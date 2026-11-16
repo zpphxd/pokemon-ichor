@@ -1,6 +1,6 @@
 -- Isolated battle-input model; no emulator memory is accessed or changed.
 local createPilot = dofile("tools/ichor/tests/slice_pilot.lua")
-local function battle(moves, held, ability, difficulty, ownAbility)
+local function battle(moves, held, ability, difficulty, ownAbility, burnWeakensFacade)
   local S = {
     gBattleMons = 100, BATTLE_MON_SIZE = 100, gBattlerPartyIndexes = 400,
     BATTLER_PARTY_INDEX_SIZE = 2,
@@ -16,6 +16,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     OFF_BATTLE_MON_STAGES = 24, OFF_BATTLE_MON_ABILITY = 32,
     OFF_BATTLE_MON_ITEM = 34, OFF_BATTLE_MON_STATUS = 36,
     OFF_BATTLE_MON_HP = 40, OFF_BATTLE_MON_MAXHP = 42,
+    OFF_BATTLE_MON_LEVEL = 44,
     VAR_DIFFICULTY = 123, DIFFICULTY_HARD = 2,
     STAT_ATK = 1, STAT_DEF = 2, STAT_SPATK = 4, STAT_SPDEF = 5,
     DAMAGE_CATEGORY_PHYSICAL = 1, DAMAGE_CATEGORY_SPECIAL = 2, ABILITY_FUR_COAT = 9,
@@ -24,6 +25,8 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     ABILITY_SAP_SIPPER = 14, ABILITY_LEVITATE = 15, ABILITY_EARTH_EATER = 16,
     ABILITY_VOLT_ABSORB = 17, ABILITY_LIGHTNING_ROD = 18, ABILITY_MOTOR_DRIVE = 19,
     ABILITY_MOLD_BREAKER = 21, ABILITY_TERAVOLT = 22, ABILITY_TURBOBLAZE = 23,
+    ABILITY_GUTS = 24, ABILITY_BLAZE = 25, ABILITY_OVERGROW = 26, ABILITY_TORRENT = 27,
+    STATUS1_BURN = 16, MOVE_FACADE = 28, BURN_WEAKENS_FACADE = burnWeakensFacade or 0,
     MOVE_YAWN = 20, MOVE_DOUBLE_KICK = 10, ITEM_POKE_BALL = 103,
     ITEM_SUPER_POTION = 104, ITEM_POTION = 105, ITEM_MOOMOO_MILK = 106,
     TYPE_GRASS = 2, TYPE_FIRE = 3, TYPE_WATER = 4,
@@ -34,7 +37,8 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     MOVE_DESCRIPTION_BUTTON = 5, L_BUTTON = 5,
   }
   local K = {UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, L = 5, A = 6}
-  local m8, m16, m32 = {[1] = 0, [5] = 0, [500] = 1}, {[400] = 0, [402] = 0}, {[236] = 0, [600] = 123}
+  local m8, m16, m32 = {[1] = 0, [5] = 0, [144] = 10, [500] = 1},
+                       {[400] = 0, [402] = 0}, {[136] = 0, [236] = 0, [600] = 123}
   local function text(address, value)
     for i = 1, #value do m8[address + i - 1] = value:byte(i) end
     m8[address + #value] = 255
@@ -123,6 +127,37 @@ assert(choices[1] == 0, "the actually held Hard Stone boosts Rock damage")
 pilot, choices = battle({move(11, 80), move(12, 60, 1, 2)}, 0, 9)
 pilot.chooseMove()
 assert(choices[1] == 1, "Fur Coat favors the available special attack")
+local stats, status
+pilot, choices, stats, status = battle({move(11, 80), move(12, 60, 1, 2)})
+status[136] = 16
+pilot.chooseMove()
+assert(choices[1] == 1, "burn must reduce physical damage before selecting an attack")
+pilot, choices, stats, status = battle({move(28, 80), move(12, 60, 1, 2)})
+status[136] = 16
+pilot.chooseMove()
+assert(choices[1] == 0, "modern Facade must not receive the new burn penalty")
+pilot, choices, stats, status = battle({move(28, 80), move(12, 60, 1, 2)}, nil, nil, nil, nil, 1)
+status[136] = 16
+pilot.chooseMove()
+assert(choices[1] == 1, "an older configured Facade must still receive the burn penalty")
+pilot, choices, stats, status = battle({move(11, 80), move(12, 100, 1, 2)}, 0, 0, 1, 24)
+pilot.chooseMove()
+assert(choices[1] == 1, "Guts must not boost a healthy attacker")
+status[136] = 16
+pilot.chooseMove()
+assert(choices[2] == 0, "Guts must boost statused physical attacks instead of applying burn's penalty")
+for _, boost in ipairs({{25, 3}, {26, 2}, {27, 4}}) do
+  pilot, choices, stats = battle({move(11, 60, boost[2], 2), move(12, boost[2] == 3 and 95 or 80, 1, 2)},
+                                0, 0, 1, boost[1])
+  pilot.chooseMove()
+  assert(choices[1] == 0, "the actual low-HP starter ability must boost its matching type")
+  stats[140], stats[142] = 14, 42
+  pilot.chooseMove()
+  assert(choices[2] == 0, "exactly one-third HP must still activate the starter ability")
+  stats[140] = 15
+  pilot.chooseMove()
+  assert(choices[3] == 1, "above one-third HP the starter ability must not boost damage")
+end
 for _, immunity in ipairs({{10, 3}, {11, 4}, {12, 4}, {13, 4}, {14, 2},
                           {15, 5}, {16, 5}, {17, 6}, {18, 6}, {19, 6}}) do
   pilot, choices = battle({move(11, 100, immunity[2]), move(12, 40)}, 0, immunity[1])
@@ -137,7 +172,7 @@ end
 pilot, choices = battle({move(11, 80), move(12, 60, 1, 2)}, 0, 9, 1, 21)
 pilot.chooseMove()
 assert(choices[1] == 0, "Mold Breaker must bypass Fur Coat")
-local party, status
+local party
 pilot, choices, party, status = battle({move(20, 0, 1, 3), move(11, 40)})
 pilot.chooseMove(); pilot.chooseMove()
 assert(choices[1] == 0 and choices[2] == 1, "Yawn must not stall repeated turns")
@@ -147,6 +182,16 @@ assert(choices[3] == 0, "a different opponent can receive Yawn")
 party[402], status[236] = 2, 1
 pilot.chooseMove()
 assert(choices[4] == 1, "an already statused opponent must not receive Yawn")
+pilot, choices, party = battle({move(20, 0, 1, 3), move(11, 40)})
+party[240] = 8
+pilot.chooseMove()
+assert(choices[1] == 1, "an immediate knockout must take priority over Yawn")
+party[240] = 10
+pilot.chooseMove()
+assert(choices[2] == 1, "an estimated two-hit knockout must not spend an extra turn on Yawn")
+party[240] = 40
+pilot.chooseMove()
+assert(choices[3] == 0, "skipping an unnecessary Yawn must not mark it as attempted")
 pilot = battle({move(11, 40)}, 0, 0, 2)
 assert(not pilot.chooseAction(true), "Spartan must never request battle medicine")
 
@@ -240,5 +285,5 @@ incoming = 336
 pilot.learnMove()
 assert(lastKey == 3 and #learnedFrom == 12, "unused Howl must be declined without selecting an owned move to erase")
 
-console:log("PILOT TACTICS PASS: damage/tactics, native-width foe slots, Spartan item ban, paid purchases, evolution learner and Hard Stone")
+console:log("PILOT TACTICS PASS: damage/status/abilities, bounded useful Yawn, native foe slots, Spartan item ban, purchases, evolution learner and gear")
 console:log("PILOT TACTICS done")

@@ -83,5 +83,48 @@ L.start(function()
         L.continueSave()
         L.expect(L.getFlag(S.FLAG_DIFFICULTY_CHOSEN), "choice survives actual save/reset/CONTINUE")
         L.expect(L.getVar(S.VAR_DIFFICULTY) == difficulty, "difficulty survives actual save/reset/CONTINUE")
+        L.runHeader("DifficultyHermesHeader")
+        local kerykos = "EmporionCity_TempleOfHermes_EventScript_Kerykos"
+        local limit = ({150, 120, 100})[difficulty + 1]
+        local function spokenLimit()
+            local digits = tostring(limit)
+            for i = 1, #digits do
+                L.expect(emu:read8(S.gStringVar1 + i - 1) == S.CHAR_0 + tonumber(digits:sub(i, i)),
+                         "Kerykos announces this difficulty's real step budget")
+            end
+            L.expect(emu:read8(S.gStringVar1 + #digits) == S.EOS, "the spoken step budget ends after its digits")
+        end
+        L.talk(L.npc(kerykos), {answers = {"no"}})
+        spokenLimit()
+        L.expect(L.getVar(S.VAR_TEMP_3) == 0, "declining the rite does not start the step-glass")
+        local logText, captured = L.logText, false
+        L.logText = function()
+            logText()
+            if not captured then
+                L.wait(40)
+                L.shot("difficulty_" .. difficulty .. "_repeat_budget")
+                captured = true
+            end
+        end
+        L.talk(L.npc(kerykos))
+        L.logText = logText
+        L.expect(captured, "the repeat instructions were actually shown")
+        L.expect(L.getVar(S.VAR_TEMP_3) == 1 and L.getVar(S.VAR_TEMP_2) == limit,
+                 "the real Herald's Run starts with this difficulty's budget")
+        L.expect(L.getVar(S.VAR_TEMP_6) == limit // 2, "the native halfway warning is difficulty-aware")
+        spokenLimit()
+        local warnings = 0
+        L.logText = function()
+            warnings = warnings + 1
+            logText()
+            L.wait(40)
+            L.shot("difficulty_" .. difficulty .. "_half_warning")
+        end
+        L.runHeader("DifficultyHalfGlassHeader")
+        L.logText = logText
+        L.expect(warnings == 1, "the native halfway tick actually displays its warning")
+        L.expect(L.getVar(S.VAR_TEMP_2) == limit // 2 and L.idle(),
+                 "the native halfway tick finishes and returns control")
+        L.shot("difficulty_" .. difficulty .. "_half_glass")
     end
 end)

@@ -1604,6 +1604,7 @@ Every trial also has:
 - **The task:** Kerykos hands you sealed scrolls to deliver to herald-herms inside a switchback stoa, within a step-glass. Steps don't count during battles, and a failure simply returns the scrolls to Kerykos.
 - **Teach** (the entry porch): one scroll, one herm 20 steps away, a glass of 40 steps. One herm head swivels to point the way once you anoint it (a second use of oil).
 - **Test** (the main stoa): three scrolls and three herms inside one glass of 120 steps on Hero (150 Mortal, 100 Spartan). Hermes's turnstiles are one-way, and the wrong one loops you back.
+- Kerykos names the selected budget in both explanations; the glass's halfway warning follows it (60 steps remaining on Hero, 75 Mortal, 50 Spartan). Its low warning remains at 30.
 - **Master** (the upper colonnade): the herms point the way only when anointed, and each turnstile reverses after you pass a herm.
 - **Acolytes:**
   - one mandatory, easy and in plain view at the porch's narrow exit;

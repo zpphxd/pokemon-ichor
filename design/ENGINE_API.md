@@ -155,7 +155,11 @@ The low-level expansion setter remains available for engine/test setup, not a
 player-facing mode-switch menu.
 
 `Ichor_GetStepGlassLimit` returns 150/120/100 for Mortal/Hero/Spartan. Hermes's
-trial and the Labyrinth's thread use the same helper. Spartan's current cap
+trial and the Labyrinth's thread use the same helper. Kerykos's first and repeat
+instructions buffer that actual limit. `Ichor_GetStepGlassHalf` derives its
+halfway mark from the same limit; the run caches it in `VAR_TEMP_6` at startup,
+so ordinary step ticks remain vars-only. The halfway warnings occur at
+75/60/50 remaining steps, while the low warning stays at 30. Spartan's current cap
 mapping is 14/20/26, then the next chapter's 32 after Laurel 3. EXP multipliers
 and candies cannot exceed the cap. Its option menu and battles enforce SET;
 the battle-item rejection gives an explicit message but still permits capture
@@ -163,7 +167,9 @@ balls. Trainer AI is upgraded even when a trainer has no separate Hard party.
 The four Act I Hierophant party variants use the existing trainer ids.
 
 `tools/ichor/tests/difficulty.sh` checks the actual menus, all boss variants,
-confirmation rejection and real save/reset/CONTINUE for all modes.
+confirmation rejection and real save/reset/CONTINUE for all modes. Its labeled
+Hermes fixtures also exercise native initial/repeat dialogue, declining and
+starting the rite, and the actual halfway warning at each difficulty's mark.
 `make check -j$(sysctl -n hw.ncpu) TESTS='Ichor:'` also covers caps, EXP Candy and item rejection.
 Oath rules and opening selection are documented in §11. Later chapter cap
 milestones and natural-level approval remain open.
@@ -195,7 +201,11 @@ Teravolt and Turboblaze. In particular, Pyrrha's Narthip has Flash Fire: the
 pilot must not keep selecting Fire attacks merely because it is Grass-type.
 Its move-learning heuristic declines unused Howl, and preserves Yawn and unique attacks ahead of observed
 status moves or weaker redundant coverage. It attempts Yawn at most once per
-opposing party member in trainer battles. This is not a complete battle AI:
+opposing party member in trainer battles, skipping setup when a conservative
+damage estimate favors a one- or two-hit finish. Scoring includes burn's
+physical penalty (respecting the configured Facade exception), Guts and the
+one-third-HP thresholds for Blaze, Overgrow and Torrent.
+This is not a complete battle AI:
 accuracy, other abilities, variable-power moves and most tactical status/switch
 choices remain unmodeled. `slice_pilot_tactics.lua` checks these scoring rules,
 bounded Yawn and the Spartan battle-item ban without emulator memory access.
@@ -265,6 +275,11 @@ first summit battle, so it does not certify continuous passage or an ending.
 A separate resumed pre-Ione fixture verifies
 native Hard Stone GIVE and Euboulos's actual coal replacement while the
 starter still holds its booster; that is menu evidence, not chapter coverage.
+With useful-Yawn and status/ability scoring, Mortal/Kynder reaches `08_after`
+from NEW GAME: 275,043 frames, 48 battles, 520 screenshots. Hero/Kynder still
+loses to Ione (last foe 31 HP), as does Spartan/Hipling (last foe 19 HP).
+Those new attempts supersede neither older strategies' evidence nor the
+remaining matrix, intended-curve and repeatability gates.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.

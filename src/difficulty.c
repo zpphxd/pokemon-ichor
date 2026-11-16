@@ -50,6 +50,11 @@ u16 Ichor_GetStepGlassLimit(void)
     }
 }
 
+u16 Ichor_GetStepGlassHalf(void)
+{
+    return Ichor_GetStepGlassLimit() / 2;
+}
+
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)
 {
     enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
