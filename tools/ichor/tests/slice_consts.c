@@ -13,6 +13,7 @@
 #include "party_menu.h"
 #include "data.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "sprite.h"
 #include "constants/party_menu.h"
 #include "constants/characters.h"
@@ -217,6 +218,7 @@ K(OFF_MPLAY_SONGHEADER, offsetof(struct MusicPlayerInfo, songHeader))
 K(B_OUTCOME_WON, B_OUTCOME_WON)
 K(B_OUTCOME_LOST, B_OUTCOME_LOST)
 K(B_OUTCOME_RAN, B_OUTCOME_RAN)
+K(OFF_TRAINER_OPPONENT_A, offsetof(TrainerBattleParameter, params.opponentA))
 K(BATTLE_TYPE_TRAINER, BATTLE_TYPE_TRAINER)
 K(BATTLE_MON_SIZE, sizeof(struct BattlePokemon))
 K(OFF_BATTLE_MON_HP, offsetof(struct BattlePokemon, hp))

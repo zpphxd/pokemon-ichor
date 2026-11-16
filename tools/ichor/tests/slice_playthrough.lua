@@ -1481,13 +1481,28 @@ beat("16_isthmus_gate", function()
   wait(30); shot("kleon_at_the_gate")
   local _, fought = settle({ every = true })
   expect(#fought == 1, "one battle with Kleon")
-  battleCheck(fought[1], KLEON_2[STARTER], S.MUS_BATTLE_RIVAL, "Kleon at the Isthmus Gate")
-  flagsSet({ "FLAG_KLEON_BATTLE_2_DONE", "FLAG_WON_KLEON_2", "FLAG_HIDE_KLEON_ISTHMUS_GATE" },
-           "beat 16: Kleon's second battle, won")
+  local rival = fought[1]
+  expect(rival.trainer and rival.trainerId == S["TRAINER_" .. KLEON_2[STARTER]],
+         "the actual Isthmus Gate opponent is Kleon's starter-specific second team")
+  local won = rival.outcome == S.B_OUTCOME_WON
+  if won then
+    battleCheck(rival, KLEON_2[STARTER], S.MUS_BATTLE_RIVAL, "Kleon at the Isthmus Gate")
+  else
+    expect(rival.outcome == S.B_OUTCOME_LOST, "Kleon's supported second loss returns to the story")
+    L.check(rival.song == L.songHeader(S.MUS_BATTLE_RIVAL), "Kleon's second loss uses the rival battle music")
+    for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+      local hp, maxHp = L.partyHp(slot)
+      expect(hp == maxHp and hp > 0, "the native loss branch heals partner " .. slot)
+    end
+  end
+  expect(getFlag(S.FLAG_WON_KLEON_2) == won, "Kleon's second victory flag matches the actual outcome")
+  flagsSet({ "FLAG_KLEON_BATTLE_2_DONE", "FLAG_HIDE_KLEON_ISTHMUS_GATE" },
+           "beat 16: Kleon's second battle is complete")
   flagsClear({ "FLAG_NO_WHITEOUT" }, "the no-whiteout flag is cleared")
   L.check(not L.npc(EC .. "KleonGate").present, "Kleon has run through the gate")
   -- the hoplites step aside: the gate plays nothing now
   expect(L.goTrigger(gate), "the Isthmus Gate lets the herald through")
+  expect(L.idle(), "the open Isthmus Gate preserves field control")
   shot("through_the_gate")
 end)
 
@@ -1547,9 +1562,17 @@ L.start(function()
                          "ALETHEA_DECK", "PHORMION", "LYKON",
                          "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS", KLEON_2[STARTER] }) do
       local openingLoss = NATURAL and n == KLEON_TRAINER[STARTER] and getFlag(S.FLAG_KLEON_BATTLE_1_DONE)
-      if not L.defeated(S["TRAINER_" .. n]) and not openingLoss then L.fail(n .. " was never beaten") end
+      local gateLoss = false
+      if n == KLEON_2[STARTER] and getFlag(S.FLAG_KLEON_BATTLE_2_DONE) then
+        for _, b in ipairs(L.battles) do
+          if b.trainer and b.trainerId == S["TRAINER_" .. n] and b.outcome == S.B_OUTCOME_LOST then
+            gateLoss = true
+          end
+        end
+      end
+      if not L.defeated(S["TRAINER_" .. n]) and not openingLoss and not gateLoss then L.fail(n .. " was never beaten") end
     end
-    log("ok every required trainer so far is beaten (opening rival permits a natural loss)")
+    log("ok every required trainer so far is beaten (authored rival losses permit progression)")
   end
   log(string.format("ok requested coverage played through in %d frames, %d battles, %d design finding(s)",
                     now(), #L.battles, L.findings))

@@ -323,6 +323,21 @@ Isthmus Gate (447,239 frames). It loses Kleon's second battle, an explicitly
 supported no-whiteout branch in SCRIPT.md beat 16 and the native script;
 the harness still stops at its win-only assertion. This is genuine Laurel-2
 coverage, not a rival win or a verified final gate endpoint.
+The gate check now accepts exactly the authored win/loss outcomes, reads the
+actual starter-specific trainer ID from `gTrainerBattleParameter`, checks
+rival music and the outcome-specific victory flag, and requires the shared
+completion/hide flags, cleared no-whiteout flag, Kleon's removal, actual gate
+traversal and returned field control. A loss must also leave every real party
+member fully healed by the native scene. The final trainer checklist permits
+this exception only with an actual recorded loss to the matching rival and
+the completed scene; ordinary trainer/Hierophant victories remain mandatory.
+Explicit current-ROM resumed fixtures pass the loss branch in 9,122 frames
+and the strength-assisted win branch in 5,680 frames. Neither is continuous
+natural evidence. One new continuous attempt was interrupted by host disk
+exhaustion; it supplies no pass. After space recovered, a fresh NEW GAME
+attempt buys the five real Super Potions but loses to Kerykos at 453,103 frames.
+The earlier actual Laurel-2 victory therefore does not establish a reliable
+strategy, and a continuous natural gate pass is still unverified.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.

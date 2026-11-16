@@ -350,6 +350,7 @@ function L.battle()
   waitUntil(L.inBattle, 1200, "the battle to start")
   local trainer = L.isTrainerBattle()
   local rec = { trainer = trainer, song = 0, start = now() }
+  if trainer then rec.trainerId = emu:read16(S.gTrainerBattleParameter + S.OFF_TRAINER_OPPONENT_A) end
   if L.pilot then L.pilot.beginBattle() end
   local t0, shotTaken, turns = now(), false, 0
   while not L.inOverworld() do
@@ -403,8 +404,9 @@ function L.battle()
     if after[n] and not before[n] then rec.who = n end
   end
   L.battles[#L.battles + 1] = rec
-  log(string.format("BATTLE %s %s outcome %d song %s turns %d frames %d", trainer and "trainer" or "wild",
-                    rec.who or "-", rec.outcome, L.songName(rec.song), turns, now() - rec.start))
+  log(string.format("BATTLE %s %s outcome %d song %s turns %d frames %d trainer_id %s", trainer and "trainer" or "wild",
+                    rec.who or "-", rec.outcome, L.songName(rec.song), turns, now() - rec.start,
+                    tostring(rec.trainerId or "-")))
   if L.readOnly and rec.outcome == S.B_OUTCOME_LOST and not permitsLoss then
     fail("natural pilot lost; see PARTY/BATTLE records, not a balance verdict")
   end

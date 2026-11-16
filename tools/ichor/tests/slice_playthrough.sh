@@ -42,8 +42,8 @@
 #
 # Checks at every beat: the map, the music actually playing (the BGM player's
 # song, not just the map's), the story flags and vars, items landing in the bag
-# once, each trainer beaten once and never again, battle music, and that the
-# player always gets control back. Writes:
+# once, required trainer victories (both authored rival losses permit
+# progression), battle music, and that the player always gets control back. Writes:
 #   <out>shots/NNNN_<beat>_<name>.png   a screenshot per moment, in play order
 #   <out>states/<beat>.ss               an mGBA save state at the start of each beat
 #   <out>run.log                        the full log (TEXT lines hold every message)

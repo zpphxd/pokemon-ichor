@@ -442,7 +442,10 @@ now checks the selected difficulty's step budget rather than assuming Hero.
 With subsequent real clinic recovery and five actually purchased Super
 Potions, Mortal/Kynder wins Kerykos, receives Laurel 2 and reaches the gate
 continuously. Its next stop is a win-only harness assertion on Kleon's
-authored, non-whiteout loss branch; final gate coverage is not yet claimed.
+authored, non-whiteout loss branch. That assertion is now corrected:
+explicit native fixtures verify both outcomes, actual loss healing and the
+open gate. A fresh repeat instead loses to Kerykos after 453,103 frames;
+preparation is not yet reliable and no continuous natural gate pass is claimed.
 The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
