@@ -418,6 +418,7 @@ TEST("Ichor: fallen partners cannot regain HP through healing, stats, items or b
     EXPECT(PokemonUseItemEffects(&mon, ITEM_REVIVAL_HERB, 0, 0, FALSE));
     boxed = mon.box;
     HealBoxPokemon(&boxed);
+    EXPECT_EQ(memcmp(&boxed, &mon.box, sizeof(boxed)), 0);
     BoxMonToMon(&boxed, &restored);
     EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
     EXPECT(Ichor_IsOathFallen(&restored.box));
@@ -508,6 +509,152 @@ TEST("Ichor: fallen partners cannot use ordinary PC deposit or selection APIs")
     EXPECT_EQ(Ichor_StoreOathFallen(&mon), ICHOR_URN_STORED);
     EXPECT_EQ(CountStorageNonEggMons(), 0);
     EXPECT(!AnyStorageMonWithMove(MOVE_TACKLE));
+}
+
+TEST("Ichor: aftermath transfers all fallen before compacting survivors and Eggs")
+{
+    struct Pokemon living, egg;
+    struct BoxPokemon first, second;
+    u32 slot, zero = 0, isEgg = TRUE;
+    ResetOath();
+    ZeroPlayerPartyMons();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    for (slot = 0; slot < 4; slot++)
+        CreateOathMon(&gParties[B_TRAINER_PLAYER][slot]);
+    gPartiesCount[B_TRAINER_PLAYER] = 4;
+    SetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_IS_EGG, &isEgg);
+    for (slot = 0; slot < 3; slot += 2)
+    {
+        SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP, &zero);
+        EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][slot]));
+    }
+    first = gParties[B_TRAINER_PLAYER][0].box;
+    second = gParties[B_TRAINER_PLAYER][2].box;
+    living = gParties[B_TRAINER_PLAYER][1];
+    egg = gParties[B_TRAINER_PLAYER][3];
+    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_STORED);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &living, sizeof(living)), 0);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][1], &egg, sizeof(egg)), 0);
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(TOTAL_BOXES_COUNT - 1, 0), &first, sizeof(first)), 0);
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(TOTAL_BOXES_COUNT - 1, 1), &second, sizeof(second)), 0);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_SPECIES), SPECIES_NONE);
+    EXPECT_EQ(gIchorSave.oath.fallenCount, 2);
+    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_NOT_FALLEN);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 2);
+}
+
+TEST("Ichor: partial aftermath capacity retains its source and can retry safely")
+{
+    struct Pokemon living, retained;
+    u32 slot, box, zero = 0;
+    ResetOath();
+    ZeroPlayerPartyMons();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    for (slot = 0; slot < 3; slot++)
+        CreateOathMon(&gParties[B_TRAINER_PLAYER][slot]);
+    gPartiesCount[B_TRAINER_PLAYER] = 3;
+    for (slot = 0; slot < 3; slot += 2)
+    {
+        SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP, &zero);
+        EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][slot]));
+    }
+    living = gParties[B_TRAINER_PLAYER][1];
+    retained = gParties[B_TRAINER_PLAYER][2];
+    for (slot = 0; slot < IN_BOX_COUNT - 1; slot++)
+        SetBoxMonAt(TOTAL_BOXES_COUNT - 1, slot, &gParties[B_TRAINER_PLAYER][0].box);
+    for (box = 0; box < TOTAL_BOXES_COUNT - 1; box++)
+        SetBoxMonAt(box, 0, &living.box);
+    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_FULL);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &living, sizeof(living)), 0);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][1], &retained, sizeof(retained)), 0);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), IN_BOX_COUNT);
+    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_FULL);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][1], &retained, sizeof(retained)), 0);
+    ZeroBoxMonAt(0, 0);
+    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_STORED);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &living, sizeof(living)), 0);
+    EXPECT(Ichor_IsUrnBox(0));
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(0, 0), &retained.box, sizeof(retained.box)), 0);
+}
+
+TEST("Ichor: simulated aftermath never transfers an existing real fallen partner")
+{
+    const u32 excluded[] = {
+        BATTLE_TYPE_LINK, BATTLE_TYPE_RECORDED, BATTLE_TYPE_BATTLE_TOWER,
+        BATTLE_TYPE_TRAINER_HILL, BATTLE_TYPE_SECRET_BASE, BATTLE_TYPE_CATCH_TUTORIAL,
+    };
+    struct Pokemon fallen;
+    u32 i, zero = 0;
+    ResetOath();
+    ZeroPlayerPartyMons();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][0]);
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][1]);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &zero);
+    EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][0]));
+    fallen = gParties[B_TRAINER_PLAYER][0];
+    for (i = 0; i < ARRAY_COUNT(excluded); i++)
+    {
+        Ichor_EndOathBattle(excluded[i], B_OUTCOME_WON);
+        EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &fallen, sizeof(fallen)), 0);
+        EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+        EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
+    }
+    Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_LOST);
+    Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_DREW);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &fallen, sizeof(fallen)), 0);
+    Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_WON);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 1);
+}
+
+TEST("Ichor: automatic aftermath does not empty a party with no usable survivor")
+{
+    struct Pokemon fallen;
+    u32 zero = 0, egg = TRUE;
+    ResetOath();
+    ZeroPlayerPartyMons();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][0]);
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][1]);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &zero);
+    EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][0]));
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &egg);
+    fallen = gParties[B_TRAINER_PLAYER][0];
+    Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_WON);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &fallen, sizeof(fallen)), 0);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &zero);
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP, &zero);
+    EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][1]));
+    Ichor_EndOathBattle(0, B_OUTCOME_RAN);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
+}
+
+TEST("Ichor: released aftermath can bury retained fallen without a new fall")
+{
+    u32 zero = 0;
+    ResetOath();
+    ZeroPlayerPartyMons();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][0]);
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][1]);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &zero);
+    EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][0]));
+    EXPECT(Ichor_ReleaseOath());
+    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_STORED);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(gIchorSave.oath.fallenCount, 1);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 1);
 }
 
 TEST("Ichor: unsworn saves keep the final jar available for ordinary storage")

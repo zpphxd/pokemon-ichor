@@ -2,6 +2,9 @@ local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
 local function oath() return L.ichor() + S.OFF_OATH end
 local function receipts() return L.snapshot(oath() + S.OFF_OATH_ENCOUNTERS, 32) end
+local function urnStorage()
+  return emu:read32(S.gPokemonStoragePtr) + S.OFF_STORAGE_BOXES + (S.TOTAL_BOXES_COUNT - 1) * S.BOX_BYTES
+end
 
 local function begin()
   L.runHeader("Oath_BattleHeader", { noSettle = true })
@@ -59,6 +62,41 @@ local function refuse()
   L.expect(emu:read8(S.gBattleOutcome) == S.B_OUTCOME_RAN, "refused capture can still escape normally")
 end
 
+local function faintLead()
+  local falls = emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT)
+  L.runHeader("Oath_FaintHeader", { noSettle = true })
+  L.waitUntil(function()
+    if emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) > falls then return true end
+    if emu:read32(S.gBattlerControllerFuncs) == (S.HandleInputChooseAction | 1) then
+      L.tap(K.UP); L.tap(K.LEFT); L.tap(K.A)
+    else
+      L.tap(K.A)
+    end
+    L.wait(4)
+    return false
+  end, 12000, "a real opponent fainting the weak lead")
+  L.expect(emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == falls + 1 and L.partyHp(0) == 0,
+           "actual battle fainting records the player partner exactly once")
+  local fallen = L.snapshot(S.gParties, S.BOX_MON_BYTES)
+  L.waitUntil(function()
+    if L.taskRunning("Task_HandleChooseMonInput") then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 2000, "the native replacement party menu")
+  L.wait(60)
+  L.tap(K.RIGHT); L.tap(K.A); L.wait(30); L.tap(K.A)
+  L.waitUntil(function()
+    if L.inBattle() then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 2000, "the living partner to enter battle")
+  L.battle()
+  L.waitUntil(function() return emu:read8(S.sOathAftermathNotice) & 0x80 ~= 0 end,
+              1200, "the post-battle Urn notice")
+  L.wait(120)
+  return falls, fallen
+end
+
 L.start(function()
   L.expect(S.sOathCatchDenied ~= nil, "the native capture-policy symbol is available")
   L.quickstart()
@@ -95,63 +133,41 @@ L.start(function()
   L.shot("released_capture")
 
   emu:write8(oath() + S.OFF_OATH_STATE, S.ICHOR_OATH_ACTIVE)
-  local falls = emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT)
-  L.runHeader("Oath_FaintHeader", { noSettle = true })
-  L.waitUntil(function()
-    if emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) > falls then return true end
-    if emu:read32(S.gBattlerControllerFuncs) == (S.HandleInputChooseAction | 1) then
-      L.tap(K.UP); L.tap(K.LEFT); L.tap(K.A)
-    else
-      L.tap(K.A)
-    end
-    L.wait(4)
-    return false
-  end, 12000, "a real opponent fainting the weak lead")
-  L.expect(emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == falls + 1 and L.partyHp(0) == 0,
-           "actual battle fainting records the player partner exactly once")
-  L.waitUntil(function()
-    if L.taskRunning("Task_HandleChooseMonInput") then return true end
-    L.tap(K.A); L.wait(4)
-    return false
-  end, 2000, "the native replacement party menu")
-  L.wait(60)
-  L.tap(K.RIGHT); L.tap(K.A); L.wait(30); L.tap(K.A)
-  L.waitUntil(function()
-    if L.inBattle() then return true end
-    L.tap(K.A); L.wait(4)
-    return false
-  end, 2000, "the living partner to enter battle")
-  L.battle(); L.settle()
+  local falls, fallenBox = faintLead()
+  L.shot("urn_automatic_transfer")
+  L.expect(emu:read8(S.sLockFieldControls) ~= 0
+           and emu:read8(S.sOathAftermathNotice) & 0x7F == S.ICHOR_URN_STORED,
+           "the native aftermath notice keeps controls locked until acknowledged")
+  L.expect(emu:read8(S.gPartiesCount) == 1 and L.partyHp(0) > 0
+           and L.snapshot(urnStorage(), S.BOX_MON_BYTES) == fallenBox,
+           "native battle teardown transfers the whole fallen partner and compacts its living replacement")
+  L.settle()
   L.runHeader("Oath_HealHeader")
-  L.expect(L.partyHp(0) == 0 and L.partyHp(1) > 0,
-           "the native party-heal special leaves the fallen partner at zero HP")
+  L.expect(L.partyHp(0) > 0 and L.snapshot(urnStorage(), S.BOX_MON_BYTES) == fallenBox,
+           "native party healing cannot modify the fallen partner in the Urn")
   L.runHeader("Oath_SaveHeader")
   emu:reset(); L.continueSave()
   L.runHeader("Oath_HealHeader")
-  L.expect(L.partyHp(0) == 0 and emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == falls + 1,
-           "fallen identity and non-revival survive real save/reset/CONTINUE")
+  L.expect(emu:read8(S.gPartiesCount) == 1
+           and L.snapshot(urnStorage(), S.BOX_MON_BYTES) == fallenBox
+           and emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == falls + 1,
+           "automatic transfer, fallen identity and the compacted party survive save/reset/CONTINUE")
   emu:write8(oath() + S.OFF_OATH_STATE, S.ICHOR_OATH_RELEASED)
   L.runHeader("Oath_HealHeader")
-  L.expect(L.partyHp(0) == 0, "ending the Oath does not bring back already fallen partners")
+  L.expect(L.snapshot(urnStorage(), S.BOX_MON_BYTES) == fallenBox,
+           "ending the Oath does not bring back already fallen partners")
 
   L.runHeader("Oath_UrnHeader")
   local storage = emu:read32(S.gPokemonStoragePtr)
   local urn = S.TOTAL_BOXES_COUNT - 1
   local urnAddr = storage + S.OFF_STORAGE_BOXES + urn * S.BOX_BYTES
-  -- Seed the PC fixture with the actual battle's fallen BoxPokemon and two
-  -- ordinary stored partners. Native transfer itself is covered in make check.
+  -- The Urn is native battle output; only the ordinary PC partners are seeded.
   for i = 0, S.BOX_MON_BYTES - 1 do
-    emu:write8(urnAddr + i, emu:read8(S.gParties + i))
     for slot = 0, 1 do
       emu:write8(storage + S.OFF_STORAGE_BOXES + slot * S.BOX_MON_BYTES + i,
-                 emu:read8(S.gParties + S.PARTY_MON_BYTES + i))
+                 emu:read8(S.gParties + i))
     end
   end
-  for i = 0, S.PARTY_MON_BYTES - 1 do
-    emu:write8(S.gParties + i, emu:read8(S.gParties + S.PARTY_MON_BYTES + i))
-    emu:write8(S.gParties + S.PARTY_MON_BYTES + i, 0)
-  end
-  emu:write8(S.gPartiesCount, 1)
   local before = L.snapshot(urnAddr, S.BOX_BYTES)
   local urnName = storage + S.OFF_STORAGE_NAMES + urn * S.BOX_NAME_BYTES
   local name = L.snapshot(urnName, S.BOX_NAME_BYTES)
@@ -299,4 +315,34 @@ L.start(function()
            and emu:read8(oath() + S.OFF_OATH_STATE) == S.ICHOR_OATH_RELEASED
            and emu:read16(oath() + S.OFF_OATH_URN_BOXES) & (1 << urn) ~= 0,
            "the unchanged Urn and its reservation survive real save/reset/CONTINUE after release")
+
+  emu:write8(oath() + S.OFF_OATH_STATE, S.ICHOR_OATH_ACTIVE)
+  for i = 0, S.BOX_MON_BYTES - 1 do
+    for box = 0, urn - 1 do
+      emu:write8(storage + S.OFF_STORAGE_BOXES + box * S.BOX_BYTES + i, emu:read8(S.gParties + i))
+    end
+    for slot = 1, S.IN_BOX_COUNT - 1 do
+      emu:write8(urnAddr + slot * S.BOX_MON_BYTES + i, emu:read8(urnAddr + i))
+    end
+  end
+  local fullUrn = L.snapshot(urnAddr, S.BOX_BYTES)
+  local _, retained = faintLead()
+  L.shot("urn_capacity_refusal")
+  L.expect(emu:read8(S.sOathAftermathNotice) & 0x7F == S.ICHOR_URN_FULL
+           and emu:read8(S.sLockFieldControls) ~= 0,
+           "a real full-capacity aftermath explicitly explains refusal before resuming the script")
+  L.expect(emu:read8(S.gPartiesCount) == 2 and L.partyHp(0) == 0 and L.partyHp(1) > 0
+           and L.snapshot(S.gParties, S.BOX_MON_BYTES) == retained
+           and L.snapshot(urnStorage(), S.BOX_BYTES) == fullUrn,
+           "full capacity preserves both the pending source and every existing Urn record")
+  L.tap(K.A); L.wait(120); L.shot("urn_capacity_instructions")
+  L.settle()
+  L.runHeader("Oath_HealHeader")
+  L.expect(L.partyHp(0) == 0, "a retained capacity-overflow partner still cannot be healed")
+  L.runHeader("Oath_SaveHeader")
+  emu:reset(); L.continueSave()
+  L.expect(L.partyHp(0) == 0 and emu:read8(S.gPartiesCount) == 2
+           and L.snapshot(S.gParties, S.BOX_MON_BYTES) == retained
+           and L.snapshot(urnStorage(), S.BOX_BYTES) == fullUrn,
+           "capacity refusal retains the pending source and full Urn through save/reset/CONTINUE")
 end)
