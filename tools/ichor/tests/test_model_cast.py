@@ -157,6 +157,29 @@ class ModelCastTests(unittest.TestCase):
                                 ((30, 4), (176, 48, 32))):
             self.assertEqual(result.getpixel(point)[:3], expected)
 
+    def test_cami_wheat_is_on_shawl_without_repainting_or_moving_the_figure(self):
+        original = np.array(cast.opaque(cast.source("cami", "front")))
+        assembled = np.array(cast.cami_front())
+        np.testing.assert_array_equal(original[:, :, 3], assembled[:, :, 3])
+        np.testing.assert_array_equal(original[140:650, 100:480],
+                                      assembled[140:650, 100:480])
+        source_colors = {tuple(p) for p in original.reshape(-1, 4)}
+        self.assertTrue(all(tuple(p) in source_colors
+                            for p in assembled.reshape(-1, 4)))
+
+        def gold(image):
+            a = np.array(image).astype(int)
+            return ((a[:, :, 1] > a[:, :, 2] * 1.8)
+                    & (a[:, :, 1] >= 100) & (a[:, :, 0] > a[:, :, 1])
+                    & (a[:, :, 3] != 0))
+
+        self.assertGreater(np.count_nonzero(gold(cast.source("cami", "front"))[316:569, 490:615]), 0)
+        self.assertEqual(np.count_nonzero(gold(cast.cami_front())[316:569, 490:615]), 0)
+        for image in (cast.fit(cast.cami_front()),
+                      self.outputs[cast.FRONT / "cami.png"].convert("RGBA")):
+            self.assertGreater(np.count_nonzero(gold(image)[46:62, 8:25]), 0)
+            self.assertEqual(np.count_nonzero(gold(image)[8:43, 40:57]), 0)
+
     def test_legacy_guard_is_exact_and_explicit(self):
         for path in cast.OWNED:
             self.assertTrue(cast.is_owned(cast.ROOT / path))

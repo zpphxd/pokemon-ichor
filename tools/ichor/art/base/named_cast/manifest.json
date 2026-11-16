@@ -2,6 +2,7 @@
   "authoring": "image_generation source illustrations; selected RGBA source crops, not hand-authored native art",
   "native_pipeline": "tools/ichor/art/model_cast.py; alpha >=128, nearest-neighbor reduction, fixed shared walker palettes, GBA indexed portrait palettes",
   "artistic_status": "candidate; technical checks are not user approval",
+  "cami_front_assembly": "Original source preserved. Threshold alpha >=128 first. Select existing wheat at x490..614/y316..568; restore that selection from model hair crop (440,210,555,320), nearest-neighbor scaled to124x252 at (490,316). Rotate selected ear -35 degrees, nearest-neighbor scale0.75, place at (100,708) on shawl fringe, clipping both selections to the unchanged original opaque figure. No recoloring, painted geometry or face/figure movement. Only this portrait additionally weights tiny existing source-yellow pixels when <=3% opaque coverage.",
   "approved_theo_native_sha256": "eab2845d3ffcd20adee2d63978e504747a37a959625bde9fb1f0b6f1ca20cd7f",
   "source_files": {
     "alethea-front.png": {

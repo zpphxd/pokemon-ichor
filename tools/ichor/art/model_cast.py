@@ -197,7 +197,7 @@ def fit(image, size=(64, 64), margin=2, phase=(0, 0)):
     return canvas
 
 
-def palette(images):
+def palette(images, *, wheat=False):
     arrays = [np.array(im) for im in images]
     pixels = np.concatenate([a[a[:, :, 3] != 0, :3] for a in arrays])
     weighted = [pixels]
@@ -215,6 +215,12 @@ def palette(images):
                     & (np.ptp(pixels, axis=1) < 48)]
     if 0 < len(lights) <= len(pixels) * .03:
         weighted.extend([lights] * 12)
+    if wheat:
+        selected = pixels[(p[:, :2].min(axis=1) >= 128)
+                          & (p[:, :2].min(axis=1) > p[:, 2] * 1.6)
+                          & (p[:, :2].max(axis=1) < p[:, :2].min(axis=1) * 1.6)]
+        if 0 < len(selected) <= len(pixels) * .03:
+            weighted.extend([selected] * 12)
     strip = Image.fromarray(np.concatenate(weighted).reshape(1, -1, 3))
     quantized = strip.quantize(colors=15, method=Image.Quantize.MEDIANCUT, kmeans=5)
     colors = np.array(quantized.getpalette()[:45]).reshape(-1, 3)
@@ -321,6 +327,34 @@ def selection(image, vertices):
     return mask
 
 
+def cami_front():
+    original = opaque(source("cami", "front"))
+    mask = selection(original, [
+        (490, 316), (527, 316), (546, 342), (558, 359), (571, 393),
+        (580, 434), (587, 464), (603, 493), (614, 561), (587, 568),
+        (572, 533), (559, 503), (548, 476), (529, 460), (514, 439),
+        (502, 406), (491, 368),
+    ])
+    # Restore hair from the same model image; relocate its wheat to the shawl.
+    hair = original.crop((440, 210, 555, 320)).resize((124, 252), Image.Resampling.NEAREST)
+    patch = Image.new("RGBA", original.size)
+    patch.alpha_composite(hair, (490, 316))
+    patch.putalpha(ImageChops.multiply(patch.getchannel("A"),
+                                      ImageChops.multiply(mask, original.getchannel("A"))))
+    result = original.copy()
+    result.alpha_composite(patch)
+    ear = original.copy()
+    ear.putalpha(ImageChops.multiply(ear.getchannel("A"), mask))
+    ear = ear.crop(ear.getbbox()).rotate(-35, Image.Resampling.NEAREST, expand=True)
+    ear = ear.resize((round(ear.width * .75), round(ear.height * .75)),
+                     Image.Resampling.NEAREST)
+    placed = Image.new("RGBA", original.size)
+    placed.alpha_composite(ear, (100, 708))
+    placed.putalpha(ImageChops.multiply(placed.getchannel("A"), original.getchannel("A")))
+    result.alpha_composite(placed)
+    return result
+
+
 def place_piece(image, vertices, joints, targets, width_scale=None):
     image = image.copy()
     image.putalpha(ImageChops.multiply(image.getchannel("A"), selection(image, vertices)))
@@ -380,9 +414,10 @@ def backs(name):
 def build():
     outputs = {PEOPLE / f"{name}.png": walker(name) for name in WALKERS}
     for name in PORTRAITS:
-        front = fit(source(name, "front"), phase=FRONT_PHASES.get(name, (0, 0)))
+        front = fit(cami_front() if name == "cami" else source(name, "front"),
+                    phase=FRONT_PHASES.get(name, (0, 0)))
         sequence = [front] + (backs(name) if name in {"kleon", "alethea"} else [])
-        colors = palette(sequence)
+        colors = palette(sequence, wheat=name == "cami")
         outputs[FRONT / f"{name}.png"] = indexed(front, colors)
         if len(sequence) > 1:
             sheet = Image.new("P", (64, 256))

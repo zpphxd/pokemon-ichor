@@ -105,6 +105,13 @@ rear stride is reflected to correct the source's misplaced single shawl-fringe
 wheat ear. Her seated/rising views and Sam/Apollo's three strum states retain
 their existing frame slots.
 
+Cami's unused front bust also relocates the existing model wheat from her hair
+to the shawl fringe. A masked patch of adjacent model hair restores the old
+location; the original source remains unchanged. Rotation, nearest-neighbor
+scaling and placement copy only existing model pixels, not painted geometry.
+Its tiny source-yellow accent receives the same at-most-3% weighting gate,
+only for this portrait. Her source face, figure bounds and walker are unchanged.
+
 Companion backs assemble model-authored arm cutouts over a fixed model-authored
 rest head/torso/satchel. Selection polygons only select existing source pixels;
 they never draw colored character geometry. Upper/forearm pieces register to

@@ -136,16 +136,22 @@ dark felt petasos, porphyry/burgundy cloak, gray beard, scrolls and kerykeion;
 the old source docstring's blue-cloak wording was stale. Fixed shared palette
 files and all unowned readers are retained.
 
+Cami's unused front bust has a bounded follow-up: its existing model wheat is
+relocated from hair to shawl fringe, with adjacent model hair restoring the
+old location. The original source, face/figure anchors, Cami walker and every
+other native output remain unchanged. Tiny source-yellow weighting preserves
+the relocated wheat; it does not alter shared palettes or enable a bust UI.
+
 The named-cast portion of the shared `save_indexed` guard blocks exactly its
 29 migrated paths and names `python3 tools/ichor/art/model_cast.py --write`;
 the 32 class/townsfolk paths remain separately protected. Neither guard
-blocks a folder or silently falls back to the old painter. The named source-frame ROM
-gallery uses actual graphics IDs, image-table slots, palettes and native OBJ
+blocks a folder or silently falls back to the old painter. The named
+source-frame ROM gallery uses actual graphics IDs, image-table slots, palettes and native OBJ
 copies in test RAM, not natural battles or dialogue. Sam/Cami's two unrouted
 portraits have native/source evidence only; Daphne's duplicate is also checked
 through source reproduction and the introduction.
 
-**Isolated candidate checkpoint verification:** 33 scoped source regressions,
+**Isolated candidate checkpoint verification:** 34 scoped source regressions,
 helper compilation, `make -j$(sysctl -n hw.ncpu)` and
 `tools/ichor/smoke_test.sh` pass (nine smoke captures). ROM usage is
 23,038,304 of 33,554,432 bytes (68.66%). Both matching before/current named
