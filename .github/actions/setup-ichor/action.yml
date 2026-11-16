@@ -33,6 +33,7 @@ runs:
         mkdir -p "$RUNNER_TEMP/mgba-source"
         tar -xzf "$RUNNER_TEMP/mgba.tar.gz" --strip-components=1 -C "$RUNNER_TEMP/mgba-source"
         cmake -S "$RUNNER_TEMP/mgba-source" -B "$RUNNER_TEMP/mgba-build" \
+          -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
           -DCMAKE_INSTALL_PREFIX="$prefix" -DCMAKE_INSTALL_LIBDIR=lib \
           -DBUILD_QT=OFF -DBUILD_SDL=OFF -DBUILD_GL=OFF \
           -DBUILD_SHARED=ON -DBUILD_STATIC=OFF \

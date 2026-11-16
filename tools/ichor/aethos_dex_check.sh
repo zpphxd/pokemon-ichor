@@ -3,7 +3,7 @@
 # types, national dex number and front pic in gSpeciesInfo, the regional dex
 # order and the starters (tools/ichor/tests/aethos_dex.lua).
 # Usage: tools/ichor/aethos_dex_check.sh [rom]   (default: pokeemerald.gba)
-# Builds the runner via smoke_test.sh's rules, so run that once on a fresh checkout.
+# Shared harness setup builds the Lua runner.
 set -u
 cd "$(dirname "$0")/../.."
 ROM="${1:-pokeemerald.gba}"

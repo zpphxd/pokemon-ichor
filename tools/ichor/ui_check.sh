@@ -3,8 +3,7 @@
 # YES/NO box, options, name box, sign) with tools/ichor/ui_check.lua. The
 # dialogue, name box and sign are read in the Akti Asclepeion.
 # Usage: tools/ichor/ui_check.sh [rom]   (default: pokeemerald.gba)
-# Screenshots go to build/ui_check/. Builds the runner via smoke_test.sh's
-# rules, so run tools/ichor/smoke_test.sh once first on a fresh checkout.
+# Screenshots go to build/ui_check/. Shared harness setup builds the Lua runner.
 set -u
 cd "$(dirname "$0")/../.."
 ROM="${1:-pokeemerald.gba}"

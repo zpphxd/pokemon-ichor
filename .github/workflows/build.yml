@@ -22,7 +22,7 @@ env:
 jobs:
   build-emerald:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,7 +56,7 @@ jobs:
 
   build-firered:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -88,7 +88,7 @@ jobs:
 
   build-leafgreen:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -120,7 +120,7 @@ jobs:
 
   release:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -154,7 +154,7 @@ jobs:
 
   test:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -191,7 +191,7 @@ jobs:
 
   ichor:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -223,7 +223,7 @@ jobs:
   # Passes only when all parallel build/test jobs succeed.
   build:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [build-emerald, build-firered, build-leafgreen, release, test, ichor]
     steps:
       - name: All builds passed
@@ -231,7 +231,7 @@ jobs:
 
   docs_validate:
     if: github.actor != 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -241,7 +241,7 @@ jobs:
 
   allcontributors:
     if: github.actor == 'allcontributors[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Automatically pass for allcontributors
         run: echo "CI automatically passes for allcontributors" && exit 0

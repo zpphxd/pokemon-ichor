@@ -2,7 +2,7 @@
 //
 // The bundled tools/mgba/mgba-rom-test-mac is built without a Lua engine, so
 // its --script flag fails, and mGBA 0.10's own frontends have no --script
-// flag. This links Homebrew's libmgba (brew install mgba), which has Lua.
+// flag. This links a Lua-capable libmgba (Homebrew, Linux, or MGBA_PREFIX).
 //
 // Usage: ichor-mgba-headless [--script FILE]... [--frames N] [--until TEXT] ROM
 // It runs until a log line contains TEXT (default "SMOKE done"), or for N frames
