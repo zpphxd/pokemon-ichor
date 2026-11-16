@@ -1885,10 +1885,36 @@
 #define FLAG_ICHOR_ITEM_EMPORION_SUPER_POTION   (FLAG_ICHOR_GENERAL_START + 0x0D3) // Ichor: item ball: Super Potion on the ship sheds' slipway
 #define FLAG_ICHOR_ITEM_EMPORION_X_SPEED        (FLAG_ICHOR_GENERAL_START + 0x0D4) // Ichor: item ball: X Speed at the end of the stoa
 #define FLAG_ICHOR_ITEM_EMPORION_REPEL          (FLAG_ICHOR_GENERAL_START + 0x0D5) // Ichor: item ball: Repel behind the Deigma
+#define FLAG_ICHOR_KRONIA_BREAD                 (FLAG_ICHOR_GENERAL_START + 0x100) // Ichor: accepted bread at the Kronia
+#define FLAG_ICHOR_ARRIVED_THYRSA               (FLAG_ICHOR_GENERAL_START + 0x101) // Ichor: reached Thyrsa
+#define FLAG_ICHOR_GOT_THESPIS_SCROLL           (FLAG_ICHOR_GENERAL_START + 0x102) // Ichor: received the Mask Laurel scroll
+#define FLAG_ICHOR_DIONYSIA_WATCHED             (FLAG_ICHOR_GENERAL_START + 0x103) // Ichor: saw the forged Unwoven tragedy
+#define FLAG_ICHOR_DIONYSIA_BROKEN              (FLAG_ICHOR_GENERAL_START + 0x104) // Ichor: broke the Dionysia trance with the satyr play
+#define FLAG_ICHOR_SILENOS_BONES                (FLAG_ICHOR_GENERAL_START + 0x105) // Ichor: won Silenos knucklebones contest
+#define FLAG_ICHOR_SILENOS_RIDDLE               (FLAG_ICHOR_GENERAL_START + 0x106) // Ichor: won Silenos riddle contest
+#define FLAG_ICHOR_SILENOS_BATTLE               (FLAG_ICHOR_GENERAL_START + 0x107) // Ichor: won Silenos battle contest
+#define FLAG_ICHOR_ITEM_R6_HEAL                 (FLAG_ICHOR_GENERAL_START + 0x108) // Ichor: Eleutherai road medicine
+#define FLAG_ICHOR_ITEM_R6_BALL                 (FLAG_ICHOR_GENERAL_START + 0x109) // Ichor: Eleutherai road ball
+#define FLAG_ICHOR_ITEM_R6_ETHER                (FLAG_ICHOR_GENERAL_START + 0x10A) // Ichor: Eleutherai road Ether
+#define FLAG_ICHOR_ITEM_R7_HEAL                 (FLAG_ICHOR_GENERAL_START + 0x10B) // Ichor: Kronia road medicine
+#define FLAG_ICHOR_ITEM_R7_BALL                 (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: Kronia road ball
+#define FLAG_ICHOR_ITEM_R7_ETHER                (FLAG_ICHOR_GENERAL_START + 0x10D) // Ichor: Kronia road Ether
+#define FLAG_ICHOR_ITEM_KITHAIRON               (FLAG_ICHOR_GENERAL_START + 0x10E) // Ichor: Kithairon summit reward
+#define FLAG_ICHOR_ITEM_KITHAIRON_BALL          (FLAG_ICHOR_GENERAL_START + 0x10F) // Ichor: Kithairon reward: Great Ball
+#define FLAG_ICHOR_ITEM_KITHAIRON_ETHER         (FLAG_ICHOR_GENERAL_START + 0x110) // Ichor: Kithairon reward: Ether
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
 #define FLAG_ICHOR_MOM_CONFESSED                (FLAG_ICHOR_GENERAL_START + 0x483) // Ichor: Mom confessed the bee at the Kastalian spring: her knucklebones play fair (engine, ENGINE_API §7; set by world-act3 at III-7)
+#define FLAG_ICHOR_HIDDEN_ITEM_R6_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x000) // Ichor: Eleutherai shrine honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R6_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x001) // Ichor: Eleutherai terrace Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R6_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x002) // Ichor: Eleutherai verge Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R7_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x003) // Ichor: Kronia honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R7_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x004) // Ichor: Kronia Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R7_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x005) // Ichor: Kronia Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_KITHAIRON_HONEY  (FLAG_ICHOR_GENERAL2_START + 0x006) // Ichor: Kithairon hidden Honey
+#define FLAG_ICHOR_HIDDEN_ITEM_KITHAIRON_REVIVE (FLAG_ICHOR_GENERAL2_START + 0x007) // Ichor: Kithairon hidden Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_KITHAIRON_REPEL  (FLAG_ICHOR_GENERAL2_START + 0x008) // Ichor: Kithairon hidden Super Repel
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

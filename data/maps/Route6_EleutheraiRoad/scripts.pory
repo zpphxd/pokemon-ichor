@@ -1,0 +1,47 @@
+mapscripts Route6_EleutheraiRoad_MapScripts {}
+
+script Route6_EleutheraiRoad_EventScript_DAMON {
+    trainerbattle_single(TRAINER_ICHOR_DAMON, format("The road goes up. Your guard must too."), format("Good. Keep your footing."))
+    msgbox(format("Good. Keep your footing."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_PHANO {
+    trainerbattle_single(TRAINER_ICHOR_PHANO, format("The vines have ears. Mine have partners."), format("All right. You can pass the grapes."))
+    msgbox(format("All right. You can pass the grapes."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_LYSIS {
+    trainerbattle_single(TRAINER_ICHOR_LYSIS, format("Do you trust the next step?"), format("That one, apparently."))
+    msgbox(format("That one, apparently."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_MELANIPPE {
+    trainerbattle_single(TRAINER_ICHOR_MELANIPPE, format("The mountain is the god's other theater."), format("A very steep stage."))
+    msgbox(format("A very steep stage."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_SOSTRATOS {
+    trainerbattle_single(TRAINER_ICHOR_SOSTRATOS, format("My flock won't climb without an audience."), format("They liked that."))
+    msgbox(format("They liked that."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_THEOGNIS {
+    trainerbattle_single(TRAINER_ICHOR_THEOGNIS, format("My reading promised a quiet walk."), format("It left that part out."))
+    msgbox(format("It left that part out."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_SouthSign {
+    msgbox(format("South: Eleusa.\nNorth: Mt. Kithairon."), MSGBOX_SIGN)
+    end
+}
+
+script Route6_EleutheraiRoad_EventScript_NorthSign {
+    msgbox(format("South: Eleusa.\nNorth: Mt. Kithairon."), MSGBOX_SIGN)
+    end
+}

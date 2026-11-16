@@ -1,0 +1,231 @@
+{
+  "id": "MAP_ROUTE7_KRONIA_GROUNDS",
+  "name": "Route7_KroniaGrounds",
+  "layout": "LAYOUT_ROUTE7_KRONIA_GROUNDS",
+  "music": "MUS_ICHOR_ROAD",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_AETHOS_ROUTE_7",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "down",
+      "map": "MAP_MT_KITHAIRON",
+      "offset": 0
+    },
+    {
+      "direction": "up",
+      "map": "MAP_THYRSA_CITY",
+      "offset": 0
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_HAGES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 10,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route7_KroniaGrounds_EventScript_HAGES",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_MYRTON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route7_KroniaGrounds_EventScript_MYRTON",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_DORIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 18,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route7_KroniaGrounds_EventScript_DORIS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_PHILISKOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
+      "x": 10,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route7_KroniaGrounds_EventScript_PHILISKOS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_EUXENOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 5,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route7_KroniaGrounds_EventScript_EUXENOS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_MANTO",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
+      "x": 18,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route7_KroniaGrounds_EventScript_MANTO",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SUPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R7_HEAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 19,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_GREAT_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R7_BALL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R7_ETHER"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_BAKER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 18,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route7_KroniaGrounds_EventScript_Baker",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_KRONIST",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 17,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route7_KroniaGrounds_EventScript_Kronist",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 37,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route7_KroniaGrounds_EventScript_SouthSign"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route7_KroniaGrounds_EventScript_NorthSign"
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "item": "ITEM_HONEY",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R7_HONEY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 19,
+      "y": 21,
+      "elevation": 3,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R7_REVIVE",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 34,
+      "elevation": 3,
+      "item": "ITEM_SUPER_REPEL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R7_REPEL",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
+}

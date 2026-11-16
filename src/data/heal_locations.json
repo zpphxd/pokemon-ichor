@@ -61,6 +61,16 @@
       "map": "MAP_EMPORION_CITY",
       "x": 26,
       "y": 32
+    },
+    {
+      "id": "HEAL_LOCATION_THYRSA_CITY",
+      "map": "MAP_THYRSA_CITY",
+      "x": 6,
+      "y": 26,
+      "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
+      "respawn_npc": "LOCALID_THYRSA_CITY_ASCLEPEION_HEALER",
+      "respawn_x": 7,
+      "respawn_y": 5
     }
   ]
 }

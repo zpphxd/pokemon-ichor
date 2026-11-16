@@ -1,0 +1,113 @@
+local L = dofile("tools/ichor/tests/engine_lib.lua")
+local S, K, emu = L.S, L.K, L.emu
+for k, v in pairs(dofile(L.OUT .. "thyrsa_symbols.lua")) do S.SCRIPTS[k] = v end
+local T = "ThyrsaCity_TempleOfDionysus_EventScript_"
+local A = "ThyrsaCity_Amphitheater_EventScript_"
+local C = "ThyrsaCity_EventScript_"
+local expect = L.expect
+
+local function mask(prefix, role)
+    L.talk(L.sign(prefix .. "Masks"), {menuChoice = role - 1})
+    expect(L.getVar(S.VAR_MASK) == role, "the native mask menu selects role " .. role)
+end
+
+local function fullPocket()
+    local pocket = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_KEY_ITEMS
+    local key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+    local saved = {}
+    for i = 0, S.BAG_KEYITEMS_COUNT - 1 do
+        saved[i] = {emu:read16(pocket + i * S.ITEM_SLOT_SIZE),
+                    emu:read16(pocket + i * S.ITEM_SLOT_SIZE + 2) ~ key}
+        emu:write16(pocket + i * S.ITEM_SLOT_SIZE, S.ITEM_TORCH)
+        emu:write16(pocket + i * S.ITEM_SLOT_SIZE + 2, 1 ~ key)
+    end
+    return function()
+        local live = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_KEY_ITEMS
+        local liveKey = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+        for i = 0, S.BAG_KEYITEMS_COUNT - 1 do
+            emu:write16(live + i * S.ITEM_SLOT_SIZE, saved[i][1])
+            emu:write16(live + i * S.ITEM_SLOT_SIZE + 2, saved[i][2] ~ liveKey)
+        end
+    end
+end
+
+L.start(function()
+    L.quickstart()
+    L.runHeader("Thyrsa_SetupHeader")
+    L.setBeat("connected_roads", false)
+    L.setFlag(S.FLAG_ACT1, false)
+    L.go(45, 6, {trigger = true})
+    L.settle()
+    local _, y = L.pos()
+    expect(y == 7, "the north gate still blocks departure before Act I closes")
+    L.setFlag(S.FLAG_ACT1)
+    for _, map in ipairs({S.MAP_R6, S.MAP_MOUNTAIN, S.MAP_R7, S.MAP_CITY}) do
+        L.leaveEdge("up", map)
+        expect(L.mapId() == map, "actual connected road crossing to map " .. map)
+        L.shot("connected_" .. map)
+    end
+    L.useWarp(S.MAP_CLINIC)
+    L.talk(L.npc("ThyrsaCity_Asclepeion_EventScript_Healer"))
+    expect(L.idle(), "the real Thyrsa healer returns control")
+    L.shot("clinic")
+    L.useWarp(S.MAP_CITY)
+    L.useWarp(S.MAP_TEMPLE)
+    L.setBeat("mask_trial", false)
+    L.talk(L.sign(T .. "Tragedy"))
+    expect(L.getVar(S.VAR_ACT) == 0, "an out-of-order entrance cannot advance the trial")
+    for i, door in ipairs({"Comedy", "Tragedy", "Satyr"}) do
+        mask(T, i)
+        L.talk(L.sign(T .. door), {every = true})
+        expect(L.getVar(S.VAR_ACT) == i, "the actual trial advances at entrance " .. i)
+    end
+    L.talk(L.npc(T .. "Thespis"), {every = true})
+    expect(L.defeated(S.TRAINER_THESPIS) and L.getFlag(S.FLAG_BADGE04), "real Thespis victory grants Laurel 4")
+    expect(L.itemCount(S.ITEM_TM06) == 1, "Toxic scroll awarded")
+    L.shot("mask_laurel")
+    local battles = #L.battles
+    L.talk(L.npc(T .. "Thespis"))
+    expect(#L.battles == battles and L.itemCount(S.ITEM_TM06) == 1, "Laurel and scroll do not replay")
+    L.useWarp(S.MAP_CITY)
+    L.useWarp(S.MAP_THEATER)
+    L.setBeat("dionysia", false)
+    L.goTrigger(L.triggers(A .. "Performance"))
+    L.settle({every = true})
+    expect(L.getFlag(S.FLAG_WATCHED), "the four-scene tragedy plays through without losing control")
+    L.talk(L.npc(A .. "Thespis"))
+    mask(A, 3)
+    L.talk(L.sign(A .. "Satyr"))
+    expect(L.getVar(S.VAR_SATYR) == 0, "the satyr ending cannot skip the first two entrances")
+    for i, door in ipairs({"Comedy", "Tragedy", "Satyr"}) do
+        mask(A, i)
+        L.talk(L.sign(A .. door), {every = true})
+        expect(L.getVar(S.VAR_SATYR) == i, "a real entrance frees audience block " .. i)
+    end
+    expect(L.getFlag(S.FLAG_BROKEN), "the satyr play breaks the staged tragedy")
+    L.shot("theater_awake")
+    L.useWarp(S.MAP_CITY)
+    L.setBeat("silenos", false)
+    L.talk(L.npc(C .. "Silenos"), {answers = {1, 0, 0, 2}})
+    expect(not L.getFlag(S.FLAG_RIDDLE), "three wrong riddles leave the contest retryable")
+    L.talk(L.npc(C .. "Silenos"), {answers = {1, 1}})
+    expect(L.getFlag(S.FLAG_RIDDLE) and L.itemCount(S.ITEM_GIRDLE) == 0, "one distinct win is not enough")
+    L.talk(L.npc(C .. "Silenos"), {answers = {1}})
+    expect(L.itemCount(S.ITEM_GIRDLE) == 0, "repeating a won contest cannot count twice")
+    L.talk(L.npc(C .. "Silenos"), {answers = {2}, every = true})
+    expect(L.defeated(S.TRAINER_SILENOS) and L.getFlag(S.FLAG_BATTLE), "Silenos's native battle is the second win")
+    local restore = fullPocket()
+    L.talk(L.npc(C .. "Silenos"))
+    expect(not L.getFlag(S.FLAG_GIRDLE) and L.getFlag(S.FLAG_RIDDLE) and L.getFlag(S.FLAG_BATTLE),
+           "a full relic pocket preserves the wins without losing the Girdle")
+    restore()
+    L.talk(L.npc(C .. "Silenos"), {every = true})
+    expect(L.getFlag(S.FLAG_GIRDLE) and L.itemCount(S.ITEM_GIRDLE) == 1, "room made: actual Girdle awarded")
+    L.talk(L.npc(C .. "Silenos"))
+    expect(L.itemCount(S.ITEM_GIRDLE) == 1, "the Girdle cannot be collected twice")
+    L.runHeader("Thyrsa_SaveHeader")
+    emu:reset()
+    L.continueSave()
+    expect(L.mapId() == S.MAP_CITY and L.getFlag(S.FLAG_BADGE04) and L.getFlag(S.FLAG_BROKEN)
+           and L.getFlag(S.FLAG_GIRDLE) and L.itemCount(S.ITEM_GIRDLE) == 1,
+           "chapter completion survives an actual save/reset/CONTINUE")
+    L.shot("saved_chapter")
+end)

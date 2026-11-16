@@ -847,6 +847,94 @@
       "border_filepath": "data/layouts/Route5_RestHouse/border.bin",
       "blockdata_filepath": "data/layouts/Route5_RestHouse/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE6_ELEUTHERAI_ROAD",
+      "name": "Route6_EleutheraiRoad_Layout",
+      "width": 24,
+      "height": 40,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Route6_EleutheraiRoad/border.bin",
+      "blockdata_filepath": "data/layouts/Route6_EleutheraiRoad/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MT_KITHAIRON",
+      "name": "MtKithairon_Layout",
+      "width": 24,
+      "height": 40,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/MtKithairon/border.bin",
+      "blockdata_filepath": "data/layouts/MtKithairon/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE7_KRONIA_GROUNDS",
+      "name": "Route7_KroniaGrounds_Layout",
+      "width": 24,
+      "height": 40,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Route7_KroniaGrounds/border.bin",
+      "blockdata_filepath": "data/layouts/Route7_KroniaGrounds/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY",
+      "name": "ThyrsaCity_Layout",
+      "width": 36,
+      "height": 32,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/ThyrsaCity/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_ASCLEPEION",
+      "name": "ThyrsaCity_Asclepeion_Layout",
+      "width": 15,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/ThyrsaCity_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_AGORA",
+      "name": "ThyrsaCity_Agora_Layout",
+      "width": 12,
+      "height": 10,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/ThyrsaCity_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_TEMPLE_OF_DIONYSUS",
+      "name": "ThyrsaCity_TempleOfDionysus_Layout",
+      "width": 25,
+      "height": 27,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/ThyrsaCity_TempleOfDionysus/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_TempleOfDionysus/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_AMPHITHEATER",
+      "name": "ThyrsaCity_Amphitheater_Layout",
+      "width": 25,
+      "height": 27,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/ThyrsaCity_Amphitheater/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_Amphitheater/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -1,0 +1,23 @@
+mapscripts ThyrsaCity_Agora_MapScripts {}
+
+script ThyrsaCity_Agora_EventScript_Merchant {
+    lock
+    faceplayer
+    message(format("Medicine for the road. Antidotes for the theater. Don't ask."))
+    waitmessage
+    pokemart(ThyrsaCity_Agora_Stock)
+    release
+}
+
+mart ThyrsaCity_Agora_Stock {
+    ITEM_GREAT_BALL
+    ITEM_SUPER_POTION
+    ITEM_HYPER_POTION
+    ITEM_ANTIDOTE
+    ITEM_AWAKENING
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_SUPER_REPEL
+    ITEM_OLIVE_OIL
+    ITEM_WINE
+}

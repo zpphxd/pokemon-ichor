@@ -17,6 +17,7 @@ u32 GetCurrentLevelCap(void)
         {FLAG_BADGE01_GET, 14},
         {FLAG_BADGE02_GET, 20},
         {FLAG_BADGE03_GET, 26},
+        {FLAG_BADGE04_GET, 32},
     };
 
     u32 i;
@@ -31,7 +32,7 @@ u32 GetCurrentLevelCap(void)
             if (!FlagGet(sLevelCapFlagMap[i][0]))
                 return sLevelCapFlagMap[i][1];
         }
-        return 32; // The next connected chapter is Thyrsa; extend as it is built.
+        return 37; // Arkadia is the next Laurel.
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {

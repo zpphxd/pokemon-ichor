@@ -1,0 +1,20 @@
+mapscripts ThyrsaCity_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_THYRSA_CITY)
+    }
+}
+
+script ThyrsaCity_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_THYRSA_CITY_ASCLEPEION_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script ThyrsaCity_Asclepeion_EventScript_Pithos {
+    lockall
+    msgbox(format("The Pithos of Thyrsa opened."))
+    special(ShowPokemonStorageSystemPC)
+    releaseall
+}

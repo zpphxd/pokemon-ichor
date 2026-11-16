@@ -7,7 +7,8 @@
     "gMapGroup_IndoorAegina",
     "gMapGroup_IndoorEmporion",
     "gMapGroup_IndoorEleusa",
-    "gMapGroup_DungeonsAct1"
+    "gMapGroup_DungeonsAct1",
+    "gMapGroup_IndoorThyrsa"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -23,7 +24,11 @@
     "EmporionHarbor",
     "EleusaVillage",
     "Route4_Isthmus",
-    "Route5_SkironianCliffs"
+    "Route5_SkironianCliffs",
+    "Route6_EleutheraiRoad",
+    "MtKithairon",
+    "Route7_KroniaGrounds",
+    "ThyrsaCity"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -101,5 +106,11 @@
   ],
   "gMapGroup_DungeonsAct1": [
     "HecatesHollow"
+  ],
+  "gMapGroup_IndoorThyrsa": [
+    "ThyrsaCity_Asclepeion",
+    "ThyrsaCity_Agora",
+    "ThyrsaCity_TempleOfDionysus",
+    "ThyrsaCity_Amphitheater"
   ]
 }

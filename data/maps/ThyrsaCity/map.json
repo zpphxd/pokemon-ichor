@@ -1,0 +1,138 @@
+{
+  "id": "MAP_THYRSA_CITY",
+  "name": "ThyrsaCity",
+  "layout": "LAYOUT_THYRSA_CITY",
+  "music": "MUS_ICHOR_AGORA",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_THYRSA_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_CITY",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "down",
+      "map": "MAP_ROUTE7_KRONIA_GROUNDS",
+      "offset": 0
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_THYRSA_CITY_SILENOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 23,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_EventScript_Silenos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_THYRSA_CITY_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 14,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_EventScript_Alethea",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_THYRSA_CITY_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 26,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_EventScript_Kleon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_THYRSA_CITY_HERALD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 31,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_EventScript_Herald",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_ASCLEPEION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 17,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_AGORA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 28,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_AMPHITHEATER",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 28,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_EventScript_CitySign"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_EventScript_TempleSign"
+    },
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_EventScript_TheaterSign"
+    }
+  ]
+}

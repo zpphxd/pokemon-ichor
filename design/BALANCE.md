@@ -32,11 +32,11 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Evolution timing:** the Aethos dex sets evolution levels so the main fully-evolved forms arrive around Laurels 4–6. The dex team owns this; keep this curve and their levels in step.
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
-- **Current Act I implementation:** Mortal variants cover Ione, Kerykos and
-  both Chloe parties, retaining Hero's species and moves at three levels lower.
+- **Current connected implementation:** Mortal variants cover Ione, Kerykos,
+  both Chloe parties and Thespis, retaining Hero's species and moves at three levels lower.
   Spartan uses those species and levels with trained EV spreads, natures,
-  held items and smart AI. Its EXP/candy caps are 14, 20 and 26, advancing when
-  each Laurel is won; after Laurel 3 the next cap is Thyrsa's 32. Extend the
+  held items and smart AI. Its EXP/candy caps are 14, 20, 26 and 32, advancing when
+  each Laurel is won; after Laurel 4 the next cap is Arkadia's 37. Extend the
   milestone mapping as later chapters are connected. Hero's existing parties
   and uncapped EXP are unchanged. These integrations are not natural-level
   balance approval.

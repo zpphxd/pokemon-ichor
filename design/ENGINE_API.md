@@ -352,6 +352,15 @@ not natural-level balance evidence. Earlier attempts affected by host disk
 exhaustion are not complete persisted evidence. Demeter, the Mysteries and the
 sanctum still have separate fixtures, not a continuous ending pass.
 
+`tools/ichor/tests/thyrsa.sh` is a separate, level-assisted native chapter check:
+it preserves the Act I north-road gate, walks the actual Eleusa/Route 6/Kithairon/
+Route 7/Thyrsa seams, uses the clinic, solves both three-mask sequences,
+defeats Thespis, and wins Silenos's riddle/battle path. It checks distinct
+contest receipts, full-key-pocket retry, repeat rewards and actual save/reset/
+CONTINUE. It does not certify natural-level balance, the knucklebones win path,
+or a continuous NEW GAME run through Act II. Regenerate the new layouts,
+road scripts, encounters and chapter teams with `python3 tools/ichor/maps/thyrsa.py`.
+
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.

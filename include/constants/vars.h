@@ -289,6 +289,9 @@
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
 #define VAR_ICHOR_DIFFICULTY                    (ICHOR_VARS_START + 0x000) // Ichor: save-fixed difficulty; expansion DIFFICULTY_* value
+#define VAR_ICHOR_MASK                          (ICHOR_VARS_START + 0x006) // Ichor: Thyrsa equipped mask: none/comic/tragic/satyr
+#define VAR_ICHOR_MASK_ACT                      (ICHOR_VARS_START + 0x007) // Ichor: completed entrances in the Three-Act Play
+#define VAR_ICHOR_SATYR_ACT                     (ICHOR_VARS_START + 0x008) // Ichor: freed audience blocks in the Dionysia
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000

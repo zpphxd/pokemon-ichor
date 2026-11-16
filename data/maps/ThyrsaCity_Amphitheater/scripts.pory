@@ -1,0 +1,167 @@
+mapscripts ThyrsaCity_Amphitheater_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_DIONYSIA_WATCHED)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+}
+
+text Thyrsa_Text_NameChorus { "CHORUS" }
+text Thyrsa_Text_NameAlethea { "ALETHEA" }
+text Thyrsa_Text_NameKleon { "KLEON" }
+
+script ThyrsaCity_Amphitheater_EventScript_Performance {
+    lockall
+    if (!flag(FLAG_BADGE04_GET)) {
+        msgbox(format("The chorus is still rehearsing. Thespis is at the temple."))
+        applymovement(OBJ_EVENT_ID_PLAYER, Thyrsa_Movement_Back)
+        waitmovement(0)
+        releaseall
+        end
+    }
+    playbgm(MUS_ICHOR_TITAN, TRUE)
+    setspeaker(Thyrsa_Text_NameChorus)
+    msgbox(format("In the blind hour, when the spindle slept,\pa bee-woman came where the old ones kept."))
+    applymovement(LOCALID_THYRSA_CITY_AMPHITHEATER_BEEWOMAN, Thyrsa_Movement_Bee)
+    waitmovement(0)
+    msgbox(format("She stole a thread from the sisters three,\pand carried a curse away to sea."))
+    delay(45)
+    msgbox(format("A child with no measure, a child with no name,\pa road with no ending, a world set aflame."))
+    applymovement(LOCALID_THYRSA_CITY_AMPHITHEATER_KLEON, Thyrsa_Movement_Look)
+    waitmovement(0)
+    applymovement(LOCALID_THYRSA_CITY_AMPHITHEATER_ACTOR, Thyrsa_Movement_Actor)
+    waitmovement(0)
+    msgbox(format("Bring the blade where the black threads meet.\pLay tomorrow at the golden king's feet."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The actor wears your hat.\p"
+                  "Nobody applauds. Nobody moves. The same note hangs above the seats."))
+    setflag(FLAG_ICHOR_DIONYSIA_WATCHED)
+    setvar(VAR_TEMP_1, 1)
+    releaseall
+}
+
+movement Thyrsa_Movement_Back { walk_down }
+movement Thyrsa_Movement_Bee { walk_left walk_left walk_left walk_left }
+movement Thyrsa_Movement_Actor { walk_right walk_right walk_right walk_right }
+movement Thyrsa_Movement_Look { face_right }
+
+script ThyrsaCity_Amphitheater_EventScript_Thespis {
+    lock
+    faceplayer
+    setspeaker(Thyrsa_Text_NameThespis)
+    if (!flag(FLAG_ICHOR_DIONYSIA_WATCHED)) {
+        msgbox(format("Take your seat. Then tell me if this is the play you expected."))
+    } elif (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("My masks. Someone's making them speak without actors.\p"
+                      "A tragedy with no satyr play after it is just a funeral.\p"
+                      "Take the goat mask. Walk on. Comedy left, tragedy middle. Then the part they left out."))
+        setvar(VAR_ICHOR_MASK, 3)
+        msgbox(format("The rack has the other masks. Three entrances. Give them back their laughter."))
+    } else {
+        msgbox(format("There. A city awake. Never trust a play that won't let you leave."))
+    }
+    release
+}
+
+script ThyrsaCity_Amphitheater_EventScript_Masks {
+    if (!flag(FLAG_ICHOR_DIONYSIA_WATCHED)) {
+        lockall
+        msgbox(format("The prop masks are set out for the performance."))
+        releaseall
+        end
+    }
+    goto(ThyrsaCity_TempleOfDionysus_EventScript_Masks)
+}
+
+script ThyrsaCity_Amphitheater_EventScript_Program {
+    lockall
+    msgbox(format("The tragedy ends at the Loom. There is no satyr play in the program.\p"
+                  "Three doors: comedy left, tragedy middle, satyr right."))
+    releaseall
+}
+
+script ThyrsaCity_Amphitheater_EventScript_Comedy {
+    setvar(VAR_0x8008, 0)
+    setvar(VAR_0x8009, 1)
+    goto(ThyrsaCity_Amphitheater_EventScript_Entrance)
+}
+script ThyrsaCity_Amphitheater_EventScript_Tragedy {
+    setvar(VAR_0x8008, 1)
+    setvar(VAR_0x8009, 2)
+    goto(ThyrsaCity_Amphitheater_EventScript_Entrance)
+}
+script ThyrsaCity_Amphitheater_EventScript_Satyr {
+    setvar(VAR_0x8008, 2)
+    setvar(VAR_0x8009, 3)
+    goto(ThyrsaCity_Amphitheater_EventScript_Entrance)
+}
+
+script ThyrsaCity_Amphitheater_EventScript_Entrance {
+    lockall
+    if (!flag(FLAG_ICHOR_DIONYSIA_WATCHED) || flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("An empty stage door."))
+    } else {
+        compare_var_to_var(VAR_ICHOR_SATYR_ACT, VAR_0x8008)
+        goto_if_ne(ThyrsaCity_Amphitheater_EventScript_WrongEntrance)
+        compare_var_to_var(VAR_ICHOR_MASK, VAR_0x8009)
+        goto_if_ne(ThyrsaCity_Amphitheater_EventScript_WrongEntrance)
+        addvar(VAR_ICHOR_SATYR_ACT, 1)
+        playse(SE_M_TEETER_DANCE)
+        if (var(VAR_ICHOR_SATYR_ACT) == 1) {
+            fadedefaultbgm
+            msgbox(format("The king trips over his own ending.\p"
+                          "A laugh from the lowest seats. Someone takes a breath."))
+        } elif (var(VAR_ICHOR_SATYR_ACT) == 2) {
+            msgbox(format("The chorus weeps into an empty wine jug.\p"
+                          "The middle tiers laugh. Heads turn toward the stage."))
+        } else {
+            msgbox(format("The goat has eaten the prophecy.\p"
+                          "For a moment, silence. Then the whole theater roars."))
+            setflag(FLAG_ICHOR_DIONYSIA_BROKEN)
+            removeobject(LOCALID_THYRSA_CITY_AMPHITHEATER_CHORUS)
+            setspeaker(Thyrsa_Text_NameAlethea)
+            msgbox(format("Look at the program. No name. Just that little hook.\p"
+                          "Same as the quay. Someone is writing you a life."))
+            setspeaker(Thyrsa_Text_NameKleon)
+            msgbox(format("They gave you the starring part.\p"
+                          "I'm off to Arkadia. I've a story of my own to get on with."))
+        }
+    }
+    releaseall
+}
+
+script ThyrsaCity_Amphitheater_EventScript_WrongEntrance {
+    msgbox(format("The silence holds. Another entrance, another mask."))
+    releaseall
+}
+
+script ThyrsaCity_Amphitheater_EventScript_Chorus {
+    lock
+    msgbox(format("The mask repeats the last line. No breath moves behind it."))
+    release
+}
+script ThyrsaCity_Amphitheater_EventScript_Actor {
+    lock
+    msgbox(format("Only a prop now."))
+    release
+}
+script ThyrsaCity_Amphitheater_EventScript_BeeWoman {
+    goto(ThyrsaCity_Amphitheater_EventScript_Actor)
+}
+script ThyrsaCity_Amphitheater_EventScript_Kleon {
+    goto(ThyrsaCity_EventScript_Kleon)
+}
+script ThyrsaCity_Amphitheater_EventScript_Alethea {
+    goto(ThyrsaCity_EventScript_Alethea)
+}
+
+script ThyrsaCity_Amphitheater_EventScript_Audience {
+    lock
+    if (flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        faceplayer
+        msgbox(format("The goat ate the prophecy! Ha! Did you see his face?"))
+    } else {
+        msgbox(format("They stare past you, waiting for the next line."))
+    }
+    release
+}

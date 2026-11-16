@@ -18,6 +18,11 @@
       "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
       "offset": 3,
       "direction": "left"
+    },
+    {
+      "direction": "up",
+      "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
+      "offset": 34
     }
   ],
   "object_events": [

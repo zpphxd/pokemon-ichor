@@ -395,7 +395,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
-| Act II | Story and system designs | Connected Thyrsa → Arkadia → Astyra → Kaldera chapters; Laurels 4–6 |
+| Act II | Connected Eleusa → Eleutherai → Kithairon → Kronia → Thyrsa; Mask Laurel 4, playable Dionysia and Silenos's Girdle quest | Thyrsa presentation/rites and natural-level acceptance; approved Lebadeia/Kirrha/Aigion/Styx approach to Arkadia, then Astyra and Kaldera; Laurels 5–6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
@@ -495,7 +495,8 @@ is cleared, with its approved rumor, real capture/defeat, loss/escape retry and
 same-day persistence. The Halai Harpelle visitor belongs to later geography.
 The Isthmus kilns and spur now have independent daily Arachne excavation.
 The family tomb's fixed Arachne find is wired behind its existing Girdle gate;
-natural acquisition of that relic still belongs to Act II.
+natural acquisition of that relic is now available from Silenos in Thyrsa,
+after Laurel 4, by winning two distinct contests.
 Sanctum B1F's fixed Persephone sherd is also real excavation, with Trowel
 requirement, repeat protection and saved-game persistence. Collecting sherds
 does not itself restore an amphora or unlock its completed-amphora rewards.
@@ -570,8 +571,9 @@ completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot
 skip the Sickle or complete the revelation without its reward; both can be
 retried after making room. The closing run exercises both branches, restored
 braziers, repeat entry and save/CONTINUE. The north vines require the Sickle;
-Alethea leaves after the player passes them, and the herald blocks the next
-chapter until it exists. Gate and companion state persist across saves.
+Alethea leaves after the player passes them, and the herald keeps the north
+road closed until Act I is complete. It now leads to the connected Thyrsa
+chapter. Gate and companion state persist across saves.
 The revelation now displays an original clay-tablet close-up while Daphne
 reads its back, then closes on a centered pottery-framed Act I title card
 that waits for A or B. Both dialogue branches retain their speaker names,
@@ -585,8 +587,25 @@ sustained aulos note at “She didn't see one at all”, continues through the
 tablet and title, and yields to Eleusa's music outside. Human scene-art,
 music and look/fun acceptance remain unfinished.
 
-**Continuation order.** Close and approve Act I first. Integrate shared systems at
-their first story use, then build connected Act II and Act III chapters. For post-game
+The first Act II chapter is playable with existing Greek art: three connected
+roads, 18 road trainers, time-of-day encounters, mountain and Kronia healers,
+and Thyrsa's Asclepeion, Agora, three-mask temple trial and Thespis battle.
+The Mask Laurel awards Toxic and advances Spartan's next cap to 37. The
+amphitheater stages the forged tragedy; reusing the three mask entrances
+breaks it, with Alethea's program clue and Kleon's departure dialogue.
+Silenos offers the existing loaded-knucklebones game, retryable riddles and
+a battle; two distinct wins earn the real Girdle, with full-Bag retry.
+An assisted native fixture crosses the actual seams and plays the trial,
+boss, tragedy and riddle/battle quest path, then saves and continues. This is
+not natural-level balance or a continuous NEW GAME ending pass. The stage
+and masks still use placeholder presentation: dedicated theater/temple art
+and music, the king close-up, trance palette transitions, full Dionysus rites,
+and human scene/map approval remain open. The next road beyond Thyrsa is
+explicitly closed; Arkadia and the rest of Act II are not yet playable.
+
+**Continuation order.** Prioritize connected playable Act II and Act III chapters
+while keeping Act I's remaining acceptance gates visible. Integrate shared systems at
+their first story use. For post-game
 implementation, follow approved PG-2: sailing → Olympia → Katabasis → Labors →
 Odyssey → Atlantis → summit, with Oikoumene lands alongside, near lands first.
 This is a build order, not a new forced player quest order. Keep the deferred Astral

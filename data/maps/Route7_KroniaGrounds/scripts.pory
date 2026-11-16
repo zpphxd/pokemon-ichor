@@ -1,0 +1,69 @@
+mapscripts Route7_KroniaGrounds_MapScripts {}
+
+script Route7_KroniaGrounds_EventScript_HAGES {
+    trainerbattle_single(TRAINER_ICHOR_HAGES, format("No toll. Battle for fun?"), format("Still no toll."))
+    msgbox(format("Still no toll."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_MYRTON {
+    trainerbattle_single(TRAINER_ICHOR_MYRTON, format("They fed me. Nobody asked my name."), format("Funny thing to be grateful for."))
+    msgbox(format("Funny thing to be grateful for."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_DORIS {
+    trainerbattle_single(TRAINER_ICHOR_DORIS, format("A better reading. Free bread. What's the catch?"), format("I keep asking."))
+    msgbox(format("I keep asking."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_PHILISKOS {
+    trainerbattle_single(TRAINER_ICHOR_PHILISKOS, format("Even masters serve at the Kronia."), format("Your turn to sit."))
+    msgbox(format("Your turn to sit."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_EUXENOS {
+    trainerbattle_single(TRAINER_ICHOR_EUXENOS, format("They said I'd come home from the war."), format("That's all I wanted."))
+    msgbox(format("That's all I wanted."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_MANTO {
+    trainerbattle_single(TRAINER_ICHOR_MANTO, format("A true reading doesn't need a sales pitch."), format("Remember that."))
+    msgbox(format("Remember that."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_SouthSign {
+    msgbox(format("South: Mt. Kithairon.\nNorth: Thyrsa."), MSGBOX_SIGN)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_NorthSign {
+    msgbox(format("South: Mt. Kithairon.\nNorth: Thyrsa."), MSGBOX_SIGN)
+    end
+}
+
+script Route7_KroniaGrounds_EventScript_Baker {
+    lock
+    faceplayer
+    msgbox(format("Sit. Masters carry the bread today. Hungry people eat it."))
+    special(HealPlayerParty)
+    if (!flag(FLAG_ICHOR_KRONIA_BREAD)) {
+        giveitem(ITEM_BARLEY_CAKE, 2)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_KRONIA_BREAD)
+        }
+    }
+    msgbox(format("No oath. No payment. Take your time."))
+    release
+}
+script Route7_KroniaGrounds_EventScript_Kronist {
+    lock
+    faceplayer
+    msgbox(format("The old readers sell you an ending. We offer a beginning.\p"
+                  "May your thread never be cut."))
+    release
+}

@@ -1,0 +1,175 @@
+// SYSTEMS §12: learn an entrance, read a role, then find the role the play forgot.
+mapscripts ThyrsaCity_TempleOfDionysus_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (var(VAR_ICHOR_MASK_ACT) >= 3) {
+            setmetatile(12, 5, 0x250, 0)
+        }
+    }
+}
+
+text Thyrsa_Text_Comedy { "COMEDY" }
+text Thyrsa_Text_Tragedy { "TRAGEDY" }
+text Thyrsa_Text_Satyr { "SATYR" }
+text Thyrsa_Text_Leave { "LEAVE" }
+text Thyrsa_Text_NameThespis { "THESPIS" }
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Masks {
+    lockall
+    msgbox(format("Laughing, weeping, and a goat with a very bad idea. Which mask?"))
+    dynmultichoice(0, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE,
+        Thyrsa_Text_Comedy, Thyrsa_Text_Tragedy, Thyrsa_Text_Satyr, Thyrsa_Text_Leave)
+    if (var(VAR_RESULT) < 3) {
+        copyvar(VAR_ICHOR_MASK, VAR_RESULT)
+        addvar(VAR_ICHOR_MASK, 1)
+        msgbox(format("You tie the mask's ribbons behind your head."))
+    }
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Program {
+    lockall
+    if (var(VAR_ICHOR_MASK_ACT) == 0) {
+        msgbox(format("ACT I: Enter the Comic, by the left door."))
+    } elif (var(VAR_ICHOR_MASK_ACT) == 1) {
+        msgbox(format("ACT II: Enter the one who weeps, by the middle door."))
+    } else {
+        msgbox(format("ACT III: The king is dead. The chorus has gone home.\p"
+                      "But a tragedy is not the whole day's play. Who has the last entrance?"))
+    }
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Comedy {
+    lockall
+    if (var(VAR_ICHOR_MASK_ACT) == 0 && var(VAR_ICHOR_MASK) == 1) {
+        setvar(VAR_ICHOR_MASK_ACT, 1)
+        msgbox(format("The first entrance earns a laugh. Read the next cue."))
+    } else {
+        msgbox(format("No entrance here in that role. Read the program."))
+    }
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Tragedy {
+    lockall
+    if (var(VAR_ICHOR_MASK_ACT) == 1 && var(VAR_ICHOR_MASK) == 2) {
+        setvar(VAR_ICHOR_MASK_ACT, 2)
+        msgbox(format("The chorus weeps. The second act ends."))
+    } else {
+        msgbox(format("The door stays shut. Who enters in this act?"))
+    }
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Satyr {
+    lockall
+    if (var(VAR_ICHOR_MASK_ACT) == 2 && var(VAR_ICHOR_MASK) == 3) {
+        setvar(VAR_ICHOR_MASK_ACT, 3)
+        setmetatile(12, 5, 0x250, 0)
+        special(DrawWholeMapView)
+        msgbox(format("The goat enters after the funeral, carrying the king's lunch.\p"
+                      "The chorus loses its place. Somewhere above you, a man laughs.\p"
+                      "The stair to the roof is open."))
+    } elif (var(VAR_ICHOR_MASK_ACT) >= 3) {
+        msgbox(format("The last laugh belongs to the role the play forgot."))
+    } else {
+        msgbox(format("Not yet. Even a goat has to wait for its cue."))
+    }
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_RoofGate {
+    if (var(VAR_ICHOR_MASK_ACT) >= 3) {
+        end
+    }
+    lockall
+    msgbox(format("The god-machine's stair is shut until the last entrance."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Comic {
+    if (var(VAR_ICHOR_MASK) == 1) {
+        lock
+        faceplayer
+        msgbox(format("Same mask. Same side. Left door, fellow fool."))
+        release
+        end
+    }
+    trainerbattle_single(TRAINER_ICHOR_THYRSA_COMIC, format("Wrong role. Improvise!"), format("A convincing performance."))
+    msgbox(format("Try the mask rack before your next entrance."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Tragic {
+    if (var(VAR_ICHOR_MASK) == 2) {
+        lock
+        faceplayer
+        msgbox(format("We who weep enter together. Or not at all."))
+        release
+        end
+    }
+    trainerbattle_single(TRAINER_ICHOR_THYRSA_TRAGIC, format("My sorrow has teeth."), format("Now it has company."))
+    msgbox(format("An actor can be more than one thing."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_SatyrActor {
+    if (var(VAR_ICHOR_MASK) == 3) {
+        lock
+        faceplayer
+        msgbox(format("They forgot the goat! They always forget the goat!"))
+        release
+        end
+    }
+    trainerbattle_single(TRAINER_ICHOR_THYRSA_SATYR, format("There's a punch line coming."), format("There it is."))
+    msgbox(format("Tragedy, then the satyr play. Never leave people in the dark."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Thespis {
+    lock
+    faceplayer
+    setspeaker(Thyrsa_Text_NameThespis)
+    if (!flag(FLAG_BADGE04_GET)) {
+        if (var(VAR_ICHOR_MASK_ACT) < 3) {
+            msgbox(format("Three acts first. Even a god waits for his entrance."))
+            release
+            end
+        }
+        msgbox(format("A tragedy with no satyr play after it is just a funeral.\p"
+                      "Now. Show me someone I haven't seen before."))
+        trainerbattle_no_intro(TRAINER_ICHOR_THESPIS, Thyrsa_Text_ThespisDefeat)
+        setflag(FLAG_BADGE04_GET)
+        settrainerflag(TRAINER_ICHOR_THYRSA_COMIC)
+        settrainerflag(TRAINER_ICHOR_THYRSA_TRAGIC)
+        settrainerflag(TRAINER_ICHOR_THYRSA_SATYR)
+        setvar(VAR_0x8004, ICHOR_GOD_DIONYSUS)
+        setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL)
+        special(Ichor_AddFavor)
+        message(format("{PLAYER} received the Mask Laurel!"))
+        waitmessage
+        call(Common_EventScript_PlayGymBadgeFanfare)
+    }
+    if (!flag(FLAG_ICHOR_GOT_THESPIS_SCROLL)) {
+        msgbox(format("Toxic. A little poison makes an excellent third act."))
+        giveitem(ITEM_TM06)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Make room for the scroll. I'll keep it here."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_THESPIS_SCROLL)
+    }
+    if (!flag(FLAG_ICHOR_GIFTS_START + 19)) {
+        msgbox(format("Wine for the god's altar. An offering, not an audition."))
+        giveitem(ITEM_WINE)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GIFTS_START + 19)
+        }
+    }
+    msgbox(format("Someone borrowed my tragic masks for tonight's play.\p"
+                  "Go to the amphitheater. If the ending feels wrong, find me backstage."))
+    release
+}
+
+text Thyrsa_Text_ThespisDefeat { format("Ah! An ending I didn't know.") }

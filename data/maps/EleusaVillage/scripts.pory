@@ -126,11 +126,14 @@ script EleusaVillage_EventScript_NorthHerald {
     if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_WROTE_TO_MOM)) {
         call(EmporionCity_RunnersHouse_EventScript_LetterHome)
     }
-    msgbox(format("Thyrsa's preparing the Dionysia. The road opens when the play's ready."))
+    msgbox(format("North over Kithairon, then down through the Kronia grounds. You'll hear Thyrsa before you see it."))
     release
 }
 
 script EleusaVillage_EventScript_NorthRoadBarrier {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        end
+    }
     lockall
     setspeaker(EleusaVillage_Text_NameHerald)
     msgbox(format("Thyrsa's preparing the Dionysia. The road opens when the play's ready."))

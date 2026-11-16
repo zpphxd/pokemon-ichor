@@ -105,7 +105,30 @@
 #define TRAINERS_END_ACT1                     155
 
 // world-act2, ids 160-319, 820-849 and 1344-1403: Thyrsa, Arkadia, Astyra, Kaldera.
-#define TRAINERS_END_ACT2                     0
+#define TRAINER_ICHOR_DAMON                 160
+#define TRAINER_ICHOR_PHANO                 161
+#define TRAINER_ICHOR_LYSIS                 162
+#define TRAINER_ICHOR_MELANIPPE             163
+#define TRAINER_ICHOR_SOSTRATOS             164
+#define TRAINER_ICHOR_THEOGNIS              165
+#define TRAINER_ICHOR_AKTAIOS               166
+#define TRAINER_ICHOR_NYSA                  167
+#define TRAINER_ICHOR_BROMIOS               168
+#define TRAINER_ICHOR_CHARINOS              169
+#define TRAINER_ICHOR_KLEITO                170
+#define TRAINER_ICHOR_EUPHRON               171
+#define TRAINER_ICHOR_HAGES                 172
+#define TRAINER_ICHOR_MYRTON                173
+#define TRAINER_ICHOR_DORIS                 174
+#define TRAINER_ICHOR_PHILISKOS             175
+#define TRAINER_ICHOR_EUXENOS               176
+#define TRAINER_ICHOR_MANTO                 177
+#define TRAINER_ICHOR_THYRSA_COMIC          178
+#define TRAINER_ICHOR_THYRSA_TRAGIC         179
+#define TRAINER_ICHOR_THYRSA_SATYR          180
+#define TRAINER_ICHOR_THESPIS               181
+#define TRAINER_ICHOR_SILENOS               182
+#define TRAINERS_END_ACT2                   183
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

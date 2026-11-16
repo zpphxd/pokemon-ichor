@@ -1,0 +1,147 @@
+mapscripts ThyrsaCity_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_ARRIVED_THYRSA)
+    }
+}
+
+text Thyrsa_Text_Bones { "KNUCKLEBONES" }
+text Thyrsa_Text_Riddle { "RIDDLE" }
+text Thyrsa_Text_Battle { "BATTLE" }
+text Thyrsa_Text_NameSilenos { "SILENOS" }
+
+script ThyrsaCity_EventScript_Silenos {
+    lock
+    faceplayer
+    setspeaker(Thyrsa_Text_NameSilenos)
+    if (!flag(FLAG_BADGE04_GET)) {
+        msgbox(format("Herakles lost a drinking game here. Left his girdle as the stake.\p"
+                      "Win the Mask Laurel, then you can try for it. No drinking required."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)) {
+        msgbox(format("Column drums move easily in that belt. Easier than actors, anyway."))
+        release
+        end
+    }
+    setvar(VAR_0x8009, 0)
+    if (flag(FLAG_ICHOR_SILENOS_BONES)) { addvar(VAR_0x8009, 1) }
+    if (flag(FLAG_ICHOR_SILENOS_RIDDLE)) { addvar(VAR_0x8009, 1) }
+    if (flag(FLAG_ICHOR_SILENOS_BATTLE)) { addvar(VAR_0x8009, 1) }
+    if (var(VAR_0x8009) >= 2) {
+        msgbox(format("Two contests. Fairly won. That's one more than Herakles managed."))
+        giveitem(ITEM_GIRDLE_OF_HERAKLES)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)
+            msgbox(format("Put your shoulder to a fallen column drum. The girdle does the rest."))
+        } else {
+            msgbox(format("Make room. A wager won stays won."))
+        }
+        release
+        end
+    }
+    msgbox(format("Two out of three. Bones, riddles, or a battle. Win two, and the girdle is yours."))
+    dynmultichoice(0, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE,
+        Thyrsa_Text_Bones, Thyrsa_Text_Riddle, Thyrsa_Text_Battle, Thyrsa_Text_Leave)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            if (!flag(FLAG_ICHOR_SILENOS_BONES)) {
+                msgbox(format("Watch the sixes. Two double-sixes running? Call me loaded.\p"
+                              "Not that I am. Obviously."))
+                setvar(VAR_0x8004, ICHOR_BONES_SILENOS)
+                call(EventScript_IchorKnucklebones)
+                if (var(VAR_RESULT) == TRUE) {
+                    setflag(FLAG_ICHOR_SILENOS_BONES)
+                }
+            }
+        case 1:
+            if (!flag(FLAG_ICHOR_SILENOS_RIDDLE)) {
+                call(ThyrsaCity_EventScript_Riddles)
+            }
+        case 2:
+            if (!flag(FLAG_ICHOR_SILENOS_BATTLE)) {
+                trainerbattle_no_intro(TRAINER_ICHOR_SILENOS, Thyrsa_Text_SilenosDefeat)
+                setflag(FLAG_ICHOR_SILENOS_BATTLE)
+            }
+    }
+    msgbox(format("Your wins stand. Ask again when you're ready."))
+    release
+}
+
+text Thyrsa_Text_SilenosDefeat { format("That used to be easier.") }
+text Thyrsa_Text_Echo { "AN ECHO" }
+text Thyrsa_Text_Shadow { "A SHADOW" }
+text Thyrsa_Text_Wine { "WINE" }
+text Thyrsa_Text_Road { "A ROAD" }
+text Thyrsa_Text_River { "A RIVER" }
+text Thyrsa_Text_Promise { "A PROMISE" }
+
+script ThyrsaCity_EventScript_Riddles {
+    msgbox(format("Three tries. New riddle each time.\pI follow you in sunlight, but leave you in the dark."))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE,
+        Thyrsa_Text_Echo, Thyrsa_Text_Shadow, Thyrsa_Text_Wine)
+    if (var(VAR_RESULT) != 1) {
+        msgbox(format("No. Next: I run without feet, and have a mouth but never speak."))
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE,
+            Thyrsa_Text_Road, Thyrsa_Text_Wine, Thyrsa_Text_River)
+        if (var(VAR_RESULT) != 2) {
+            msgbox(format("Last one. What can you break without laying a hand on it?"))
+            dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE,
+                Thyrsa_Text_Promise, Thyrsa_Text_River, Thyrsa_Text_Shadow)
+            if (var(VAR_RESULT) != 0) {
+                msgbox(format("A promise. Herakles said he'd pay his tab, for instance. Try again later."))
+                return
+            }
+        }
+    }
+    setflag(FLAG_ICHOR_SILENOS_RIDDLE)
+    msgbox(format("Right. One contest to you."))
+    return
+}
+
+script ThyrsaCity_EventScript_Alethea {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("The program has no author's name. Just that little hook.\p"
+                      "The quay receipts. The clay seal. Now this. I'm keeping a list."))
+    } else {
+        msgbox(format("A play about you. You haven't even been here before.\p"
+                      "I bought a program. Someone ought to check the sources."))
+    }
+    release
+}
+
+script ThyrsaCity_EventScript_Kleon {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("They wrote you a whole play. Some of us just get a sentence.\p"
+                      "I'm going on to Arkadia. A Huntress ought to know what glory looks like."))
+    } else {
+        msgbox(format("You took your time. I've got us seats. Near the front.\p"
+                      "If there's a fight, I want to see it."))
+    }
+    release
+}
+
+script ThyrsaCity_EventScript_Herald {
+    lock
+    faceplayer
+    msgbox(format("The Dionysia is at the amphitheater. Thespis gives the Mask Laurel in the temple.\p"
+                  "The road beyond Thyrsa is not open yet."))
+    release
+}
+
+script ThyrsaCity_EventScript_CitySign {
+    msgbox(format("THYRSA\nEvery face has another side."), MSGBOX_SIGN)
+    end
+}
+script ThyrsaCity_EventScript_TempleSign {
+    msgbox(format("Temple of Dionysus\nThe Three-Act Play. Thespis, Hierophant."), MSGBOX_SIGN)
+    end
+}
+script ThyrsaCity_EventScript_TheaterSign {
+    msgbox(format("Tonight: THE UNWOVEN\nA tragedy in four scenes."), MSGBOX_SIGN)
+    end
+}

@@ -700,9 +700,8 @@ def write_events(g):
     m = json.loads((MAP_DIR / "map.json").read_text())
     m["music"] = "MUS_ICHOR_ELEUSA"
     m["weather"] = "WEATHER_SUNNY"
-    # Route 5 joins the west edge (its rows 21-24 meet ours 24-27); Routes 6 and
-    # 15 (world-act2) add theirs on their own branch. BUILD.md has the seams.
-    m["connections"] = [{"map": "MAP_ROUTE5_SKIRONIAN_CLIFFS", "offset": 3, "direction": "left"}]
+    m["connections"] = [{"map": "MAP_ROUTE5_SKIRONIAN_CLIFFS", "offset": 3, "direction": "left"},
+                        {"map": "MAP_ROUTE6_ELEUTHERAI_ROAD", "offset": 34, "direction": "up"}]
     objs = []
     for lid, gfx, x, y, facing, script, flag, *sight in OBJECTS:
         objs.append({
