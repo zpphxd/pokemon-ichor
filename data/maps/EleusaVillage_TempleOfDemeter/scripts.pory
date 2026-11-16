@@ -160,8 +160,9 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
                   "{PLAYER}. Sit. The steps are cold, but they're honest.\p"
                   "Halia wrote to me. After the Klotheia, and again when you sailed.\p"
                   "She looked at your thread four times. Once by lamplight.\p"
-                  "She didn't see a short thread. Or a long one. Or a knotted one.\p"
-                  "She didn't see one at all."))
+                  "She didn't see a short thread. Or a long one. Or a knotted one."))
+    playbgm(MUS_ICHOR_REVELATION, FALSE)
+    msgbox("She didn't see one at all.")
     call(EleusaVillage_TempleOfDemeter_EventScript_FlickerRevelationLamp)
     msgbox(format("Here's what I know. I'll try to say it plainly. I'm out of practice.\p"
                   "Under Delphoi there's a Loom. Three old women work it.\p"

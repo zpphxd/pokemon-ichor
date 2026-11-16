@@ -381,6 +381,12 @@ The **night road** needs no map work. `sNightMusicTable` in `src/overworld.c` ma
 - B is Daphne's part: the Question, the climb in tenths under "they put it in the sky", and the triangle's stars for the Star Chart.
 - It loops for as long as the dialogue runs.
 
+The revelation script now starts 637 at “She didn't see one at all”, after the
+temple hymn accompanies the opening. The intro-to-A-to-B progression follows
+musical time, not dialogue input: the cue associations above are the score's
+dramatic shape, not hard-synchronized speech triggers. The Chart fanfare
+resumes the cue, and leaving restores the destination's normal music.
+
 **The admin battle** keeps its tenth track free for each admin's own top layer, so it doesn't need re-orchestrating later:
 - Hyperion: forge hammers (anvil hits), from Kaldera on;
 - Iapetos: a chorus of aulos doubling the strings;

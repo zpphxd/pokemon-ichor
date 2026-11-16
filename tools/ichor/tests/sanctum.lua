@@ -384,14 +384,31 @@ local function closingPresentation(branch, choice, answer)
   local file = assert(io.open("graphics/ichor/tablet_back.4bpp", "rb"))
   local picture = file:read("a")
   file:close()
-  local seenPicture, hiddenPicture, seenCard = false, false, false
+  local seenPicture, hiddenPicture, seenCard, heardCue = false, false, false, false
   local savedPalette, savedFadedPalette = {}, {}
   local opts = { every = true, menuChoice = choice, answers = { answer } }
   opts.stop = function()
+    if not heardCue and L.playing(S.MUS_REVELATION) then
+      heardCue = true
+      L.wait(90)
+      local tracks = emu:read32(S.gMPlayInfo_BGM + S.OFF_MPLAY_TRACKS)
+      local voices, key = 0, nil
+      for i = 0, emu:read8(S.gMPlayInfo_BGM + S.OFF_MPLAY_TRACKCOUNT) - 1 do
+        local track = tracks + i * S.MUSIC_TRACK_SIZE
+        local channel = emu:read32(track + S.OFF_MUSIC_TRACK_CHANNEL)
+        if channel ~= 0 and emu:read8(channel) ~= 0 then
+          voices = voices + 1
+          key = emu:read8(track + S.OFF_MUSIC_TRACK_KEY)
+        end
+      end
+      expect(voices == 1 and key == 62,
+             branch .. ": the original revelation score opens on one sustained aulos D4")
+    end
     local encoded = emu:read8(S.sScenePictureWindow)
     if encoded ~= 0 and not seenPicture then
       seenPicture = true
       checkLampScene(branch)
+      expect(L.playing(S.MUS_REVELATION), branch .. ": the revelation score accompanies the tablet")
       local window = S.gWindows + (encoded - 1) * S.WINDOW_SIZE
       expect(emu:read8(window + S.OFF_WINDOW_WIDTH) == 8
              and emu:read8(window + S.OFF_WINDOW_HEIGHT) == 8,
@@ -428,6 +445,7 @@ local function closingPresentation(branch, choice, answer)
     local card = emu:read8(S.sActOneCardWindow)
     if card ~= 0 and not seenCard then
       seenCard = true
+      expect(L.playing(S.MUS_REVELATION), branch .. ": the revelation score resumes after the Chart fanfare")
       expect(hiddenPicture, branch .. ": the tablet is released before the title")
       local window = S.gWindows + (card - 1) * S.WINDOW_SIZE
       expect(emu:read8(window + S.OFF_WINDOW_WIDTH) == 28
@@ -442,6 +460,8 @@ local function closingPresentation(branch, choice, answer)
     return false
   end
   return opts, function()
+    expect(heardCue, branch .. ": the actual scene starts its dedicated revelation score")
+    expect(L.playing(S.MUS_ELEUSA), branch .. ": returning outside restores Eleusa's music")
     expect(seenPicture and hiddenPicture and seenCard,
            branch .. ": the live scene shows and closes both presentation windows")
     expect(emu:read8(S.sScenePictureWindow) == 0 and emu:read8(S.sActOneCardWindow) == 0,
@@ -462,6 +482,7 @@ local function revelation()
          and L.itemCount(S.ITEM_STAR_CHART) == 0,
          "a full key-item pocket leaves the scene and reward available")
   expect(L.npc(daphne).present, "Daphne stays to retry when the Bag is full")
+  expect(L.playing(S.MUS_SANCTUM), "a full Bag does not start the revelation score early")
   checkLampScene("full Bag, doused Torch")
   expect(emu:read8(S.sScenePictureWindow) == 0 and emu:read8(S.sActOneCardWindow) == 0,
          "the full-Bag refusal does not allocate scene windows")
@@ -546,6 +567,7 @@ local function revelation()
   expect(not L.npc(daphne).present and not L.objectAt(S.LOCALID_REVELATION_ALETHEA),
          "the revelation actors are gone on reentry")
   expect(tile(2, 21) == S.MT_HALL_BRAZIER_LIT_00, "the autumn brazier is restored after Act I")
+  expect(L.playing(S.MUS_SANCTUM), "normal reentry restores the temple hymn, not the revelation score")
   expect(tile(2, 6) == S.MT_HALL_BRAZIER_LIT_00 and tile(24, 6) == S.MT_HALL_BRAZIER_LIT_00,
          "both back braziers are restored after the one-lamp scene")
   expect(tile(13, 23) == S.MT_HALL_FLOOR and tile(6, 24) == S.MT_HALL_LAMP_LIT

@@ -12,11 +12,19 @@
 #include "pokemon.h"
 #include "item.h"
 #include "window.h"
+#include "gba/m4a_internal.h"
 
 K(WINDOW_SIZE, sizeof(struct Window))
 K(OFF_WINDOW_WIDTH, offsetof(struct Window, window.width))
 K(OFF_WINDOW_HEIGHT, offsetof(struct Window, window.height))
 K(OFF_WINDOW_TILES, offsetof(struct Window, tileData))
+K(OFF_MPLAY_TRACKS, offsetof(struct MusicPlayerInfo, tracks))
+K(OFF_MPLAY_TRACKCOUNT, offsetof(struct MusicPlayerInfo, trackCount))
+K(MUSIC_TRACK_SIZE, sizeof(struct MusicPlayerTrack))
+K(OFF_MUSIC_TRACK_CHANNEL, offsetof(struct MusicPlayerTrack, chan))
+K(OFF_MUSIC_TRACK_KEY, offsetof(struct MusicPlayerTrack, key))
+K(MUS_REVELATION, MUS_ICHOR_REVELATION)
+K(MUS_ELEUSA, MUS_ICHOR_ELEUSA)
 
 // maps
 K(MAP_B1F, MAP_ELEUSA_SANCTUM_B1F)

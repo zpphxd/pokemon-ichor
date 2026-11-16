@@ -654,6 +654,14 @@ The sanctum regression counts all flames, samples the real flicker script,
 retries from full brightness, exercises doused and upgraded Torches with native
 Flash, and checks normal reentry and saved brazier progress.
 
+The temple hymn continues through the scene's opening. At “She didn't see one
+at all”, `playbgm(MUS_ICHOR_REVELATION, FALSE)` starts the existing original
+score with its sustained aulos D4. Do not save this as a map-music override:
+the Chart fanfare resumes it automatically, while the exit and normal reentry
+must restore Eleusa's theme and the temple hymn respectively. Both dialogue
+branches check those transitions and the intro's single active D4 voice;
+full-Bag refusals leave the temple hymn playing.
+
 ### Counting flags
 
 `setvar(VAR_0x8004, FLAG_ICHOR_PROPHECY_START)`, `setvar(VAR_0x8005, 8)`, `specialvar(VAR_RESULT, Ichor_CountFlagRange)`: how many of those flags are set. It works on any flag range: a bank, a vanilla range or the daily flags.

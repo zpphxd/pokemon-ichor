@@ -525,8 +525,10 @@ outside. The Chart has its own rolled-sky Bag icon instead of borrowing the
 Town Map. The revelation now burns one clay lamp beside Daphne, with the
 authored flicker and a fixed halo independent of the player's Torch or Flash.
 Other flames stay cold without erasing solved brazier progress; normal lighting
-returns on reentry. Dedicated music and human scene-art acceptance remain
-unfinished.
+returns on reentry. The existing original revelation score now starts on its
+sustained aulos note at “She didn't see one at all”, continues through the
+tablet and title, and yields to Eleusa's music outside. Human scene-art,
+music and look/fun acceptance remain unfinished.
 
 **Continuation order.** Close and approve Act I first. Integrate shared systems at
 their first story use, then build connected Act II and Act III chapters. For post-game
