@@ -70,7 +70,7 @@ Oath_Faint:
 	setvar VAR_TEMP_F, 1
 	callnative ZeroPlayerPartyMons
 	givemon SPECIES_CLEFFA, 1
-	createmon 0, 0, SPECIES_CLEFFA, 1, move1=MOVE_SPLASH, move2=MOVE_LEER, move3=MOVE_NONE, move4=MOVE_NONE
+	createmon 0, 0, SPECIES_CLEFFA, 1, item=ITEM_POTION, move1=MOVE_SPLASH, move2=MOVE_LEER, move3=MOVE_NONE, move4=MOVE_NONE
 	givemon SPECIES_SNIVY, 80
 	setwildbattle SPECIES_ZIGZAGOON, 10
 	dowildbattle
@@ -81,3 +81,31 @@ Oath_Heal:
 	setvar VAR_TEMP_F, 1
 	special HealPlayerParty
 	end
+
+	test_header Oath_UrnHeader, Oath_Urn
+Oath_Urn:
+	setvar VAR_TEMP_F, 1
+	callnative Oath_NameFixtureUrn
+	end
+
+	test_header Oath_PcHeader, Oath_Pc
+Oath_Pc:
+	setvar VAR_TEMP_F, 1
+	special ShowPokemonStorageSystemPC
+	end
+
+	.thumb
+	.align 2
+	.thumb_func
+Oath_NameFixtureUrn:
+	push {lr}
+	movs r0, #13
+	bl GetBoxNamePtr
+	ldr r1, =Oath_UrnName
+	bl StringCopy
+	pop {pc}
+
+	.align 2
+Oath_UrnName:
+	.string "URN$"
+	.pool

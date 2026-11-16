@@ -3,6 +3,7 @@
 #include "battle_scripts.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
+#include "chooseboxmon.h"
 #include "event_data.h"
 #include "ichor_oath.h"
 #include "ichor_save.h"
@@ -458,6 +459,70 @@ TEST("Ichor: Revival Blessing's target search skips fallen partners")
     CreateOathMon(&party[1]);
     SetMonData(&party[1], MON_DATA_HP, &zero);
     EXPECT_EQ(GetFirstFaintedPartyIndex(B_BATTLER_0), 1);
+}
+
+TEST("Ichor: normal capture storage skips every reserved Urn jar")
+{
+    struct Pokemon mon;
+    struct BoxPokemon snapshot;
+    u32 box, slot;
+    ResetOath();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    gIchorSave.oath.urnBoxes |= 1 << (TOTAL_BOXES_COUNT - 3);
+    CreateOathMon(&mon);
+    snapshot = mon.box;
+    for (box = 0; box < TOTAL_BOXES_COUNT; box++)
+        if (!Ichor_IsUrnBox(box))
+            for (slot = 0; slot < IN_BOX_COUNT; slot++)
+                SetBoxMonAt(box, slot, &mon.box);
+    EXPECT(IsPokemonStorageFull());
+    EXPECT(!CheckFreePokemonStorageSpace());
+    EXPECT_EQ(CopyMonToPC(&mon), MON_CANT_GIVE);
+    EXPECT_EQ(memcmp(&mon.box, &snapshot, sizeof(snapshot)), 0);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 3), 0);
+    ZeroBoxMonAt(0, 0);
+    EXPECT(!IsPokemonStorageFull());
+    EXPECT(CheckFreePokemonStorageSpace());
+    EXPECT_EQ(CopyMonToPC(&mon), MON_GIVEN_TO_PC);
+    EXPECT_EQ(GetBoxMonDataAt(0, 0, MON_DATA_SPECIES), SPECIES_NEBREL);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
+    EXPECT(Ichor_ReleaseOath());
+    EXPECT(IsPokemonStorageFull());
+}
+
+TEST("Ichor: fallen partners cannot use ordinary PC deposit or selection APIs")
+{
+    struct Pokemon mon;
+    u32 zero = 0;
+    ResetOath();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    CreateOathMon(&mon);
+    SetMonMoveSlot(&mon, MOVE_TACKLE, 0);
+    SetMonData(&mon, MON_DATA_HP, &zero);
+    EXPECT(Ichor_RecordOathFallen(&mon));
+    EXPECT_EQ(CopyMonToPC(&mon), MON_CANT_GIVE);
+    EXPECT(!CanBoxMonBeSelected(&mon.box));
+    EXPECT(IsBoxMonExcluded(&mon.box));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_NEBREL);
+    EXPECT_EQ(Ichor_StoreOathFallen(&mon), ICHOR_URN_STORED);
+    EXPECT_EQ(CountStorageNonEggMons(), 0);
+    EXPECT(!AnyStorageMonWithMove(MOVE_TACKLE));
+}
+
+TEST("Ichor: unsworn saves keep the final jar available for ordinary storage")
+{
+    struct Pokemon mon;
+    u32 box, slot;
+    ResetOath();
+    CreateOathMon(&mon);
+    for (box = 0; box < TOTAL_BOXES_COUNT - 1; box++)
+        for (slot = 0; slot < IN_BOX_COUNT; slot++)
+            SetBoxMonAt(box, slot, &mon.box);
+    EXPECT(!IsPokemonStorageFull());
+    EXPECT(CheckFreePokemonStorageSpace());
+    EXPECT_EQ(CopyMonToPC(&mon), MON_GIVEN_TO_PC);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 1);
 }
 
 SINGLE_BATTLE_TEST("Ichor: recorded-link simulation fainting never marks a real partner")

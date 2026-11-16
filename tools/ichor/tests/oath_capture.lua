@@ -133,4 +133,170 @@ L.start(function()
   emu:write8(oath() + S.OFF_OATH_STATE, S.ICHOR_OATH_RELEASED)
   L.runHeader("Oath_HealHeader")
   L.expect(L.partyHp(0) == 0, "ending the Oath does not bring back already fallen partners")
+
+  L.runHeader("Oath_UrnHeader")
+  local storage = emu:read32(S.gPokemonStoragePtr)
+  local urn = S.TOTAL_BOXES_COUNT - 1
+  local urnAddr = storage + S.OFF_STORAGE_BOXES + urn * S.BOX_BYTES
+  -- Seed the PC fixture with the actual battle's fallen BoxPokemon and two
+  -- ordinary stored partners. Native transfer itself is covered in make check.
+  for i = 0, S.BOX_MON_BYTES - 1 do
+    emu:write8(urnAddr + i, emu:read8(S.gParties + i))
+    for slot = 0, 1 do
+      emu:write8(storage + S.OFF_STORAGE_BOXES + slot * S.BOX_MON_BYTES + i,
+                 emu:read8(S.gParties + S.PARTY_MON_BYTES + i))
+    end
+  end
+  for i = 0, S.PARTY_MON_BYTES - 1 do
+    emu:write8(S.gParties + i, emu:read8(S.gParties + S.PARTY_MON_BYTES + i))
+    emu:write8(S.gParties + S.PARTY_MON_BYTES + i, 0)
+  end
+  emu:write8(S.gPartiesCount, 1)
+  local before = L.snapshot(urnAddr, S.BOX_BYTES)
+  local urnName = storage + S.OFF_STORAGE_NAMES + urn * S.BOX_NAME_BYTES
+  local name = L.snapshot(urnName, S.BOX_NAME_BYTES)
+  emu:write8(storage, urn)
+  L.runHeader("Oath_PcHeader", { noSettle = true })
+  L.waitUntil(function() return L.taskRunning("Task_PCMainMenu") end, 900, "the native Pithos menu")
+  L.wait(90); L.tap(K.A)
+  L.waitUntil(function() return L.taskRunning("Task_PokeStorageMain") end, 1200, "Move partners")
+  L.wait(120)
+  L.shot("urn_view")
+
+  local function menu()
+    L.tap(K.A)
+    L.waitUntil(function() return L.taskRunning("Task_OnSelectedMon") end, 300, "the Urn action menu")
+    L.wait(60)
+  end
+  local function main()
+    L.waitUntil(function() return L.taskRunning("Task_PokeStorageMain") end, 900, "the storage cursor")
+    L.wait(90)
+  end
+  menu(); L.shot("urn_summary_only")
+  L.tap(K.DOWN); L.tap(K.A); main()
+  L.expect(L.snapshot(urnAddr, S.BOX_BYTES) == before and emu:read8(S.sIsMonBeingMoved) == 0,
+           "the Urn action menu offers Cancel instead of any withdraw, release or move action")
+  menu(); L.tap(K.A); L.wait(150)
+  L.expect(not L.taskRunning("Task_PokeStorageMain") and emu:read32(S.sMonSummaryScreen) ~= 0,
+           "fallen partners remain viewable in the real summary screen")
+  L.shot("urn_summary")
+  L.tap(K.RIGHT); L.wait(45); L.tap(K.RIGHT); L.wait(45)
+  L.tap(K.A); L.wait(60); L.tap(K.A); L.wait(60); L.tap(K.DOWN); L.tap(K.A); L.wait(60)
+  L.expect(L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "the summary move-order shortcut cannot mutate a fallen partner")
+  L.shot("urn_moves")
+  L.tap(K.B); L.wait(45); L.tap(K.LEFT); L.wait(45); L.tap(K.LEFT); L.wait(45)
+  L.tap(K.A); L.wait(60)
+  L.expect(not L.on("CB2_PssChangePokemonNickname")
+           and L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "the fallen summary cannot enter the nickname editor")
+  main()
+  L.tap(K.SELECT)
+  L.expect(emu:read8(S.sAutoActionOn) ~= 0, "the storage shortcut cursor is enabled")
+  menu(); L.tap(K.DOWN); L.tap(K.A); main()
+  L.expect(emu:read8(S.sIsMonBeingMoved) == 0 and L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "shortcut and group-selection mode cannot lift an Urn partner")
+  L.tap(K.SELECT)
+  L.tap(K.START); L.wait(60); L.tap(K.A); L.wait(60)
+  L.shot("urn_box_options")
+  L.tap(K.DOWN); L.tap(K.A); main()
+  L.expect(L.snapshot(urnName, S.BOX_NAME_BYTES) == name,
+           "Urn box options preserve its reserved name")
+  L.tap(K.DOWN); L.wait(45)
+  L.tap(K.RIGHT); L.wait(45); L.tap(K.A); L.wait(60)
+  L.shot("urn_empty_slot_refusal")
+  L.expect(L.snapshot(urnAddr, S.BOX_BYTES) == before and emu:read8(S.sIsMonBeingMoved) == 0,
+           "an empty Urn slot refuses ordinary storage actions")
+  L.tap(K.B); main()
+
+  local function changeBox(key, expected)
+    L.tap(K.START); L.wait(30); L.tap(key); L.wait(120)
+    L.expect(emu:read8(storage) == expected, "the native cursor scrolls to jar " .. (expected + 1))
+    L.tap(K.DOWN); L.wait(30)
+    L.tap(K.LEFT); L.wait(20); L.tap(K.LEFT); L.wait(30)
+  end
+  changeBox(K.RIGHT, 0)
+  menu(); L.tap(K.A); main()
+  L.expect(emu:read8(S.sIsMonBeingMoved) ~= 0, "an ordinary jar still permits moving a living partner")
+  changeBox(K.LEFT, urn)
+  L.tap(K.RIGHT); L.wait(30)
+  L.tap(K.A); L.wait(60); L.shot("urn_deposit_refusal")
+  L.expect(emu:read8(S.sIsMonBeingMoved) ~= 0 and L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "A-button placement refuses an empty Urn slot without losing the held partner")
+  L.tap(K.B); main()
+  L.tap(K.B); L.wait(60)
+  L.expect(emu:read8(S.sIsMonBeingMoved) ~= 0 and L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "B-button quick placement cannot bypass the sealed Urn")
+  L.tap(K.A); main()
+  changeBox(K.RIGHT, 0)
+  menu(); L.tap(K.A); main()
+  L.expect(emu:read8(S.sIsMonBeingMoved) == 0, "a refused placement can safely return its partner to ordinary storage")
+
+  local ordinary = storage + S.OFF_STORAGE_BOXES
+  local ordinaryBefore = L.snapshot(ordinary, S.BOX_MON_BYTES * 2)
+  L.tap(K.SELECT)
+  emu:addKey(K.A); L.wait(60); L.tap(K.RIGHT); L.wait(45); emu:clearKey(K.A)
+  L.wait(120)
+  L.expect(emu:read8(S.sIsMonBeingMoved) ~= 0 and L.snapshot(ordinary, S.BOX_MON_BYTES * 2) ~= ordinaryBefore,
+           "ordinary storage still permits lifting a real multi-partner selection")
+  L.tap(K.LEFT); L.wait(120)
+  L.expect(emu:read8(storage) == urn, "a lifted group can scroll to the Urn")
+  L.tap(K.A); L.wait(60); L.shot("urn_group_refusal")
+  L.expect(emu:read8(S.sIsMonBeingMoved) ~= 0 and L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "a group cannot be placed in the Urn and remains safely held")
+  L.tap(K.B); main()
+  for _ = 1, 6 do
+    if emu:read8(storage) == 0 then break end
+    L.tap(K.RIGHT); L.wait(90)
+  end
+  for _ = 1, 4 do L.tap(K.LEFT); L.wait(30) end
+  L.tap(K.A); L.wait(120)
+  L.expect(emu:read8(storage) == 0 and emu:read8(S.sIsMonBeingMoved) == 0
+           and L.snapshot(ordinary, S.BOX_MON_BYTES * 2) == ordinaryBefore,
+           "a refused group can be returned with both ordinary partners intact")
+  L.expect(L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "returning the group leaves every byte of the Urn unchanged")
+  L.tap(K.SELECT)
+
+  changeBox(K.LEFT, urn)
+  L.tap(K.B); L.wait(60); L.tap(K.B)
+  L.waitUntil(function() return L.taskRunning("Task_PCMainMenu") end, 1200, "the Pithos mode menu")
+  L.wait(90)
+  L.tap(K.DOWN); L.tap(K.DOWN); L.tap(K.DOWN); L.tap(K.A); main()
+  storage = emu:read32(S.gPokemonStoragePtr)
+  urnAddr = storage + S.OFF_STORAGE_BOXES + urn * S.BOX_BYTES
+  L.tap(K.A); L.wait(60); L.shot("urn_item_refusal")
+  L.expect(L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "Move items cannot take the fallen partner's held item or give it another")
+  L.tap(K.B); main()
+  L.tap(K.B); L.wait(60); L.tap(K.B)
+  L.waitUntil(function() return L.taskRunning("Task_PCMainMenu") end, 1200, "the mode menu after Move items")
+  L.wait(90)
+  for i = 0, S.PARTY_MON_BYTES - 1 do
+    emu:write8(S.gParties + S.PARTY_MON_BYTES + i, emu:read8(S.gParties + i))
+  end
+  emu:write8(S.gPartiesCount, 2)
+  local party = L.snapshot(S.gParties, S.PARTY_MON_BYTES * 2)
+  L.tap(K.UP); L.tap(K.UP); L.tap(K.A); main()
+  menu(); L.tap(K.A)
+  L.waitUntil(function() return L.taskRunning("Task_DepositMenu") end, 600, "the party-deposit jar chooser")
+  L.wait(90); L.tap(K.LEFT); L.wait(45); L.tap(K.A); L.wait(90)
+  storage = emu:read32(S.gPokemonStoragePtr)
+  urnAddr = storage + S.OFF_STORAGE_BOXES + urn * S.BOX_BYTES
+  L.shot("urn_party_deposit_refusal")
+  L.expect(emu:read8(S.gPartiesCount) == 2 and L.snapshot(S.gParties, S.PARTY_MON_BYTES * 2) == party
+           and L.snapshot(urnAddr, S.BOX_BYTES) == before,
+           "the party-deposit chooser refuses a reserved jar before changing either partner")
+  L.tap(K.B); L.wait(60); L.tap(K.B); main()
+  L.tap(K.B); L.wait(60); L.tap(K.B)
+  L.waitUntil(function() return L.taskRunning("Task_PCMainMenu") end, 1200, "the mode menu after deposit refusal")
+  L.wait(90); L.tap(K.B); L.settle()
+  L.runHeader("Oath_SaveHeader")
+  emu:reset(); L.continueSave()
+  storage = emu:read32(S.gPokemonStoragePtr)
+  urnAddr = storage + S.OFF_STORAGE_BOXES + urn * S.BOX_BYTES
+  L.expect(L.snapshot(urnAddr, S.BOX_BYTES) == before
+           and emu:read8(oath() + S.OFF_OATH_STATE) == S.ICHOR_OATH_RELEASED
+           and emu:read16(oath() + S.OFF_OATH_URN_BOXES) & (1 << urn) ~= 0,
+           "the unchanged Urn and its reservation survive real save/reset/CONTINUE after release")
 end)
