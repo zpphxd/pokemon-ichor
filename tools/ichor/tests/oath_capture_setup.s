@@ -3,6 +3,7 @@
 #include "constants/items.h"
 #include "constants/map_scripts.h"
 #include "constants/maps.h"
+#include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/species.h"
 #include "constants/vars.h"
@@ -62,4 +63,21 @@ Oath_Save:
 	setvar VAR_TEMP_F, 1
 	special SaveGame
 	releaseall
+	end
+
+	test_header Oath_FaintHeader, Oath_Faint
+Oath_Faint:
+	setvar VAR_TEMP_F, 1
+	callnative ZeroPlayerPartyMons
+	givemon SPECIES_CLEFFA, 1
+	createmon 0, 0, SPECIES_CLEFFA, 1, move1=MOVE_SPLASH, move2=MOVE_LEER, move3=MOVE_NONE, move4=MOVE_NONE
+	givemon SPECIES_SNIVY, 80
+	setwildbattle SPECIES_ZIGZAGOON, 10
+	dowildbattle
+	end
+
+	test_header Oath_HealHeader, Oath_Heal
+Oath_Heal:
+	setvar VAR_TEMP_F, 1
+	special HealPlayerParty
 	end

@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_scripts.h"
 #include "battle_util.h"
+#include "battle_script_commands.h"
 #include "event_data.h"
 #include "ichor_oath.h"
 #include "ichor_save.h"
@@ -10,7 +11,7 @@
 #include "item.h"
 #include "safari_zone.h"
 #include "string_util.h"
-#include "test/test.h"
+#include "test/battle.h"
 #include "constants/battle.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
@@ -389,4 +390,109 @@ TEST("Ichor: native quick and Safari throws refuse repeat areas without consumin
     HandleAction_SafariZoneBallThrow();
     EXPECT_EQ(gNumSafariBalls, 17);
     EXPECT_EQ(gBattlescriptCurrInstr, BattleScript_IchorOathNoCatch);
+}
+
+TEST("Ichor: fallen partners cannot regain HP through healing, stats, items or boxing")
+{
+    struct Pokemon mon, restored;
+    struct BoxPokemon boxed;
+    u32 value = 0;
+    ResetOath();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    CreateOathMon(&mon);
+    SetMonData(&mon, MON_DATA_HP, &value);
+    EXPECT(Ichor_RecordOathFallen(&mon));
+    value = 50;
+    SetMonData(&mon, MON_DATA_HP, &value);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 0);
+    value = 0;
+    SetMonData(&mon, MON_DATA_HP_LOST, &value);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 0);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 0);
+    HealPokemon(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 0);
+    EXPECT(PokemonUseItemEffects(&mon, ITEM_REVIVE, 0, 0, FALSE));
+    EXPECT(PokemonUseItemEffects(&mon, ITEM_MAX_REVIVE, 0, 0, FALSE));
+    EXPECT(PokemonUseItemEffects(&mon, ITEM_REVIVAL_HERB, 0, 0, FALSE));
+    boxed = mon.box;
+    HealBoxPokemon(&boxed);
+    BoxMonToMon(&boxed, &restored);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
+    EXPECT(Ichor_IsOathFallen(&restored.box));
+    EXPECT(Ichor_ReleaseOath());
+    HealPokemon(&restored);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
+    EXPECT(PokemonUseItemEffects(&restored, ITEM_REVIVE, 0, 0, FALSE));
+    EXPECT_EQ(gIchorSave.oath.fallenCount, 1);
+}
+
+TEST("Ichor: ordinary fainted partners can still heal and use revival items")
+{
+    struct Pokemon mon;
+    u32 zero = 0;
+    ResetOath();
+    CreateOathMon(&mon);
+    mon.box.oathFallen = TRUE;
+    SetMonData(&mon, MON_DATA_HP, &zero);
+    EXPECT(!PokemonUseItemEffects(&mon, ITEM_REVIVE, 0, 0, FALSE));
+    EXPECT(GetMonData(&mon, MON_DATA_HP) > 0);
+    SetMonData(&mon, MON_DATA_HP, &zero);
+    HealPokemon(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), GetMonData(&mon, MON_DATA_MAX_HP));
+}
+
+TEST("Ichor: Revival Blessing's target search skips fallen partners")
+{
+    u32 zero = 0;
+    struct Pokemon *party = gParties[B_TRAINER_PLAYER];
+    ResetOath();
+    ZeroPlayerPartyMons();
+    gBattleTypeFlags = 0;
+    EXPECT(Ichor_ChooseOath(TRUE));
+    CreateOathMon(&party[0]);
+    SetMonData(&party[0], MON_DATA_HP, &zero);
+    EXPECT_EQ(GetFirstFaintedPartyIndex(B_BATTLER_0), 0);
+    EXPECT(Ichor_RecordOathFallen(&party[0]));
+    EXPECT_EQ(GetFirstFaintedPartyIndex(B_BATTLER_0), PARTY_SIZE);
+    CreateOathMon(&party[1]);
+    SetMonData(&party[1], MON_DATA_HP, &zero);
+    EXPECT_EQ(GetFirstFaintedPartyIndex(B_BATTLER_0), 1);
+}
+
+SINGLE_BATTLE_TEST("Ichor: recorded-link simulation fainting never marks a real partner")
+{
+    GIVEN {
+        ResetOath();
+        EXPECT(Ichor_ChooseOath(TRUE));
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SCRATCH); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(gIchorSave.oath.fallenCount, 0);
+        EXPECT(!Ichor_IsOathFallen(&gParties[B_TRAINER_PLAYER][0].box));
+        Ichor_InitSave();
+    }
+
+}
+
+TEST("Ichor: real trainer and wild fainting count but simulations and tutorials do not")
+{
+    const u32 excluded[] = {
+        BATTLE_TYPE_LINK, BATTLE_TYPE_LINK_IN_BATTLE, BATTLE_TYPE_TOWER_LINK_MULTI,
+        BATTLE_TYPE_RECORDED, BATTLE_TYPE_RECORDED_LINK, BATTLE_TYPE_FRONTIER,
+        BATTLE_TYPE_TRAINER_HILL, BATTLE_TYPE_SECRET_BASE,
+        BATTLE_TYPE_CATCH_TUTORIAL, BATTLE_TYPE_POKEDUDE,
+    };
+    u32 i;
+    ResetOath();
+    EXPECT(!Ichor_IsOathBattle(BATTLE_TYPE_TRAINER));
+    EXPECT(Ichor_ChooseOath(TRUE));
+    EXPECT(Ichor_IsOathBattle(BATTLE_TYPE_IS_MASTER));
+    EXPECT(Ichor_IsOathBattle(BATTLE_TYPE_TRAINER));
+    EXPECT(Ichor_IsOathBattle(BATTLE_TYPE_GHOST));
+    for (i = 0; i < ARRAY_COUNT(excluded); i++)
+        EXPECT(!Ichor_IsOathBattle(excluded[i]));
 }

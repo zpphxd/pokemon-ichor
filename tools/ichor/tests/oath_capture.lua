@@ -93,4 +93,44 @@ L.start(function()
            "release restores normal capture permission without deleting history")
   capture()
   L.shot("released_capture")
+
+  emu:write8(oath() + S.OFF_OATH_STATE, S.ICHOR_OATH_ACTIVE)
+  local falls = emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT)
+  L.runHeader("Oath_FaintHeader", { noSettle = true })
+  L.waitUntil(function()
+    if emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) > falls then return true end
+    if emu:read32(S.gBattlerControllerFuncs) == (S.HandleInputChooseAction | 1) then
+      L.tap(K.UP); L.tap(K.LEFT); L.tap(K.A)
+    else
+      L.tap(K.A)
+    end
+    L.wait(4)
+    return false
+  end, 12000, "a real opponent fainting the weak lead")
+  L.expect(emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == falls + 1 and L.partyHp(0) == 0,
+           "actual battle fainting records the player partner exactly once")
+  L.waitUntil(function()
+    if L.taskRunning("Task_HandleChooseMonInput") then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 2000, "the native replacement party menu")
+  L.wait(60)
+  L.tap(K.RIGHT); L.tap(K.A); L.wait(30); L.tap(K.A)
+  L.waitUntil(function()
+    if L.inBattle() then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 2000, "the living partner to enter battle")
+  L.battle(); L.settle()
+  L.runHeader("Oath_HealHeader")
+  L.expect(L.partyHp(0) == 0 and L.partyHp(1) > 0,
+           "the native party-heal special leaves the fallen partner at zero HP")
+  L.runHeader("Oath_SaveHeader")
+  emu:reset(); L.continueSave()
+  L.runHeader("Oath_HealHeader")
+  L.expect(L.partyHp(0) == 0 and emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == falls + 1,
+           "fallen identity and non-revival survive real save/reset/CONTINUE")
+  emu:write8(oath() + S.OFF_OATH_STATE, S.ICHOR_OATH_RELEASED)
+  L.runHeader("Oath_HealHeader")
+  L.expect(L.partyHp(0) == 0, "ending the Oath does not bring back already fallen partners")
 end)
