@@ -76,7 +76,10 @@ L.start(function()
       L.runHeader("AktiArt_FreeMonHeader")
     end
   end
-  for _, name in ipairs({"SHEPHERD", "HARVESTER", "GOATHERD", "HOPLITE", "AUGUR", "ACOLYTE_M", "ACOLYTE_F"}) do
+  for _, name in ipairs({
+    "SHEPHERD", "HARVESTER", "GOATHERD", "HOPLITE", "AUGUR", "ACOLYTE_M", "ACOLYTE_F",
+    "POTTER", "INITIATE_F", "RUNNER",
+  }) do
     L.setVar(S.VAR_0x8000, S[name])
     L.runHeader("AktiArt_TrainerHeader")
     local id = L.getVar(S.VAR_0x8005)

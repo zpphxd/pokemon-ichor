@@ -22,9 +22,21 @@ reference is not counted as integrated production art.
 | Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
 | Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
 | Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Image-model-led redesign in progress; healer's tenth bow is required |
-| Still-reachable imported class portraits | Hiker, Psychic F, Running Triathlete M | Previously verified original Gen 3 retention; not newly redrawn or covered by the 85 custom surfaces |
+| Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
 | Legacy players | 22 RS/FRLG PNGs and their existing compiled aliases | Preserve accepted identities/provenance; not a new character redesign |
 | Other imported people/fronts/backs and duplicate screen art | Hoenn/FRLG/cut assets, map markers, intro/credits/naming and other human appearances outside the custom set | Coverage review remains open; do not silently count unchanged or unassigned art as complete |
+
+The Sacred Way replacements add three fronts beyond the first 85-surface
+partition (88 surfaces before supplemental markers/credits). Their immutable
+model source and export recipe are in `design/art/characters/route4/` and
+`tools/ichor/art/export_route4_characters.py`. These are sampled/quantized
+image-model outputs, not hand-authored native drawings or separately
+user-approved character designs. Native source reproduction and accent
+retention pass; the real loader gallery passes 68 checks/18 captures including
+these three fronts. Build and smoke pass (9 captures); linked ROM usage is
+23,094,568 bytes / 68.83%. The 22-source/208-frame legacy-player set and
+36 compiled link frames remain unchanged. This bounded parent checkpoint
+does not complete the other character groups or establish gameplay coverage.
 
 This character-only continuation does not restart Pokemon, prop, field-effect,
 tileset, UI or ball-art generation. Town-by-town production landing still

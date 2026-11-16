@@ -1194,13 +1194,13 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Rock Polish
 
 /* Route 4, the Isthmus road (design/phase2/SCRIPT.md Part 3, "Route 2 trainers"), levels
- * 18-20. Aethos stand-ins (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. The POTTER,
- * RUNNER and INITIATE classes aren't drawn yet (ICHOR_STUB_SPRITE): they borrow the Hiker,
- * the running Triathlete and the Psychic, SCRIPT.md's placeholders. */
+ * 18-20. Aethos stand-ins (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. Potter,
+ * Runner and Initiate F use their own Greek portraits; the original Hiker,
+ * running Triathlete and Psychic assets remain unchanged. */
 === TRAINER_ICHOR_EXEKIAS ===
 Name: EXEKIAS
 Class: Potter
-Pic: Hiker
+Pic: Potter
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -1216,7 +1216,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 === TRAINER_ICHOR_MYRRHINE ===
 Name: MYRRHINE
 Class: Initiate
-Pic: Psychic F
+Pic: Initiate F
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1264,7 +1264,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 === TRAINER_ICHOR_PHEIDIPPOS ===
 Name: PHEIDIPPOS
 Class: Runner
-Pic: Running Triathlete M
+Pic: Runner
 Gender: Male
 Music: Cool
 AI: Check Bad Move

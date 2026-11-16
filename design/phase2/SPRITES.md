@@ -9,6 +9,34 @@ Trainer portraits, trainer classes and overworld walkers for the *Euploia* and A
 
 `--write` with no name also rewrites the contact sheets in `img/`.
 
+## Sacred Way portrait replacements, 2026-11-16
+
+The existing Potter Exekias, Initiate Myrrhine and Runner Pheidippos now have
+separate Greek portraits rather than Hiker, Psychic F and Running Triathlete M
+placeholders. Their classes, parties, levels, dialogue and battle behavior are
+unchanged. The three original Hoenn PNGs remain byte-identical.
+
+| `Pic:` | Look | File |
+|---|---|---|
+| `Potter` | Bearded craftsman in linen and a clay-colored apron, raising his brush while holding a black-figure amphora | `graphics/trainers/front_pics/potter.png` |
+| `Initiate F` | Myrtle-wreathed young woman in ivory and indigo, holding a scroll and gesturing excitedly | `graphics/trainers/front_pics/initiate_f.png` |
+| `Runner` | Red-headbanded messenger in a short ochre chiton and red cloak, running with a tied message roll | `graphics/trainers/front_pics/runner.png` |
+
+These are reference-guided image-model outputs using the approved Theo
+direction, **not hand-authored native drawings**. The immutable 1536x1024 source
+is `design/art/characters/route4/generated.png`; each production picture is an
+actual indexed 64x64 export with transparent index 0 and at most 15 opaque
+colors at GBA precision. Nearest-neighbor sampling retains the silhouette but
+loses small facial and vase-painting detail.
+
+`python3 tools/ichor/art/export_route4_characters.py --output DIR` reproduces
+the native PNGs in `DIR/native`, a comparison board and a verification manifest.
+It segments the source's existing alpha channel and does no anatomy drawing.
+Tiny red/green accents receive extra palette weight only below 3% coverage:
+weighting whole red/brown garments erased the Potter's linen in the rejected
+first conversion. This exporter never writes production paths implicitly.
+The older class painters do not own these three source-backed assets.
+
 ## For party files
 
 | Trainer | `Class:` | `Pic:` |
@@ -199,9 +227,13 @@ The brief rules out editing maps and parties, and the permission system refused 
    - The tablet sits at his chest.
 3. **Matching the portrait.** The pilgrim's dish now matches the portrait's cloth and knot. Checked in game.
 
-## Still open
+## Original batch 1 open-items ledger
 
-- **Phase 2's other classes:** Potter, Runner, Initiate, Jester, Beekeeper, Swineherd and the Titan Admin aren't drawn. Nor are Kerykos, Chloe, Hyperion, Daphne's sandals or the walkers for batch 2 and later. Until they are, Eleusa's story borrows: `TRAINER_CLASS_SWINEHERD` exists with the Goatherd's pic, Chloe battles with the Acolyte F pic, and the initiates walk as pilgrims and youths.
+This is the historical batch 1 ledger, not the current completion matrix;
+see `design/art/INVENTORY.md`. In particular, the three active Sacred Way
+portrait fallbacks are now replaced as described above.
+
+- **Phase 2's other classes:** Potter, Runner, Initiate, Jester, Beekeeper, Swineherd and the Titan Admin were not drawn at this checkpoint. Neither were Kerykos, Chloe, Hyperion, Daphne's sandals or the walkers for batch 2 and later. Eleusa's story borrowed the Goatherd pic for `TRAINER_CLASS_SWINEHERD`, the Acolyte F pic for Chloe, and pilgrims/youths for initiate walkers.
 - **Kleon's back pic** is drawn (`tools/ichor/art/sprites_kleon_back.py`, his front pic's palette, Theo's throw): a battle partner slides in from behind, and he is one on the night of the Mysteries.
 - **The initiate walker:** it can reuse the pilgrim's white midi chiton without the cloak.
 - **Kleon's sitting pose:** it waits for the Telesterion's batch.
