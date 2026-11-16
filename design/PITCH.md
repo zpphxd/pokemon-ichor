@@ -435,6 +435,10 @@ complete the native scene; a new NEW GAME attempt instead loses its first
 summit battle. That fixture is not continuous or ending coverage. With later
 useful-Yawn and status/ability scoring, Mortal/Kynder reaches the ending from
 NEW GAME too (48 battles); Hero/Kynder and Spartan/Hipling still lose at Ione.
+The next continuous Mortal/Kynder attempt reaches Emporion, completes the
+Herald's Run with 73 of its 150 steps remaining and beats all three acolytes,
+then loses to Kerykos. This is not a Laurel-2 or gate-opening pass. The harness
+now checks the selected difficulty's step budget rather than assuming Hero.
 The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
