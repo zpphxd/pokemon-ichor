@@ -1099,7 +1099,9 @@ fainting, the locked Urn and run-ending behavior work together.
   modern poison survival at one HP does not count as a fall.
 - Fallen HP remains zero through `SetMonData`'s HP/HP-lost setters, stat
   recalculation, party healing and boxed-to-party conversion, including
-  after release. Item effects refuse fallen targets; battle revival items
+  after release. `HealPokemon` and `HealBoxPokemon` leave the whole fallen
+  record unchanged, including PP and status; modern party healing otherwise
+  heals every stored jar too. Item effects refuse fallen targets; battle revival items
   explain why, and Revival Blessing's native search excludes them. Ordinary
   saves, including legacy Pokemon with the formerly unused bit set, retain
   ordinary healing and revival.
@@ -1124,6 +1126,22 @@ fainting, the locked Urn and run-ending behavior work together.
   leaves both the source and storage intact. Call this after battle, then
   compact/recount the party; the caller must report capacity refusal and
   prevent use or revival of a retained fallen partner.
+- `Ichor_StoreOathPartyFallen()` transfers all marked party partners before
+  compacting and recounting the party. Its aggregate result is NOT_FALLEN
+  when no fallen partners were present, STORED when all pending partners fit, or FULL when
+  any remain. FULL can include partial success: retained sources stay intact,
+  and retrying after an ordinary jar becomes empty cannot duplicate records.
+- `Ichor_EndOathBattle(type, outcome)` applies that transfer to real,
+  non-defeat battles only when a living, non-Egg player partner remains.
+  Wild, scripted wild, ghost, trainer and rematch return paths call it after
+  any existing follower/variant party restoration. Lost/drawn battles and
+  parties with no usable survivor are deliberately left for the unfinished
+  recovery/run-ending integration; an Egg does not count as a survivor.
+- `Ichor_ShowOathAftermathNotice()` runs after the field fades back in,
+  before the normal return tasks unlock movement or resume the paused
+  script. Transfer and full-capacity notices require acknowledgment without
+  replacing the original event script. A full Urn retains the pending fallen
+  partner and explains the need for an empty jar.
 
 Version 5 takes 40 bytes from the old reserved region at 0x450. Total
 IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
@@ -1131,9 +1149,10 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Post-battle Urn transfer/party compaction, overflow and run-ending callers still need integration
-before the Oath can be enabled. In particular, do not expose enrollment while
-an all-party fall could enter an ordinary whiteout with no revivable partner.
+Total-party-loss recovery, field-poison cleanup, overflow service restrictions
+and storage-exit retry, and run-ending callers still need integration before
+the Oath can be enabled. In particular, do not expose enrollment while an
+all-party fall could enter an ordinary whiteout with no revivable partner.
 
 Native tests cover the entire map-section range, byte boundaries, invalid
 indices, once-only choice/transitions and migration. The actual-ROM save
@@ -1152,9 +1171,14 @@ search and actual recorded-link fainting without permanent loss.
 Native storage checks also fill every ordinary jar while leaving two reserved
 jars empty, prove that capture and script capacity checks report full, and
 verify that unsworn saves keep their final jar available. The actual-ROM
-fixture seeds a PC scene with the real battle's fallen BoxPokemon and plays
+fixture uses the actual battle's automatically transferred fallen BoxPokemon and plays
 view-only menus, summaries, shortcut/group refusal, A/B placement refusal,
 safe return of held ordinary partners, Move items and the party-deposit
-chooser. The complete fixture passes 53 checks with 19 screenshots, including
+chooser. The complete fixture passes 60 checks with 23 screenshots, including
 byte-for-byte Urn preservation through a second save/reset/CONTINUE after
-release. This does not claim that automatic post-battle transfer is wired.
+release. It also fills the Urn, occupies every ordinary jar, plays another real
+fall and verifies the explicit capacity notice, retained source, continued
+non-revival and preservation through save/reset/CONTINUE. Native tests cover
+multiple fallen partners, survivor/Egg compaction, partial-capacity retry,
+simulation and defeat exclusions, and the no-survivor guard. None of this
+claims that total-party-loss recovery or the full Oath is finished.
