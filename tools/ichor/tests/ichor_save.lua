@@ -1,6 +1,6 @@
 -- IchorSave check, run by tools/ichor/tests/ichor_save.sh (read it first).
 --
---   1. A new game: IchorSave is version 1, Mom's record is 0-212, everything else is zero.
+--   1. A new game: IchorSave is the current version, Mom's record is 0-212, everything else is zero.
 --   2. Scripts write and read the flag bank, the daily bank and the var bank
 --      (ichor_save_setup.s): each lands in IchorSave at its own bit, and no
 --      SaveBlock1 flag or var changes.
@@ -13,6 +13,8 @@
 --   7. A hidden item with a bank flag (asm/macros/map.inc) is found once, and is
 --      still found after a save and CONTINUE. The map's events are copied to RAM
 --      with the hidden item added, since no map has one yet.
+--   8. Oath state survives a real save, while version-4 reserved bytes migrate
+--      to an undecided Oath without erasing any existing progress.
 
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, emu = L.S, L.emu
@@ -138,6 +140,12 @@ L.start(function()
   -- 4. Save, reset, CONTINUE
   L.setFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5, true)   -- a daily flag, saved mid-day
   emu:write16(L.ichor() + S.OFF_ICHOR_MOM_WINS, 3)
+  local oath = L.ichor() + S.OFF_ICHOR_OATH
+  local chanceByte = S.OFF_OATH_ENCOUNTERS + (S.MAPSEC_KALLISTE_ROUTE_1 >> 3)
+  local chanceMask = 1 << (S.MAPSEC_KALLISTE_ROUTE_1 & 7)
+  emu:write8(oath + S.OFF_OATH_STATE, S.ICHOR_OATH_ACTIVE)
+  emu:write16(oath + S.OFF_OATH_FALLEN_COUNT, 7)
+  emu:write8(oath + chanceByte, chanceMask)
   local saved = L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE)
   L.runHeader("SaveTest_SaveHeader")
   shot("saved")
@@ -146,6 +154,10 @@ L.start(function()
   shot("continued")
   expect(L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE) == saved,
          string.format("all %d bytes of IchorSave come back from the save", S.ICHOR_SAVE_SIZE))
+  expect(ichor8(S.OFF_ICHOR_OATH + S.OFF_OATH_STATE) == S.ICHOR_OATH_ACTIVE
+         and ichor16(S.OFF_ICHOR_OATH + S.OFF_OATH_FALLEN_COUNT) == 7
+         and ichor8(S.OFF_ICHOR_OATH + chanceByte) == chanceMask,
+         "the Oath state, fallen count and named-area receipt survive CONTINUE")
   expect(L.getFlag(S.ICHOR_FLAGS2_END), "the second bank's flags come back too")
   plantHiddenItem()
   expect(L.getFlag(HIDDEN_FLAG) and not searchHiddenItem() and L.itemCount(S.ITEM_POTION) == potions + 1,
@@ -153,6 +165,26 @@ L.start(function()
   expect(L.getFlag(S.FLAG_ICHOR_HERMS_START + 3) and L.getFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5)
          and L.getVar(S.ICHOR_VARS_END) == 0xBEEF and ichor16(S.OFF_ICHOR_MOM_WINS) == 3,
          "flags, daily flags, vars and Mom's record read back through the engine")
+
+  -- 8. A version-4 save may hold arbitrary bytes in the new Oath allocation.
+  local prefix = L.snapshot(L.ichor() + 4, S.OFF_ICHOR_OATH - 4)
+  local secondBank = L.snapshot(L.ichor() + S.OFF_ICHOR_FLAGS2,
+                                S.ICHOR_SAVE_SIZE - S.OFF_ICHOR_FLAGS2)
+  emu:write8(L.ichor() + S.OFF_ICHOR_VERSION, 4)
+  for i = 0, S.ICHOR_OATH_SIZE - 1 do
+    emu:write8(L.ichor() + S.OFF_ICHOR_OATH + i, 0xFF)
+  end
+  L.runHeader("SaveTest_SaveHeader")
+  emu:reset()
+  L.continueSave()
+  expect(ichor8(S.OFF_ICHOR_VERSION) == S.ICHOR_SAVE_VERSION
+         and allZero(S.OFF_ICHOR_OATH, S.ICHOR_OATH_SIZE),
+         "version 4 clears stale reserved bytes instead of swearing an Oath")
+  expect(L.snapshot(L.ichor() + 4, S.OFF_ICHOR_OATH - 4) == prefix
+         and L.snapshot(L.ichor() + S.OFF_ICHOR_FLAGS2,
+                        S.ICHOR_SAVE_SIZE - S.OFF_ICHOR_FLAGS2) == secondBank,
+         "version-4 migration preserves both banks, vars, Favor and the Thread")
+  shot("version4_continued")
 
   -- 6. A version-3 save: junk where the second bank now sits (the old dexNavChain)
   emu:write8(L.ichor() + S.OFF_ICHOR_VERSION, 3)
