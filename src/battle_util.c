@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "ichor_rites.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -855,9 +856,14 @@ void HandleAction_SafariZoneBallThrow(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    gNumSafariBalls--;
     gLastUsedItem = ITEM_SAFARI_BALL;
-    gBattlescriptCurrInstr = BattleScript_SafariBallThrow;
+    if (!Ichor_CanCatchOathBattle())
+        gBattlescriptCurrInstr = BattleScript_IchorOathNoCatch;
+    else
+    {
+        gNumSafariBalls--;
+        gBattlescriptCurrInstr = BattleScript_SafariBallThrow;
+    }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
@@ -867,9 +873,14 @@ void HandleAction_ThrowBall(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     gLastUsedItem = gBallToDisplay;
-    if (!GetItemImportance(gLastUsedItem))
-        RemoveBagItem(gLastUsedItem, 1);
-    gBattlescriptCurrInstr = BattleScript_BallThrow;
+    if (!Ichor_CanCatchOathBattle())
+        gBattlescriptCurrInstr = BattleScript_IchorOathNoCatch;
+    else
+    {
+        if (!GetItemImportance(gLastUsedItem))
+            RemoveBagItem(gLastUsedItem, 1);
+        gBattlescriptCurrInstr = BattleScript_BallThrow;
+    }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 

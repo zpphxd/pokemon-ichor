@@ -5,12 +5,15 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "string_util.h"
+#include "constants/battle.h"
 #include "constants/region_map_sections.h"
 
 STATIC_ASSERT(MAPSEC_COUNT <= 256, IchorOathMapSectionsFit);
 STATIC_ASSERT(TOTAL_BOXES_COUNT <= 16, IchorUrnBoxesFit);
 
 #define URN_BOX (TOTAL_BOXES_COUNT - 1)
+
+static EWRAM_DATA bool8 sOathCatchDenied = FALSE;
 
 static bool32 IsNamedArea(u32 mapSection)
 {
@@ -79,6 +82,23 @@ u32 Ichor_CountOathEncounters(void)
         if (Ichor_HasOathEncounter(mapSection))
             count++;
     return count;
+}
+
+void Ichor_BeginOathBattle(u32 battleType, u32 mapSection)
+{
+    const u32 excluded = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK
+        | BATTLE_TYPE_LINK_IN_BATTLE | BATTLE_TYPE_TOWER_LINK_MULTI
+        | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK
+        | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE
+        | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_GHOST;
+    sOathCatchDenied = FALSE;
+    if (Ichor_IsOathActive() && !(battleType & excluded))
+        sOathCatchDenied = !Ichor_ClaimOathEncounter(mapSection);
+}
+
+bool32 Ichor_CanCatchOathBattle(void)
+{
+    return !Ichor_IsOathActive() || !sOathCatchDenied;
 }
 
 bool32 Ichor_IsUrnBox(u32 box)

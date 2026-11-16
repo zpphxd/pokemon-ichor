@@ -27,6 +27,8 @@ bool32 Ichor_FailOath(void);
 bool32 Ichor_HasOathEncounter(u32 mapSection);
 bool32 Ichor_ClaimOathEncounter(u32 mapSection);
 u32 Ichor_CountOathEncounters(void);
+void Ichor_BeginOathBattle(u32 battleType, u32 mapSection);
+bool32 Ichor_CanCatchOathBattle(void);
 bool32 Ichor_IsUrnBox(u32 box);
 bool32 Ichor_IsOathFallen(const struct BoxPokemon *mon);
 bool32 Ichor_RecordOathFallen(struct Pokemon *mon);
