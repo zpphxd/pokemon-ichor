@@ -405,6 +405,15 @@ separate area checks through the Mystery sanctum. Its assisted battles are progr
 evidence, **not** natural-level balance evidence. Historical QA and art inventories
 remain evidence of those revisions, not current open-issue counts.
 
+The continuous harness now also has a guarded natural-level mode: no EXP/stat
+edits, injected scripts, fixture resumes or softlock workarounds. All nine real
+starter/difficulty prologues pass, including actual rival wins/losses and
+Alethea's recovery. That is opening coverage only. The first Hero/Nebrel solo,
+first-move probe falls on Route 1 after reaching level 8; it does not catch
+partners or use healing items, so that result is not a balance defect. A
+team-building/healing pilot and continuous coverage beyond the Emporion gate
+are still needed before natural-level chapter approval.
+
 The Hollow night-hound failure was a signed-offset error in the test clock setup,
 not an established encounter bug. The corrected harness checks that the cave
 actually loads at noon and 22:00; its complete 73-check walk passes.

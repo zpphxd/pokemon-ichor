@@ -7,19 +7,23 @@
 -- trainer is fought, every gift and item in the slice is collected, and the game
 -- is saved in the Asclepeion, reset and continued from the save.
 --
--- THE ONE ASSIST: right after the starter screen, the starter's experience is set
+-- Unless SLICE_NATURAL=1, right after the starter screen the starter's experience is set
 -- to level 100's (and the game recalculates its stats). That is battle strength
 -- only: its moves, met level and species are untouched, it never levels or
 -- evolves, and every battle is still fought with button presses (the first
 -- move for trainers, RUN for wild Pokémon, or the first move once a trapping one
 -- won't let it flee). Nothing else is written to memory
--- except reading state; options are set in the OPTION menu by hand.
+-- except reading state; options are set in the OPTION menu by hand. Natural
+-- mode rejects emulator memory writes, RAM scripts, assists and state resumes.
+-- The first-move solo pilot is a progression probe, not a balance verdict.
 --
 -- Env: SLICE_OUT (default build/slice/), SLICE_SYMBOLS (default <out>symbols.lua),
 -- SLICE_STARTER 0 Nebrel / 1 Kynder / 2 Hipling (default 0),
 -- SLICE_GENDER theo / ianthe (default theo), SLICE_FROM <beat> (resume from that
 -- beat's save state), SLICE_WORKAROUNDS=1 (release a stuck waitmovement, logged
--- as a BUG, so the rest of the slice can still be checked).
+-- as a BUG, so the rest of the slice can still be checked),
+-- SLICE_DIFFICULTY mortal / hero / spartan (default hero),
+-- SLICE_STOP_AFTER <beat> (explicitly partial coverage, never a full-run PASS).
 --
 -- Prints "SLICE ok ..." per check, "SLICE BEAT ..." per beat (with a save state
 -- in <out>states/), "SLICE shot ..." per screenshot and "SLICE TEXT ..." per
@@ -28,8 +32,9 @@
 -- failed, then "SLICE done"; any failure prints "SLICE FAIL: ..." first.
 
 local OUT = os.getenv("SLICE_OUT") or "build/slice/"
+local NATURAL = os.getenv("SLICE_NATURAL") == "1"
 local L = dofile("tools/ichor/tests/slice_lib.lua")
-L.init{ tag = "SLICE", out = OUT, symbols = os.getenv("SLICE_SYMBOLS") or (OUT .. "symbols.lua") }
+L.init{ tag = "SLICE", out = OUT, symbols = os.getenv("SLICE_SYMBOLS") or (OUT .. "symbols.lua"), readOnly = NATURAL }
 L.statesDir = OUT .. "states/"
 local S, K = L.S, L.K
 local emu = L.emu
@@ -39,6 +44,8 @@ local getFlag, mapId, pos, settle, talk, go = L.getFlag, L.mapId, L.pos, L.settl
 local STARTER = tonumber(os.getenv("SLICE_STARTER") or "0")
 local IANTHE = (os.getenv("SLICE_GENDER") or "theo") == "ianthe"
 local SPECIES = { [0] = "Nebrel", [1] = "Kynder", [2] = "Hipling" }
+local DIFFICULTY = os.getenv("SLICE_DIFFICULTY") or "hero"
+local DIFFICULTIES = { mortal = 0, hero = 1, spartan = 2 }
 local KLEON_TAKES = { [0] = 1, [1] = 2, [2] = 0 }   -- SCRIPT.md beat 3
 local KLEON_TRAINER = { [0] = "KLEON_KYNDER", [1] = "KLEON_HIPLING", [2] = "KLEON_NEBREL" }
 
@@ -265,8 +272,15 @@ beat("01_bedroom", function()
   talk(L.sign("ElaiaVillage_PlayersHouse_2F_EventScript_Knucklebones"), { shotBefore = "knucklebones" })
   talk(L.sign("ElaiaVillage_PlayersHouse_2F_EventScript_Scrolls"), { shotBefore = "scrolls" })
   talk(L.sign("ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock"),
-       { shotBefore = "water_clock", shots = { [1] = "klepsydra_text" } })
+       { shotBefore = "water_clock", shots = { [1] = "klepsydra_text" },
+         answers = { ({ mortal = "up", hero = "yes", spartan = "down" })[DIFFICULTY] } })
   expect(getFlag(S.FLAG_SET_WATER_CLOCK), "the water clock is set")
+  expect(getFlag(S.FLAG_DIFFICULTY_CHOSEN) and L.getVar(S.VAR_DIFFICULTY) == DIFFICULTIES[DIFFICULTY],
+         "the actual water-clock menu saved " .. DIFFICULTY)
+  expect(not getFlag(S.FLAG_OATH_CHOICE_PENDING), "the separate Oath choice is resolved")
+  local ichor = emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR
+  expect(emu:read8(ichor + S.OFF_ICHOR_OATH_STATE) == S.OATH_DECLINED,
+         "the ordinary playthrough did not swear the Oath")
   L.useWarp(S.MAP_HOUSE_1F, true)
 end)
 
@@ -337,9 +351,13 @@ beat("03_akademia", function()
   flagsClear({ hide[third] }, "the last krater stays: " .. SPECIES[third])
   expect(L.partyLevel(0) == 5, "the starter arrives at level 5")
 
-  -- THE ASSIST (see the header): the starter goes to level 100.
-  local species, growth, exp = L.assistLevel100()
-  log(string.format("ok ASSIST: starter (species %d, growth %d) set to level 100 (exp %d)", species, growth, exp))
+  if NATURAL then
+    log(string.format("ok NATURAL: starter species %d remains level 5 (exp %d); memory writes prohibited",
+                      L.partySpecies(0), L.partyExperience(0)))
+  else
+    local species, growth, exp = L.assistLevel100()
+    log(string.format("ok ASSIST: starter (species %d, growth %d) set to level 100 (exp %d)", species, growth, exp))
+  end
   shot("last_krater")
   L.useWarp(S.MAP_ELAIA)
 end)
@@ -353,10 +371,21 @@ beat("04_kleon", function()
   wait(40); shot("kleon_there_you_are")
   local _, fought = settle({ answers = { "no" }, shots = { [4] = "kleon_oracle", [6] = "kleon_battle_me" } })
   expect(#fought == 1, "one battle with Kleon")
-  battleCheck(fought[1], KLEON_TRAINER[STARTER], S.MUS_BATTLE_RIVAL, "Kleon")
-  flagsSet({ "FLAG_KLEON_BATTLE_1_DONE", "FLAG_WON_KLEON_1", "FLAG_GOT_POKEBALLS", "FLAG_HIDE_KLEON_ELAIA",
+  local won = fought[1] and fought[1].outcome == S.B_OUTCOME_WON
+  if NATURAL and not won then
+    expect(fought[1] and fought[1].trainer and fought[1].outcome == S.B_OUTCOME_LOST,
+           "Kleon's supported opening loss returns to the story")
+    flagsClear({ "FLAG_WON_KLEON_1" }, "losing does not record a victory")
+    L.check(fought[1].song == L.songHeader(S.MUS_BATTLE_RIVAL), "Kleon's loss uses the rival battle music")
+  else
+    battleCheck(fought[1], KLEON_TRAINER[STARTER], S.MUS_BATTLE_RIVAL, "Kleon")
+    flagsSet({ "FLAG_WON_KLEON_1" }, "the actual rival win is recorded")
+  end
+  flagsSet({ "FLAG_KLEON_BATTLE_1_DONE", "FLAG_GOT_POKEBALLS", "FLAG_HIDE_KLEON_ELAIA",
              "FLAG_HIDE_ALETHEA_ELAIA" }, "beat 4's flags")
   flagsClear({ "FLAG_NO_WHITEOUT" }, "the no-whiteout flag is cleared")
+  local hp, maxHp = L.partyHp(0)
+  expect(hp == maxHp and hp > 0, "Alethea healed the actual opening battle damage")
   expect(L.itemCount(S.ITEM_POKE_BALL) == 5, "Alethea's five Poke Balls")
   mapIs(S.MAP_ELAIA, "still in Elaia")
   musicIs(S.MUS_ELAIA, "Elaia's theme again")
@@ -1452,22 +1481,51 @@ end)
 
 L.start(function()
   local from = os.getenv("SLICE_FROM")
-  log(string.format("note starter %s, %s%s", SPECIES[STARTER], IANTHE and "Ianthe" or "Theo",
+  local stop = os.getenv("SLICE_STOP_AFTER")
+  if from == "" then from = nil end
+  if stop == "" then stop = nil end
+  expect(SPECIES[STARTER] and DIFFICULTIES[DIFFICULTY], "valid starter and difficulty")
+  expect(not NATURAL or (not from and not L.workarounds), "unassisted runs cannot resume fixtures or use workarounds")
+  if NATURAL then
+    local function refuses(fn, reason)
+      local ok, err = pcall(fn)
+      expect(not ok and tostring(err):find(reason, 1, true), "natural guard rejects " .. reason)
+    end
+    for _, width in ipairs({ 8, 16, 32 }) do
+      local value = emu["read" .. width](emu, S.gParties)
+      refuses(function() emu["write" .. width](emu, S.gParties, value) end, "emulator write" .. width)
+    end
+    refuses(function() emu:loadStateFile("unused.ss", 31) end, "emulator loadStateFile")
+    refuses(function() L.runRamScript({}) end, "a RAM script")
+    refuses(L.assistLevel100, "the level-100 assist")
+  end
+  local first, last = 1, #BEATS
+  local function beatIndex(name)
+    for i, b in ipairs(BEATS) do if b.name == name then return i end end
+    L.fail("unknown beat " .. name)
+  end
+  if from then first = beatIndex(from) end
+  if stop then last = beatIndex(stop) end
+  expect(first <= last, "requested beat range is in play order")
+  log(string.format("note %s pilot, %s difficulty, starter %s, %s%s",
+                    NATURAL and "NATURAL first-move solo" or "ASSISTED level-100",
+                    DIFFICULTY, SPECIES[STARTER], IANTHE and "Ianthe" or "Theo",
                     from and (", resuming at " .. from) or ""))
-  local first = 1
   if from then
-    for i, b in ipairs(BEATS) do if b.name == from then first = i end end
     wait(2)
     expect(emu:loadStateFile(L.statesDir .. from .. ".ss", 31), "loaded the state for " .. from)
     wait(2)
   else
     boot()
   end
-  for i = first, #BEATS do
+  for i = first, last do
     L.setBeat(BEATS[i].name, not (from and i == first))
     BEATS[i].fn()
+    log("REACHED " .. BEATS[i].name)
   end
-  if from then
+  if stop then
+    log("note PARTIAL coverage ends at " .. stop .. "; not a full playthrough or balance approval")
+  elseif from then
     log("note a resumed run checks only the beats it played")
   else
     -- every trainer in the slice and Phase 2 so far
@@ -1475,12 +1533,13 @@ L.start(function()
                          "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER],
                          "ALETHEA_DECK", "PHORMION", "LYKON",
                          "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS", KLEON_2[STARTER] }) do
-      if not L.defeated(S["TRAINER_" .. n]) then L.fail(n .. " was never beaten") end
+      local openingLoss = NATURAL and n == KLEON_TRAINER[STARTER] and getFlag(S.FLAG_KLEON_BATTLE_1_DONE)
+      if not L.defeated(S["TRAINER_" .. n]) and not openingLoss then L.fail(n .. " was never beaten") end
     end
-    log("ok every trainer so far is beaten")
+    log("ok every required trainer so far is beaten (opening rival permits a natural loss)")
   end
-  log(string.format("ok the slice played through in %d frames, %d battles, %d design finding(s)", now(),
-                    #L.battles, L.findings))
+  log(string.format("ok requested coverage played through in %d frames, %d battles, %d design finding(s)",
+                    now(), #L.battles, L.findings))
   if L.bugs > 0 then L.fail(string.format("played to the end, but %d check(s) failed (the BUG lines)", L.bugs)) end
-  log("PASS")
+  log(stop and ("PARTIAL PASS " .. stop) or "PASS")
 end)
