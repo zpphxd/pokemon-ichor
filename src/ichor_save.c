@@ -17,7 +17,9 @@ STATIC_ASSERT(offsetof(struct IchorSave, vars) == 0x040, IchorSaveVarsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, flags) == 0x080, IchorSaveFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, dailyFlags) == 0x180, IchorSaveDailyFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, thread) == 0x1A0, IchorSaveThreadOffset);
-STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x450, IchorSaveReservedOffset);
+STATIC_ASSERT(sizeof(struct IchorOath) == 40, IchorOathSize);
+STATIC_ASSERT(offsetof(struct IchorSave, oath) == 0x450, IchorSaveOathOffset);
+STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x478, IchorSaveReservedOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, flags2) == 0x500, IchorSaveFlags2Offset);
 STATIC_ASSERT(ICHOR_FLAGS2_START > ICHOR_DAILY_FLAGS_END, IchorFlags2AfterTheDailyBank);
 STATIC_ASSERT(ICHOR_FLAGS2_END < SPECIAL_FLAGS_START, IchorFlags2BelowSpecialFlags);
@@ -63,6 +65,8 @@ void Ichor_OnSaveLoaded(void)
     }
     if (gIchorSave.version < 4)  // the block grew: what was past its old end (dexNavChain) is not flags
         memset(gIchorSave.flags2, 0, sizeof(gIchorSave.flags2));
+    if (gIchorSave.version < 5)
+        memset(&gIchorSave.oath, 0, sizeof(gIchorSave.oath));
     gIchorSave.version = ICHOR_SAVE_VERSION;
 }
 

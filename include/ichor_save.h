@@ -21,7 +21,7 @@
 #include "constants/flags.h"
 #include "constants/vars.h"
 
-#define ICHOR_SAVE_VERSION  4
+#define ICHOR_SAVE_VERSION  5
 #define ICHOR_SAVE_SIZE     1472
 
 #define ICHOR_GOD_SLOTS     16  // the 15 gods of design/SYSTEMS.md §3, and one spare
@@ -64,6 +64,15 @@ struct IchorBlessing
     u16 steps;  // steps left
 };
 
+struct IchorOath
+{
+    u8 state;
+    u8 reserved;
+    u16 fallenCount;
+    u8 encounters[32];  // one persistent chance per named map section
+    u8 padding[4];
+};
+
 struct IchorSave
 {
     /*0x000*/ u8 version;               // ICHOR_SAVE_VERSION; 0 means a save made before IchorSave
@@ -86,7 +95,8 @@ struct IchorSave
     /*0x080*/ u8 flags[ICHOR_FLAGS_COUNT / 8];
     /*0x180*/ u8 dailyFlags[ICHOR_DAILY_FLAGS_COUNT / 8];  // cleared each day
     /*0x1A0*/ struct IchorThread thread;   // 688 bytes
-    /*0x450*/ u8 reserved[0x500 - 0x450];
+    /*0x450*/ struct IchorOath oath;     // version 5, carved from reserved bytes
+    /*0x478*/ u8 reserved[0x500 - 0x478];
     /*0x500*/ u8 flags2[ICHOR_FLAGS2_COUNT / 8];  // the second flag bank (version 4)
 };
 
