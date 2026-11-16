@@ -1030,6 +1030,7 @@ gSpecials::
 	def_special CheckAddCoins
 	def_special Ichor_SetHoursOverride
 	def_special Ichor_ChooseDifficulty
+	def_special Ichor_ChooseStartingOath
 	def_special Ichor_GetStepGlassLimit
 	@ Ichor: relics (src/ichor_relics.c)
 	def_special Ichor_CanUseRelic

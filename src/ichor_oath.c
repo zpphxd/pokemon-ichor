@@ -41,12 +41,18 @@ bool32 Ichor_ChooseOath(bool32 swear)
         || (swear && CountMonsInBox(URN_BOX) != 0))
         return FALSE;
     gIchorSave.oath.state = swear ? ICHOR_OATH_ACTIVE : ICHOR_OATH_DECLINED;
+    FlagClear(FLAG_ICHOR_OATH_CHOICE_PENDING);
     if (swear)
     {
         gIchorSave.oath.urnBoxes = 1 << URN_BOX;
         StringCopy(GetBoxNamePtr(URN_BOX), COMPOUND_STRING("URN"));
     }
     return TRUE;
+}
+
+u16 Ichor_ChooseStartingOath(void)
+{
+    return FlagGet(FLAG_ICHOR_OATH_CHOICE_PENDING) && Ichor_ChooseOath(gSpecialVar_0x8004);
 }
 
 bool32 Ichor_ReleaseOath(void)
