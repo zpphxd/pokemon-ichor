@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "classification": "accepted retain-as-authentic; no art or palette rewriting",
+  "expansion": {
+    "repository": "rh-hideout/pokeemerald-expansion",
+    "tag": "expansion/1.17.2",
+    "revision": "79dd436920845ebc145577649de624f65298c209",
+    "source_bytes": "All 22 PNGs are byte-identical to this release."
+  },
+  "originals": {
+    "emerald": {"repository": "pret/pokeemerald", "revision": "9103e529c2fbdd7add4a1ff3350c6c1f92112c42"},
+    "frlg": {"repository": "pret/pokefirered", "revision": "ce6406d8c2eaf46d543c8a2606de0c3cb1951982"}
+  },
+  "hash_encoding": {
+    "source": "SHA256 of complete PNG bytes",
+    "indices": "SHA256 of row-major palette-index bytes",
+    "dimensions": "SHA256 of width,height packed as two little-endian uint32 values",
+    "hardware_palette": "SHA256 of 16 little-endian BGR555 words; RGB channels truncate by >>3"
+  },
+  "layouts": {
+    "walker": {"dimensions": [144, 32], "frame_width": 16, "frames": 9, "dimension_sha256": "8055aed9729848ab3d6a1664b2f3b22dd06de6f35f79d9462ee16ad4957085cf"},
+    "bike": {"dimensions": [288, 32], "frame_width": 32, "frames": 9, "dimension_sha256": "9129dcb5a2bc2bd1d68a41fb84dc720bfec29d2c248d4f9644928e6faa43d7f9"},
+    "fish": {"dimensions": [384, 32], "frame_width": 32, "frames": 12, "dimension_sha256": "55ad5db3e359ebeb2c20aac0ea60ad3819f9376ae1277d311451d6c311b8f35e"},
+    "surf-run": {"dimensions": [224, 32], "frame_width": 16, "frames": 14, "dimension_sha256": "bd5b1b0a392c7f32b52fca7f2816ce83a02a15e8c1e4f193279875be07c035c6"},
+    "vs-bike": {"dimensions": [192, 32], "frame_width": 32, "frames": 6, "dimension_sha256": "2cf13ffa2c5d51e0f8e3f9cbb7e758206467a96bc3aa14725a25b67dd1ffb51f"}
+  },
+  "palettes": {
+    "player_frlg": {"hardware_sha256": "3f8a1c94699742cf122ca29a9a8f0a212f518d940795450888834b84712a76da", "symbol": null, "tags": ["PLAYER_RED:0x1125", "PLAYER_GREEN:0x1127"], "roles": "1 ochre;2..4 skin;5..7 blue;8 brown;9..10 pale hat;11..12 red;13..14 gold"},
+    "red_leaf": {"hardware_sha256": "bd9c78451124138724e0215f02ee27e4c778ca27b91fdbef0ce978fe3a81cf75", "symbol": "gObjectEventPal_RedLeaf", "tags": ["RED_LEAF:0x111D"], "roles": "1..4 skin;5..7 red/brown;8..9 blue;10..11 gold;12..13 gray;14 white"},
+    "npc_white": {"hardware_sha256": "a08041541f7cdf8bf76504c1ef07edb1f58e900ed21778892021120dacbd1089", "symbol": null, "tags": ["original FRLG NPC_WHITE; no Ichor orphan binding"], "roles": "1..4 skin;5..7 gold/olive;8..10 red/brown;11..13 gray;14 white"},
+    "ruby_sapphire_brendan": {"hardware_sha256": "1622618b2104fa423128075bfc05222b25929bed01e1f06addf255059cb1568b", "symbol": "gObjectEventPal_RubySapphireBrendan", "tags": ["RS_BRENDAN:0x1122"], "roles": "1..4 skin;5..8 navy/hair;9 gray;10..11 gold;12..13 red;14 white"},
+    "ruby_sapphire_may": {"hardware_sha256": "fcb96dbc6e0780037fbb327b30bf5c576b6336c943fc8ab21e3fcfcbdc78ca12", "symbol": "gObjectEventPal_RubySapphireMay", "tags": ["RS_MAY:0x1123"], "roles": "1..4 skin;5 gray;6 slate;7..8 brown hair;9 gray;10..11 gold;12..13 red;14 white"}
+  },
+  "partitions": {
+    "compiled-link": {"files": 4, "frames": 36, "status": "Required current ROM symbols, separate peer-game identities; relative 256B frames, Standard20, east hardware mirror. Retired link controllers are not exercised."},
+    "rs-running-gc": {"files": 2, "frames": 18, "status": "Declared native running PNGs have no current image-table consumer; Running symbols must stay GC-absent."},
+    "orphan-frlg-rs": {"files": 2, "frames": 18, "status": "Distinct original FRLG RS representations; no current PNG declaration/table/ID. Original NPC_WHITE palette, not the RS-link palettes."},
+    "frlg-gated": {"files": 14, "frames": 136, "status": "IS_FRLG=0 in Ichor's Emerald build. Source states are retained, not current player/controller availability."}
+  },
+  "dormant_aliases": {
+    "normal": "FRLG normal source0..8; logical9..19 alias SurfRun3..13. Normal28 animations use run slots9..17; SurfRun12/13 are spare default-table aliases.",
+    "surf": "FRLG Surfing24 table repeats SurfRun0..2 through12 logical slots. Separate 32x32 *_surf.png sources are declared but have no image-table consumer.",
+    "item": "FieldMove uses item0..4; VSSeeker aliases the same item PNG and uses0/1/5..8, finite LOOP sequence.",
+    "bike-fish-vs": "Bike uses Standard20/512B relative frames; Fishing12 uses all12 source frames; VS-bike finite LOOP uses all6 source frames.",
+    "naming": "Naming rival borrows RedNormal template but replaces its sheet/palette/anims with naming_screen/rival.*, not a direct PNG alias."
+  },
+  "absent_symbols": [
+    "gObjectEventPic_RubySapphireBrendanRunning", "gObjectEventPic_RubySapphireMayRunning",
+    "gObjectEventPic_RSBrendan", "gObjectEventPic_RSMay",
+    "gObjectEventPic_RedNormal", "gObjectEventPic_RedBike", "gObjectEventPic_RedSurf",
+    "gObjectEventPic_RedSurfRun", "gObjectEventPic_RedFish", "gObjectEventPic_RedItem", "gObjectEventPic_RedVSSeekerBike",
+    "gObjectEventPic_GreenNormal", "gObjectEventPic_GreenBike", "gObjectEventPic_GreenSurf",
+    "gObjectEventPic_GreenSurfRun", "gObjectEventPic_GreenFish", "gObjectEventPic_GreenItem", "gObjectEventPic_GreenVSSeekerBike",
+    "gObjectEventPal_PlayerFrlg",
+    "gObjectEventGraphicsInfo_RedNormal", "gObjectEventGraphicsInfo_RedBike", "gObjectEventGraphicsInfo_RedSurf",
+    "gObjectEventGraphicsInfo_RedFieldMove", "gObjectEventGraphicsInfo_RedFish", "gObjectEventGraphicsInfo_RedVSSeeker", "gObjectEventGraphicsInfo_RedVSSeekerBike",
+    "gObjectEventGraphicsInfo_GreenNormal", "gObjectEventGraphicsInfo_GreenBike", "gObjectEventGraphicsInfo_GreenSurf",
+    "gObjectEventGraphicsInfo_GreenFieldMove", "gObjectEventGraphicsInfo_GreenFish", "gObjectEventGraphicsInfo_GreenVSSeeker", "gObjectEventGraphicsInfo_GreenVSSeekerBike"
+  ],
+  "files": [
+    {"path": "leaf/green_bike.png", "layout": "bike", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_bike.png", "source_sha256": "84e4ea94fd1d584595cc6f38dd0b7fd84b0736429fd404874c588337f6aa1b9b", "index_sha256": "1fdfa08a44b508931755d8d28df42092bad362a5edd336d65d110e960a2eecff"},
+    {"path": "leaf/green_fish.png", "layout": "fish", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_fish.png", "source_sha256": "661f1b7573f1e4860ce63085bb6bae0275c64bbc5429233aebfe492c24f74d65", "index_sha256": "1b5e2bc0e32446e5f6655d24af4c999cf2a265fdf18232fae52276cd9abb7807"},
+    {"path": "leaf/green_item.png", "layout": "walker", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_item.png", "source_sha256": "3084ace890902518ae7f85102e0062e4c3e0f171ac50b8be1aa0e817ed825b87", "index_sha256": "984b671ee878ba32dcb8d23b6892cd69dec3ee10cf80ce4814b277f9422a570e"},
+    {"path": "leaf/green_normal.png", "layout": "walker", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_normal.png", "source_sha256": "1229935843ebeb349176fe0c0dad579fdb855c5b89ecad8a22cbb9096581e1df", "index_sha256": "d16b3cd66f58bcff6209bd4dee68f6a7c21742878d6efd6ead8f08813fe4d4a6"},
+    {"path": "leaf/green_surf.png", "layout": "bike", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_surf.png", "source_sha256": "3174fb442fd2f82b5b80b403eb0d7cd9ee7444767957edcdda0f36f967b0fc19", "index_sha256": "2321260bc08672d188cd08af7b42c701e33973c41626c2b7701c13e4f6a1f20e"},
+    {"path": "leaf/green_surf_run.png", "layout": "surf-run", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_surf_run.png", "source_sha256": "6457fa188cada46e25e9389c2bba1d974320d09f6f4a27678086340714740f1f", "index_sha256": "c3aabf2594c0810e207ed2f0d9d6c59568b062cfa035ecf8e7cf16440e915e1b"},
+    {"path": "leaf/green_vs_seeker_bike.png", "layout": "vs-bike", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "green_vs_seeker_bike.png", "source_sha256": "13bbed221fa132e8929fa731c2676b128e0e93c82ff329659da2d043e5219e33", "index_sha256": "a4294ab34613c784708bb2b5b3ff5c3437c153278732df6ef91fce1469c93654"},
+    {"path": "leaf.png", "layout": "walker", "palette": "red_leaf", "partition": "compiled-link", "original": "emerald", "original_path": "leaf.png", "symbol": "gObjectEventPic_Leaf", "source_sha256": "917c546b3143a46ca53bf08ee0a2467ba5c55540bc4222e947cac9b758a10849", "index_sha256": "3376f0814768c5b14f07f42b77643d83799997edad6ad8cb29922e1e2aa5e2c6"},
+    {"path": "red/red_bike.png", "layout": "bike", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_bike.png", "source_sha256": "a5aef798abd0ef0a5c9734067bb9e01224485a60b1427c4b85a3c7c22cdbd31f", "index_sha256": "65c6bb966a313abb9c7a2087f80d480bac94d028cfb8719061d8975e93a04fa0"},
+    {"path": "red/red_fish.png", "layout": "fish", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_fish.png", "source_sha256": "b74f893aa13c6e442d6821815508b2e1949283bf1155c9031e8a010ad1d584dd", "index_sha256": "9d27a7b989d44c8c475f85139732ba41810267c72e74832bed957be07a2dcd89"},
+    {"path": "red/red_item.png", "layout": "walker", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_item.png", "source_sha256": "f3dd2a2d3b47efbf4ccd4123ee4b7512bea8e6f34ae130eb82f2063fed4328b3", "index_sha256": "63ac8d99269a45c0f8497db79167ae90a6f2ee9ec5d05dda0720bc9defda17b5"},
+    {"path": "red/red_normal.png", "layout": "walker", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_normal.png", "source_sha256": "94eb37499a8bd663f47a0767c34b93569cf0c222a9906852943016e3a771054d", "index_sha256": "5d96b86a2dd3e3a72067a42acd7d06242309898af46d37863d21b3588a158fdb"},
+    {"path": "red/red_surf.png", "layout": "bike", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_surf.png", "source_sha256": "747bf0d0d34592f5778191294b0ac18721ae1647f46d43a2a1d6c6d1c78857fa", "index_sha256": "9cc2e089b2292553596f811047733a31dc68d72502a5f70f77742fa62e244a60"},
+    {"path": "red/red_surf_run.png", "layout": "surf-run", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_surf_run.png", "source_sha256": "c33a893e4449cadb417de8e201018975f99e056e582abdafe2cb9f7450931252", "index_sha256": "84c9611eceec480538b15560c7e07ad6b1a60fe3a47de863e1b104b11246238a"},
+    {"path": "red/red_vs_seeker_bike.png", "layout": "vs-bike", "palette": "player_frlg", "partition": "frlg-gated", "original": "frlg", "original_path": "red_vs_seeker_bike.png", "source_sha256": "a6da175f6e6bd3785743df67e794a1da7323838657d84574b7ecf2b255cedc20", "index_sha256": "a12563366702456e33caef6b511e7fc80618aaa5b4519786d585173dbc82b15d"},
+    {"path": "red.png", "layout": "walker", "palette": "red_leaf", "partition": "compiled-link", "original": "emerald", "original_path": "red.png", "symbol": "gObjectEventPic_Red", "source_sha256": "080c8eac0a6cb8288f5f5b13351500763609061f39126ea7742dbe3bf03ad391", "index_sha256": "39555d04b5de404b74c6a2c8dc87272cb438b6f9fe4c65fa5a885741f1aa16e3"},
+    {"path": "rs_brendan.png", "layout": "walker", "palette": "npc_white", "partition": "orphan-frlg-rs", "original": "frlg", "original_path": "rs_brendan.png", "source_sha256": "3acf5bbf61053842b1d2948ff56654b360b56fee1b0de20fe015e0b9ca6b1ff4", "index_sha256": "a77e0b1e40fe2b8690d8e1cdec01ff7d6fbe29d31fead84de085e1b0376ddcc3"},
+    {"path": "rs_may.png", "layout": "walker", "palette": "npc_white", "partition": "orphan-frlg-rs", "original": "frlg", "original_path": "rs_may.png", "source_sha256": "0ea194e8eca3ec45ea807eef681f8080a8a298456d476a9bbb13ce3e6827d39e", "index_sha256": "26173cb5f3816dc507e05238e996226fd101b4e8ff741585b502709b67d5f6b0"},
+    {"path": "ruby_sapphire_brendan/running.png", "layout": "walker", "palette": "ruby_sapphire_brendan", "partition": "rs-running-gc", "original": "emerald", "original_path": "ruby_sapphire_brendan/running.png", "source_sha256": "ad6d6eeaaca509cb00c8b051b2a3f82d4bf1da341b145f938c1f2c57d73e9e27", "index_sha256": "6c213c245ab74c13334422b6e0dc1fa1b6868aa9d6ad9ceea4d872f7861680cd"},
+    {"path": "ruby_sapphire_brendan/walking.png", "layout": "walker", "palette": "ruby_sapphire_brendan", "partition": "compiled-link", "original": "emerald", "original_path": "ruby_sapphire_brendan/walking.png", "symbol": "gObjectEventPic_RubySapphireBrendanNormal", "source_sha256": "9792a6ed4b83f8aa286d1042e9faf0614c759fb5c7d2548ab8fc13e46511a57d", "index_sha256": "73810b4251419af6a38b6faadb87bd9ac8bc79111e9891e4713113c8822ef0d9"},
+    {"path": "ruby_sapphire_may/running.png", "layout": "walker", "palette": "ruby_sapphire_may", "partition": "rs-running-gc", "original": "emerald", "original_path": "ruby_sapphire_may/running.png", "source_sha256": "1a07051b2ad5aa110d16f513311188e154ff39ac31a0619c07048fc21a94b200", "index_sha256": "f13be57aa97f4a5866cd9d7362552244a1c85a790b7656497effb31e2b0a9dcd"},
+    {"path": "ruby_sapphire_may/walking.png", "layout": "walker", "palette": "ruby_sapphire_may", "partition": "compiled-link", "original": "emerald", "original_path": "ruby_sapphire_may/walking.png", "symbol": "gObjectEventPic_RubySapphireMayNormal", "source_sha256": "ee189388b766de8327777da7962a4ffcdc8204cbd184d761e0c1b0a2017c2334", "index_sha256": "7a4d40c5ff326749fea4e53fe095bf294b737c5887fc0ffd0ebe6dd7d4ac169b"}
+  ]
+}
