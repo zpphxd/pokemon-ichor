@@ -146,6 +146,8 @@ L.start(function()
   emu:write8(oath + S.OFF_OATH_STATE, S.ICHOR_OATH_ACTIVE)
   emu:write16(oath + S.OFF_OATH_FALLEN_COUNT, 7)
   emu:write8(oath + chanceByte, chanceMask)
+  emu:write16(oath + S.OFF_OATH_URN_BOXES,
+              (1 << (S.TOTAL_BOXES_COUNT - 1)) | (1 << (S.TOTAL_BOXES_COUNT - 3)))
   local saved = L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE)
   L.runHeader("SaveTest_SaveHeader")
   shot("saved")
@@ -165,6 +167,19 @@ L.start(function()
   expect(L.getFlag(S.FLAG_ICHOR_HERMS_START + 3) and L.getFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5)
          and L.getVar(S.ICHOR_VARS_END) == 0xBEEF and ichor16(S.OFF_ICHOR_MOM_WINS) == 3,
          "flags, daily flags, vars and Mom's record read back through the engine")
+
+  emu:write8(L.ichor() + S.OFF_ICHOR_VERSION, 5)
+  emu:write16(L.ichor() + S.OFF_ICHOR_OATH + S.OFF_OATH_URN_BOXES, 0xFFFF)
+  L.runHeader("SaveTest_SaveHeader")
+  emu:reset()
+  L.continueSave()
+  expect(ichor8(S.OFF_ICHOR_VERSION) == S.ICHOR_SAVE_VERSION
+         and ichor16(S.OFF_ICHOR_OATH + S.OFF_OATH_URN_BOXES) == 1 << (S.TOTAL_BOXES_COUNT - 1),
+         "version 5 initializes only the original Urn, not every Pithos jar")
+  expect(ichor8(S.OFF_ICHOR_OATH + S.OFF_OATH_STATE) == S.ICHOR_OATH_ACTIVE
+         and ichor16(S.OFF_ICHOR_OATH + S.OFF_OATH_FALLEN_COUNT) == 7
+         and ichor8(S.OFF_ICHOR_OATH + chanceByte) == chanceMask,
+         "version-5 migration preserves its Oath choice, falls and area chance")
 
   -- 8. A version-4 save may hold arbitrary bytes in the new Oath allocation.
   local prefix = L.snapshot(L.ichor() + 4, S.OFF_ICHOR_OATH - 4)

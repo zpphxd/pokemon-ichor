@@ -1,12 +1,15 @@
 // Constants for tools/ichor/tests/ichor_save.lua (see engine_consts.h).
 #include "engine_consts.h"
 #include "ichor_oath.h"
+#include "pokemon_storage_system.h"
 #include "constants/region_map_sections.h"
 K(OFF_ICHOR_OATH, offsetof(struct IchorSave, oath))
 K(ICHOR_OATH_SIZE, sizeof(struct IchorOath))
 K(OFF_OATH_STATE, offsetof(struct IchorOath, state))
 K(OFF_OATH_FALLEN_COUNT, offsetof(struct IchorOath, fallenCount))
 K(OFF_OATH_ENCOUNTERS, offsetof(struct IchorOath, encounters))
+K(OFF_OATH_URN_BOXES, offsetof(struct IchorOath, urnBoxes))
+K(TOTAL_BOXES_COUNT, TOTAL_BOXES_COUNT)
 K(ICHOR_OATH_ACTIVE, ICHOR_OATH_ACTIVE)
 K(MAPSEC_KALLISTE_ROUTE_1, MAPSEC_KALLISTE_ROUTE_1)
 // a hidden item planted in RAM (map events copied out of ROM)
