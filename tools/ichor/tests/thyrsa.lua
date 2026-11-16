@@ -49,6 +49,8 @@ L.start(function()
     L.useWarp(S.MAP_CLINIC)
     L.talk(L.npc("ThyrsaCity_Asclepeion_EventScript_Healer"))
     expect(L.idle(), "the real Thyrsa healer returns control")
+    L.talk(L.sign("ThyrsaCity_Asclepeion_EventScript_Pithos"), {menuChoice = 2})
+    expect(L.idle(), "the Thyrsa Pithos menu can be closed normally")
     L.shot("clinic")
     L.useWarp(S.MAP_CITY)
     L.useWarp(S.MAP_TEMPLE)
@@ -60,9 +62,27 @@ L.start(function()
         L.talk(L.sign(T .. door), {every = true})
         expect(L.getVar(S.VAR_ACT) == i, "the actual trial advances at entrance " .. i)
     end
+    expect(emu:saveStateFile(L.OUT .. "before_thespis.ss", 31), "saved the trial before Thespis")
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    L.battleMode = "lose"
+    L.talk(L.npc(T .. "Thespis"))
+    L.battleMode = nil
+    expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST and not L.getFlag(S.FLAG_BADGE04),
+           "losing the actual Thespis battle cannot award the Laurel")
+    expect(L.mapId() == S.MAP_CLINIC, "Thespis whiteout returns to Thyrsa's safe clinic")
+    L.shot("thespis_loss")
+    expect(emu:loadStateFile(L.OUT .. "before_thespis.ss", 31), "restored the trial for the win branch")
+    L.wait(30)
+    L.waitUntil(L.idle, 600, "control after restoring the trial")
     L.talk(L.npc(T .. "Thespis"), {every = true})
     expect(L.defeated(S.TRAINER_THESPIS) and L.getFlag(S.FLAG_BADGE04), "real Thespis victory grants Laurel 4")
     expect(L.itemCount(S.ITEM_TM06) == 1, "Toxic scroll awarded")
+    local favor = emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.GOD_DIONYSUS)
+    local wine = L.itemCount(S.ITEM_WINE)
+    L.talk(L.sign(T .. "Altar"), {answers = {1, 0}, every = true})
+    expect(L.itemCount(S.ITEM_WINE) == wine - 1
+           and emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.GOD_DIONYSUS) == favor + 10,
+           "the actual Dionysus temple altar consumes Wine for double loved-offering Favor")
     L.shot("mask_laurel")
     local battles = #L.battles
     L.talk(L.npc(T .. "Thespis"))

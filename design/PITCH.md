@@ -395,7 +395,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
-| Act II | Connected Eleusa → Eleutherai → Kithairon → Kronia → Thyrsa; Mask Laurel 4, playable Dionysia and Silenos's Girdle quest | Thyrsa presentation/rites and natural-level acceptance; approved Lebadeia/Kirrha/Aigion/Styx approach to Arkadia, then Astyra and Kaldera; Laurels 5–6 |
+| Act II | Connected Eleusa → Eleutherai → Kithairon → Kronia → Thyrsa; Mask Laurel 4, Dionysus altar, playable Dionysia and Silenos's Girdle quest | Thyrsa presentation and natural-level acceptance; approved Lebadeia/Kirrha/Aigion/Styx approach to Arkadia, then Astyra and Kaldera; Laurels 5–6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
@@ -589,7 +589,9 @@ music and look/fun acceptance remain unfinished.
 
 The first Act II chapter is playable with existing Greek art: three connected
 roads, 18 road trainers, time-of-day encounters, mountain and Kronia healers,
-and Thyrsa's Asclepeion, Agora, three-mask temple trial and Thespis battle.
+and Thyrsa's Asclepeion with both kinds of Pithos storage, Agora, three-mask
+temple trial and Thespis battle. The temple's actual Dionysus altar supports
+prayer, Wine offerings at temple strength, Revel and the existing Favor gifts.
 The Mask Laurel awards Toxic and advances Spartan's next cap to 37. The
 amphitheater stages the forged tragedy; reusing the three mask entrances
 breaks it, with Alethea's program clue and Kleon's departure dialogue.
@@ -599,7 +601,7 @@ An assisted native fixture crosses the actual seams and plays the trial,
 boss, tragedy and riddle/battle quest path, then saves and continues. This is
 not natural-level balance or a continuous NEW GAME ending pass. The stage
 and masks still use placeholder presentation: dedicated theater/temple art
-and music, the king close-up, trance palette transitions, full Dionysus rites,
+and music, the king close-up, trance palette transitions, shared altar/whiteout text fit,
 and human scene/map approval remain open. The next road beyond Thyrsa is
 explicitly closed; Arkadia and the rest of Act II are not yet playable.
 

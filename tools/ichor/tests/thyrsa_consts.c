@@ -1,5 +1,6 @@
 #include "engine_consts.h"
 #include "constants/items.h"
+#include "constants/ichor.h"
 #include "constants/map_groups.h"
 #include "constants/opponents.h"
 #include "item.h"
@@ -28,5 +29,7 @@ K(TRAINER_SILENOS, TRAINER_ICHOR_SILENOS)
 K(ITEM_TM06, ITEM_TM06)
 K(ITEM_GIRDLE, ITEM_GIRDLE_OF_HERAKLES)
 K(ITEM_TORCH, ITEM_HECATES_TORCH)
+K(ITEM_WINE, ITEM_WINE)
+K(GOD_DIONYSUS, ICHOR_GOD_DIONYSUS)
 K(OFF_BAG_KEY_ITEMS, offsetof(struct Bag, keyItems))
 K(BAG_KEYITEMS_COUNT, BAG_KEYITEMS_COUNT)

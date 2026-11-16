@@ -355,7 +355,9 @@ sanctum still have separate fixtures, not a continuous ending pass.
 `tools/ichor/tests/thyrsa.sh` is a separate, level-assisted native chapter check:
 it preserves the Act I north-road gate, walks the actual Eleusa/Route 6/Kithairon/
 Route 7/Thyrsa seams, uses the clinic, solves both three-mask sequences,
-defeats Thespis, and wins Silenos's riddle/battle path. It checks distinct
+loses to Thespis and checks the safe clinic respawn before replaying the win,
+makes a real Wine offering at Dionysus's temple altar, and wins Silenos's
+riddle/battle path. It checks distinct
 contest receipts, full-key-pocket retry, repeat rewards and actual save/reset/
 CONTINUE. It does not certify natural-level balance, the knucklebones win path,
 or a continuous NEW GAME run through Act II. Regenerate the new layouts,

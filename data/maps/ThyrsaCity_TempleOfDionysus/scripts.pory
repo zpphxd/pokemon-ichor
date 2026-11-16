@@ -78,13 +78,9 @@ script ThyrsaCity_TempleOfDionysus_EventScript_Satyr {
     releaseall
 }
 
-script ThyrsaCity_TempleOfDionysus_EventScript_RoofGate {
-    if (var(VAR_ICHOR_MASK_ACT) >= 3) {
-        end
-    }
-    lockall
-    msgbox(format("The god-machine's stair is shut until the last entrance."))
-    releaseall
+script ThyrsaCity_TempleOfDionysus_EventScript_Altar {
+    setspeaker(SP_NAME_NONE)
+    goto(EventScript_IchorTempleAltar_Dionysus)
 }
 
 script ThyrsaCity_TempleOfDionysus_EventScript_Comic {

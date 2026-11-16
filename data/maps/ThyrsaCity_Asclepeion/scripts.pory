@@ -14,7 +14,28 @@ script ThyrsaCity_Asclepeion_EventScript_Healer {
 
 script ThyrsaCity_Asclepeion_EventScript_Pithos {
     lockall
-    msgbox(format("The Pithos of Thyrsa opened."))
-    special(ShowPokemonStorageSystemPC)
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(ThyrsaCity_Asclepeion_EventScript_PithosMenu)
+}
+
+script ThyrsaCity_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE,
+        Ichor_Text_PithosOptionPokemon, Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Thyrsa opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(ThyrsaCity_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(ThyrsaCity_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
     releaseall
 }

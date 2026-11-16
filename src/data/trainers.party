@@ -2129,9 +2129,9 @@ AI: Smart Trainer
 
 Prosomime @ Sitrus Berry
 Level: 30
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-EVs: 252 HP / 128 SpA / 128 Spe
-Modest Nature
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Timid Nature
 - Psybeam
 - Clear Smog
 - Hypnosis
@@ -2139,9 +2139,9 @@ Modest Nature
 
 Raknit @ Sitrus Berry
 Level: 30
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-EVs: 252 HP / 128 SpA / 128 Spe
-Modest Nature
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
 - Poison Jab
 - Bite
 - String Shot
@@ -2149,9 +2149,9 @@ Modest Nature
 
 Ampelix @ Sitrus Berry
 Level: 31
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-EVs: 252 HP / 128 SpA / 128 Spe
-Modest Nature
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 128 Def / 128 SpA
+Bold Nature
 - Venoshock
 - Giga Drain
 - Leech Seed
@@ -2159,9 +2159,9 @@ Modest Nature
 
 Thyrsivy @ Sitrus Berry
 Level: 32
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-EVs: 252 HP / 128 SpA / 128 Spe
-Modest Nature
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 128 Def / 128 SpA
+Bold Nature
 - Venoshock
 - Giga Drain
 - Toxic

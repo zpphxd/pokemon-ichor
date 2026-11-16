@@ -316,6 +316,8 @@ def main():
         m.sign("Program", 20, 21, 0x003)
         if name == "TempleOfDionysus":
             m.person("Thespis", 12, 3, gfx="ACOLYTE_M")
+            m.stamp(18, 2, [[0x227], [0x228], [0x229]])
+            m.json["bg_events"].append(bg(18, 4, m.prefix + "Altar"))
             for person, x, y in (("Comic", 6, 18), ("Tragic", 18, 18), ("SatyrActor", 12, 12)):
                 m.person(person, x, y, gfx="ACOLYTE_M")
             for x in range(1, 24):
@@ -378,9 +380,15 @@ def trainers():
         for i, (species, level, moves) in enumerate(mons):
             held = " @ Sitrus Berry" if difficulty == "Hard" else ""
             text += f"\n{species}{held}\nLevel: {level}\n"
-            text += "IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe\n"
+            iv = 31 if difficulty == "Hard" else 18
+            text += f"IVs: {iv} HP / {iv} Atk / {iv} Def / {iv} SpA / {iv} SpD / {iv} Spe\n"
             if difficulty == "Hard":
-                text += "EVs: 252 HP / 128 SpA / 128 Spe\nModest Nature\n"
+                if species == "Raknit":
+                    text += "EVs: 4 HP / 252 Atk / 252 Spe\nAdamant Nature\n"
+                elif species == "Prosomime":
+                    text += "EVs: 4 HP / 252 SpA / 252 Spe\nTimid Nature\n"
+                else:
+                    text += "EVs: 252 HP / 128 Def / 128 SpA\nBold Nature\n"
             if moves:
                 text += "".join("- " + move + "\n" for move in moves)
     for _, _, base, roster in ROADS:
