@@ -12,11 +12,11 @@ All of Ichor's own persistent state lives in **`struct IchorSave`** (`include/ic
 | | |
 |---|---|
 | Size | 1,472 bytes. It was 1,280 until version 4 added the second flag bank at 0x500. SaveBlock3 is now 1,476 of its 1,624 bytes. |
-| Version | `ICHOR_SAVE_VERSION` (4). Version 0 means a save from before IchorSave. |
+| Version | `ICHOR_SAVE_VERSION` (5). Version 0 means a save from before IchorSave. |
 | New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version` and `momLosses = 212`. |
-| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there. |
+| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there; 5 clears the new Oath allocation for older saves (§11). |
 | New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank and draws the day's omen (§7). |
-| Headroom | 176 bytes in `reserved` at 0x450 (world-postgame takes 64 of them for `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
+| Headroom | 136 bytes in `reserved` at 0x478 (64 remain reserved for the future `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
 
 **Adding a field later.**
 1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct keeps its size; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets. Growing the struct again is a last resort: it moves what follows IchorSave in SaveBlock3.
@@ -42,6 +42,7 @@ This way the save never breaks again.
 | `flags2[192]` (0x500) | the second flag bank | 1,536 flags (version 4). See below. |
 | `dailyFlags[32]` | the daily bank | 256 flags, cleared each day. |
 | `thread` | LABYRINTH.md §5.1 | Ariadne's Thread: 24 anchors (8 bytes each, not 6, because apcs-gnu rounds structs to 4 bytes), 1,792 committed steps, a 152-step live segment. |
+| `oath` (0x450) | PITCH §5, UNDERWORLD §5 | Version 5 foundation: choice state, fallen count and 256 named-area encounter bits. Not yet offered to players; see §11. |
 
 ### The flag and var banks
 
@@ -1053,3 +1054,38 @@ mapping, thresholds, distinct pages, legacy recovery and reserved bits.
 `tools/ichor/tests/star_chart.sh` opens the real Bag item, checks all 24
 distinct rendered pixel patterns, the empty final patch, palette twinkling,
 navigation, screen cleanup and save/reset/CONTINUE.
+
+## 11. Oath of the Styx foundation
+
+The autonomous continuation uses **one wild-encounter chance per named area**,
+not one per map or dungeon floor. This is an implementation decision, not a
+claim of human approval. The full Oath remains unfinished and cannot yet be
+selected from the bedroom clock: do not offer it until battle admission,
+fainting, the locked Urn and run-ending behavior work together.
+
+`src/ichor_oath.c` provides the saved-state core:
+
+- `Ichor_ChooseOath(TRUE/FALSE)` accepts a single choice before the starter
+  receipt, independently of difficulty. It refuses repeats, invalid booleans
+  and retroactive enrollment of old saves.
+- `Ichor_IsOathActive()` recognizes only ACTIVE. The other saved states are
+  UNDECIDED, DECLINED, RELEASED and FAILED.
+- `Ichor_ClaimOathEncounter(mapSection)` admits the first encounter and saves
+  its bit. Under an active Oath it refuses another chance in that named area,
+  out-of-range IDs, dynamic sections and secret bases. Without an active Oath
+  it admits ordinary encounters without recording a bit. The future battle
+  caller must exclude simulations, tutorials and trainer battles.
+- `Ichor_HasOathEncounter` and `Ichor_CountOathEncounters` read valid receipts.
+- `Ichor_ReleaseOath` and `Ichor_FailOath` each transition an active Oath once,
+  retaining its receipts and fallen count. Neither permits re-enrollment.
+
+Version 5 takes 40 bytes from the old reserved region at 0x450. Total
+IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
+including the second flag bank at 0x500. Older saves get zero Oath bytes,
+not whatever previously occupied that reserve. Nothing currently writes the
+fallen count during gameplay; it is space for the required Urn integration.
+
+Native tests cover the entire map-section range, byte boundaries, invalid
+indices, once-only choice/transitions and migration. The actual-ROM save
+fixture seeds Oath state, saves and CONTINUEs, then writes a version-4 save
+with stale reserve bytes and verifies migration preserves the old progress.

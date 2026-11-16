@@ -209,6 +209,10 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     the bedroom water clock. The choice is fixed for that save; existing saves
     stay Hero. Act I's modes are integrated, but natural-level mode balance and
     the Oath remain unfinished.
+    The Oath now has a version-5 save foundation for one encounter chance per
+    named area, independently of difficulty. It is not yet offered to players:
+    fainting, locked Urn storage and complete battle enforcement still need
+    integration before the choice can safely appear.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
