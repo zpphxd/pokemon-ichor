@@ -1011,3 +1011,45 @@ Stylus hints and two complete calendar years.
 `bash tools/ichor/tests/deeds.sh` exercises the real start-menu callback,
 empty pages, scrolling, read/back navigation, the retained trainer card,
 field-control release and save/reset/CONTINUE.
+
+## 10. Star Chart
+
+`ITEM_STAR_CHART` opens `src/ichor_star_chart.c` through the real Bag's USE
+action. BG2 holds the parchment sky, BG1 holds 24 original star-and-line
+patterns and the selected patch, and BG0 holds the count, name and controls.
+Only placed patterns appear. Unplaced names remain hidden, including the
+Unwoven until its eventual credits caller. D-pad movement wraps through
+six columns and four rows; B frees the chart's windows and tilemaps and
+returns to the same Bag pocket. Placed stars cycle between two gold shades.
+Allocation failures display an explicit retry message rather than claiming
+the screen opened.
+
+The existing `FLAG_ICHOR_CONSTELLATIONS_START` range stores one saved bit
+per constellation, in SYSTEMS §8 order (indices 0–23). This uses the already
+reserved flag bank instead of introducing a new `IchorSave.constellations`
+field or changing save layout/version. Extra reserved bits 24–31 do not count.
+
+- `Ichor_PlaceStar(index)` returns TRUE only for a first valid placement.
+  Invalid indices and repeated placements return FALSE without changing
+  other bits. `specialvar(VAR_RESULT, Ichor_PlaceConstellation)` exposes
+  this with the index in `VAR_0x8004`.
+- `Ichor_CountStars()` and
+  `specialvar(VAR_RESULT, Ichor_CountConstellations)` count only the 24 myths.
+- `FlagSet` calls `Ichor_StarFlagSet` for the Conch and Laurel 4/5/7/8
+  receipts, placing Delphinus, Crater, Ursa Major, Cygnus and Corvus.
+  The seventh distinct Daedalus page places the Pleiades.
+- `Ichor_AddFavorTo` places Orion or Cancer when Artemis or Hera first
+  reaches Favor 30. Other gods do not place those stars.
+- `Ichor_RefreshStars` recovers these existing receipts and Favor thresholds
+  on opening older saves. Placements are permanent; removing a debug
+  receipt does not erase a star.
+
+The other myth callers, outdoor live-sky seats, moon-dance encounter and
+6/12/18/24 milestone rewards remain future integrations. Manually seeded
+all-star fixtures demonstrate rendering, not current story obtainability.
+
+`test/ichor_star_chart.c` covers bounded/idempotent placement, exact receipt
+mapping, thresholds, distinct pages, legacy recovery and reserved bits.
+`tools/ichor/tests/star_chart.sh` opens the real Bag item, checks all 24
+distinct rendered pixel patterns, the empty final patch, palette twinkling,
+navigation, screen cleanup and save/reset/CONTINUE.

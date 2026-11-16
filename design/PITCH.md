@@ -371,7 +371,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Kalliste slice | Opening, starter selection, rival, Kronion Hill, Hestia and Laurel 1 | Current natural-level balance and human look/fun approval |
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
-| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, Oath, Scroll, Chart and missing dungeon mechanics |
+| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, Oath, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
 | Act II | Story and system designs | Connected Thyrsa → Arkadia → Astyra → Kaldera chapters; Laurels 4–6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
@@ -478,6 +478,14 @@ completed Act I encounters. Athena's Stylus adds hints to open quests.
 The calendar page uses the existing 36-day Attic year, including the
 festival-free storm month; it does not claim that all festival events exist.
 Other amphora world callers and later-chapter quest pages remain unfinished.
+The Star Chart now opens from the key-item Bag as a parchment sky, with
+24 distinct star-and-line patterns, a twinkling palette, directional
+navigation and a clean return to the same Bag pocket. Unplaced myths stay
+blank, including the final Unwoven patch. Saved constellation flags record
+the known Conch, Laurel 4/5/7/8, Favor-30 Artemis/Hera and seven-page gates.
+Legacy progress is recovered when the chart opens; reading cannot invent
+the remaining myths. Outdoor stargazing seats, milestone rewards and the
+remaining story/post-game constellation callers are not yet integrated.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot
