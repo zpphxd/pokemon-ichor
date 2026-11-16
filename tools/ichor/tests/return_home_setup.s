@@ -36,6 +36,7 @@ HomeTest_Setup:
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_ICHOR_TALKED_TO_MOM
 	setflag FLAG_ICHOR_GOT_STARTER
+	setflag FLAG_ICHOR_THREAD_READ
 	setflag FLAG_ICHOR_KLEON_BATTLE_1_DONE
 	clearflag FLAG_ICHOR_HIDE_MOM_HOME
 	warp MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F, 3, 4
@@ -76,4 +77,40 @@ HomeTest_Save:
 	setvar VAR_TEMP_F, 1
 	special SaveGame
 	releaseall
+	end
+
+	test_header HomeTest_VillageHeader, HomeTest_Village
+HomeTest_Village:
+	lockall
+	setvar VAR_TEMP_F, 1
+	warp MAP_ELAIA_VILLAGE, 13, 19
+	waitstate
+	releaseall
+	end
+
+	test_header HomeTest_AkademiaHeader, HomeTest_Akademia
+HomeTest_Akademia:
+	lockall
+	setvar VAR_TEMP_F, 1
+	warp MAP_ELAIA_VILLAGE_AKADEMIA, 7, 4
+	waitstate
+	releaseall
+	end
+
+	test_header HomeTest_HestiaHeader, HomeTest_Hestia
+HomeTest_Hestia:
+	lockall
+	setvar VAR_TEMP_F, 1
+	setflag FLAG_ICHOR_HEARTH_TRIAL_DONE
+	setflag FLAG_ICHOR_GOT_CHARCOAL
+	setflag FLAG_BADGE01_GET
+	warp MAP_AKTI_TOWN_TEMPLE_OF_HESTIA, 9, 23
+	waitstate
+	releaseall
+	end
+
+	test_header HomeTest_RemoveHeader, HomeTest_Remove
+HomeTest_Remove:
+	setvar VAR_TEMP_F, 1
+	removeitem VAR_0x8004, VAR_0x8005
 	end
