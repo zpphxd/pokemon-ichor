@@ -289,7 +289,11 @@ script KallisteRoute1_KronionHill_EventScript_Grunt {
 
 // --- the ruins ----------------------------------------------------------------
 script KallisteRoute1_KronionHill_EventScript_Stele {
-    msgbox(format("KRONION HILL. An old shrine, older than the olives.\pSomeone has scratched a sickle into the stone. Recently."), MSGBOX_SIGN)
+    msgbox(format("KRONION HILL. An old shrine, older than the olives.\pSomeone has scratched a sickle into the stone. Recently.\pThe east end of the old steps is worn smooth. A place to watch the stars."), MSGBOX_SIGN)
+}
+
+script KallisteRoute1_KronionHill_EventScript_SkySeat {
+    goto(EventScript_IchorSkySeat)
 }
 
 script KallisteRoute1_KronionHill_EventScript_Altar {

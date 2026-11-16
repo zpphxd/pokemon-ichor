@@ -1034,9 +1034,13 @@ DAPHNE: You're not in the sky yet. Neither am I.
   - BG0 is text;
   - the twinkle is a palette cycle, like the title screen's.
 - The portable parchment view uses 24 distinct original line patterns.
-  Outdoor seats and milestone-reward world callers remain to integrate.
+  Kronion Hill's eastern shrine steps are the first outdoor seat: the real
+  Chart and night are required, and the same placed patterns twinkle against
+  a midnight-blue sky. B returns to the steps, not the Bag. The view preserves
+  map music and saved placements. Other seats and milestone-reward world
+  callers remain to integrate.
 - Its setup follows the small-screen lifecycle of `src/diploma.c`, with
-  explicit resource cleanup and return to the Bag.
+  explicit resource cleanup and return to the Bag or the seat's waiting script.
 
 ### Cost
 

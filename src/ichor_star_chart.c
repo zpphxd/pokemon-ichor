@@ -6,6 +6,8 @@
 #include "ichor_rites.h"
 #include "ichor_save.h"
 #include "ichor_star_chart.h"
+#include "ichor_time.h"
+#include "item.h"
 #include "item_menu.h"
 #include "main.h"
 #include "malloc.h"
@@ -20,7 +22,9 @@
 #include "task.h"
 #include "text.h"
 #include "window.h"
+#include "constants/items.h"
 #include "constants/rgb.h"
+#include "constants/rtc.h"
 #include "constants/songs.h"
 
 struct Constellation
@@ -118,6 +122,7 @@ struct StarChart
     u8 selected;
     u8 pulse;
     bool8 closing;
+    bool8 liveSky;
 };
 
 static EWRAM_DATA struct StarChart *sStarChart = NULL;
@@ -142,6 +147,12 @@ static const u16 sPalettes[3][16] =
     {RGB(29,25,18), RGB(29,25,18), RGB(14,7,3), RGB(26,20,12)},
     {RGB(0,0,0), RGB(14,7,3), RGB(30,19,4), RGB(20,13,7)},
     {RGB(0,0,0), RGB(29,25,18), RGB(14,7,3), RGB(26,20,12)},
+};
+static const u16 sNightPalettes[3][16] =
+{
+    {RGB(2,3,8), RGB(2,3,8), RGB(6,8,15), RGB(4,5,10)},
+    {RGB(0,0,0), RGB(11,15,24), RGB(25,28,31), RGB(15,18,26)},
+    {RGB(0,0,0), RGB(2,3,8), RGB(29,29,25), RGB(8,10,16)},
 };
 
 extern const u8 EventScript_IchorChartError[];
@@ -211,7 +222,7 @@ static void DrawChart(void)
         }
     }
     FillWindowPixelBuffer(WIN_HEADER, PIXEL_FILL(0));
-    end = StringCopy(text, COMPOUND_STRING("STAR CHART   "));
+    end = StringCopy(text, sStarChart->liveSky ? COMPOUND_STRING("NIGHT SKY   ") : COMPOUND_STRING("STAR CHART   "));
     end = ConvertIntToDecimalStringN(end, Ichor_CountStars(), STR_CONV_MODE_LEFT_ALIGN, 2);
     StringCopy(end, COMPOUND_STRING("/24"));
     AddTextPrinterParameterized4(WIN_HEADER, FONT_SMALL, 8, 1, 0, 0, colors, TEXT_SKIP_DRAW, text);
@@ -219,7 +230,9 @@ static void DrawChart(void)
     StringCopy(text, FlagGet(FLAG_ICHOR_CONSTELLATIONS_START + sStarChart->selected)
                     ? sStars[sStarChart->selected].name : COMPOUND_STRING("An empty patch of sky."));
     AddTextPrinterParameterized4(WIN_FOOTER, FONT_SMALL, 8, 0, 0, 0, colors, TEXT_SKIP_DRAW, text);
-    AddTextPrinterParameterized4(WIN_FOOTER, FONT_SMALL, 8, 12, 0, 0, colors, TEXT_SKIP_DRAW, COMPOUND_STRING("D-pad: patches   B: Bag"));
+    AddTextPrinterParameterized4(WIN_FOOTER, FONT_SMALL, 8, 12, 0, 0, colors, TEXT_SKIP_DRAW,
+                                sStarChart->liveSky ? COMPOUND_STRING("D-pad: patches   B: field")
+                                                    : COMPOUND_STRING("D-pad: patches   B: Bag"));
     CopyWindowToVram(WIN_STARS, COPYWIN_FULL);
     CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
     CopyWindowToVram(WIN_FOOTER, COPYWIN_FULL);
@@ -232,9 +245,10 @@ static void Task_StarChart(u8 taskId)
         return;
     if (sStarChart->closing)
     {
+        bool8 liveSky = sStarChart->liveSky;
         ReleaseChart();
         DestroyTask(taskId);
-        SetMainCallback2(CB2_ReturnToBagMenuPocket);
+        SetMainCallback2(liveSky ? CB2_ReturnToFieldContinueScript : CB2_ReturnToBagMenuPocket);
         return;
     }
     if (JOY_NEW(B_BUTTON))
@@ -258,7 +272,11 @@ static void Task_StarChart(u8 taskId)
     sStarChart->pulse = (sStarChart->pulse + 1) % 24;
     if (sStarChart->pulse % 12 == 0)
     {
-        u16 color = sStarChart->pulse % 24 == 0 ? RGB(30,19,4) : RGB(31,28,15);
+        u16 color;
+        if (sStarChart->liveSky)
+            color = sStarChart->pulse % 24 == 0 ? RGB(25,28,31) : RGB(31,31,31);
+        else
+            color = sStarChart->pulse % 24 == 0 ? RGB(30,19,4) : RGB(31,28,15);
         LoadPalette(&color, BG_PLTT_ID(14) + 2, sizeof(color));
     }
 }
@@ -294,18 +312,36 @@ static void CB2_InitStarChart(void)
     }
     if (!InitWindows(sWindows))
     {
+        bool8 liveSky = sStarChart->liveSky;
         ReleaseChart();
-        gFieldCallback = FieldCB_ChartError;
-        SetMainCallback2(CB2_ReturnToField);
+        if (liveSky)
+        {
+            gSpecialVar_Result = FALSE;
+            SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        }
+        else
+        {
+            gFieldCallback = FieldCB_ChartError;
+            SetMainCallback2(CB2_ReturnToField);
+        }
         return;
     }
     DeactivateAllTextPrinters();
-    LoadPalette(sPalettes, BG_PLTT_ID(13), sizeof(sPalettes));
+    LoadPalette(sStarChart->liveSky ? sNightPalettes : sPalettes, BG_PLTT_ID(13), sizeof(sPalettes));
     FillWindowPixelBuffer(WIN_SKY, PIXEL_FILL(1));
-    FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 2, 17, 236, 1);
-    FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 2, 134, 236, 1);
-    FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 2, 17, 1, 118);
-    FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 237, 17, 1, 118);
+    if (sStarChart->liveSky)
+    {
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(3), 0, 133, 240, 27);
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 0, 132, 72, 1);
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 158, 132, 82, 1);
+    }
+    else
+    {
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 2, 17, 236, 1);
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 2, 134, 236, 1);
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 2, 17, 1, 118);
+        FillWindowPixelRect(WIN_SKY, PIXEL_FILL(2), 237, 17, 1, 118);
+    }
     PutWindowTilemap(WIN_SKY);
     PutWindowTilemap(WIN_STARS);
     PutWindowTilemap(WIN_HEADER);
@@ -323,6 +359,20 @@ static void CB2_InitStarChart(void)
     SetVBlankCallback(VBlank_StarChart);
     SetMainCallback2(CB2_StarChart);
     CreateTask(Task_StarChart, 0);
+}
+
+u16 Ichor_ShowNightSky(void)
+{
+    if (sStarChart != NULL || !CheckBagHasItem(ITEM_STAR_CHART, 1)
+        || !IsMapTypeOutdoors(GetCurrentMapType()) || Ichor_GetTimeOfDay() != TIME_NIGHT)
+        return FALSE;
+    sStarChart = AllocZeroed(sizeof(*sStarChart));
+    if (sStarChart == NULL)
+        return FALSE;
+    sStarChart->liveSky = TRUE;
+    Ichor_RefreshStars();
+    SetMainCallback2(CB2_InitStarChart);
+    return TRUE;
 }
 
 void ItemUseOutOfBattle_IchorStarChart(u8 taskId)

@@ -1091,6 +1091,27 @@ palette, not the Town Map's graphics. Regenerate just this asset with
 option retains the generator's shared-palette checks without rewriting
 other icon PNGs or the ground jar.
 
+### Outdoor seats
+
+Kronion Hill's eastern shrine steps at `(15, 8)`, approached from `(15, 9)`,
+run `EventScript_IchorSkySeat`. The summit stele explains the seat; the route
+builder preserves the event and checks reachability without changing terrain.
+The shared script requires the real Chart, night and an affirmative answer,
+then fades to black and calls `specialvar(VAR_RESULT, Ichor_ShowNightSky)`.
+On `TRUE`, `waitstate` waits for the screen; on immediate `FALSE`, fade back in.
+Screen-initialization failure resumes with `FALSE` and the script reports an
+explicit retry message. The native entry also rejects indoor, daytime,
+missing-item and already-open callers.
+
+The sky shares the portable view's patterns, selection and saved flags, but
+uses its own midnight-blue palette, pale twinkling stars and field-exit label.
+B releases its resources and uses `CB2_ReturnToFieldContinueScript`, retaining
+the seat's position and music. It does not consume the Chart or change the
+held time, tint option or weather. The portable view still returns to its
+original Bag pocket. No new save field or milestone reward is introduced.
+
+### Saved placements
+
 The existing `FLAG_ICHOR_CONSTELLATIONS_START` range stores one saved bit
 per constellation, in SYSTEMS §8 order (indices 0–23). This uses the already
 reserved flag bank instead of introducing a new `IchorSave.constellations`
@@ -1111,7 +1132,7 @@ field or changing save layout/version. Extra reserved bits 24–31 do not count.
   on opening older saves. Placements are permanent; removing a debug
   receipt does not erase a star.
 
-The other myth callers, outdoor live-sky seats, moon-dance encounter and
+The other myth callers, additional outdoor seats, moon-dance encounter and
 6/12/18/24 milestone rewards remain future integrations. Manually seeded
 all-star fixtures demonstrate rendering, not current story obtainability.
 
@@ -1122,6 +1143,11 @@ distinct rendered pixel patterns, the empty final patch, palette twinkling,
 navigation, screen cleanup and save/reset/CONTINUE. It compares all 288
 compiled icon bytes and all sixteen colors against the live Bag sprite's
 OBJ VRAM and palette, both before opening the Chart and after returning.
+The same run interacts with the actual hill seat: daytime and missing-item
+refusals, declining, dawn during its prompt, empty and two-myth skies, distinct
+live colors, twinkle, navigation, repeated cleanup, retained music/position,
+save/CONTINUE and the portable parchment afterward. Native guard checks also
+exercise indoor, daytime and missing-Chart callers.
 
 ## 11. Oath of the Styx
 

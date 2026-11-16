@@ -5,3 +5,36 @@ script EventScript_IchorChartError {
     releaseall
     end
 }
+
+script EventScript_IchorSkySeat {
+    lockall
+    setspeaker(SP_NAME_NONE)
+    specialvar(VAR_RESULT, Ichor_GetTimeOfDay)
+    if (var(VAR_RESULT) != TIME_NIGHT) {
+        msgbox(format("The old steps face an open sky.\pCome back after dark to watch the stars."))
+        releaseall
+        end
+    }
+    checkitem(ITEM_STAR_CHART)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The stars are bright above the old steps.\pBring a Star Chart to trace their stories."))
+        releaseall
+        end
+    }
+    msgbox(format("Sit on the steps and read the night sky?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        specialvar(VAR_RESULT, Ichor_ShowNightSky)
+        if (var(VAR_RESULT) == TRUE) {
+            waitstate
+        } else {
+            fadescreen(FADE_FROM_BLACK)
+        }
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("The sky view cannot be opened. Try again after saving."))
+        }
+    }
+    releaseall
+    end
+}

@@ -507,7 +507,13 @@ navigation and a clean return to the same Bag pocket. Unplaced myths stay
 blank, including the final Unwoven patch. Saved constellation flags record
 the known Conch, Laurel 4/5/7/8, Favor-30 Artemis/Hera and seven-page gates.
 Legacy progress is recovered when the chart opens; reading cannot invent
-the remaining myths. Outdoor stargazing seats, milestone rewards and the
+the remaining myths. Kronion Hill's eastern shrine steps now offer the live
+night sky to Chart owners after dark, with a distinct midnight-blue palette,
+twinkling saved constellations and a return to the same steps. Daytime,
+missing-Chart and declined visits leave the view closed; daylight arriving
+during the prompt safely restores the field. The summit stele points out the
+seat. The Bag remains a parchment view, and stargazing does not consume the
+Chart or place unfinished myths. Other sky seats, milestone rewards and the
 remaining story/post-game constellation callers are not yet integrated.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I

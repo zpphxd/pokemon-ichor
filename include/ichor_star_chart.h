@@ -20,6 +20,7 @@ u16 Ichor_PlaceConstellation(void);
 u16 Ichor_CountConstellations(void);
 void Ichor_StarFlagSet(u16 flag);
 void Ichor_RefreshStars(void);
+u16 Ichor_ShowNightSky(void);
 void ItemUseOutOfBattle_IchorStarChart(u8 taskId);
 
 #endif

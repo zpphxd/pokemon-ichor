@@ -1182,6 +1182,7 @@ KRONION_EVENTS = {
     ],
     "bg_events": [
         sign(14, 10, KH + "Stele"),
+        sign(15, 8, KH + "SkySeat", "BG_EVENT_PLAYER_FACING_NORTH"),
         sign(9, 5, KH + "Altar"),
         sign(10, 5, KH + "Altar"),
         # the pit's front row: its back row (9-10,6) can't be faced from anywhere
@@ -1732,6 +1733,8 @@ def check_route(r1, kh):
         seen |= set(k.sight(x, y, f, reach)) | {(x, y)}
     if k.cost(KH_FOOT, KH_TOP, avoid=seen) is None:
         errs.append("Kronion Hill: the climb to the summit crosses a trainer's line")
+    if k.cost(KH_FOOT, [(15, 9)]) is None:
+        errs.append("Kronion Hill: the stargazing steps cannot be approached")
     for name in sorted(set(kt) - set(KRONION_MANDATORY)):
         print(f"  {name} is optional")
     # §1: never use a ledge to trap a player away from an exit, nor stand
