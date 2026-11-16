@@ -296,6 +296,12 @@ script KallisteRoute1_KronionHill_EventScript_Altar {
     msgbox(format("A cracked altar. The stone is warm, like a sleeping animal."), MSGBOX_SIGN)
 }
 
+script KallisteRoute1_KronionHill_EventScript_DigShrine {
+    setvar(VAR_0x8004, 6)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_KRONOS))
+    goto(EventScript_IchorDigSpot)
+}
+
 // Before the scene the grunts stand in the pit; after it, the pit is the
 // mouth of the dark stair (Hecate's Torch opens it later).
 script KallisteRoute1_KronionHill_EventScript_Pit {

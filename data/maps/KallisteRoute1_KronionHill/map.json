@@ -249,6 +249,14 @@
       "script": "KallisteRoute1_KronionHill_EventScript_Pit"
     },
     {
+      "type": "sign",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KallisteRoute1_KronionHill_EventScript_DigShrine"
+    },
+    {
       "type": "hidden_item",
       "x": 13,
       "y": 7,

@@ -1012,6 +1012,7 @@ def build_route1_pieces(g, cat):
     g.place(cat, "ruin_columns", 20, 15, 0, 0, 1, 3)
     g.place(cat, "big_olive", 3, 22)                  # the ancient olive
     g.place(cat, "bee_wall", 22, 24)                  # Komatas's hives
+    g.place(cat, "dig_site", 23, 26, 2, 1, 1, 1)      # turned earth on the bee terraces
     g.place(cat, "spring", 2, 32)                     # the spring in the grove
     g.place(cat, "shrine", 18, 9)                     # the wayside shrine on the goat path
     g.place(cat, "alonia", 18, 44)                    # the threshing floor
@@ -1131,6 +1132,7 @@ ROUTE1_EVENTS = {
         sign(9, 56, R1 + "HermSouth"),
         sign(14, 20, R1 + "HermFork"),
         sign(16, 3, R1 + "HermNorth"),
+        sign(23, 26, R1 + "DigTerraces"),
         hidden(4, 25, "ITEM_ORAN_BERRY", "FLAG_ICHOR_HIDDEN_ROUTE1_ORAN_BERRY"),
         hidden(2, 54, "ITEM_REPEL", "FLAG_ICHOR_HIDDEN_ROUTE1_REPEL"),
         hidden(4, 29, "ITEM_ANTIDOTE", "FLAG_ICHOR_HIDDEN_ROUTE1_ANTIDOTE"),
@@ -1185,6 +1187,7 @@ KRONION_EVENTS = {
         # the pit's front row: its back row (9-10,6) can't be faced from anywhere
         sign(9, 7, KH + "Pit"),
         sign(10, 7, KH + "Pit"),
+        sign(8, 6, KH + "DigShrine"),
         hidden(13, 7, "ITEM_HARD_STONE", "FLAG_ICHOR_HIDDEN_KRONION_HARD_STONE"),
         hidden(10, 4, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_KRONION_STARDUST"),
         sign(8, 17, KH + "HermFork"),

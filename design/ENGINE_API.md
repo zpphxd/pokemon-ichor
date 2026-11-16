@@ -827,7 +827,13 @@ goto(EventScript_IchorDigFixed)
 (Arachne), Eleusa west field 2 and east meadow 3 (Persephone). The village's
 two BG events use separate index-setting wrappers and a shared loot caller;
 never share a daily index between sites. See `tools/ichor/claim_ranges.md`.
-- A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once its amphora is whole, and an ostrakon roll once all 30 are found.
+Kalliste's three daily spots use indices 6 (Kronion Hill's pried-up slabs),
+7 (Route 1's bee terraces) and 8 (Akti's beach shells), all with the Kronos
+amphora and Act I loot. They are BG interactions on visible map details, not
+objects removed by a dig; their consumed flags clear at midnight without
+requiring reentry. The existing map generator owns both Route 1 and Kronion
+events and the terrace's turned-earth tile.
+- A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once all four of its amphora's sherds are collected, and an ostrakon roll once all 30 are found. Collection does not set the restored-amphora flag.
 
 **What a dig does:**
 - **Without the Trowel,** it says the earth has been turned and something glints in it.
@@ -837,7 +843,7 @@ never share a daily index between sites. See `tools/ichor/claim_ranges.md`.
   - An ostrakon sets the next of `FLAG_ICHOR_OSTRAKA_START + 0–29`, in order, and shows its words. The 30 are in `src/ichor_dig.c` (`sOstraka`). Nine name Aristeides, for Lysimachos, and the last is the player's. Writers may rewrite any of them.
   - Tablet *n* sets `FLAG_ICHOR_PROPHECY_START + n − 1`, and page *n* sets `FLAG_ICHOR_PAGES_START + n − 1`. Alethea's reading, or the page's text, is the map's own script (see below).
 - **Afterwards,** a daily spot says "dug today" until tomorrow, and a fixed find says "nothing else is buried here".
-- **A fixed find with nothing left to give** (a sherd of a whole amphora) gives Stardust instead.
+- **A fixed find with nothing left to give** (a sherd whose four-piece collection is already complete) gives Stardust instead.
 - **Rolls are seeded by the day's seed and the spot,** so reloading a save digs up the same thing.
 - **Blessings:** Demeter's rolls twice and keeps the rarer find. Hades's doubles an item from a daily spot.
 - **Loot that waits on other work:** the fossils are Kanto's and Hoenn's until the dex adds the Aethos fossils. The 1% Ichor Stone is one of ten Mega Stones; Balance may change the list in `sIchorStones`.

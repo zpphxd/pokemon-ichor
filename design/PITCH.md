@@ -448,6 +448,13 @@ Akademia after that night. Euboulos replaces missing Charcoal after the Hearth
 Trial until the forge is relit, without duplicating an owned piece; a full Bag
 can be retried. The original opening and home whiteout/healing remain playable
 for all three starters.
+Returning with the Trowel opens three independent daily Kalliste digs: Kronion
+Hill's pried-up slabs, Route 1's bee terraces and Akti's beach. They give real
+Act I loot and Kronos sherds, retain consumed/pending state through saves, and
+renew at midnight without map reentry. A full Bag leaves an item in the ground
+for retry; a four-piece collection keeps other loot available. Four collected
+sherds are not a restored amphora: Akademia restoration, paintings and the
+amphora's encounter lead remain unfinished.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot

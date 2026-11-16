@@ -55,6 +55,9 @@ offsets above. Do not assign them to another find.
 | Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 1 | Emporion's Hephaisteion garden | Act I loot, including Arachne sherds |
 | Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 2 | Eleusa's west field | Act I loot, including Persephone sherds |
 | Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 3 | Eleusa's east meadow | Act I loot, including Persephone sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 6 | Kronion Hill's pried-up slabs (8,6) | Act I loot, including Kronos sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 7 | Route 1's bee terraces (23,26) | Act I loot, including Kronos sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 8 | Akti's beach shells (25,9) | Act I loot, including Kronos sherds |
 
 Herm id 25 is Emporion's crossroads town anchor. It uses the reserved Aethos
 herm bank but does not count toward the 23-route completion reward. Its Wings

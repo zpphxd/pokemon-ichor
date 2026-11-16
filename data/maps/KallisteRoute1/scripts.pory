@@ -200,3 +200,9 @@ script KallisteRoute1_EventScript_HermFork {
 script KallisteRoute1_EventScript_HermNorth {
     msgbox(format("North: Akti Town. Mind the nets."), MSGBOX_SIGN)
 }
+
+script KallisteRoute1_EventScript_DigTerraces {
+    setvar(VAR_0x8004, 7)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_KRONOS))
+    goto(EventScript_IchorDigSpot)
+}
