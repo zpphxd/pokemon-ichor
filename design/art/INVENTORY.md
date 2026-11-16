@@ -32,6 +32,19 @@ requires complete compatible native sources, visual review, build and smoke
 evidence. The full character and global sprite requests remain open until the
 remaining groups are reconciled.
 
+**Compiled-map coverage check:** at the concurrent `8b70e8ef98` boundary,
+`data/maps/map_groups.json` registers 51 Aethos maps and 26 retained engine
+maps. All directly placed human graphics on those 51 Aethos maps use the
+custom character set above. The only variable graphics placement is Kleon
+on the *Euploia*, whose script selects the existing normal, seasick and
+tablet sheets; these are all assigned. Other non-species placements are
+items, cuttable trees, breakable rocks and pushable boulders, not missing
+human sheets. The 26 retained engine maps still contain imported people;
+this is not evidence that they are reachable through Aethos or redrawn.
+The normal credits routine also loads original player/rival art from
+`graphics/intro/scene_2/`; those appearances remain an explicit player
+coverage item rather than being hidden by the custom-map count.
+
 ## Source provenance coverage, 2026-11-15
 
 `sprite_audit.py provenance --reference <commit> --output <json>` accounts for
