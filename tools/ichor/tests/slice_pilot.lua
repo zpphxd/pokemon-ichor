@@ -3,7 +3,7 @@ return function(L, starter)
   local S, K, emu = L.S, L.K, L.emu
   local P, powers, types, categories = {}, {}, {}, {}
   local partyBefore, ballsBefore, throws, switchTarget, switched
-  local starterPersonality, attemptedYawn
+  local starterPersonality, attemptedYawn, evolvingSlot
 
   local function gameString(address)
     local bytes = {}
@@ -127,7 +127,7 @@ return function(L, starter)
           L.tap(K.L); L.wait(4)
         end
         local score = attackScore(powers[move], types[move], categories[move], move)
-        local foe = emu:read8(S.gBattlerPartyIndexes + 1)
+        local foe = emu:read16(S.gBattlerPartyIndexes + S.BATTLER_PARTY_INDEX_SIZE)
         if move == S.MOVE_YAWN and L.isTrainerBattle() and not attemptedYawn[foe]
            and emu:read32(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_STATUS) == 0 then
           score = 1000000
@@ -137,17 +137,34 @@ return function(L, starter)
     end
     L.expect(selected ~= nil, "the natural pilot found a move with real PP")
     P.moveCursor(selected)
-    L.log(string.format("PILOT attack slot=%d move=%d score=%.2f", selected,
-                        emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MOVES + selected * S.MOVE_ID_SIZE), best))
+    local foe = emu:read16(S.gBattlerPartyIndexes + S.BATTLER_PARTY_INDEX_SIZE)
+    L.log(string.format("PILOT attack slot=%d move=%d score=%.2f foe_party=%d foe_hp=%d", selected,
+                        emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MOVES + selected * S.MOVE_ID_SIZE), best,
+                        foe, emu:read16(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_HP)))
     if emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MOVES + selected * S.MOVE_ID_SIZE) == S.MOVE_YAWN then
-      attemptedYawn[emu:read8(S.gBattlerPartyIndexes + 1)] = true
+      attemptedYawn[foe] = true
     end
     L.tap(K.A)
   end
 
+  function P.observeEvolution()
+    local task = L.taskAddress("Task_EvolutionScene")
+    if task then evolvingSlot = emu:read16(task + S.OFF_EVOLUTION_PARTY_ID) end
+  end
+
   function P.learnMove()
     L.wait(20)
-    local mon = emu:read8(emu:read32(S.gBattleStruct) + S.OFF_EXP_GETTER_MON)
+    local incoming = emu:read16(S.gMoveToLearn)
+    if incoming == S.MOVE_HOWL then
+      L.log("PILOT declining Howl; this pilot does not use Attack setup")
+      L.shot("natural_declined_setup_move")
+      L.tap(K.B)
+      L.waitUntil(function() return not L.taskRunning("Task_HandleReplaceMoveInput") end, 900, "declining the unused setup move")
+      return
+    end
+    local mon = evolvingSlot
+    if mon == nil then mon = emu:read8(emu:read32(S.gBattleStruct) + S.OFF_EXP_GETTER_MON) end
+    L.expect(mon < emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER), "the actual learner is in the party")
     local selected, lowest = 0, math.huge
     local moves = {}
     for slot = 0, S.MAX_MON_MOVES - 1 do moves[slot] = L.partyMove(mon, slot) end
@@ -167,8 +184,8 @@ return function(L, starter)
       if priority < lowest then selected, lowest = slot, priority end
     end
     for _ = 1, selected do L.tap(K.DOWN) end
-    L.log(string.format("PILOT learning move=%d replaces=%d in slot=%d",
-                        emu:read16(S.gMoveToLearn), moves[selected], selected))
+    L.log(string.format("PILOT learning party=%d move=%d replaces=%d in slot=%d",
+                        mon, incoming, moves[selected], selected))
     L.shot("natural_move_learning")
     L.tap(K.A)
     L.waitUntil(function() return not L.taskRunning("Task_HandleReplaceMoveInput") end, 900, "the native move choice")
@@ -191,7 +208,7 @@ return function(L, starter)
     L.wait(30)
     local count = emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER)
     for slot = 0, count - 1 do
-      if L.partyHp(slot) > 0 and slot ~= emu:read8(S.gBattlerPartyIndexes)
+      if L.partyHp(slot) > 0 and slot ~= emu:read16(S.gBattlerPartyIndexes)
          and (switchTarget == nil or slot == switchTarget) then
         partySlot(slot)
         L.shot("natural_living_replacement")
@@ -263,11 +280,39 @@ return function(L, starter)
   end
 
   function P.beginBattle()
+    evolvingSlot = nil
     if starterPersonality == nil then starterPersonality = emu:read32(L.partyMon(0)) end
     attemptedYawn = {}
     partyBefore = emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER)
     ballsBefore, throws = L.itemCount(S.ITEM_POKE_BALL), 0
     switchTarget, switched = nil, false
+  end
+
+  function P.buyBalls()
+    L.expect(L.taskRunning("Task_BuyMenu"), "ball purchases start in Demeas's actual item list")
+    local balls, money = L.itemCount(S.ITEM_POKE_BALL), L.money()
+    L.expect(money >= 1000, "the natural pilot can afford five ordinary balls")
+    L.tap(K.A)
+    L.waitUntil(function()
+      if L.taskRunning("Task_BuyHowManyDialogueHandleInput") then return true end
+      L.tap(K.A); L.wait(8)
+      return false
+    end, 900, "the native shop quantity picker")
+    for _ = 1, 4 do L.tap(K.UP) end
+    L.shot("natural_buy_five_balls")
+    L.tap(K.A)
+    L.waitUntil(function()
+      if L.itemCount(S.ITEM_POKE_BALL) == balls + 5 and L.money() == money - 1000 then return true end
+      L.tap(K.A); L.wait(8)
+      return false
+    end, 1200, "five purchased balls and the real price deduction")
+    L.waitUntil(function()
+      if L.taskRunning("Task_BuyMenu") then return true end
+      L.tap(K.A); L.wait(8)
+      return false
+    end, 900, "the item list after the purchase")
+    L.log(string.format("PILOT bought balls=%d->%d money=%d->%d", balls, L.itemCount(S.ITEM_POKE_BALL), money, L.money()))
+    L.shot("natural_paid_for_balls")
   end
 
   function P.chooseAction(trainer)
@@ -278,7 +323,7 @@ return function(L, starter)
         for _, item in ipairs({S.ITEM_SUPER_POTION, S.ITEM_POTION, S.ITEM_MOOMOO_MILK}) do
           local before = L.itemCount(item)
           if before > 0 then
-            local slot = emu:read8(S.gBattlerPartyIndexes)
+            local slot = emu:read16(S.gBattlerPartyIndexes)
             L.tap(K.UP); L.tap(K.RIGHT); L.tap(K.A)
             L.waitUntil(function() return L.taskRunning("Task_BagMenu_HandleInput") end, 1200, "the native battle medicine Bag")
             L.wait(30)
@@ -302,7 +347,7 @@ return function(L, starter)
       for slot = 1, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
         if L.partyHp(slot) > 0 and L.partyLevel(slot) > L.partyLevel(strongest) then strongest = slot end
       end
-      if strongest ~= emu:read8(S.gBattlerPartyIndexes) then
+      if strongest ~= emu:read16(S.gBattlerPartyIndexes) then
         switchTarget = strongest
         L.log("PILOT native switch training to party slot " .. strongest)
         L.tap(K.DOWN); L.tap(K.LEFT); L.tap(K.A)
@@ -310,11 +355,12 @@ return function(L, starter)
         return true
       end
     end
-    if trainer or throws >= 3 or L.itemCount(S.ITEM_POKE_BALL) == 0
-       or emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) >= 3
+    local count = emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER)
+    if trainer or throws >= 3 or L.itemCount(S.ITEM_POKE_BALL) == 0 or count >= 4
        or (L.mapId() ~= S.MAP_ROUTE1 and L.mapId() ~= S.MAP_KRONION) then return false end
     local species = emu:read16(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_SPECIES)
-    for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+    if count >= 3 and (not P.training or (species ~= S.SPECIES_EOPEEP and species ~= S.SPECIES_PEBBLITH)) then return false end
+    for slot = 0, count - 1 do
       if L.partySpecies(slot) == species then return false end
     end
     L.tap(K.UP); L.tap(K.RIGHT); L.tap(K.A)
@@ -483,6 +529,7 @@ return function(L, starter)
     local x, y = L.pos()
     restAtAsclepeion()
     L.leaveEdge("down", S.MAP_ROUTE1)
+    L.leaveEdge("right", S.MAP_KRONION)
     local g, patch = L.grid(), nil
     for py = 0, g.h - 1 do
       for px = 0, g.w - 2 do
@@ -499,30 +546,33 @@ return function(L, starter)
     L.expect(patch ~= nil, "a real reachable grass patch is available")
     L.go(patch[1], patch[2])
     local steps = 0
+    P.training = true
     while true do
-      local weakest, needsRest = 0, false
+      local weakest, needsRest, hasCounter = 0, false, false
       for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+        if L.partySpecies(slot) == S.SPECIES_EOPEEP or L.partySpecies(slot) == S.SPECIES_PEBBLITH then hasCounter = true end
         if L.partyLevel(slot) < L.partyLevel(weakest) then weakest = slot end
         local hp, maxHp = L.partyHp(slot)
         local pp = 0
         for move = 0, S.MAX_MON_MOVES - 1 do pp = pp + L.partyPp(slot, move) end
         if hp * 4 <= maxHp * 3 or pp < 6 then needsRest = true end
       end
-      if L.partyLevel(weakest) >= targetLevel then break end
+      if L.partyLevel(weakest) >= targetLevel and hasCounter then break end
+      L.expect(hasCounter or L.itemCount(S.ITEM_POKE_BALL) > 0, "owned balls remain for a Normal-type counter")
       L.expect(steps < 6000, "Kalliste training stays within its walking budget")
       if needsRest then restAtHome() end
       leadWith(weakest)
-      P.training = true
       L.go(patch[1] + steps % 2, patch[2])
-      P.training = false
       steps = steps + 1
     end
+    P.training = false
     local lead
     for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
       if emu:read32(L.partyMon(slot)) == starterPersonality then lead = slot end
     end
     L.expect(lead ~= nil, "the original starter remains in the trained party")
     leadWith(lead)
+    L.leaveEdge("left", S.MAP_ROUTE1)
     L.leaveEdge("up", S.MAP_AKTI)
     restAtAsclepeion()
     returnToPosition(x, y)

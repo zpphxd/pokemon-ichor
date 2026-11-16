@@ -255,6 +255,10 @@ K(ABILITY_MOTOR_DRIVE, ABILITY_MOTOR_DRIVE)
 K(ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER)
 K(ABILITY_TERAVOLT, ABILITY_TERAVOLT)
 K(ABILITY_TURBOBLAZE, ABILITY_TURBOBLAZE)
+K(SPECIES_EOPEEP, SPECIES_EOPEEP)
+K(SPECIES_PEBBLITH, SPECIES_PEBBLITH)
+K(BATTLER_PARTY_INDEX_SIZE, sizeof(gBattlerPartyIndexes[0]))
+K(MOVE_HOWL, MOVE_HOWL)
 K(PILOT_SPRITE_SIZE, sizeof(struct Sprite))
 K(OFF_PILOT_SPRITE_ANIM, offsetof(struct Sprite, animNum))
 K(TYPE_ID_SIZE, sizeof(enum Type))
@@ -376,6 +380,7 @@ K(OFF_SPECIES_GROWTH_RATE, offsetof(struct SpeciesInfo, growthRate))
 K(TASK_SIZE, sizeof(struct Task))
 K(OFF_TASK_FUNC, offsetof(struct Task, func))
 K(OFF_TASK_ACTIVE, offsetof(struct Task, isActive))
+K(OFF_EVOLUTION_PARTY_ID, offsetof(struct Task, data[10])) // evolution_scene.c: tPartyId
 K(NUM_TASKS, NUM_TASKS)
 
 // --- The current map's events, read from gMapHeader ------------------------------

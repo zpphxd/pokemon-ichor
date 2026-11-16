@@ -183,16 +183,17 @@ function L.idle()
      and emu:read8(S.sGlobalScriptContextStatus) == CONTEXT_SHUTDOWN
      and emu:read8(S.gPlayerAvatar + S.OFF_AVATAR_TILE_TRANSITION) == 0
 end
-function L.taskRunning(name)
-  if not S[name] then return false end
+function L.taskAddress(name)
+  if not S[name] then return nil end
   for i = 0, S.NUM_TASKS - 1 do
     local t = S.gTasks + i * S.TASK_SIZE
     if emu:read8(t + S.OFF_TASK_ACTIVE) ~= 0 and emu:read32(t + S.OFF_TASK_FUNC) == (S[name] | 1) then
-      return true
+      return t
     end
   end
-  return false
+  return nil
 end
+function L.taskRunning(name) return not not L.taskAddress(name) end
 function L.boxUp() return emu:read8(S.sFieldMessageBoxMode) ~= 0 end
 -- What the game is doing, for a failure message: the main callback, the field
 -- lock, and the global script's mode, native wait function and script pointer
@@ -353,6 +354,7 @@ function L.battle()
   local t0, shotTaken, turns = now(), false, 0
   while not L.inOverworld() do
     if L.on("CB2_EvolutionSceneUpdate") then
+      if L.pilot then L.pilot.observeEvolution() end
       tap(K.A); wait(6)
     elseif L.on("CB2_NamingScreen") then
       L.acceptName("caught_partner")
@@ -488,6 +490,7 @@ function L.settle(opts)
       elseif L.inBattle() then
         fought[#fought + 1] = L.battle()
       elseif L.on("CB2_EvolutionSceneUpdate") then
+        if L.pilot then L.pilot.observeEvolution() end
         tap(K.A); wait(6)
       elseif L.taskRunning("Task_HandleYesNoInput") then
         wait(10)

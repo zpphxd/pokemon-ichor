@@ -622,6 +622,7 @@ beat("06_agora", function()
   wait(20); shot("agora_menu"); tap(K.A)                              -- BUY
   L.waitUntil(function() return L.taskRunning("Task_BuyMenu") end, 600, "the Agora's item list")
   wait(40); shot("agora_shop")
+  if L.pilot then L.pilot.buyBalls() end
   tap(K.B)
   L.waitUntil(function() return L.taskRunning("Task_ShopMenu") end, 600, "the shop menu again")
   wait(20); shot("agora_menu_again"); tap(K.B)                        -- QUIT

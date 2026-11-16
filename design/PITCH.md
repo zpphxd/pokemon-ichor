@@ -413,14 +413,16 @@ learns attacks, uses owned medicine, visits real healers and switch-trains its
 team. Hero/Nebrel reaches Kalliste's ending (`08_after`) continuously: 117
 battles, with a level-16 starter and two level-10 partners entering Ione.
 Mortal/Nebrel also reaches the ending. That substantial training is not
-approval of the intended level curve. Hero/Kynder reaches Ione but loses;
-Spartan/Hipling also loses there, even with all three partners naturally
-trained to the real level-14 cap. Those pilot results are not established
-balance defects. Further
+approval of the intended level curve. Further
 pilot improvements include real held-item preparation, limited Yawn, legal
 Mortal/Hero battle medicine, multi-hit scoring and ability-immunity checks
-(including Narthip's Flash Fire). Hero/Kynder still loses at Ione with those
-tactics; they are not additional chapter passes. The remaining
+(including Narthip's Flash Fire). The pilot now buys five balls at the actual
+Agora price and reserves a fourth team slot for a real Normal-type counter.
+Correcting evolution's move-learning source and the native opponent-index
+stride lets Hero/Kynder reach Kalliste's ending too: 69 battles, a level-16
+Dikyon and three level-10 partners at Ione. Spartan/Hipling still loses to
+Ione with four level-14 partners; Spartan/Kynder can lose earlier at Metis.
+Those are pilot failures, not established balance defects. The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
 

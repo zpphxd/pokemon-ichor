@@ -3,6 +3,7 @@ local createPilot = dofile("tools/ichor/tests/slice_pilot.lua")
 local function battle(moves, held, ability, difficulty, ownAbility)
   local S = {
     gBattleMons = 100, BATTLE_MON_SIZE = 100, gBattlerPartyIndexes = 400,
+    BATTLER_PARTY_INDEX_SIZE = 2,
     gPartiesCount = 500, B_TRAINER_PLAYER = 0, gMoveSelectionCursor = 1,
     gDisplayedStringBattle = 1000, gTypesInfo = 2000, TYPE_INFO_SIZE = 16,
     OFF_TYPE_NAME = 0, NUMBER_OF_MON_TYPES = 7, TYPE_ID_SIZE = 1,
@@ -32,7 +33,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     MOVE_DESCRIPTION_BUTTON = 5, L_BUTTON = 5,
   }
   local K = {UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, L = 5, A = 6}
-  local m8, m16, m32 = {[1] = 0, [5] = 0, [400] = 0, [401] = 0, [500] = 1}, {}, {[236] = 0, [600] = 123}
+  local m8, m16, m32 = {[1] = 0, [5] = 0, [500] = 1}, {[400] = 0, [402] = 0}, {[236] = 0, [600] = 123}
   local function text(address, value)
     for i = 1, #value do m8[address + i - 1] = value:byte(i) end
     m8[address + #value] = 255
@@ -47,6 +48,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
   end
   m16[132], m16[134], m16[232] = ownAbility or 0, held or 0, ability or 0
   m16[140], m16[142] = 10, 40
+  m16[240] = 40
   for i = 0, 3 do
     m16[100 + i * 2] = moves[i + 1] and moves[i + 1].id or 0
     m8[108 + i] = moves[i + 1] and 10 or 0
@@ -96,7 +98,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     partyMon = function() return 600 end,
   }, 1)
   pilot.beginBattle()
-  return pilot, choices, m8, m32
+  return pilot, choices, m16, m32
 end
 
 local function move(id, power, kind, category)
@@ -132,13 +134,103 @@ local party, status
 pilot, choices, party, status = battle({move(20, 0, 1, 3), move(11, 40)})
 pilot.chooseMove(); pilot.chooseMove()
 assert(choices[1] == 0 and choices[2] == 1, "Yawn must not stall repeated turns")
-party[401] = 1
+party[402] = 1
 pilot.chooseMove()
 assert(choices[3] == 0, "a different opponent can receive Yawn")
-party[401], status[236] = 2, 1
+party[402], status[236] = 2, 1
 pilot.chooseMove()
 assert(choices[4] == 1, "an already statused opponent must not receive Yawn")
 pilot = battle({move(11, 40)}, 0, 0, 2)
 assert(not pilot.chooseAction(true), "Spartan must never request battle medicine")
-console:log("PILOT TACTICS PASS: multi-hit, held booster, ability immunities/bypass, Fur Coat, bounded Yawn and Spartan item ban")
+
+local function shop(funds)
+  local state, quantity, balls, money = "list", 1, 2, funds
+  local pilot = createPilot({
+    S = {ITEM_POKE_BALL = 1}, K = {A = 1, UP = 2},
+    itemCount = function(item) assert(item == 1); return balls end,
+    money = function() return money end,
+    taskRunning = function(task)
+      return (task == "Task_BuyMenu" and state == "list")
+          or (task == "Task_BuyHowManyDialogueHandleInput" and state == "quantity")
+    end,
+    tap = function(key)
+      if key == 2 then
+        assert(state == "quantity")
+        quantity = quantity + 1
+      elseif state == "list" then state = "prompt"
+      elseif state == "prompt" then state = "quantity"
+      elseif state == "quantity" then state = "confirm"
+      elseif state == "confirm" then
+        assert(quantity * 200 <= money, "modeled native shop rejects unaffordable purchases")
+        balls, money, state = balls + quantity, money - quantity * 200, "receipt"
+      elseif state == "receipt" then state = "list"
+      else error("unexpected modeled shop input") end
+    end,
+    waitUntil = function(condition, _, message)
+      for _ = 1, 10 do if condition() then return end end
+      error(message)
+    end,
+    expect = function(condition, message) assert(condition, message) end,
+    wait = function() end, log = function() end, shot = function() end,
+  }, 0)
+  return pilot, function() return state, balls, money end
+end
+local snapshot
+pilot, snapshot = shop(3000)
+pilot.buyBalls()
+local state, balls, money = snapshot()
+assert(state == "list" and balls == 7 and money == 2000, "five balls must be paid for and return to the item list")
+pilot, snapshot = shop(999)
+local ok, failure = pcall(pilot.buyBalls)
+assert(not ok and tostring(failure):find("afford five ordinary balls", 1, true), "insufficient funds must fail explicitly")
+state, balls, money = snapshot()
+assert(state == "list" and balls == 2 and money == 999, "unaffordable purchases must not press any menu buttons")
+
+local expectedLearner, evolution, learnedFrom, incoming, lastKey = 1, false, {}, 99, nil
+pilot = createPilot({
+  S = {
+    gBattleStruct = 1, OFF_EXP_GETTER_MON = 2, gPartiesCount = 3, B_TRAINER_PLAYER = 0,
+    OFF_EVOLUTION_PARTY_ID = 20, MAX_MON_MOVES = 4, gMoveToLearn = 4,
+    MOVE_HOWL = 336,
+  },
+  K = {DOWN = 1, A = 2, B = 3},
+  emu = {
+    read32 = function(_, address)
+      assert(address == 1 and not evolution, "evolution learning must not reuse the battle EXP getter")
+      return 100
+    end,
+    read8 = function(_, address)
+      if address == 102 then return 1 end
+      assert(address == 3); return 2
+    end,
+    read16 = function(_, address)
+      if address == 220 then return expectedLearner end
+      assert(address == 4); return incoming
+    end,
+  },
+  taskAddress = function(task)
+    assert(task == "Task_EvolutionScene")
+    return evolution and 200 or nil
+  end,
+  partyMove = function(mon, slot)
+    assert(mon == expectedLearner, "replacement scoring must inspect the actual learner")
+    learnedFrom[#learnedFrom + 1] = mon
+    return slot + 1
+  end,
+  taskRunning = function() return false end,
+  expect = function(condition, message) assert(condition, message) end,
+  waitUntil = function(condition) assert(condition()) end,
+  tap = function(key) lastKey = key end, wait = function() end, log = function() end, shot = function() end,
+}, 0)
+pilot.learnMove()
+evolution, expectedLearner = true, 0
+pilot.observeEvolution(); pilot.learnMove()
+expectedLearner = 1
+pilot.observeEvolution(); pilot.learnMove()
+assert(#learnedFrom == 12 and learnedFrom[1] == 1 and learnedFrom[5] == 0 and learnedFrom[9] == 1,
+       "ordinary learning and successive evolutions must use their own party slots")
+incoming = 336
+pilot.learnMove()
+assert(lastKey == 3 and #learnedFrom == 12, "unused Howl must be declined without selecting an owned move to erase")
+console:log("PILOT TACTICS PASS: damage/tactics, native-width foe slots, Spartan item ban, paid purchases and correct evolution learner")
 console:log("PILOT TACTICS done")

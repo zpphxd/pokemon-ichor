@@ -32,6 +32,8 @@ Task_NewGameBirchSpeech_ChooseGender Task_HandleYesNoInput Task_HandleMultichoic
 Task_HandleScrollingMultichoiceInput Task_BuyMenu Task_ShopMenu Task_OptionMenuProcessInput
 Task_ShowStartMenu Task_BagMenu_HandleInput Task_ItemContext_SingleRow Task_ItemContext_MultipleRows Task_HandleChooseMonInput
 Task_HandleReplaceMoveInput
+Task_BuyHowManyDialogueHandleInput
+Task_EvolutionScene
 Task_HandleSelectionMenuInput
 SetCB2WhiteOut SetHiddenNature ScrCmd_createmon"
 PATTERN="^($(echo $SYMS | tr ' ' '|'))$"
