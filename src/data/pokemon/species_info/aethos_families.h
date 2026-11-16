@@ -1803,13 +1803,13 @@
             "The stubby horns on its head spark when\n"
             "it is pleased. It looks after any lost\n"
             "young Pokémon it finds on the hills."),
-        .pokemonScale = 572,
-        .pokemonOffset = 15,
+        .pokemonScale = 531,
+        .pokemonOffset = 14,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerazap,
         .frontPicSize = MON_COORDS_SIZE(48, 56),
-        .frontPicYOffset = 3,
+        .frontPicYOffset = 2,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1817,7 +1817,7 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Kerazap,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         .palette = gMonPalette_Kerazap,
@@ -1825,7 +1825,7 @@
         .iconSprite = gMonIcon_Kerazap,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(7, 10, SHADOW_SIZE_S)
+        SHADOW(6, 11, SHADOW_SIZE_S)
         FOOTPRINT(Kerazap)
         OVERWORLD(
             sPicTable_Kerazap,
@@ -1871,12 +1871,12 @@
             "never runs out. When it shakes its\n"
             "fleece, thunderheads gather. It is said\n"
             "a god was raised on its milk."),
-        .pokemonScale = 317,
-        .pokemonOffset = 5,
+        .pokemonScale = 302,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerastorm,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1885,7 +1885,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Kerastorm,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         .palette = gMonPalette_Kerastorm,
@@ -1893,7 +1893,7 @@
         .iconSprite = gMonIcon_Kerastorm,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(16, 11, SHADOW_SIZE_M)
+        SHADOW(10, 11, SHADOW_SIZE_M)
         FOOTPRINT(Kerastorm)
         OVERWORLD(
             sPicTable_Kerastorm,

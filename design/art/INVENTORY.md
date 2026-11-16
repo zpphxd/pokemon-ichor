@@ -336,8 +336,9 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Ione, Titan Grunt | Native three-quarter portraits and all nine walker states redrawn in `sprites_trainers.py` and `sprites_npc.py`. Their existing portrait and shared cast palettes retained unchanged; palette-correct native comparisons and genuine ROM portraits verified. Artistically accepted at checkpoint scope, not whole-town approval. |
 | Eopeep, Alekrow, Hoplektor; Harpeck, Harpelle; Epopoi, Lophops, Basilops | Complete native two-front/back grids, two icon frames and six follower states implemented in the three family painters and 24 art grids. Independently authored miniatures preserve the rooster shields/crests, harpy leaf/plumes and hoopoe fans/barred wings without scaled battle-view drafts. Normal/shiny and exact engine-selected icon palettes, all bird footprints and Hoplektor's follower scale retained. Source/native/ROM-loader checks pass; complete normal/shiny cards artistically accepted at scoped checkpoint `b2e32f2997`, not whole-town acceptance. |
 | Gelasable | Complete native two-front/back grids and eight miniature states implemented in `lines/weasel.py` and three hand-finished grids. Lower sinuous mustelid, turned laughing muzzle, dark collar/three gold torches and curled dark-tipped tail preserved. Normal/shiny colors and exact icon palette5 retained. Four-toe footprint pixels, colors and 1-bit depth retained; its PNG container was re-encoded, not kept byte-identical. Galekit's existing source/output remains protected. Complete native cards artistically accepted at scoped checkpoint `b2e32f2997`; source/native and matching real-engine views pass technical checks. |
-| Kerazap, Kerastorm; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra | These 28 owned species still await this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
-| Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's contact/shared effects | Elaia's human/opening-object checkpoint `dfb7974fbc`, twelve-species checkpoint `9ae5aff4af` and shared-effects checkpoint `70ff39b430` on main `840dbefb8624` are integrated. All 16 new effects/emotion sheets and the emote palette match that landed base; accepted local human sheets remain unchanged. Further supported-player-state evidence belongs to Elaia's continuation, not this batch. |
+| Kerazap, Kerastorm | Complete two-front/back hand-finished grids, two native icon states and six independently authored follower states implemented in `lines/amalthea.py`. Smaller goat faces, connected cloud ruffs/tails, slimmer prancing legs, whole sparkling horn buds and the mature long-left/broken-right cornucopia horns preserved. Fruit includes olive grapes, a fig with one pink accent and terracotta pomegranate; normal/shiny identities, all palette-file bytes, exact icon selectors 5/3 and hoof-footprint bytes retained. Eripip's source and all 18 design/ROM assets remain protected. Complete native cards artistically accepted at scoped source `ddcd3fb3d9`; independent combined source/ROM verification passes, not whole-town acceptance. |
+| Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra | These 26 owned species still await this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
+| Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's contact/shared effects | Elaia's human/opening-object checkpoint `dfb7974fbc`, twelve-species checkpoint `9ae5aff4af` and shared-effects checkpoint `70ff39b430` are integrated. All 16 effects/emotion sheets and the emote palette are preserved. Main `90d53010aa` also supplies accepted dolphin/underwater, unused watering/decorating, retained bicycle rider sheets and the deterministic healing fixture. None is redrawn by the goat checkpoint; further supported-player-state ownership stays outside this batch. |
 | Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Artistically accepted at checkpoint scope. |
 | Two upturned-boat halves | Direct native 32x16 drawing split into matched halves, replacing tileset extraction. Restrained plank seam and keel clusters use the existing cast palette. Native and real harbor evidence artistically accepted at checkpoint scope. |
 | Sailor and Diver walkers | Eight-row native directional heads, longer cloth bodies, distinct strides and all nine engine frames implemented in `sprites_folk.py`. Costumes and folk palette preserved; Sailor's shoulder rope matches the existing portrait identity. Palette-correct complete sheets and real harbor before/after captured against the exact post-Elaia ROM. Artistically accepted at checkpoint scope. |
@@ -365,7 +366,8 @@ All local walkers are implemented and accepted at checkpoint scope.
 The seven portraits and Nemean family are artistically accepted at scoped
 checkpoint `1a111f80fc`, and local healing at `975b2d610f`.
 The eight bird species and Gelasable are artistically accepted at scoped
-checkpoint `b2e32f2997`; the remaining 28 owned species are not finished.
+checkpoint `b2e32f2997`, and Kerazap/Kerastorm at scoped source
+`ddcd3fb3d9`; the remaining 26 owned species are not finished.
 
 The seven-portrait/Nemean checkpoint passes six human-source regressions,
 seven portrait native audits, both species native/import checks, helpers,
@@ -404,6 +406,39 @@ ball, human or dolphin assets.
 The actual Route 1/Kronion story and Temple trial also pass with
 `SPRITE_REVIEW=1` (81 and 39 captures respectively), preserving the tablet
 drop, road reopening, class battles, Ione's portrait and Hearth Laurel flow.
+
+At the child's clean `b2e32f2997` boundary, landed main `7d17b62e9a` is integrated
+without amending the nine-species checkpoint or reapplying equivalent
+Elaia/Akti commits. Both exact new-main/current creature galleries pass
+120 checks / 43 captures. Their unoccluded central player regions are
+pixel-identical; the old healing-base comparisons remain preserved separately.
+All 33 source regressions, helpers, build, smoke, the pinned seven-check
+healing fixture, retained 13,448-check / 320-capture water fixture and
+242-check / 34-capture unused-player fixture pass. The accepted water,
+unused-player and healing sources/assets match landed main exactly.
+The combined ROM remains 23,039,552 bytes (68.66%); no new shared art
+was authored during this boundary merge.
+
+The following two-species storm-goat checkpoint passes helpers, build, smoke
+(nine captures), all 34 source regressions, both species audits and native
+gbagfx conversions. Native miniatures are scale-independent indexed drawings,
+not resized battle fronts; all eight miniature states and the six hand-finished
+battle grids reproduce. All Eripip code before the Kerazap section is
+AST-identical to the prior source, and its 18 palette/image hashes are unchanged.
+Only the goats' framing, grounding, shadow and Pokedex comparison geometry
+was recalculated through `gen.pics`; gameplay and other species metadata
+remain unchanged.
+
+Both exact integrated `a334d7efb4` baseline/current loader galleries pass
+43 checks / 15 captures, covering the four normal/shiny/front0/front1/back
+states per goat plus seven retained portraits. All seven portrait screenshots
+and the eight unoccluded player/room crops are pixel-identical between runs.
+These are real engine-loader views, not natural goat battle or follower
+playthroughs. Complete native before/current cards also show both icons,
+all normal/shiny follower states and retained prints. The current ROM uses
+23,038,528 bytes (68.66%), leaving 10,515,904 bytes. Shared human, player,
+field-effect and ball assets were not regenerated. Technical completion of
+these two species alone does not establish artistic or whole-town acceptance.
 
 The effects integration also passes helper compilation, build, smoke, the
 four folk regressions and `tools/ichor/art/check_elaia_effects.py`. Both
@@ -519,6 +554,36 @@ in `akti-nine-integrated`. Original-source reconciliation reports 218 changed,
 no added/removed and 19,931 unchanged image/palette sources, not a completion
 percentage. The remaining 28 owned species and retained global groups are
 still unfinished; this is not whole-town acceptance.
+
+**Coordinator storm-goat integration verification:** accepted source
+`ddcd3fb3d9` is integrated after retained-bike main `90d53010aa`, without
+the child's boundary merges. Exactly eight game PNGs and their design
+imports change. Both goats' palette/hoof bytes and all 18 Eripip assets are
+unchanged; the Eripip painter prefix is AST-identical. Only Kerazap and
+Kerastorm's derived sprite geometry changes, with no other metadata or
+gameplay changes. All shared player/human/effect/ball assets are retained.
+
+Helpers, build, original smoke (nine inspected captures), 38 combined source
+regressions and both species-aware native audits pass. All 99 compiled
+surface/palette assets across the eleven-species union match actual ROM
+bytes. Both genuine post-bike/current engine-loader galleries pass 230
+checks and 51 captures, including complete 2,048-byte front0/front1/back
+OBJ transfers and live normal/shiny palettes. Only the eight goat captures
+differ; all 43 retained full screenshots, including seven portraits, are
+pixel-identical. Complete native cards and all paired engine boards were
+inspected. These are renderer fixtures, not natural goat battles or follower
+playthroughs.
+
+Retained healing, water, unused-player and bicycle fixtures pass 7/37,
+13,448/320, 242/34 and 7,481/736 checks/captures respectively.
+ROM use is 23,038,528 bytes (68.66%), leaving 10,515,904 bytes; the GBA
+file is padded to 32 MiB. GBA SHA256:
+`871bf0ab2265c1eca4f702dddd0540c895f0569bc5be92a7cd630ee070500dec`.
+Matching ROM/ELF/map, source snapshot, logs and complete paired captures
+are preserved in `akti-goats-integrated`. Original graphics-source
+reconciliation reports 230 changed, no added/removed and 19,919 unchanged,
+not a completion percentage. The remaining 26 owned species and all
+unaccepted global groups still require work; this is scoped acceptance only.
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|

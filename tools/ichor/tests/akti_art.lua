@@ -20,6 +20,7 @@ local supported = {
   EOPEEP = true, ALEKROW = true, HOPLEKTOR = true,
   HARPECK = true, HARPELLE = true, EPOPOI = true,
   LOPHOPS = true, BASILOPS = true, GELASABLE = true,
+  KERAZAP = true, KERASTORM = true,
 }
 local selected = os.getenv("AKTI_ART_POKEMON")
 if selected then

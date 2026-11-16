@@ -17,14 +17,14 @@ import build
 
 NAMES = (
     "Eopeep", "Alekrow", "Hoplektor", "Harpeck", "Harpelle",
-    "Epopoi", "Lophops", "Basilops", "Gelasable",
+    "Epopoi", "Lophops", "Basilops", "Gelasable", "Kerazap", "Kerastorm",
 )
 
 
 class AktiSpeciesSpriteTests(unittest.TestCase):
     def test_all_views_reproduce_and_keep_distinct_animation_states(self):
         mons = build.load_mons()
-        for name in (*NAMES, "Galekit"):
+        for name in (*NAMES, "Galekit", "Eripip"):
             with self.subTest(species=name):
                 errors, warnings = [], []
                 built = build.build_mon(mons[name], errors, warnings)
@@ -75,6 +75,30 @@ class AktiSpeciesSpriteTests(unittest.TestCase):
                     .split("[SPECIES_", 1)[0]
                 )
                 self.assertEqual(int(re.search(r"\.iconPalIndex = (\d+)", entry)[1]), built.icon_pal)
+
+    def test_goat_miniatures_are_native_and_battle_grids_hand_finished(self):
+        mons = build.load_mons()
+        for name in ("Kerazap", "Kerastorm"):
+            for view in ("down", "up", "side", "icon"):
+                for phase in (0, 1):
+                    with self.subTest(species=name, view=view, phase=phase):
+                        first = build.render(mons[name], view, phase, W=32, H=32, s=0.2)
+                        second = build.render(mons[name], view, phase, W=32, H=32, s=0.7)
+                        np.testing.assert_array_equal(first, second)
+                        x0, y0, x1, y1 = build.bbox(first)
+                        self.assertGreater(x0, 0)
+                        self.assertGreater(y0, 0)
+                        self.assertLess(x1, 31)
+                        self.assertEqual(y1, 30)
+                        if name == "Kerastorm":
+                            self.assertEqual(np.count_nonzero(first == 15), 1)
+            for view, phase in (("front", 0), ("front", 1), ("back", 0)):
+                with self.subTest(species=name, view=view, phase=phase):
+                    finished = build.render(mons[name], view, phase)
+                    draft = build.render(mons[name], view, phase, art=False)
+                    self.assertGreater(np.count_nonzero(finished != draft), 20)
+                    if name == "Kerastorm":
+                        self.assertEqual(np.count_nonzero(finished == 15), 1)
 
     def test_geometry_matches_authoritative_sprite_generator(self):
         entries = {
