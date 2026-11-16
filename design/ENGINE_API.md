@@ -195,7 +195,11 @@ Teravolt and Turboblaze. In particular, Pyrrha's Narthip has Flash Fire: the
 pilot must not keep selecting Fire attacks merely because it is Grass-type.
 Its move-learning heuristic declines unused Howl, and preserves Yawn and unique attacks ahead of observed
 status moves or weaker redundant coverage. It attempts Yawn at most once per
-opposing party member in trainer battles. This is not a complete battle AI:
+opposing party member in trainer battles, skipping setup when a conservative
+damage estimate favors a one- or two-hit finish. Scoring includes burn's
+physical penalty (respecting the configured Facade exception), Guts and the
+one-third-HP thresholds for Blaze, Overgrow and Torrent.
+This is not a complete battle AI:
 accuracy, other abilities, variable-power moves and most tactical status/switch
 choices remain unmodeled. `slice_pilot_tactics.lua` checks these scoring rules,
 bounded Yawn and the Spartan battle-item ban without emulator memory access.
@@ -265,6 +269,11 @@ first summit battle, so it does not certify continuous passage or an ending.
 A separate resumed pre-Ione fixture verifies
 native Hard Stone GIVE and Euboulos's actual coal replacement while the
 starter still holds its booster; that is menu evidence, not chapter coverage.
+With useful-Yawn and status/ability scoring, Mortal/Kynder reaches `08_after`
+from NEW GAME: 275,043 frames, 48 battles, 520 screenshots. Hero/Kynder still
+loses to Ione (last foe 31 HP), as does Spartan/Hipling (last foe 19 HP).
+Those new attempts supersede neither older strategies' evidence nor the
+remaining matrix, intended-curve and repeatability gates.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.

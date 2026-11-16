@@ -72,6 +72,20 @@ return function(L, starter)
     if physical and ability == S.ABILITY_FUR_COAT then
       defense = defense * 2
     end
+    local status = emu:read32(S.gBattleMons + S.OFF_BATTLE_MON_STATUS)
+    if physical then
+      if ownAbility == S.ABILITY_GUTS and status ~= 0 then
+        attack = attack * 1.5
+      elseif status & S.STATUS1_BURN ~= 0 and (move ~= S.MOVE_FACADE or S.BURN_WEAKENS_FACADE ~= 0) then
+        attack = attack / 2
+      end
+    end
+    if emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_HP) * 3 <= emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MAXHP)
+       and ((ownAbility == S.ABILITY_BLAZE and kind == S.TYPE_FIRE)
+         or (ownAbility == S.ABILITY_OVERGROW and kind == S.TYPE_GRASS)
+         or (ownAbility == S.ABILITY_TORRENT and kind == S.TYPE_WATER)) then
+      score = score * 1.5
+    end
     L.expect(attack > 0 and defense > 0, "native battle stats are positive")
     score = score * attack / defense
     return score
@@ -110,7 +124,7 @@ return function(L, starter)
 
   function P.chooseMove()
     L.expect(S.MOVE_DESCRIPTION_BUTTON == S.L_BUTTON, "the native move-description button is L")
-    local selected, best = nil, -1
+    local selected, best, yawn = nil, -1, nil
     for slot = 0, S.MAX_MON_MOVES - 1 do
       local move = emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MOVES + slot * S.MOVE_ID_SIZE)
       local pp = emu:read8(S.gBattleMons + S.OFF_BATTLE_MON_PP + slot)
@@ -131,12 +145,20 @@ return function(L, starter)
         local foe = emu:read16(S.gBattlerPartyIndexes + S.BATTLER_PARTY_INDEX_SIZE)
         if move == S.MOVE_YAWN and L.isTrainerBattle() and not attemptedYawn[foe]
            and emu:read32(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_STATUS) == 0 then
-          score = 1000000
+          yawn = slot
         end
         if score >= best then selected, best = slot, score end
       end
     end
     L.expect(selected ~= nil, "the natural pilot found a move with real PP")
+    if yawn then
+      -- Yawn needs a setup turn; prefer a conservative two-hit finish.
+      local level = emu:read8(S.gBattleMons + S.OFF_BATTLE_MON_LEVEL)
+      local damage = best > 0 and math.floor(((2 * level // 5 + 2) * best / 50 + 2) * 0.85) or 0
+      if damage * 2 < emu:read16(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_HP) then
+        selected, best = yawn, 1000000
+      end
+    end
     P.moveCursor(selected)
     local foe = emu:read16(S.gBattlerPartyIndexes + S.BATTLER_PARTY_INDEX_SIZE)
     L.log(string.format("PILOT attack slot=%d move=%d score=%.2f foe_party=%d foe_hp=%d", selected,

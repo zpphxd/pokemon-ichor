@@ -432,7 +432,10 @@ established balance defects. An earlier Mortal/Kynder summit timeout was
 the harness counting both battles against its cutscene deadline, not an
 established engine lock. Separate battle/scene budgets let a resumed fixture
 complete the native scene; a new NEW GAME attempt instead loses its first
-summit battle. That fixture is not continuous or ending coverage. The remaining
+summit battle. That fixture is not continuous or ending coverage. With later
+useful-Yawn and status/ability scoring, Mortal/Kynder reaches the ending from
+NEW GAME too (48 battles); Hero/Kynder and Spartan/Hipling still lose at Ione.
+The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
 
