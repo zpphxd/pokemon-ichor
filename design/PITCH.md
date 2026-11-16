@@ -441,6 +441,12 @@ All three Emporion day-runners and Eleusa's north herald can send the post-endin
 letter. Mom answers with exactly three Honey, once, with an atomic full-Bag
 refusal and saved pending/claimed state. The reserved story jar and her healing
 offer are unchanged.
+Halia and Gylippos acknowledge the revelation and Kleon's departure on return.
+Daphne describes packing before the Mysteries and no longer appears at the home
+Akademia after that night. Euboulos replaces missing Charcoal after the Hearth
+Trial until the forge is relit, without duplicating an owned piece; a full Bag
+can be retried. The original opening and home whiteout/healing remain playable
+for all three starters.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot

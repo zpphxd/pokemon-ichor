@@ -80,6 +80,9 @@ saves whose new var is zero. The bedroom's confirmed selection is save-fixed.
 General offset 0x02C is `FLAG_ICHOR_GOT_MOMS_HONEY`, the one-time three-Honey
 return-home gift after the Act I ending and letter. It is set only after the
 whole gift fits; `FLAG_ICHOR_WROTE_TO_MOM` independently records the sent letter.
+General offset 0x02D is `FLAG_ICHOR_HIDE_DAPHNE_AKADEMIA`. The Akademia transition
+sets it after `FLAG_ICHOR_MYSTERIES_NIGHT`, preventing duplicate home/mainland
+appearances; earlier visits clear it.
 Isthmus excavation uses daily dig indices 4 (kilns) and 5 (hill spur), and fixed
 find index 1 (family tomb, Girdle-gated). All belong to the Arachne amphora.
 These are offsets in the reserved dig ranges, not the general flag range.
