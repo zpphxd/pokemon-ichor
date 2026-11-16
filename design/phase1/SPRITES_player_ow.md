@@ -41,7 +41,8 @@ Walking, running, fishing, field-move and surfing sheets were regenerated in
 the 2026-11-15 Elaia native pass with a cleaner petasos contour and eye glints.
 All their motion frames are distinct and match their source arrays.
 
-Bike sheets remain retained and unchanged. Watering/decorating art landed
+Bike sheets have a separate native rider checkpoint below; their systems
+remain retired. Watering/decorating art landed
 separately at `4133f17748`; these unused systems were not enabled. Underwater
 now has an Ichor-native follow-on in its existing `player_underwater.pal`,
 described below.
@@ -87,6 +88,62 @@ not ordinary gameplay or proof of controller eligibility. Three source
 regressions, four native PNG checks, helper/build and original smoke pass.
 Complete palette-correct 1x/4x comparisons and matching ROM/ELF/map packages
 are preserved in the coordinator's session artifacts.
+
+## Retained bicycle rider follow-on
+
+`python3 tools/ichor/art/player_bikes.py --write --check` writes exactly
+the four existing `mach_bike.png`/`acro_bike.png` sheets. The private painter
+uses the accepted Theo/Ianthe hats, faces and role maps read-only, with
+authored gripping bodies, bent knees and alternating pedal phases. Private
+base atlases preserve the bicycles, contact planes and raised-wheel/
+handlebar parts; new riders may occlude parts behind them. This is not a
+recolor of Brendan/May bodies or a new Greek vehicle.
+
+Each Mach atlas remains 288x32 with nine 32x32 source frames; each Acro atlas
+remains 864x32 with 27, for 72 source frames total. The player palettes are
+unchanged, including all sixteen hardware color roles. PNGs are indexed
+4bpp with transparent index 0 and exact BGR555 display colors.
+`test_player_bikes.py` checks source reproduction, every retained bicycle
+contact plane, accepted faces and distinct ordinary/wheelie pedal phases.
+
+The original engine contracts are retained: the single relative-frame
+image table transfers 512 bytes per source frame; Mach uses 20 standard
+animations, Acro 40 standard/hop/standing-wheelie/moving-wheelie animations.
+The four retained rival graphics IDs alias the same atlases. No source frame
+is unused by these tables. East mirrors west in hardware; no vertical flip
+is introduced. All production tables, callbacks, anchors and eligibility
+code remain unchanged.
+
+`bash tools/ichor/tests/player_bikes.sh [ROM.gba]` exercises all eight real
+player/rival graphics IDs in a test-only NPC fixture. The exact paired
+`7d17b62e9a` baseline and new ROM each pass 7,481 checks with 736 captures:
+240 graphics/animation cases, every ordered phase, all source frames, all
+live palette words/tags, full OBJ VRAM transfers, mirrors, finite ends and
+loop cycles. The fixture holds the NPC callback idle; it does **not**
+exercise bike controllers or prove bikes available in Aethos.
+The walking observer's randomized Quickstart identity is fixed only in the
+fixture so full-screen before/after backgrounds match.
+
+For complete 1x/4x native and engine comparisons, pass `--preview DIR`,
+`--engine-before BEFORE_RUN` and `--engine-after AFTER_RUN` to the painter.
+The comparison gate requires all 736 paired phases and matching OAM
+anchors, and rejects any difference outside the forced bike sprite.
+Helper/build, 26 source/audit regressions and nine-capture smoke pass;
+ROM usage is 23,039,520 bytes
+(68.66%). Artistic approval and serial main integration remain the
+coordinator's gate. Bike items, tire tracks, shop tiles and the retirement
+policy are untouched; other global/town groups remain open.
+
+The coordinator subsequently accepted source `36f4207c6c` and independently
+integrated it after nine-species main `4d0a21d8fe`. Both matching combined
+ROMs pass the same 7,481-check/736-capture fixture and complete comparison
+gate; all native cards, all 240 case boards and smoke captures were inspected.
+The four compiled atlases match ROM bytes, and every byte outside their
+ranges remains identical to the baseline. Combined source regressions
+pass 37 tests. Healing, water, spare-player and nine-species fixtures still
+pass; use remains 23,039,552 bytes (68.66%), with the GBA padded to 32 MiB.
+This is scoped rider-art acceptance, not restored bicycle gameplay or
+whole-town/global completion.
 
 ## Native underwater follow-on
 
@@ -157,9 +214,8 @@ Only Theo has a chlamys highlight; Ianthe's chlamys uses two shades because `may
 
 ## Side effects on the untouched sheets
 
-These still use Brendan's and May's art, so they now draw in the new colors:
-- **Brendan's bike sheets:** the white beanie turns cream, the navy clothes Aegean blue, the green band straw-gold, the red trim terracotta.
-- **May's bike sheets:** the green bandana turns straw-gold, the brown hair stays brown, the gray knot and dark shorts turn Aegean blue.
+The retained bicycle checkpoint replaces the stock player bodies rather
+than relying on the original beanie/bandana recolor. Remaining shared uses:
 - **Rival Brendan and May** (`OBJ_EVENT_GFX_RIVAL_*`) and the **link players** take the same colors. Ichor's rival is Kleon, so the rivals should not appear in the slice.
 - **The "!" and "?" emotes** above trainers use `may.pal` 14 and 15: cream with ink, nearly as before.
 - **Reflections** are filtered from the live palette by the engine, so they follow automatically.

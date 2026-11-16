@@ -15,7 +15,7 @@ new higher-quality art direction.
 | Theo/Ianthe and Alethea animated battle backs | Profile/eye detail, matched palettes; all four throw frames retained and distinct | Opening player throw captured; native checks cover all sheets, not later tutorial/throw contexts |
 | Player walking, running, fishing, relic raise and surfing | All ten sheets regenerated from the shared native hats/faces; no opaque palette-role changes | Both genders' walk/run captures pass; fishing, surfing and relic tables now have labeled engine-state captures, not proof of early-game controller eligibility |
 | Player underwater | Both 128x32 sheets redrawn with wide bent arms, splayed kicking knees and a leaning profile; shared Theo/Ianthe identity parts and `player_underwater.pal` preserved | Pose/source/native checks and forced real-ROM state/bob/VRAM coverage pass; fourth source frame remains unused by the standard image table, and Dive eligibility/controller is not exercised |
-| Player bikes | Unchanged | Unused by current Aethos design; retain in the full-rollout inventory rather than silently deleting |
+| Player bikes | Four native Theo/Ianthe rider sheets, 72 source frames; private painter preserves retained bicycle contact planes/raised parts and exact player palettes | Artistically accepted at scoped source checkpoint `36f4207c6c`; independent combined renderer fixtures pass 7,481 checks/736 captures. Retired bike availability/controllers, items, tracks and shop art are unchanged |
 | Player watering and decorating | Four native sheets replace recolored Brendan/May with Theo/Ianthe's established faces/clothing, a handled clay watering jug and crouched decorating pose | Source/native checks and matching 242-check/34-capture engine fixtures pass; gameplay availability/controllers/shared palettes unchanged; these unused systems are not enabled |
 | Kleon, Daphne, Alethea walkers | Native hair/headband/eye details; nine existing engine frames each | Native checks and current Elaia/Akademia captures pass |
 | Halia, Korinna, Philon, Gylippos, woman, man/scribe, harvester, kid, shepherd, fisher, Kydippe and Melitta | Twelve shared sheets get native shoulder/waist/hem construction and Kydippe's shawl folds; costumes, props, frame indices and folk/cast palette budgets preserved | Native checks and current opening/interior captures pass; this is a polish pass, not twelve wholly new character concepts |
@@ -129,6 +129,64 @@ unused-player source checks, and 22 audit/unused-player regressions pass.
 ROM usage remains 23,040,960 bytes (68.67%). The refined native swimming
 poses and retained dolphin are artistically accepted; independent integration
 remains the coordinator's gate, not a full-town completion claim.
+
+**Bounded retained-bike follow-on:** based on canonical `main` at
+`7d17b62e9a`, only the four player `mach_bike.png`/`acro_bike.png` graphics
+change. `player_bikes.py` is a private painter/checker, using read-only
+accepted identity parts and explicit retained bicycle layers. All 72
+source frames, atlas sizes, relative-frame tables, player/rival aliases,
+animations, callbacks and palette files are retained. Ordinary pedaling
+and moving-wheelie knee phases remain distinct.
+
+The exact baseline and new ROM each pass 7,481 assertions and 736 captures
+across 240 graphics/animation cases, including every ordered source phase,
+hardware east mirror, full native OBJ VRAM transfers, all live palette
+words/tags and finite/loop contracts. Complete 1x/4x native and real-ROM
+comparisons require identical anchors and unchanged pixels outside the
+forced bike sprite. These are idle-callback renderer fixtures in the
+bedroom, **not controller gameplay**; the observer's Quickstart identity
+is fixed only in test RAM. Helper/build, 26 source/audit regressions and
+smoke (9 captures) pass.
+ROM usage is 23,039,520 bytes (68.66%).
+
+This checkpoint does not enable bikes, allocate a Greek replacement
+vehicle, change the retirement policy, or redraw bike items/tracks/shop
+tiles. Accepted water/watering/decorating/healing and ball-owned assets
+are untouched. Terrain/furniture, other door/water animations, UI/item/
+trade and other retained/global groups remain open; there is no whole-town
+or global completion claim. Artistic approval and serial landing remain
+the coordinator's gate.
+
+**Coordinator retained-bike integration verification:** accepted source
+`36f4207c6c` is integrated after nine-species main `4d0a21d8fe`, without
+reapplying its clean-boundary merge or earlier water/effect equivalents.
+Only the four assigned production PNGs change. All four private input
+atlases match the exact pre-redraw sources; the 72 contact planes, identity
+faces, frame counts and pedal distinctions pass their regressions.
+Helpers, build, original smoke (nine inspected captures), 37 combined
+source regressions and all four native image gates pass.
+
+Both genuine post-nine/current ROMs pass 7,481 assertions and 736 captures
+across all 240 player/rival animation cases. Every phase's complete 512-byte
+OBJ transfer, dynamic palette, mirror, finite ending and loop cycle is
+verified. All paired anchors match, with no changed pixels outside the
+forced rider bounds. All four complete native cards and all 240 matched
+engine case boards were inspected. These remain test-only bedroom renderer
+fixtures, not bicycle-controller gameplay or eligibility proof.
+
+All four complete compiled atlases match actual ROM bytes. Compared with
+the nine-species baseline, exactly 9,166 bytes change inside those four
+atlas ranges; every other byte of the padded ROM and the complete linker
+map is identical. The retained healing, water, unused-player and
+nine-species fixtures pass 7/37, 13,448/320, 242/34 and 192/43
+checks/captures respectively. ROM use remains 23,039,552 bytes (68.66%);
+the distributed GBA is padded to 33,554,432 bytes. GBA SHA256:
+`5f796528804400cbd9c4253500f56db8ff211961cf6f0e915b0ca4e4dcde9153`.
+Matching ROM/ELF/map, source snapshots, logs and all raw paired captures
+are preserved in `player-bikes-integrated`. Original graphics-source
+reconciliation reports 222 changed, no added/removed and 19,927 unchanged,
+not a completion percentage. This accepts four retained rider sheets only;
+bike policy, items/tracks/shop and the full sprite rollout remain open.
 
 **Coordinator water integration verification:** source `f786a9ad25` and
 accepted pose follow-up `4011f16e92` are applied without the housekeeping
@@ -501,7 +559,7 @@ still unfinished; this is not whole-town acceptance.
 | Theo and Ianthe: walking, running (Talaria wings), fishing (Old Rod), field-move (relic raise) | `graphics/object_events/pics/people/brendan/`, `.../may/`, `tools/ichor/art/sprites_player_ow.py`, `design/phase1/SPRITES_player_ow.md` | Greek | 1 | 4 of the 10 sheets each, and the surfing sheet below. The folders keep Brendan's and May's names and palettes (`brendan.pal`, `may.pal`), which also color the rival and link-player sprites. |
 | Theo and Ianthe: surfing | `.../brendan/surfing.png`, `.../may/surfing.png` | Greek | 1 | Theo and Ianthe ride a Minoan dolphin (`surf_poses.py`, `surf_blob.png`, `FIELD_EFFECTS.md`). Poseidon's Conch, the relic that grants it, does not exist yet (§6). |
 | Theo and Ianthe: underwater (Dive) | `.../underwater.png`, `tools/ichor/art/player_underwater.py` | Greek art / late state | 5 | Native swimming bodies landed at `c6b66c5daa`; all four source frames and the existing three-frame engine aliases/palette retained. Forced renderer evidence is not Atlantis traversal or Nereid Pearl eligibility. |
-| Mach Bike and Acro Bike | `.../mach_bike.png`, `.../acro_bike.png`, `graphics/field_effects/pics/bike_tire_tracks.png`, `bike_shop` tileset | Cut | 6 | `SPRITES_player_ow.md` says Aethos has no bikes. The bible does not list a bike. Needs a director decision, including the three bike key items and the `bike_shop` maps. |
+| Mach Bike and Acro Bike | `.../mach_bike.png`, `.../acro_bike.png`, `graphics/field_effects/pics/bike_tire_tracks.png`, `bike_shop` tileset | Native rider art / retired system | 6 | Four retained rider sheets have a bounded native checkpoint with unchanged engine contracts; no bikes enabled. Retirement policy, bike key items, tire tracks and shop maps/tiles remain untouched and outside this art checkpoint. |
 | Watering and decorating poses | `.../watering.png`, `.../decorating.png` | Greek art / unused | 6 | Four native Theo/Ianthe sheets implemented at `4133f17748`; systems remain unavailable. Earlier retirement proposal is still tied to the berry/secret-base decisions, not enacted by this art checkpoint. |
 | Ruby/Sapphire and FRLG player sheets | `.../people/ruby_sapphire_brendan/`, `ruby_sapphire_may/`, `rs_brendan.png`, `rs_may.png`, `leaf/`, `red/` | Cut | 6 | Never used by Aethos. |
 | Player battle back pics | `graphics/trainers/back_pics/brendan.png`, `may.png`, `graphics/trainers/palettes/brendan.pal`, `may.pal`, `design/phase1/SPRITES_player.md` | Greek | 1 | Theo and Ianthe with throw animation. |
