@@ -10,6 +10,7 @@
 // data/scripts/ichor_rites.pory holds the altar scripts; the specials and the
 // blessing hooks the engine calls are here.
 #include "global.h"
+#include "ichor_star_chart.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
@@ -302,6 +303,13 @@ void Ichor_AddFavorTo(u32 god, u32 amount)
         return;
     favor = gIchorSave.favor[god] + amount;
     gIchorSave.favor[god] = min(favor, ICHOR_FAVOR_MAX);
+    if (gIchorSave.favor[god] >= 30)
+    {
+        if (god == ICHOR_GOD_ARTEMIS)
+            Ichor_PlaceStar(ICHOR_STAR_ORION);
+        else if (god == ICHOR_GOD_HERA)
+            Ichor_PlaceStar(ICHOR_STAR_CANCER);
+    }
 }
 
 // special Ichor_AddFavor: VAR_0x8004 god, VAR_0x8005 amount. Favor never drops.

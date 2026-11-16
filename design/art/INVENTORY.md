@@ -767,7 +767,8 @@ The Aethos regional dex of about 150 species is designed separately in `design/d
 | Dex diploma | `graphics/diploma/` (Hoenn and National palettes), `src/diploma.c` | Hoenn | 4 | Signed PROF. DAPHNE now (§7). The art is Emerald's. |
 | Wall clock | `graphics/wallclock/`, `src/wallclock.c` | Greek | 1 | The klepsydra (`UI_world.md`). |
 | DexNav (the Augur's Eye) | `graphics/dexnav/` (9), `src/dexnav.c`, `include/config/dexnav.h` | Greek | 1 | An augur's tablet (`design/phase1/UI_remnants.md`, QA P5). The register line still reads the expansion's "R TO REGISTER!". |
-| Scroll of Deeds (quest log) | not in the ROM | New | 3 | PITCH §5 promises it. No quest-log code exists. |
+| Scroll of Deeds (quest log) | `src/ichor_deeds.c`, `data/scripts/ichor_deeds.pory`, start-menu DEEDS | Greek | 3 | Playable text pages on the shared pottery frame: Act I receipts, amphora leads, herms, Stylus hints and calendar. No separate scroll illustration or key-item icon. Later-chapter pages remain. |
+| Star Chart screen | `src/ichor_star_chart.c`, key-item Bag USE | Greek | 3 | Original parchment and 24 line patterns on three BG layers, with gold palette twinkling. Unplaced patches stay empty. Outdoor seats and reward scenes remain; the Bag item icon is still the upstream Town Map stand-in. |
 | Difficulty select and the Oath of the Styx | not in the ROM as screens | New | 1 | The bible's four difficulties and the Nuzlocke oath need a new-game screen. `include/constants/difficulty.h` exists. |
 | Laurel case | not in the ROM | New | 1 | ART_PLAN §5. Could share the trainer card's laurel art. |
 | Save prompt and save info panel | `src/start_menu.c`, `src/strings.c:957` (`gText_SavingBadges`), `data/text/save.inc` | Greek | 1 | PLAYER, LAURELS and TIME on the pottery frame, with the place in the dialogue red. |

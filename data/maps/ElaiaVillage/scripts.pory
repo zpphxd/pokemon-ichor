@@ -241,7 +241,12 @@ script ElaiaVillage_EventScript_Halia {
     }
     faceplayer
     setspeaker(ElaiaVillage_Name_Halia)
-    if (flag(FLAG_ICHOR_HALIA_SECOND_LOOK)) {
+    if (flag(FLAG_ICHOR_DAPHNE_REVELATION)) {
+        msgbox(format("So Daphne told you. I'm glad it was her and not me.\p"
+                      "Your thread's your own business. I meant it more than I knew."))
+    } elif (flag(FLAG_ICHOR_HALIA_SECOND_LOOK) && flag(FLAG_ICHOR_CROSSING_DONE)) {
+        msgbox(format("Back already? No. I won't look again. Four times is enough for anyone."))
+    } elif (flag(FLAG_ICHOR_HALIA_SECOND_LOOK)) {
         msgbox(format("Go on. The wind won't wait, and neither will your mother."))
     } elif (flag(FLAG_ICHOR_GOT_STARTER)) {
         msgbox(format("Daphne found you a partner? Good.\pWhatever's on your thread, you won't walk it alone."))
@@ -493,7 +498,11 @@ script ElaiaVillage_EventScript_Gylippos {
     lock
     faceplayer
     setspeaker(ElaiaVillage_Name_Gylippos)
-    if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
+    if (flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA)) {
+        msgbox(format("The boy went north. To the theater.\p"
+                      "…\p"
+                      "He wants an audience. He'll get one."))
+    } elif (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
         msgbox(format("The boy talks enough for all of Lakonia. Someone must."))
     } else {
         msgbox(format("Lakonians speak little."))

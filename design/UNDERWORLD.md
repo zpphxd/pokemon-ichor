@@ -638,7 +638,9 @@ At the Crossroads, the Judges each pick one line from a list, by the first condi
 
 ### Your fallen: the Riverside of the Oath
 
-**Only on an Oath of the Styx run.** The Oath is PITCH §5's optional Nuzlocke, and nobody has specified it yet. This feature needs one thing from whoever does:
+**Only on an Oath of the Styx run.** The core optional Nuzlocke and opening
+choice are implemented (PITCH §5, ENGINE_API §11); this Riverside scene is
+still future Underworld chapter work. It depends on the preserved Urn:
 
 > **Requirement for the Oath's spec:** when a Pokémon faints under the Oath, move it to a locked Pithos jar, **the Urn**, rather than releasing it. The Urn keeps species, nickname, level and met location.
 
@@ -1483,7 +1485,9 @@ RHEA: I'm saying them now. Sit down. Fewer words won't do for this one.
 2. **§10, E11:** E11's shade takes the Elaia well-coin, and at Charon's landing the fare is already paid (§4.4).
 3. **§16.5:** Minos holds the Helm during the Katabasis; Hades returns it; the Helm of Hades upgrade stays Hades's Favor-60 gift.
 
-**For whoever specifies the Oath of the Styx:** fallen Pokémon go to a locked jar, the Urn (§5).
+**For the Oath's Underworld integration:** fallen Pokémon already go to locked
+Urn jars (ENGINE_API §11). The Riverside presentation and Charon's release
+choice remain to be built (§5).
 
 ---
 

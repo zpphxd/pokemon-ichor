@@ -1,10 +1,11 @@
 """Ichor's item icons (24x24, graphics/items/icons) and their palettes.
 
 Usage:
-    /usr/bin/python3 tools/ichor/art/items.py [--write] [--preview DIR]
+    /usr/bin/python3 tools/ichor/art/items.py [--write] [--only PIC] [--preview DIR]
 
 --write    rewrites the icon PNGs and palettes this file owns, keeping every
            item that shares a pic or a palette consistent
+--only PIC limits --write to one icon PNG and its associated palettes
 --preview  writes DIR/items_icons.png (before and after at 4x and 1x, on the
            bag's parchment plate and on clay) and DIR/items_icons_tm.png (the
            sealed scroll and the tablet in all 19 type colors)
@@ -1156,6 +1157,29 @@ def _augurs_eye():
     return ic
 
 
+@icon("star_chart", {
+    "star_chart": pal(ramp_roles("p", [C["lp_d"], C["lp_m"], C["lp_l"]]),
+                      b=C["ae_d"], l=C["ae_m"], g=C["sg_l"], h=C["sg_p"]),
+}, labels={"star_chart": "Star Chart"})
+def _star_chart():
+    ic = Icon("K p1 p2 p3 b l g h")
+    paper = ic.poly([(4, 3), (20, 3), (19, 20), (4, 20)])
+    ic.shade(paper, ["p1", "p2", "p3"], kind="cyl")
+    ic.outline(paper)
+    sky = ic.poly([(6, 6), (17, 6), (17, 16), (6, 17)])
+    ic.fill(sky, "b")
+    for start, end in (((8, 10), (12, 8)), ((12, 8), (15, 13)), ((15, 13), (10, 15))):
+        ic.line(*start, *end, "l")
+    ic.pxs([(8, 10), (15, 13), (10, 15)], "g")
+    ic.pxs([(11, 8), (13, 8), (12, 7), (12, 9)], "g")
+    ic.px(12, 8, "h")
+    for y in (3, 20):
+        roll = ic.tube((3, y), (20, y), 1.5, ["p1", "p2", "p3"], caps=True)
+        ic.outline(roll)
+        ic.line(4, y - 1, 19, y - 1, "p3")
+    return ic
+
+
 @icon("ichor_codex", {
     "ichor_codex": pal(ramp_roles("w", [C["wd_d"], C["wd_m"], C["wd_l"]]),
                        x1=(40, 32, 24), x2=(88, 72, 48), c=C["tc_m"], g=C["sg_l"], ln=C["lp_l"]),
@@ -1311,13 +1335,15 @@ def check_sharing():
     return ok
 
 
-def write_all():
-    for pic, ic in PICS.items():
+def write_all(only=None):
+    pics = PICS if only is None else {only: PICS[only]}
+    palettes = PALETTES if only is None else {stem: PALETTES[stem] for stem in PIC_PALS[only]}
+    for pic, ic in pics.items():
         first = PALETTES[PIC_PALS[pic][0]][1]
         save_indexed(ic.a, palette_colors(ic.roles, first), os.path.join(ICONS, pic + ".png"))
-    for stem, (roles, cols) in PALETTES.items():
+    for stem, (roles, cols) in palettes.items():
         write_jasc(os.path.join(PALS, stem + ".pal"), palette_colors(roles, cols))
-    print(f"items.py: wrote {len(PICS)} pics and {len(PALETTES)} palettes")
+    print(f"items.py: wrote {len(pics)} pics and {len(palettes)} palettes")
 
 
 def git_original(path):
@@ -1459,13 +1485,17 @@ def preview_jar(outdir):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--only", choices=sorted(PICS))
     ap.add_argument("--preview")
     args = ap.parse_args()
+    if args.only and not args.write:
+        ap.error("--only requires --write")
     if not check_sharing():
         sys.exit(1)
     if args.write:
-        write_all()
-        write_jar()
+        write_all(args.only)
+        if args.only is None:
+            write_jar()
     if args.preview:
         preview(args.preview)
         preview_jar(args.preview)

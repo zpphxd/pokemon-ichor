@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "item_use.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1130,7 +1131,9 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 static u32 GetBallThrowableState(void)
 {
-    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+    if (!Ichor_CanCatchOathBattle())
+        return BALL_THROW_UNABLE_OATH;
+    else if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
      && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
         return BALL_THROW_UNABLE_TWO_MONS;
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
@@ -1151,6 +1154,7 @@ bool32 CanThrowBall(void)
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be used\nright now!\p");
+static const u8 sText_CantThrowPokeBall_Oath[] = _("The Styx grants one chance here.\nThat chance has already passed.\p");
 
 static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
@@ -1255,6 +1259,10 @@ bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon)
     case EFFECT_ITEM_THROW_BALL:
         switch (GetBallThrowableState())
         {
+        case BALL_THROW_UNABLE_OATH:
+            failStr = sText_CantThrowPokeBall_Oath;
+            cannotUse = TRUE;
+            break;
         case BALL_THROW_UNABLE_TWO_MONS:
             failStr = sText_CantThrowPokeBall_TwoMons;
             cannotUse = TRUE;
@@ -1308,7 +1316,12 @@ bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_REVIVE:
-        if (hp != 0)
+        if (mon != NULL && Ichor_IsOathFallen(&mon->box))
+        {
+            failStr = COMPOUND_STRING("The Styx does not return\nfallen partners.");
+            cannotUse = TRUE;
+        }
+        else if (hp != 0)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_RESTORE_PP:

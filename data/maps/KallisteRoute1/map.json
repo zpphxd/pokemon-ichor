@@ -322,6 +322,14 @@
       "script": "KallisteRoute1_EventScript_HermNorth"
     },
     {
+      "type": "sign",
+      "x": 23,
+      "y": 26,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KallisteRoute1_EventScript_DigTerraces"
+    },
+    {
       "type": "hidden_item",
       "x": 4,
       "y": 25,

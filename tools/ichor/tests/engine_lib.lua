@@ -18,6 +18,8 @@ local L = dofile("tools/ichor/tests/slice_lib.lua")
 L.init{ tag = TAG, out = OUT, symbols = OUT .. "symbols.lua" }
 local S, K, emu = L.S, L.K, L.emu
 for k, v in pairs(dofile(OUT .. "engine_symbols.lua")) do S[k] = v end
+-- VAR_RESULT has a named linker symbol rather than a hexadecimal suffix.
+S["gSpecialVar_0x" .. string.format("%04X", S.VAR_RESULT)] = S.gSpecialVar_Result
 L.OUT, L.TAG = OUT, TAG
 
 -- --- The setup blob ---------------------------------------------------------------------------

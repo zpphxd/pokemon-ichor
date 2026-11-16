@@ -48,6 +48,10 @@ Hidden items can take these bank flags too (`claim.py hiddenitem`; see `asm/macr
 These indices are inside the engine's reserved dig ranges, not the general bank
 offsets above. Do not assign them to another find.
 
+General bank offset 0x02E is `FLAG_ICHOR_GOT_AMPHORA_PATCH`, the one-time
+Ability Patch on Daphne's shelf after all twelve amphorae are restored.
+It is independent of sherd collection and the reserved restored-amphora bank.
+
 | Kind | Index | Location | Find |
 |---|---|---|---|
 | Fixed (`FLAG_ICHOR_DIG_FIXED_START`) | 0 | Emporion Harbor's quay planter | First available Arachne sherd |
@@ -55,6 +59,9 @@ offsets above. Do not assign them to another find.
 | Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 1 | Emporion's Hephaisteion garden | Act I loot, including Arachne sherds |
 | Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 2 | Eleusa's west field | Act I loot, including Persephone sherds |
 | Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 3 | Eleusa's east meadow | Act I loot, including Persephone sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 6 | Kronion Hill's pried-up slabs (8,6) | Act I loot, including Kronos sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 7 | Route 1's bee terraces (23,26) | Act I loot, including Kronos sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 8 | Akti's beach shells (25,9) | Act I loot, including Kronos sherds |
 
 Herm id 25 is Emporion's crossroads town anchor. It uses the reserved Aethos
 herm bank but does not count toward the 23-route completion reward. Its Wings
@@ -65,7 +72,8 @@ Daily general offset 0x40 is `FLAG_DAILY_ICHOR_AUGURY_READ`: one shared
 reading/blessing entitlement per day, retained across map changes.
 
 General bank offset 0x08E is `FLAG_ICHOR_HIDE_OMEN_KORANTHA`, Eleusa's rare
-visitor at (32,35). Visitor id 2 preserves the reserved Act II visitor ids 0/1.
+visitor at (17,35), in the reachable wheat rather than the sealed Rharian field.
+Visitor id 2 preserves the reserved Act II visitor ids 0/1.
 The daily omen clears this hide flag only for a matching visit; capture/defeat
 sets it again, while escape/loss leaves it available.
 General bank offset 0x08F is `FLAG_ICHOR_HIDE_OMEN_PITHOUND`, visitor id 3.
@@ -80,6 +88,14 @@ saves whose new var is zero. The bedroom's confirmed selection is save-fixed.
 General offset 0x02C is `FLAG_ICHOR_GOT_MOMS_HONEY`, the one-time three-Honey
 return-home gift after the Act I ending and letter. It is set only after the
 whole gift fits; `FLAG_ICHOR_WROTE_TO_MOM` independently records the sent letter.
+General offset 0x02D is `FLAG_ICHOR_HIDE_DAPHNE_AKADEMIA`. The Akademia transition
+sets it after `FLAG_ICHOR_MYSTERIES_NIGHT`, preventing duplicate home/mainland
+appearances; earlier visits clear it.
+General offsets 0x02F/0x030 are `FLAG_ICHOR_KRONION_ALTAR_STONE` and
+`FLAG_ICHOR_ELEUSA_PERSENYX`, permanent capture/victory receipts for the
+restored-amphora encounters. Offset 0x031 is
+`FLAG_ICHOR_HIDE_AMPHORA_PERSENYX`, derived from restoration, the receipt and
+dusk; it is not the encounter's completion state or a daily omen flag.
 Isthmus excavation uses daily dig indices 4 (kilns) and 5 (hill spur), and fixed
 find index 1 (family tomb, Girdle-gated). All belong to the Arachne amphora.
 These are offsets in the reserved dig ranges, not the general flag range.

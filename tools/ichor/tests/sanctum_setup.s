@@ -54,6 +54,7 @@ SanctumTest_Setup:
 	additem ITEM_HECATES_TORCH
 	additem ITEM_ALETHEAS_TROWEL
 	setflag FLAG_ICHOR_LESSER_MYSTERIES_DONE
+	setflag FLAG_ICHOR_MYSTERIES_NIGHT
 	setflag FLAG_ICHOR_BRAZIERS_START + 0x10
 	setflag FLAG_ICHOR_BRAZIERS_START + 0x11
 	setflag FLAG_ICHOR_BRAZIERS_START + 0x12
@@ -80,5 +81,22 @@ SanctumTest_Save:
 	lockall
 	setvar VAR_TEMP_F, 1
 	special SaveGame
+	releaseall
+	end
+
+	test_header SanctumTest_BrightHallHeader, SanctumTest_BrightHall
+SanctumTest_BrightHall:
+	lockall
+	setvar VAR_TEMP_F, 1
+	animateflash 0
+	setflashlevel 0
+	releaseall
+	end
+
+	test_header SanctumTest_FlickerHeader, SanctumTest_Flicker
+SanctumTest_Flicker:
+	lockall
+	setvar VAR_TEMP_F, 1
+	call EleusaVillage_TempleOfDemeter_EventScript_FlickerRevelationLamp
 	releaseall
 	end

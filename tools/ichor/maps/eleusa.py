@@ -635,8 +635,10 @@ OBJECTS = [
      "FLAG_ICHOR_ELEUSA_VINES_MIDEAST_CUT"),
     ("VINES_EAST", "OBJ_EVENT_GFX_CUTTABLE_TREE", 47, 9, "DOWN", "@EventScript_CutTree",
      "FLAG_ICHOR_ELEUSA_VINES_EAST_CUT"),
-    ("OMEN_KORANTHA", "OBJ_EVENT_GFX_SPECIES(KORANTHA)", 32, 35, "LEFT", "OmenKorantha",
+    ("OMEN_KORANTHA", "OBJ_EVENT_GFX_SPECIES(KORANTHA)", 17, 35, "LEFT", "OmenKorantha",
      "FLAG_ICHOR_HIDE_OMEN_KORANTHA"),
+    ("AMPHORA_PERSENYX", "OBJ_EVENT_GFX_SPECIES(PERSENYX)", 37, 33, "LEFT", "AmphoraPersenyx",
+     "FLAG_ICHOR_HIDE_AMPHORA_PERSENYX"),
 ]
 # Krokis's gate (beat 19): a coord trigger across the Sacred Way just inside the west
 # entrance, two steps short of her stool. It plays once (VAR_TEMP_8 is 1 once the

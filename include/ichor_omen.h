@@ -21,5 +21,8 @@ struct IchorOmenEntry
 
 void Ichor_OmenNewDay(void);  // ichor_save.c, Ichor_DoDailyEvents
 void Ichor_DrawOmen(u32 seed); // the draw itself, for the C tests
+void Ichor_OmenFieldFrame(void);
+void Ichor_SetOmenWeather(void);
+void Ichor_SetPersephoneVisitor(void);
 
 #endif // GUARD_ICHOR_OMEN_H

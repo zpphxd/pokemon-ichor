@@ -348,10 +348,133 @@ local function climb()
   expect(L.objectAt(L.npc(B1 .. "Chloe").localId) == nil, "Chloe has left the stair")
 end
 
+local function checkLampScene(branch)
+  expect(flash() == S.FLASH_LAMP, branch .. ": the steps' lamp fixes the light independently of the player's Torch")
+  expect(tile(13, 23) == S.MT_HALL_LAMP_LIT, branch .. ": a real clay lamp burns beside Daphne")
+  expect(tile(6, 24) == S.MT_HALL_LAMP_COLD and tile(9, 9) == S.MT_HALL_LAMP_COLD,
+         branch .. ": the acolytes' other lamps are cold")
+  expect(tile(2, 6) == S.MT_HALL_BRAZIER_COLD_00 and tile(24, 6) == S.MT_HALL_BRAZIER_COLD_00,
+         branch .. ": neither back brazier burns during the revelation")
+  expect(tile(2, 21) == S.MT_HALL_FLOOR and tile(24, 21) == S.MT_HALL_FLOOR,
+         branch .. ": the front braziers remain knocked off their stands")
+  local lamps, otherFlames = 0, 0
+  for y = 0, 26 do
+    for x = 0, 26 do
+      local metatile = tile(x, y)
+      if metatile == S.MT_HALL_LAMP_LIT then lamps = lamps + 1 end
+      if metatile == S.MT_HALL_BRAZIER_LIT_00 or metatile == S.MT_HALL_COLUMN_LIT
+         or metatile == S.MT_HALL_SCONCE_LIT or metatile == S.MT_HALL_NICHE_LIT then
+        otherFlames = otherFlames + 1
+      end
+    end
+  end
+  expect(lamps == 1 and otherFlames == 0, branch .. ": exactly one lamp and no other flames burn in all 27x27 cells")
+  for i = 0, 3 do
+    expect(L.getFlag(S.FLAG_HALL_BRAZIERS + i), branch .. ": the solved brazier " .. i .. " stays saved")
+  end
+  if branch == "how" then
+    expect(not L.getFlag(S.FLAG_TORCH_DOUSED) and L.getFlag(S.FLAG_TORCH_UPGRADE)
+           and L.getFlag(S.FLAG_USE_FLASH)
+           and emu:read8(L.ichor() + S.OFF_ICHOR_OPTIONS) & S.TINT_OFF ~= 0,
+           "the lamp overrides strong Flash without changing it or the tint-OFF preference")
+  end
+end
+
+local function closingPresentation(branch, choice, answer)
+  local file = assert(io.open("graphics/ichor/tablet_back.4bpp", "rb"))
+  local picture = file:read("a")
+  file:close()
+  local seenPicture, hiddenPicture, seenCard, heardCue = false, false, false, false
+  local savedPalette, savedFadedPalette = {}, {}
+  local opts = { every = true, menuChoice = choice, answers = { answer } }
+  opts.stop = function()
+    if not heardCue and L.playing(S.MUS_REVELATION) then
+      heardCue = true
+      L.wait(90)
+      local tracks = emu:read32(S.gMPlayInfo_BGM + S.OFF_MPLAY_TRACKS)
+      local voices, key = 0, nil
+      for i = 0, emu:read8(S.gMPlayInfo_BGM + S.OFF_MPLAY_TRACKCOUNT) - 1 do
+        local track = tracks + i * S.MUSIC_TRACK_SIZE
+        local channel = emu:read32(track + S.OFF_MUSIC_TRACK_CHANNEL)
+        if channel ~= 0 and emu:read8(channel) ~= 0 then
+          voices = voices + 1
+          key = emu:read8(track + S.OFF_MUSIC_TRACK_KEY)
+        end
+      end
+      expect(voices == 1 and key == 62,
+             branch .. ": the original revelation score opens on one sustained aulos D4")
+    end
+    local encoded = emu:read8(S.sScenePictureWindow)
+    if encoded ~= 0 and not seenPicture then
+      seenPicture = true
+      checkLampScene(branch)
+      expect(L.playing(S.MUS_REVELATION), branch .. ": the revelation score accompanies the tablet")
+      local window = S.gWindows + (encoded - 1) * S.WINDOW_SIZE
+      expect(emu:read8(window + S.OFF_WINDOW_WIDTH) == 8
+             and emu:read8(window + S.OFF_WINDOW_HEIGHT) == 8,
+             branch .. ": the tablet has its own 64x64 picture window")
+      local tiles = emu:read32(window + S.OFF_WINDOW_TILES)
+      expect(#picture == 2048, "the tablet asset is exactly one 64x64 4bpp panel")
+      for i = 0, 2047 do
+        if emu:read8(tiles + i) ~= picture:byte(i + 1) then
+          L.fail(branch .. ": the tablet picture differs at byte " .. i)
+        end
+      end
+      expect(true, branch .. ": all tablet pixels match the actual compiled art")
+      expect(emu:read32(S.gSpeakerName) == S.EleusaVillage_TempleOfDemeter_Text_NameDaphne,
+             branch .. ": Daphne is still named while explaining the tablet")
+      L.wait(34)
+      L.shot(branch .. "_tablet")
+    elseif encoded == 0 and seenPicture and not hiddenPicture then
+      hiddenPicture = true
+      for i = 0, 15 do
+        if emu:read16(S.gPlttBufferUnfaded + 13 * 32 + i * 2) ~= savedPalette[i]
+           or emu:read16(S.gPlttBufferFaded + 13 * 32 + i * 2) ~= savedFadedPalette[i] then
+          L.fail(branch .. ": picture palette color " .. i .. " was not restored")
+        end
+      end
+      expect(true, branch .. ": the original unfaded and displayed picture palettes are restored")
+      expect(emu:read32(S.gSpeakerName) == S.EleusaVillage_TempleOfDemeter_Text_NameDaphne,
+             branch .. ": Daphne remains named after the picture closes")
+    elseif encoded == 0 and not seenPicture then
+      for i = 0, 15 do
+        savedPalette[i] = emu:read16(S.gPlttBufferUnfaded + 13 * 32 + i * 2)
+        savedFadedPalette[i] = emu:read16(S.gPlttBufferFaded + 13 * 32 + i * 2)
+      end
+    end
+    local card = emu:read8(S.sActOneCardWindow)
+    if card ~= 0 and not seenCard then
+      seenCard = true
+      expect(L.playing(S.MUS_REVELATION), branch .. ": the revelation score resumes after the Chart fanfare")
+      expect(hiddenPicture, branch .. ": the tablet is released before the title")
+      local window = S.gWindows + (card - 1) * S.WINDOW_SIZE
+      expect(emu:read8(window + S.OFF_WINDOW_WIDTH) == 28
+             and emu:read8(window + S.OFF_WINDOW_HEIGHT) == 12,
+             branch .. ": Act I uses a dedicated centered title window")
+      L.wait(75)
+      expect(emu:read8(S.sActOneCardWindow) == card,
+             branch .. ": the title waits for acknowledgment instead of auto-closing")
+      L.shot(branch .. "_title")
+      L.tap(choice == 0 and K.B or K.A)
+    end
+    return false
+  end
+  return opts, function()
+    expect(heardCue, branch .. ": the actual scene starts its dedicated revelation score")
+    expect(L.playing(S.MUS_ELEUSA), branch .. ": returning outside restores Eleusa's music")
+    expect(seenPicture and hiddenPicture and seenCard,
+           branch .. ": the live scene shows and closes both presentation windows")
+    expect(emu:read8(S.sScenePictureWindow) == 0 and emu:read8(S.sActOneCardWindow) == 0,
+           branch .. ": neither scene window survives the return outside")
+  end
+end
+
 local function revelation()
   local daphne = "EleusaVillage_TempleOfDemeter_EventScript_Daphne"
   L.setBeat("revelation_full_bag", false)
   expect(emu:saveStateFile(L.OUT .. "before_revelation.ss", 31), "saved the revelation entry")
+  L.setFlag(S.FLAG_TORCH_DOUSED, true)
+  L.setFlag(S.FLAG_USE_FLASH, false)
   local restorePocket = fillKeyItemPocket()
   L.useWarp(S.MAP_TELESTERION, true)
   L.settle({ every = true })
@@ -359,10 +482,37 @@ local function revelation()
          and L.itemCount(S.ITEM_STAR_CHART) == 0,
          "a full key-item pocket leaves the scene and reward available")
   expect(L.npc(daphne).present, "Daphne stays to retry when the Bag is full")
+  expect(L.playing(S.MUS_SANCTUM), "a full Bag does not start the revelation score early")
+  checkLampScene("full Bag, doused Torch")
+  expect(emu:read8(S.sScenePictureWindow) == 0 and emu:read8(S.sActOneCardWindow) == 0,
+         "the full-Bag refusal does not allocate scene windows")
+  L.go(13, 24)
+  L.runHeader("SanctumTest_BrightHallHeader")
+  expect(flash() == 0, "the retry fixture starts in a fully bright hall")
+  L.runHeader("SanctumTest_FlickerHeader", { noSettle = true })
+  local gutters, last = 0, nil
+  for _ = 1, 80 do
+    local lamp = tile(13, 23)
+    if lamp == S.MT_HALL_LAMP_COLD and lamp ~= last then
+      gutters = gutters + 1
+      if gutters == 1 then
+        L.wait(2)
+        L.shot("lamp_gutters")
+      end
+    end
+    last = lamp
+    L.wait(1)
+  end
+  expect(gutters == 2 and last == S.MT_HALL_LAMP_LIT and L.idle(),
+         "the real lamp flicker gutters twice, restores its flame and releases control")
+  L.shot("lamp_steady")
   restorePocket()
-  L.talk(L.npc(daphne), { every = true, menuChoice = 0, answers = { "no" } })
+  local opts, checkPresentation = closingPresentation("why", 0, "no")
+  L.talk(L.npc(daphne, 2), opts)
+  checkPresentation()
   expect(L.mapId() == S.MAP_ELEUSA and L.getFlag(S.FLAG_ACT1_COMPLETE),
-         "making room and speaking to Daphne completes Act I")
+         "making room and retrying through Alethea completes Act I")
+  expect(L.getFlag(S.FLAG_TORCH_DOUSED), "the lamp does not relight the player's doused Torch")
   expect(L.getFlag(S.FLAG_REVELATION) and L.getFlag(S.FLAG_GOT_STAR_CHART)
          and L.itemCount(S.ITEM_STAR_CHART) == 1,
          "WHY? and declining home grant one real Star Chart")
@@ -370,8 +520,14 @@ local function revelation()
 
   expect(emu:loadStateFile(L.OUT .. "before_revelation.ss", 31), "restored the other dialogue branch")
   L.setBeat("revelation_other_branch", false)
-  L.useWarp(S.MAP_TELESTERION, { every = true, menuChoice = 1, answers = { "yes" } })
-  L.settle({ every = true, menuChoice = 1, answers = { "yes" } })
+  L.setFlag(S.FLAG_TORCH_DOUSED, false)
+  L.setFlag(S.FLAG_TORCH_UPGRADE, true)
+  L.setFlag(S.FLAG_USE_FLASH, true)
+  emu:write8(L.ichor() + S.OFF_ICHOR_OPTIONS, emu:read8(L.ichor() + S.OFF_ICHOR_OPTIONS) | S.TINT_OFF)
+  opts, checkPresentation = closingPresentation("how", 1, "yes")
+  L.useWarp(S.MAP_TELESTERION, opts)
+  L.settle(opts)
+  checkPresentation()
   expect(L.mapId() == S.MAP_ELEUSA and L.getFlag(S.FLAG_REVELATION)
          and L.getFlag(S.FLAG_ACT1_COMPLETE) and L.itemCount(S.ITEM_STAR_CHART) == 1,
          "HOW DO YOU KNOW? and offering to go home reach the same completion")
@@ -411,6 +567,16 @@ local function revelation()
   expect(not L.npc(daphne).present and not L.objectAt(S.LOCALID_REVELATION_ALETHEA),
          "the revelation actors are gone on reentry")
   expect(tile(2, 21) == S.MT_HALL_BRAZIER_LIT_00, "the autumn brazier is restored after Act I")
+  expect(L.playing(S.MUS_SANCTUM), "normal reentry restores the temple hymn, not the revelation score")
+  expect(tile(2, 6) == S.MT_HALL_BRAZIER_LIT_00 and tile(24, 6) == S.MT_HALL_BRAZIER_LIT_00,
+         "both back braziers are restored after the one-lamp scene")
+  expect(tile(13, 23) == S.MT_HALL_FLOOR and tile(6, 24) == S.MT_HALL_LAMP_LIT
+         and tile(9, 9) == S.MT_HALL_LAMP_LIT,
+         "reentry removes the temporary lamp and restores the acolytes' lamps")
+  expect(flash() == S.FLASH_TORCH_UPGRADED and L.getFlag(S.FLAG_TORCH_UPGRADE)
+         and not L.getFlag(S.FLAG_USE_FLASH)
+         and emu:read8(L.ichor() + S.OFF_ICHOR_OPTIONS) & S.TINT_OFF ~= 0,
+         "the player's upgraded Torch and tint preference return, while leaving outdoors clears native Flash")
   expect(L.itemCount(S.ITEM_STAR_CHART) == 1, "reentry does not duplicate the Star Chart")
   L.runHeader("SanctumTest_SaveHeader")
   emu:reset()

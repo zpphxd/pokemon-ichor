@@ -207,8 +207,31 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
   - **Oath of the Styx**: an optional Nuzlocke ruleset you swear to at the start.
   - **Current selection policy:** confirm Mortal, Hero or Spartan when setting
     the bedroom water clock. The choice is fixed for that save; existing saves
-    stay Hero. Act I's modes are integrated, but natural-level mode balance and
-    the Oath remain unfinished.
+    stay Hero. Act I's modes are integrated; natural-level mode balance still
+    needs approval. New games then offer the Oath separately, defaulting to
+    NO and requiring a second confirmation to swear. Both answers are final
+    for the opening; existing saves are not prompted or retroactively enrolled.
+    The Oath has saved one-chance-per-named-area receipts independently of
+    difficulty, and version-6 Urn foundations that preserve fallen Pokemon
+    and grow only into empty Pithos jars without changing save sizes.
+    Native wild-battle entry and ball-use guards now enforce the area chance
+    on sworn saves; ordinary runs remain unrestricted.
+    Real player fainting now records permanent falls, and HP healing, revival
+    items and Revival Blessing respect them. The Urn now has view-only storage,
+    and captures and deposits skip its jars. Non-defeat battle teardown now
+    transfers fallen partners when a usable survivor remains, with party
+    compaction and an acknowledged field notice.
+    Capacity refusal preserves the fallen source and explains the problem.
+    Retained fallen partners are restricted to view-only party actions;
+    freeing a jar retries burial automatically on leaving storage.
+    Total-party loss now recovers a living stored partner before ordinary
+    whiteout healing. Exhaustion and blocked full-party/full-Urn recovery
+    return to title without overwriting the last manual save, and saved
+    failed states cannot enter the field.
+    Field-poison cleanup waits for all party messages before burial and uses
+    the same recovery path for total-party loss; modern one-HP survival
+    never counts as a fall. Charon's later release scene and the Riverside
+    shades remain Underworld chapter work, not delivered opening features.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
@@ -371,7 +394,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Kalliste slice | Opening, starter selection, rival, Kronion Hill, Hestia and Laurel 1 | Current natural-level balance and human look/fun approval |
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
-| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, Oath, Scroll, Chart and missing dungeon mechanics |
+| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
 | Act II | Story and system designs | Connected Thyrsa → Arkadia → Astyra → Kaldera chapters; Laurels 4–6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
@@ -409,10 +432,11 @@ by repeat conversations or map reentry. Reachable Act I omens include actual
 Kerazap, Melibee and Stachyss outbreaks and Eleusa's sun weather. Its rare
 Korantha visitor is a real level-22 encounter: capture or defeat consumes the
 day's visit, while escape or loss leaves it available. An off-day legacy save
-cannot reveal it; reentry cannot respawn a caught visitor. The other rare
-visitors and later omen callers remain unfinished. An expired visitor cannot
-start a battle after a day change in the wheat; seamless live object/weather
-refresh on day rollover remains unfinished.
+cannot reveal it; reentry cannot respawn a caught visitor. Later chapter omen
+callers remain unfinished. An expired visitor cannot start a battle after a day
+change in the wheat. Midnight rollover now refreshes live visitor objects and
+Eleusa's sun/normal weather without reentry. It waits through active scripts,
+fades and the Frozen Hour, and new arrivals do not overlap the player.
 Emporion's marked-jar Pithound omen is also integrated: Halitherses names the
 westernmost stoa jar, which holds a real level-16 visitor only on its omen day.
 Capture/defeat consumes that visit; escape/loss keeps it available. The other
@@ -441,6 +465,56 @@ All three Emporion day-runners and Eleusa's north herald can send the post-endin
 letter. Mom answers with exactly three Honey, once, with an atomic full-Bag
 refusal and saved pending/claimed state. The reserved story jar and her healing
 offer are unchanged.
+Halia and Gylippos acknowledge the revelation and Kleon's departure on return.
+Daphne describes packing before the Mysteries and no longer appears at the home
+Akademia after that night. Euboulos replaces missing Charcoal after the Hearth
+Trial until the forge is relit, without duplicating an owned piece; a full Bag
+can be retried. The original opening and home whiteout/healing remain playable
+for all three starters.
+Returning with the Trowel opens three independent daily Kalliste digs: Kronion
+Hill's pried-up slabs, Route 1's bee terraces and Akti's beach. They give real
+Act I loot and Kronos sherds, retain consumed/pending state through saves, and
+renew at midnight without map reentry. A full Bag leaves an item in the ground
+for retry; a four-piece collection keeps other loot available. Four collected
+sherds are not a restored amphora until the player explicitly assembles them
+at the Akademia's shelf. The shelf remains usable while Daphne is away, with
+her written notes, all twelve distinct 64x64 black-figure paintings, saved
+restoration flags and repeat reading. Hephaestus's and Paris's restorations
+grant their gods five Favor once. All twelve restored amphorae reveal Daphne's
+last written lecture and one Ability Patch, with a saved full-Bag retry.
+The three Act I leads are playable after actual restoration: Kronion's altar
+offers Cairnolith Lv20 at night (Sand Force, Hard Stone), the Hollow's web
+chamber offers Raknit Lv20 (Defiant), and Eleusa's meadow offers Persenyx Lv22
+at dusk. Escape, declined approach and whiteout preserve the encounters;
+victory/capture claim independent saved flags. Raknit and Persenyx disappear
+immediately when claimed, rather than requiring reentry. Dusk arrivals/expiry
+refresh safely on the live field, deferring during scripts, the Frozen Hour
+and occupied arrival tiles. The existing Korantha omen is now in reachable
+wheat outside the sealed Rharian field; the sacred fence remains intact.
+The start menu's DEEDS entry now opens the Scroll of Deeds, on the existing
+pottery frame without replacing the trainer card. Its Act I pages follow
+saved story receipts, including the Mysteries, Kleon's departure, the
+revelation, the letter home and Mom's pending gift. Daedalus's pages and
+anointed herms have collection counts. Amphora pages distinguish collected
+sherds, explicit restoration, recorded later-region clues and the three
+completed Act I encounters. Athena's Stylus adds hints to open quests.
+The calendar page uses the existing 36-day Attic year, including the
+festival-free storm month; it does not claim that all festival events exist.
+Other amphora world callers and later-chapter quest pages remain unfinished.
+The Star Chart now opens from the key-item Bag as a parchment sky, with
+24 distinct star-and-line patterns, a twinkling palette, directional
+navigation and a clean return to the same Bag pocket. Unplaced myths stay
+blank, including the final Unwoven patch. Saved constellation flags record
+the known Conch, Laurel 4/5/7/8, Favor-30 Artemis/Hera and seven-page gates.
+Legacy progress is recovered when the chart opens; reading cannot invent
+the remaining myths. Kronion Hill's eastern shrine steps now offer the live
+night sky to Chart owners after dark, with a distinct midnight-blue palette,
+twinkling saved constellations and a return to the same steps. Daytime,
+missing-Chart and declined visits leave the view closed; daylight arriving
+during the prompt safely restores the field. The summit stele points out the
+seat. The Bag remains a parchment view, and stargazing does not consume the
+Chart or place unfinished myths. Other sky seats, milestone rewards and the
+remaining story/post-game constellation callers are not yet integrated.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot
@@ -449,9 +523,18 @@ retried after making room. The closing run exercises both branches, restored
 braziers, repeat entry and save/CONTINUE. The north vines require the Sickle;
 Alethea leaves after the player passes them, and the herald blocks the next
 chapter until it exists. Gate and companion state persist across saves.
-This is story/state integration, not
-final scene-art acceptance: the lamp, tablet close-up, pottery title card,
-dedicated music and Chart icon/UI remain unfinished.
+The revelation now displays an original clay-tablet close-up while Daphne
+reads its back, then closes on a centered pottery-framed Act I title card
+that waits for A or B. Both dialogue branches retain their speaker names,
+release the scene windows and restore borrowed palettes before returning
+outside. The Chart has its own rolled-sky Bag icon instead of borrowing the
+Town Map. The revelation now burns one clay lamp beside Daphne, with the
+authored flicker and a fixed halo independent of the player's Torch or Flash.
+Other flames stay cold without erasing solved brazier progress; normal lighting
+returns on reentry. The existing original revelation score now starts on its
+sustained aulos note at “She didn't see one at all”, continues through the
+tablet and title, and yields to Eleusa's music outside. Human scene-art,
+music and look/fun acceptance remain unfinished.
 
 **Continuation order.** Close and approve Act I first. Integrate shared systems at
 their first story use, then build connected Act II and Act III chapters. For post-game

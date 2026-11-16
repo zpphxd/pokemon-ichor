@@ -244,6 +244,8 @@ void NewGameInitData(void)
     ResetDexNav();
     ClearFollowerNPCData();
     Ichor_InitSave(); // Ichor
+    // Save migration also calls Ichor_InitSave; only new games may enroll.
+    FlagSet(FLAG_ICHOR_OATH_CHOICE_PENDING);
 }
 
 static void ResetMiniGamesRecords(void)

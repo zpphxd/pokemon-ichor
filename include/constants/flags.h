@@ -1783,6 +1783,12 @@
 #define FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL        (FLAG_ICHOR_GENERAL_START + 0x02A) // Ichor: Hecate's Hollow: Dusk Ball in the shortcut tunnel
 #define FLAG_ICHOR_ITEM_HOLLOW_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x02B) // Ichor: Hecate's Hollow: Revive in Kallias's side passage
 #define FLAG_ICHOR_GOT_MOMS_HONEY               (FLAG_ICHOR_GENERAL_START + 0x02C) // Ichor: Elaia: received Mom's three Honey after writing home
+#define FLAG_ICHOR_HIDE_DAPHNE_AKADEMIA         (FLAG_ICHOR_GENERAL_START + 0x02D) // Ichor: Elaia: Daphne left for the Mysteries on the mainland
+#define FLAG_ICHOR_GOT_AMPHORA_PATCH            (FLAG_ICHOR_GENERAL_START + 0x02E) // Ichor: claimed Daphne's twelve-amphora Ability Patch
+#define FLAG_ICHOR_KRONION_ALTAR_STONE          (FLAG_ICHOR_GENERAL_START + 0x02F) // Ichor: caught or defeated the Kronos amphora's altar Cairnolith
+#define FLAG_ICHOR_ELEUSA_PERSENYX              (FLAG_ICHOR_GENERAL_START + 0x030) // Ichor: caught or defeated the Persephone amphora's field visitor
+#define FLAG_ICHOR_HIDE_AMPHORA_PERSENYX        (FLAG_ICHOR_GENERAL_START + 0x031) // Ichor: derived visibility of the dusk-only restored-amphora visitor
+#define FLAG_ICHOR_OATH_CHOICE_PENDING          (FLAG_ICHOR_GENERAL_START + 0x032) // Ichor: new game may choose its starting Oath; cleared by either answer
 #define FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x040) // Ichor: Route 5: the Super Potion in the pine clearing
 #define FLAG_ICHOR_ITEM_ROUTE5_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x041) // Ichor: Route 5: the Great Ball beside the rock seat
 #define FLAG_ICHOR_ITEM_ROUTE5_PP_UP            (FLAG_ICHOR_GENERAL_START + 0x042) // Ichor: Route 5: the PP Up at the watchtower (the Girdle, Act II)

@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "item.h"
 #include "money.h"
+#include "string_util.h"
 #include "ichor_dig.h"
 #include "ichor_rites.h"
 #include "ichor_save.h"
@@ -29,6 +30,91 @@ static void ResetDig(void)
     memset(&gIchorSave.blessing, 0, sizeof(gIchorSave.blessing));
     memset(gIchorSave.dailyFlags, 0, sizeof(gIchorSave.dailyFlags));
     gSaveBlock1Ptr->dailySeed = 0x5EED;
+}
+
+static void ResetAmphorae(void)
+{
+    u32 i;
+    ResetDig();
+    for (i = 0; i < ICHOR_AMPHORA_COUNT; i++)
+        FlagClear(FLAG_ICHOR_AMPHORAE_START + i);
+    memset(gIchorSave.favor, 0, sizeof(gIchorSave.favor));
+}
+
+TEST("Ichor: all twelve amphorae need four sherds and explicit restoration")
+{
+    u32 amphora, piece;
+    ResetAmphorae();
+    for (amphora = 0; amphora < ICHOR_AMPHORA_COUNT; amphora++)
+    {
+        gSpecialVar_0x8004 = amphora;
+        EXPECT_EQ(Ichor_AmphoraStatus(amphora), ICHOR_AMPHORA_INCOMPLETE);
+        for (piece = 0; piece < ICHOR_SHERDS_PER_AMPHORA - 1; piece++)
+        {
+            FlagSet(FLAG_ICHOR_SHERDS_START + amphora * ICHOR_SHERDS_PER_AMPHORA + piece);
+            EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_INCOMPLETE);
+            EXPECT(!FlagGet(FLAG_ICHOR_AMPHORAE_START + amphora));
+        }
+        EXPECT_EQ(Ichor_BufferAmphoraNotes(), FALSE);
+        FlagSet(FLAG_ICHOR_SHERDS_START + amphora * ICHOR_SHERDS_PER_AMPHORA + piece);
+        EXPECT_EQ(Ichor_BufferAmphora(), ICHOR_AMPHORA_READY);
+        EXPECT(!FlagGet(FLAG_ICHOR_AMPHORAE_START + amphora));
+        EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_RESTORED);
+        EXPECT_EQ(Ichor_CountFlags(FLAG_ICHOR_AMPHORAE_START, ICHOR_AMPHORA_COUNT), amphora + 1);
+        EXPECT_EQ(Ichor_CountFlags(FLAG_ICHOR_SHERDS_START + amphora * ICHOR_SHERDS_PER_AMPHORA,
+                                  ICHOR_SHERDS_PER_AMPHORA), ICHOR_SHERDS_PER_AMPHORA);
+        EXPECT_EQ(Ichor_BufferAmphoraNotes(), TRUE);
+        EXPECT(StringLength(gStringVar4) > 80 && StringLength(gStringVar4) < sizeof(gStringVar4));
+    }
+}
+
+TEST("Ichor: invalid amphora ids cannot read notes or alter collection state")
+{
+    ResetAmphorae();
+    gSpecialVar_0x8004 = ICHOR_AMPHORA_COUNT;
+    EXPECT_EQ(Ichor_BufferAmphora(), ICHOR_AMPHORA_INVALID);
+    EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_INVALID);
+    EXPECT_EQ(Ichor_BufferAmphoraNotes(), FALSE);
+    gSpecialVar_0x8004 = 0xFFFF;
+    EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_INVALID);
+    EXPECT_EQ(Ichor_AmphoraStatus(0xFFFFFFFF), ICHOR_AMPHORA_INVALID);
+    EXPECT_EQ(Ichor_CountFlags(FLAG_ICHOR_AMPHORAE_START, ICHOR_AMPHORA_COUNT), 0);
+    EXPECT_EQ(Ichor_CountFlags(FLAG_ICHOR_SHERDS_START, ICHOR_AMPHORA_COUNT * ICHOR_SHERDS_PER_AMPHORA), 0);
+}
+
+TEST("Ichor: restoration grants Hephaestus and Aphrodite Favor once, capped at 100")
+{
+    static const u8 amphorae[] = { ICHOR_AMPHORA_HEPHAESTUS, ICHOR_AMPHORA_PARIS };
+    static const u8 gods[] = { ICHOR_GOD_HEPHAESTUS, ICHOR_GOD_APHRODITE };
+    u32 i, piece, capped;
+
+    for (capped = 0; capped < 2; capped++)
+    {
+        ResetAmphorae();
+        for (i = 0; i < ARRAY_COUNT(amphorae); i++)
+        {
+            gIchorSave.favor[gods[i]] = capped ? 98 : 10;
+            for (piece = 0; piece < ICHOR_SHERDS_PER_AMPHORA; piece++)
+                FlagSet(FLAG_ICHOR_SHERDS_START + amphorae[i] * ICHOR_SHERDS_PER_AMPHORA + piece);
+            gSpecialVar_0x8004 = amphorae[i];
+            EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_RESTORED);
+            EXPECT_EQ(Ichor_GetFavor(gods[i]), capped ? 100 : 15);
+            EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_RESTORED);
+            EXPECT_EQ(Ichor_GetFavor(gods[i]), capped ? 100 : 15);
+        }
+    }
+}
+
+TEST("Ichor: legacy restored amphorae remain readable without duplicate Favor")
+{
+    ResetAmphorae();
+    FlagSet(FLAG_ICHOR_AMPHORAE_START + ICHOR_AMPHORA_HEPHAESTUS);
+    gSpecialVar_0x8004 = ICHOR_AMPHORA_HEPHAESTUS;
+    EXPECT_EQ(Ichor_BufferAmphora(), ICHOR_AMPHORA_RESTORED);
+    EXPECT_EQ(Ichor_BufferAmphoraNotes(), TRUE);
+    EXPECT_EQ(Ichor_RestoreAmphora(), ICHOR_AMPHORA_RESTORED);
+    EXPECT_EQ(Ichor_GetFavor(ICHOR_GOD_HEPHAESTUS), 0);
+    EXPECT_EQ(Ichor_CountFlags(FLAG_ICHOR_SHERDS_START, ICHOR_AMPHORA_COUNT * ICHOR_SHERDS_PER_AMPHORA), 0);
 }
 
 // Roll spot (i % 96) on day (i / 96), as the game would over many days.

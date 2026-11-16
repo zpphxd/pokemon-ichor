@@ -1,5 +1,6 @@
 #ifndef GUARD_ITEM_USE_H
 #define GUARD_ITEM_USE_H
+void ItemUseOutOfBattle_IchorStarChart(u8 taskId);
 
 void ItemUseOutOfBattle_Mail(u8 taskId);
 void ItemUseOutOfBattle_Bike(u8 taskId);
@@ -57,6 +58,7 @@ enum {
     BALL_THROW_UNABLE_SEMI_INVULNERABLE,
     BALL_THROW_ABLE,
     BALL_THROW_UNABLE_DISABLED_FLAG,
+    BALL_THROW_UNABLE_OATH,
 };
 
 bool32 CanThrowBall(void);

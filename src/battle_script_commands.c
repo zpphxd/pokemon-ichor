@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "ichor_rites.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
@@ -8257,6 +8258,10 @@ static void Cmd_handleballthrow(void)
         MarkBattlerForControllerExec(gBattlerAttacker);
         gBattlescriptCurrInstr = BattleScript_WallyBallThrow;
     }
+    else if (!Ichor_CanCatchOathBattle())
+    {
+        gBattlescriptCurrInstr = BattleScript_IchorOathNoCatch;
+    }
     else
     {
         SetBallThrowShakes();
@@ -9247,6 +9252,7 @@ u8 GetFirstFaintedPartyIndex(enum BattlerId battler)
         enum Species species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
         if (species != SPECIES_NONE
             && species != SPECIES_EGG
+            && !Ichor_IsOathFallen(&party[i].box)
             && GetMonData(&party[i], MON_DATA_HP) == 0)
         {
             return i;
@@ -12197,7 +12203,12 @@ void BS_CatchAfterVictory(void)
 {
     NATIVE_ARGS();
 
-    if (gBattleStruct->victoryCatchState == VICTORY_CATCH_START) // open bag if end sequence just began
+    if (!Ichor_CanCatchOathBattle())
+    {
+        gBattleStruct->victoryCatchState = VICTORY_CATCH_FAINTED;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else if (gBattleStruct->victoryCatchState == VICTORY_CATCH_START) // open bag if end sequence just began
     {
         gBattleStruct->victoryCatchState = VICTORY_CATCH_OPEN_BAG;
         gSpecialVar_ItemId = ITEM_NONE;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "cable_club.h"
 #include "event_data.h"
 #include "fieldmap.h"
@@ -157,6 +158,8 @@ static void Task_WaitForFadeAndEnableScriptCtx(u8 taskID)
 {
     if (WaitForWeatherFadeIn() == TRUE)
     {
+        if (Ichor_ShowOathAftermathNotice())
+            return;
         DestroyTask(taskID);
         ScriptContext_Enable();
     }
@@ -496,6 +499,8 @@ static void Task_ReturnToFieldNoScript(u8 taskId)
 {
     if (WaitForWeatherFadeIn() == 1)
     {
+        if (Ichor_ShowOathAftermathNotice())
+            return;
         UnlockPlayerFieldControls();
         DestroyTask(taskId);
         ScriptUnfreezeObjectEvents();
@@ -1493,7 +1498,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         gTasks[taskId].tState = WHITEOUT_CUTSCENE_HEAL_SCRIPT;
         break;
     case WHITEOUT_CUTSCENE_HEAL_SCRIPT:
-        if (WaitForWeatherFadeIn() == TRUE)
+        if (WaitForWeatherFadeIn() == TRUE && !Ichor_ShowOathAftermathNotice())
         {
             DestroyTask(taskId);
             // Ichor: at home in Elaia, Melitta does the welcoming (her own script and lines)

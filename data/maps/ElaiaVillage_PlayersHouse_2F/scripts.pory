@@ -29,6 +29,7 @@ script ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock {
         // parks the script until the field comes back (as vanilla's clock does).
         delay(30)
         call(ElaiaVillage_PlayersHouse_2F_EventScript_ChooseDifficulty)
+        call(ElaiaVillage_PlayersHouse_2F_EventScript_ChooseOath)
         setflag(FLAG_ICHOR_SET_WATER_CLOCK)
         msgbox(format("Drip… drip… drip. Good as new."))
     } else {
@@ -59,6 +60,39 @@ script ElaiaVillage_PlayersHouse_2F_EventScript_ChooseDifficulty {
                     msgbox(format("That choice could not be saved. Try again."))
                 }
             }
+        }
+    }
+    return
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_ChooseOath {
+    if (flag(FLAG_ICHOR_OATH_CHOICE_PENDING) && !flag(FLAG_ICHOR_GOT_STARTER)) {
+        msgbox(format("One more choice, separate from your road: the Oath of the Styx.\pIt is optional. Only the first wild encounter in each named area may be caught.\pIf it gets away, that area's chance is gone.\pA fallen partner can never battle or be healed again. They rest in the sealed Urn.\pThe Urn grows into empty Pithos jars. Keep a jar free; fallen partners may wait with you if it fills.\pIf your party falls, a living partner from storage can take their place.\pIf none remain, or there is no room to recover one, you return to the title.\pYour last manual save is unchanged. You may load it again.\pYou choose this rule only once, before your first partner."))
+        while (flag(FLAG_ICHOR_OATH_CHOICE_PENDING)) {
+            message(format("Swear the Oath of the Styx?"))
+            waitmessage
+            multichoicedefault(0, 0, MULTI_YESNO, TRUE, 1)
+            setvar(VAR_0x8004, FALSE)
+            setvar(VAR_0x8005, TRUE)
+            if (var(VAR_RESULT) == 0) {
+                msgbox(format("Fallen partners stay fallen. Bind this journey to the Oath?"), MSGBOX_YESNO)
+                if (var(VAR_RESULT) == YES) {
+                    setvar(VAR_0x8004, TRUE)
+                } else {
+                    setvar(VAR_0x8005, FALSE)
+                }
+            }
+            if (var(VAR_0x8005) == TRUE) {
+                specialvar(VAR_RESULT, Ichor_ChooseStartingOath)
+                if (var(VAR_RESULT) == FALSE) {
+                    msgbox(format("That choice could not be saved. Try again."))
+                }
+            }
+        }
+        if (var(VAR_0x8004) == TRUE) {
+            msgbox(format("The Styx has heard you. The Urn waits for those who fall."))
+        } else {
+            msgbox(format("No Oath binds this journey. Your partners follow the usual rules."))
         }
     }
     return

@@ -1028,12 +1028,19 @@ DAPHNE: You're not in the sky yet. Neither am I.
 
 ### Engine
 
-- A new screen, `src/ichor_star_chart.c`:
+- The Bag screen is built in `src/ichor_star_chart.c`:
   - BG2 is the sky;
   - BG1 holds the constellation line tilemaps, copied in when a constellation's bit is set;
   - BG0 is text;
   - the twinkle is a palette cycle, like the title screen's.
-- Its setup can follow a small existing screen such as `src/diploma.c`. **Medium,** about 500 lines.
+- The portable parchment view uses 24 distinct original line patterns.
+  Kronion Hill's eastern shrine steps are the first outdoor seat: the real
+  Chart and night are required, and the same placed patterns twinkle against
+  a midnight-blue sky. B returns to the steps, not the Bag. The view preserves
+  map music and saved placements. Other seats and milestone-reward world
+  callers remain to integrate.
+- Its setup follows the small-screen lifecycle of `src/diploma.c`, with
+  explicit resource cleanup and return to the Bag or the seat's waiting script.
 
 ### Cost
 
@@ -1043,7 +1050,10 @@ DAPHNE: You're not in the sky yet. Neither am I.
 
 ### Flags and vars
 
-`IchorSave.constellations` (u32).
+Production uses the existing 32-bit allocation at
+`FLAG_ICHOR_CONSTELLATIONS_START`: 24 saved flags in table order, with eight
+spare bits. It has the same persistent placement semantics without changing
+the current save layout. See ENGINE_API §10.
 
 ---
 

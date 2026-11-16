@@ -3,8 +3,10 @@
 #include "global.h"
 #include "event_data.h"
 #include "ichor_omen.h"
+#include "ichor_oath.h"
 #include "ichor_save.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 
 // The layout is part of the save format. These pin it, so a change that moves
 // a field fails the build instead of silently breaking saves.
@@ -17,7 +19,9 @@ STATIC_ASSERT(offsetof(struct IchorSave, vars) == 0x040, IchorSaveVarsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, flags) == 0x080, IchorSaveFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, dailyFlags) == 0x180, IchorSaveDailyFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, thread) == 0x1A0, IchorSaveThreadOffset);
-STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x450, IchorSaveReservedOffset);
+STATIC_ASSERT(sizeof(struct IchorOath) == 40, IchorOathSize);
+STATIC_ASSERT(offsetof(struct IchorSave, oath) == 0x450, IchorSaveOathOffset);
+STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x478, IchorSaveReservedOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, flags2) == 0x500, IchorSaveFlags2Offset);
 STATIC_ASSERT(ICHOR_FLAGS2_START > ICHOR_DAILY_FLAGS_END, IchorFlags2AfterTheDailyBank);
 STATIC_ASSERT(ICHOR_FLAGS2_END < SPECIAL_FLAGS_START, IchorFlags2BelowSpecialFlags);
@@ -63,6 +67,15 @@ void Ichor_OnSaveLoaded(void)
     }
     if (gIchorSave.version < 4)  // the block grew: what was past its old end (dexNavChain) is not flags
         memset(gIchorSave.flags2, 0, sizeof(gIchorSave.flags2));
+    if (gIchorSave.version < 5)
+        memset(&gIchorSave.oath, 0, sizeof(gIchorSave.oath));
+    if (gIchorSave.version < 6)
+    {
+        gIchorSave.oath.urnBoxes = Ichor_IsOathActive()
+            || gIchorSave.oath.state == ICHOR_OATH_RELEASED
+            || gIchorSave.oath.state == ICHOR_OATH_FAILED
+            ? 1 << (TOTAL_BOXES_COUNT - 1) : 0;
+    }
     gIchorSave.version = ICHOR_SAVE_VERSION;
 }
 

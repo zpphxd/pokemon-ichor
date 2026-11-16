@@ -1,0 +1,42 @@
+#include "engine_consts.h"
+#include "battle.h"
+#include "ichor_oath.h"
+#include "item_menu.h"
+#include "pokemon_storage_system.h"
+#include "constants/battle.h"
+#include "constants/items.h"
+K(OFF_OATH, offsetof(struct IchorSave, oath))
+K(OFF_OATH_STATE, offsetof(struct IchorOath, state))
+K(OFF_OATH_ENCOUNTERS, offsetof(struct IchorOath, encounters))
+K(OFF_OATH_URN_BOXES, offsetof(struct IchorOath, urnBoxes))
+K(OFF_OATH_FALLEN_COUNT, offsetof(struct IchorOath, fallenCount))
+K(ICHOR_OATH_ACTIVE, ICHOR_OATH_ACTIVE)
+K(ICHOR_OATH_RELEASED, ICHOR_OATH_RELEASED)
+K(ICHOR_OATH_FAILED, ICHOR_OATH_FAILED)
+K(TOTAL_BOXES_COUNT, TOTAL_BOXES_COUNT)
+K(ITEM_MASTER_BALL, ITEM_MASTER_BALL)
+K(POCKETS_COUNT, POCKETS_COUNT)
+K(POCKET_POKE_BALLS, POCKET_POKE_BALLS)
+K(OFF_BAG_POSITION_POCKET, offsetof(struct BagPosition, pocket))
+K(B_OUTCOME_CAUGHT, B_OUTCOME_CAUGHT)
+K(B_OUTCOME_RAN, B_OUTCOME_RAN)
+K(OFF_BATTLE_TURN, offsetof(struct BattleResults, battleTurnCounter))
+K(OFF_STORAGE_BOXES, offsetof(struct PokemonStorage, boxes))
+K(OFF_STORAGE_NAMES, offsetof(struct PokemonStorage, boxNames))
+K(BOX_BYTES, IN_BOX_COUNT * sizeof(struct BoxPokemon))
+K(BOX_NAME_BYTES, BOX_NAME_LENGTH + 1)
+K(BOX_MON_BYTES, sizeof(struct BoxPokemon))
+K(PARTY_MON_BYTES, sizeof(struct Pokemon))
+K(IN_BOX_COUNT, IN_BOX_COUNT)
+K(ICHOR_URN_STORED, ICHOR_URN_STORED)
+K(ICHOR_URN_FULL, ICHOR_URN_FULL)
+K(OFF_MON_STATUS, offsetof(struct Pokemon, status))
+K(STATUS1_POISON, STATUS1_POISON)
+K(VAR_TEMP_E, VAR_TEMP_E)
+K(FLAG_OATH_CHOICE_PENDING, FLAG_ICHOR_OATH_CHOICE_PENDING)
+K(FLAG_GOT_STARTER, FLAG_ICHOR_GOT_STARTER)
+K(FLAG_DIFFICULTY_CHOSEN, FLAG_ICHOR_DIFFICULTY_CHOSEN)
+K(VAR_DIFFICULTY, VAR_ICHOR_DIFFICULTY)
+K(ICHOR_OATH_DECLINED, ICHOR_OATH_DECLINED)
+K(ICHOR_OATH_UNDECIDED, ICHOR_OATH_UNDECIDED)
+K(FLAG_SET_WATER_CLOCK, FLAG_ICHOR_SET_WATER_CLOCK)

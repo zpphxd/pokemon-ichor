@@ -677,3 +677,9 @@ script AktiTown_EventScript_Board {
     waitstate
     release
 }
+
+script AktiTown_EventScript_DigBeach {
+    setvar(VAR_0x8004, 8)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_KRONOS))
+    goto(EventScript_IchorDigSpot)
+}

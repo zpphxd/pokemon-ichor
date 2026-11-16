@@ -11,6 +11,20 @@
 #include "constants/species.h"
 #include "pokemon.h"
 #include "item.h"
+#include "window.h"
+#include "gba/m4a_internal.h"
+
+K(WINDOW_SIZE, sizeof(struct Window))
+K(OFF_WINDOW_WIDTH, offsetof(struct Window, window.width))
+K(OFF_WINDOW_HEIGHT, offsetof(struct Window, window.height))
+K(OFF_WINDOW_TILES, offsetof(struct Window, tileData))
+K(OFF_MPLAY_TRACKS, offsetof(struct MusicPlayerInfo, tracks))
+K(OFF_MPLAY_TRACKCOUNT, offsetof(struct MusicPlayerInfo, trackCount))
+K(MUSIC_TRACK_SIZE, sizeof(struct MusicPlayerTrack))
+K(OFF_MUSIC_TRACK_CHANNEL, offsetof(struct MusicPlayerTrack, chan))
+K(OFF_MUSIC_TRACK_KEY, offsetof(struct MusicPlayerTrack, key))
+K(MUS_REVELATION, MUS_ICHOR_REVELATION)
+K(MUS_ELEUSA, MUS_ICHOR_ELEUSA)
 
 // maps
 K(MAP_B1F, MAP_ELEUSA_SANCTUM_B1F)
@@ -86,5 +100,19 @@ K(MT_BOULDER, METATILE_EleusaSanctumRock_Boulder)
 K(MT_ROCK_PILE, METATILE_EleusaSanctumRock_RockPile)
 K(MT_DIG_CRYPT, METATILE_EleusaSanctumRock_DigCrypt)
 K(MT_HALL_BRAZIER_LIT_00, METATILE_TempleDemeter_BrazierTop_Lit)
+K(MT_HALL_BRAZIER_COLD_00, METATILE_TempleDemeter_BrazierTop_Cold)
+K(MT_HALL_LAMP_LIT, METATILE_TempleDemeter_Lamp_Lit)
+K(MT_HALL_LAMP_COLD, METATILE_TempleDemeter_Lamp_Cold)
+K(MT_HALL_COLUMN_LIT, METATILE_TempleDemeter_ColumnTorch_Lit)
+K(MT_HALL_SCONCE_LIT, METATILE_TempleDemeter_Sconce_Lit)
+K(MT_HALL_NICHE_LIT, METATILE_TempleDemeter_Niche_Lit)
+K(MT_HALL_FLOOR, METATILE_TempleDemeter_Floor)
+K(FLAG_TORCH_DOUSED, FLAG_ICHOR_TORCH_DOUSED)
+K(FLAG_TORCH_UPGRADE, FLAG_ICHOR_THREE_FLAMED_TORCH)
+K(FLAG_USE_FLASH, FLAG_SYS_USE_FLASH)
+K(FLAG_HALL_BRAZIERS, FLAG_ICHOR_BRAZIERS_START + 0x10)
+K(FLASH_LAMP, ICHOR_FLASH_TORCH)
+K(FLASH_TORCH_UPGRADED, ICHOR_FLASH_TORCH_STRONG)
+K(TINT_OFF, ICHOR_OPTION_TINT_OFF)
 K(LOCALID_REVELATION_ALETHEA, LOCALID_TEMPLE_DEMETER_ALETHEA_REVELATION)
 K(ICHOR_GOD_DEMETER, ICHOR_GOD_DEMETER)

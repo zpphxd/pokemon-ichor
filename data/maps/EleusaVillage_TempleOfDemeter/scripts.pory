@@ -53,6 +53,9 @@ mapscripts EleusaVillage_TempleOfDemeter_MapScripts {
             setvar(VAR_TEMP_C, 1)
         }
         call(EleusaVillage_TempleOfDemeter_EventScript_PlaceCast)
+        if (flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA) && !flag(FLAG_ICHOR_DAPHNE_REVELATION)) {
+            setflashlevel(ICHOR_FLASH_TORCH)
+        }
     }
     MAP_SCRIPT_ON_LOAD {
         call(EleusaVillage_TempleOfDemeter_EventScript_DrawHall)
@@ -145,6 +148,9 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
         end
     }
     hidefollower
+    // The steps' lamp lights the scene even if the player's Torch is doused.
+    animateflash(ICHOR_FLASH_TORCH)
+    setflashlevel(ICHOR_FLASH_TORCH)
     turnobject(OBJ_EVENT_ID_PLAYER, DIR_WEST)
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
     msgbox(format("She came on the morning boat. She was sick the whole way."))
@@ -154,9 +160,10 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
                   "{PLAYER}. Sit. The steps are cold, but they're honest.\p"
                   "Halia wrote to me. After the Klotheia, and again when you sailed.\p"
                   "She looked at your thread four times. Once by lamplight.\p"
-                  "She didn't see a short thread. Or a long one. Or a knotted one.\p"
-                  "She didn't see one at all."))
-    delay(60)
+                  "She didn't see a short thread. Or a long one. Or a knotted one."))
+    playbgm(MUS_ICHOR_REVELATION, FALSE)
+    msgbox("She didn't see one at all.")
+    call(EleusaVillage_TempleOfDemeter_EventScript_FlickerRevelationLamp)
     msgbox(format("Here's what I know. I'll try to say it plainly. I'm out of practice.\p"
                   "Under Delphoi there's a Loom. Three old women work it.\p"
                   "One spins every life. One measures it. One cuts it.\p"
@@ -180,8 +187,14 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
     msgbox(format("Where the sickle broke. Where the pieces fell. Where they'd be joined.\p"
                   "I was wrong about Kalliste. Thank the gods. I was right about Eleusa.\p"
                   "They're digging where I told them to dig.\p"
-                  "…And then there's the back.\p"
-                  "Hold a lamp low and old scratches stand up. I taught Alethea that."))
+                  "…And then there's the back."))
+    closemessage
+    specialvar(VAR_RESULT, Ichor_ShowTabletPicture)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The tablet picture could not be opened."))
+    }
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("Hold a lamp low and old scratches stand up. I taught Alethea that."))
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
     msgbox(format("I saw it on the hill. I wanted to tell you.\p"
                   "Truthfully, I nearly did. Twice."))
@@ -192,6 +205,9 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
                   "Unwoven. That's their word for you.\p"
                   "They weren't on Kalliste for the hill. They were there for you."))
     delay(60)
+    closemessage
+    special(Ichor_HideScenePicture)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
     msgbox(format("You could go home. Nobody would blame you. I'd row you myself.\p"
                   "Badly. But I'd row."))
     setspeaker(SP_NAME_NONE)
@@ -236,7 +252,14 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
     setflag(FLAG_ICHOR_ACT1_COMPLETE)
     setspeaker(SP_NAME_NONE)
     fadescreen(FADE_TO_BLACK)
-    msgbox("END OF ACT I\nTHE UNWOVEN")
+    specialvar(VAR_RESULT, Ichor_ShowActOneCard)
+    if (var(VAR_RESULT) == TRUE) {
+        delay(60)
+        waitbuttonpress
+        special(Ichor_HideActOneCard)
+    } else {
+        msgbox(format("The Act I title card could not be opened."))
+    }
     msgbox(format("Thank you for playing Act I of Pokémon Ichor."))
     updatefollowingmon
     warp(MAP_ELEUSA_VILLAGE, 25, 12)
@@ -957,11 +980,79 @@ script EleusaVillage_TempleOfDemeter_EventScript_DrawHall {
     if (flag(FLAG_ICHOR_MYSTERIES_NIGHT) && !flag(FLAG_ICHOR_ACT1_COMPLETE)) {
         call(EleusaVillage_TempleOfDemeter_EventScript_DrawRaid)
     }
+    if (flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA) && !flag(FLAG_ICHOR_DAPHNE_REVELATION)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_DrawRevelation)
+    }
     if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {
         setmetatile(13, 13, 0x28A, TRUE)
     } else {
         setmetatile(13, 13, 0x28A, FALSE)
     }
+    return
+}
+
+// Daphne reads by one clay lamp; saved brazier flags are unchanged.
+script EleusaVillage_TempleOfDemeter_EventScript_DrawRevelation {
+    setmetatile(2, 6, 0x260, TRUE)
+    setmetatile(2, 7, 0x26C, TRUE)
+    setmetatile(1, 6, 0x200, FALSE)
+    setmetatile(3, 6, 0x200, FALSE)
+    setmetatile(1, 7, 0x200, FALSE)
+    setmetatile(3, 7, 0x203, FALSE)
+    setmetatile(1, 8, 0x200, FALSE)
+    setmetatile(2, 8, 0x200, FALSE)
+    setmetatile(3, 8, 0x200, FALSE)
+    setmetatile(6, 9, 0x201, FALSE)
+    setmetatile(8, 9, 0x200, FALSE)
+    setmetatile(6, 10, 0x200, FALSE)
+    setmetatile(8, 10, 0x200, FALSE)
+    setmetatile(6, 11, 0x200, FALSE)
+    setmetatile(7, 11, 0x200, FALSE)
+    setmetatile(8, 11, 0x201, FALSE)
+    setmetatile(7, 9, 0x24C, TRUE)
+    setmetatile(7, 10, 0x253, TRUE)
+    setmetatile(4, 2, 0x238, TRUE)
+    setmetatile(10, 2, 0x238, TRUE)
+    setmetatile(24, 6, 0x260, TRUE)
+    setmetatile(24, 7, 0x264, TRUE)
+    setmetatile(23, 6, 0x202, FALSE)
+    setmetatile(25, 6, 0x200, FALSE)
+    setmetatile(23, 7, 0x200, FALSE)
+    setmetatile(25, 7, 0x200, FALSE)
+    setmetatile(23, 8, 0x200, FALSE)
+    setmetatile(24, 8, 0x200, FALSE)
+    setmetatile(25, 8, 0x200, FALSE)
+    setmetatile(18, 9, 0x200, FALSE)
+    setmetatile(20, 9, 0x200, FALSE)
+    setmetatile(18, 10, 0x200, FALSE)
+    setmetatile(20, 10, 0x200, FALSE)
+    setmetatile(18, 11, 0x202, FALSE)
+    setmetatile(19, 11, 0x200, FALSE)
+    setmetatile(20, 11, 0x200, FALSE)
+    setmetatile(19, 9, 0x24C, TRUE)
+    setmetatile(19, 10, 0x253, TRUE)
+    setmetatile(16, 2, 0x238, TRUE)
+    setmetatile(22, 2, 0x238, TRUE)
+    setmetatile(6, 24, 0x2AA, TRUE)
+    setmetatile(9, 9, 0x2AA, TRUE)
+    setmetatile(13, 23, 0x2AB, TRUE)
+    return
+}
+
+// The authored one-second pause: a gutter, then a steady flame.
+script EleusaVillage_TempleOfDemeter_EventScript_FlickerRevelationLamp {
+    setmetatile(13, 23, METATILE_TempleDemeter_Lamp_Cold, TRUE)
+    special(DrawWholeMapView)
+    delay(4)
+    setmetatile(13, 23, METATILE_TempleDemeter_Lamp_Lit, TRUE)
+    special(DrawWholeMapView)
+    delay(8)
+    setmetatile(13, 23, METATILE_TempleDemeter_Lamp_Cold, TRUE)
+    special(DrawWholeMapView)
+    delay(4)
+    setmetatile(13, 23, METATILE_TempleDemeter_Lamp_Lit, TRUE)
+    special(DrawWholeMapView)
+    delay(44)
     return
 }
 

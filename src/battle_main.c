@@ -31,6 +31,7 @@
 #include "graphics.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
+#include "ichor_oath.h"
 #include "item.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -496,6 +497,7 @@ void CB2_InitBattle(void)
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         MoveSaveBlocks_ResetHeap();
     AllocateBattleResources();
+    Ichor_BeginOathBattle(gBattleTypeFlags, gMapHeader.regionMapSectionId);
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();
     RecordedBattle_ClearFrontierPassFlag();

@@ -127,6 +127,8 @@ data/scripts/ichor_herms.inc
 data/scripts/ichor_labyrinth.inc
 data/scripts/ichor_frozen.inc
 data/scripts/ichor_dig.inc
+data/scripts/ichor_deeds.inc
+data/scripts/ichor_star_chart.inc
 data/scripts/ichor_world.inc
 data/scripts/ichor_bones.inc
 data/maps/Route4_Isthmus/scripts.inc

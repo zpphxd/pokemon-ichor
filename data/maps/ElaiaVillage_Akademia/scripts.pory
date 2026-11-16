@@ -9,6 +9,11 @@ const AKADEMIA_BARE_TABLE = 0x2AA   // aka_table_m: the table with its krater go
 
 mapscripts ElaiaVillage_Akademia_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+            setflag(FLAG_ICHOR_HIDE_DAPHNE_AKADEMIA)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_DAPHNE_AKADEMIA)
+        }
         // Kleon only appears during the scene (his object hides behind a temp
         // flag, cleared on every load); Alethea is here until beat 4 ends
         setflag(FLAG_TEMP_1)
@@ -287,7 +292,11 @@ script ElaiaVillage_Akademia_EventScript_Daphne {
     lock
     faceplayer
     setspeaker(ElaiaVillage_Akademia_Name_Daphne)
-    if (flag(FLAG_ICHOR_RUINS_CLEARED)) {
+    if (flag(FLAG_ICHOR_CROSSING_DONE)) {
+        msgbox(format("Halia's gull. Then Alethea's letter. I'm packing.\p"
+                      "I hate packing. I hate boats more. I've bought sandals. Look at them.\p"
+                      "…Go on. I'll find you on the mainland. Probably green."))
+    } elif (flag(FLAG_ICHOR_RUINS_CLEARED)) {
         msgbox(format("Alethea sent me a rubbing of that tablet. Interesting.\p“Where the grain goes underground.” I have a guess.\pBut a guess is only a question that's gotten too confident."))
     } elif (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
         msgbox(format("Alethea went up Kronion Hill. She said “digging” and ran.\pThat girl runs toward holes. I've always admired that."))
@@ -325,5 +334,5 @@ script ElaiaVillage_Akademia_EventScript_WallMap {
 }
 
 script ElaiaVillage_Akademia_EventScript_Scrolls {
-    msgbox(format("“Every myth is a memory of a Pokémon” is carved over the shelf."), MSGBOX_SIGN)
+    goto(EventScript_IchorAmphoraShelf)
 }

@@ -289,11 +289,49 @@ script KallisteRoute1_KronionHill_EventScript_Grunt {
 
 // --- the ruins ----------------------------------------------------------------
 script KallisteRoute1_KronionHill_EventScript_Stele {
-    msgbox(format("KRONION HILL. An old shrine, older than the olives.\pSomeone has scratched a sickle into the stone. Recently."), MSGBOX_SIGN)
+    msgbox(format("KRONION HILL. An old shrine, older than the olives.\pSomeone has scratched a sickle into the stone. Recently.\pThe east end of the old steps is worn smooth. A place to watch the stars."), MSGBOX_SIGN)
+}
+
+script KallisteRoute1_KronionHill_EventScript_SkySeat {
+    goto(EventScript_IchorSkySeat)
 }
 
 script KallisteRoute1_KronionHill_EventScript_Altar {
-    msgbox(format("A cracked altar. The stone is warm, like a sleeping animal."), MSGBOX_SIGN)
+    lockall
+    setspeaker(SP_NAME_NONE)
+    if (!flag(FLAG_ICHOR_AMPHORAE_START + ICHOR_AMPHORA_KRONOS) || flag(FLAG_ICHOR_KRONION_ALTAR_STONE)) {
+        msgbox(format("A cracked altar. The stone is warm, like a sleeping animal."))
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetTimeOfDay)
+    if (var(VAR_RESULT) != TIME_NIGHT) {
+        msgbox(format("The stone is warm. Daphne's painting showed this altar after dark."))
+        releaseall
+        end
+    }
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("A low hum comes from the crack. A stone shifts under its cloth.\pReach toward it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        setwildbattle(SPECIES_CAIRNOLITH, 20, ITEM_HARD_STONE)
+        createmon(1, 0, SPECIES_CAIRNOLITH, 20, item=ITEM_HARD_STONE, abilityNum=2)
+        playmoncry(SPECIES_CAIRNOLITH, CRY_MODE_ENCOUNTER)
+        waitmoncry
+        dowildbattle
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        if (var(VAR_RESULT) == B_OUTCOME_CAUGHT || var(VAR_RESULT) == B_OUTCOME_WON) {
+            setflag(FLAG_ICHOR_KRONION_ALTAR_STONE)
+        }
+    }
+    releaseall
+    end
+}
+
+script KallisteRoute1_KronionHill_EventScript_DigShrine {
+    setvar(VAR_0x8004, 6)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_KRONOS))
+    goto(EventScript_IchorDigSpot)
 }
 
 // Before the scene the grunts stand in the pit; after it, the pit is the

@@ -1029,7 +1029,12 @@ gSpecials::
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
 	def_special Ichor_SetHoursOverride
+	def_special Ichor_ShowTabletPicture
+	def_special Ichor_HideScenePicture
+	def_special Ichor_ShowActOneCard
+	def_special Ichor_HideActOneCard
 	def_special Ichor_ChooseDifficulty
+	def_special Ichor_ChooseStartingOath
 	def_special Ichor_GetStepGlassLimit
 	@ Ichor: relics (src/ichor_relics.c)
 	def_special Ichor_CanUseRelic
@@ -1128,3 +1133,17 @@ gSpecials::
 	def_special Ichor_BonesMatchOver
 	def_special Ichor_GetMomRecord
 	def_special Ichor_QuoteToMoneychanger
+	def_special Ichor_SetOmenWeather
+	def_special Ichor_BuildAmphoraMenu
+	def_special Ichor_BufferAmphora
+	def_special Ichor_RestoreAmphora
+	def_special Ichor_BufferAmphoraNotes
+	def_special Ichor_ShowAmphoraPicture
+	def_special Ichor_HideAmphoraPicture
+	def_special Ichor_SetPersephoneVisitor
+	def_special Ichor_GetTimeOfDay
+	def_special Ichor_BuildDeedsMenu
+	def_special Ichor_BufferDeed
+	def_special Ichor_PlaceConstellation
+	def_special Ichor_CountConstellations
+	def_special Ichor_ShowNightSky

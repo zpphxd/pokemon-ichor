@@ -230,6 +230,12 @@
 #define ICHOR_SHERDS_PER_AMPHORA  4
 #define ICHOR_OSTRAKA_COUNT      30
 
+#define ICHOR_AMPHORA_INCOMPLETE 0
+#define ICHOR_AMPHORA_READY      1
+#define ICHOR_AMPHORA_RESTORED   2
+#define ICHOR_AMPHORA_INVALID    3
+#define ICHOR_AMPHORA_MENU_ERROR 0xFFFF
+
 // A fixed find's VAR_0x8005 is an item, or one of these
 #define ICHOR_FIND_SHERD(amphora)  (0xF000 + (amphora))  // the amphora's next sherd
 #define ICHOR_FIND_PROPHECY(n)     (0xF100 + (n))        // tablet n (1-8): FLAG_ICHOR_PROPHECY_START + n - 1

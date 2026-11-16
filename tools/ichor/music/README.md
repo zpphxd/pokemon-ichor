@@ -95,7 +95,13 @@ New IDs:
   - 637 `MUS_ICHOR_REVELATION`
   - 638 `MUS_ICHOR_HOLLOW`
 
-  None is assigned to a map yet. `sNightMusicTable` in `src/overworld.c` maps 630 to 631, so a map that plays the road plays its night form after dark.
+  Map themes are assigned in each map's `map.json`. Daphne's revelation starts
+  637 at “She didn't see one at all”: its intro is one sustained aulos D4, then
+  the score loops while the dialogue continues. It is not saved as a map-music
+  override, so the Chart fanfare resumes it and the exit restores Eleusa's theme.
+  `tools/ichor/tests/sanctum.sh` checks both scene branches, the opening D4 and
+  music restoration. `sNightMusicTable` in `src/overworld.c` maps 630 to 631,
+  so a map that plays the road plays its night form after dark.
 
 A new fanfare needs an `sFanfares` entry (`src/sound.c`, with a `FANFARE_*` constant in `include/constants/sound.h`), or `playfanfare` falls back to the level-up fanfare. Use `compose.py --summary` for its length in frames. Fanfares keep vanilla's player (SE2) and priority.
 

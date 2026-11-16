@@ -800,6 +800,8 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
 	.include "data/scripts/ichor_frozen.inc" @ Ichor: the Frozen Hour
 	.include "data/scripts/ichor_dig.inc" @ Ichor: excavation
+	.include "data/scripts/ichor_deeds.inc"
+	.include "data/scripts/ichor_star_chart.inc"
 	.include "data/scripts/ichor_world.inc" @ Ichor: the world's small systems
 	.include "data/scripts/ichor_bones.inc" @ Ichor: knucklebones
 	.include "data/scripts/item_ball_scripts.inc"

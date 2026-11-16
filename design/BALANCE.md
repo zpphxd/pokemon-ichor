@@ -42,4 +42,10 @@ The single source for levels across the whole game. Every script, encounter tabl
   balance approval.
 - **Aethos's trainers use Aethos's Pokémon** (user, 2026-11-14). Before the post-game, trainer parties and wild tables draw on the 152-species Aethos dex for the most part. A non-Aethos species is the exception and needs a reason: a story gift such as the theoxenia starters, a foreigner's signature Pokémon, or a deliberate rarity. The National Dex's other species belong to the Oikoumene and the post-game.
 - **Gifts:** theoxenia starters follow SYSTEMS.md §10's levels, which must sit inside the band of the stage where they're given.
+- **Act I amphora returns:** explicit shelf restoration unlocks the one-off
+  Cairnolith Lv20 at Kronion's altar (night, Sand Force, Hard Stone), Raknit
+  Lv20 in the Hollow's web chamber (Defiant), and Persenyx Lv22 in Eleusa's
+  fields (dusk). These are the scripted return prizes from Phase 2, not
+  additions to Kalliste's early wild band. Cairnolith and Persenyx are deliberate
+  early-evolved static exceptions, like the fields' existing augury rewards.
 - **Rematches** (the Olympiad's Arena, the Hierophants) scale to the Aethos post-game row.

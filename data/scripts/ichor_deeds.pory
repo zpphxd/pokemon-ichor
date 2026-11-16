@@ -1,0 +1,51 @@
+script EventScript_IchorDeeds {
+    lockall
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x800B, 0)
+    setvar(VAR_0x800A, 0xFFFF)
+    goto(EventScript_IchorDeedsList)
+}
+
+script EventScript_IchorDeedsList {
+    copyvar(VAR_0x8004, VAR_0x800B)
+    special(Ichor_BuildDeedsMenu)
+    if (var(VAR_RESULT) == 0xFFFF) {
+        msgbox(format("Your scroll cannot be opened. Try again after saving."))
+        goto(EventScript_IchorDeedsClose)
+    }
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("No amphorae recorded yet. Collect sherds with Alethea's Trowel."))
+        setvar(VAR_0x800B, 0)
+        goto(EventScript_IchorDeedsList)
+    }
+    message(format("Scroll of Deeds.\nChoose a page. B goes back."))
+    waitmessage
+    dynmultistack(0, 0, FALSE, 5, FALSE, VAR_0x8000, DYN_MULTICHOICE_CB_NONE)
+    if (var(VAR_RESULT) == MULTI_B_PRESSED) {
+        if (var(VAR_0x800B) == 0) {
+            goto(EventScript_IchorDeedsClose)
+        }
+        setvar(VAR_0x800B, 0)
+        goto(EventScript_IchorDeedsList)
+    }
+    copyvar(VAR_0x800A, VAR_RESULT)
+    if (var(VAR_RESULT) >= 100) {
+        copyvar(VAR_0x800B, VAR_RESULT)
+        subvar(VAR_0x800B, 99)
+        goto(EventScript_IchorDeedsList)
+    }
+    copyvar(VAR_0x8004, VAR_RESULT)
+    specialvar(VAR_RESULT, Ichor_BufferDeed)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("This page is not in your scroll."))
+    } else {
+        msgbox(gStringVar4)
+    }
+    goto(EventScript_IchorDeedsList)
+}
+
+script EventScript_IchorDeedsClose {
+    closemessage
+    releaseall
+    end
+}

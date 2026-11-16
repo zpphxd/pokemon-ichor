@@ -45,6 +45,11 @@ bool32 Ichor_IsTintOff(void)
     return (gIchorSave.options & ICHOR_OPTION_TINT_OFF) && gIchorSave.heldTimeOfDay == 0;
 }
 
+u16 Ichor_GetTimeOfDay(void)
+{
+    return GetTimeOfDay();
+}
+
 // special Ichor_HoldTimeOfDay: the tint holds at TIME_* VAR_0x8004 until released.
 void Ichor_HoldTimeOfDay(void)
 {

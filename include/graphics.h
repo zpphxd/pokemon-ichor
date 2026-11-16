@@ -1059,6 +1059,8 @@ extern const u32 gItemIcon_AletheasTrowel[];
 extern const u16 gItemIconPalette_AletheasTrowel[];
 extern const u32 gItemIcon_AphroditeBone[];
 extern const u16 gItemIconPalette_AphroditeBone[];
+extern const u32 gItemIcon_StarChart[];
+extern const u16 gItemIconPalette_StarChart[];
 extern const u32 gItemIcon_HelmOfDarkness[];
 extern const u16 gItemIconPalette_HelmOfDarkness[];
 extern const u32 gItemIcon_NereidPearl[];

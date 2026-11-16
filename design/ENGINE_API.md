@@ -12,11 +12,11 @@ All of Ichor's own persistent state lives in **`struct IchorSave`** (`include/ic
 | | |
 |---|---|
 | Size | 1,472 bytes. It was 1,280 until version 4 added the second flag bank at 0x500. SaveBlock3 is now 1,476 of its 1,624 bytes. |
-| Version | `ICHOR_SAVE_VERSION` (4). Version 0 means a save from before IchorSave. |
+| Version | `ICHOR_SAVE_VERSION` (6). Version 0 means a save from before IchorSave. |
 | New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version` and `momLosses = 212`. |
-| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there. |
+| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there; 5 clears the new Oath allocation for older saves; 6 initializes its Urn-jar mask (§11). |
 | New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank and draws the day's omen (§7). |
-| Headroom | 176 bytes in `reserved` at 0x450 (world-postgame takes 64 of them for `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
+| Headroom | 136 bytes in `reserved` at 0x478 (64 remain reserved for the future `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
 
 **Adding a field later.**
 1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct keeps its size; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets. Growing the struct again is a last resort: it moves what follows IchorSave in SaveBlock3.
@@ -42,6 +42,7 @@ This way the save never breaks again.
 | `flags2[192]` (0x500) | the second flag bank | 1,536 flags (version 4). See below. |
 | `dailyFlags[32]` | the daily bank | 256 flags, cleared each day. |
 | `thread` | LABYRINTH.md §5.1 | Ariadne's Thread: 24 anchors (8 bytes each, not 6, because apcs-gnu rounds structs to 4 bytes), 1,792 committed steps, a 152-step live segment. |
+| `oath` (0x450) | PITCH §5, UNDERWORLD §5 | Choice state, fallen count, 256 named-area encounter bits (version 5) and reserved Urn jars (version 6). Offered once at the bedroom clock on new games; see §11. |
 
 ### The flag and var banks
 
@@ -134,7 +135,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
 | 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
 | 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
-| 8 | Excavation: the Trowel, dig spots, fixed finds | 6 | **Built** |
+| 8 | Excavation: the Trowel, dig spots, fixed finds, amphora restoration | 6 | **Built** |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -164,7 +165,8 @@ The four Act I Hierophant party variants use the existing trainer ids.
 `tools/ichor/tests/difficulty.sh` checks the actual menus, all boss variants,
 confirmation rejection and real save/reset/CONTINUE for all modes.
 `make check -j$(sysctl -n hw.ncpu) TESTS='Ichor:'` also covers caps, EXP Candy and item rejection.
-Oath rules, later chapter cap milestones and natural-level approval remain open.
+Oath rules and opening selection are documented in §11. Later chapter cap
+milestones and natural-level approval remain open.
 
 ## 2. Relics (SYSTEMS §1, §2)
 
@@ -368,7 +370,8 @@ The altar scripts use `VAR_0x8004`–`0x8007` and `VAR_0x800A`–`0x800B`.
   - The War Horn (the VS Seeker, renamed).
   - The Acorn of Dodona (the Shiny Charm, renamed).
   - Hephaestus's Hammer, the Three-Flamed Torch, Triton's Conch and the Helm of Hades: flags the relics read (§2).
-  - The Hunter's Moon, Athena's Stylus and the Eyes of Argus are **flags only, hooks** for the Augur's Eye and the Scroll of Deeds.
+  - The Hunter's Moon and the Eyes of Argus remain **flags-only hooks**.
+    Athena's Stylus is read by the Scroll of Deeds to add open-quest hints.
 - **Gift III (Favor 100)** sets its flag and shows the sacred animal. **Hook:** the static encounter waits for the dex's species.
 
 ### Calls for story scripts
@@ -598,7 +601,66 @@ copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
 
 ## 7. Scripts' small needs
 
-Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"` and `tools/ichor/tests/ichor_world.sh`.
+Built in `src/ichor_save.c`, `src/ichor_time.c`, `src/ichor_omen.c` and `src/ichor_scene.c`. Tested by `make check TESTS="Ichor:"`, `tools/ichor/tests/ichor_world.sh` and the scene checks below.
+
+### Story picture windows and the Act I title
+
+`Ichor_ShowScenePicture(tiles, palette)` is the shared C renderer for a 64x64,
+4bpp picture with sixteen colors. The restored-amphora wrapper and
+`specialvar(VAR_RESULT, Ichor_ShowTabletPicture)` both use it. It borrows BG
+palette 13, preserves both its unfaded and displayed colors, and returns
+`FALSE` if a scene window is already open or allocation fails.
+`special(Ichor_HideScenePicture)` clears and releases the window and restores
+both palettes; repeated closes are safe. Close pictures before rewards,
+another menu or a map transition. The existing amphora show/hide specials
+retain their interfaces and restoration guard.
+
+The revelation opens the tablet between Daphne introducing its back and
+explaining the raking light, and closes it after her reading and its pause.
+Regenerate the original indexed asset with
+`python3 tools/ichor/art/tablet_back.py`; `make` converts the PNG.
+
+After closing dialogue and its speaker plaque, fading the field to black and
+calling `specialvar(VAR_RESULT, Ichor_ShowActOneCard)` opens the centered title.
+It uses the original pottery frame, independent of the player's menu-frame
+choice, and temporarily borrows BG palettes 14 and 15. Check for `TRUE`,
+`delay(60)`, `waitbuttonpress`, then `special(Ichor_HideActOneCard)` before
+showing the thank-you message or warping. It cannot coexist with a picture;
+its close is idempotent and restores both unfaded and displayed palettes.
+The revelation reports either allocation failure explicitly without losing
+its already-earned reward or trapping the player.
+
+`tools/ichor/tests/sanctum.sh` exercises both actual revelation branches,
+compiled tablet pixels, palette restoration, speaker continuity, A and B
+title acknowledgment, window cleanup, full-Bag retry and saved/repeated
+completion. `tools/ichor/tests/amphorae.sh` checks all twelve paintings through
+the shared renderer.
+
+### The revelation's one-lamp lighting
+
+The Demeter hall's generated `DrawRevelation` overlay applies between Kleon's
+departure and Daphne's completed revelation. It keeps the raid's overturned
+front braziers, extinguishes other flames and places one clay lamp beside
+Daphne at `(13, 23)`, without changing saved brazier flags. Map transition sets
+`ICHOR_FLASH_TORCH`; the revelation also uses `animateflash` and `setflashlevel`
+after positioning the cast, so a full-Bag retry cannot inherit full brightness.
+The lamp flickers through the authored sixty-frame pause. Regenerate its
+overlay and flicker script with `python3 tools/ichor/maps/temple_demeter.py`.
+
+This is map-local staging, not a change to Torch ownership, dousing, upgrades
+or the tint preference. Normal map entry restores the room and personal Torch
+radius after completion; entering outdoors clears native Flash as usual.
+The sanctum regression counts all flames, samples the real flicker script,
+retries from full brightness, exercises doused and upgraded Torches with native
+Flash, and checks normal reentry and saved brazier progress.
+
+The temple hymn continues through the scene's opening. At “She didn't see one
+at all”, `playbgm(MUS_ICHOR_REVELATION, FALSE)` starts the existing original
+score with its sustained aulos D4. Do not save this as a map-music override:
+the Chart fanfare resumes it automatically, while the exit and normal reentry
+must restore Eleusa's theme and the temple hymn respectively. Both dialogue
+branches check those transitions and the intro's single active D4 voice;
+full-Bag refusals leave the temple hymn playing.
 
 ### Counting flags
 
@@ -644,6 +706,10 @@ if (var(VAR_RESULT) == TRUE) {
 ### Holding the day-and-night tint
 
 - **`setvar(VAR_0x8004, TIME_EVENING)`, then `special(Ichor_HoldTimeOfDay)`.** The tint holds at that time of day, whatever the clock says. The hold lasts through warps and saves until `special(Ichor_ReleaseTimeOfDay)`. It takes `TIME_MORNING`, `TIME_DAY`, `TIME_EVENING` or `TIME_NIGHT`, each at full strength.
+- **`specialvar(VAR_RESULT, Ichor_GetTimeOfDay)`.** Returns the current
+  `TIME_*` value, including a script's held time. DAY/NIGHT TINT OFF is visual
+  only and does not turn nighttime gameplay into daytime. The underlying C
+  `GetTimeOfDay` is not itself a script special.
 - **It's the game's time of day while held,** not just the colors. Encounter tables and time-based evolutions follow it, so night falls at Delphoi for the Pokémon too.
 - The tint only shows on maps with natural light (towns, routes and the sea), so interiors look the same either way.
 - The expansion's own `SetTimeOfDay` hour override still works, but it resets on every warp. Use the hold for anything that spans maps.
@@ -696,7 +762,9 @@ Nobody breaks up an Aphrodite.
 
 **By itself, the engine runs only the Anthesteria:** at night, Ghost-types come about three times as often on land. Everything else on a festival day is the town's script, and the main path never needs a festival (the Act II Dionysia is story time).
 
-**Not built:** `IchorSave.festivalsSeen`, and the Scroll of Deeds' calendar page.
+The Scroll of Deeds' calendar page reads this schedule and the current
+`VAR_DAYS`. **Not built:** `IchorSave.festivalsSeen` and the remaining festival
+world events.
 
 ### Theoxenia's tells (SYSTEMS §10)
 
@@ -736,7 +804,14 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
 - **What an omen does by itself:**
   - **A swarm** starts the expansion's mass outbreak for the day: half the row's `map`'s land encounters are its `species` at its `level`, with the species' own moves.
   - **A visitor's object** shows only on its day. Each new day the engine sets every visitor's `hideFlag`, then clears today's. A map's script sets it again once the visitor is caught or beaten.
-  - **Weather** is the map's `ON_TRANSITION`, as above.
+  - **Live rollover** queues a field refresh after the daily draw. Once the
+    player is stationary and no script, fade or Frozen Hour is active, expired
+    visitor objects are removed and visible new arrivals are spawned. A new
+    arrival waits if the player occupies its tile. This does not respawn a
+    same-day consumed visitor or remove Emporion's permanent marked jar.
+  - **Weather** is generally the map's `ON_TRANSITION`, as above. Eleusa uses
+    `special(Ichor_SetOmenWeather)` to select sun or normal weather from the same
+    policy as live rollover; the field refresh updates both saved and live weather.
 - **Adding an omen.** Number it in `include/constants/ichor.h` (`OMEN_SWARM_*`, `OMEN_VISITOR_*`, `OMEN_WEATHER_*`), then add a row:
   ```
   { .kind = OMEN_SWARM, .entry = OMEN_SWARM_ROUTE6, .unlockFlag = FLAG_ICHOR_ARRIVED_ELEUSA,
@@ -749,13 +824,12 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
   weather. The latter four unlock on arrival in Eleusa. Swarm ids 2-5 preserve
   the reserved Act II entries 0/1. Eleusa's transition clears the previous
   weather before applying today's sun. Later rows remain progress-gated;
-  Eleusa's `OMEN_VISITOR_ELEUSA_KORANTHA` (2) is registered at (32,35), level 22,
+  Eleusa's `OMEN_VISITOR_ELEUSA_KORANTHA` (2) is registered at (17,35), level 22,
   with `FLAG_ICHOR_HIDE_OMEN_KORANTHA`. Capture/defeat hides it until another
   matching omen; escape/loss does not. Map entry hides off-day visitors even
   on legacy saves with an unset new flag. Interaction also rejects an expired
-  visitor if the day changes while the player stays in the wheat. Daily flags
-  do not refresh live objects or weather by themselves; seamless on-map day
-  rollover and other Act I visitor callers remain open.
+  visitor if the day changes while the player stays in the wheat. The daily
+  draw now queues the live refresh described above.
   Emporion's `OMEN_VISITOR_EMPORION_PITHOUND` (3) unlocks on the first city
   visit. Only the westernmost stoa jar at (10,24), whose description identifies
   a scratched paw-print, starts this level-16 visitor. Its BG script checks the
@@ -768,6 +842,10 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
   `FLAG_ICHOR_HIDE_OMEN_NEMECUB` records capture/defeat for that visit; loss and
   escape preserve it. Entry and interaction reject off-day visitors, including
   legacy saves and an on-map day change.
+  `tools/ichor/tests/omen_rollover.sh` checks actual midnight field-clock
+  rollover without map reentry: Korantha and Nemecub arrival/expiry, same-day
+  consumption, script/Frozen Hour deferral, occupied-tile arrival, and
+  Eleusa's saved/live sun onset and expiry.
 - **Halitherses's reading** uses the actual saved kind/entry and
   `FLAG_DAILY_ICHOR_AUGURY_READ`. A good-sign blessing asks before replacing
   the current blessing, grants Hermes 100 steps without Favor, and cannot be
@@ -817,7 +895,13 @@ goto(EventScript_IchorDigFixed)
 (Arachne), Eleusa west field 2 and east meadow 3 (Persephone). The village's
 two BG events use separate index-setting wrappers and a shared loot caller;
 never share a daily index between sites. See `tools/ichor/claim_ranges.md`.
-- A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once its amphora is whole, and an ostrakon roll once all 30 are found.
+Kalliste's three daily spots use indices 6 (Kronion Hill's pried-up slabs),
+7 (Route 1's bee terraces) and 8 (Akti's beach shells), all with the Kronos
+amphora and Act I loot. They are BG interactions on visible map details, not
+objects removed by a dig; their consumed flags clear at midnight without
+requiring reentry. The existing map generator owns both Route 1 and Kronion
+events and the terrace's turned-earth tile.
+- A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once all four of its amphora's sherds are collected, and an ostrakon roll once all 30 are found. Collection does not set the restored-amphora flag.
 
 **What a dig does:**
 - **Without the Trowel,** it says the earth has been turned and something glints in it.
@@ -827,7 +911,7 @@ never share a daily index between sites. See `tools/ichor/claim_ranges.md`.
   - An ostrakon sets the next of `FLAG_ICHOR_OSTRAKA_START + 0–29`, in order, and shows its words. The 30 are in `src/ichor_dig.c` (`sOstraka`). Nine name Aristeides, for Lysimachos, and the last is the player's. Writers may rewrite any of them.
   - Tablet *n* sets `FLAG_ICHOR_PROPHECY_START + n − 1`, and page *n* sets `FLAG_ICHOR_PAGES_START + n − 1`. Alethea's reading, or the page's text, is the map's own script (see below).
 - **Afterwards,** a daily spot says "dug today" until tomorrow, and a fixed find says "nothing else is buried here".
-- **A fixed find with nothing left to give** (a sherd of a whole amphora) gives Stardust instead.
+- **A fixed find with nothing left to give** (a sherd whose four-piece collection is already complete) gives Stardust instead.
 - **Rolls are seeded by the day's seed and the spot,** so reloading a save digs up the same thing.
 - **Blessings:** Demeter's rolls twice and keeps the rarer find. Hades's doubles an item from a daily spot.
 - **Loot that waits on other work:** the fossils are Kanto's and Hoenn's until the dex adds the Aethos fossils. The 1% Ichor Stone is one of ten Mega Stones; Balance may change the list in `sIchorStones`.
@@ -874,4 +958,391 @@ money unchanged; the sale rechecks capacity. With no blessing, +20% is ¥600,
 
 **Index blocks** for dig spots are in §1's table. Ask the engine session for more.
 
+### Amphora restoration
+
+The Akademia's three shelf BG events enter `EventScript_IchorAmphoraShelf`.
+This is a self-service shelf with Daphne's written notes, available after she
+leaves for the Mysteries; it does not change her location or require an invented
+attendant. Its scrolling menu shows only collected or restored myths, in
+canonical `ICHOR_AMPHORA_*` order, with a piece count or `whole` label.
+
+The player must explicitly confirm assembling four sherds. Partial collections,
+menu cancellation and declined confirmation leave the restoration flag unset.
+Restoration sets `FLAG_ICHOR_AMPHORAE_START + amphora`, retains all four collected
+flags, and grants Hephaestus or Aphrodite five capped Favor once for their
+respective myths. A legacy restored flag remains readable even without sherds
+and does not grant Favor again.
+
+With an amphora id in `VAR_0x8004`:
+- `Ichor_BufferAmphora` returns `ICHOR_AMPHORA_INCOMPLETE`, `_READY`,
+  `_RESTORED` or `_INVALID`, buffering the name/count in `STR_VAR_1/2` when valid.
+- `Ichor_RestoreAmphora` rechecks eligibility and returns the resulting status.
+- `Ichor_BufferAmphoraNotes` returns `TRUE` and copies the notes to `gStringVar4`
+  only for a restored amphora.
+- `Ichor_ShowAmphoraPicture` returns `TRUE` only after opening the 64x64 window.
+  `Ichor_HideAmphoraPicture` releases it and restores the borrowed BG palette.
+  Close it before another menu, map transition or reward.
+
+`Ichor_BuildAmphoraMenu` puts its count in `VAR_RESULT`; zero means no entries,
+and `ICHOR_AMPHORA_MENU_ERROR` is an explicit allocation failure. The menu owns
+and frees its labels. Finish its dynamic selection before showing a painting.
+
+The twelve panels use one 16-color palette, no secondary-tileset capacity,
+and 24,576 bytes of uncompressed 4bpp graphics. Regenerate their indexed PNG with
+`python3 tools/ichor/art/amphorae.py`; `make` supplies the `.4bpp` and `.gbapal`.
+
+All twelve **restored** flags unlock the last page and one Ability Patch.
+`FLAG_ICHOR_GOT_AMPHORA_PATCH` is set only after `giveitem` succeeds; pending
+and claimed rewards persist across CONTINUE. Forty-eight collected sherds alone
+do not qualify. Later-region world callers remain to
+integrate; the shelf and Scroll of Deeds record their canonical restored-amphora gates and clues,
+not an automatically finished encounter.
+
 **Checks:** `tools/ichor/tests/ichor_dig.sh` (15 checks on Route 1) and `make check TESTS="Ichor:"` (`test/ichor_dig.c`: the rolls, rerolls, act tables and blessings).
+`tools/ichor/tests/amphorae.sh` exercises all twelve real shelf choices and
+paintings, cancellation, explicit restoration, Favor, saved/full-Bag collection
+rewards and repeated reading. `tools/ichor/tests/kalliste_digs.sh` also follows
+four actually excavated Kronos sherds through shelf restoration and CONTINUE.
+
+### The Act I amphora encounters
+
+Checking Kronion's existing broken altar after restoring Kronos offers
+Cairnolith Lv20 at `TIME_NIGHT`, with Sand Force and a held Hard Stone.
+`FLAG_ICHOR_KRONION_ALTAR_STONE` records capture or victory, not an approach,
+escape or whiteout. Both existing altar BG events share this state.
+
+The Hollow's web chamber similarly uses the canonical Arachne restoration
+flag to reveal Raknit Lv20 with Defiant. `FLAG_ICHOR_HOLLOW_RAKNIT` records
+its outcome. Claimed Raknit is hidden/removed immediately and its interaction
+rechecks eligibility, closing same-map repeats.
+
+`Ichor_SetPersephoneVisitor` derives `FLAG_ICHOR_HIDE_AMPHORA_PERSENYX` only
+on Eleusa's map: show the object at (37,33) if Persephone is restored,
+`FLAG_ICHOR_ELEUSA_PERSENYX` is unset and the time is `TIME_EVENING`. The
+map transition calls it before object placement; the safe field refresh
+also handles clock boundaries without leaving the map. Scripts, palette
+fades, the Frozen Hour, player movement and an occupied arrival tile defer
+that refresh. Its Lv22 battle is optional, and only capture/victory claim it.
+These are independent of daily omen draws and do not reset on another day.
+
+`tools/ichor/tests/amphora_leads.sh` restores the three myths through the real
+shelf and exercises exact enemy levels/abilities/items, declined approaches,
+escape, whiteout, victory, actual ball captures, save/CONTINUE and live dusk
+boundaries. The battle-strength assist is not natural-level balance approval.
+
+## 9. Scroll of Deeds
+
+`src/ichor_deeds.c` reads existing saved receipts; opening the journal never
+sets a quest flag, restores an amphora, consumes an item or claims a reward.
+The ordinary and debug start menus use the cut PokéNav's slot for **DEEDS**
+when `ICHOR_CUT_POKENAV` is enabled, preserving the nine-entry action buffer.
+The trainer card and special-mode menu builders are unchanged. The script
+uses standard pottery-framed scrolling choices and field messages, with
+B returning to the contents and then releasing field controls.
+
+- `Ichor_DeedState(deed)` returns `ICHOR_DEED_HIDDEN`, `OPEN`, `DONE` or
+  `RECORDED`. Story ids 0–11 follow the first partner, Hearth Laurel, crossing,
+  Herald Laurel, Harvest Laurel, Mysteries night, stolen fragment, Kleon's
+  departure, revelation, letter, Mom's parcel and Daedalus's seven pages.
+  An existing completion receipt remains readable even if an older save
+  lacks the prerequisite receipt.
+- Amphora ids are `ICHOR_DEED_AMPHORA_START + myth` (16–27). No sherds means
+  hidden; four sherds remain an open restoration. Only a restored myth
+  reveals its lead. The three Act I capture/victory receipts mark their
+  leads done; later leads are **recorded**, not fictitiously completed.
+- `Ichor_BuildDeedsMenu` takes category 0 (contents), 1 (Act I) or 2
+  (amphorae) in `VAR_0x8004`, and the previous selection id in `VAR_0x800A`.
+  It queues separately allocated labels for `dynmultistack`, returns the
+  count in `VAR_RESULT`, and supplies the resumable **item id**, not row
+  number, in `VAR_0x8000`. Allocation failure cleans queued labels and
+  returns `ICHOR_DEEDS_MENU_ERROR`; the script displays an explicit error.
+- `Ichor_BufferDeed` takes a page id in `VAR_0x8004`, writes the message to
+  `gStringVar4`, preserves the id and returns TRUE. Hidden/invalid ids return
+  FALSE with an explanatory message. Athena's Stylus adds hints only to
+  open pages; Daedalus hints follow which of the first two pages is missing.
+- `ICHOR_DEED_HERMS` (40) reads `Ichor_CountAnointedHerms` and `HERM_COUNT`,
+  without counting post-game waystones as Aethos herms.
+- `ICHOR_DEED_CALENDAR` (41) shows the current month, day of three and
+  time until that month's next festival, using `Ichor_DaysToFestival`.
+  Maimakterion explicitly has no festival. This is a schedule, not festival
+  attendance or a claim that all twelve world events have been built.
+
+`test/ichor_deeds.c` covers story gates, pending gifts, all twelve myths,
+Stylus hints and two complete calendar years.
+`bash tools/ichor/tests/deeds.sh` exercises the real start-menu callback,
+empty pages, scrolling, read/back navigation, the retained trainer card,
+field-control release and save/reset/CONTINUE.
+
+## 10. Star Chart
+
+`ITEM_STAR_CHART` opens `src/ichor_star_chart.c` through the real Bag's USE
+action. BG2 holds the parchment sky, BG1 holds 24 original star-and-line
+patterns and the selected patch, and BG0 holds the count, name and controls.
+Only placed patterns appear. Unplaced names remain hidden, including the
+Unwoven until its eventual credits caller. D-pad movement wraps through
+six columns and four rows; B frees the chart's windows and tilemaps and
+returns to the same Bag pocket. Placed stars cycle between two gold shades.
+Allocation failures display an explicit retry message rather than claiming
+the screen opened.
+
+The Bag uses an original 24x24 rolled-sky icon and its own sixteen-color
+palette, not the Town Map's graphics. Regenerate just this asset with
+`python3 tools/ichor/art/items.py --write --only star_chart`; the focused
+option retains the generator's shared-palette checks without rewriting
+other icon PNGs or the ground jar.
+
+### Outdoor seats
+
+Kronion Hill's eastern shrine steps at `(15, 8)`, approached from `(15, 9)`,
+run `EventScript_IchorSkySeat`. The summit stele explains the seat; the route
+builder preserves the event and checks reachability without changing terrain.
+The shared script requires the real Chart, night and an affirmative answer,
+then fades to black and calls `specialvar(VAR_RESULT, Ichor_ShowNightSky)`.
+On `TRUE`, `waitstate` waits for the screen; on immediate `FALSE`, fade back in.
+Screen-initialization failure resumes with `FALSE` and the script reports an
+explicit retry message. The native entry also rejects indoor, daytime,
+missing-item and already-open callers.
+
+The sky shares the portable view's patterns, selection and saved flags, but
+uses its own midnight-blue palette, pale twinkling stars and field-exit label.
+B releases its resources and uses `CB2_ReturnToFieldContinueScript`, retaining
+the seat's position and music. It does not consume the Chart or change the
+held time, tint option or weather. The portable view still returns to its
+original Bag pocket. No new save field or milestone reward is introduced.
+
+### Saved placements
+
+The existing `FLAG_ICHOR_CONSTELLATIONS_START` range stores one saved bit
+per constellation, in SYSTEMS §8 order (indices 0–23). This uses the already
+reserved flag bank instead of introducing a new `IchorSave.constellations`
+field or changing save layout/version. Extra reserved bits 24–31 do not count.
+
+- `Ichor_PlaceStar(index)` returns TRUE only for a first valid placement.
+  Invalid indices and repeated placements return FALSE without changing
+  other bits. `specialvar(VAR_RESULT, Ichor_PlaceConstellation)` exposes
+  this with the index in `VAR_0x8004`.
+- `Ichor_CountStars()` and
+  `specialvar(VAR_RESULT, Ichor_CountConstellations)` count only the 24 myths.
+- `FlagSet` calls `Ichor_StarFlagSet` for the Conch and Laurel 4/5/7/8
+  receipts, placing Delphinus, Crater, Ursa Major, Cygnus and Corvus.
+  The seventh distinct Daedalus page places the Pleiades.
+- `Ichor_AddFavorTo` places Orion or Cancer when Artemis or Hera first
+  reaches Favor 30. Other gods do not place those stars.
+- `Ichor_RefreshStars` recovers these existing receipts and Favor thresholds
+  on opening older saves. Placements are permanent; removing a debug
+  receipt does not erase a star.
+
+The other myth callers, additional outdoor seats, moon-dance encounter and
+6/12/18/24 milestone rewards remain future integrations. Manually seeded
+all-star fixtures demonstrate rendering, not current story obtainability.
+
+`test/ichor_star_chart.c` covers bounded/idempotent placement, exact receipt
+mapping, thresholds, distinct pages, legacy recovery and reserved bits.
+`tools/ichor/tests/star_chart.sh` opens the real Bag item, checks all 24
+distinct rendered pixel patterns, the empty final patch, palette twinkling,
+navigation, screen cleanup and save/reset/CONTINUE. It compares all 288
+compiled icon bytes and all sixteen colors against the live Bag sprite's
+OBJ VRAM and palette, both before opening the Chart and after returning.
+The same run interacts with the actual hill seat: daytime and missing-item
+refusals, declining, dawn during its prompt, empty and two-myth skies, distinct
+live colors, twinkle, navigation, repeated cleanup, retained music/position,
+save/CONTINUE and the portable parchment afterward. Native guard checks also
+exercise indoor, daytime and missing-Chart callers.
+
+## 11. Oath of the Styx
+
+The autonomous continuation uses **one wild-encounter chance per named area**,
+not one per map or dungeon floor. This is an implementation decision, not a
+claim of human approval. New games can now select the core Oath at the
+bedroom clock after choosing difficulty. NO is the default, swearing requires
+a second confirmation, and either completed answer is saved once. The
+explanation covers area chances, permanent falls, empty-jar capacity,
+stored-survivor recovery and the unchanged last-manual-save ending policy.
+Later Charon/Riverside scenes are separate, unfinished Underworld work.
+
+`src/ichor_oath.c` provides the saved-state core:
+
+- `Ichor_ChooseOath(TRUE/FALSE)` accepts a single choice before the starter
+  receipt, independently of difficulty. It refuses repeats, invalid booleans
+  and choices after the starter. Swearing requires an empty final
+  Pithos jar, names it URN and reserves it without moving existing Pokemon.
+- The playable `Ichor_ChooseStartingOath` special additionally requires
+  `FLAG_ICHOR_OATH_CHOICE_PENDING`, set only by `NewGameInitData`, not by
+  IchorSave initialization or old-save migration. Either successful answer
+  clears it. The bedroom script also skips players with the starter receipt,
+  so existing saves and late arrivals cannot be retroactively enrolled.
+  `gSpecialVar_0x8004` supplies TRUE/FALSE; a failed write leaves eligibility
+  intact and reports the error in the original choice loop.
+- `Ichor_IsOathActive()` recognizes only ACTIVE. The other saved states are
+  UNDECIDED, DECLINED, RELEASED and FAILED.
+- `Ichor_ClaimOathEncounter(mapSection)` admits the first encounter and saves
+  its bit. Under an active Oath it refuses another chance in that named area,
+  out-of-range IDs, dynamic sections and secret bases. Without an active Oath
+  it admits ordinary encounters without recording a bit.
+- `Ichor_BeginOathBattle` runs once from `CB2_InitBattle`, after save pointers
+  have been relocated. Real wild encounters claim the named area's chance
+  immediately: escape or defeat still spends it, while failed ball throws in
+  that first battle can be retried. Trainer, link, recorded, Frontier,
+  Trainer Hill, secret-base, tutorial and uncatchable ghost battles do not
+  spend a chance. Dungeon floors sharing a named map section share a chance.
+- `Ichor_CanCatchOathBattle` supplies the Bag, last-ball shortcut, Safari throw,
+  native throw command and victory-catch guards. Repeat-area Bag attempts
+  explain the refusal without spending an item or turn. Native quick/Safari
+  action guards also preserve their ball counts. Inactive/released runs keep
+  their normal capture behavior. This is not a gift/trade restriction.
+- `Ichor_HasOathEncounter` and `Ichor_CountOathEncounters` read valid receipts.
+- `Ichor_ReleaseOath` and `Ichor_FailOath` each transition an active Oath once,
+  retaining its receipts and fallen count. Neither permits re-enrollment.
+- `Ichor_RecordOathFallen(mon)` marks an actual zero-HP, non-Egg Pokemon
+  once under an active Oath and increments its fallen count. The marker uses
+  a previously unused BoxPokemon bit, leaving the Pokemon/storage sizes
+  unchanged; `Ichor_IsOathFallen` ignores it outside sworn runs. Native
+  `SetValuesOnFaint` records only the player's own Pokemon in real battles,
+  not opponents, NPC partners or simulated/tutorial battles.
+  Field poison also records actual zero-HP falls outside battle facilities;
+  modern poison survival at one HP does not count as a fall.
+- Fallen HP remains zero through `SetMonData`'s HP/HP-lost setters, stat
+  recalculation, party healing and boxed-to-party conversion, including
+  after release. `HealPokemon` and `HealBoxPokemon` leave the whole fallen
+  record unchanged, including PP and status; modern party healing otherwise
+  heals every stored jar too. Item effects refuse fallen targets; battle
+  revival items explain why, and Revival Blessing's native search excludes them. Ordinary
+  saves, including legacy Pokemon with the formerly unused bit set, retain
+  ordinary healing and revival.
+- `Ichor_IsUrnBox(box)` identifies saved reserved jars even after release or
+  failure. Ordinary capture storage, full-storage checks and script free-space
+  checks skip those jars. Direct party deposits refuse reserved destinations
+  before changing their source.
+- Reserved jars offer only SUMMARY/CANCEL for their occupants and JUMP/CANCEL
+  for the jar itself. Normal/shortcut/group movement, A/B quick placement and
+  Move items cannot remove or add partners or belongings. Refusals explain
+  that the Urn is sealed; group refusal temporarily switches out of the
+  eight-bit icon layer so the message remains legible, then restores the
+  held group without changing its data.
+- Fallen partners, including any retained in the party for capacity handling,
+  cannot use ordinary PC deposit or service-selection APIs. Their summaries
+  remain viewable but cannot rename, relearn or reorder moves. They do not
+  count as living stored partners or usable stored field-move holders.
+  The party menu offers only SUMMARY/CANCEL; direct-choice services explicitly
+  refuse them without closing the chooser or changing the partner.
+- `Ichor_StoreOathFallen(mon)` stores the entire marked BoxPokemon before
+  clearing its source. A full Urn grows only into an entirely empty Pithos
+  jar, named URN 2 and onward. Living Pokemon are never displaced. If no
+  reserved space or empty jar exists, the explicit `ICHOR_URN_FULL` result
+  leaves both the source and storage intact. Call this after battle, then
+  compact/recount the party; the caller must report capacity refusal and
+  prevent use or revival of a retained fallen partner.
+- `Ichor_StoreOathPartyFallen()` transfers all marked party partners before
+  compacting and recounting the party. Its aggregate result is NOT_FALLEN
+  when no fallen partners were present, STORED when all pending partners fit,
+  or FULL when any remain. FULL can include partial success: retained sources stay intact,
+  and retrying after an ordinary jar becomes empty cannot duplicate records.
+- `Ichor_EndOathBattle(type, outcome)` applies that transfer to real,
+  non-defeat battles only when a living, non-Egg player partner remains.
+  Wild, scripted wild, ghost, trainer and rematch return paths call it after
+  any existing follower/variant party restoration. A TRUE result forces
+  whiteout recovery before ordinary callback branches, including scripted
+  no-whiteout battles and NPC victories with no usable player survivor.
+  Lost/drawn battles with a usable restored party keep their native outcome
+  handling; an Egg does not count as a survivor.
+- `Ichor_ShowOathAftermathNotice()` runs after the field fades back in,
+  before the normal return tasks unlock movement or resume the paused
+  script. Transfer and full-capacity notices require acknowledgment without
+  replacing the original event script. A full Urn retains the pending fallen
+  partner and explains the need for an empty jar.
+- `Ichor_RetryOathUrn()` repeats survivor-safe burial when opening the Pithos
+  menu or returning from storage. Freeing an ordinary jar therefore resolves
+  retained fallen partners without another battle, including after release.
+  The same acknowledged notice is shown before the menu accepts input, and
+  its ordinary description is restored afterward. No usable party survivor
+  still means no transfer; total-party-loss recovery remains separate.
+- `Ichor_PrepareOathRecovery()` runs before ordinary whiteout healing.
+  An active Oath without a usable party partner searches non-Urn storage for
+  a non-Egg, non-fallen partner. It buries fallen party members, restores one
+  stored partner to the party, clears that source only after conversion,
+  and retries burial if withdrawing it emptied a jar. Whole memorial records
+  remain unchanged; partial capacity retains all overflow partners.
+  The usual whiteout destination/healing remains in use, and an acknowledged
+  recovery notice precedes the destination's normal healing script.
+  RECOVERY_NONE leaves ordinary/released runs to native handling; RECOVERED
+  means the party is usable again. EXHAUSTED marks only the in-memory Oath
+  FAILED when no living stored partner exists. RECOVERY_BLOCKED instead
+  leaves the Oath active and all party/storage records unchanged when no
+  party slot can be freed without displacing a partner.
+- `Ichor_ShowOathEndScreen(capacityBlocked)` explains exhaustion or blocked
+  capacity and returns to the native title on A/B. It never writes a save.
+  CONTINUE also routes saved FAILED states to this terminal screen before
+  loading a map. Normal defeat therefore preserves the last manual save.
+- The field-poison task finishes every original party index/message before
+  survivor-safe burial and compaction. It waits for the Urn notice to be
+  acknowledged before enabling the original script. Total-party field loss
+  retains the native whiteout script and therefore uses the same stored-partner
+  recovery and terminal safeguards. Facility losses keep their own routing;
+  modern poison survival at one HP does not mark a permanent fall.
+
+Version 5 takes 40 bytes from the old reserved region at 0x450. Total
+IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
+including the second flag bank at 0x500. Older saves get zero Oath bytes,
+not whatever previously occupied that reserve. Version 6 takes its two-byte
+Urn mask from padding within those same 40 bytes; version-5 migration
+preserves existing Oath progress and reserves only the original final jar.
+Opening selection does not change the IchorSave version, save layout or
+chosen difficulty. Existing saves have no new-game eligibility flag and
+therefore remain unprompted and unenrolled.
+
+The continuation's conservative run-ending policy is to return to the title
+without overwriting the last manual save, not to auto-save a failed run or
+permanently retire the save. This was selected autonomously while the user
+was unavailable, not explicitly approved by the user. Defeat/load enforcement
+is now implemented, including explicit capacity refusal without falsely
+declaring stored living partners exhausted.
+
+Native tests cover the entire map-section range, byte boundaries, invalid
+indices, once-only choice/transitions and migration. The actual-ROM save
+fixture seeds Oath state, saves and CONTINUEs, then writes version-4 and
+version-5 saves with stale reserve bytes and verifies migration preserves
+the old progress. Urn tests verify whole-Pokemon preservation, no duplicate
+fall counting, safe growth, occupied-jar refusal and full-capacity retention.
+`tools/ichor/tests/oath_capture.sh` enrolls only a fixture save and plays real
+first-area capture, repeat-area Bag refusal, an escaped second area's chance,
+save/reset/CONTINUE and capture after release. Native checks cover excluded
+battle categories and quick/Safari no-consumption guards.
+The same real-ROM fixture now plays an actual weak-lead fall, selects a living
+replacement and checks native party healing before and after save/reload.
+Native tests cover HP/item/boxed-heal bypasses, Revival Blessing's target
+search and actual recorded-link fainting without permanent loss.
+Native storage checks also fill every ordinary jar while leaving two reserved
+jars empty, prove that capture and script capacity checks report full, and
+verify that unsworn saves keep their final jar available. The actual-ROM
+fixture uses the actual battle's automatically transferred fallen BoxPokemon and plays
+view-only menus, summaries, shortcut/group refusal, A/B placement refusal,
+safe return of held ordinary partners, Move items and the party-deposit
+chooser. The complete fixture passes 68 checks with 25 screenshots, including
+byte-for-byte Urn preservation through a second save/reset/CONTINUE after
+release. It also fills the Urn, occupies every ordinary jar, plays another real
+fall and verifies the explicit capacity notice, retained source, continued
+non-revival and preservation through save/reset/CONTINUE. A direct-choice
+party service refuses the retained partner; moving a living stored partner
+to empty a jar triggers automatic burial on storage exit, with the original
+Urn unchanged and the expansion preserved by save/reset/CONTINUE. Native tests cover
+multiple fallen partners, survivor/Egg compaction, partial-capacity retry,
+simulation and defeat exclusions, and the no-survivor routing guard.
+`tools/ichor/tests/oath_recovery.sh` adds 18 real-ROM checks and eight
+screenshots: an actual scripted no-whiteout defeat, boxed-survivor recovery,
+memorial preservation, exhausted-run title return, transactional capacity
+refusal, last-manual-save preservation and saved-FAILED load interception.
+It also runs the native poison-message task with two one-HP survivors and an
+already marked pending partner, checks that indices stay intact until every
+message finishes, and proves acknowledged burial resumes the original
+script with exact memorial records. The native all-party field-loss script
+also reaches stored-survivor recovery. This is not a claim that the current
+modern configuration inflicts lethal overworld poison damage.
+Native tests also cover six-partner recovery, Eggs/memorials not counting
+as survivors, partial-capacity retention, newly emptied source-jar reuse,
+and ordinary/released whiteout preservation.
+`tools/ichor/tests/oath_choice.sh` adds 21 real-ROM checks and six screenshots:
+default decline, rejected binding confirmation, accepted enrollment on all
+three difficulties, old-save and post-starter refusal, once-only persistence
+of either answer, and the complete native water-clock-to-Oath handoff through
+save/reset/CONTINUE. These demonstrate the core rules, not human balance
+approval or completed later-chapter memorial scenes.

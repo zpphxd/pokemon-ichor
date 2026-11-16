@@ -171,6 +171,15 @@ script AktiTown_TempleOfHestia_EventScript_Euboulos {
     lock
     faceplayer
     setspeaker(AktiTown_TempleOfHestia_Text_NameEuboulos)
+    if (flag(FLAG_ICHOR_HEARTH_TRIAL_DONE) && !flag(FLAG_ICHOR_FORGE_RELIT)) {
+        checkitem(ITEM_CHARCOAL)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Lost your coal from the hearth? Take another. Hestia doesn't count."))
+            call(AktiTown_TempleOfHestia_EventScript_GiveCharcoal)
+            release
+            end
+        }
+    }
     if (flag(FLAG_BADGE01_GET)) {
         msgbox(format("The house is warm, and so are you. Hestia keep you, guest."))
     } elif (flag(FLAG_ICHOR_HEARTH_TRIAL_DONE)) {

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "ichor_rites.h"
 #include "malloc.h"
 #include "apprentice.h"
@@ -2545,6 +2546,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     {
         u32 hpLost;
         SET16(mon->hp);
+        if (Ichor_IsOathFallen(&mon->box))
+            mon->hp = 0;
         hpLost = mon->maxHP - mon->hp;
         SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
         break;
@@ -2553,6 +2556,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     {
         u32 hpLost;
         SET16(hpLost);
+        if (Ichor_IsOathFallen(&mon->box))
+            hpLost = mon->maxHP;
         mon->hp = mon->maxHP - hpLost;
         SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
         break;
@@ -2967,13 +2972,16 @@ u8 CopyMonToPC(struct Pokemon *mon)
 {
     s32 boxNo, boxPos;
 
+    if (Ichor_IsOathFallen(&mon->box))
+        return MON_CANT_GIVE;
+
     SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
 
     boxNo = StorageGetCurrentBox();
 
     do
     {
-        for (boxPos = 0; boxPos < IN_BOX_COUNT; boxPos++)
+        for (boxPos = 0; !Ichor_IsUrnBox(boxNo) && boxPos < IN_BOX_COUNT; boxPos++)
         {
             struct BoxPokemon *checkingMon = GetBoxedMonPtr(boxNo, boxPos);
             if (GetBoxMonData(checkingMon, MON_DATA_SPECIES) == SPECIES_NONE)
@@ -3173,7 +3181,7 @@ bool8 IsPokemonStorageFull(void)
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
         for (j = 0; j < IN_BOX_COUNT; j++)
-            if (GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
+            if (!Ichor_IsUrnBox(i) && GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
                 return FALSE;
 
     return TRUE;
@@ -3471,6 +3479,9 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
 
     // Determine the EV cap to use
     u32 maxAllowedEVs = !B_EV_ITEMS_CAP ? MAX_TOTAL_EVS : GetCurrentEVCap();
+
+    if (Ichor_IsOathFallen(&mon->box))
+        return TRUE;
 
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
@@ -6519,6 +6530,8 @@ void HealPokemon(struct Pokemon *mon)
 {
     u32 data;
 
+    if (Ichor_IsOathFallen(&mon->box))
+        return;
     data = GetMonData(mon, MON_DATA_MAX_HP);
     SetMonData(mon, MON_DATA_HP, &data);
 
@@ -6532,6 +6545,8 @@ void HealBoxPokemon(struct BoxPokemon *boxMon)
 {
     u32 data;
 
+    if (Ichor_IsOathFallen(boxMon))
+        return;
     data = 0;
     SetBoxMonData(boxMon, MON_DATA_HP_LOST, &data);
 
