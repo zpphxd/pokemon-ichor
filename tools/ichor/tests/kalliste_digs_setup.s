@@ -78,6 +78,16 @@ KallisteDigs_Akti:
 	releaseall
 	end
 
+	test_header KallisteDigs_AkademiaHeader, KallisteDigs_Akademia
+KallisteDigs_Akademia:
+	lockall
+	setvar VAR_TEMP_F, 1
+	setflag FLAG_ICHOR_MYSTERIES_NIGHT
+	warp MAP_ELAIA_VILLAGE_AKADEMIA, 13, 4
+	waitstate
+	releaseall
+	end
+
 	test_header KallisteDigs_TrowelHeader, KallisteDigs_Trowel
 KallisteDigs_Trowel:
 	setvar VAR_TEMP_F, 1

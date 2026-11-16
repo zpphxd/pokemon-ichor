@@ -145,4 +145,11 @@ L.start(function()
   withFind(sites[3], S.ICHOR_FIND_KIND_ITEM, nil, function() dig(sites[3]) end)
   L.expect(L.getFlag(S.FLAG_DIG_START + sites[3].index) and sherds() == 4,
            "a whole sherd collection leaves the beach's other loot usable")
+  L.runHeader("KallisteDigs_AkademiaHeader")
+  L.talk(L.sign("ElaiaVillage_Akademia_EventScript_Scrolls"), { answers = { 0, "yes" }, every = true })
+  L.expect(L.getFlag(S.FLAG_KRONOS_AMPHORA) and sherds() == 4,
+           "the four actually excavated sherds restore Kronos at the real Akademia shelf")
+  saveAndContinue()
+  L.expect(L.getFlag(S.FLAG_KRONOS_AMPHORA) and sherds() == 4,
+           "the restored amphora and its excavated sherd record survive CONTINUE")
 end)
