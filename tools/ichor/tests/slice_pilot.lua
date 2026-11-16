@@ -433,14 +433,19 @@ return function(L, starter)
 
   local function restAtAsclepeion()
     local map, x, y = L.mapId(), L.pos()
-    if map == S.MAP_TEMPLE then L.useWarp(S.MAP_AKTI) end
-    if L.mapId() == S.MAP_AKTI then L.useWarp(S.MAP_ASCLEPEION) end
-    L.talk(L.npc("AktiTown_Asclepeion_EventScript_Healer"))
+    local mainland = map == S.MAP_CITY or map == S.MAP_E_ASCLEPEION
+    local town = mainland and S.MAP_CITY or S.MAP_AKTI
+    local clinic = mainland and S.MAP_E_ASCLEPEION or S.MAP_ASCLEPEION
+    local healer = mainland and "EmporionCity_Asclepeion_EventScript_Healer"
+                           or "AktiTown_Asclepeion_EventScript_Healer"
+    if map == S.MAP_TEMPLE then L.useWarp(town) end
+    if L.mapId() == town then L.useWarp(clinic) end
+    L.talk(L.npc(healer))
     for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
       local hp, maxHp = L.partyHp(slot)
       L.expect(hp == maxHp and hp > 0, "the native Asclepeion restored partner " .. slot)
     end
-    if map ~= S.MAP_ASCLEPEION then L.useWarp(S.MAP_AKTI) end
+    if map ~= clinic then L.useWarp(town) end
     if map == S.MAP_TEMPLE then L.useWarp(S.MAP_TEMPLE) end
     returnToPosition(x, y)
     L.log("PILOT returned from the actual Asclepeion")
@@ -450,9 +455,17 @@ return function(L, starter)
     if not L.idle() or emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) == 0 then return end
     local hp, maxHp = L.partyHp(0)
     local homeReachable = L.mapId() == S.MAP_ROUTE1 or L.mapId() == S.MAP_KRONION
-    local clinicReachable = L.mapId() == S.MAP_AKTI or L.mapId() == S.MAP_TEMPLE or L.mapId() == S.MAP_ASCLEPEION
-    if clinicReachable and L.getFlag(S.FLAG_BADGE01_GET) and not L.getFlag(S.FLAG_SLICE_COMPLETE) then return end
-    if clinicReachable and hp < maxHp then restAtAsclepeion(); return end
+    local mainlandClinic = L.mapId() == S.MAP_CITY or L.mapId() == S.MAP_E_ASCLEPEION
+    local clinicReachable = mainlandClinic or L.mapId() == S.MAP_AKTI or L.mapId() == S.MAP_TEMPLE or L.mapId() == S.MAP_ASCLEPEION
+    if clinicReachable and not mainlandClinic and L.getFlag(S.FLAG_BADGE01_GET) and not L.getFlag(S.FLAG_SLICE_COMPLETE) then return end
+    if clinicReachable then
+      for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+        local current, maximum = L.partyHp(slot)
+        local pp = 0
+        for move = 0, S.MAX_MON_MOVES - 1 do pp = pp + L.partyPp(slot, move) end
+        if current < maximum or pp < 6 then restAtAsclepeion(); return end
+      end
+    end
     if hp == 0 and homeReachable then restAtHome(); return end
     if hp == 0 and clinicReachable then restAtAsclepeion(); return end
     if hp == 0 or hp * 4 > maxHp * 3 then return end

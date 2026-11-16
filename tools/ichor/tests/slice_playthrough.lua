@@ -1439,6 +1439,7 @@ beat("15_kerykos", function()
   -- out through T6, up through the open gate to the dais
   runTo({ { 15, 11 }, { 15, 10 }, { 17, 10 }, { 18, 10 }, { 18, 8 }, { 10, 8 }, { 10, 5 } })
   shot("the_dais")
+  if L.pilot then L.pilot.recover() end
   local honey, n0 = L.itemCount(S.ITEM_HONEY), #L.battles
   talk(L.npc(HM .. "Kerykos"), { shotBefore = "kerykos_dais", every = true })
   expect(#L.battles == n0 + 1, "one battle with Kerykos")

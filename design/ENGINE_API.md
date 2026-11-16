@@ -219,6 +219,17 @@ party to at least level 10 (14 in Spartan), using Mom for HP/PP recovery. Traini
 to 6,000 grass steps; no EXP, party, item or progression writes are allowed.
 Healing near Akti uses the actual Asclepeion; an NPC returning to the former
 player tile on map reentry does not require the pilot to stand inside it.
+Clinic recovery also supports Emporion's actual healer and checks every
+partner's HP and remaining move PP, not just the lead's HP. A healthy lead must
+not hide a fainted or PP-exhausted bench partner. The island-ending walk guard
+is unchanged, and healthy teams do not loop through the healer.
+An explicitly resumed fixture with a setup warp verifies the real Emporion
+clinic round trip: genuine pre-Kerykos damage is healed, owned Potions are
+preserved and the original city position and field control are restored.
+That fixture is not continuous provenance. At Kerykos's dais, the pilot now
+checks owned field recovery again after Philonides rather than entering the
+Hierophant battle with unchecked new damage; it does not leave an active Run
+for a clinic.
 `PILOT` records describe inspections, item consumption, catches, move choices
 and training alongside the existing `PARTY`/`BATTLE` evidence.
 Before Ione, the starter is restored as the lead by its original personality
@@ -287,6 +298,12 @@ remain level 10–11 while the starter enters Kerykos at level 19 with 20/52 HP.
 This is not a Laurel-2 or gate-opening pass. The harness now asserts the real
 150/120/100 budget rather than a Hero-only 120; the previous mainland attempt
 stopped at that incorrect assertion, not an actual rite failure.
+Subsequent fresh attempts with pre-dais field recovery, then whole-team clinic
+recovery, also lose to Kerykos (414,818 and 443,391 frames). In the latter the
+starter reaches the boss at 17/52 HP after Philonides, with no usable medicine
+left. Reaching a real healer earlier does not supply medicine for the temple;
+the pilot still needs a legitimate preparation strategy. No balance change or
+Laurel-2 natural pass is inferred from these losses.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.

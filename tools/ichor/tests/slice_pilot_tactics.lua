@@ -285,5 +285,58 @@ incoming = 336
 pilot.learnMove()
 assert(lastKey == 3 and #learnedFrom == 12, "unused Howl must be declined without selecting an owned move to erase")
 
-console:log("PILOT TACTICS PASS: damage/status/abilities, bounded useful Yawn, native foe slots, Spartan item ban, purchases, evolution learner and gear")
+local function clinicRecovery(startMap, benchHp, benchPp, islandEnding)
+  local S = {
+    MAP_ROUTE1 = 1, MAP_KRONION = 2, MAP_AKTI = 3, MAP_TEMPLE = 4,
+    MAP_ASCLEPEION = 5, MAP_CITY = 6, MAP_E_ASCLEPEION = 7,
+    gPartiesCount = 100, B_TRAINER_PLAYER = 0, MAX_MON_MOVES = 4,
+    FLAG_BADGE01_GET = 10, FLAG_SLICE_COMPLETE = 11,
+  }
+  local map, visits, warps = startMap, 0, 0
+  local mainland = map == S.MAP_CITY or map == S.MAP_E_ASCLEPEION
+  local clinic = mainland and S.MAP_E_ASCLEPEION or S.MAP_ASCLEPEION
+  local town = mainland and S.MAP_CITY or S.MAP_AKTI
+  local pilot = createPilot({
+    S = S, K = {},
+    emu = {read8 = function(_, address) assert(address == 100); return 2 end},
+    idle = function() return true end,
+    mapId = function() return map end,
+    pos = function() return 8, 9 end,
+    partyHp = function(slot) return slot == 0 and 40 or benchHp, 40 end,
+    partyPp = function(slot) return slot == 0 and 10 or benchPp end,
+    getFlag = function(flag) return flag == S.FLAG_BADGE01_GET or islandEnding end,
+    useWarp = function(target)
+      assert((map == town and target == clinic) or (map == clinic and target == town),
+             "recovery must enter and leave the correct town's real clinic")
+      map, warps = target, warps + 1
+    end,
+    npc = function(script)
+      assert(script == (mainland and "EmporionCity" or "AktiTown") .. "_Asclepeion_EventScript_Healer")
+      return script
+    end,
+    talk = function()
+      assert(map == clinic, "the native healer must be reached before recovery")
+      visits, benchHp, benchPp = visits + 1, 40, 10
+    end,
+    grid = function() return {people = {}} end,
+    go = function(x, y) assert(map == startMap and x == 8 and y == 9) end,
+    expect = function(condition, message) assert(condition, message) end,
+    log = function() end,
+  }, 0)
+  pilot.recover()
+  assert(map == startMap, "clinic recovery must preserve the original map")
+  return visits, warps
+end
+local visits, warps = clinicRecovery(6, 0, 10, false)
+assert(visits == 1 and warps == 2, "Emporion must heal a fainted bench partner despite a healthy lead")
+visits, warps = clinicRecovery(7, 12, 10, false)
+assert(visits == 1 and warps == 0, "an injured team already inside Emporion's clinic must stay inside")
+visits, warps = clinicRecovery(6, 40, 0, false)
+assert(visits == 1 and warps == 2, "a full-HP team with exhausted bench PP must still visit the healer")
+assert(clinicRecovery(6, 40, 10, false) == 0, "healthy teams must not loop through the healer")
+assert(clinicRecovery(3, 0, 0, false) == 0, "the island ending must still prevent a premature recovery walk")
+visits, warps = clinicRecovery(3, 0, 0, true)
+assert(visits == 1 and warps == 2, "Akti's actual clinic must remain available after the ending")
+
+console:log("PILOT TACTICS PASS: damage/status/abilities, bounded useful Yawn, native foe slots, Spartan item ban, purchases, evolution learner, gear and whole-team clinic recovery")
 console:log("PILOT TACTICS done")
