@@ -522,8 +522,11 @@ reads its back, then closes on a centered pottery-framed Act I title card
 that waits for A or B. Both dialogue branches retain their speaker names,
 release the scene windows and restore borrowed palettes before returning
 outside. The Chart has its own rolled-sky Bag icon instead of borrowing the
-Town Map. This is not final scene-art or human acceptance: lamp staging
-and dedicated music remain unfinished.
+Town Map. The revelation now burns one clay lamp beside Daphne, with the
+authored flicker and a fixed halo independent of the player's Torch or Flash.
+Other flames stay cold without erasing solved brazier progress; normal lighting
+returns on reentry. Dedicated music and human scene-art acceptance remain
+unfinished.
 
 **Continuation order.** Close and approve Act I first. Integrate shared systems at
 their first story use, then build connected Act II and Act III chapters. For post-game

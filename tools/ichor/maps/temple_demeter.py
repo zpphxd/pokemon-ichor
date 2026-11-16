@@ -97,6 +97,8 @@ DAIS = (12, 6)                            # 4x2: the altar at +3,0, the steps at
 ALTAR = (15, 6)
 STAIRS = [(12, 26), (13, 26), (14, 26)]
 ARRIVAL = (13, 26)
+ACOLYTE_LAMPS = ((6, 24), (9, 9))
+REVELATION_LAMP = (13, 23)
 
 # The Summer quarter's grain pits. S is the safe way (Hecate's chalk), P a pit;
 # anything else is left as it is (C a column, B the brazier, e the last seed).
@@ -199,7 +201,7 @@ def names_grid():
     for s, (bx, by) in BRAZIER.items():
         g[by][bx], g[by + 1][bx] = "braziers.top_cold", f"braziers.{s}_cold"
     # the acolytes' lamps
-    for (x, y) in ((6, 24), (9, 9)):
+    for (x, y) in ACOLYTE_LAMPS:
         g[y][x] = "vessels.lamp_lit"
     # the Summer quarter: pits (black, walkable, each a trigger) and the chalk path
     pits, safe = pit_cells()
@@ -295,6 +297,18 @@ def kick_cells(g, season):
             continue
         base = g[y][x]
         out.append((x, y, IDS[base], not walkable_name(base)))
+    return out
+
+
+def revelation_cells(g):
+    """Keep the raid damage, but let only the steps' clay lamp burn."""
+    out = []
+    for season in SEASONS:
+        if season not in KICKED:
+            for x, y, _ in light_cells(g, season):
+                out.append((x, y, g[y][x], not walkable_name(g[y][x])))
+    out.extend((x, y, "vessels.lamp_cold", True) for x, y in ACOLYTE_LAMPS)
+    out.append((*REVELATION_LAMP, "vessels.lamp_lit", True))
     return out
 
 
@@ -438,11 +452,30 @@ def script_block(g):
     o.append("    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT) && !flag(FLAG_ICHOR_ACT1_COMPLETE)) {")
     o.append(f"        call({PX}DrawRaid)")
     o.append("    }")
+    o.append("    if (flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA) && !flag(FLAG_ICHOR_DAPHNE_REVELATION)) {")
+    o.append(f"        call({PX}DrawRevelation)")
+    o.append("    }")
     o.append("    if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {")
     o.append(f"        setmetatile({DOOR[0]}, {DOOR[1]}, 0x{IDS['anaktoron.r2c2']:03X}, TRUE)")
     o.append("    } else {")
     o.append(f"        setmetatile({DOOR[0]}, {DOOR[1]}, 0x{IDS['anaktoron.r2c2']:03X}, FALSE)")
     o.append("    }")
+    o.append("    return")
+    o.append("}")
+    o.append("")
+    o.append("// Daphne reads by one clay lamp; saved brazier flags are unchanged.")
+    o.append(f"script {PX}DrawRevelation {{")
+    for x, y, name, solid in revelation_cells(g):
+        o.append(f"    setmetatile({x}, {y}, 0x{IDS[name]:03X}, {'TRUE' if solid else 'FALSE'})")
+    o.append("    return")
+    o.append("}")
+    o.append("")
+    o.append("// The authored one-second pause: a gutter, then a steady flame.")
+    o.append(f"script {PX}FlickerRevelationLamp {{")
+    for state, frames in (("Cold", 4), ("Lit", 8), ("Cold", 4), ("Lit", 44)):
+        o.append(f"    setmetatile({REVELATION_LAMP[0]}, {REVELATION_LAMP[1]}, METATILE_TempleDemeter_Lamp_{state}, TRUE)")
+        o.append("    special(DrawWholeMapView)")
+        o.append(f"    delay({frames})")
     o.append("    return")
     o.append("}")
     o.append("")
@@ -560,6 +593,13 @@ def check(g, solid, m):
             continue
         if solid[o["y"], o["x"]] or (o["x"], o["y"]) in pits:
             errors.append(f"{o['local_id']} stands on {g[o['y']][o['x']]}")
+    lamp_x, lamp_y = REVELATION_LAMP
+    if solid[lamp_y, lamp_x] or any((o["x"], o["y"]) == REVELATION_LAMP for o in m["object_events"]):
+        errors.append("the revelation lamp must sit on free floor beside Daphne")
+    lamp_blocked = solid.copy()
+    lamp_blocked[lamp_y, lamp_x] = True
+    if (12, 26) not in reach(lamp_blocked, (12, 23)):
+        errors.append("the revelation lamp blocks Daphne's departure")
     # beat 22: the scene's spot, and Kleon's post beside the door (not in front of it)
     for what, (x, y) in (("the Mysteries' spot", MYSTERIES_SPOT), ("Kleon's post", KLEON_DOOR)):
         if solid[y, x] or (x, y) in pits or (x, y) not in every:
@@ -608,6 +648,7 @@ def check(g, solid, m):
         allowed.setdefault(seed_cell(s), set()).add(IDS["floor.seed"])
     for (x, y) in pits:
         allowed.setdefault((x, y), set()).add(IDS["floor.floor"])
+    allowed.setdefault(REVELATION_LAMP, set()).update((IDS["vessels.lamp_cold"], IDS["vessels.lamp_lit"]))
     script = (MAP_DIR / "scripts.pory").read_text()
     for x, y, label in re.findall(r"setmetatile\((\d+),\s*(\d+),\s*(METATILE_\w+)", script):
         x, y = int(x), int(y)

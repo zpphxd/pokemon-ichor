@@ -636,6 +636,24 @@ title acknowledgment, window cleanup, full-Bag retry and saved/repeated
 completion. `tools/ichor/tests/amphorae.sh` checks all twelve paintings through
 the shared renderer.
 
+### The revelation's one-lamp lighting
+
+The Demeter hall's generated `DrawRevelation` overlay applies between Kleon's
+departure and Daphne's completed revelation. It keeps the raid's overturned
+front braziers, extinguishes other flames and places one clay lamp beside
+Daphne at `(13, 23)`, without changing saved brazier flags. Map transition sets
+`ICHOR_FLASH_TORCH`; the revelation also uses `animateflash` and `setflashlevel`
+after positioning the cast, so a full-Bag retry cannot inherit full brightness.
+The lamp flickers through the authored sixty-frame pause. Regenerate its
+overlay and flicker script with `python3 tools/ichor/maps/temple_demeter.py`.
+
+This is map-local staging, not a change to Torch ownership, dousing, upgrades
+or the tint preference. Normal map entry restores the room and personal Torch
+radius after completion; entering outdoors clears native Flash as usual.
+The sanctum regression counts all flames, samples the real flicker script,
+retries from full brightness, exercises doused and upgraded Torches with native
+Flash, and checks normal reentry and saved brazier progress.
+
 ### Counting flags
 
 `setvar(VAR_0x8004, FLAG_ICHOR_PROPHECY_START)`, `setvar(VAR_0x8005, 8)`, `specialvar(VAR_RESULT, Ichor_CountFlagRange)`: how many of those flags are set. It works on any flag range: a bank, a vanilla range or the daily flags.
