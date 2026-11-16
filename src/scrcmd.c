@@ -2554,6 +2554,8 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 
 #if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     PlaySlotMachine(machineId, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+#else
+    (void)machineId;
 #endif
     ScriptContext_Stop();
     return TRUE;
