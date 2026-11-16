@@ -276,6 +276,21 @@ class TextRendererTests(unittest.TestCase):
 
 
 class ExecutionTests(unittest.TestCase):
+    def test_native_counts_preserve_colored_result_categories(self):
+        counts = {"KNOWN_FAILING": 19, "TO_DO": 419, "EXPECT_FAILING": 9,
+                  "PASSED": 5486, "TOTAL": 5933}
+        output = "\n".join(f"- Tests \x1b[32m{key}\x1b[0m: {value}"
+                           for key, value in counts.items())
+        suites = {"expansion": {"command": [sys.executable, "-c", f"print({output!r})"],
+                                "deps": [], "category": "engine"}}
+        with tempfile.TemporaryDirectory() as directory, \
+                mock.patch.object(check, "ROOT", Path(directory)), \
+                mock.patch.object(check, "git", return_value="fixture\n"), \
+                mock.patch.object(check, "tool_versions", return_value={}):
+            self.assertEqual(check.execute(suites, ["expansion"], {}, [], "test", "main", 1), 0)
+            report = json.loads((Path(directory) / "build/ichor-check/report.json").read_text())
+            self.assertEqual(report["suites"][0]["native_counts"], counts)
+
     def test_fake_runner_and_nonzero_completion(self):
         with tempfile.TemporaryDirectory() as directory:
             log = Path(directory) / "run.log"

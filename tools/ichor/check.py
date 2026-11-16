@@ -312,8 +312,9 @@ def execute(suites, names, reasons, paths, profile, base, jobs):
                 if text_error:
                     entry["error"] = "measured dialogue exceeds the text box"
                 if name == "expansion":
+                    native_output = re.sub(r"\x1b\[[0-9;]*m", "", text)
                     entry["native_counts"] = {key: int(value) for key, value in
-                                              re.findall(r"^-\s+Tests\s+(\w+):\s+(\d+)", text, re.M)}
+                                              re.findall(r"^-\s+Tests\s+(\w+):\s+(\d+)", native_output, re.M)}
                 if entry["status"] == "failed":
                     print(text[-4000:], file=sys.stderr)
             status[name] = entry["status"]
