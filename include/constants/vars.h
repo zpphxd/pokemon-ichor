@@ -292,6 +292,9 @@
 #define VAR_ICHOR_MASK                          (ICHOR_VARS_START + 0x006) // Ichor: Thyrsa equipped mask: none/comic/tragic/satyr
 #define VAR_ICHOR_MASK_ACT                      (ICHOR_VARS_START + 0x007) // Ichor: completed entrances in the Three-Act Play
 #define VAR_ICHOR_SATYR_ACT                     (ICHOR_VARS_START + 0x008) // Ichor: freed audience blocks in the Dionysia
+#define VAR_ICHOR_GULF_DEST                     (ICHOR_VARS_START + 0x009) // Ichor: Gulf trireme destination: 0 Aigion, 1 Kirrha
+#define VAR_ICHOR_HUNT_STAGE                    (ICHOR_VARS_START + 0x00A) // Ichor: Artemis hunt stage: 0 teach, 1 test, 2 master, 3 complete
+#define VAR_ICHOR_HIND_TOUCHES                  (ICHOR_VARS_START + 0x00B) // Ichor: Golden hind antler touches: 0–3
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000

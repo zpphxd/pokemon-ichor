@@ -129,7 +129,7 @@ script ThyrsaCity_EventScript_Herald {
     lock
     faceplayer
     msgbox(format("The Dionysia is at the amphitheater. Thespis gives the Mask Laurel in the temple.\p"
-                  "The road beyond Thyrsa is not open yet."))
+                  "West along Lake Kopais for Lebadeia. Kirrha's trireme crosses to Aigion."))
     release
 }
 

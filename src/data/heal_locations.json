@@ -71,6 +71,46 @@
       "respawn_npc": "LOCALID_THYRSA_CITY_ASCLEPEION_HEALER",
       "respawn_x": 7,
       "respawn_y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_LEBADEIA",
+      "map": "MAP_LEBADEIA",
+      "x": 18,
+      "y": 12,
+      "respawn_map": "MAP_LEBADEIA",
+      "respawn_npc": "LOCALID_LEBADEIA_HEALER",
+      "respawn_x": 18,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_KIRRHA",
+      "map": "MAP_KIRRHA",
+      "x": 18,
+      "y": 12,
+      "respawn_map": "MAP_KIRRHA",
+      "respawn_npc": "LOCALID_KIRRHA_HEALER",
+      "respawn_x": 18,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_AIGION",
+      "map": "MAP_AIGION",
+      "x": 18,
+      "y": 12,
+      "respawn_map": "MAP_AIGION",
+      "respawn_npc": "LOCALID_AIGION_HEALER",
+      "respawn_x": 18,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_ARKADIA",
+      "map": "MAP_ARKADIA",
+      "x": 18,
+      "y": 12,
+      "respawn_map": "MAP_ARKADIA",
+      "respawn_npc": "LOCALID_ARKADIA_HEALER",
+      "respawn_x": 18,
+      "respawn_y": 12
     }
   ]
 }

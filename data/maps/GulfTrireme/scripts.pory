@@ -1,0 +1,23 @@
+mapscripts GulfTrireme_MapScripts {}
+
+script GulfTrireme_EventScript_Captain {
+    lock
+    faceplayer
+    if (var(VAR_ICHOR_GULF_DEST) == 1) {
+        msgbox(format("Kirrha ahead. Keep clear of the steering oar."))
+        warp(MAP_KIRRHA, 19, 25)
+    } else {
+        msgbox(format("Aigion ahead. Mind the gap at the pier."))
+        warp(MAP_AIGION, 19, 25)
+    }
+    waitstate
+    releaseall
+}
+
+script GulfTrireme_EventScript_Passenger {
+    lock
+    faceplayer
+    msgbox(format("You can see both shores from here.\p"
+                  "Makes you wonder why the wind takes sides."))
+    release
+}

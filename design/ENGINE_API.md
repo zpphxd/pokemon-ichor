@@ -363,6 +363,18 @@ CONTINUE. It does not certify natural-level balance, the knucklebones win path,
 or a continuous NEW GAME run through Act II. Regenerate the new layouts,
 road scripts, encounters and chapter teams with `python3 tools/ichor/maps/thyrsa.py`.
 
+`tools/ichor/tests/arkadia_route.sh` checks the assisted Thyrsa-to-Arkadia
+journey through the approved Kopais/Parnassos/Gulf/Styx geography. It traverses
+the actual connections and bidirectional ferry, verifies destination persistence
+across save/reset aboard ship, tests the real no-Girdle refusal and native
+column pushing, and checks a real pass whiteout to Aigion's outdoor healer.
+It finishes with save/reset/CONTINUE in Arkadia. It does not certify Arkadia's
+unfinished story, temple or natural-level balance. Regenerate approach layouts,
+road scripts, encounters and teams with `python3 tools/ichor/maps/arkadia.py`.
+The shared native walker scopes local object IDs to their owning map: connected
+neighbor objects can remain loaded with the same local ID as a current-map NPC.
+New heal locations are append-only because their numeric IDs are saved.
+
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.

@@ -1902,6 +1902,23 @@
 #define FLAG_ICHOR_ITEM_KITHAIRON               (FLAG_ICHOR_GENERAL_START + 0x10E) // Ichor: Kithairon summit reward
 #define FLAG_ICHOR_ITEM_KITHAIRON_BALL          (FLAG_ICHOR_GENERAL_START + 0x10F) // Ichor: Kithairon reward: Great Ball
 #define FLAG_ICHOR_ITEM_KITHAIRON_ETHER         (FLAG_ICHOR_GENERAL_START + 0x110) // Ichor: Kithairon reward: Ether
+#define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x111) // Ichor: Arkadia: Kleon accepted Iapetos’s forged thread
+#define FLAG_ICHOR_HIDE_IAPETOS_ARKADIA         (FLAG_ICHOR_GENERAL_START + 0x112) // Ichor: Arkadia: Iapetos is absent outside the recruitment scene
+#define FLAG_ICHOR_KALLISTO_TRIAL               (FLAG_ICHOR_GENERAL_START + 0x113) // Ichor: Artemis: completed the Hunt for the Hind
+#define FLAG_ICHOR_GOT_KALLISTO_SCROLL          (FLAG_ICHOR_GENERAL_START + 0x114) // Ichor: Kallisto awarded Night Slash
+#define FLAG_ICHOR_ARKADIA_NORTH_OPEN           (FLAG_ICHOR_GENERAL_START + 0x115) // Ichor: Arkadia: left for the Nemean road
+#define FLAG_ICHOR_ITEM_R8_HEAL                 (FLAG_ICHOR_GENERAL_START + 0x116) // Ichor: R8 medicine reward
+#define FLAG_ICHOR_ITEM_R8_BALL                 (FLAG_ICHOR_GENERAL_START + 0x117) // Ichor: R8 capture reward
+#define FLAG_ICHOR_ITEM_R8_ETHER                (FLAG_ICHOR_GENERAL_START + 0x118) // Ichor: R8 Ether reward
+#define FLAG_ICHOR_ITEM_R9_HEAL                 (FLAG_ICHOR_GENERAL_START + 0x119) // Ichor: R9 medicine reward
+#define FLAG_ICHOR_ITEM_R9_BALL                 (FLAG_ICHOR_GENERAL_START + 0x11A) // Ichor: R9 capture reward
+#define FLAG_ICHOR_ITEM_R9_ETHER                (FLAG_ICHOR_GENERAL_START + 0x11B) // Ichor: R9 Ether reward
+#define FLAG_ICHOR_ITEM_R11_HEAL                (FLAG_ICHOR_GENERAL_START + 0x11C) // Ichor: R11 medicine reward
+#define FLAG_ICHOR_ITEM_R11_BALL                (FLAG_ICHOR_GENERAL_START + 0x11D) // Ichor: R11 capture reward
+#define FLAG_ICHOR_ITEM_R11_ETHER               (FLAG_ICHOR_GENERAL_START + 0x11E) // Ichor: R11 Ether reward
+#define FLAG_ICHOR_ITEM_R12_HEAL                (FLAG_ICHOR_GENERAL_START + 0x11F) // Ichor: R12 medicine reward
+#define FLAG_ICHOR_ITEM_R12_BALL                (FLAG_ICHOR_GENERAL_START + 0x120) // Ichor: R12 capture reward
+#define FLAG_ICHOR_ITEM_R12_ETHER               (FLAG_ICHOR_GENERAL_START + 0x121) // Ichor: R12 Ether reward
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
@@ -1915,6 +1932,18 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_KITHAIRON_HONEY  (FLAG_ICHOR_GENERAL2_START + 0x006) // Ichor: Kithairon hidden Honey
 #define FLAG_ICHOR_HIDDEN_ITEM_KITHAIRON_REVIVE (FLAG_ICHOR_GENERAL2_START + 0x007) // Ichor: Kithairon hidden Revive
 #define FLAG_ICHOR_HIDDEN_ITEM_KITHAIRON_REPEL  (FLAG_ICHOR_GENERAL2_START + 0x008) // Ichor: Kithairon hidden Super Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R8_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x009) // Ichor: R8 hidden Honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R8_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x00A) // Ichor: R8 hidden Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R8_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x00B) // Ichor: R8 hidden Super Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R9_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x00C) // Ichor: R9 hidden Honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R9_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x00D) // Ichor: R9 hidden Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R9_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x00E) // Ichor: R9 hidden Super Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R11_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x00F) // Ichor: R11 hidden Honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R11_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x010) // Ichor: R11 hidden Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R11_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x011) // Ichor: R11 hidden Super Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R12_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x012) // Ichor: R12 hidden Honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R12_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x013) // Ichor: R12 hidden Revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R12_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x014) // Ichor: R12 hidden Super Repel
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

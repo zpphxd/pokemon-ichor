@@ -1,0 +1,65 @@
+mapscripts Route9_ParnassosCrossroads_MapScripts {}
+
+script Route9_ParnassosCrossroads_EventScript_POLYON {
+    trainerbattle_single(TRAINER_ICHOR_R9_POLYON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_MNASON {
+    trainerbattle_single(TRAINER_ICHOR_R9_MNASON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_AKESON {
+    trainerbattle_single(TRAINER_ICHOR_R9_AKESON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_ERYX {
+    trainerbattle_single(TRAINER_ICHOR_R9_ERYX,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_PHILTA {
+    trainerbattle_single(TRAINER_ICHOR_R9_PHILTA,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_DEINON {
+    trainerbattle_single(TRAINER_ICHOR_R9_DEINON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_Sign0 {
+    msgbox(format("North: Lebadeia. South: Kirrha and the Gulf trireme."), MSGBOX_SIGN)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_Sign1 {
+    msgbox(format("North: Lebadeia. South: Kirrha and the Gulf trireme."), MSGBOX_SIGN)
+    end
+}
+
+script Route9_ParnassosCrossroads_EventScript_Delphoi {
+    msgbox(format("Delphoi is above the falls. The water has taken the stair.\p"
+                  "The road continues south to Kirrha."), MSGBOX_SIGN)
+    end
+}

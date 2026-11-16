@@ -28,7 +28,16 @@
     "Route6_EleutheraiRoad",
     "MtKithairon",
     "Route7_KroniaGrounds",
-    "ThyrsaCity"
+    "ThyrsaCity",
+    "Route8_KopaisRoad",
+    "Lebadeia",
+    "Route9_ParnassosCrossroads",
+    "Kirrha",
+    "Aigion",
+    "Route11_DrumPass",
+    "StyxFalls",
+    "Route12_CypressRoad",
+    "Arkadia"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -111,6 +120,7 @@
     "ThyrsaCity_Asclepeion",
     "ThyrsaCity_Agora",
     "ThyrsaCity_TempleOfDionysus",
-    "ThyrsaCity_Amphitheater"
+    "ThyrsaCity_Amphitheater",
+    "GulfTrireme"
   ]
 }

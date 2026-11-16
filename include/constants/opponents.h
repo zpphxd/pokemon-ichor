@@ -128,7 +128,31 @@
 #define TRAINER_ICHOR_THYRSA_SATYR          180
 #define TRAINER_ICHOR_THESPIS               181
 #define TRAINER_ICHOR_SILENOS               182
-#define TRAINERS_END_ACT2                   183
+#define TRAINER_ICHOR_R8_PANOS              183
+#define TRAINER_ICHOR_R8_AMPELIS            184
+#define TRAINER_ICHOR_R8_KEPHALOS           185
+#define TRAINER_ICHOR_R8_MEDA               186
+#define TRAINER_ICHOR_R8_MELAS              187
+#define TRAINER_ICHOR_R8_THYONE             188
+#define TRAINER_ICHOR_R9_POLYON             189
+#define TRAINER_ICHOR_R9_MNASON             190
+#define TRAINER_ICHOR_R9_AKESON             191
+#define TRAINER_ICHOR_R9_ERYX               192
+#define TRAINER_ICHOR_R9_PHILTA             193
+#define TRAINER_ICHOR_R9_DEINON             194
+#define TRAINER_ICHOR_R11_DORYS             195
+#define TRAINER_ICHOR_R11_LACHON            196
+#define TRAINER_ICHOR_R11_THRASEAS          197
+#define TRAINER_ICHOR_R11_MYRINE            198
+#define TRAINER_ICHOR_R11_PHERON            199
+#define TRAINER_ICHOR_R11_XANTHE            200
+#define TRAINER_ICHOR_R12_STHENON           201
+#define TRAINER_ICHOR_R12_BRISEIS           202
+#define TRAINER_ICHOR_R12_OPHION            203
+#define TRAINER_ICHOR_R12_DAMO              204
+#define TRAINER_ICHOR_R12_PHANES            205
+#define TRAINER_ICHOR_R12_KALLIN            206
+#define TRAINERS_END_ACT2                   207
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

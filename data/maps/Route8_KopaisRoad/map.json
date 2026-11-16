@@ -1,0 +1,203 @@
+{
+  "id": "MAP_ROUTE8_KOPAIS_ROAD",
+  "name": "Route8_KopaisRoad",
+  "layout": "LAYOUT_ROUTE8_KOPAIS_ROAD",
+  "music": "MUS_ICHOR_ROAD",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_AETHOS_ROUTE_8",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "right",
+      "map": "MAP_THYRSA_CITY",
+      "offset": -8
+    },
+    {
+      "direction": "left",
+      "map": "MAP_LEBADEIA",
+      "offset": 0
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_ROUTE8_KOPAIS_ROAD_PANOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route8_KopaisRoad_EventScript_PANOS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_KOPAIS_ROAD_AMPELIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route8_KopaisRoad_EventScript_AMPELIS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_KOPAIS_ROAD_KEPHALOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 26,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route8_KopaisRoad_EventScript_KEPHALOS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_KOPAIS_ROAD_MEDA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 30,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route8_KopaisRoad_EventScript_MEDA",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_KOPAIS_ROAD_MELAS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 29,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route8_KopaisRoad_EventScript_MELAS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_KOPAIS_ROAD_THYONE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
+      "x": 44,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route8_KopaisRoad_EventScript_THYONE",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R8_HEAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 24,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R8_BALL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 44,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R8_ETHER"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 10,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_HONEY",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R8_HONEY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 30,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R8_REVIVE",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 44,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_SUPER_REPEL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R8_REPEL",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route8_KopaisRoad_EventScript_Sign0"
+    },
+    {
+      "type": "sign",
+      "x": 45,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route8_KopaisRoad_EventScript_Sign1"
+    }
+  ]
+}

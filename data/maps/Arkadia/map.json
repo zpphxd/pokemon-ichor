@@ -1,0 +1,121 @@
+{
+  "id": "MAP_ARKADIA",
+  "name": "Arkadia",
+  "layout": "LAYOUT_ARKADIA",
+  "music": "MUS_ICHOR_ROAD",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ARKADIA",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "up",
+      "map": "MAP_ROUTE12_CYPRESS_ROAD",
+      "offset": 0
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_ARKADIA_HEALER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
+      "x": 18,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Healer",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_MERCHANT",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
+      "x": 19,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Merchant",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_GUIDE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "x": 6,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Guide",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 7,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_KLEON_JOINED_TITANS"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 15,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Alethea",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_IAPETOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 5,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Iapetos",
+      "flag": "FLAG_ICHOR_HIDE_IAPETOS_ARKADIA"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_EventScript_Sign"
+    }
+  ]
+}

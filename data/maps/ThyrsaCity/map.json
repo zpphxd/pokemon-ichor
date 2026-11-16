@@ -18,6 +18,11 @@
       "direction": "down",
       "map": "MAP_ROUTE7_KRONIA_GROUNDS",
       "offset": 0
+    },
+    {
+      "direction": "left",
+      "map": "MAP_ROUTE8_KOPAIS_ROAD",
+      "offset": 8
     }
   ],
   "object_events": [

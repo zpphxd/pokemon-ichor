@@ -1,0 +1,43 @@
+mapscripts Arkadia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ARKADIA)
+        setflag(FLAG_ICHOR_HIDE_IAPETOS_ARKADIA)
+        removeobject(LOCALID_ARKADIA_IAPETOS)
+    }
+}
+script Arkadia_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_ARKADIA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+script Arkadia_EventScript_Merchant {
+    goto(ArkadiaApproach_EventScript_Merchant)
+}
+script Arkadia_EventScript_Guide {
+    lock
+    faceplayer
+    msgbox(format("Kallisto's been hunting the new moon. You won't find a kinder light in her grove.\p"
+                  "A young Lakonian came to challenge her. He's down among the cypresses."))
+    release
+}
+script Arkadia_EventScript_Sign {
+    msgbox(format("ARKADIA\nUnder the eyes of Artemis."), MSGBOX_SIGN)
+    end
+}
+script Arkadia_EventScript_Kleon {
+    lock
+    faceplayer
+    msgbox(format("Don't. Whatever you're going to say. Don't."))
+    release
+}
+script Arkadia_EventScript_Alethea {
+    lock
+    faceplayer
+    msgbox(format("Give him a moment. That went very badly."))
+    release
+}
+script Arkadia_EventScript_Iapetos {
+    end
+}

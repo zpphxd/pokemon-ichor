@@ -3593,6 +3593,1110 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE8_KOPAIS_ROAD",
+          "base_label": "gRoute8_KopaisRoad_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE8_KOPAIS_ROAD",
+          "base_label": "gRoute8_KopaisRoad_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE8_KOPAIS_ROAD",
+          "base_label": "gRoute8_KopaisRoad_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE8_KOPAIS_ROAD",
+          "base_label": "gRoute8_KopaisRoad_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
+          "base_label": "gRoute9_ParnassosCrossroads_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
+          "base_label": "gRoute9_ParnassosCrossroads_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
+          "base_label": "gRoute9_ParnassosCrossroads_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
+          "base_label": "gRoute9_ParnassosCrossroads_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11_DRUM_PASS",
+          "base_label": "gRoute11_DrumPass_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11_DRUM_PASS",
+          "base_label": "gRoute11_DrumPass_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11_DRUM_PASS",
+          "base_label": "gRoute11_DrumPass_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11_DRUM_PASS",
+          "base_label": "gRoute11_DrumPass_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE12_CYPRESS_ROAD",
+          "base_label": "gRoute12_CypressRoad_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE12_CYPRESS_ROAD",
+          "base_label": "gRoute12_CypressRoad_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE12_CYPRESS_ROAD",
+          "base_label": "gRoute12_CypressRoad_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_ERIPIP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE12_CYPRESS_ROAD",
+          "base_label": "gRoute12_CypressRoad_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_NEBREL"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_MELIBEE"
+              }
+            ]
+          }
         }
       ]
     },

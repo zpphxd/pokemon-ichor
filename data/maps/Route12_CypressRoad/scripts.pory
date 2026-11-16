@@ -1,0 +1,59 @@
+mapscripts Route12_CypressRoad_MapScripts {}
+
+script Route12_CypressRoad_EventScript_STHENON {
+    trainerbattle_single(TRAINER_ICHOR_R12_STHENON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route12_CypressRoad_EventScript_BRISEIS {
+    trainerbattle_single(TRAINER_ICHOR_R12_BRISEIS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route12_CypressRoad_EventScript_OPHION {
+    trainerbattle_single(TRAINER_ICHOR_R12_OPHION,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route12_CypressRoad_EventScript_DAMO {
+    trainerbattle_single(TRAINER_ICHOR_R12_DAMO,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route12_CypressRoad_EventScript_PHANES {
+    trainerbattle_single(TRAINER_ICHOR_R12_PHANES,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route12_CypressRoad_EventScript_KALLIN {
+    trainerbattle_single(TRAINER_ICHOR_R12_KALLIN,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route12_CypressRoad_EventScript_Sign0 {
+    msgbox(format("North: Styx Falls. South: Arkadia and the temple of Artemis."), MSGBOX_SIGN)
+    end
+}
+
+script Route12_CypressRoad_EventScript_Sign1 {
+    msgbox(format("North: Styx Falls. South: Arkadia and the temple of Artemis."), MSGBOX_SIGN)
+    end
+}

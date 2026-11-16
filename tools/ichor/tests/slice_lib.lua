@@ -148,10 +148,13 @@ end
 -- facingDirection is the low nibble of byte 0x18 (DIR_SOUTH 1, NORTH 2, WEST 3, EAST 4)
 function L.facing() return emu:read8(L.playerObject() + 0x18) & 0xF end
 -- The object event with this local id, if it is on the map.
+local function onCurrentMap(o)
+  return emu:read8(o + S.OFF_OBJ_MAP_GROUP) * 256 + emu:read8(o + S.OFF_OBJ_MAP_NUM) == L.mapId()
+end
 function L.objectAt(localId)
   for i = 0, S.OBJECT_EVENTS_COUNT - 1 do
     local o = S.gObjectEvents + i * S.OBJECT_EVENT_SIZE
-    if emu:read8(o) & 1 == 1 and emu:read8(o + S.OFF_OBJ_LOCAL_ID) == localId then
+    if emu:read8(o) & 1 == 1 and onCurrentMap(o) and emu:read8(o + S.OFF_OBJ_LOCAL_ID) == localId then
       local c = o + S.OFF_OBJ_CURRENT_COORDS
       return emu:read16(c) - S.MAP_OFFSET, emu:read16(c + 2) - S.MAP_OFFSET
     end
@@ -633,7 +636,7 @@ local function grid()
   local live = {}
   for i = 0, S.OBJECT_EVENTS_COUNT - 1 do
     local o = S.gObjectEvents + i * S.OBJECT_EVENT_SIZE
-    if emu:read8(o) & 1 == 1 then live[emu:read8(o + S.OFF_OBJ_LOCAL_ID)] = true end
+    if emu:read8(o) & 1 == 1 and onCurrentMap(o) then live[emu:read8(o + S.OFF_OBJ_LOCAL_ID)] = true end
   end
   for _, t in ipairs(L.mapEvents().objects) do
     if not live[t.localId] and (t.flag == 0 or not L.getFlag(t.flag)) then g.people[t.x .. "," .. t.y] = true end
@@ -860,7 +863,7 @@ function L.sight(script)
   local facing
   for i = 0, S.OBJECT_EVENTS_COUNT - 1 do
     local o = S.gObjectEvents + i * S.OBJECT_EVENT_SIZE
-    if emu:read8(o) & 1 == 1 and emu:read8(o + S.OFF_OBJ_LOCAL_ID) == t.localId then facing = emu:read8(o + 0x18) & 0xF end
+    if emu:read8(o) & 1 == 1 and onCurrentMap(o) and emu:read8(o + S.OFF_OBJ_LOCAL_ID) == t.localId then facing = emu:read8(o + 0x18) & 0xF end
   end
   local d = ({ { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } })[facing or 1]
   for k = 1, t.range do set[(t.x + d[1] * k) .. "," .. (t.y + d[2] * k)] = true end

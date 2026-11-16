@@ -1,0 +1,59 @@
+mapscripts Route11_DrumPass_MapScripts {}
+
+script Route11_DrumPass_EventScript_DORYS {
+    trainerbattle_single(TRAINER_ICHOR_R11_DORYS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_DrumPass_EventScript_LACHON {
+    trainerbattle_single(TRAINER_ICHOR_R11_LACHON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_DrumPass_EventScript_THRASEAS {
+    trainerbattle_single(TRAINER_ICHOR_R11_THRASEAS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_DrumPass_EventScript_MYRINE {
+    trainerbattle_single(TRAINER_ICHOR_R11_MYRINE,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_DrumPass_EventScript_PHERON {
+    trainerbattle_single(TRAINER_ICHOR_R11_PHERON,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_DrumPass_EventScript_XANTHE {
+    trainerbattle_single(TRAINER_ICHOR_R11_XANTHE,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_DrumPass_EventScript_Sign0 {
+    msgbox(format("North: Aigion. South: Styx Falls. Column drums block the pass."), MSGBOX_SIGN)
+    end
+}
+
+script Route11_DrumPass_EventScript_Sign1 {
+    msgbox(format("North: Aigion. South: Styx Falls. Column drums block the pass."), MSGBOX_SIGN)
+    end
+}

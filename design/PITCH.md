@@ -395,7 +395,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
-| Act II | Connected Eleusa → Eleutherai → Kithairon → Kronia → Thyrsa; Mask Laurel 4, Dionysus altar, playable Dionysia and Silenos's Girdle quest | Thyrsa presentation and natural-level acceptance; approved Lebadeia/Kirrha/Aigion/Styx approach to Arkadia, then Astyra and Kaldera; Laurels 5–6 |
+| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia; Mask Laurel 4, Dionysus altar, playable Dionysia and Silenos's Girdle quest | Chapter presentation and natural-level acceptance; Arkadia's recruitment and Artemis trial, then Astyra and Kaldera; Laurels 5–6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
@@ -602,8 +602,20 @@ boss, tragedy and riddle/battle quest path, then saves and continues. This is
 not natural-level balance or a continuous NEW GAME ending pass. The stage
 and masks still use placeholder presentation: dedicated theater/temple art
 and music, the king close-up, trance palette transitions, shared altar/whiteout text fit,
-and human scene/map approval remain open. The next road beyond Thyrsa is
-explicitly closed; Arkadia and the rest of Act II are not yet playable.
+and human scene/map approval remain open.
+
+The approved approach to Arkadia is connected: Lake Kopais and Lebadeia,
+the Parnassos crossroads and Kirrha, a returnable Gulf trireme to Aigion,
+the column-drum pass, Styx Falls and the cypress road. Four routes add 24
+trainers, time-of-day encounters and exploration rewards. Four outdoor
+healing/trading stops provide safe recovery. The pass uses the actual Girdle
+and native Strength pushing; it cannot be crossed without the relic.
+An assisted native journey crosses every seam, takes both ferry directions,
+saves and continues aboard the ferry, loses a real pass battle and recovers
+at Aigion, pushes the drum and saves/continues in Arkadia. Existing Thyrsa
+heal-location numbering is preserved. These are provisional maps and an
+onward-travel foundation, not completed Arkadia story: Kleon's recruitment,
+the Artemis trial and Laurel 5 are still unimplemented.
 
 **Continuation order.** Prioritize connected playable Act II and Act III chapters
 while keeping Act I's remaining acceptance gates visible. Integrate shared systems at

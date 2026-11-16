@@ -1,0 +1,40 @@
+mapscripts Aigion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_AIGION)
+    }
+}
+script Aigion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_AIGION_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+script Aigion_EventScript_Merchant {
+    goto(ArkadiaApproach_EventScript_Merchant)
+}
+script Aigion_EventScript_Guide {
+    lock
+    faceplayer
+    msgbox(format("The pass is full of fallen column drums. Nothing wrong with the road under them.\p"
+                  "There's an actor in Thyrsa with Herakles's girdle. Or so he says.\p"
+                  "Get those drums moving and it's Styx Falls, then Arkadia."))
+    release
+}
+script Aigion_EventScript_Sign {
+    msgbox(format("AIGION\nSouth: the drum pass and Arkadia. Trireme to Kirrha."), MSGBOX_SIGN)
+    end
+}
+script Aigion_EventScript_Captain {
+    lock
+    faceplayer
+    msgbox(format("Back to Kirrha? We sail when you're aboard."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        setvar(VAR_ICHOR_GULF_DEST, 1)
+        warp(MAP_GULF_TRIREME, 13, 4)
+        waitstate
+        releaseall
+        end
+    }
+    release
+}

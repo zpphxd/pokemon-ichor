@@ -1,0 +1,59 @@
+mapscripts Route8_KopaisRoad_MapScripts {}
+
+script Route8_KopaisRoad_EventScript_PANOS {
+    trainerbattle_single(TRAINER_ICHOR_R8_PANOS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_AMPELIS {
+    trainerbattle_single(TRAINER_ICHOR_R8_AMPELIS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_KEPHALOS {
+    trainerbattle_single(TRAINER_ICHOR_R8_KEPHALOS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_MEDA {
+    trainerbattle_single(TRAINER_ICHOR_R8_MEDA,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_MELAS {
+    trainerbattle_single(TRAINER_ICHOR_R8_MELAS,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_THYONE {
+    trainerbattle_single(TRAINER_ICHOR_R8_THYONE,
+        format("A long road. Let's make it worth remembering."),
+        format("Worth the walk."))
+    msgbox(format("There's a healer at the next hamlet."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_Sign0 {
+    msgbox(format("East: Thyrsa. West: Lebadeia, along Lake Kopais."), MSGBOX_SIGN)
+    end
+}
+
+script Route8_KopaisRoad_EventScript_Sign1 {
+    msgbox(format("East: Thyrsa. West: Lebadeia, along Lake Kopais."), MSGBOX_SIGN)
+    end
+}

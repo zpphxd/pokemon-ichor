@@ -1,0 +1,40 @@
+mapscripts Lebadeia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_LEBADEIA)
+    }
+}
+
+script Lebadeia_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_LEBADEIA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script ArkadiaApproach_EventScript_Merchant {
+    lock
+    faceplayer
+    message(format("Stock up before the next pass."))
+    waitmessage
+    pokemart(ThyrsaCity_Agora_Stock)
+    release
+}
+
+script Lebadeia_EventScript_Merchant {
+    goto(ArkadiaApproach_EventScript_Merchant)
+}
+
+script Lebadeia_EventScript_Guide {
+    lock
+    faceplayer
+    msgbox(format("They used to lower visitors into Trophonios's cave feet first.\p"
+                  "I've enough trouble remembering what I had for breakfast.\p"
+                  "The cave's closed. The road to Kirrha is south."))
+    release
+}
+
+script Lebadeia_EventScript_Sign {
+    msgbox(format("LEBADEIA\nEast: Thyrsa. South: Kirrha."), MSGBOX_SIGN)
+    end
+}

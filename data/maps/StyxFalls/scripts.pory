@@ -1,0 +1,13 @@
+mapscripts StyxFalls_MapScripts {}
+script StyxFalls_EventScript_Guide {
+    lock
+    faceplayer
+    msgbox(format("The gods swear by this water. They say even Zeus keeps his word here.\p"
+                  "People still throw coins in. As if an oath were a fare.\p"
+                  "Arkadia's through the cypresses to the south."))
+    release
+}
+script StyxFalls_EventScript_Sign {
+    msgbox(format("STYX FALLS\nNorth: Aigion. South: Arkadia."), MSGBOX_SIGN)
+    end
+}

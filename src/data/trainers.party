@@ -2188,3 +2188,391 @@ Level: 35
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 /* End connected Thyrsa chapter. */
+
+/* Arkadia approach teams. */
+
+=== TRAINER_ICHOR_R8_PANOS ===
+Name: PANOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galekit
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Ampelix
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R8_AMPELIS ===
+Name: AMPELIS
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Ergant
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R8_KEPHALOS ===
+Name: KEPHALOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Spalunk
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Pebblith
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R8_MEDA ===
+Name: MEDA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Raknit
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R8_MELAS ===
+Name: MELAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Eripip
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Chelonet
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R8_THYONE ===
+Name: THYONE
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykopup
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melibee
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R9_POLYON ===
+Name: POLYON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galekit
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Ampelix
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R9_MNASON ===
+Name: MNASON
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Ergant
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R9_AKESON ===
+Name: AKESON
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Spalunk
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Pebblith
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R9_ERYX ===
+Name: ERYX
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Raknit
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R9_PHILTA ===
+Name: PHILTA
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Eripip
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Chelonet
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R9_DEINON ===
+Name: DEINON
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykopup
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melibee
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R11_DORYS ===
+Name: DORYS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galekit
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Ampelix
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R11_LACHON ===
+Name: LACHON
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Ergant
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R11_THRASEAS ===
+Name: THRASEAS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Spalunk
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Pebblith
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R11_MYRINE ===
+Name: MYRINE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Raknit
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R11_PHERON ===
+Name: PHERON
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Eripip
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Chelonet
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R11_XANTHE ===
+Name: XANTHE
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykopup
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melibee
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R12_STHENON ===
+Name: STHENON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galekit
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Ampelix
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R12_BRISEIS ===
+Name: BRISEIS
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Ergant
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R12_OPHION ===
+Name: OPHION
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Spalunk
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Pebblith
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R12_DAMO ===
+Name: DAMO
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Raknit
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R12_PHANES ===
+Name: PHANES
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Eripip
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Chelonet
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R12_KALLIN ===
+Name: KALLIN
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykopup
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melibee
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Arkadia approach teams. */
