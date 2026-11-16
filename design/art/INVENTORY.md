@@ -89,8 +89,10 @@ image/palette arrays. The frozen archive independently reconstructs all
 `player_battle.sh` now also checks every opaque native pixel in all 24
 front/back animation captures, beyond source/VRAM agreement. The 238-state
 named and 275-state class full-rendered-pixel galleries and authentic legacy
-sources/compiled aliases still pass. Linked ROM usage is 23,097,448 bytes /
-68.84%; the smaller isolated child build is not this combined-main ROM.
+sources/compiled aliases still pass. After preserving concurrent difficulty
+changes, the repeated combined boundary also passes the difficulty fixture
+(174 checks / 24 captures). Linked ROM usage is 23,097,544 bytes / 68.84%;
+the smaller isolated child build is not this combined-main ROM.
 New-style source adoption now covers 88 assigned surfaces; the four
 parent-owned marker/credits surfaces remain open. Source reconstruction
 and forced engine-state coverage are not separate user artistic acceptance,
