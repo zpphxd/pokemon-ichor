@@ -63,6 +63,19 @@ case "${SLICE_GENDER:-theo}" in theo|ianthe) ;; *) echo "SLICE FAIL: SLICE_GENDE
 if [ "$NATURAL" = 1 ] && { [ -n "${SLICE_FROM:-}" ] || [ "${SLICE_WORKAROUNDS:-0}" != 0 ]; }; then
   echo "SLICE FAIL: natural runs cannot resume save states or use workarounds"; exit 1
 fi
+beat_line() {
+  awk -F '"' -v name="$1" '$1 == "beat(" && $2 == name { print NR; found = 1; exit }
+                         END { if (!found) exit 1 }' tools/ichor/tests/slice_playthrough.lua
+}
+if [ -n "${SLICE_FROM:-}" ]; then
+  first=$(beat_line "$SLICE_FROM") || { echo "SLICE FAIL: unknown beat $SLICE_FROM"; exit 1; }
+fi
+if [ -n "${SLICE_STOP_AFTER:-}" ]; then
+  last=$(beat_line "$SLICE_STOP_AFTER") || { echo "SLICE FAIL: unknown beat $SLICE_STOP_AFTER"; exit 1; }
+  if [ -n "${SLICE_FROM:-}" ] && [ "$first" -gt "$last" ]; then
+    echo "SLICE FAIL: requested beat range is not in play order"; exit 1
+  fi
+fi
 DEFAULT_OUT=build/slice/
 if [ "$NATURAL" = 1 ]; then DEFAULT_OUT="build/slice-natural/$DIFFICULTY-$STARTER/"; fi
 OUT="${SLICE_OUT:-$DEFAULT_OUT}"

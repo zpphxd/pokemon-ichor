@@ -187,6 +187,10 @@ natural-level Kalliste/Act I runs and player approval remain separate gates.
 The continuous route currently ends at the Emporion gate after Laurel 2, not
 the end of Act I.
 
+`python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
+without requiring a ROM or toolchain. Invalid requests must preserve existing
+screenshots and save states; every declared beat remains selectable.
+
 ## 2. Relics (SYSTEMS §1, §2)
 
 Relics are key items. **No Pokémon ever needs a field move:** the party menu offers none, and every obstacle checks the bag.

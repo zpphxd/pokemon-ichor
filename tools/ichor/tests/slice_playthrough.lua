@@ -1482,6 +1482,8 @@ end)
 L.start(function()
   local from = os.getenv("SLICE_FROM")
   local stop = os.getenv("SLICE_STOP_AFTER")
+  if from == "" then from = nil end
+  if stop == "" then stop = nil end
   expect(SPECIES[STARTER] and DIFFICULTIES[DIFFICULTY], "valid starter and difficulty")
   expect(not NATURAL or (not from and not L.workarounds), "unassisted runs cannot resume fixtures or use workarounds")
   if NATURAL then
