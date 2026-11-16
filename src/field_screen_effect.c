@@ -1498,7 +1498,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         gTasks[taskId].tState = WHITEOUT_CUTSCENE_HEAL_SCRIPT;
         break;
     case WHITEOUT_CUTSCENE_HEAL_SCRIPT:
-        if (WaitForWeatherFadeIn() == TRUE)
+        if (WaitForWeatherFadeIn() == TRUE && !Ichor_ShowOathAftermathNotice())
         {
             DestroyTask(taskId);
             // Ichor: at home in Elaia, Melitta does the welcoming (her own script and lines)

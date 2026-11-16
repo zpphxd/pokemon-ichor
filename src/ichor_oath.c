@@ -19,6 +19,8 @@ static EWRAM_DATA bool8 sOathCatchDenied = FALSE;
 static EWRAM_DATA u8 sOathAftermathNotice = 0;
 
 #define OATH_NOTICE_SHOWING (1 << 7)
+#define OATH_NOTICE_RECOVERED 3
+#define OATH_NOTICE_RECOVERED_FULL 4
 
 static bool32 IsNamedArea(u32 mapSection)
 {
@@ -196,19 +198,9 @@ u32 Ichor_StoreOathPartyFallen(void)
     return result;
 }
 
-void Ichor_EndOathBattle(u32 battleType, u32 battleOutcome)
-{
-    if (!Ichor_IsOathBattle(battleType)
-        || battleOutcome == B_OUTCOME_LOST || battleOutcome == B_OUTCOME_DREW)
-        return;
-    Ichor_RetryOathUrn();
-}
-
-void Ichor_RetryOathUrn(void)
+static bool32 HasUsablePartyPartner(void)
 {
     u32 slot;
-    if (!Ichor_IsUrnBox(URN_BOX))
-        return;
     for (slot = 0; slot < PARTY_SIZE; slot++)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
@@ -216,12 +208,93 @@ void Ichor_RetryOathUrn(void)
             && !GetMonData(mon, MON_DATA_IS_EGG)
             && GetMonData(mon, MON_DATA_HP) != 0
             && !Ichor_IsOathFallen(&mon->box))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 Ichor_EndOathBattle(u32 battleType, u32 battleOutcome)
+{
+    if (!Ichor_IsOathBattle(battleType))
+        return FALSE;
+    if (!HasUsablePartyPartner())
+        return TRUE;
+    if (battleOutcome != B_OUTCOME_LOST && battleOutcome != B_OUTCOME_DREW)
+        Ichor_RetryOathUrn();
+    return FALSE;
+}
+
+void Ichor_RetryOathUrn(void)
+{
+    if (Ichor_IsUrnBox(URN_BOX) && HasUsablePartyPartner())
+        sOathAftermathNotice = Ichor_StoreOathPartyFallen();
+}
+
+static bool32 HasUrnSpace(void)
+{
+    u32 box;
+    for (box = 0; box < TOTAL_BOXES_COUNT; box++)
+        if (Ichor_IsUrnBox(box) ? GetFirstFreeBoxSpot(box) >= 0 : CountMonsInBox(box) == 0)
+            return TRUE;
+    return FALSE;
+}
+
+u32 Ichor_PrepareOathRecovery(void)
+{
+    u32 box, slot, partySlot, stored;
+    bool32 hasUrnSpace;
+    if (gIchorSave.oath.state == ICHOR_OATH_FAILED)
+        return ICHOR_OATH_EXHAUSTED;
+    if (!Ichor_IsOathActive())
+        return ICHOR_OATH_RECOVERY_NONE;
+    if (HasUsablePartyPartner())
+    {
+        Ichor_RetryOathUrn();
+        return ICHOR_OATH_RECOVERY_NONE;
+    }
+
+    for (box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        if (Ichor_IsUrnBox(box))
+            continue;
+        for (slot = 0; slot < IN_BOX_COUNT; slot++)
         {
-            sOathAftermathNotice = Ichor_StoreOathPartyFallen();
-            return;
+            struct BoxPokemon *mon = GetBoxedMonPtr(box, slot);
+            if (GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
+                && !GetBoxMonData(mon, MON_DATA_IS_EGG)
+                && !Ichor_IsOathFallen(mon))
+                goto found;
         }
     }
-    // Exhausted parties await the separate recovery/run-ending integration.
+    Ichor_FailOath();
+    return ICHOR_OATH_EXHAUSTED;
+
+found:
+    hasUrnSpace = HasUrnSpace();
+    for (partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partySlot];
+        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE
+            || (hasUrnSpace && Ichor_IsOathFallen(&mon->box)))
+            break;
+    }
+    // Refuse before any mutation if burial cannot free a recovery slot.
+    if (partySlot == PARTY_SIZE)
+        return ICHOR_OATH_RECOVERY_BLOCKED;
+
+    stored = Ichor_StoreOathPartyFallen();
+    for (partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_SPECIES) == SPECIES_NONE)
+            break;
+    BoxMonToMon(GetBoxedMonPtr(box, slot), &gParties[B_TRAINER_PLAYER][partySlot]);
+    HealPokemon(&gParties[B_TRAINER_PLAYER][partySlot]);
+    ZeroBoxMonAt(box, slot);
+    if (stored == ICHOR_URN_FULL)
+        stored = Ichor_StoreOathPartyFallen();
+    CompactPartySlots();
+    gPartiesCount[B_TRAINER_PLAYER] = CalculatePlayerPartyCount();
+    sOathAftermathNotice = stored == ICHOR_URN_FULL ? OATH_NOTICE_RECOVERED_FULL : OATH_NOTICE_RECOVERED;
+    return ICHOR_OATH_RECOVERED;
 }
 
 bool32 Ichor_ShowOathAftermathNotice(void)
@@ -230,9 +303,22 @@ bool32 Ichor_ShowOathAftermathNotice(void)
         return FALSE;
     if (!(sOathAftermathNotice & OATH_NOTICE_SHOWING))
     {
-        const u8 *text = sOathAftermathNotice == ICHOR_URN_FULL
-            ? COMPOUND_STRING("The Urn has no room.\nFallen partners remain with you.\pEmpty a Pithos jar to give them\nrest. They cannot return to battle.")
-            : COMPOUND_STRING("Your fallen partners now rest\nin the Urn.");
+        const u8 *text;
+        switch (sOathAftermathNotice)
+        {
+        case ICHOR_URN_FULL:
+            text = COMPOUND_STRING("The Urn has no room.\nFallen partners remain with you.\pEmpty a Pithos jar to give them\nrest. They cannot return to battle.");
+            break;
+        case OATH_NOTICE_RECOVERED:
+            text = COMPOUND_STRING("A living partner from storage\nhas joined your party.\pYour fallen partners now rest\nin the Urn.");
+            break;
+        case OATH_NOTICE_RECOVERED_FULL:
+            text = COMPOUND_STRING("A living partner from storage\nhas joined your party.\pThe Urn has no room.\nFallen partners remain with you.\pEmpty a Pithos jar to give them\nrest. They cannot return to battle.");
+            break;
+        default:
+            text = COMPOUND_STRING("Your fallen partners now rest\nin the Urn.");
+            break;
+        }
         if (ShowFieldMessage(text))
             sOathAftermathNotice |= OATH_NOTICE_SHOWING;
         return TRUE;

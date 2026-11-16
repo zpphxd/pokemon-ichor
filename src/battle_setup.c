@@ -704,7 +704,11 @@ static void CB2_EndWildBattle(void)
             HealPlayerParty();
     }
 
-    Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome);
+    if (Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome))
+    {
+        SetMainCallback2(CB2_WhiteOut);
+        return;
+    }
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
         SetMainCallback2(CB2_WhiteOut);
@@ -722,7 +726,11 @@ static void CB2_EndScriptedWildBattle(void)
     CpuFill16(0, (void *)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome);
+    if (Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome))
+    {
+        SetMainCallback2(CB2_WhiteOut);
+        return;
+    }
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         // Ichor: B_FLAG_NO_WHITEOUT lets a scripted wild battle be lost and the
@@ -744,7 +752,11 @@ static void CB2_EndMarowakBattle(void)
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome);
+    if (Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome))
+    {
+        SetMainCallback2(CB2_WhiteOut);
+        return;
+    }
     if (IsPlayerDefeated(gBattleOutcome))
     {
         SetMainCallback2(CB2_WhiteOut);
@@ -1605,7 +1617,11 @@ static void CB2_EndTrainerBattle(void)
             HealPlayerParty();
     }
 
-    Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome);
+    if (Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome))
+    {
+        SetMainCallback2(CB2_WhiteOut);
+        return;
+    }
     if (TRAINER_BATTLE_PARAM.earlyRival)
     {
         if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -1655,7 +1671,11 @@ static void CB2_EndTrainerBattle(void)
 
 static void CB2_EndRematchBattle(void)
 {
-    Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome);
+    if (Ichor_EndOathBattle(gBattleTypeFlags, gBattleOutcome))
+    {
+        SetMainCallback2(CB2_WhiteOut);
+        return;
+    }
     if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
     {
         DowngradeBadPoison();

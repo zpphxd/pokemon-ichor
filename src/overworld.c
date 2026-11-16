@@ -2,6 +2,7 @@
 #include "ichor_relics.h"
 #include "ichor_frozen.h"
 #include "ichor_time.h"
+#include "ichor_oath.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1978,6 +1979,12 @@ void CB2_WhiteOut(void)
 
     if (++gMain.state >= 120)
     {
+        u32 recovery = Ichor_PrepareOathRecovery();
+        if (recovery == ICHOR_OATH_EXHAUSTED || recovery == ICHOR_OATH_RECOVERY_BLOCKED)
+        {
+            Ichor_ShowOathEndScreen(recovery == ICHOR_OATH_RECOVERY_BLOCKED);
+            return;
+        }
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
         ResetSafariZoneFlag_();
@@ -2135,6 +2142,11 @@ void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
 
+    if (gIchorSave.oath.state == ICHOR_OATH_FAILED)
+    {
+        Ichor_ShowOathEndScreen(FALSE);
+        return;
+    }
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();

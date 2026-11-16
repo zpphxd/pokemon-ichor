@@ -20,6 +20,14 @@ enum
     ICHOR_URN_FULL,
 };
 
+enum
+{
+    ICHOR_OATH_RECOVERY_NONE,
+    ICHOR_OATH_RECOVERED,
+    ICHOR_OATH_EXHAUSTED,
+    ICHOR_OATH_RECOVERY_BLOCKED,
+};
+
 bool32 Ichor_IsOathActive(void);
 bool32 Ichor_IsOathBattle(u32 battleType);
 bool32 Ichor_ChooseOath(bool32 swear);
@@ -35,8 +43,10 @@ bool32 Ichor_IsOathFallen(const struct BoxPokemon *mon);
 bool32 Ichor_RecordOathFallen(struct Pokemon *mon);
 u32 Ichor_StoreOathFallen(struct Pokemon *mon);
 u32 Ichor_StoreOathPartyFallen(void);
-void Ichor_EndOathBattle(u32 battleType, u32 battleOutcome);
+bool32 Ichor_EndOathBattle(u32 battleType, u32 battleOutcome);
 void Ichor_RetryOathUrn(void);
+u32 Ichor_PrepareOathRecovery(void);
+void Ichor_ShowOathEndScreen(bool32 capacityBlocked);
 bool32 Ichor_ShowOathAftermathNotice(void);
 
 #endif
