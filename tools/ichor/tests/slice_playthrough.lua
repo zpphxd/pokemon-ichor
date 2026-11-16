@@ -941,7 +941,9 @@ local function visitShop(name, where) return visit(name, where, function() shop(
 local function holdCity()
   local hold = L.triggers(EC .. "KleonStepsX21", EC .. "KleonStepsX22", EC .. "KleonStepsX23",
                           EC .. "KleonStepsX24", EC .. "KleonStepsX25")
-  for k in pairs(L.triggers(EC .. "IsthmusGateX7", EC .. "IsthmusGateX8", EC .. "IsthmusGateX9")) do hold[k] = true end
+  if not getFlag(S.FLAG_KLEON_BATTLE_2_DONE) then
+    for k in pairs(L.triggers(EC .. "IsthmusGateX7", EC .. "IsthmusGateX8", EC .. "IsthmusGateX9")) do hold[k] = true end
+  end
   L.keepOff[S.MAP_CITY] = hold
 end
 local function gateTread() return L.triggers(EC .. "IsthmusGateX7", EC .. "IsthmusGateX8", EC .. "IsthmusGateX9") end
@@ -1506,6 +1508,111 @@ beat("16_isthmus_gate", function()
   shot("through_the_gate")
 end)
 
+local function healedParty(what)
+  for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+    local hp, maxHp = L.partyHp(slot)
+    expect(hp == maxHp and hp > 0, what .. " healed partner " .. slot)
+  end
+end
+
+beat("17_rockslide", function()
+  room(S.MAP_E_ASCLEPEION, function()
+    talk(L.npc("EmporionCity_Asclepeion_EventScript_Healer"))
+    healedParty("Emporion's actual clinic")
+  end)
+  L.leaveEdge("up", S.MAP_ROUTE4)
+  mapIs(S.MAP_ROUTE4, "through the opened Isthmus Gate onto Route 4")
+  local R = "Route4_Isthmus_EventScript_"
+  trainer("EXEKIAS", R .. "Exekias", S.MUS_BATTLE_TRAINER)
+  trainer("MYRRHINE", R .. "Myrrhine", S.MUS_BATTLE_TRAINER)
+  if not L.defeated(S.TRAINER_LAAS) then talk(L.npc(R .. "Laas")) end
+  expect(L.defeated(S.TRAINER_LAAS), "the herm's Titanborn guard is beaten")
+  flagsSet({ "FLAG_HIDE_GRUNT_LAAS" }, "Laas leaves the actual herm")
+  trainer("ISTHMUS_MENALKAS", R .. "Menalkas", S.MUS_BATTLE_TRAINER)
+  trainer("PHEIDIPPOS", R .. "Pheidippos", S.MUS_BATTLE_TRAINER)
+  if not getFlag(S.FLAG_SAW_ROCKSLIDE) then
+    expect(not L.goTrigger(L.triggers(R .. "RockslideScene")), "the rockslide starts beat 17")
+    settle({ every = true })
+  end
+  flagsSet({ "FLAG_SAW_ROCKSLIDE" }, "the procession's obstruction is introduced")
+  trainer("KAPELOS", R .. "Kapelos", S.MUS_BATTLE_TRAINER)
+  talk(L.npc(R .. "Healer"))
+  healedParty("The procession's actual healer")
+  local cakes = L.itemCount(S.ITEM_BARLEY_CAKE)
+  for i, x in ipairs({ 52, 53, 54 }) do
+    talk(x, 9, { every = true, shotBefore = "rockslide_heap_" .. i })
+    flagsSet({ "FLAG_HIDE_ROCKSLIDE_" .. i }, "the Hammer clears heap " .. i)
+  end
+  flagsSet({ "FLAG_ROCKSLIDE_CLEARED", "FLAG_GOT_PROCESSION_BARLEY", "FLAG_ITEM_ROCK_TOMB" },
+           "the actual slide rewards and open road")
+  expect(L.itemCount(S.ITEM_BARLEY_CAKE) == cakes + 2, "Eudemos gives two actual Barley Cakes")
+  expect(L.itemCount(S.ITEM_TM39) >= 1, "the last heap reveals the Rock Tomb scroll")
+  L.useWarp(S.MAP_HOLLOW)
+  mapIs(S.MAP_HOLLOW, "the cleared road reaches Hecate's Hollow")
+end)
+
+beat("18_hollow", function()
+  local H = "HecatesHollow_EventScript_"
+  musicIs(S.MUS_HOLLOW, "Hecate's Hollow")
+  talk(L.npc(H .. "OldWoman"), { every = true })
+  flagsSet({ "FLAG_MET_CRONE" }, "the old woman's warning")
+  for _, name in ipairs({ "BarkLeft", "BarkRight", "BarkAhead" }) do
+    expect(not L.goTrigger(L.triggers(H .. name)), "the dog guides the player: " .. name)
+    settle({ every = true })
+    if name == "BarkRight" then trainer("PHAINO", H .. "Phaino", S.MUS_BATTLE_TRAINER) end
+  end
+  talk(L.sign(H .. "Hekataion"), { answers = { "yes" }, every = true })
+  flagsSet({ "FLAG_GOT_TORCH" }, "the actual crossroads offering grants Hecate's Torch")
+  expect(L.itemCount(S.ITEM_HECATES_TORCH) == 1, "one real Torch, not just its story flag")
+  talk(L.sign(H .. "Spring"))
+  healedParty("Hecate's actual spring")
+  talk(L.npc(H .. "Web", 1))
+  flagsSet({ "FLAG_WEB_WEST" }, "the owned Torch opens the western web")
+  L.go(5, 15)
+  trainer("HEKABE", H .. "Hekabe", S.MUS_BATTLE_TRAINER)
+  flagsSet({ "FLAG_HEKABE_SUPPER" }, "Hekabe's actual supper reward")
+  talk(L.sign(H .. "Brazier1"))
+  L.go(4, 21)
+  talk(L.sign(H .. "Brazier2"))
+  flagsSet({ "FLAG_HOLLOW_BRAZIER_1", "FLAG_HOLLOW_BRAZIER_2" }, "both western passages are lit")
+  trainer("KALLIAS", H .. "Kallias", S.MUS_BATTLE_TRAINER)
+  trainer("BATTOS", H .. "Battos", S.MUS_BATTLE_TRAINER)
+  L.useWarp(S.MAP_ROUTE5)
+  mapIs(S.MAP_ROUTE5, "out of the actual Hollow onto the Skironian cliffs")
+  shot("beyond_the_hollow")
+end)
+
+beat("19_cliffs", function()
+  local R = "Route5_SkironianCliffs_EventScript_"
+  for _, t in ipairs({ { "KYNEGEIROS", "Kynegeiros" }, { "MELANTHIOS", "Melanthios" },
+                      { "ARISTAIOS", "Aristaios" }, { "DAPHNIS", "Daphnis" }, { "MYRTO", "Myrto" },
+                      { "MOPSOS", "Mopsos" }, { "KERDON", "Kerdon" } }) do
+    trainer(t[1], R .. t[2], S.MUS_BATTLE_TRAINER)
+  end
+  talk(L.npc(R .. "Aigialeus"), { every = true })
+  flagsSet({ "FLAG_GOT_GOOD_ROD" }, "Aigialeus gives his actual rod")
+  expect(L.itemCount(S.ITEM_GOOD_ROD) == 1, "the Good Rod is owned")
+  L.useWarp(S.MAP_REST_HOUSE)
+  talk(L.npc("Route5_RestHouse_EventScript_Xenokles"), { answers = { "no" } })
+  healedParty("Xenokles's actual hospitality")
+  flagsSet({ "FLAG_MET_XENOKLES" }, "the inn's welcome is saved")
+  L.useWarp(S.MAP_ROUTE5)
+  L.leaveEdge("right", S.MAP_ELEUSA)
+  mapIs(S.MAP_ELEUSA, "the connected cliff road reaches Eleusa")
+end)
+
+beat("20_eleusa_arrival", function()
+  local V = "EleusaVillage_EventScript_"
+  L.go(12, 25)
+  flagsSet({ "FLAG_SAFFRON_THREAD", "FLAG_ARRIVED_ELEUSA", "FLAG_VISITED_ELEUSA" },
+           "Krokis's actual thread scene and Eleusa's arrival")
+  musicIs(S.MUS_ELEUSA, "Eleusa's village theme")
+  talk(L.npc(V .. "Krokis"))
+  talk(L.npc(V .. "Kleon"), { every = true })
+  expect(L.idle(), "the continuous arrival restores field control")
+  shot("eleusa_before_the_mysteries")
+end)
+
 L.start(function()
   local from = os.getenv("SLICE_FROM")
   local stop = os.getenv("SLICE_STOP_AFTER")
@@ -1560,7 +1667,10 @@ L.start(function()
     for _, n in ipairs({ "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS", "AGIS", "POLYEIDOS", "PETROS", "AMATHOS",
                          "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER],
                          "ALETHEA_DECK", "PHORMION", "LYKON",
-                         "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS", KLEON_2[STARTER] }) do
+                         "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS", KLEON_2[STARTER],
+                         "EXEKIAS", "MYRRHINE", "LAAS", "ISTHMUS_MENALKAS", "PHEIDIPPOS", "KAPELOS",
+                         "PHAINO", "HEKABE", "KALLIAS", "BATTOS", "KYNEGEIROS", "MELANTHIOS", "ARISTAIOS",
+                         "DAPHNIS", "MYRTO", "MOPSOS", "KERDON" }) do
       local openingLoss = NATURAL and n == KLEON_TRAINER[STARTER] and getFlag(S.FLAG_KLEON_BATTLE_1_DONE)
       local gateLoss = false
       if n == KLEON_2[STARTER] and getFlag(S.FLAG_KLEON_BATTLE_2_DONE) then

@@ -401,8 +401,12 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
 
 The setup run exercised the opening through the Emporion gate continuously, and
-separate area checks through the Mystery sanctum. Its assisted battles are progression
-evidence, **not** natural-level balance evidence. Historical QA and art inventories
+separate area checks through the Mystery sanctum. The current continuous harness
+also reaches Eleusa from NEW GAME through the actual Isthmus slide, Hollow and
+cliff road: Hero/Kynder, 378,413 frames and 63 battles, with 1,263 verified
+screenshots and saved beat states. These assisted battles are progression
+evidence, **not** natural-level balance evidence. The continuous Demeter,
+Mysteries and sanctum ending remains open. Historical QA and art inventories
 remain evidence of those revisions, not current open-issue counts.
 
 The continuous harness now also has a guarded natural-level mode: no EXP/stat
@@ -447,7 +451,7 @@ explicit native fixtures verify both outcomes, actual loss healing and the
 open gate. A fresh repeat instead loses to Kerykos after 453,103 frames;
 preparation is not yet reliable and no continuous natural gate pass is claimed.
 The remaining
-starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
+starter/difficulty chapter runs, continuous natural-level coverage beyond the Emporion gate
 and human look/fun approval are still open.
 
 The Hollow night-hound failure was a signed-offset error in the test clock setup,

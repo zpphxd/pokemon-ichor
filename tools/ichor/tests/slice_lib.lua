@@ -231,7 +231,28 @@ L.beat = "boot"
 function L.shot(name)
   shots = shots + 1
   local file = string.format("%04d_%s_%s.png", shots, L.beat, name)
-  emu:screenshot(OUT .. "shots/" .. file)
+  local path = OUT .. "shots/" .. file
+  local previous = io.open(path, "rb")
+  if previous then
+    previous:close()
+    local removed, err = os.remove(path)
+    if not removed then fail("could not replace screenshot " .. path .. ": " .. tostring(err)) end
+  end
+  emu:screenshot(path)
+  -- mGBA's screenshot API returns nothing, including when its write fails.
+  local image, err = io.open(path, "rb")
+  if not image then fail("could not save screenshot " .. path .. ": " .. tostring(err)) end
+  local header = image:read(8)
+  local size = image:seek("end")
+  local footer
+  if size and size >= 20 then
+    image:seek("set", size - 12)
+    footer = image:read(12)
+  end
+  image:close()
+  if header ~= "\137PNG\r\n\26\n" or footer ~= "\0\0\0\0IEND\174\66\96\130" then
+    fail("incomplete PNG screenshot " .. path)
+  end
   -- the map and whether it's the plain field (for the gallery's one-frame-per-map sheet)
   local field = L.inOverworld() and not L.boxUp() and emu:read8(S.sLockFieldControls) == 0
   log(string.format("shot %s map %d %s", file, L.mapId(), field and "field" or (L.inBattle() and "battle" or "scene")))
@@ -241,7 +262,8 @@ function L.setBeat(name, state)
   L.beat = name
   log("BEAT " .. name)
   if state ~= false and L.statesDir then
-    emu:saveStateFile(L.statesDir .. name .. ".ss", 31)
+    local file = L.statesDir .. name .. ".ss"
+    if not emu:saveStateFile(file, 31) then fail("could not save diagnostic state " .. file) end
   end
 end
 
@@ -320,7 +342,10 @@ local TRAINERS = { "KLEON_NEBREL", "KLEON_KYNDER", "KLEON_HIPLING", "TITYROS", "
                    -- Phase 2
                    "ALETHEA_DECK", "PHORMION", "LYKON",
                    "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS",
-                   "KLEON_2_KYNDER", "KLEON_2_HIPLING", "KLEON_2_NEBREL" }
+                   "KLEON_2_KYNDER", "KLEON_2_HIPLING", "KLEON_2_NEBREL",
+                   "EXEKIAS", "MYRRHINE", "LAAS", "ISTHMUS_MENALKAS", "PHEIDIPPOS", "KAPELOS",
+                   "PHAINO", "HEKABE", "KALLIAS", "BATTOS", "KYNEGEIROS", "MELANTHIOS", "ARISTAIOS",
+                   "DAPHNIS", "MYRTO", "MOPSOS", "KERDON" }
 local function defeatedSet()
   local t = {}
   for _, n in ipairs(TRAINERS) do t[n] = L.defeated(S["TRAINER_" .. n]) end

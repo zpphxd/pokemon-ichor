@@ -341,8 +341,16 @@ strategy, and a continuous natural gate pass is still unverified.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.
-The continuous route currently ends at the Emporion gate after Laurel 2, not
-the end of Act I.
+The continuous route now continues beyond the opened Emporion gate: the actual
+Isthmus slide and Hammer rewards, Hecate's Torch and western Hollow, cliff-road
+trainers and healers, and Krokis's Eleusa arrival (`20_eleusa_arrival`). Its 17
+additional trainers are tracked in the final victory checks. The city walker
+stops avoiding the Isthmus gate only after the actual rival scene is complete.
+A fresh NEW GAME Hero/Kynder **assisted** run passes in 378,413 frames with 63
+battles and 1,263 complete screenshots. This is connected progression evidence,
+not natural-level balance evidence. Earlier attempts affected by host disk
+exhaustion are not complete persisted evidence. Demeter, the Mysteries and the
+sanctum still have separate fixtures, not a continuous ending pass.
 
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
@@ -353,6 +361,17 @@ even if Lua reaches its completion marker. Partial logs are not valid run
 evidence. `python3 tools/ichor/tests/test_headless_output.py` checks both complete
 output and a real failed write under a small file-size limit; build the ROM
 and runner first.
+
+Screenshots are accepted only after checking the actual PNG signature and final
+IEND chunk; mGBA's screenshot API itself returns nothing even on write failure.
+An existing image is removed first so a failed replacement cannot reuse stale
+evidence. Diagnostic state saves must also report success. Host disk exhaustion
+must stop the run, not produce a successful log with missing artifacts.
+After generating `build/slice/symbols.lua`, run
+`mkdir -p build/slice-persistence/shots build/slice-persistence/states` and
+`build/tools/ichor-mgba-headless --script tools/ichor/tests/slice_persistence.lua --frames 150 --until "SLICE PERSISTENCE done" pokeemerald.gba`
+to check actual PNG/state writes and modeled stale-image, truncated-PNG and
+state-save failures. This isolated check is not gameplay progression evidence.
 
 `build/tools/ichor-mgba-headless --script tools/ichor/tests/slice_pilot_cursor.lua --frames 2 --until "PILOT CURSOR done" pokeemerald.gba`
 checks all 30 cursor transitions across one-, two-, three- and four-move grids.

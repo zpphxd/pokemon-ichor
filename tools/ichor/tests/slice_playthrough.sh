@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # The playthrough: one continuous run from a fresh cartridge through the Phase 1
-# slice and on through the Emporion gate after Laurel 2, with key presses only.
-# Later Act I areas currently have separate fixtures, not continuous coverage.
+# slice and on through the actual roads and Hollow to Eleusa, with key presses only.
+# Demeter and the sanctum still have separate fixtures, not continuous coverage.
 #
 #   tools/ichor/tests/slice_playthrough.sh [rom]     (default: pokeemerald.gba; run make first)
 #
@@ -34,6 +34,8 @@
 # every room (beat 12 in the Deigma, beat 13 at the forge), beat 14 on the temple
 # stair, the Isthmus Gate shut, the Temple of Hermes (the Herald's Run, its three
 # acolytes, Kerykos, the Herald Laurel and TM40), and beat 16, Kleon at the gate.
+# Then the actual Isthmus slide and its Hammer rewards, Hecate's Torch, the
+# western Hollow, cliff-road trainers and real healers, and Krokis's Eleusa arrival.
 #
 # THE ONE ASSIST (unless SLICE_NATURAL=1): after the starter screen the starter's
 # experience is set to level 100's (battle strength only; see the .lua header).
@@ -127,6 +129,9 @@ elif [ -n "${SLICE_STOP_AFTER:-}" ]; then
   fi
 elif ! grep -q "SLICE PASS" "${OUT}run.log"; then
   echo "SLICE FAIL: the run stopped before the end (runner exit $code)"; fail=1
+fi
+if [ -z "${SLICE_STOP_AFTER:-}" ] && ! grep -q "SLICE REACHED 20_eleusa_arrival" "${OUT}run.log"; then
+  echo "SLICE FAIL: the run never reached Eleusa's actual arrival"; fail=1
 fi
 # These are the continuous harness's endpoints, not all of Act I's built content.
 if [ -z "${SLICE_STOP_AFTER:-}" ] && ! grep -q "Halia sent a gull" "${OUT}text.txt"; then
