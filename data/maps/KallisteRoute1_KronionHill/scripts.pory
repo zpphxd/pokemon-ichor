@@ -293,7 +293,35 @@ script KallisteRoute1_KronionHill_EventScript_Stele {
 }
 
 script KallisteRoute1_KronionHill_EventScript_Altar {
-    msgbox(format("A cracked altar. The stone is warm, like a sleeping animal."), MSGBOX_SIGN)
+    lockall
+    setspeaker(SP_NAME_NONE)
+    if (!flag(FLAG_ICHOR_AMPHORAE_START + ICHOR_AMPHORA_KRONOS) || flag(FLAG_ICHOR_KRONION_ALTAR_STONE)) {
+        msgbox(format("A cracked altar. The stone is warm, like a sleeping animal."))
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetTimeOfDay)
+    if (var(VAR_RESULT) != TIME_NIGHT) {
+        msgbox(format("The stone is warm. Daphne's painting showed this altar after dark."))
+        releaseall
+        end
+    }
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("A low hum comes from the crack. A stone shifts under its cloth.\pReach toward it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        setwildbattle(SPECIES_CAIRNOLITH, 20, ITEM_HARD_STONE)
+        createmon(1, 0, SPECIES_CAIRNOLITH, 20, item=ITEM_HARD_STONE, abilityNum=2)
+        playmoncry(SPECIES_CAIRNOLITH, CRY_MODE_ENCOUNTER)
+        waitmoncry
+        dowildbattle
+        specialvar(VAR_RESULT, GetBattleOutcome)
+        if (var(VAR_RESULT) == B_OUTCOME_CAUGHT || var(VAR_RESULT) == B_OUTCOME_WON) {
+            setflag(FLAG_ICHOR_KRONION_ALTAR_STONE)
+        }
+    }
+    releaseall
+    end
 }
 
 script KallisteRoute1_KronionHill_EventScript_DigShrine {

@@ -47,7 +47,7 @@ RolloverTest_Setup:
 	setflag FLAG_ICHOR_ROCKSLIDE_CLEARED
 	setvar VAR_REPEL_STEP_COUNT, 999
 	callnative InitTimeBasedEvents
-	warp MAP_ELEUSA_VILLAGE, 31, 35
+	warp MAP_ELEUSA_VILLAGE, 16, 35
 	waitstate
 	releaseall
 	end
@@ -84,7 +84,7 @@ RolloverTest_Held:
 RolloverTest_Spot:
 	lockall
 	setvar VAR_TEMP_F, 1
-	warp MAP_ELEUSA_VILLAGE, 32, 35
+	warp MAP_ELEUSA_VILLAGE, 17, 35
 	waitstate
 	releaseall
 	end

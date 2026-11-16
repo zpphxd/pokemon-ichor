@@ -1135,3 +1135,5 @@ gSpecials::
 	def_special Ichor_BufferAmphoraNotes
 	def_special Ichor_ShowAmphoraPicture
 	def_special Ichor_HideAmphoraPicture
+	def_special Ichor_SetPersephoneVisitor
+	def_special Ichor_GetTimeOfDay

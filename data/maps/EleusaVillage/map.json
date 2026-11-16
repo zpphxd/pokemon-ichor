@@ -332,7 +332,7 @@
     {
       "local_id": "LOCALID_ELEUSA_OMEN_KORANTHA",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KORANTHA)",
-      "x": 32,
+      "x": 17,
       "y": 35,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -342,6 +342,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EleusaVillage_EventScript_OmenKorantha",
       "flag": "FLAG_ICHOR_HIDE_OMEN_KORANTHA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_AMPHORA_PERSENYX",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PERSENYX)",
+      "x": 37,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_AmphoraPersenyx",
+      "flag": "FLAG_ICHOR_HIDE_AMPHORA_PERSENYX"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",

@@ -318,7 +318,7 @@ local function omenVisitor()
   local noRunning = L.getFlag(S.FLAG_NO_RUNNING)
   local function reloadVillage()
     warpTo(S.MAP_TEMPLE_DEMETER, 13, 24)
-    warpTo(S.MAP_ELEUSA, 31, 34)
+    warpTo(S.MAP_ELEUSA, 16, 34)
   end
   local function setOmen(k, e)
     emu:write8(L.ichor() + S.OFF_ICHOR_OMEN_KIND, k)

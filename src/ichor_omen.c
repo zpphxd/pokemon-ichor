@@ -16,6 +16,7 @@
 #include "mass_outbreak.h"
 #include "palette.h"
 #include "random.h"
+#include "rtc.h"
 #include "script.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
@@ -117,12 +118,33 @@ static bool32 IsVisitorFlag(u16 flag)
 
     if (flag == 0)
         return FALSE;
+    if (flag == FLAG_ICHOR_HIDE_AMPHORA_PERSENYX)
+        return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ELEUSA_VILLAGE)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ELEUSA_VILLAGE);
     for (i = 0; i < ARRAY_COUNT(sOmenEntries); i++)
     {
         if (sOmenEntries[i].kind == OMEN_VISITOR && sOmenEntries[i].hideFlag == flag)
             return TRUE;
     }
     return FALSE;
+}
+
+static bool32 PersephoneVisitorAvailable(void)
+{
+    return FlagGet(FLAG_ICHOR_AMPHORAE_START + ICHOR_AMPHORA_PERSEPHONE)
+        && !FlagGet(FLAG_ICHOR_ELEUSA_PERSENYX)
+        && GetTimeOfDay() == TIME_EVENING;
+}
+
+void Ichor_SetPersephoneVisitor(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_ELEUSA_VILLAGE)
+     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_ELEUSA_VILLAGE))
+        return;
+    if (PersephoneVisitorAvailable())
+        FlagClear(FLAG_ICHOR_HIDE_AMPHORA_PERSENYX);
+    else
+        FlagSet(FLAG_ICHOR_HIDE_AMPHORA_PERSENYX);
 }
 
 void Ichor_OmenFieldFrame(void)
@@ -132,6 +154,11 @@ void Ichor_OmenFieldFrame(void)
     u8 mapNum = gSaveBlock1Ptr->location.mapNum;
     u8 mapGroup = gSaveBlock1Ptr->location.mapGroup;
 
+    // Clock boundaries also refresh the restored amphora's dusk-only visitor.
+    if (mapGroup == MAP_GROUP(MAP_ELEUSA_VILLAGE) && mapNum == MAP_NUM(MAP_ELEUSA_VILLAGE)
+     && FlagGet(FLAG_ICHOR_HIDE_AMPHORA_PERSENYX) == PersephoneVisitorAvailable())
+        sMapRefreshPending = TRUE;
+
     if (!sMapRefreshPending || ScriptContext_IsEnabled() || gPaletteFade.active || Ichor_IsFrozenHour()
      || gPlayerAvatar.tileTransitionState != T_NOT_MOVING
      || gPlayerAvatar.objectEventId >= OBJECT_EVENTS_COUNT
@@ -139,6 +166,7 @@ void Ichor_OmenFieldFrame(void)
         return;
 
     player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    Ichor_SetPersephoneVisitor();
     if (gMapHeader.events != NULL)
     {
         for (i = 0; i < gMapHeader.events->objectEventCount; i++)

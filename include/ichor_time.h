@@ -7,5 +7,6 @@
 
 void Ichor_ApplyHeldTime(s32 *hours, s32 *minutes);  // overworld.c, UpdateTimeOfDay
 bool32 Ichor_IsTintOff(void);                         // the DAY/NIGHT TINT option is OFF, and no tint is held
+u16 Ichor_GetTimeOfDay(void);
 
 #endif // GUARD_ICHOR_TIME_H
