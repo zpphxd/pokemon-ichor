@@ -7,18 +7,28 @@
 // start the expansion's mass outbreak; visitors show their objects.
 #include "global.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "field_player_avatar.h"
+#include "field_weather.h"
+#include "fieldmap.h"
+#include "ichor_frozen.h"
 #include "ichor_omen.h"
 #include "mass_outbreak.h"
+#include "palette.h"
 #include "random.h"
+#include "script.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
 #include "constants/map_groups.h"
 #include "constants/species.h"
+#include "constants/weather.h"
 
 #include "data/ichor_omens.h"
 
 #define ICHOR_OMEN_SALT   0x0BE5A1D5
 #define SWARM_SHARE       50   // percent of the map's land encounters
+
+static EWRAM_DATA bool8 sMapRefreshPending = FALSE;
 
 // SYSTEMS §6's weights, by kind. The swarm's 35 is 45 until strangers walk.
 static const u8 sKindWeights[] =
@@ -64,6 +74,7 @@ static void ApplyOmen(void)
     u32 i;
     const struct IchorOmenEntry *e = FindEntry(gIchorSave.omenKind, gIchorSave.omenEntry);
 
+    sMapRefreshPending = TRUE;
     for (i = 0; i < ARRAY_COUNT(sOmenEntries); i++)
     {
         if (sOmenEntries[i].kind == OMEN_VISITOR && sOmenEntries[i].hideFlag != 0 && &sOmenEntries[i] != e)
@@ -87,6 +98,71 @@ static void ApplyOmen(void)
         };
         StartMassOutbreak(outbreak);
     }
+}
+
+void Ichor_SetOmenWeather(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ELEUSA_VILLAGE)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ELEUSA_VILLAGE))
+    {
+        SetSavedWeather(gIchorSave.omenKind == OMEN_WEATHER
+                     && gIchorSave.omenEntry == OMEN_WEATHER_ELEUSA_SUN
+                      ? WEATHER_DROUGHT : WEATHER_NONE);
+    }
+}
+
+static bool32 IsVisitorFlag(u16 flag)
+{
+    u32 i;
+
+    if (flag == 0)
+        return FALSE;
+    for (i = 0; i < ARRAY_COUNT(sOmenEntries); i++)
+    {
+        if (sOmenEntries[i].kind == OMEN_VISITOR && sOmenEntries[i].hideFlag == flag)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void Ichor_OmenFieldFrame(void)
+{
+    u32 i;
+    struct ObjectEvent *player;
+    u8 mapNum = gSaveBlock1Ptr->location.mapNum;
+    u8 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+
+    if (!sMapRefreshPending || ScriptContext_IsEnabled() || gPaletteFade.active || Ichor_IsFrozenHour()
+     || gPlayerAvatar.tileTransitionState != T_NOT_MOVING
+     || gPlayerAvatar.objectEventId >= OBJECT_EVENTS_COUNT
+     || !gObjectEvents[gPlayerAvatar.objectEventId].active)
+        return;
+
+    player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (gMapHeader.events != NULL)
+    {
+        for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+        {
+            const struct ObjectEventTemplate *template = &gSaveBlock1Ptr->objectEventTemplates[i];
+            u8 objectId;
+
+            if (!IsVisitorFlag(template->flagId))
+                continue;
+            if (FlagGet(template->flagId))
+                RemoveObjectEventByLocalIdAndMap(template->localId, mapNum, mapGroup);
+            else if (template->x + MAP_OFFSET == player->currentCoords.x
+                  && template->y + MAP_OFFSET == player->currentCoords.y
+                  && TryGetObjectEventIdByLocalIdAndMap(template->localId, mapNum, mapGroup, &objectId))
+                return; // A new arrival waits until the player leaves its tile.
+        }
+        // The stationary field has no moving-camera offset.
+        TrySpawnObjectEvents(0, 0);
+    }
+    Ichor_SetOmenWeather();
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ELEUSA_VILLAGE)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ELEUSA_VILLAGE))
+        SetNextWeather(GetSavedWeather());
+    sMapRefreshPending = FALSE;
 }
 
 // The day's draw: a kind by weight among the kinds with an open entry, then

@@ -20,6 +20,7 @@
 #include "follower_npc.h"
 #include "ichor_frozen.h"
 #include "ichor_labyrinth.h"
+#include "ichor_omen.h"
 #include "ichor_relics.h"
 #include "ichor_theoxenia.h"
 #include "ichor_save.h"
@@ -128,6 +129,7 @@ void Ichor_OnMapTransition(void)
 // overworld.c, OverworldBasic: once a field frame, before the palette fade.
 void Ichor_OnFieldFrame(void)
 {
+    Ichor_OmenFieldFrame();
     Ichor_FrozenHourFrame();
     Ichor_LabyrinthFrame();
     Ichor_TheoxeniaFrame();

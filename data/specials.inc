@@ -1128,3 +1128,4 @@ gSpecials::
 	def_special Ichor_BonesMatchOver
 	def_special Ichor_GetMomRecord
 	def_special Ichor_QuoteToMoneychanger
+	def_special Ichor_SetOmenWeather
