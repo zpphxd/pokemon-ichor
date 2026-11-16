@@ -128,6 +128,9 @@ script EleusaVillage_EventScript_NorthHerald {
     lock
     faceplayer
     setspeaker(EleusaVillage_Text_NameHerald)
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_WROTE_TO_MOM)) {
+        call(EmporionCity_RunnersHouse_EventScript_LetterHome)
+    }
     msgbox(format("Thyrsa's preparing the Dionysia. The road opens when the play's ready."))
     release
 }

@@ -55,7 +55,32 @@ script ElaiaVillage_PlayersHouse_1F_EventScript_Mom {
     lock
     faceplayer
     setspeaker(SP_NAME_MOM)
-    if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        if (flag(FLAG_ICHOR_WROTE_TO_MOM)) {
+            msgbox(format(
+                "You wrote! “I'm eating.” That's the whole letter. “I'm eating.”\p"
+                "…Something's happened. Daphne's letter was three pages and said nothing.\p"
+                "Sit. You don't have to tell me. Sit anyway."))
+            if (!flag(FLAG_ICHOR_GOT_MOMS_HONEY)) {
+                msgbox(format("And take these. From the hives. Not from that jar.\p"
+                              "That jar's spoken for."))
+                setspeaker(SP_NAME_NONE)
+                giveitem(ITEM_HONEY, 3)
+                if (var(VAR_RESULT) == TRUE) {
+                    setflag(FLAG_ICHOR_GOT_MOMS_HONEY)
+                } else {
+                    call(Common_EventScript_ShowBagIsFull)
+                }
+            }
+        } else {
+            msgbox(format("Daphne wrote. Three pages, and they said nothing.\p"
+                          "You didn't write at all.\p"
+                          "Sit. You don't have to tell me. Sit anyway."))
+        }
+    } elif (flag(FLAG_ICHOR_CROSSING_DONE)) {
+        msgbox(format("A mainlander! Look at you. Did you eat? You didn't eat.\p"
+                      "Halia came by. She looked tired. She wouldn't say why."))
+    } elif (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
         msgbox(format("I heard about the Lakonian boy. The whole village heard."))
     } elif (flag(FLAG_ICHOR_GOT_STARTER)) {
         msgbox(format("Let me see! Oh, look at it. Does it eat honey? Everything eats honey."))
