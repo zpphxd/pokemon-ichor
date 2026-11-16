@@ -6530,6 +6530,8 @@ void HealPokemon(struct Pokemon *mon)
 {
     u32 data;
 
+    if (Ichor_IsOathFallen(&mon->box))
+        return;
     data = GetMonData(mon, MON_DATA_MAX_HP);
     SetMonData(mon, MON_DATA_HP, &data);
 
@@ -6543,6 +6545,8 @@ void HealBoxPokemon(struct BoxPokemon *boxMon)
 {
     u32 data;
 
+    if (Ichor_IsOathFallen(boxMon))
+        return;
     data = 0;
     SetBoxMonData(boxMon, MON_DATA_HP_LOST, &data);
 

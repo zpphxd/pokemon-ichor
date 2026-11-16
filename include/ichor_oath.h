@@ -34,5 +34,8 @@ bool32 Ichor_IsUrnBox(u32 box);
 bool32 Ichor_IsOathFallen(const struct BoxPokemon *mon);
 bool32 Ichor_RecordOathFallen(struct Pokemon *mon);
 u32 Ichor_StoreOathFallen(struct Pokemon *mon);
+u32 Ichor_StoreOathPartyFallen(void);
+void Ichor_EndOathBattle(u32 battleType, u32 battleOutcome);
+bool32 Ichor_ShowOathAftermathNotice(void);
 
 #endif
