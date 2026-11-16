@@ -77,6 +77,9 @@ only with another matching omen, like the Eleusa visitor.
 General offset 0x01F is `FLAG_ICHOR_DIFFICULTY_CHOSEN`; bank var offset 0 is
 `VAR_ICHOR_DIFFICULTY`. An unset confirmation flag means Hero, preserving old
 saves whose new var is zero. The bedroom's confirmed selection is save-fixed.
+General offset 0x02C is `FLAG_ICHOR_GOT_MOMS_HONEY`, the one-time three-Honey
+return-home gift after the Act I ending and letter. It is set only after the
+whole gift fits; `FLAG_ICHOR_WROTE_TO_MOM` independently records the sent letter.
 Isthmus excavation uses daily dig indices 4 (kilns) and 5 (hill spur), and fixed
 find index 1 (family tomb, Girdle-gated). All belong to the Arachne amphora.
 These are offsets in the reserved dig ranges, not the general flag range.
