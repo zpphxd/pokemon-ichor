@@ -149,6 +149,9 @@ def hubs():
             m.person("Kleon", 7, 22, gfx="KLEON", flag="FLAG_ICHOR_KLEON_JOINED_TITANS")
             m.person("Alethea", 15, 22, gfx="ALETHEA")
             m.person("Iapetos", 5, 22, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_HIDE_IAPETOS_ARKADIA")
+            for x in range(10, 14):
+                m.json["coord_events"].append(dict(type="trigger", x=x, y=23, elevation=3,
+                    var="VAR_TEMP_1", var_value="0", script="Arkadia_EventScript_Recruitment"))
         m.save()
 
 
