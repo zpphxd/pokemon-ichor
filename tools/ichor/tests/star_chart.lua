@@ -1,6 +1,43 @@
 -- Ownership/collection are fixture inputs; screens are opened through the real Bag.
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
+local function readAsset(name)
+  local file = assert(io.open(L.OUT .. name, "rb"))
+  local bytes = file:read("a")
+  file:close()
+  return bytes
+end
+local iconPixels, iconPalette = readAsset("icon.4bpp"), readAsset("icon.gbapal")
+local function checkBagIcon()
+  local bag = emu:read32(S.gBagMenu)
+  local found
+  for _, slot in ipairs({ S.ICON_SLOT, S.ICON_ALT_SLOT }) do
+    local id = emu:read8(bag + S.OFF_BAG_SPRITES + slot)
+    if id ~= S.SPRITE_NONE then
+      L.expect(found == nil, "only the selected item's icon owns a Bag sprite")
+      found = id
+    end
+  end
+  L.expect(found ~= nil, "the selected Star Chart has a live icon sprite")
+  local attr2 = emu:read16(S.gSprites + found * S.SPRITE_SIZE + S.OFF_SPRITE_OAM + 4)
+  local tiles = S.OBJ_VRAM_ADDR + (attr2 & 0x3FF) * 32
+  L.expect(#iconPixels == 288 and #iconPalette == 32, "the chart icon is 24x24 4bpp with sixteen colors")
+  for row = 0, 2 do
+    for i = 0, 95 do
+      if emu:read8(tiles + row * 128 + i) ~= iconPixels:byte(row * 96 + i + 1) then
+        L.fail("the actual Bag sprite does not display the original chart icon")
+      end
+    end
+  end
+  for i = 0, 15 do
+    local expected = iconPalette:byte(i * 2 + 1) | iconPalette:byte(i * 2 + 2) << 8
+    local offset = (256 + (attr2 >> 12) * 16 + i) * 2
+    if emu:read16(S.gPlttBufferFaded + offset) ~= expected then
+      L.fail("the actual Bag sprite has the wrong chart color " .. i)
+    end
+  end
+  L.expect(true, "all live icon pixels and colors match the original Star Chart art")
+end
 local function stars()
   local n = 0
   for i = 0, S.STAR_COUNT - 1 do if L.getFlag(S.FLAG_STARS + i) then n = n + 1 end end
@@ -40,6 +77,7 @@ local function useFromBag()
   L.tap(K.A)
   L.waitUntil(function() return L.on("CB2_Bag") and L.taskRunning("Task_BagMenu_HandleInput") end, 1200, "the key-item Bag")
   L.wait(30)
+  checkBagIcon()
   L.shot("chart_in_key_items")
   L.tap(K.A)
   L.waitUntil(function() return L.taskRunning("Task_ItemContext_SingleRow") or L.taskRunning("Task_ItemContext_MultipleRows") end, 300, "the chart's USE menu")
@@ -57,6 +95,7 @@ local function close()
   L.waitUntil(function() return L.on("CB2_Bag") and L.taskRunning("Task_BagMenu_HandleInput") end, 1500, "the same Bag pocket")
   L.expect(emu:read32(S.sStarChart) == 0, "closing the chart releases all screen resources")
   L.wait(30)
+  checkBagIcon()
   L.shot("back_in_bag")
   L.tap(K.B)
   L.waitUntil(function() return L.inOverworld() or L.taskRunning("Task_ShowStartMenu") end, 1200, "the field")

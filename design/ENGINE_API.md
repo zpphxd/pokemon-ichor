@@ -1059,6 +1059,12 @@ returns to the same Bag pocket. Placed stars cycle between two gold shades.
 Allocation failures display an explicit retry message rather than claiming
 the screen opened.
 
+The Bag uses an original 24x24 rolled-sky icon and its own sixteen-color
+palette, not the Town Map's graphics. Regenerate just this asset with
+`python3 tools/ichor/art/items.py --write --only star_chart`; the focused
+option retains the generator's shared-palette checks without rewriting
+other icon PNGs or the ground jar.
+
 The existing `FLAG_ICHOR_CONSTELLATIONS_START` range stores one saved bit
 per constellation, in SYSTEMS §8 order (indices 0–23). This uses the already
 reserved flag bank instead of introducing a new `IchorSave.constellations`
@@ -1087,7 +1093,9 @@ all-star fixtures demonstrate rendering, not current story obtainability.
 mapping, thresholds, distinct pages, legacy recovery and reserved bits.
 `tools/ichor/tests/star_chart.sh` opens the real Bag item, checks all 24
 distinct rendered pixel patterns, the empty final patch, palette twinkling,
-navigation, screen cleanup and save/reset/CONTINUE.
+navigation, screen cleanup and save/reset/CONTINUE. It compares all 288
+compiled icon bytes and all sixteen colors against the live Bag sprite's
+OBJ VRAM and palette, both before opening the Chart and after returning.
 
 ## 11. Oath of the Styx
 

@@ -7656,8 +7656,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IchorStarChart,
-        .iconPic = gItemIcon_TownMap,
-        .iconPalette = gItemIconPalette_TownMap,
+        .iconPic = gItemIcon_StarChart,
+        .iconPalette = gItemIconPalette_StarChart,
     },
 
 // Gems

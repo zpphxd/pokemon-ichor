@@ -2,6 +2,7 @@
 #include "ichor_star_chart.h"
 #include "item_menu.h"
 #include "window.h"
+#include "sprite.h"
 #include "constants/ichor.h"
 #include "constants/items.h"
 
@@ -23,3 +24,10 @@ K(WINDOW_SIZE, sizeof(struct Window))
 K(OFF_WINDOW_WIDTH, offsetof(struct Window, window.width))
 K(OFF_WINDOW_HEIGHT, offsetof(struct Window, window.height))
 K(OFF_WINDOW_TILES, offsetof(struct Window, tileData))
+K(OFF_BAG_SPRITES, offsetof(struct BagMenu, spriteIds))
+K(ICON_SLOT, ITEMMENUSPRITE_ITEM)
+K(ICON_ALT_SLOT, ITEMMENUSPRITE_ITEM_ALT)
+K(SPRITE_NONE, SPRITE_NONE)
+K(SPRITE_SIZE, sizeof(struct Sprite))
+K(OFF_SPRITE_OAM, offsetof(struct Sprite, oam))
+K(OBJ_VRAM_ADDR, OBJ_VRAM0)
