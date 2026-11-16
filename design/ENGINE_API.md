@@ -280,6 +280,13 @@ from NEW GAME: 275,043 frames, 48 battles, 520 screenshots. Hero/Kynder still
 loses to Ione (last foe 31 HP), as does Spartan/Hipling (last foe 19 HP).
 Those new attempts supersede neither older strategies' evidence nor the
 remaining matrix, intended-curve and repeatability gates.
+The next continuous Mortal/Kynder NEW GAME attempt reaches Kerykos in
+460,136 frames, completing the Herald's Run with 73 of 150 steps left and
+beating all three acolytes before losing to the Hierophant. Its companions
+remain level 10–11 while the starter enters Kerykos at level 19 with 20/52 HP.
+This is not a Laurel-2 or gate-opening pass. The harness now asserts the real
+150/120/100 budget rather than a Hero-only 120; the previous mainland attempt
+stopped at that incorrect assertion, not an actual rite failure.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.

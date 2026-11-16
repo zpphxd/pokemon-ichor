@@ -46,6 +46,7 @@ local IANTHE = (os.getenv("SLICE_GENDER") or "theo") == "ianthe"
 local SPECIES = { [0] = "Nebrel", [1] = "Kynder", [2] = "Hipling" }
 local DIFFICULTY = os.getenv("SLICE_DIFFICULTY") or "hero"
 local DIFFICULTIES = { mortal = 0, hero = 1, spartan = 2 }
+local STEP_GLASS_LIMITS = { mortal = 150, hero = 120, spartan = 100 }
 local KLEON_TAKES = { [0] = 1, [1] = 2, [2] = 0 }   -- SCRIPT.md beat 3
 local KLEON_TRAINER = { [0] = "KLEON_KYNDER", [1] = "KLEON_HIPLING", [2] = "KLEON_NEBREL" }
 if NATURAL then L.pilot = dofile("tools/ichor/tests/slice_pilot.lua")(L, STARTER) end
@@ -1392,7 +1393,8 @@ beat("15_temple", function()
   -- Kerykos's rite, YES: the scrolls, and the glass begins
   talk(L.npc(HM .. "Kerykos"), { shotBefore = "kerykos_rite", every = true })
   flagsSet({ "FLAG_HERALDS_RUN_TOLD" }, "Kerykos told the rite")
-  expect(running() and glass() == 120 and delivered() == 0, "the Run is on: 120 steps in the glass")
+  local limit = STEP_GLASS_LIMITS[DIFFICULTY]
+  expect(running() and glass() == limit and delivered() == 0, string.format("the Run is on: %d steps in the glass", limit))
   L.check(not L.npc(HM .. "Kerykos").present, "Kerykos took the short way")
   musicIs(S.MUS_TEMPLE_HERMES, "the Herald's Run plays from its first bar")
 end)
@@ -1419,7 +1421,8 @@ beat("15_herald_run", function()
   herm("J4", "FLAG_HERMES_HERM_J4")
   runTo({ { 18, 8 }, { 7, 8 }, { 5, 8 }, { 2, 8 } })
   local left = glass()
-  expect(running() and left > 0, string.format("made the Market herm with sand to spare (%d of 120 steps left)", left))
+  expect(running() and left > 0, string.format("made the Market herm with sand to spare (%d of %d steps left)",
+                                           left, STEP_GLASS_LIMITS[DIFFICULTY]))
   deliver("H3", 3)
   flagsSet({ "FLAG_HERALDS_RUN_DONE" }, "the Run is done (FLAG_ICHOR_HERALDS_RUN_DONE)")
   flagsClear({ "FLAG_HERALDS_RUN_FAILED" }, "the glass never ran dry")
