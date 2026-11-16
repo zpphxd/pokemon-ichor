@@ -371,7 +371,7 @@ function L.battle()
       -- deck snatchers) is fought like a trainer's, and so is one that won't let
       -- the player go (Arena Trap, Shadow Tag): after three tries, fight
       if L.pilot and L.pilot.chooseAction(trainer) then
-        -- The pilot used the actual Bag.
+        -- The pilot completed a native Bag or party action.
       elseif (L.pilot and L.pilot.training) or trainer or turns > 3 or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else
@@ -1154,6 +1154,7 @@ end
 
 function L.partySpecies(slot) return secureWord(slot, 0, 0) & 0x7FF end
 function L.partyExperience(slot) return secureWord(slot, 0, 4) & 0x1FFFFF end
+function L.partyHeldItem(slot) return secureWord(slot, 0, 0) >> 16 & 0x3FF end
 function L.partyMove(slot, moveSlot)
   return secureWord(slot, 1, (moveSlot // 2) * 4) >> (moveSlot % 2 * 16) & 0x7FF
 end

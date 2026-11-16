@@ -188,18 +188,29 @@ tries up to three owned balls per eligible Route 1/Kronion encounter, keeping
 at most three distinct partners. It reads power/type/category from the native
 move UI and scores available attacks using STAB, type effectiveness, current
 offensive/defensive stats and stages, including Fur Coat's physical defense.
-Its move-learning heuristic replaces observed status moves or weaker redundant
-coverage before unique attacks. This is not a complete battle AI: accuracy,
-most abilities, variable-power moves and tactical status/switch choices remain
-unmodeled.
+It accounts for Double Kick's two hits, actually held type boosters and common
+Fire/Water/Grass/Ground/Electric ability immunities, respecting Mold Breaker,
+Teravolt and Turboblaze. In particular, Pyrrha's Narthip has Flash Fire: the
+pilot must not keep selecting Fire attacks merely because it is Grass-type.
+Its move-learning heuristic preserves Yawn and unique attacks ahead of observed
+status moves or weaker redundant coverage. It attempts Yawn at most once per
+opposing party member in trainer battles. This is not a complete battle AI:
+accuracy, other abilities, variable-power moves and most tactical status/switch
+choices remain unmodeled. `slice_pilot_tactics.lua` checks these scoring rules,
+bounded Yawn and the Spartan battle-item ban without emulator memory access.
 
 Before Hestia, the pilot walks back to Route 1 and switch-trains the actual
-party to at least level 10, using Mom for HP/PP recovery. Training is bounded
+party to at least level 10 (14 in Spartan), using Mom for HP/PP recovery. Training is bounded
 to 6,000 grass steps; no EXP, party, item or progression writes are allowed.
 Healing near Akti uses the actual Asclepeion; an NPC returning to the former
 player tile on map reentry does not require the pilot to stand inside it.
 `PILOT` records describe inspections, item consumption, catches, move choices
 and training alongside the existing `PARTY`/`BATTLE` evidence.
+Before Ione, the starter is restored as the lead by its original personality
+and given its actually collected type booster, or its reserved Sitrus Berry
+in Spartan. GIVE checks both held ownership and exact Bag consumption.
+Mortal/Hero may use owned trainer-battle medicine at half HP or below, asserting
+actual HP recovery and exact consumption. Spartan never requests battle medicine.
 
 Hero/Nebrel has reached `08_after` continuously from NEW GAME: 418,310 frames,
 117 battles. This strategy includes substantial wild training: the starter
@@ -208,7 +219,9 @@ reaches `08_after` (333,477 frames, 78 battles). Hero/Kynder reaches Ione but
 loses; Spartan/Hipling loses there even in a separate probe that naturally
 trains all three partners to the real level-14 cap. Raising the training target
 alone does not resolve that strategy. These results do not establish the
-intended curve's balance. Other starter/difficulty chapter runs, complete
+intended curve's balance. The added held-item/status/medicine tactics, including
+the Flash Fire correction, still leave Hero/Kynder losing at Ione; their presence
+is not a new successful chapter result. Other starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.
 The continuous route currently ends at the Emporion gate after Laurel 2, not
 the end of Act I.

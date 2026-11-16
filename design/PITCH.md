@@ -416,7 +416,11 @@ Mortal/Nebrel also reaches the ending. That substantial training is not
 approval of the intended level curve. Hero/Kynder reaches Ione but loses;
 Spartan/Hipling also loses there, even with all three partners naturally
 trained to the real level-14 cap. Those pilot results are not established
-balance defects. The remaining
+balance defects. Further
+pilot improvements include real held-item preparation, limited Yawn, legal
+Mortal/Hero battle medicine, multi-hit scoring and ability-immunity checks
+(including Narthip's Flash Fire). Hero/Kynder still loses at Ione with those
+tactics; they are not additional chapter passes. The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
 

@@ -48,7 +48,7 @@ local DIFFICULTY = os.getenv("SLICE_DIFFICULTY") or "hero"
 local DIFFICULTIES = { mortal = 0, hero = 1, spartan = 2 }
 local KLEON_TAKES = { [0] = 1, [1] = 2, [2] = 0 }   -- SCRIPT.md beat 3
 local KLEON_TRAINER = { [0] = "KLEON_KYNDER", [1] = "KLEON_HIPLING", [2] = "KLEON_NEBREL" }
-if NATURAL then L.pilot = dofile("tools/ichor/tests/slice_pilot.lua")(L) end
+if NATURAL then L.pilot = dofile("tools/ichor/tests/slice_pilot.lua")(L, STARTER) end
 
 -- --- Checks shared by every beat -----------------------------------------------------------
 
@@ -724,6 +724,7 @@ beat("07_hearth_trial", function()
 end)
 
 beat("07_ione", function()
+  if L.pilot then L.pilot.prepareBoss() end
   local n0 = #L.battles
   talk(L.npc(T .. "Ione"), { shotBefore = "ione", every = true })
   local rec
