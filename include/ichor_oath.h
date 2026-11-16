@@ -21,6 +21,7 @@ enum
 };
 
 bool32 Ichor_IsOathActive(void);
+bool32 Ichor_IsOathBattle(u32 battleType);
 bool32 Ichor_ChooseOath(bool32 swear);
 bool32 Ichor_ReleaseOath(void);
 bool32 Ichor_FailOath(void);

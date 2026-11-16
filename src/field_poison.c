@@ -8,6 +8,7 @@
 #include "field_poison.h"
 #include "fldeff_misc.h"
 #include "frontier_util.h"
+#include "ichor_oath.h"
 #include "party_menu.h"
 #include "pokenav.h"
 #include "script.h"
@@ -145,6 +146,8 @@ s32 DoPoisonFieldEffect(void)
                 numFainted++;
 
             SetMonData(pokemon, MON_DATA_HP, &hp);
+            if (hp == 0 && !CurrentBattlePyramidLocation() && !InBattlePike() && !InTrainerHillChallenge())
+                Ichor_RecordOathFallen(pokemon);
             numPoisoned++;
         }
         pokemon++;

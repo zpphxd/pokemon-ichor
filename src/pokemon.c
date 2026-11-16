@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "ichor_rites.h"
 #include "malloc.h"
 #include "apprentice.h"
@@ -2545,6 +2546,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     {
         u32 hpLost;
         SET16(mon->hp);
+        if (Ichor_IsOathFallen(&mon->box))
+            mon->hp = 0;
         hpLost = mon->maxHP - mon->hp;
         SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
         break;
@@ -2553,6 +2556,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     {
         u32 hpLost;
         SET16(hpLost);
+        if (Ichor_IsOathFallen(&mon->box))
+            hpLost = mon->maxHP;
         mon->hp = mon->maxHP - hpLost;
         SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
         break;
@@ -3471,6 +3476,9 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
 
     // Determine the EV cap to use
     u32 maxAllowedEVs = !B_EV_ITEMS_CAP ? MAX_TOTAL_EVS : GetCurrentEVCap();
+
+    if (Ichor_IsOathFallen(&mon->box))
+        return TRUE;
 
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);

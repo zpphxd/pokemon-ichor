@@ -86,14 +86,19 @@ u32 Ichor_CountOathEncounters(void)
 
 void Ichor_BeginOathBattle(u32 battleType, u32 mapSection)
 {
-    const u32 excluded = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK
+    sOathCatchDenied = FALSE;
+    if (Ichor_IsOathBattle(battleType) && !(battleType & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_GHOST)))
+        sOathCatchDenied = !Ichor_ClaimOathEncounter(mapSection);
+}
+
+bool32 Ichor_IsOathBattle(u32 battleType)
+{
+    const u32 excluded = BATTLE_TYPE_LINK
         | BATTLE_TYPE_LINK_IN_BATTLE | BATTLE_TYPE_TOWER_LINK_MULTI
         | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK
         | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE
-        | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_GHOST;
-    sOathCatchDenied = FALSE;
-    if (Ichor_IsOathActive() && !(battleType & excluded))
-        sOathCatchDenied = !Ichor_ClaimOathEncounter(mapSection);
+        | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE;
+    return Ichor_IsOathActive() && !(battleType & excluded);
 }
 
 bool32 Ichor_CanCatchOathBattle(void)

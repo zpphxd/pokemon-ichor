@@ -1316,7 +1316,12 @@ bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_REVIVE:
-        if (hp != 0)
+        if (mon != NULL && Ichor_IsOathFallen(&mon->box))
+        {
+            failStr = COMPOUND_STRING("The Styx does not return\nfallen partners.");
+            cannotUse = TRUE;
+        }
+        else if (hp != 0)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_RESTORE_PP:

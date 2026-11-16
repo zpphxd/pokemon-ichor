@@ -9252,6 +9252,7 @@ u8 GetFirstFaintedPartyIndex(enum BattlerId battler)
         enum Species species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
         if (species != SPECIES_NONE
             && species != SPECIES_EGG
+            && !Ichor_IsOathFallen(&party[i].box)
             && GetMonData(&party[i], MON_DATA_HP) == 0)
         {
             return i;

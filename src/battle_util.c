@@ -11225,6 +11225,14 @@ struct PartyState *GetBattlerPartyState(enum BattlerId battler)
 
 void SetValuesOnFaint(enum BattlerId battler)
 {
+    if (Ichor_IsOathBattle(gBattleTypeFlags) && GetBattlerTrainer(battler) == B_TRAINER_PLAYER
+        && gBattleMons[battler].hp == 0)
+    {
+        u32 hp = 0;
+        struct Pokemon *mon = GetBattlerMon(battler);
+        SetMonData(mon, MON_DATA_HP, &hp);
+        Ichor_RecordOathFallen(mon);
+    }
     gHitMarker |= HITMARKER_FAINTED(battler);
     gBattleStruct->eventState.faintedAction = 0;
     gBattlerFainted = battler;
