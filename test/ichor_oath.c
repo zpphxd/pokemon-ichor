@@ -1,11 +1,18 @@
 #include "global.h"
+#include "battle.h"
+#include "battle_scripts.h"
+#include "battle_util.h"
 #include "event_data.h"
 #include "ichor_oath.h"
 #include "ichor_save.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "item.h"
+#include "safari_zone.h"
 #include "string_util.h"
 #include "test/test.h"
+#include "constants/battle.h"
+#include "constants/items.h"
 #include "constants/region_map_sections.h"
 
 static void ResetOath(void)
@@ -304,4 +311,82 @@ TEST("Ichor: version 5 preserves Oath progress while initializing only its Urn m
     EXPECT_EQ(gIchorSave.oath.urnBoxes, 1 << (TOTAL_BOXES_COUNT - 1));
     EXPECT(Ichor_IsUrnBox(TOTAL_BOXES_COUNT - 1));
     EXPECT(!Ichor_IsUrnBox(TOTAL_BOXES_COUNT - 2));
+}
+
+TEST("Ichor: the first wild battle claims one area chance for all its ball attempts")
+{
+    ResetOath();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    Ichor_BeginOathBattle(BATTLE_TYPE_IS_MASTER, MAPSEC_KALLISTE_ROUTE_1);
+    EXPECT(Ichor_CanCatchOathBattle());
+    EXPECT(Ichor_CanCatchOathBattle());
+    EXPECT_EQ(Ichor_CountOathEncounters(), 1);
+    Ichor_BeginOathBattle(BATTLE_TYPE_IS_MASTER, MAPSEC_KALLISTE_ROUTE_1);
+    EXPECT(!Ichor_CanCatchOathBattle());
+    EXPECT_EQ(Ichor_CountOathEncounters(), 1);
+    Ichor_BeginOathBattle(BATTLE_TYPE_DOUBLE | BATTLE_TYPE_IS_MASTER, MAPSEC_ELEUSA_VILLAGE);
+    EXPECT(Ichor_CanCatchOathBattle());
+    EXPECT_EQ(Ichor_CountOathEncounters(), 2);
+}
+
+TEST("Ichor: trainers, tutorials, ghosts and simulated battles never spend area chances")
+{
+    const u32 excluded[] = {
+        BATTLE_TYPE_TRAINER, BATTLE_TYPE_LINK, BATTLE_TYPE_LINK_IN_BATTLE,
+        BATTLE_TYPE_TOWER_LINK_MULTI, BATTLE_TYPE_RECORDED, BATTLE_TYPE_RECORDED_LINK,
+        BATTLE_TYPE_BATTLE_TOWER, BATTLE_TYPE_DOME, BATTLE_TYPE_PALACE,
+        BATTLE_TYPE_ARENA, BATTLE_TYPE_FACTORY, BATTLE_TYPE_PIKE,
+        BATTLE_TYPE_PYRAMID, BATTLE_TYPE_TRAINER_HILL, BATTLE_TYPE_SECRET_BASE,
+        BATTLE_TYPE_CATCH_TUTORIAL, BATTLE_TYPE_POKEDUDE, BATTLE_TYPE_GHOST,
+    };
+    u32 i;
+    ResetOath();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    for (i = 0; i < ARRAY_COUNT(excluded); i++)
+    {
+        Ichor_BeginOathBattle(excluded[i] | BATTLE_TYPE_IS_MASTER, MAPSEC_KALLISTE_ROUTE_1);
+        EXPECT(Ichor_CanCatchOathBattle());
+        EXPECT_EQ(Ichor_CountOathEncounters(), 0);
+    }
+}
+
+TEST("Ichor: ordinary and released runs retain their native capture permissions")
+{
+    ResetOath();
+    Ichor_BeginOathBattle(0, MAPSEC_NONE);
+    EXPECT(Ichor_CanCatchOathBattle());
+    EXPECT_EQ(Ichor_CountOathEncounters(), 0);
+    EXPECT(Ichor_ChooseOath(TRUE));
+    Ichor_BeginOathBattle(0, MAPSEC_KALLISTE_ROUTE_1);
+    Ichor_BeginOathBattle(0, MAPSEC_KALLISTE_ROUTE_1);
+    EXPECT(!Ichor_CanCatchOathBattle());
+    Ichor_BeginOathBattle(0, MAPSEC_NONE);
+    EXPECT(!Ichor_CanCatchOathBattle());
+    EXPECT_EQ(Ichor_CountOathEncounters(), 1);
+    EXPECT(Ichor_ReleaseOath());
+    EXPECT(Ichor_CanCatchOathBattle());
+    Ichor_BeginOathBattle(0, MAPSEC_KALLISTE_ROUTE_1);
+    EXPECT(Ichor_CanCatchOathBattle());
+    EXPECT_EQ(Ichor_CountOathEncounters(), 1);
+}
+
+TEST("Ichor: native quick and Safari throws refuse repeat areas without consuming balls")
+{
+    u32 balls;
+    ResetOath();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    Ichor_BeginOathBattle(0, MAPSEC_KALLISTE_ROUTE_1);
+    Ichor_BeginOathBattle(0, MAPSEC_KALLISTE_ROUTE_1);
+    gCurrentTurnActionNumber = 0;
+    gBattlerByTurnOrder[0] = B_BATTLER_0;
+    gBallToDisplay = ITEM_MASTER_BALL;
+    EXPECT(AddBagItem(ITEM_MASTER_BALL, 2));
+    balls = CountTotalItemQuantityInBag(ITEM_MASTER_BALL);
+    HandleAction_ThrowBall();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), balls);
+    EXPECT_EQ(gBattlescriptCurrInstr, BattleScript_IchorOathNoCatch);
+    gNumSafariBalls = 17;
+    HandleAction_SafariZoneBallThrow();
+    EXPECT_EQ(gNumSafariBalls, 17);
+    EXPECT_EQ(gBattlescriptCurrInstr, BattleScript_IchorOathNoCatch);
 }
