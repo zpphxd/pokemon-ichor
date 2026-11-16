@@ -502,6 +502,10 @@ local function afterTheRun()
   -- Up the steps, through the open gate, across the lectern from Kerykos.
   go({ { 18, 10 }, { 18, 8 }, { 10, 8 }, { 10, 5 } })
   shot("27_dais.png")
+  local function hermesFavor()
+    return emu:read8(emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR + S.OFF_ICHOR_FAVOR + S.ICHOR_GOD_HERMES)
+  end
+  local favorBeforeLaurel = hermesFavor()
   face(K.UP); tap(K.A); wait(60)
   shot("28_kerykos_on_the_dais.png")
   local t0 = now()
@@ -534,6 +538,8 @@ local function afterTheRun()
   expect(defeated(S.TRAINER_KERYKOS), "Kerykos's trainer flag")
   expect(itemCount(S.ITEM_TM40) == 1, "TM40 Aerial Ace in the bag")
   expect(itemCount(S.ITEM_HONEY) == 1, "a Honey in the bag")
+  expect(hermesFavor() == math.min(favorBeforeLaurel + S.ICHOR_FAVOR_LAUREL, 100),
+         "the Herald Laurel grants Hermes exactly 15 Favor")
   expect(defeated(S.TRAINER_PODARGE) and defeated(S.TRAINER_EUCHIDAS) and defeated(S.TRAINER_PHILONIDES),
          "every acolyte counts as beaten")
   expect(metatile(GLASS[1], GLASS[2]) == S.MT_GLASS_GONE, "the step-glass is put away")
@@ -545,6 +551,8 @@ local function afterTheRun()
   wait(30)
   expectAt(10, 22, "the short way down, to the door")
   shot("34_short_way_down.png")
+  expect(hermesFavor() == math.min(favorBeforeLaurel + S.ICHOR_FAVOR_LAUREL, 100),
+         "talking again does not repeat the Laurel Favor")
 
   -- Re-entry: the room stays solved.
   local back = warpScript(S.MAP_TEMPLE)
