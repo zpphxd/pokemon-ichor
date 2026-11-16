@@ -6,6 +6,8 @@
 #include "main.h"
 #include "fieldmap.h"
 #include "task.h"
+#include "text.h"
+#include "window.h"
 #include "pokemon.h"
 #include "ichor_save.h"
 #include "gba/m4a_internal.h"
@@ -286,6 +288,19 @@ K(TASK_SIZE, sizeof(struct Task))
 K(OFF_TASK_FUNC, offsetof(struct Task, func))
 K(OFF_TASK_ACTIVE, offsetof(struct Task, isActive))
 K(NUM_TASKS, NUM_TASKS)
+K(FONT_NORMAL, FONT_NORMAL)
+K(WINDOW_SIZE, sizeof(struct Window))
+K(OFF_WINDOW_WIDTH, offsetof(struct Window, window.width))
+K(OFF_WINDOW_HEIGHT, offsetof(struct Window, window.height))
+K(OFF_TEXT_CHAR, offsetof(struct TextPrinter, printerTemplate.currentChar))
+K(OFF_TEXT_WINDOW, offsetof(struct TextPrinter, printerTemplate.windowId))
+K(OFF_TEXT_FONT, offsetof(struct TextPrinter, printerTemplate.fontId))
+K(OFF_TEXT_X, offsetof(struct TextPrinter, printerTemplate.x))
+K(OFF_TEXT_Y, offsetof(struct TextPrinter, printerTemplate.y))
+K(OFF_TEXT_SPACING, offsetof(struct TextPrinter, printerTemplate.lineSpacing))
+K(OFF_TEXT_NEXT, offsetof(struct TextPrinter, nextPrinter))
+K(FONT_INFO_SIZE, sizeof(struct FontInfo))
+K(OFF_FONT_HEIGHT, offsetof(struct FontInfo, maxLetterHeight))
 
 // --- The current map's events, read from gMapHeader ------------------------------
 K(OFF_MAPHEADER_EVENTS, offsetof(struct MapHeader, events))

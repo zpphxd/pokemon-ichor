@@ -1,6 +1,6 @@
 # Shared host setup and verdicts. Source from the repository root.
 
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:$HOME/.local/bin:/opt/homebrew/bin:$PATH"
+export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:$PATH:$HOME/.local/bin:/opt/homebrew/bin"
 RUNNER=build/tools/ichor-mgba-headless
 
 harness_require() {

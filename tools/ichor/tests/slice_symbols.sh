@@ -19,6 +19,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
 SYMS="gMain gSaveBlock1Ptr gSaveBlock2Ptr gSaveBlock3Ptr gObjectEvents gPlayerAvatar gBackupMapLayout gBattleOutcome
 gBattleMons gParties gTasks gMapHeader gBattleTypeFlags gStringVar4 gSpecialVar_Result gSpecialVar_0x8004
 gSpecialVar_0x8008 gSpecialVar_0x8009 gMPlayInfo_BGM gSongTable gExperienceTables gSpeciesInfo
+sFirstTextPrinter gWindows gFonts Task_RushInjuredPokemonToCenter
 sSubstructOffsets sGlobalScriptContextStatus sGlobalScriptContext sLockFieldControls sCurrentMapMusic sFieldMessageBoxMode
 sStartMenuCursorPos sNumStartMenuActions sCurrentStartMenuActions gPaletteFade
 CB2_Overworld BattleMainCB2 CB2_MainMenu CB2_InitMainMenu CB2_NamingScreen CB2_StarterChoose CB2_WallClock

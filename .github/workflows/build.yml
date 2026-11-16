@@ -8,6 +8,11 @@ on:
       - upcoming
   pull_request:
   workflow_dispatch:
+    inputs:
+      upstream_compatibility:
+        description: 'Run inherited FireRed/LeafGreen diagnostics (not supported Ichor targets)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -55,7 +60,7 @@ jobs:
         run: make -j$(nproc) -O all
 
   build-firered:
-    if: github.actor != 'allcontributors[bot]'
+    if: github.actor != 'allcontributors[bot]' && github.event_name == 'workflow_dispatch' && inputs.upstream_compatibility
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -87,7 +92,7 @@ jobs:
         run: make firered -j$(nproc) -O
 
   build-leafgreen:
-    if: github.actor != 'allcontributors[bot]'
+    if: github.actor != 'allcontributors[bot]' && github.event_name == 'workflow_dispatch' && inputs.upstream_compatibility
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -224,7 +229,7 @@ jobs:
   build:
     if: github.actor != 'allcontributors[bot]'
     runs-on: ubuntu-24.04
-    needs: [build-emerald, build-firered, build-leafgreen, release, test, ichor]
+    needs: [build-emerald, release, test, ichor]
     steps:
       - name: All builds passed
         run: echo "All builds and tests passed."

@@ -38,6 +38,7 @@ COMMON_DATA struct EReaderData gEReaderData = {0};
 extern const u8 gMultiBootProgram_EReader_Start[];
 extern const u8 gMultiBootProgram_EReader_End[];
 
+#if !ICHOR_CUT_MULTIBOOT
 static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
 {
     volatile u16 backupIME = REG_IME;
@@ -52,6 +53,7 @@ static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
     eReader->size = size;
     eReader->data = data;
 }
+#endif
 
 static void EReader_Reset(struct EReaderData *eReader)
 {

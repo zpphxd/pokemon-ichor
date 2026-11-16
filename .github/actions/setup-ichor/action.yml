@@ -13,12 +13,12 @@ runs:
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends \
           binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi \
-          libpng-dev python3 pkg-config cmake liblua5.4-dev coreutils
+          libpng-dev python3 python3-venv pkg-config cmake liblua5.4-dev coreutils
     - uses: actions/cache@v4
       id: host-tools
       with:
         path: ${{ runner.temp }}/ichor-host
-        key: ichor-host-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.github/actions/setup-ichor/action.yml') }}
+        key: ichor-host-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.github/actions/setup-ichor/action.yml', 'tools/ichor/requirements.txt') }}
     - name: Build pinned host tools
       if: steps.host-tools.outputs.cache-hit != 'true'
       shell: bash
@@ -26,6 +26,8 @@ runs:
         set -euo pipefail
         prefix="$RUNNER_TEMP/ichor-host"
         mkdir -p "$prefix/bin"
+        python3 -m venv "$prefix/python"
+        "$prefix/python/bin/pip" install --requirement tools/ichor/requirements.txt
         GOBIN="$prefix/bin" go install github.com/huderlem/poryscript@d9bc56bc84db479dc14c872a5b65e1e773fce69b
         curl -fL --retry 3 \
           https://github.com/mgba-emu/mgba/archive/26b7884bc25a5933960f3cdcd98bac1ae14d42e2.tar.gz \
@@ -51,4 +53,5 @@ runs:
       shell: bash
       run: |
         echo "$RUNNER_TEMP/ichor-host/bin" >> "$GITHUB_PATH"
+        echo "$RUNNER_TEMP/ichor-host/python/bin" >> "$GITHUB_PATH"
         echo "MGBA_PREFIX=$RUNNER_TEMP/ichor-host" >> "$GITHUB_ENV"

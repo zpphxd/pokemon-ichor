@@ -262,7 +262,7 @@ def execute(suites, names, reasons, paths, profile, base, jobs):
     out.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
     env["PATH"] = (f"{env.get('DEVKITARM', '/opt/devkitpro/devkitARM')}/bin:"
-                   f"{Path.home()}/.local/bin:/opt/homebrew/bin:{env['PATH']}")
+                   f"{env['PATH']}:{Path.home()}/.local/bin:/opt/homebrew/bin")
     # A resumed/workaround run or a limited side-check list is not a full gate.
     for key in ("SLICE_FROM", "SLICE_WORKAROUNDS", "SLICE_OUT", "CHECKS_ONLY", "CHECKS_OUT"):
         env.pop(key, None)

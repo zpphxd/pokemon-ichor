@@ -4,11 +4,11 @@
 The playthrough logs each message as it appears (gStringVar4, after the game
 expanded {PLAYER} and the like, so this is exactly what was on screen):
 
-  SLICE TEXT <mapId> <x>,<y> <hex bytes in the game's charset>
+  SLICE TEXT <mapId> <x>,<y> <hex bytes> [<renderer width>,<renderer lines>]
 
 This prints each one decoded, then flags:
-  WIDE   a line wider than the field message box (216 px in the normal font)
-  TALL   a page with more than two lines before a \\p (the box shows two)
+  WIDE   a line wider than its renderer (field messages default to 216 px)
+  TALL   a page taller than its renderer (field messages default to two lines)
   HOENN  a Hoenn-era word left in the text
   WORD?  words not in the system dictionary or Ichor's own names, for a typo read
 
@@ -115,28 +115,35 @@ def main():
     decode = decoder()
     words = load_dictionary()
     seen, wide, tall, hoenn, unknown = set(), 0, 0, 0, {}
-    pat = re.compile(r" TEXT (\d+) (-?\d+,-?\d+) ([0-9A-F]+)")
+    pat = re.compile(r" TEXT (\d+) (-?\d+,-?\d+) ([0-9A-F]+)(?: (\d+),(\d+))?\s*$")
     with open(log, encoding="utf-8", errors="replace") as f:
         for raw in f:
             m = pat.search(raw)
             if not m:
+                if " TEXT " in raw:
+                    raise ValueError("malformed recorded text message")
                 continue
-            mapid, where, hexs = m.groups()
+            mapid, where, hexs, width, rows = m.groups()
+            max_width = int(width) if width is not None else MAX_WIDTH
+            max_rows = int(rows) if rows is not None else 2
+            if max_width <= 0 or max_rows <= 0:
+                raise ValueError("invalid recorded text renderer geometry")
             data = bytes.fromhex(hexs)
-            if data in seen:
+            key = (data, max_width, max_rows)
+            if key in seen:
                 continue
-            seen.add(data)
+            seen.add(key)
             text, lines = decode(data)
             group, num = int(mapid) >> 8, int(mapid) & 0xFF
             print(f"[map {group}.{num} at {where}] {text}")
             for line, w, _, _ in lines:
-                if w > MAX_WIDTH:
+                if w > max_width:
                     wide += 1
-                    print(f"WIDE {w}px > {MAX_WIDTH}: {line}")
+                    print(f"WIDE {w}px > {max_width}: {line}")
             # \l scrolls the box up a line, so only \n stacks a third line in a page
             for n, page in enumerate(text.split("\\p"), 1):
                 stacked = page.count("\\n") + 1
-                if stacked > 2:
+                if stacked > max_rows:
                     tall += 1
                     print(f"TALL page {n} has {stacked} lines: {page}")
             for h in HOENN:

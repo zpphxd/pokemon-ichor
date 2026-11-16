@@ -258,11 +258,50 @@ end
 
 -- The message on screen, as hex in the game's charset (gStringVar4 up to EOS).
 local lastText, lastSig
+local boundsSig, textBounds
 -- A cheap test for a new message: the first 24 bytes of gStringVar4.
 local function textSig()
   local t = {}
   for i = 0, 5 do t[#t + 1] = emu:read32(S.gStringVar4 + 4 * i) end
   return table.concat(t, ",")
+end
+-- Recovery text is logged after its full-screen printer may have disappeared.
+-- Capture that printer's actual geometry while its owning task is active.
+local function captureTextBounds(native)
+  if not S or not S.sFirstTextPrinter then return end
+  local sig = native:readRange(S.gStringVar4, 1024):match("^[^\255]*")
+  if sig == boundsSig then return end
+  boundsSig, textBounds = sig, nil
+  local recovery = false
+  for i = 0, S.NUM_TASKS - 1 do
+    local task = S.gTasks + i * S.TASK_SIZE
+    if native:read8(task + S.OFF_TASK_ACTIVE) ~= 0
+       and native:read32(task + S.OFF_TASK_FUNC) == (S.Task_RushInjuredPokemonToCenter | 1) then
+      recovery = true
+      break
+    end
+  end
+  if not recovery then return end
+  local printer, seen = native:read32(S.sFirstTextPrinter), {}
+  while printer ~= 0 do
+    assert(not seen[printer], "cycle in text printer list")
+    seen[printer] = true
+    local char = native:read32(printer + S.OFF_TEXT_CHAR)
+    if char >= S.gStringVar4 and char < S.gStringVar4 + 1024 then
+      local font = native:read8(printer + S.OFF_TEXT_FONT)
+      assert(font == S.FONT_NORMAL, "unsupported recovery text font")
+      local window = S.gWindows + native:read8(printer + S.OFF_TEXT_WINDOW) * S.WINDOW_SIZE
+      local width = native:read8(window + S.OFF_WINDOW_WIDTH) * 8 - native:read8(printer + S.OFF_TEXT_X)
+      local height = native:read8(window + S.OFF_WINDOW_HEIGHT) * 8 - native:read8(printer + S.OFF_TEXT_Y)
+      local fonts = native:read32(S.gFonts)
+      local glyphHeight = native:read8(fonts + font * S.FONT_INFO_SIZE + S.OFF_FONT_HEIGHT)
+      local spacing = native:read8(printer + S.OFF_TEXT_SPACING)
+      assert(glyphHeight > 0 and width > 0 and height >= glyphHeight, "invalid recovery text geometry")
+      textBounds = string.format(" %d,%d", width, math.floor((height + spacing) / (glyphHeight + spacing)))
+      return
+    end
+    printer = native:read32(printer + S.OFF_TEXT_NEXT)
+  end
 end
 function L.newText()
   local sig = textSig()
@@ -271,21 +310,23 @@ function L.newText()
 end
 function L.logText()
   lastSig = textSig()
-  local hex, a = {}, S.gStringVar4
+  local hex, bytes, a = {}, {}, S.gStringVar4
   for i = 0, 1023 do
     local b = emu:read8(a + i)
     if b == 0xFF then break end
     hex[#hex + 1] = string.format("%02X", b)
+    bytes[#bytes + 1] = string.char(b)
   end
   local s = table.concat(hex)
-  if s ~= lastText and #s > 0 then
-    lastText = s
+  local bounds = table.concat(bytes) == boundsSig and textBounds or ""
+  if s .. bounds ~= lastText and #s > 0 then
+    lastText = s .. bounds
     local x, y = L.pos()
     -- The console cuts a line near 1 KB, so a long speech (a herald's) goes out
     -- a few pages at a time: each TEXT line ends on a page break (\p).
     local chunk = {}
     local function flush()
-      if #chunk > 0 then log(string.format("TEXT %d %d,%d %s", L.mapId(), x, y, table.concat(chunk))) end
+      if #chunk > 0 then log(string.format("TEXT %d %d,%d %s%s", L.mapId(), x, y, table.concat(chunk), bounds)) end
       chunk = {}
     end
     local page = {}
@@ -1111,6 +1152,7 @@ function L.start(main)
   local realEmu = _G.emu
   callbacks:add("frame", function()
     if not co then return end
+    captureTextBounds(realEmu)
     local result = table.pack(coroutine.resume(co))
     while true do
       if not result[1] then

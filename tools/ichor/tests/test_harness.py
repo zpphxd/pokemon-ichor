@@ -60,6 +60,20 @@ class VerdictTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("missing ichor-nonexistent-tool", result.stderr)
 
+    def test_explicit_python_environment_precedes_fallback_tools(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            for subdir in ("selected", ".local/bin"):
+                executable = home / subdir / "python3"
+                executable.parent.mkdir(parents=True)
+                executable.write_text("#!/bin/bash\nexit 0\n")
+                executable.chmod(0o755)
+            result = subprocess.run(
+                ["bash", "-c", 'HOME="$2"; PATH="$2/selected:$PATH"; . "$1"; command -v python3',
+                 "test", str(HELPER), str(home)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0)
+            self.assertEqual(result.stdout.strip(), str(home / "selected/python3"))
+
     def test_no_unbounded_fallback(self):
         result = subprocess.run(
             ["bash", "-c", '. "$1"; PATH=/no-tools; harness_timeout', "test", str(HELPER)],
@@ -210,6 +224,50 @@ class StructuralTests(unittest.TestCase):
             self.assertEqual(check.budget(rom), 1)
             rom.write_bytes(b"")
             self.assertEqual(check.budget(rom), 1)
+
+
+class TextRendererTests(unittest.TestCase):
+    def report(self, records):
+        with tempfile.TemporaryDirectory() as directory:
+            log = Path(directory) / "run.log"
+            log.write_text(records)
+            return subprocess.run(
+                [sys.executable, str(ROOT / "tools/ichor/tests/slice_text_report.py"), str(log)],
+                capture_output=True, text=True)
+
+    def test_normal_field_three_lines_still_fail(self):
+        result = self.report("SIDE TEXT 1 0,0 BBFEBCFEBD\n")
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("TALL page 1 has 3 lines", result.stdout)
+
+    def test_recovery_uses_measured_window(self):
+        result = self.report("SIDE TEXT 1 0,0 BBFEBCFEBD 238,5\n")
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("0 tall pages", result.stdout)
+
+    def test_recovery_overflow_still_fails(self):
+        result = self.report("SIDE TEXT 1 0,0 BBFEBCFEBD 238,2\n")
+        self.assertIn("TALL page 1 has 3 lines", result.stdout)
+
+    def test_same_text_in_different_renderers_is_not_deduplicated(self):
+        result = self.report("SIDE TEXT 1 0,0 BBFEBCFEBD 238,5\nSIDE TEXT 1 0,0 BBFEBCFEBD\n")
+        self.assertIn("2 messages", result.stdout)
+        self.assertIn("1 tall pages", result.stdout)
+
+    def test_width_is_checked_against_recorded_geometry(self):
+        result = self.report("SIDE TEXT 1 0,0 BBBBBB 1,5\n")
+        self.assertIn("WIDE ", result.stdout)
+
+    def test_scrolling_still_fits_field_box(self):
+        result = self.report("SIDE TEXT 1 0,0 BBFEBCFABD\n")
+        self.assertIn("0 tall pages", result.stdout)
+
+    def test_invalid_geometry_is_an_error(self):
+        for bounds in ("0,5", "238,0", "wide,5"):
+            with self.subTest(bounds=bounds):
+                result = self.report(f"SIDE TEXT 1 0,0 BB {bounds}\n")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("recorded text", result.stderr)
 
 
 class ExecutionTests(unittest.TestCase):

@@ -145,6 +145,9 @@ SHA; manual dispatch uses `HEAD^`), not compare a clean revision to itself.
   not silent promotion to hard design rules.
 - `slice_text_report.py` measures decoded dialogue. WIDE/TALL findings fail
   orchestrated continuous/recovery checks; dictionary suggestions are review aids.
+  Normal field messages retain the 216 px/two-line limit. Full-screen whiteout
+  messages record their live printer/window geometry before the recovery task
+  ends; their larger window is not an exception based on English text.
 - The hard cartridge ceiling is 32 MiB. The harness measures the built file,
   not a historical estimate. Save constraints remain the engine's assertions
   and migration/persistence tests.
@@ -159,6 +162,14 @@ The normal game build requires ARM GCC/binutils, libpng, Poryscript, and its
 existing asset tools. Follow the handbook's devkitARM setup on macOS.
 Headless checks additionally need a host compiler, Lua-capable mGBA 0.10.5
 development headers/library, and `timeout` (or Homebrew `gtimeout`).
+Dex checks also need the pinned Python packages in `tools/ichor/requirements.txt`.
+Install them without changing system Python:
+
+```bash
+python3 -m venv build/ichor-python
+build/ichor-python/bin/python -m pip install -r tools/ichor/requirements.txt
+export PATH="$PWD/build/ichor-python/bin:$PATH"
+```
 
 `tools/ichor/tests/harness.sh` discovers Homebrew mGBA on macOS and system headers
 on Linux. Set `MGBA_PREFIX` for a custom installation. It rebuilds the small runner
@@ -169,6 +180,10 @@ The CI setup pins public mGBA and Poryscript revisions. It builds a Lua-enabled
 mGBA instead of assuming the distribution's frontend contains a Lua engine.
 Local and CI checks use the same entry point. CI retains reports, logs, and
 screenshots, never ROMs, saves, save states, or patches.
+The required game gate covers Emerald, release, native tests, and Ichor suites.
+Inherited FireRed/LeafGreen builds are explicitly opt-in manual diagnostics
+(`upstream_compatibility`); Ichor's save/flag contracts do not support those
+targets. Their skipped status is not a compatibility pass.
 
 The checked-in workflow is not evidence that a remote job passed. Branch
 protection is a repository setting and is not changed by these scripts.
