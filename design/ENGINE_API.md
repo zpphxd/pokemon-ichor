@@ -253,11 +253,16 @@ Current Spartan/Nebrel also loses there, with Nemecub left at 46 HP, not the
 older attempt's 2 HP. Spartan/Hipling's earlier four-level-14 loss and
 Spartan/Kynder's possible Metis loss remain unclosed.
 
-Mortal/Kynder wins both summit grunts but then times out awaiting field
-control. The native script context is WAITING after `dotrainerbattle`;
-the recorded movement native pointer can be stale and does not establish a
-movement deadlock. This scene-return failure remains unresolved, distinct
-from the pilot's battle losses. A separate resumed pre-Ione fixture verifies
+An earlier Mortal/Kynder run won both summit grunts but exhausted the
+harness's shared 20,000-frame scene deadline: the battles alone took 12,705
+and 6,525 frames. The native script context was normally WAITING after
+`dotrainerbattle`, not an established engine lock. `L.settle` now excludes
+nested battle time from its scene deadline; each battle retains its own
+30,000-frame limit. A resumed summit fixture completes both battles, the
+scene's flags and restored field control in 20,318 frames without raising
+either deadline. A fresh NEW GAME Mortal/Kynder attempt instead loses its
+first summit battle, so it does not certify continuous passage or an ending.
+A separate resumed pre-Ione fixture verifies
 native Hard Stone GIVE and Euboulos's actual coal replacement while the
 starter still holds its booster; that is menu evidence, not chapter coverage.
 These results do not establish the intended curve's balance. Other
@@ -274,6 +279,11 @@ screenshots and save states; every declared beat remains selectable.
 checks all 30 cursor transitions across one-, two-, three- and four-move grids.
 The isolated input model rejects moves into empty slots, including the
 three-move case where bottom-left must reach top-right through the top row.
+
+`build/tools/ichor-mgba-headless --script tools/ichor/tests/slice_scene_budget.lua --frames 2 --until "SCENE BUDGET done" pokeemerald.gba`
+models two 11,000-frame battles inside one scene, plus genuine scene locks
+with and without preceding battles. Battles must not consume the scene
+budget, and non-battle timeouts must still fail within their requested limit.
 
 ## 2. Relics (SYSTEMS §1, §2)
 
