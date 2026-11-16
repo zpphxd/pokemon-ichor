@@ -1,0 +1,53 @@
+name: Ichor build and headless tools
+description: Pinned Poryscript and Lua-capable mGBA for the Ubuntu Ichor build
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-go@v5
+      with:
+        go-version: '1.25.3'
+        cache: false
+    - name: Install system prerequisites
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi \
+          libpng-dev python3 pkg-config cmake liblua5.4-dev coreutils
+    - uses: actions/cache@v4
+      id: host-tools
+      with:
+        path: ${{ runner.temp }}/ichor-host
+        key: ichor-host-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.github/actions/setup-ichor/action.yml') }}
+    - name: Build pinned host tools
+      if: steps.host-tools.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        prefix="$RUNNER_TEMP/ichor-host"
+        mkdir -p "$prefix/bin"
+        GOBIN="$prefix/bin" go install github.com/huderlem/poryscript@d9bc56bc84db479dc14c872a5b65e1e773fce69b
+        curl -fL --retry 3 \
+          https://github.com/mgba-emu/mgba/archive/26b7884bc25a5933960f3cdcd98bac1ae14d42e2.tar.gz \
+          -o "$RUNNER_TEMP/mgba.tar.gz"
+        mkdir -p "$RUNNER_TEMP/mgba-source"
+        tar -xzf "$RUNNER_TEMP/mgba.tar.gz" --strip-components=1 -C "$RUNNER_TEMP/mgba-source"
+        cmake -S "$RUNNER_TEMP/mgba-source" -B "$RUNNER_TEMP/mgba-build" \
+          -DCMAKE_INSTALL_PREFIX="$prefix" -DCMAKE_INSTALL_LIBDIR=lib \
+          -DBUILD_QT=OFF -DBUILD_SDL=OFF -DBUILD_GL=OFF \
+          -DBUILD_SHARED=ON -DBUILD_STATIC=OFF \
+          -DENABLE_SCRIPTING=ON -DUSE_LUA=5.4 \
+          -DUSE_FFMPEG=OFF -DUSE_LIBZIP=OFF -DUSE_SQLITE3=OFF -DUSE_EDITLINE=OFF \
+          -DUSE_LZMA=OFF -DUSE_MINIZIP=OFF -DUSE_DISCORD_RPC=OFF
+        cmake --build "$RUNNER_TEMP/mgba-build" --parallel 2
+        cmake --install "$RUNNER_TEMP/mgba-build"
+        test -f "$prefix/include/mgba/internal/script/lua.h"
+        printf '%s\n' \
+          'mGBA=0.10.5@26b7884bc25a5933960f3cdcd98bac1ae14d42e2' \
+          'Poryscript=3.6.1@d9bc56bc84db479dc14c872a5b65e1e773fce69b' \
+          > "$prefix/versions.txt"
+    - name: Export host tools
+      shell: bash
+      run: |
+        echo "$RUNNER_TEMP/ichor-host/bin" >> "$GITHUB_PATH"
+        echo "MGBA_PREFIX=$RUNNER_TEMP/ichor-host" >> "$GITHUB_ENV"

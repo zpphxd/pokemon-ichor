@@ -28,17 +28,17 @@ OUT="${CHECKS_OUT:-build/slice_checks/}"
 [ -f "$ROM" ] || { echo "CHECK FAIL: $ROM missing (run make first)"; exit 1; }
 [ -f build/slice/states/08_after.ss ] && [ -f build/slice/symbols.lua ] \
   || { echo "CHECK FAIL: no save states through 08_after (run tools/ichor/tests/slice_playthrough.sh first; while a blocker stands, with SLICE_WORKAROUNDS=1)"; exit 1; }
-TIMEOUT=$(command -v gtimeout || command -v timeout)
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 mkdir -p "${OUT}shots"
 rm -f "${OUT}"shots/*.png
-RUNNER=build/tools/ichor-mgba-headless
-[ -x "$RUNNER" ] || { echo "CHECK FAIL: $RUNNER missing (run tools/ichor/smoke_test.sh once)"; exit 1; }
 
-CHECKS_OUT="$OUT" ${TIMEOUT:+$TIMEOUT 2400} "$RUNNER" --script tools/ichor/tests/slice_sidechecks.lua \
+CHECKS_OUT="$OUT" "$TIMEOUT" 2400 "$RUNNER" --script tools/ichor/tests/slice_sidechecks.lua \
   --frames 900000 --until "CHECK SUMMARY" "$ROM" > "${OUT}run.log" 2>&1
 code=$?
+harness_result CHECK "${OUT}run.log" "$code" "CHECK SUMMARY" || exit 1
 grep -o "CHECK \(RESULT\|BUG\|FAIL\|SUMMARY\|NOTE\|note\).*" "${OUT}run.log"
-python3 tools/ichor/tests/slice_text_report.py "${OUT}run.log" > "${OUT}text.txt" || true
+python3 tools/ichor/tests/slice_text_report.py "${OUT}run.log" > "${OUT}text.txt" || exit 1
 grep -E "^(WIDE|TALL|HOENN|WORD\?|SUMMARY)" "${OUT}text.txt"
 grep -q "CHECK SUMMARY" "${OUT}run.log" || { echo "CHECK FAIL: the checks did not finish (runner exit $code)"; exit 1; }
 if grep -q "CHECK \(BUG\|FAIL\)" "${OUT}run.log"; then exit 1; fi

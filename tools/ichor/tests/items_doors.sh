@@ -21,16 +21,8 @@ MODE="${3:-all}"
 ELF="${ROM%.gba}.elf"
 [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "ITEMS FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
 mkdir -p "$OUT" && rm -f "$OUT"/*.png
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
-TIMEOUT=$(command -v gtimeout || command -v timeout)
-
-RUNNER=build/tools/ichor-mgba-headless
-SRC=tools/ichor/mgba_headless.c
-if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
-  MGBA_PREFIX=$(brew --prefix mgba) || { echo "ITEMS FAIL: needs Homebrew mgba"; exit 1; }
-  mkdir -p build/tools
-  cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || exit 1
-fi
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 
 arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -Wno-trigraphs \
   -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -o "$OUT/consts.s" tools/ichor/tests/items_doors_consts.c \
@@ -50,6 +42,7 @@ LUA="$OUT/symbols.lua"
 ITEMS_OUT="$OUT/" ITEMS_SYMBOLS="$LUA" ITEMS_MODE="$MODE" "$TIMEOUT" 900 "$RUNNER" \
   --script tools/ichor/tests/items_doors.lua --frames 60000 --until "ITEMS done" "$ROM" > "$OUT/run.log" 2>&1
 code=$?
+harness_result ITEMS "$OUT/run.log" "$code" || exit 1
 grep -o "ITEMS \(ok\|FAIL\).*" "$OUT/run.log"
 CRASH="invalid address|illegal opcode|undefined instruction|bad (read|write)|abort|assertion"
 if grep -qiE "$CRASH" "$OUT/run.log"; then

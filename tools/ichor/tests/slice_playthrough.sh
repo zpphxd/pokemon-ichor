@@ -47,31 +47,23 @@ ROM="${1:-pokeemerald.gba}"
 ELF="${ROM%.gba}.elf"
 OUT="${SLICE_OUT:-build/slice/}"
 [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "SLICE FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
-TIMEOUT=$(command -v gtimeout || command -v timeout)
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 mkdir -p "${OUT}shots" "${OUT}states"
 # SLICE_FROM=<beat> resumes from that beat's save state (left by an earlier full run)
 if [ -z "${SLICE_FROM:-}" ]; then rm -f "${OUT}"shots/*.png "${OUT}"states/*.ss; fi
 
-# The Lua-capable headless runner (built by smoke_test.sh's rule).
-RUNNER=build/tools/ichor-mgba-headless
-SRC=tools/ichor/mgba_headless.c
-if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
-  MGBA_PREFIX=$(brew --prefix mgba) || { echo "SLICE FAIL: needs Homebrew mgba"; exit 1; }
-  mkdir -p build/tools
-  cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || exit 1
-fi
-
 tools/ichor/tests/slice_symbols.sh "$ELF" "${OUT}symbols.lua" || { echo "SLICE FAIL: no symbols"; exit 1; }
 
 start=$(date +%s)
-SLICE_OUT="$OUT" SLICE_SYMBOLS="${OUT}symbols.lua" ${TIMEOUT:+$TIMEOUT 2400} "$RUNNER" \
+SLICE_OUT="$OUT" SLICE_SYMBOLS="${OUT}symbols.lua" "$TIMEOUT" 2400 "$RUNNER" \
   --script tools/ichor/tests/slice_playthrough.lua --frames 900000 --until "SLICE done" "$ROM" > "${OUT}run.log" 2>&1
 code=$?
+harness_result SLICE "${OUT}run.log" "$code" || exit 1
 secs=$(( $(date +%s) - start ))
 
 grep -o "SLICE \(ok\|FAIL\|BUG\|FINDING\|NOTE\|BEAT\|BATTLE\|note\).*" "${OUT}run.log"
-python3 tools/ichor/tests/slice_text_report.py "${OUT}run.log" > "${OUT}text.txt" || true
+python3 tools/ichor/tests/slice_text_report.py "${OUT}run.log" > "${OUT}text.txt" || exit 1
 grep -E "^(WIDE|SUMMARY)" "${OUT}text.txt"
 
 fail=0

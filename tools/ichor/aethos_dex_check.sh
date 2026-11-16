@@ -7,14 +7,15 @@
 set -u
 cd "$(dirname "$0")/../.."
 ROM="${1:-pokeemerald.gba}"
-RUNNER=build/tools/ichor-mgba-headless
+. tools/ichor/tests/harness.sh
 [ -f "$ROM" ] || { echo "AETHOS FAIL: $ROM not found (run make first)"; exit 1; }
-[ -x "$RUNNER" ] || { echo "AETHOS FAIL: $RUNNER missing (run tools/ichor/smoke_test.sh once)"; exit 1; }
+harness_prepare || exit 1
 mkdir -p build/aethos_dex
 export AETHOS_EXPECT=build/aethos_dex/expect.lua
 python3 tools/dex/rom/gen.py --expect "$AETHOS_EXPECT" || exit 1
 LOG=build/aethos_dex/mgba.log
-TIMEOUT=$(command -v gtimeout || command -v timeout)
 "$TIMEOUT" 120 "$RUNNER" --script tools/ichor/tests/aethos_dex.lua --frames 600 --until "AETHOS done" "$ROM" >"$LOG" 2>&1
+code=$?
+harness_result AETHOS "$LOG" "$code" || exit 1
 grep "AETHOS" "$LOG" | grep -v "AETHOS done"
 grep -q "AETHOS PASS" "$LOG" || { echo "AETHOS CHECK FAIL. See $LOG"; exit 1; }

@@ -88,6 +88,13 @@ int main(int argc, char** argv) {
 	mScriptContextInit(&context);
 	mScriptContextAttachStdlib(&context);
 	struct mScriptEngineContext* lua = mScriptContextRegisterEngine(&context, mSCRIPT_ENGINE_LUA);
+	if (!lua) {
+		fprintf(stderr, "mGBA has no Lua engine; rebuild with scripting and Lua enabled\n");
+		mScriptContextDeinit(&context);
+		core->deinit(core);
+		free(video);
+		return 1;
+	}
 	mScriptContextAttachCore(&context, core);
 	mScriptContextAttachLogger(&context, &logger);
 	// In 0.10, mScriptContextLoadFile only loads a chunk; it has to be run too.

@@ -10,17 +10,8 @@ ROM="${1:-pokeemerald.gba}"
 [ -f "$ROM" ] || { echo "SMOKE FAIL: $ROM not found (run make first)"; exit 1; }
 mkdir -p build/smoke && rm -f build/smoke/*.png
 LOG=build/smoke/mgba.log
-TIMEOUT=$(command -v gtimeout || command -v timeout)
-
-# The bundled tools/mgba runner has no Lua engine, so build our own against
-# Homebrew's libmgba (see tools/ichor/mgba_headless.c).
-RUNNER=build/tools/ichor-mgba-headless
-SRC=tools/ichor/mgba_headless.c
-if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
-  MGBA_PREFIX=$(brew --prefix mgba 2>/dev/null) || { echo "SMOKE FAIL: needs Homebrew mgba (brew install mgba)"; exit 1; }
-  mkdir -p build/tools
-  cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || { echo "SMOKE FAIL: could not build $RUNNER"; exit 1; }
-fi
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 
 # Elaia's rows nearest the Route 1 seam must stay aethos-only (design/MAP_DESIGN.md).
 /usr/bin/python3 tools/ichor/maps/elaia.py --verify >/dev/null \
@@ -32,6 +23,7 @@ tools/ichor/tests/elaia_symbols.sh "${ROM%.gba}.elf" build/smoke/symbols.lua \
 
 "$TIMEOUT" 120 "$RUNNER" --script tools/ichor/smoke_test.lua --frames 12000 --until "SMOKE done" "$ROM" >"$LOG" 2>&1
 code=$?
+harness_result SMOKE "$LOG" "$code" || exit 1
 CRASH="invalid address|illegal opcode|undefined instruction|bad (read|write)|abort|assertion"
 if grep -qiE "$CRASH" "$LOG"; then
   echo "SMOKE FAIL: crash-like errors in $LOG"; grep -iE "$CRASH" "$LOG" | head -5; exit 1

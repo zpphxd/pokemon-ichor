@@ -27,6 +27,7 @@ Python 3 stdlib only. A full --all-ichor run takes a few seconds.
 """
 import argparse
 import hashlib
+import json
 import re
 import statistics
 import subprocess
@@ -831,6 +832,7 @@ def main():
     ap.add_argument("--root", help="tree to audit (default: this repo)")
     ap.add_argument("--ref", help="audit a git ref (a branch) instead; its maps are read with git archive")
     ap.add_argument("--markdown", action="store_true", help="print tables for design/MAP_AUDIT.md")
+    ap.add_argument("--json", action="store_true", help="machine-readable findings (same exit status)")
     ap.add_argument("--benchmark", action="store_true",
                     help="measure Emerald's routes at the upstream merge-base (or at --root)")
     ap.add_argument("--kinds", default="route,town,dungeon,interior", help="classes to report (comma-separated)")
@@ -841,7 +843,8 @@ def main():
     if ref:
         sha = subprocess.run(["git", "-C", str(REPO), "rev-parse", "--short", ref], check=True,
                              capture_output=True, text=True).stdout.strip()
-        print(f"{ref} at {sha}\n" if args.ref else f"upstream merge-base {sha}\n")
+        if not args.json:
+            print(f"{ref} at {sha}\n" if args.ref else f"upstream merge-base {sha}\n")
         with tempfile.TemporaryDirectory() as tmp:
             export_tree(ref, tmp)
             return run(Repo(tmp), args)
@@ -853,12 +856,20 @@ def run(repo, args):
         benchmark(repo)
         return 0
     results, groups = audit(repo, select(repo, args), tuple(args.kinds.split(",")))
-    (print_markdown if args.markdown else print_text)(results, groups)
+    if args.json:
+        findings = [{"map": m.name, "level": level, "message": message}
+                    for m, rows in results for level, message in rows]
+        findings += [{"map": name, "level": level, "message": message}
+                     for name, (_, rows) in groups.items() for level, message in rows]
+        print(json.dumps({"maps": len(results), "findings": findings}, indent=2))
+    else:
+        (print_markdown if args.markdown else print_text)(results, groups)
     fails = sum(1 for _, r in results for lv, _ in r if lv == "FAIL")
     fails += sum(1 for _, r in groups.values() for lv, _ in r if lv == "FAIL")
     warns = sum(1 for _, r in results for lv, _ in r if lv == "WARN")
     failing = sorted({m.name for m, r in results if any(lv == "FAIL" for lv, _ in r)})
-    print(f"\n{len(results)} map(s): {fails} hard shortfall(s) in {len(failing)} map(s), {warns} warning(s)")
+    if not args.json:
+        print(f"\n{len(results)} map(s): {fails} hard shortfall(s) in {len(failing)} map(s), {warns} warning(s)")
     return 1 if fails and not args.warn_only else 0
 
 

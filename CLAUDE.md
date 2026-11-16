@@ -2,6 +2,10 @@
 
 This repo is a fan ROM hack built on **pokeemerald-expansion 1.17.2**, the Emerald decompilation. Every agent working here reads this file first.
 
+The model-neutral entry point is [AGENTS.md](AGENTS.md). Shared task contracts,
+regression selection and evidence requirements live in
+[design/ENGINEERING.md](design/ENGINEERING.md).
+
 ## Sources of truth
 
 - **`design/PITCH.md`** is the design bible: story, world, characters, the Twelve, Pokémon, systems and roadmap. Read the relevant section before any content work. If a change contradicts the bible, raise it with the creative director (the main session) instead of improvising.
@@ -67,7 +71,9 @@ mgba pokeemerald.gba                   # play it
 
 ## Git
 
-- Work on `main`. `origin` is the private repo `zpphxd/pokemon-ichor`.
+- Work in the assigned checkout and branch (an isolated feature worktree when provided).
+  Never edit the main checkout from another worktree. `main` is the integration
+  branch; `origin` is the private repo `zpphxd/pokemon-ichor`.
 - Commit format:
 
   ```

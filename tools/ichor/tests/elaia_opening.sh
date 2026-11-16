@@ -20,17 +20,8 @@ ELF="${ROM%.gba}.elf"
 OUT=build/elaia_opening
 [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "ELAIA FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
 mkdir -p "$OUT"
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
-TIMEOUT=$(command -v gtimeout || command -v timeout)
-
-# The Lua-capable headless runner (built by smoke_test.sh's rule).
-RUNNER=build/tools/ichor-mgba-headless
-SRC=tools/ichor/mgba_headless.c
-if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
-  MGBA_PREFIX=$(brew --prefix mgba) || { echo "ELAIA FAIL: needs Homebrew mgba"; exit 1; }
-  mkdir -p build/tools
-  cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || exit 1
-fi
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 
 tools/ichor/tests/elaia_symbols.sh "$ELF" "$OUT/symbols.lua" || { echo "ELAIA FAIL: no symbols"; exit 1; }
 
@@ -45,7 +36,9 @@ for run in "0 win nebrel" "1 any kynder" "2 lose hipling"; do
   code=$?
   grep -o "ELAIA \(ok\|FAIL\|note\).*" "$dir/run.log" | sed "s/^/[$3] /"
   CRASH="invalid address|illegal opcode|undefined instruction|bad (read|write)|abort|assertion"
-  if grep -qiE "$CRASH" "$dir/run.log"; then
+  if ! harness_result ELAIA "$dir/run.log" "$code"; then
+    fails=1
+  elif grep -qiE "$CRASH" "$dir/run.log"; then
     echo "ELAIA FAIL [$3]: crash-like errors in $dir/run.log"; fails=1
   elif grep -q "ELAIA FAIL" "$dir/run.log" || ! grep -q "ELAIA done" "$dir/run.log"; then
     echo "ELAIA FAIL [$3]: see $dir/run.log (runner exit $code)"; fails=1

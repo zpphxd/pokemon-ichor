@@ -3,9 +3,14 @@ name: CI
 on:
   push:
     branches:
+      - main
       - master
       - upcoming
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 env:
   GAME_REVISION: 0
@@ -22,10 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install binutils
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+      - uses: ./.github/actions/setup-ichor
 
       - name: Cache build tools
         uses: actions/cache@v4
@@ -59,10 +61,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install binutils
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+      - uses: ./.github/actions/setup-ichor
 
       - name: Cache build tools
         uses: actions/cache@v4
@@ -94,10 +93,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install binutils
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+      - uses: ./.github/actions/setup-ichor
 
       - name: Cache build tools
         uses: actions/cache@v4
@@ -129,10 +125,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install binutils
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+      - uses: ./.github/actions/setup-ichor
 
       - name: Cache build tools
         uses: actions/cache@v4
@@ -166,10 +159,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install binutils
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+      - uses: ./.github/actions/setup-ichor
 
       - name: Cache build tools
         uses: actions/cache@v4
@@ -199,12 +189,42 @@ jobs:
           TEST: 1
         run: make -j$(nproc) check
 
+  ichor:
+    if: github.actor != 'allcontributors[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-ichor
+      - name: Pull request regression gate
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python3 tools/ichor/check.py --profile changed --base "$BASE_SHA" --jobs 2
+      - name: Integration and manual regression gate
+        if: github.event_name != 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.before }}
+        run: python3 tools/ichor/check.py --profile full --base "${BASE_SHA:-HEAD^}" --jobs 2
+      - name: Preserve diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ichor-diagnostics
+          if-no-files-found: warn
+          path: |
+            build/ichor-check/*.json
+            build/**/*.log
+            build/**/*.png
+
   # Gate job: satisfies the "build" branch protection rule.
   # Passes only when all parallel build/test jobs succeed.
   build:
     if: github.actor != 'allcontributors[bot]'
     runs-on: ubuntu-latest
-    needs: [build-emerald, build-firered, build-leafgreen, release, test]
+    needs: [build-emerald, build-firered, build-leafgreen, release, test, ichor]
     steps:
       - name: All builds passed
         run: echo "All builds and tests passed."
@@ -222,7 +242,6 @@ jobs:
   allcontributors:
     if: github.actor == 'allcontributors[bot]'
     runs-on: ubuntu-latest
-    needs: []
     steps:
       - name: Automatically pass for allcontributors
         run: echo "CI automatically passes for allcontributors" && exit 0

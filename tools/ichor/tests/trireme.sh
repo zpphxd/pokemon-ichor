@@ -20,26 +20,14 @@ ELF="${ROM%.gba}.elf"
 OUT=build/test_trireme
 [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "TRIREME FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
 mkdir -p "$OUT" && rm -f "$OUT"/*.png
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
-TIMEOUT=$(command -v gtimeout || command -v timeout)
-
-# The Lua-capable headless runner (built by smoke_test.sh's rule).
-RUNNER=build/tools/ichor-mgba-headless
-SRC=tools/ichor/mgba_headless.c
-if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
-  MGBA_PREFIX=$(brew --prefix mgba) || { echo "TRIREME FAIL: needs Homebrew mgba"; exit 1; }
-  mkdir -p build/tools
-  cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || exit 1
-fi
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 
 # The setup blob: assembled with the game's macros, linked into spare EWRAM past
 # the linker's last EWRAM symbol (near 0x02037480), ROM symbols from the ELF.
 BLOB_ADDR=0x0203F000
 ASM=tools/ichor/tests/trireme_setup.s
-tools/preproc/preproc -s "$ASM" charmap.txt \
-  | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - \
-  | tools/preproc/preproc -ie "$ASM" charmap.txt \
-  | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o "$OUT/setup.o" \
+harness_assemble "$ASM" "$OUT/setup.o" \
   || { echo "TRIREME FAIL: could not assemble $ASM"; exit 1; }
 arm-none-eabi-ld -Ttext=$BLOB_ADDR --just-symbols="$ELF" -o "$OUT/setup.elf" "$OUT/setup.o" \
   && arm-none-eabi-objcopy -O binary -j .text "$OUT/setup.elf" "$OUT/setup.bin" \
@@ -66,6 +54,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
 TRIREME_OUT="$OUT/" TRIREME_BLOB_ADDR=$BLOB_ADDR "$TIMEOUT" 1200 "$RUNNER" \
   --script tools/ichor/tests/trireme.lua --frames 160000 --until "TRIREME done" "$ROM" > "$OUT/run.log" 2>&1
 code=$?
+harness_result TRIREME "$OUT/run.log" "$code" || exit 1
 grep -o "TRIREME \(ok\|FAIL\).*" "$OUT/run.log"
 CRASH="invalid address|illegal opcode|undefined instruction|bad (read|write)|abort|assertion"
 if grep -qiE "$CRASH" "$OUT/run.log"; then

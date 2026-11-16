@@ -20,17 +20,8 @@ ELF="${ROM%.gba}.elf"
 OUT=build/temple_hermes
 [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "HERMES FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
 mkdir -p "$OUT" && rm -f "$OUT"/*.png
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
-TIMEOUT=$(command -v gtimeout || command -v timeout)
-
-# The Lua-capable headless runner (built by smoke_test.sh's rule).
-RUNNER=build/tools/ichor-mgba-headless
-SRC=tools/ichor/mgba_headless.c
-if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
-  MGBA_PREFIX=$(brew --prefix mgba) || { echo "HERMES FAIL: needs Homebrew mgba"; exit 1; }
-  mkdir -p build/tools
-  cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || exit 1
-fi
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 
 # Constants and offsets from the game's headers, and addresses from the ELF (static
 # symbols included), written as a Lua table the test loads.
@@ -52,6 +43,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
 "$TIMEOUT" 900 "$RUNNER" --script tools/ichor/tests/temple_hermes.lua --frames 200000 \
   --until "HERMES done" "$ROM" > "$OUT/run.log" 2>&1
 code=$?
+harness_result HERMES "$OUT/run.log" "$code" || exit 1
 grep -o "HERMES \(ok\|FAIL\).*" "$OUT/run.log"
 CRASH="invalid address|illegal opcode|undefined instruction|bad (read|write)|abort|assertion"
 if grep -qiE "$CRASH" "$OUT/run.log"; then

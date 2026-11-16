@@ -18,9 +18,8 @@
 ROM="${ROM:-pokeemerald.gba}"
 ELF="${ROM%.gba}.elf"
 BLOB_ADDR=0x0203F000
-export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
-TIMEOUT=$(command -v gtimeout || command -v timeout)
-RUNNER=build/tools/ichor-mgba-headless
+. tools/ichor/tests/harness.sh
+harness_prepare || exit 1
 
 # Engine addresses every check may need, besides slice_symbols.sh's.
 ENGINE_SYMS="gSaveBlock3Ptr gSpecialVar_0x8000 gSpecialVar_0x8001 gSpecialVar_0x8002 gSpecialVar_0x8003
@@ -35,12 +34,6 @@ engine_prepare() {
   local tag="$1" out="$2" consts="$3" asm="$4"
   [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "$tag FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
   mkdir -p "$out/shots" && rm -f "$out"/shots/*.png "$out"/*.png
-  if [ ! -x "$RUNNER" ] || [ tools/ichor/mgba_headless.c -nt "$RUNNER" ]; then
-    local prefix
-    prefix=$(brew --prefix mgba) || { echo "$tag FAIL: needs Homebrew mgba"; exit 1; }
-    mkdir -p build/tools
-    cc -O2 -I"$prefix/include" tools/ichor/mgba_headless.c -L"$prefix/lib" -lmgba -o "$RUNNER" || exit 1
-  fi
   tools/ichor/tests/slice_symbols.sh "$ELF" "$out/symbols.lua" >/dev/null \
     || { echo "$tag FAIL: slice_symbols.sh"; exit 1; }
 
@@ -62,10 +55,7 @@ engine_prepare() {
   } > "$out/engine_symbols.lua"
 
   [ -n "$asm" ] || return 0
-  tools/preproc/preproc -s "$asm" charmap.txt \
-    | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - \
-    | tools/preproc/preproc -ie "$asm" charmap.txt \
-    | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o "$out/setup.o" \
+  harness_assemble "$asm" "$out/setup.o" \
     || { echo "$tag FAIL: could not assemble $asm"; exit 1; }
   arm-none-eabi-ld -e 0 -Ttext=$BLOB_ADDR --just-symbols="$ELF" -o "$out/setup.elf" "$out/setup.o" \
     && arm-none-eabi-objcopy -O binary -j .text "$out/setup.elf" "$out/setup.bin" \
@@ -75,9 +65,10 @@ engine_prepare() {
 
 engine_run() {
   local tag="$1" out="$2" lua="$3" frames="$4" secs="$5"
-  ENGINE_OUT="$out/" ENGINE_TAG="$tag" ENGINE_BLOB_ADDR=$BLOB_ADDR ${TIMEOUT:+$TIMEOUT $secs} "$RUNNER" \
+  ENGINE_OUT="$out/" ENGINE_TAG="$tag" ENGINE_BLOB_ADDR=$BLOB_ADDR "$TIMEOUT" "$secs" "$RUNNER" \
     --script "$lua" --frames "$frames" --until "$tag done" "$ROM" > "$out/run.log" 2>&1
   local code=$?
+  harness_result "$tag" "$out/run.log" "$code" || exit 1
   grep -o "$tag \(ok\|FAIL\|NOTE\|BUG\).*" "$out/run.log"
   local crash="invalid address|illegal opcode|undefined instruction|bad (read|write)|abort|assertion"
   if grep -qiE "$crash" "$out/run.log"; then
