@@ -13,3 +13,4 @@ if [ "$(wc -c < build/player_battle/setup.bin)" -gt 4096 ]; then
   exit 1
 fi
 engine_run PLAYER_BATTLE build/player_battle tools/ichor/tests/player_battle.lua 12000 300
+python3 tools/ichor/tests/player_battle_render.py

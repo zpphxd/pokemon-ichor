@@ -8,9 +8,21 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 import player_sources as sources
+import sprites_lib as legacy
 
 
 class PlayerCanonicalSourceTests(unittest.TestCase):
+    def test_shared_legacy_writer_preserves_all_24_canonical_pngs(self):
+        paths = [name for name in sources.manifest()["assets"] if name.endswith(".png")]
+        self.assertEqual(len(paths), 24)
+        for name in paths:
+            path = sources.ROOT / name
+            with self.subTest(path=name):
+                before = path.read_bytes()
+                with self.assertRaisesRegex(ValueError, "Legacy repainting is retired"):
+                    legacy.save_indexed(None, None, path)
+                self.assertEqual(path.read_bytes(), before)
+
     def test_complete_native_coverage_and_palettes(self):
         self.assertEqual(sources.check(), {
             "pngs": 24, "source_frames": 186, "trainer_palettes": 2,

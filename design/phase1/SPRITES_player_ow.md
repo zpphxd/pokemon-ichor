@@ -78,7 +78,8 @@ The ROM check resolves 27 required image/palette arrays from the matching ELF,
 including concatenated walk/run atlases and compressed trainer fronts. Missing
 symbols, wrong sizes, out-of-ROM ranges and differing bytes fail explicitly.
 Legacy repaint commands below **must fail**, leaving all canonical PNGs/PALs
-unchanged. Shared `sprites_lib.save_indexed` guarding remains parent-owned.
+unchanged. The parent-installed shared `sprites_lib.save_indexed` guard also
+rejects all 24 player PNG paths without weakening the class/named guards.
 
 ```bash
 python3 tools/ichor/art/sprites_player.py --write
@@ -100,6 +101,10 @@ bash tools/ichor/tests/elaia_water.sh     # 13,448 / 320
 bash tools/ichor/tests/elaia_effects.sh   # 538 / 229
 ```
 
+The parent-installed `player_battle_render.py` gate additionally requires all
+24 captured trainer states to display every opaque native pixel unobscured,
+using the source's RGB5-expanded colors and the shared rendered-pixel matcher.
+
 The 736 paired bike captures keep identical OAM anchors and rendered lower
 contact planes. All opaque original vehicle/extras pixels match their expected
 hardware colors; source/VRAM checks also preserve original transparent pixels.
@@ -110,11 +115,14 @@ original bases, not that older compositor, define the full extras contract.
 
 Both genders also have natural player-controller walk/run captures in the
 bedroom (fixture-selected gender/running shoes), plus the nine-capture smoke.
-The source build uses 23,038,656 ROM bytes (68.66%). Full 1x/integer-zoom source
+The isolated player-child build used 23,038,656 ROM bytes (68.66%). Full 1x/integer-zoom source
 and actual-ROM comparisons accompany the handoff; old cards/pilots are immutable.
 Coordinator implementation clearance is not separate user artistic acceptance,
 runtime/controller eligibility, or whole-character/town completion. The marker
-pair and four intro/credits surfaces are explicitly parent-owned.
+pair and two seven-frame credits sources are explicitly parent-owned: four
+surfaces, not six. Credits' opposite-gender companion reuses the first four
+frames of those same sources; the separate normal-intro sheets are link-discarded
+and retained, not two additional active replacements.
 
 ## Historical source and review checkpoints
 

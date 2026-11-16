@@ -414,6 +414,7 @@ def hflip(a):
 def save_indexed(arr, pal: Palette, path):
     from human_classes import ASSETS
     from model_cast import is_owned
+    from player_sources import reject_legacy_write
 
     relative = os.path.relpath(os.path.realpath(path), os.path.realpath(ROOT)).replace(os.sep, "/")
     if any(entry["target"] == relative for entry in ASSETS):
@@ -426,6 +427,7 @@ def save_indexed(arr, pal: Palette, path):
             f"{path} is an image-model-led named-cast asset; "
             "use python3 tools/ichor/art/model_cast.py --write"
         )
+    reject_legacy_write(path)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     im = Image.fromarray(arr.astype(np.uint8), "P")
     im.putpalette(pal.flat())
