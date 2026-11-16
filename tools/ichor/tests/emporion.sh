@@ -47,7 +47,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
 tools/ichor/tests/slice_symbols.sh "$ELF" "$OUT/battle_symbols.lua" \
   || { echo "EMPORION FAIL: could not resolve the player battle controller"; exit 1; }
 
-/usr/bin/python3 tools/ichor/tests/emporion_grids.py > "$OUT/grids.lua" \
+python3 tools/ichor/tests/emporion_grids.py > "$OUT/grids.lua" \
   || { echo "EMPORION FAIL: could not write the walk grids"; exit 1; }
 
 "$TIMEOUT" 1500 "$RUNNER" --script tools/ichor/tests/emporion.lua --frames 400000 \

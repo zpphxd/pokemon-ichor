@@ -74,6 +74,11 @@ class VerdictTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout.strip(), str(home / "selected/python3"))
 
+    def test_wrappers_do_not_bypass_the_python_environment(self):
+        for wrapper in (ROOT / "tools/ichor").rglob("*.sh"):
+            with self.subTest(wrapper=wrapper.relative_to(ROOT)):
+                self.assertNotIn("/usr/bin/python3", wrapper.read_text())
+
     def test_no_unbounded_fallback(self):
         result = subprocess.run(
             ["bash", "-c", '. "$1"; PATH=/no-tools; harness_timeout', "test", str(HELPER)],

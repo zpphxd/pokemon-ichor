@@ -14,7 +14,7 @@ LOG=build/smoke/mgba.log
 harness_prepare || exit 1
 
 # Elaia's rows nearest the Route 1 seam must stay aethos-only (design/MAP_DESIGN.md).
-/usr/bin/python3 tools/ichor/maps/elaia.py --verify >/dev/null \
+python3 tools/ichor/maps/elaia.py --verify >/dev/null \
   || { echo "SMOKE FAIL: Elaia's seam rows (tools/ichor/maps/elaia.py --verify)"; exit 1; }
 
 # Addresses and constants the Lua reads the game's state with.
