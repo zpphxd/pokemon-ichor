@@ -217,8 +217,8 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     Real player fainting now records permanent falls, and HP healing, revival
     items and Revival Blessing respect them. The Urn now has view-only storage,
     and captures and deposits skip its jars. Non-defeat battle teardown now
-    transfers fallen partners when a usable
-    survivor remains, with party compaction and an acknowledged field notice.
+    transfers fallen partners when a usable survivor remains, with party
+    compaction and an acknowledged field notice.
     Capacity refusal preserves the fallen source and explains the problem.
     Total-party-loss recovery, complete overflow handling and run-ending
     enforcement still need integration before the choice can safely appear.

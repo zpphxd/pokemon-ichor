@@ -1101,8 +1101,8 @@ fainting, the locked Urn and run-ending behavior work together.
   recalculation, party healing and boxed-to-party conversion, including
   after release. `HealPokemon` and `HealBoxPokemon` leave the whole fallen
   record unchanged, including PP and status; modern party healing otherwise
-  heals every stored jar too. Item effects refuse fallen targets; battle revival items
-  explain why, and Revival Blessing's native search excludes them. Ordinary
+  heals every stored jar too. Item effects refuse fallen targets; battle
+  revival items explain why, and Revival Blessing's native search excludes them. Ordinary
   saves, including legacy Pokemon with the formerly unused bit set, retain
   ordinary healing and revival.
 - `Ichor_IsUrnBox(box)` identifies saved reserved jars even after release or
@@ -1128,8 +1128,8 @@ fainting, the locked Urn and run-ending behavior work together.
   prevent use or revival of a retained fallen partner.
 - `Ichor_StoreOathPartyFallen()` transfers all marked party partners before
   compacting and recounting the party. Its aggregate result is NOT_FALLEN
-  when no fallen partners were present, STORED when all pending partners fit, or FULL when
-  any remain. FULL can include partial success: retained sources stay intact,
+  when no fallen partners were present, STORED when all pending partners fit,
+  or FULL when any remain. FULL can include partial success: retained sources stay intact,
   and retrying after an ordinary jar becomes empty cannot duplicate records.
 - `Ichor_EndOathBattle(type, outcome)` applies that transfer to real,
   non-defeat battles only when a living, non-Egg player partner remains.
@@ -1153,6 +1153,12 @@ Total-party-loss recovery, field-poison cleanup, overflow service restrictions
 and storage-exit retry, and run-ending callers still need integration before
 the Oath can be enabled. In particular, do not expose enrollment while an
 all-party fall could enter an ordinary whiteout with no revivable partner.
+
+The continuation's conservative run-ending policy is to return to the title
+without overwriting the last manual save, not to auto-save a failed run or
+permanently retire the save. This was selected autonomously while the user
+was unavailable, not explicitly approved by the user. The actual defeat/load
+flow still needs implementation; do not treat this policy as delivered code.
 
 Native tests cover the entire map-section range, byte boundaries, invalid
 indices, once-only choice/transitions and migration. The actual-ROM save
