@@ -368,7 +368,8 @@ The altar scripts use `VAR_0x8004`–`0x8007` and `VAR_0x800A`–`0x800B`.
   - The War Horn (the VS Seeker, renamed).
   - The Acorn of Dodona (the Shiny Charm, renamed).
   - Hephaestus's Hammer, the Three-Flamed Torch, Triton's Conch and the Helm of Hades: flags the relics read (§2).
-  - The Hunter's Moon, Athena's Stylus and the Eyes of Argus are **flags only, hooks** for the Augur's Eye and the Scroll of Deeds.
+  - The Hunter's Moon and the Eyes of Argus remain **flags-only hooks**.
+    Athena's Stylus is read by the Scroll of Deeds to add open-quest hints.
 - **Gift III (Favor 100)** sets its flag and shows the sacred animal. **Hook:** the static encounter waits for the dex's species.
 
 ### Calls for story scripts
@@ -700,7 +701,9 @@ Nobody breaks up an Aphrodite.
 
 **By itself, the engine runs only the Anthesteria:** at night, Ghost-types come about three times as often on land. Everything else on a festival day is the town's script, and the main path never needs a festival (the Act II Dionysia is story time).
 
-**Not built:** `IchorSave.festivalsSeen`, and the Scroll of Deeds' calendar page.
+The Scroll of Deeds' calendar page reads this schedule and the current
+`VAR_DAYS`. **Not built:** `IchorSave.festivalsSeen` and the remaining festival
+world events.
 
 ### Theoxenia's tells (SYSTEMS §10)
 
@@ -930,8 +933,8 @@ and 24,576 bytes of uncompressed 4bpp graphics. Regenerate their indexed PNG wit
 All twelve **restored** flags unlock the last page and one Ability Patch.
 `FLAG_ICHOR_GOT_AMPHORA_PATCH` is set only after `giveitem` succeeds; pending
 and claimed rewards persist across CONTINUE. Forty-eight collected sherds alone
-do not qualify. Later-region world callers and Scroll of Deeds UI remain to
-integrate; the shelf records their canonical completed-amphora gates and clues,
+do not qualify. Later-region world callers remain to
+integrate; the shelf and Scroll of Deeds record their canonical restored-amphora gates and clues,
 not an automatically finished encounter.
 
 **Checks:** `tools/ichor/tests/ichor_dig.sh` (15 checks on Route 1) and `make check TESTS="Ichor:"` (`test/ichor_dig.c`: the rolls, rerolls, act tables and blessings).
@@ -965,3 +968,46 @@ These are independent of daily omen draws and do not reset on another day.
 shelf and exercises exact enemy levels/abilities/items, declined approaches,
 escape, whiteout, victory, actual ball captures, save/CONTINUE and live dusk
 boundaries. The battle-strength assist is not natural-level balance approval.
+
+## 9. Scroll of Deeds
+
+`src/ichor_deeds.c` reads existing saved receipts; opening the journal never
+sets a quest flag, restores an amphora, consumes an item or claims a reward.
+The ordinary and debug start menus use the cut PokéNav's slot for **DEEDS**
+when `ICHOR_CUT_POKENAV` is enabled, preserving the nine-entry action buffer.
+The trainer card and special-mode menu builders are unchanged. The script
+uses standard pottery-framed scrolling choices and field messages, with
+B returning to the contents and then releasing field controls.
+
+- `Ichor_DeedState(deed)` returns `ICHOR_DEED_HIDDEN`, `OPEN`, `DONE` or
+  `RECORDED`. Story ids 0–11 follow the first partner, Hearth Laurel, crossing,
+  Herald Laurel, Harvest Laurel, Mysteries night, stolen fragment, Kleon's
+  departure, revelation, letter, Mom's parcel and Daedalus's seven pages.
+  An existing completion receipt remains readable even if an older save
+  lacks the prerequisite receipt.
+- Amphora ids are `ICHOR_DEED_AMPHORA_START + myth` (16–27). No sherds means
+  hidden; four sherds remain an open restoration. Only a restored myth
+  reveals its lead. The three Act I capture/victory receipts mark their
+  leads done; later leads are **recorded**, not fictitiously completed.
+- `Ichor_BuildDeedsMenu` takes category 0 (contents), 1 (Act I) or 2
+  (amphorae) in `VAR_0x8004`, and the previous selection id in `VAR_0x800A`.
+  It queues separately allocated labels for `dynmultistack`, returns the
+  count in `VAR_RESULT`, and supplies the resumable **item id**, not row
+  number, in `VAR_0x8000`. Allocation failure cleans queued labels and
+  returns `ICHOR_DEEDS_MENU_ERROR`; the script displays an explicit error.
+- `Ichor_BufferDeed` takes a page id in `VAR_0x8004`, writes the message to
+  `gStringVar4`, preserves the id and returns TRUE. Hidden/invalid ids return
+  FALSE with an explanatory message. Athena's Stylus adds hints only to
+  open pages; Daedalus hints follow which of the first two pages is missing.
+- `ICHOR_DEED_HERMS` (40) reads `Ichor_CountAnointedHerms` and `HERM_COUNT`,
+  without counting post-game waystones as Aethos herms.
+- `ICHOR_DEED_CALENDAR` (41) shows the current month, day of three and
+  time until that month's next festival, using `Ichor_DaysToFestival`.
+  Maimakterion explicitly has no festival. This is a schedule, not festival
+  attendance or a claim that all twelve world events have been built.
+
+`test/ichor_deeds.c` covers story gates, pending gifts, all twelve myths,
+Stylus hints and two complete calendar years.
+`bash tools/ichor/tests/deeds.sh` exercises the real start-menu callback,
+empty pages, scrolling, read/back navigation, the retained trainer card,
+field-control release and save/reset/CONTINUE.

@@ -468,7 +468,16 @@ immediately when claimed, rather than requiring reentry. Dusk arrivals/expiry
 refresh safely on the live field, deferring during scripts, the Frozen Hour
 and occupied arrival tiles. The existing Korantha omen is now in reachable
 wheat outside the sealed Rharian field; the sacred fence remains intact.
-Other amphora leads and their Scroll of Deeds presentation remain unfinished.
+The start menu's DEEDS entry now opens the Scroll of Deeds, on the existing
+pottery frame without replacing the trainer card. Its Act I pages follow
+saved story receipts, including the Mysteries, Kleon's departure, the
+revelation, the letter home and Mom's pending gift. Daedalus's pages and
+anointed herms have collection counts. Amphora pages distinguish collected
+sherds, explicit restoration, recorded later-region clues and the three
+completed Act I encounters. Athena's Stylus adds hints to open quests.
+The calendar page uses the existing 36-day Attic year, including the
+festival-free storm month; it does not claim that all festival events exist.
+Other amphora world callers and later-chapter quest pages remain unfinished.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot
