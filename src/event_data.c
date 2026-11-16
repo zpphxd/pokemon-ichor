@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ichor_relics.h"
+#include "ichor_star_chart.h"
 #include "event_data.h"
 #include "pokedex.h"
 
@@ -228,7 +229,14 @@ u8 FlagSet(u16 id)
 {
     u8 *ptr = GetFlagPointer(id);
     if (ptr)
+    {
         *ptr |= 1 << (id & 7);
+        // Myth receipts place their star even before the chart is opened.
+        Ichor_StarFlagSet(id);
+        if (id >= FLAG_ICHOR_PAGES_START && id < FLAG_ICHOR_PAGES_START + 7
+            && Ichor_CountFlags(FLAG_ICHOR_PAGES_START, 7) == 7)
+            Ichor_PlaceStar(ICHOR_STAR_PLEIADES);
+    }
     return 0;
 }
 

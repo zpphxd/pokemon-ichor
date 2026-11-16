@@ -1139,3 +1139,5 @@ gSpecials::
 	def_special Ichor_GetTimeOfDay
 	def_special Ichor_BuildDeedsMenu
 	def_special Ichor_BufferDeed
+	def_special Ichor_PlaceConstellation
+	def_special Ichor_CountConstellations

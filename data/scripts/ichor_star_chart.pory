@@ -1,0 +1,7 @@
+script EventScript_IchorChartError {
+    lockall
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The chart cannot be opened. Try again after saving."))
+    releaseall
+    end
+}
