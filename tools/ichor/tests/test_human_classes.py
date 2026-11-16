@@ -1,16 +1,37 @@
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 import numpy as np
+from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import human_classes as humans
 import human_classes_render as rendered
+import sprites_lib as legacy
 
 
 class HumanClassTests(unittest.TestCase):
+    def test_legacy_write_guard_rejects_all_32_production_paths_without_changes(self):
+        self.assertEqual(len(humans.ASSETS), 32)
+        for entry in humans.ASSETS:
+            path = humans.ROOT / entry["target"]
+            with self.subTest(asset=entry["target"]):
+                before = humans.digest(path)
+                with self.assertRaisesRegex(ValueError, r"human_classes\.py --write"):
+                    legacy.save_indexed(np.zeros((1, 1), dtype=np.uint8), None, path)
+                self.assertEqual(humans.digest(path), before)
+
+    def test_legacy_write_guard_allows_unrelated_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "unrelated.png"
+            palette = legacy.Palette([("ink", (16, 16, 16))])
+            legacy.save_indexed(np.ones((8, 8), dtype=np.uint8), palette, path)
+            with Image.open(path) as image:
+                np.testing.assert_array_equal(np.array(image), np.ones((8, 8), dtype=np.uint8))
+
     def test_rendered_pixel_gate_rejects_even_one_obscured_pixel(self):
         pixels = np.arange(18, dtype=np.uint8).reshape((3, 2, 3)) + 10
         mask = np.ones((3, 2), dtype=bool)

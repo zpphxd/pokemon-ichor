@@ -21,7 +21,7 @@ reference is not counted as integrated production art.
 |---|---|---|
 | Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
 | Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
-| Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Image-model-led redesign in progress; healer's tenth bow is required |
+| Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Source-backed image-model-led adoption verified: all 199 field states, healer bow, 66 right mirrors and ten fronts; shared palettes and bindings preserved |
 | Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
 | Supplemental players | Two region-map markers and two seven-frame credits rider sheets | Parent-owned identity/source review in progress, separate from the core 24 player surfaces; credits' opposite-gender companion reuses the first four frames of the same seven-frame source |
 | Legacy players | 22 RS/FRLG PNGs and their existing compiled aliases | Preserve accepted identities/provenance; not a new character redesign |
@@ -38,6 +38,19 @@ these three fronts. Build and smoke pass (9 captures); linked ROM usage is
 23,094,568 bytes / 68.83%. The 22-source/208-frame legacy-player set and
 36 compiled link frames remain unchanged. This bounded parent checkpoint
 does not complete the other character groups or establish gameplay coverage.
+
+The next bounded checkpoint adopts the 32 class/townsfolk sources from
+`tools/ichor/art/sources/human_classes/`; reproduce them with
+`python3 tools/ichor/art/human_classes.py --write`. The shared legacy writer
+rejects exactly those 32 production paths before writing, without blocking
+unrelated assets. The combined parent build passes 79 targeted regressions,
+smoke's nine captures, and `tools/ichor/tests/human_classes.sh`: 1,971 engine
+checks and 275 complete, unobscured rendered-state comparisons. Linked ROM
+usage is 23,096,488 bytes / 68.83%; the accepted legacy-player sources and
+compiled aliases still pass. This brings adopted new-style character
+surfaces to 35, leaving the 24 core player, 29 named-cast and four supplemental
+surfaces in progress. These checks and parent implementation clearance do
+not imply separate user artistic acceptance or completion of any town.
 
 This character-only continuation does not restart Pokemon, prop, field-effect,
 tileset, UI or ball-art generation. Town-by-town production landing still
