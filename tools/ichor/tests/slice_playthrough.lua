@@ -928,6 +928,7 @@ local function shop(target, name)
   wait(20); tap(K.A)                                                  -- BUY
   L.waitUntil(function() return L.taskRunning("Task_BuyMenu") end, 600, name .. "'s item list")
   wait(40); shot(name .. "_wares")
+  if L.pilot and name == "general_stall" then L.pilot.buyMedicine() end
   tap(K.B)
   L.waitUntil(function() return L.taskRunning("Task_ShopMenu") end, 600, name .. "'s menu again")
   wait(20); tap(K.B)                                                  -- QUIT
@@ -1028,7 +1029,7 @@ beat("11_city", function()
   musicIs(S.MUS_EMPORION, "Emporion's theme in the city")
   shot("harbor_road")
   holdCity()
-  local relics, money = L.itemCount(S.ITEM_RELIC_COPPER), L.money()
+  local relics = L.itemCount(S.ITEM_RELIC_COPPER)
   visitAll({
     visitTalk("fork_sign", sign(EC .. "ForkSign")),
     visitTalk("nemea_sign", sign(EC .. "NemeaGateSign")),
@@ -1045,10 +1046,10 @@ beat("11_city", function()
     visitShop("kydon", npc(EC .. "Kydon")),
     visitShop("offerings_stall", npc(EC .. "OfferingsStallkeeper")),
     visit("pasion", npc(EC .. "Pasion"), function()
+      local money = L.money()
       talk(L.npc(EC .. "Pasion"), { shotBefore = "pasion" })              -- YES: sell him the obol
       L.check(L.money() == money + 600, string.format("Pasion pays 600 for a Bronze Obol (money %d -> %d)",
                                                       money, L.money()))
-      money = L.money()
     end),
     visitTalk("elder", npc(EC .. "Elder")),
     visitItem("the Honey under Kydon's awning", hidden("FLAG_HIDDEN_EMPORION_HONEY"), "FLAG_HIDDEN_EMPORION_HONEY",

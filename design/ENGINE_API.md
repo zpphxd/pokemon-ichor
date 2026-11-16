@@ -252,6 +252,19 @@ Agora verifies actual ownership changing from 2 to 7 and money from 4,440 to
 mode enabled across healing/menu walks as well as grass steps, and fails
 explicitly if it runs out of owned balls before recruiting a counter.
 
+At Emporion's actual general stall, the pilot now buys five Super Potions
+for temple preparation rather than merely viewing the wares. The shared
+purchase helper checks the native task's selected item and quantity, reads
+the actual decimal price quote (including any blessing discount), and
+verifies exact ownership and money changes before returning to the list.
+A rejected quantity, malformed quote or mismatched receipt fails explicitly;
+the pilot must not retry a completed transaction. Isolated models cover
+ordinary/discounted prices and those refusals. An explicit matching-ROM
+city fixture buys five real Super Potions: 2→7, with money 8,260→4,760 and
+a quoted cost of 3,500. It is not continuous or temple-win evidence.
+Pasion's separate 600 payment is checked against money immediately before
+his conversation, so a legitimate earlier purchase does not invalidate it.
+
 The earlier three-partner pilot reached `08_after` continuously from NEW GAME
 with Hero/Nebrel: 418,310 frames,
 117 battles. This strategy includes substantial wild training: the starter
@@ -304,6 +317,12 @@ starter reaches the boss at 17/52 HP after Philonides, with no usable medicine
 left. Reaching a real healer earlier does not supply medicine for the temple;
 the pilot still needs a legitimate preparation strategy. No balance change or
 Laurel-2 natural pass is inferred from these losses.
+With five actually purchased Super Potions, the next current-player-art
+NEW GAME Mortal/Kynder run wins Kerykos, receives Laurel 2 and reaches the
+Isthmus Gate (447,239 frames). It loses Kleon's second battle, an explicitly
+supported no-whiteout branch in SCRIPT.md beat 16 and the native script;
+the harness still stops at its win-only assertion. This is genuine Laurel-2
+coverage, not a rival win or a verified final gate endpoint.
 These results do not establish the intended curve's balance. Other
 starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.

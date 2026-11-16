@@ -439,6 +439,10 @@ The next continuous Mortal/Kynder attempt reaches Emporion, completes the
 Herald's Run with 73 of its 150 steps remaining and beats all three acolytes,
 then loses to Kerykos. This is not a Laurel-2 or gate-opening pass. The harness
 now checks the selected difficulty's step budget rather than assuming Hero.
+With subsequent real clinic recovery and five actually purchased Super
+Potions, Mortal/Kynder wins Kerykos, receives Laurel 2 and reaches the gate
+continuously. Its next stop is a win-only harness assertion on Kleon's
+authored, non-whiteout loss branch; final gate coverage is not yet claimed.
 The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.

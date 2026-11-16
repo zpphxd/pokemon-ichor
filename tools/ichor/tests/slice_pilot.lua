@@ -311,31 +311,56 @@ return function(L, starter)
     switchTarget, switched = nil, false
   end
 
-  function P.buyBalls()
-    L.expect(L.taskRunning("Task_BuyMenu"), "ball purchases start in Demeas's actual item list")
-    local balls, money = L.itemCount(S.ITEM_POKE_BALL), L.money()
-    L.expect(money >= 1000, "the natural pilot can afford five ordinary balls")
+  local function buyItems(item, quantity, down, expectedCost)
+    L.expect(L.taskRunning("Task_BuyMenu"), "purchases start in the actual item list")
+    local before, money = L.itemCount(item), L.money()
+    if expectedCost then L.expect(money >= expectedCost, "the natural pilot can afford the requested supplies") end
+    local task = L.taskAddress("Task_BuyMenu")
+    for _ = 1, down do L.tap(K.DOWN) end
     L.tap(K.A)
     L.waitUntil(function()
       if L.taskRunning("Task_BuyHowManyDialogueHandleInput") then return true end
       L.tap(K.A); L.wait(8)
       return false
     end, 900, "the native shop quantity picker")
-    for _ = 1, 4 do L.tap(K.UP) end
-    L.shot("natural_buy_five_balls")
+    L.expect(emu:read16(task + S.OFF_BUY_ITEM_ID) == item, "the real shop selected the requested item")
+    for _ = 2, quantity do L.tap(K.UP) end
+    L.expect(emu:read16(task + S.OFF_BUY_ITEM_COUNT) == quantity, "the real quantity picker selected the requested count")
+    L.shot("natural_buy_supplies")
     L.tap(K.A)
+    L.waitUntil(function() return not L.taskRunning("Task_BuyHowManyDialogueHandleInput") end, 300, "the native price quote")
+    local price = gameString(S.gStringVar3)
+    L.expect(#price > 0 and #price <= 6, "the native quote has a valid money width")
+    local cost = 0
+    for i = 1, #price do
+      local digit = price:byte(i) - S.CHAR_0
+      L.expect(digit >= 0 and digit <= 9, "the native quote contains only decimal digits")
+      cost = cost * 10 + digit
+    end
+    L.expect(cost > 0 and cost <= money, "the actual quoted purchase is affordable")
+    if expectedCost then L.expect(cost == expectedCost, "the native quote matches the expected ordinary-ball price") end
     L.waitUntil(function()
-      if L.itemCount(S.ITEM_POKE_BALL) == balls + 5 and L.money() == money - 1000 then return true end
+      if L.itemCount(item) == before + quantity and L.money() == money - cost then return true end
+      L.expect(not L.taskRunning("Task_BuyMenu"), "the shop returned without the requested supplies and quoted payment")
       L.tap(K.A); L.wait(8)
       return false
-    end, 1200, "five purchased balls and the real price deduction")
+    end, 1200, "the purchased supplies and exact quoted payment")
     L.waitUntil(function()
       if L.taskRunning("Task_BuyMenu") then return true end
       L.tap(K.A); L.wait(8)
       return false
     end, 900, "the item list after the purchase")
-    L.log(string.format("PILOT bought balls=%d->%d money=%d->%d", balls, L.itemCount(S.ITEM_POKE_BALL), money, L.money()))
-    L.shot("natural_paid_for_balls")
+    L.log(string.format("PILOT bought item=%d count=%d->%d money=%d->%d quoted_cost=%d",
+                        item, before, L.itemCount(item), money, L.money(), cost))
+    L.shot("natural_paid_for_supplies")
+  end
+
+  function P.buyBalls()
+    buyItems(S.ITEM_POKE_BALL, 5, 0, 1000)
+  end
+
+  function P.buyMedicine()
+    buyItems(S.ITEM_SUPER_POTION, 5, 2)
   end
 
   function P.chooseAction(trainer)

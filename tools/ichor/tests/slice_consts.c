@@ -390,6 +390,8 @@ K(TASK_SIZE, sizeof(struct Task))
 K(OFF_TASK_FUNC, offsetof(struct Task, func))
 K(OFF_TASK_ACTIVE, offsetof(struct Task, isActive))
 K(OFF_EVOLUTION_PARTY_ID, offsetof(struct Task, data[10])) // evolution_scene.c: tPartyId
+K(OFF_BUY_ITEM_ID, offsetof(struct Task, data[5])) // shop.c: tItemId
+K(OFF_BUY_ITEM_COUNT, offsetof(struct Task, data[1])) // shop.c: tItemCount
 K(NUM_TASKS, NUM_TASKS)
 
 // --- The current map's events, read from gMapHeader ------------------------------

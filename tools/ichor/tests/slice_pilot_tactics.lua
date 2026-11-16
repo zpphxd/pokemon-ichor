@@ -195,12 +195,32 @@ assert(choices[3] == 0, "skipping an unnecessary Yawn must not mark it as attemp
 pilot = battle({move(11, 40)}, 0, 0, 2)
 assert(not pilot.chooseAction(true), "Spartan must never request battle medicine")
 
-local function shop(funds)
+local function shop(funds, medicinePrice, wrongItem, quotedCost)
   local state, quantity, balls, money = "list", 1, 2, funds
+  local cursor, medicine = 0, 0
+  local function item() return ({1, 3, 2})[cursor + 1] end
+  local function price() return item() == 1 and 200 or medicinePrice or 700 end
   local pilot = createPilot({
-    S = {ITEM_POKE_BALL = 1}, K = {A = 1, UP = 2},
-    itemCount = function(item) assert(item == 1); return balls end,
+    S = {
+      ITEM_POKE_BALL = 1, ITEM_SUPER_POTION = 2,
+      OFF_BUY_ITEM_ID = 10, OFF_BUY_ITEM_COUNT = 2, gStringVar3 = 3000,
+      CHAR_0 = 48, EOS = 255,
+    }, K = {A = 1, UP = 2, DOWN = 3},
+    itemCount = function(id) assert(id == 1 or id == 2); return id == 1 and balls or medicine end,
     money = function() return money end,
+    taskAddress = function(task) assert(task == "Task_BuyMenu"); return 1000 end,
+    emu = {
+      read16 = function(_, address)
+        if address == 1010 then return wrongItem or item() end
+        assert(address == 1002); return quantity
+      end,
+      read8 = function(_, address)
+        local text = tostring(quotedCost or quantity * price())
+        local i = address - 3000 + 1
+        assert(i >= 1 and i <= #text + 1)
+        return i > #text and 255 or text:byte(i)
+      end,
+    },
     taskRunning = function(task)
       return (task == "Task_BuyMenu" and state == "list")
           or (task == "Task_BuyHowManyDialogueHandleInput" and state == "quantity")
@@ -208,13 +228,17 @@ local function shop(funds)
     tap = function(key)
       if key == 2 then
         assert(state == "quantity")
-        quantity = quantity + 1
+        quantity = quantity % math.min(999, math.floor(money / price())) + 1
+      elseif key == 3 then
+        assert(state == "list")
+        cursor = cursor + 1
       elseif state == "list" then state = "prompt"
       elseif state == "prompt" then state = "quantity"
       elseif state == "quantity" then state = "confirm"
       elseif state == "confirm" then
-        assert(quantity * 200 <= money, "modeled native shop rejects unaffordable purchases")
-        balls, money, state = balls + quantity, money - quantity * 200, "receipt"
+        assert(quantity * price() <= money, "modeled native shop rejects unaffordable purchases")
+        if item() == 1 then balls = balls + quantity else medicine = medicine + quantity end
+        money, state = money - quantity * price(), "receipt"
       elseif state == "receipt" then state = "list"
       else error("unexpected modeled shop input") end
     end,
@@ -225,7 +249,7 @@ local function shop(funds)
     expect = function(condition, message) assert(condition, message) end,
     wait = function() end, log = function() end, shot = function() end,
   }, 0)
-  return pilot, function() return state, balls, money end
+  return pilot, function() return state, balls, money, medicine end
 end
 local snapshot
 pilot, snapshot = shop(3000)
@@ -234,9 +258,34 @@ local state, balls, money = snapshot()
 assert(state == "list" and balls == 7 and money == 2000, "five balls must be paid for and return to the item list")
 pilot, snapshot = shop(999)
 local ok, failure = pcall(pilot.buyBalls)
-assert(not ok and tostring(failure):find("afford five ordinary balls", 1, true), "insufficient funds must fail explicitly")
+assert(not ok and tostring(failure):find("afford the requested supplies", 1, true), "insufficient funds must fail explicitly")
 state, balls, money = snapshot()
 assert(state == "list" and balls == 2 and money == 999, "unaffordable purchases must not press any menu buttons")
+for _, price in ipairs({700, 560}) do
+  pilot, snapshot = shop(5000, price)
+  pilot.buyMedicine()
+  local state, balls, money, medicine = snapshot()
+  assert(state == "list" and balls == 2 and medicine == 5 and money == 5000 - 5 * price,
+         "real medicine purchases must honor the native quote, including a blessing discount")
+end
+pilot, snapshot = shop(1399)
+ok, failure = pcall(pilot.buyMedicine)
+assert(not ok and tostring(failure):find("requested count", 1, true), "an unaffordable quantity must fail before confirming a smaller purchase")
+local _, _, money, medicine = snapshot()
+assert(money == 1399 and medicine == 0, "quantity failure must preserve money and ownership")
+pilot = shop(5000, 700, 3)
+ok, failure = pcall(pilot.buyMedicine)
+assert(not ok and tostring(failure):find("requested item", 1, true), "a changed item order must not buy the wrong supplies")
+pilot, snapshot = shop(5000, 700, nil, "-3500")
+ok, failure = pcall(pilot.buyMedicine)
+assert(not ok and tostring(failure):find("decimal digits", 1, true), "malformed native quotes must not be accepted")
+_, _, money, medicine = snapshot()
+assert(money == 5000 and medicine == 0, "invalid quotes must fail before payment")
+pilot, snapshot = shop(5000, 700, nil, 3501)
+ok, failure = pcall(pilot.buyMedicine)
+assert(not ok and tostring(failure):find("quoted payment", 1, true), "a mismatched receipt must stop without purchasing again")
+_, _, money, medicine = snapshot()
+assert(money == 1500 and medicine == 5, "receipt failure must not repeat the transaction")
 
 local expectedLearner, evolution, learnedFrom, incoming, lastKey = 1, false, {}, 99, nil
 pilot = createPilot({
