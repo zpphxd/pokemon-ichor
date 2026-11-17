@@ -1,0 +1,66 @@
+// Chthonia's house, of the Sown Men (SCRIPT.md Part 2, Thyrsa).
+// Ported from claude/world-act2-0a92e7. Chthonia (5,3) by her hearth, the dragon's tooth
+// hung over it; her grandson Udaios (6,4) with the family's spear-shaped birthmark. Lore
+// that leads to a gift: the Dragon Fang.
+
+mapscripts ThyrsaCity_SownHouse_MapScripts {}
+
+text ThyrsaCity_SownHouse_Name_Chthonia { "CHTHONIA" }
+text ThyrsaCity_SownHouse_Name_Udaios { "UDAIOS" }
+
+script ThyrsaCity_SownHouse_EventScript_Chthonia {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_SownHouse_Name_Chthonia)
+    if (flag(FLAG_ICHOR_GOT_DRAGON_FANG)) {
+        msgbox(format("Five families, and every one of us born with the spear. The ground remembers."))
+        release
+        end
+    }
+    msgbox(format("Kadmos killed a dragon on this hill and sowed its teeth in the ground.\p"
+                  "Armed men grew out of the furrows. They fought each other at once.\p"
+                  "Five were left standing. We're from the five."))
+    setspeaker(ThyrsaCity_SownHouse_Name_Udaios)
+    msgbox(format("Look! A spear! On my arm! Everyone in the family's got one!"))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("He shows a spear-shaped birthmark on his forearm."))
+    setspeaker(ThyrsaCity_SownHouse_Name_Chthonia)
+    msgbox(format("Every one of us, born with the spear. Kadmos's mark.\p"
+                  "My cousins went south, to Lakonia, generations back. They still drill there.\p"
+                  "They say the ground at their school still sprouts things, now and then.\p"
+                  "Here. Not the one on the wall. That's the dragon's tooth.\p"
+                  "This is its little brother."))
+    giveitem(ITEM_DRAGON_FANG)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_DRAGON_FANG)
+    }
+    release
+}
+
+script ThyrsaCity_SownHouse_EventScript_Udaios {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_SownHouse_Name_Udaios)
+    msgbox(format("Look! A spear! On my arm! Everyone in the family's got one!"))
+    release
+}
+
+// The hearth is Hestia's altar in this house (ENGINE_API §3), under the dragon's tooth.
+script ThyrsaCity_SownHouse_EventScript_Tooth {
+    lockall
+    msgbox(format("Over the hearth hangs a tooth, or something very like one, as long as your forearm."))
+    goto(EventScript_IchorHearth)
+}
+
+script ThyrsaCity_SownHouse_EventScript_ClayMen {
+    msgbox(format("Five little clay men, armed, on a stone shelf. The five who were left standing."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_SownHouse_EventScript_Spears {
+    msgbox(format("A rack of old spears. The shafts have been replaced many times. The heads never."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_SownHouse_EventScript_Walls {
+    msgbox(format("The wall is built of boulders bigger than you. The oldest stones in the city."), MSGBOX_SIGN)
+}

@@ -22,7 +22,7 @@
     {
       "direction": "up",
       "map": "MAP_THYRSA_CITY",
-      "offset": 0
+      "offset": -16
     }
   ],
   "object_events": [

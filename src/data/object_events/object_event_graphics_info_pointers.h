@@ -450,6 +450,16 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSam;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorApollo;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDemeter;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorManto;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorVintner;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorActor;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMask;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCrows;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMomThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorWomanThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthFThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidMThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMerchantThyrsa;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -893,6 +903,16 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_APOLLO] =             &gObjectEventGraphicsInfo_IchorApollo,
     [OBJ_EVENT_GFX_ICHOR_CAMI] =               &gObjectEventGraphicsInfo_IchorCami,
     [OBJ_EVENT_GFX_ICHOR_DEMETER] =            &gObjectEventGraphicsInfo_IchorDemeter,
+    [OBJ_EVENT_GFX_ICHOR_MANTO] = &gObjectEventGraphicsInfo_IchorManto,
+    [OBJ_EVENT_GFX_ICHOR_VINTNER] = &gObjectEventGraphicsInfo_IchorVintner,
+    [OBJ_EVENT_GFX_ICHOR_ACTOR] = &gObjectEventGraphicsInfo_IchorActor,
+    [OBJ_EVENT_GFX_ICHOR_MASK] = &gObjectEventGraphicsInfo_IchorMask,
+    [OBJ_EVENT_GFX_ICHOR_CROWS] = &gObjectEventGraphicsInfo_IchorCrows,
+    [OBJ_EVENT_GFX_ICHOR_MOM_THYRSA] = &gObjectEventGraphicsInfo_IchorMomThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA] = &gObjectEventGraphicsInfo_IchorWomanThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA] = &gObjectEventGraphicsInfo_IchorYouthFThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA] = &gObjectEventGraphicsInfo_IchorKidMThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA] = &gObjectEventGraphicsInfo_IchorMerchantThyrsa,
     // End of Ichor object events
 };
 

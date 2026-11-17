@@ -1,0 +1,73 @@
+// Eudora's house, and its courtyard (SCRIPT.md Part 2, Thyrsa).
+// Ported from claude/world-act2-0a92e7. Eudora (2,7) at her loom. Her son Hippias joined
+// the Titans as Gypsos, and before he went he buried something under the fig (4,4).
+//
+// Main has neither the branch's prophecy tablets nor Gypsos's homecoming on Route 7, so
+// the fig holds his father's arm-ring instead: dig it up (FLAG_ICHOR_EUDORA_FIG_DUG), and
+// Eudora gives it to you (the Power Bracer, FLAG_ICHOR_GOT_POWER_BRACER). Hippias's
+// sleeping object stays on the branch with the homecoming.
+
+mapscripts ThyrsaCity_EudoraHouse_MapScripts {}
+
+text ThyrsaCity_EudoraHouse_Name_Eudora { "EUDORA" }
+
+script ThyrsaCity_EudoraHouse_EventScript_Eudora {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_EudoraHouse_Name_Eudora)
+    if (flag(FLAG_ICHOR_GOT_POWER_BRACER)) {
+        msgbox(format("I mend the cloak. I unpick it. I mend it again.\p"
+                      "He'll come home to a cloak with no hole in it. That's the plan."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_EUDORA_FIG_DUG)) {
+        msgbox(format("His father's arm-ring. He buried it so he wouldn't have to wear it to war.\p"
+                      "He took the Titans' word over his father's bronze.\p"
+                      "Keep it. Somebody in this family ought to wear it into a fight."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_POWER_BRACER)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_POWER_BRACER)
+        }
+        release
+        end
+    }
+    msgbox(format("My son went off with the Titans. Hippias. They call him something else.\p"
+                  "Plaster. “Gypsos.” As if he were a wall.\p"
+                  "A seer told him he'd die in the next war. So he ran to them.\p"
+                  "They don't go to wars, he said. They stop them.\p"
+                  "Before he went, he buried something under the fig. I couldn't bear to dig."))
+    release
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_TurnedEarth {
+    lockall
+    if (flag(FLAG_ICHOR_EUDORA_FIG_DUG)) {
+        msgbox(format("The hole under the fig, filled in again. Somebody has patted it flat."))
+        releaseall
+        end
+    }
+    msgbox(format("The earth under the fig has been turned, and not by a plough.\p"
+                  "Something is buried here. Dig?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("{PLAYER} scraped the earth away with both hands…\p"
+                      "A bronze arm-ring, wrapped in a scrap of red cloak."))
+        setflag(FLAG_ICHOR_EUDORA_FIG_DUG)
+    }
+    releaseall
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Fig {
+    msgbox(format("An old fig, older than the house. Its figs are going purple."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Helmet {
+    msgbox(format("A bronze helmet of the city's levy, on a peg by the door. His father's.\p"
+                  "Not a speck of dust on it."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Loom {
+    msgbox(format("A soldier's red cloak, half mended on the loom. The tear is where a spear went in."),
+           MSGBOX_SIGN)
+}

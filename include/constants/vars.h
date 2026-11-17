@@ -49,7 +49,7 @@
 #define VAR_OBJ_GFX_ID_F           0x401F
 
 // general purpose vars
-#define VAR_UNUSED_0x4020                                0x4020 // Unused Var
+#define VAR_ICHOR_PINDAROS_LAURELS                       0x4020 // Ichor: highest laurel Pindaros has written a line for (Thyrsa); vanilla var because world-act2's bank vars 6-11 are full
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
 #define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip

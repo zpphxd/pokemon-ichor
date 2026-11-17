@@ -264,6 +264,105 @@ The play screen is **15×10 metatiles**. Judge every rule at that size.
 
 For a new biome, start with a **beauty shot**: a 240×160 mock-up of one typical screen at native resolution, drawn to these rules and approved before the tileset is cut. It does for a tileset what the concept does for a sprite.
 
+### 4.5 The Greek land: build from the ground up
+
+Every map is designed by two people at once: a ROM-hack mapper who makes places worth exploring, and someone who knows how a Greek landscape and city actually work. A map that is correct for play but could be anywhere has failed. **Design from the landform outward:** the land first, then the water, then where people would put roads, fields, walls and temples because of that land.
+
+**The land.**
+- **Limestone everywhere.** Pale gray-white rock, karst, scree slopes, cliffs that drop straight into the sea, caves and sinkholes. Mountains are steep and bare above the trees, and they come right down to the coast. Flat land is precious: small coastal plains, upland basins, river valleys.
+- **Water is scarce and therefore sacred.** Streams are seasonal (*cheimarroi*): dry beds of white stones most of the year, flowing after rain. Springs are holy places with a fountain house, a nymph's shrine or a temple. Wherever a map has water, give it a reason and a structure.
+- **Vegetation by height:**
+  - Coast: sand and shingle, tamarisk, Aleppo pine, reeds at river mouths.
+  - Lowland: olive groves on terraces, vineyards, wheat and barley, with a stone threshing floor (*aloni*) beside the fields.
+  - Hillside: *maquis* and *phrygana* (kermes oak, mastic, broom, thyme in low mounds), with cypress around shrines and graves.
+  - Mountain: fir and black pine, then bare rock and summer-burnt grass.
+- **Terraces are the signature of a lived-in hillside.** Dry-stone retaining walls (*pezoules*) step the slope into strips of olives or vines, with steps built into the wall. In Gen 3 terms these are ledges, stairs and wall tiles, and they give every farmed slope its height.
+- **Light.** High sun, bleached ground, short dark shadows, a deep blue sea. Keep land colors warm and dry, and the sea saturated.
+
+**The polis.** A Greek town is not a grid of houses around a square. It has parts, and each part has a place in the land:
+- **Akropolis:** the defensible high rock, holding the oldest temple, treasuries and the last refuge. Visible from everywhere in town, and reached by one ramp or stair through a gateway (*propylon*).
+- **Asty:** the lower town on the slopes below. Houses are **courtyard houses**: blank walls and one door onto the street, life inside around a court. Lanes are narrow, follow the contours, and turn to steps where it's steep.
+- **Agora:** the open civic heart on the flattest ground. It's lined by **stoas** (long colonnaded halls, one side open) and holds altars, herms, a fountain house, the council house and market stalls. Keep it open; the stoas frame it.
+- **Walls** follow the ridges and contours, not straight lines. They have towers at corners and gates where the roads come in. Gates are a big moment: a towered opening, often angled so attackers expose their unshielded side.
+- **Outside the walls:**
+  - the **necropolis**, lining the roads out of each gate with grave stelai, tombs and cypress
+  - the gymnasium and palaestra, near water and shade
+  - the stadium, set in a natural hollow
+  - the theater, cut into a hillside, facing a view
+  - farmsteads with a stone tower, and shepherd huts on the hills
+- **Sanctuaries** sit in a walled precinct (*temenos*), entered through a propylon. The **temple faces east**, and its **altar stands outside in front of it**, because the rites happen at the altar, not inside. Around them are votive offerings, treasuries and a sacred grove or spring.
+- **Harbors** have a mole or breakwater, ship sheds (long sloping roofed slips), warehouses, a market stoa and a harbor shrine.
+
+**Two kinds of town.** **Old hill towns grow organically:** stepped lanes, irregular blocks, and buildings fitted to the rock (Elaia, Thyrsa's Kadmeia, Delphoi). **Planned cities use the Hippodamian grid:** straight streets at right angles, blocks of equal size, and the agora as one or two blocks left open (Emporion, Astyra's harbor quarter, colonies). Choose deliberately for each town, and never mix the two at random.
+
+**Architecture.**
+- **Orders.** Doric is sturdy, with no base and plain capitals; it belongs to the mainland and the older temples. Ionic is slender, with volute capitals; it belongs to the islands and the east, and suits richer, later buildings. Corinthian is rare and late; save it for one showpiece at most.
+- **Materials.** Marble or limestone for sacred and civic buildings. Houses are mudbrick and timber on stone footings, with terracotta tile roofs. Island villages are whitewashed stone cubes with flat roofs; Ichor's blue domes are an accepted design-bible choice for island shrines only.
+- **Detail that says Greek:**
+  - antefixes along a roof edge, acroteria on gable peaks, a pediment
+  - herms at crossroads and stelai beside roads
+  - amphorae, pithoi (storage jars) half-sunk in courtyards
+  - a *louterion* basin at a sanctuary gate
+  - painted stoa walls, bronze tripods, olive-oil lamps
+- **Avoid anachronisms:** no Roman arches, vaults or domes on secular buildings, no glass windows, no chimneys, no fences of planks (use dry-stone walls or wattle).
+
+### 4.6 What makes a map incredible
+
+1. **One idea per map, said clearly.** Before placing a tile, write the map's sentence: "a switchback road up a gorge to a cliff-hung sanctuary", or "a harbor town under its akropolis". Every choice serves that sentence.
+2. **Approach and reveal.** Hide the best thing, then show it. Approach a temple from below, through a propylon or around a bend, so it appears whole in one screen. Let the player see the next town, peak or tower from far off (a landmark visible across the map) before they can reach it.
+3. **Compression and release.** Alternate narrow and open: a tight gorge or lane opens onto a plain, an agora or the sea. Never give the same width for a whole map.
+4. **Roads obey the land.** Paths follow contours, switch back up slopes, cross streams at fords or a single bridge, and squeeze through passes. A road that runs straight over a mountain is a placeholder.
+5. **Height you can feel.** Use at least two levels per map:
+   - terraces, a raised akropolis or plinth
+   - cliffs with a cast shadow
+   - stairs cut into rock
+   - ledges that make the return trip a shortcut
+6. **Loops and secrets.** A shortcut that opens back to the start, a hidden item behind a column or in an olive press, a nook only reachable from a ledge above, a cave mouth behind a waterfall. Reward curiosity at every dead end (`MAP_DESIGN.md`).
+7. **People in their place.** Put townsfolk where their life happens: the potter at the kiln, the farmer at the threshing floor, the priestess at the altar, the old men in the stoa's shade.
+8. **Each place has a signature motif no other map uses.** For example:
+   - Thyrsa's vineyards and theater cut into the hill
+   - Emporion's ship sheds
+   - Eleusa's forest of columns in the Telesterion
+   - the diolkos ship-track across the Isthmus
+9. **Read it at 15×10.** Every screen should be a good picture on its own: a landmark, a frame, a path through.
+
+**The map brief.** Every new or rebuilt map starts with this five-line brief, recorded in its map-design doc:
+- **Sentence:** the one idea.
+- **Land:** the ridges, the water, how it slopes.
+- **Settlement logic:** why things are where they are.
+- **Reveal:** the moment the player sees the best thing.
+- **Signature:** the one motif no other map has.
+
+### 4.7 Places: what each one is
+
+These are the real-world models the design bible names, and the features each map should draw on. Use them as references, not copies.
+
+| Place | Model | Build it around |
+|---|---|---|
+| Elaia, Kalliste | Cycladic hill village | Whitewashed cubes stepping down a slope, stepped lanes, the old olive in the square, a threshing floor, terraces, a dovecote |
+| Akti Town | Island harbor town | Mole and breakwater, ship sheds, fish market by the water, the Temple of Hestia on a rise above the harbor |
+| Aegina | Aegina: Aphaia, Mt Oros | Pine-wooded ridge, with the Doric temple looking out to sea; a conical peak with a summit altar |
+| Emporion City | Piraeus | Hippodamian grid, harbor stoas, ship sheds, herms at the crossroads, the Long Walls heading inland |
+| Route 4, Isthmus | Isthmus of Corinth | The **diolkos**, a paved ship-track hauling boats across, plus the Isthmian sanctuary |
+| Route 5 | Skironian Rocks | A cliff road high above the sea; Skiron's rock at the drop |
+| Eleusa | Eleusis | The Rharian wheat plain, the Kallichoron well, the Telesterion's forest of columns, the start of the Sacred Way |
+| Kithairon, Route 6 | Mt Kithairon, Eleutherai | Fir slopes, and a walled fort with square towers guarding the pass |
+| Thyrsa | Thebes | The Kadmeia citadel on its hill, gates in the walls, the Dirce spring, vineyards on the plain, the theater in a hillside |
+| Route 8, Kopais | Lake Kopais | A marsh lake of reeds, Mycenaean dikes and the island fortress of Gla |
+| Lebadeia | Trophonios's oracle | A gorge with the Herkyna spring and the oracle's cave |
+| Route 9 | The Schiste | The three-way crossroads in a narrow valley where Oedipus met Laius: a split road and a lone tomb |
+| Kirrha | Delphi's port | A sea of olive trees on the plain below the mountains |
+| Arkadia, Route 12 | Arcadia, Bassae, Lykaion | Remote pastoral uplands, a lone temple high on a mountain, cypress, shepherds' folds |
+| Styx Falls | Mavroneri, Mt Chelmos | A thin waterfall down a black cliff in a high bowl |
+| Nemea | Nemea | The Temple of Zeus on a valley floor, a stadium entered by a vaulted tunnel, the lion's cave in the hills |
+| Daphni, Route 15 | The Sacred Way | The road from Eleusa to the capital through a pass, with roadside shrines and tombs |
+| Astyra | Athens | The Akropolis rock with its Propylaia and Parthenon, the Areopagus, the agora with its stoas below, the Kerameikos with potters and graves at the Dipylon gate, the Pnyx, the Lyceum outside the walls, the harbor at Phaleron |
+| Kaldera | Santorini | Caldera cliffs with white towns on the rim, black-sand beaches, and a buried Bronze Age town in the ash |
+| Kythera | Paphos | The sea-foam rock where Aphrodite rose, her sanctuary, rose-gardens |
+| Knossa | Knossos | A many-storied palace: light wells, red columns that taper downward, horns of consecration, frescoed corridors that become the Labyrinth |
+| Lakonia | Sparta | Unwalled villages, the reedy Eurotas river, the wall of Taygetos behind, and the sanctuary of Artemis Orthia: austere, not grand |
+| Delphoi | Delphi | A terraced sanctuary on a steep slope: the Sacred Way zigzagging up past treasuries, the temple on its terrace, the theater above, the stadium at the top, the Castalian spring in the ravine, the shining Phaedriades cliffs, and the olive sea far below |
+
 ---
 
 ## 5. Order of work

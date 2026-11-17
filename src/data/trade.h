@@ -1326,6 +1326,26 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_MELIBEE,
         .level = 21,                         // SCRIPT.md: Critic is Lv 21
+    },
+    // Ichor: Euthykles the mask-maker's Prosomime walked into his workshop and won't
+    // leave; he'd trade it for something that laughs (Thyrsa, ported from
+    // claude/world-act2-0a92e7). Pathos: what you feel at the end of a tragedy.
+    [INGAME_TRADE_ICHOR_PATHOS] =
+    {
+        .nickname = _("PATHOS"),
+        .species = SPECIES_PROSOMIME,
+        .ivs = {18, 12, 16, 24, 26, 20},
+        .abilityNum = 0,
+        .otId = 30517,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x91,
+        .heldItem = ITEM_ORAN_BERRY,
+        .mailNum = -1,
+        .otName = _("EUTHYKL"),              // seven letters: the OT field holds no more
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GELASABLE,
+        .level = 24,                         // BALANCE.md: Thyrsa's wild band is 21-28
     }
 };
 

@@ -1,0 +1,119 @@
+// Pindaros's house: the poet's upper room (SCRIPT.md Part 2, Thyrsa; SYSTEMS.md §10).
+// Ported from claude/world-act2-0a92e7. Pindaros (8,4) keeps the old law of hospitality:
+// he heals the party every visit, offers a bed till a time you choose, and gives a line
+// (and a laurel sprig) for every laurel he hasn't heard about.
+//
+// Laurel lines: VAR_ICHOR_PINDAROS_LAURELS holds the highest laurel he has remarked on (0
+// until the first visit). On the first visit he hears about every laurel you hold at once;
+// after that, about each new one.
+// The bed is the engine's xenia rest (EventScript_IchorXeniaRest, data/scripts/ichor_world.pory).
+// Each new laurel's line comes with a Laurel Sprig, the engine's offering.
+// Kleon's later line waits for FLAG_ICHOR_KLEON_JOINED_TITANS (region B2).
+
+mapscripts ThyrsaCity_PindarosHouse_MapScripts {}
+
+text ThyrsaCity_PindarosHouse_Name_Pindaros { "PINDAROS" }
+
+script ThyrsaCity_PindarosHouse_EventScript_Pindaros {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+    msgbox(format("Sit. Eat first.\p"
+                  "Then tell me who you are. Not before."))
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+    copyvar(VAR_0x8007, VAR_ICHOR_PINDAROS_LAURELS)     // 0: the first visit
+    if (var(VAR_0x8007) == 0) {
+        msgbox(format("Bread, honey, figs. A poet's table. Light on meat, heavy on adjectives."))
+        msgbox(format("A Lakonian boy came by. Loud. Hungry. Three laurels in his belt.\p"
+                      "He wanted me to write him an ode. Now. In advance.\p"
+                      "I don't write in advance. Nobody should. It's bad luck, and worse poetry."))
+    }
+    call(ThyrsaCity_PindarosHouse_EventScript_LaurelLines)
+    if (var(VAR_RESULT) == FALSE && var(VAR_0x8007) != 0) {
+        setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+        msgbox(format("An ode isn't for the winner. It's for the people who weren't there.\p"
+                      "So they know. So it isn't forgotten. That's all glory is. Remembering."))
+    }
+    goto(ThyrsaCity_PindarosHouse_EventScript_Rest)
+}
+
+// VAR_RESULT TRUE if he heard about a laurel this time.
+script ThyrsaCity_PindarosHouse_EventScript_LaurelLines {
+    // VAR_0x8006: the highest laurel the player holds
+    setvar(VAR_0x8006, 0)
+    if (flag(FLAG_BADGE08_GET)) {
+        setvar(VAR_0x8006, 8)
+    } elif (flag(FLAG_BADGE07_GET)) {
+        setvar(VAR_0x8006, 7)
+    } elif (flag(FLAG_BADGE06_GET)) {
+        setvar(VAR_0x8006, 6)
+    } elif (flag(FLAG_BADGE05_GET)) {
+        setvar(VAR_0x8006, 5)
+    } elif (flag(FLAG_BADGE04_GET)) {
+        setvar(VAR_0x8006, 4)
+    } elif (flag(FLAG_BADGE03_GET)) {
+        setvar(VAR_0x8006, 3)
+    } elif (flag(FLAG_BADGE02_GET)) {
+        setvar(VAR_0x8006, 2)
+    } elif (flag(FLAG_BADGE01_GET)) {
+        setvar(VAR_0x8006, 1)
+    }
+    if (var(VAR_0x8006) <= VAR_ICHOR_PINDAROS_LAURELS) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    copyvar(VAR_ICHOR_PINDAROS_LAURELS, VAR_0x8006)
+    setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+    msgbox(format("A new leaf! Sit. Tell me how it went. Every blow."))
+    fadescreen(FADE_TO_BLACK)
+    delay(60)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+    msgbox(format("Good. Good. I'll write you a line. One line. That's all you get, for now.\p"
+                  "I write the whole ode when the race is over. Not before.\p"
+                  "Here. A sprig of laurel. A victor's crown starts somewhere."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_LAUREL_SPRIG)
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// The bed till a time you choose: the engine's xenia rest offers the hours still ahead.
+script ThyrsaCity_PindarosHouse_EventScript_Rest {
+    setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+    msgbox(format("Stay, if you like. The couch is made. It always is."))
+    call(EventScript_IchorXeniaRest)
+    if (var(VAR_RESULT) == TRUE) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} rested on the guest's couch."))
+    } else {
+        setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
+        msgbox(format("Then go well. The couch will wait."))
+    }
+    release
+}
+
+script ThyrsaCity_PindarosHouse_EventScript_Odes {
+    msgbox(format("Pigeonholes of odes, each tagged with a victor's name and the year.\p"
+                  "Some tags are blank. The races aren't over."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_PindarosHouse_EventScript_Desk {
+    msgbox(format("A wax tablet by the window. One line, crossed out eleven times."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_PindarosHouse_EventScript_Lyre {
+    msgbox(format("A lyre on a peg. The strings are new. The shell is very old."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_PindarosHouse_EventScript_Tripod {
+    msgbox(format("A bronze victor's tripod, won long ago for a song. He polishes it. He never mentions it."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_PindarosHouse_EventScript_GuestCouch {
+    msgbox(format("A couch made up with fresh linen, a red cloak folded on it. For whoever comes."), MSGBOX_SIGN)
+}

@@ -474,6 +474,18 @@ enum
     OBJ_EVENT_GFX_ICHOR_APOLLO,
     OBJ_EVENT_GFX_ICHOR_CAMI,
     OBJ_EVENT_GFX_ICHOR_DEMETER,
+    // Thyrsa, ported from claude/world-act2-0a92e7: Act II batch 1's walkers and objects
+    OBJ_EVENT_GFX_ICHOR_MANTO,
+    OBJ_EVENT_GFX_ICHOR_VINTNER,
+    OBJ_EVENT_GFX_ICHOR_ACTOR,
+    OBJ_EVENT_GFX_ICHOR_MASK,
+    OBJ_EVENT_GFX_ICHOR_CROWS,
+    // Thyrsa's townsfolk: main's folk walkers in the wine palette
+    OBJ_EVENT_GFX_ICHOR_MOM_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -637,6 +649,7 @@ enum
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA         0x1136 // Sam, Apollo, Cami and Demeter: true gold, white, green
+#define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1137 // Thyrsa: the folk palette with grape purples and wine red (Act II)
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

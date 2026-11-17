@@ -26,6 +26,9 @@ class AktiSpeciesSpriteTests(unittest.TestCase):
         mons = build.load_mons()
         for name in (*NAMES, "Galekit", "Eripip"):
             with self.subTest(species=name):
+                if name.lower() in build.concept_sourced():
+                    self.check_concept_sourced(name)
+                    continue
                 errors, warnings = [], []
                 built = build.build_mon(mons[name], errors, warnings)
                 self.assertEqual(errors, [])
@@ -75,6 +78,29 @@ class AktiSpeciesSpriteTests(unittest.TestCase):
                     .split("[SPECIES_", 1)[0]
                 )
                 self.assertEqual(int(re.search(r"\.iconPalIndex = (\d+)", entry)[1]), built.icon_pal)
+
+    def check_concept_sourced(self, name):
+        """Built from an approved concept (design/STYLE.md §3), not the painter."""
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("mon_from_concept", ROOT / "tools/ichor/art/mon_from_concept.py")
+        mfc = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mfc)
+        built = mfc.build(name.lower(), mfc.config(name.lower()))
+        source = ROOT / "design/dex/sprites" / name.lower()
+        target = ROOT / "graphics/pokemon" / name.lower()
+        for file, pixels in (("anim_front.png", built["front"]), ("back.png", built["back"]),
+                             ("icon.png", built["icon"]), ("overworld.png", built["follow"])):
+            with Image.open(source / file) as image:
+                self.assertEqual(image.mode, "P")
+                np.testing.assert_array_equal(np.asarray(image), pixels)
+                self.assertEqual(image.info.get("transparency"), 0)
+            self.assertEqual((source / file).read_bytes(), (target / file).read_bytes())
+        for file in ("normal.pal", "shiny.pal", "overworld_normal.pal", "overworld_shiny.pal"):
+            colors = build.read_jasc(source / file)
+            self.assertTrue(all(0 <= v <= 248 and v % 8 == 0 for c in colors for v in c))
+            self.assertEqual((source / file).read_bytes(), (target / file).read_bytes())
+        self.assertFalse(np.array_equal(built["front"][:64], built["front"][64:]))
+        self.assertFalse(np.array_equal(built["icon"][:32], built["icon"][32:]))
 
     def test_goat_miniatures_are_native_and_battle_grids_hand_finished(self):
         mons = build.load_mons()

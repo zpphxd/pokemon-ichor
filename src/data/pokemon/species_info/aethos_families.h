@@ -31,12 +31,12 @@
             "senses danger, it bolts, and it is said\n"
             "that no one has ever caught one that\n"
             "did not wish to be caught."),
-        .pokemonScale = 583,
-        .pokemonOffset = 15,
+        .pokemonScale = 656,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nebrel,
-        .frontPicSize = MON_COORDS_SIZE(48, 56),
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -45,15 +45,15 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Nebrel,
-        .backPicSize = MON_COORDS_SIZE(48, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Nebrel,
         .shinyPalette = gMonShinyPalette_Nebrel,
         .iconSprite = gMonIcon_Nebrel,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(2, 12, SHADOW_SIZE_S)
+        SHADOW(6, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nebrel)
         OVERWORLD(
             sPicTable_Nebrel,
@@ -89,7 +89,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_GRASS),
         .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_LEAF_GUARD },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Kladoe"),
         .cryId = CRY_STANTLER,
         .natDexNum = NATIONAL_DEX_KLADOE,
@@ -101,12 +101,12 @@
             "deer. Bark is creeping up its shins, and\n"
             "twigs sprout from its brow wherever its\n"
             "flight takes it."),
-        .pokemonScale = 312,
-        .pokemonOffset = 3,
+        .pokemonScale = 328,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kladoe,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -115,15 +115,15 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Kladoe,
-        .backPicSize = MON_COORDS_SIZE(48, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Kladoe,
         .shinyPalette = gMonShinyPalette_Kladoe,
         .iconSprite = gMonIcon_Kladoe,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(6, 12, SHADOW_SIZE_M)
+        SHADOW(-8, 12, SHADOW_SIZE_M)
         FOOTPRINT(Kladoe)
         OVERWORLD(
             sPicTable_Kladoe,
@@ -158,7 +158,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_GRASS),
         .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_LEAF_GUARD },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Daphnyad"),
         .cryId = CRY_SAWSBUCK,
         .natDexNum = NATIONAL_DEX_DAPHNYAD,
@@ -185,14 +185,14 @@
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Daphnyad,
         .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Daphnyad,
         .shinyPalette = gMonShinyPalette_Daphnyad,
         .iconSprite = gMonIcon_Daphnyad,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 12, SHADOW_SIZE_L)
+        SHADOW(-3, 12, SHADOW_SIZE_L)
         FOOTPRINT(Daphnyad)
         OVERWORLD(
             sPicTable_Daphnyad,
@@ -237,12 +237,12 @@
             "The other two doze in its warm ruff. It\n"
             "is said they dream of a gate they have\n"
             "not yet been asked to guard."),
-        .pokemonScale = 699,
-        .pokemonOffset = 17,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kynder,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -251,15 +251,15 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Kynder,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kynder,
         .shinyPalette = gMonShinyPalette_Kynder,
         .iconSprite = gMonIcon_Kynder,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-3, 12, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kynder)
         OVERWORLD(
             sPicTable_Kynder,
@@ -295,7 +295,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_STRONG_JAW },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Dikyon"),
         .cryId = CRY_HOUNDOOM,
         .natDexNum = NATIONAL_DEX_DIKYON,
@@ -307,8 +307,8 @@
             "go. One follows the trail while the other\n"
             "barks at its own shadow. Both take care\n"
             "not to wake the third."),
-        .pokemonScale = 284,
-        .pokemonOffset = 1,
+        .pokemonScale = 318,
+        .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Dikyon,
@@ -321,15 +321,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Dikyon,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         .palette = gMonPalette_Dikyon,
         .shinyPalette = gMonShinyPalette_Dikyon,
         .iconSprite = gMonIcon_Dikyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(1, 12, SHADOW_SIZE_M)
+        SHADOW(2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Dikyon)
         OVERWORLD(
             sPicTable_Dikyon,
@@ -363,7 +363,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_STRONG_JAW },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Pylakyon"),
         .cryId = CRY_ARCANINE,
         .natDexNum = NATIONAL_DEX_PYLAKYON,
@@ -377,10 +377,10 @@
             "have never all slept at once."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 334,
-        .trainerOffset = 6,
+        .trainerScale = 305,
+        .trainerOffset = 4,
         .frontPic = gMonFrontPic_Pylakyon,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -389,15 +389,15 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Pylakyon,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         .palette = gMonPalette_Pylakyon,
         .shinyPalette = gMonShinyPalette_Pylakyon,
         .iconSprite = gMonIcon_Pylakyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 12, SHADOW_SIZE_L)
+        SHADOW(-2, 12, SHADOW_SIZE_L)
         FOOTPRINT(Pylakyon)
         OVERWORLD(
             sPicTable_Pylakyon,
@@ -442,13 +442,13 @@
             "with its front hooves. Fishermen say a\n"
             "foal that splashes your boat brings you\n"
             "a calm sea home."),
-        .pokemonScale = 572,
-        .pokemonOffset = 15,
+        .pokemonScale = 656,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hipling,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -456,15 +456,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Hipling,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Hipling,
         .shinyPalette = gMonShinyPalette_Hipling,
         .iconSprite = gMonIcon_Hipling,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-2, 11, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Hipling)
         OVERWORLD(
             sPicTable_Hipling,
@@ -512,9 +512,9 @@
             "Islanders once harnessed them in pairs\n"
             "to carry messages across the sea, and\n"
             "they never lost one."),
-        .pokemonScale = 256,
+        .pokemonScale = 262,
         .pokemonOffset = 0,
-        .trainerScale = 260,
+        .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Thalamare,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -526,15 +526,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Thalamare,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Thalamare,
         .shinyPalette = gMonShinyPalette_Thalamare,
         .iconSprite = gMonIcon_Thalamare,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(12, 12, SHADOW_SIZE_M)
+        SHADOW(14, 12, SHADOW_SIZE_M)
         FOOTPRINT(Thalamare)
         OVERWORLD(
             sPicTable_Thalamare,
@@ -586,7 +586,7 @@
         .trainerScale = 347,
         .trainerOffset = 6,
         .frontPic = gMonFrontPic_Seismare,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -595,15 +595,15 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Seismare,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Seismare,
         .shinyPalette = gMonShinyPalette_Seismare,
         .iconSprite = gMonIcon_Seismare,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(8, 12, SHADOW_SIZE_L)
+        SHADOW(1, 12, SHADOW_SIZE_L)
         FOOTPRINT(Seismare)
         OVERWORLD(
             sPicTable_Seismare,
@@ -647,13 +647,13 @@
             "All day it calls out its own name from\n"
             "the olive branches. Epopoi, popoi! When\n"
             "startled, its tiny crest pops up."),
-        .pokemonScale = 1186,
-        .pokemonOffset = 22,
+        .pokemonScale = 1967,
+        .pokemonOffset = 24,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Epopoi,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -661,15 +661,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Epopoi,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Epopoi,
         .shinyPalette = gMonShinyPalette_Epopoi,
         .iconSprite = gMonIcon_Epopoi,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 10, SHADOW_SIZE_S)
+        SHADOW(4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Epopoi)
         OVERWORLD(
             sPicTable_Epopoi,
@@ -705,7 +705,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_KEEN_EYE, ABILITY_STENCH, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_BLACK,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Lophops"),
         .cryId = CRY_PIDGEOTTO,
         .natDexNum = NATIONAL_DEX_LOPHOPS,
@@ -717,13 +717,13 @@
             "bird for a mile comes to listen. None of\n"
             "them remembers what it said, only that\n"
             "they all agreed."),
-        .pokemonScale = 583,
+        .pokemonScale = 656,
         .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lophops,
-        .frontPicSize = MON_COORDS_SIZE(48, 56),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -731,15 +731,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Lophops,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Lophops,
         .shinyPalette = gMonShinyPalette_Lophops,
         .iconSprite = gMonIcon_Lophops,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(10, 9, SHADOW_SIZE_S)
+        SHADOW(4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Lophops)
         OVERWORLD(
             sPicTable_Lophops,
@@ -774,7 +774,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_KEEN_EYE, ABILITY_STENCH, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Basilops"),
         .cryId = CRY_PIDGEOT,
         .natDexNum = NATIONAL_DEX_BASILOPS,
@@ -786,13 +786,13 @@
             "the cliffs, and calls itself king. The\n"
             "smoke of altars drifts up into it, and\n"
             "it is said the gods go hungry."),
-        .pokemonScale = 288,
-        .pokemonOffset = 2,
+        .pokemonScale = 303,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Basilops,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(40, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -800,15 +800,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Basilops,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Basilops,
         .shinyPalette = gMonShinyPalette_Basilops,
         .iconSprite = gMonIcon_Basilops,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 11, SHADOW_SIZE_M)
+        SHADOW(-4, 12, SHADOW_SIZE_M)
         FOOTPRINT(Basilops)
         OVERWORLD(
             sPicTable_Basilops,
@@ -853,13 +853,13 @@
             "even its young. Its markings make it\n"
             "look as if it is laughing at you, and\n"
             "it usually is."),
-        .pokemonScale = 562,
-        .pokemonOffset = 16,
+        .pokemonScale = 833,
+        .pokemonOffset = 19,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Galekit,
-        .frontPicSize = MON_COORDS_SIZE(48, 32),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(64, 40),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -867,15 +867,15 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Galekit,
-        .backPicSize = MON_COORDS_SIZE(56, 40),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Galekit,
         .shinyPalette = gMonShinyPalette_Galekit,
         .iconSprite = gMonIcon_Galekit,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
-        SHADOW(-1, 9, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Galekit)
         OVERWORLD(
             sPicTable_Galekit,
@@ -910,7 +910,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_PICKUP, ABILITY_FRISK, ABILITY_PRANKSTER },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Gelasable"),
         .cryId = CRY_FURRET,
         .natDexNum = NATIONAL_DEX_GELASABLE,
@@ -922,13 +922,13 @@
             "lanes, laughing softly. Farmers leave\n"
             "it scraps at the crossroads, for it runs\n"
             "errands for the goddess of the night."),
-        .pokemonScale = 305,
-        .pokemonOffset = 5,
+        .pokemonScale = 437,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Gelasable,
-        .frontPicSize = MON_COORDS_SIZE(56, 48),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -936,15 +936,15 @@
         ),
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Gelasable,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Gelasable,
         .shinyPalette = gMonShinyPalette_Gelasable,
         .iconSprite = gMonIcon_Gelasable,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 10, SHADOW_SIZE_M)
+        SHADOW(-1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Gelasable)
         OVERWORLD(
             sPicTable_Gelasable,
@@ -977,7 +977,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_SHIELD_DUST, ABILITY_NONE, ABILITY_RUN_AWAY },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Kampillar"),
         .cryId = CRY_CATERPIE,
         .natDexNum = NATIONAL_DEX_KAMPILLAR,
@@ -988,13 +988,13 @@
             "Hold one up to the light and something\n"
             "flickers inside it. Old women in Elaia\n"
             "say it is a soul, waiting for wings."),
-        .pokemonScale = 687,
-        .pokemonOffset = 18,
+        .pokemonScale = 1082,
+        .pokemonOffset = 21,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kampillar,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1002,15 +1002,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Kampillar,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kampillar,
         .shinyPalette = gMonShinyPalette_Kampillar,
         .iconSprite = gMonIcon_Kampillar,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(7, 10, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kampillar)
         OVERWORLD(
             sPicTable_Kampillar,
@@ -1056,13 +1056,13 @@
             "It hangs perfectly still under its veil\n"
             "of silk. Lift the veil to peek, and it\n"
             "will not hatch until it forgives you."),
-        .pokemonScale = 583,
-        .pokemonOffset = 17,
+        .pokemonScale = 656,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nymveil,
-        .frontPicSize = MON_COORDS_SIZE(32, 56),
-        .frontPicYOffset = 7,
+        .frontPicSize = MON_COORDS_SIZE(32, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1070,15 +1070,15 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Nymveil,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         .palette = gMonPalette_Nymveil,
         .shinyPalette = gMonShinyPalette_Nymveil,
         .iconSprite = gMonIcon_Nymveil,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(0, 6, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nymveil)
         OVERWORLD(
             sPicTable_Nymveil,
@@ -1125,13 +1125,13 @@
             "while it sleeps. Its scales bring a sleep\n"
             "so deep that only a kiss is said to wake\n"
             "the sleeper."),
-        .pokemonScale = 335,
-        .pokemonOffset = 8,
+        .pokemonScale = 307,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Psychora,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 5,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1139,15 +1139,15 @@
         ),
         .frontAnimId = ANIM_SHRINK_GROW,
         .backPic = gMonBackPic_Psychora,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Psychora,
         .shinyPalette = gMonShinyPalette_Psychora,
         .iconSprite = gMonIcon_Psychora,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 8, SHADOW_SIZE_M)
+        SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Psychora)
         OVERWORLD(
             sPicTable_Psychora,
@@ -1180,7 +1180,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
         .abilities = { ABILITY_HARVEST, ABILITY_LEAF_GUARD, ABILITY_REGENERATOR },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Elaleaf"),
         .cryId = CRY_SEEDOT,
         .natDexNum = NATIONAL_DEX_ELALEAF,
@@ -1192,13 +1192,13 @@
             "stands up the next day. Every one in\n"
             "Elaia is said to come from a cutting of\n"
             "Athena's first tree."),
-        .pokemonScale = 728,
-        .pokemonOffset = 19,
+        .pokemonScale = 1311,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Elaleaf,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 6,
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1206,15 +1206,15 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Elaleaf,
-        .backPicSize = MON_COORDS_SIZE(48, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Elaleaf,
         .shinyPalette = gMonShinyPalette_Elaleaf,
         .iconSprite = gMonIcon_Elaleaf,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(4, 7, SHADOW_SIZE_S)
+        SHADOW(-7, 12, SHADOW_SIZE_S)
         FOOTPRINT(Elaleaf)
         OVERWORLD(
             sPicTable_Elaleaf,
@@ -1249,7 +1249,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
         .abilities = { ABILITY_HARVEST, ABILITY_LEAF_GUARD, ABILITY_REGENERATOR },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Elapling"),
         .cryId = CRY_NUZLEAF,
         .natDexNum = NATIONAL_DEX_ELAPLING,
@@ -1261,13 +1261,13 @@
             "by morning. It raises its branches like\n"
             "fists whenever it hears a fight, and it\n"
             "hears a lot of them."),
-        .pokemonScale = 325,
-        .pokemonOffset = 7,
+        .pokemonScale = 393,
+        .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Elapling,
-        .frontPicSize = MON_COORDS_SIZE(40, 56),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1275,15 +1275,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Elapling,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Elapling,
         .shinyPalette = gMonShinyPalette_Elapling,
         .iconSprite = gMonIcon_Elapling,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 9, SHADOW_SIZE_M)
+        SHADOW(-2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Elapling)
         OVERWORLD(
             sPicTable_Elapling,
@@ -1318,7 +1318,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
         .abilities = { ABILITY_HARVEST, ABILITY_STURDY, ABILITY_REGENERATOR },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Hierolive"),
         .cryId = CRY_TREVENANT,
         .natDexNum = NATIONAL_DEX_HIEROLIVE,
@@ -1332,11 +1332,11 @@
             "the first winners at the Games."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 392,
+        .trainerScale = 380,
         .trainerOffset = 8,
         .frontPic = gMonFrontPic_Hierolive,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1345,14 +1345,14 @@
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Hierolive,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Hierolive,
         .shinyPalette = gMonShinyPalette_Hierolive,
         .iconSprite = gMonIcon_Hierolive,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 11, SHADOW_SIZE_L)
+        SHADOW(6, 12, SHADOW_SIZE_L)
         FOOTPRINT(Hierolive)
         OVERWORLD(
             sPicTable_Hierolive,
@@ -1385,7 +1385,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_SWARM, ABILITY_BATTLE_ARMOR, ABILITY_DEFIANT },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Ergant"),
         .cryId = CRY_DURANT,
         .natDexNum = NATIONAL_DEX_ERGANT,
@@ -1396,13 +1396,13 @@
             "It carries ten times its own weight and\n"
             "never rests. Where one marches, a long\n"
             "line follows, all of them in step."),
-        .pokemonScale = 640,
-        .pokemonOffset = 16,
+        .pokemonScale = 983,
+        .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ergant,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1410,15 +1410,15 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Ergant,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Ergant,
         .shinyPalette = gMonShinyPalette_Ergant,
         .iconSprite = gMonIcon_Ergant,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(1, 11, SHADOW_SIZE_S)
+        SHADOW(4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Ergant)
         OVERWORLD(
             sPicTable_Ergant,
@@ -1464,13 +1464,13 @@
             "They fight in a line, shield beside\n"
             "shield. If one falls, the line closes so\n"
             "fast that no enemy ever sees the gap."),
-        .pokemonScale = 263,
-        .pokemonOffset = 2,
+        .pokemonScale = 277,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hoplomex,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 4,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1479,14 +1479,14 @@
         .frontAnimId = ANIM_LUNGE_GROW,
         .backPic = gMonBackPic_Hoplomex,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Hoplomex,
         .shinyPalette = gMonShinyPalette_Hoplomex,
         .iconSprite = gMonIcon_Hoplomex,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-3, 9, SHADOW_SIZE_M)
+        SHADOW(13, 12, SHADOW_SIZE_M)
         FOOTPRINT(Hoplomex)
         OVERWORLD(
             sPicTable_Hoplomex,
@@ -1531,13 +1531,13 @@
             "over a shoulder long ago, and that it has\n"
             "been trying to grow into a person ever\n"
             "since."),
-        .pokemonScale = 520,
-        .pokemonOffset = 15,
+        .pokemonScale = 1311,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Pebblith,
-        .frontPicSize = MON_COORDS_SIZE(40, 32),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1545,15 +1545,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Pebblith,
-        .backPicSize = MON_COORDS_SIZE(48, 32),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Pebblith,
         .shinyPalette = gMonShinyPalette_Pebblith,
         .iconSprite = gMonIcon_Pebblith,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-2, 9, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Pebblith)
         OVERWORLD(
             sPicTable_Pebblith,
@@ -1588,7 +1588,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
         .abilities = { ABILITY_ROCK_HEAD, ABILITY_STURDY, ABILITY_SAND_FORCE },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Cairnolith"),
         .cryId = CRY_BOLDORE,
         .natDexNum = NATIONAL_DEX_CAIRNOLITH,
@@ -1600,13 +1600,13 @@
             "a traveler leaves becomes part of it.\n"
             "By dawn it stands a little farther down\n"
             "the road than it did at dusk."),
-        .pokemonScale = 335,
-        .pokemonOffset = 6,
+        .pokemonScale = 358,
+        .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Cairnolith,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1614,15 +1614,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Cairnolith,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         .palette = gMonPalette_Cairnolith,
         .shinyPalette = gMonShinyPalette_Cairnolith,
         .iconSprite = gMonIcon_Cairnolith,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 11, SHADOW_SIZE_M)
+        SHADOW(-2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Cairnolith)
         OVERWORLD(
             sPicTable_Cairnolith,
@@ -1656,7 +1656,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
         .abilities = { ABILITY_ROCK_HEAD, ABILITY_STURDY, ABILITY_IRON_FIST },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Laolith"),
         .cryId = CRY_CONKELDURR,
         .natDexNum = NATIONAL_DEX_LAOLITH,
@@ -1670,11 +1670,11 @@
             "are said to have been built by its kind."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 295,
-        .trainerOffset = 3,
+        .trainerScale = 281,
+        .trainerOffset = 2,
         .frontPic = gMonFrontPic_Laolith,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 3,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1683,14 +1683,14 @@
         .frontAnimId = ANIM_LUNGE_GROW,
         .backPic = gMonBackPic_Laolith,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Laolith,
         .shinyPalette = gMonShinyPalette_Laolith,
         .iconSprite = gMonIcon_Laolith,
         .iconPalIndex = 0,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 10, SHADOW_SIZE_L)
+        SHADOW(-4, 12, SHADOW_SIZE_L)
         FOOTPRINT(Laolith)
         OVERWORLD(
             sPicTable_Laolith,
@@ -1735,13 +1735,13 @@
             "sleeps curled up in caves. Goatherds say\n"
             "a child who naps beside one cannot be\n"
             "found by anyone who means it harm."),
-        .pokemonScale = 687,
-        .pokemonOffset = 17,
+        .pokemonScale = 1270,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Eripip,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1749,15 +1749,15 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Eripip,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Eripip,
         .shinyPalette = gMonShinyPalette_Eripip,
         .iconSprite = gMonIcon_Eripip,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(4, 11, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Eripip)
         OVERWORLD(
             sPicTable_Eripip,
@@ -1792,7 +1792,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
         .abilities = { ABILITY_STATIC, ABILITY_CUTE_CHARM, ABILITY_HARVEST },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Kerazap"),
         .cryId = CRY_SKIDDO,
         .natDexNum = NATIONAL_DEX_KERAZAP,
@@ -1803,13 +1803,13 @@
             "The stubby horns on its head spark when\n"
             "it is pleased. It looks after any lost\n"
             "young Pokémon it finds on the hills."),
-        .pokemonScale = 531,
-        .pokemonOffset = 14,
+        .pokemonScale = 656,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerazap,
-        .frontPicSize = MON_COORDS_SIZE(48, 56),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1817,15 +1817,15 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Kerazap,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         .palette = gMonPalette_Kerazap,
         .shinyPalette = gMonShinyPalette_Kerazap,
         .iconSprite = gMonIcon_Kerazap,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(6, 11, SHADOW_SIZE_S)
+        SHADOW(6, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kerazap)
         OVERWORLD(
             sPicTable_Kerazap,
@@ -1871,13 +1871,13 @@
             "never runs out. When it shakes its\n"
             "fleece, thunderheads gather. It is said\n"
             "a god was raised on its milk."),
-        .pokemonScale = 302,
-        .pokemonOffset = 3,
+        .pokemonScale = 328,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerastorm,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1885,15 +1885,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Kerastorm,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         .palette = gMonPalette_Kerastorm,
         .shinyPalette = gMonShinyPalette_Kerastorm,
         .iconSprite = gMonIcon_Kerastorm,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(10, 11, SHADOW_SIZE_M)
+        SHADOW(2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Kerastorm)
         OVERWORLD(
             sPicTable_Kerastorm,
@@ -1926,7 +1926,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FLYING),
         .abilities = { ABILITY_CLOUD_NINE, ABILITY_KEEN_EYE, ABILITY_SNIPER },
-        .bodyColor = BODY_COLOR_BLUE,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Halcyling"),
         .cryId = CRY_WINGULL,
         .natDexNum = NATIONAL_DEX_HALCYLING,
@@ -1938,13 +1938,13 @@
             "winter sea. While it sleeps there, the\n"
             "wind holds its breath and the waves lie\n"
             "down flat."),
-        .pokemonScale = 687,
-        .pokemonOffset = 19,
+        .pokemonScale = 1166,
+        .pokemonOffset = 21,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Halcyling,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 7,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -1952,15 +1952,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Halcyling,
-        .backPicSize = MON_COORDS_SIZE(40, 40),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Halcyling,
         .shinyPalette = gMonShinyPalette_Halcyling,
         .iconSprite = gMonIcon_Halcyling,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-5, 6, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Halcyling)
         OVERWORLD(
             sPicTable_Halcyling,
@@ -2007,13 +2007,13 @@
             "and for seven days no wind dares blow.\n"
             "Sailors time their voyages by its\n"
             "nesting."),
-        .pokemonScale = 326,
-        .pokemonOffset = 10,
+        .pokemonScale = 347,
+        .pokemonOffset = 6,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Galenyon,
-        .frontPicSize = MON_COORDS_SIZE(56, 48),
-        .frontPicYOffset = 8,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2021,15 +2021,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Galenyon,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Galenyon,
         .shinyPalette = gMonShinyPalette_Galenyon,
         .iconSprite = gMonIcon_Galenyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 5, SHADOW_SIZE_M)
+        SHADOW(8, 12, SHADOW_SIZE_M)
         FOOTPRINT(Galenyon)
         OVERWORLD(
             sPicTable_Galenyon,
@@ -2074,12 +2074,12 @@
             "the sea god keeps it weak on purpose,\n"
             "so that no one notices what it will\n"
             "become."),
-        .pokemonScale = 546,
-        .pokemonOffset = 14,
+        .pokemonScale = 952,
+        .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ketofry,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2088,15 +2088,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Ketofry,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Ketofry,
         .shinyPalette = gMonShinyPalette_Ketofry,
         .iconSprite = gMonIcon_Ketofry,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-8, 12, SHADOW_SIZE_S)
+        SHADOW(-5, 12, SHADOW_SIZE_S)
         FOOTPRINT(Ketofry)
         OVERWORLD(
             sPicTable_Ketofry,
@@ -2158,14 +2158,14 @@
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Kynoketos,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Kynoketos,
         .shinyPalette = gMonShinyPalette_Kynoketos,
         .iconSprite = gMonIcon_Kynoketos,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
+        SHADOW(0, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Kynoketos)
         OVERWORLD(
             sPicTable_Kynoketos,
@@ -2209,13 +2209,13 @@
             "It hides in tide pools and pinches the\n"
             "toes of anyone who wades in. It is never\n"
             "sorry, and it never lets go first."),
-        .pokemonScale = 749,
-        .pokemonOffset = 18,
+        .pokemonScale = 999,
+        .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Karkipool,
-        .frontPicSize = MON_COORDS_SIZE(48, 40),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2223,15 +2223,15 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Karkipool,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Karkipool,
         .shinyPalette = gMonShinyPalette_Karkipool,
         .iconSprite = gMonIcon_Karkipool,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(1, 10, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Karkipool)
         OVERWORLD(
             sPicTable_Karkipool,
@@ -2278,13 +2278,13 @@
             "where it lurks beside the many-headed\n"
             "serpent. It is said a goddess set its\n"
             "ancestor among the stars for its loyalty."),
-        .pokemonScale = 268,
-        .pokemonOffset = 1,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Karkitox,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 3,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2293,14 +2293,14 @@
         .frontAnimId = ANIM_LUNGE_GROW,
         .backPic = gMonBackPic_Karkitox,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Karkitox,
         .shinyPalette = gMonShinyPalette_Karkitox,
         .iconSprite = gMonIcon_Karkitox,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(3, 10, SHADOW_SIZE_M)
+        SHADOW(-2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Karkitox)
         OVERWORLD(
             sPicTable_Karkitox,
@@ -2344,13 +2344,13 @@
             "Arrows and thorns slide off its gold fur.\n"
             "It is far too sure of itself, and it\n"
             "picks fights with lions twice its size."),
-        .pokemonScale = 416,
-        .pokemonOffset = 10,
+        .pokemonScale = 656,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nemecub,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2358,15 +2358,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Nemecub,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Nemecub,
         .shinyPalette = gMonShinyPalette_Nemecub,
         .iconSprite = gMonIcon_Nemecub,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(2, 11, SHADOW_SIZE_S)
+        SHADOW(3, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nemecub)
         OVERWORLD(
             sPicTable_Nemecub,
@@ -2401,7 +2401,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_FUR_COAT, ABILITY_NONE, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Nemeleon"),
         .cryId = CRY_PYROAR,
         .natDexNum = NATIONAL_DEX_NEMELEON,
@@ -2415,11 +2415,11 @@
             "not lend that to anyone."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 287,
-        .trainerOffset = 3,
+        .trainerScale = 264,
+        .trainerOffset = 1,
         .frontPic = gMonFrontPic_Nemeleon,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2427,15 +2427,15 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Nemeleon,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Nemeleon,
         .shinyPalette = gMonShinyPalette_Nemeleon,
         .iconSprite = gMonIcon_Nemeleon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 11, SHADOW_SIZE_L)
+        SHADOW(4, 12, SHADOW_SIZE_L)
         FOOTPRINT(Nemeleon)
         OVERWORLD(
             sPicTable_Nemeleon,
@@ -2479,13 +2479,13 @@
             "It wakes long before dawn and peeps at\n"
             "the dark sky, as if afraid it will miss\n"
             "the sun. It cannot bear to be late."),
-        .pokemonScale = 749,
-        .pokemonOffset = 18,
+        .pokemonScale = 1311,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Eopeep,
-        .frontPicSize = MON_COORDS_SIZE(32, 40),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2493,15 +2493,15 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Eopeep,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Eopeep,
         .shinyPalette = gMonShinyPalette_Eopeep,
         .iconSprite = gMonIcon_Eopeep,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(0, 10, SHADOW_SIZE_S)
+        SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Eopeep)
         OVERWORLD(
             sPicTable_Eopeep,
@@ -2548,13 +2548,13 @@
             "the sun is watching. It fights anything\n"
             "that steps into its yard, even its own\n"
             "reflection."),
-        .pokemonScale = 453,
+        .pokemonScale = 492,
         .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Alekrow,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2562,15 +2562,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Alekrow,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         .palette = gMonPalette_Alekrow,
         .shinyPalette = gMonShinyPalette_Alekrow,
         .iconSprite = gMonIcon_Alekrow,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(6, 10, SHADOW_SIZE_S)
+        SHADOW(-6, 12, SHADOW_SIZE_S)
         FOOTPRINT(Alekrow)
         OVERWORLD(
             sPicTable_Alekrow,
@@ -2604,7 +2604,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_FIELD),
         .abilities = { ABILITY_EARLY_BIRD, ABILITY_GUTS, ABILITY_DEFIANT },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Hoplektor"),
         .cryId = CRY_HAWLUCHA,
         .natDexNum = NATIONAL_DEX_HOPLEKTOR,
@@ -2616,13 +2616,13 @@
             "It is said its ancestor once slept on\n"
             "watch and was punished for it. It has\n"
             "not closed its eyes on duty since."),
-        .pokemonScale = 256,
+        .pokemonScale = 262,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hoplektor,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2630,15 +2630,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Hoplektor,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Hoplektor,
         .shinyPalette = gMonShinyPalette_Hoplektor,
         .iconSprite = gMonIcon_Hoplektor,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 11, SHADOW_SIZE_M)
+        SHADOW(-2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Hoplektor)
         OVERWORLD(
             sPicTable_Hoplektor,
@@ -2683,13 +2683,13 @@
             "and it cannot keep one. Old herders say\n"
             "the reeds by its pasture learned to talk\n"
             "from listening to it."),
-        .pokemonScale = 382,
-        .pokemonOffset = 9,
+        .pokemonScale = 492,
+        .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Onotis,
-        .frontPicSize = MON_COORDS_SIZE(48, 56),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2697,15 +2697,15 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Onotis,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Onotis,
         .shinyPalette = gMonShinyPalette_Onotis,
         .iconSprite = gMonIcon_Onotis,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(6, 10, SHADOW_SIZE_S)
+        SHADOW(4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Onotis)
         OVERWORLD(
             sPicTable_Onotis,
@@ -2740,7 +2740,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_OWN_TEMPO, ABILITY_HEAVY_METAL, ABILITY_GOOD_AS_GOLD },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Midonos"),
         .cryId = CRY_MUDSDALE,
         .natDexNum = NATIONAL_DEX_MIDONOS,
@@ -2752,13 +2752,13 @@
             "it is always hungry. It hides its huge\n"
             "ears under a cap and kicks anyone who\n"
             "stares at them."),
-        .pokemonScale = 263,
-        .pokemonOffset = 2,
+        .pokemonScale = 281,
+        .pokemonOffset = 1,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Midonos,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2766,15 +2766,15 @@
         ),
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Midonos,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Midonos,
         .shinyPalette = gMonShinyPalette_Midonos,
         .iconSprite = gMonIcon_Midonos,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 9, SHADOW_SIZE_M)
+        SHADOW(5, 12, SHADOW_SIZE_M)
         FOOTPRINT(Midonos)
         OVERWORLD(
             sPicTable_Midonos,
@@ -2818,13 +2818,13 @@
             "It swoops on picnics and snatches food\n"
             "from the plate before it reaches a mouth.\n"
             "What it cannot carry off, it spoils."),
-        .pokemonScale = 609,
-        .pokemonOffset = 16,
+        .pokemonScale = 983,
+        .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Harpeck,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2832,15 +2832,15 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Harpeck,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Harpeck,
         .shinyPalette = gMonShinyPalette_Harpeck,
         .iconSprite = gMonIcon_Harpeck,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-4, 10, SHADOW_SIZE_S)
+        SHADOW(6, 12, SHADOW_SIZE_S)
         FOOTPRINT(Harpeck)
         OVERWORLD(
             sPicTable_Harpeck,
@@ -2886,12 +2886,12 @@
             "It arrives as a sudden squall. When the\n"
             "wind drops, every loaf in the market is\n"
             "gone, and what is left smells awful."),
-        .pokemonScale = 256,
+        .pokemonScale = 262,
         .pokemonOffset = 0,
-        .trainerScale = 264,
-        .trainerOffset = 1,
+        .trainerScale = 256,
+        .trainerOffset = 0,
         .frontPic = gMonFrontPic_Harpelle,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2901,14 +2901,14 @@
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Harpelle,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Harpelle,
         .shinyPalette = gMonShinyPalette_Harpelle,
         .iconSprite = gMonIcon_Harpelle,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-9, 12, SHADOW_SIZE_M)
+        SHADOW(2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Harpelle)
         OVERWORLD(
             sPicTable_Harpelle,
@@ -2941,7 +2941,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FIELD),
         .abilities = { ABILITY_SHELL_ARMOR, ABILITY_STURDY, ABILITY_PUNK_ROCK },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Chelonet"),
         .cryId = CRY_TIRTOUGA,
         .natDexNum = NATIONAL_DEX_CHELONET,
@@ -2952,13 +2952,13 @@
             "Its hollow shell hums in the wind. It\n"
             "listens to the hum all day, trying to\n"
             "learn the song its shell was made for."),
-        .pokemonScale = 687,
-        .pokemonOffset = 18,
+        .pokemonScale = 1290,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Chelonet,
-        .frontPicSize = MON_COORDS_SIZE(48, 40),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2966,15 +2966,15 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Chelonet,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Chelonet,
         .shinyPalette = gMonShinyPalette_Chelonet,
         .iconSprite = gMonIcon_Chelonet,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(7, 10, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Chelonet)
         OVERWORLD(
             sPicTable_Chelonet,
@@ -3010,7 +3010,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FIELD),
         .abilities = { ABILITY_SHELL_ARMOR, ABILITY_STURDY, ABILITY_PUNK_ROCK },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Chelyra"),
         .cryId = CRY_CARRACOSTA,
         .natDexNum = NATIONAL_DEX_CHELYRA,
@@ -3021,13 +3021,13 @@
             "Strings run between two horns on its\n"
             "shell. It is said a god once forgave a\n"
             "cattle thief in exchange for its song."),
-        .pokemonScale = 368,
-        .pokemonOffset = 9,
+        .pokemonScale = 393,
+        .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Chelyra,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 3,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3036,14 +3036,14 @@
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Chelyra,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Chelyra,
         .shinyPalette = gMonShinyPalette_Chelyra,
         .iconSprite = gMonIcon_Chelyra,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(8, 10, SHADOW_SIZE_M)
+        SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Chelyra)
         OVERWORLD(
             sPicTable_Chelyra,
@@ -3077,7 +3077,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_UNAWARE, ABILITY_FRISK, ABILITY_PRANKSTER },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Pithound"),
         .cryId = CRY_HERDIER,
         .natDexNum = NATIONAL_DEX_PITHOUND,
@@ -3089,13 +3089,13 @@
             "day with a lit lamp, looking for an\n"
             "honest Trainer. It hasn't found one, and\n"
             "it doesn't expect to."),
-        .pokemonScale = 446,
-        .pokemonOffset = 12,
+        .pokemonScale = 392,
+        .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Pithound,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3103,15 +3103,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Pithound,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Pithound,
         .shinyPalette = gMonShinyPalette_Pithound,
         .iconSprite = gMonIcon_Pithound,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-8, 10, SHADOW_SIZE_S)
+        SHADOW(-11, 12, SHADOW_SIZE_S)
         FOOTPRINT(Pithound)
         OVERWORLD(
             sPicTable_Pithound,
@@ -3156,13 +3156,13 @@
             "It gathers honey from Eleusa's meadows.\n"
             "Old tales say its honey fed a god when\n"
             "he was small, hidden in a mountain cave."),
-        .pokemonScale = 770,
-        .pokemonOffset = 20,
+        .pokemonScale = 1311,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Melibee,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 8,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3170,15 +3170,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Melibee,
-        .backPicSize = MON_COORDS_SIZE(48, 48),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Melibee,
         .shinyPalette = gMonShinyPalette_Melibee,
         .iconSprite = gMonIcon_Melibee,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(4, 5, SHADOW_SIZE_S)
+        SHADOW(7, 12, SHADOW_SIZE_S)
         FOOTPRINT(Melibee)
         OVERWORLD(
             sPicTable_Melibee,
@@ -3214,7 +3214,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_FOREWARN, ABILITY_SWARM, ABILITY_SWEET_VEIL },
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Melisseer"),
         .cryId = CRY_VESPIQUEN,
         .natDexNum = NATIONAL_DEX_MELISSEER,
@@ -3226,13 +3226,13 @@
             "What it hums today, it is said, will\n"
             "happen tomorrow. Its wings bear the net\n"
             "of the Omphalos."),
-        .pokemonScale = 324,
-        .pokemonOffset = 8,
+        .pokemonScale = 358,
+        .pokemonOffset = 7,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Melisseer,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 6,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3241,14 +3241,14 @@
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Melisseer,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Melisseer,
         .shinyPalette = gMonShinyPalette_Melisseer,
         .iconSprite = gMonIcon_Melisseer,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 7, SHADOW_SIZE_M)
+        SHADOW(-8, 12, SHADOW_SIZE_M)
         FOOTPRINT(Melisseer)
         OVERWORLD(
             sPicTable_Melisseer,
@@ -3293,13 +3293,13 @@
             "A bearded face on its back seems about\n"
             "to ask a question. Touch it and you go\n"
             "numb, unable to answer anything at all."),
-        .pokemonScale = 324,
-        .pokemonOffset = 9,
+        .pokemonScale = 346,
+        .pokemonOffset = 6,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Narkeray,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 7,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3307,15 +3307,15 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Narkeray,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Narkeray,
         .shinyPalette = gMonShinyPalette_Narkeray,
         .iconSprite = gMonIcon_Narkeray,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 6, SHADOW_SIZE_M)
+        SHADOW(-8, 12, SHADOW_SIZE_M)
         FOOTPRINT(Narkeray)
         OVERWORLD(
             sPicTable_Narkeray,
@@ -3349,7 +3349,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SHED_SKIN, ABILITY_HARVEST, ABILITY_SEED_SOWER },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Stachyss"),
         .cryId = CRY_APPLIN,
         .natDexNum = NATIONAL_DEX_STACHYSS,
@@ -3360,13 +3360,13 @@
             "It slides through the wheat unseen, for\n"
             "the ears on its back look just like the\n"
             "crop. Any field it lives in grows thick."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 290,
-        .trainerOffset = 3,
+        .pokemonScale = 328,
+        .pokemonOffset = 5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
         .frontPic = gMonFrontPic_Stachyss,
-        .frontPicSize = MON_COORDS_SIZE(56, 48),
-        .frontPicYOffset = 0,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3374,15 +3374,15 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Stachyss,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Stachyss,
         .shinyPalette = gMonShinyPalette_Stachyss,
         .iconSprite = gMonIcon_Stachyss,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(3, 13, SHADOW_SIZE_M)
+        SHADOW(7, 12, SHADOW_SIZE_M)
         FOOTPRINT(Stachyss)
         OVERWORLD(
             sPicTable_Stachyss,
@@ -3417,7 +3417,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SHED_SKIN, ABILITY_HARVEST, ABILITY_SEED_SOWER },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Stachypter"),
         .cryId = CRY_TROPIUS,
         .natDexNum = NATIONAL_DEX_STACHYPTER,
@@ -3435,7 +3435,7 @@
         .trainerOffset = 12,
         .frontPic = gMonFrontPic_Stachypter,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 0,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3444,14 +3444,14 @@
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Stachypter,
         .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Stachypter,
         .shinyPalette = gMonShinyPalette_Stachypter,
         .iconSprite = gMonIcon_Stachypter,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(7, 13, SHADOW_SIZE_XL_BATTLE_ONLY)
+        SHADOW(-3, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Stachypter)
         OVERWORLD(
             sPicTable_Stachypter,
@@ -3495,13 +3495,13 @@
             "It sleeps deep in the dark sanctum, but\n"
             "its sprout always leans toward the sun.\n"
             "No one knows which way it will grow."),
-        .pokemonScale = 874,
-        .pokemonOffset = 20,
+        .pokemonScale = 1311,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Rhoaril,
-        .frontPicSize = MON_COORDS_SIZE(32, 48),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3509,15 +3509,15 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Rhoaril,
-        .backPicSize = MON_COORDS_SIZE(40, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Rhoaril,
         .shinyPalette = gMonShinyPalette_Rhoaril,
         .iconSprite = gMonIcon_Rhoaril,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(1, 11, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Rhoaril)
         OVERWORLD(
             sPicTable_Rhoaril,
@@ -3554,7 +3554,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_FAIRY),
         .abilities = { ABILITY_RIPEN, ABILITY_NATURAL_CURE, ABILITY_GRASSY_SURGE },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Korantha"),
         .cryId = CRY_LILLIGANT,
         .natDexNum = NATIONAL_DEX_KORANTHA,
@@ -3565,13 +3565,13 @@
             "By day it walks the wheat fields, and\n"
             "flowers open in its footsteps. When it\n"
             "goes below, they say, winter comes."),
-        .pokemonScale = 256,
+        .pokemonScale = 262,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Korantha,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3579,15 +3579,15 @@
         ),
         .frontAnimId = ANIM_SHRINK_GROW,
         .backPic = gMonBackPic_Korantha,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Korantha,
         .shinyPalette = gMonShinyPalette_Korantha,
         .iconSprite = gMonIcon_Korantha,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(1, 11, SHADOW_SIZE_M)
+        SHADOW(2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Korantha)
         OVERWORLD(
             sPicTable_Korantha,
@@ -3620,7 +3620,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_FAIRY),
         .abilities = { ABILITY_RIPEN, ABILITY_CURSED_BODY, ABILITY_PERISH_BODY },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Persenyx"),
         .cryId = CRY_GOURGEIST,
         .natDexNum = NATIONAL_DEX_PERSENYX,
@@ -3634,11 +3634,11 @@
             "leave the dark again."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 282,
-        .trainerOffset = 2,
+        .trainerScale = 264,
+        .trainerOffset = 1,
         .frontPic = gMonFrontPic_Persenyx,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(40, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3646,15 +3646,15 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Persenyx,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Persenyx,
         .shinyPalette = gMonShinyPalette_Persenyx,
         .iconSprite = gMonIcon_Persenyx,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(4, 9, SHADOW_SIZE_L)
+        SHADOW(4, 12, SHADOW_SIZE_L)
         FOOTPRINT(Persenyx)
         OVERWORLD(
             sPicTable_Persenyx,
@@ -3698,13 +3698,13 @@
             "It roots through Eleusa's furrows from\n"
             "dawn to dusk. Farmers say a field it\n"
             "has turned needs no plow that year."),
-        .pokemonScale = 412,
-        .pokemonOffset = 11,
+        .pokemonScale = 549,
+        .pokemonOffset = 14,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kaplet,
-        .frontPicSize = MON_COORDS_SIZE(56, 40),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3712,15 +3712,15 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Kaplet,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(56, 56),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kaplet,
         .shinyPalette = gMonShinyPalette_Kaplet,
         .iconSprite = gMonIcon_Kaplet,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-8, 9, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kaplet)
         OVERWORLD(
             sPicTable_Kaplet,
@@ -3768,11 +3768,11 @@
             "these comes out of the woods at night."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 335,
-        .trainerOffset = 6,
+        .trainerScale = 395,
+        .trainerOffset = 8,
         .frontPic = gMonFrontPic_Kaprodon,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3781,14 +3781,14 @@
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Kaprodon,
         .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 0,
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Kaprodon,
         .shinyPalette = gMonShinyPalette_Kaprodon,
         .iconSprite = gMonIcon_Kaprodon,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(7, 10, SHADOW_SIZE_L)
+        SHADOW(6, 12, SHADOW_SIZE_L)
         FOOTPRINT(Kaprodon)
         OVERWORLD(
             sPicTable_Kaprodon,
@@ -3821,7 +3821,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_PICKUP, ABILITY_SAND_VEIL, ABILITY_SUPER_LUCK },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Spalunk"),
         .cryId = CRY_DRILBUR,
         .natDexNum = NATIONAL_DEX_SPALUNK,
@@ -3832,13 +3832,13 @@
             "It cannot see, so it digs at random and\n"
             "gives away what it finds to whoever is\n"
             "nearest, worthy or not."),
-        .pokemonScale = 520,
-        .pokemonOffset = 14,
+        .pokemonScale = 1228,
+        .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Spalunk,
-        .frontPicSize = MON_COORDS_SIZE(56, 32),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3846,15 +3846,15 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Spalunk,
-        .backPicSize = MON_COORDS_SIZE(64, 32),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Spalunk,
         .shinyPalette = gMonShinyPalette_Spalunk,
         .iconSprite = gMonIcon_Spalunk,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-4, 11, SHADOW_SIZE_S)
+        SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Spalunk)
         OVERWORLD(
             sPicTable_Spalunk,
@@ -3889,7 +3889,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_PICKUP, ABILITY_THICK_FAT, ABILITY_SUPER_LUCK },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Plouteras"),
         .cryId = CRY_EXCADRILL,
         .natDexNum = NATIONAL_DEX_PLOUTERAS,
@@ -3900,13 +3900,13 @@
             "It hugs a horn full of grain and hands\n"
             "out the harvest to anyone it bumps into.\n"
             "It never asks who deserves it."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
+        .pokemonScale = 307,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Plouteras,
-        .frontPicSize = MON_COORDS_SIZE(64, 48),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -3914,15 +3914,15 @@
         ),
         .frontAnimId = ANIM_LUNGE_GROW,
         .backPic = gMonBackPic_Plouteras,
-        .backPicSize = MON_COORDS_SIZE(64, 40),
-        .backPicYOffset = 0,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Plouteras,
         .shinyPalette = gMonShinyPalette_Plouteras,
         .iconSprite = gMonIcon_Plouteras,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 11, SHADOW_SIZE_M)
+        SHADOW(-6, 12, SHADOW_SIZE_M)
         FOOTPRINT(Plouteras)
         OVERWORLD(
             sPicTable_Plouteras,

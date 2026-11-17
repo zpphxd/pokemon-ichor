@@ -2003,12 +2003,33 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Capital pass repel
 #define FLAG_ICHOR_HIDDEN_AKROPOLIS_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x021) // Ichor: Lower terrace revive
 #define FLAG_ICHOR_HIDDEN_AKROPOLIS_ETHER        (FLAG_ICHOR_GENERAL2_START + 0x022) // Ichor: Olive court ether
-#define FLAG_ICHOR_HIDDEN_SALT_WELL_SALT        (FLAG_ICHOR_GENERAL2_START + 0x023) // Ichor: Upper tide-line salt
-#define FLAG_ICHOR_HIDDEN_SALT_WELL_SCALE       (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: Upper rock-pool scale
-#define FLAG_ICHOR_HIDDEN_SALT_WELL_PEARL       (FLAG_ICHOR_GENERAL2_START + 0x025) // Ichor: Lower sea gift
-#define FLAG_ICHOR_HIDDEN_SALT_WELL_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x026) // Ichor: Lower sheltered cache
-#define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SALT    (FLAG_ICHOR_GENERAL2_START + 0x027) // Ichor: Harbor salt
-#define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SCALE   (FLAG_ICHOR_GENERAL2_START + 0x028) // Ichor: Harbor scale
+#define FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS       (FLAG_ICHOR_GENERAL2_START + 0x023) // Ichor: won Phaidimos's first knucklebones match (Thyrsa, the Kantharos)
+#define FLAG_ICHOR_KNUCKLEBONES_GLAUKE          (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: won Glauke's first knucklebones match (Thyrsa, the Kantharos)
+#define FLAG_ICHOR_KNUCKLEBONES_THYRSA          (FLAG_ICHOR_GENERAL2_START + 0x025) // Ichor: beat Aristomache, Thyrsa's knucklebones champion
+#define FLAG_ICHOR_TRADED_PROSOMIME             (FLAG_ICHOR_GENERAL2_START + 0x026) // Ichor: traded a Gelasable for Euthykles's Prosomime (Thyrsa)
+#define FLAG_ICHOR_GOT_POLOS_MYSTIC_WATER       (FLAG_ICHOR_GENERAL2_START + 0x027) // Ichor: showed Polos a Prosomime and got his Mystic Water (Thyrsa)
+#define FLAG_ICHOR_EUDORA_FIG_DUG               (FLAG_ICHOR_GENERAL2_START + 0x028) // Ichor: dug up the arm-ring under Eudora's fig (Thyrsa)
+#define FLAG_ICHOR_GOT_POWER_BRACER             (FLAG_ICHOR_GENERAL2_START + 0x029) // Ichor: Eudora gave her husband's arm-ring, the Power Bracer (Thyrsa)
+#define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL2_START + 0x02A) // Ichor: met Manto on the Kadmeia wall (Thyrsa)
+#define FLAG_ICHOR_MANTO_CROWS                  (FLAG_ICHOR_GENERAL2_START + 0x02B) // Ichor: Manto asked you to watch the crows over the Kronia (Thyrsa)
+#define FLAG_ICHOR_SAW_CROWS                    (FLAG_ICHOR_GENERAL2_START + 0x02C) // Ichor: saw the crows fly south from the Elektran Gate (Thyrsa)
+#define FLAG_ICHOR_GOT_TWISTED_SPOON            (FLAG_ICHOR_GENERAL2_START + 0x02D) // Ichor: Manto gave Teiresias's spoon, the Twisted Spoon (Thyrsa)
+#define FLAG_ICHOR_GOT_DRAGON_FANG              (FLAG_ICHOR_GENERAL2_START + 0x02E) // Ichor: Chthonia gave the Dragon Fang (Thyrsa, the Sown house)
+#define FLAG_ICHOR_GOT_STAPHYLOS_NUGGET         (FLAG_ICHOR_GENERAL2_START + 0x02F) // Ichor: Staphylos gave the press's Nugget (Thyrsa)
+#define FLAG_ICHOR_THYRSA_BEGGAR_HELPED         (FLAG_ICHOR_GENERAL2_START + 0x030) // Ichor: led Thyrsa's blind beggar to the spring of Dirke
+#define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL2_START + 0x031) // Ichor: Thyrsa's Black Sludge item ball
+#define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL2_START + 0x032) // Ichor: Thyrsa's Super Potion item ball
+#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL2_START + 0x033) // Ichor: Thyrsa's Big Nugget item ball
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_CELL_BATTERY (FLAG_ICHOR_GENERAL2_START + 0x034) // Ichor: Thyrsa: by Semele's chamber
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_HEART_SCALE (FLAG_ICHOR_GENERAL2_START + 0x035) // Ichor: Thyrsa: at the spring of Dirke
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_RARE_CANDY (FLAG_ICHOR_GENERAL2_START + 0x036) // Ichor: Thyrsa: at the north-west bricked gate
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_PRETTY_FEATHER (FLAG_ICHOR_GENERAL2_START + 0x037) // Ichor: Thyrsa: under the Kadmeia's east wall
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_SALT        (FLAG_ICHOR_GENERAL2_START + 0x038) // Ichor: Upper tide-line salt
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_SCALE       (FLAG_ICHOR_GENERAL2_START + 0x039) // Ichor: Upper rock-pool scale
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_PEARL       (FLAG_ICHOR_GENERAL2_START + 0x03A) // Ichor: Lower sea gift
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x03B) // Ichor: Lower sheltered cache
+#define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SALT    (FLAG_ICHOR_GENERAL2_START + 0x03C) // Ichor: Harbor salt
+#define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SCALE   (FLAG_ICHOR_GENERAL2_START + 0x03D) // Ichor: Harbor scale
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
@@ -2025,6 +2046,7 @@
 // Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
 #define FLAG_DAILY_ICHOR_FESTIVAL_JOINED        (FLAG_DAILY_ICHOR_GENERAL_START + 0x000) // Ichor: joined today's festival: its god's +5 Favor is given (engine, ENGINE_API §7)
 #define FLAG_DAILY_ICHOR_AUGURY_READ            (FLAG_DAILY_ICHOR_GENERAL_START + 0x040) // Ichor: heard today's shared omen; prevents repeated augur blessings
+#define FLAG_DAILY_ICHOR_TREADING               (FLAG_DAILY_ICHOR_GENERAL_START + 0x04C) // Ichor: trod Staphylos's grapes today (Thyrsa)
 // Ichor daily bank flags: end
 
 // Temp flag aliases

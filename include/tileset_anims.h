@@ -40,6 +40,7 @@ void InitTilesetAnim_CeladonGym(void);
 void InitTilesetAnim_SilphCo(void);
 void InitTilesetAnim_MtEmber(void);
 
+void InitTilesetAnim_Thyrsa(void); // Ichor: Semele's smoke (src/tileset_anims.c)
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_Aethos(void);
 // [Porytiles] Auto-generated declaration. Do not remove.

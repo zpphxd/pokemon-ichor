@@ -1,0 +1,129 @@
+// The Kantharos, a cellar tavern (SCRIPT.md Part 2, Thyrsa; the game: SYSTEMS.md §9).
+// Ported from claude/world-act2-0a92e7. Aristomache, Thyrsa's champion, keeps the bar
+// (9,3; talked to across it from (9,5)); Phaidimos (3,6) and Glauke (5,6) play at the
+// worn table in the sunken floor. Each match is the engine's knucklebones
+// (data/scripts/ichor_bones.pory): Phaidimos cautious, Glauke bold, Aristomache cautious.
+// The regulars' first-win prizes are offerings: Phaidimos's Olive Oil x2 and Glauke's Wine.
+// Aristomache's "Encore" is a Metronome (main has no Encore TM): do it again, but more.
+
+mapscripts ThyrsaCity_Tavern_MapScripts {}
+
+text ThyrsaCity_Tavern_Name_Aristomache { "ARISTOMACHE" }
+text ThyrsaCity_Tavern_Name_Phaidimos { "PHAIDIMOS" }
+text ThyrsaCity_Tavern_Name_Glauke { "GLAUKE" }
+
+// In: VAR_0x8004 opponent, STR_VAR_3 name. Out: VAR_RESULT TRUE (won), FALSE (lost) or 2 (declined).
+script ThyrsaCity_Tavern_EventScript_Match {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Four bones, a leather cup, a best of five. Play?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setvar(VAR_RESULT, 2)
+        return
+    }
+    closemessage
+    call(EventScript_IchorKnucklebones)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} won the match!"))
+        setvar(VAR_RESULT, TRUE)
+    } else {
+        msgbox(format("{PLAYER} lost the match."))
+        setvar(VAR_RESULT, FALSE)
+    }
+    return
+}
+
+script ThyrsaCity_Tavern_EventScript_Phaidimos {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Tavern_Name_Phaidimos)
+    msgbox(format("Ones, I rethrow. Threes, I keep. Sixes, I thank the god.\p"
+                  "Fours I don't trust. Fours are up to something."))
+    bufferstring(STR_VAR_3, ThyrsaCity_Tavern_Name_Phaidimos)
+    setvar(VAR_0x8004, ICHOR_BONES_CAUTIOUS)
+    call(ThyrsaCity_Tavern_EventScript_Match)
+    if (var(VAR_RESULT) != 2) {
+        setspeaker(ThyrsaCity_Tavern_Name_Phaidimos)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox(format("Fours. I told you. Up to something."))
+            if (!flag(FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS)) {
+                msgbox(format("Take this. Oil for the god. He likes a careful player."))
+                setspeaker(SP_NAME_NONE)
+                giveitem(ITEM_OLIVE_OIL, 2)
+                if (var(VAR_RESULT) == TRUE) {
+                    setflag(FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS)
+                }
+            }
+        } else {
+            msgbox(format("Sixes. I thanked the god. The god listened."))
+        }
+    }
+    release
+}
+
+script ThyrsaCity_Tavern_EventScript_Glauke {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Tavern_Name_Glauke)
+    msgbox(format("Aphrodite or ruin! Throw everything!\p"
+                  "I've been ruined six times this month. It's very exciting."))
+    bufferstring(STR_VAR_3, ThyrsaCity_Tavern_Name_Glauke)
+    setvar(VAR_0x8004, ICHOR_BONES_BOLD)
+    call(ThyrsaCity_Tavern_EventScript_Match)
+    if (var(VAR_RESULT) != 2) {
+        setspeaker(ThyrsaCity_Tavern_Name_Glauke)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox(format("Ruin! Seven times! Wonderful."))
+            if (!flag(FLAG_ICHOR_KNUCKLEBONES_GLAUKE)) {
+                msgbox(format("Here, my jar. I'd only drink it."))
+                setspeaker(SP_NAME_NONE)
+                giveitem(ITEM_WINE)
+                if (var(VAR_RESULT) == TRUE) {
+                    setflag(FLAG_ICHOR_KNUCKLEBONES_GLAUKE)
+                }
+            }
+        } else {
+            msgbox(format("Not ruin! How dull. Again!"))
+        }
+    }
+    release
+}
+
+script ThyrsaCity_Tavern_EventScript_Aristomache {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Tavern_Name_Aristomache)
+    if (flag(FLAG_ICHOR_KNUCKLEBONES_THYRSA)) {
+        msgbox(format("Sit. Throw. Don't talk."))
+    } else {
+        msgbox(format("Thyrsa's champion. Sit. I don't talk while I throw."))
+    }
+    bufferstring(STR_VAR_3, ThyrsaCity_Tavern_Name_Aristomache)
+    setvar(VAR_0x8004, ICHOR_BONES_CAUTIOUS)
+    call(ThyrsaCity_Tavern_EventScript_Match)
+    if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_KNUCKLEBONES_THYRSA)) {
+        setspeaker(ThyrsaCity_Tavern_Name_Aristomache)
+        msgbox(format("…Again.\p"
+                      "That's what they shout in the theater when they love a thing. Again.\p"
+                      "Here. A metronome. Do what you just did, but more."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_METRONOME)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_KNUCKLEBONES_THYRSA)
+        }
+    }
+    release
+}
+
+script ThyrsaCity_Tavern_EventScript_Frieze {
+    msgbox(format("A painted frieze runs round the cellar: satyrs chasing maenads.\p"
+                  "Look closer. The maenads are winning."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_Tavern_EventScript_BonesTable {
+    msgbox(format("A stone table, worn into a shallow bowl by a hundred years of throws."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_Tavern_EventScript_GreatCup {
+    msgbox(format("Over the bar hangs the Kantharos: a great two-handled cup, Dionysus's own.\p"
+                  "It's big enough to bathe a Pokémon in. Someone has."), MSGBOX_SIGN)
+}

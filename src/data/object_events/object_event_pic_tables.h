@@ -2734,6 +2734,27 @@ static const struct SpriteFrameImage sPicTable_IchorCami[] = {
 static const struct SpriteFrameImage sPicTable_IchorDemeter[] = {
     overworld_ascending_frames(gObjectEventPic_IchorDemeter, 2, 4),
 };
+
+// Thyrsa (ported from claude/world-act2-0a92e7)
+static const struct SpriteFrameImage sPicTable_IchorManto[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorManto, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorVintner[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorVintner, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorActor[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorActor, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMask[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMask, 2, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorCrows[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorCrows, 4, 4),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

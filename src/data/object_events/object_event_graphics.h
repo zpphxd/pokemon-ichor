@@ -692,6 +692,13 @@ const u32 gObjectEventPic_IchorSam[] = INCGFX_U32("graphics/object_events/pics/p
 const u32 gObjectEventPic_IchorApollo[] = INCGFX_U32("graphics/object_events/pics/people/ichor/apollo.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorCami[] = INCGFX_U32("graphics/object_events/pics/people/ichor/cami.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorDemeter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/demeter.png", ".4bpp", "-mwidth 2 -mheight 4");
+// Thyrsa (ported from claude/world-act2-0a92e7)
+const u16 gObjectEventPal_IchorWine[] = INCGFX_U16("graphics/object_events/palettes/ichor_wine.pal", ".gbapal");
+const u32 gObjectEventPic_IchorManto[] = INCGFX_U32("graphics/object_events/pics/people/ichor/manto.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorVintner[] = INCGFX_U32("graphics/object_events/pics/people/ichor/vintner.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorActor[] = INCGFX_U32("graphics/object_events/pics/people/ichor/actor.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMask[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mask.png", ".4bpp", "-mwidth 2 -mheight 2");
+const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/crows.png", ".4bpp", "-mwidth 4 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
