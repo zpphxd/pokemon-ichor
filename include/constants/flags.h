@@ -2261,6 +2261,15 @@
 #define FLAG_ICHOR_ITEM_PALACE_ELIXIR           (FLAG_ICHOR_GENERAL2_START + 0x43E) // Ichor: Knossa item ball: the palace, Elixir in the Theatral Area
 #define FLAG_ICHOR_ARIADNE_WOKE_YOU             (FLAG_ICHOR_GENERAL2_START + 0x43F) // Ichor: Knossa: III-3P, Ariadne at the Megaron's door before dawn (He wants you)
 #define FLAG_ICHOR_ALETHEA_DAWN_DONE            (FLAG_ICHOR_GENERAL2_START + 0x440) // Ichor: Knossa: III-3P, Alethea sent the gull at dawn and went down to the quay
+#define FLAG_ICHOR_R2_LONG_HALL                 (FLAG_ICHOR_GENERAL2_START + 0x458) // Ichor: Labyrinth Ring II: scene C played, Asterion broke the Long Hall's cracked wall
+#define FLAG_ICHOR_ITEM_R2_TM                   (FLAG_ICHOR_GENERAL2_START + 0x459) // Ichor: Labyrinth Ring II: the sun room's TM
+#define FLAG_ICHOR_ITEM_R2_MOON_STONE           (FLAG_ICHOR_GENERAL2_START + 0x45A) // Ichor: Labyrinth Ring II: the Moon Room's Moon Stone
+#define FLAG_ICHOR_ITEM_R2_FULL_HEAL            (FLAG_ICHOR_GENERAL2_START + 0x45B) // Ichor: Labyrinth Ring II: the Full Heal behind the broken wall
+#define FLAG_ICHOR_ITEM_R2_SILVER_OWL           (FLAG_ICHOR_GENERAL2_START + 0x45C) // Ichor: Labyrinth Ring II: Sinopos's gallery Silver Owl
+#define FLAG_ICHOR_ITEM_R2_MAX_REPEL            (FLAG_ICHOR_GENERAL2_START + 0x45D) // Ichor: Labyrinth Ring II: a Max Repel in a dead end
+#define FLAG_ICHOR_ITEM_R2_ULTRA_BALL           (FLAG_ICHOR_GENERAL2_START + 0x45E) // Ichor: Labyrinth Ring II: an Ultra Ball in the grotto
+#define FLAG_ICHOR_HIDDEN_ITEM_R2_STARDUST      (FLAG_ICHOR_GENERAL2_START + 0x45F) // Ichor: Labyrinth Ring II: Stardust in the Moon Room
+#define FLAG_ICHOR_HIDDEN_ITEM_R2_OBOL          (FLAG_ICHOR_GENERAL2_START + 0x460) // Ichor: Labyrinth Ring II: a Bronze Obol in a dead end
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

@@ -233,6 +233,14 @@ def build(render=True):
         for x in range(W):
             if m.g[y][x] == "," and (x * 7 + y * 3) % 11 == 0:
                 m.g[y][x] = ";"
+    from labyrinth_lib import notch
+    keep = {(x, y) for e in (DOOR, DRAUGHT) for (gx, gy) in gap(*e)
+            for x in range(gx - 2, gx + 3) for y in range(gy - 2, gy + 3)}
+    keep |= {(x, 1) for x in (6, 7, 8, 20, 21, 22, 23)} | {(x, 25) for x in range(29, 33)}
+    keep |= {(19, 29), (6, 21), (23, 8), (23, 9)}
+    notch(m.g, keep=keep)
+    ok, hops = measure(m.g)
+    assert ok, hops
     m.lay()
 
     # --- the fixed pieces --------------------------------------------------------------

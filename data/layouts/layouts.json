@@ -1863,8 +1863,8 @@
     {
       "id": "LAYOUT_LABYRINTH_RING2",
       "name": "LabyrinthRing2_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 54,
+      "height": 42,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthRing2/border.bin",
