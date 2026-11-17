@@ -1919,6 +1919,12 @@
 #define FLAG_ICHOR_ITEM_R12_HEAL                (FLAG_ICHOR_GENERAL_START + 0x11F) // Ichor: R12 medicine reward
 #define FLAG_ICHOR_ITEM_R12_BALL                (FLAG_ICHOR_GENERAL_START + 0x120) // Ichor: R12 capture reward
 #define FLAG_ICHOR_ITEM_R12_ETHER               (FLAG_ICHOR_GENERAL_START + 0x121) // Ichor: R12 Ether reward
+#define FLAG_ICHOR_ITEM_R13_HEAL                (FLAG_ICHOR_GENERAL_START + 0x122) // Ichor: Highland road visible healing jar
+#define FLAG_ICHOR_ITEM_R13_BALL                (FLAG_ICHOR_GENERAL_START + 0x123) // Ichor: Highland road visible ball jar
+#define FLAG_ICHOR_ITEM_R13_ETHER               (FLAG_ICHOR_GENERAL_START + 0x124) // Ichor: Highland road visible ether jar
+#define FLAG_ICHOR_ITEM_R14_HEAL                (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Nemea road visible healing jar
+#define FLAG_ICHOR_ITEM_R14_BALL                (FLAG_ICHOR_GENERAL_START + 0x126) // Ichor: Nemea road visible ball jar
+#define FLAG_ICHOR_ITEM_R14_ETHER               (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Nemea road visible ether jar
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
@@ -1944,6 +1950,12 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R12_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x012) // Ichor: R12 hidden Honey
 #define FLAG_ICHOR_HIDDEN_ITEM_R12_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x013) // Ichor: R12 hidden Revive
 #define FLAG_ICHOR_HIDDEN_ITEM_R12_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x014) // Ichor: R12 hidden Super Repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R13_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x015) // Ichor: Highland road grove honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R13_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x016) // Ichor: Highland road ridge revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R13_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x017) // Ichor: Highland road wall repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R14_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x018) // Ichor: Nemea road grove honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R14_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x019) // Ichor: Nemea road ridge revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R14_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x01A) // Ichor: Nemea road wall repel
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

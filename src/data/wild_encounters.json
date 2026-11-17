@@ -4697,6 +4697,558 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE13_HIGHLAND_ROAD",
+          "base_label": "gRoute13_HighlandRoad_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE13_HIGHLAND_ROAD",
+          "base_label": "gRoute13_HighlandRoad_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE13_HIGHLAND_ROAD",
+          "base_label": "gRoute13_HighlandRoad_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE13_HIGHLAND_ROAD",
+          "base_label": "gRoute13_HighlandRoad_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14_NEMEA_ROAD",
+          "base_label": "gRoute14_NemeaRoad_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14_NEMEA_ROAD",
+          "base_label": "gRoute14_NemeaRoad_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14_NEMEA_ROAD",
+          "base_label": "gRoute14_NemeaRoad_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14_NEMEA_ROAD",
+          "base_label": "gRoute14_NemeaRoad_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
         }
       ]
     },

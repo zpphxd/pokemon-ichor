@@ -1,0 +1,43 @@
+mapscripts Nemea_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_NEMEA)
+    }
+}
+
+script Nemea_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_NEMEA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Nemea_EventScript_Merchant {
+    goto(ArkadiaApproach_EventScript_Merchant)
+}
+
+script Nemea_EventScript_Guide {
+    lock
+    faceplayer
+    msgbox(format("Down from Arkadia? Then you've seen the new moon.\p"
+                  "Emporion lies east. The city watch opens its gate to travelers coming from here.\p"
+                  "Stay on the road. I still count my goats twice."))
+    release
+}
+
+script Nemea_EventScript_Sign {
+    msgbox(format("NEMEA\pWest: Arkadia. East: Emporion."), MSGBOX_SIGN)
+    end
+}
+
+script Nemea_EventScript_Zeus {
+    msgbox(format("The columns of Zeus's old sanctuary.\p"
+                  "A shepherd has left a little wool at the foot of the stone."), MSGBOX_SIGN)
+    end
+}
+
+script Nemea_EventScript_LionCave {
+    msgbox(format("The lion's cave is sealed with stone.\p"
+                  "Something breathes on the other side."), MSGBOX_SIGN)
+    end
+}

@@ -111,6 +111,28 @@
       "respawn_npc": "LOCALID_ARKADIA_HEALER",
       "respawn_x": 18,
       "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_NEMEA",
+      "map": "MAP_NEMEA",
+      "x": 18,
+      "y": 12,
+      "respawn_map": "MAP_NEMEA",
+      "respawn_npc": "LOCALID_NEMEA_HEALER",
+      "respawn_x": 18,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_13",
+      "map": "MAP_ROUTE13_HIGHLAND_ROAD",
+      "x": 27,
+      "y": 9
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_14",
+      "map": "MAP_ROUTE14_NEMEA_ROAD",
+      "x": 27,
+      "y": 9
     }
   ]
 }

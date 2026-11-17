@@ -2762,3 +2762,199 @@ Adamant Nature
 - Protect
 
 /* End Artemis hunt teams. */
+
+/* Nemea return teams. */
+
+=== TRAINER_ICHOR_R13_POLYDOROS ===
+Name: POLYDOROS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R13_ANTHE ===
+Name: ANTHE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Thyrsivy
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R13_LYKON ===
+Name: LYKON
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R13_THEANO ===
+Name: THEANO
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Harpelle
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R13_KALLIAS ===
+Name: KALLIAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Nemeleon
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kladoe
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R13_AGLAON ===
+Name: AGLAON
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykanax
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_ISON ===
+Name: ISON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_PHILOMELE ===
+Name: PHILOMELE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Thyrsivy
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_NEOKLES ===
+Name: NEOKLES
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_ERATO ===
+Name: ERATO
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Harpelle
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_DEMADES ===
+Name: DEMADES
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Nemeleon
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kladoe
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_KLEARCHOS ===
+Name: KLEARCHOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykanax
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Nemea return teams. */

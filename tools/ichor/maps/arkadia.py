@@ -113,7 +113,7 @@ def hubs():
              "Kirrha": [("up", "Route9_ParnassosCrossroads")],
              "Aigion": [("down", "Route11_DrumPass")],
              "StyxFalls": [("up", "Route11_DrumPass"), ("down", "Route12_CypressRoad")],
-             "Arkadia": [("up", "Route12_CypressRoad")]}
+             "Arkadia": [("up", "Route12_CypressRoad"), ("right", "Route13_HighlandRoad")]}
     for name, connections in links.items():
         m = Map(name, 28, 32)
         m.rect(2, 2, 25, 29, 0x001)
@@ -146,6 +146,9 @@ def hubs():
             m.rect(22, 3, 23, 16, 0x0B3, True)
             m.put(20, 18, 0x01B, True)
         if name == "Arkadia":
+            for y in range(10, 14):
+                m.json["coord_events"].append(dict(type="trigger", x=26, y=y, elevation=3,
+                    var="VAR_TEMP_4", var_value="0", script="Arkadia_EventScript_NemeaRoad"))
             m.stamp(17, 2, [
                 [0x1AA, 0x1AB, 0x1AB, 0x1AB, 0x1AB, 0x1AC],
                 [0x1B2, 0x1B3, 0x1B3, 0x1B3, 0x1B3, 0x1B4],

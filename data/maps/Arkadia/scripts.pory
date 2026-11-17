@@ -23,9 +23,33 @@ script Arkadia_EventScript_Merchant {
 script Arkadia_EventScript_Guide {
     lock
     faceplayer
-    msgbox(format("Kallisto's been hunting the new moon. You won't find a kinder light in her grove.\p"
-                  "A young Lakonian came to challenge her. He's down among the cypresses."))
+    if (flag(FLAG_BADGE05_GET)) {
+        msgbox(format("The east road descends through Nemea to Emporion.\p"
+                      "Show the watch your Moon Laurel. They'll open the gate from this side."))
+    } else {
+        msgbox(format("Kallisto's been hunting the new moon. You won't find a kinder light in her grove.\p"
+                      "A young Lakonian came to challenge her. He's down among the cypresses."))
+    }
     release
+}
+
+script Arkadia_EventScript_NemeaRoad {
+    lockall
+    if (flag(FLAG_BADGE05_GET)) {
+        setflag(FLAG_ICHOR_ARKADIA_NORTH_OPEN)
+    } else {
+        msgbox(format("Kallisto is waiting in the grove.\p"
+                      "The road down to Nemea can wait until you have the Moon Laurel."))
+        closemessage
+        applymovement(OBJ_EVENT_ID_PLAYER, Arkadia_Movement_LeaveNemeaRoad)
+        waitmovement(0)
+    }
+    releaseall
+    end
+}
+
+movement Arkadia_Movement_LeaveNemeaRoad {
+    walk_left
 }
 script Arkadia_EventScript_Sign {
     msgbox(format("ARKADIA\nUnder the eyes of Artemis."), MSGBOX_SIGN)

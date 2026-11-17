@@ -1,0 +1,100 @@
+local L = dofile("tools/ichor/tests/engine_lib.lua")
+local S, K, emu = L.S, L.K, L.emu
+for k, v in pairs(dofile(L.OUT .. "nemea_symbols.lua")) do S.SCRIPTS[k] = v end
+local function cross(dir, map, name)
+    L.leaveEdge(dir, map)
+    L.expect(L.mapId() == map, "actual connected crossing: " .. name)
+    L.shot(name)
+end
+local function herm(script, flag)
+    local oil = L.itemCount(S.ITEM_OIL)
+    L.talk(L.sign(script), {answers = {0}})
+    L.expect(L.getFlag(flag) and L.itemCount(S.ITEM_OIL) == oil - 1,
+             "actual anointing consumes oil and records " .. script)
+    L.talk(L.sign(script))
+    L.expect(L.itemCount(S.ITEM_OIL) == oil - 1, "anointed herm cannot consume oil twice")
+end
+L.start(function()
+    L.quickstart()
+    L.runHeader("Nemea_EarlyHeader")
+    L.setBeat("early_return_gate", false)
+    L.expect(L.npc("EmporionCity_EventScript_NemeaHoplite").present,
+             "Emporion's existing hoplite still closes the return shortcut in Act I")
+    L.talk(L.npc("EmporionCity_EventScript_NemeaHoplite"))
+    L.go(2, 41)
+    L.tap(K.LEFT, 8)
+    L.wait(40)
+    local x = L.pos()
+    L.expect(x == 2 and L.mapId() == S.MAP_EMPORION and not L.getFlag(S.FLAG_ROAD_OPEN),
+             "the closed single-tile gate cannot bypass the Girdle approach to Arkadia")
+    L.runHeader("Nemea_ArkadiaHeader")
+    L.go(25, 12)
+    L.tap(K.RIGHT, 8)
+    L.settle()
+    x = L.pos()
+    L.expect(L.mapId() == S.MAP_ARKADIA and x == 25 and not L.getFlag(S.FLAG_ROAD_OPEN),
+             "Arkadia's onward road waits for the actual Moon Laurel milestone")
+    L.runHeader("Nemea_MoonHeader")
+    L.setBeat("down_from_arkadia", false)
+    cross("right", S.MAP_R13, "highland_road")
+    L.expect(L.getFlag(S.FLAG_ROAD_OPEN), "walking out after Laurel 5 opens the return gate")
+    herm("Route13_HighlandRoad_EventScript_Herm", S.FLAG_R13_HERM)
+    local potions, honey = L.itemCount(S.ITEM_HYPER_POTION), L.itemCount(S.ITEM_HONEY)
+    L.talk(L.ball(S.FLAG_R13_JAR))
+    L.talk(L.hidden(S.FLAG_R13_HIDDEN))
+    L.expect(L.getFlag(S.FLAG_R13_JAR) and L.itemCount(S.ITEM_HYPER_POTION) == potions + 1,
+             "the visible highland reward is a real one-time item")
+    L.expect(L.getFlag(S.FLAG_R13_HIDDEN) and L.itemCount(S.ITEM_HONEY) == honey + 1,
+             "the highland hidden item uses its own persistent bank flag")
+    cross("right", S.MAP_NEMEA, "nemea")
+    L.talk(L.npc("Nemea_EventScript_Healer"))
+    L.expect(L.idle(), "Nemea's healer restores control")
+    L.talk(L.sign("Nemea_EventScript_Zeus"))
+    L.talk(L.sign("Nemea_EventScript_LionCave"))
+    L.talk(L.npc("Nemea_EventScript_Merchant"), {noSettle = true})
+    local started = L.now()
+    while not L.taskRunning("Task_ShopMenu") do
+        L.tap(K.A)
+        L.wait(20)
+        if L.now() - started > 900 then L.fail("Nemea's shop menu did not open") end
+    end
+    L.wait(20)
+    L.tap(K.A)
+    L.waitUntil(function() return L.taskRunning("Task_BuyMenu") end, 600, "Nemea's item list")
+    L.wait(40)
+    L.shot("nemea_supplies")
+    L.tap(K.B)
+    L.waitUntil(function() return L.taskRunning("Task_ShopMenu") end, 600, "Nemea's shop menu again")
+    L.wait(20)
+    L.tap(K.B)
+    L.settle()
+    L.expect(L.idle(), "Nemea's real shop can be closed normally")
+    cross("right", S.MAP_R14, "nemea_road")
+    L.expect(emu:saveStateFile(L.OUT .. "before_nemea_loss.ss", 31), "saved the return journey before its loss branch")
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    L.battleMode = "lose"
+    L.talk(L.npc("Route14_NemeaRoad_EventScript_ISON"))
+    L.battleMode = nil
+    L.expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST and L.mapId() == S.MAP_NEMEA,
+             "a real return-road whiteout recovers at Nemea's healer")
+    L.shot("nemea_recovery")
+    L.expect(emu:loadStateFile(L.OUT .. "before_nemea_loss.ss", 31), "restored the route for onward travel")
+    L.wait(30)
+    L.waitUntil(L.idle, 600, "control after restoring the route")
+    herm("Route14_NemeaRoad_EventScript_Herm", S.FLAG_R14_HERM)
+    cross("right", S.MAP_EMPORION, "emporion_gate_open")
+    L.expect(not L.npc("EmporionCity_EventScript_NemeaHoplite").present,
+             "the existing city guard stands down after arrival from Arkadia")
+    L.runHeader("Nemea_SaveHeader")
+    emu:reset()
+    L.continueSave()
+    L.expect(L.mapId() == S.MAP_EMPORION and L.getFlag(S.FLAG_ROAD_OPEN)
+             and L.getFlag(S.FLAG_R13_HERM) and L.getFlag(S.FLAG_R14_HERM),
+             "the opened return loop and both anointed herms survive save/reset/CONTINUE")
+    L.expect(L.getFlag(S.FLAG_R13_JAR) and L.getFlag(S.FLAG_R13_HIDDEN),
+             "collected return-road rewards remain consumed after saving")
+    cross("left", S.MAP_R14, "return_to_nemea_road")
+    cross("left", S.MAP_NEMEA, "return_to_nemea")
+    cross("left", S.MAP_R13, "return_to_highlands")
+    cross("left", S.MAP_ARKADIA, "return_to_arkadia")
+end)

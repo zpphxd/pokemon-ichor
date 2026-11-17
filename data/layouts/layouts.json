@@ -1045,6 +1045,39 @@
       "border_filepath": "data/layouts/Arkadia_TempleOfArtemis/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_TempleOfArtemis/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE13_HIGHLAND_ROAD",
+      "name": "Route13_HighlandRoad_Layout",
+      "width": 48,
+      "height": 24,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Route13_HighlandRoad/border.bin",
+      "blockdata_filepath": "data/layouts/Route13_HighlandRoad/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_NEMEA",
+      "name": "Nemea_Layout",
+      "width": 28,
+      "height": 32,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Nemea/border.bin",
+      "blockdata_filepath": "data/layouts/Nemea/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE14_NEMEA_ROAD",
+      "name": "Route14_NemeaRoad_Layout",
+      "width": 48,
+      "height": 24,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Route14_NemeaRoad/border.bin",
+      "blockdata_filepath": "data/layouts/Route14_NemeaRoad/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -1,0 +1,63 @@
+mapscripts Route13_HighlandRoad_MapScripts {}
+
+script Route13_HighlandRoad_EventScript_POLYDOROS {
+    trainerbattle_single(TRAINER_ICHOR_R13_POLYDOROS,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_ANTHE {
+    trainerbattle_single(TRAINER_ICHOR_R13_ANTHE,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_LYKON {
+    trainerbattle_single(TRAINER_ICHOR_R13_LYKON,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_THEANO {
+    trainerbattle_single(TRAINER_ICHOR_R13_THEANO,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_KALLIAS {
+    trainerbattle_single(TRAINER_ICHOR_R13_KALLIAS,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_AGLAON {
+    trainerbattle_single(TRAINER_ICHOR_R13_AGLAON,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_Sign0 {
+    msgbox(format("West: Arkadia. East: Nemea, then Emporion."), MSGBOX_SIGN)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_Sign1 {
+    msgbox(format("West: Arkadia. East: Nemea, then Emporion."), MSGBOX_SIGN)
+    end
+}
+
+script Route13_HighlandRoad_EventScript_Herm {
+    goto(EventScript_IchorGreatHerm)
+}

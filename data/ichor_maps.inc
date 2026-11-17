@@ -71,3 +71,6 @@
 	.include "data/maps/Arkadia/scripts.inc"
 	.include "data/maps/GulfTrireme/scripts.inc"
 	.include "data/maps/Arkadia_TempleOfArtemis/scripts.inc"
+	.include "data/maps/Route13_HighlandRoad/scripts.inc"
+	.include "data/maps/Nemea/scripts.inc"
+	.include "data/maps/Route14_NemeaRoad/scripts.inc"

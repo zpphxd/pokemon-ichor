@@ -30,6 +30,10 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Evolved forms in late areas** (director's ruling, 2026-11-14, with the dex team): from Astyra on, a line whose evolution level sits below the area's wild band appears in the wild as its evolved form, at the band's levels. Its first stage shows up only in rare lower-level spots, in swarms or omens, or by breeding, the way Victory Road works. The rare exception is the pseudo-legendary Lernip (evolving at 30 and 55): a rain-only hunt at Lake Stymphalia at about level 30, in the tradition of Bagon. The full list is in `design/dex/DECISIONS.md` (07dd37483b).
 - **No early evolved forms in the wild** (director's ruling, 2026-11-14, from Phase 2's open question 22). A wild Pokémon never appears in an evolved form earlier than its evolution level allows. A few early evolved forms may appear only as one-off story rewards: augury statics such as Harpelle at 17 and Korantha or Persenyx at 22, and trainer teams such as Aiakides's Hoplomex on Aegina.
 - **Evolution timing:** the Aethos dex sets evolution levels so the main fully-evolved forms arrive around Laurels 4–6. The dex team owns this; keep this curve and their levels in step.
+- **Implemented return loop:** Route 13 uses wild 30–32 and trainers 33–35;
+  Route 14 uses wild 31–33 and trainers 34–36. These begin the Astyra stage
+  after the Moon Laurel. Their evolved encounters respect evolution timing;
+  assisted native travel is not natural-level balance approval.
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,

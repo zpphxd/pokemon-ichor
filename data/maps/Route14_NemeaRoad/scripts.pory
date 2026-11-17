@@ -1,0 +1,63 @@
+mapscripts Route14_NemeaRoad_MapScripts {}
+
+script Route14_NemeaRoad_EventScript_ISON {
+    trainerbattle_single(TRAINER_ICHOR_R14_ISON,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_PHILOMELE {
+    trainerbattle_single(TRAINER_ICHOR_R14_PHILOMELE,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_NEOKLES {
+    trainerbattle_single(TRAINER_ICHOR_R14_NEOKLES,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_ERATO {
+    trainerbattle_single(TRAINER_ICHOR_R14_ERATO,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_DEMADES {
+    trainerbattle_single(TRAINER_ICHOR_R14_DEMADES,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_KLEARCHOS {
+    trainerbattle_single(TRAINER_ICHOR_R14_KLEARCHOS,
+        format("The Isthmus is below us. One more battle before the descent?"),
+        format("You kept your footing."))
+    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_Sign0 {
+    msgbox(format("West: Nemea and Arkadia. East: Emporion's Nemea Gate."), MSGBOX_SIGN)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_Sign1 {
+    msgbox(format("West: Nemea and Arkadia. East: Emporion's Nemea Gate."), MSGBOX_SIGN)
+    end
+}
+
+script Route14_NemeaRoad_EventScript_Herm {
+    goto(EventScript_IchorGreatHerm)
+}

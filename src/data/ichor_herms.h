@@ -28,4 +28,14 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_EMPORION_CITY,
         .healLocation = HEAL_LOCATION_HERM_EMPORION_CITY,
     },
+    [HERM_AETHOS_ROUTE_13] = {
+        .map = MAP_ROUTE13_HIGHLAND_ROAD,
+        .mapsec = MAPSEC_AETHOS_ROUTE_13,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_13,
+    },
+    [HERM_AETHOS_ROUTE_14] = {
+        .map = MAP_ROUTE14_NEMEA_ROAD,
+        .mapsec = MAPSEC_AETHOS_ROUTE_14,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_14,
+    },
 };
