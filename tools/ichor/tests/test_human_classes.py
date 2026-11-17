@@ -9,6 +9,7 @@ from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import human_classes as humans
+import walker_paint as hand_drawn  # owns the hand-drawn Gen 3 walkers (STYLE.md §3.6)
 import human_classes_render as rendered
 import sprites_lib as legacy
 
@@ -48,6 +49,11 @@ class HumanClassTests(unittest.TestCase):
         self.assertEqual(len([a for a in humans.ASSETS if a["kind"] == "portraits"]), 10)
         for entry in humans.ASSETS:
             with self.subTest(asset=entry["target"]):
+                if entry["kind"] == "walkers" and entry["name"] in hand_drawn.CHARACTERS:
+                    # redrawn by hand; the image-model source is kept as history
+                    with Image.open(humans.ROOT / entry["target"]) as image:
+                        np.testing.assert_array_equal(np.array(image), hand_drawn.build(entry["name"])[0])
+                    continue
                 self.assertEqual(humans.digest(humans.ROOT / entry["target"]), entry["sha256"])
 
     def test_all_199_field_frames_are_complete_distinct_and_anchored(self):
