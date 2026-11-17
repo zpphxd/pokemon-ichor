@@ -1,4 +1,8 @@
 mapscripts Kaldera_TelchinesForge_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // the climax: the Cutter waits on the cold anvil in the Frozen Hour (III-10C)
+        call(Kaldera_TelchinesForge_EventScript_ClimaxObjects)
+    }
     MAP_SCRIPT_ON_LOAD {
         if (flag(FLAG_BADGE06_GET)) {
             setmetatile(14, 20, 0x265, FALSE)

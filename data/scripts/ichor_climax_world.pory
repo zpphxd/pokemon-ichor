@@ -1,0 +1,440 @@
+// Ichor: the climax on the world's existing maps (design/phase4/SCRIPT.md III-10 and
+// III-12): the Fates at their three sanctuaries, Elpis's room, Mom's house, the
+// Stoa's unfinished decree, and Elpis's line. tools/ichor/maps/climax_world.py adds
+// the objects; each map's ON_TRANSITION calls its *_ClimaxObjects, so nothing here
+// shows outside the Frozen Hour and the maps' own scripts are untouched.
+
+// A Fate stands at her sanctuary only while the world is stopped and she sleeps.
+script Climax_EventScript_FateObjects {
+    setflag(FLAG_ICHOR_HIDE_FATE_CUTTER)
+    setflag(FLAG_ICHOR_HIDE_FATE_MEASURER)
+    setflag(FLAG_ICHOR_HIDE_FATE_SPINNER)
+    if (!flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        return
+    }
+    if (!flag(FLAG_ICHOR_ROUSED_CUTTER)) {
+        clearflag(FLAG_ICHOR_HIDE_FATE_CUTTER)
+    }
+    if (!flag(FLAG_ICHOR_ROUSED_MEASURER)) {
+        clearflag(FLAG_ICHOR_HIDE_FATE_MEASURER)
+    }
+    if (!flag(FLAG_ICHOR_ROUSED_SPINNER)) {
+        clearflag(FLAG_ICHOR_HIDE_FATE_SPINNER)
+    }
+    return
+}
+
+script Kaldera_TelchinesForge_EventScript_ClimaxObjects {
+    call(Climax_EventScript_FateObjects)
+    setvar(VAR_0x8004, LOCALID_FORGE_CUTTER)
+    special(Ichor_UnfreezeObject)
+    return
+}
+
+script Arkadia_EventScript_ClimaxObjects {
+    call(Climax_EventScript_FateObjects)
+    setvar(VAR_0x8004, LOCALID_ARKADIA_MEASURER)
+    special(Ichor_UnfreezeObject)
+    return
+}
+
+script ElaiaVillage_EventScript_ClimaxObjects {
+    call(Climax_EventScript_FateObjects)
+    setvar(VAR_0x8004, LOCALID_ELAIA_SPINNER)
+    special(Ichor_UnfreezeObject)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// III-10C. Kaldera's forge: the Cutter
+// ---------------------------------------------------------------------------
+
+script Kaldera_TelchinesForge_EventScript_Cutter {
+    lockall
+    faceplayer
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("You found me. Good. I wasn't sure anyone could.\p"
+                  "I've cut every thread in Aethos. Every one, for a thousand years.\p"
+                  "I always knew when. Before they were born, I knew.\p"
+                  "Do you know what it's like? To love someone you've already cut?\p"
+                  "…Now I don't know anything. My hands are empty.\p"
+                  "It's the most frightening thing that's ever happened to me.\p"
+                  "Help me up."))
+    closemessage
+    // The player takes her hand. A little color comes into her.
+    playse(SE_M_HEAL_BELL)
+    applymovement(LOCALID_FORGE_CUTTER, Common_Movement_WalkInPlaceDown)
+    waitmovement(0)
+    msgbox(format("Warm. Of course you're warm. You're the only thing still going.\p"
+                  "Four hours of the stair are mine. They'll take your weight now.\p"
+                  "Go and get my sisters."))
+    closemessage
+    removeobject(LOCALID_FORGE_CUTTER)
+    setflag(FLAG_ICHOR_ROUSED_CUTTER)
+    setflag(FLAG_ICHOR_HIDE_FATE_CUTTER)
+    setspeaker(SP_NAME_NONE)
+    call(Climax_EventScript_SparkFlies)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// III-10D. The Pool of Mnemosyne: the Measurer
+// ---------------------------------------------------------------------------
+
+script Arkadia_EventScript_Measurer {
+    lockall
+    faceplayer
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("The pool remembers. Even now. Memory doesn't need time to move.\p"
+                  "Look in. I'll show you who chained us."))
+    closemessage
+    // The gray turns sepia: a young man in a white cloak at the Loom, hammering a
+    // black chain onto a post, three figures at the warp with their backs to him.
+    fadeoutbgm(1)
+    special(Ichor_SepiaMemoryBegin)
+    playse(SE_M_HAZE)
+    delay(30)
+    setspeaker(Climax_Name_Medon)
+    msgbox(format("The Oracle said a king's death would save the city.\p"
+                  "So my father put on a peasant's cloak and walked into the spears.\p"
+                  "If oracles can be wrong, he died for nothing.\p"
+                  "So they won't be. Not ever again. Not for anyone."))
+    playse(SE_WALL_HIT)
+    msgbox(format("Hold still. Please. I'm sorry. Hold still."))
+    closemessage
+    playse(SE_WALL_HIT)
+    delay(20)
+    special(Ichor_SepiaMemoryEnd)
+    fadeinbgm(1)
+    setflag(FLAG_ICHOR_SAW_MEDON)
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Medon. The first Archon. He cried the whole time he worked.\p"
+                  "He made every knot tight, so his father's would mean something.\p"
+                  "Grief is a very strong smith.\p"
+                  "He kept one last knot. Archons have kept it ever since. In a box.\p"
+                  "Remember that, after."))
+    if (flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
+        msgbox(format("You've been to the city. You've seen him. Good."))
+    } elif (flag(FLAG_ICHOR_ROUSED_SPINNER)) {
+        msgbox(format("And go to the city. The healer is there.\p"
+                      "He isn't at the top of the stair. He's with her."))
+    } else {
+        msgbox(format("And go to the city before you go home. The healer is there.\p"
+                      "He isn't at the top of the stair. He's with her."))
+    }
+    msgbox(format("Your hand, please."))
+    closemessage
+    playse(SE_M_HEAL_BELL)
+    applymovement(LOCALID_ARKADIA_MEASURER, Common_Movement_WalkInPlaceLeft)
+    waitmovement(0)
+    if (flag(FLAG_ICHOR_ROUSED_CUTTER) && flag(FLAG_ICHOR_ROUSED_SPINNER)) {
+        msgbox(format("Four more hours. That's all twelve. We'll all come."))
+    } elif (flag(FLAG_ICHOR_ROUSED_SPINNER)) {
+        msgbox(format("Four more hours. That's eight. The last four are the Cutter's."))
+    } elif (flag(FLAG_ICHOR_ROUSED_CUTTER)) {
+        msgbox(format("Four more hours. That's eight. The last four are my little sister's."))
+    } else {
+        msgbox(format("Four hours. The other eight are my sisters'."))
+    }
+    closemessage
+    removeobject(LOCALID_ARKADIA_MEASURER)
+    setflag(FLAG_ICHOR_ROUSED_MEASURER)
+    setflag(FLAG_ICHOR_HIDE_FATE_MEASURER)
+    setspeaker(SP_NAME_NONE)
+    call(Climax_EventScript_SparkFlies)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// III-10E. Astyra: the unfinished decree, and Elpis's room
+// ---------------------------------------------------------------------------
+
+script Astyra_Stoa_EventScript_UnfinishedDecree {
+    if (!flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        msgbox(format("The Keeper's desk. Tablets in rows, every one in the same neat hand."), MSGBOX_SIGN)
+        end
+    }
+    lockall
+    if (flag(FLAG_ICHOR_GOT_UNFINISHED_DECREE)) {
+        msgbox(format("His right hand is dark with ink to the wrist."))
+        releaseall
+        end
+    }
+    msgbox(format("A wax tablet lies under his hand.\p"
+                  "“DECREE OF THE GOLDEN AGE. In the first hour without end…\p"
+                  "…by the will of Kronos, its Keeper shall be Iape-”\p"
+                  "The stylus stopped two letters short of his own name."))
+    msgbox(format("Take the tablet?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("You leave him to it. He isn't going anywhere."))
+    } else {
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(format("{PLAYER} took the unfinished decree."))
+        waitfanfare
+        setflag(FLAG_ICHOR_GOT_UNFINISHED_DECREE)
+    }
+    releaseall
+}
+
+script Astyra_PhaedonsHouse_EventScript_ClimaxObjects {
+    setflag(FLAG_ICHOR_HIDE_PHAEDON_BEDSIDE)
+    setflag(FLAG_ICHOR_HIDE_DAWN_CAST)
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        clearflag(FLAG_ICHOR_HIDE_DAWN_CAST)
+        if (!flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
+            clearflag(FLAG_ICHOR_HIDE_PHAEDON_BEDSIDE)
+        }
+        setvar(VAR_0x8004, LOCALID_PHAEDONS_HOUSE_BEDSIDE)
+        special(Ichor_UnfreezeObject)
+    } elif (var(VAR_ICHOR_ACT3) == 18) {
+        clearflag(FLAG_ICHOR_HIDE_DAWN_CAST)
+    }
+    return
+}
+
+// The music box: in the hour, the only moving thing in the room.
+script Astyra_PhaedonsHouse_EventScript_MusicBoxClimax {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        msgbox(format("It's ticking. It's the tune you've heard everywhere since the world stopped.\p"
+                      "A scratched label: From Papa's friend under the island."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("It's stopped. Somebody wound it all the way down."), MSGBOX_SIGN)
+    }
+    end
+}
+
+script Astyra_PhaedonsHouse_EventScript_DaphneChair {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        msgbox(format("Daphne, frozen mid-word. One finger keeps her place on the page."), MSGBOX_SIGN)
+        end
+    }
+    msgbox(format("DAPHNE: Not now. Later. Let me just sit here and be wrong about everything."), MSGBOX_NPC)
+}
+
+script Astyra_PhaedonsHouse_EventScript_PhaedonDawn {
+    msgbox(format("He doesn't look away from her."), MSGBOX_SIGN)
+}
+
+script Astyra_PhaedonsHouse_EventScript_Bedside {
+    lockall
+    if (flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
+        releaseall
+        end
+    }
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("She was humming when it stopped.\p"
+                  "I've been sitting here trying to remember how it ends.\p"
+                  "Seven years, every night. She never gets to the end.\p"
+                  "She always falls asleep first."))
+    msgbox(format("Daphne was reading to her. The olive on the Akropolis. The one that grew back.\p"
+                  "I read her the rest. I don't know if she can hear me.\p"
+                  "It isn't a garden. I thought it would be a garden.\p"
+                  "I thought she'd play in it. Forever. Never tired.\p"
+                  "She isn't tired. She isn't anything."))
+    call(Climax_EventScript_HasTablet)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Show him the sealed tablet?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Phaedon doesn't look up."))
+        releaseall
+        end
+    }
+    closemessage
+    // He takes it. He looks at the seal for a long time. He breaks it.
+    delay(40)
+    playse(SE_BALL_BOUNCE_1)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("“ELPIS, DAUGHTER OF PHAEDON. Revised.”\p"
+                  "“Short is her thread. The shears are near.”\p"
+                  "That's it. That's what they gave me.\p"
+                  "And underneath, in different writing…\p"
+                  "“Scraped from the wax. The Pythia's words, as she spoke them:”\p"
+                  "“Her thread ends the day the hours stop.”\p"
+                  "“Truthfully. Alethea.”"))
+    closemessage
+    delay(90)
+    msgbox(format("The day the hours stop.\p"
+                  "Not young. Not soon. The day the hours stop.\p"
+                  "That's never. It was always never. Unless someone…"))
+    closemessage
+    applymovement(LOCALID_PHAEDONS_HOUSE_BEDSIDE, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(30)
+    msgbox(format("…I stopped them.\p"
+                  "He handed me a short thread, and I went and made it true.\p"
+                  "Her thread's ended. Tonight. I ended it."))
+    closemessage
+    applymovement(LOCALID_PHAEDONS_HOUSE_BEDSIDE, Common_Movement_FaceRight)
+    waitmovement(0)
+    msgbox(format("Do you understand? If you wake the world, it's already cut.\p"
+                  "She won't wake with it. She can't. Her thread is done.\p"
+                  "This way she's here. Humming. I can hold her hand.\p"
+                  "I'm sorry. I'll be at the top of the stair.\p"
+                  "Please don't come up."))
+    closemessage
+    // He lets go of her hand, very carefully, and leaves.
+    applymovement(LOCALID_PHAEDONS_HOUSE_BEDSIDE, Climax_Movement_PhaedonLeavesHouse)
+    waitmovement(0)
+    playse(SE_EXIT)
+    removeobject(LOCALID_PHAEDONS_HOUSE_BEDSIDE)
+    setflag(FLAG_ICHOR_HIDE_PHAEDON_BEDSIDE)
+    setflag(FLAG_ICHOR_PHAEDON_READ_TABLET)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Elpis's mouth is open on a note. You don't know which one."))
+    releaseall
+}
+
+movement Climax_Movement_PhaedonLeavesHouse { walk_down walk_left walk_down * 7 }
+
+// ---------------------------------------------------------------------------
+// III-10F. Elaia: the Spinner, and home
+// ---------------------------------------------------------------------------
+
+script ElaiaVillage_EventScript_Spinner {
+    lockall
+    faceplayer
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("There you are. Back where you started.\p"
+                  "This is where your thread came up. Out of the dark, like a root.\p"
+                  "We didn't spin it. You did. You've been spinning it all along.\p"
+                  "Look. It's gold. We don't spin gold. Nobody does."))
+    msgbox(format("It's what a thread looks like when nobody's decided it yet.\p"
+                  "The olives came in silver on your festival day. That was us. Looking.\p"
+                  "We wanted to see you on your day. We never get to see anyone's day.\p"
+                  "And Halia. She tried so hard to read you. Tell her it wasn't her eyes."))
+    if (flag(FLAG_ICHOR_ROUSED_CUTTER) && flag(FLAG_ICHOR_ROUSED_MEASURER)) {
+        msgbox(format("Give me your hand. That's all twelve hours. We'll all come."))
+    } else {
+        msgbox(format("Give me your hand. Four more hours. Find my sister, and we'll all come."))
+    }
+    closemessage
+    playse(SE_M_HEAL_BELL)
+    applymovement(LOCALID_ELAIA_SPINNER, Common_Movement_WalkInPlaceDown)
+    waitmovement(0)
+    removeobject(LOCALID_ELAIA_SPINNER)
+    setflag(FLAG_ICHOR_ROUSED_SPINNER)
+    setflag(FLAG_ICHOR_HIDE_FATE_SPINNER)
+    setspeaker(SP_NAME_NONE)
+    call(Climax_EventScript_SparkFlies)
+    releaseall
+}
+
+// Mom's house in the hour: the slice's own loom, honey shelf and hearth call these first.
+script Climax_EventScript_HomeLoom {
+    lockall
+    if (flag(FLAG_ICHOR_WORE_MELITTAS_CLOAK)) {
+        msgbox(format("Mom's loom. The cloak she made you is on your shoulders."))
+        releaseall
+        end
+    }
+    msgbox(format("The traveling cloak is finished. It's folded on the stool.\p"
+                  "A note is pinned to it: Someday. -M."))
+    msgbox(format("Put it on?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("You leave it folded. It'll keep."))
+    } else {
+        playse(SE_M_SKETCH)
+        msgbox(format("{PLAYER} put on Melitta's cloak."))
+        setflag(FLAG_ICHOR_WORE_MELITTAS_CLOAK)
+    }
+    releaseall
+    end
+}
+
+script Climax_EventScript_HomeHoney {
+    msgbox(format("There's a clean ring where the jar sat. No dust. It wasn't gone long."), MSGBOX_SIGN)
+    end
+}
+
+script Climax_EventScript_HomeHearth {
+    msgbox(format("No fire. There's always a fire."), MSGBOX_SIGN)
+    end
+}
+
+// ===========================================================================
+// III-12. Dawn, and Elpis's line
+// ===========================================================================
+
+// After the twelfth chime the screen is white. III-12A (Delphoi at dawn: Mom, Hyperion
+// turning to the sun, Rhea's wrists, Phaedon asking to be taken to her) belongs on
+// Delphoi's court; until that map is built, the light carries straight on to
+// Astyra, and the state III-12A sets is set here.
+script Climax_EventScript_Dawn {
+    setflag(FLAG_ICHOR_RHEA_SURRENDERED)
+    warpsilent(MAP_ASTYRA_PHAEDONS_HOUSE, 9, 12)
+    waitstate
+    releaseall
+}
+
+script Astyra_PhaedonsHouse_EventScript_ElpisLine {
+    lockall
+    // Morning comes in through the window with the city's noise.
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    playse(SE_M_GUST)
+    delay(30)
+    setspeaker(Climax_Name_Elpis)
+    msgbox(format("Papa! You missed it. I got to the end.\p"
+                  "Of the song. All the way to the end. Listen."))
+    closemessage
+    // She hums the lullaby all the way through, and it resolves.
+    playbgm(MUS_ICHOR_ELPIS_LULLABY, FALSE)
+    delay(240)
+    setspeaker(Climax_Name_Daphne)
+    msgbox(format("She did. I heard it. I'd never heard the end before."))
+    closemessage
+    // Phaedon kneels by the bed.
+    applymovement(LOCALID_PHAEDONS_HOUSE_PHAEDON_DAWN, Climax_Movement_PhaedonToBed)
+    waitmovement(0)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Little one. Listen. The Oracle. What it said about you.\p"
+                  "It's gone. All of it. Nobody can read anybody now.\p"
+                  "Not the Pythia. Not me. I don't know how long you have.\p"
+                  "I don't know. I don't know anything."))
+    closemessage
+    // Elpis thinks about it: she turns to the window and back.
+    applymovement(LOCALID_ASTYRA_PHAEDONS_HOUSE_ELPIS, Climax_Movement_ElpisThinks)
+    waitmovement(0)
+    setspeaker(Climax_Name_Elpis)
+    msgbox(format("Then my thread isn't finished yet."))
+    closemessage
+    fadeoutbgm(1)
+    delay(120)
+    applymovement(LOCALID_PHAEDONS_HOUSE_PHAEDON_DAWN, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Climax_Name_Elpis)
+    msgbox(format("Papa? Are you sad or happy?"))
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("I don't know that either."))
+    applymovement(LOCALID_ASTYRA_PHAEDONS_HOUSE_ELPIS, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Climax_Name_Elpis)
+    msgbox(format("{PLAYER}. This is Starry. Papa says there's a real one.\p"
+                  "Is he still sad?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Then we should go and see him."))
+    } else {
+        msgbox(format("Good. I'd like to meet him."))
+    }
+    closemessage
+    // Ophiuchus, the healer, takes its place in the Star Chart (SYSTEMS §8 #17).
+    setvar(VAR_0x8004, 16)
+    special(Ichor_PlaceConstellation)
+    playse(SE_M_MORNING_SUN)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A new star has appeared in your Star Chart: Ophiuchus, the healer."))
+    closemessage
+    setflag(FLAG_ICHOR_ELPIS_LINE)
+    call(Climax_EventScript_ActComplete)
+    fadescreen(FADE_TO_BLACK)
+    setflag(FLAG_ICHOR_HIDE_DAWN_CAST)
+    removeobject(LOCALID_PHAEDONS_HOUSE_PHAEDON_DAWN)
+    removeobject(LOCALID_PHAEDONS_HOUSE_DAPHNE_CHAIR)
+    // The League begins in Astyra the next morning (L-1).
+    warp(MAP_ASTYRA, 1)
+    waitstate
+    releaseall
+}
+
+movement Climax_Movement_PhaedonToBed { walk_up * 6 walk_right face_up }
+movement Climax_Movement_ElpisThinks { face_right delay_16 delay_16 face_left delay_8 face_down }

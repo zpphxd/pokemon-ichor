@@ -56,6 +56,48 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Astyra_PhaedonsHouse_EventScript_Visitor",
       "flag": "FLAG_ICHOR_HIDE_DAPHNE_HOUSE"
+    },
+    {
+      "local_id": "LOCALID_PHAEDONS_HOUSE_BEDSIDE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PHAEDON",
+      "x": 9,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_PhaedonsHouse_EventScript_Bedside",
+      "flag": "FLAG_ICHOR_HIDE_PHAEDON_BEDSIDE"
+    },
+    {
+      "local_id": "LOCALID_PHAEDONS_HOUSE_DAPHNE_CHAIR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PROFESSOR_DAPHNE",
+      "x": 11,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_PhaedonsHouse_EventScript_DaphneChair",
+      "flag": "FLAG_ICHOR_HIDE_DAWN_CAST"
+    },
+    {
+      "local_id": "LOCALID_PHAEDONS_HOUSE_PHAEDON_DAWN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PHAEDON",
+      "x": 8,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_PhaedonsHouse_EventScript_PhaedonDawn",
+      "flag": "FLAG_ICHOR_HIDE_DAWN_CAST"
     }
   ],
   "warp_events": [

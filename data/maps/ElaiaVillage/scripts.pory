@@ -12,6 +12,8 @@
 mapscripts ElaiaVillage_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(ElaiaVillage_EventScript_SetUpVillage)
+        // the climax: the Spinner under the old olive in the Frozen Hour (III-10F)
+        call(ElaiaVillage_EventScript_ClimaxObjects)
     }
     MAP_SCRIPT_ON_LOAD {
         if (flag(FLAG_ICHOR_HIDE_SCRIBE)) {

@@ -2,6 +2,8 @@ mapscripts Arkadia_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         special(Ichor_ReleaseTimeOfDay)
         setrespawn(HEAL_LOCATION_ARKADIA)
+        // the climax: the Measurer at the falls pool in the Frozen Hour (III-10D)
+        call(Arkadia_EventScript_ClimaxObjects)
         setflag(FLAG_ICHOR_HIDE_IAPETOS_ARKADIA)
         removeobject(LOCALID_ARKADIA_IAPETOS)
         if (flag(FLAG_ICHOR_KLEON_JOINED_TITANS)) {

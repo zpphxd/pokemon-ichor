@@ -128,14 +128,23 @@ script ElaiaVillage_PlayersHouse_1F_EventScript_AfterWhiteOut {
 }
 
 script ElaiaVillage_PlayersHouse_1F_EventScript_Hearth {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        goto(Climax_EventScript_HomeHearth)
+    }
     msgbox(format("The family hearth, banked low. Mom says a cold hearth is bad luck."), MSGBOX_SIGN)
 }
 
 script ElaiaVillage_PlayersHouse_1F_EventScript_Loom {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        goto(Climax_EventScript_HomeLoom)
+    }
     msgbox(format("A half-woven traveling cloak. Mom says you'll need it someday.\pShe's said “someday” a lot lately."), MSGBOX_SIGN)
 }
 
 script ElaiaVillage_PlayersHouse_1F_EventScript_HoneyShelf {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        goto(Climax_EventScript_HomeHoney)
+    }
     if (flag(FLAG_ICHOR_MOM_MISSING) && !flag(FLAG_SYS_GAME_CLEAR)) {
         msgbox(format("One clean circle in the dust.\pThe jar marked “NOT FOR {PLAYER}” is gone."), MSGBOX_SIGN)
         end
