@@ -1936,6 +1936,13 @@
 #define FLAG_ICHOR_ITEM_R16_BALL                (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Capital pass ball jar
 #define FLAG_ICHOR_ITEM_R16_ETHER               (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Capital pass ether jar
 #define FLAG_ICHOR_ELEUSA_CAPITAL_OPEN          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Eleusa eastern watch stood down after the Moon Laurel
+#define FLAG_ICHOR_PHAEDON_DAPHNE_VISIT         (FLAG_ICHOR_GENERAL_START + 0x133) // Ichor: Witnessed Daphne and Phaedon at Elpis bedside
+#define FLAG_ICHOR_HIDE_PHAEDON_HOUSE           (FLAG_ICHOR_GENERAL_START + 0x134) // Ichor: Phaedon left the bedside visit
+#define FLAG_ICHOR_HIDE_DAPHNE_HOUSE            (FLAG_ICHOR_GENERAL_START + 0x135) // Ichor: Daphne left the bedside visit
+#define FLAG_ICHOR_ASTYRA_OSTRACISM_DONE        (FLAG_ICHOR_GENERAL_START + 0x136) // Ichor: Witnessed the forged ostracism and Alethea exile
+#define FLAG_ICHOR_HIDE_ALETHEA_ASTYRA          (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Alethea is outside the city after exile
+#define FLAG_ICHOR_HIDE_ALETHEA_R16             (FLAG_ICHOR_GENERAL_START + 0x138) // Ichor: Roadside Alethea is absent before exile or after confession
+#define FLAG_ICHOR_ALETHEA_CONFESSED            (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Alethea told the truth about her reading outside Astyra
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

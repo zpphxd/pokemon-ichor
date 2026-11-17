@@ -148,6 +148,20 @@
       "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_R16_ETHER"
+    },
+    {
+      "local_id": "LOCALID_ROUTE16_CAPITAL_PASS_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 43,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_EventScript_RoadAlethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_R16"
     }
   ],
   "warp_events": [],

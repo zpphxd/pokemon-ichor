@@ -1,5 +1,6 @@
 mapscripts Astyra_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        special(Ichor_ReleaseTimeOfDay)
         setflag(FLAG_ICHOR_VISITED_ASTYRA)
     }
 }
@@ -24,7 +25,45 @@ script Astyra_EventScript_Alethea {
     release
 }
 script Astyra_EventScript_Clerk {
-    msgbox(format("The Assembly is being called.\pKeep the steps clear. We have enough people trying to be heard."), MSGBOX_NPC)
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE)) {
+        msgbox(format("The people have voted. The decree stands.\pThe Library will keep the record."))
+    } elif (!flag(FLAG_ICHOR_MET_PHAEDON)) {
+        msgbox(format("A long journey? Phaedon's Asclepeion is west of here.\pThe Assembly can wait until your Pokémon are well."))
+    } elif (!flag(FLAG_ICHOR_MET_ELPIS) || !flag(FLAG_ICHOR_PHAEDON_DAPHNE_VISIT)) {
+        msgbox(format("Daphne called at Phaedon's house. His daughter wanted company.\pAcross the square, the little door east of the Asclepeion."))
+    } elif (!flag(FLAG_ICHOR_DAPHNE_ASTYRA)) {
+        msgbox(format("Daphne left her papers at the Library.\pAsk her about them before the Assembly starts."))
+    } else {
+        msgbox(format("The Assembly is called. Through the Stoa door beside me.\pBring your evidence."))
+    }
+    release
+}
+script Astyra_EventScript_PlaceRoadAlethea {
+    if (flag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE) && !flag(FLAG_ICHOR_ALETHEA_CONFESSED)) {
+        clearflag(FLAG_ICHOR_HIDE_ALETHEA_R16)
+        addobject(LOCALID_ROUTE16_CAPITAL_PASS_ALETHEA)
+        setvar(VAR_0x8004, TIME_NIGHT)
+        special(Ichor_HoldTimeOfDay)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_R16)
+        removeobject(LOCALID_ROUTE16_CAPITAL_PASS_ALETHEA)
+    }
+    return
+}
+script Astyra_EventScript_RoadAlethea {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("Ten years. That's how long an ostracism lasts.\pI'll be old. Truthfully, very old.\pCan I tell you something? About my Klotheia?"))
+    msgbox(format("I said Halia called me exhausting. She did. That wasn't the reading.\pShe said: You'll tell the truth all your life…\pand they'll call you a liar."))
+    msgbox(format("So I say truthfully. Every time. In case it helps.\pIt doesn't. But I like to have it on the record."))
+    msgbox(format("The Titans are going up the Akropolis tonight. I heard the Keeper's men.\pCome on."))
+    setflag(FLAG_ICHOR_ALETHEA_CONFESSED)
+    closemessage
+    removeobject(LOCALID_ROUTE16_CAPITAL_PASS_ALETHEA)
+    release
 }
 script Astyra_EventScript_Guard {
     msgbox(format("The Akropolis is closed by the Archon's order.\pThe inscription? Read it if you like. Just stay below the steps."), MSGBOX_NPC)

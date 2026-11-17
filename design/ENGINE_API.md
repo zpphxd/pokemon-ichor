@@ -406,6 +406,13 @@ final presentation, the lion Labor or the onward Astyra chapter.
 approach, actual doors to Phaedon/Elpis/the Library, both herms, real healing,
 Pithos closure, the composed lullaby/music-box return, Page V's incorrect/
 correct riddle paths, Phaedon whiteout recovery and save/reset/CONTINUE.
+It also traverses the actual bedside visit, both Elpis/healer visit orders,
+the Assembly refusal and full ostracism, six distinct live citizens at the
+urn, all three exact count windows, non-replay on reentry, the roadside
+confession and staged-clock release. House and Assembly scenes use local
+frame triggers plus permanent completion receipts; no additional bank vars.
+The decree pauses and then permanently stops map music before the return warp:
+leaving BGM temporarily paused can strand the warp's music-stop task.
 Eleusa retains its original wall/watch in Act I; its load script opens the
 wall after the Moon Laurel and a separate hide flag retires the watch.
 Regenerate with `python3 tools/ichor/maps/astyra.py` after `arkadia.py` and

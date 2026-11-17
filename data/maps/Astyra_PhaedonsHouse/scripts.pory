@@ -1,4 +1,61 @@
-mapscripts Astyra_PhaedonsHouse_MapScripts {}
+mapscripts Astyra_PhaedonsHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_MET_PHAEDON) && !flag(FLAG_ICHOR_PHAEDON_DAPHNE_VISIT)) {
+            clearflag(FLAG_ICHOR_HIDE_PHAEDON_HOUSE)
+            clearflag(FLAG_ICHOR_HIDE_DAPHNE_HOUSE)
+            addobject(LOCALID_ASTYRA_PHAEDONS_HOUSE_PHAEDON)
+            addobject(LOCALID_ASTYRA_PHAEDONS_HOUSE_DAPHNE)
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_PHAEDON_HOUSE)
+            setflag(FLAG_ICHOR_HIDE_DAPHNE_HOUSE)
+            removeobject(LOCALID_ASTYRA_PHAEDONS_HOUSE_PHAEDON)
+            removeobject(LOCALID_ASTYRA_PHAEDONS_HOUSE_DAPHNE)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: Astyra_PhaedonsHouse_EventScript_Visit
+    ]
+}
+script Astyra_PhaedonsHouse_EventScript_Visitor {
+    end
+}
+script Astyra_PhaedonsHouse_EventScript_Visit {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    applymovement(OBJ_EVENT_ID_PLAYER, AstyraHouse_Movement_Approach)
+    waitmovement(0)
+    setspeaker(Astyra_Text_NameDaphne)
+    msgbox(format("Still being wrong?"))
+    setspeaker(Astyra_Text_NamePhaedon)
+    msgbox(format("Constantly. You?"))
+    setspeaker(Astyra_Text_NameDaphne)
+    msgbox(format("Never, lately."))
+    closemessage
+    applymovement(LOCALID_ASTYRA_PHAEDONS_HOUSE_PHAEDON, AstyraHouse_Movement_Left)
+    waitmovement(0)
+    applymovement(LOCALID_ASTYRA_PHAEDONS_HOUSE_PHAEDON, AstyraHouse_Movement_Leave)
+    waitmovement(0)
+    removeobject(LOCALID_ASTYRA_PHAEDONS_HOUSE_PHAEDON)
+    applymovement(LOCALID_ASTYRA_PHAEDONS_HOUSE_DAPHNE, AstyraHouse_Movement_Right)
+    waitmovement(0)
+    applymovement(LOCALID_ASTYRA_PHAEDONS_HOUSE_DAPHNE, AstyraHouse_Movement_Leave)
+    waitmovement(0)
+    removeobject(LOCALID_ASTYRA_PHAEDONS_HOUSE_DAPHNE)
+    setflag(FLAG_ICHOR_PHAEDON_DAPHNE_VISIT)
+    releaseall
+    end
+}
+movement AstyraHouse_Movement_Approach {
+    walk_up * 4
+}
+movement AstyraHouse_Movement_Left { walk_left }
+movement AstyraHouse_Movement_Right { walk_right }
+movement AstyraHouse_Movement_Leave {
+    walk_down * 7
+    walk_right
+    walk_down
+}
 script Astyra_PhaedonsHouse_EventScript_Elpis {
     lock
     faceplayer

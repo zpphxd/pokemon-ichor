@@ -1,4 +1,9 @@
-mapscripts Route16_CapitalPass_MapScripts {}
+mapscripts Route16_CapitalPass_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        special(Ichor_ReleaseTimeOfDay)
+        call(Astyra_EventScript_PlaceRoadAlethea)
+    }
+}
 
 script Route16_CapitalPass_EventScript_NIKIAS {
     trainerbattle_single(TRAINER_ICHOR_R16_NIKIAS,

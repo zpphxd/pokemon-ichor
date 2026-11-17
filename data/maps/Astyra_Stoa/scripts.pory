@@ -1,0 +1,203 @@
+mapscripts Astyra_Stoa_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_0x8004, TIME_DAY)
+        special(Ichor_HoldTimeOfDay)
+        if (!flag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: Astyra_Stoa_EventScript_Assembly
+    ]
+}
+text AstyraStoa_Text_Archon { "THE ARCHON" }
+text AstyraStoa_Text_Keeper { "LYKOPHRON" }
+text AstyraStoa_Text_Nikomache { "NIKOMACHE" }
+text AstyraStoa_Text_Euphranor { "EUPHRANOR" }
+text AstyraStoa_Text_Kallippos { "KALLIPPOS" }
+text AstyraStoa_Text_Mnesippe { "MNESIPPE" }
+text AstyraStoa_Text_Philinos { "PHILINOS" }
+text AstyraStoa_Text_Theano { "THEANO" }
+text AstyraStoa_Text_CountFirst { format("THE COUNT\nALETHEA, 1,204") }
+text AstyraStoa_Text_CountSecond { format("THE COUNT\nALETHEA, 3,977") }
+text AstyraStoa_Text_CountFinal { format("THE COUNT\nALETHEA, 6,000+.\pOthers: 389.") }
+script Astyra_Stoa_EventScript_Assembly {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    if (!flag(FLAG_ICHOR_MET_PHAEDON) || !flag(FLAG_ICHOR_MET_ELPIS)
+        || !flag(FLAG_ICHOR_PHAEDON_DAPHNE_VISIT) || !flag(FLAG_ICHOR_DAPHNE_ASTYRA)) {
+        msgbox(format("The Assembly has not begun.\pPhaedon, Elpis and Daphne are still expecting you. The clerk can direct you."))
+        closemessage
+        warp(MAP_ASTYRA, 3)
+        waitstate
+        releaseall
+        end
+    }
+    applymovement(OBJ_EVENT_ID_PLAYER, AstyraStoa_Movement_Approach)
+    waitmovement(0)
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("These readings were forged. So was the play in Thyrsa.\pThe little hook is on both. Here. Look at it."))
+    setspeaker(AstyraStoa_Text_Keeper)
+    msgbox(format("May I tell the Assembly something true?\pThe evidence was forged. By the girl who brought it."))
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("That's not true. I'm telling you the truth."))
+    setspeaker(AstyraStoa_Text_Archon)
+    msgbox(format("Let the city decide. A shard, and a name."))
+    playbgm(MUS_ICHOR_TITAN, TRUE)
+    setspeaker(AstyraStoa_Text_Nikomache)
+    applymovement(LOCALID_ASTYRA_STOA_NIKOMACHE, AstyraStoa_Movement_NikomacheTo)
+    waitmovement(0)
+    msgbox(format("I have children. I need this city quiet."))
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_ASTYRA_STOA_NIKOMACHE, AstyraStoa_Movement_NikomacheBack)
+    waitmovement(0)
+    setspeaker(AstyraStoa_Text_Euphranor)
+    applymovement(LOCALID_ASTYRA_STOA_EUPHRANOR, AstyraStoa_Movement_EuphranorTo)
+    waitmovement(0)
+    msgbox(format("I read what bears the seal. That's my work."))
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_ASTYRA_STOA_EUPHRANOR, AstyraStoa_Movement_EuphranorBack)
+    waitmovement(0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(AstyraStoa_Text_CountFirst, MSGBOX_SIGN)
+    setspeaker(AstyraStoa_Text_Kallippos)
+    applymovement(LOCALID_ASTYRA_STOA_KALLIPPOS, AstyraStoa_Movement_KallipposTo)
+    waitmovement(0)
+    msgbox(format("I saw the record myself. Her name was there."))
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_ASTYRA_STOA_KALLIPPOS, AstyraStoa_Movement_KallipposBack)
+    waitmovement(0)
+    setspeaker(AstyraStoa_Text_Mnesippe)
+    applymovement(LOCALID_ASTYRA_STOA_MNESIPPE, AstyraStoa_Movement_MnesippeTo)
+    waitmovement(0)
+    msgbox(format("I don't know her. I know the Keeper."))
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_ASTYRA_STOA_MNESIPPE, AstyraStoa_Movement_MnesippeBack)
+    waitmovement(0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(AstyraStoa_Text_CountSecond, MSGBOX_SIGN)
+    setspeaker(AstyraStoa_Text_Philinos)
+    applymovement(LOCALID_ASTYRA_STOA_PHILINOS, AstyraStoa_Movement_PhilinosTo)
+    waitmovement(0)
+    msgbox(format("A city has to hold together. That's all."))
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_ASTYRA_STOA_PHILINOS, AstyraStoa_Movement_PhilinosBack)
+    waitmovement(0)
+    setspeaker(AstyraStoa_Text_Theano)
+    applymovement(LOCALID_ASTYRA_STOA_THEANO, AstyraStoa_Movement_TheanoTo)
+    waitmovement(0)
+    msgbox(format("I wish she'd been right."))
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_ASTYRA_STOA_THEANO, AstyraStoa_Movement_TheanoBack)
+    waitmovement(0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(AstyraStoa_Text_CountFinal, MSGBOX_SIGN)
+    fadeoutbgm(1)
+    callnative(StopMapMusic)
+    delay(30)
+    setspeaker(AstyraStoa_Text_Keeper)
+    msgbox(format("By vote of the Assembly, Alethea is exiled from Astyra.\pTen years. The decree bears the Archon's seal."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("An owl pressed into the wax.\pUnder it: a little hook."))
+    closemessage
+    delay(90)
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("They believed the better story."))
+    setspeaker(AstyraStoa_Text_Archon)
+    msgbox(format("The people have voted. It is written.\pYou're from Kalliste.\p…Hm."))
+    closemessage
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_ASTYRA)
+    setflag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE)
+    removeobject(LOCALID_ASTYRA_STOA_ALETHEA)
+    warp(MAP_ASTYRA, 3)
+    waitstate
+    releaseall
+    end
+}
+script Astyra_Stoa_EventScript_Archon {
+    msgbox(format("The people have voted. It is written."), MSGBOX_NPC)
+}
+script Astyra_Stoa_EventScript_Keeper {
+    msgbox(format("The record is complete. There is nothing to add."), MSGBOX_NPC)
+}
+script Astyra_Stoa_EventScript_Alethea {
+    msgbox(format("Let them see the hook for themselves."), MSGBOX_NPC)
+}
+script Astyra_Stoa_EventScript_Citizen {
+    msgbox(format("The count is posted. What else can I tell you?"), MSGBOX_NPC)
+}
+script Astyra_Stoa_EventScript_Count {
+    if (flag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE)) {
+        msgbox(AstyraStoa_Text_CountFinal, MSGBOX_SIGN)
+    } else {
+        msgbox(format("The count board is empty."), MSGBOX_SIGN)
+    }
+    end
+}
+movement AstyraStoa_Movement_Approach { walk_up * 14 }
+movement AstyraStoa_Movement_NikomacheTo {
+    walk_down * 2
+    walk_right * 4
+    walk_up * 4
+    face_right
+}
+movement AstyraStoa_Movement_NikomacheBack {
+    walk_down * 4
+    walk_left * 4
+    walk_up * 2
+}
+movement AstyraStoa_Movement_EuphranorTo {
+    walk_down * 2
+    walk_right * 3
+    walk_up * 4
+    face_right
+}
+movement AstyraStoa_Movement_EuphranorBack {
+    walk_down * 4
+    walk_left * 3
+    walk_up * 2
+}
+movement AstyraStoa_Movement_KallipposTo {
+    walk_down * 2
+    walk_right * 2
+    walk_up * 4
+    face_right
+}
+movement AstyraStoa_Movement_KallipposBack {
+    walk_down * 4
+    walk_left * 2
+    walk_up * 2
+}
+movement AstyraStoa_Movement_MnesippeTo {
+    walk_down * 2
+    walk_left * 6
+    walk_up * 4
+    face_right
+}
+movement AstyraStoa_Movement_MnesippeBack {
+    walk_down * 4
+    walk_right * 6
+    walk_up * 2
+}
+movement AstyraStoa_Movement_PhilinosTo {
+    walk_down * 2
+    walk_left * 7
+    walk_up * 4
+    face_right
+}
+movement AstyraStoa_Movement_PhilinosBack {
+    walk_down * 4
+    walk_right * 7
+    walk_up * 2
+}
+movement AstyraStoa_Movement_TheanoTo {
+    walk_down * 2
+    walk_left * 8
+    walk_up * 4
+    face_right
+}
+movement AstyraStoa_Movement_TheanoBack {
+    walk_down * 4
+    walk_right * 8
+    walk_up * 2
+}

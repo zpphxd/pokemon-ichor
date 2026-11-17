@@ -1,5 +1,6 @@
 mapscripts Daphni_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        special(Ichor_ReleaseTimeOfDay)
         setrespawn(HEAL_LOCATION_DAPHNI)
     }
 }

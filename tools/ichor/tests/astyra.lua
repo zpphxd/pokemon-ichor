@@ -6,10 +6,39 @@ local function cross(dir, map, name)
     L.expect(L.mapId() == map, "actual connected crossing: " .. name)
     L.shot(name)
 end
-local function door(map, name)
-    L.useWarp(map)
+local function door(map, name, scene)
+    L.useWarp(map, scene)
+    if scene then L.settle() end
     L.expect(L.mapId() == map, "actual door: " .. name)
     L.shot(name)
+end
+local counts, votes, watchCount = {}, {}, false
+local logText = L.logText
+function L.logText()
+    logText()
+    if not watchCount or L.mapId() ~= S.MAP_STOA then return end
+    for i = 1, 6 do
+        local voter = L.npc("Astyra_Stoa_EventScript_Citizen", i)
+        if not votes[i] and voter.present and voter.x == 16 and voter.y == 16 then
+            votes[i] = true
+            L.shot("assembly_vote_" .. i)
+        end
+    end
+    for _, name in ipairs({"CountFirst", "CountSecond", "CountFinal"}) do
+        if not counts[name] then
+            local addr, same = S.SCRIPTS["AstyraStoa_Text_" .. name], true
+            for i = 0, 127 do
+                local b = emu:read8(addr + i)
+                if emu:read8(S.gStringVar4 + i) ~= b then same = false break end
+                if b == 0xFF then break end
+            end
+            if same then
+                counts[name] = true
+                L.expect(emu:read8(S.gTimeOfDay) == S.TIME_DAY, "Assembly count is staged in actual daylight")
+                L.shot("assembly_" .. name)
+            end
+        end
+    end
 end
 local function leave()
     L.useWarp(S.MAP_ASTYRA)
@@ -52,6 +81,16 @@ L.start(function()
     L.talk(L.sign("Astyra_EventScript_Kodros"))
     L.talk(L.sign("Astyra_EventScript_Kairos"))
     L.talk(L.sign("Astyra_EventScript_Perdix"))
+    L.useWarp(S.MAP_STOA, true)
+    L.settle()
+    L.expect(L.mapId() == S.MAP_ASTYRA and not L.getFlag(S.FLAG_OSTRACISM),
+             "the Assembly cannot skip the Phaedon, Elpis and Daphne story seeds")
+    door(S.MAP_HOUSE, "elpis_before_doctor", true)
+    L.talk(L.npc("Astyra_PhaedonsHouse_EventScript_Elpis"))
+    L.expect(not L.getFlag(S.FLAG_VISIT)
+             and not L.npc("Astyra_PhaedonsHouse_EventScript_Visitor", 1).present,
+             "visiting Elpis first leaves the later bedside exchange available")
+    leave()
     door(S.MAP_CLINIC, "phaedon_clinic")
     emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
     L.talk(L.npc("Astyra_Asclepeion_EventScript_Phaedon"))
@@ -62,11 +101,16 @@ L.start(function()
     L.talk(L.sign("Astyra_Asclepeion_EventScript_Pithos"), {answers = {2}})
     L.expect(L.idle(), "the capital's actual Pithos menu opens and closes")
     leave()
-    door(S.MAP_HOUSE, "elpis_room")
+    door(S.MAP_HOUSE, "elpis_room", true)
+    L.expect(L.getFlag(S.FLAG_VISIT)
+             and not L.npc("Astyra_PhaedonsHouse_EventScript_Visitor", 1).present
+             and not L.npc("Astyra_PhaedonsHouse_EventScript_Visitor", 2).present,
+             "Daphne and Phaedon's actual bedside exchange finishes and both visitors leave")
     L.expect(L.playing(S.MUS_LULLABY), "Elpis's room plays the composed lullaby")
     L.talk(L.npc("Astyra_PhaedonsHouse_EventScript_Elpis"))
     L.talk(L.sign("Astyra_PhaedonsHouse_EventScript_Starry"))
     L.talk(L.sign("Astyra_PhaedonsHouse_EventScript_MusicBox"))
+    L.shot("elpis_and_starry")
     L.expect(L.getFlag(S.FLAG_ELPIS) and L.playing(S.MUS_LULLABY),
              "Elpis's receipt and the music-box return to her room's song work")
     leave()
@@ -80,7 +124,31 @@ L.start(function()
     L.talk(L.npc("Astyra_Library_EventScript_Librarian"))
     L.shot("page_v")
     leave()
+    watchCount = true
+    L.useWarp(S.MAP_STOA, true)
+    L.settle()
+    watchCount = false
+    local voteCount = 0
+    for _ in pairs(votes) do voteCount = voteCount + 1 end
+    L.expect(voteCount == 6, "all six distinct named citizens actually walk to the voting urn")
+    L.expect(counts.CountFirst and counts.CountSecond and counts.CountFinal,
+             "the actual count window shows 1,204, then 3,977, then 6,000+ and 389 others")
+    L.expect(L.getFlag(S.FLAG_OSTRACISM) and L.mapId() == S.MAP_ASTYRA
+             and not L.npc("Astyra_EventScript_Alethea").present,
+             "the forged decree exiles Alethea and returns control to the real city")
+    L.expect(L.playing(S.MUS_CITY), "decree silence does not stall the warp or leave city music paused")
+    L.useWarp(S.MAP_STOA)
+    L.talk(L.sign("Astyra_Stoa_EventScript_Count"))
+    L.expect(L.idle() and not L.npc("Astyra_Stoa_EventScript_Alethea").present,
+             "reentering the Assembly cannot replay the vote or restore the exile")
+    L.shot("assembly_after_vote")
+    leave()
     cross("left", S.MAP_R16, "road_back_to_daphni")
+    L.expect(emu:read8(S.gTimeOfDay) == S.TIME_NIGHT,
+             "the exile's roadside confession is available at staged night without a clock gate")
+    L.talk(L.npc("Astyra_EventScript_RoadAlethea"))
+    L.expect(L.getFlag(S.FLAG_CONFESSION) and not L.npc("Astyra_EventScript_RoadAlethea").present,
+             "Alethea's actual reading and Keeper warning are saved before the raid")
     L.expect(emu:saveStateFile(L.OUT .. "before_capital_loss.ss", 31), "saved the capital loss branch")
     emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
     L.battleMode = "lose"
@@ -97,9 +165,13 @@ L.start(function()
     L.continueSave()
     L.expect(L.getFlag(S.FLAG_PAGE_V) and L.getFlag(S.FLAG_PHAEDON)
              and L.getFlag(S.FLAG_ELPIS) and L.getFlag(S.FLAG_DAPHNE)
+             and L.getFlag(S.FLAG_VISIT) and L.getFlag(S.FLAG_OSTRACISM)
+             and L.getFlag(S.FLAG_CONFESSION)
              and L.getFlag(S.FLAG_R15_HERM) and L.getFlag(S.FLAG_R16_HERM),
              "capital scenes, canonical page and both herms survive save/reset/CONTINUE")
     cross("left", S.MAP_DAPHNI, "return_to_daphni")
+    L.expect(emu:read8(L.ichor() + S.OFF_HELD_TIME) == 0,
+             "leaving the staged chapter returns the world to its real clock")
     cross("left", S.MAP_R15, "return_to_salt_lakes")
     cross("left", S.MAP_ELEUSA, "return_to_eleusa")
 end)

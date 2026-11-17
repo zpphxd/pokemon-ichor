@@ -81,3 +81,4 @@
 	.include "data/maps/Astyra_Asclepeion/scripts.inc"
 	.include "data/maps/Astyra_PhaedonsHouse/scripts.inc"
 	.include "data/maps/Astyra_Library/scripts.inc"
+	.include "data/maps/Astyra_Stoa/scripts.inc"

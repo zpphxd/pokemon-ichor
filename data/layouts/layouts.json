@@ -1155,6 +1155,17 @@
       "border_filepath": "data/layouts/Astyra_Library/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Library/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA_STOA",
+      "name": "Astyra_Stoa_Layout",
+      "width": 36,
+      "height": 32,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Astyra_Stoa/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra_Stoa/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

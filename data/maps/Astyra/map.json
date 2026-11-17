@@ -75,7 +75,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Astyra_EventScript_Alethea",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_ASTYRA"
     },
     {
       "local_id": "LOCALID_ASTYRA_CLERK",
@@ -126,6 +126,13 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_LIBRARY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 35,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_STOA",
       "dest_warp_id": "0"
     }
   ],

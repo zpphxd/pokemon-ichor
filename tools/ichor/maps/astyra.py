@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the Eleusa--Daphni--Astyra road and the capital's first story rooms."""
-from thyrsa import Map, bg, hall, read, warp, write
+from thyrsa import ROOT, Map, bg, hall, obj, read, warp, write
 from nemea import roads, encounters_and_teams
 
 ROADS = [
@@ -53,13 +53,15 @@ def city():
     m.json["warp_events"] = [
         warp(9, 31, "Astyra_Asclepeion", 0),
         warp(36, 31, "Astyra_PhaedonsHouse", 0),
-        warp(10, 19, "Astyra_Library", 0)]
+        warp(10, 19, "Astyra_Library", 0),
+        warp(35, 18, "Astyra_Stoa", 0)]
     m.person("Preacher", 17, 34, gfx="AUGUR")
     m.person("Herald", 29, 34, gfx="PILGRIM")
     m.person("Merchant", 37, 36, gfx="MERCHANT")
-    m.person("Alethea", 31, 23, gfx="ALETHEA")
+    m.person("Alethea", 31, 23, gfx="ALETHEA", flag="FLAG_ICHOR_HIDE_ALETHEA_ASTYRA")
     m.person("Clerk", 37, 19, gfx="ELDER_M")
     m.rect(34, 17, 40, 18, 0x149, True)
+    m.put(35, 18, 0x1DB)
     m.rect(21, 8, 30, 11, 0x0E1, True)
     m.person("Guard", 25, 12, gfx="HOPLITE")
     for name, x, y in (("Sign", 8, 36), ("ClinicSign", 12, 32),
@@ -86,6 +88,10 @@ def rooms():
     m.stamp(11, 2, [[0x21B, 0x21C], [0x21D, 0x21E]])
     m.rect(3, 7, 6, 8, 0x213, True)
     m.person("Elpis", 10, 4, gfx="KID_F")
+    m.person("Phaedon", 8, 5, gfx="MAN", script="Astyra_PhaedonsHouse_EventScript_Visitor",
+             flag="FLAG_ICHOR_HIDE_PHAEDON_HOUSE")
+    m.person("Daphne", 6, 5, gfx="PROFESSOR_DAPHNE", script="Astyra_PhaedonsHouse_EventScript_Visitor",
+             flag="FLAG_ICHOR_HIDE_DAPHNE_HOUSE")
     m.sign("Starry", 12, 5, tile=0x003)
     m.sign("MusicBox", 7, 3, tile=0x003)
     m.json["warp_events"] = [warp(8, 13, "Astyra", 1)]
@@ -101,6 +107,39 @@ def rooms():
     m.sign("Book", 6, 6, tile=0x003)
     m.json["warp_events"] = [warp(11, 15, "Astyra", 2)]
     m.save()
+
+
+def stoa():
+    m = hall("Astyra_Stoa", 36, 32)
+    m.person("Archon", 17, 13, gfx="ELDER_M")
+    m.person("Keeper", 21, 13, gfx="ELDER_M")
+    m.person("Alethea", 19, 14, gfx="ALETHEA", flag="FLAG_ICHOR_HIDE_ALETHEA_ASTYRA")
+    for name, x, gfx in (("Nikomache", 12, "MERCHANT"), ("Euphranor", 13, "PILGRIM"),
+                          ("Kallippos", 14, "MAN"), ("Mnesippe", 22, "HARVESTER"),
+                          ("Philinos", 23, "HOPLITE"), ("Theano", 24, "WOMAN")):
+        m.person(name, x, 18, gfx=gfx, script="Astyra_Stoa_EventScript_Citizen")
+    m.stamp(17, 14, [[0x21F, 0x220], [0x221, 0x222], [0x223, 0x224]])
+    for x in (4, 29):
+        m.stamp(x, 3, [[0x20B], [0x20C], [0x20D]])
+    m.sign("Count", 23, 14, tile=0x003)
+    m.json["warp_events"] = [warp(18, 31, "Astyra", 3)]
+    m.save()
+
+
+def roadside_cast():
+    path = "data/maps/Route16_CapitalPass/map.json"
+    m = read(path)
+    m["object_events"].append(obj("LOCALID_ROUTE16_CAPITAL_PASS_ALETHEA", 43, 15,
+        "Astyra_EventScript_RoadAlethea", gfx="ALETHEA", flag="FLAG_ICHOR_HIDE_ALETHEA_R16"))
+    write(path, m)
+    path = ROOT / "data/maps/Route16_CapitalPass/scripts.pory"
+    path.write_text(path.read_text().replace("mapscripts Route16_CapitalPass_MapScripts {}",
+        """mapscripts Route16_CapitalPass_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        special(Ichor_ReleaseTimeOfDay)
+        call(Astyra_EventScript_PlaceRoadAlethea)
+    }
+}""", 1))
 
 
 def eleusa_connection():
@@ -122,5 +161,7 @@ if __name__ == "__main__":
     daphni()
     city()
     rooms()
+    stoa()
+    roadside_cast()
     eleusa_connection()
     encounters_and_teams(ROADS, "Astyra approach")
