@@ -273,7 +273,7 @@ def build(render=True):
     m.arrival(*hall_stand)                                         # 0: from the Grand Staircase
     from labyrinth_lib import dest
     up, upw = dest("MAP_KNOSSA_PALACE_GRAND_STAIRCASE", ("MAP_LABYRINTH_RING1", 0))
-    upw = 0 if upw is None else upw       # the Grand Staircase's warp 0 lands by its stair down
+    upw = 1 if upw is None else upw       # the Grand Staircase's warp 1 is its dark doorway
     m.warp(21, 1, up, upw)                                         # 1, 2: the stair up
     m.warp(22, 1, up, upw)
     m.arrival(30, 26)                                              # 3: up from Ring II
