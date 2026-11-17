@@ -393,6 +393,7 @@ Drawn in the "Ichor cast" OBJ palette, so they cost no palette slot on the deck,
 | What | Where |
 |---|---|
 | Boarding (warp 0, not a door) | (13,4), the starboard entry port: `warp(MAP_TRIREME_EUPLOIA_DECK, 0)` |
+| Beat 10C's arrival (no warp event) | (8,4), the starboard rail: `warp(MAP_TRIREME_EUPLOIA_DECK, 8, 4)` from Aigina's inn |
 | The hatch (warp 1, `MB_LADDER`) | (14,7), to the hold's warp 0 |
 | The hold's ladder (warp 0, `MB_LADDER`) | (11,5), to the deck's warp 1 |
 | The helm | the player at (19,6) facing the tiller's knob at (20,6); Nausikles at (19,7) |
