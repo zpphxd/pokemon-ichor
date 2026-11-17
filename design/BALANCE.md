@@ -43,13 +43,14 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,
   both Chloe parties, Thespis, Kallisto, all three Akropolis Kleon parties and
-  Akropolis Rhea, Kaldera Talos and Kaldera Hyperion, retaining Hero's species
+  Akropolis Rhea, Kaldera Talos, Kaldera Hyperion and Galatea, retaining Hero's species
   and moves at three levels lower.
   Spartan uses those species and levels with trained EV spreads, natures,
   held items and smart AI. Its EXP/candy caps are 14, 20, 26, 32 and 37, advancing when
   each Laurel is won; after Laurel 5 the next cap is Astyra's 40, followed by
   Kaldera's 43 after the saved Akropolis raid victory, Hyperion's 44 after
-  Laurel 6, and Kythera's 48 after the saved third-fragment aftermath. Extend the
+  Laurel 6, Kythera's 48 after the saved third-fragment aftermath, and Knossa's
+  Hyperion cap of 53 after Laurel 7. Extend the
   milestone mapping as later chapters are connected. Hero's existing parties
   and uncapped EXP are unchanged. These integrations are not natural-level
   balance approval.
@@ -68,6 +69,10 @@ The single source for levels across the whole game. Every script, encounter tabl
   Mortal/Spartan variants; Pyrapod's Spartan training is special, not physical.
   These are implemented parties, not natural-level balance approval.
 - **Aethos's trainers use Aethos's Pokémon** (user, 2026-11-14). Before the post-game, trainer parties and wild tables draw on the 152-species Aethos dex for the most part. A non-Aethos species is the exception and needs a reason: a story gift such as the theoxenia starters, a foreigner's signature Pokémon, or a deliberate rarity. The National Dex's other species belong to the Oikoumene and the post-game.
+- **Implemented Galatea:** Hero uses 46/46/47/47/48, Mortal uses
+  43/43/44/44/45, and Spartan retains Hero's levels with trained EVs, natures,
+  held items and smart AI. Himerow remains itemless for Acrobatics. These
+  concrete teams and the post-Laurel cap are not natural-level approval.
 - **Gifts:** theoxenia starters follow SYSTEMS.md §10's levels, which must sit inside the band of the stage where they're given.
 - **Act I amphora returns:** explicit shelf restoration unlocks the one-off
   Cairnolith Lv20 at Kronion's altar (night, Sand Force, Hard Stone), Raknit

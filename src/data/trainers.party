@@ -4537,6 +4537,126 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Calm Mind
 - Wish
 
+=== TRAINER_ICHOR_GALATEA_1 ===
+Name: GALATEA
+Class: Hierophant
+Pic: Hierophant Galatea
+Gender: Female
+Music: Female
+Difficulty: Easy
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Himerow
+Level: 43
+Ability: Cute Charm
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dazzling Gleam
+- Acrobatics
+- Tailwind
+- Play Rough
+
+Chelyra
+Level: 43
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sing
+- Alluring Voice
+- Earth Power
+- Calm Mind
+
+Aphrogene @ Mystic Water
+Level: 44
+Ability: Marvel Scale
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Moonblast
+- Scald
+- Calm Mind
+- Draining Kiss
+
+Korantha @ Miracle Seed
+Level: 44
+Ability: Natural Cure
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dazzling Gleam
+- Energy Ball
+- Synthesis
+- Leech Seed
+
+Kalliglyph @ Sitrus Berry
+Level: 45
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Dazzling Gleam
+- Power Gem
+- Calm Mind
+- Wish
+
+=== TRAINER_ICHOR_GALATEA_1 ===
+Name: GALATEA
+Class: Hierophant
+Pic: Hierophant Galatea
+Gender: Female
+Music: Female
+Difficulty: Hard
+Items: Full Restore / Full Restore
+AI: Smart Trainer
+
+Himerow
+Level: 46
+Ability: Cute Charm
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 Atk / 4 SpA / 252 Spe
+Jolly Nature
+- Dazzling Gleam
+- Acrobatics
+- Tailwind
+- Play Rough
+
+Chelyra @ Sitrus Berry
+Level: 46
+Ability: Punk Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Modest Nature
+- Sing
+- Alluring Voice
+- Earth Power
+- Calm Mind
+
+Aphrogene @ Mystic Water
+Level: 47
+Ability: Marvel Scale
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Def / 4 SpD
+Bold Nature
+- Moonblast
+- Scald
+- Calm Mind
+- Draining Kiss
+
+Korantha @ Miracle Seed
+Level: 47
+Ability: Natural Cure
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Modest Nature
+- Dazzling Gleam
+- Energy Ball
+- Synthesis
+- Leech Seed
+
+Kalliglyph @ Sitrus Berry
+Level: 48
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 4 Def / 252 SpD
+Calm Nature
+- Dazzling Gleam
+- Power Gem
+- Calm Mind
+- Wish
+
 === TRAINER_ICHOR_LYKIDAS_KYTHERA ===
 Name: LYKIDAS
 Class: Goatherd

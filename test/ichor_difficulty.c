@@ -9,6 +9,7 @@
 #include "pokemon.h"
 #include "test/test.h"
 #include "constants/items.h"
+#include "constants/opponents.h"
 #include "constants/species.h"
 
 static void ResetDifficulty(void)
@@ -95,13 +96,14 @@ TEST("Ichor: Spartan stops cap-level EXP while Hero and Mortal retain ordinary E
     ResetDifficulty();
 }
 
-TEST("Ichor: Kaldera caps follow Talos, Hyperion and the next Laurel")
+TEST("Ichor: Kaldera and Kythera caps follow each saved boss milestone")
 {
     u32 i;
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE05_GET; i++)
         FlagSet(i);
     FlagSet(FLAG_ICHOR_AKROPOLIS_RAID_DONE);
     FlagClear(FLAG_BADGE06_GET);
+    FlagClear(FLAG_BADGE07_GET);
     FlagClear(FLAG_ICHOR_KALDERA_FRAGMENT_LOST);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     EXPECT_EQ(GetCurrentLevelCap(), 43);
@@ -109,12 +111,46 @@ TEST("Ichor: Kaldera caps follow Talos, Hyperion and the next Laurel")
     EXPECT_EQ(GetCurrentLevelCap(), 44);
     FlagSet(FLAG_ICHOR_KALDERA_FRAGMENT_LOST);
     EXPECT_EQ(GetCurrentLevelCap(), 48);
+    FlagSet(FLAG_BADGE07_GET);
+    EXPECT_EQ(GetCurrentLevelCap(), 53);
+    EXPECT_EQ(GetSoftLevelCapExpValue(52, 500), 500);
+    EXPECT_EQ(GetSoftLevelCapExpValue(53, 500), 0);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     EXPECT_EQ(GetCurrentLevelCap(), MAX_LEVEL);
-    for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE06_GET; i++)
+    for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE07_GET; i++)
         FlagClear(i);
     FlagClear(FLAG_ICHOR_AKROPOLIS_RAID_DONE);
     FlagClear(FLAG_ICHOR_KALDERA_FRAGMENT_LOST);
+    ResetDifficulty();
+}
+
+TEST("Ichor: Galatea selects lowered Mortal and trained Spartan teams without changing Hero")
+{
+    const struct Trainer *hero = &gTrainers[DIFFICULTY_NORMAL][TRAINER_ICHOR_GALATEA_1];
+    u32 difficulty, i, move, stat;
+    for (difficulty = DIFFICULTY_EASY; difficulty <= DIFFICULTY_HARD; difficulty++)
+    {
+        const struct Trainer *trainer;
+        SetCurrentDifficultyLevel(difficulty);
+        trainer = GetTrainerStructFromId(TRAINER_ICHOR_GALATEA_1);
+        EXPECT(trainer->partySize == hero->partySize);
+        for (i = 0; i < trainer->partySize; i++)
+        {
+            const struct TrainerMon *mon = &trainer->party[i];
+            EXPECT_EQ(mon->species, hero->party[i].species);
+            EXPECT_EQ(mon->lvl, hero->party[i].lvl - (difficulty == DIFFICULTY_EASY ? 3 : 0));
+            for (move = 0; move < MAX_MON_MOVES; move++)
+                EXPECT_EQ(mon->moves[move], hero->party[i].moves[move]);
+            if (difficulty == DIFFICULTY_HARD)
+            {
+                u32 total = 0;
+                EXPECT(mon->ev != NULL);
+                for (stat = 0; stat < NUM_STATS; stat++)
+                    total += mon->ev[stat];
+                EXPECT(total >= 508 && total <= MAX_TOTAL_EVS);
+            }
+        }
+    }
     ResetDifficulty();
 }
 
