@@ -862,10 +862,10 @@
     {
       "id": "LAYOUT_ROUTE6_ELEUTHERAI_ROAD",
       "name": "Route6_EleutheraiRoad_Layout",
-      "width": 24,
+      "width": 28,
       "height": 40,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route6_EleutheraiRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route6_EleutheraiRoad/map.bin",
       "layout_version": "emerald"
@@ -873,10 +873,10 @@
     {
       "id": "LAYOUT_MT_KITHAIRON",
       "name": "MtKithairon_Layout",
-      "width": 24,
-      "height": 40,
+      "width": 28,
+      "height": 52,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/MtKithairon/border.bin",
       "blockdata_filepath": "data/layouts/MtKithairon/map.bin",
       "layout_version": "emerald"

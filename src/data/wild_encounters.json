@@ -2770,27 +2770,17 @@
           "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
           "base_label": "gRoute6_EleutheraiRoad_Morning",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 21,
-                "max_level": 24,
+                "max_level": 23,
                 "species": "SPECIES_AMPELIX"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_GALEKIT"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
+                "species": "SPECIES_LOPHOPS"
               },
               {
                 "min_level": 21,
@@ -2799,13 +2789,13 @@
               },
               {
                 "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_PEBBLITH"
+                "max_level": 23,
+                "species": "SPECIES_ONOTIS"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_AMPELIX"
+                "species": "SPECIES_KERAZAP"
               },
               {
                 "min_level": 21,
@@ -2814,23 +2804,33 @@
               },
               {
                 "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
+                "max_level": 23,
                 "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_STACHYSS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_GELASABLE"
               }
             ]
           }
@@ -2839,12 +2839,42 @@
           "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
           "base_label": "gRoute6_EleutheraiRoad_Day",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 21,
-                "max_level": 24,
+                "max_level": 23,
                 "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_PEBBLITH"
               },
               {
                 "min_level": 21,
@@ -2854,52 +2884,22 @@
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_NEBREL"
+                "species": "SPECIES_STACHYSS"
               },
               {
                 "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_PEBBLITH"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
+                "max_level": 23,
                 "species": "SPECIES_AMPELIX"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_GALEKIT"
+                "species": "SPECIES_NEMECUB"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_PEBBLITH"
+                "species": "SPECIES_GELASABLE"
               }
             ]
           }
@@ -2908,32 +2908,27 @@
           "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
           "base_label": "gRoute6_EleutheraiRoad_Evening",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 21,
-                "max_level": 24,
+                "max_level": 23,
                 "species": "SPECIES_AMPELIX"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_GALEKIT"
+                "species": "SPECIES_GELASABLE"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_NEBREL"
+                "species": "SPECIES_ONOTIS"
               },
               {
                 "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_MELIBEE"
+                "max_level": 23,
+                "species": "SPECIES_KERAZAP"
               },
               {
                 "min_level": 21,
@@ -2943,7 +2938,12 @@
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_AMPELIX"
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_LOPHOPS"
               },
               {
                 "min_level": 21,
@@ -2953,22 +2953,22 @@
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
                 "species": "SPECIES_MELIBEE"
               },
               {
                 "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_PEBBLITH"
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_PROSOMIME"
               }
             ]
           }
@@ -2977,12 +2977,27 @@
           "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
           "base_label": "gRoute6_EleutheraiRoad_Night",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_AMPELIX"
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_PEBBLITH"
               },
               {
                 "min_level": 21,
@@ -2992,37 +3007,12 @@
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_PROSOMIME"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_PEBBLITH"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
                 "species": "SPECIES_AMPELIX"
               },
               {
                 "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_LYKOPUP"
-              },
-              {
-                "min_level": 21,
-                "max_level": 24,
-                "species": "SPECIES_PROSOMIME"
+                "max_level": 23,
+                "species": "SPECIES_ONOTIS"
               },
               {
                 "min_level": 21,
@@ -3032,12 +3022,22 @@
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_MELIBEE"
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_BOTRYKIT"
               },
               {
                 "min_level": 21,
                 "max_level": 24,
-                "species": "SPECIES_PEBBLITH"
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 21,
+                "max_level": 24,
+                "species": "SPECIES_NEMECUB"
               }
             ]
           }
@@ -3046,12 +3046,37 @@
           "map": "MAP_MT_KITHAIRON",
           "base_label": "gMtKithairon_Morning",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 23,
                 "max_level": 26,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
                 "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_MELIBEE"
               },
               {
                 "min_level": 23,
@@ -3059,54 +3084,29 @@
                 "species": "SPECIES_GALEKIT"
               },
               {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_NEBREL"
+                "max_level": 27,
+                "species": "SPECIES_NEMECUB"
               },
               {
                 "min_level": 23,
                 "max_level": 26,
-                "species": "SPECIES_SPALUNK"
+                "species": "SPECIES_GELASABLE"
               },
               {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
+                "max_level": 27,
+                "species": "SPECIES_BOTRYKIT"
               },
               {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_AMPELIX"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_GALEKIT"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
               }
             ]
           }
@@ -3115,67 +3115,67 @@
           "map": "MAP_MT_KITHAIRON",
           "base_label": "gMtKithairon_Day",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 23,
                 "max_level": 26,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
                 "species": "SPECIES_AMPELIX"
               },
               {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_GALEKIT"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
+                "max_level": 27,
                 "species": "SPECIES_MELIBEE"
               },
               {
                 "min_level": 23,
                 "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
               },
               {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_AMPELIX"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
+                "max_level": 27,
                 "species": "SPECIES_GALEKIT"
               },
               {
                 "min_level": 23,
                 "max_level": 26,
-                "species": "SPECIES_NEBREL"
+                "species": "SPECIES_GELASABLE"
               },
               {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_SPALUNK"
+                "max_level": 27,
+                "species": "SPECIES_BOTRYKIT"
               },
               {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
               }
             ]
           }
@@ -3184,67 +3184,67 @@
           "map": "MAP_MT_KITHAIRON",
           "base_label": "gMtKithairon_Evening",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 23,
                 "max_level": 26,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
                 "species": "SPECIES_AMPELIX"
               },
               {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_GALEKIT"
+                "max_level": 27,
+                "species": "SPECIES_GELASABLE"
               },
               {
                 "min_level": 23,
                 "max_level": 26,
-                "species": "SPECIES_NEBREL"
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_NEMECUB"
               },
               {
                 "min_level": 23,
                 "max_level": 26,
-                "species": "SPECIES_SPALUNK"
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
               },
               {
                 "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_AMPELIX"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_GALEKIT"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_NEBREL"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
+                "max_level": 27,
+                "species": "SPECIES_PROSOMIME"
               }
             ]
           }
@@ -3253,11 +3253,51 @@
           "map": "MAP_MT_KITHAIRON",
           "base_label": "gMtKithairon_Night",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 23,
                 "max_level": 26,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 23,
+                "max_level": 26,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 23,
+                "max_level": 27,
                 "species": "SPECIES_AMPELIX"
               },
               {
@@ -3267,53 +3307,13 @@
               },
               {
                 "min_level": 23,
-                "max_level": 26,
+                "max_level": 27,
                 "species": "SPECIES_PROSOMIME"
               },
               {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_AMPELIX"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_LYKOPUP"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PROSOMIME"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_SPALUNK"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_MELIBEE"
-              },
-              {
-                "min_level": 23,
-                "max_level": 26,
-                "species": "SPECIES_PEBBLITH"
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_CAIRNOLITH"
               }
             ]
           }

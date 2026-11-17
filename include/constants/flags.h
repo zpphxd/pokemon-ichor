@@ -1978,6 +1978,11 @@
 #define FLAG_ICHOR_ITEM_KALDERA_FORGE_ETHER     (FLAG_ICHOR_GENERAL_START + 0x159) // Ichor: Telchines forge supply
 #define FLAG_ICHOR_ITEM_KALDERA_FORGE_REVIVE    (FLAG_ICHOR_GENERAL_START + 0x15A) // Ichor: Telchines forge side grotto gift
 #define FLAG_ICHOR_HIDE_DAPHNE_LIBRARY          (FLAG_ICHOR_GENERAL_START + 0x15B) // Ichor: Daphne followed the player to Kaldera
+#define FLAG_ICHOR_R6_VINES_CUT                 (FLAG_ICHOR_GENERAL_START + 0x15C) // Ichor: Route 6: Demeter's Sickle cut the vines on the terrace stair
+#define FLAG_ICHOR_R6_PRESS_VINES_CUT           (FLAG_ICHOR_GENERAL_START + 0x15D) // Ichor: Route 6: the Sickle cut the vines over the old wine press
+#define FLAG_ICHOR_R6_POSTERN_VINES_CUT         (FLAG_ICHOR_GENERAL_START + 0x15E) // Ichor: Route 6: the Sickle cut the vines in the fort's postern
+#define FLAG_ICHOR_R6_VINEDRESSER_GIFT          (FLAG_ICHOR_GENERAL_START + 0x15F) // Ichor: Route 6: the vine-dresser gave the player a Miracle Seed
+#define FLAG_ICHOR_KITHAIRON_WINE_GIFT          (FLAG_ICHOR_GENERAL_START + 0x160) // Ichor: Kithairon: the maenads gave the player Wine for the god
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

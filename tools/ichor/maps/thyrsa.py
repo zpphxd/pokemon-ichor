@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build the connected Eleusa--Kithairon--Thyrsa chapter using existing Greek art."""
+"""Build the connected Eleusa--Kithairon--Thyrsa chapter using existing Greek art.
+
+Route 6 and Mt. Kithairon's layouts, events, scripts and wild tables now come
+from tools/ichor/maps/kithairon.py; this script still writes their trainers'
+parties (trainers()) and builds Route 7.
+"""
 import json
 import struct
 from pathlib import Path
@@ -229,15 +234,13 @@ def hall(name, w, h):
     return m
 
 
+KITHAIRON_MAPS = ("Route6_EleutheraiRoad", "MtKithairon")   # built by kithairon.py
+
+
 def main():
-    roads = [road(*r) for r in ROADS]
-    roads[0].connection("down", "EleusaVillage", -34)
-    roads[0].connection("up", "MtKithairon")
-    roads[1].connection("down", roads[0].name)
-    roads[1].connection("up", roads[2].name)
-    roads[1].json["music"] = "MUS_ICHOR_ROAD"
-    roads[2].connection("down", roads[1].name)
-    roads[2].connection("up", "ThyrsaCity")
+    roads = [road(*r) for r in ROADS if r[0] not in KITHAIRON_MAPS]
+    roads[0].connection("down", "MtKithairon")
+    roads[0].connection("up", "ThyrsaCity")
     for m in roads:
         m.save()
     eleusa = read("data/maps/EleusaVillage/map.json")
@@ -346,9 +349,11 @@ def main():
 
     wild = read("src/data/wild_encounters.json")
     group = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
-    ids = {"MAP_" + const(r[0]) for r in ROADS}
+    ids = {"MAP_" + const(r[0]) for r in ROADS if r[0] not in KITHAIRON_MAPS}
     group["encounters"] = [e for e in group["encounters"] if e.get("map") not in ids]
     for name, _, level, _ in ROADS:
+        if name in KITHAIRON_MAPS:
+            continue
         for time in ("Morning", "Day", "Evening", "Night"):
             species = ["AMPELIX", "GALEKIT", "NEBREL", "SPALUNK", "MELIBEE", "PEBBLITH"]
             if time == "Night":
