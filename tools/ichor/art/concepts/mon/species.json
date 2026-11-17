@@ -18,12 +18,141 @@
   "pivot": 0.4
  },
  "hipling": {
-  "pivot": 0.5
+  "pivot": 0.5,
+  "recolor": {
+   "hue": [
+    170,
+    250
+   ],
+   "min_sat": 0.3,
+   "ink_below": 0.25,
+   "ink": [
+    24,
+    40,
+    104
+   ],
+   "ramp": [
+    [
+     40,
+     96,
+     184
+    ],
+    [
+     64,
+     136,
+     224
+    ],
+    [
+     96,
+     176,
+     248
+    ],
+    [
+     152,
+     212,
+     248
+    ],
+    [
+     208,
+     236,
+     248
+    ]
+   ]
+  },
+  "rim_light": true,
+  "note": "User asked for a lighter, classic water-starter blue; the concept's dark teal maps by brightness onto a planned ramp, deeper at each stage, with a top-left rim light for form.",
+  "sharpen": 40
  },
  "thalamare": {
-  "pivot": 0.5
+  "pivot": 0.5,
+  "recolor": {
+   "hue": [
+    170,
+    250
+   ],
+   "min_sat": 0.3,
+   "ink_below": 0.25,
+   "ink": [
+    16,
+    32,
+    96
+   ],
+   "ramp": [
+    [
+     32,
+     72,
+     160
+    ],
+    [
+     48,
+     112,
+     208
+    ],
+    [
+     80,
+     152,
+     240
+    ],
+    [
+     128,
+     192,
+     248
+    ],
+    [
+     192,
+     224,
+     248
+    ]
+   ]
+  },
+  "rim_light": true,
+  "note": "User asked for a lighter, classic water-starter blue; the concept's dark teal maps by brightness onto a planned ramp, deeper at each stage, with a top-left rim light for form.",
+  "sharpen": 40
  },
  "seismare": {
-  "pivot": 0.45
+  "pivot": 0.45,
+  "recolor": {
+   "hue": [
+    170,
+    250
+   ],
+   "min_sat": 0.3,
+   "ink_below": 0.25,
+   "ink": [
+    16,
+    24,
+    80
+   ],
+   "ramp": [
+    [
+     24,
+     56,
+     136
+    ],
+    [
+     40,
+     88,
+     192
+    ],
+    [
+     64,
+     128,
+     232
+    ],
+    [
+     104,
+     168,
+     248
+    ],
+    [
+     168,
+     208,
+     248
+    ]
+   ]
+  },
+  "rim_light": true,
+  "note": "User asked for a lighter, classic water-starter blue; the concept's dark teal maps by brightness onto a planned ramp, deeper at each stage, with a top-left rim light for form.",
+  "sharpen": 40
  }
 }
