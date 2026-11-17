@@ -1,0 +1,84 @@
+// Hippothoos's hut, dug half into the hill (SCRIPT.md Part 2, Arkadia interiors). Room:
+// tools/ichor/maps/arkrooms.py. Hippothoos (6,3) trades his Arkoby, ARKAS, holding a Smoke
+// Ball, for a Gelasable (INGAME_TRADE_ICHOR_ARKAS in src/data/trade.h); she sits by the door
+// (2,6) out of the smoke until she's traded. After, his granddad's story of the Wolf
+// Mountain, the seed of the gods' tell (SYSTEMS.md §10: no shadow).
+// ICHOR_STUB_AETHOS_DEX: both species are stand-ins until the dex lands.
+// ICHOR_STUB_MUSIC: Arkadia's own cue.
+
+mapscripts Arkadia_CharcoalHut_MapScripts {}
+
+text Arkadia_CharcoalHut_Name_Hippothoos { "HIPPOTHOOS" }
+
+script Arkadia_CharcoalHut_EventScript_Hippothoos {
+    lock
+    faceplayer
+    setspeaker(Arkadia_CharcoalHut_Name_Hippothoos)
+    if (flag(FLAG_ICHOR_TRADED_ARKOBY)) {
+        msgbox(format("My granddad burned charcoal up on the Wolf Mountain. Lykaion.\p"
+                      "There's a patch of ground up top where nothing has a shadow. Nothing.\p"
+                      "Only gods walk there, he said. They don't have shadows either.\p"
+                      "I never went. I like my shadow. It's the only thing that keeps up with me."))
+        release
+        end
+    }
+    msgbox(format("Rats in the sacks. Every winter. They eat the bark off the charcoal.\p"
+                  "I need a weasel. A Gelasable. They laugh at rats, and the rats leave.\p"
+                  "I'd give you my little bear for one. She hates the smoke."))
+    // The in-game trade, written out (as the ingame_trade macro does) so each line carries his name.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_ARKAS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Trade a Gelasable for his Arkoby?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Arkadia_CharcoalHut_Name_Hippothoos)
+        msgbox(format("Then the rats win another winter. They usually do."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(Arkadia_CharcoalHut_Name_Hippothoos)
+        msgbox(format("Then the rats win another winter. They usually do."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Arkadia_CharcoalHut_Name_Hippothoos)
+        msgbox(format("That one won't laugh at a rat. It'll just look at it."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_TRADED_ARKOBY)
+    removeobject(LOCALID_ARKADIA_ARKAS)
+    setspeaker(Arkadia_CharcoalHut_Name_Hippothoos)
+    msgbox(format("Her name's Arkas. After Kallisto's boy. The one who nearly hunted her.\p"
+                  "She carries that ball of soot everywhere. Throws it when she's scared.\p"
+                  "She'll grow, with a moon on her. Or she'll stay small and sleep. Either way."))
+    release
+}
+
+script Arkadia_CharcoalHut_EventScript_Arkas {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A little bear, as far from the smoke as the hut allows. She's holding a ball of soot."))
+    release
+}
+
+script Arkadia_CharcoalHut_EventScript_Drawing {
+    msgbox(format("A kiln mound drawn in soot on a board, every vent marked, arrows for the wind."),
+           MSGBOX_SIGN)
+}
+
+script Arkadia_CharcoalHut_EventScript_Sacks {
+    msgbox(format("Sacks of charcoal stacked to the roof. Black dust on everything."), MSGBOX_SIGN)
+}
+
+script Arkadia_CharcoalHut_EventScript_Rake {
+    msgbox(format("A long iron rake for drawing the kiln. The handle is worn smooth and black."), MSGBOX_SIGN)
+}

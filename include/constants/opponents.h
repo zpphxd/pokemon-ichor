@@ -191,7 +191,16 @@
 #define TRAINER_ICHOR_SALT_WELL_GLAUKOS      243
 #define TRAINER_ICHOR_SALT_WELL_KYMOTHOE     244
 #define TRAINER_ICHOR_SALT_WELL_HALIA        245
-#define TRAINERS_END_ACT2                   246
+#define TRAINER_ICHOR_PHEGEUS                 246
+#define TRAINER_ICHOR_KORYTHOS                247
+#define TRAINER_ICHOR_EUANDROS                248
+#define TRAINER_ICHOR_AGAPENOR                249
+#define TRAINER_ICHOR_EUADNE                  250
+#define TRAINER_ICHOR_HEKAERGE                251
+#define TRAINER_ICHOR_LYSIPPE                 252
+#define TRAINER_ICHOR_MAINALOS                253
+#define TRAINER_ICHOR_WOOD_MELANIPPE          254
+#define TRAINERS_END_ACT2                   255
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

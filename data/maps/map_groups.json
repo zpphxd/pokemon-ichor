@@ -40,7 +40,18 @@
     "Route12_CypressRoad",
     "Arkadia",
     "Astyra_Akropolis",
-    "Astyra_Harbor"
+    "Astyra_Harbor",
+    "Arkadia_Asclepeion",
+    "Arkadia_Agora",
+    "Arkadia_NyktimosHall",
+    "Arkadia_KlymeneHouse",
+    "Arkadia_CharcoalHut",
+    "Arkadia_GoatherdHouse",
+    "Arkadia_CypressWood",
+    "StyxFalls_Inn",
+    "StyxFalls_OathHouse",
+    "StyxFalls_StoneHouse",
+    "Route12_CaveOfMaia"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",

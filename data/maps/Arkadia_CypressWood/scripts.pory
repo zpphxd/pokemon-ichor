@@ -1,0 +1,119 @@
+// The Cypress Wood behind Arkadia's west arch (ported from claude/world-act2-0a92e7). On the
+// branch it held Kleon's new-moon beat and led west to the Pool of Mnemosyne; main's story
+// plays that beat in town and has no Pool, so here it is a quiet wood: its hunters and
+// burners, its items and the first Kallisto's tomb. The west edge is closed with canopy.
+
+mapscripts Arkadia_CypressWood_MapScripts {}
+
+text Arkadia_CypressWood_Name_Euadne { "EUADNE" }
+text Arkadia_CypressWood_Name_Agapenor { "AGAPENOR" }
+text Arkadia_CypressWood_Name_Hekaerge { "HEKAERGE" }
+text Arkadia_CypressWood_Name_Mainalos { "MAINALOS" }
+text Arkadia_CypressWood_Name_Lysippe { "LYSIPPE" }
+text Arkadia_CypressWood_Name_Melanippe { "MELANIPPE" }
+
+script Arkadia_CypressWood_EventScript_Euadne {
+    trainerbattle_single(TRAINER_ICHOR_EUADNE, Arkadia_CypressWood_Text_EuadneIntro, Arkadia_CypressWood_Text_EuadneDefeat)
+    setspeaker(Arkadia_CypressWood_Name_Euadne)
+    msgbox(format("The Huntress went to her tomb at sunset. The mound, down the south path.\p"
+                  "She knelt and dug a little hole with her hands.\p"
+                  "Then she came back without her bag."), MSGBOX_AUTOCLOSE)
+}
+
+text Arkadia_CypressWood_Text_EuadneIntro {
+    format("Nobody walks the Wood at the new moon. Except wolves. And you.")
+}
+
+text Arkadia_CypressWood_Text_EuadneDefeat {
+    format("You're not a wolf. Wolves lose better.")
+}
+
+script Arkadia_CypressWood_EventScript_Agapenor {
+    trainerbattle_single(TRAINER_ICHOR_AGAPENOR, Arkadia_CypressWood_Text_AgapenorIntro, Arkadia_CypressWood_Text_AgapenorDefeat)
+    setspeaker(Arkadia_CypressWood_Name_Agapenor)
+    if (flag(FLAG_BADGE05_GET)) {
+        msgbox(format("She sleeps behind my kiln, you know. The vixen. Nights. I leave her the crusts."),
+               MSGBOX_AUTOCLOSE)
+    } else {
+        msgbox(format("There's a vixen around here nobody's ever caught. Nobody. Ever.\p"
+                      "There's a hound that's never missed. They've been at it longer than the trees."),
+               MSGBOX_AUTOCLOSE)
+    }
+}
+
+text Arkadia_CypressWood_Text_AgapenorIntro {
+    format("In the Wood, at night? You must be lost. Or you must want a battle.")
+}
+
+text Arkadia_CypressWood_Text_AgapenorDefeat {
+    format("Not lost, then. Just good.")
+}
+
+script Arkadia_CypressWood_EventScript_Hekaerge {
+    trainerbattle_single(TRAINER_ICHOR_HEKAERGE, Arkadia_CypressWood_Text_HekaergeIntro, Arkadia_CypressWood_Text_HekaergeDefeat)
+    setspeaker(Arkadia_CypressWood_Name_Hekaerge)
+    msgbox(format("There's a hollow trunk at the glade's west edge. Mushrooms in it, big as fists."),
+           MSGBOX_AUTOCLOSE)
+}
+
+text Arkadia_CypressWood_Text_HekaergeIntro {
+    format("Far-shooter, they call the goddess. I'm still working on the far part.")
+}
+
+text Arkadia_CypressWood_Text_HekaergeDefeat {
+    format("Too close. Always too close.")
+}
+
+script Arkadia_CypressWood_EventScript_Mainalos {
+    trainerbattle_single(TRAINER_ICHOR_MAINALOS, Arkadia_CypressWood_Text_MainalosIntro, Arkadia_CypressWood_Text_MainalosDefeat)
+    setspeaker(Arkadia_CypressWood_Name_Mainalos)
+    msgbox(format("My kiln went cold the night the wolves came through. I sit with it anyway."),
+           MSGBOX_AUTOCLOSE)
+}
+
+text Arkadia_CypressWood_Text_MainalosIntro {
+    format("Charcoal's slow work. A battle's quicker. Go on, then.")
+}
+
+text Arkadia_CypressWood_Text_MainalosDefeat {
+    format("Burned through. Like a bad kiln.")
+}
+
+script Arkadia_CypressWood_EventScript_Lysippe {
+    trainerbattle_single(TRAINER_ICHOR_LYSIPPE, Arkadia_CypressWood_Text_LysippeIntro, Arkadia_CypressWood_Text_LysippeDefeat)
+    setspeaker(Arkadia_CypressWood_Name_Lysippe)
+    msgbox(format("Mnaseas has sat by that water longer than he'll say. Ask him. He won't answer."),
+           MSGBOX_AUTOCLOSE)
+}
+
+text Arkadia_CypressWood_Text_LysippeIntro {
+    format("The Pool's past me. Nobody drinks from it. Shall we fight instead?")
+}
+
+text Arkadia_CypressWood_Text_LysippeDefeat {
+    format("You didn't even blink. Good.")
+}
+
+script Arkadia_CypressWood_EventScript_Melanippe {
+    trainerbattle_single(TRAINER_ICHOR_WOOD_MELANIPPE, Arkadia_CypressWood_Text_MelanippeIntro, Arkadia_CypressWood_Text_MelanippeDefeat)
+    setspeaker(Arkadia_CypressWood_Name_Melanippe)
+    msgbox(format("On clear nights the Great Bear stands right over the mound. Look up."),
+           MSGBOX_AUTOCLOSE)
+}
+
+text Arkadia_CypressWood_Text_MelanippeIntro {
+    format("This is the first Kallisto's tomb. Mind your feet on her mound.")
+}
+
+text Arkadia_CypressWood_Text_MelanippeDefeat {
+    format("You walk softly for someone who wins like that.")
+}
+
+script Arkadia_CypressWood_EventScript_SignGate {
+    msgbox(format("THE CYPRESS WOOD\nKeep to the path. The path is the only sure thing."), MSGBOX_SIGN)
+}
+
+script Arkadia_CypressWood_EventScript_SignTomb {
+    msgbox(format("THE TOMB OF KALLISTO. She hunted here. She sleeps here. She shines up there."),
+           MSGBOX_SIGN)
+}

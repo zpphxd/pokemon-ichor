@@ -2030,6 +2030,43 @@
 #define FLAG_ICHOR_HIDDEN_SALT_WELL_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x03B) // Ichor: Lower sheltered cache
 #define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SALT    (FLAG_ICHOR_GENERAL2_START + 0x03C) // Ichor: Harbor salt
 #define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SCALE   (FLAG_ICHOR_GENERAL2_START + 0x03D) // Ichor: Harbor scale
+#define FLAG_ICHOR_TRADED_ARKOBY                (FLAG_ICHOR_GENERAL2_START + 0x03E) // Ichor: traded Hippothoos a Gelasable for Arkas (Arkadia, the charcoal hut)
+#define FLAG_ICHOR_KROTOS_KID_1                 (FLAG_ICHOR_GENERAL2_START + 0x03F) // Ichor: Krotos's first lost kid sent home (Arkadia)
+#define FLAG_ICHOR_KROTOS_KID_2                 (FLAG_ICHOR_GENERAL2_START + 0x040) // Ichor: Krotos's second lost kid sent home (Arkadia)
+#define FLAG_ICHOR_KROTOS_KID_3                 (FLAG_ICHOR_GENERAL2_START + 0x041) // Ichor: Krotos's third lost kid sent home (Arkadia)
+#define FLAG_ICHOR_GOT_LUCKY_EGG                (FLAG_ICHOR_GENERAL2_START + 0x042) // Ichor: Krotos's Lucky Egg (Arkadia, the goatherd's house)
+#define FLAG_ICHOR_KLYMENE_STORY                (FLAG_ICHOR_GENERAL2_START + 0x043) // Ichor: heard Klymene's Atalanta story (Arkadia)
+#define FLAG_ICHOR_KLYMENE_RACE                 (FLAG_ICHOR_GENERAL2_START + 0x044) // Ichor: racing Parthenopaios to the temple stair (Arkadia)
+#define FLAG_ICHOR_KLYMENE_RACE_TURNED          (FLAG_ICHOR_GENERAL2_START + 0x045) // Ichor: touched the temple stair in the race (Arkadia)
+#define FLAG_ICHOR_GOT_CHOICE_SCARF             (FLAG_ICHOR_GENERAL2_START + 0x046) // Ichor: Klymene's Choice Scarf (Arkadia)
+#define FLAG_ICHOR_NYKTIMOS_STORY               (FLAG_ICHOR_GENERAL2_START + 0x047) // Ichor: heard Nyktimos's Lykaon story (Arkadia)
+#define FLAG_ICHOR_GOT_BLACK_GLASSES            (FLAG_ICHOR_GENERAL2_START + 0x048) // Ichor: Nyktimos's Black Glasses after the Moon Laurel (Arkadia)
+#define FLAG_ICHOR_ITEM_ARKADIA_MAX_REPEL       (FLAG_ICHOR_GENERAL2_START + 0x049) // Ichor: Arkadia's Max Repel item ball
+#define FLAG_ICHOR_GOT_GRYLLOS                  (FLAG_ICHOR_GENERAL2_START + 0x04A) // Ichor: took Gryllos the Kaplet from Eubouleus (Styx Falls, the inn)
+#define FLAG_ICHOR_GRYLLOS_SHOWN                (FLAG_ICHOR_GENERAL2_START + 0x04B) // Ichor: showed Eubouleus Gryllos grown (Styx Falls, the inn)
+#define FLAG_ICHOR_GOT_CLEANSE_TAG              (FLAG_ICHOR_GENERAL2_START + 0x04C) // Ichor: Horkia's Cleanse Tag (Styx Falls, the oath house)
+#define FLAG_ICHOR_GOT_TM_BULLDOZE              (FLAG_ICHOR_GENERAL2_START + 0x04D) // Ichor: Kepheus's TM Bulldoze (Styx Falls, the stone house)
+#define FLAG_ICHOR_ITEM_STYX_FALLS_STARDUST     (FLAG_ICHOR_GENERAL2_START + 0x04E) // Ichor: Styx Falls's Stardust item ball
+#define FLAG_ICHOR_MAIA_SINGER                  (FLAG_ICHOR_GENERAL2_START + 0x04F) // Ichor: the Cave of Maia's priestess heard a Chelyra (Route 12)
+#define FLAG_ICHOR_ITEM_MAIA_MAX_REPEL          (FLAG_ICHOR_GENERAL2_START + 0x050) // Ichor: the Cave of Maia's Max Repel item ball
+#define FLAG_ICHOR_ITEM_MAIA_LEPPA_BERRY        (FLAG_ICHOR_GENERAL2_START + 0x051) // Ichor: the Cave of Maia's Leppa Berry item ball
+#define FLAG_ICHOR_ITEM_TEMPLE_ARTEMIS_PRETTY_FEATHER (FLAG_ICHOR_GENERAL2_START + 0x052) // Ichor: the Temple of Artemis's Pretty Feather item ball
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_BALLS (FLAG_ICHOR_GENERAL2_START + 0x053) // Ichor: the Cypress Wood's Dusk Balls item ball
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_STONE (FLAG_ICHOR_GENERAL2_START + 0x054) // Ichor: the Cypress Wood's Dusk Stone item ball
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_HYPER_POTION (FLAG_ICHOR_GENERAL2_START + 0x055) // Ichor: the Cypress Wood's Hyper Potion item ball
+#define FLAG_ICHOR_HIDDEN_ITEM_ARKADIA_REVIVE   (FLAG_ICHOR_GENERAL2_START + 0x056) // Ichor: Arkadia: by the north gate's lamp
+#define FLAG_ICHOR_HIDDEN_ITEM_ARKADIA_SILVER_POWDER (FLAG_ICHOR_GENERAL2_START + 0x057) // Ichor: Arkadia: behind the Agora
+#define FLAG_ICHOR_HIDDEN_ITEM_STYX_FALLS_OBOL  (FLAG_ICHOR_GENERAL2_START + 0x058) // Ichor: Styx Falls: an obol by the Oath Stone
+#define FLAG_ICHOR_HIDDEN_ITEM_STYX_FALLS_ETHER (FLAG_ICHOR_GENERAL2_START + 0x059) // Ichor: Styx Falls: in the gorge's gap
+#define FLAG_ICHOR_HIDDEN_ITEM_STYX_KEPHEUS_EVERSTONE (FLAG_ICHOR_GENERAL2_START + 0x05A) // Ichor: Styx Falls: the rubble in Kepheus's lean-to
+#define FLAG_ICHOR_HIDDEN_ITEM_MAIA_PP_UP       (FLAG_ICHOR_GENERAL2_START + 0x05B) // Ichor: the Cave of Maia: beside the cradle
+#define FLAG_ICHOR_HIDDEN_ITEM_MAIA_FRESH_WATER (FLAG_ICHOR_GENERAL2_START + 0x05C) // Ichor: the Cave of Maia: by Hermes's altar
+#define FLAG_ICHOR_HIDDEN_ITEM_TEMPLE_ARTEMIS_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x05D) // Ichor: the Temple of Artemis: the first glade's corner
+#define FLAG_ICHOR_HIDDEN_ITEM_TEMPLE_ARTEMIS_DUSK_BALL (FLAG_ICHOR_GENERAL2_START + 0x05E) // Ichor: the Temple of Artemis: by the Keryneia stele
+#define FLAG_ICHOR_HIDDEN_ITEM_TEMPLE_ARTEMIS_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x05F) // Ichor: the Temple of Artemis: on Kallisto's rock
+#define FLAG_ICHOR_HIDDEN_ITEM_CYPRESS_WOOD_CHARCOAL (FLAG_ICHOR_GENERAL2_START + 0x060) // Ichor: the Cypress Wood: by the burners' hedge
+#define FLAG_ICHOR_HIDDEN_ITEM_CYPRESS_WOOD_BIG_MUSHROOM (FLAG_ICHOR_GENERAL2_START + 0x061) // Ichor: the Cypress Wood: in the east thicket
+#define FLAG_ICHOR_HIDDEN_ITEM_CYPRESS_WOOD_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x062) // Ichor: the Cypress Wood: by Artemis's altar
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

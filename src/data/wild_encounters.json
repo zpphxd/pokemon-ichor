@@ -4837,6 +4837,144 @@
           }
         },
         {
+          "map": "MAP_ARKADIA_CYPRESS_WOOD",
+          "base_label": "gArkadiaCypressWood_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ARKOBY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_ARKOBY"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_ARKOBY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ARKADIA_CYPRESS_WOOD",
+          "base_label": "gArkadiaCypressWood_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ARKOBY"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_ARKOBY"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KAPRODON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_LYKOPUP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_AMNOZE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_KAPRODON"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_ROUTE13_HIGHLAND_ROAD",
           "base_label": "gRoute13_HighlandRoad_Morning",
           "land_mons": {
