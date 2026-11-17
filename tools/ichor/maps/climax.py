@@ -210,7 +210,7 @@ def build_stair(render):
                              ("CUTTER", "THANIRA", (15, 12))):
         m.obj(f"SPECIES({sp})", x, y, P + "Fate", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_HIDE_STAIR_FATES",
               local_id=f"LOCALID_STAIR_{name}")
-    m.obj("SPECIES(KAIRAZOR)", 22, 13, "0", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_ICHOR_HIDE_STAIR_FATES",
+    m.obj("SPECIES(KAIRAZOR)", 19, 13, "0", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_ICHOR_HIDE_STAIR_FATES",
           local_id="LOCALID_STAIR_MOMENT")["_floats"] = True
     m.obj("ICHOR_HARPE", 14, 10, "0", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_HIDE_STAIR_FATES",
           local_id="LOCALID_STAIR_HARPE")["_floats"] = True

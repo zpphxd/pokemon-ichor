@@ -629,7 +629,12 @@ script StairOfHours_EventScript_MomentRuns {
 script StairOfHours_EventScript_MomentComesRound {
     applymovement(LOCALID_STAIR_MOMENT, StairOfHours_Movement_MomentAway)
     waitmovement(0)
-    setobjectxy(LOCALID_STAIR_MOMENT, 22, 13)
+    removeobject(LOCALID_STAIR_MOMENT)
+    delay(30)
+    setobjectxyperm(LOCALID_STAIR_MOMENT, 19, 13)
+    addobject(LOCALID_STAIR_MOMENT)
+    setvar(VAR_0x8004, LOCALID_STAIR_MOMENT)
+    special(Ichor_UnfreezeObject)
     turnobject(LOCALID_STAIR_MOMENT, DIR_WEST)
     return
 }
@@ -639,7 +644,7 @@ script StairOfHours_EventScript_Chimes {
     playse(SE_M_MORNING_SUN)
     fadescreenspeed(FADE_TO_WHITE, 1)
     fadescreenspeed(FADE_FROM_WHITE, 1)
-    fadeoutbgm(0)
+    fadeoutbgm(1)
     setspeaker(SP_NAME_NONE)
     msgbox(format("You have it by the forelock."))
     closemessage
@@ -713,7 +718,7 @@ movement StairOfHours_Movement_ToTheLine13 { walk_left walk_down face_right }
 movement StairOfHours_Movement_ToTheLine14 { walk_left * 2 walk_down face_right }
 
 movement StairOfHours_Movement_HarpeFalls { walk_fast_down * 2 walk_fast_right * 2 walk_faster_down * 6 }
-movement StairOfHours_Movement_MomentAway { walk_faster_right * 10 }
+movement StairOfHours_Movement_MomentAway { walk_faster_right * 3 }
 movement StairOfHours_Movement_CameraDownAnHour { walk_faster_down * 8 }
 movement StairOfHours_Movement_CameraUpAll { walk_faster_up * 88 }
 movement StairOfHours_Movement_LordSinks { walk_slow_down * 3 walk_down * 8 }

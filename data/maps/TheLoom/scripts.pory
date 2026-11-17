@@ -293,6 +293,8 @@ script TheLoom_EventScript_TheHourStops {
     delay(30)
     applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraFromStair)
     waitmovement(0)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraBack)
+    waitmovement(0)
     special(RemoveCameraObject)
     setspeaker(Climax_Name_Phaedon)
     msgbox(format("Come up when you're ready. I'll tell you all of it then."))
@@ -388,8 +390,8 @@ movement TheLoom_Movement_CameraPanWest { walk_left * 16 delay_16 walk_left * 10
 movement TheLoom_Movement_CameraPanEast { walk_fast_right * 26 }
 movement TheLoom_Movement_CameraToFates { walk_fast_left * 15 walk_up * 2 }
 movement TheLoom_Movement_CameraBack { walk_down * 2 walk_fast_right * 15 }
-movement TheLoom_Movement_CameraToStair { walk_fast_left * 24 walk_up * 4 }
-movement TheLoom_Movement_CameraFromStair { walk_fast_down * 4 walk_fast_right * 24 }
+movement TheLoom_Movement_CameraToStair { walk_fast_left * 10 walk_up * 2 }
+movement TheLoom_Movement_CameraFromStair { walk_fast_down * 2 walk_fast_right * 10 }
 movement TheLoom_Movement_HarpeFalls { walk_faster_up walk_faster_left * 6 walk_faster_up walk_faster_left * 8 walk_faster_down }
 movement TheLoom_Movement_LordRises { walk_slow_up }
 movement TheLoom_Movement_LordLeaves { walk_slow_up * 3 walk_up * 6 }
