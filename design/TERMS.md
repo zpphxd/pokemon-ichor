@@ -10,7 +10,7 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 - **Labels stay in capitals.** Menu entries, window headers and info-panel tags keep Gen 3's capitals ("LAURELS", "AUGURY", "SAVE"). On a pottery frame they read like an inscription.
 - **People's names** are capitals in name boxes and trainer names (KLEON, DAPHNE) and mixed case in prose ("Daphne told me…"). The player's default names are THEO and IANTHE.
 - **"Professor"** is spelled out in prose. In a label it is "PROF. DAPHNE".
-- **Keep these as they are:** Pokémon, Poké Ball, TM, Pokérus, Egg, Trainer, Bag, HP, PP, money and the ¥ sign.
+- **Keep these as they are:** Pokémon, Poké Ball, TM, Pokérus, Egg, Trainer, Bag, HP, PP, money and the ¥ sign. "Poké Ball" stays both as the plain ball's item name and as the generic word for every ball (the POKé BALLS pocket, "Poké Ball" in battle text); the other balls take the names in [the Poké Balls](#the-poké-balls).
 
 ## The world and its people
 
@@ -68,6 +68,45 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 | Day Care | not decided | | **Flag.** Not in Phase 1. |
 
 **Apotheosis waits for one pass.** The two battle lines (`STRINGID_MEGAEVOREACTING`, `STRINGID_MEGAEVOEVOLVED` in `src/battle_message.c`) are asserted word for word by the expansion's tests (`test/battle/trainer_slides.c` and four more), and the bag would still say "Mega Ring". Rename the items, the two lines, the trigger art and those tests together, in Phase 4.
+
+## The Poké Balls
+
+The user's ruling (2026-11-17): every ball gets Ichor art and a Greek name, the Master Ball is **Daedalus Ball** and the Dive Ball is **Poseidon Ball**. Each ball is named "&lt;figure&gt; Ball" for the figure whose story matches what it does, so the name hints at the effect. **Only the names, descriptions and art change:** every catch rate, item constant (`ITEM_DIVE_BALL` and the rest) and ball id is upstream's. The plain **Poké Ball keeps its name**, because it is also the generic word (see above); it keeps its red-over-white look too, in terracotta and marble.
+
+The art: `tools/ichor/art/balls.py` draws the battle sprites (`graphics/balls/`, closed, opening and open) and the bag icons (written through `items.py`); each cap carries its figure's mark, from `ball_motifs.py`. Each ball's `openFadeColor` in `src/battle_anim_throw.c` is its cap's light, so a Pokémon comes out of a Poseidon Ball sea-blue. Widths are the bag's narrow font; the bag allows 88 px and the shop about 76 before the price.
+
+| Upstream | Ichor | Width | Why this figure |
+|---|---|---|---|
+| Poké Ball | **Poké Ball** | 41 | Kept: the generic word. |
+| Great Ball | **Theseus Ball** | 56 | The hero who bound the bull of Marathon. A step up from a Poké Ball. |
+| Ultra Ball | **Herakles Ball** | 60 | His labors brought beasts back alive. A step up from Theseus. |
+| Master Ball | **Daedalus Ball** | 60 | User's name. Nothing finds its way out of Daedalus's work (LABYRINTH Scene D). |
+| Premier Ball | **Xenia Ball** | 45 | *Xenia*, the guest-gift: the Agora throws one in for every ten balls. |
+| Heal Ball | **Asclepius Ball** | 64 | The healer god: the catch is healed. |
+| Net Ball | **Arachne Ball** | 56 | The weaver turned spider: good on Bug and Water types. |
+| Nest Ball | **Alcyone Ball** | 55 | The halcyon's calm-sea nest: good on weaker Pokémon. |
+| Dive Ball | **Poseidon Ball** | 60 | User's name. Good on Pokémon in the water. |
+| Dusk Ball | **Nyx Ball** | 36 | Night herself: good at night and in caves. |
+| Timer Ball | **Chronos Ball** | 56 | Time: stronger as the battle runs on. **Flag:** Chronos (time) and Kronos (the villain's Titan) were run together in antiquity; the spelling keeps them apart, but the director may prefer *Horai* (the Hours). |
+| Quick Ball | **Hermes Ball** | 51 | The swiftest god: best on the first turn. |
+| Repeat Ball | **Mnemosyne Ball** | 66 | Memory: good on species caught before. Her pool is in Arkadia. |
+| Luxury Ball | **Plutus Ball** | 50 | Wealth: the Pokémon grows friendly quickly. |
+| Level Ball | **Arete Ball** | 46 | Excellence: better when your Pokémon's level is higher. |
+| Lure Ball | **Glaucus Ball** | 55 | The fisherman made a sea god: good on Pokémon hooked by a Rod. |
+| Moon Ball | **Selene Ball** | 50 | The moon: good on Moon Stone evolvers. |
+| Friend Ball | **Philia Ball** | 48 | Friendship: the catch starts out fond of you. |
+| Love Ball | **Eros Ball** | 41 | Desire: good on the opposite gender. |
+| Fast Ball | **Atalanta Ball** | 60 | The fastest runner: good on fast Pokémon. |
+| Heavy Ball | **Atlas Ball** | 45 | He bears the sky: good on heavy Pokémon. |
+| Dream Ball | **Hypnos Ball** | 51 | Sleep: good on sleeping Pokémon. |
+| Safari Ball | **Pan Ball** | 36 | The god of the wild. A cut system's ball (Safari Zone). |
+| Sport Ball | **Agon Ball** | 41 | The contest. A cut system's ball (Bug-Catching Contest). |
+| Park Ball | **Elysium Ball** | 54 | The blessed meadow. A transfer ball, never found in Aethos. |
+| Beast Ball | **Typhon Ball** | 51 | The father of monsters: for beasts from beyond, poor on the rest. |
+| Cherish Ball | **Charis Ball** | 50 | Grace and gift: the event ball. |
+| Strange Ball | **Aion Ball** | 40 | Eternity: the ball that "wandered through all time". |
+
+None of the names touches the Lazarus avoid-list (`research/LAZARUS.md`). The Premier Ball's throw-in line now reads "Take a Xenia Ball too, as a guest-gift." The Safari Zone's own strings ("SAFARI BALLS", the announcer) belong to a cut system and keep their Hoenn words.
 
 ## The eight Laurels
 
