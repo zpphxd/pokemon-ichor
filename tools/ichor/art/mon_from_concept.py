@@ -114,7 +114,7 @@ def nearest(pal, rgb, skip0=True):
 
 def front_frames(name, cfg):
     src = CONCEPTS / f"{name}.png"
-    img = c2n.convert(src, fit=cfg["fit"], sharpen=cfg.get("sharpen", 80))
+    img = c2n.convert(src, fit=cfg["fit"], sharpen=cfg.get("sharpen", 40))
     f0 = np.array(img)
     pal = np.array(img.getpalette()[:48], int).reshape(16, 3)
     for x, y, rgb in cfg.get("fixes", []):
@@ -184,6 +184,27 @@ def back_from_front(f0, pal):
     return back
 
 
+def shiny_global(pal, old_normal, old_shiny):
+    """One smooth shift for every colored entry, taken from the old design's
+    most saturated body color, so neighboring shades stay neighbors."""
+    on = old_normal[1:] / 255.0
+    os_ = old_shiny[1:] / 255.0
+    hn = np.array([colorsys.rgb_to_hsv(*c) for c in on])
+    hs = np.array([colorsys.rgb_to_hsv(*c) for c in os_])
+    j = int(np.argmax(hn[:, 1] * (hn[:, 2] > 0.25)))
+    dh = hs[j, 0] - hn[j, 0]
+    rs = hs[j, 1] / max(hn[j, 1], 0.05)
+    rv = hs[j, 2] / max(hn[j, 2], 0.05)
+    out = pal.copy()
+    for i in range(1, len(pal)):
+        h, s, v = colorsys.rgb_to_hsv(*(pal[i] / 255.0))
+        if s < 0.15:
+            continue  # neutrals, outlines and highlights stay
+        r, g, b = colorsys.hsv_to_rgb((h + dh) % 1.0, min(1.0, s * rs), min(1.0, v * rv))
+        out[i] = (np.round(np.array([r, g, b]) * 255 / 8) * 8).clip(0, 248)
+    return out
+
+
 def remap(a, old_pal, new_pal):
     lut = np.zeros(16, int)
     for i in range(1, len(old_pal)):
@@ -239,12 +260,16 @@ def recolor(pal, spec):
     if not spec:
         return pal
     out = pal.copy()
-    lo, hi = spec["hue"]
+    lo, hi = spec.get("hue", [0, 360])
     ramp = np.array(spec["ramp"], float)
     fam, ink = [], []
     for i in range(1, len(pal)):
         h, s, v = colorsys.rgb_to_hsv(*(pal[i] / 255.0))
-        if not (lo <= h * 360 <= hi) or s < spec.get("min_sat", 0.25):
+        if spec.get("neutral"):
+            # grays and near-grays (stone, ash), not the outline or the whites
+            if s >= spec.get("max_sat", 0.18) or not (0.15 <= v <= 0.92):
+                continue
+        elif not (lo <= h * 360 <= hi) or s < spec.get("min_sat", 0.25):
             continue
         (ink if v < spec.get("ink_below", 0.25) else fam).append(i)
     # several near-blacks: keep them as distinct steps from the outline ink
@@ -252,7 +277,7 @@ def recolor(pal, spec):
     ink.sort(key=lambda i: c2n.lum(pal[i]))
     for k, i in enumerate(ink):
         t = k / max(1, len(ink)) * 0.6
-        col = np.array(spec["ink"], float) * (1 - t) + ramp[0] * t
+        col = np.array(spec.get("ink", pal[i]), float) * (1 - t) + ramp[0] * t
         out[i] = (np.round(col / 8) * 8).clip(0, 248)
     fam.sort(key=lambda i: c2n.lum(pal[i]))
     lums = [c2n.lum(pal[i]) for i in fam]
@@ -305,10 +330,18 @@ def build(name, cfg):
     # Indices are assigned against the concept's own palette (pal0); a
     # recolor then changes colors only, so every shading step is kept.
     pal = recolor(pal0, cfg.get("recolor"))
-    shiny = shiny_from_old(pal, old_normal, old_shiny)
+    if cfg.get("shiny_recolor"):
+        # a shiny designed from its dex line: ramps applied to the normal palette
+        shiny = pal
+        for spec in cfg["shiny_recolor"]:
+            shiny = recolor(shiny, spec)
+    elif cfg.get("shiny") == "global":
+        shiny = shiny_global(pal, old_normal, old_shiny)
+    else:
+        shiny = shiny_from_old(pal, old_normal, old_shiny)
     back_src = CONCEPTS / f"{name}_back.png"
     if back_src.exists():
-        bimg = c2n.convert(back_src, fit=64, sharpen=cfg.get("sharpen", 80))
+        bimg = c2n.convert(back_src, fit=64, sharpen=cfg.get("sharpen", 40))
         bpal = np.array(bimg.getpalette()[:48], int).reshape(16, 3)
         back = remap(np.array(bimg), bpal, pal0)
     else:
@@ -395,12 +428,15 @@ def ingest(folder, dry_run=False):
         # a gentle gradient are fine (the flood fill handles them); a scene isn't.
         corners = np.array([c.reshape(-1, 3).mean(0) for c in
                             (a[:8, :8], a[:8, -8:], a[-8:, :8], a[-8:, -8:])])
-        if np.abs(corners - corners.mean(0)).sum(-1).max() > 90:
+        # agree with the median corner; one corner may be covered by the
+        # subject itself (smoke, a wing tip) and is only a warning
+        off = np.abs(corners - np.median(corners, axis=0)).sum(-1) > 90
+        if off.sum() > 1:
             problems.append(f"{f.name}: the background isn't flat; regenerate on solid magenta")
             continue
-        warn = ""
+        warn = " (the subject touches a corner: it is cropped at the frame)" if off.any() else ""
         if not (im.width == im.height and im.width % 64 == 0 and im.width >= 256):
-            warn = f" (not on a 64-grid, {im.width}x{im.height}: sampled by size, check detail)"
+            warn += f" (not on a 64-grid, {im.width}x{im.height}: sampled by size, check detail)"
         dst = CONCEPTS / (f"{name}_back.png" if view == "back" else f"{name}.png")
         tmp = CONCEPTS / f".check_{name}_{view}.png"
         im.save(tmp)

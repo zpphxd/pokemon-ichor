@@ -95,6 +95,7 @@ def detail_palette(px, k):
     for sel in (L >= np.percentile(L, 99.6), L <= np.percentile(L, 0.6)):
         if sel.sum() >= 2:
             keep.append(np.round(px[sel].mean(0) / 8) * 8)
+    keep += accents(px, k - len(keep))
     body = kmeans(px, k - len(keep))
     pal = np.vstack([body] + [np.asarray(keep).clip(0, 248)] if keep else [body]).astype(int)
     return np.unique(pal, axis=0)
@@ -128,6 +129,35 @@ def chroma_key(nat, alpha, key=90, spill=25):
             g = nat[y, x, 1]
             nat[y, x] = (g, g, g)
     return alpha, nat
+
+
+def accents(px, k, most=2):
+    """Small, saturated color accents a body palette would swallow.
+
+    Eyes, flames, sparks and lantern glow are a few pixels of a hue the big
+    clusters don't have. Reserve up to `most` of them: a hue bin covering
+    0.15-4% of the subject whose hue is 35+ degrees from every body color.
+    """
+    import colorsys
+    hsv = np.array([colorsys.rgb_to_hsv(*(c / 255.0)) for c in px])
+    sat = (hsv[:, 1] > 0.45) & (hsv[:, 2] > 0.35)
+    if sat.sum() < 3:
+        return []
+    body = kmeans(px, k).astype(float)
+    bins = (hsv[:, 0] * 12).astype(int) % 12
+    found = []
+    for b in range(12):
+        sel = sat & (bins == b)
+        share = sel.sum() / len(px)
+        if not (0.0015 <= share <= 0.04):
+            continue
+        col = px[sel].mean(0)
+        # only when the full palette would still miss it by a visible margin
+        if np.sqrt(((body - col) ** 2).sum(-1)).min() < 70:
+            continue
+        found.append((share, np.round(col / 8) * 8))
+    found.sort(key=lambda t: -t[0])
+    return [c for _, c in found[:most]]
 
 
 def kmeans(px, k, seed=3, iters=30):
@@ -309,7 +339,7 @@ def pixel_downscale(idx, alpha, pal, scale):
     return out, oa
 
 
-def hybrid_downscale(nat, alpha, pal, scale, sharpen=80):
+def hybrid_downscale(nat, alpha, pal, scale, sharpen=40):
     """Reduce a concept that's bigger than the frame, keeping as much as fits.
 
     The interior comes from an area average (alpha-premultiplied, lightly
@@ -352,7 +382,7 @@ def despeckle(idx, alpha):
     return idx, alpha
 
 
-def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto", sharpen=80):
+def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto", sharpen=40):
     a = np.asarray(Image.open(src).convert("RGB")).astype(int)
     bg = np.asarray(bg, float) if bg is not None else border_color(a)
     found = None
@@ -392,8 +422,11 @@ def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None
     else:
         idx, alpha = cleanup(idx, alpha, pal)
     h, w = idx.shape
-    if h > size or w > size:
-        raise SystemExit(f"subject {w}x{h} exceeds the {size}px canvas")
+    if max(h, w) > size - 1:
+        # still too tall or wide for the frame plus a row of floor (the
+        # no-grid path samples by size): reduce once more, keeping line art
+        idx, alpha = pixel_downscale(idx, alpha, pal, (size - 1) / max(h, w))
+        h, w = idx.shape
     out = np.zeros((size, size), np.uint8)
     oy, ox = size - h - 1, (size - w) // 2  # feet on the floor, centred
     out[oy:oy + h, ox:ox + w] = np.where(alpha, idx + 1, 0)
