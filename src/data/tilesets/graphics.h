@@ -1534,6 +1534,8 @@ const u16 gTilesetPalettes_PorytilesManaged_PalaceRooms[][16] =
     INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/15.gbapal")
+};
+
 // Ichor: lakonia (Lakonia, the town with no walls), written by tools/ichor/art/lakonia_build.py
 const u32 gTilesetTiles_PorytilesManaged_Lakonia[] = INCBIN_U32("data/tilesets/secondary/lakonia/porytiles_bin/tiles.4bpp.lz");
 
