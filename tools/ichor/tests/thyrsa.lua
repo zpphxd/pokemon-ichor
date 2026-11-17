@@ -41,10 +41,30 @@ L.start(function()
     local _, y = L.pos()
     expect(y == 7, "the north gate still blocks departure before Act I closes")
     L.setFlag(S.FLAG_ACT1)
+    -- Route 6 and Kithairon: the vines on the terrace stair need the Sickle, and
+    -- the trainers at the narrow points can't be walked round
+    local mandatory = {
+        [S.MAP_R6] = {"SOSTRATOS", "PHANO", "MELANIPPE", "DAMON"},
+        [S.MAP_MOUNTAIN] = {"AKTAIOS", "BROMIOS", "NYSA", "CHARINOS", "EUPHRON"},
+    }
     for _, map in ipairs({S.MAP_R6, S.MAP_MOUNTAIN, S.MAP_R7, S.MAP_CITY}) do
         L.leaveEdge("up", map)
         expect(L.mapId() == map, "actual connected road crossing to map " .. map)
         L.shot("connected_" .. map)
+        if map == S.MAP_R6 then
+            L.talk(L.npc("EventScript_CutTree"), {every = true, answers = {"yes"}})
+            expect(L.getFlag(S.FLAG_R6_VINES), "Demeter's Sickle cuts the vines on Route 6's terrace stair")
+        elseif map == S.MAP_MOUNTAIN then
+            -- up the first three tiers to the maenads' camp, where the spring keeper heals
+            emu:write16(L.partyMon(0) + S.OFF_MON_HP, 150)
+            L.talk(L.npc("MtKithairon_EventScript_Spring"))
+            expect(emu:read16(L.partyMon(0) + S.OFF_MON_HP) > 150, "Kithairon's spring keeper heals mid-climb")
+        end
+    end
+    for map, names in pairs(mandatory) do
+        for _, name in ipairs(names) do
+            expect(L.defeated(S["TRAINER_" .. name]), name .. " stopped the walk on map " .. map)
+        end
     end
     L.useWarp(S.MAP_CLINIC)
     L.talk(L.npc("ThyrsaCity_Asclepeion_EventScript_Healer"))
