@@ -1,0 +1,208 @@
+{
+  "areas": [
+    {
+      "id": "elaia-village",
+      "maps": ["ElaiaVillage", "ElaiaVillage_PlayersHouse_1F", "ElaiaVillage_PlayersHouse_2F", "ElaiaVillage_Akademia", "ElaiaVillage_BakersHouse", "ElaiaVillage_NeighborsHouse"],
+      "title": "Elaia Village",
+      "kind": "town",
+      "blurb": "Your home village of silver olives, celebrating the Klotheia, the festival where Kalliste's youths come of age.",
+      "walkthrough": [
+        "You wake up in your room on festival morning. Before Mom will let you downstairs, check the water clock (the klepsydra) by the wall. Filling it sets the time of day, then asks you to pick your road: Mortal, Hero or Spartan. Right after that you are offered the optional Oath of the Styx. Both choices stay with this save, so read the descriptions carefully. The chest beside your bed is your kibotos, where you can store spare items.",
+        "Head downstairs. Mom stops you at the foot of the stairs and gives you the Talaria, winged sandals that let you run by holding the B Button. Leave the house and walk up into the square. Halia calls you over as soon as you near the old olive, and you join the line for the reading of the threads. A story scene plays.",
+        "The Akademia is at the bottom of the village, on the lower terrace. Its door is closed until Halia has read your thread. Inside, Professor Daphne asks you a question (either answer is fine) and offers you one of three Pokémon. Choose Nebrel, Kynder or Hipling. Daphne also gives you the Pokédex. Then Kleon of Lakonia barges in and takes the starter with the type advantage over yours.",
+        "When you climb either flight of steps back up from the lower terrace, Kleon challenges you in front of the whole village. His partner is level 5. Win or lose, the story carries on, and Alethea heals your team and gives you five Poké Balls afterward. She heads off to Kronion Hill and asks you to meet her there.",
+        "Before the battle, an old shepherd blocks the north road and won't let you through without a partner. Once Kleon has left, he steps aside. Take the north road out of the village to Route 1. Before you go, visit the houses: Kydippe has berries for you, and Glykera the baker needs honey.",
+        "After you have the Hearth Laurel and seen the quay at Akti, Alethea tells you Halia wants to see you. Come back to Elaia and walk toward the old olive in the square. Halia sits you down for a second look. Then head back to Akti, where your mother has gone down to the harbor."
+      ],
+      "key_npcs": [
+        {"map": "ElaiaVillage_PlayersHouse_2F", "script": "ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock", "label": "Water clock", "note": "Sets the clock, then your difficulty (Mortal, Hero or Spartan) and the optional Oath of the Styx. You must use it before you can go downstairs."},
+        {"map": "ElaiaVillage_PlayersHouse_2F", "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Kibotos", "label": "Kibotos", "note": "Your wooden chest. Opens your stored things, like the Pithos item storage."},
+        {"map": "ElaiaVillage_PlayersHouse_1F", "script": "ElaiaVillage_PlayersHouse_1F_EventScript_Mom", "label": "Mom (Melitta)", "note": "Gives the Talaria on festival morning. Once you have a partner, she offers to heal your team whenever you talk to her."},
+        {"map": "ElaiaVillage", "script": "ElaiaVillage_EventScript_Halia", "label": "Halia", "note": "Reads your thread at the festival, which opens the Akademia. Gives you a second look after you have the Hearth Laurel and seen the trireme."},
+        {"map": "ElaiaVillage_Akademia", "script": "ElaiaVillage_Akademia_EventScript_Daphne", "label": "Professor Daphne", "note": "Gives you your starter and the Pokédex on your first visit, after the thread reading."},
+        {"map": "ElaiaVillage_Akademia", "script": "ElaiaVillage_Akademia_EventScript_Scrolls", "label": "Daphne's amphora shelf", "note": "Bring four matching potsherds here to restore an amphora and see its painting."},
+        {"map": "ElaiaVillage", "script": "ElaiaVillage_EventScript_OldShepherd", "label": "Old shepherd", "note": "Blocks the north road until you have a partner."},
+        {"map": "ElaiaVillage", "script": "ElaiaVillage_EventScript_Kleon", "label": "Kleon", "note": "Your rival. Challenges you in the square after you get your starter. Losing does not end the game."},
+        {"map": "ElaiaVillage", "script": "ElaiaVillage_EventScript_Well", "label": "Village well", "note": "Check it once for a coin at the bottom."},
+        {"map": "ElaiaVillage_NeighborsHouse", "script": "ElaiaVillage_NeighborsHouse_EventScript_Kydippe", "label": "Kydippe", "note": "The midwife who delivered you. Gives two Oran Berries."},
+        {"map": "ElaiaVillage_BakersHouse", "script": "ElaiaVillage_BakersHouse_EventScript_Glykera", "label": "Glykera", "note": "Bring her a Honey and she trades two Old Gateaux for it."},
+        {"map": "ElaiaVillage_BakersHouse", "script": "ElaiaVillage_BakersHouse_EventScript_Kimon", "label": "Kimon", "note": "Once you have Poké Balls, trades his Halcyling, Arion, for a Galekit. After you win the Hearth Laurel, gives you a Pearl String."}
+      ],
+      "statics": [
+        {"species": "SPECIES_NEBREL", "level": 5, "where": "The Akademia", "condition": "Starter choice from Professor Daphne. Grass type. Pick one of the three."},
+        {"species": "SPECIES_KYNDER", "level": 5, "where": "The Akademia", "condition": "Starter choice from Professor Daphne. Fire type. Pick one of the three."},
+        {"species": "SPECIES_HIPLING", "level": 5, "where": "The Akademia", "condition": "Starter choice from Professor Daphne. Water type. Pick one of the three."},
+        {"species": "SPECIES_HALCYLING", "level": null, "where": "Glykera's house (Kimon)", "condition": "In-game trade for any Galekit, once you have Poké Balls. Arion arrives at your Galekit's level, holding an Oran Berry, with the ability Cloud Nine."}
+      ],
+      "tips": [
+        {"kind": "Hot Tip", "text": "A Honey is hidden by Mom's beehives behind your house. Take it to Glykera the baker and she gives you two Old Gateaux, which heal your Pokémon."},
+        {"kind": "Pro Tip", "text": "Kimon's Halcyling is a Water and Flying type. Galekit live in the grass along Route 1, so catch one there and come back for the trade."},
+        {"kind": "Pro Tip", "text": "Mom heals your whole team for free once you have a partner. It's a short walk from the north road, so use her before you set out."},
+        {"kind": "Lore", "text": "The Klotheia is named for Klotho, the Fate who spins every life's thread. Halia reads each youth's future from that thread under the old olive."}
+      ],
+      "puzzles": [],
+      "spoilers": [
+        {"title": "Your thread", "text": "Halia's spindle stops when she reads you, which has never happened in forty years. At her second look she admits she saw nothing on your thread at all, and she sends a gull to Daphne about it."},
+        {"title": "The traveling scribe", "text": "The quiet scribe by the festival altar, who collects fortunes for his book, is the Titan Iapetos in disguise. He slips away with his stool after Kleon's battle."}
+      ],
+      "hierophant": null
+    },
+    {
+      "id": "kalliste-route-1",
+      "maps": ["KallisteRoute1"],
+      "title": "Route 1",
+      "kind": "route",
+      "blurb": "The olive-terraced road north from Elaia Village to Akti Town, with a fork east to Kronion Hill.",
+      "walkthrough": [
+        "Route 1 runs north from Elaia through groves and goat pasture. Shepherds and harvesters wait along the way, so expect battles. The carter near the south end and the olive farmer under the big olive both have a gift for you.",
+        "Halfway up, a herm marks a fork: east to Kronion Hill, north to Akti Town. Keep going north and you find Amaryllis's goat flock standing across the road. They won't move while the hill is humming.",
+        "Take the east fork to Kronion Hill and deal with what's happening at the old shrine. When you come back, the flock has moved and the road north to Akti is open."
+      ],
+      "key_npcs": [
+        {"map": "KallisteRoute1", "script": "KallisteRoute1_EventScript_Carter", "label": "Carter", "note": "Gives a Moomoo Milk the first time you talk to her."},
+        {"map": "KallisteRoute1", "script": "KallisteRoute1_EventScript_OliveFarmer", "label": "Olive farmer", "note": "Gives a Sitrus Berry the first time you talk to him."},
+        {"map": "KallisteRoute1", "script": "KallisteRoute1_EventScript_Amaryllis", "label": "Amaryllis", "note": "Her flock blocks the road north until you clear Kronion Hill."},
+        {"map": "KallisteRoute1", "script": "KallisteRoute1_EventScript_DigTerraces", "label": "Dig spot (terraces)", "note": "An excavation spot. Needs Alethea's Trowel, which you get later. Can be dug once a day and can turn up a Kronos amphora sherd."}
+      ],
+      "statics": [],
+      "tips": [
+        {"kind": "Hot Tip", "text": "Catch a Galekit here. Kimon in Elaia Village trades his Halcyling for one."},
+        {"kind": "Pro Tip", "text": "You can't reach Akti until the flock moves, so heal up before the fork. There's no Asclepeion until Akti."}
+      ],
+      "puzzles": [],
+      "spoilers": [],
+      "hierophant": null
+    },
+    {
+      "id": "kronion-hill",
+      "maps": ["KallisteRoute1_KronionHill"],
+      "title": "Kronion Hill",
+      "kind": "dungeon",
+      "blurb": "A hill east of Route 1, topped by a ruined shrine older than the olives, with high goat pastures on its south flank.",
+      "walkthrough": [
+        "At the hill foot a herm points two ways: up to the old shrine, down to the high pastures. The pastures are an optional branch with three herders to battle, and past the last one, an Everstone near the edge.",
+        "Climb the stairs to the summit. When you reach the top, Alethea calls you over. Two Titanborn have been digging up the shrine, and you battle them one after the other. Their Pokémon are level 8 and 9, so heal before you climb.",
+        "After the grunts flee, a story scene plays and Alethea gives you the Augur's Eye. Open it from the menu (AUGURY), pick a Pokémon you have already seen, and it shows where one is hiding in the grass. Creep up slowly.",
+        "Alethea heads back to Elaia. Go back down to Route 1 and continue north: the goats have left the road, and Akti Town is ahead."
+      ],
+      "key_npcs": [
+        {"map": "KallisteRoute1_KronionHill", "script": "KallisteRoute1_KronionHill_EventScript_Alethea", "label": "Alethea", "note": "Meets you at the summit. Gives you the Augur's Eye after you beat the two Titanborn."},
+        {"map": "KallisteRoute1_KronionHill", "script": "KallisteRoute1_KronionHill_EventScript_Grunt", "label": "Titanborn Petros and Amathos", "note": "Fought back to back at the summit. Beating them opens the road north on Route 1."},
+        {"map": "KallisteRoute1_KronionHill", "script": "KallisteRoute1_KronionHill_EventScript_Altar", "label": "Cracked altar", "note": "At night, after you restore the Kronos amphora on Daphne's shelf, a Pokémon waits under the altar."},
+        {"map": "KallisteRoute1_KronionHill", "script": "KallisteRoute1_KronionHill_EventScript_SkySeat", "label": "Sky seat", "note": "Worn steps for stargazing. At night, with a Star Chart (found later), you can read the night sky here."},
+        {"map": "KallisteRoute1_KronionHill", "script": "KallisteRoute1_KronionHill_EventScript_Stele", "label": "Kronion Hill stele", "note": "Hints at the stargazing seat at the east end of the old steps."},
+        {"map": "KallisteRoute1_KronionHill", "script": "KallisteRoute1_KronionHill_EventScript_DigShrine", "label": "Dig spot (shrine)", "note": "An excavation spot. Needs Alethea's Trowel, which you get later. Can be dug once a day and can turn up a Kronos amphora sherd."}
+      ],
+      "statics": [
+        {"species": "SPECIES_CAIRNOLITH", "level": 20, "where": "The cracked altar on the summit", "condition": "Only at night, after you restore the Kronos and the stone amphora on Daphne's shelf. Holds a Hard Stone and has its hidden ability, Sand Force. If you run, you can try again; it is gone once caught or defeated."}
+      ],
+      "tips": [
+        {"kind": "Hot Tip", "text": "If you lose to the second grunt, you don't have to fight the first one again when you come back."},
+        {"kind": "Pro Tip", "text": "The grunts use Rock and Ground Pokémon. Water and Grass moves make short work of them."},
+        {"kind": "Lore", "text": "Lykidas says Kronos swallowed a stone instead of his son. The story is Zeus's: Rhea gave Kronos a wrapped stone to swallow in the baby's place."}
+      ],
+      "puzzles": [],
+      "spoilers": [
+        {"title": "The Titanborn tablet", "text": "The grunts drop a clay tablet stamped with a sickle. It lists places, with Kalliste scratched out, and says a fragment of the Harpe, Kronos's sickle, lies 'where the grain goes underground'. Its last line reads 'Last, the house of the double axe.' The grunts answer to Hyperion."},
+        {"title": "The dark stair", "text": "Once the grunts are gone, their pit shows stone steps going down into the dark. You can't go down them yet."}
+      ],
+      "hierophant": null
+    },
+    {
+      "id": "akti-town",
+      "maps": ["AktiTown", "AktiTown_Asclepeion", "AktiTown_Agora", "AktiTown_FishersHouse", "AktiTown_DiversHouse", "AktiTown_GoatherdsHouse"],
+      "title": "Akti Town",
+      "kind": "town",
+      "blurb": "Kalliste's harbor town, home of the Temple of Hestia and the quay where the trireme to the mainland waits for the wind.",
+      "walkthrough": [
+        "As you enter from the south road, Diktys the net-mender gives you the lay of the land: the Asclepeion on the left, the Temple of Hestia on the right, the Agora up the hill and the sea straight ahead. Step into the Asclepeion first. It heals your team, holds the Pithos, and makes Akti the place you wake up if your team faints.",
+        "Explore before you take on the temple. Glaukos the fisher gives you an Old Rod, and Hydna the diver gives you a Mystic Water. A goat called Kapra is loose in town eating laundry. Talk to her to send her home, then visit Aigon in the goatherd's farmhouse for a reward.",
+        "Captain Nausikles at the quay won't take you to the mainland without a laurel. Enter the Temple of Hestia and win the Hearth Laurel from Ione.",
+        "When you step out of the temple with the Laurel, Alethea runs up with news and heads for the quay. Follow her and walk up to the trireme. A story scene plays at the ship. The trireme can't sail until the winds turn, and Alethea passes on a message: Halia wants to see you in Elaia before you go.",
+        "Go back to Elaia Village for Halia's second look, then return to Akti. As you arrive, the wind comes back. Walk to the trireme's end of the quay for a farewell scene. Mom is waiting there and gives you two Honey.",
+        "When you're ready, talk to Nausikles to board the Euploia for Emporion. Once you're out, there's no turning back, so finish anything you want to do on Kalliste first."
+      ],
+      "key_npcs": [
+        {"map": "AktiTown_Asclepeion", "script": "AktiTown_Asclepeion_EventScript_Healer", "label": "Healer", "note": "Heals your team for free. Entering the Asclepeion makes Akti your respawn point."},
+        {"map": "AktiTown_Asclepeion", "script": "AktiTown_Asclepeion_EventScript_Pithos", "label": "Pithos", "note": "The great storage jar: Pokémon storage and your stored things."},
+        {"map": "AktiTown_Agora", "script": "AktiTown_Agora_EventScript_Demeas", "label": "Demeas", "note": "Runs the Agora stall. More stock after the Hearth Laurel."},
+        {"map": "AktiTown_FishersHouse", "script": "AktiTown_FishersHouse_EventScript_Glaukos", "label": "Glaukos", "note": "Gives you the Old Rod."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_Hydna", "label": "Hydna", "note": "The sponge diver. Gives you a Mystic Water."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_LooseGoat", "label": "Kapra the goat", "note": "Loose in town. Talk to her to send her home to Aigon's pen."},
+        {"map": "AktiTown_GoatherdsHouse", "script": "AktiTown_GoatherdsHouse_EventScript_Aigon", "label": "Aigon", "note": "Gives a Soothe Bell after you send Kapra home."},
+        {"map": "AktiTown_DiversHouse", "script": "AktiTown_DiversHouse_EventScript_Doris", "label": "Doris", "note": "After you win the Hearth Laurel, trades her Shell Bell for a Heart Scale."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_Nausikles", "label": "Captain Nausikles", "note": "Won't sail without a laurel. After the winds turn, talk to him to board the Euploia for Emporion."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_Mom", "label": "Mom", "note": "Waits on the quay after Halia's second look. Gives you two Honey in the farewell scene."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_GrottoRubble", "label": "Grotto rubble", "note": "Marble blocks a sea grotto under the tide rocks. A good hammer would break them; come back later."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_IsletFisher", "label": "Islet fisher", "note": "Tells you about Poseidon's shrine on the islet, which you can't reach yet."},
+        {"map": "AktiTown", "script": "AktiTown_EventScript_DigBeach", "label": "Dig spot (beach)", "note": "An excavation spot. Needs Alethea's Trowel, which you get later. Can be dug once a day and can turn up a Kronos amphora sherd."}
+      ],
+      "shops": [
+        {"where": "Akti Agora", "when": "before Laurel 1", "items": ["ITEM_POKE_BALL", "ITEM_POTION", "ITEM_ANTIDOTE", "ITEM_PARALYZE_HEAL", "ITEM_AWAKENING"]},
+        {"where": "Akti Agora", "when": "after Laurel 1", "items": ["ITEM_POKE_BALL", "ITEM_POTION", "ITEM_SUPER_POTION", "ITEM_ANTIDOTE", "ITEM_PARALYZE_HEAL", "ITEM_AWAKENING", "ITEM_REPEL", "ITEM_ESCAPE_ROPE"]}
+      ],
+      "statics": [],
+      "tips": [
+        {"kind": "Hot Tip", "text": "A Heart Scale is hidden in Akti. Find it before you visit Doris after the Laurel, and you can trade it straight away for her Shell Bell."},
+        {"kind": "Pro Tip", "text": "Arriving in Akti doesn't set your respawn point. Step inside the Asclepeion once so a loss doesn't send you all the way home."},
+        {"kind": "Pro Tip", "text": "Give the Mystic Water to a Water-type partner, like Hipling or Kimon's Halcyling. It powers up Water moves."},
+        {"kind": "Lore", "text": "The halcyon days are the calm days when the kingfishers nest. In the myth, Aeolus stills the winds so his daughter Alkyone, turned into a kingfisher, can hatch her eggs on the sea."}
+      ],
+      "puzzles": [],
+      "spoilers": [
+        {"title": "Where the grain goes underground", "text": "Daphne reads the Titanborn tablet's riddle as Eleusa, on the mainland, where the Mysteries are kept. That's why Alethea wants a ship."},
+        {"title": "Kleon's Laurel", "text": "Kleon loses to Ione at first, then beats her by lamplight the night before the trireme sails. He runs to the quay waving the Hearth Laurel, and your race to the next laurel begins."}
+      ],
+      "hierophant": null
+    },
+    {
+      "id": "temple-of-hestia",
+      "maps": ["AktiTown_TempleOfHestia"],
+      "title": "Temple of Hestia",
+      "kind": "temple",
+      "blurb": "Akti's temple of the hearth goddess, where Hierophant Ione keeps a fire that has burned for three hundred years.",
+      "walkthrough": [
+        "Euboulos greets you inside the door. Before you can face Ione you must warm the house by completing the Hearth Trial: carry fire from the great hearth to the four bronze braziers around the hall, in the right order, then bring the last flame home.",
+        "Read the hymn on the stele by the entrance. Then talk to Lampon, the acolyte who keeps the great hearth. He won't let you touch the hearth until you beat him.",
+        "Take a flame from the great hearth and light the braziers. Each one has a plaque that shows what it stands for. Light one out of order and every brazier goes dark, so you have to start again. Leaving the temple with a torch puts it out too. Two more acolytes, Pyrrha and Aithra, wait in the hall.",
+        "When all four burn, give the last flame back to the hearth. The braziers by the dais flare, the cord across the steps burns away, and a piece of Charcoal tumbles out of the ashes. Go up to the dais and talk to Ione.",
+        "Beat Ione for the Hearth Laurel and TM42, Facade. Then head back outside."
+      ],
+      "key_npcs": [
+        {"map": "AktiTown_TempleOfHestia", "script": "AktiTown_TempleOfHestia_EventScript_Euboulos", "label": "Euboulos", "note": "Explains the Hearth Trial. If you lose the Charcoal before you use it, he gives you another."},
+        {"map": "AktiTown_TempleOfHestia", "script": "AktiTown_TempleOfHestia_EventScript_Stele", "label": "Hymn of the Hearth", "note": "The stele by the door. It tells you the trial's order."},
+        {"map": "AktiTown_TempleOfHestia", "script": "AktiTown_TempleOfHestia_EventScript_Lampon", "label": "Lampon", "note": "Acolyte. You must beat him before you can take a flame from the great hearth."},
+        {"map": "AktiTown_TempleOfHestia", "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth", "label": "Great hearth", "note": "Take a flame here to start the trial, and return the last flame here to finish it. Gives Charcoal when you finish."},
+        {"map": "AktiTown_TempleOfHestia", "script": "AktiTown_TempleOfHestia_EventScript_Ione", "label": "Hierophant Ione", "note": "Battles you once the Hearth Trial is done. Gives the Hearth Laurel and TM42, Facade."}
+      ],
+      "statics": [],
+      "tips": [
+        {"kind": "Hot Tip", "text": "Keep the Charcoal from Hestia's hearth. Emporion's cold forge needs it, and relighting it earns you the Bronze Hammer."},
+        {"kind": "Pro Tip", "text": "Pyrrha and Aithra both drop hints about the trial after you beat them. Battle them if you're stuck."},
+        {"kind": "Lore", "text": "Hestia was Kronos's first child and the first he swallowed, so she came back up last. That's why Greeks gave her the first and last offering of every feast."}
+      ],
+      "puzzles": [
+        {"title": "The Hearth Trial", "hint": "The hymn on the stele names four places in a house, in order. Match each one to the picture on a brazier's plaque, not to where the brazier stands in the hall.", "solution": "Beat Lampon, then take a flame from the great hearth. Light the braziers in this order: the doorway (back right), the loaf of bread (back left), the spindle (front left), then the couch (front right). Return to the great hearth and give it the last flame."}
+      ],
+      "spoilers": [
+        {"title": "Halia's gull", "text": "After the battle, Ione tells you Halia sent word that you were coming, but for once Halia didn't say how it would go."}
+      ],
+      "hierophant": {
+        "trainer": "TRAINER_ICHOR_IONE_1",
+        "name": "Ione",
+        "title": "the Hearthkeeper",
+        "type": "Normal",
+        "laurel": "Hearth Laurel",
+        "rewards": ["ITEM_TM42"],
+        "unlocks": "Captain Nausikles will take you to the mainland once the winds turn. The Akti Agora adds Super Potion, Repel and Escape Rope. Kimon in Elaia gives you a Pearl String, and Doris in Akti offers her Shell Bell trade.",
+        "strategy": [
+          "Ione's team is all Normal type: Galekit (level 12), Onotis (level 13, holding an Oran Berry) and her ace Nemecub (level 14, holding a Sitrus Berry). Fighting moves hit all three for super-effective damage. She also carries two Potions.",
+          "Nemecub is the real test. Its ability, Fur Coat, doubles its Defense, so physical moves barely scratch it. Use special moves on it instead, like your starter's Water, Fire or Grass attacks. It can use Work Up to raise its Attack, and Fire Fang hurts Nebrel badly. A Water-type partner like Hipling or Arion resists Fire Fang.",
+          "Onotis has Double Kick, which is super effective against Normal types, so don't lead with a Galekit. Her Galekit is quick, with Quick Attack and Bite.",
+          "On Mortal her team is three levels lower (9, 10 and 11). On Spartan she keeps the Hero levels but uses trained, natured sets and smarter AI. She also carries no Potions, and her Galekit holds an Oran Berry."
+        ],
+        "before": "Beat the acolyte Lampon, then complete the Hearth Trial: light the four braziers in the hymn's order and return the last flame to the great hearth. Until then a cord blocks the dais."
+      }
+    }
+  ]
+}
