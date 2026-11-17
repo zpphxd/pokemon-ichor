@@ -392,8 +392,8 @@
    ]
   },
   "graphics/object_events/pics/people/brendan/mach_bike.png": {
-   "sha256": "763353f52b1dcd61406da02fce9e72f6dc822f465e049b23f05a54ca5ce8c5b7",
-   "indices_sha256": "d82dae6e472ec7a0a2d98ae35beddc8d8a0bb8e6f103c48bf6ae8f77de4c1efa",
+   "sha256": "0e3fa22cff5bb2c996e8341e5a6a62afcf8cbccb5ab49cf07f47889e57f9f888",
+   "indices_sha256": "cbf967d947e5583617c42d5604d76a6bb37f4ba47ff03e5b9ec466c6099f1173",
    "size": [
     288,
     32
@@ -1176,8 +1176,8 @@
    ]
   },
   "graphics/object_events/pics/people/may/mach_bike.png": {
-   "sha256": "91f4ec59bc8b0f13d57a46edfed856b56400e60a853a142cfd1eb0292ab85c09",
-   "indices_sha256": "70ad8f7b57cd54fbbc194a8d3a4db312f80fc510df3535b9328524496faf181a",
+   "sha256": "b803cde9accff64517819456e057809c530724f2ea5ab596ed3c95dd755b80ef",
+   "indices_sha256": "b61073bab6c999b164f58bd8567a8d1f4eb62433166beecb9e349988ba9c3d5d",
    "size": [
     288,
     32

@@ -22,10 +22,11 @@ palette (graphics/object_events/palettes/ichor_<family>.pal):
   python3 tools/ichor/art/walker_paint.py NAME [...] [--write] [--preview DIR]
 """
 import argparse
+import math
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[3]
 PALS = ROOT / "graphics/object_events/palettes"
@@ -1143,6 +1144,372 @@ def build_player_pose(name, sheet):
     return np.hstack(frames), read_pal(spec["family"])
 
 
+# ── the chariot: the Mach Bike's riding sheet (mach_bike.png) ─────────────────
+# The player standing in a small two-wheeled racing chariot drawn by one bay
+# pony, in 32x32 frames in the walking order (down, up, left, then each view's
+# two trot steps). The pony and car use only the palette slots brendan.pal and
+# may.pal share (browns, golds, creams, ink), so both players draw the same
+# chariot. The pony trots on the step frames and the wheel's spokes turn; side
+# steps keep the stand frame's facing (never mirrored).
+# palette slots shared by brendan.pal and may.pal
+INK, BAY, BAY_D, BAY_L = 15, 3, 4, 12
+CREAM, CREAM_D = 14, 9
+GOLD, GOLD_D = 10, 11
+RED = 13
+WOOD, WOOD_D = 3, 4
+
+
+def _canvas():
+    return np.zeros((32, 32), np.uint8)
+
+
+def _c_outline(a):
+    """Ink round a layer's own silhouette (4-way), like the walkers."""
+    m = a != 0
+    out = a.copy()
+    near = np.zeros_like(m)
+    near[1:] |= m[:-1]
+    near[:-1] |= m[1:]
+    near[:, 1:] |= m[:, :-1]
+    near[:, :-1] |= m[:, 1:]
+    out[near & ~m] = INK
+    return out
+
+
+def _c_over(base, top):
+    out = base.copy()
+    out[top != 0] = top[top != 0]
+    return out
+
+
+def _c_draw(a):
+    im = Image.fromarray(a, 'P')
+    return im, ImageDraw.Draw(im)
+
+
+def _c_done(im):
+    return np.array(im, np.uint8)
+
+
+# The rider is drawn small for the chariot, as Gen 3 draws its cyclists: the
+# same petasos, chlamys and linen chiton as the walker, at about two-thirds
+# scale, so the pony, the car and its wheel all fit the 32x32 frame.
+RIDER = {
+    "down": """
+....kkkk....
+...kYYYYk...
+..kBBBBBBk..
+.kYYYYYYYYk.
+kyyyyyyyyyyk
+.kHHHGHHHHk.
+.kHSSSSSSHk.
+.kSeSSSSeSk.
+.kSeSSSSeSk.
+..ksSSSSsk..
+.kXkCCCCkXk.
+kXXCCNCCCXXk
+kSXCCCNCCXSk
+.kkCCCCNCkk.
+""",
+    "up": """
+....kkkk....
+...kYYYYk...
+..kBBBBBBk..
+.kYYYYYYYYk.
+kyyyyyyyyyyk
+.kHHHGHHHHk.
+.kHHHHHHGHk.
+.kHHGHHHHHk.
+..khhhhhhk..
+.kXXXXXXXXk.
+kSXXXXXXXXSk
+kSXXXXXXXXSk
+.kxXXXXXXxk.
+..kxxxxxxk..
+..kCCkkCCk..
+..kFk..kFk..
+""",
+    "left": """
+...kkkk....
+..kYYYYk...
+.kBBBBBBk..
+kYYYYYYYYk.
+kyyyyyyyyyk
+.kSHHHHHHk.
+kSSSHHGHHk.
+kSeSSHHHHk.
+kSeSSSHHhk.
+.ksSSSShk..
+..kCCXXXk..
+.kSSCXXXXk.
+.kkCCCXXXk.
+..kCCCXXk..
+""",
+}
+# long hair falls past the hat brim: over the cape behind, beside the face in front
+RIDER_LONG_HAIR = {"down": [(1, 7), (10, 7), (1, 8), (10, 8)],
+                   "up": [(x, y) for y in (9, 10) for x in range(3, 9)],
+                   "left": [(9, 8), (9, 9), (8, 10), (9, 10), (8, 11)]}
+
+
+def _small_rider(name, view, x0, y0):
+    spec = PLAYERS[name]
+    roles = spec["roles"]
+    grid = [list(r) for r in RIDER[view].strip("\n").splitlines()]
+    if spec.get("hair") == "long":
+        for x, y in RIDER_LONG_HAIR[view]:
+            grid[y][x] = "H"
+    a = _canvas()
+    for j, row in enumerate(grid):
+        for i, ch in enumerate(row):
+            if ch != "." and 0 <= y0 + j < 32 and 0 <= x0 + i < 32:
+                a[y0 + j, x0 + i] = roles[ch]
+    return a
+
+
+def wheel_side(a, cx, cy, r, spin):
+    """A spoked wheel side-on, drawn over the outline (open between the spokes):
+    an ink tyre, a wooden rim lit at the top left, four spokes at `spin`
+    degrees, a gold hub."""
+    for y in range(cy - r - 2, cy + r + 3):
+        for x in range(cx - r - 2, cx + r + 3):
+            if not (0 <= x < 32 and 0 <= y < 32):
+                continue
+            d = math.hypot(x - cx, y - cy)
+            if r - 0.5 < d <= r + 0.6:
+                a[y, x] = INK
+            elif r - 1.6 < d <= r - 0.5:
+                a[y, x] = WOOD if (x - cx) + (y - cy) < 0 else WOOD_D
+            elif d <= r - 1.6 and a[y, x] in (GOLD, GOLD_D, CREAM, RED):
+                pass                         # the car shows through above the axle
+            elif d <= r - 1.6:
+                a[y, x] = 0
+    for k in range(4):
+        t = math.radians(spin + 90 * k)
+        for s_ in range(1, r - 1):
+            x, y = round(cx + s_ * math.cos(t)), round(cy + s_ * math.sin(t))
+            a[y, x] = WOOD_D
+    a[cy - 1:cy + 2, cx] = INK
+    a[cy, cx - 1:cx + 2] = INK
+    a[cy, cx] = GOLD
+
+
+PONY_LEFT = """
+..k.k...........
+.kBkBk..........
+.kBBBkk.........
+kBBBBBmk........
+kBeBBBBmk.......
+kBBBBBBBmk......
+kLBBkkBBBmk.....
+kDDk..kBBBmk....
+.kk...kBBBBmk...
+......kBBBBBmkkk
+......kBBBBBLLLL
+.....kBBBBBBBBBB
+.....kBBBBBBBBBB
+.....kBBBBBBBBBB
+.....kDBBBBBBBBD
+......kDDDDDDDDk
+"""
+PONY_KEY = {"k": INK, "B": BAY, "D": BAY_D, "L": BAY_L, "m": INK, "e": INK}
+# x of each leg; near legs are two pixels wide (lit, shaded), far legs one, dark
+PONY_LEGS = (("front", True, 6), ("front", False, 9), ("hind", False, 12), ("hind", True, 14))
+
+
+def leg(a, x, front, near, lifted):
+    col = (BAY, BAY_D) if near else (BAY_D,)
+    if not lifted:
+        cells = [(x, y) for y in range(23, 29)]
+        hoof = [(x, 29)]
+    else:
+        d = -1 if front else 1          # the knee comes forward, the hock goes back
+        cells = [(x, 23), (x, 24), (x + d, 25), (x + d, 26)]
+        hoof = [(x + d, 27)]
+    for cx, cy in cells:
+        for i, c in enumerate(col):
+            a[cy, cx + i] = c
+    for cx, cy in hoof:
+        for i in range(len(col)):
+            a[cy, cx + i] = INK
+
+
+def pony_left(phase):
+    a = _canvas()
+    for j, row in enumerate(PONY_LEFT.strip("\n").splitlines()):
+        for i, ch in enumerate(row):
+            if ch != ".":
+                a[7 + j, i] = PONY_KEY[ch]
+    # a trot: the diagonal pairs lift in turn (near-front with far-hind)
+    lift = {0: set(), 1: {("front", True), ("hind", False)}, 2: {("front", False), ("hind", True)}}[phase]
+    for kind, near, x in PONY_LEGS:
+        leg(a, x, kind == "front", near, (kind, near) in lift)
+    return _c_outline(a)
+
+
+def car_left(phase):
+    im, d = _c_draw(_canvas())
+    d.polygon([(16, 18), (17, 15), (20, 15), (22, 17), (29, 18), (29, 21), (16, 21)], fill=GOLD)
+    a = _c_done(im)
+    for x in range(16, 30):
+        col = np.nonzero(a[:, x])[0]
+        if len(col):
+            a[col[0], x] = CREAM                               # lit rim
+        if a[21, x]:
+            a[21, x] = GOLD_D
+    for x in range(19, 29):
+        if a[19, x]:
+            a[19, x] = RED                                     # a painted band
+    a = _c_outline(a)
+    wheel_side(a, 23, 25, 5, {0: 0, 1: 30, 2: 60}[phase])
+    return a
+
+
+def frame_left(name, phase):
+    a = _canvas()
+    a = _c_over(a, pony_left(phase))
+    a = _c_over(a, _small_rider(name, 'left', 17, 4 + (1 if phase else 0)))
+    a = _c_over(a, car_left(phase))
+    for x, y in ((17, 16), (16, 16), (15, 15), (14, 15), (13, 14)):   # reins to the withers
+        if a[y, x] in (0, BAY, BAY_L):
+            a[y, x] = INK
+    out = _canvas()
+    out[1:] = a[:-1]                       # stand on the bike's ground row
+    return out
+
+
+# ── down (facing south): the pony faces you, the rider stands behind it ──────
+PONY_DOWN = """
+..k......k..
+.kBk....kBk.
+.kBBk..kBBk.
+..kBBkkBBk..
+.kBBmmmmBBk.
+kBBBBccBBBBk
+kBeBBccBBeBk
+kBBBBccBBBBk
+.kBBBccBBBk.
+..kBBccBBk..
+..kBBccBBk..
+..kDDDDDDk..
+..kDkDDkDk..
+...kkkkkk...
+"""
+PONY_KEY["c"] = CREAM
+
+
+def pony_down(phase, bob):
+    a = _canvas()
+    for j, row in enumerate(PONY_DOWN.strip("\n").splitlines()):
+        for i, ch in enumerate(row):
+            if ch != ".":
+                a[13 + j + bob, 10 + i] = PONY_KEY[ch]
+    # forelegs under the chest; a trot lifts one, then the other
+    for x, up in ((10, phase == 1), (20, phase == 2)):
+        bottom = 28 if up else 30
+        for y in range(22 + bob, bottom):
+            a[y, x] = BAY
+            a[y, x + 1] = BAY_D
+        a[bottom, x] = a[bottom, x + 1] = INK
+    return _c_outline(a)
+
+
+def wheel_edge(a, x, top, bottom, phase):
+    """A wheel seen edge-on: an upright rim with a gold hub; spokes flicker by."""
+    for y in range(top, bottom + 1):
+        a[y, x] = WOOD_D
+        a[y, x + 1] = WOOD if (y + phase) % 3 else WOOD_D
+    mid = (top + bottom) // 2
+    a[mid, x] = a[mid, x + 1] = GOLD
+
+
+def car_down(phase):
+    im, d = _c_draw(_canvas())
+    d.rectangle((8, 14, 23, 22), fill=GOLD)
+    a = _c_done(im)
+    a[14, 8] = a[14, 23] = 0
+    for x in range(9, 23):
+        a[14, x] = CREAM
+        a[22, x] = GOLD_D
+        a[17, x] = RED
+    a = _c_outline(a)
+    for x in (5, 25):                                          # the wheels, edge-on
+        w = _canvas()
+        wheel_edge(w, x, 14, 28, phase)
+        a = _c_over(a, _c_outline(w))
+    return a
+
+
+def frame_down(name, phase):
+    a = _canvas()
+    a = _c_over(a, _small_rider(name, 'down', 10, 1 + (1 if phase else 0)))
+    a = _c_over(a, car_down(phase))
+    a = _c_over(a, pony_down(phase, 1 if phase else 0))
+    return a
+
+
+# ── up (facing north): the rider's back, the pony ahead over the hat ─────────
+PONY_UP = """
+.....k....k.....
+....kBk..kBk....
+....kBBkkBBk....
+.....kBmBBk.....
+.....kBmBBk.....
+....kBBBmBBk....
+...kBBBBmBBBk...
+..kBBBBBmBBBBk..
+.kLBBBBBBBBBBLk.
+kLBBBBBBBBBBBBLk
+kBBBBBBBBBBBBBBk
+kDBBBBBBBBBBBBDk
+"""
+
+
+def frame_up(name, phase):
+    a = _canvas()
+    p = _canvas()
+    bob = 1 if phase else 0
+    for j, row in enumerate(PONY_UP.strip("\n").splitlines()):
+        for i, ch in enumerate(row):
+            if ch != ".":
+                p[0 + j + bob, 8 + i] = PONY_KEY[ch]
+    # under the rump: the tail, and the hind legs trotting either side of it
+    for y in range(12, 15):
+        p[y + bob, 15] = INK
+        p[y + bob, 16] = BAY_D
+    for x, up in ((9, phase == 1), (21, phase == 2)):
+        bottom = 14 if up else 16
+        for y in range(12 + bob, bottom):
+            p[y, x] = BAY
+            p[y, x + 1] = BAY_D
+        p[bottom, x] = p[bottom, x + 1] = INK
+    a = _c_over(a, _c_outline(p))
+    w = _canvas()
+    for x in (5, 25):
+        wheel_edge(w, x, 17, 30, phase)
+    a = _c_over(a, _c_outline(w))
+    c = _canvas()
+    for x in range(8, 24):                                     # the car's floor and rails
+        c[29, x] = WOOD
+        c[30, x] = WOOD_D
+    for y in range(21, 29):
+        c[y, 8] = c[y, 23] = GOLD
+        c[y, 9] = c[y, 22] = GOLD_D
+    a = _c_over(a, _c_outline(c))
+    a = _c_over(a, _small_rider(name, 'up', 10, 13 + (1 if phase else 0)))
+    return a
+
+
+def chariot_frames(name):
+    """The nine frames in the engine's walking order."""
+    return [frame_down(name, 0), frame_up(name, 0), frame_left(name, 0),
+            frame_down(name, 1), frame_down(name, 2), frame_up(name, 1), frame_up(name, 2),
+            frame_left(name, 1), frame_left(name, 2)]
+
+
+def build_player_chariot(name):
+    return np.hstack(chariot_frames(name)), read_pal(PLAYERS[name]["family"])
+
 def player_path(name, sheet):
     return ROOT / "graphics/object_events/pics/people" / PLAYER_DIR[name] / f"{sheet}.png"
 
@@ -1206,6 +1573,9 @@ def main():
                 sheet, pal = build_player_pose(n, sheet_name)
                 save(sheet, pal, player_path(n, sheet_name))
                 print("wrote", n, sheet_name)
+            sheet, pal = build_player_chariot(n)
+            save(sheet, pal, player_path(n, "mach_bike"))
+            print("wrote", n, "mach_bike (the chariot)")
     names = [n for n in names if n in CHARACTERS]
     if a.preview:
         preview(names, a.preview)
