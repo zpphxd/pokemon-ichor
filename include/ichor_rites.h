@@ -23,6 +23,7 @@ struct WildPokemon;
 
 u8 Ichor_GetFavor(u32 god);
 void Ichor_AddFavorTo(u32 god, u32 amount);
+bool32 Ichor_TakeFirstFruits(void);
 bool32 Ichor_HasBlessing(void);
 void Ichor_SetBlessingTo(u32 god, u32 steps, u32 flags);
 bool32 Ichor_IsFrenzy(void);

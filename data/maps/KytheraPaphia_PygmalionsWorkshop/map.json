@@ -1,0 +1,68 @@
+{
+  "id": "MAP_KYTHERA_PAPHIA_PYGMALIONS_WORKSHOP",
+  "name": "KytheraPaphia_PygmalionsWorkshop",
+  "layout": "LAYOUT_KYTHERA_PAPHIA_PYGMALIONS_WORKSHOP",
+  "music": "MUS_ICHOR_AKTI",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_KYTHERA_ISLE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 5,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraPaphia_PygmalionsWorkshop_EventScript_Pygmalion",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_PAPHIA",
+      "dest_warp_id": "3"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KytheraPaphia_PygmalionsWorkshop_EventScript_DustSheet"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KytheraPaphia_PygmalionsWorkshop_EventScript_Table"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KytheraPaphia_PygmalionsWorkshop_EventScript_Table"
+    }
+  ]
+}

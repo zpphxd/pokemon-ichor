@@ -2084,6 +2084,85 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_SCALE    (FLAG_ICHOR_GENERAL2_START + 0x064) // Ichor: Kaldera pier scale
 #define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_FORGE_SHARD (FLAG_ICHOR_GENERAL2_START + 0x065) // Ichor: Telchines forge red shard
 #define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_FORGE_NUGGET (FLAG_ICHOR_GENERAL2_START + 0x066) // Ichor: Telchines forge nugget
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_ETHER (FLAG_ICHOR_GENERAL2_START + 0x067) // Ichor: Foam Road hidden item: Ether behind the great herm
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_HEART_SCALE (FLAG_ICHOR_GENERAL2_START + 0x068) // Ichor: Foam Road hidden item: Heart Scale in the Horn's cliff-top meadow
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_NET_BALL (FLAG_ICHOR_GENERAL2_START + 0x069) // Ichor: Foam Road hidden item: Net Ball on the rock past Amphitos's jetty
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x06A) // Ichor: Foam Road hidden item: Stardust in the cove under the east wood
+#define FLAG_ICHOR_HIDDEN_ECHO_CAVES_HEART_SCALE (FLAG_ICHOR_GENERAL2_START + 0x06B) // Ichor: Echo's caves hidden item: Heart Scale at the dark gallery's end
+#define FLAG_ICHOR_HIDDEN_PAPHIA_ULTRA_BALL (FLAG_ICHOR_GENERAL2_START + 0x06C) // Ichor: Paphia hidden item: Ultra Ball behind the dovecote
+#define FLAG_ICHOR_HIDDEN_PAPHIA_PEARL (FLAG_ICHOR_GENERAL2_START + 0x06D) // Ichor: Paphia hidden item: Pearl under the mirror by the jetty
+#define FLAG_ICHOR_HIDDEN_NERAIDA_MYSTIC_WATER (FLAG_ICHOR_GENERAL2_START + 0x06E) // Ichor: Neraida falls hidden item: Mystic Water in the mill-race
+#define FLAG_ICHOR_HIDDEN_NERAIDA_PEARL (FLAG_ICHOR_GENERAL2_START + 0x06F) // Ichor: Neraida falls hidden item: Pearl behind the shrine's basin
+#define FLAG_ICHOR_HIDDEN_KALLIRHOE_REVIVE (FLAG_ICHOR_GENERAL2_START + 0x070) // Ichor: Spring of Kallirhoe hidden item: Revive in the nook under the cave rock
+#define FLAG_ICHOR_HIDDEN_KALLIRHOE_PP_UP (FLAG_ICHOR_GENERAL2_START + 0x071) // Ichor: Spring of Kallirhoe hidden item: PP Up at the fall's rock
+#define FLAG_ICHOR_HIDDEN_ECHO_CAVES_SHELL_BELL (FLAG_ICHOR_GENERAL2_START + 0x072) // Ichor: Echo's caves hidden item: Shell Bell in the Speaking Hall's west nook
+#define FLAG_ICHOR_HIDDEN_NERAIDA_HEART_SCALE (FLAG_ICHOR_GENERAL2_START + 0x073) // Ichor: Neraida falls hidden item: Heart Scale at the ledge path's foot
+#define FLAG_ICHOR_HIDDEN_NERAIDA_HONEY (FLAG_ICHOR_GENERAL2_START + 0x074) // Ichor: Neraida falls hidden item: Honey in Kerinthos's bee wall
+#define FLAG_ICHOR_HIDDEN_SKANDEIA_BIG_PEARL (FLAG_ICHOR_GENERAL2_START + 0x075) // Ichor: Skandeia hidden item: Big Pearl in the harbor shrine's niche, among the shells
+#define FLAG_ICHOR_HIDDEN_SKANDEIA_HEART_SCALE (FLAG_ICHOR_GENERAL2_START + 0x076) // Ichor: Skandeia hidden item: Heart Scale at the north slip's end
+#define FLAG_ICHOR_SAW_BAD_GUESTS               (FLAG_ICHOR_GENERAL_START + 0x200) // Ichor: Skandeia: saw the Titan guests at Axylos's table (beat III-1C2)
+#define FLAG_ICHOR_BAD_GUESTS_GONE              (FLAG_ICHOR_GENERAL_START + 0x201) // Ichor: Skandeia: drove the bad guests from Axylos's table; also hides them and Alethea there
+#define FLAG_ICHOR_TRADED_TELKANVIL             (FLAG_ICHOR_GENERAL_START + 0x202) // Ichor: Skandeia: traded Bathykleia a Glyphlet for Ankyra the Telkanvil
+#define FLAG_ICHOR_GOT_SOOTHE_BELL_EUODIA       (FLAG_ICHOR_GENERAL_START + 0x203) // Ichor: Skandeia: Euodia the perfumer's Soothe Bell (SCRIPT.md's GOT_SOOTHE_BELL is Akti's)
+#define FLAG_ICHOR_LITHOS_HOME                  (FLAG_ICHOR_GENERAL_START + 0x204) // Ichor: Skandeia: Lithos, home after the climax, gave the Ability Capsule
+#define FLAG_ICHOR_KNUCKLEBONES_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x205) // Ichor: Skandeia: first knucklebones win against Phereklos (Big Pearl)
+#define FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION    (FLAG_ICHOR_GENERAL_START + 0x206) // Ichor: Paphia: Pygmalion's Shiny Stone, after the climax
+#define FLAG_ICHOR_GOT_EROSIE_EGG               (FLAG_ICHOR_GENERAL_START + 0x207) // Ichor: Paphia: Peristera's Egg (Erosie)
+#define FLAG_ICHOR_GOT_MIRROR_HERB              (FLAG_ICHOR_GENERAL_START + 0x208) // Ichor: Paphia: Leukippe's Mirror Herb, after the Foam Laurel
+#define FLAG_ICHOR_TRADED_HIMEROW               (FLAG_ICHOR_GENERAL_START + 0x209) // Ichor: Paphia: traded Lysis a Galenyon for Pothos the Himerow
+#define FLAG_ICHOR_GOT_METRONOME                (FLAG_ICHOR_GENERAL_START + 0x20A) // Ichor: Neraida falls: Myles the miller's Metronome
+#define FLAG_ICHOR_SAW_GEAR_BOX                 (FLAG_ICHOR_GENERAL_START + 0x20D) // Ichor: Route 23: saw Skyllias's box of gears off Antikythera (set there; read in the divers' house)
+#define FLAG_ICHOR_CROSSED_ROUTE22              (FLAG_ICHOR_GENERAL_START + 0x213) // Ichor: Act III: III-1B3, rounded Malea and landed at Skandeia (hides Nausikles on Melos's jetty)
+#define FLAG_ICHOR_VISITED_SKANDEIA             (FLAG_ICHOR_GENERAL_START + 0x214) // Ichor: Act III: Skandeia visited (fly target, MAPSEC_KYTHERA_ISLE)
+#define FLAG_ICHOR_EUPLOIA_KEPT                 (FLAG_ICHOR_GENERAL_START + 0x215) // Ichor: Act III: III-1C, beat Molybdos; the Euploia isn't requisitioned
+#define FLAG_ICHOR_ALETHEA_REJOINED             (FLAG_ICHOR_GENERAL_START + 0x216) // Ichor: Act III: III-1C2, Alethea met you on Skandeia's main street
+#define FLAG_ICHOR_SAILED_FOR_KNOSSA            (FLAG_ICHOR_GENERAL_START + 0x217) // Ichor: Act III: III-1I, sailed from Skandeia for Amnisos
+#define FLAG_ICHOR_SKANDEIA_CALL                (FLAG_ICHOR_GENERAL_START + 0x218) // Ichor: Act III: the Euploia's call at Skandeia between Amnisos and Gytheion (set by the Knossa writer's departure)
+#define FLAG_ICHOR_SAILED_FOR_GYTHEION          (FLAG_ICHOR_GENERAL_START + 0x219) // Ichor: Act III: sailed on from Skandeia's call for Gytheion (Route 24 starts from it)
+#define FLAG_ICHOR_HIDE_ALETHEA_CALL            (FLAG_ICHOR_GENERAL_START + 0x21A) // Ichor: Act III: Skandeia: hides Alethea at the gangplank (shown only during the call)
+#define FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21B) // Ichor: Act III: Skandeia: hides Alethea at Axylos's door (shown from III-1C2 until the bad guests go)
+#define FLAG_ICHOR_HIDE_MOLYBDOS                (FLAG_ICHOR_GENERAL_START + 0x21C) // Ichor: Act III: Skandeia: hides Molybdos once he is beaten
+#define FLAG_ICHOR_HIDE_SKANDEIA_PORTERS        (FLAG_ICHOR_GENERAL_START + 0x21D) // Ichor: Act III: Skandeia: hides the Titanborn porters (from VAR_ICHOR_ACT3 6)
+#define FLAG_ICHOR_HIDE_KRONIST_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21E) // Ichor: Act III: Skandeia: hides the Kronist (after the climax, VAR_ICHOR_ACT3 19)
+#define FLAG_ICHOR_HEARD_KRONIST                (FLAG_ICHOR_GENERAL_START + 0x21F) // Ichor: Act III: Skandeia: the Kronist has preached at you once (his walk-past trigger)
+#define FLAG_ICHOR_ITEM_SKANDEIA_SEA_INCENSE    (FLAG_ICHOR_GENERAL_START + 0x22F) // Ichor: Act III item ball: Skandeia's Sea Incense at the pocket beach's end
+#define FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD       (FLAG_ICHOR_GENERAL_START + 0x240) // Ichor: Foam Road: hides Alethea at Aphrodite's rock once her scene is done (beat III-1D)
+#define FLAG_ICHOR_HIDE_KASSITEROS              (FLAG_ICHOR_GENERAL_START + 0x241) // Ichor: Foam Road: hides Kassiteros after Knossa (VAR_ICHOR_ACT3 >= 6)
+#define FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD     (FLAG_ICHOR_GENERAL_START + 0x242) // Ichor: Foam Road: hides Hermes the messenger at the great herm (theoxenia E1; move to the theoxenia range with ichor-engine)
+#define FLAG_ICHOR_TALARIA_LENT                 (FLAG_ICHOR_GENERAL_START + 0x243) // Ichor: Foam Road: lent the Talaria to the messenger (theoxenia E1; move to the theoxenia range with ichor-engine)
+#define FLAG_ICHOR_FOAM_ROAD_DRUMS_MOVED        (FLAG_ICHOR_GENERAL_START + 0x244) // Ichor: Foam Road: the Girdle of Herakles moved the quarry's column drums
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_HYPER_POTION  (FLAG_ICHOR_GENERAL_START + 0x245) // Ichor: Foam Road: the jar on the reef spit past Pontinos
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_RARE_CANDY    (FLAG_ICHOR_GENERAL_START + 0x246) // Ichor: Foam Road: the jar on the quarry's top step (the Girdle)
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_PRETTY_FEATHER (FLAG_ICHOR_GENERAL_START + 0x247) // Ichor: Foam Road: the Pretty Feathers in the cliff cove (the Horn)
+#define FLAG_ICHOR_SAW_KALLIRHOE                (FLAG_ICHOR_GENERAL_START + 0x248) // Ichor: Spring of Kallirhoe: saw the youth at the pool with Alethea (beat III-1E)
+#define FLAG_ICHOR_HIDE_ALETHEA_KALLIRHOE       (FLAG_ICHOR_GENERAL_START + 0x249) // Ichor: Spring of Kallirhoe: hides Alethea at the spring
+#define FLAG_ICHOR_HIDE_KALLIRHOE_MOTHER        (FLAG_ICHOR_GENERAL_START + 0x24A) // Ichor: Spring of Kallirhoe: hides the youth's mother (shown evenings and nights after the scene)
+#define FLAG_ICHOR_KALLIRHOE_MYRTLE_CUT         (FLAG_ICHOR_GENERAL_START + 0x24B) // Ichor: Spring of Kallirhoe: Demeter's Sickle cut the myrtle on the back path
+#define FLAG_ICHOR_ITEM_KALLIRHOE_MIRACLE_SEED  (FLAG_ICHOR_GENERAL_START + 0x24C) // Ichor: Spring of Kallirhoe: the Miracle Seed on the ledge behind the myrtle
+#define FLAG_ICHOR_ITEM_ECHO_CAVES_BIG_PEARL    (FLAG_ICHOR_GENERAL_START + 0x24D) // Ichor: Echo's caves: the Big Pearl on the Speaking Hall's ledge
+#define FLAG_ICHOR_ITEM_ECHO_CAVES_ZINC         (FLAG_ICHOR_GENERAL_START + 0x24E) // Ichor: Echo's caves: the Zinc in the dark gallery's dead end
+#define FLAG_ICHOR_ITEM_ECHO_CAVES_TM_HYPER_VOICE (FLAG_ICHOR_GENERAL_START + 0x24F) // Ichor: Echo's caves: TM Hyper Voice on the sea mouth's rock (once it is a TM)
+#define FLAG_ICHOR_ALETHEA_SAILED_KNOSSA        (FLAG_ICHOR_GENERAL_START + 0x250) // Ichor: Paphia: Alethea sailed for Knossa on the honey boat (beat III-1F)
+#define FLAG_ICHOR_HIDE_ALETHEA_PAPHIA          (FLAG_ICHOR_GENERAL_START + 0x251) // Ichor: Paphia: hides Alethea and the honey boat's skipper on the jetty
+#define FLAG_ICHOR_HIDE_HERMES_PAPHIA           (FLAG_ICHOR_GENERAL_START + 0x252) // Ichor: Paphia: hides Hermes at the gate herm (theoxenia E1; move to the theoxenia range with ichor-engine)
+#define FLAG_ICHOR_GALLERY_DONE                 (FLAG_ICHOR_GENERAL_START + 0x253) // Ichor: Temple of Aphrodite: first reached Galatea's dais
+#define FLAG_ICHOR_GALATEA_FALLS_HINT           (FLAG_ICHOR_GENERAL_START + 0x254) // Ichor: Temple of Aphrodite: Galatea sent the player to the Neraida falls
+#define FLAG_ICHOR_GOT_TM_DAZZLING_GLEAM        (FLAG_ICHOR_GENERAL_START + 0x255) // Ichor: Temple of Aphrodite: Galatea's TM Dazzling Gleam
+#define FLAG_ICHOR_GALLERY_MIRROR_P2_BIT0       (FLAG_ICHOR_GENERAL_START + 0x256) // Ichor: Temple of Aphrodite: turnable mirror P2's facing, bit 0
+#define FLAG_ICHOR_GALLERY_MIRROR_P2_BIT1       (FLAG_ICHOR_GENERAL_START + 0x257) // Ichor: Temple of Aphrodite: turnable mirror P2's facing, bit 1
+#define FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0       (FLAG_ICHOR_GENERAL_START + 0x258) // Ichor: Temple of Aphrodite: turnable mirror P3's facing, bit 0
+#define FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1       (FLAG_ICHOR_GENERAL_START + 0x259) // Ichor: Temple of Aphrodite: turnable mirror P3's facing, bit 1
+#define FLAG_ICHOR_ITEM_TEMPLE_APHRODITE_MAX_REVIVE (FLAG_ICHOR_GENERAL_START + 0x25A) // Ichor: Temple of Aphrodite: the jar in Anthousa's alcove
+#define FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL       (FLAG_ICHOR_GENERAL_START + 0x25C) // Ichor: Neraida falls: the jar on the top terrace
+#define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Neraida falls: the Protein on a rock in the upper pool
+#define FLAG_ICHOR_KRENAIA_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x25E) // Ichor: Neraida falls: Krenaia told the laureled player about the silent falls and the horn (beat III-1H)
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_PEARL_STRING  (FLAG_ICHOR_GENERAL_START + 0x260) // Ichor: Foam Road item ball: Pearl String on the islet
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_ULTRA_BALL    (FLAG_ICHOR_GENERAL_START + 0x261) // Ichor: Foam Road item ball: Ultra Ball in the barley by the bay
+#define FLAG_ICHOR_ITEM_PAPHIA_LOVE_BALL        (FLAG_ICHOR_GENERAL_START + 0x262) // Ichor: Paphia item ball: Love Ball on the green by the Asclepeion
+#define FLAG_ICHOR_ITEM_NERAIDA_BIG_ROOT        (FLAG_ICHOR_GENERAL_START + 0x263) // Ichor: Neraida falls item ball: Big Root in the east bank's meadow
+#define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Neraida falls item ball: Max Potion on the plunge pool's west bank
+#define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Neraida falls item ball: Elixir on the upper shelf
+#define FLAG_ICHOR_NERAIDA_BERRIES_PLANTED (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: initialized the falls' first-fruits trees once
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

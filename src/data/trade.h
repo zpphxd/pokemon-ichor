@@ -1366,7 +1366,39 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_GELASABLE,
         .level = 31,                         // BALANCE.md: Arkadia's wild band is 29-33
-    }
+    },
+    [INGAME_TRADE_ICHOR_ANKYRA] =
+    {
+        .nickname = _("ANKYRA"),
+        .species = SPECIES_TELKANVIL,
+        .ivs = {22, 28, 24, 14, 18, 16},
+        .abilityNum = 2,
+        .otId = 52817,
+        .conditions = {20, 5, 5, 5, 30},
+        .personality = 0x87,
+        .heldItem = ITEM_METAL_COAT,
+        .mailNum = -1,
+        .otName = _("KLEIA"),
+        .otGender = FEMALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GLYPHLET,
+    },
+    [INGAME_TRADE_ICHOR_POTHOS] =
+    {
+        .nickname = _("POTHOS"),
+        .species = SPECIES_HIMEROW,
+        .ivs = {18, 20, 16, 26, 20, 26},
+        .abilityNum = 1,
+        .otId = 30944,
+        .conditions = {5, 30, 20, 5, 5},
+        .personality = 0x4E,
+        .heldItem = ITEM_RAZOR_CLAW,
+        .mailNum = -1,
+        .otName = _("LYSIS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GALENYON,
+    },
 };
 
 static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =

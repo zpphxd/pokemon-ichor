@@ -10,7 +10,8 @@
     "gMapGroup_DungeonsAct1",
     "gMapGroup_IndoorThyrsa",
     "gMapGroup_DungeonsAct2",
-    "gMapGroup_IndoorKaldera"
+    "gMapGroup_IndoorKaldera",
+    "gMapGroup_Kythera"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -169,5 +170,29 @@
     "Kaldera_Agora",
     "Kaldera_SmithsHouse",
     "Kaldera_TempleOfHephaestus"
+  ],
+  "gMapGroup_Kythera": [
+    "KytheraSkandeia_AxylosHouse",
+    "KytheraSkandeia_DiversHouse",
+    "KytheraSkandeia_PerfumersHouse",
+    "KytheraSkandeia_NikareteHouse",
+    "KytheraSkandeia_ShipwrightsHouse",
+    "KytheraSkandeia_Asclepeion",
+    "KytheraSkandeia_Agora",
+    "KytheraPaphia_Dovecote",
+    "KytheraPaphia_PottersHouse",
+    "KytheraPaphia_Asclepeion",
+    "KytheraPaphia_Agora",
+    "KytheraPaphia_PygmalionsWorkshop",
+    "KytheraPaphia_MirrorHouse",
+    "KytheraPaphia_OrchardHouse",
+    "KytheraNeraidaFalls_Mill",
+    "KytheraSkandeia",
+    "KytheraFoamRoad",
+    "KytheraSpringOfKallirhoe",
+    "KytheraPaphia",
+    "KytheraNeraidaFalls",
+    "KytheraEchoCaves",
+    "KytheraTempleOfAphrodite"
   ]
 }

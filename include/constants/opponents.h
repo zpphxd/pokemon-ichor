@@ -211,7 +211,33 @@
 #define TRAINERS_END_ACT2                   263
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
-#define TRAINERS_END_ACT3                     0
+#define TRAINER_ICHOR_MOLYBDOS                328
+#define TRAINER_ICHOR_OCHROS                  329
+#define TRAINER_ICHOR_PSEPHOS                 330
+#define TRAINER_ICHOR_AMPHITOS                331
+#define TRAINER_ICHOR_SKOPAS                  332
+#define TRAINER_ICHOR_PONTINOS                333
+#define TRAINER_ICHOR_KASSITEROS              334
+#define TRAINER_ICHOR_PHILOTES                335
+#define TRAINER_ICHOR_KALAMIS                 336
+#define TRAINER_ICHOR_KOLYMBOS                337
+#define TRAINER_ICHOR_ANTHOUSA                338
+#define TRAINER_ICHOR_RHODANTHE               339
+#define TRAINER_ICHOR_GALATEA_1               340
+#define TRAINER_ICHOR_LYKIDAS_KYTHERA         341
+#define TRAINER_ICHOR_KERINTHOS               342
+#define TRAINER_ICHOR_MOPSOS_KYTHERA                  343
+#define TRAINER_ICHOR_THESTYLIS_KYTHERA       344
+#define TRAINER_ICHOR_LYKON_KYTHERA                  490
+#define TRAINER_ICHOR_THEANO                 491
+#define TRAINER_ICHOR_KYMODOKE               492
+#define TRAINER_ICHOR_MENALKAS_KYTHERA        493
+#define TRAINER_ICHOR_AMARYLLIS              494
+#define TRAINER_ICHOR_DAPHNIS_KYTHERA                495
+#define TRAINER_ICHOR_OPORA                  496
+#define TRAINER_ICHOR_PEGAIOS                497
+#define TRAINER_ICHOR_DEXITHEA               498
+#define TRAINERS_END_ACT3 499
 
 // The post-game, ids 500-679 and 1024-1223: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0

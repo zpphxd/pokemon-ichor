@@ -437,6 +437,10 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SWINEHERD] = { _("SWINEHERD"), 4 },
     // Ichor: the Titans' admins pay like Emerald's (Aqua and Magma admins, 10)
     [TRAINER_CLASS_TITAN_ADMIN] = { _("TITAN ADMIN"), 10 },
+    [TRAINER_CLASS_FISHER] = { _("FISHER"), 4 },
+    [TRAINER_CLASS_SCULPTOR] = { _("SCULPTOR"), 6 },
+    [TRAINER_CLASS_BEEKEEPER] = { _("BEEKEEPER"), 4 },
+    [TRAINER_CLASS_DIVER] = { _("DIVER"), 6 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

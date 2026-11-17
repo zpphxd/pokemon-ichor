@@ -1,0 +1,111 @@
+// The divers' house, Skandeia (design/phase4/SCRIPT.md, Part 2): Skyllias, a
+// sponge diver gone gray, and his daughter Bathykleia, who dives now.
+// Room: tools/ichor/maps/kythera_homes.py. The mat is (1..2,7). Skyllias stands
+// under his nets at (3,2); Bathykleia by the tank at (7,4); Ankyra the
+// Telkanvil is in the tank (the blue rug at (8..10,3..4), made solid) at (9,4).
+//
+// Skyllias tells of the box of gears off Antikythera; once you've seen it
+// (FLAG_ICHOR_SAW_GEAR_BOX, set on Route 23) he rewards you. Bathykleia trades
+// Ankyra for a Glyphlet (INGAME_TRADE_ICHOR_ANKYRA).
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
+// TODO(balance): TM Liquidation doesn't exist yet. When it does, give it where
+// marked and set FLAG_ICHOR_GOT_TM_LIQUIDATION (claim it then).
+
+mapscripts KytheraSkandeia_DiversHouse_MapScripts {}
+
+text KytheraSkandeia_DiversHouse_Name_Skyllias { "SKYLLIAS" }
+text KytheraSkandeia_DiversHouse_Name_Bathykleia { "BATHYKLEIA" }
+
+script KytheraSkandeia_DiversHouse_EventScript_Skyllias {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_DiversHouse_Name_Skyllias)
+    if (!flag(FLAG_ICHOR_SAW_GEAR_BOX)) {
+        msgbox(format("Forty years under the water. I've seen everything down there.\p"
+                      "Wrecks. Statues. A bronze horse with no rider.\p"
+                      "And off Antikythera, a box. A box full of little bronze wheels.\p"
+                      "Too heavy to bring up. Too strange to leave. I left it on the reef.\p"
+                      "Go and look, if you can swim that far. Tell me if it's still there."))
+        release
+        end
+    }
+    msgbox(format("Still there? Stopped, I expect. The sea stops everything in the end.\p"
+                  "I always thought it was a clock.\p"
+                  "A clock for something bigger than days.\p"
+                  "Who'd want a clock like that? Somebody frightened of running out.\p"
+                  "Here. For swimming out to an old man's box. It's what I'd have wanted."))
+    // TODO(balance): {PLAYER} received TM Liquidation! (see the header)
+    setspeaker(KytheraSkandeia_DiversHouse_Name_Skyllias)
+    msgbox(format("It hits like the sea does. All at once, and then it's gone."))
+    release
+}
+
+script KytheraSkandeia_DiversHouse_EventScript_Bathykleia {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_DiversHouse_Name_Bathykleia)
+    if (flag(FLAG_ICHOR_TRADED_TELKANVIL)) {
+        msgbox(format("Look at it. It's just sitting. On my hand. Oh, I love it."))
+        release
+        end
+    }
+    msgbox(format("That's Ankyra in the tank. It followed Father home from Kaldera.\p"
+                  "It hammers sponges. Beautifully. But it won't stop hammering.\p"
+                  "I want something quiet to dive with. Something that sits.\p"
+                  "The little marble ones on the temple hill. Glyphlet. They just sit."))
+    // The in-game trade, written out as Kimon's is (ElaiaVillage_BakersHouse) so
+    // each line keeps her name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_ANKYRA)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(KytheraSkandeia_DiversHouse_Name_Bathykleia)
+    msgbox(format("Trade me a Glyphlet for Ankyra?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(KytheraSkandeia_DiversHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(KytheraSkandeia_DiversHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        goto(KytheraSkandeia_DiversHouse_EventScript_NoTrade)
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_TELKANVIL)
+    removeobject(LOCALID_SKANDEIA_ANKYRA)
+    setspeaker(KytheraSkandeia_DiversHouse_Name_Bathykleia)
+    msgbox(format("Look at it. It's just sitting. On my hand. Oh, I love it.\p"
+                  "Ankyra's yours. The coat's for its claws. It gets cold."))
+    release
+}
+
+script KytheraSkandeia_DiversHouse_EventScript_NoTrade {
+    setspeaker(KytheraSkandeia_DiversHouse_Name_Bathykleia)
+    msgbox(format("Back in the tank, Ankyra. Hammer quietly."))
+    release
+    end
+}
+
+script KytheraSkandeia_DiversHouse_EventScript_Ankyra {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TELKANVIL, CRY_MODE_NORMAL)
+    waitmoncry
+    release
+}
+
+script KytheraSkandeia_DiversHouse_EventScript_Tank {
+    if (flag(FLAG_ICHOR_TRADED_TELKANVIL)) {
+        msgbox(format("A tank sunk in the floor. A sponge lies in it, hammered flat."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A tank sunk in the floor. Ankyra is hammering a sponge flat with its claws."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraSkandeia_DiversHouse_EventScript_Urchins {
+    msgbox(format("A basket of black sea-urchins."), MSGBOX_SIGN)
+}

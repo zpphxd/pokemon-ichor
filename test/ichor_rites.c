@@ -78,6 +78,28 @@ TEST("Ichor: Demeter refuses the pomegranate, and the player keeps it")
     EXPECT_EQ(Ichor_GetBlessingGod(), ICHOR_GOD_NONE);
 }
 
+TEST("Ichor: first fruits refuse fewer than three berries without taking any")
+{
+    ClearBag();
+    AddBagItem(ITEM_ORAN_BERRY, 1);
+    AddBagItem(ITEM_POMEG_BERRY, 1);
+    EXPECT(!Ichor_TakeFirstFruits());
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ORAN_BERRY), 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POMEG_BERRY), 1);
+}
+
+TEST("Ichor: first fruits take exactly three berries across stacks, including pomegranates")
+{
+    ClearBag();
+    AddBagItem(ITEM_ORAN_BERRY, 1);
+    AddBagItem(ITEM_POMEG_BERRY, 4);
+    AddBagItem(ITEM_POTION, 1);
+    EXPECT(Ichor_TakeFirstFruits());
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ORAN_BERRY), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POMEG_BERRY), 2);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POTION), 1);
+}
+
 TEST("Ichor: temple altars double Favor, and Hestia takes +1 of every offering")
 {
     ResetRites();

@@ -396,7 +396,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
 | Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia → Nemea → Emporion; return through Eleusa → Daphni → Astyra; Laurels 4–6, Dionysus/Artemis altars, Dionysia, Girdle quest, Kleon's recruitment, Hunt for the Hind, capital introductions, ostracism, Akropolis midpoint, Salt Well/Conch with dolphin harbor passage, and story trireme to Kaldera's Bronze Servants, Talos, Wings, third-fragment eruption and letter from home | Chapter presentation and natural-level acceptance; Pandora's sherds; independent Route 19/Paros sea journey; complete Kaldera interiors, props, scenes and side-system integrations |
-| Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
+| Act III / 0.9 | Connected Kaldera → Kythera voyage, Skandeia requisition and bad guests, Foam Road/Kallirhoe/Alethea scenes, three-room Gallery, Galatea/Foam Laurel and Silent Falls/Horn quest across 22 restored maps | Kythera difficulty variants, natural-level and presentation acceptance, optional integrations; Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
 
@@ -708,6 +708,20 @@ tide choices, all three trainers, every cave reward, full-pocket recovery,
 actual Surf, reentry and save/reset/CONTINUE without duplicating the Conch or
 replaying Alethea's exit. Existing cave and harbor art is a gameplay foundation,
 not final presentation or natural-level approval. Kaldera and Laurel 6 are next.
+
+**Kythera's playable foundation.** The shared Euploia now reaches Skandeia after
+the Kaldera letter, retaining its destination through save/CONTINUE. The actual
+island route plays the requisition, Alethea's reunion, the bad-guests double
+battle, the Foam Road excavation, Kallirhoe and her honey-boat departure.
+Galatea's three-room watched-statue Gallery awards the seventh Laurel, Cygnus,
+Aphrodite's Favor and an actual Dazzling Gleam scroll, without repeat rewards.
+The Silent Falls' terrace trees supply real berries; Krenaia consumes exactly
+three for the Horn, refusing a full Key Items pocket before taking payment.
+The connected native check uses assisted battles, not a natural-level team.
+Galatea's Mortal/Spartan variants, later cap transition, complete relic/page
+coverage, losses/retries, temple rites, hospitality/token chains, optional
+side systems and final art/music remain open. The Knossa crossing is explicitly
+unavailable until its actual destination exists; it sets no sailed receipt.
 
 **Continuation order.** Prioritize connected playable Act II and Act III chapters
 while keeping Act I's remaining acceptance gates visible. Integrate shared systems at

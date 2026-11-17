@@ -54,7 +54,8 @@
     F(OVERHEAT) \
     F(FLING) \
     F(BULLDOZE) \
-    F(ROUND)
+    F(ROUND) \
+    F(DAZZLING_GLEAM)
 
 #define FOREACH_HM(F) \
     F(CUT) \

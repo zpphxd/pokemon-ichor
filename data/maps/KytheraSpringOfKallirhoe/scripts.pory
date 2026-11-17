@@ -1,0 +1,226 @@
+// The Spring of Kallirhoe (design/phase4/SCRIPT.md, beat III-1E and Part 2): a
+// round glade in the myrtle above the Foam Road, Kallirhoe's pool fed by a thin
+// fall, the youth who kneels over his reflection, the voice from the caves below.
+// Layout and events: tools/ichor/maps/kythera_spring.py.
+//
+// Alethea waits here only after her scene at Aphrodite's rock on the Foam Road
+// (the first sherd of amphora #11), until she has seen the youth with the player
+// or sailed for Knossa. The scene runs once, from the stair's top (the triggers
+// at (12,19) and (13,19)); she leaves by the stair and Paphia's jetty shows her.
+//
+// TODO(engine §5): the ledge's turned earth is a fixed dig spot (Alethea's
+// Trowel) giving amphora #11's second sherd, FLAG_ICHOR_SHERDS_START + 41.
+// TODO(engine §1): Demeter's Sickle cuts the thicket on the back path (it then
+// sets FLAG_ICHOR_KALLIRHOE_MYRTLE_CUT and removes the object). Until the relic
+// exists the thicket stays shut.
+// TODO(audio): MUS_ICHOR_KALLIRHOE (one phrase and its echo); MUS_ICHOR_HOLLOW
+// stands in.
+
+const KYTHERA_SHERD_PARIS_1 = FLAG_ICHOR_SHERDS_START + 40
+
+mapscripts KytheraSpringOfKallirhoe_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(KytheraSpringOfKallirhoe_EventScript_SetPeople)
+    }
+}
+
+text KytheraSpringOfKallirhoe_Name_Alethea { "ALETHEA" }
+text KytheraSpringOfKallirhoe_Name_Voice { "VOICE" }
+text KytheraSpringOfKallirhoe_Name_Youth { "YOUTH" }
+text KytheraSpringOfKallirhoe_Name_Mother { "MOTHER" }
+
+// Who is here: Alethea between her rock scene and this one; the youth's mother
+// in the evening and at night, once the player has met him.
+script KytheraSpringOfKallirhoe_EventScript_SetPeople {
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_KALLIRHOE)
+    setvar(VAR_TEMP_1, 0)
+    if (flag(KYTHERA_SHERD_PARIS_1) && !flag(FLAG_ICHOR_SAW_KALLIRHOE) && !flag(FLAG_ICHOR_ALETHEA_SAILED_KNOSSA)) {
+        clearflag(FLAG_ICHOR_HIDE_ALETHEA_KALLIRHOE)
+        setvar(VAR_TEMP_1, 1)
+    }
+    setflag(FLAG_ICHOR_HIDE_KALLIRHOE_MOTHER)
+    if (flag(FLAG_ICHOR_SAW_KALLIRHOE)) {
+        gettimeofday
+        if (var(VAR_0x8000) == TIME_EVENING || var(VAR_0x8000) == TIME_NIGHT) {
+            clearflag(FLAG_ICHOR_HIDE_KALLIRHOE_MOTHER)
+        }
+    }
+    return
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-1E: Alethea at the spring
+// ---------------------------------------------------------------------------
+
+script KytheraSpringOfKallirhoe_EventScript_AletheaScene {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    applymovement(LOCALID_KALLIRHOE_ALETHEA, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraSpringOfKallirhoe_Name_Alethea)
+    msgbox(format("There. Him. Don't walk too close. You'll ripple him."))
+    closemessage
+    applymovement(LOCALID_KALLIRHOE_ALETHEA, KytheraSpringOfKallirhoe_Movement_LookToPool)
+    waitmovement(0)
+    delay(40)
+    setspeaker(KytheraSpringOfKallirhoe_Name_Voice)
+    msgbox(format("…ripple him."))
+    applymovement(LOCALID_KALLIRHOE_ALETHEA, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraSpringOfKallirhoe_Name_Alethea)
+    msgbox(format("That's the other one. You never see her. You only hear the end of things.\p"
+                  "Truthfully, everyone here calls him Narkissos. He's never said.\p"
+                  "Three summers he's knelt there. His mother brings him bread.\p"
+                  "He doesn't eat it. The birds do.\p"
+                  "I asked him once what he sees. He said, “Nothing that will ever leave.”"))
+    setspeaker(KytheraSpringOfKallirhoe_Name_Voice)
+    msgbox(format("…ever leave."))
+    closemessage
+    applymovement(LOCALID_KALLIRHOE_ALETHEA, KytheraSpringOfKallirhoe_Movement_TurnAway)
+    waitmovement(0)
+    setspeaker(KytheraSpringOfKallirhoe_Name_Alethea)
+    msgbox(format("He isn't sad. That's what's horrible. He's happy. He'd stay forever.\p"
+                  "I'm going on to Paphia. I'll see you at the bay."))
+    setspeaker(SP_NAME_NONE)
+    closemessage
+    // she leaves by the stair, down the side of it the player isn't standing on
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 12) {
+        applymovement(LOCALID_KALLIRHOE_ALETHEA, KytheraSpringOfKallirhoe_Movement_LeaveEast)
+    } else {
+        applymovement(LOCALID_KALLIRHOE_ALETHEA, KytheraSpringOfKallirhoe_Movement_LeaveWest)
+    }
+    waitmovement(0)
+    removeobject(LOCALID_KALLIRHOE_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_KALLIRHOE)
+    setflag(FLAG_ICHOR_SAW_KALLIRHOE)
+    releaseall
+}
+
+// Talking to her before the scene (she's only here until it has played).
+script KytheraSpringOfKallirhoe_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(KytheraSpringOfKallirhoe_Name_Alethea)
+    msgbox(format("Don't walk too close. You'll ripple him."))
+    setspeaker(SP_NAME_NONE)
+    release
+}
+
+movement KytheraSpringOfKallirhoe_Movement_LookToPool {
+    face_left
+    delay_16
+    face_up
+}
+
+movement KytheraSpringOfKallirhoe_Movement_TurnAway {
+    face_up
+    delay_16
+    delay_16
+    face_down
+}
+
+// From (15,16): down the stair's east side, x 13, and out of sight.
+movement KytheraSpringOfKallirhoe_Movement_LeaveEast {
+    walk_left
+    walk_left
+    walk_down * 5
+}
+
+// From (15,16): down the stair's west side, x 12.
+movement KytheraSpringOfKallirhoe_Movement_LeaveWest {
+    walk_left
+    walk_left
+    walk_left
+    walk_down * 5
+}
+
+// ---------------------------------------------------------------------------
+// The youth, his Narcisheen, his mother
+// ---------------------------------------------------------------------------
+
+script KytheraSpringOfKallirhoe_EventScript_Youth {
+    lock
+    if (!flag(FLAG_TEMP_1)) {
+        setflag(FLAG_TEMP_1)
+        msgbox(format("A young man kneels at the water's edge. He doesn't look up."))
+        setspeaker(KytheraSpringOfKallirhoe_Name_Youth)
+        msgbox(format("Shh. He's just about to smile."))
+        setspeaker(KytheraSpringOfKallirhoe_Name_Voice)
+        msgbox(format("…about to smile."))
+    } else {
+        setspeaker(KytheraSpringOfKallirhoe_Name_Youth)
+        msgbox(format("You can look too. He doesn't mind. He never minds anything."))
+        setspeaker(KytheraSpringOfKallirhoe_Name_Voice)
+        msgbox(format("…minds anything."))
+    }
+    setspeaker(SP_NAME_NONE)
+    release
+}
+
+script KytheraSpringOfKallirhoe_EventScript_Narcisheen {
+    lock
+    playmoncry(SPECIES_NARCISHEEN, CRY_MODE_NORMAL)
+    msgbox(format("It doesn't look up either."))
+    waitmoncry
+    release
+}
+
+script KytheraSpringOfKallirhoe_EventScript_Mother {
+    lock
+    faceplayer
+    setspeaker(KytheraSpringOfKallirhoe_Name_Mother)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("He looked up. This morning. Just for a moment.\p"
+                      "He said the water went gray and he couldn't see himself.\p"
+                      "And then he looked at me. As if he'd forgotten I was there."))
+    } else {
+        msgbox(format("I bring bread. He doesn't eat it. The birds are very fat.\p"
+                      "He was a beautiful boy. Everybody said. He heard them.\p"
+                      "Now he's found the one person who'll never tell him otherwise."))
+    }
+    setspeaker(SP_NAME_NONE)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// PILGRIM Philotes, on the bench by the fall (optional)
+// ---------------------------------------------------------------------------
+
+script KytheraSpringOfKallirhoe_EventScript_Philotes {
+    trainerbattle_single(TRAINER_ICHOR_PHILOTES, Kythera_Text_PhilotesIntro, Kythera_Text_PhilotesDefeat)
+    setspeaker(Kythera_Text_SpeakerPhilotes)
+    msgbox(Kythera_Text_PhilotesAfter, MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// Things to read
+// ---------------------------------------------------------------------------
+
+script KytheraSpringOfKallirhoe_EventScript_Pool {
+    msgbox(format("The pool is perfectly still. You see the sky, the myrtle, and yourself.\p"
+                  "Your reflection looks a little older than you remember."), MSGBOX_SIGN)
+}
+
+script KytheraSpringOfKallirhoe_EventScript_Fall {
+    msgbox(format("A thin fall of water off a lip of rock. It makes almost no sound."), MSGBOX_SIGN)
+}
+
+script KytheraSpringOfKallirhoe_EventScript_BulbStone {
+    msgbox(format("Words scratched on a flat stone:\p"
+                  "“Bulbs planted at this spring turn their faces to the water and change.”\p"
+                  "“Nowhere else on Kythera. Nowhere else at all.”"), MSGBOX_SIGN)
+}
+
+// TODO(engine §1): Demeter's Sickle (see the header).
+script KytheraSpringOfKallirhoe_EventScript_Thicket {
+    msgbox(format("A thicket of myrtle, grown right across an old path.\p"
+                  "Through the leaves you can see a ledge, and the sea beyond it.\p"
+                  "The stems are tough as rope. A sickle might do it."), MSGBOX_SIGN)
+}
+
+// TODO(engine §5): the fixed dig spot (see the header).
+script KytheraSpringOfKallirhoe_EventScript_DigSpot {
+    msgbox(format("A patch of turned earth on the ledge, half washed by the rain.\p"
+                  "Something pale is just showing in it. A bit of old pot?"), MSGBOX_SIGN)
+}

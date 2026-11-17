@@ -430,6 +430,27 @@ static bool32 IsBerry(u32 item)
     return item >= FIRST_BERRY_INDEX && item <= LAST_BERRY_INDEX;
 }
 
+bool32 Ichor_TakeFirstFruits(void)
+{
+    u32 item, count = 0, remaining = 3;
+
+    for (item = FIRST_BERRY_INDEX; item <= LAST_BERRY_INDEX && count < 3; item++)
+        count += CountTotalItemQuantityInBag(item);
+    if (count < 3)
+        return FALSE;
+
+    for (item = FIRST_BERRY_INDEX; item <= LAST_BERRY_INDEX && remaining; item++)
+    {
+        u32 take = min(remaining, CountTotalItemQuantityInBag(item));
+        if (take)
+        {
+            RemoveBagItem(item, take);
+            remaining -= take;
+        }
+    }
+    return TRUE;
+}
+
 static bool32 MatchesTaste(u16 taste, u32 item)
 {
     switch (taste)
