@@ -1044,5 +1044,30 @@ const struct Tileset gTileset_Daidaleion =
     .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
     .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
+// Ichor: loom, the Loom under the Omphalos (beat III-9). Porytiles-managed, built by tools/ichor/art/loom_build.py
+// (design/phase4/TILES_loom.md): the map is painted whole and sliced into cells. It uses
+// only its own tiles and palettes 6-12, with opaque floors, on the oikos primary.
+const struct Tileset gTileset_Loom =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Loom,
+    .palettes = gTilesetPalettes_PorytilesManaged_Loom,
+    .metatiles = gMetatiles_PorytilesManaged_Loom,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Loom,
+    .callback = NULL,
+};
+
+// Ichor: stair_of_hours, the Stair of Hours (beat III-11). Porytiles-managed, built by tools/ichor/art/loom_build.py
+// (design/phase4/TILES_loom.md): the map is painted whole and sliced into cells. It uses
+// only its own tiles and palettes 6-12, with opaque floors, on the oikos primary.
+const struct Tileset gTileset_StairOfHours =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_StairOfHours,
+    .palettes = gTilesetPalettes_PorytilesManaged_StairOfHours,
+    .metatiles = gMetatiles_PorytilesManaged_StairOfHours,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_StairOfHours,
     .callback = NULL,
 };
