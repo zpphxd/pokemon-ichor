@@ -20,7 +20,7 @@ Built by `tools/ichor/maps/knossa_palace.py` (`gTileset_PalaceMinos`, aethos pri
 
 ## Hand-offs (for the Labyrinth chapters)
 
-- **Down:** the Grand Staircase's stair foot is a trigger at (2,3) in `MAP_KNOSSA_PALACE_GRAND_STAIRCASE`. Once the Labyrinth I chapter's `MAP_LABYRINTH_RING1` exists, `KnossaPalace_GrandStaircase_EventScript_ToRing1` should warp there (it needs the Thread). Before dawn after the raid (`FLAG_ICHOR_ARIADNE_WOKE_YOU`), the same foot is Daedalus's lift: `_ToWorkshop` should warp to `MAP_LABYRINTH_WORKSHOP` for Scene L.
+- **Down:** the Grand Staircase's stair foot is a trigger at (2,3) in `MAP_KNOSSA_PALACE_GRAND_STAIRCASE`: with the Thread it warps to `MAP_LABYRINTH_RING1` warp 0; without, it turns you back. Its warp 1 is the dark doorway (2,2), so Ring I's stair up should target `MAP_KNOSSA_PALACE_GRAND_STAIRCASE` warp 1. Before dawn after the raid (`FLAG_ICHOR_ARIADNE_WOKE_YOU`), the same foot is Daedalus's lift to `MAP_LABYRINTH_WORKSHOP` (10,20), where Scene L begins.
 - **Back up after the Turning:** warp to `MAP_KNOSSA_PALACE` (29,16) at night with `VAR_ICHOR_KNOSSA` = 18. Kleon waits at (29,14) for Scene K; Alethea runs in; the night passes in the Queen's Megaron; Ariadne wakes you.
 - **The Icarus Shaft:** warp to `MAP_KNOSSA_PALACE` (30,23) with `VAR_ICHOR_KNOSSA` = 19. The landing plays here (Ariadne asleep against Asterion) and sets `VAR_ICHOR_ACT3` = 6; Asterion can be caught (Lv 50); Alethea sends her gull and goes down to the quay for III-4.
 

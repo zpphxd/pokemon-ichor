@@ -380,6 +380,9 @@ def grand_staircase(stem):
     m.coords.append({"type": "trigger", "x": 2, "y": 3, "elevation": 3, "var": "VAR_TEMP_0",
                      "var_value": "0", "script": P + "StairDown"})
     _out(m, 5, 9, "MAP_KNOSSA_PALACE", PALACE_WARPS["GrandStaircase"])
+    # warp 1, the dark at the stair's foot: Ring I's way back up lands here. The
+    # trigger on the step below (2,3) checks for the Thread before you reach it.
+    m.warp(2, 2, "MAP_LABYRINTH_RING1", 0)
     return m.build(stem, starts=[(5, 9)], must_reach=[(2, 3, "the stair down")], views=[(5, 5)])
 
 
