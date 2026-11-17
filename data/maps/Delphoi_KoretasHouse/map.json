@@ -1,0 +1,65 @@
+{
+  "id": "MAP_DELPHOI_KORETAS_HOUSE",
+  "name": "Delphoi_KoretasHouse",
+  "layout": "LAYOUT_DELPHOI_KORETAS_HOUSE",
+  "music": "MUS_ICHOR_ELEUSA",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_DELPHOI",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_KORETAS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOATHERD",
+      "x": 2,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_KoretasHouse_EventScript_Koretas",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KORETAS_AIX",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_F",
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_KoretasHouse_EventScript_Aix",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI",
+      "dest_warp_id": "8"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

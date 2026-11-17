@@ -55,7 +55,9 @@
     F(FLING) \
     F(BULLDOZE) \
     F(ROUND) \
-    F(DAZZLING_GLEAM)
+    F(DAZZLING_GLEAM) \
+    F(MYSTICAL_FIRE) \
+    F(HYPER_VOICE)
 
 #define FOREACH_HM(F) \
     F(CUT) \

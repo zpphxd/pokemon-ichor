@@ -1387,4 +1387,30 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_BugCatcher, gTrainerPalette_BugCatcher),
     },
+    // Ichor: Delphoi's stand-ins; the bespoke portraits remain an art gate.
+    [TRAINER_PIC_MELISSA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AromaLady, gTrainerPalette_AromaLady),
+    },
+    [TRAINER_PIC_KITHARODE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Gentleman, gTrainerPalette_Gentleman),
+    },
+    [TRAINER_PIC_PROPHETES] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PsychicM, gTrainerPalette_PsychicM),
+    },
+    [TRAINER_PIC_GIGAS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_BlackBelt, gTrainerPalette_BlackBelt),
+    },
+    [TRAINER_PIC_HIEROPHANT_PHEMONOE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PsychicF, gTrainerPalette_PsychicF),
+    },
+    [TRAINER_PIC_RHEA_PARTNER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_TitanGrunt, gTrainerPalette_TitanGrunt),
+        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_May, gTrainerPalette_May, sBackAnims_Hoenn),
+    },
 };

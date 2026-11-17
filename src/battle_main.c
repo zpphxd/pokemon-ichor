@@ -441,6 +441,11 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SCULPTOR] = { _("SCULPTOR"), 6 },
     [TRAINER_CLASS_BEEKEEPER] = { _("BEEKEEPER"), 4 },
     [TRAINER_CLASS_DIVER] = { _("DIVER"), 6 },
+    // Ichor: Delphoi's classes (phase4 SCRIPT.md Part 3, "Conventions for Delphoi")
+    [TRAINER_CLASS_MELISSA] = { _("MELISSA"), 6 },
+    [TRAINER_CLASS_KITHARODE] = { _("KITHARODE"), 8 },
+    [TRAINER_CLASS_PROPHETES] = { _("PROPHETES"), 8 },
+    [TRAINER_CLASS_GIGAS] = { _("GIGAS"), 10 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

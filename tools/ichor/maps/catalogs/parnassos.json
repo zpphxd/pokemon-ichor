@@ -1,0 +1,661 @@
+{
+ "fronts": {},
+ "structures": {
+  "bush": {
+   "ground": {
+    "0,0": "grass",
+    "1,0": "grass"
+   },
+   "h": 1,
+   "ids": [
+    [
+     560,
+     561
+    ]
+   ],
+   "names": {
+    "laurel": [
+     1,
+     0
+    ],
+    "mastic": [
+     0,
+     0
+    ]
+   },
+   "section": "land",
+   "w": 2,
+   "walk": [
+    "XX"
+   ]
+  },
+  "camp_props": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "1,0": "grass",
+    "1,1": "grass",
+    "2,0": "grass",
+    "2,1": "grass",
+    "3,0": "grass",
+    "3,1": "grass",
+    "4,0": "grass",
+    "4,1": "grass",
+    "5,0": "grass",
+    "5,1": "grass",
+    "6,0": "none",
+    "6,1": "grass",
+    "7,0": "none",
+    "7,1": "grass"
+   },
+   "h": 2,
+   "ids": [
+    [
+     656,
+     657,
+     658,
+     659,
+     660,
+     661,
+     662,
+     663
+    ],
+    [
+     664,
+     665,
+     666,
+     667,
+     668,
+     669,
+     670,
+     671
+    ]
+   ],
+   "names": {
+    "ash": [
+     7,
+     1
+    ],
+    "banner": [
+     1,
+     1
+    ],
+    "banner_top": [
+     1,
+     0
+    ],
+    "bridge_EW": [
+     6,
+     0
+    ],
+    "bridge_NS": [
+     7,
+     0
+    ],
+    "crate": [
+     0,
+     1
+    ],
+    "crates": [
+     2,
+     1
+    ],
+    "fire": [
+     0,
+     0
+    ],
+    "oven_BL": [
+     4,
+     1
+    ],
+    "oven_BR": [
+     5,
+     1
+    ],
+    "oven_TL": [
+     4,
+     0
+    ],
+    "oven_TR": [
+     5,
+     0
+    ],
+    "rack_E": [
+     3,
+     0
+    ],
+    "rack_W": [
+     2,
+     0
+    ],
+    "trodden": [
+     6,
+     1
+    ]
+   },
+   "section": "camp",
+   "w": 8,
+   "walk": [
+    "XTXXXX..",
+    "XXXXXX.."
+   ]
+  },
+  "great_laurel": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "0,2": "grass",
+    "1,0": "grass",
+    "1,1": "grass",
+    "1,2": "grass",
+    "2,0": "grass",
+    "2,1": "grass",
+    "2,2": "grass"
+   },
+   "h": 3,
+   "ids": [
+    [
+     588,
+     589,
+     590
+    ],
+    [
+     596,
+     597,
+     598
+    ],
+    [
+     604,
+     605,
+     606
+    ]
+   ],
+   "names": {},
+   "section": "trees",
+   "w": 3,
+   "walk": [
+    "XXX",
+    "XXX",
+    "XXX"
+   ]
+  },
+  "ground": {
+   "ground": {
+    "0,0": "grass",
+    "1,0": "grass",
+    "2,0": "grass",
+    "3,0": "grass",
+    "4,0": "grass",
+    "5,0": "grass",
+    "6,0": "grass"
+   },
+   "h": 1,
+   "ids": [
+    [
+     552,
+     553,
+     554,
+     555,
+     556,
+     557,
+     558
+    ]
+   ],
+   "names": {
+    "leaves": [
+     2,
+     0
+    ],
+    "pebbles": [
+     1,
+     0
+    ],
+    "shade_N": [
+     6,
+     0
+    ],
+    "stones": [
+     4,
+     0
+    ],
+    "thyme": [
+     3,
+     0
+    ],
+    "tuft": [
+     0,
+     0
+    ],
+    "worn": [
+     5,
+     0
+    ]
+   },
+   "section": "land",
+   "w": 7,
+   "walk": [
+    "......."
+   ]
+  },
+  "hut": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "none",
+    "1,0": "grass",
+    "1,1": "none",
+    "2,0": "grass",
+    "2,1": "none"
+   },
+   "h": 2,
+   "ids": [
+    [
+     672,
+     673,
+     674
+    ],
+    [
+     680,
+     681,
+     682
+    ]
+   ],
+   "names": {
+    "door": [
+     1,
+     1
+    ]
+   },
+   "section": "camp",
+   "w": 3,
+   "walk": [
+    "XXX",
+    "XDX"
+   ]
+  },
+  "laurel": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "1,0": "grass",
+    "1,1": "grass"
+   },
+   "h": 2,
+   "ids": [
+    [
+     584,
+     585
+    ],
+    [
+     592,
+     593
+    ]
+   ],
+   "names": {},
+   "section": "trees",
+   "w": 2,
+   "walk": [
+    "XX",
+    "XX"
+   ]
+  },
+  "laurel_b": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "1,0": "grass",
+    "1,1": "grass"
+   },
+   "h": 2,
+   "ids": [
+    [
+     586,
+     587
+    ],
+    [
+     594,
+     595
+    ]
+   ],
+   "names": {},
+   "section": "trees",
+   "w": 2,
+   "walk": [
+    "XX",
+    "XX"
+   ]
+  },
+  "oldest_altar": {
+   "ground": {
+    "0,0": "grass"
+   },
+   "h": 1,
+   "ids": [
+    [
+     564
+    ]
+   ],
+   "names": {},
+   "section": "land",
+   "w": 1,
+   "walk": [
+    "X"
+   ]
+  },
+  "oldest_olive": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "0,2": "grass",
+    "1,0": "grass",
+    "1,1": "grass",
+    "1,2": "grass",
+    "2,0": "grass",
+    "2,1": "grass",
+    "2,2": "grass"
+   },
+   "h": 3,
+   "ids": [
+    [
+     608,
+     609,
+     610
+    ],
+    [
+     616,
+     617,
+     618
+    ],
+    [
+     624,
+     625,
+     626
+    ]
+   ],
+   "names": {
+    "hollow": [
+     1,
+     2
+    ]
+   },
+   "section": "trees",
+   "w": 3,
+   "walk": [
+    "XXX",
+    "XXX",
+    "XXX"
+   ]
+  },
+  "pezoula": {
+   "ground": {
+    "0,0": "grass",
+    "1,0": "grass",
+    "2,0": "grass",
+    "3,0": "grass"
+   },
+   "h": 1,
+   "ids": [
+    [
+     544,
+     545,
+     546,
+     547
+    ]
+   ],
+   "names": {
+    "E": [
+     3,
+     0
+    ],
+    "M": [
+     1,
+     0
+    ],
+    "M2": [
+     2,
+     0
+    ],
+    "W": [
+     0,
+     0
+    ]
+   },
+   "section": "land",
+   "w": 4,
+   "walk": [
+    "JJJJ"
+   ]
+  },
+  "phaedriades": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "0,2": "grass",
+    "0,3": "grass",
+    "1,0": "grass",
+    "1,1": "none",
+    "1,2": "none",
+    "1,3": "grass",
+    "2,0": "grass",
+    "2,1": "none",
+    "2,2": "none",
+    "2,3": "grass",
+    "3,0": "grass",
+    "3,1": "grass",
+    "3,2": "grass",
+    "3,3": "grass"
+   },
+   "h": 4,
+   "ids": [
+    [
+     512,
+     513,
+     514,
+     515
+    ],
+    [
+     520,
+     521,
+     522,
+     523
+    ],
+    [
+     528,
+     529,
+     530,
+     531
+    ],
+    [
+     536,
+     537,
+     538,
+     539
+    ]
+   ],
+   "names": {
+    "crest": [
+     1,
+     0
+    ],
+    "crest2": [
+     2,
+     0
+    ],
+    "crest_E": [
+     3,
+     0
+    ],
+    "crest_W": [
+     0,
+     0
+    ],
+    "face": [
+     1,
+     1
+    ],
+    "face2": [
+     2,
+     1
+    ],
+    "face_E": [
+     3,
+     1
+    ],
+    "face_W": [
+     0,
+     1
+    ],
+    "faceb": [
+     1,
+     2
+    ],
+    "faceb2": [
+     2,
+     2
+    ],
+    "faceb_E": [
+     3,
+     2
+    ],
+    "faceb_W": [
+     0,
+     2
+    ],
+    "foot": [
+     1,
+     3
+    ],
+    "foot2": [
+     2,
+     3
+    ],
+    "foot_E": [
+     3,
+     3
+    ],
+    "foot_W": [
+     0,
+     3
+    ]
+   },
+   "section": "land",
+   "w": 4,
+   "walk": [
+    "XXXX",
+    "XXXX",
+    "XXXX",
+    "XXXX"
+   ]
+  },
+  "scree": {
+   "ground": {
+    "0,0": "grass",
+    "1,0": "none"
+   },
+   "h": 1,
+   "ids": [
+    [
+     516,
+     517
+    ]
+   ],
+   "names": {
+    "block": [
+     0,
+     0
+    ],
+    "face_scrub": [
+     1,
+     0
+    ]
+   },
+   "section": "land",
+   "w": 2,
+   "walk": [
+    "XX"
+   ]
+  },
+  "sibyl_rock": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "1,0": "grass",
+    "1,1": "grass"
+   },
+   "h": 2,
+   "ids": [
+    [
+     562,
+     563
+    ],
+    [
+     570,
+     571
+    ]
+   ],
+   "names": {},
+   "section": "land",
+   "w": 2,
+   "walk": [
+    "XX",
+    "XX"
+   ]
+  },
+  "tent": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "1,0": "grass",
+    "1,1": "grass",
+    "2,0": "grass",
+    "2,1": "grass"
+   },
+   "h": 2,
+   "ids": [
+    [
+     640,
+     641,
+     642
+    ],
+    [
+     648,
+     649,
+     650
+    ]
+   ],
+   "names": {},
+   "section": "camp",
+   "w": 3,
+   "walk": [
+    "XXX",
+    "XXX"
+   ]
+  },
+  "tent_small": {
+   "ground": {
+    "0,0": "grass",
+    "0,1": "grass",
+    "1,0": "grass",
+    "1,1": "grass"
+   },
+   "h": 2,
+   "ids": [
+    [
+     643,
+     644
+    ],
+    [
+     651,
+     652
+    ]
+   ],
+   "names": {},
+   "section": "camp",
+   "w": 2,
+   "walk": [
+    "XX",
+    "XX"
+   ]
+  }
+ },
+ "symbol": "gTileset_Parnassos"
+}

@@ -7660,6 +7660,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_StarChart,
     },
 
+    [ITEM_MELITTAS_HONEY] =
+    {
+        .name = ITEM_NAME("Melitta's Honey"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "The last Delphoi\n"
+            "honey. The label\n"
+            "says NOT FOR YOU."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_Honey,
+        .iconPalette = gItemIconPalette_Honey,
+    },
+
 // Gems
 #if I_PRICE >= GEN_9
     #define GEM_PRICE 15000

@@ -1,0 +1,77 @@
+// Hieron's hut, by the oldest olive (design/phase4/SCRIPT.md Part 2, "Hieron's
+// hut"). The room is tools/ichor/maps/delphoi_rooms.py's ("hut"). The spring that
+// runs across the floor heals the party: the route's rest point. Hieron gives
+// three Olive Oil (fallen olives, for the herms), and after the climax a Big Root.
+
+mapscripts Route28_SacredOlives_WardensHut_MapScripts {}
+
+text WardensHut_Text_NameHieron { "HIERON" }
+
+script Route28_SacredOlives_WardensHut_EventScript_Hieron {
+    lock
+    faceplayer
+    setspeaker(WardensHut_Text_NameHieron)
+    if (var(VAR_ICHOR_ACT3) >= 19 && !flag(FLAG_ICHOR_GOT_HIERON_BIG_ROOT)) {
+        msgbox(format("They came back down through my olives. The Titans. In ones and twos.\p"
+                      "They stepped off the road this time. To sit under the trees.\p"
+                      "One of them cried on my roots. I let him. Roots don't mind.\p"
+                      "Take this. It came up where he sat."))
+        giveitem(ITEM_BIG_ROOT)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_HIERON_BIG_ROOT)
+        }
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_GOT_HIERON_OIL)) {
+        msgbox(format("Drink. It's the god's water. Comes all the way from the spring above."))
+        call(Route28_SacredOlives_WardensHut_EventScript_Heal)
+        setspeaker(WardensHut_Text_NameHieron)
+        msgbox(format("Here. Oil from fallen olives.\pFallen ones aren't picked. That's the rule."))
+        giveitem(ITEM_OLIVE_OIL, 3)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_HIERON_OIL)
+            setspeaker(WardensHut_Text_NameHieron)
+            msgbox(format("For the herms. Hermes likes a good oil. So do I."))
+        }
+        release
+        end
+    }
+    msgbox(format("The Titans go up. The pilgrims go up. Nobody comes down. I counted.\p"
+                  "Drink, if you're tired."))
+    call(Route28_SacredOlives_WardensHut_EventScript_Heal)
+    release
+}
+
+script Route28_SacredOlives_WardensHut_EventScript_Heal {
+    setspeaker(SP_NAME_NONE)
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("The spring water is cold and tastes of stone. Your Pokémon are rested."))
+    return
+}
+
+// the spring's channel
+script Route28_SacredOlives_WardensHut_EventScript_Thing1 {
+    lockall
+    msgbox(format("A spring runs across the floor in a stone channel and out under the door.\p"
+                  "A ladle hangs over it. Drink?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        call(Route28_SacredOlives_WardensHut_EventScript_Heal)
+    }
+    releaseall
+}
+
+// the olive-wood carvings
+script Route28_SacredOlives_WardensHut_EventScript_Thing2 {
+    msgbox(format("Little olive-wood figures. Pilgrims, runners, a soldier.\p"
+                  "The newest is a big man with a torch. It's been carved squinting."), MSGBOX_SIGN)
+}
+
+// the pruning hook
+script Route28_SacredOlives_WardensHut_EventScript_Thing3 {
+    msgbox(format("A pruning hook, rusted shut. A tag on it says: NEVER."), MSGBOX_SIGN)
+}

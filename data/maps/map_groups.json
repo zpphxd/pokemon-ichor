@@ -12,7 +12,8 @@
     "gMapGroup_DungeonsAct2",
     "gMapGroup_IndoorKaldera",
     "gMapGroup_Kythera",
-    "gMapGroup_League"
+    "gMapGroup_League",
+    "gMapGroup_Delphoi"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -208,5 +209,23 @@
     "Olympus_SeatOfHera",
     "Olympus_Summit",
     "Olympus_HallOfHeroes"
+  ],
+  "gMapGroup_Delphoi": [
+    "Route28_SacredOlives",
+    "Route28_KastalianGorge",
+    "Delphoi",
+    "Delphoi_TempleOfApollo",
+    "Delphoi_OmphalosStair",
+    "Route28_SacredOlives_WardensHut",
+    "Delphoi_Asclepeion",
+    "Delphoi_Agora",
+    "Delphoi_HouseOfTheMelissai",
+    "Delphoi_TheoklesHouse",
+    "Delphoi_PilgrimsHouse",
+    "Delphoi_KoretasHouse",
+    "Delphoi_KitharodeHouse",
+    "Delphoi_AstyranTreasury",
+    "Delphoi_SiphnianTreasury",
+    "Delphoi_Lesche"
   ]
 }

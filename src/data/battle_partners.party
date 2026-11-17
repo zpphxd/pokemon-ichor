@@ -143,3 +143,42 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Night Slash
 - Quick Attack
 - Taunt
+
+/* Delphoi: Rhea beside you at the Omphalos (phase4 SCRIPT.md Part 3). She
+ * never uses a move that hits her partner. */
+=== PARTNER_ICHOR_RHEA_DELPHOI ===
+Name: RHEA
+Class: Titan Admin
+Pic: Rhea Partner
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Laolith
+Level: 57
+Ability: Iron Fist
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Hammer Arm
+- Rock Slide
+- Stealth Rock
+
+Geogrip
+Level: 57
+Ability: Earth Eater
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- High Horsepower
+- Superpower
+- Circle Throw
+- Bulk Up
+
+Plouteras
+Level: 57
+Ability: Thick Fat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- High Horsepower
+- Wish
+- Body Slam
+- Helping Hand
+
+/* End Delphoi partner. */

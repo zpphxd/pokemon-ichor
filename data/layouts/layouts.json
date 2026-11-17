@@ -1848,6 +1848,182 @@
       "border_filepath": "data/layouts/Olympus_HallOfHeroes/border.bin",
       "blockdata_filepath": "data/layouts/Olympus_HallOfHeroes/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE28_SACRED_OLIVES",
+      "name": "Route28_SacredOlives_Layout",
+      "width": 56,
+      "height": 25,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Parnassos",
+      "border_filepath": "data/layouts/Route28_SacredOlives/border.bin",
+      "blockdata_filepath": "data/layouts/Route28_SacredOlives/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE28_KASTALIAN_GORGE",
+      "name": "Route28_KastalianGorge_Layout",
+      "width": 30,
+      "height": 47,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Parnassos",
+      "border_filepath": "data/layouts/Route28_KastalianGorge/border.bin",
+      "blockdata_filepath": "data/layouts/Route28_KastalianGorge/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI",
+      "name": "Delphoi_Layout",
+      "width": 52,
+      "height": 46,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Delphoi",
+      "border_filepath": "data/layouts/Delphoi/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_TEMPLE_OF_APOLLO",
+      "name": "Delphoi_TempleOfApollo_Layout",
+      "width": 19,
+      "height": 47,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_TempleApollo",
+      "border_filepath": "data/layouts/Delphoi_TempleOfApollo/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_TempleOfApollo/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_OMPHALOS_STAIR",
+      "name": "Delphoi_OmphalosStair_Layout",
+      "width": 14,
+      "height": 40,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_TempleApollo",
+      "border_filepath": "data/layouts/Delphoi_OmphalosStair/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_OmphalosStair/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE28_SACRED_OLIVES_WARDENS_HUT",
+      "name": "Route28_SacredOlives_WardensHut_Layout",
+      "width": 8,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Route28_SacredOlives_WardensHut/border.bin",
+      "blockdata_filepath": "data/layouts/Route28_SacredOlives_WardensHut/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_ASCLEPEION",
+      "name": "Delphoi_Asclepeion_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_AGORA",
+      "name": "Delphoi_Agora_Layout",
+      "width": 14,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_HOUSE_OF_THE_MELISSAI",
+      "name": "Delphoi_HouseOfTheMelissai_Layout",
+      "width": 16,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_HouseOfTheMelissai/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_HouseOfTheMelissai/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_THEOKLES_HOUSE",
+      "name": "Delphoi_TheoklesHouse_Layout",
+      "width": 9,
+      "height": 6,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_TheoklesHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_TheoklesHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_PILGRIMS_HOUSE",
+      "name": "Delphoi_PilgrimsHouse_Layout",
+      "width": 14,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_PilgrimsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_PilgrimsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_KORETAS_HOUSE",
+      "name": "Delphoi_KoretasHouse_Layout",
+      "width": 10,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_KoretasHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_KoretasHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_KITHARODE_HOUSE",
+      "name": "Delphoi_KitharodeHouse_Layout",
+      "width": 10,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_KitharodeHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_KitharodeHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_ASTYRAN_TREASURY",
+      "name": "Delphoi_AstyranTreasury_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_AstyranTreasury/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_AstyranTreasury/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_SIPHNIAN_TREASURY",
+      "name": "Delphoi_SiphnianTreasury_Layout",
+      "width": 10,
+      "height": 6,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_SiphnianTreasury/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_SiphnianTreasury/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DELPHOI_LESCHE",
+      "name": "Delphoi_Lesche_Layout",
+      "width": 16,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaDelphoi",
+      "border_filepath": "data/layouts/Delphoi_Lesche/border.bin",
+      "blockdata_filepath": "data/layouts/Delphoi_Lesche/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

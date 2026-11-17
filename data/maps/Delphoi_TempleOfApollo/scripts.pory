@@ -1,0 +1,707 @@
+// The Temple of Apollo: the Pythian Light (design/phase4/SCRIPT.md III-6D and
+// Part 5). The layout, the puzzle's geometry and the generated half of these
+// scripts (below the marker) are tools/ichor/maps/delphoi_temple.py's.
+//
+// Teach: in the pronaos M1 sends the window's sun onto disc 0, and the inner
+// door opens. Test: one beam from the smoke-hole falls on M2 and is passed on
+// through four chambers (M2; M3 and M3b; M4 and M5 round the serpent; M6 and
+// M7), each chamber's disc opening the next door. Master: M8 focuses it on the
+// adyton's brazier, and its fire is carried on Hecate's Torch round the vents to
+// the tripod (24 steps; the clean route is 15). The Pythia is on the tripod.
+//
+// Mirrors' facings are VAR_TEMP_1..9 (reset on leaving; the lit discs keep the
+// doors open). Discs and the brazier are flags. Pherenike resets the mirrors.
+// After the Sun Laurel everything stays lit and the mirrors are bolted.
+//
+// TODO(music): MUS_ICHOR_TEMPLE_APOLLO and MUS_ICHOR_BATTLE_HIEROPHANT aren't
+// written; the slice's temple theme and the Hierophant battle music stand in.
+// TODO(art): Phemonoe's portrait is a stand-in (TRAINER_PIC_HIEROPHANT_PHEMONOE).
+
+const FLAG_ICHOR_CONSTELLATION_CORVUS = FLAG_ICHOR_CONSTELLATIONS_START + 9
+
+mapscripts Delphoi_TempleOfApollo_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_0, 0)
+        setvar(VAR_TEMP_A, 0)
+        if (flag(FLAG_BADGE08_GET)) {
+            call(Delphoi_TempleOfApollo_EventScript_SolvedFacings)
+        } else {
+            call(Delphoi_TempleOfApollo_EventScript_InitialFacings)
+        }
+        call(Delphoi_TempleOfApollo_EventScript_ApplyFacings)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(Delphoi_TempleOfApollo_EventScript_LightTiles)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: Delphoi_TempleOfApollo_EventScript_FirstTrace
+    ]
+}
+
+text Apollo_Text_NameEudoros { "EUDOROS" }
+text Apollo_Text_NamePythia { "PYTHIA" }
+text Apollo_Text_NamePherenike { "PHERENIKE" }
+text Apollo_Text_NameOnomakritos { "ONOMAKRITOS" }
+text Apollo_Text_NameBremousa { "BREMOUSA" }
+
+// On entering: the light already falls where the mirrors send it.
+script Delphoi_TempleOfApollo_EventScript_FirstTrace {
+    setvar(VAR_TEMP_0, 1)
+    call(Delphoi_TempleOfApollo_EventScript_TracePronaos)
+    call(Delphoi_TempleOfApollo_EventScript_TraceCella)
+    end
+}
+
+script Delphoi_TempleOfApollo_EventScript_TracePronaos {
+    call(Delphoi_TempleOfApollo_EventScript_BeamKind)
+    setvar(VAR_0x8004, LOCALID_APOLLO_M1)
+    special(Ichor_TraceBeam)
+    if (var(VAR_RESULT) == LOCALID_APOLLO_DISC_0 && !flag(FLAG_ICHOR_APOLLO_DISC_0)) {
+        setflag(FLAG_ICHOR_APOLLO_DISC_0)
+        call(Delphoi_TempleOfApollo_EventScript_DiscBlazes)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_TraceCella {
+    call(Delphoi_TempleOfApollo_EventScript_BeamKind)
+    setvar(VAR_0x8004, LOCALID_APOLLO_M2)
+    special(Ichor_TraceBeam)
+    call(Delphoi_TempleOfApollo_EventScript_CheckCella)
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_DiscBlazes {
+    playse(SE_SHINY)
+    call(Delphoi_TempleOfApollo_EventScript_LightTiles)
+    special(DrawWholeMapView)
+    msgbox(format("The beam strikes the gold disc. It blazes.\p"
+                  "Somewhere inside the wall, a bronze bolt slides back."))
+    specialvar(VAR_RESULT, Ichor_GetTimeOfDay)
+    if (var(VAR_RESULT) == TIME_NIGHT && !flag(FLAG_TEMP_2)) {
+        setflag(FLAG_TEMP_2)
+        msgbox(format("The light through the roof is pale tonight. A moonbeam.\p"
+                      "It goes the same way. The god's sister lends him her light at night."))
+    }
+    // the door that just opened lets the beam on through
+    call(Delphoi_TempleOfApollo_EventScript_TraceCella)
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_BrazierCatches {
+    playse(SE_M_FLAME_WHEEL)
+    call(Delphoi_TempleOfApollo_EventScript_LightTiles)
+    special(DrawWholeMapView)
+    msgbox(format("The beam gathers on the brazier's bowl. The oil smokes, then catches.\p"
+                  "The brazier is burning. Fire, made from light."))
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The mirrors
+// ---------------------------------------------------------------------------
+
+script Delphoi_TempleOfApollo_EventScript_Mirror {
+    lock
+    if (flag(FLAG_BADGE08_GET)) {
+        msgbox(format("The mirrors are bolted where you left them. Eudoros polishes them every morning."))
+        release
+        end
+    }
+    msgbox(format("A bronze mirror on a stand, polished bright.\pTurn it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    closemessage
+    playse(SE_M_STRENGTH)
+    call(Delphoi_TempleOfApollo_EventScript_TurnTalked)
+    msgbox(format("You turn the mirror. The light swings across the floor."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The adyton: the brazier, the vents, the tripod
+// ---------------------------------------------------------------------------
+
+script Delphoi_TempleOfApollo_EventScript_Brazier {
+    lockall
+    if (!flag(FLAG_ICHOR_APOLLO_BRAZIER)) {
+        msgbox(format("A cold bronze brazier at the foot of the steps. Its bowl faces the stair.\p"
+                      "The god's light would light it, if it came down this far."))
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAME_SANCTUM)
+    setvar(VAR_0x8005, 24)
+    special(Ichor_TakeFlame)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The brazier is burning. Fire, made from light.\p"
+                      "Hecate's Torch could carry it, if it were lit."))
+        releaseall
+        end
+    }
+    playse(SE_M_EMBER)
+    msgbox(format("You light Hecate's Torch from the brazier.\p"
+                  "The flame is gold, and it leans toward the tripod."))
+    releaseall
+}
+
+script Delphoi_TempleOfApollo_EventScript_Vent {
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) == FLAME_SANCTUM) {
+        lockall
+        special(Ichor_PutOutFlame)
+        playse(SE_M_MIST)
+        msgbox(format("A breath of vapour from the vent. The carried fire goes out.\p"
+                      "The brazier's still burning. Try again."))
+        releaseall
+    }
+    end
+}
+
+script Delphoi_TempleOfApollo_EventScript_Tripod {
+    lockall
+    if (flag(FLAG_ICHOR_PYTHIAN_LIGHT_DONE)) {
+        if (!flag(FLAG_BADGE08_GET)) {
+            goto(Delphoi_TempleOfApollo_EventScript_PythiaBattle)
+        }
+        msgbox(format("The tripod's bowl is burning. Vapour rises gold from the crack beneath it."))
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_SANCTUM) {
+        msgbox(format("A bronze tripod stands over a crack in the rock. Its bowl is cold and dark.\p"
+                      "Vapour breathes up from below. Something sits on the tripod's seat, in shadow."))
+        releaseall
+        end
+    }
+    special(Ichor_PutOutFlame)
+    setflag(FLAG_ICHOR_PYTHIAN_LIGHT_DONE)
+    playse(SE_M_FLAME_WHEEL)
+    call(Delphoi_TempleOfApollo_EventScript_LightTiles)
+    special(DrawWholeMapView)
+    msgbox(format("Flame climbs the bronze legs of the tripod over the chasm.\p"
+                  "Vapour rises from the crack beneath it and turns gold in the firelight."))
+    clearflag(FLAG_ICHOR_HIDE_PHEMONOE_TRIPOD)
+    addobject(LOCALID_APOLLO_PYTHIA)
+    msgbox(format("On the tripod's seat, a laurel branch across her knees, sits the Pythia.\p"
+                  "She has been there all along."))
+    goto(Delphoi_TempleOfApollo_EventScript_PythiaBattle)
+}
+
+text Apollo_Text_PythiaDefeat { format("…Bright.") }
+
+script Delphoi_TempleOfApollo_EventScript_PythiaBattle {
+    lockall
+    setspeaker(Apollo_Text_NamePythia)
+    msgbox(format("…"))
+    msgbox(format("Come."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    trainerbattle_no_intro(TRAINER_ICHOR_PHEMONOE, Apollo_Text_PythiaDefeat)
+    goto(Delphoi_TempleOfApollo_EventScript_PythiaDefeated)
+}
+
+script Delphoi_TempleOfApollo_EventScript_PythiaDefeated {
+    lockall
+    setspeaker(Apollo_Text_NamePythia)
+    msgbox(format("Yours."))
+    if (!flag(FLAG_BADGE08_GET)) {
+        setvar(VAR_0x8004, ICHOR_GOD_APOLLO)
+        setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL)
+        special(Ichor_AddFavor)
+        setflag(FLAG_BADGE08_GET)
+    }
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} received the Sun Laurel!"))
+    waitmessage
+    call(Common_EventScript_PlayGymBadgeFanfare)
+    setflag(FLAG_ICHOR_CONSTELLATION_CORVUS)
+    playse(SE_SHINY)
+    msgbox(format("A new star has appeared in your Star Chart: Corvus, the raven."))
+    if (!flag(FLAG_ICHOR_GOT_TM_MYSTICAL_FIRE)) {
+        setspeaker(Apollo_Text_NamePythia)
+        msgbox(format("Take."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_TM_MYSTICAL_FIRE)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_TM_MYSTICAL_FIRE)
+        }
+    }
+    if (var(VAR_ICHOR_ACT3) < 12) {
+        setvar(VAR_ICHOR_ACT3, 12)
+    }
+    // the rite stays solved; the acolytes count as beaten
+    settrainerflag(TRAINER_ICHOR_ONOMAKRITOS)
+    settrainerflag(TRAINER_ICHOR_PHERENIKE)
+    settrainerflag(TRAINER_ICHOR_BREMOUSA)
+    call(Delphoi_TempleOfApollo_EventScript_SolvedFacings)
+    call(Delphoi_TempleOfApollo_EventScript_ApplyFacings)
+    if (!flag(FLAG_ICHOR_PYTHIA_SPOKE)) {
+        // STORY §7.5's opening, word for word
+        setspeaker(Apollo_Text_NamePythia)
+        msgbox(format("…"))
+        msgbox(format("Melitta."))
+        closemessage
+        delay(60)
+        msgbox(format("Someone's waiting for you. At the spring.\pShe's been waiting thirteen years."))
+        closemessage
+        setspeaker(SP_NAME_NONE)
+        playse(SE_DOOR)
+        msgbox(format("Somewhere in the temple, a broom clatters onto the floor."))
+        setspeaker(Apollo_Text_NameEudoros)
+        msgbox(format("She said a sentence. Two! I have to tell someone.\p"
+                      "…I'm not going to tell anyone. Nobody would believe me."))
+        setspeaker(SP_NAME_NONE)
+        setflag(FLAG_ICHOR_PYTHIA_SPOKE)
+        // the sun is going down behind Parnassos
+        setvar(VAR_0x8004, TIME_EVENING)
+        special(Ichor_HoldTimeOfDay)
+    }
+    releaseall
+}
+
+script Delphoi_TempleOfApollo_EventScript_Pythia {
+    lock
+    if (!flag(FLAG_BADGE08_GET)) {
+        goto(Delphoi_TempleOfApollo_EventScript_PythiaBattle)
+    }
+    setspeaker(Apollo_Text_NamePythia)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Ha.\p…Ha. I'm sorry. I can't stop. Everything's so dark.\p"
+                      "Come back when I've stopped. There'll be something for you."))
+    } else {
+        msgbox(format("…Spring."))
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The temple's people
+// ---------------------------------------------------------------------------
+
+script Delphoi_TempleOfApollo_EventScript_Eudoros {
+    lock
+    faceplayer
+    setspeaker(Apollo_Text_NameEudoros)
+    if (flag(FLAG_BADGE08_GET)) {
+        msgbox(format("I polish the mirrors every morning now. They're bolted.\p"
+                      "The light still goes where you sent it."))
+    } elif (flag(FLAG_ICHOR_APOLLO_DISC_0)) {
+        msgbox(format("Light goes straight until something turns it. Like people.\p"
+                      "If a mirror's gone wrong, Pherenike will set it back. Just ask."))
+    } else {
+        msgbox(format("Pilgrim? The Pythia isn't answering today. Or any day.\p"
+                      "Oh. You're here for the laurel. That's different. She'll fight you.\p"
+                      "She doesn't talk much, but she fights a lot."))
+        msgbox(format("The god's light comes in through the roof. Show it where to go.\p"
+                      "Turn the mirrors. Light the gold discs. The doors open for the light.\p"
+                      "And mind the swallows. They're the god's. They know it."))
+    }
+    release
+}
+
+script Delphoi_TempleOfApollo_EventScript_Gate {
+    msgbox(format("A bronze gate in the screen, bolted shut.\p"
+                  "A gold disc set somewhere in this chamber must draw the bolt."), MSGBOX_SIGN)
+}
+
+script Delphoi_TempleOfApollo_EventScript_Onomakritos {
+    trainerbattle_single(TRAINER_ICHOR_ONOMAKRITOS,
+        format("I put her words into verse. Exactly her words. Exactly."),
+        format("A rough line. I won't change it. I never change a word."))
+    setspeaker(Apollo_Text_NameOnomakritos)
+    msgbox(format("Some of us never change a word. Remember that."), MSGBOX_AUTOCLOSE)
+}
+
+script Delphoi_TempleOfApollo_EventScript_Pherenike {
+    trainerbattle_single(TRAINER_ICHOR_PHERENIKE,
+        format("Need a mirror set back? Battle first. Rules are rules."),
+        format("Fine. Fine! I'll turn them. You only had to ask nicely."))
+    lock
+    faceplayer
+    setspeaker(Apollo_Text_NamePherenike)
+    if (flag(FLAG_BADGE08_GET)) {
+        msgbox(format("They're bolted now. I've nothing to turn. It's very restful."))
+        release
+        end
+    }
+    msgbox(format("Talk to me if the light's gone wrong.\pAll of them back how they were?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Fine. Turn, turn, turn. There."))
+        closemessage
+        call(Delphoi_TempleOfApollo_EventScript_InitialFacings)
+        call(Delphoi_TempleOfApollo_EventScript_ApplyFacings)
+        call(Delphoi_TempleOfApollo_EventScript_TraceCella)
+    }
+    release
+}
+
+script Delphoi_TempleOfApollo_EventScript_Bremousa {
+    trainerbattle_single(TRAINER_ICHOR_BREMOUSA,
+        format("The god's fire is below. Nobody carries it down without my say."),
+        format("Say given. Mind the vents. They blow out anything you carry."))
+    setspeaker(Apollo_Text_NameBremousa)
+    msgbox(format("Go left of the third vent. Everyone goes right. Everyone's wrong."), MSGBOX_AUTOCLOSE)
+}
+
+// delphoi_temple: begin generated (tools/ichor/maps/delphoi_temple.py; don't edit)
+
+const METATILE_APOLLO_BEAM_EW = 0x208
+const METATILE_APOLLO_MOONBEAM_EW = 0x210
+const METATILE_APOLLO_WALL_DISC_LIT = 0x22B
+const METATILE_APOLLO_SCREEN_DISC_LIT = 0x234
+const METATILE_APOLLO_GATE_OPEN = 0x232
+const METATILE_APOLLO_BRAZIER_LIT = 0x247
+const METATILE_APOLLO_TRIPOD_LIT_TL = 0x255
+const METATILE_APOLLO_TRIPOD_LIT_TC = 0x256
+const METATILE_APOLLO_TRIPOD_LIT_TR = 0x257
+const METATILE_APOLLO_TRIPOD_LIT_BL = 0x25D
+const METATILE_APOLLO_TRIPOD_LIT_BC = 0x25E
+const METATILE_APOLLO_TRIPOD_LIT_BR = 0x25F
+
+script Delphoi_TempleOfApollo_EventScript_BeamKind {
+    specialvar(VAR_RESULT, Ichor_GetTimeOfDay)
+    if (var(VAR_RESULT) == TIME_NIGHT) {
+        setvar(VAR_0x8005, METATILE_APOLLO_MOONBEAM_EW)
+    } else {
+        setvar(VAR_0x8005, METATILE_APOLLO_BEAM_EW)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_ApplyFacings {
+    call(Delphoi_TempleOfApollo_EventScript_FaceM1)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM2)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM3)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM3B)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM4)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM5)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM6)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM7)
+    call(Delphoi_TempleOfApollo_EventScript_FaceM8)
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM1 {
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M1, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M1, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M1, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M1, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M1, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M1, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M1, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M1, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM2 {
+    switch (var(VAR_TEMP_2)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M2, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M2, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M2, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M2, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M2, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M2, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M2, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M2, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM3 {
+    switch (var(VAR_TEMP_3)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M3, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M3, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M3, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M3, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M3, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M3, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M3, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M3, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM3B {
+    switch (var(VAR_TEMP_4)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M3B, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M3B, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M3B, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M3B, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M3B, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M3B, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M3B, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M3B, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM4 {
+    switch (var(VAR_TEMP_5)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M4, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M4, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M4, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M4, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M4, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M4, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M4, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M4, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM5 {
+    switch (var(VAR_TEMP_6)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M5, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M5, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M5, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M5, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M5, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M5, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M5, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M5, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM6 {
+    switch (var(VAR_TEMP_7)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M6, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M6, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M6, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M6, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M6, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M6, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M6, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M6, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM7 {
+    switch (var(VAR_TEMP_8)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M7, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M7, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M7, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M7, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M7, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M7, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M7, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M7, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_FaceM8 {
+    switch (var(VAR_TEMP_9)) {
+        case 0:
+            turnobject(LOCALID_APOLLO_M8, DIR_SOUTH)
+            setobjectmovementtype(LOCALID_APOLLO_M8, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 1:
+            turnobject(LOCALID_APOLLO_M8, DIR_WEST)
+            setobjectmovementtype(LOCALID_APOLLO_M8, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 2:
+            turnobject(LOCALID_APOLLO_M8, DIR_NORTH)
+            setobjectmovementtype(LOCALID_APOLLO_M8, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 3:
+            turnobject(LOCALID_APOLLO_M8, DIR_EAST)
+            setobjectmovementtype(LOCALID_APOLLO_M8, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_InitialFacings {
+    setvar(VAR_TEMP_1, 2)
+    setvar(VAR_TEMP_2, 0)
+    setvar(VAR_TEMP_3, 2)
+    setvar(VAR_TEMP_4, 1)
+    setvar(VAR_TEMP_5, 0)
+    setvar(VAR_TEMP_6, 1)
+    setvar(VAR_TEMP_7, 0)
+    setvar(VAR_TEMP_8, 0)
+    setvar(VAR_TEMP_9, 2)
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_SolvedFacings {
+    setvar(VAR_TEMP_1, 3)
+    setvar(VAR_TEMP_2, 2)
+    setvar(VAR_TEMP_3, 1)
+    setvar(VAR_TEMP_4, 2)
+    setvar(VAR_TEMP_5, 1)
+    setvar(VAR_TEMP_6, 2)
+    setvar(VAR_TEMP_7, 3)
+    setvar(VAR_TEMP_8, 2)
+    setvar(VAR_TEMP_9, 3)
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_TurnTalked {
+    switch (var(VAR_LAST_TALKED)) {
+        case LOCALID_APOLLO_M1:
+            addvar(VAR_TEMP_1, 1)
+            if (var(VAR_TEMP_1) >= 4) {
+                setvar(VAR_TEMP_1, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM1)
+        case LOCALID_APOLLO_M2:
+            addvar(VAR_TEMP_2, 1)
+            if (var(VAR_TEMP_2) >= 4) {
+                setvar(VAR_TEMP_2, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM2)
+        case LOCALID_APOLLO_M3:
+            addvar(VAR_TEMP_3, 1)
+            if (var(VAR_TEMP_3) >= 4) {
+                setvar(VAR_TEMP_3, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM3)
+        case LOCALID_APOLLO_M3B:
+            addvar(VAR_TEMP_4, 1)
+            if (var(VAR_TEMP_4) >= 4) {
+                setvar(VAR_TEMP_4, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM3B)
+        case LOCALID_APOLLO_M4:
+            addvar(VAR_TEMP_5, 1)
+            if (var(VAR_TEMP_5) >= 4) {
+                setvar(VAR_TEMP_5, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM4)
+        case LOCALID_APOLLO_M5:
+            addvar(VAR_TEMP_6, 1)
+            if (var(VAR_TEMP_6) >= 4) {
+                setvar(VAR_TEMP_6, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM5)
+        case LOCALID_APOLLO_M6:
+            addvar(VAR_TEMP_7, 1)
+            if (var(VAR_TEMP_7) >= 4) {
+                setvar(VAR_TEMP_7, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM6)
+        case LOCALID_APOLLO_M7:
+            addvar(VAR_TEMP_8, 1)
+            if (var(VAR_TEMP_8) >= 4) {
+                setvar(VAR_TEMP_8, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM7)
+        case LOCALID_APOLLO_M8:
+            addvar(VAR_TEMP_9, 1)
+            if (var(VAR_TEMP_9) >= 4) {
+                setvar(VAR_TEMP_9, 0)
+            }
+            call(Delphoi_TempleOfApollo_EventScript_FaceM8)
+    }
+    if (var(VAR_LAST_TALKED) == LOCALID_APOLLO_M1) {
+        call(Delphoi_TempleOfApollo_EventScript_TracePronaos)
+    } else {
+        call(Delphoi_TempleOfApollo_EventScript_TraceCella)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_LightTiles {
+    if (flag(FLAG_ICHOR_APOLLO_DISC_0)) {
+        setmetatile(18, 43, METATILE_APOLLO_WALL_DISC_LIT, TRUE)
+        setmetatile(9, 40, METATILE_APOLLO_GATE_OPEN, FALSE)
+    }
+    if (flag(FLAG_ICHOR_APOLLO_DISC_1)) {
+        setmetatile(0, 37, METATILE_APOLLO_WALL_DISC_LIT, TRUE)
+        setmetatile(9, 33, METATILE_APOLLO_GATE_OPEN, FALSE)
+    }
+    if (flag(FLAG_ICHOR_APOLLO_DISC_2)) {
+        setmetatile(18, 30, METATILE_APOLLO_WALL_DISC_LIT, TRUE)
+        setmetatile(5, 26, METATILE_APOLLO_GATE_OPEN, FALSE)
+    }
+    if (flag(FLAG_ICHOR_APOLLO_DISC_3)) {
+        setmetatile(2, 26, METATILE_APOLLO_SCREEN_DISC_LIT, TRUE)
+        setmetatile(2, 18, METATILE_APOLLO_GATE_OPEN, FALSE)
+    }
+    if (flag(FLAG_ICHOR_APOLLO_DISC_4)) {
+        setmetatile(12, 11, METATILE_APOLLO_GATE_OPEN, FALSE)
+    }
+    if (flag(FLAG_ICHOR_APOLLO_BRAZIER)) {
+        setmetatile(16, 8, METATILE_APOLLO_BRAZIER_LIT, TRUE)
+    }
+    if (flag(FLAG_ICHOR_PYTHIAN_LIGHT_DONE)) {
+        setmetatile(7, 2, METATILE_APOLLO_TRIPOD_LIT_TL, TRUE)
+        setmetatile(8, 2, METATILE_APOLLO_TRIPOD_LIT_TC, TRUE)
+        setmetatile(9, 2, METATILE_APOLLO_TRIPOD_LIT_TR, TRUE)
+        setmetatile(7, 3, METATILE_APOLLO_TRIPOD_LIT_BL, TRUE)
+        setmetatile(8, 3, METATILE_APOLLO_TRIPOD_LIT_BC, TRUE)
+        setmetatile(9, 3, METATILE_APOLLO_TRIPOD_LIT_BR, TRUE)
+    }
+    return
+}
+
+script Delphoi_TempleOfApollo_EventScript_CheckCella {
+    switch (var(VAR_RESULT)) {
+        case LOCALID_APOLLO_DISC_1:
+            if (!flag(FLAG_ICHOR_APOLLO_DISC_1)) {
+                setflag(FLAG_ICHOR_APOLLO_DISC_1)
+                call(Delphoi_TempleOfApollo_EventScript_DiscBlazes)
+            }
+        case LOCALID_APOLLO_DISC_2:
+            if (!flag(FLAG_ICHOR_APOLLO_DISC_2)) {
+                setflag(FLAG_ICHOR_APOLLO_DISC_2)
+                call(Delphoi_TempleOfApollo_EventScript_DiscBlazes)
+            }
+        case LOCALID_APOLLO_DISC_3:
+            if (!flag(FLAG_ICHOR_APOLLO_DISC_3)) {
+                setflag(FLAG_ICHOR_APOLLO_DISC_3)
+                call(Delphoi_TempleOfApollo_EventScript_DiscBlazes)
+            }
+        case LOCALID_APOLLO_DISC_4:
+            if (!flag(FLAG_ICHOR_APOLLO_DISC_4)) {
+                setflag(FLAG_ICHOR_APOLLO_DISC_4)
+                call(Delphoi_TempleOfApollo_EventScript_DiscBlazes)
+                removeobject(LOCALID_APOLLO_DISC_4)
+            }
+        case LOCALID_APOLLO_BRAZIER:
+            if (!flag(FLAG_ICHOR_APOLLO_BRAZIER)) {
+                setflag(FLAG_ICHOR_APOLLO_BRAZIER)
+                call(Delphoi_TempleOfApollo_EventScript_BrazierCatches)
+            }
+    }
+    return
+}
+
+// delphoi_temple: end generated

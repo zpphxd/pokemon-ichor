@@ -232,3 +232,19 @@ const u16 gMetatileAttributes_PorytilesManaged_OikiaMelos[] = INCBIN_U16("data/t
 const u16 gMetatiles_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatiles.bin");
 
 const u16 gMetatileAttributes_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py).
+const u16 gMetatiles_PorytilesManaged_Delphoi[] = INCBIN_U16("data/tilesets/secondary/delphoi/porytiles_bin/metatiles.bin");
+
+const u16 gMetatileAttributes_PorytilesManaged_Delphoi[] = INCBIN_U16("data/tilesets/secondary/delphoi/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_Parnassos[] = INCBIN_U16("data/tilesets/secondary/parnassos/porytiles_bin/metatiles.bin");
+
+const u16 gMetatileAttributes_PorytilesManaged_Parnassos[] = INCBIN_U16("data/tilesets/secondary/parnassos/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_TempleApollo[] = INCBIN_U16("data/tilesets/secondary/temple_apollo/porytiles_bin/metatiles.bin");
+
+const u16 gMetatileAttributes_PorytilesManaged_TempleApollo[] = INCBIN_U16("data/tilesets/secondary/temple_apollo/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_OikiaDelphoi[] = INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_OikiaDelphoi[] = INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/metatile_attributes.bin");
