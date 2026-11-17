@@ -1,1 +1,91 @@
+// Chilon's house, Lakonia (design/phase4/SCRIPT.md, Part 2): a very old man who
+// collects Lakonian sayings. Every wall is scratched with them, one or two
+// words each, floor to ceiling; one shard on a shelf says IF.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (3..4, 6), warps 0 and 1
+// to MAP_LAKONIA warp 8.
+//
+// The quiz: three questions; the answer with the fewest words is always right.
+// Three right in one go: Wise Glasses, FLAG_ICHOR_GOT_WISE_GLASSES.
+
 mapscripts Lakonia_ChilonHouse_MapScripts {}
+
+text Lakonia_ChilonHouse_Name_Chilon { "CHILON" }
+text Lakonia_ChilonHouse_Q1a { "We'll fight on every hill" }
+text Lakonia_ChilonHouse_Q1b { "If." }
+text Lakonia_ChilonHouse_Q1c { "Please don't" }
+text Lakonia_ChilonHouse_Q2a { "Be careful" }
+text Lakonia_ChilonHouse_Q2b { "With it, or on it." }
+text Lakonia_ChilonHouse_Q2c { "Write to me" }
+text Lakonia_ChilonHouse_Q3a { "Until I'm old" }
+text Lakonia_ChilonHouse_Q3b { "Nobody knows" }
+text Lakonia_ChilonHouse_Q3c { "Well." }
+
+script Lakonia_ChilonHouse_EventScript_Chilon {
+    lock
+    faceplayer
+    setspeaker(Lakonia_ChilonHouse_Name_Chilon)
+    if (flag(FLAG_ICHOR_GOT_WISE_GLASSES)) {
+        if (var(VAR_ICHOR_ACT3) >= 19) {
+            msgbox(format("Prophecy's over, they say. Nobody knows how long they've got.\p"
+                          "“Know thyself,” then. It's all that's left. Told you it was mine."))
+        } else {
+            msgbox(format("“Nothing too much.” Mine. Including talking. Off you go."))
+        }
+        release
+        end
+    }
+    msgbox(format("“Know thyself.” Mine. I said it first.\p"
+                  "Delphoi carved it on a door and took the credit.\p"
+                  "“Nothing too much.” Also mine. I'm very modest about it.\p"
+                  "Three questions. Answer like a Lakonian. Fewest words wins."))
+    msgbox(format("A king writes: if I enter Lakonia, I will burn your town.\p"
+                  "What does Lakonia write back?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Lakonia_ChilonHouse_Q1a,
+                   Lakonia_ChilonHouse_Q1b, Lakonia_ChilonHouse_Q1c)
+    if (var(VAR_RESULT) != 1) {
+        goto(Lakonia_ChilonHouse_EventScript_Wrong)
+    }
+    msgbox(format("If! Ha! That's the one. It's on my shelf.\p"
+                  "A mother hands her son his shield before a war. What does she say?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Lakonia_ChilonHouse_Q2a,
+                   Lakonia_ChilonHouse_Q2b, Lakonia_ChilonHouse_Q2c)
+    if (var(VAR_RESULT) != 1) {
+        goto(Lakonia_ChilonHouse_EventScript_Wrong)
+    }
+    msgbox(format("Come home carrying it, or carried on it. Four words. Cruel. Correct.\p"
+                  "A stranger asks: how long will you live?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Lakonia_ChilonHouse_Q3a,
+                   Lakonia_ChilonHouse_Q3b, Lakonia_ChilonHouse_Q3c)
+    if (var(VAR_RESULT) != 2) {
+        goto(Lakonia_ChilonHouse_EventScript_Wrong)
+    }
+    msgbox(format("Not how long. How well. One word.\p"
+                  "You're wasted on that island."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_WISE_GLASSES)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(Lakonia_ChilonHouse_Name_Chilon)
+        msgbox(format("Bag full. Too many things. Come back with fewer."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_WISE_GLASSES)
+    release
+}
+
+script Lakonia_ChilonHouse_EventScript_Wrong {
+    setspeaker(Lakonia_ChilonHouse_Name_Chilon)
+    msgbox(format("Too many words. Start again. Fewer."))
+    release
+    end
+}
+
+script Lakonia_ChilonHouse_EventScript_Shard {
+    msgbox(format("A pottery shard on a shelf. One word is scratched on it: IF."), MSGBOX_SIGN)
+}
+
+script Lakonia_ChilonHouse_EventScript_Sayings {
+    msgbox(format("Sayings scratched into the plaster in a hundred hands.\p"
+                  "“ENOUGH.” “NOT YET.” “WELL.” “BE QUICK.” “NOTHING TOO MUCH.”\p"
+                  "Low down, in a child's letters: “KLEON WAS HERE.”"), MSGBOX_SIGN)
+}

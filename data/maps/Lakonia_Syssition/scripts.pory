@@ -1,1 +1,80 @@
+// The syssition, Lakonia (design/phase4/SCRIPT.md, Part 2): the mess hall.
+// Dexippos the cook is enormously proud of the worst soup in the world. One
+// long plank table, a clay cup on a peg above every man's place, the black
+// cauldron at the far end, a barrel of barley. No windows.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (6..7, 6), warps 0 and 1
+// to MAP_LAKONIA warp 4.
+//
+// The black broth: the first bowl you finish earns TM Bulk Up,
+// FLAG_ICHOR_GOT_TM_BULK_UP. Lakonia has no daily flag, so later bowls are only
+// a bowl (SCRIPT.md's daily berry waits on one).
+
 mapscripts Lakonia_Syssition_MapScripts {}
+
+text Lakonia_Syssition_Name_Dexippos { "DEXIPPOS" }
+text Lakonia_Syssition_Name_Soldier { "HOPLITE" }
+
+script Lakonia_Syssition_EventScript_Dexippos {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Syssition_Name_Dexippos)
+    if (flag(FLAG_ICHOR_GOT_TM_BULK_UP)) {
+        msgbox(format("Back! Nobody comes back! Bowl?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            msgbox(format("Soft! A soft foreigner! Come back when you're hungrier."))
+            release
+            end
+        }
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} ate the black broth.\p"
+                      "It hasn't got better."))
+        setspeaker(Lakonia_Syssition_Name_Dexippos)
+        msgbox(format("One bowl a day. Two and you'd live forever. We can't have that."))
+        release
+        end
+    }
+    msgbox(format("Black broth! Pork, blood, salt, vinegar. Nothing else. Nothing needed.\p"
+                  "A king from the east tasted it once. You know what he said?\p"
+                  "“Now I understand why Lakonians don't fear death.”\p"
+                  "Ha! He meant it as an insult. We took it as a compliment. Bowl?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Soft! A soft foreigner! Come back when you're hungrier."))
+        release
+        end
+    }
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("{PLAYER} ate the black broth.\p"
+                  "It tastes like a cold iron bar that's been in a fight."))
+    setspeaker(Lakonia_Syssition_Name_Dexippos)
+    msgbox(format("Finished it! All of it! You can stand in the line.\p"
+                  "Here. What the broth does for you, this does for your Pokémon."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_TM_BULK_UP)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(Lakonia_Syssition_Name_Dexippos)
+        msgbox(format("No room? Then come back. The broth'll still be here. It always is."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_TM_BULK_UP)
+    release
+}
+
+script Lakonia_Syssition_EventScript_Soldier {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Syssition_Name_Soldier)
+    msgbox(format("…\p"
+                  "Lakonian men eat in the dark and don't complain.\p"
+                  "…This is me not complaining."))
+    release
+}
+
+script Lakonia_Syssition_EventScript_Cauldron {
+    msgbox(format("The black cauldron, over the fire. Something in it is thinking about bubbling."), MSGBOX_SIGN)
+}
+
+script Lakonia_Syssition_EventScript_Cups {
+    msgbox(format("A clay cup on a peg above every man's place. Fifteen places.\p"
+                  "Two cups are turned to the wall."), MSGBOX_SIGN)
+}

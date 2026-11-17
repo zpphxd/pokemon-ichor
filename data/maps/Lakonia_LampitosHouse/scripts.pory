@@ -1,1 +1,93 @@
-mapscripts Lakonia_LampitosHouse_MapScripts {}
+// Lampito's house, Lakonia (design/phase4/SCRIPT.md, beats III-5E to III-5H).
+// Room: tools/ichor/maps/lakonia_rooms.py (design/phase4/ROOMS_lakonia.md has the
+// coordinates). The story scripts are the Lakonia chapter builder's: the
+// scripts below are the room's object texts (SCRIPT.md's "Interacting with the
+// room" table) and placeholder people, for the chapter builder to replace.
+//
+//   table (6..7, 5); stools (5,5) and (8,5), walkable (whoever stands there sits)
+//   hearth (4..5, 2..3), cold; LakoniaLampito_EventScript_SetHearthLit lights it
+//     (METATILE_OikiaLakonia_Hearth_Lit_*); read from (4,4)
+//   loom (0..1, 0..2), read from (2,2); chest (0..1, 3..4), read from (2,4)
+//   stelai (7,1) AGIS and (9,1) the swallow, read from (7,2) and (9,2)
+//   mat (5..6, 8): warps 0 and 1, to MAP_LAKONIA warp 2
+//   LOCALID_LAMPITO_KLEON (5,5) on the west stool, facing east
+//   LOCALID_LAMPITO_RHEA (5,7) just inside the door (gfx VAR_1)
+//   LOCALID_LAMPITO_ALETHEA (8,7); LOCALID_LAMPITO_HELMET (6,5) and
+//   LOCALID_LAMPITO_TABLET (7,5) on the table (placeholder gfx)
+
+mapscripts Lakonia_LampitosHouse_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+            call(LakoniaLampito_EventScript_SetHearthLit)
+        }
+    }
+}
+
+text LakoniaLampito_Text_NameKleon { "KLEON" }
+
+script LakoniaLampito_EventScript_Kleon {
+    lock
+    faceplayer
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("Oh. It's you."))
+    release
+}
+
+script LakoniaLampito_EventScript_Rhea {
+    lock
+    faceplayer
+    release
+}
+
+script LakoniaLampito_EventScript_Alethea {
+    lock
+    faceplayer
+    release
+}
+
+script LakoniaLampito_EventScript_Helmet {
+    msgbox(format("Rhea's helmet. Closed, bronze, the sickle on its cheek-pieces.\p"
+                  "Without a head in it, it's only a pot."), MSGBOX_SIGN)
+}
+
+script LakoniaLampito_EventScript_Tablet {
+    msgbox(format("A small, plain lead tablet. Worn soft at the corners."), MSGBOX_SIGN)
+}
+
+script LakoniaLampito_EventScript_Stelai {
+    msgbox(format("Two grave-stelai, painted on the plaster.\p"
+                  "One says AGIS. IN WAR.\p"
+                  "The other has no name. Only a swallow, painted small.\p"
+                  "In Lakonia, only the war dead get their names on a stone."), MSGBOX_SIGN)
+}
+
+script LakoniaLampito_EventScript_Loom {
+    msgbox(format("A red cloak on the loom. Too small for anyone in this house."), MSGBOX_SIGN)
+}
+
+script LakoniaLampito_EventScript_Hearth {
+    if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+        msgbox(format("The fire's going. Someone's home."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Cold. Nobody's lit it in a long time."), MSGBOX_SIGN)
+    }
+}
+
+script LakoniaLampito_EventScript_Chest {
+    msgbox(format("Kleon's things from before the battle school.\p"
+                  "A wooden sword. A sling. One small sandal."), MSGBOX_SIGN)
+}
+
+// oikia_lakonia_build: begin generated
+
+// Written by tools/ichor/art/oikia_lakonia_build.py; don't edit by hand.
+
+script LakoniaLampito_EventScript_SetHearthLit {
+    setmetatile(4, 2, 0x263, TRUE)
+    setmetatile(5, 2, 0x24D, TRUE)
+    setmetatile(4, 3, 0x264, TRUE)
+    setmetatile(5, 3, 0x251, TRUE)
+    return
+}
+
+// oikia_lakonia_build: end generated

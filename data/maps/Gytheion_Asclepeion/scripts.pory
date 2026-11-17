@@ -1,1 +1,109 @@
-mapscripts Gytheion_Asclepeion_MapScripts {}
+// The Asclepeion, Gytheion (design/phase4/SCRIPT.md, Part 2): built into the
+// little theater's stage-building, so the healing room is a long narrow hall
+// with painted scenery flats still on one wall and the counter where the actors
+// once sold tickets. A window looks out over the front rows, where patients sit
+// in the sun. The healer's Panacoil greets you at the counter.
+// Room: tools/ichor/maps/lakonia_rooms.py. The healer stands at (7,2) with the
+// spring trough at (5..6, 1..2) for the heal animation; the player talks from
+// (7,4). The mat is (7..8, 6), warps 0 and 1 to MAP_GYTHEION warp 0.
+//
+// Entering makes Gytheion the respawn point (HEAL_LOCATION_GYTHEION).
+
+mapscripts Gytheion_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_GYTHEION)
+    }
+}
+
+text Gytheion_Asclepeion_Name_Healer { "HEALER" }
+text Gytheion_Asclepeion_Name_Fisherman { "FISHERMAN" }
+
+script Gytheion_Asclepeion_EventScript_Healer {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Asclepeion_Name_Healer)
+    msgbox(format("Sit in the front row, love. Best seat for getting better.\p"
+                  "Shall I see to your Pokémon?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Go well, then. Mind the steps. Actors used to fall down them."))
+        release
+        end
+    }
+    incrementgamestat(GAME_STAT_USED_POKECENTER)
+    message(format("Rest them here a moment."))
+    waitmessage
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    applymovement(LOCALID_GYTHEION_HEALER, Movement_PkmnCenterNurse_Bow)
+    waitmovement(0)
+    msgbox(format("There. Applause optional."))
+    release
+}
+
+script Gytheion_Asclepeion_EventScript_Panacoil {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    msgbox(format("The Panacoil lifts its head off the counter, as if to take your ticket."))
+    waitmoncry
+    release
+}
+
+script Gytheion_Asclepeion_EventScript_Fisherman {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Asclepeion_Name_Fisherman)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Arm's nearly mended. Just in time. The boats are coming home."))
+    } else {
+        msgbox(format("Hauled a net with a Karkitox in it. It hauled back.\p"
+                      "She says to sit in the sun and keep still.\p"
+                      "Keeping still's the hard part."))
+    }
+    release
+}
+
+script Gytheion_Asclepeion_EventScript_FlatPalace {
+    msgbox(format("A painted scenery flat: a king's palace, white columns on a blue sky.\p"
+                  "Somebody's chalked a sickle on the door. Somebody else has rubbed it out."), MSGBOX_SIGN)
+}
+
+script Gytheion_Asclepeion_EventScript_FlatSea {
+    msgbox(format("A painted scenery flat: the sea, and one small ship on it.\p"
+                  "The paint's faded. The ship is still sailing."), MSGBOX_SIGN)
+}
+
+script Gytheion_Asclepeion_EventScript_Window {
+    msgbox(format("The window looks over the theater's front rows.\p"
+                  "Patients sit on the stone seats in the sun, wrapped in blankets, facing an empty stage."), MSGBOX_SIGN)
+}
+
+// The Pithos. Ichor_EventScript_Pithos names Akti when it opens, so this town
+// has its own copy of the menu (as Skandeia's does).
+script Gytheion_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(Gytheion_Asclepeion_EventScript_PithosMenu)
+}
+
+script Gytheion_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Gytheion opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(Gytheion_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(Gytheion_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}
