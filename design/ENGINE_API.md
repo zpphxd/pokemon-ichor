@@ -1709,13 +1709,14 @@ approval or completed later-chapter memorial scenes.
 
 ## 12. The catch mash
 
-Tap A as you throw a ball and it is a little likelier to hold. `src/ichor_catch.c`;
+Tap A as you throw a ball and it is a little likelier to hold. **It is a secret**
+(the user's call, 2026-11-17): no prompt, sound or NPC hints at it. `src/ichor_catch.c`;
 the numbers are in `include/config/ichor.h` (`ICHOR_CATCH_MASH_*`).
 
 - **When.** The expansion rolls a throw's shakes in `Cmd_handleballthrow` before the
   animation plays. The window opens first: after "{PLAYER} used Poké Ball!" prints,
-  the message box's second line shows a blinking "Tap A!" and ten pips. It closes
-  after 1.5 s, or a beat after the tenth press, and only then are the odds rolled.
+  the message silently holds while A presses are counted. It closes after 1.3 s, or a
+  beat after the tenth press, and only then are the odds rolled.
   The shakes the player then watches are that one roll, so they always match.
 - **The bonus.** The modified catch rate is multiplied by 1 + 0.03 per press, to
   x1.3 at ten presses (`Ichor_ApplyCatchMash`). Catch chance follows that rate almost
@@ -1727,6 +1728,6 @@ the numbers are in `include/config/ichor.h` (`ICHOR_CATCH_MASH_*`).
 - **State.** `gIchorCatchMash` holds the open flag, the presses and the last throw's
   rate before and after the bonus. `Ichor_TakeCatchMash` spends the presses on the
   throw that follows, so no later throw inherits them.
-- **Hint.** The girl in the Akti Agora (`AktiTown_Agora_EventScript_CustomerGirl`).
+- **No hint.** Keep it out of dialogue, signs and descriptions.
 - **Tests.** `test/battle/ichor_catch_mash.c` (the math, and a vanilla throw);
   `tools/ichor/tests/catch_mash.sh` (a mashed, an untouched and a Master Ball throw).

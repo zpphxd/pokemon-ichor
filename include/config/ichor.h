@@ -31,7 +31,7 @@
 //     rolls always happen and mashing never guarantees a catch. Master Balls, auto-catches,
 //     trainer battles, the catch tutorial and Oath-refused battles get no window at all.
 #define ICHOR_CATCH_MASH              1    // 0 turns the window and the bonus off
-#define ICHOR_CATCH_MASH_FRAMES       90   // the longest the window stays open (1.5 s)
+#define ICHOR_CATCH_MASH_FRAMES       80   // the longest the silent window holds the message (1.3 s; ten fast taps fit)
 #define ICHOR_CATCH_MASH_CAP          10   // presses that count; more add nothing
 #define ICHOR_CATCH_MASH_MAX_BONUS    30   // percent added to the catch rate at the cap
 #define ICHOR_CATCH_MASH_ODDS_CEILING 254  // the highest rate mashing can reach (255 auto-catches)

@@ -55,10 +55,10 @@ L.start(function()
   -- 1. A mashed throw.
   local caught = false
   throw(0)
-  waitForWindow("the Tap A window on a Poké Ball throw")
+  waitForWindow("the silent window on a Poké Ball throw")
   L.expect(presses() == 0, "the window opens with no presses counted")
   L.wait(4)
-  L.shot("tap_a_prompt")
+  L.shot("silent_window")
   local most, took = 0, false
   for i = 1, S.MASH_CAP + 4 do
     if not isOpen() then break end
@@ -82,7 +82,7 @@ L.start(function()
   -- 2. An untouched throw: the window still opens, the rate stays vanilla.
   if caught then begin() end
   throw(0)
-  waitForWindow("the Tap A window on a second throw")
+  waitForWindow("the silent window on a second throw")
   L.waitUntil(function() return not isOpen() end, S.MASH_FRAMES + 30, "the untouched window to time out")
   L.expect(baseOdds() == 45 and finalOdds() == 45, "no presses keeps the vanilla rate (" .. finalOdds() .. ")")
   if outcome() == "caught" then begin() end
