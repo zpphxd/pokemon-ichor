@@ -6546,32 +6546,6 @@ Class: Titanborn
 Pic: Titan Grunt
 Gender: Male
 Music: Titan
-/* Ichor: the Labyrinth's heart (the Labyrinth II build, ids 390-409; design/phase4/SCRIPT.md
-   Part 3, "Ring VI, the Forge" to "The Starry Chamber"). The Gigas wear the Titanborn class
-   and the grunt's portrait until a Gigas class and portrait are drawn. */
-
-=== TRAINER_ICHOR_ANTHRAKOS ===
-Name: ANTHRAKOS
-Class: Titanborn
-Pic: Titan Grunt
-Gender: Male
-Music: Male
-AI: Basic Trainer
-
-Kolossard
-Level: 47
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Cairnolith
-Level: 47
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_PORINOS ===
-Name: PORINOS
-Class: Titanborn
-Pic: Titan Grunt
-Gender: Male
-Music: Male
 AI: Basic Trainer
 
 Kolossette
@@ -6608,6 +6582,69 @@ AI: Basic Trainer
 
 Plouteras
 Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ENKELADOS ===
+Name: ENKELADOS
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* Ichor: the Labyrinth's heart (the Labyrinth II build, ids 390-409; design/phase4/SCRIPT.md
+   Part 3, "Ring VI, the Forge" to "The Starry Chamber"). The Gigas wear the Titanborn class
+   and the grunt's portrait until a Gigas class and portrait are drawn. */
+
+=== TRAINER_ICHOR_ANTHRAKOS ===
+Name: ANTHRAKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PORINOS ===
+Name: PORINOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
 === TRAINER_ICHOR_ARGILLOS ===
 Name: ARGILLOS
 Class: Titanborn
@@ -6640,20 +6677,6 @@ Kaprodon
 Level: 48
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
-Cairnolith
-Level: 47
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_ENKELADOS ===
-Name: ENKELADOS
-Class: Titan Admin
-Pic: Titan Grunt
-Gender: Male
-Music: Titan
-Items: Hyper Potion
-AI: Basic Trainer
-
-Laolith
 Kolossette
 Level: 47
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe

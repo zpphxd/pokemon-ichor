@@ -4,7 +4,7 @@
   "layout": "LAYOUT_LABYRINTH_RING6",
   "music": "MUS_ICHOR_TITAN",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_PALACE_OF_MINOS",
+  "region_map_section": "MAPSEC_WATER_LABYRINTH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
@@ -186,14 +186,14 @@
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING5",
-      "dest_warp_id": "2"
+      "dest_warp_id": "5"
     },
     {
       "x": 24,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING5",
-      "dest_warp_id": "3"
+      "dest_warp_id": "6"
     },
     {
       "x": 27,
@@ -214,7 +214,7 @@
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING5",
-      "dest_warp_id": "7"
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [

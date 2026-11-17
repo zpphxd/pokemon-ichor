@@ -398,18 +398,20 @@ def finish_ring5(m, stem_suffix, render):
     # --- events ---------------------------------------------------------------------------------
     ring4 = "MAP_LABYRINTH_RING4" if map_exists("LabyrinthRing4") else "MAP_LABYRINTH_RING5"
     tomb = "MAP_LABYRINTH_MINOS_TOMB" if map_exists("LabyrinthMinosTomb") else "MAP_LABYRINTH_RING5"
-    m.warp(sx, sy, ring4, 1)                       # 0
-    m.warp(sx + 1, sy, ring4, 1)                   # 1
-    m.warp(dx_, dy_, "MAP_LABYRINTH_RING6", 0)     # 2
-    m.warp(dx_ + 1, dy_, "MAP_LABYRINTH_RING6", 0) # 3
-    m.warp(tx, ty, tomb, 0)                        # 4
-    m.warp(tx + 1, ty, tomb, 0)                    # 5
-    m.warp(cx, cy, ring4, 2)                       # 6: the rope
-    m.warp(44, 42, "MAP_LABYRINTH_RING6", 4)       # 7: the rope down to Ring VI's east caves
+    m.warp(sx, sy, ring4, 6)                       # 0: the stair up (Ring IV lands here)
+    m.warp(tx, ty, tomb, 0)                        # 1: the tomb stair (the tomb lands here)
+    m.warp(30, 13, "MAP_LABYRINTH_RING5", 2)       # 2: arrival in the lake, from Ring IV's chute
+    m.warps[-1].update({"_scripted": True, "unreached_ok": True})
+    m.warp(sx + 1, sy, ring4, 6)                   # 3
+    m.warp(tx + 1, ty, tomb, 0)                    # 4
+    m.warp(dx_, dy_, "MAP_LABYRINTH_RING6", 0)     # 5: down to Ring VI
+    m.warp(dx_ + 1, dy_, "MAP_LABYRINTH_RING6", 1) # 6
+    m.warp(cx, cy, ring4, 6)                       # 7: the rope up to Ring IV
+    m.warp(44, 42, "MAP_LABYRINTH_RING6", 4)       # 8: the rope down to Ring VI's east caves
     for w in m.warps:
         if w["dest_map"] == "MAP_LABYRINTH_RING5":
             w["dest_warp_id"] = "0"
-    m.header.update({"requires_flash": True, "music": "MUS_ICHOR_HOLLOW", "map_type": "MAP_TYPE_UNDERGROUND",
+    m.header.update({"requires_flash": True, "music": "MUS_ICHOR_HOLLOW", "map_type": "MAP_TYPE_UNDERGROUND", "region_map_section": "MAPSEC_WATER_LABYRINTH",
                      "allow_escaping": True})
     # Asterion, on his loop; the scene's bull and Kleon (Scene E)
     m.obj("SPECIES(ASTERLORN)", x0, y0, "LabyrinthRing5_EventScript_Asterion",
@@ -741,12 +743,12 @@ def finish_ring6(m, stem_suffix, render):
     m.lay()
 
     # --- events ---------------------------------------------------------------------------------
-    m.warp(sx, sy, "MAP_LABYRINTH_RING5", 2)              # 0
-    m.warp(sx + 1, sy, "MAP_LABYRINTH_RING5", 3)          # 1
+    m.warp(sx, sy, "MAP_LABYRINTH_RING5", 5)              # 0
+    m.warp(sx + 1, sy, "MAP_LABYRINTH_RING5", 6)          # 1
     m.warp(dx_, dy_, "MAP_LABYRINTH_RING7", 0)            # 2
     m.warp(dx_ + 1, dy_, "MAP_LABYRINTH_RING7", 1)        # 3
-    m.warp(cx, cy, "MAP_LABYRINTH_RING5", 7)              # 4: the rope up to Ring V's grotto
-    m.header.update({"music": "MUS_ICHOR_TITAN", "map_type": "MAP_TYPE_UNDERGROUND", "allow_escaping": True,
+    m.warp(cx, cy, "MAP_LABYRINTH_RING5", 8)              # 4: the rope up to Ring V's grotto
+    m.header.update({"music": "MUS_ICHOR_TITAN", "map_type": "MAP_TYPE_UNDERGROUND", "region_map_section": "MAPSEC_WATER_LABYRINTH", "allow_escaping": True,
                      "requires_flash": False})
     # sentries: the teaching room's Bronzong, then two in the Hall of Dials
     m.obj("SPECIES(BRONZONG)", 27, 7, "LabyrinthRing6_EventScript_Sentry1",
@@ -954,7 +956,7 @@ def finish_ring7(m, stem_suffix, render):
     m.warp(fx + 2, fy + 2, "MAP_LABYRINTH_STARRY_CHAMBER", 0)   # 2: the stair the dance opens
     m.warps[-1]["unreached_ok"] = True
     m.warps[-1]["_scripted"] = True
-    m.header.update({"music": "MUS_ICHOR_HOLLOW", "map_type": "MAP_TYPE_UNDERGROUND", "allow_escaping": True,
+    m.header.update({"music": "MUS_ICHOR_HOLLOW", "map_type": "MAP_TYPE_UNDERGROUND", "region_map_section": "MAPSEC_WATER_LABYRINTH", "allow_escaping": True,
                      "requires_flash": False})
     for name, (x, y, start, want) in R7_MIRRORS.items():
         m.obj("ICHOR_MIRROR", x, y, f"LabyrinthRing7_EventScript_Mirror{name[1]}",

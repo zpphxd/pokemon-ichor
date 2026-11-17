@@ -44,7 +44,7 @@ def const_name(name):
     return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name).upper()
 
 
-def ensure_map(name, w, h, ts, music, mapsec="MAPSEC_PALACE_OF_MINOS", group="gMapGroup_Labyrinth",
+def ensure_map(name, w, h, ts, music, mapsec="MAPSEC_WATER_LABYRINTH", group="gMapGroup_Labyrinth",
                map_type="MAP_TYPE_UNDERGROUND", show_name=False):
     """Register the map and its layout if they don't exist yet (as tools/ichor/new_map.py)."""
     lp = ROOT / "data/layouts/layouts.json"

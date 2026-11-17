@@ -4,7 +4,7 @@
   "layout": "LAYOUT_LABYRINTH_RING5",
   "music": "MUS_ICHOR_HOLLOW",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_PALACE_OF_MINOS",
+  "region_map_section": "MAPSEC_WATER_LABYRINTH",
   "requires_flash": true,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
@@ -128,6 +128,20 @@
       "x": 27,
       "y": 2,
       "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING4",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 44,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_MINOS_TOMB",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 30,
+      "y": 13,
+      "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING5",
       "dest_warp_id": "0"
     },
@@ -135,7 +149,14 @@
       "x": 28,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_map": "MAP_LABYRINTH_RING4",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 45,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_MINOS_TOMB",
       "dest_warp_id": "0"
     },
     {
@@ -150,28 +171,14 @@
       "y": 40,
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING6",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 44,
-      "y": 13,
-      "elevation": 0,
-      "dest_map": "MAP_LABYRINTH_RING5",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 45,
-      "y": 13,
-      "elevation": 0,
-      "dest_map": "MAP_LABYRINTH_RING5",
-      "dest_warp_id": "0"
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_LABYRINTH_RING5",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_LABYRINTH_RING4",
+      "dest_warp_id": "6"
     },
     {
       "x": 44,
