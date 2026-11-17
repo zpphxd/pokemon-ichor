@@ -2006,6 +2006,14 @@
 #define FLAG_ICHOR_GOT_TWISTED_SPOON            (FLAG_ICHOR_GENERAL2_START + 0x02D) // Ichor: Manto gave Teiresias's spoon, the Twisted Spoon (Thyrsa)
 #define FLAG_ICHOR_GOT_DRAGON_FANG              (FLAG_ICHOR_GENERAL2_START + 0x02E) // Ichor: Chthonia gave the Dragon Fang (Thyrsa, the Sown house)
 #define FLAG_ICHOR_GOT_STAPHYLOS_NUGGET         (FLAG_ICHOR_GENERAL2_START + 0x02F) // Ichor: Staphylos gave the press's Nugget (Thyrsa)
+#define FLAG_ICHOR_THYRSA_BEGGAR_HELPED         (FLAG_ICHOR_GENERAL2_START + 0x030) // Ichor: led Thyrsa's blind beggar to the spring of Dirke
+#define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL2_START + 0x031) // Ichor: Thyrsa's Black Sludge item ball
+#define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL2_START + 0x032) // Ichor: Thyrsa's Super Potion item ball
+#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL2_START + 0x033) // Ichor: Thyrsa's Big Nugget item ball
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_CELL_BATTERY (FLAG_ICHOR_GENERAL2_START + 0x034) // Ichor: Thyrsa: by Semele's chamber
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_HEART_SCALE (FLAG_ICHOR_GENERAL2_START + 0x035) // Ichor: Thyrsa: at the spring of Dirke
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_RARE_CANDY (FLAG_ICHOR_GENERAL2_START + 0x036) // Ichor: Thyrsa: at the north-west bricked gate
+#define FLAG_ICHOR_HIDDEN_ITEM_THYRSA_PRETTY_FEATHER (FLAG_ICHOR_GENERAL2_START + 0x037) // Ichor: Thyrsa: under the Kadmeia's east wall
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

@@ -1,6 +1,12 @@
 mapscripts ThyrsaCity_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setflag(FLAG_ICHOR_ARRIVED_THYRSA)
+        // Manto's crows (her house's quest): they wheel over the Elektran Gate only
+        // while she's waiting to hear of them. FLAG_TEMP_13 hides them until then.
+        setflag(FLAG_TEMP_13)
+        if (!flag(FLAG_ICHOR_MANTO_CROWS) || flag(FLAG_ICHOR_SAW_CROWS)) {
+            setvar(VAR_TEMP_3, 1)
+        }
     }
 }
 
@@ -144,4 +150,323 @@ script ThyrsaCity_EventScript_TempleSign {
 script ThyrsaCity_EventScript_TheaterSign {
     msgbox(format("Tonight: THE UNWOVEN\nA tragedy in four scenes."), MSGBOX_SIGN)
     end
+}
+
+// ---------------------------------------------------------------------------
+// Thyrsa's townspeople, signs and objects, ported from claude/world-act2-0a92e7 with
+// the real city's layout. Only self-contained dialogue came over: the branch's
+// Dionysia flag is main's FLAG_ICHOR_DIONYSIA_BROKEN (the satyr play that breaks the
+// tragedy), and lines that told the branch's story (the stolen masks, the shut west
+// gate) were left out or reworded to fit this one.
+// ---------------------------------------------------------------------------
+
+text ThyrsaCity_Name_Gatekeeper { "GATEKEEPER" }
+text ThyrsaCity_Name_Manto { "MANTO" }
+text ThyrsaCity_Name_Kronist { "KRONIST" }
+text ThyrsaCity_Name_Guard { "GUARD" }
+text ThyrsaCity_Name_Beggar { "BEGGAR" }
+text ThyrsaCity_Name_Citizen { "CITIZEN" }
+text ThyrsaCity_Name_Child { "CHILD" }
+text ThyrsaCity_Name_WineSeller { "MERCHANT" }
+text ThyrsaCity_Name_MaskSeller { "VENDOR" }
+
+script ThyrsaCity_EventScript_Gatekeeper {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Gatekeeper)
+    if (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("Asclepeion's by the spring, there. The Agora's under the awnings.\p"
+                      "The theater's on the east hill. The god's temple is right at the top."))
+    } else {
+        msgbox(format("Seven gates, stranger. Thyrsa uses three. Mind you pick one."))
+    }
+    release
+}
+
+// Manto on the Kadmeia's wall walk: the first time she talks, then the day's omen.
+// The branch's omen visitor (a Thyrsivy in the old trellises) waits for main's omen
+// system to place it; she only reads the birds.
+script ThyrsaCity_EventScript_Manto {
+    lock
+    setspeaker(ThyrsaCity_Name_Manto)
+    if (!flag(FLAG_ICHOR_MET_MANTO)) {
+        msgbox(format("Footsteps. Small ones. And a Pokémon walking proud beside them.\p"
+                      "Come here, child. I'm blind. I'm not rude.\p"
+                      "My great-great-grandfather was Teiresias.\p"
+                      "Blind as a stone, and saw everything.\p"
+                      "I've been blind sixty years. Lately I'm blind in the other way too.\p"
+                      "The birds still fly. I listen to them. They've started flying the wrong way."))
+        closemessage
+        faceplayer
+        delay(60)
+        setspeaker(ThyrsaCity_Name_Manto)
+        msgbox(format("…Hm. You're there. I can hear you breathing.\p"
+                      "But when I listen for what comes after you, there's nothing.\p"
+                      "Like a doorway with no room behind it.\p"
+                      "Don't fret. Most days I can't hear what comes after my own breakfast."))
+        setflag(FLAG_ICHOR_MET_MANTO)
+    }
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Manto)
+    msgbox(format("Sit. I'll tell you what the birds told me. They talk too much."))
+    random(2)
+    setspeaker(ThyrsaCity_Name_Manto)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("Today: The crows went low over the vine terraces on the mountain road.\p"
+                      "Something's crawling in the vines."))
+    } else {
+        msgbox(format("Today: Fog on Kithairon. The ones with webs like it."))
+    }
+    msgbox(format("That's all. The birds don't do detail. Neither do I."))
+    release
+}
+
+// The Proitid Gate (east): the Euripus road isn't built yet, so its guard sits in the arch.
+script ThyrsaCity_EventScript_ProitidGuard {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Guard)
+    msgbox(format("The Euripus road. The bridge to Euboia's at the end of it.\p"
+                  "The Euripus bridge. It only opens when the current turns."))
+    release
+}
+
+script ThyrsaCity_EventScript_Kronist {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Kronist)
+    msgbox(format("Free bread at the gate, friends! The Kronia never closes!\p"
+                  "Have you heard? The seers can't read past a certain day.\p"
+                  "Every seer in Thyrsa. Ask them. Ask the blind woman on the wall.\p"
+                  "They won't tell you why. We will. Come down to the feast."))
+    release
+}
+
+// The blind beggar by the spring of Dirke. Kindness to a stranger is Zeus Xenios's: +1 Favor.
+script ThyrsaCity_EventScript_Beggar {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Beggar)
+    if (flag(FLAG_ICHOR_THYRSA_BEGGAR_HELPED)) {
+        msgbox(format("I can hear the spring. Sweetest sound in Thyrsa."))
+        release
+        end
+    }
+    message(format("The spring of Dirke, child? Which way? I've lost the wall."))
+    waitmessage
+    dynmultichoice(15, 4, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, ThyrsaCity_Text_ByTheAsclepeion,
+                   ThyrsaCity_Text_ByTheTheater, ThyrsaCity_Text_UpTheKadmeia)
+    setspeaker(ThyrsaCity_Name_Beggar)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("Ah. I can hear it now. Thank you. Here, a berry. All I've got."))
+        giveitem(ITEM_PECHA_BERRY)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setvar(VAR_0x8004, ICHOR_GOD_ZEUS)
+        setvar(VAR_0x8005, 1)
+        special(Ichor_AddFavor)
+        setflag(FLAG_ICHOR_THYRSA_BEGGAR_HELPED)
+    } else {
+        msgbox(format("…That's not water I hear. That's an actor. Never mind, I'll ask again."))
+    }
+    release
+}
+
+text ThyrsaCity_Text_ByTheAsclepeion { "BY THE ASCLEPEION" }
+text ThyrsaCity_Text_ByTheTheater { "BY THE THEATER" }
+text ThyrsaCity_Text_UpTheKadmeia { "UP THE KADMEIA" }
+
+script ThyrsaCity_EventScript_CitizenMasks {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Citizen)
+    if (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("Thespis makes every challenger pick a mask. Laughing, weeping, or a goat.\p"
+                      "My grandmother says the goat's the honest one."))
+    } else {
+        msgbox(format("That play. I keep thinking about it. The child with nothing in its hands.\p"
+                      "My neighbor says the Titans paid for it. My neighbor says a lot of things."))
+    }
+    release
+}
+
+script ThyrsaCity_EventScript_CitizenSeer {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_Citizen)
+    if (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("My seer can't read my thread past the spring. Nor my wife's.\p"
+                      "She says it's her eyes. She's been saying that a lot."))
+    } else {
+        msgbox(format("I've never laughed like that. At a satyr. In the middle of a tragedy.\p"
+                      "My cheeks still hurt. My wife says I cried first. I don't remember."))
+    }
+    release
+}
+
+script ThyrsaCity_EventScript_CitizenKadmos {
+    setspeaker(ThyrsaCity_Name_Citizen)
+    msgbox(format("Kadmos founded this city where a cow lay down. True story.\p"
+                  "Then he killed a dragon, sowed its teeth, and armed men grew. Less true."),
+           MSGBOX_NPC)
+}
+
+script ThyrsaCity_EventScript_CitizenIvy {
+    setspeaker(ThyrsaCity_Name_Citizen)
+    msgbox(format("Ivy's the god's plant. It grows on anything. It never lets go.\p"
+                  "My husband says that's why I married him. I don't know what he means."),
+           MSGBOX_NPC)
+}
+
+script ThyrsaCity_EventScript_CitizenCushion {
+    setspeaker(ThyrsaCity_Name_Citizen)
+    msgbox(format("Laurel-holders sit at the front. I've no laurel.\pI've a cushion."), MSGBOX_NPC)
+}
+
+script ThyrsaCity_EventScript_Child {
+    setspeaker(ThyrsaCity_Name_Child)
+    msgbox(format("We're maenads! Euoi!"), MSGBOX_NPC)
+}
+
+script ThyrsaCity_EventScript_Child2 {
+    setspeaker(ThyrsaCity_Name_Child)
+    msgbox(format("Mother says we can be maenads till dinner. Then we're children again."), MSGBOX_NPC)
+}
+
+script ThyrsaCity_EventScript_WineSeller {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_WineSeller)
+    if (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("New wine! Three days old! The god's own vintage!\p"
+                      "Well. His neighbor's. The Agora sells it by the jar."))
+    } else {
+        msgbox(format("Sold out the night of the play. Every jar.\p"
+                      "Nobody remembers drinking it. That's how you know it was good."))
+    }
+    release
+}
+
+script ThyrsaCity_EventScript_MaskSeller {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_MaskSeller)
+    if (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        msgbox(format("Masks for the play! Wear one tonight and nobody can say it was you."))
+    } else {
+        msgbox(format("Half price. Since the play, nobody wants another face."))
+    }
+    release
+}
+
+// Manto's crows (her house's quest): at the Elektran Gate in the evening or at
+// night, the flock wheels over the Kronia and flies south.
+script ThyrsaCity_EventScript_Crows {
+    gettimeofday
+    if (var(VAR_0x8000) < TIME_EVENING) {
+        end
+    }
+    lockall
+    setvar(VAR_TEMP_3, 1)
+    clearflag(FLAG_TEMP_13)
+    addobject(LOCALID_THYRSA_CROWS)
+    applymovement(LOCALID_THYRSA_CROWS, ThyrsaCity_Movement_CrowsCircle)
+    waitmovement(LOCALID_THYRSA_CROWS)
+    msgbox(format("The crows circle the feast once, then fly south. Away from the city, against the wind."))
+    applymovement(LOCALID_THYRSA_CROWS, ThyrsaCity_Movement_CrowsSouth)
+    waitmovement(LOCALID_THYRSA_CROWS)
+    removeobject(LOCALID_THYRSA_CROWS)
+    setflag(FLAG_TEMP_13)
+    setflag(FLAG_ICHOR_SAW_CROWS)
+    releaseall
+    end
+}
+
+movement ThyrsaCity_Movement_CrowsCircle {
+    walk_fast_left * 2
+    walk_fast_down
+    walk_fast_right * 3
+    walk_fast_up
+    walk_fast_left
+}
+
+movement ThyrsaCity_Movement_CrowsSouth {
+    walk_faster_down * 7
+}
+
+script ThyrsaCity_EventScript_NeistanSign {
+    msgbox(format("West: Route 8, the Kopais shore, and Lebadeia."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_ProitidSign {
+    msgbox(format("East: the Euripus, and the bridge to Euboia."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_SemeleChamber {
+    msgbox(format("A roofless room wrapped in ivy. Smoke curls up from a crack in the floor.\p"
+                  "They say Zeus came to her as lightning.\p"
+                  "She was the only one who ever saw him as he is."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_SemeleCrack {
+    msgbox(format("Warm air. Somewhere far down, something hums."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_BrickedGate {
+    msgbox(format("A bricked-up gate. Thyrsa had seven. It uses three.\p"
+                  "The others are for show. Or for armies. Or for poets, who need seven."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_MarkedIvy {
+    msgbox(format("Ivy, thick as a curtain, up the old terrace wall.\p"
+                  "Someone has scratched a pinecone on a staff into the stone behind it."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Dirke {
+    msgbox(format("The spring of Dirke. The water is cold and very sweet."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_WinePress {
+    msgbox(format("The old wine press. Its floor is stained purple to the rim."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_TempleFront {
+    msgbox(format("The god's masks over the temple's doors. One laughs. One weeps."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Statue {
+    msgbox(format("The god in bronze, ivy in his hair, a thyrsus raised.\p"
+                  "Somebody has tied a ribbon round his ankle for the festival."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Fountain {
+    msgbox(format("The god's fountain. Two bronze lions pour into the basin.\p"
+                  "At the Dionysia, they say, it runs with wine. Today it's water. Mostly."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Tripod {
+    msgbox(format("A bronze tripod on a marble base: a prize for a play that won.\p"
+                  "The base names the poet, the year and the chorus. The year is very old."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_YardGate {
+    msgbox(format("A yard gate, barred from inside.\p"
+                  "Over the wall: an old fig, and a red cloak on the washing line."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Grave {
+    msgbox(format("An old grave by the road. Thyrsa buries its dead outside the gates."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Herm {
+    msgbox(format("A herm of Hermes by the road.\pNorth: Thyrsa City. South: the Kronia grounds."),
+           MSGBOX_SIGN)
 }
