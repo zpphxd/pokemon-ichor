@@ -114,7 +114,7 @@ def nearest(pal, rgb, skip0=True):
 
 def front_frames(name, cfg):
     src = CONCEPTS / f"{name}.png"
-    img = c2n.convert(src, fit=cfg["fit"])
+    img = c2n.convert(src, fit=cfg["fit"], sharpen=cfg.get("sharpen", 80))
     f0 = np.array(img)
     pal = np.array(img.getpalette()[:48], int).reshape(16, 3)
     for x, y, rgb in cfg.get("fixes", []):
@@ -227,24 +227,102 @@ def icon_pal_index(name):
     return int(m.group(1))
 
 
+def recolor(pal, spec):
+    """Move a color family onto a planned ramp, by brightness rank.
+
+    spec: {"hue": [lo, hi] degrees, "min_sat": 0.25, "ink_below": 0.25,
+           "ink": [r, g, b], "ramp": [[r, g, b], ...] dark -> light}
+    Palette entries in the hue range take the ramp's color at their own
+    relative brightness (interpolated between steps), keeping their order;
+    near-black entries in the range become the ramp's outline ink.
+    """
+    if not spec:
+        return pal
+    out = pal.copy()
+    lo, hi = spec["hue"]
+    ramp = np.array(spec["ramp"], float)
+    fam, ink = [], []
+    for i in range(1, len(pal)):
+        h, s, v = colorsys.rgb_to_hsv(*(pal[i] / 255.0))
+        if not (lo <= h * 360 <= hi) or s < spec.get("min_sat", 0.25):
+            continue
+        (ink if v < spec.get("ink_below", 0.25) else fam).append(i)
+    # several near-blacks: keep them as distinct steps from the outline ink
+    # toward the ramp's darkest color, so no palette slot is wasted
+    ink.sort(key=lambda i: c2n.lum(pal[i]))
+    for k, i in enumerate(ink):
+        t = k / max(1, len(ink)) * 0.6
+        col = np.array(spec["ink"], float) * (1 - t) + ramp[0] * t
+        out[i] = (np.round(col / 8) * 8).clip(0, 248)
+    fam.sort(key=lambda i: c2n.lum(pal[i]))
+    lums = [c2n.lum(pal[i]) for i in fam]
+    lo_l, hi_l = (min(lums), max(lums)) if lums else (0, 1)
+    for r, i in enumerate(fam):
+        # place each color by its own brightness, so a mostly mid-dark body
+        # stays mid-toned instead of being spread evenly toward the light end
+        t = (c2n.lum(pal[i]) - lo_l) / max(1e-6, hi_l - lo_l) * (len(ramp) - 1)
+        a, b = int(np.floor(t)), min(len(ramp) - 1, int(np.floor(t)) + 1)
+        col = ramp[a] + (ramp[b] - ramp[a]) * (t - a)
+        out[i] = (np.round(col / 8) * 8).clip(0, 248)
+    return out
+
+
+def rim_light(a, pal):
+    """A 1 px rim of light inside the lit (top/left) silhouette edge.
+
+    Body pixels just inside the outline on the top or left take the next
+    lighter color of their own hue, the classic Gen 3 way of rounding a form.
+    """
+    L = c2n.lum(pal)
+    out = a.copy()
+    h, w = a.shape
+    for y in range(1, h - 1):
+        for x in range(1, w - 1):
+            v = a[y, x]
+            if not v or L[v] < 60 or L[v] > 200:
+                continue
+            # only where the body is thick enough to round: a rim on a 1-2 px
+            # leg or fin edge reads as noise, not light
+            if not (a[y + 1, x] and a[y, x + 1] and (y + 2 >= h or a[y + 2, x]) and (x + 2 >= w or a[y, x + 2])):
+                continue
+            for dy, dx in ((-1, 0), (0, -1)):
+                n1, n2 = a[y + dy, x + dx], a[y + 2 * dy, x + 2 * dx] if 0 <= y + 2 * dy and 0 <= x + 2 * dx else 0
+                if n1 and L[n1] < 40 and not n2:  # outline pixel with air beyond it
+                    hv = colorsys.rgb_to_hsv(*(pal[v] / 255.0))[0]
+                    cands = [j for j in range(1, len(pal)) if L[j] > L[v] + 15 and
+                             abs(colorsys.rgb_to_hsv(*(pal[j] / 255.0))[0] - hv) < 0.06]
+                    if cands:
+                        out[y, x] = min(cands, key=lambda j: L[j])
+                    break
+    return out
+
+
 def build(name, cfg):
     d = OUT / name
     old_normal = read_jasc(d / "normal.pal")
     old_shiny = read_jasc(d / "shiny.pal")
-    f0, f1, pal = front_frames(name, cfg)
+    f0, f1, pal0 = front_frames(name, cfg)
+    # Indices are assigned against the concept's own palette (pal0); a
+    # recolor then changes colors only, so every shading step is kept.
+    pal = recolor(pal0, cfg.get("recolor"))
     shiny = shiny_from_old(pal, old_normal, old_shiny)
     back_src = CONCEPTS / f"{name}_back.png"
     if back_src.exists():
-        bimg = c2n.convert(back_src, fit=64)
+        bimg = c2n.convert(back_src, fit=64, sharpen=cfg.get("sharpen", 80))
         bpal = np.array(bimg.getpalette()[:48], int).reshape(16, 3)
-        back = remap(np.array(bimg), bpal, pal)
+        back = remap(np.array(bimg), bpal, pal0)
     else:
-        back = back_from_front(f0, pal)
+        back = back_from_front(f0, pal0)
+    if cfg.get("rim_light"):
+        f0, f1, back = (rim_light(x, pal) for x in (f0, f1, back))
     ipal = read_jasc(ICON_PALS / f"pal{icon_pal_index(name)}.pal")
     i0, i1 = icon_frames(f0, pal, ipal)
-    # the follower shares the battle palette (check_elaia); move it across
-    follow = remap(np.array(Image.open(d / "overworld.png")),
-                   read_jasc(d / "overworld_normal.pal"), pal)
+    # the follower shares the battle palette (check_elaia); move it across,
+    # unless this builder already wrote it in this palette's index layout
+    follow = np.array(Image.open(d / "overworld.png"))
+    old_ow = read_jasc(d / "overworld_normal.pal")
+    if not np.array_equal(old_ow, pal):
+        follow = remap(follow, old_ow, pal0)
     return {"front": np.vstack([f0, f1]), "pal": pal, "shiny": shiny, "follow": follow,
             "back": back, "icon": np.vstack([i0, i1]), "icon_pal": ipal}
 

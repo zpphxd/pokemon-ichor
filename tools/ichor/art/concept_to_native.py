@@ -352,7 +352,7 @@ def despeckle(idx, alpha):
     return idx, alpha
 
 
-def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto"):
+def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto", sharpen=80):
     a = np.asarray(Image.open(src).convert("RGB")).astype(int)
     bg = np.asarray(bg, float) if bg is not None else border_color(a)
     found = None
@@ -386,7 +386,7 @@ def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None
     if found and max(h, w) > size - 1:
         # Bigger than the frame at its own scale: reduce once, to fill the
         # frame, keeping faces and line art (STYLE.md §3.3).
-        idx, alpha = hybrid_downscale(nat, alpha, pal, (size - 1) / max(h, w))
+        idx, alpha = hybrid_downscale(nat, alpha, pal, (size - 1) / max(h, w), sharpen)
     if found:
         idx, alpha = despeckle(idx, alpha)  # keep the concept's own outline
     else:
