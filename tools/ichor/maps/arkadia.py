@@ -10,10 +10,15 @@ ROUTES = [
     ("Route12_CypressRoad", "R12", 29, ["STHENON", "BRISEIS", "OPHION", "DAMO", "PHANES", "KALLIN"]),
 ]
 HEALERS = ("Lebadeia", "Kirrha", "Aigion", "Arkadia")
+# Route 8 and Lebadeia are built by kopais.py (layouts, events, scripts, wild tables);
+# this script still writes Route 8's trainer parties.
+KOPAIS_MAPS = ("Route8_KopaisRoad", "Lebadeia")
 
 
 def routes():
     for name, tag, base, names in ROUTES:
+        if name in KOPAIS_MAPS:
+            continue
         horizontal = tag == "R8"
         m = Map(name, 48 if horizontal else 24, 24 if horizontal else 40)
         if horizontal:
@@ -116,6 +121,8 @@ def hubs():
              "StyxFalls": [("up", "Route11_DrumPass"), ("down", "Route12_CypressRoad")],
              "Arkadia": [("up", "Route12_CypressRoad"), ("right", "Route13_HighlandRoad")]}
     for name, connections in links.items():
+        if name in KOPAIS_MAPS:
+            continue
         m = Map(name, 28, 32)
         m.rect(2, 2, 25, 29, 0x001)
         m.rect(10, 2, 13, 29, 0x1D9)
@@ -219,9 +226,11 @@ def ferry():
 def encounters_and_teams():
     wild = read("src/data/wild_encounters.json")
     g = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
-    ids = {"MAP_" + const(r[0]) for r in ROUTES}
+    ids = {"MAP_" + const(r[0]) for r in ROUTES if r[0] not in KOPAIS_MAPS}
     g["encounters"] = [e for e in g["encounters"] if e.get("map") not in ids]
     for name, tag, level, _ in ROUTES:
+        if name in KOPAIS_MAPS:
+            continue
         for time in ("Morning", "Day", "Evening", "Night"):
             species = ["NEBREL", "AMPELIX", "ERIPIP", "GALEKIT", "PEBBLITH", "MELIBEE"]
             if time == "Night":

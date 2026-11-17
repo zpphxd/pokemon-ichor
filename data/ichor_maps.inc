@@ -172,3 +172,6 @@
 	.include "data/maps/LabyrinthRing7/scripts.inc"
 	.include "data/maps/LabyrinthStarryChamber/scripts.inc"
 	.include "data/maps/LabyrinthIcarusShaft/scripts.inc"
+	.include "data/maps/KopaisKatavothres/scripts.inc"
+	.include "data/maps/Lebadeia_Trophoneion/scripts.inc"
+	.include "data/maps/Lebadeia_HoneyHouse/scripts.inc"

@@ -19,7 +19,7 @@ local TAG = "FISH " .. SPOT
 
 -- spot: map, the shore cell, the key that faces the water
 local SPOTS = {
-  route8 = { S.MAP_ROUTE8_KOPAIS_ROAD, 21, 13, K.DOWN },     -- the screenshot's sand path, facing south
+  route8 = { S.MAP_ROUTE8_KOPAIS_ROAD, 40, 18, K.UP },       -- the south bank's sand, facing the lake
   kirrha = { S.MAP_KIRRHA, 5, 22, K.DOWN },
   neraida = { S.MAP_KYTHERA_NERAIDA_FALLS, 19, 14, K.UP },
   route12 = { S.MAP_ROUTE12_CYPRESS_ROAD, 29, 29, K.LEFT },

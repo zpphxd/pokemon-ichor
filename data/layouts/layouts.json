@@ -884,10 +884,10 @@
     {
       "id": "LAYOUT_ROUTE7_KRONIA_GROUNDS",
       "name": "Route7_KroniaGrounds_Layout",
-      "width": 24,
-      "height": 40,
+      "width": 30,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route7_KroniaGrounds/border.bin",
       "blockdata_filepath": "data/layouts/Route7_KroniaGrounds/map.bin",
       "layout_version": "emerald"
@@ -1038,10 +1038,10 @@
     {
       "id": "LAYOUT_ROUTE8_KOPAIS_ROAD",
       "name": "Route8_KopaisRoad_Layout",
-      "width": 48,
-      "height": 24,
+      "width": 72,
+      "height": 26,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Stymphalia",
       "border_filepath": "data/layouts/Route8_KopaisRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route8_KopaisRoad/map.bin",
       "layout_version": "emerald"
@@ -1049,10 +1049,10 @@
     {
       "id": "LAYOUT_LEBADEIA",
       "name": "Lebadeia_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Stymphalia",
       "border_filepath": "data/layouts/Lebadeia/border.bin",
       "blockdata_filepath": "data/layouts/Lebadeia/map.bin",
       "layout_version": "emerald"
@@ -2155,6 +2155,39 @@
       "secondary_tileset": "gTileset_Astra",
       "border_filepath": "data/layouts/LabyrinthIcarusShaft/border.bin",
       "blockdata_filepath": "data/layouts/LabyrinthIcarusShaft/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KOPAIS_KATAVOTHRES",
+      "name": "KopaisKatavothres_Layout",
+      "width": 40,
+      "height": 22,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/KopaisKatavothres/border.bin",
+      "blockdata_filepath": "data/layouts/KopaisKatavothres/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LEBADEIA_TROPHONEION",
+      "name": "Lebadeia_Trophoneion_Layout",
+      "width": 17,
+      "height": 13,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Lebadeia_Trophoneion/border.bin",
+      "blockdata_filepath": "data/layouts/Lebadeia_Trophoneion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LEBADEIA_HONEY_HOUSE",
+      "name": "Lebadeia_HoneyHouse_Layout",
+      "width": 10,
+      "height": 7,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Lebadeia_HoneyHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lebadeia_HoneyHouse/map.bin",
       "layout_version": "emerald"
     }
   ]

@@ -209,7 +209,12 @@
 #define TRAINER_ICHOR_KALDERA_TALOS          261
 #define TRAINER_ICHOR_KALDERA_HYPERION       262
 #define TRAINER_ICHOR_THYRSA_CHORUS          263 // The Three-Act Play's chorus: fought again after each wrong mask
-#define TRAINERS_END_ACT2                   264
+// Lake Kopais and its katavothres (tools/ichor/maps/kopais.py); ids 290-293 leave 264-289 for the other Act II builders
+#define TRAINER_ICHOR_R8_ENCHELYS            290 // Route 8: the eel-fisher on Kopais's dike
+#define TRAINER_ICHOR_R8_SCHOINIS            291 // Route 8: the reed-cutter at the dike's west landing
+#define TRAINER_ICHOR_KOPAIS_AGAMEDES        292 // the katavothres: a pilgrim walking the drain to Lebadeia
+#define TRAINER_ICHOR_KOPAIS_DIPSAS          293 // the katavothres: a Titanborn mapping the drains
+#define TRAINERS_END_ACT2                   294
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328
