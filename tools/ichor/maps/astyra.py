@@ -108,7 +108,7 @@ def rooms():
         m.stamp(x, 2, [[0x20B], [0x20C], [0x20D]])
     m.rect(3, 8, 7, 8, 0x213, True)
     m.rect(14, 10, 18, 10, 0x213, True)
-    m.person("Daphne", 5, 7, gfx="PROFESSOR_DAPHNE")
+    m.person("Daphne", 5, 7, gfx="PROFESSOR_DAPHNE", flag="FLAG_ICHOR_HIDE_DAPHNE_LIBRARY")
     m.person("Librarian", 16, 9, gfx="ELDER_F")
     m.sign("Book", 6, 6, tile=0x003)
     m.json["warp_events"] = [warp(11, 15, "Astyra", 2)]

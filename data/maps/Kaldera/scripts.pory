@@ -1,0 +1,67 @@
+text Kaldera_Text_NameTalos { "TALOS" }
+text Kaldera_Text_NameHyperion { "HYPERION" }
+text Kaldera_Text_NameDaphne { "DAPHNE" }
+mapscripts Kaldera_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        special(Ichor_ReleaseTimeOfDay)
+        setflag(FLAG_ICHOR_ARRIVED_KALDERA)
+        setrespawn(HEAL_LOCATION_KALDERA)
+        if (flag(FLAG_ICHOR_KALDERA_FRAGMENT_LOST) && !flag(FLAG_ICHOR_MOM_MISSING)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: Kaldera_EventScript_Letter
+    ]
+}
+script Kaldera_EventScript_Nausikles {
+    setvar(VAR_0x8004, 4)
+    goto(Ichor_EventScript_FerryQuay)
+}
+script Kaldera_EventScript_Daphne {
+    lock
+    faceplayer
+    setspeaker(Kaldera_Text_NameDaphne)
+    if (flag(FLAG_ICHOR_MOM_MISSING)) {
+        msgbox(format("She's done this before. Find her.\pNot a reading. Your mother. Start with the people who knew her."))
+    } else {
+        msgbox(format("I wrote about the Telchines' forge without ever seeing it.\pI'm trying not to do that anymore.\pTalos keeps the old fire. Ask him, not my book."))
+    }
+    release
+}
+script Kaldera_EventScript_HarborGuide {
+    msgbox(format("The Asclepeion is up the steps. The Agora's on the next terrace.\pTalos works at the temple above both. Follow the hammering."), MSGBOX_NPC)
+}
+script Kaldera_EventScript_AshWorker {
+    msgbox(format("Hyperion grew up here. Used to carry two sacks when the rest of us took one.\pNow he won't go below the forge unless every lamp's lit."), MSGBOX_NPC)
+}
+script Kaldera_EventScript_Sign {
+    msgbox(format("KALDERA\nThe fire beneath the sea."), MSGBOX_SIGN)
+}
+script Kaldera_EventScript_ForgeSign {
+    msgbox(format("THE TELCHINES' FORGE\nThe inner work belongs to the Forge Laurel."), MSGBOX_SIGN)
+}
+script Kaldera_EventScript_TempleSign {
+    msgbox(format("TEMPLE OF HEPHAESTUS\nTalos, the Bronzesmith.\pThe Bronze Servants wait within."), MSGBOX_SIGN)
+}
+script Kaldera_EventScript_Letter {
+    setvar(VAR_TEMP_1, 2)
+    if (!flag(FLAG_ICHOR_KALDERA_FRAGMENT_LOST) || flag(FLAG_ICHOR_MOM_MISSING)) {
+        end
+    }
+    lockall
+    callnative(StopMapMusic)
+    playse(SE_M_WING_ATTACK)
+    msgbox(format("A gull drops out of the thinning ash. A letter is tied to its leg.\pHalia's knot. Kydippe's hand."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The helmets came at dawn. Your mother was gone by midnight.\pShe knew. I don't know how.\pThe hives are open. The jar is gone.\pCome home if you need to. There's a lamp in my window.\n-- Kydippe"), MSGBOX_SIGN)
+    closemessage
+    turnobject(LOCALID_PLAYER, DIR_WEST)
+    delay(90)
+    playbgm(MUS_ICHOR_ELAIA, TRUE)
+    setspeaker(Kaldera_Text_NameDaphne)
+    msgbox(format("She's done this before. Find her."))
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_MOM_MISSING)
+    releaseall
+}

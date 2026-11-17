@@ -17,5 +17,9 @@ script Astyra_Harbor_EventScript_Sign {
     msgbox(format("ASTYRA HARBOR\nNorth: city steps."), MSGBOX_SIGN)
 }
 script Astyra_Harbor_EventScript_Mariner {
-    msgbox(format("Kaldera's ash blows this far on a south wind.\pThe trireme takes the long way. A dolphin wouldn't have to."), MSGBOX_NPC)
+    if (flag(FLAG_ICHOR_AKROPOLIS_RECOVERED)) {
+        setvar(VAR_0x8004, 3)
+        goto(Ichor_EventScript_FerryQuay)
+    }
+    msgbox(format("Kaldera's ash blows this far on a south wind.\pWe're loading water. Ask again once the hill is quiet."), MSGBOX_NPC)
 }

@@ -15,7 +15,7 @@ The single source for levels across the whole game. Every script, encounter tabl
 | **Arkadia** (Laurel 5) | 26–33 | 30–35 | Kallisto 35–37 | Kleon joins the Titans |
 | **Astyra** (midpoint) | 30–36 | 33–38 | Kleon 38–40 | The Akropolis double battle |
 | **Salt Well** (Conch quest) | 36–39 | 36–38 | — | Two floors after the Akropolis raid, SYSTEMS §1 |
-| **Kaldera** (Laurel 6) | 34–40 | 37–42 | Talos 41–43 | The low point |
+| **Kaldera** (Laurel 6) | 34–40 | 37–42 | Talos 41–43; Hyperion 41–44 | The low point |
 | **Kythera** (Laurel 7) | 38–45 | 42–47 | Galatea 46–48 | Act III |
 | **Knossa**, the Labyrinth | 42–48 | 45–50 | Hyperion 50–53, Kleon 51–54 | LABYRINTH.md's levels |
 | **Lakonia** | 46–50 | 49–53 | Rhea 52–54 | |
@@ -43,11 +43,13 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,
   both Chloe parties, Thespis, Kallisto, all three Akropolis Kleon parties and
-  Akropolis Rhea, retaining Hero's species and moves at three levels lower.
+  Akropolis Rhea, Kaldera Talos and Kaldera Hyperion, retaining Hero's species
+  and moves at three levels lower.
   Spartan uses those species and levels with trained EV spreads, natures,
   held items and smart AI. Its EXP/candy caps are 14, 20, 26, 32 and 37, advancing when
   each Laurel is won; after Laurel 5 the next cap is Astyra's 40, followed by
-  Kaldera's 43 after the saved Akropolis raid victory. Extend the
+  Kaldera's 43 after the saved Akropolis raid victory, Hyperion's 44 after
+  Laurel 6, and Kythera's 48 after the saved third-fragment aftermath. Extend the
   milestone mapping as later chapters are connected. Hero's existing parties
   and uncapped EXP are unchanged. These integrations are not natural-level
   balance approval.
@@ -59,6 +61,12 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Salt Well quest band:** its two floors use Water-type encounters at
   36–39 (SYSTEMS §1), following the raid rather than the earlier capital road.
   The stranded Glaukos has one 36; optional grotto trainers use 37–38.
+- **Implemented Kaldera:** harbor encounters are 34–37 and forge encounters
+  36–39. Three smiths use 38–40; three Titanborn use 40–42. Talos has
+  41/41/42/43 and eruption Hyperion has 41/42/43/44, matching STORY's
+  approximately level-44 ace. Both bosses have explicit four-move sets and
+  Mortal/Spartan variants; Pyrapod's Spartan training is special, not physical.
+  These are implemented parties, not natural-level balance approval.
 - **Aethos's trainers use Aethos's Pokémon** (user, 2026-11-14). Before the post-game, trainer parties and wild tables draw on the 152-species Aethos dex for the most part. A non-Aethos species is the exception and needs a reason: a story gift such as the theoxenia starters, a foreigner's signature Pokémon, or a deliberate rarity. The National Dex's other species belong to the Oikoumene and the post-game.
 - **Gifts:** theoxenia starters follow SYSTEMS.md §10's levels, which must sit inside the band of the stage where they're given.
 - **Act I amphora returns:** explicit shelf restoration unlocks the one-off

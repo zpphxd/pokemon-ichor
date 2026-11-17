@@ -3764,3 +3764,363 @@ Level: 38
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Salt Well teams. */
+
+/* Kaldera teams. */
+
+=== TRAINER_ICHOR_KALDERA_SMITH_ONE ===
+Name: ALKIMOS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Karkitox
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALDERA_SMITH_TWO ===
+Name: CHALKE
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossard
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Taurivet
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALDERA_SMITH_THREE ===
+Name: PYRAICHMES
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossard
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Karkitox
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALDERA_PETROS ===
+Name: PETROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Laolith
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Taurivet
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALDERA_AMATHOS ===
+Name: AMATHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Plouteras
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Pyrapod
+Level: 41
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALDERA_PHLOGIOS ===
+Name: PHLOGIOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Laolith
+Level: 41
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Pyrapod
+Level: 42
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALDERA_TALOS ===
+Name: TALOS
+Class: Hierophant
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 41
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Heat Crash
+- Work Up
+- Protect
+
+Karkitox
+Level: 41
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crabhammer
+- Poison Jab
+- Swords Dance
+- Protect
+
+Kolossard
+Level: 42
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+Kolossard
+Level: 43
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+=== TRAINER_ICHOR_KALDERA_TALOS ===
+Name: TALOS
+Class: Hierophant
+Pic: Acolyte M
+Gender: Male
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Taurivet
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Heat Crash
+- Work Up
+- Protect
+
+Karkitox
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crabhammer
+- Poison Jab
+- Swords Dance
+- Protect
+
+Kolossard
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+Kolossard
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+=== TRAINER_ICHOR_KALDERA_TALOS ===
+Name: TALOS
+Class: Hierophant
+Pic: Acolyte M
+Gender: Male
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Taurivet @ Sitrus Berry
+Level: 41
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Iron Head
+- Heat Crash
+- Work Up
+- Protect
+
+Karkitox @ Sitrus Berry
+Level: 41
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Crabhammer
+- Poison Jab
+- Swords Dance
+- Protect
+
+Kolossard @ Sitrus Berry
+Level: 42
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+Kolossard @ Sitrus Berry
+Level: 43
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+=== TRAINER_ICHOR_KALDERA_HYPERION ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 41
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Heat Crash
+- Work Up
+- Protect
+
+Laolith
+Level: 42
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Brick Break
+- Iron Defense
+
+Pyrapod
+Level: 43
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Psybeam
+- Will-O-Wisp
+- Calm Mind
+
+Gigantomb
+Level: 44
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Heat Crash
+- Rock Slide
+- Stealth Rock
+- Yawn
+
+=== TRAINER_ICHOR_KALDERA_HYPERION ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Taurivet
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Heat Crash
+- Work Up
+- Protect
+
+Laolith
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Brick Break
+- Iron Defense
+
+Pyrapod
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Psybeam
+- Will-O-Wisp
+- Calm Mind
+
+Gigantomb
+Level: 41
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Heat Crash
+- Rock Slide
+- Stealth Rock
+- Yawn
+
+=== TRAINER_ICHOR_KALDERA_HYPERION ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Taurivet @ Sitrus Berry
+Level: 41
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Iron Head
+- Heat Crash
+- Work Up
+- Protect
+
+Laolith @ Sitrus Berry
+Level: 42
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Rock Slide
+- Bulldoze
+- Brick Break
+- Iron Defense
+
+Pyrapod @ Sitrus Berry
+Level: 43
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+- Flamethrower
+- Psybeam
+- Will-O-Wisp
+- Calm Mind
+
+Gigantomb @ Sitrus Berry
+Level: 44
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Heat Crash
+- Rock Slide
+- Stealth Rock
+- Yawn
+
+/* End Kaldera teams. */

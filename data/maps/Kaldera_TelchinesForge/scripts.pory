@@ -1,0 +1,99 @@
+mapscripts Kaldera_TelchinesForge_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_BADGE06_GET)) {
+            setmetatile(14, 20, 0x265, FALSE)
+        }
+    }
+}
+script Kaldera_TelchinesForge_EventScript_Gate {
+    if (flag(FLAG_BADGE06_GET)) {
+        msgbox(format("The inner forge is open. The anvil rings above."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A heavy bronze gate. Talos's seal is worked into its lock.\pEarn the Forge Laurel above the harbor."), MSGBOX_SIGN)
+    }
+}
+script Kaldera_TelchinesForge_EventScript_Rest {
+    lockall
+    msgbox(format("Fresh water waits in the jar. The stone beside it is warm."))
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    releaseall
+}
+script Kaldera_TelchinesForge_EventScript_Petros {
+    trainerbattle_single(TRAINER_ICHOR_KALDERA_PETROS,
+        format("I just got all the ash out of my boots. Now this."),
+        format("More ash. Brilliant."))
+    msgbox(format("The boss said stay close. For once I'm listening."), MSGBOX_AUTOCLOSE)
+}
+script Kaldera_TelchinesForge_EventScript_Amathos {
+    trainerbattle_single(TRAINER_ICHOR_KALDERA_AMATHOS,
+        format("Petros gets the easy stair. I get you."),
+        format("Should've picked the stair."))
+    msgbox(format("He keeps counting us. The boss. Like one of us might go missing."), MSGBOX_AUTOCLOSE)
+}
+script Kaldera_TelchinesForge_EventScript_Phlogios {
+    trainerbattle_single(TRAINER_ICHOR_KALDERA_PHLOGIOS,
+        format("The old forge still has teeth."),
+        format("So do you."))
+    msgbox(format("Hyperion ordered every lamp lit. Even at noon."), MSGBOX_AUTOCLOSE)
+}
+script Kaldera_TelchinesForge_EventScript_Talos {
+    lock
+    faceplayer
+    setspeaker(Kaldera_Text_NameTalos)
+    if (!flag(FLAG_ICHOR_TALOS_RELIC_STORY)) {
+        msgbox(format("The Harpe cuts what's woven. Anyone woven who holds it comes apart.\pYou're not woven.\pThat's why they keep letting you follow them."))
+        msgbox(format("An old man threw these into my fire. Wax and feathers. I pulled them out.\pHe said not too high, not too low. Then he threw them in my forge."))
+        giveitem(ITEM_DAEDALUS_WINGS)
+        if (!flag(FLAG_ICHOR_GOT_DAEDALUS_WINGS)) {
+            msgbox(format("Make room. These have waited long enough."))
+            release
+            end
+        }
+        setspeaker(Kaldera_Text_NameTalos)
+        msgbox(format("They aren't mine to give. Take them back to him.\pHe's under Knossa. He'll want to know they still fly.\pDaedalus called me Perdix, once. Before I learned to keep my feet on the ground."))
+        setflag(FLAG_ICHOR_TALOS_RELIC_STORY)
+    } else {
+        msgbox(format("The Wings remember every herm you anointed.\pThe old man is under Knossa. Tell him I kept the fire."))
+    }
+    release
+}
+script Kaldera_TelchinesForge_EventScript_Hyperion {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_TALOS_RELIC_STORY)) {
+        msgbox(format("Talos catches your arm.\pHear me before you go after him."))
+        release
+        end
+    }
+    setspeaker(Kaldera_Text_NameHyperion)
+    msgbox(format("There you are. Nice and bright up here.\pPetros! Behind me!\pThe last piece. The old man kept it warm for us."))
+    closemessage
+    setweather(WEATHER_VOLCANIC_ASH)
+    doweather
+    setvar(VAR_0x8004, 0)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 8)
+    setvar(VAR_0x8007, 3)
+    special(ShakeScreen)
+    fadescreen(FADE_TO_WHITE)
+    delay(8)
+    fadescreen(FADE_FROM_WHITE)
+    trainerbattle_no_intro(TRAINER_ICHOR_KALDERA_HYPERION, KalderaForge_Text_Defeat)
+    setspeaker(Kaldera_Text_NameHyperion)
+    msgbox(format("Got the piece. Got my kids. That's a good day's work.\pYou keep coming, Unwoven. We need you in one piece."))
+    closemessage
+    setflag(FLAG_ICHOR_KALDERA_FRAGMENT_LOST)
+    removeobject(LOCALID_KALDERA_TELCHINES_FORGE_HYPERION)
+    setweather(WEATHER_NONE)
+    doweather
+    setspeaker(Kaldera_Text_NameTalos)
+    msgbox(format("All three, now. And only one pair of hands can hold them.\pGo down to the harbor. Get some air."))
+    setspeaker(SP_NAME_NONE)
+    callnative(StopMapMusic)
+    warp(MAP_KALDERA, 19, 34)
+    waitstate
+    releaseall
+}
+text KalderaForge_Text_Defeat { format("Eyes on me, kids. Eyes on me.") }

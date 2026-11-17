@@ -452,6 +452,23 @@ only for `HEAL_LOCATION_ASTYRA`; all other recovery scripts are unchanged.
 New map, layout and heal IDs remain append-only. These checks do not certify
 natural-level balance, final capital art or the whole unfinished Astyra chapter.
 
+`tools/ichor/tests/kaldera.sh` continues from the capital's real harbor after
+the raid. The late ferry shares Euploia's actual deck and saves its destination
+in `VAR_ICHOR_FERRY_DEST`; Kaldera's story sailing never requires the Conch.
+The fixture enters all service doors, solves six dials using the live moving
+Kolossard actors, physically pushes the Girdle drum, and checks saved shutters,
+Talos/Hyperion whiteouts, the full-pocket Wings retry, the third fragment,
+the letter, Mom's absence, return sailing and save/reset/CONTINUE.
+`kaldera.py` generates the six maps, encounters, parties and concrete dial
+wrappers. Flag commands do not dereference script variables: the shared dial
+uses the existing `Ichor_SetFlagInVar` helper for its selected parking receipt.
+Changing an object's template movement alone does not stop its live actor;
+parking respawns it at the observed plate with the stationary template.
+The last servant has a two-cell vertical range so the actual pushed drum cuts
+its loop. Native assisted progression is not natural-level acceptance.
+The independent Route 19/Paros sea journey, finished map presentation and
+remaining Kaldera side integrations are still open.
+
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.

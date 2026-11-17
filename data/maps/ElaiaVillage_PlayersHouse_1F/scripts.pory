@@ -5,6 +5,13 @@
 mapscripts ElaiaVillage_PlayersHouse_1F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_ELAIA_VILLAGE)
+        if (flag(FLAG_ICHOR_MOM_MISSING)) {
+            if (flag(FLAG_SYS_GAME_CLEAR)) {
+                clearflag(FLAG_ICHOR_HIDE_MOM_HOME)
+            } else {
+                setflag(FLAG_ICHOR_HIDE_MOM_HOME)
+            }
+        }
         if (flag(FLAG_ICHOR_SET_WATER_CLOCK) && !flag(FLAG_ICHOR_TALKED_TO_MOM)) {
             setvar(VAR_TEMP_1, 1)
         }
@@ -129,6 +136,10 @@ script ElaiaVillage_PlayersHouse_1F_EventScript_Loom {
 }
 
 script ElaiaVillage_PlayersHouse_1F_EventScript_HoneyShelf {
+    if (flag(FLAG_ICHOR_MOM_MISSING) && !flag(FLAG_SYS_GAME_CLEAR)) {
+        msgbox(format("One clean circle in the dust.\pThe jar marked “NOT FOR {PLAYER}” is gone."), MSGBOX_SIGN)
+        end
+    }
     msgbox(format("Jars of honey, sealed with wax. One is labelled “NOT FOR {PLAYER}.”"), MSGBOX_SIGN)
 }
 

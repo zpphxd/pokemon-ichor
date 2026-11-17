@@ -87,7 +87,7 @@
 #define VAR_FANCLUB_FAN_COUNTER                          0x4041
 #define VAR_FANCLUB_LOSE_FAN_TIMER                       0x4042
 #define VAR_DEPT_STORE_FLOOR                             0x4043
-#define VAR_UNUSED_0x4044                                0x4044 // Unused Var
+#define VAR_ICHOR_FERRY_DEST                             0x4044 // Ichor: Euploia destination: 0 legacy, 1 Akti, 2 Emporion, 3 Astyra, 4 Kaldera
 #define VAR_POKELOT_PRIZE_ITEM                           0x4045
 #define VAR_NATIONAL_DEX                                 0x4046
 #define VAR_SEEDOT_SIZE_RECORD                           0x4047

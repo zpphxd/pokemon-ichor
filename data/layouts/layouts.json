@@ -1298,6 +1298,72 @@
       "border_filepath": "data/layouts/Astyra_Harbor/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Harbor/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDERA",
+      "name": "Kaldera_Layout",
+      "width": 40,
+      "height": 40,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Kaldera/border.bin",
+      "blockdata_filepath": "data/layouts/Kaldera/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDERA_ASCLEPEION",
+      "name": "Kaldera_Asclepeion_Layout",
+      "width": 18,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Kaldera_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/Kaldera_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDERA_AGORA",
+      "name": "Kaldera_Agora_Layout",
+      "width": 16,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Kaldera_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/Kaldera_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDERA_SMITHS_HOUSE",
+      "name": "Kaldera_SmithsHouse_Layout",
+      "width": 16,
+      "height": 14,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Kaldera_SmithsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Kaldera_SmithsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDERA_TEMPLE_OF_HEPHAESTUS",
+      "name": "Kaldera_TempleOfHephaestus_Layout",
+      "width": 28,
+      "height": 46,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Kaldera_TempleOfHephaestus/border.bin",
+      "blockdata_filepath": "data/layouts/Kaldera_TempleOfHephaestus/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALDERA_TELCHINES_FORGE",
+      "name": "Kaldera_TelchinesForge_Layout",
+      "width": 34,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/Kaldera_TelchinesForge/border.bin",
+      "blockdata_filepath": "data/layouts/Kaldera_TelchinesForge/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -19,8 +19,17 @@ script Ichor_EventScript_FerryQuay {
     lock
     faceplayer
     setspeaker(Ichor_Text_NameNausikles)
+    setvar(VAR_ICHOR_FERRY_DEST, 0)
     msgbox(format("Where to? Wind's fair, more or less."))
-    if (var(VAR_0x8004) == 2) {
+    if (flag(FLAG_ICHOR_AKROPOLIS_RECOVERED)) {
+        dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE,
+            "AKTI", "EMPORION", "ASTYRA", "KALDERA", "STAY")
+        if (var(VAR_RESULT) < 4) {
+            copyvar(VAR_ICHOR_FERRY_DEST, VAR_RESULT)
+            addvar(VAR_ICHOR_FERRY_DEST, 1)
+            goto(Ichor_EventScript_FerryBoard)
+        }
+    } elif (var(VAR_0x8004) == 2) {
         dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AKTI", "STAY")
         if (var(VAR_RESULT) == 0) {
             clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
@@ -62,7 +71,15 @@ script Ichor_EventScript_FerryDeck {
     closemessage
     fadescreen(FADE_TO_BLACK)
     // world-act2 adds an Aigina destination of its own.
-    if (flag(FLAG_ICHOR_FERRY_TO_EMPORION)) {
+    if (var(VAR_ICHOR_FERRY_DEST) == 4) {
+        warpsilent(MAP_KALDERA, 19, 34)
+    } elif (var(VAR_ICHOR_FERRY_DEST) == 3) {
+        warpsilent(MAP_ASTYRA_HARBOR, 24, 13)
+    } elif (var(VAR_ICHOR_FERRY_DEST) == 2) {
+        warpsilent(MAP_EMPORION_HARBOR, 30, 16)
+    } elif (var(VAR_ICHOR_FERRY_DEST) == 1) {
+        warpsilent(MAP_AKTI_TOWN, 9, 10)
+    } elif (flag(FLAG_ICHOR_FERRY_TO_EMPORION)) {
         // Emporion's quay, the Euploia's berth (BUILD.md's arrival table)
         warpsilent(MAP_EMPORION_HARBOR, 30, 16)
     } else {

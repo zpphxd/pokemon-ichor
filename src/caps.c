@@ -20,6 +20,8 @@ u32 GetCurrentLevelCap(void)
         {FLAG_BADGE04_GET, 32},
         {FLAG_BADGE05_GET, 37},
         {FLAG_ICHOR_AKROPOLIS_RAID_DONE, 40},
+        {FLAG_BADGE06_GET, 43},
+        {FLAG_ICHOR_KALDERA_FRAGMENT_LOST, 44},
     };
 
     u32 i;
@@ -34,7 +36,7 @@ u32 GetCurrentLevelCap(void)
             if (!FlagGet(sLevelCapFlagMap[i][0]))
                 return sLevelCapFlagMap[i][1];
         }
-        return 43; // Kaldera's Forge Laurel follows the Akropolis midpoint.
+        return 48; // Kythera follows the Forge Laurel; Hyperion's eruption is within this cap.
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {

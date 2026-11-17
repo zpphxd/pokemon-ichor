@@ -95,6 +95,29 @@ TEST("Ichor: Spartan stops cap-level EXP while Hero and Mortal retain ordinary E
     ResetDifficulty();
 }
 
+TEST("Ichor: Kaldera caps follow Talos, Hyperion and the next Laurel")
+{
+    u32 i;
+    for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE05_GET; i++)
+        FlagSet(i);
+    FlagSet(FLAG_ICHOR_AKROPOLIS_RAID_DONE);
+    FlagClear(FLAG_BADGE06_GET);
+    FlagClear(FLAG_ICHOR_KALDERA_FRAGMENT_LOST);
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    EXPECT_EQ(GetCurrentLevelCap(), 43);
+    FlagSet(FLAG_BADGE06_GET);
+    EXPECT_EQ(GetCurrentLevelCap(), 44);
+    FlagSet(FLAG_ICHOR_KALDERA_FRAGMENT_LOST);
+    EXPECT_EQ(GetCurrentLevelCap(), 48);
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
+    EXPECT_EQ(GetCurrentLevelCap(), MAX_LEVEL);
+    for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE06_GET; i++)
+        FlagClear(i);
+    FlagClear(FLAG_ICHOR_AKROPOLIS_RAID_DONE);
+    FlagClear(FLAG_ICHOR_KALDERA_FRAGMENT_LOST);
+    ResetDifficulty();
+}
+
 TEST("Ichor: Hermes and the Thread share the 150, 120 and 100 step difficulty limits")
 {
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);

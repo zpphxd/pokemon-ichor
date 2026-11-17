@@ -1,0 +1,20 @@
+mapscripts Kaldera_SmithsHouse_MapScripts {}
+script Kaldera_SmithsHouse_EventScript_Smith {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_KALDERA_HOUSE_GIFT)) {
+        msgbox(format("I hammer the plates. My daughter makes them walk.\pHere. A little armor for a friend of yours."))
+        giveitem(ITEM_METAL_COAT)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_KALDERA_HOUSE_GIFT)
+        } else {
+            call(Common_EventScript_ShowBagIsFull)
+        }
+    } else {
+        msgbox(format("A good joint needs room to move. Remember that in Talos's temple."))
+    }
+    release
+}
+script Kaldera_SmithsHouse_EventScript_Apprentice {
+    msgbox(format("The dials stop the Bronze Servants. Turn one when its feet are on the pale plate.\pWrong moment? Turn it again. Nothing breaks.\pThe last servant needs a column drum in its way. Bring the Girdle."), MSGBOX_NPC)
+}

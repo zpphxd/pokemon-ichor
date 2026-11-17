@@ -1964,6 +1964,19 @@
 #define FLAG_ICHOR_ITEM_SALT_WELL_ETHER         (FLAG_ICHOR_GENERAL_START + 0x14C) // Ichor: Lower side grotto supply
 #define FLAG_ICHOR_ITEM_SALT_WELL_SHELL         (FLAG_ICHOR_GENERAL_START + 0x14D) // Ichor: Lower side grotto gift
 #define FLAG_ICHOR_ITEM_ASTYRA_HARBOR           (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Harbor pier jar
+#define FLAG_ICHOR_ARRIVED_KALDERA              (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: reached Thera on the connected journey
+#define FLAG_ICHOR_FORGE_TEACH                  (FLAG_ICHOR_GENERAL_START + 0x150) // Ichor: parked the first Bronze Servant
+#define FLAG_ICHOR_FORGE_TEST                   (FLAG_ICHOR_GENERAL_START + 0x151) // Ichor: parked the paired Bronze Servants
+#define FLAG_ICHOR_FORGE_MASTER                 (FLAG_ICHOR_GENERAL_START + 0x152) // Ichor: parked three servants with the column drum
+#define FLAG_ICHOR_TALOS_RELIC_STORY            (FLAG_ICHOR_GENERAL_START + 0x153) // Ichor: Talos explained the wings and the Harpe
+#define FLAG_ICHOR_KALDERA_FRAGMENT_LOST        (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Hyperion escaped with the third Harpe fragment
+#define FLAG_ICHOR_MOM_MISSING                  (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: read Kydippe's letter at Kaldera harbor
+#define FLAG_ICHOR_HIDE_KALDERA_HYPERION        (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Hyperion left the Telchines forge
+#define FLAG_ICHOR_KALDERA_HOUSE_GIFT           (FLAG_ICHOR_GENERAL_START + 0x157) // Ichor: the smith gave the player a Metal Coat
+#define FLAG_ICHOR_ITEM_KALDERA_BALL            (FLAG_ICHOR_GENERAL_START + 0x158) // Ichor: Kaldera's harbor supply
+#define FLAG_ICHOR_ITEM_KALDERA_FORGE_ETHER     (FLAG_ICHOR_GENERAL_START + 0x159) // Ichor: Telchines forge supply
+#define FLAG_ICHOR_ITEM_KALDERA_FORGE_REVIVE    (FLAG_ICHOR_GENERAL_START + 0x15A) // Ichor: Telchines forge side grotto gift
+#define FLAG_ICHOR_HIDE_DAPHNE_LIBRARY          (FLAG_ICHOR_GENERAL_START + 0x15B) // Ichor: Daphne followed the player to Kaldera
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
@@ -2030,6 +2043,10 @@
 #define FLAG_ICHOR_HIDDEN_SALT_WELL_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x03B) // Ichor: Lower sheltered cache
 #define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SALT    (FLAG_ICHOR_GENERAL2_START + 0x03C) // Ichor: Harbor salt
 #define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SCALE   (FLAG_ICHOR_GENERAL2_START + 0x03D) // Ichor: Harbor scale
+#define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_SALT     (FLAG_ICHOR_GENERAL2_START + 0x03E) // Ichor: Kaldera harbor salt
+#define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_SCALE    (FLAG_ICHOR_GENERAL2_START + 0x03F) // Ichor: Kaldera pier scale
+#define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_FORGE_SHARD (FLAG_ICHOR_GENERAL2_START + 0x040) // Ichor: Telchines forge red shard
+#define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_FORGE_NUGGET (FLAG_ICHOR_GENERAL2_START + 0x041) // Ichor: Telchines forge nugget
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

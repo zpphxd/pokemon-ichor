@@ -165,6 +165,16 @@
       "map": "MAP_ROUTE16_CAPITAL_PASS",
       "x": 27,
       "y": 9
+    },
+    {
+      "id": "HEAL_LOCATION_KALDERA",
+      "map": "MAP_KALDERA",
+      "x": 27,
+      "y": 18,
+      "respawn_map": "MAP_KALDERA_ASCLEPEION",
+      "respawn_npc": "LOCALID_KALDERA_ASCLEPEION_HEALER",
+      "respawn_x": 8,
+      "respawn_y": 5
     }
   ]
 }

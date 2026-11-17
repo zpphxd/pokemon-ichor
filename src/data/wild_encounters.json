@@ -6336,6 +6336,452 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_KALDERA",
+          "base_label": "gKaldera_Morning",
+          "land_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KAMINOO"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KAMINOO"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KAMINOO"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_SEISMARE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_SEISMARE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_SEISMARE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KALDERA",
+          "base_label": "gKaldera_Night",
+          "land_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KAMINOO"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KAMINOO"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KAMINOO"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_SEISMARE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_SEISMARE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_SEISMARE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 37,
+                "species": "SPECIES_KARKITOX"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KALDERA_TELCHINES_FORGE",
+          "base_label": "gKaldera_TelchinesForge_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PLOUTERAS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KALDERA_TELCHINES_FORGE",
+          "base_label": "gKaldera_TelchinesForge_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_TAURIVET"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PYRAPOD"
+              },
+              {
+                "min_level": 36,
+                "max_level": 39,
+                "species": "SPECIES_PLOUTERAS"
+              }
+            ]
+          }
         }
       ]
     },

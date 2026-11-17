@@ -1,0 +1,21 @@
+mapscripts Kaldera_Agora_MapScripts {}
+script Kaldera_Agora_EventScript_Merchant {
+    lock
+    faceplayer
+    message(format("Keep ash out of the jars. That's all I ask."))
+    waitmessage
+    pokemart(Kaldera_Agora_Stock)
+    release
+}
+mart Kaldera_Agora_Stock {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_OLIVE_OIL
+    ITEM_BRONZE_VOTIVE
+}
+script Kaldera_Agora_EventScript_Customer {
+    msgbox(format("A Bronze Votive for the forge. Better than throwing good tools into it.\pMy husband did that once. Talos fished them out."), MSGBOX_NPC)
+}

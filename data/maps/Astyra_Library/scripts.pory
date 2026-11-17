@@ -1,4 +1,12 @@
-mapscripts Astyra_Library_MapScripts {}
+mapscripts Astyra_Library_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_ARRIVED_KALDERA)) {
+            setflag(FLAG_ICHOR_HIDE_DAPHNE_LIBRARY)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_DAPHNE_LIBRARY)
+        }
+    }
+}
 script Astyra_Library_EventScript_Daphne {
     lock
     faceplayer

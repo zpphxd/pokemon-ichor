@@ -9,7 +9,8 @@
     "gMapGroup_IndoorEleusa",
     "gMapGroup_DungeonsAct1",
     "gMapGroup_IndoorThyrsa",
-    "gMapGroup_DungeonsAct2"
+    "gMapGroup_DungeonsAct2",
+    "gMapGroup_IndoorKaldera"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -40,7 +41,8 @@
     "Route12_CypressRoad",
     "Arkadia",
     "Astyra_Akropolis",
-    "Astyra_Harbor"
+    "Astyra_Harbor",
+    "Kaldera"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -148,6 +150,13 @@
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",
-    "SaltWell_B2F"
+    "SaltWell_B2F",
+    "Kaldera_TelchinesForge"
+  ],
+  "gMapGroup_IndoorKaldera": [
+    "Kaldera_Asclepeion",
+    "Kaldera_Agora",
+    "Kaldera_SmithsHouse",
+    "Kaldera_TempleOfHephaestus"
   ]
 }
