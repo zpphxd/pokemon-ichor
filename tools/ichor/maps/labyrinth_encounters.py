@@ -51,6 +51,9 @@ TABLES = {
                                          "fishing_mons": land(FISH, 20)},
     ("MAP_LABYRINTH_RING4", "Morning"): {"land_mons": land(R4, 6), "water_mons": land(WATER, 4),
                                          "fishing_mons": land(FISH, 20)},
+    # Rings V and VI: the same stream fills the cisterns around the heart
+    ("MAP_LABYRINTH_RING5", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
+    ("MAP_LABYRINTH_RING6", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
 }
 
 
