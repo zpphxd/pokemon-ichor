@@ -38,8 +38,9 @@ def warp(x, y, dest, index):
 
 
 class Map:
-    def __init__(self, name, w, h, indoor=False):
+    def __init__(self, name, w, h, indoor=False, secondary=None):
         self.name, self.w, self.h = name, w, h
+        self.secondary = secondary
         self.json = read(f"data/maps/{name}/map.json")
         self.json.update(object_events=[], bg_events=[], warp_events=[], coord_events=[], connections=None)
         self.cells = [0x3400 | (0x205 if indoor else 0x001)] * (w * h)
@@ -82,12 +83,13 @@ class Map:
     def save(self):
         path = ROOT / f"data/layouts/{self.name}"
         (path / "map.bin").write_bytes(struct.pack("<" + "H" * len(self.cells), *self.cells))
-        border = 0x3400 | (0x205 if self.indoor else 0x0E0)
+        border = 0x3400 | (0x200 if self.secondary == "gTileset_ThyrsaRooms" else
+                           0x205 if self.indoor else 0x0E0)
         (path / "border.bin").write_bytes(struct.pack("<4H", *([border] * 4)))
         layouts = read("data/layouts/layouts.json")
         layout = next(l for l in layouts["layouts"] if l.get("id") == self.json["layout"])
         layout.update(width=self.w, height=self.h, primary_tileset="gTileset_Aethos",
-                      secondary_tileset="gTileset_Civic" if self.indoor else "gTileset_Kalliste")
+                      secondary_tileset=self.secondary or ("gTileset_Civic" if self.indoor else "gTileset_Kalliste"))
         write("data/layouts/layouts.json", layouts)
         write(f"data/maps/{self.name}/map.json", self.json)
 
@@ -229,6 +231,157 @@ def hall(name, w, h):
     return m
 
 
+# The Temple of Dionysus: Thespis's Three-Act Play (SYSTEMS §12, redesigned).
+# Backstage (the green room) is at the south door. Three painted scenery walls
+# stand between it and the roof, one per act, each with a left, middle and right
+# door. The right door with the right mask walks you onto the next stage; the
+# wrong door drops you through the trapdoor back to the green room.
+VOID, WTOP, WBOT = 0x200, 0x25E, 0x204
+FLOOR, FLOOR_SHADOW, FLOOR_EDGE = 0x26D, 0x267, 0x26C
+DOOR = 0x238
+DOOR_X = (6, 12, 18)
+# Painted panels beside each door: vines (left), a house (middle), a ship (right).
+PANELS = ((7, 0x239, "PanelLeft"), (13, 0x207, "PanelMiddle"), (19, 0x208, "PanelRight"))
+# (wall top row, act index) for each scenery wall, south to north.
+FACADES = ((31, 0), (23, 1), (15, 2))
+
+
+def temple():
+    m = Map("ThyrsaCity_TempleOfDionysus", 25, 41, True, "gTileset_ThyrsaRooms")
+    m.rect(0, 0, 24, 40, VOID, True)
+
+    def room(x0, y0, x1, y1):
+        """Floor with a shadow under the wall above and a shaded left edge."""
+        m.rect(x0, y0, x1, y1, FLOOR)
+        m.rect(x0, y0, x1, y0, FLOOR_SHADOW)
+        m.rect(x0, y0 + 1, x0, y1, FLOOR_EDGE)
+
+    def wall(x0, x1, y):
+        m.rect(x0, y, x1, y, WTOP, True)
+        m.rect(x0, y + 1, x1, y + 1, WBOT, True)
+
+    # The roof of the stage building, where the crane sets gods down.
+    wall(7, 17, 1)
+    for x, mask in zip(range(8, 17, 2), (0x233, 0x234, 0x236, 0x235, 0x27E)):
+        m.put(x, 1, mask, True)
+    room(7, 3, 17, 6)
+    m.put(7, 3, 0x28F, True)
+    m.put(17, 3, 0x28F, True)
+    m.person("Thespis", 12, 4, gfx="ACOLYTE_M")
+    m.sign("Altar", 15, 4, 0x265)
+    m.sign("MechaneDown", 9, 5, 0x26B)
+    # Act III's stage, and the crane at the back of it.
+    wall(1, 23, 7)
+    room(1, 9, 23, 14)
+    m.sign("MechaneUp", 12, 8, 0x26B)
+    for y in range(9, 13):
+        m.put(11, y, 0x278 if y % 2 else 0x28F, True)
+        m.put(13, y, 0x278 if y % 2 else 0x28F, True)
+    m.put(11, 11, FLOOR)  # the satyr acolyte stands in the line of props
+    m.person("SatyrActor", 11, 11, gfx="ACOLYTE_M", facing="RIGHT", sight=1)
+    for x in (3, 21):
+        m.put(x, 10, 0x27B, True)
+    m.stamp(4, 12, [[0x24B, 0x24C]])  # the ekkyklema, parked
+    m.put(17, 11, 0x291)
+    m.put(18, 11, 0x292)
+    # Act II's stage: the vintner's house is behind it.
+    room(1, 17, 23, 22)
+    m.person("Koryphaios", 4, 19, gfx="ACTOR")
+    m.person("Tragic", 21, 19, gfx="ACOLYTE_M", facing="UP")
+    m.stamp(16, 20, [[0x275, 0x276]])
+    m.put(8, 19, 0x28D)
+    m.put(9, 19, 0x28E)
+    m.put(18, 20, 0x284, True)
+    m.put(2, 21, 0x278, True)
+    m.put(22, 21, 0x278, True)
+    # Act I's stage: a bench of footlights with one gap, and the comic acolyte.
+    room(1, 25, 23, 30)
+    for x in range(1, 24):
+        if x != 21:
+            m.put(x, 28, (0x28F, 0x275, 0x276)[(x - 1) % 3], True)
+    m.put(20, 28, 0x28F, True)
+    m.put(22, 28, 0x28F, True)
+    m.put(5, 26, 0x291)
+    m.put(6, 26, 0x292)
+    # He faces the row behind the gap, so once beaten he never blocks it.
+    m.person("Comic", 18, 27, gfx="ACOLYTE_M", facing="RIGHT", sight=3)
+    # The green room, backstage.
+    room(1, 33, 23, 40)
+    for y, act in FACADES:
+        wall(1, 23, y)
+        m.put(1 if act else 9, y, 0x233, True)  # laughing and weeping, the theater's sign
+        m.put(23 if act else 10, y, 0x234, True)
+        for i, x in enumerate(DOOR_X):
+            m.put(x, y + 1, DOOR, True)
+            m.json["bg_events"].append(bg(x, y + 1, m.prefix + f"Door{act + 1}{'LMR'[i]}"))
+        for x, tile, name in PANELS:
+            m.sign(name, x, y + 1, tile)
+    m.sign("FrescoLast", 3, 24, 0x203)
+    m.sign("FrescoFollow", 3, 16, 0x203)
+    # The mask rack, the rules, the script, the costume pegs, the prompter.
+    for x, mask, shelf in ((2, 0x233, 0x280), (3, 0x27E, 0x281), (4, 0x235, 0x282)):
+        m.put(x, 31, mask, True)
+        m.sign("Masks", x, 32, shelf)
+    m.sign("Rules", 22, 32, 0x241)
+    m.sign("Script", 9, 35, 0x287)
+    m.sign("Costumes", 16, 35, 0x28A)
+    m.put(16, 34, 0x288, True)
+    m.put(12, 36, 0x28D)  # the trapdoor drops you onto this rug
+    m.put(13, 36, 0x28E)
+    m.person("Prompter", 20, 36, gfx="ELDER_F", facing="LEFT")
+    for x, y in ((1, 34), (23, 34), (1, 39), (23, 39)):
+        m.put(x, y, 0x28F, True)
+    m.put(5, 38, 0x278, True)
+    m.put(8, 35, 0x268, True)
+    m.put(10, 35, 0x26A, True)
+    m.put(15, 35, 0x28B, True)
+    m.put(19, 38, 0x27B, True)
+    m.put(12, 40, 0x295)
+    m.put(13, 40, 0x296)
+    m.json["warp_events"] = [warp(12, 40, "ThyrsaCity", 2), warp(13, 40, "ThyrsaCity", 2)]
+    m.save()
+
+
+def amphitheater():
+    m = Map("ThyrsaCity_Amphitheater", 25, 27, True)
+    m.rect(1, 2, 23, 26, 0x250)
+    m.rect(0, 0, 24, 0, 0x205, True)
+    m.rect(0, 1, 24, 1, 0x208, True)
+    m.put(12, 26, 0x242)
+    m.json["warp_events"] = [warp(12, 26, "ThyrsaCity", 3)]
+    for x in (2, 22):
+        for y in (5, 11, 17, 23):
+            m.stamp(x, y, [[0x20B], [0x20C], [0x20D]])
+    # The skene's three doors, each with the same painted panel as the temple's.
+    for x, door in ((6, "DoorLeft"), (12, "DoorMiddle"), (18, "DoorRight")):
+        m.put(x, 8, 0x208, True)
+        m.json["bg_events"].append(bg(x, 8, m.prefix + door))
+    for x, name, tile in ((7, "PanelLeft", 0x219), (13, "PanelMiddle", 0x21C), (19, "PanelRight", 0x21B)):
+        m.put(x, 8, tile, True)
+        m.json["bg_events"].append(bg(x, 8, "ThyrsaCity_TempleOfDionysus_EventScript_" + name))
+    m.sign("Masks", 4, 21, 0x003)
+    m.sign("Program", 20, 21, 0x003)
+    for y in (12, 16, 20):
+        for x in (6, 8, 14, 16):
+            m.stamp(x, y, [[0x240, 0x241]])
+    m.person("Thespis", 4, 18, gfx="ACOLYTE_M")
+    m.person("Chorus", 12, 4, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_DIONYSIA_BROKEN")
+    m.person("Actor", 6, 4, gfx="YOUTH_M")
+    m.person("BeeWoman", 18, 4, gfx="WOMAN")
+    m.person("Kleon", 7, 15, gfx="KLEON")
+    m.person("Alethea", 17, 15, gfx="ALETHEA")
+    for x in (10, 12, 14):
+        m.person("Fate" + str(x), x, 2, script=m.prefix + "Actor", gfx="ELDER_F")
+    for block, y in enumerate((13, 17, 21)):
+        for x in (8, 16):
+            m.person(f"Audience{block}_{x}", x, y, script=m.prefix + "Audience",
+                     gfx="PILGRIM", facing="UP")
+    m.json["coord_events"] = [dict(type="trigger", x=x, y=23, elevation=0,
+        var="VAR_TEMP_1", var_value="0", script=m.prefix + "Performance") for x in range(10, 15)]
+    m.save()
+
+
+
 def main():
     roads = [road(*r) for r in ROADS]
     roads[0].connection("down", "EleusaVillage", -34)
@@ -301,48 +454,8 @@ def main():
     shop.json["warp_events"] = [warp(6, 9, "ThyrsaCity", 1)]
     shop.save()
 
-    for name in ("TempleOfDionysus", "Amphitheater"):
-        m = Map("ThyrsaCity_" + name, 25, 27, True)
-        m.rect(1, 2, 23, 26, 0x250)
-        m.rect(0, 0, 24, 0, 0x205, True)
-        m.rect(0, 1, 24, 1, 0x208, True)
-        m.put(12, 26, 0x242)
-        m.json["warp_events"] = [warp(12, 26, "ThyrsaCity", 2 if name == "TempleOfDionysus" else 3)]
-        for x in (2, 22):
-            for y in (5, 11, 17, 23):
-                m.stamp(x, y, [[0x20B], [0x20C], [0x20D]])
-        for x, door in ((6, "Comedy"), (12, "Tragedy"), (18, "Satyr")):
-            m.put(x, 8, 0x208, True)
-            m.json["bg_events"].append(bg(x, 8, m.prefix + door))
-        m.sign("Masks", 4, 21, 0x003)
-        m.sign("Program", 20, 21, 0x003)
-        if name == "TempleOfDionysus":
-            m.person("Thespis", 12, 3, gfx="ACOLYTE_M")
-            m.stamp(18, 2, [[0x227], [0x228], [0x229]])
-            m.json["bg_events"].append(bg(18, 4, m.prefix + "Altar"))
-            for person, x, y in (("Comic", 6, 18), ("Tragic", 18, 18), ("SatyrActor", 12, 12)):
-                m.person(person, x, y, gfx="ACOLYTE_M")
-            for x in range(1, 24):
-                m.put(x, 5, 0x149, True)
-        else:
-            for y in (12, 16, 20):
-                for x in (6, 8, 14, 16):
-                    m.stamp(x, y, [[0x240, 0x241]])
-            m.person("Thespis", 4, 18, gfx="ACOLYTE_M")
-            m.person("Chorus", 12, 4, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_DIONYSIA_BROKEN")
-            m.person("Actor", 6, 4, gfx="YOUTH_M")
-            m.person("BeeWoman", 18, 4, gfx="WOMAN")
-            m.person("Kleon", 7, 15, gfx="KLEON")
-            m.person("Alethea", 17, 15, gfx="ALETHEA")
-            for x in (10, 12, 14):
-                m.person("Fate" + str(x), x, 2, script=m.prefix + "Actor", gfx="ELDER_F")
-            for block, y in enumerate((13, 17, 21)):
-                for x in (8, 16):
-                    m.person(f"Audience{block}_{x}", x, y, script=m.prefix + "Audience",
-                             gfx="PILGRIM", facing="UP")
-            m.json["coord_events"] = [dict(type="trigger", x=x, y=23, elevation=0,
-                var="VAR_TEMP_1", var_value="0", script=m.prefix + "Performance") for x in range(10, 15)]
-        m.save()
+    temple()
+    amphitheater()
 
     wild = read("src/data/wild_encounters.json")
     group = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
@@ -402,6 +515,8 @@ def trainers():
             party(name, name, cls, pic, [(s, min(30, level + j), None) for j, s in enumerate(pair)])
     for name, species in (("COMIC", "Botrykit"), ("TRAGIC", "Prosomime"), ("SATYR", "Ampelix")):
         party("THYRSA_" + name, name, "Acolyte", "Acolyte M", [(species, 28, None), ("Raknit", 29, None)])
+    # The chorus that shoves a wrongly masked actor back offstage, every time.
+    party("THYRSA_CHORUS", "CHORUS", "Acolyte", "Acolyte M", [("Elapling", 28, None), ("Botrykit", 28, None)])
     sets = [
         ("Prosomime", 30, ["Psybeam", "Clear Smog", "Hypnosis", "Encore"]),
         ("Raknit", 30, ["Poison Jab", "Bite", "String Shot", "Protect"]),
@@ -417,4 +532,12 @@ def trainers():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if sys.argv[1:] == ["theater"]:
+        # Only the temple, the amphitheater and the trainers: main() would also
+        # rebuild the city and roads, which have since been restored by hand.
+        temple()
+        amphitheater()
+        trainers()
+    else:
+        main()

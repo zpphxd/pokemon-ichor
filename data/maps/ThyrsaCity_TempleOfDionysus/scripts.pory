@@ -1,8 +1,29 @@
-// SYSTEMS §12: learn an entrance, read a role, then find the role the play forgot.
+// SYSTEMS §12: Thespis's Three-Act Play, "The Vintner's Gift".
+// Three painted scenery walls stand between the green room and the roof, one
+// per act. Each act is one entrance: the right door (the one painted with where
+// your character has just been) in the right mask. Nothing says the answer;
+// the script, the paintings, the frescoes and the actors' lines add up to it.
+//   Act I:   the stranger, laughing, off a ship      -> COMEDY, right door
+//   Act II:  the vintner, woken in his house, blamed -> TRAGEDY, middle door
+//   Act III: torn away. The satyr play follows a tragedy, and the goat-men
+//            follow their god, the stranger, in      -> SATYR, right door
+// Act I teaches: a wrong try costs nothing. In Acts II and III a wrong door
+// drops you through the trapdoor into the green room, and the right door in the
+// wrong mask means a fight with the chorus.
 mapscripts ThyrsaCity_TempleOfDionysus_MapScripts {
     MAP_SCRIPT_ON_LOAD {
+        // A door you came through stays open.
+        if (var(VAR_ICHOR_MASK_ACT) >= 1) {
+            setmetatile(18, 31, 0x26D, FALSE)
+            setmetatile(18, 32, 0x26D, FALSE)
+        }
+        if (var(VAR_ICHOR_MASK_ACT) >= 2) {
+            setmetatile(12, 23, 0x26D, FALSE)
+            setmetatile(12, 24, 0x26D, FALSE)
+        }
         if (var(VAR_ICHOR_MASK_ACT) >= 3) {
-            setmetatile(12, 5, 0x250, 0)
+            setmetatile(18, 15, 0x26D, FALSE)
+            setmetatile(18, 16, 0x26D, FALSE)
         }
     }
 }
@@ -12,6 +33,8 @@ text Thyrsa_Text_Tragedy { "TRAGEDY" }
 text Thyrsa_Text_Satyr { "SATYR" }
 text Thyrsa_Text_Leave { "LEAVE" }
 text Thyrsa_Text_NameThespis { "THESPIS" }
+text Thyrsa_Text_NamePrompter { "PROMPTER" }
+text Thyrsa_Text_NameKoryphaios { "KORYPHAIOS" }
 
 script ThyrsaCity_TempleOfDionysus_EventScript_Masks {
     lockall
@@ -26,54 +49,268 @@ script ThyrsaCity_TempleOfDionysus_EventScript_Masks {
     releaseall
 }
 
-script ThyrsaCity_TempleOfDionysus_EventScript_Program {
+// --- The clues ------------------------------------------------------------------
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Script {
     lockall
+    msgbox(format("THE VINTNER'S GIFT. A play in three acts.\p"
+                  "ACT I. A stranger steps off a ship with a wineskin. He laughs at everything.\p"
+                  "Enter the stranger.\p"
+                  "ACT II. The vintner pours the gift for the shepherds in his yard, then goes in to bed.\p"
+                  "They wake up sick and swear they've been poisoned.\p"
+                  "Enter the one they blame.\p"
+                  "ACT III. …\p"
+                  "The rest of the page has been torn away."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Rules {
+    lockall
+    msgbox(format("Chalked on a slate, in a big hand:\p"
+                  "ONE. Come on through the door painted with where you've just been.\p"
+                  "TWO. Wear the face your part would wear.\p"
+                  "THREE. Miss your cue and the floor will find you."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Costumes {
+    lockall
+    msgbox(format("Costume pegs, each with a tag.\p"
+                  "STRANGER: the laughing mask. SHEPHERDS: the chorus.\p"
+                  "The vintner's tag has fallen off. Someone has stepped on it."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_PanelLeft {
+    lockall
+    msgbox(format("Painted by the left door: vines on a hillside, under a full moon."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_PanelMiddle {
+    lockall
+    msgbox(format("Painted by the middle door: the gate of a house, with a lamp lit inside."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_PanelRight {
+    lockall
+    msgbox(format("Painted by the right door: a ship at a quay. Ivy climbs its mast."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_FrescoLast {
+    lockall
+    msgbox(format("A fresco of a festival day. Three sad plays, one after another.\p"
+                  "Then the goat-men, dancing. They always come on last."))
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_FrescoFollow {
+    lockall
+    msgbox(format("Goat-men tumbling through a doorway behind a man with a wineskin.\p"
+                  "Wherever he goes, they go."))
+    releaseall
+}
+
+// The safety valve: the prompter points at the right clue for the act you're on.
+script ThyrsaCity_TempleOfDionysus_EventScript_Prompter {
+    lock
+    faceplayer
+    setspeaker(Thyrsa_Text_NamePrompter)
     if (var(VAR_ICHOR_MASK_ACT) == 0) {
-        msgbox(format("ACT I: Enter the Comic, by the left door."))
+        msgbox(format("Lose your lines and I feed them. That's the job.\p"
+                      "Read the script on the stand. Read the rules on the slate.\p"
+                      "Then pick a face from the rack and find the right door."))
     } elif (var(VAR_ICHOR_MASK_ACT) == 1) {
-        msgbox(format("ACT II: Enter the one who weeps, by the middle door."))
+        msgbox(format("Act Two. Where was the vintner when the shepherds woke?\p"
+                      "And would anybody be laughing?"))
+    } elif (var(VAR_ICHOR_MASK_ACT) == 2) {
+        msgbox(format("Act Three, and the page is gone. What comes after a tragedy?\p"
+                      "And the goat-men never pick a door. Whose footsteps do they follow?"))
     } else {
-        msgbox(format("ACT III: The king is dead. The chorus has gone home.\p"
-                      "But a tragedy is not the whole day's play. Who has the last entrance?"))
+        msgbox(format("You've played all three acts. Thespis is on the roof. Take the crane."))
     }
+    release
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Koryphaios {
+    lock
+    faceplayer
+    setspeaker(Thyrsa_Text_NameKoryphaios)
+    if (var(VAR_ICHOR_MASK_ACT) < 3) {
+        msgbox(format("I lead the chorus. Tonight we're the shepherds. We did the vintner in.\p"
+                      "So that's the tragedy finished. But nobody goes home on a funeral."))
+    } else {
+        msgbox(format("Goat-men all over my funeral. Best ending we've had all year."))
+    }
+    release
+}
+
+// --- The acolytes ------------------------------------------------------------------
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Comic {
+    trainerbattle_single(TRAINER_ICHOR_THYRSA_COMIC, format("You came on laughing? Good. Now make me laugh."), format("Ha! All right, all right."))
+    msgbox(format("Act Two's no fun. Nobody laughs in it. Not even the shepherds.\p"
+                  "And between us? The stranger's the god. Keep a straight face."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Tragic {
+    trainerbattle_single(TRAINER_ICHOR_THYRSA_TRAGIC, format("I play the vintner. I die every night. Let's see you try."), format("Dead again."))
+    msgbox(format("Goat-men can't find a door by themselves. They follow their god in."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_SatyrActor {
+    trainerbattle_single(TRAINER_ICHOR_THYRSA_SATYR, format("There's a punch line coming."), format("There it is."))
+    msgbox(format("Tragedy, then the satyr play. Never leave people in the dark."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// --- The doors -----------------------------------------------------------------------
+// VAR_0x8008: which scenery wall (0 = Act I's, 1 = Act II's, 2 = Act III's).
+// VAR_0x8009: which door (1 left, 2 middle, 3 right).
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Door1L { setvar(VAR_0x8008, 0) setvar(VAR_0x8009, 1) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door1M { setvar(VAR_0x8008, 0) setvar(VAR_0x8009, 2) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door1R { setvar(VAR_0x8008, 0) setvar(VAR_0x8009, 3) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door2L { setvar(VAR_0x8008, 1) setvar(VAR_0x8009, 1) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door2M { setvar(VAR_0x8008, 1) setvar(VAR_0x8009, 2) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door2R { setvar(VAR_0x8008, 1) setvar(VAR_0x8009, 3) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door3L { setvar(VAR_0x8008, 2) setvar(VAR_0x8009, 1) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door3M { setvar(VAR_0x8008, 2) setvar(VAR_0x8009, 2) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+script ThyrsaCity_TempleOfDionysus_EventScript_Door3R { setvar(VAR_0x8008, 2) setvar(VAR_0x8009, 3) goto(ThyrsaCity_TempleOfDionysus_EventScript_Door) }
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Door {
+    lockall
+    compare_var_to_var(VAR_ICHOR_MASK_ACT, VAR_0x8008)
+    goto_if_gt(ThyrsaCity_TempleOfDionysus_EventScript_DoorPlayed)
+    goto_if_lt(ThyrsaCity_TempleOfDionysus_EventScript_DoorPlayed)
+    if (var(VAR_ICHOR_MASK) == 0) {
+        msgbox(format("You can't walk on barefaced. The masks hang in the green room."))
+        releaseall
+        end
+    }
+    if (var(VAR_0x8008) == 0) {
+        goto(ThyrsaCity_TempleOfDionysus_EventScript_Act1)
+    } elif (var(VAR_0x8008) == 1) {
+        goto(ThyrsaCity_TempleOfDionysus_EventScript_Act2)
+    }
+    goto(ThyrsaCity_TempleOfDionysus_EventScript_Act3)
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_DoorPlayed {
+    msgbox(format("That act is over. The door stays shut."))
     releaseall
 }
 
-script ThyrsaCity_TempleOfDionysus_EventScript_Comedy {
-    lockall
-    if (var(VAR_ICHOR_MASK_ACT) == 0 && var(VAR_ICHOR_MASK) == 1) {
-        setvar(VAR_ICHOR_MASK_ACT, 1)
-        msgbox(format("The first entrance earns a laugh. Read the next cue."))
-    } else {
-        msgbox(format("No entrance here in that role. Read the program."))
+// Act I teaches: the prompter catches a wrong try before anyone sees it.
+script ThyrsaCity_TempleOfDionysus_EventScript_Act1 {
+    setspeaker(Thyrsa_Text_NamePrompter)
+    if (var(VAR_0x8009) != 3) {
+        msgbox(format("Psst! Not that door! Where has the stranger just come from?\p"
+                      "Look at what's painted by each door."))
+        releaseall
+        end
     }
+    if (var(VAR_ICHOR_MASK) != 1) {
+        msgbox(format("Psst! Right door, wrong face. Does the stranger laugh or weep?\p"
+                      "After this act I can't save you. Miss a cue and you'll drop."))
+        releaseall
+        end
+    }
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_ICHOR_MASK_ACT, 1)
+    playse(SE_DOOR)
+    msgbox(format("You stroll on from the harbor, laughing at nothing at all.\p"
+                  "Out front, somebody laughs with you."))
+    closemessage
+    warpsilent(MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS, 18, 30)
+    waitstate
     releaseall
 }
 
-script ThyrsaCity_TempleOfDionysus_EventScript_Tragedy {
-    lockall
-    if (var(VAR_ICHOR_MASK_ACT) == 1 && var(VAR_ICHOR_MASK) == 2) {
-        setvar(VAR_ICHOR_MASK_ACT, 2)
-        msgbox(format("The chorus weeps. The second act ends."))
-    } else {
-        msgbox(format("The door stays shut. Who enters in this act?"))
+script ThyrsaCity_TempleOfDionysus_EventScript_Act2 {
+    if (var(VAR_0x8009) != 2) {
+        goto(ThyrsaCity_TempleOfDionysus_EventScript_Trapdoor)
     }
+    if (var(VAR_ICHOR_MASK) != 2) {
+        goto(ThyrsaCity_TempleOfDionysus_EventScript_WrongFace)
+    }
+    setvar(VAR_ICHOR_MASK_ACT, 2)
+    playse(SE_DOOR)
+    msgbox(format("You stumble out of the house, rubbing your eyes. The shepherds turn on you.\p"
+                  "The chorus weeps. The rolling stage carries you down to the footlights."))
+    closemessage
+    warpsilent(MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS, 12, 22)
+    waitstate
     releaseall
 }
 
-script ThyrsaCity_TempleOfDionysus_EventScript_Satyr {
+script ThyrsaCity_TempleOfDionysus_EventScript_Act3 {
+    if (var(VAR_0x8009) != 3) {
+        goto(ThyrsaCity_TempleOfDionysus_EventScript_Trapdoor)
+    }
+    if (var(VAR_ICHOR_MASK) != 3) {
+        goto(ThyrsaCity_TempleOfDionysus_EventScript_WrongFace)
+    }
+    setvar(VAR_ICHOR_MASK_ACT, 3)
+    playse(SE_M_TEETER_DANCE)
+    msgbox(format("You bound in from the harbor behind the god, and the goat-men pour after you.\p"
+                  "They eat the funeral wreaths. The chorus loses its place.\p"
+                  "High above the stage, someone laughs. The crane's ropes creak."))
+    closemessage
+    warpsilent(MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS, 18, 14)
+    waitstate
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_Trapdoor {
+    msgbox(format("Wrong door. You've missed your cue.\p"
+                  "The floor drops out from under you!"))
+    closemessage
+    playse(SE_FALL)
+    warpsilent(MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS, 12, 36)
+    waitstate
+    releaseall
+}
+
+// The right door in the wrong mask: the chorus won't have you, every time.
+script ThyrsaCity_TempleOfDionysus_EventScript_WrongFace {
+    msgbox(format("Right door. But the chorus takes one look at your face and closes ranks."))
+    cleartrainerflag(TRAINER_ICHOR_THYRSA_CHORUS)
+    trainerbattle_no_intro(TRAINER_ICHOR_THYRSA_CHORUS, Thyrsa_Text_ChorusDefeat)
+    msgbox(format("Wrong face for the part. The chorus shoves you back into the wings."))
+    releaseall
+}
+
+text Thyrsa_Text_ChorusDefeat { format("Fine! But you're still wrong.") }
+
+// --- The crane, the roof and Thespis ---------------------------------------------
+
+script ThyrsaCity_TempleOfDionysus_EventScript_MechaneUp {
     lockall
-    if (var(VAR_ICHOR_MASK_ACT) == 2 && var(VAR_ICHOR_MASK) == 3) {
-        setvar(VAR_ICHOR_MASK_ACT, 3)
-        setmetatile(12, 5, 0x250, 0)
-        special(DrawWholeMapView)
-        msgbox(format("The goat enters after the funeral, carrying the king's lunch.\p"
-                      "The chorus loses its place. Somewhere above you, a man laughs.\p"
-                      "The stair to the roof is open."))
-    } elif (var(VAR_ICHOR_MASK_ACT) >= 3) {
-        msgbox(format("The last laugh belongs to the role the play forgot."))
-    } else {
-        msgbox(format("Not yet. Even a goat has to wait for its cue."))
+    if (var(VAR_ICHOR_MASK_ACT) < 3) {
+        msgbox(format("The crane's ropes. Only gods ride the mechane."))
+        releaseall
+        end
+    }
+    msgbox(format("You grab the crane's hook. Stagehands haul,\p"
+                  "and the mechane swings you up over the scenery."))
+    closemessage
+    warpsilent(MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS, 12, 6)
+    waitstate
+    releaseall
+}
+
+script ThyrsaCity_TempleOfDionysus_EventScript_MechaneDown {
+    lockall
+    msgbox(format("Ride the crane back down to the stage?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        warpsilent(MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS, 12, 9)
+        waitstate
     }
     releaseall
 }
@@ -81,45 +318,6 @@ script ThyrsaCity_TempleOfDionysus_EventScript_Satyr {
 script ThyrsaCity_TempleOfDionysus_EventScript_Altar {
     setspeaker(SP_NAME_NONE)
     goto(EventScript_IchorTempleAltar_Dionysus)
-}
-
-script ThyrsaCity_TempleOfDionysus_EventScript_Comic {
-    if (var(VAR_ICHOR_MASK) == 1) {
-        lock
-        faceplayer
-        msgbox(format("Same mask. Same side. Left door, fellow fool."))
-        release
-        end
-    }
-    trainerbattle_single(TRAINER_ICHOR_THYRSA_COMIC, format("Wrong role. Improvise!"), format("A convincing performance."))
-    msgbox(format("Try the mask rack before your next entrance."), MSGBOX_AUTOCLOSE)
-    end
-}
-
-script ThyrsaCity_TempleOfDionysus_EventScript_Tragic {
-    if (var(VAR_ICHOR_MASK) == 2) {
-        lock
-        faceplayer
-        msgbox(format("We who weep enter together. Or not at all."))
-        release
-        end
-    }
-    trainerbattle_single(TRAINER_ICHOR_THYRSA_TRAGIC, format("My sorrow has teeth."), format("Now it has company."))
-    msgbox(format("An actor can be more than one thing."), MSGBOX_AUTOCLOSE)
-    end
-}
-
-script ThyrsaCity_TempleOfDionysus_EventScript_SatyrActor {
-    if (var(VAR_ICHOR_MASK) == 3) {
-        lock
-        faceplayer
-        msgbox(format("They forgot the goat! They always forget the goat!"))
-        release
-        end
-    }
-    trainerbattle_single(TRAINER_ICHOR_THYRSA_SATYR, format("There's a punch line coming."), format("There it is."))
-    msgbox(format("Tragedy, then the satyr play. Never leave people in the dark."), MSGBOX_AUTOCLOSE)
-    end
 }
 
 script ThyrsaCity_TempleOfDionysus_EventScript_Thespis {
