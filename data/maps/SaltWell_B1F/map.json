@@ -1,0 +1,142 @@
+{
+  "id": "MAP_SALT_WELL_B1F",
+  "name": "SaltWell_B1F",
+  "layout": "LAYOUT_SALT_WELL_B1F",
+  "music": "MUS_ICHOR_HOLLOW",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ASTYRA",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 7,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_SALT_WELL_HEAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 24,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_BIG_PEARL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_SALT_WELL_PEARL"
+    },
+    {
+      "local_id": "LOCALID_SALT_WELL_B1F_GLAUKOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 12,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaltWell_B1F_EventScript_Glaukos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SALT_WELL_B1F_KYMOTHOE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 22,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "SaltWell_B1F_EventScript_Kymothoe",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SALT_WELL_B1F_REST",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 8,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaltWell_B1F_EventScript_Rest",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_AKROPOLIS",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 21,
+      "y": 24,
+      "elevation": 0,
+      "dest_map": "MAP_SALT_WELL_B2F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 6,
+      "y": 24,
+      "elevation": 0,
+      "item": "ITEM_SHOAL_SALT",
+      "flag": "FLAG_ICHOR_HIDDEN_SALT_WELL_SALT",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 23,
+      "y": 25,
+      "elevation": 0,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_ICHOR_HIDDEN_SALT_WELL_SCALE",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaltWell_B1F_EventScript_Tide"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaltWell_B1F_EventScript_Shallows"
+    }
+  ]
+}

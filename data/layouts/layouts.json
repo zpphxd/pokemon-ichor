@@ -1177,6 +1177,39 @@
       "border_filepath": "data/layouts/Astyra_Akropolis/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Akropolis/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_SALT_WELL_B1F",
+      "name": "SaltWell_B1F_Layout",
+      "width": 30,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/SaltWell_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/SaltWell_B1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_SALT_WELL_B2F",
+      "name": "SaltWell_B2F_Layout",
+      "width": 30,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/SaltWell_B2F/border.bin",
+      "blockdata_filepath": "data/layouts/SaltWell_B2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA_HARBOR",
+      "name": "Astyra_Harbor_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Astyra_Harbor/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra_Harbor/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

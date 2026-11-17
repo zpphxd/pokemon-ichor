@@ -1,0 +1,113 @@
+const SW_BRAZIER = FLAG_ICHOR_BRAZIERS_START + 0x24
+mapscripts SaltWell_B2F_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(SW_BRAZIER)) {
+            call(SaltWell_B2F_EventScript_Lit)
+        }
+        if (flag(FLAG_ICHOR_SALT_WELL_TIDE_2)) {
+            call(SaltWell_B2F_EventScript_LowWater)
+        }
+        if (flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+            setmetatileinrange(25, 23, 25, 23, 0x170, FALSE, 1)
+        }
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_ALETHEA_LEFT_ASTYRA)) {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_SALT_WELL)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_SALT_WELL)
+        }
+        if (flag(SW_BRAZIER)) {
+            setflashlevel(0)
+        }
+    }
+}
+script SaltWell_B2F_EventScript_Brazier {
+    setvar(VAR_0x8004, SW_BRAZIER)
+    setvar(VAR_0x8005, TRUE)
+    call(EventScript_IchorBrazier)
+    if (flag(SW_BRAZIER)) {
+        call(SaltWell_B2F_EventScript_Lit)
+        special(DrawWholeMapView)
+    }
+    releaseall
+}
+script SaltWell_B2F_EventScript_Lit {
+    setmetatile(14, 8, 0x2FA, TRUE)
+    setmetatile(15, 8, 0x2FB, TRUE)
+    setmetatile(14, 9, 0x302, TRUE)
+    setmetatile(15, 9, 0x303, TRUE)
+    return
+}
+script SaltWell_B2F_EventScript_Tide {
+    lockall
+    if (!flag(FLAG_ICHOR_SALT_WELL_TIDE_2)) {
+        msgbox(format("The Torch catches a pale line under the water.\pWait for the backwash?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            releaseall
+            end
+        }
+        closemessage
+        playse(SE_M_SURF)
+        delay(45)
+        setflag(FLAG_ICHOR_SALT_WELL_TIDE_2)
+        call(SaltWell_B2F_EventScript_LowWater)
+        special(DrawWholeMapView)
+    }
+    msgbox(format("The pale stones lead to a low shelf beside the pool."))
+    releaseall
+}
+script SaltWell_B2F_EventScript_LowWater {
+    setmetatileinrange(16, 18, 17, 22, 0x157, FALSE, 3)
+    return
+}
+script SaltWell_B2F_EventScript_Halia {
+    trainerbattle_single(TRAINER_ICHOR_SALT_WELL_HALIA,
+        format("The sea sounds like it's breathing down here.\pLet's give it something to listen to."),
+        format("It held its breath."))
+    msgbox(format("Light the old brazier. It's easier to see the tide line."), MSGBOX_AUTOCLOSE)
+    end
+}
+script SaltWell_B2F_EventScript_Dolphin {
+    lockall
+    faceplayer
+    playmoncry(SPECIES_FINIZEN, CRY_MODE_NORMAL)
+    msgbox(format("A dolphin surfaces. A shell gleams in its mouth."))
+    applymovement(LOCALID_SALT_WELL_B2F_DOLPHIN, SaltWell_Movement_Nudge)
+    waitmovement(0)
+    msgbox(format("It nudges the shell into your hands."))
+    giveitem(ITEM_POSEIDONS_CONCH)
+    if (!flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+        msgbox(format("Your Bag is full. The dolphin waits with the shell."))
+        releaseall
+        end
+    }
+    closemessage
+    setmetatileinrange(25, 23, 25, 23, 0x170, FALSE, 1)
+    special(DrawWholeMapView)
+    removeobject(LOCALID_SALT_WELL_B2F_DOLPHIN)
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("No reading. No decree. It just... chose to help.\pBlow that at the shore. I think you have a friend."))
+    msgbox(format("I'm going to keep digging. Not here. Not for them.\pEverywhere's outside the walls if you walk far enough."))
+    closemessage
+    applymovement(LOCALID_SALT_WELL_B2F_ALETHEA, SaltWell_Movement_AletheaLeaves)
+    waitmovement(0)
+    setflag(FLAG_ICHOR_ALETHEA_LEFT_ASTYRA)
+    removeobject(LOCALID_SALT_WELL_B2F_ALETHEA)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+script SaltWell_B2F_EventScript_Alethea {
+    msgbox(format("Hear that? Not the wind. Something breathing."), MSGBOX_NPC)
+}
+script SaltWell_B2F_EventScript_SeaDoor {
+    if (flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+        lockall
+        warp(MAP_ASTYRA_HARBOR, 10, 12)
+        waitstate
+        releaseall
+    }
+    end
+}
+movement SaltWell_Movement_Nudge { walk_in_place_down }
+movement SaltWell_Movement_AletheaLeaves { walk_left * 3 walk_up * 8 }

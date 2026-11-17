@@ -1,0 +1,56 @@
+mapscripts SaltWell_B1F_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_SALT_WELL_TIDE_1)) {
+            call(SaltWell_B1F_EventScript_LowWater)
+        }
+    }
+}
+script SaltWell_B1F_EventScript_Shallows {
+    msgbox(format("Clear water over pale stone. Only ankle deep.\pA jar rests in the pool. You can wade to it."), MSGBOX_SIGN)
+}
+script SaltWell_B1F_EventScript_Tide {
+    lockall
+    if (!flag(FLAG_ICHOR_SALT_WELL_TIDE_1)) {
+        msgbox(format("The pool swells, then drains. White stones show beneath the foam.\pWait for the backwash?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            releaseall
+            end
+        }
+        closemessage
+        playse(SE_M_SURF)
+        delay(45)
+        setflag(FLAG_ICHOR_SALT_WELL_TIDE_1)
+        call(SaltWell_B1F_EventScript_LowWater)
+        special(DrawWholeMapView)
+    }
+    msgbox(format("Follow the pale stones. The deep pool stays blue."))
+    releaseall
+}
+script SaltWell_B1F_EventScript_LowWater {
+    setmetatileinrange(13, 14, 15, 17, 0x157, FALSE, 3)
+    return
+}
+script SaltWell_B1F_EventScript_Glaukos {
+    trainerbattle_single(TRAINER_ICHOR_SALT_WELL_GLAUKOS,
+        format("I came up here to keep my sandals dry. Now look.\pOne battle while the water falls?"),
+        format("Should've taken my sandals off."))
+    msgbox(format("Pale stone, shallow water. Dark blue, don't step.\pThe lower grotto has no daylight. Bring your Torch."), MSGBOX_AUTOCLOSE)
+    end
+}
+script SaltWell_B1F_EventScript_Kymothoe {
+    trainerbattle_single(TRAINER_ICHOR_SALT_WELL_KYMOTHOE,
+        format("Poseidon left salt. Athena left an olive.\pI wonder which gift lasts longer."),
+        format("Salt, apparently."))
+    msgbox(format("Something keeps bringing shells into this grotto."), MSGBOX_AUTOCLOSE)
+    end
+}
+script SaltWell_B1F_EventScript_Rest {
+    lock
+    faceplayer
+    msgbox(format("Catch your breath. I brought fresh water, not this stuff."))
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    msgbox(format("A sea-door used to lead from the bottom to the harbor.\pYou'd need a friend who swims."), MSGBOX_DEFAULT)
+    release
+}

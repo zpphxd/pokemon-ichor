@@ -32,6 +32,7 @@ Astyra_EarlyScript:
     lockall
     setvar VAR_TEMP_F, 1
     givemon SPECIES_KYNDER, 100, move1=MOVE_FLAMETHROWER, move2=MOVE_LEER
+    additem ITEM_HECATES_TORCH, 1
     setflag FLAG_SYS_POKEMON_GET
     setflag FLAG_BADGE01_GET
     setflag FLAG_BADGE02_GET

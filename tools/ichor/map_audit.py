@@ -85,6 +85,7 @@ STAGES = [  # (stage, band, route numbers, place prefixes)
     ("Astyra", "middle", (13, 14, 15, 16, 17, 18),
      ("Nemea", "Daphni", "Astyra", "Marathon", "CapeSounion", "Sounion",
       "AeginaAphaia", "AeginaTemple", "AeginaMount")),  # Aigina's interior opens in Act II (beat 46)
+    ("Salt Well", "middle", (), ("SaltWell",)),
     ("Kaldera", "middle", (19, 20, 21), ("Kaldera", "Paros", "Delos", "Skyros", "Lemnos", "Samothrake", "Ikaria",
                                          "Samos", "Chios", "Lesbos")),
     ("Kythera", "late", (22,), ("Melos", "Kythera")),

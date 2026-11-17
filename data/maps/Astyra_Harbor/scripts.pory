@@ -1,0 +1,21 @@
+mapscripts Astyra_Harbor_MapScripts {}
+script Astyra_Harbor_EventScript_SeaDoor {
+    lockall
+    if (flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+        msgbox(format("The salt spring's sea-door. Ride back into the grotto?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            closemessage
+            warp(MAP_SALT_WELL_B2F, 24, 23)
+            waitstate
+        }
+    } else {
+        msgbox(format("A sealed sea-door. Salt water seeps between the stones."))
+    }
+    releaseall
+}
+script Astyra_Harbor_EventScript_Sign {
+    msgbox(format("ASTYRA HARBOR\nNorth: city steps."), MSGBOX_SIGN)
+}
+script Astyra_Harbor_EventScript_Mariner {
+    msgbox(format("Kaldera's ash blows this far on a south wind.\pThe trireme takes the long way. A dolphin wouldn't have to."), MSGBOX_NPC)
+}

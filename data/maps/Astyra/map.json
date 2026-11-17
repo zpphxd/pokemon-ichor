@@ -141,6 +141,13 @@
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_AKROPOLIS",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 25,
+      "y": 46,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_HARBOR",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

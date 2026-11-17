@@ -431,6 +431,20 @@ Regenerate with `python3 tools/ichor/maps/astyra.py` after `arkadia.py` and
 `nemea.py` in that order. The shared road/team builders take optional records;
 their default Nemea output remains unchanged.
 
+The same fixture continues through the caretaker's saved Salt Well stair,
+two floors of wading/tide choices, all three trainers, all eight cave rewards,
+midpoint healing, Torch darkness and brazier `+0x24`. It checks a full key-item
+pocket before the actual dolphin reward: only successful `giveitem` sets the
+canonical Conch flag, places Delphinus and permits Alethea's saved departure.
+Actual Surf, the mounted two-way harbor sea-door, dismounting, capital return
+and save/reset/CONTINUE are covered. Generate `salt_well.py` after `astyra.py`.
+The map audit's solid Akropolis arrival warning is the caretaker's intentionally
+closed stair; the native fixture enters and returns through its live open state.
+Water cells use elevation 1 and collision 0; shore/wading cells use elevation 3.
+Saved crossings use `setmetatileinrange` with an explicit elevation because
+`setmetatile` alone preserves the old elevation. The dolphin stands in shallow
+water at shore elevation so it remains interactable before obtaining the Conch.
+
 Phaedon's ordinary male stand-in cannot play `ANIM_NURSE_BOW`. His healing
 reuses `EventScript_PkmnCenterNurse_TakeAndHealPkmn` without the nurse-only
 bow. The existing whiteout dispatcher selects his dedicated recovery script
@@ -541,7 +555,7 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   | +0x00–0x0F | engine | tests and the slice |
   | +0x10–0x13 | world-act1 | the Telesterion's season braziers in Eleusa: autumn, winter, spring, summer |
   | +0x14–0x1F | world-act1 | kept: the Mystery sanctum's four, Eleusa's procession torches |
-  | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and the oracle's chamber; room for Arkadia and Kaldera |
+  | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and oracle's chamber; Salt Well B2F uses +0x24; room for Arkadia and Kaldera |
   ```
   // the brazier's bg event
   script Map_Brazier1 {

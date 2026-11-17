@@ -14,6 +14,7 @@ The single source for levels across the whole game. Every script, encounter tabl
 | **Thyrsa** (Laurel 4) | 21–28 | 24–30 | Thespis 30–32 | Act II. The Dionysia |
 | **Arkadia** (Laurel 5) | 26–33 | 30–35 | Kallisto 35–37 | Kleon joins the Titans |
 | **Astyra** (midpoint) | 30–36 | 33–38 | Kleon 38–40 | The Akropolis double battle |
+| **Salt Well** (Conch quest) | 36–39 | 36–38 | — | Two floors after the Akropolis raid, SYSTEMS §1 |
 | **Kaldera** (Laurel 6) | 34–40 | 37–42 | Talos 41–43 | The low point |
 | **Kythera** (Laurel 7) | 38–45 | 42–47 | Galatea 46–48 | Act III |
 | **Knossa**, the Labyrinth | 42–48 | 45–50 | Hyperion 50–53, Kleon 51–54 | LABYRINTH.md's levels |
@@ -55,6 +56,9 @@ The single source for levels across the whole game. Every script, encounter tabl
   starter-counter variants use 38, 38, 39, 40; Rhea uses 38, 39, 40.
   These parties and their difficulty variants are implemented, not
   natural-level pacing approval.
+- **Salt Well quest band:** its two floors use Water-type encounters at
+  36–39 (SYSTEMS §1), following the raid rather than the earlier capital road.
+  The stranded Glaukos has one 36; optional grotto trainers use 37–38.
 - **Aethos's trainers use Aethos's Pokémon** (user, 2026-11-14). Before the post-game, trainer parties and wild tables draw on the 152-species Aethos dex for the most part. A non-Aethos species is the exception and needs a reason: a story gift such as the theoxenia starters, a foreigner's signature Pokémon, or a deliberate rarity. The National Dex's other species belong to the Oikoumene and the post-game.
 - **Gifts:** theoxenia starters follow SYSTEMS.md §10's levels, which must sit inside the band of the stage where they're given.
 - **Act I amphora returns:** explicit shelf restoration unlocks the one-off

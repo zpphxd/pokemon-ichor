@@ -1954,6 +1954,16 @@
 #define FLAG_ICHOR_HIDE_RHEA_AKROPOLIS           (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Rhea left through the spring stair
 #define FLAG_ICHOR_AKROPOLIS_RECOVERED           (FLAG_ICHOR_GENERAL_START + 0x143) // Ichor: Phaedon tended the player after the raid
 #define FLAG_ICHOR_HIDE_ALETHEA_ASTYRA_CLINIC    (FLAG_ICHOR_GENERAL_START + 0x144) // Ichor: Alethea is only at the clinic for the raid aftermath
+#define FLAG_ICHOR_SALT_WELL_OPEN               (FLAG_ICHOR_GENERAL_START + 0x145) // Ichor: Caretaker opened Poseidon's stair
+#define FLAG_ICHOR_SALT_WELL_TIDE_1             (FLAG_ICHOR_GENERAL_START + 0x146) // Ichor: Found the upper pool's safe backwash crossing
+#define FLAG_ICHOR_SALT_WELL_TIDE_2             (FLAG_ICHOR_GENERAL_START + 0x147) // Ichor: Found the grotto's safe backwash crossing
+#define FLAG_ICHOR_ALETHEA_LEFT_ASTYRA          (FLAG_ICHOR_GENERAL_START + 0x148) // Ichor: Alethea left after the Conch
+#define FLAG_ICHOR_HIDE_ALETHEA_SALT_WELL       (FLAG_ICHOR_GENERAL_START + 0x149) // Ichor: Independent Salt Well actor state
+#define FLAG_ICHOR_ITEM_SALT_WELL_HEAL          (FLAG_ICHOR_GENERAL_START + 0x14A) // Ichor: Supply by the teaching shallows
+#define FLAG_ICHOR_ITEM_SALT_WELL_PEARL         (FLAG_ICHOR_GENERAL_START + 0x14B) // Ichor: Upper side grotto gift
+#define FLAG_ICHOR_ITEM_SALT_WELL_ETHER         (FLAG_ICHOR_GENERAL_START + 0x14C) // Ichor: Lower side grotto supply
+#define FLAG_ICHOR_ITEM_SALT_WELL_SHELL         (FLAG_ICHOR_GENERAL_START + 0x14D) // Ichor: Lower side grotto gift
+#define FLAG_ICHOR_ITEM_ASTYRA_HARBOR           (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Harbor pier jar
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
@@ -1993,6 +2003,12 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Capital pass repel
 #define FLAG_ICHOR_HIDDEN_AKROPOLIS_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x021) // Ichor: Lower terrace revive
 #define FLAG_ICHOR_HIDDEN_AKROPOLIS_ETHER        (FLAG_ICHOR_GENERAL2_START + 0x022) // Ichor: Olive court ether
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_SALT        (FLAG_ICHOR_GENERAL2_START + 0x023) // Ichor: Upper tide-line salt
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_SCALE       (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: Upper rock-pool scale
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_PEARL       (FLAG_ICHOR_GENERAL2_START + 0x025) // Ichor: Lower sea gift
+#define FLAG_ICHOR_HIDDEN_SALT_WELL_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x026) // Ichor: Lower sheltered cache
+#define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SALT    (FLAG_ICHOR_GENERAL2_START + 0x027) // Ichor: Harbor salt
+#define FLAG_ICHOR_HIDDEN_ASTYRA_HARBOR_SCALE   (FLAG_ICHOR_GENERAL2_START + 0x028) // Ichor: Harbor scale
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

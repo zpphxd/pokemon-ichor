@@ -395,7 +395,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
-| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia → Nemea → Emporion; return through Eleusa → Daphni → Astyra; Laurels 4–5, Dionysus/Artemis altars, Dionysia, Girdle quest, Kleon's recruitment, Hunt for the Hind, capital introductions, ostracism and Akropolis midpoint | Chapter presentation and natural-level acceptance; Salt Well/Conch; Kaldera and Laurel 6 |
+| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia → Nemea → Emporion; return through Eleusa → Daphni → Astyra; Laurels 4–5, Dionysus/Artemis altars, Dionysia, Girdle quest, Kleon's recruitment, Hunt for the Hind, capital introductions, ostracism, Akropolis midpoint and Salt Well/Conch with dolphin harbor passage | Chapter presentation and natural-level acceptance; Pandora's sherds; Kaldera and Laurel 6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
@@ -662,7 +662,7 @@ Kodros/Kairos inscriptions seed the countdown. The assisted native fixture
 covers actual connections/doors, refusal before Laurel 5, incorrect/correct
 riddle answers, healing, recovery and save/reset/CONTINUE. It is not a continuous
 natural-level run. Dedicated capital art, Phaedon/Elpis sprites,
-Pandora's sherds and Salt Well/Conch remain open;
+Pandora's sherds remain open;
 the approach and story increments below do not complete the Astyra chapter.
 
 The bedside visit now plays with Daphne and Phaedon as actual actors, including
@@ -692,8 +692,22 @@ same assisted native fixture. All three Kleon variants and Rhea have Mortal
 and Spartan parties; Spartan's next cap becomes Kaldera's 43 after the raid.
 The hill uses existing art and canopy/root swaps, not the finished olive-fall,
 glint, kneeling animation or bespoke character portraits. Those presentation
-gates and natural-level/human acceptance remain open. The next playable
-checkpoint is the two-floor Salt Well and Poseidon's Conch, not a free grant.
+gates and natural-level/human acceptance remain open.
+
+After the raid, the caretaker opens the actual Salt Well stair. Its two floors
+teach wading and saved safe backwash crossings, then combine the lower crossing
+with Torch darkness and a persistent brazier. Three Water-type trainers,
+a midpoint healer, encounters at 36–39 and eight visible/hidden cave rewards
+support the descent. The dolphin gives Poseidon's Conch, which places Delphinus;
+a full Pithos pocket leaves the encounter available to retry. Alethea delivers
+her departure and physically leaves. The Conch then calls the riding dolphin
+at actual water, and the opened sea-door leads to Astyra's connected harbor.
+The mounted passage works both ways, and the player can land on the pier and
+walk back into the capital. The connected assisted native fixture covers both
+tide choices, all three trainers, every cave reward, full-pocket recovery,
+actual Surf, reentry and save/reset/CONTINUE without duplicating the Conch or
+replaying Alethea's exit. Existing cave and harbor art is a gameplay foundation,
+not final presentation or natural-level approval. Kaldera and Laurel 6 are next.
 
 **Continuation order.** Prioritize connected playable Act II and Act III chapters
 while keeping Act I's remaining acceptance gates visible. Integrate shared systems at

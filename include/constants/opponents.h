@@ -188,7 +188,10 @@
 #define TRAINER_ICHOR_KLEON_AKROPOLIS_HIPLING 240
 #define TRAINER_ICHOR_KLEON_AKROPOLIS_NEBREL 241
 #define TRAINER_ICHOR_RHEA_AKROPOLIS         242
-#define TRAINERS_END_ACT2                   243
+#define TRAINER_ICHOR_SALT_WELL_GLAUKOS      243
+#define TRAINER_ICHOR_SALT_WELL_KYMOTHOE     244
+#define TRAINER_ICHOR_SALT_WELL_HALIA        245
+#define TRAINERS_END_ACT2                   246
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

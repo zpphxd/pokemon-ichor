@@ -3716,3 +3716,51 @@ Adamant Nature
 - Bulk Up
 
 /* End Akropolis raid teams. */
+
+/* Salt Well teams. */
+
+=== TRAINER_ICHOR_SALT_WELL_GLAUKOS ===
+Name: GLAUKOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_SALT_WELL_KYMOTHOE ===
+Name: KYMOTHOE
+Class: Pilgrim
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Narkeray
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Karkitox
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_SALT_WELL_HALIA ===
+Name: HALIA
+Class: Pilgrim
+Pic: Acolyte F
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Karkitox
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Galenyon
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Salt Well teams. */

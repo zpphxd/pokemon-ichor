@@ -8,7 +8,8 @@
     "gMapGroup_IndoorEmporion",
     "gMapGroup_IndoorEleusa",
     "gMapGroup_DungeonsAct1",
-    "gMapGroup_IndoorThyrsa"
+    "gMapGroup_IndoorThyrsa",
+    "gMapGroup_DungeonsAct2"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -38,7 +39,8 @@
     "StyxFalls",
     "Route12_CypressRoad",
     "Arkadia",
-    "Astyra_Akropolis"
+    "Astyra_Akropolis",
+    "Astyra_Harbor"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -135,5 +137,9 @@
     "Astyra_PhaedonsHouse",
     "Astyra_Library",
     "Astyra_Stoa"
+  ],
+  "gMapGroup_DungeonsAct2": [
+    "SaltWell_B1F",
+    "SaltWell_B2F"
   ]
 }

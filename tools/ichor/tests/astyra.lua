@@ -74,6 +74,108 @@ local function herm(script, flag)
     L.expect(L.getFlag(flag) and L.itemCount(S.ITEM_OIL) == oil - 1,
              "anointing consumes actual oil: " .. script)
 end
+local function surfing()
+    return emu:read8(S.SCRIPTS.gPlayerAvatar + S.OFF_AVATAR_FLAGS) & S.SURFING ~= 0
+end
+local function saltWell()
+    L.setVar(S.VAR_REPEL, 999)
+    door(S.MAP_WELL_1, "salt_well")
+    L.go(5, 8)
+    L.expect(not surfing(), "the teaching pool is actual walkable shallow water before the Conch")
+    L.talk(L.ball(S.FLAG_WELL_HEAL))
+    L.talk(L.ball(S.FLAG_WELL_PEARL))
+    L.talk(L.npc("SaltWell_B1F_EventScript_Kymothoe"))
+    local tide = L.sign("SaltWell_B1F_EventScript_Tide")
+    L.talk(tide, {answers = {"no"}})
+    L.expect(not L.getFlag(S.FLAG_TIDE_1) and not L.canReachNextTo(21, 24),
+             "declining the tide leaves the downstairs inaccessible without Surf")
+    L.talk(tide, {answers = {0}})
+    L.expect(L.getFlag(S.FLAG_TIDE_1) and not L.getFlag(S.FLAG_CONCH),
+             "watching the backwash reveals a real pre-Conch crossing")
+    local battles = #L.battles
+    L.go(14, 19)
+    L.expect(#L.battles == battles + 1 and not surfing(),
+             "the stranded trainer actually battles across the mandatory wading path")
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    L.talk(L.npc("SaltWell_B1F_EventScript_Rest"))
+    L.expect(emu:read16(L.partyMon(0) + S.OFF_MON_HP) > 1, "the well's midpoint traveler heals the actual party")
+    L.talk(L.hidden(S.FLAG_WELL_SALT))
+    L.talk(L.hidden(S.FLAG_WELL_SCALE))
+    door(S.MAP_WELL_2, "salt_grotto")
+    L.expect(emu:read8(L.sb1() + S.OFF_FLASH) > 0, "the lower grotto actually uses Torch darkness")
+    L.talk(L.sign("SaltWell_B2F_EventScript_Brazier"), {answers = {0}})
+    L.expect(L.getFlag(S.FLAG_BRAZIER) and emu:read8(L.sb1() + S.OFF_FLASH) == 0,
+             "Hecate's Torch lights a persistent brazier and the actual grotto")
+    L.talk(L.ball(S.FLAG_WELL_ETHER))
+    L.talk(L.ball(S.FLAG_WELL_SHELL))
+    L.talk(L.hidden(S.FLAG_WELL_HIDDEN_PEARL))
+    L.talk(L.sign("SaltWell_B2F_EventScript_Tide"), {answers = {0}})
+    L.expect(L.getFlag(S.FLAG_TIDE_2) and L.canReachNextTo(18, 22),
+             "the lit lower tide crossing reaches the dolphin without already owning Surf")
+    L.go(17, 22)
+    L.shot("dolphin_grotto")
+    local pocket, saved = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_KEY_ITEMS, {}
+    local key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+    for i = 0, S.BAG_KEYITEMS_COUNT - 1 do
+        local slot = pocket + i * S.ITEM_SLOT_SIZE
+        saved[i] = {emu:read16(slot), emu:read16(slot + 2) ~ key}
+        emu:write16(slot, S.ITEM_TORCH)
+        emu:write16(slot + 2, 1 ~ key)
+    end
+    local boxes = L.talk(L.npc("SaltWell_B2F_EventScript_Dolphin"))
+    L.expect(boxes >= 3 and not L.getFlag(S.FLAG_CONCH) and not L.getFlag(S.FLAG_ALETHEA_LEFT)
+             and L.npc("SaltWell_B2F_EventScript_Dolphin").present,
+             "a full Bag cannot lose the dolphin, award the Conch or prematurely send Alethea away")
+    pocket = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_KEY_ITEMS
+    key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+    for i = 0, S.BAG_KEYITEMS_COUNT - 1 do
+        emu:write16(pocket + i * S.ITEM_SLOT_SIZE, saved[i][1])
+        emu:write16(pocket + i * S.ITEM_SLOT_SIZE + 2, saved[i][2] ~ key)
+    end
+    L.talk(L.npc("SaltWell_B2F_EventScript_Dolphin"))
+    L.expect(L.itemCount(S.ITEM_CONCH) == 1 and L.getFlag(S.FLAG_CONCH)
+             and L.getFlag(S.FLAG_DELPHINUS) and L.getFlag(S.FLAG_ALETHEA_LEFT),
+             "the actual dolphin grants one canonical Conch, places Delphinus and stages Alethea's departure")
+    L.talk(L.hidden(S.FLAG_WELL_REVIVE))
+    L.expect(L.getFlag(S.FLAG_WELL_HEAL) and L.getFlag(S.FLAG_WELL_PEARL)
+             and L.getFlag(S.FLAG_WELL_ETHER) and L.getFlag(S.FLAG_WELL_SHELL)
+             and L.getFlag(S.FLAG_WELL_SALT) and L.getFlag(S.FLAG_WELL_SCALE)
+             and L.getFlag(S.FLAG_WELL_HIDDEN_PEARL) and L.getFlag(S.FLAG_WELL_REVIVE),
+             "all eight real branch rewards are reachable and persistently collected")
+    L.go(19, 23)
+    L.talk(20, 23, {answers = {0}})
+    L.expect(surfing(), "blowing the newly earned Conch actually mounts the dolphin")
+    L.shot("first_dolphin_ride")
+    for _ = 1, 8 do
+        if L.mapId() == S.MAP_WELL_2 then L.step(K.RIGHT); L.settle() end
+    end
+    L.expect(L.mapId() == S.MAP_HARBOR and surfing(),
+             "the sea-door actually rides out to the capital harbor")
+    L.shot("dolphin_in_harbor")
+    L.step(K.LEFT); L.step(K.LEFT)
+    L.talk(L.sign("Astyra_Harbor_EventScript_SeaDoor"), {answers = {"yes"}})
+    L.expect(L.mapId() == S.MAP_WELL_2 and surfing(),
+             "the harbor's sea-door is an actual two-way mounted connection")
+    L.step(K.RIGHT); L.settle()
+    L.step(K.RIGHT); L.settle()
+    L.expect(L.mapId() == S.MAP_HARBOR and L.itemCount(S.ITEM_CONCH) == 1,
+             "riding back out cannot duplicate the Conch")
+    for _ = 1, 8 do L.step(K.RIGHT); L.settle() end
+    L.expect(not surfing(), "the dolphin can land on the harbor pier")
+    door(S.MAP_ASTYRA, "harbor_city_steps")
+    L.useWarp(S.MAP_AKROPOLIS)
+    L.useWarp(S.MAP_WELL_1)
+    L.expect(L.getFlag(S.FLAG_TIDE_1) and L.canReachNextTo(21, 24),
+             "the learned upper crossing remains traversable on return")
+    L.useWarp(S.MAP_WELL_2)
+    L.expect(L.getFlag(S.FLAG_TIDE_2) and emu:read8(L.sb1() + S.OFF_FLASH) == 0
+             and not L.npc("SaltWell_B2F_EventScript_Dolphin").present
+             and not L.npc("SaltWell_B2F_EventScript_Alethea").present
+             and L.itemCount(S.ITEM_CONCH) == 1,
+             "reentry restores light and crossings without replaying the reward or Alethea's exit")
+    L.useWarp(S.MAP_WELL_1)
+    L.useWarp(S.MAP_AKROPOLIS)
+end
 L.start(function()
     L.quickstart()
     L.runHeader("Astyra_EarlyHeader")
@@ -236,6 +338,7 @@ L.start(function()
     L.talk(L.hidden(S.FLAG_RAID_ETHER))
     L.expect(L.getFlag(S.FLAG_RAID_REVIVE) and L.getFlag(S.FLAG_RAID_ETHER),
              "both curious terrace/court corners grant persistent hidden supplies")
+    saltWell()
     leave()
     cross("left", S.MAP_R16, "road_after_raid")
     L.expect(emu:saveStateFile(L.OUT .. "before_capital_loss.ss", 31), "saved the capital loss branch")
@@ -262,6 +365,9 @@ L.start(function()
              and L.getFlag(S.FLAG_RECOVERY)
              and L.getFlag(S.FLAG_RAID_JAR) and L.getFlag(S.FLAG_RAID_REVIVE)
              and L.getFlag(S.FLAG_RAID_ETHER)
+             and L.getFlag(S.FLAG_CONCH) and L.getFlag(S.FLAG_DELPHINUS)
+             and L.getFlag(S.FLAG_ALETHEA_LEFT) and L.getFlag(S.FLAG_BRAZIER)
+             and L.getFlag(S.FLAG_TIDE_1) and L.getFlag(S.FLAG_TIDE_2)
              and L.getFlag(S.FLAG_R15_HERM) and L.getFlag(S.FLAG_R16_HERM),
              "capital scenes, canonical page and both herms survive save/reset/CONTINUE")
     cross("left", S.MAP_DAPHNI, "return_to_daphni")

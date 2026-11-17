@@ -55,7 +55,10 @@ def city():
         warp(36, 31, "Astyra_PhaedonsHouse", 0),
         warp(10, 19, "Astyra_Library", 0),
         warp(35, 18, "Astyra_Stoa", 0),
-        warp(25, 11, "Astyra_Akropolis", 0)]
+        warp(25, 11, "Astyra_Akropolis", 0),
+        warp(25, 46, "Astyra_Harbor", 0)]
+    m.rect(24, 40, 27, 47, 0x1D9)
+    m.put(25, 46, 0x1DB)
     m.person("Preacher", 17, 34, gfx="AUGUR")
     m.person("Herald", 29, 34, gfx="PILGRIM")
     m.person("Merchant", 37, 36, gfx="MERCHANT")
@@ -190,13 +193,16 @@ def akropolis():
             item="ITEM_" + item, flag="FLAG_ICHOR_HIDDEN_AKROPOLIS_" + flag))
     m.sign("Olive", 16, 8, tile=0x003)
     m.sign("SpringStair", 21, 5, tile=0x003)
+    m.sign("Trident", 24, 6, tile=0x0E0)
+    m.put(25, 6, 0x0E1, True)
     for y, scene in ((43, "PairOne"), (31, "PairTwo"), (19, "Kleon"), (11, "Rhea")):
         for x in range(15, 20):
             m.json["coord_events"].append(dict(type="trigger", x=x, y=y, elevation=0,
                 var="VAR_TEMP_1", var_value="0", script=m.prefix + scene))
     m.rect(15, 50, 19, 51, 0x1D9)
     m.put(17, 50, 0x1DB)
-    m.json["warp_events"] = [warp(17, 50, "Astyra", 4)]
+    m.json["warp_events"] = [warp(17, 50, "Astyra", 4),
+                              warp(25, 6, "SaltWell_B1F", 0)]
     m.save()
 
 

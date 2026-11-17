@@ -1,5 +1,8 @@
 mapscripts Astyra_Akropolis_MapScripts {
     MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_SALT_WELL_OPEN)) {
+            setmetatile(25, 6, 0x1DB, FALSE)
+        }
         if (flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {
             call(Akropolis_EventScript_FallenOlive)
         }
@@ -286,10 +289,24 @@ script Astyra_Akropolis_EventScript_Digger {
 }
 script Astyra_Akropolis_EventScript_Caretaker {
     if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
-        msgbox(format("Athena's tree is down. Poseidon's spring is still below us.\pSee the trident marks? Beneath the rock is the old salt well."), MSGBOX_NPC)
+        lock
+        faceplayer
+        msgbox(format("Athena's tree is down. Poseidon's spring is still below us.\pSee the trident marks? Beneath the rock is the old salt well."))
+        if (!flag(FLAG_ICHOR_SALT_WELL_OPEN)) {
+            msgbox(format("Poseidon struck there when he and Athena wanted this city.\pListen. The south wind's in it. The stone isn't sealed."))
+            closemessage
+            playse(SE_DOOR)
+            setflag(FLAG_ICHOR_SALT_WELL_OPEN)
+            setmetatile(25, 6, 0x1DB, FALSE)
+            special(DrawWholeMapView)
+        }
+        release
     } else {
         msgbox(format("Athena's olive. Please. Stop them."), MSGBOX_NPC)
     }
+}
+script Astyra_Akropolis_EventScript_Trident {
+    msgbox(format("Three long cuts in the rock. Salt beads in the grooves."), MSGBOX_SIGN)
 }
 script Astyra_Akropolis_EventScript_Olive {
     if (flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {

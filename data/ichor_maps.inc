@@ -83,3 +83,6 @@
 	.include "data/maps/Astyra_Library/scripts.inc"
 	.include "data/maps/Astyra_Stoa/scripts.inc"
 	.include "data/maps/Astyra_Akropolis/scripts.inc"
+	.include "data/maps/SaltWell_B1F/scripts.inc"
+	.include "data/maps/SaltWell_B2F/scripts.inc"
+	.include "data/maps/Astyra_Harbor/scripts.inc"
