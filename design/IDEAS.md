@@ -8,13 +8,13 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Now:** a bare outdoor hamlet between Route 8 and Route 9, with an outdoor healer, a merchant and one sign (no buildings).
 - **Idea (user, 2026-11-17):** a temple stands here as a rest stop for travelers.
 - **Later:** a side quest, perhaps in the post-game. Trophonios's oracle cave (AETHOS_MAP.md's proposal: an optional dark cave for the Torch, entered feet first) fits it.
-- **Not yet:** don't build it now. Keep the current healer and merchant working until the temple replaces them.
+- **In progress (2026-11-17):** the user asked to build it now, with the Route 7–8 rebuild. The oracle's descent stays a sealed hook for the later side quest.
 
 ### Every route: a design and complexity pass
 - **Idea (user, 2026-11-17):** improve all the routes, both how they look and how complex they are to explore.
 - **The model:** Route 6 and Mt. Kithairon's rebuild (tools/ichor/maps/kithairon.py): trainers on chokepoints you can't walk around, forced grass, ledges and one-way shortcuts, terrain that reads (climbs, cliffs, water), optional branches with rewards, and three render → critique → fix passes.
 - **Also for each route:** fuller time-of-day wild tables, fishable water with a fishing table, relic gates that invite a return, and a landmark per screen.
 - **First up when it lands:** Route 7 (Kronia Grounds) and Routes 8–9 around Lebadeia, which the user asked about; then Routes 1, 4 and 5, and every route after.
-- **Not yet:** don't start until the user says.
+- **In progress (2026-11-17):** Routes 7, 8, 9, 11, 13 and 14, with the bare stops (Lebadeia, Kirrha, Aigion, Nemea) each getting a temple, shrine or outcamp that can carry a later quest. Routes 1, 4, 5 and the rest are still to come.
 
 ## Done
