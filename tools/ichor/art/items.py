@@ -19,8 +19,8 @@ The look (design/phase1/PLAN.md's master palette; the Aethos style):
   * TMs are sealed scrolls, the seal and cord in the move's type color
   * berries are Aegean fruit: the Oran Berry a fig, the Sitrus Berry a golden
     quince, the "golden apple" of the Hesperides
-  * Poke Balls keep their name and look (director's ruling), so the ball
-    icons are not touched
+  * Poke Balls are drawn in balls.py (one sphere, one band, one god's mark
+    per ball) and registered here, like the relics
 
 Some pics are shared by several items, each with its own palette (the Potion
 pic serves Potion, Super Potion and Hyper Potion), and some palettes color
@@ -1288,6 +1288,12 @@ def write_jar():
 # ==========================================================================
 import items_relics  # noqa: E402
 items_relics.register(icon, pal, ramp_roles, C, Icon)
+
+# ==========================================================================
+# The Poke Balls (design/TERMS.md), drawn in balls.py with their battle sprites
+# ==========================================================================
+import balls  # noqa: E402
+balls.register(icon, pal, ramp_roles, C, Icon)
 
 
 # ==========================================================================
