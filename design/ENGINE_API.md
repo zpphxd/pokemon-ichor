@@ -849,7 +849,7 @@ Built in `src/ichor_labyrinth.c` and `data/scripts/ichor_labyrinth.pory`. Tested
 
 ```
 // ON_LOAD
-setvar(VAR_0x8004, <floor metatile>)          // a floor that takes thread (up to 4)
+setvar(VAR_0x8004, <floor metatile>)          // a floor that takes thread (up to 8)
 setvar(VAR_0x8005, <its first twin>)          // ten twins in a row, in the order below
 special(Ichor_AddThreadFloor)
 

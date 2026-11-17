@@ -66,5 +66,6 @@ void InitTilesetAnim_PorytilesManaged_Eurotas(void);
 
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_Stymphalia(void);
+void InitTilesetAnim_PorytilesManaged_Labyrinth(void);
 
 #endif // GUARD_TILESET_ANIMS_H
