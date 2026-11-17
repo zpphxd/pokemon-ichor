@@ -31,6 +31,13 @@ def importer():
     return module
 
 
+def concept_builder():
+    spec = importlib.util.spec_from_file_location("mon_from_concept", ROOT / "tools/ichor/art/mon_from_concept.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def check(names=NAMES):
     mons = build.load_mons()
     engine = (ROOT / "src/data/pokemon/species_info/aethos_families.h").read_text()
@@ -68,6 +75,14 @@ def check(names=NAMES):
         assert (source / "normal.pal").read_bytes() == (source / "overworld_normal.pal").read_bytes(), name
         assert (source / "shiny.pal").read_bytes() == (source / "overworld_shiny.pal").read_bytes(), name
         assert (source / "normal.pal").read_bytes() != (source / "shiny.pal").read_bytes(), name
+        if name.lower() in build.concept_sourced():
+            # built from an approved concept (design/STYLE.md §3), not the painter
+            c = concept_builder().build(name.lower(), concept_builder().SPECIES[name.lower()])
+            for file, want in (("anim_front.png", c["front"]), ("back.png", c["back"]),
+                               ("overworld.png", c["follow"]), ("icon.png", c["icon"])):
+                assert np.array_equal(arrays[file], want), (name, file, "concept reproducibility")
+            report[name] = {"source": "concept"}
+            continue
         assert np.array_equal(arrays["anim_front.png"], np.vstack(b.front)), (name, "front reproducibility")
         assert np.array_equal(arrays["back.png"], b.back), (name, "back reproducibility")
         assert np.array_equal(arrays["overworld.png"], np.hstack(b.follow)), (name, "follower reproducibility")

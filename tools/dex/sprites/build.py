@@ -306,7 +306,16 @@ def quantize_icon(frames, pal: Palette, force=None):
 # Writing
 # --------------------------------------------------------------------------
 
+def concept_sourced():
+    """Species whose sprites come from approved concepts (design/STYLE.md §3)."""
+    path = os.path.join(os.path.dirname(__file__), "..", "..", "ichor", "art", "concepts", "mon")
+    return {f[:-4] for f in os.listdir(path) if f.endswith(".png")} if os.path.isdir(path) else set()
+
+
 def write_mon(b: Built):
+    if b.mon.name.lower() in concept_sourced():
+        print(f"kept {b.mon.name}: built by tools/ichor/art/mon_from_concept.py, not this painter")
+        return None
     d = os.path.join(OUT, b.mon.name.lower())
     os.makedirs(d, exist_ok=True)
     save_indexed(np.vstack(b.front), b.pal, os.path.join(d, "anim_front.png"))
