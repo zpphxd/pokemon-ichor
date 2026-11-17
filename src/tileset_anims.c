@@ -1470,3 +1470,5 @@ void InitTilesetAnim_Thyrsa(void)
 #include "porytiles_generated/tilesets/paphia/generated_anim_code.h"
 #include "porytiles_generated/tilesets/neraida/generated_anim_code.h"
 #include "porytiles_generated/tilesets/melos/generated_anim_code.h"
+#include "porytiles_generated/tilesets/amnisos/generated_anim_code.h"
+#include "porytiles_generated/tilesets/bull_road/generated_anim_code.h"

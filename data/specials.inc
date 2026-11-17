@@ -1149,3 +1149,5 @@ gSpecials::
 	def_special Ichor_CountConstellations
 	def_special Ichor_ShowNightSky
 	def_special Ichor_TakeFirstFruits
+	@ Ichor: Act III engine (design/phase4/ENGINE_ACT3.md E7)
+	def_special Ichor_BullLeap

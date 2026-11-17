@@ -51,5 +51,7 @@ void InitTilesetAnim_PorytilesManaged_Skandeia(void);
 void InitTilesetAnim_PorytilesManaged_Paphia(void);
 void InitTilesetAnim_PorytilesManaged_Neraida(void);
 void InitTilesetAnim_PorytilesManaged_Melos(void);
+void InitTilesetAnim_PorytilesManaged_Amnisos(void);
+void InitTilesetAnim_PorytilesManaged_BullRoad(void);
 
 #endif // GUARD_TILESET_ANIMS_H
