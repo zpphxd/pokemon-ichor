@@ -1,0 +1,317 @@
+mapscripts Astyra_Akropolis_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {
+            call(Akropolis_EventScript_FallenOlive)
+        }
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
+            clearflag(FLAG_ICHOR_HIDE_RHEA_AKROPOLIS)
+            setvar(VAR_0x8004, TIME_NIGHT)
+            special(Ichor_HoldTimeOfDay)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
+            setflag(FLAG_ICHOR_HIDE_RHEA_AKROPOLIS)
+            special(Ichor_ReleaseTimeOfDay)
+        }
+        if (flag(FLAG_ICHOR_AKROPOLIS_GATE)) {
+            setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, 18, 46)
+        } else {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: Astyra_Akropolis_EventScript_Gate
+    ]
+}
+text Akropolis_Text_Captain { "CAPTAIN" }
+text Akropolis_Text_Kleon { "KLEON" }
+text Akropolis_Text_Rhea { "RHEA" }
+text Akropolis_Text_Titan { "TITANBORN" }
+text Akropolis_Text_LithosLost { format("That wasn't in the golden age.") }
+text Akropolis_Text_KoniortosLost { format("You'll grow old anyway.") }
+text Akropolis_Text_SiderosLost { format("My brother's still waiting.") }
+text Akropolis_Text_ChalkosLost { format("Good. Shift's over.") }
+text Akropolis_Text_KleonLost { format("That's not- it's written. It's WRITTEN.") }
+text Akropolis_Text_RheaLost { format("Hm. Good.") }
+
+script Astyra_Akropolis_EventScript_Gate {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    if (!flag(FLAG_ICHOR_ALETHEA_CONFESSED)) {
+        msgbox(format("The Akropolis is sealed tonight.\pAlethea was last seen outside the western wall."))
+        closemessage
+        warp(MAP_ASTYRA, 4)
+        waitstate
+        releaseall
+        end
+    }
+    applymovement(OBJ_EVENT_ID_PLAYER, Akropolis_Movement_Approach)
+    waitmovement(0)
+    setspeaker(Akropolis_Text_Captain)
+    msgbox(format("Stand aside, kid. Orders. Sealed by the Archon.\pNobody goes up or down tonight.\pFunny thing. Somebody's up there. Hear them?"))
+    setspeaker(Akropolis_Text_Titan)
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("What does the sickle reap?\pThe hours."))
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("Let me see that seal.\pThat's the Archon's owl. Pressed right. Perfect.\pAnd under it, in the wax... a little hook."))
+    msgbox(format("The same hook as my exile decree. The same as the play.\p{PLAYER}, the Archon didn't seal this. His Keeper of Records did."))
+    setspeaker(Akropolis_Text_Captain)
+    msgbox(format("The Keeper? He's the Archon's right hand."))
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("He's the Archon's right hand. And the Titans' left."))
+    setspeaker(Akropolis_Text_Captain)
+    msgbox(format("You're the girl they voted out this morning."))
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("I'm exiled from the city. The Akropolis is above the city.\pTechnically."))
+    setspeaker(Akropolis_Text_Captain)
+    msgbox(format("I didn't see you. Either of you. Go."))
+    closemessage
+    applymovement(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, Akropolis_Movement_Aside)
+    waitmovement(0)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, 18, 46)
+    setflag(FLAG_ICHOR_AKROPOLIS_GATE)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+script Astyra_Akropolis_EventScript_Captain {
+    msgbox(format("I didn't see you. Keep moving."), MSGBOX_NPC)
+}
+script Akropolis_EventScript_Retreat {
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("Back down! We can't help anyone if we stay here.\pPhaedon can get us on our feet. Then we try again."))
+    closemessage
+    special(HealPlayerParty)
+    setspeaker(SP_NAME_NONE)
+    warp(MAP_ASTYRA_ASCLEPEION, 8, 5)
+    waitstate
+    releaseall
+    end
+}
+script Astyra_Akropolis_EventScript_PairOne {
+    lockall
+    if (flag(FLAG_ICHOR_AKROPOLIS_PAIR_ONE)) {
+        releaseall
+        end
+    }
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 44)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
+    addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("They're in twos. So are we.\p{PLAYER}, with me."))
+    setspeaker(Akropolis_Text_Titan)
+    msgbox(format("LITHOS: Golden age soon! Then nobody gets voted out of anything.\pKONIORTOS: You'll thank us when you never grow old."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setmultitrainerbattle(TRAINER_ICHOR_AKROPOLIS_LITHOS, Akropolis_Text_LithosLost, TRAINER_ICHOR_AKROPOLIS_KONIORTOS, Akropolis_Text_KoniortosLost, PARTNER_ICHOR_ALETHEA_AKROPOLIS)
+    setvar(VAR_0x8005, MULTI_BATTLE_2_VS_2)
+    callnative(BattleSetup_StartMultiBattle)
+    waitstate
+    if (var(VAR_RESULT) != B_OUTCOME_WON) {
+        call(Akropolis_EventScript_Retreat)
+    }
+    setflag(FLAG_ICHOR_AKROPOLIS_PAIR_ONE)
+    settrainerflag(TRAINER_ICHOR_AKROPOLIS_LITHOS)
+    settrainerflag(TRAINER_ICHOR_AKROPOLIS_KONIORTOS)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_LITHOS)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_KONIORTOS)
+    releaseall
+}
+script Astyra_Akropolis_EventScript_PairTwo {
+    lockall
+    if (flag(FLAG_ICHOR_AKROPOLIS_PAIR_TWO)) {
+        releaseall
+        end
+    }
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 32)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
+    addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setspeaker(Akropolis_Text_Titan)
+    msgbox(format("SIDEROS: My thread ends the same day as my little brother's. Think about that.\pCHALKOS: Shift's nearly over. Can we hurry this up?"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setmultitrainerbattle(TRAINER_ICHOR_AKROPOLIS_SIDEROS, Akropolis_Text_SiderosLost, TRAINER_ICHOR_AKROPOLIS_CHALKOS, Akropolis_Text_ChalkosLost, PARTNER_ICHOR_ALETHEA_AKROPOLIS)
+    setvar(VAR_0x8005, MULTI_BATTLE_2_VS_2)
+    callnative(BattleSetup_StartMultiBattle)
+    waitstate
+    if (var(VAR_RESULT) != B_OUTCOME_WON) {
+        call(Akropolis_EventScript_Retreat)
+    }
+    setflag(FLAG_ICHOR_AKROPOLIS_PAIR_TWO)
+    settrainerflag(TRAINER_ICHOR_AKROPOLIS_SIDEROS)
+    settrainerflag(TRAINER_ICHOR_AKROPOLIS_CHALKOS)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_SIDEROS)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_CHALKOS)
+    releaseall
+}
+script Astyra_Akropolis_EventScript_Kleon {
+    lockall
+    if (flag(FLAG_ICHOR_KLEON_AKROPOLIS)) {
+        releaseall
+        end
+    }
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 20)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
+    addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setspeaker(Akropolis_Text_Kleon)
+    msgbox(format("Took you long enough.\pLike the helmet? I don't wear it down. Heroes don't hide their faces."))
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("Kleon, they're tearing up the Akropolis."))
+    setspeaker(Akropolis_Text_Kleon)
+    msgbox(format("They're digging. You dig. Everyone digs.\pI've got a real thread now. It's written. I win.\pLet's find out."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_AKROPOLIS_KYNDER, Akropolis_Text_KleonLost)
+        case 1:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_AKROPOLIS_HIPLING, Akropolis_Text_KleonLost)
+        default:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_AKROPOLIS_NEBREL, Akropolis_Text_KleonLost)
+    }
+    setspeaker(Akropolis_Text_Kleon)
+    msgbox(format("It says the bull. It doesn't say you. That's all. You're not in it.\pYou're not in anything, are you? That's the whole point of you."))
+    msgbox(format("They don't want the pieces. Not really. Iapetos told me.\pThey want you. You're the only one who can carry it.\pEvery step you take after them, you're bringing it closer."))
+    msgbox(format("I thought you should know. That's all. Don't make it a thing."))
+    closemessage
+    playse(SE_M_EARTHQUAKE)
+    applymovement(LOCALID_ASTYRA_AKROPOLIS_KLEON, Akropolis_Movement_KleonLeaves)
+    waitmovement(0)
+    setflag(FLAG_ICHOR_KLEON_AKROPOLIS)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_KLEON)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+script Astyra_Akropolis_EventScript_Rhea {
+    lockall
+    if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
+        releaseall
+        end
+    }
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 20, 10)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
+    addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
+    if (!flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {
+        setspeaker(Akropolis_Text_Rhea)
+        msgbox(format("Keep digging."))
+        setspeaker(Akropolis_Text_Titan)
+        msgbox(format("The roots, Rhea. It's Athena's tree. They say it grew back once-"))
+        setspeaker(Akropolis_Text_Rhea)
+        msgbox(format("Not this time. Dig."))
+        closemessage
+        call(EleusaVillage_TempleOfDemeter_EventScript_Rumble)
+        playse(SE_M_EARTHQUAKE)
+        call(Akropolis_EventScript_FallenOlive)
+        special(DrawWholeMapView)
+        removeobject(LOCALID_ASTYRA_AKROPOLIS_DIGGERWEST)
+        removeobject(LOCALID_ASTYRA_AKROPOLIS_DIGGEREAST)
+        setflag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)
+        playse(SE_ITEMFINDER)
+        msgbox(format("There. Second piece."))
+    }
+    setspeaker(Akropolis_Text_Rhea)
+    msgbox(format("You. The Unwoven.\pGo home."))
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("We're not going anywhere."))
+    setspeaker(Akropolis_Text_Rhea)
+    msgbox(format("Then don't. Fine."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    trainerbattle_no_intro(TRAINER_ICHOR_RHEA_AKROPOLIS, Akropolis_Text_RheaLost)
+    setspeaker(Akropolis_Text_Rhea)
+    msgbox(format("Strong. Doesn't matter. The piece goes."))
+    closemessage
+    clearflag(FLAG_ICHOR_KLEON_AKROPOLIS)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_KLEON, 20, 7)
+    addobject(LOCALID_ASTYRA_AKROPOLIS_KLEON)
+    setspeaker(Akropolis_Text_Titan)
+    msgbox(format("Move it, Lakonian!"))
+    setspeaker(Akropolis_Text_Rhea)
+    msgbox(format("Leave the boy."))
+    setspeaker(Akropolis_Text_Kleon)
+    msgbox(format("Who asked you?"))
+    setspeaker(Akropolis_Text_Rhea)
+    msgbox(format("No one."))
+    closemessage
+    applymovement(LOCALID_ASTYRA_AKROPOLIS_KLEON, Akropolis_Movement_KleonEscapes)
+    waitmovement(0)
+    setflag(FLAG_ICHOR_KLEON_AKROPOLIS)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_KLEON)
+    applymovement(LOCALID_ASTYRA_AKROPOLIS_RHEA, Akropolis_Movement_RheaEscapes)
+    waitmovement(0)
+    removeobject(LOCALID_ASTYRA_AKROPOLIS_RHEA)
+    playse(SE_M_EARTHQUAKE)
+    call(EleusaVillage_TempleOfDemeter_EventScript_Rumble)
+    setmetatile(21, 6, 0x0E1, TRUE)
+    special(DrawWholeMapView)
+    fadeoutbgm(1)
+    callnative(StopMapMusic)
+    delay(45)
+    applymovement(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, Akropolis_Movement_ToStump)
+    waitmovement(0)
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("The Persians burned this tree, long ago.\pThe next morning there was a green shoot on the stump. A cubit long.\pEveryone in Astyra knows that story."))
+    msgbox(format("Truthfully? I don't think it'll do it twice."))
+    closemessage
+    setflag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)
+    special(HealPlayerParty)
+    warp(MAP_ASTYRA_ASCLEPEION, 8, 5)
+    waitstate
+    releaseall
+    end
+}
+script Akropolis_EventScript_FallenOlive {
+    setmetatile(16, 5, 0x001, FALSE)
+    setmetatile(17, 5, 0x001, FALSE)
+    setmetatile(16, 6, 0x001, FALSE)
+    setmetatile(17, 6, 0x001, FALSE)
+    if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
+        setmetatile(21, 6, 0x0E1, TRUE)
+    }
+    return
+}
+script Astyra_Akropolis_EventScript_Alethea {
+    msgbox(format("With you. Truthfully."), MSGBOX_NPC)
+}
+script Astyra_Akropolis_EventScript_Titan {
+    msgbox(format("What does the sickle reap? The hours."), MSGBOX_NPC)
+}
+script Astyra_Akropolis_EventScript_Digger {
+    msgbox(format("The roots shudder."), MSGBOX_NPC)
+}
+script Astyra_Akropolis_EventScript_Caretaker {
+    if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
+        msgbox(format("Athena's tree is down. Poseidon's spring is still below us.\pSee the trident marks? Beneath the rock is the old salt well."), MSGBOX_NPC)
+    } else {
+        msgbox(format("Athena's olive. Please. Stop them."), MSGBOX_NPC)
+    }
+}
+script Astyra_Akropolis_EventScript_Olive {
+    if (flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {
+        msgbox(format("The stump of Athena's olive.\pNo green shoot."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("ATHENA'S OLIVE\pOnce burned. Once returned."), MSGBOX_SIGN)
+    }
+}
+script Astyra_Akropolis_EventScript_SpringStair {
+    if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
+        msgbox(format("The spring stair is buried under fresh rubble."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A crack in the stone. Salt air comes up through it."), MSGBOX_SIGN)
+    }
+}
+script Astyra_Akropolis_EventScript_HealingJar {
+    finditem(ITEM_HYPER_POTION)
+    end
+}
+movement Akropolis_Movement_Approach { walk_up * 2 }
+movement Akropolis_Movement_Aside { walk_right face_down }
+movement Akropolis_Movement_KleonLeaves { walk_fast_up * 2 walk_fast_right * 4 }
+movement Akropolis_Movement_KleonEscapes { walk_right walk_up }
+movement Akropolis_Movement_RheaEscapes { walk_right * 2 walk_up }
+movement Akropolis_Movement_ToStump { walk_left * 2 walk_up * 2 face_left }

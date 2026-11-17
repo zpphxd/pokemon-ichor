@@ -41,13 +41,20 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,
-  both Chloe parties, Thespis and Kallisto, retaining Hero's species and moves at three levels lower.
+  both Chloe parties, Thespis, Kallisto, all three Akropolis Kleon parties and
+  Akropolis Rhea, retaining Hero's species and moves at three levels lower.
   Spartan uses those species and levels with trained EV spreads, natures,
   held items and smart AI. Its EXP/candy caps are 14, 20, 26, 32 and 37, advancing when
-  each Laurel is won; after Laurel 5 the next cap is Astyra's Kleon battle at 40. Extend the
+  each Laurel is won; after Laurel 5 the next cap is Astyra's 40, followed by
+  Kaldera's 43 after the saved Akropolis raid victory. Extend the
   milestone mapping as later chapters are connected. Hero's existing parties
   and uncapped EXP are unchanged. These integrations are not natural-level
   balance approval.
+- **Implemented Akropolis:** the first Titanborn pair uses 36–37 and the second
+  37–38. Alethea's partner Plouteras/Harpelle are 38/37. Kleon's three
+  starter-counter variants use 38, 38, 39, 40; Rhea uses 38, 39, 40.
+  These parties and their difficulty variants are implemented, not
+  natural-level pacing approval.
 - **Aethos's trainers use Aethos's Pokémon** (user, 2026-11-14). Before the post-game, trainer parties and wild tables draw on the 152-species Aethos dex for the most part. A non-Aethos species is the exception and needs a reason: a story gift such as the theoxenia starters, a foreigner's signature Pokémon, or a deliberate rarity. The National Dex's other species belong to the Oikoumene and the post-game.
 - **Gifts:** theoxenia starters follow SYSTEMS.md §10's levels, which must sit inside the band of the stage where they're given.
 - **Act I amphora returns:** explicit shelf restoration unlocks the one-off

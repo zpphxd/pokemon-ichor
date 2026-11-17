@@ -13,9 +13,34 @@ local function door(map, name, scene)
     L.shot(name)
 end
 local counts, votes, watchCount = {}, {}, false
+local courtShots = {}
+local multiCount = 0
+local battle = L.battle
+function L.battle()
+    if L.mapId() == S.MAP_AKROPOLIS
+       and emu:read32(S.gBattleTypeFlags) & S.MULTI_TYPES == S.MULTI_TYPES then
+        multiCount = multiCount + 1
+        L.expect(emu:read16(S.SCRIPTS.gPartnerTrainerId) == S.ALETHEA_PARTNER,
+                 "the Akropolis battle uses actual Alethea as the AI partner against two trainers")
+        if L.battleMode == "lose" then
+            for i = 0, 1 do
+                emu:write16(L.partyMon(i + S.B_TRAINER_PARTNER * 6) + S.OFF_MON_HP, 1)
+            end
+        end
+    end
+    return battle()
+end
 local logText = L.logText
 function L.logText()
     logText()
+    if L.mapId() == S.MAP_AKROPOLIS then
+        local _, y = L.pos()
+        local name = L.getFlag(S.FLAG_OLIVE) and "fallen_olive" or "olive_before_raid"
+        if y <= 11 and not courtShots[name] then
+            courtShots[name] = true
+            L.shot(name)
+        end
+    end
     if not watchCount or L.mapId() ~= S.MAP_STOA then return end
     for i = 1, 6 do
         local voter = L.npc("Astyra_Stoa_EventScript_Citizen", i)
@@ -81,6 +106,10 @@ L.start(function()
     L.talk(L.sign("Astyra_EventScript_Kodros"))
     L.talk(L.sign("Astyra_EventScript_Kairos"))
     L.talk(L.sign("Astyra_EventScript_Perdix"))
+    L.useWarp(S.MAP_AKROPOLIS, true)
+    L.settle()
+    L.expect(L.mapId() == S.MAP_ASTYRA and not L.getFlag(S.FLAG_GATE),
+             "the real Akropolis entrance cannot bypass the exile and roadside confession")
     L.useWarp(S.MAP_STOA, true)
     L.settle()
     L.expect(L.mapId() == S.MAP_ASTYRA and not L.getFlag(S.FLAG_OSTRACISM),
@@ -149,6 +178,66 @@ L.start(function()
     L.talk(L.npc("Astyra_EventScript_RoadAlethea"))
     L.expect(L.getFlag(S.FLAG_CONFESSION) and not L.npc("Astyra_EventScript_RoadAlethea").present,
              "Alethea's actual reading and Keeper warning are saved before the raid")
+    cross("right", S.MAP_ASTYRA, "return_for_raid")
+    door(S.MAP_AKROPOLIS, "forged_order_gate", true)
+    L.expect(L.getFlag(S.FLAG_GATE) and emu:read8(S.gTimeOfDay) == S.TIME_NIGHT,
+             "the captain actually steps aside for the forged owl/hook order at staged night")
+    L.go(17, 44)
+    L.expect(emu:saveStateFile(L.OUT .. "before_multi_loss.ss", 31), "saved the partner loss branch")
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    L.battleMode = "lose"
+    L.step(K.UP)
+    L.settle()
+    L.battleMode = nil
+    L.expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST
+             and L.mapId() == S.MAP_CLINIC and not L.getFlag(S.FLAG_PAIR_ONE),
+             "a genuine multi loss retreats to Phaedon without granting the checkpoint")
+    L.expect(emu:loadStateFile(L.OUT .. "before_multi_loss.ss", 31), "restored the partner climb")
+    L.wait(30)
+    L.waitUntil(L.idle, 600, "control after restoring the climb")
+    L.go(17, 42)
+    L.expect(L.getFlag(S.FLAG_PAIR_ONE), "Lithos and Koniortos must actually be defeated")
+    L.talk(L.hidden(S.FLAG_RAID_REVIVE))
+    L.go(17, 30)
+    L.expect(L.getFlag(S.FLAG_PAIR_TWO) and multiCount == 3 and not L.getFlag(S.FLAG_RAID),
+             "Sideros and Chalkos are a second distinct native multi battle, not a player double")
+    local heals = L.itemCount(S.ITEM_HYPER_POTION)
+    L.talk(L.npc("Astyra_Akropolis_EventScript_HealingJar"))
+    L.expect(L.getFlag(S.FLAG_RAID_JAR) and L.itemCount(S.ITEM_HYPER_POTION) == heals + 1,
+             "the Sacred Way's side branch pays with an actual healing supply")
+    L.go(17, 18)
+    L.expect(L.getFlag(S.FLAG_KLEON), "beating Kleon plays his they-want-you revelation")
+    L.shot("parthenon_steps")
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    L.battleMode = "lose"
+    L.goTrigger(L.triggers("Astyra_Akropolis_EventScript_Rhea"))
+    L.settle()
+    L.battleMode = nil
+    L.expect(L.getFlag(S.FLAG_OLIVE) and not L.getFlag(S.FLAG_RAID) and L.mapId() == S.MAP_CLINIC,
+             "a real Rhea whiteout keeps the uprooted olive but does not award raid completion")
+    leave()
+    L.useWarp(S.MAP_AKROPOLIS)
+    L.goTrigger(L.triggers("Astyra_Akropolis_EventScript_Rhea"))
+    L.settle()
+    L.expect(L.getFlag(S.FLAG_OLIVE) and L.getFlag(S.FLAG_RAID) and L.mapId() == S.MAP_CLINIC,
+             "Rhea's battle, escape with the second fragment and olive aftermath reach Phaedon")
+    L.expect(L.getFlag(S.FLAG_RECOVERY) and emu:read8(L.ichor() + S.OFF_HELD_TIME) == 0,
+             "Phaedon's actual recovery scene releases the staged night")
+    L.shot("raid_recovery")
+    leave()
+    L.useWarp(S.MAP_AKROPOLIS)
+    local fought = #L.battles
+    L.go(17, 9)
+    L.talk(L.npc("Astyra_Akropolis_EventScript_Caretaker"))
+    L.expect(#L.battles == fought and L.grid().tile(16, 5) == 0x001
+             and L.grid().tile(21, 6) == 0x0E1,
+             "reentry preserves the fallen olive and collapsed spring without replaying combat")
+    L.shot("olive_after_raid")
+    L.talk(L.hidden(S.FLAG_RAID_ETHER))
+    L.expect(L.getFlag(S.FLAG_RAID_REVIVE) and L.getFlag(S.FLAG_RAID_ETHER),
+             "both curious terrace/court corners grant persistent hidden supplies")
+    leave()
+    cross("left", S.MAP_R16, "road_after_raid")
     L.expect(emu:saveStateFile(L.OUT .. "before_capital_loss.ss", 31), "saved the capital loss branch")
     emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
     L.battleMode = "lose"
@@ -167,6 +256,12 @@ L.start(function()
              and L.getFlag(S.FLAG_ELPIS) and L.getFlag(S.FLAG_DAPHNE)
              and L.getFlag(S.FLAG_VISIT) and L.getFlag(S.FLAG_OSTRACISM)
              and L.getFlag(S.FLAG_CONFESSION)
+             and L.getFlag(S.FLAG_GATE) and L.getFlag(S.FLAG_PAIR_ONE)
+             and L.getFlag(S.FLAG_PAIR_TWO) and L.getFlag(S.FLAG_KLEON)
+             and L.getFlag(S.FLAG_OLIVE) and L.getFlag(S.FLAG_RAID)
+             and L.getFlag(S.FLAG_RECOVERY)
+             and L.getFlag(S.FLAG_RAID_JAR) and L.getFlag(S.FLAG_RAID_REVIVE)
+             and L.getFlag(S.FLAG_RAID_ETHER)
              and L.getFlag(S.FLAG_R15_HERM) and L.getFlag(S.FLAG_R16_HERM),
              "capital scenes, canonical page and both herms survive save/reset/CONTINUE")
     cross("left", S.MAP_DAPHNI, "return_to_daphni")

@@ -1166,6 +1166,17 @@
       "border_filepath": "data/layouts/Astyra_Stoa/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Stoa/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA_AKROPOLIS",
+      "name": "Astyra_Akropolis_Layout",
+      "width": 34,
+      "height": 52,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Astyra_Akropolis/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra_Akropolis/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

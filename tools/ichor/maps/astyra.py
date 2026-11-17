@@ -54,7 +54,8 @@ def city():
         warp(9, 31, "Astyra_Asclepeion", 0),
         warp(36, 31, "Astyra_PhaedonsHouse", 0),
         warp(10, 19, "Astyra_Library", 0),
-        warp(35, 18, "Astyra_Stoa", 0)]
+        warp(35, 18, "Astyra_Stoa", 0),
+        warp(25, 11, "Astyra_Akropolis", 0)]
     m.person("Preacher", 17, 34, gfx="AUGUR")
     m.person("Herald", 29, 34, gfx="PILGRIM")
     m.person("Merchant", 37, 36, gfx="MERCHANT")
@@ -63,7 +64,8 @@ def city():
     m.rect(34, 17, 40, 18, 0x149, True)
     m.put(35, 18, 0x1DB)
     m.rect(21, 8, 30, 11, 0x0E1, True)
-    m.person("Guard", 25, 12, gfx="HOPLITE")
+    m.person("Guard", 24, 12, gfx="HOPLITE")
+    m.put(25, 11, 0x1DB)
     for name, x, y in (("Sign", 8, 36), ("ClinicSign", 12, 32),
                         ("HouseSign", 39, 32), ("LibrarySign", 13, 20),
                         ("Kodros", 18, 26), ("Kairos", 29, 26), ("Perdix", 27, 13)):
@@ -78,6 +80,7 @@ def rooms():
     m.person("Phaedon", 8, 3, gfx="MAN")
     m.person("Panacoil", 12, 7)
     m.json["object_events"][-1]["graphics_id"] = "OBJ_EVENT_GFX_SPECIES(PANACOIL)"
+    m.person("Alethea", 9, 5, gfx="ALETHEA", flag="FLAG_ICHOR_HIDE_ALETHEA_ASTYRA_CLINIC")
     m.stamp(14, 2, [[0x21F, 0x220], [0x221, 0x222], [0x223, 0x224]])
     m.json["bg_events"].append(bg(14, 4, m.prefix + "Pithos"))
     m.sign("Hearth", 3, 7, tile=0x21B)
@@ -142,6 +145,111 @@ def roadside_cast():
 }""", 1))
 
 
+def akropolis():
+    m = Map("Astyra_Akropolis", 34, 52)
+    m.rect(15, 3, 19, 50, 0x1D9)
+    for y, left, right in ((4, 8, 26), (14, 11, 24), (25, 9, 25),
+                            (37, 10, 23), (46, 12, 22)):
+        m.rect(left, y, right, y + 3, 0x001)
+        m.rect(15, y, 19, y + 3, 0x1D9)
+        for x in (left + 1, right - 1):
+            m.put(x, y, 0x00E, True)
+            m.put(x, y + 1, 0x016, True)
+            m.put(x + 1, y + 2, 0x004)
+    # Each terrace has one visible three-wide stair; triggers cover the whole gap.
+    for y in (44, 32, 20, 12):
+        m.rect(12, y, 22, y, 0x149, True)
+        m.rect(15, y, 19, y, 0x0E1, True)
+        m.rect(16, y, 18, y, 0x1D9)
+        for x in (14, 20):
+            m.put(x, y + 1, 0x130, True)
+            m.put(x, y + 2, 0x131, True)
+    m.rect(7, 3, 27, 11, 0x1D9)
+    m.rect(9, 4, 13, 6, 0x001)
+    m.stamp(16, 5, [[0x01E, 0x01F], [0x026, 0x027]])
+    m.put(16, 7, 0x026, True)
+    m.put(17, 7, 0x027, True)
+    m.put(21, 6, 0x1D9)
+    m.person("Captain", 17, 46, gfx="HOPLITE")
+    m.person("Alethea", 18, 48, gfx="ALETHEA", flag="FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS")
+    for name, x, y, flag in (("Lithos", 16, 40, "FLAG_ICHOR_AKROPOLIS_PAIR_ONE"),
+                              ("Koniortos", 18, 40, "FLAG_ICHOR_AKROPOLIS_PAIR_ONE"),
+                              ("Sideros", 16, 28, "FLAG_ICHOR_AKROPOLIS_PAIR_TWO"),
+                              ("Chalkos", 18, 28, "FLAG_ICHOR_AKROPOLIS_PAIR_TWO")):
+        m.person(name, x, y, gfx="TITAN_GRUNT", flag=flag, script=m.prefix + "Titan")
+    m.person("Kleon", 17, 16, gfx="KLEON", flag="FLAG_ICHOR_KLEON_AKROPOLIS")
+    m.person("Rhea", 19, 7, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_HIDE_RHEA_AKROPOLIS")
+    for name, x, y in (("DiggerWest", 15, 7), ("DiggerEast", 18, 6)):
+        m.person(name, x, y, script=m.prefix + "Digger", flag="FLAG_ICHOR_AKROPOLIS_OLIVE_FELL")
+        m.json["object_events"][-1]["graphics_id"] = "OBJ_EVENT_GFX_SPECIES(PLOUTERAS)"
+    m.person("Caretaker", 23, 8, gfx="ELDER_M")
+    m.person("HealingJar", 11, 27, flag="FLAG_ICHOR_ITEM_AKROPOLIS_HEAL")
+    m.json["object_events"][-1]["graphics_id"] = "OBJ_EVENT_GFX_ITEM_BALL"
+    for x, y, item, flag in ((10, 39, "REVIVE", "REVIVE"), (13, 5, "ETHER", "ETHER")):
+        m.json["bg_events"].append(dict(type="hidden_item", x=x, y=y, elevation=0,
+            item="ITEM_" + item, flag="FLAG_ICHOR_HIDDEN_AKROPOLIS_" + flag))
+    m.sign("Olive", 16, 8, tile=0x003)
+    m.sign("SpringStair", 21, 5, tile=0x003)
+    for y, scene in ((43, "PairOne"), (31, "PairTwo"), (19, "Kleon"), (11, "Rhea")):
+        for x in range(15, 20):
+            m.json["coord_events"].append(dict(type="trigger", x=x, y=y, elevation=0,
+                var="VAR_TEMP_1", var_value="0", script=m.prefix + scene))
+    m.rect(15, 50, 19, 51, 0x1D9)
+    m.put(17, 50, 0x1DB)
+    m.json["warp_events"] = [warp(17, 50, "Astyra", 4)]
+    m.save()
+
+
+def raid_teams():
+    teams = [
+        ("AKROPOLIS_LITHOS", "LITHOS", [("Cairnolith", 36), ("Hoplomex", 37)]),
+        ("AKROPOLIS_KONIORTOS", "KONIORTOS", [("Lykanax", 36), ("Cairnolith", 37)]),
+        ("AKROPOLIS_SIDEROS", "SIDEROS", [("Hoplomex", 37), ("Kerazap", 38)]),
+        ("AKROPOLIS_CHALKOS", "CHALKOS", [("Cairnolith", 37), ("Lykanax", 38)]),
+    ]
+    moves = {
+        "Pylakyon": ("Flamethrower", "Shadow Ball", "Will-O-Wisp", "Protect"),
+        "Seismare": ("Surf", "Earth Power", "Ice Beam", "Protect"),
+        "Daphnyad": ("Energy Ball", "Dazzling Gleam", "Synthesis", "Protect"),
+        "Cairnolith": ("Rock Slide", "Bulldoze", "Rock Polish", "Protect"),
+        "Harpelle": ("Night Slash", "Wing Attack", "Quick Attack", "Taunt"),
+        "Kourodin": ("Drain Punch", "Bulldoze", "Rock Slide", "Bulk Up"),
+        "Plouteras": ("Drill Run", "Rock Slide", "Slash", "Protect"),
+    }
+    bosses = [("KLEON_AKROPOLIS_" + tag, "KLEON",
+               [("Cairnolith", 38), ("Harpelle", 38), ("Kourodin", 39), (species, 40)])
+              for tag, species in (("KYNDER", "Pylakyon"), ("HIPLING", "Seismare"), ("NEBREL", "Daphnyad"))]
+    bosses.append(("RHEA_AKROPOLIS", "RHEA",
+                   [("Cairnolith", 38), ("Plouteras", 39), ("Kourodin", 40)]))
+    start, end = "/* Akropolis raid teams. */", "/* End Akropolis raid teams. */"
+    path = ROOT / "src/data/trainers.party"
+    before, _, old = path.read_text().partition(start)
+    after = old.partition(end)[2]
+    text = before.rstrip() + "\n\n" + start + "\n"
+    for tag, name, party in teams + bosses:
+        boss = name in ("KLEON", "RHEA")
+        for difficulty in (("", "Easy", "Hard") if boss else ("",)):
+            cls, pic = ("Lakonian", "Kleon") if name == "KLEON" else (
+                ("Titan Admin", "Titan Grunt") if name == "RHEA" else ("Titanborn", "Titan Grunt"))
+            text += f"\n=== TRAINER_ICHOR_{tag} ===\nName: {name}\nClass: {cls}\nPic: {pic}\n"
+            text += "Gender: " + ("Female\n" if name == "RHEA" else "Male\n") + "Music: Male\n"
+            if difficulty:
+                text += f"Difficulty: {difficulty}\n"
+            text += "AI: " + ("Smart Trainer\n" if difficulty == "Hard" else "Basic Trainer\n")
+            for species, level in party:
+                text += f"\n{species}" + (" @ Sitrus Berry" if difficulty == "Hard" else "") + "\n"
+                text += f"Level: {level - (3 if difficulty == 'Easy' else 0)}\n"
+                iv = 31 if difficulty == "Hard" else 20
+                text += f"IVs: {iv} HP / {iv} Atk / {iv} Def / {iv} SpA / {iv} SpD / {iv} Spe\n"
+                if difficulty == "Hard":
+                    special = species in ("Pylakyon", "Seismare", "Daphnyad")
+                    text += "EVs: 4 HP / 252 " + ("SpA" if special else "Atk") + " / 252 Spe\n"
+                    text += "Modest Nature\n" if special else "Adamant Nature\n"
+                if boss:
+                    text += "".join("- " + move + "\n" for move in moves[species])
+    path.write_text(text + "\n" + end + after + ("" if after else "\n"))
+
+
 def eleusa_connection():
     path = "data/maps/EleusaVillage/map.json"
     m = read(path)
@@ -162,6 +270,8 @@ if __name__ == "__main__":
     city()
     rooms()
     stoa()
+    akropolis()
     roadside_cast()
     eleusa_connection()
     encounters_and_teams(ROADS, "Astyra approach")
+    raid_teams()

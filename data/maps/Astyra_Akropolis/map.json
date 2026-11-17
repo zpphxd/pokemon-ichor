@@ -1,0 +1,412 @@
+{
+  "id": "MAP_ASTYRA_AKROPOLIS",
+  "name": "Astyra_Akropolis",
+  "layout": "LAYOUT_ASTYRA_AKROPOLIS",
+  "music": "MUS_ICHOR_TITAN",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ASTYRA",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_CITY",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_CAPTAIN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 17,
+      "y": 46,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Captain",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 18,
+      "y": 48,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_LITHOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 16,
+      "y": 40,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Titan",
+      "flag": "FLAG_ICHOR_AKROPOLIS_PAIR_ONE"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_KONIORTOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 18,
+      "y": 40,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Titan",
+      "flag": "FLAG_ICHOR_AKROPOLIS_PAIR_ONE"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_SIDEROS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 16,
+      "y": 28,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Titan",
+      "flag": "FLAG_ICHOR_AKROPOLIS_PAIR_TWO"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_CHALKOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 18,
+      "y": 28,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Titan",
+      "flag": "FLAG_ICHOR_AKROPOLIS_PAIR_TWO"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 17,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_KLEON_AKROPOLIS"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_RHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 19,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Rhea",
+      "flag": "FLAG_ICHOR_HIDE_RHEA_AKROPOLIS"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_DIGGERWEST",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PLOUTERAS)",
+      "x": 15,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Digger",
+      "flag": "FLAG_ICHOR_AKROPOLIS_OLIVE_FELL"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_DIGGEREAST",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PLOUTERAS)",
+      "x": 18,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Digger",
+      "flag": "FLAG_ICHOR_AKROPOLIS_OLIVE_FELL"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_CARETAKER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 23,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_Caretaker",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASTYRA_AKROPOLIS_HEALINGJAR",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 11,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Astyra_Akropolis_EventScript_HealingJar",
+      "flag": "FLAG_ICHOR_ITEM_AKROPOLIS_HEAL"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 17,
+      "y": 50,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA",
+      "dest_warp_id": "4"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 43,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairOne"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 43,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairOne"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 43,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairOne"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 43,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairOne"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 43,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairOne"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairTwo"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairTwo"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairTwo"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairTwo"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_PairTwo"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Kleon"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Kleon"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Kleon"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Kleon"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Kleon"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Rhea"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Rhea"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Rhea"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Rhea"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Astyra_Akropolis_EventScript_Rhea"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 10,
+      "y": 39,
+      "elevation": 0,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_ICHOR_HIDDEN_AKROPOLIS_REVIVE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_AKROPOLIS_ETHER"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Astyra_Akropolis_EventScript_Olive"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Astyra_Akropolis_EventScript_SpringStair"
+    }
+  ]
+}

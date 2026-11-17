@@ -119,3 +119,27 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 - Wake-Up Slap
 - Bulk Up
 - Fury Attack
+
+=== PARTNER_ICHOR_ALETHEA_AKROPOLIS ===
+Name: ALETHEA
+Class: Scholar
+Pic: Alethea
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Plouteras
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drill Run
+- Rock Slide
+- Slash
+- Protect
+
+Harpelle
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Wing Attack
+- Night Slash
+- Quick Attack
+- Taunt

@@ -1,7 +1,36 @@
 mapscripts Astyra_Asclepeion_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_ASTYRA)
+        special(Ichor_ReleaseTimeOfDay)
+        if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE) && !flag(FLAG_ICHOR_AKROPOLIS_RECOVERED)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_ASTYRA_CLINIC)
+            addobject(LOCALID_ASTYRA_ASCLEPEION_ALETHEA)
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_ASTYRA_CLINIC)
+            removeobject(LOCALID_ASTYRA_ASCLEPEION_ALETHEA)
+        }
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: Astyra_Asclepeion_EventScript_RaidRecovery
+    ]
+}
+script Astyra_Asclepeion_EventScript_RaidRecovery {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setspeaker(Astyra_Text_NamePhaedon)
+    msgbox(format("Sit down. Both of you.\pI can mend what hurts. The rest can wait until morning."))
+    closemessage
+    applymovement(LOCALID_ASTYRA_ASCLEPEION_ALETHEA, Astyra_Asclepeion_Movement_AletheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_ASTYRA_ASCLEPEION_ALETHEA)
+    setflag(FLAG_ICHOR_AKROPOLIS_RECOVERED)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+movement Astyra_Asclepeion_Movement_AletheaLeaves { walk_down * 6 }
+script Astyra_Asclepeion_EventScript_Alethea {
+    msgbox(format("We got down. That's something."), MSGBOX_NPC)
 }
 script Astyra_Asclepeion_EventScript_Phaedon {
     lock

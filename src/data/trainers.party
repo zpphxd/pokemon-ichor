@@ -3154,3 +3154,565 @@ Level: 38
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Astyra approach teams. */
+
+/* Akropolis raid teams. */
+
+=== TRAINER_ICHOR_AKROPOLIS_LITHOS ===
+Name: LITHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_AKROPOLIS_KONIORTOS ===
+Name: KONIORTOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykanax
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_AKROPOLIS_SIDEROS ===
+Name: SIDEROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_AKROPOLIS_CHALKOS ===
+Name: CHALKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Lykanax
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Pylakyon
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Shadow Ball
+- Will-O-Wisp
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Pylakyon
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Shadow Ball
+- Will-O-Wisp
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Cairnolith @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin @ Sitrus Berry
+Level: 39
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Pylakyon @ Sitrus Berry
+Level: 40
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Modest Nature
+- Flamethrower
+- Shadow Ball
+- Will-O-Wisp
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Seismare
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Surf
+- Earth Power
+- Ice Beam
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Seismare
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Surf
+- Earth Power
+- Ice Beam
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Cairnolith @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin @ Sitrus Berry
+Level: 39
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Seismare @ Sitrus Berry
+Level: 40
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Modest Nature
+- Surf
+- Earth Power
+- Ice Beam
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Daphnyad
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Energy Ball
+- Dazzling Gleam
+- Synthesis
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Daphnyad
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Energy Ball
+- Dazzling Gleam
+- Synthesis
+- Protect
+
+=== TRAINER_ICHOR_KLEON_AKROPOLIS_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Cairnolith @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Harpelle @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Kourodin @ Sitrus Berry
+Level: 39
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+Daphnyad @ Sitrus Berry
+Level: 40
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Modest Nature
+- Energy Ball
+- Dazzling Gleam
+- Synthesis
+- Protect
+
+=== TRAINER_ICHOR_RHEA_AKROPOLIS ===
+Name: RHEA
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Female
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Plouteras
+Level: 39
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drill Run
+- Rock Slide
+- Slash
+- Protect
+
+Kourodin
+Level: 40
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+=== TRAINER_ICHOR_RHEA_AKROPOLIS ===
+Name: RHEA
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Female
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Plouteras
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drill Run
+- Rock Slide
+- Slash
+- Protect
+
+Kourodin
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+=== TRAINER_ICHOR_RHEA_AKROPOLIS ===
+Name: RHEA
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Female
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Cairnolith @ Sitrus Berry
+Level: 38
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Rock Slide
+- Bulldoze
+- Rock Polish
+- Protect
+
+Plouteras @ Sitrus Berry
+Level: 39
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Drill Run
+- Rock Slide
+- Slash
+- Protect
+
+Kourodin @ Sitrus Berry
+Level: 40
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Drain Punch
+- Bulldoze
+- Rock Slide
+- Bulk Up
+
+/* End Akropolis raid teams. */

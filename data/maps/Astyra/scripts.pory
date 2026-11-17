@@ -66,7 +66,13 @@ script Astyra_EventScript_RoadAlethea {
     release
 }
 script Astyra_EventScript_Guard {
-    msgbox(format("The Akropolis is closed by the Archon's order.\pThe inscription? Read it if you like. Just stay below the steps."), MSGBOX_NPC)
+    if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
+        msgbox(format("The stairs are open. Mind the broken stone.\pThe caretaker is still up there."), MSGBOX_NPC)
+    } elif (flag(FLAG_ICHOR_ALETHEA_CONFESSED)) {
+        msgbox(format("Someone's breaking stone up there.\pThe captain has the sealed order. Straight up the steps."), MSGBOX_NPC)
+    } else {
+        msgbox(format("The Akropolis is closed by the Archon's order.\pThe inscription? Read it if you like. Just stay below the steps."), MSGBOX_NPC)
+    }
 }
 script Astyra_EventScript_Sign {
     msgbox(format("ASTYRA\pAsclepeion: west. Library: north.\nAgora and Stoa: east."), MSGBOX_SIGN)

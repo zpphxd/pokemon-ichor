@@ -413,6 +413,18 @@ confession and staged-clock release. House and Assembly scenes use local
 frame triggers plus permanent completion receipts; no additional bank vars.
 The decree pauses and then permanently stops map music before the return warp:
 leaving BGM temporarily paused can strand the warp's music-stop task.
+The connected Akropolis traversal covers the forged-order entrance, both
+actual Alethea multi battles (partner ID and two-opponent battle flags),
+multi defeat without a checkpoint, Kleon's revelation, an actual Rhea
+whiteout/retry, the saved fallen olive, escape/collapse and Phaedon's
+one-off clinic aftermath. The destination clinic owns its aftermath frame
+trigger; script work after a map-changing warp is not a recovery trigger.
+`CB2_EndSpecialTrainerBattle` returns the multi outcome in `VAR_RESULT`:
+the raid explicitly checks victory, otherwise heals and retreats without
+setting either opponent's trainer flag. Ordinary boss losses still use
+normal whiteout recovery. `removeobject` sets the object's saved hide flag;
+repositioned Alethea therefore has a hide flag separate from raid completion.
+The boss difficulty fixture also inspects all three Kleon variants and Rhea.
 Eleusa retains its original wall/watch in Act I; its load script opens the
 wall after the Moon Laurel and a separate hide flag retires the watch.
 Regenerate with `python3 tools/ichor/maps/astyra.py` after `arkadia.py` and
@@ -424,7 +436,7 @@ reuses `EventScript_PkmnCenterNurse_TakeAndHealPkmn` without the nurse-only
 bow. The existing whiteout dispatcher selects his dedicated recovery script
 only for `HEAL_LOCATION_ASTYRA`; all other recovery scripts are unchanged.
 New map, layout and heal IDs remain append-only. These checks do not certify
-natural-level balance, final capital art or the unfinished midpoint chapter.
+natural-level balance, final capital art or the whole unfinished Astyra chapter.
 
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing

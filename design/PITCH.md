@@ -395,7 +395,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
-| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia → Nemea → Emporion; return through Eleusa → Daphni → Astyra; Laurels 4–5, Dionysus/Artemis altars, Dionysia, Girdle quest, Kleon's recruitment, Hunt for the Hind, capital introductions and Alethea's ostracism/confession | Chapter presentation and natural-level acceptance; Astyra's raid and Conch; Kaldera and Laurel 6 |
+| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia → Nemea → Emporion; return through Eleusa → Daphni → Astyra; Laurels 4–5, Dionysus/Artemis altars, Dionysia, Girdle quest, Kleon's recruitment, Hunt for the Hind, capital introductions, ostracism and Akropolis midpoint | Chapter presentation and natural-level acceptance; Salt Well/Conch; Kaldera and Laurel 6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
@@ -662,8 +662,8 @@ Kodros/Kairos inscriptions seed the countdown. The assisted native fixture
 covers actual connections/doors, refusal before Laurel 5, incorrect/correct
 riddle answers, healing, recovery and save/reset/CONTINUE. It is not a continuous
 natural-level run. Dedicated capital art, Phaedon/Elpis sprites,
-Pandora's sherds, Akropolis and Salt Well/Conch remain open;
-this is an approach/intro increment, not a completed Astyra chapter.
+Pandora's sherds and Salt Well/Conch remain open;
+the approach and story increments below do not complete the Astyra chapter.
 
 The bedside visit now plays with Daphne and Phaedon as actual actors, including
 if Elpis is visited before the healer. The Stoa's daylight Assembly follows the
@@ -675,8 +675,25 @@ staged night; chapter exit restores the real clock. The same connected native
 fixture covers these scenes, both visit orders, control/music after the decree,
 healer recovery and saved receipts. Crowd/decree close-up art, bespoke actors,
 the dry vote pulse and solo-lyre cue remain presentation debt; the vote currently
-uses the existing Titan theme and then silence. Akropolis combat and the
-second-fragment loss are the next playable checkpoint, not delivered here.
+uses the existing Titan theme and then silence.
+
+The night Akropolis is now connected through the actual capital steps.
+The captain recognizes the owl/hook forgery and physically stands aside.
+Alethea fights beside the player in two genuine multi-trainer bouts:
+Lithos/Koniortos, then Sideros/Chalkos. Defeat retreats to Phaedon without
+awarding the checkpoint; victories remain cleared on return. Kleon's
+starter-counter team leads to his "they want you" revelation. Rhea uproots
+the olive, battles, protects Kleon and escapes down the spring stair with
+the second fragment. Collapse, Alethea's stump scene and Phaedon's actual
+clinic aftermath follow. A real Rhea whiteout preserves the fallen olive
+without completing the raid, and the player can climb back to retry.
+Visible/hidden supplies, reentry and save/reset/CONTINUE are covered by the
+same assisted native fixture. All three Kleon variants and Rhea have Mortal
+and Spartan parties; Spartan's next cap becomes Kaldera's 43 after the raid.
+The hill uses existing art and canopy/root swaps, not the finished olive-fall,
+glint, kneeling animation or bespoke character portraits. Those presentation
+gates and natural-level/human acceptance remain open. The next playable
+checkpoint is the two-floor Salt Well and Poseidon's Conch, not a free grant.
 
 **Continuation order.** Prioritize connected playable Act II and Act III chapters
 while keeping Act I's remaining acceptance gates visible. Integrate shared systems at

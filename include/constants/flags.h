@@ -1943,6 +1943,17 @@
 #define FLAG_ICHOR_HIDE_ALETHEA_ASTYRA          (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Alethea is outside the city after exile
 #define FLAG_ICHOR_HIDE_ALETHEA_R16             (FLAG_ICHOR_GENERAL_START + 0x138) // Ichor: Roadside Alethea is absent before exile or after confession
 #define FLAG_ICHOR_ALETHEA_CONFESSED            (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Alethea told the truth about her reading outside Astyra
+#define FLAG_ICHOR_AKROPOLIS_GATE               (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Captain recognized the forged owl seal and stood aside
+#define FLAG_ICHOR_AKROPOLIS_PAIR_ONE           (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Defeated Lithos and Koniortos beside Alethea
+#define FLAG_ICHOR_AKROPOLIS_PAIR_TWO           (FLAG_ICHOR_GENERAL_START + 0x13C) // Ichor: Defeated Sideros and Chalkos beside Alethea
+#define FLAG_ICHOR_KLEON_AKROPOLIS              (FLAG_ICHOR_GENERAL_START + 0x13D) // Ichor: Kleon revealed why the Titans want the Unwoven
+#define FLAG_ICHOR_AKROPOLIS_OLIVE_FELL          (FLAG_ICHOR_GENERAL_START + 0x13E) // Ichor: Athena's olive was uprooted before the Rhea battle
+#define FLAG_ICHOR_AKROPOLIS_RAID_DONE           (FLAG_ICHOR_GENERAL_START + 0x13F) // Ichor: Rhea escaped with the second fragment
+#define FLAG_ICHOR_ITEM_AKROPOLIS_HEAL           (FLAG_ICHOR_GENERAL_START + 0x140) // Ichor: Sacred Way healing jar
+#define FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS        (FLAG_ICHOR_GENERAL_START + 0x141) // Ichor: Independent actor hide state, not raid completion
+#define FLAG_ICHOR_HIDE_RHEA_AKROPOLIS           (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Rhea left through the spring stair
+#define FLAG_ICHOR_AKROPOLIS_RECOVERED           (FLAG_ICHOR_GENERAL_START + 0x143) // Ichor: Phaedon tended the player after the raid
+#define FLAG_ICHOR_HIDE_ALETHEA_ASTYRA_CLINIC    (FLAG_ICHOR_GENERAL_START + 0x144) // Ichor: Alethea is only at the clinic for the raid aftermath
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
@@ -1980,6 +1991,8 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x01E) // Ichor: Capital pass honey
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x01F) // Ichor: Capital pass revive
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Capital pass repel
+#define FLAG_ICHOR_HIDDEN_AKROPOLIS_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x021) // Ichor: Lower terrace revive
+#define FLAG_ICHOR_HIDDEN_AKROPOLIS_ETHER        (FLAG_ICHOR_GENERAL2_START + 0x022) // Ichor: Olive court ether
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

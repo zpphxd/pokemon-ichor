@@ -94,7 +94,7 @@
     {
       "local_id": "LOCALID_ASTYRA_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
-      "x": 25,
+      "x": 24,
       "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -133,6 +133,13 @@
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_STOA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 25,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_AKROPOLIS",
       "dest_warp_id": "0"
     }
   ],
