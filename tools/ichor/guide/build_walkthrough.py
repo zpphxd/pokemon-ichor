@@ -799,7 +799,7 @@ class Page:
             if len(self.g.trainers.get(t0["tid"], {})) > 1:
                 self.w('<p class="fine">Hero difficulty shown. Mortal is 3 levels lower; Spartan has trained sets.</p>')
             if not n:
-                self.w('<p class="fine">Battled in a story scene.</p>')
+                self.w('<p class="fine">No fixed spot: battled during an event.</p>')
             self.w('</article>')
         self.w('</div></div>')
 
