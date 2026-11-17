@@ -9,8 +9,8 @@
  "registration": "Theo Mach/Acro source3 and Ianthe watering source1 y+1 mechanical ground registration; no clipping or anatomy painting.",
  "assets": {
   "graphics/object_events/pics/people/brendan/walking.png": {
-   "sha256": "d5aa60ef646815fe22b8a0d7928b0cff1aaad5f25914e7a40eb5575b7d6c2f3d",
-   "indices_sha256": "7db50e7edf11c19994a2f14fd5c6fe72bc58ab428964f011a44581f6edc59587",
+   "sha256": "1d545efdbc3ee1cbc8bd9ae8146e192eba75abfdc73c5189b6a2611f8d8dd763",
+   "indices_sha256": "c4d036b92da7c452b1c39ec6aeea77d61cc35bac944169bf13ed35fbaf84bcff",
    "size": [
     144,
     32
@@ -82,8 +82,8 @@
    "authorship": "hand-drawn in tools/ichor/art/walker_paint.py (STYLE.md \u00a73.6), replacing the image-model source"
   },
   "graphics/object_events/pics/people/brendan/running.png": {
-   "sha256": "13deb63ae7dc94aa7030dded2ca1f6b3b1d7c8dc6d9b36b327cf182d0ed26900",
-   "indices_sha256": "165af231c62f661775e313d596fa2b893583d044637753ec57937e8add3fd257",
+   "sha256": "847c7a7c9ba896ef8420bc2c5ac9007c60e9d40d2b1da2dad546060275b04cd9",
+   "indices_sha256": "1a9399eaf656dcf9ac647c301f13f6db453f7ad7eff45c504d7e2e3ea79ca55f",
    "size": [
     144,
     32
@@ -793,8 +793,8 @@
    "type": "trainer-local-palette"
   },
   "graphics/object_events/pics/people/may/walking.png": {
-   "sha256": "e7095429282bbd5202e41fbfda119df85f96f3ab03cb58c58b6e732df1e74d6c",
-   "indices_sha256": "70dc0b5421734cae089023ba08dd48b396a60aa1488c2d582e2150f57696f457",
+   "sha256": "5bc8eee8a530bdf43ffad5dff04b3dfed28b9cc2a90b01e8cdba331996d70bed",
+   "indices_sha256": "ef147f16d58aff4e5be8f78e7ff40f7b54b09459fa2c83747cc4ace328ab4453",
    "size": [
     144,
     32
@@ -866,8 +866,8 @@
    "authorship": "hand-drawn in tools/ichor/art/walker_paint.py (STYLE.md \u00a73.6), replacing the image-model source"
   },
   "graphics/object_events/pics/people/may/running.png": {
-   "sha256": "440360e7ac94dc3f0126172fd986a5c20059f9be9d9f64e56791afda2b86332c",
-   "indices_sha256": "829219d2e9f53e137fb64d51391be4c0b018a51e4318ee2b694f5df0293a04c9",
+   "sha256": "3e4b745e78f9b6e0267a6bd975800c8935a0e54da86a32f1bf2f8c55bb74fab2",
+   "indices_sha256": "ea3fbfed410d0749f4f6719ca4ee67d7ae024219c51da0266c50f71fdf937782",
    "size": [
     144,
     32

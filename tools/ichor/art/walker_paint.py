@@ -862,6 +862,14 @@ def stamp(grid, part, view, phase, behind=False, dy=0, dx=0):
     if not part or view not in part:
         return
     t = part[view][phase]
+    if view == "left" and phase == 2:
+        # same()/phases() make step B by mirroring step A, which is right seen
+        # from the front or back but turns a profile round to face the other
+        # way every other stride. In profile a mirrored B means "no B of its
+        # own": keep A's facing. Bodies that draw a real B are untouched.
+        a = part[view][1]
+        if t.start == a.start and t.rows == [r[::-1] for r in a.rows] and t.rows != a.rows:
+            t = a
     for i, row in enumerate(t.rows):
         y = t.start + i + dy
         if not 0 <= y < 32:
