@@ -18,4 +18,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **First up when it lands:** Route 7 (Kronia Grounds) and Routes 8–9 around Lebadeia, which the user asked about; then Routes 1, 4 and 5, and every route after.
 - **In progress (2026-11-17):** Routes 7, 8, 9, 11, 13 and 14, with the bare stops (Lebadeia, Kirrha, Aigion, Nemea) each getting a temple, shrine or outcamp that can carry a later quest. Routes 1, 4, 5 and the rest are still to come.
 
+### The whole world: hidden parts and return gates
+- **Planned (2026-11-17):** `design/WORLD_EXPLORATION.md` plans every region's return gates, cave back sections and what pays behind them (story, stronger Pokémon, leads), proposes Pan's Crook as the climbing relic, and gives a build order.
+
 ## Done
