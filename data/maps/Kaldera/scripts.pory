@@ -15,8 +15,28 @@ mapscripts Kaldera_MapScripts {
     ]
 }
 script Kaldera_EventScript_Nausikles {
+    // Act III (STORY III-1): once the letter is read, the Euploia sails south
+    // for Kythera, and Daphne says goodbye on deck (TriremeEuploia_DeckSouth).
+    if (flag(FLAG_BADGE06_GET) && flag(FLAG_ICHOR_MOM_MISSING) && var(VAR_ICHOR_ACT3) == 0) {
+        goto(Kaldera_EventScript_SouthernVoyage)
+    }
     setvar(VAR_0x8004, 4)
     goto(Ichor_EventScript_FerryQuay)
+}
+text Kaldera_Text_NameNausikles { "NAUSIKLES" }
+script Kaldera_EventScript_SouthernVoyage {
+    lock
+    faceplayer
+    setspeaker(Kaldera_Text_NameNausikles)
+    msgbox(format("The Titans' whole fleet went west in the night. I don't like it.\p"
+                  "Your professor's on deck with a letter. Come aboard and hear it."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    playse(SE_EXIT)
+    fadescreen(FADE_TO_BLACK)
+    warp(MAP_TRIREME_EUPLOIA_DECK_SOUTH, 12, 6)
+    waitstate
+    release
 }
 script Kaldera_EventScript_Daphne {
     lock

@@ -21,7 +21,16 @@ script Ichor_EventScript_FerryQuay {
     setspeaker(Ichor_Text_NameNausikles)
     setvar(VAR_ICHOR_FERRY_DEST, 0)
     msgbox(format("Where to? Wind's fair, more or less."))
-    if (flag(FLAG_ICHOR_AKROPOLIS_RECOVERED)) {
+    if (flag(FLAG_ICHOR_EUPLOIA_KEPT)) {
+        // Act III: Skandeia joins the lanes once the Euploia is kept there.
+        dynmultichoice(0, 0, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE,
+            "AKTI", "EMPORION", "ASTYRA", "KALDERA", "KYTHERA", "STAY")
+        if (var(VAR_RESULT) < 5) {
+            copyvar(VAR_ICHOR_FERRY_DEST, VAR_RESULT)
+            addvar(VAR_ICHOR_FERRY_DEST, 1)
+            goto(Ichor_EventScript_FerryBoard)
+        }
+    } elif (flag(FLAG_ICHOR_AKROPOLIS_RECOVERED)) {
         dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE,
             "AKTI", "EMPORION", "ASTYRA", "KALDERA", "STAY")
         if (var(VAR_RESULT) < 4) {
@@ -71,7 +80,10 @@ script Ichor_EventScript_FerryDeck {
     closemessage
     fadescreen(FADE_TO_BLACK)
     // world-act2 adds an Aigina destination of its own.
-    if (var(VAR_ICHOR_FERRY_DEST) == 4) {
+    if (var(VAR_ICHOR_FERRY_DEST) == 5) {
+        // Skandeia's gangplank, Kythera (Act III)
+        warpsilent(MAP_KYTHERA_SKANDEIA, 25, 10)
+    } elif (var(VAR_ICHOR_FERRY_DEST) == 4) {
         warpsilent(MAP_KALDERA, 19, 34)
     } elif (var(VAR_ICHOR_FERRY_DEST) == 3) {
         warpsilent(MAP_ASTYRA_HARBOR, 24, 13)
