@@ -32,11 +32,11 @@ static bool32 IsMoonlit(s16 x, s16 y)
 {
     x -= MAP_OFFSET;
     y -= MAP_OFFSET;
-    return (x >= 8 && x <= 13 && y >= 39 && y <= 43)
-        || (x >= 14 && x <= 19 && y >= 31 && y <= 35)
-        || (x >= 17 && x <= 21 && y >= 19 && y <= 23)
-        || (x >= 6 && x <= 10 && y >= 13 && y <= 17)
-        || (x >= 17 && x <= 21 && y >= 7 && y <= 11);
+    // The grove's three pale clearings (layouts/Arkadia_TempleOfArtemis, from world-act2):
+    // two in the second glade, one in the third.
+    return (x >= 4 && x <= 11 && y >= 23 && y <= 26)
+        || (x >= 18 && x <= 25 && y >= 24 && y <= 29)
+        || (x >= 21 && x <= 26 && y >= 8 && y <= 13);
 }
 
 static bool32 SeesPlayer(const struct ObjectEvent *hound, s16 px, s16 py)

@@ -6,9 +6,9 @@ mapscripts Arkadia_TempleOfArtemis_MapScripts {
             setvar(VAR_TEMP_4, 1)
         }
         if (var(VAR_ICHOR_HIND_TOUCHES) == 1) {
-            setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 7, 15)
+            setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 4, 11)
         } elif (var(VAR_ICHOR_HIND_TOUCHES) == 2) {
-            setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 20, 9)
+            setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 23, 12)
         }
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
@@ -22,7 +22,7 @@ script Arkadia_TempleOfArtemis_EventScript_Entry {
     if (!flag(FLAG_ICHOR_KLEON_JOINED_TITANS)) {
         msgbox(format("A huntress bars the path.\p"
                       "“Your friend is still among the cypresses. Don't leave him there.”"))
-        warp(MAP_ARKADIA, 20, 7)
+        warp(MAP_ARKADIA, 20, 31)
         waitstate
     }
     releaseall
@@ -50,11 +50,11 @@ script Arkadia_TempleOfArtemis_EventScript_Caught {
     msgbox(format("A hound bays. The huntresses guide you back to this glade's entrance.\p"
                   "Wait for its head to turn. Keep a cypress between you."))
     if (var(VAR_ICHOR_HUNT_STAGE) == 0) {
-        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 12, 66)
+        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 14, 42)
     } elif (var(VAR_ICHOR_HUNT_STAGE) == 1) {
-        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 12, 46)
+        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 23, 33)
     } else {
-        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 12, 24)
+        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 6, 20)
     }
     waitstate
     releaseall
@@ -107,12 +107,12 @@ script Arkadia_TempleOfArtemis_EventScript_Hind {
     addvar(VAR_ICHOR_HIND_TOUCHES, 1)
     removeobject(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND)
     if (var(VAR_ICHOR_HIND_TOUCHES) == 1) {
-        setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 7, 15)
+        setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 4, 11)
         clearflag(FLAG_ICHOR_KALLISTO_TRIAL)
         addobject(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND)
         msgbox(format("Gold flashes in the western clearing."))
     } elif (var(VAR_ICHOR_HIND_TOUCHES) == 2) {
-        setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 20, 9)
+        setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 23, 12)
         clearflag(FLAG_ICHOR_KALLISTO_TRIAL)
         addobject(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND)
         msgbox(format("She bounds to the northeastern clearing."))
