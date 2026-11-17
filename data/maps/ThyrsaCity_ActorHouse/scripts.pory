@@ -1,0 +1,62 @@
+// Polos's house: the old tragic actor's narrow house (SCRIPT.md Part 2, Thyrsa).
+// Ported from claude/world-act2-0a92e7. Polos (4,4), famous for one Elektra forty years
+// ago. Show him a Pokémon that can play someone else (a Prosomime) for his vial of stage
+// tears, a Mystic Water (the branch's TM Fake Tears has no TM number on main).
+
+mapscripts ThyrsaCity_ActorHouse_MapScripts {}
+
+text ThyrsaCity_ActorHouse_Name_Polos { "POLOS" }
+
+script ThyrsaCity_ActorHouse_EventScript_Polos {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_ActorHouse_Name_Polos)
+    if (flag(FLAG_ICHOR_GOT_POLOS_MYSTIC_WATER)) {
+        msgbox(format("They still talk about it, you know. The urn.\p"
+                      "I don't. I just dust it."))
+        release
+        end
+    }
+    checkspecies(SPECIES_PROSOMIME)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Ah. It's wearing a face that isn't its own. Beautifully.\p"
+                      "Here. Every actor keeps a vial of tears. For when the part needs them."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_MYSTIC_WATER)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_POLOS_MYSTIC_WATER)
+        }
+        release
+        end
+    }
+    msgbox(format("I played Elektra. Forty years ago. I'm told they still talk about it.\p"
+                  "She grieves over an urn she thinks holds her brother's ashes.\p"
+                  "I carried my own son's urn on stage. That one, on the table.\p"
+                  "Everyone wept. They thought it was acting. It's always acting.\p"
+                  "Show me a Pokémon that can play someone else. A real actor."))
+    release
+}
+
+script ThyrsaCity_ActorHouse_EventScript_Masks {
+    msgbox(format("A wall of masks, each labelled with the part. KING. OLD MAN. SATYR.\p"
+                  "The one in the middle says ELEKTRA. Its paint is worn where a thumb held it."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_ActorHouse_EventScript_Boots {
+    msgbox(format("Kothornoi: tragic boots with soles a hand high. Red for kings, blue for gods."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_ActorHouse_EventScript_Mirror {
+    msgbox(format("A mirror of polished bronze. Your face looks back, a little gold, a little someone else's."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_ActorHouse_EventScript_Trunk {
+    msgbox(format("A costume trunk. A king's purple, a chorus cloak, a beard on a string."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_ActorHouse_EventScript_Urn {
+    msgbox(format("A plain clay urn on a little table by itself. Someone has laid a sprig of ivy on it."),
+           MSGBOX_SIGN)
+}

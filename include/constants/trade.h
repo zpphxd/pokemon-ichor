@@ -27,6 +27,7 @@ enum InGameTradeID
     INGAME_TRADE_ICHOR_SOCRATES, // Thaletas's Narkeray, for an Onotis (Emporion, the Deigma)
     INGAME_TRADE_ICHOR_GALANTHIS, // Xenokles's Gelasable, for an Onotis (Route 5, the inn)
     INGAME_TRADE_ICHOR_CRITIC, // Euphorion's Pithound, for a Melibee (Eleusa, Euphorion's house)
+    INGAME_TRADE_ICHOR_PATHOS, // Euthykles's Prosomime, for a Gelasable (Thyrsa, the mask workshop)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

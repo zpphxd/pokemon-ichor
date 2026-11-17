@@ -937,6 +937,94 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_THYRSA_CITY_TAVERN",
+      "name": "ThyrsaCity_Tavern_Layout",
+      "width": 13,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaStone",
+      "border_filepath": "data/layouts/ThyrsaCity_Tavern/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_Tavern/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_MASK_WORKSHOP",
+      "name": "ThyrsaCity_MaskWorkshop_Layout",
+      "width": 16,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
+      "border_filepath": "data/layouts/ThyrsaCity_MaskWorkshop/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_MaskWorkshop/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_ACTOR_HOUSE",
+      "name": "ThyrsaCity_ActorHouse_Layout",
+      "width": 7,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
+      "border_filepath": "data/layouts/ThyrsaCity_ActorHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_ActorHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_EUDORA_HOUSE",
+      "name": "ThyrsaCity_EudoraHouse_Layout",
+      "width": 13,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
+      "border_filepath": "data/layouts/ThyrsaCity_EudoraHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_EudoraHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_MANTO_HOUSE",
+      "name": "ThyrsaCity_MantoHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
+      "border_filepath": "data/layouts/ThyrsaCity_MantoHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_MantoHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_PINDAROS_HOUSE",
+      "name": "ThyrsaCity_PindarosHouse_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
+      "border_filepath": "data/layouts/ThyrsaCity_PindarosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_PindarosHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_SOWN_HOUSE",
+      "name": "ThyrsaCity_SownHouse_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaStone",
+      "border_filepath": "data/layouts/ThyrsaCity_SownHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_SownHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THYRSA_CITY_VINTNER_HOUSE",
+      "name": "ThyrsaCity_VintnerHouse_Layout",
+      "width": 14,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
+      "border_filepath": "data/layouts/ThyrsaCity_VintnerHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ThyrsaCity_VintnerHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_ROUTE8_KOPAIS_ROAD",
       "name": "Route8_KopaisRoad_Layout",
       "width": 48,

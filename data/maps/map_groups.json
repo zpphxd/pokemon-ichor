@@ -134,6 +134,14 @@
     "Astyra_Asclepeion",
     "Astyra_PhaedonsHouse",
     "Astyra_Library",
-    "Astyra_Stoa"
+    "Astyra_Stoa",
+    "ThyrsaCity_Tavern",
+    "ThyrsaCity_MaskWorkshop",
+    "ThyrsaCity_ActorHouse",
+    "ThyrsaCity_EudoraHouse",
+    "ThyrsaCity_MantoHouse",
+    "ThyrsaCity_PindarosHouse",
+    "ThyrsaCity_SownHouse",
+    "ThyrsaCity_VintnerHouse"
   ]
 }

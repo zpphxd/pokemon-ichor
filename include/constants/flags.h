@@ -1993,6 +1993,19 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Capital pass repel
 #define FLAG_ICHOR_HIDDEN_AKROPOLIS_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x021) // Ichor: Lower terrace revive
 #define FLAG_ICHOR_HIDDEN_AKROPOLIS_ETHER        (FLAG_ICHOR_GENERAL2_START + 0x022) // Ichor: Olive court ether
+#define FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS       (FLAG_ICHOR_GENERAL2_START + 0x023) // Ichor: won Phaidimos's first knucklebones match (Thyrsa, the Kantharos)
+#define FLAG_ICHOR_KNUCKLEBONES_GLAUKE          (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: won Glauke's first knucklebones match (Thyrsa, the Kantharos)
+#define FLAG_ICHOR_KNUCKLEBONES_THYRSA          (FLAG_ICHOR_GENERAL2_START + 0x025) // Ichor: beat Aristomache, Thyrsa's knucklebones champion
+#define FLAG_ICHOR_TRADED_PROSOMIME             (FLAG_ICHOR_GENERAL2_START + 0x026) // Ichor: traded a Gelasable for Euthykles's Prosomime (Thyrsa)
+#define FLAG_ICHOR_GOT_POLOS_MYSTIC_WATER       (FLAG_ICHOR_GENERAL2_START + 0x027) // Ichor: showed Polos a Prosomime and got his Mystic Water (Thyrsa)
+#define FLAG_ICHOR_EUDORA_FIG_DUG               (FLAG_ICHOR_GENERAL2_START + 0x028) // Ichor: dug up the arm-ring under Eudora's fig (Thyrsa)
+#define FLAG_ICHOR_GOT_POWER_BRACER             (FLAG_ICHOR_GENERAL2_START + 0x029) // Ichor: Eudora gave her husband's arm-ring, the Power Bracer (Thyrsa)
+#define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL2_START + 0x02A) // Ichor: met Manto on the Kadmeia wall (Thyrsa)
+#define FLAG_ICHOR_MANTO_CROWS                  (FLAG_ICHOR_GENERAL2_START + 0x02B) // Ichor: Manto asked you to watch the crows over the Kronia (Thyrsa)
+#define FLAG_ICHOR_SAW_CROWS                    (FLAG_ICHOR_GENERAL2_START + 0x02C) // Ichor: saw the crows fly south from the Elektran Gate (Thyrsa)
+#define FLAG_ICHOR_GOT_TWISTED_SPOON            (FLAG_ICHOR_GENERAL2_START + 0x02D) // Ichor: Manto gave Teiresias's spoon, the Twisted Spoon (Thyrsa)
+#define FLAG_ICHOR_GOT_DRAGON_FANG              (FLAG_ICHOR_GENERAL2_START + 0x02E) // Ichor: Chthonia gave the Dragon Fang (Thyrsa, the Sown house)
+#define FLAG_ICHOR_GOT_STAPHYLOS_NUGGET         (FLAG_ICHOR_GENERAL2_START + 0x02F) // Ichor: Staphylos gave the press's Nugget (Thyrsa)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
@@ -2009,6 +2022,7 @@
 // Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
 #define FLAG_DAILY_ICHOR_FESTIVAL_JOINED        (FLAG_DAILY_ICHOR_GENERAL_START + 0x000) // Ichor: joined today's festival: its god's +5 Favor is given (engine, ENGINE_API §7)
 #define FLAG_DAILY_ICHOR_AUGURY_READ            (FLAG_DAILY_ICHOR_GENERAL_START + 0x040) // Ichor: heard today's shared omen; prevents repeated augur blessings
+#define FLAG_DAILY_ICHOR_TREADING               (FLAG_DAILY_ICHOR_GENERAL_START + 0x04C) // Ichor: trod Staphylos's grapes today (Thyrsa)
 // Ichor daily bank flags: end
 
 // Temp flag aliases

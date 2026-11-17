@@ -143,6 +143,14 @@ data/maps/ThyrsaCity_Asclepeion/scripts.inc
 data/maps/ThyrsaCity_Agora/scripts.inc
 data/maps/ThyrsaCity_TempleOfDionysus/scripts.inc
 data/maps/ThyrsaCity_Amphitheater/scripts.inc
+data/maps/ThyrsaCity_Tavern/scripts.inc
+data/maps/ThyrsaCity_MaskWorkshop/scripts.inc
+data/maps/ThyrsaCity_ActorHouse/scripts.inc
+data/maps/ThyrsaCity_EudoraHouse/scripts.inc
+data/maps/ThyrsaCity_MantoHouse/scripts.inc
+data/maps/ThyrsaCity_PindarosHouse/scripts.inc
+data/maps/ThyrsaCity_SownHouse/scripts.inc
+data/maps/ThyrsaCity_VintnerHouse/scripts.inc
 data/maps/Route8_KopaisRoad/scripts.inc
 data/maps/Lebadeia/scripts.inc
 data/maps/Route9_ParnassosCrossroads/scripts.inc

@@ -1,0 +1,84 @@
+{
+  "id": "MAP_THYRSA_CITY_EUDORA_HOUSE",
+  "name": "ThyrsaCity_EudoraHouse",
+  "layout": "LAYOUT_THYRSA_CITY_EUDORA_HOUSE",
+  "music": "MUS_ICHOR_AGORA",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_THYRSA_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_EUDORA_HOUSE_EUDORA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA",
+      "x": 2,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_EudoraHouse_EventScript_Eudora",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "8"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
+      "script": "ThyrsaCity_EudoraHouse_EventScript_TurnedEarth"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
+      "script": "ThyrsaCity_EudoraHouse_EventScript_Fig"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_EudoraHouse_EventScript_Helmet"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_EudoraHouse_EventScript_Loom"
+    }
+  ]
+}

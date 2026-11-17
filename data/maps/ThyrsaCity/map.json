@@ -118,6 +118,62 @@
       "elevation": 0,
       "dest_map": "MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 38,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_TAVERN",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 42,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_MASK_WORKSHOP",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 37,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_ACTOR_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 39,
+      "y": 35,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_EUDORA_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 39,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_MANTO_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 43,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_PINDAROS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 19,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_SOWN_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 13,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY_VINTNER_HOUSE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
