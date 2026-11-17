@@ -28,6 +28,7 @@ enum InGameTradeID
     INGAME_TRADE_ICHOR_GALANTHIS, // Xenokles's Gelasable, for an Onotis (Route 5, the inn)
     INGAME_TRADE_ICHOR_CRITIC, // Euphorion's Pithound, for a Melibee (Eleusa, Euphorion's house)
     INGAME_TRADE_ICHOR_PATHOS, // Euthykles's Prosomime, for a Gelasable (Thyrsa, the mask workshop)
+    INGAME_TRADE_ICHOR_ARKAS, // Hippothoos's Arkoby, for a Gelasable (Arkadia, the charcoal hut)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

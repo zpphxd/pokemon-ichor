@@ -187,3 +187,186 @@ script Arkadia_EventScript_Recruitment {
 
 movement Arkadia_Movement_IntoCypresses { walk_up walk_up walk_up }
 movement Arkadia_Movement_KleonLeaves { walk_up walk_left walk_left walk_up walk_up }
+
+// ---------------------------------------------------------------------------
+// The town's people, signs, grotto and falls, ported from claude/world-act2-0a92e7
+// ---------------------------------------------------------------------------
+
+text Arkadia_Name_Lamplighter { "LAMPLIGHTER" }
+
+text Arkadia_Name_Huntress { "HUNTRESS" }
+
+text Arkadia_Name_Iamos { "IAMOS" }
+
+text Arkadia_Name_Kronist { "KRONIST" }
+
+text Arkadia_Name_Hunter { "HUNTER" }
+
+text Arkadia_Name_Child { "CHILD" }
+
+text Arkadia_Name_Hoplite { "HOPLITE" }
+
+script Arkadia_EventScript_Lamplighter {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Lamplighter)
+    msgbox(format("It's the new moon. Nobody goes in the Wood at the new moon.\p"
+                  "The wolves go in. That's how we know."))
+    release
+}
+
+script Arkadia_EventScript_Huntress1 {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Huntress)
+    msgbox(format("Six to nothing. Did you see it? She never looked at him once."))
+    release
+}
+
+script Arkadia_EventScript_Huntress2 {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Huntress)
+    msgbox(format("Poor thing. He's fated, you know. Young and glorious."))
+    release
+}
+
+script Arkadia_EventScript_Iamos {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Iamos)
+    msgbox(format("My mother left me in the violets when I was born. Two snakes fed me honey."))
+    setspeaker(Arkadia_Name_Iamos)
+    msgbox(format("I don't remember it. But I can read a bird like a letter. Watch."))
+    closemessage
+    applymovement(LOCALID_ARKADIA_IAMOS, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(30)
+    applymovement(LOCALID_ARKADIA_IAMOS, Common_Movement_FacePlayer)
+    waitmovement(0)
+    // ICHOR_STUB_OMENS: the day's draw from Part 4's Arkadian entries isn't built
+    // (ENGINE_API §7). Iamos reads one of the three; none has its effect yet.
+    random(3)
+    setspeaker(Arkadia_Name_Iamos)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The sleepers are out on Kyllene tonight. Walk softly. They won't wake. They never do."))
+        case 1:
+            msgbox(format("A great boar was seen on the Huntress's tomb at dusk. Standing guard, or grieving."))
+        default:
+            msgbox(format("Thunder over Kyllene. The Kerazap will be dancing on the meadow. Mind your hair."))
+    }
+    setspeaker(Arkadia_Name_Iamos)
+    msgbox(format("That's today. Tomorrow's tomorrow. The owls don't do tomorrow."))
+    release
+}
+
+script Arkadia_EventScript_Kronist {
+    lock
+    faceplayer
+    goto(Arkadia_EventScript_KronistAndHunter)
+}
+
+script Arkadia_EventScript_Hunter {
+    lock
+    faceplayer
+    goto(Arkadia_EventScript_KronistAndHunter)
+}
+
+script Arkadia_EventScript_KronistAndHunter {
+    setspeaker(Arkadia_Name_Kronist)
+    msgbox(format("Friends! Hunters! What if nothing ever had to end?"))
+    setspeaker(Arkadia_Name_Kronist)
+    msgbox(format("Not you. Not your mother. Not even the deer."))
+    setspeaker(Arkadia_Name_Kronist)
+    msgbox(format("Kronos is coming back. No more cutting. Only the long, golden hour."))
+    setspeaker(Arkadia_Name_Hunter)
+    msgbox(format("No more deer ending? Then what do I have for supper?"))
+    setspeaker(Arkadia_Name_Kronist)
+    msgbox(format("In the golden age, friend, nobody's hungry."))
+    setspeaker(Arkadia_Name_Hunter)
+    msgbox(format("That's not an answer. That's a wish with a beard on."))
+    release
+}
+
+script Arkadia_EventScript_Child1 {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Child)
+    msgbox(format("I'm a little bear! Like the girls at the temple! Grr!"))
+    setspeaker(Arkadia_Name_Child)
+    msgbox(format("Kallisto was a girl who turned into a bear. Then she turned into stars."))
+    release
+}
+
+script Arkadia_EventScript_Child2 {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Child)
+    msgbox(format("I'm going to be stars. After bears. After my supper."))
+    release
+}
+
+script Arkadia_EventScript_Hoplite {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Name_Hoplite)
+    msgbox(format("The road to Stymphalia's shut. Lakonia's border. They're keeping the Karneia."))
+    setspeaker(Arkadia_Name_Hoplite)
+    msgbox(format("No marching, no visitors, no nothing till the moon's full."))
+    setspeaker(Arkadia_Name_Hoplite)
+    msgbox(format("Lakonians missed a whole war once over the Karneia. They didn't mind."))
+    release
+}
+
+// One of Krotos's kids that didn't run: grazing in the pasture.
+script Arkadia_EventScript_Grazer {
+    lock
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("A Kerazap kid, grazing. It ignores you completely."))
+    waitmoncry
+    release
+}
+
+script Arkadia_EventScript_SignAsclepeion {
+    msgbox(format("ASCLEPEION. The spring runs through. Step over it."), MSGBOX_SIGN)
+}
+
+script Arkadia_EventScript_SignTemple {
+    msgbox(format("TEMPLE OF ARTEMIS\nHierophant: Kallisto, the Moonlit Huntress."), MSGBOX_SIGN)
+}
+
+script Arkadia_EventScript_SignWoodGate {
+    msgbox(format("THE CYPRESS WOOD. No moon tonight. No moon ever, in there."), MSGBOX_SIGN)
+}
+
+script Arkadia_EventScript_SignEastRoad {
+    msgbox(format("East: Route 13, down out of the highlands to Nemea."), MSGBOX_SIGN)
+}
+
+script Arkadia_EventScript_SignAlpheios {
+    msgbox(format("The Alpheios is in flood. The road to the west coast is under water."), MSGBOX_SIGN)
+}
+
+script Arkadia_EventScript_PansGrotto {
+    lockall
+    msgbox(format("A shallow grotto with a syrinx carved over the mouth. Pan's.\p"
+                  "The reeds of the syrinx were a nymph once. She ran from him.\p"
+                  "Now she sings for him."))
+    closemessage
+    playse(SE_M_SCREECH)
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 3)
+    setvar(VAR_0x8006, 8)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    waitstate
+    msgbox(format("Something rustles inside, and you feel a sudden, total panic. Then it's gone."))
+    releaseall
+}
+
+script Arkadia_EventScript_Waterfall {
+    msgbox(format("The falls drop straight from the cliff. Halfway up, there's a cave mouth.\p"
+                  "Something glints in it. You'd have to climb the water itself to reach it."),
+           MSGBOX_SIGN)
+}

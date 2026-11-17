@@ -17,22 +17,22 @@
     {
       "direction": "up",
       "map": "MAP_STYX_FALLS",
-      "offset": 0
+      "offset": -24
     },
     {
       "direction": "down",
       "map": "MAP_ARKADIA",
-      "offset": 0
+      "offset": 6
     }
   ],
   "object_events": [
     {
       "local_id": "LOCALID_ROUTE12_CYPRESS_ROAD_STHENON",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
-      "x": 10,
-      "y": 8,
+      "x": 27,
+      "y": 10,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -43,8 +43,8 @@
     {
       "local_id": "LOCALID_ROUTE12_CYPRESS_ROAD_BRISEIS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
-      "x": 5,
-      "y": 6,
+      "x": 11,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -57,10 +57,10 @@
     {
       "local_id": "LOCALID_ROUTE12_CYPRESS_ROAD_OPHION",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
-      "x": 18,
-      "y": 19,
+      "x": 37,
+      "y": 2,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -71,10 +71,10 @@
     {
       "local_id": "LOCALID_ROUTE12_CYPRESS_ROAD_DAMO",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
-      "x": 10,
+      "x": 35,
       "y": 22,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -85,10 +85,10 @@
     {
       "local_id": "LOCALID_ROUTE12_CYPRESS_ROAD_PHANES",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
-      "x": 5,
-      "y": 32,
+      "x": 23,
+      "y": 23,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -99,10 +99,10 @@
     {
       "local_id": "LOCALID_ROUTE12_CYPRESS_ROAD_KALLIN",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
-      "x": 18,
-      "y": 33,
+      "x": 46,
+      "y": 24,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -112,8 +112,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 4,
-      "y": 4,
+      "x": 49,
+      "y": 16,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -125,8 +125,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 19,
-      "y": 17,
+      "x": 42,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -138,8 +138,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 4,
-      "y": 34,
+      "x": 50,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -148,15 +148,88 @@
       "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_R12_ETHER"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 9,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route12_CypressRoad_EventScript_Phegeus",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOATHERD",
+      "x": 48,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route12_CypressRoad_EventScript_Korythos",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
+      "x": 9,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route12_CypressRoad_EventScript_Goat",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
+      "x": 14,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route12_CypressRoad_EventScript_Goat",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "x": 42,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorGreatBoulder",
+      "flag": "0"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 26,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE12_CAVE_OF_MAIA",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
     {
       "type": "hidden_item",
-      "x": 7,
-      "y": 4,
+      "x": 22,
+      "y": 11,
       "elevation": 3,
       "item": "ITEM_HONEY",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_R12_HONEY",
@@ -165,8 +238,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 19,
-      "y": 21,
+      "x": 12,
+      "y": 7,
       "elevation": 3,
       "item": "ITEM_REVIVE",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_R12_REVIVE",
@@ -175,8 +248,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 7,
-      "y": 34,
+      "x": 33,
+      "y": 8,
       "elevation": 3,
       "item": "ITEM_SUPER_REPEL",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_R12_REPEL",
@@ -185,19 +258,59 @@
     },
     {
       "type": "sign",
-      "x": 14,
-      "y": 2,
+      "x": 5,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route12_CypressRoad_EventScript_Sign0"
     },
     {
       "type": "sign",
-      "x": 14,
-      "y": 37,
+      "x": 31,
+      "y": 31,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route12_CypressRoad_EventScript_Sign1"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route12_CypressRoad_EventScript_SignWest"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route12_CypressRoad_EventScript_SignCave"
+    },
+    {
+      "type": "sign",
+      "x": 35,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route12_CypressRoad_EventScript_SignHawk"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route12_CypressRoad_EventScript_TortoiseBoulder"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route12_CypressRoad_EventScript_TortoiseBoulder"
     }
   ]
 }

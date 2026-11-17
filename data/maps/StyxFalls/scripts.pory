@@ -11,3 +11,82 @@ script StyxFalls_EventScript_Sign {
     msgbox(format("STYX FALLS\nNorth: Aigion. South: Arkadia."), MSGBOX_SIGN)
     end
 }
+
+// ---------------------------------------------------------------------------
+// The village's people and the oath stone, ported from claude/world-act2-0a92e7
+// ---------------------------------------------------------------------------
+
+text StyxFalls_Text_SpeakerMuleteer { "MULETEER" }
+
+text StyxFalls_Text_SpeakerOldMan { "OLD MAN" }
+
+text StyxFalls_Text_SpeakerGirl { "GIRL" }
+
+// The Oath Stone: YES sets nothing and gives nothing (beat 39's design note).
+script StyxFalls_EventScript_OathStone {
+    lockall
+    msgbox(format("A boulder worn smooth by hands. Above it, the Styx falls without a sound.\pSwear by the Styx to finish what you started?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("You lay your hand on the stone. Nothing happens. The water keeps falling.\pIt doesn't care. It will remember anyway."))
+    } else {
+        msgbox(format("Probably wise. The water remembers everything."))
+    }
+    releaseall
+}
+
+script StyxFalls_EventScript_Muleteer {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Text_SpeakerMuleteer)
+    msgbox(format("Watch. A hoof-cup. Off a mule that died of old age, mind. Very respectful."))
+    msgbox(format("Clay cracks. Bronze rots. Glass, gone. A hoof holds it. Nobody knows why."))
+    msgbox(format("The rich send for it, down in the cities. For oaths. For a little drop of terror."))
+    release
+}
+
+script StyxFalls_EventScript_Mule {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
+    msgbox(format("The mule won't go near the water's edge. It knows."))
+    waitmoncry
+    release
+}
+
+script StyxFalls_EventScript_OldMan {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Text_SpeakerOldMan)
+    msgbox(format("Nothing lives in that water. Not a fish. Not a weed. Not a fly on it."))
+    msgbox(format("Throw a stick in, it doesn't float. It goes down."))
+    msgbox(format("People drop a coin in, for the ferryman. In case. Look. You can see them."))
+    release
+}
+
+// Her hint: the hidden Bronze Obol on the pool's lip (18,17).
+script StyxFalls_EventScript_Girl {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Text_SpeakerGirl)
+    msgbox(format("I dropped my sandal in the pool. It's gone. It just went."))
+    msgbox(format("Grandma says the water eats everything. Except hooves. And some coins."))
+    msgbox(format("One came back up once. A coin. It's still lying on the edge. Nobody'll touch it."))
+    release
+}
+
+script StyxFalls_EventScript_Pool {
+    lockall
+    msgbox(format("Black water, perfectly still. On the bottom, coins: small bronze obols, dozens.\pFor the ferryman, people say. In case."))
+    if (flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+        msgbox(format("The water won't hold you up. Nothing floats on the Styx."))
+    }
+    releaseall
+}
+
+script StyxFalls_EventScript_SignNorth {
+    msgbox(format("STYX FALLS · NONAKRIS\pSwear carefully."), MSGBOX_SIGN)
+}
+
+script StyxFalls_EventScript_SignOathStone {
+    msgbox(format("THE OATH STONE. Hands only. No feet. No promises you mean to break."), MSGBOX_SIGN)
+}

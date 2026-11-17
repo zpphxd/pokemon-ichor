@@ -1346,6 +1346,26 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_GELASABLE,
         .level = 24,                         // BALANCE.md: Thyrsa's wild band is 21-28
+    },
+    // Ichor: Hippothoos the charcoal-burner's Arkoby hates the smoke; he'd trade her for a
+    // Gelasable to laugh the rats out of his sacks (Arkadia, ported from claude/world-act2-0a92e7).
+    // Arkas: Kallisto's son, who nearly hunted her.
+    [INGAME_TRADE_ICHOR_ARKAS] =
+    {
+        .nickname = _("ARKAS"),
+        .species = SPECIES_ARKOBY,
+        .ivs = {22, 16, 18, 14, 20, 24},
+        .abilityNum = 0,
+        .otId = 51824,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x6E,
+        .heldItem = ITEM_SMOKE_BALL,
+        .mailNum = -1,
+        .otName = _("HIPPOTH"),              // seven letters: the OT field holds no more
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GELASABLE,
+        .level = 31,                         // BALANCE.md: Arkadia's wild band is 29-33
     }
 };
 

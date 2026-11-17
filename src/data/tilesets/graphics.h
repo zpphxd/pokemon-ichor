@@ -1015,3 +1015,210 @@ const u16 gTilesetPalettes_PorytilesManaged_ThyrsaStone[][16] =
     INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: arkadia, Arkadia, the hunters' town (Act II, beat 41); built by tools/ichor/art/arkadia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Arkadia[] = INCBIN_U32("data/tilesets/secondary/arkadia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Arkadia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: styx_falls, the Arkadian climb: Styx Falls and Nonakris; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_StyxFalls[] = INCBIN_U32("data/tilesets/secondary/styx_falls/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_StyxFalls[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: kyllene, the Arkadian climb: Route 12, the cypress road over Kyllene; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_Kyllene[] = INCBIN_U32("data/tilesets/secondary/kyllene/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Kyllene[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: temple_artemis
+const u32 gTilesetTiles_PorytilesManaged_TempleArtemis[] = INCBIN_U32("data/tilesets/secondary/temple_artemis/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_TempleArtemis[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: arkadia_rooms
+const u32 gTilesetTiles_PorytilesManaged_ArkadiaRooms[] = INCBIN_U32("data/tilesets/secondary/arkadia_rooms/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ArkadiaRooms[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: arkadia_homes
+const u32 gTilesetTiles_PorytilesManaged_ArkadiaHomes[] = INCBIN_U32("data/tilesets/secondary/arkadia_homes/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ArkadiaHomes[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: styx_rooms
+const u32 gTilesetTiles_PorytilesManaged_StyxRooms[] = INCBIN_U32("data/tilesets/secondary/styx_rooms/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_StyxRooms[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: maia_cave, the Arkadian climb: the Cave of Maia on Route 12; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_MaiaCave[] = INCBIN_U32("data/tilesets/secondary/maia_cave/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_MaiaCave[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: arkadia_wood, the Cypress Wood and the Pool of Mnemosyne (Act II, beats 42-43); built by tools/ichor/art/arkadia_build.py
+const u32 gTilesetTiles_PorytilesManaged_ArkadiaWood[] = INCBIN_U32("data/tilesets/secondary/arkadia_wood/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ArkadiaWood[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/15.gbapal")
+};

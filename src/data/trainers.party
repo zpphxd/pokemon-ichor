@@ -3715,6 +3715,164 @@ Adamant Nature
 - Rock Slide
 - Bulk Up
 
+/* Ichor: the Arkadia cluster's townsfolk trainers, ported from claude/world-act2-0a92e7 with
+   its parties; its Huntress and Charcoaler classes are main's Acolyte and Harvester. */
+=== TRAINER_ICHOR_PHEGEUS ===
+Name: PHEGEUS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Chelonet
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lykopup
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KORYTHOS ===
+Name: KORYTHOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Amnoze
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUANDROS ===
+Name: EUANDROS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Chelyra
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_AGAPENOR ===
+Name: AGAPENOR
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Gelasable
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUADNE ===
+Name: EUADNE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lykanax
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kaprodon
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Double-Edge
+- Stomping Tantrum
+- Night Slash
+- Take Down
+
+=== TRAINER_ICHOR_HEKAERGE ===
+Name: HEKAERGE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Raknit
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lykopup
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LYSIPPE ===
+Name: LYSIPPE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Arkoby
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kaprodon
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MAINALOS ===
+Name: MAINALOS
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Cairnolith
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_WOOD_MELANIPPE ===
+Name: MELANIPPE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lophops
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Amnoze
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lykopup
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
 /* End Akropolis raid teams. */
 
 /* Salt Well teams. */

@@ -638,3 +638,134 @@ const struct Tileset gTileset_ThyrsaStone =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
     .callback = NULL,
 };
+
+// Ichor: arkadia, Arkadia, the hunters' town (Act II, beat 41). Porytiles-managed, ported from claude/world-act2-0a92e7, where it is built by
+// tools/ichor/art/arkadia_build.py for the aethos primary: its cells on grass borrow
+// aethos's grass, so rebuild it whenever aethos changes. It uses only its own
+// tiles and palettes 6-12.
+const struct Tileset gTileset_Arkadia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Arkadia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Arkadia,
+    .metatiles = gMetatiles_PorytilesManaged_Arkadia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Arkadia,
+    .callback = NULL,
+};
+
+// Ichor: styx_falls, the Arkadian climb: Styx Falls and Nonakris. Porytiles-managed, ported from claude/world-act2-0a92e7, where it is built by
+// tools/ichor/art/heights_build.py for the aethos primary; it shares its core section
+// with gTileset_ArkadiaHeights at the same ids. Its ground cells borrow aethos's, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_StyxFalls =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_StyxFalls,
+    .palettes = gTilesetPalettes_PorytilesManaged_StyxFalls,
+    .metatiles = gMetatiles_PorytilesManaged_StyxFalls,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_StyxFalls,
+    .callback = NULL,
+};
+
+// Ichor: kyllene, the Arkadian climb: Route 12, the cypress road over Kyllene. Porytiles-managed, ported from claude/world-act2-0a92e7, where it is built by
+// tools/ichor/art/heights_build.py for the aethos primary; it shares its core section
+// with gTileset_ArkadiaHeights at the same ids. Its ground cells borrow aethos's, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_Kyllene =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kyllene,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kyllene,
+    .metatiles = gMetatiles_PorytilesManaged_Kyllene,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kyllene,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary ported from claude/world-act2-0a92e7, where it is built by tools/ichor/art/temple_artemis_build.py: the Temple
+// of Artemis at Arkadia, the goddess's night garden and the Hunt for the Hind. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any primary (drawn for
+// oikos: an indoor map, so the clock's tint never touches its night).
+const struct Tileset gTileset_TempleArtemis =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleArtemis,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleArtemis,
+    .metatiles = gMetatiles_PorytilesManaged_TempleArtemis,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleArtemis,
+    .callback = NULL,
+};
+
+// Ichor (Act II batch 3 rooms): Arkadia's public rooms: the Asclepeion, the Agora stall, and Klymene's upper room. A Porytiles-managed secondary for the oikos
+// primary, ported from claude/world-act2-0a92e7, where it is built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaRooms,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaRooms,
+    .callback = NULL,
+};
+
+// Ichor (Act II batch 3 rooms): Arkadia's homes: Nyktimos's hall, Hippothoos's charcoal hut and Krotos's house and byre. A Porytiles-managed secondary for the oikos
+// primary, ported from claude/world-act2-0a92e7, where it is built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaHomes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaHomes,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaHomes,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaHomes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaHomes,
+    .callback = NULL,
+};
+
+// Ichor (Act II batch 3 rooms): Styx Falls's rooms: the Inn at the Falls, Horkia's house of oaths and Kepheus's house. A Porytiles-managed secondary for the oikos
+// primary, ported from claude/world-act2-0a92e7, where it is built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_StyxRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_StyxRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_StyxRooms,
+    .metatiles = gMetatiles_PorytilesManaged_StyxRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_StyxRooms,
+    .callback = NULL,
+};
+
+// Ichor: maia_cave, the Arkadian climb: the Cave of Maia on Route 12. Porytiles-managed, ported from claude/world-act2-0a92e7, where it is built by
+// tools/ichor/art/heights_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea, tall grass, shade and waterfall, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_MaiaCave =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_MaiaCave,
+    .palettes = gTilesetPalettes_PorytilesManaged_MaiaCave,
+    .metatiles = gMetatiles_PorytilesManaged_MaiaCave,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_MaiaCave,
+    .callback = NULL,
+};
+
+// Ichor: arkadia_wood, the Cypress Wood and the Pool of Mnemosyne (Act II, beats 42-43). Porytiles-managed, ported from claude/world-act2-0a92e7, where it is built by
+// tools/ichor/art/arkadia_build.py for the aethos primary: its cells on grass borrow
+// aethos's grass, so rebuild it whenever aethos changes. It uses only its own
+// tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaWood =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaWood,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaWood,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaWood,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaWood,
+    .callback = NULL,
+};

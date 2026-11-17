@@ -155,3 +155,39 @@ const u16 gMetatileAttributes_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/
 // Ichor: thyrsa_stone
 const u16 gMetatiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia
+const u16 gMetatiles_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: styx_falls
+const u16 gMetatiles_PorytilesManaged_StyxFalls[] = INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_StyxFalls[] = INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: kyllene
+const u16 gMetatiles_PorytilesManaged_Kyllene[] = INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Kyllene[] = INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: temple_artemis
+const u16 gMetatiles_PorytilesManaged_TempleArtemis[] = INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_TempleArtemis[] = INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia_rooms
+const u16 gMetatiles_PorytilesManaged_ArkadiaRooms[] = INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ArkadiaRooms[] = INCBIN_U16("data/tilesets/secondary/arkadia_rooms/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia_homes
+const u16 gMetatiles_PorytilesManaged_ArkadiaHomes[] = INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ArkadiaHomes[] = INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: styx_rooms
+const u16 gMetatiles_PorytilesManaged_StyxRooms[] = INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_StyxRooms[] = INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: maia_cave
+const u16 gMetatiles_PorytilesManaged_MaiaCave[] = INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_MaiaCave[] = INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia_wood
+const u16 gMetatiles_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatile_attributes.bin");

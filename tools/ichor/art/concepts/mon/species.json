@@ -154,5 +154,154 @@
   "rim_light": true,
   "note": "User asked for a lighter, classic water-starter blue; the concept's dark teal maps by brightness onto a planned ramp, deeper at each stage, with a top-left rim light for form.",
   "sharpen": 40
+ },
+ "bouldyphus": {
+  "note": "Dex: the boulder turns terracotta. The shiny is designed from that line, not carried over color by color.",
+  "shiny_recolor": [
+   {
+    "neutral": true,
+    "ramp": [
+     [
+      88,
+      40,
+      24
+     ],
+     [
+      136,
+      64,
+      40
+     ],
+     [
+      184,
+      88,
+      48
+     ],
+     [
+      216,
+      128,
+      80
+     ],
+     [
+      240,
+      176,
+      128
+     ]
+    ]
+   }
+  ]
+ },
+ "melodrakon": {
+  "note": "Dex: its scales turn silver-white. The shiny is designed from that line, not carried over color by color.",
+  "shiny_recolor": [
+   {
+    "hue": [
+     20,
+     65
+    ],
+    "min_sat": 0.3,
+    "ramp": [
+     [
+      88,
+      96,
+      112
+     ],
+     [
+      136,
+      144,
+      160
+     ],
+     [
+      184,
+      192,
+      200
+     ],
+     [
+      216,
+      224,
+      232
+     ],
+     [
+      240,
+      244,
+      248
+     ]
+    ]
+   }
+  ]
+ },
+ "trybdis": {
+  "note": "Dex: its scales turn sun-gold. The shiny is designed from that line, not carried over color by color.",
+  "shiny_recolor": [
+   {
+    "hue": [
+     170,
+     260
+    ],
+    "min_sat": 0.25,
+    "ramp": [
+     [
+      120,
+      72,
+      16
+     ],
+     [
+      176,
+      120,
+      24
+     ],
+     [
+      216,
+      160,
+      40
+     ],
+     [
+      240,
+      200,
+      72
+     ],
+     [
+      248,
+      232,
+      136
+     ]
+    ]
+   }
+  ]
+ },
+ "hexylla": {
+  "note": "Dex: the body turns cypress green. The shiny is designed from that line, not carried over color by color.",
+  "shiny_recolor": [
+   {
+    "neutral": true,
+    "ramp": [
+     [
+      24,
+      48,
+      32
+     ],
+     [
+      40,
+      80,
+      48
+     ],
+     [
+      64,
+      112,
+      64
+     ],
+     [
+      96,
+      144,
+      88
+     ],
+     [
+      144,
+      184,
+      128
+     ]
+    ],
+    "max_sat": 0.4
+   }
+  ]
  }
 }

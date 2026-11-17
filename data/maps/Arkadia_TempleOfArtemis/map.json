@@ -6,20 +6,20 @@
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ARKADIA",
   "requires_flash": false,
-  "weather": "WEATHER_SHADE",
-  "map_type": "MAP_TYPE_ROUTE",
-  "allow_cycling": true,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": true,
-  "show_map_name": true,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDTEACH",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
-      "x": 12,
-      "y": 58,
+      "x": 13,
+      "y": 37,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -32,8 +32,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDTEST1",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
-      "x": 12,
-      "y": 44,
+      "x": 22,
+      "y": 32,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -46,8 +46,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDTEST2",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
-      "x": 16,
-      "y": 38,
+      "x": 18,
+      "y": 29,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -60,8 +60,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDTEST3",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
-      "x": 12,
-      "y": 32,
+      "x": 22,
+      "y": 25,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -75,7 +75,7 @@
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDMASTER1",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
       "x": 12,
-      "y": 20,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -88,8 +88,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDMASTER2",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
-      "x": 16,
-      "y": 14,
+      "x": 13,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -102,8 +102,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HOUNDMASTER3",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
-      "x": 12,
-      "y": 8,
+      "x": 24,
+      "y": 10,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 4,
@@ -116,8 +116,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
-      "x": 20,
-      "y": 21,
+      "x": 12,
+      "y": 17,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -130,8 +130,8 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_TEACH",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
-      "x": 10,
-      "y": 52,
+      "x": 20,
+      "y": 36,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -144,10 +144,10 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_TEST",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
-      "x": 19,
-      "y": 36,
+      "x": 26,
+      "y": 23,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -158,22 +158,22 @@
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_MASTER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
-      "x": 10,
-      "y": 6,
+      "x": 13,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "Arkadia_TempleOfArtemis_EventScript_Master",
       "flag": "0"
     },
     {
       "local_id": "LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_KALLISTO",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
-      "x": 12,
-      "y": 2,
+      "x": 15,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -182,12 +182,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arkadia_TempleOfArtemis_EventScript_Kallisto",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 6,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_PRETTY_FEATHER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_TEMPLE_ARTEMIS_PRETTY_FEATHER"
     }
   ],
   "warp_events": [
     {
-      "x": 12,
-      "y": 71,
+      "x": 14,
+      "y": 49,
+      "elevation": 0,
+      "dest_map": "MAP_ARKADIA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 15,
+      "y": 49,
       "elevation": 0,
       "dest_map": "MAP_ARKADIA",
       "dest_warp_id": "0"
@@ -196,8 +216,8 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 12,
-      "y": 49,
+      "x": 22,
+      "y": 34,
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
@@ -205,8 +225,8 @@
     },
     {
       "type": "trigger",
-      "x": 13,
-      "y": 49,
+      "x": 23,
+      "y": 34,
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
@@ -214,8 +234,8 @@
     },
     {
       "type": "trigger",
-      "x": 12,
-      "y": 27,
+      "x": 6,
+      "y": 21,
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
@@ -223,8 +243,8 @@
     },
     {
       "type": "trigger",
-      "x": 13,
-      "y": 27,
+      "x": 7,
+      "y": 21,
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
@@ -232,8 +252,8 @@
     },
     {
       "type": "trigger",
-      "x": 12,
-      "y": 5,
+      "x": 14,
+      "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
@@ -241,8 +261,8 @@
     },
     {
       "type": "trigger",
-      "x": 13,
-      "y": 5,
+      "x": 15,
+      "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
@@ -252,19 +272,235 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 15,
-      "y": 2,
+      "x": 4,
+      "y": 45,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
     },
     {
       "type": "sign",
-      "x": 16,
-      "y": 67,
+      "x": 6,
+      "y": 45,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 46,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Arkadia_TempleOfArtemis_EventScript_Instructions"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Instructions"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 47,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Instructions"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 47,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Instructions"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 45,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 45,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 45,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 45,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Kennel"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Pool"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Pool"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleHound"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleBears"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 37,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleAktaion"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 37,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleAtalanta"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleKeryneia"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 29,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleWorn"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_SteleOrion"
+    },
+    {
+      "type": "hidden_item",
+      "x": 2,
+      "y": 41,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_TEMPLE_ARTEMIS_STARDUST"
+    },
+    {
+      "type": "hidden_item",
+      "x": 27,
+      "y": 23,
+      "elevation": 3,
+      "item": "ITEM_DUSK_BALL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_TEMPLE_ARTEMIS_DUSK_BALL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 20,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_TEMPLE_ARTEMIS_STAR_PIECE"
     }
   ],
   "allow_fly": false,

@@ -1,0 +1,57 @@
+# Per-tileset Porytiles config for gTileset_MaiaCave (the Cave of Maia).
+# Written by tools/ichor/art/heights_build.py, which compiles it against an empty
+# stand-in primary, then points its ground cells at aethos's grass, road, sea, tall
+# grass, deep shade and waterfall. Pair it with aethos when compiling it directly.
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]
+  palettes:
+    packing:
+      hints_enabled: true
+      hints:
+        - name: cave
+          colors:
+            - [24, 16, 16]
+            - [56, 48, 40]
+            - [96, 80, 64]
+            - [136, 112, 88]
+            - [176, 152, 112]
+            - [208, 184, 136]
+            - [160, 128, 88]
+            - [192, 160, 112]
+            - [224, 200, 152]
+            - [32, 24, 24]
+        - name: relic
+          colors:
+            - [24, 16, 16]
+            - [56, 48, 40]
+            - [96, 80, 64]
+            - [176, 152, 112]
+            - [160, 128, 88]
+            - [192, 160, 112]
+            - [224, 200, 152]
+            - [232, 224, 200]
+            - [176, 96, 56]
+            - [216, 144, 96]
+            - [232, 200, 72]
+            - [128, 88, 56]
+            - [168, 128, 88]
+            - [32, 24, 24]
+        - name: altar
+          colors:
+            - [56, 48, 40]
+            - [96, 80, 64]
+            - [136, 112, 88]
+            - [160, 128, 88]
+            - [192, 160, 112]
+            - [224, 200, 152]
+            - [232, 224, 200]
+            - [192, 184, 160]
+            - [144, 136, 120]
+            - [96, 88, 80]
+            - [200, 168, 96]
+            - [64, 104, 56]
+            - [112, 152, 72]
+            - [176, 96, 56]
+            - [32, 24, 24]

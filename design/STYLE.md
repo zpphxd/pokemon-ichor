@@ -172,6 +172,62 @@ A sprite is ready to land only when all of these hold:
 
 Batches go **by evolution line**, never by single sprites: all stages, then backs, icons, followers and shinies, landed together.
 
+### 3.6 Walking characters: Gen 3 construction, Greek costume
+
+The people who walk around the world must stand beside Emerald's townsfolk as equals: the same proportions, the same clean construction, with a Greek twist in the costume. On 2026-11-16 we measured Emerald's walkers against ours, at native size:
+- **Height and width.** Emerald's adults stand about 20 px tall and use the full 16 px width. Ours stood about 25 px tall and 13 wide: realistic figures, too thin and too tall.
+- **Heads.** Emerald's heads are about half the body. Ours were small.
+- **Outlines and shading.** Ours had broken outlines, speckled shading, and often single-pixel eyes or none.
+- **The exception.** Theo and Ianthe, the approved player sprites, already have the right build. They are the reference for everyone.
+
+**The build:**
+
+| Part | Gen 3 measure (16x32 frame) |
+|---|---|
+| Body | Adults 19–22 px tall, children 15–18, elders 18–20 (a slight stoop). **Feet on the bottom row.** |
+| Head | About half the height: 10–12 px tall, 12–14 px wide. A bold hair or hat shape is the character's identity. |
+| Face (front view) | Two eyes, each 1x2 dark px, 2–3 px apart, set low in the face; skin in two tones. Side view: one eye, plus the nose's step in the outline. Back view: hair or headwear only. |
+| Torso and legs | 8–10 px together, short and sturdy: arms 2 px wide, feet 2–3 px each. |
+| Outline | One continuous 1 px ink outline around the silhouette, with no breaks or doubled corners. Interior lines are a step lighter than the ink. |
+| Shading | Two tones per material (three for hair at most), lit from the top left, as flat shapes. **No texture noise.** |
+| Silhouette | Every class can be told apart by its silhouette alone: hat, helmet, veil, beard or prop. |
+
+**The sheet.** 9 frames of 16x32 in the engine's order:
+- frames 1–3: standing, facing down, up and left
+- frames 4–5: walking down
+- frames 6–7: walking up
+- frames 8–9: walking left
+
+The right-facing frames are the left ones mirrored, so nothing may be one-sided by accident.
+- **Walk frames:** alternate the legs and swing the arms, with the head held level.
+- **Special sheets** (kneeling, holding up a tablet, seasick) keep their own frame counts.
+
+**Palette.** Walkers share family palettes, such as `ichor_cast.pal` for the named cast (the slot table is in `design/phase1/SPRITES_npc.md`) and `ichor_folk.pal` for townsfolk and classes. Design inside the family's 15 colors. A new family palette costs one of the OBJ palette slots, so it needs the director's approval.
+
+**The Greek costume vocabulary.** Use real clothes, chosen for who the person is:
+
+| Who | What they wear |
+|---|---|
+| Men, workers | A belted **chiton** to the knee, or an **exomis** (one shoulder bare) for laborers. Adult men are usually **bearded**. |
+| Older or important men | A **himation** (a large mantle) draped over one shoulder, and a staff. |
+| Women | A **peplos** (with a folded overfold at the chest) or a long chiton, a himation or **veil** over the head outdoors, and hair in a bun or tied with a fillet. |
+| Travelers, messengers, hunters | A short **chlamys** cloak pinned at one shoulder, a wide-brimmed **petasos** hat, and laced sandals. |
+| Fishermen, sailors, craftsmen | A conical felt **pilos** cap and an exomis. |
+| Soldiers | A Corinthian helmet with a crest, a round **hoplon** shield, greaves and a spear. |
+| Priests and priestesses | White or saffron robes, a fillet or wreath, and the god's object: a lamp for Hestia, a torch for Demeter, ivy and a thyrsos for Dionysus. |
+| Festival people and victors | Wreaths: olive, laurel or ivy. |
+
+**Props tell the job:** an amphora on the shoulder, a fishing net, a lyre, a distaff and spindle, a scroll, a shepherd's crook, a basket of olives.
+
+**Never:** trousers, buttons, modern shoes, realistic proportions, or tiny heads.
+
+**Concepts and conversion.** Walker concepts come from `design/art/WALKER_PROMPTS.md`, as one 3x3 sheet per character:
+- **Rows:** facing down, up and left.
+- **Columns:** standing, step A, step B.
+- **Frames:** each 16x32 on a true pixel grid, drawn at 8x.
+
+`tools/ichor/art/walker_from_concept.py` checks a sheet, reads each frame on its grid, sets the feet on the bottom row, maps the colors into the family palette, and writes the 144x32 strip in engine order. Review every walker at 1x on a real map beside Theo and an Emerald townsperson, before and after.
+
 ---
 
 ## 4. Maps

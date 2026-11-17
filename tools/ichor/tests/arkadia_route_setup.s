@@ -67,7 +67,7 @@ Hunt_SetupScript:
     setvar VAR_ICHOR_DIFFICULTY, 1
     setflag FLAG_ICHOR_KLEON_JOINED_TITANS
     additem ITEM_PRETTY_FEATHER
-    warp MAP_ARKADIA, 20, 7
+    warp MAP_ARKADIA, 20, 31
     waitstate
     end
 

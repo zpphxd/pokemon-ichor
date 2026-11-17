@@ -1,0 +1,83 @@
+// Nyktimos's hall: Arkadia's xenia host (SCRIPT.md Part 2, Arkadia interiors; SYSTEMS.md
+// §10). Room: tools/ichor/maps/arkrooms.py. Nyktimos (5,3) by his hearth heals the party
+// every visit and offers a bed till a time you choose; after the Moon Laurel he gives Black
+// Glasses, once. His mother (13,3) is at her loom. The long table's last place (9,5) is laid
+// for a guest who has never come.
+//
+// The bed is the engine's xenia rest (EventScript_IchorXeniaRest).
+// ICHOR_STUB_KEY_ITEMS: the Split Coin's link 3 (a stretch) needs ITEM_HALF_COIN (Phase 2's
+// key item) and the xenia chain's flag FLAG_ICHOR_SPLIT_COIN_3 in the engine's xenia range;
+// its lines are in SCRIPT.md and wait for both.
+// ICHOR_STUB_MUSIC: Arkadia's own cue.
+
+mapscripts Arkadia_NyktimosHall_MapScripts {}
+
+text Arkadia_NyktimosHall_Name_Nyktimos { "NYKTIMOS" }
+text Arkadia_NyktimosHall_Name_Mother { "OLD WOMAN" }
+
+script Arkadia_NyktimosHall_EventScript_Nyktimos {
+    lock
+    faceplayer
+    setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+    msgbox(format("Sit. Eat first.\p"
+                  "Then tell me who you are. Not before."))
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    if (flag(FLAG_BADGE05_GET) && !flag(FLAG_ICHOR_GOT_BLACK_GLASSES)) {
+        setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+        msgbox(format("Kallisto's laurel! She was a girl in this hall, once. Ate everything.\p"
+                      "Here. For hunters who work at night. They help you see what's there."))
+        giveitem(ITEM_BLACK_GLASSES)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_BLACK_GLASSES)
+        }
+    } elif (!flag(FLAG_ICHOR_NYKTIMOS_STORY)) {
+        setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+        msgbox(format("My family's been very careful hosts for a very long time.\p"
+                      "My ancestor, Lykaon, once served a guest something he shouldn't have.\p"
+                      "The guest was Zeus. The ancestor became a wolf. That's him on the wall.\p"
+                      "So we lay one more place than we need. Every night. Just in case."))
+        setflag(FLAG_ICHOR_NYKTIMOS_STORY)
+    } else {
+        setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+        msgbox(format("So we lay one more place than we need. Every night. Just in case."))
+    }
+    goto(Arkadia_NyktimosHall_EventScript_Rest)
+}
+
+script Arkadia_NyktimosHall_EventScript_Mother {
+    lock
+    faceplayer
+    setspeaker(Arkadia_NyktimosHall_Name_Mother)
+    msgbox(format("I set the extra bowl. Every night for sixty years.\p"
+                  "Nobody's ever sat there. Not once.\p"
+                  "I'd still rather set it. You never know who's at the door."))
+    release
+}
+
+script Arkadia_NyktimosHall_EventScript_EmptyPlace {
+    msgbox(format("A clean bowl and a cup, set out at an empty place. Waiting."), MSGBOX_SIGN)
+}
+
+script Arkadia_NyktimosHall_EventScript_Pelt {
+    msgbox(format("A great grey wolf pelt hangs over the hearth. Nobody sits under it."), MSGBOX_SIGN)
+}
+
+script Arkadia_NyktimosHall_EventScript_Ladder {
+    msgbox(format("A ladder up to the sleeping loft. It's warm up there, from the hearth."), MSGBOX_SIGN)
+}
+
+script Arkadia_NyktimosHall_EventScript_Rest {
+    setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+    msgbox(format("Stay, if you like. Rest till you want to wake."))
+    call(EventScript_IchorXeniaRest)
+    if (var(VAR_RESULT) == TRUE) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} slept in the loft. Below, the extra bowl stayed empty."))
+    } else {
+        setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+        msgbox(format("Then go well. There's always a place."))
+    }
+    release
+}

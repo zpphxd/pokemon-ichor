@@ -1093,10 +1093,10 @@
     {
       "id": "LAYOUT_STYX_FALLS",
       "name": "StyxFalls_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_StyxFalls",
       "border_filepath": "data/layouts/StyxFalls/border.bin",
       "blockdata_filepath": "data/layouts/StyxFalls/map.bin",
       "layout_version": "emerald"
@@ -1104,10 +1104,10 @@
     {
       "id": "LAYOUT_ROUTE12_CYPRESS_ROAD",
       "name": "Route12_CypressRoad_Layout",
-      "width": 24,
-      "height": 40,
+      "width": 56,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Kyllene",
       "border_filepath": "data/layouts/Route12_CypressRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route12_CypressRoad/map.bin",
       "layout_version": "emerald"
@@ -1115,10 +1115,10 @@
     {
       "id": "LAYOUT_ARKADIA",
       "name": "Arkadia_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 50,
+      "height": 44,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Arkadia",
       "border_filepath": "data/layouts/Arkadia/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia/map.bin",
       "layout_version": "emerald"
@@ -1126,10 +1126,10 @@
     {
       "id": "LAYOUT_ARKADIA_TEMPLE_OF_ARTEMIS",
       "name": "Arkadia_TempleOfArtemis_Layout",
-      "width": 28,
-      "height": 72,
-      "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "width": 30,
+      "height": 50,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_TempleArtemis",
       "border_filepath": "data/layouts/Arkadia_TempleOfArtemis/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_TempleOfArtemis/map.bin",
       "layout_version": "emerald"
@@ -1297,6 +1297,127 @@
       "secondary_tileset": "gTileset_Kalliste",
       "border_filepath": "data/layouts/Astyra_Harbor/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Harbor/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_ASCLEPEION",
+      "name": "Arkadia_Asclepeion_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ArkadiaRooms",
+      "border_filepath": "data/layouts/Arkadia_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_AGORA",
+      "name": "Arkadia_Agora_Layout",
+      "width": 13,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ArkadiaRooms",
+      "border_filepath": "data/layouts/Arkadia_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_NYKTIMOS_HALL",
+      "name": "Arkadia_NyktimosHall_Layout",
+      "width": 16,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ArkadiaHomes",
+      "border_filepath": "data/layouts/Arkadia_NyktimosHall/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_NyktimosHall/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_KLYMENE_HOUSE",
+      "name": "Arkadia_KlymeneHouse_Layout",
+      "width": 11,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ArkadiaRooms",
+      "border_filepath": "data/layouts/Arkadia_KlymeneHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_KlymeneHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_CHARCOAL_HUT",
+      "name": "Arkadia_CharcoalHut_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ArkadiaHomes",
+      "border_filepath": "data/layouts/Arkadia_CharcoalHut/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_CharcoalHut/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_GOATHERD_HOUSE",
+      "name": "Arkadia_GoatherdHouse_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_ArkadiaHomes",
+      "border_filepath": "data/layouts/Arkadia_GoatherdHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_GoatherdHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_CYPRESS_WOOD",
+      "name": "Arkadia_CypressWood_Layout",
+      "width": 36,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_ArkadiaWood",
+      "border_filepath": "data/layouts/Arkadia_CypressWood/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_CypressWood/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_STYX_FALLS_INN",
+      "name": "StyxFalls_Inn_Layout",
+      "width": 17,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_StyxRooms",
+      "border_filepath": "data/layouts/StyxFalls_Inn/border.bin",
+      "blockdata_filepath": "data/layouts/StyxFalls_Inn/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_STYX_FALLS_OATH_HOUSE",
+      "name": "StyxFalls_OathHouse_Layout",
+      "width": 9,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_StyxRooms",
+      "border_filepath": "data/layouts/StyxFalls_OathHouse/border.bin",
+      "blockdata_filepath": "data/layouts/StyxFalls_OathHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_STYX_FALLS_STONE_HOUSE",
+      "name": "StyxFalls_StoneHouse_Layout",
+      "width": 14,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_StyxRooms",
+      "border_filepath": "data/layouts/StyxFalls_StoneHouse/border.bin",
+      "blockdata_filepath": "data/layouts/StyxFalls_StoneHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE12_CAVE_OF_MAIA",
+      "name": "Route12_CaveOfMaia_Layout",
+      "width": 20,
+      "height": 11,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_MaiaCave",
+      "border_filepath": "data/layouts/Route12_CaveOfMaia/border.bin",
+      "blockdata_filepath": "data/layouts/Route12_CaveOfMaia/map.bin",
       "layout_version": "emerald"
     },
     {

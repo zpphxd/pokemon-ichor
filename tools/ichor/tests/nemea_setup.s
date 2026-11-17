@@ -50,7 +50,7 @@ Nemea_EarlyScript:
     test_header Nemea_ArkadiaHeader, Nemea_ArkadiaScript
 Nemea_ArkadiaScript:
     setvar VAR_TEMP_F, 1
-    warp MAP_ARKADIA, 20, 7
+    warp MAP_ARKADIA, 20, 31
     waitstate
     end
 

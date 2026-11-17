@@ -57,3 +57,65 @@ script Route12_CypressRoad_EventScript_Sign1 {
     msgbox(format("North: Styx Falls. South: Arkadia and the temple of Artemis."), MSGBOX_SIGN)
     end
 }
+
+// ---------------------------------------------------------------------------
+// The road's goatherds, goats and signs, ported from claude/world-act2-0a92e7
+// ---------------------------------------------------------------------------
+
+text Route12_CypressRoad_Text_SpeakerPhegeus { "PHEGEUS" }
+
+text Route12_CypressRoad_Text_SpeakerKorythos { "KORYTHOS" }
+
+script Route12_CypressRoad_EventScript_Phegeus {
+    trainerbattle_single(TRAINER_ICHOR_PHEGEUS, Route12_CypressRoad_Text_PhegeusIntro, Route12_CypressRoad_Text_PhegeusDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerPhegeus)
+    msgbox(format("Up the steps, then the meadow. Kyllene's shoulder. Then it's downhill to Arkadia."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_PhegeusIntro {
+    format("Out of the black water's hollow at last! Let's warm up. Battle!")
+}
+
+text Route12_CypressRoad_Text_PhegeusDefeat {
+    format("Warm enough. Too warm.")
+}
+
+script Route12_CypressRoad_EventScript_Korythos {
+    trainerbattle_single(TRAINER_ICHOR_KORYTHOS, Route12_CypressRoad_Text_KorythosIntro, Route12_CypressRoad_Text_KorythosDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerKorythos)
+    msgbox(format("See that boulder in the rock? A smith's hammer would crack it. Nothing less."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_KorythosIntro {
+    format("The knoll's mine in summer. You'll have to battle for a seat.")
+}
+
+text Route12_CypressRoad_Text_KorythosDefeat {
+    format("Take the seat. Mind the tortoise. If it's a tortoise.")
+}
+
+script Route12_CypressRoad_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("Bleat! A spark jumps off its horns."))
+    waitmoncry
+    release
+}
+
+// --- signs and landmarks ---------------------------------------------------------------------
+script Route12_CypressRoad_EventScript_SignWest {
+    msgbox(format("ROUTE 12 · THE CYPRESS ROAD\pNorth: Styx Falls. Over Kyllene to Arkadia."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_SignCave {
+    msgbox(format("The Cave of Maia. Here Hermes was born. Please wipe your feet."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_SignHawk {
+    msgbox(format("North: the hawk cliff. Goats only. You are not a goat."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_TortoiseBoulder {
+    msgbox(format("A gray boulder shaped like a tortoise's shell.\p…It just moved.\pNo. It didn't. Probably."), MSGBOX_SIGN)
+}

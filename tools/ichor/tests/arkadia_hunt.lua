@@ -5,11 +5,9 @@ for k, v in pairs(dofile(L.OUT .. "hunt_symbols.lua")) do S.SCRIPTS[k] = v end
 
 local cached, danger = -1, {}
 local function moon(x, y)
-    return (x >= 8 and x <= 13 and y >= 39 and y <= 43)
-        or (x >= 14 and x <= 19 and y >= 31 and y <= 35)
-        or (x >= 17 and x <= 21 and y >= 19 and y <= 23)
-        or (x >= 6 and x <= 10 and y >= 13 and y <= 17)
-        or (x >= 17 and x <= 21 and y >= 7 and y <= 11)
+    return (x >= 4 and x <= 11 and y >= 23 and y <= 26)
+        or (x >= 18 and x <= 25 and y >= 24 and y <= 29)
+        or (x >= 21 and x <= 26 and y >= 8 and y <= 13)
 end
 -- A conservative walking policy, not a bypass: keep off both sides of each
 -- live patrol and replan as it moves. The actual engine still catches mistakes.
@@ -21,9 +19,9 @@ local function avoid(x, y)
             for _, o in ipairs(L.mapEvents().objects) do
                 if o.script == S.SCRIPTS[T .. "Hound"] then
                     local hx, hy = L.objectAt(o.localId)
-                    local hs = o.y >= 50 and 0 or (o.y >= 28 and 1 or 2)
+                    local hs = o.y >= 36 and 0 or (o.y >= 22 and 1 or 2)
                     if hx and hs == stage then
-                        for xx = 0, 27 do
+                        for xx = 0, 29 do
                             if math.abs(xx - hx) <= (moon(xx, hy) and 7 or 4) then
                                 danger[xx .. "," .. hy] = true
                             end
@@ -60,11 +58,11 @@ local function sentry(localId, x, y)
     end
     emu:write8(target + 0x18, 0x44)
 end
-local function caught(stage, touches, y)
+local function caught(stage, touches, x, y)
     L.waitUntil(L.scriptRunning, 120, "the native hound sight to start its catch script")
     L.settle()
     local px, py = L.pos()
-    L.expect(px == 12 and py == y and L.getVar(S.VAR_STAGE) == stage
+    L.expect(px == x and py == y and L.getVar(S.VAR_STAGE) == stage
              and L.getVar(S.VAR_TOUCHES) == touches,
              "a real hound catch restores only the current glade and preserves progress")
 end
@@ -102,35 +100,35 @@ L.start(function()
     L.expect(L.mapId() == S.MAP_TEMPLE and emu:read8(S.gTimeOfDay) == S.TIME_NIGHT,
              "the real temple entrance reaches the endless-night grove")
     L.talk(L.sign(T .. "Instructions"))
-    L.go(12, 61)
+    L.go(7, 42)
     L.expect(emu:saveStateFile(L.OUT .. "before_sight_probe.ss", 31), "saved the ordinary patrol before controlled sight checks")
-    sentry(1, 10, 61)
+    sentry(1, 5, 42)
     L.wait(60)
     L.expect(L.idle(), "the actual cypress blocks a hound two tiles away")
-    L.go(12, 62)
-    sentry(1, 8, 62)
+    L.go(12, 41)
+    sentry(1, 8, 41)
     L.wait(60)
     L.expect(L.idle(), "normal sight does not reach four clear tiles")
-    sentry(1, 9, 62)
-    caught(0, 0, 66)
+    sentry(1, 9, 41)
+    caught(0, 0, 14, 42)
     L.expect(emu:loadStateFile(L.OUT .. "before_sight_probe.ss", 31), "restored the actual moving patrol")
     L.wait(30)
     talk("Teach")
-    L.go(12, 48, {avoid = avoid})
+    L.go(23, 33, {avoid = avoid})
     L.expect(L.getVar(S.VAR_STAGE) == 1 and L.defeated(S.TRAINER_HUNT_TEACH),
              "crossing the first patrol and winning its huntress unlocks stage two")
     L.shot("three_hounds")
     L.setBeat("hunt_test", false)
-    L.go(18, 34, {avoid = avoid})
+    L.go(25, 27, {avoid = avoid})
     L.expect(emu:saveStateFile(L.OUT .. "before_moon_probe.ss", 31), "saved stage two before moonlight boundary checks")
-    sentry(3, 11, 34)
+    sentry(3, 18, 27)
     L.wait(60)
     L.expect(L.idle(), "moonlight does not reveal the player seven tiles away")
-    sentry(3, 12, 34)
-    caught(1, 0, 46)
+    sentry(3, 19, 27)
+    caught(1, 0, 23, 33)
     L.expect(emu:loadStateFile(L.OUT .. "before_moon_probe.ss", 31), "restored all three moving hounds after the boundary probe")
     L.wait(30)
-    L.go(12, 26, {avoid = avoid})
+    L.go(6, 20, {avoid = avoid})
     L.expect(L.getVar(S.VAR_STAGE) == 2 and not L.defeated(S.TRAINER_HUNT_TEST),
              "the three-hound stage can be completed without its optional acolyte")
     L.setBeat("golden_hind", false)
@@ -144,15 +142,15 @@ L.start(function()
         if touch == 1 then
             local px, py = L.pos()
             sentry(5, px - 3, py)
-            caught(2, 1, 24)
+            caught(2, 1, 6, 20)
             local hind = L.npc(T .. "Hind")
-            L.expect(hind.x == 7 and hind.y == 15, "the next clearing survives a real hound reset")
+            L.expect(hind.x == 4 and hind.y == 11, "the next clearing survives a real hound reset")
         end
     end
     L.expect(L.getFlag(S.FLAG_TRIAL) and L.getVar(S.VAR_STAGE) == 3,
              "three different clearings complete the hunt and quiet the hounds")
     talk("Master")
-    L.go(12, 4)
+    L.go(14, 4)
     cap(37)
     L.expect(emu:saveStateFile(L.OUT .. "before_kallisto.ss", 31), "saved the completed hunt before Kallisto")
     emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
