@@ -237,6 +237,19 @@
 #define TRAINER_ICHOR_OPORA                  496
 #define TRAINER_ICHOR_PEGAIOS                497
 #define TRAINER_ICHOR_DEXITHEA               498
+// Labyrinth I (ids 365-389; tools/ichor/claim_ranges.md): Rings I-IV.
+#define TRAINER_ICHOR_AKAKALLIS               365
+#define TRAINER_ICHOR_XENODIKE                366
+#define TRAINER_ICHOR_TEPHRA                  367
+#define TRAINER_ICHOR_SINOPOS                 368
+#define TRAINER_ICHOR_AUTOMATON_3             369
+#define TRAINER_ICHOR_AUTOMATON_7             370
+#define TRAINER_ICHOR_LITHOS                  371
+#define TRAINER_ICHOR_KONIORTOS               372
+#define TRAINER_ICHOR_SIDEROS                 373
+#define TRAINER_ICHOR_CHALKOS                 374
+#define TRAINER_ICHOR_PELOS                   375
+#define TRAINER_ICHOR_ENKELADOS               376
 #define TRAINERS_END_ACT3 499
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's

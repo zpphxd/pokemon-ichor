@@ -2188,6 +2188,14 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1D5) // Ichor: Ascent 3F: in the snow by the last cairn
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_ELIXIR   (FLAG_ICHOR_GENERAL2_START + 0x1D6) // Ichor: Ascent 2F: behind the camp's second tent
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1D7) // Ichor: Ascent 3F: on the summit shoulder above the stair
+#define FLAG_ICHOR_RING1_GATE                   (FLAG_ICHOR_GENERAL2_START + 0x450) // Ichor: Labyrinth Ring I: the gate brazier caught, the stair down is open
+#define FLAG_ICHOR_R1_TIE_TAUGHT                (FLAG_ICHOR_GENERAL2_START + 0x451) // Ichor: Labyrinth Ring I: Ariadne's TIE IT HERE shown
+#define FLAG_ICHOR_ITEM_R1_HYPER_POTION         (FLAG_ICHOR_GENERAL2_START + 0x452) // Ichor: Labyrinth Ring I: the thread lesson's Hyper Potion
+#define FLAG_ICHOR_ITEM_R1_TM_ROCK_SLIDE        (FLAG_ICHOR_GENERAL2_START + 0x453) // Ichor: Labyrinth Ring I: Xenodike's TM Rock Slide
+#define FLAG_ICHOR_ITEM_R1_HYPER_POTION_2       (FLAG_ICHOR_GENERAL2_START + 0x454) // Ichor: Labyrinth Ring I: the hidden anchor's Hyper Potion
+#define FLAG_ICHOR_ITEM_R1_ETHER                (FLAG_ICHOR_GENERAL2_START + 0x455) // Ichor: Labyrinth Ring I: an Ether in the cave pocket
+#define FLAG_ICHOR_HIDDEN_ITEM_R1_BRONZE_OBOL   (FLAG_ICHOR_GENERAL2_START + 0x456) // Ichor: Labyrinth Ring I: a Bronze Obol in a dead end
+#define FLAG_ICHOR_HIDDEN_ITEM_R1_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x457) // Ichor: Labyrinth Ring I: a Revive in the cleft
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

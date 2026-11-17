@@ -1,0 +1,27 @@
+// Constants for tools/ichor/tests/labyrinth_upper.lua (see engine_consts.h).
+#include "engine_consts.h"
+#include "constants/ichor.h"
+#include "constants/items.h"
+#include "constants/map_groups.h"
+#include "constants/opponents.h"
+
+K(MAP_RING1, MAP_LABYRINTH_RING1)
+K(MAP_RING2, MAP_LABYRINTH_RING2)
+K(MAP_RING3, MAP_LABYRINTH_RING3)
+K(MAP_RING4, MAP_LABYRINTH_RING4)
+K(MAP_WORKSHOP, MAP_LABYRINTH_WORKSHOP)
+K(MAP_TOMB, MAP_LABYRINTH_MINOS_TOMB)
+K(FLAG_B1, FLAG_ICHOR_BRAZIERS_START + 0x30)
+K(FLAG_B2, FLAG_ICHOR_BRAZIERS_START + 0x31)
+K(FLAG_B3, FLAG_ICHOR_BRAZIERS_START + 0x32)
+K(FLAG_B4, FLAG_ICHOR_BRAZIERS_START + 0x33)
+K(FLAG_B5, FLAG_ICHOR_BRAZIERS_START + 0x34)
+K(FLAG_G, FLAG_ICHOR_BRAZIERS_START + 0x35)
+K(FLAG_RING1_GATE, FLAG_ICHOR_RING1_GATE)
+K(FLAG_TIE_TAUGHT, FLAG_ICHOR_R1_TIE_TAUGHT)
+K(TRAINER_AKAKALLIS, TRAINER_ICHOR_AKAKALLIS)
+K(VAR_KNOSSA, VAR_ICHOR_KNOSSA)
+K(OFF_THR_LIVE_LEN, offsetof(struct IchorThread, liveLen))
+K(OFF_THR_ANCHOR_COUNT, offsetof(struct IchorThread, anchorCount))
+K(OFF_BACKUP_MAP_WIDTH, offsetof(struct BackupMapLayout, width))
+K(OFF_BACKUP_MAP_MAP, offsetof(struct BackupMapLayout, map))

@@ -1848,6 +1848,72 @@
       "border_filepath": "data/layouts/Olympus_HallOfHeroes/border.bin",
       "blockdata_filepath": "data/layouts/Olympus_HallOfHeroes/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING1",
+      "name": "LabyrinthRing1_Layout",
+      "width": 42,
+      "height": 34,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthRing1/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING2",
+      "name": "LabyrinthRing2_Layout",
+      "width": 21,
+      "height": 36,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthRing2/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING3",
+      "name": "LabyrinthRing3_Layout",
+      "width": 21,
+      "height": 36,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthRing3/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing3/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING4",
+      "name": "LabyrinthRing4_Layout",
+      "width": 21,
+      "height": 36,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthRing4/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing4/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_MINOS_TOMB",
+      "name": "LabyrinthMinosTomb_Layout",
+      "width": 21,
+      "height": 36,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthMinosTomb/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthMinosTomb/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_WORKSHOP",
+      "name": "LabyrinthWorkshop_Layout",
+      "width": 21,
+      "height": 36,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Daidaleion",
+      "border_filepath": "data/layouts/LabyrinthWorkshop/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthWorkshop/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
