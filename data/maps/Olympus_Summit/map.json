@@ -1,0 +1,79 @@
+{
+  "id": "MAP_OLYMPUS_SUMMIT",
+  "name": "Olympus_Summit",
+  "layout": "LAYOUT_OLYMPUS_SUMMIT",
+  "music": "MUS_NONE",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_MOUNT_OLYMPUS",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_OLYMPUS_SUMMIT_ARISTEIDES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 13,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Olympus_Summit_EventScript_Aristeides",
+      "flag": "FLAG_ICHOR_HIDE_ARCHON_SUMMIT"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_OLYMPUS_SEAT_OF_HERA",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 14,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_OLYMPUS_HALL_OF_HEROES",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Olympus_Summit_EventScript_TempleDoor"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Olympus_Summit_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Olympus_Summit_EventScript_Altar"
+    }
+  ],
+  "ichor_kind": "interior"
+}

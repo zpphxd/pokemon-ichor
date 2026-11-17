@@ -36,10 +36,9 @@ int GameClear(void)
 
     SetContinueGameWarpStatus();
 
-    if (gSaveBlock2Ptr->playerGender == MALE)
-        SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
-    else
-        SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
+    // Ichor: after the credits, CONTINUE wakes the player in their room in Elaia
+    // on the next Klotheia (STORY.md L-10, the epilogue).
+    SetContinueGameWarpToHealLocation(HEAL_LOCATION_ELAIA_VILLAGE_PLAYERS_ROOM);
 
     ribbonGet = FALSE;
 

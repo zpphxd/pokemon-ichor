@@ -11,7 +11,8 @@
     "gMapGroup_IndoorThyrsa",
     "gMapGroup_DungeonsAct2",
     "gMapGroup_IndoorKaldera",
-    "gMapGroup_Kythera"
+    "gMapGroup_Kythera",
+    "gMapGroup_League"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -195,5 +196,17 @@
     "KytheraNeraidaFalls",
     "KytheraEchoCaves",
     "KytheraTempleOfAphrodite"
+  ],
+  "gMapGroup_League": [
+    "Ascent_1F",
+    "Ascent_2F",
+    "Ascent_3F",
+    "Olympus_Propylaia",
+    "Olympus_SeatOfAres",
+    "Olympus_SeatOfPoseidon",
+    "Olympus_SeatOfAthena",
+    "Olympus_SeatOfHera",
+    "Olympus_Summit",
+    "Olympus_HallOfHeroes"
   ]
 }

@@ -35,7 +35,8 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_... "commen
 |---|---|---|---|
 | **world-act1** | 0x000–0x0FF | 0x40–0x4B | 0–5 |
 | **world-act2** | 0x100–0x1FF, and 0x500–0x63F | 0x4C–0x57 | 6–11 |
-| **world-act3** | 0x200–0x2FF, 0x4C0–0x4FF, and 0x640–0x6FF | 0x58–0x63 | 12–17 |
+| **world-act3** | 0x200–0x2FF, 0x4C0–0x4FF, and 0x640–0x6BF | 0x58–0x63 | 12–17 |
+| **world-act3, the League** (the Ascent, Olympus, L-1 to L-10; `design/LEAGUE.md`) | 0x6C0–0x6FF (24 used: 0x6C0–0x6D7) | — | — |
 | **the post-game** | 0x300–0x3BF, and 0x700–0x7FF | 0x64–0x6F | 18–23 |
 | **the Oikoumene** | 0x3C0–0x47F, and 0x800–0x8FF | — | 24–27 |
 | **ichor-engine** | 0x480–0x4BF | 0x00–0x3F | 28–31 |
@@ -126,7 +127,8 @@ Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,536 (raised
 | Reserve | 26–39 | Ask the director |
 | **world-act1** | 40–159 | |
 | **world-act2** | 160–319, 820–849 and 1344–1403 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182. 1344–1403 added with the 1,536 raise |
-| **world-act3** | 320–499 and 1404–1503 | Includes the League. 1404–1503 added with the 1,536 raise |
+| **world-act3** | 320–459 and 1404–1503 | Kythera to the Stair. 1404–1503 added with the 1,536 raise |
+| **world-act3, the League** | 460–499 | 460–475 used: the Ascent's eleven, the Pantheon's four, the Archon. Its own `TRAINERS_END_LEAGUE` line, so it never shares a line with Act III's |
 | **the post-game** | 500–679 and 1024–1223 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
 | **the Oikoumene** | 680–819, 864–1023 and 1224–1343 | 420 in all, for its ten champion halls and its routes |
 | Reserve | 850–863 and 1504–1535 | Shared; ask the director |

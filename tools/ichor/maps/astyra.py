@@ -68,6 +68,10 @@ def city():
     m.put(35, 18, 0x1DB)
     m.rect(21, 8, 30, 11, 0x0E1, True)
     m.person("Guard", 24, 12, gfx="HOPLITE")
+    # The League (design/LEAGUE.md): the muleteer to the Ascent, until the Tempe road
+    # is built, and Kerykos reading the Archon's decree after Act III (L-1).
+    m.person("Muleteer", 43, 33, gfx="MAN", facing="LEFT")
+    m.person("Kerykos", 28, 30, gfx="KERYKOS", flag="FLAG_ICHOR_HIDE_DECREE_CROWD")
     m.put(25, 11, 0x1DB)
     for name, x, y in (("Sign", 8, 36), ("ClinicSign", 12, 32),
                         ("HouseSign", 39, 32), ("LibrarySign", 13, 20),
