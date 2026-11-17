@@ -14,6 +14,9 @@ start from something close. Steps:
   5. close a selective outline: ink on the shadow side (bottom/right),
      the darker shade of the local ramp on the lit side (top/left).
 
+A true-grid concept (--pitch) that already uses 15 colors or fewer is clean
+pixel art: steps 3-5 are skipped and its colors and outline are kept exactly.
+
 Usage:
   python3 tools/ichor/art/concept_to_native.py CONCEPT.png OUT.png \
       [--size 64] [--fit 60] [--colors 15] [--bg R,G,B]
@@ -174,9 +177,16 @@ def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None
     alpha = flood_alpha(nat, bg, tol)
     ys, xs = np.where(alpha)
     nat, alpha = nat[ys.min():ys.max() + 1, xs.min():xs.max() + 1], alpha[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
-    pal = detail_palette(nat[alpha].astype(float), colors)
-    idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
-    idx, alpha = cleanup(idx, alpha, pal)
+    exact = np.unique((np.round(nat[alpha] / 8) * 8).clip(0, 248).astype(int), axis=0)
+    if concept_pitch and len(exact) <= colors:
+        # Already clean pixel art on the grid: keep the artist's colors and
+        # outline exactly; only the backdrop is removed.
+        pal = exact
+        idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+    else:
+        pal = detail_palette(nat[alpha].astype(float), colors)
+        idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+        idx, alpha = cleanup(idx, alpha, pal)
     h, w = idx.shape
     if h > size or w > size:
         raise SystemExit(f"subject {w}x{h} exceeds the {size}px canvas: regenerate the "

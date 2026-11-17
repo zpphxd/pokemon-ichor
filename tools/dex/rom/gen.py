@@ -339,10 +339,17 @@ def icon_pal_index(d):
     pal = Image.open(d / "icon.png").getpalette()[:48]
     colors = [tuple(pal[i:i + 3]) for i in range(0, 48, 3)]
     used = set(np.unique(np.array(Image.open(d / "icon.png"))))
+    # An icon may use only colors two shared palettes have in common; on a
+    # tie keep the palette the species already has.
+    current = None
+    header = ROOT / "src/data/pokemon/species_info/aethos_families.h"
+    if header.exists():
+        m = re.search(rf"\[SPECIES_{d.name.upper()}\] =.*?\.iconPalIndex = (\d+)", header.read_text(), re.S)
+        current = int(m.group(1)) if m else None
     best, best_err = 0, None
     for i, ip in enumerate(ICON_PALS):
         err = sum(sum(abs(a - b) for a, b in zip(colors[k], ip[k])) for k in used if k < len(ip))
-        if best_err is None or err < best_err:
+        if best_err is None or err < best_err or (err == best_err and i == current):
             best, best_err = i, err
     if best_err:
         note(f"icon palette for {d.name} matched pal{best} only approximately")

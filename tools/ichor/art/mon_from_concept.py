@@ -1,0 +1,442 @@
+#!/usr/bin/env python3
+"""Build Pokémon sprites from approved concepts (design/STYLE.md §3).
+
+For each species with a concept in tools/ichor/art/concepts/mon/<name>.png:
+
+  anim_front.png  frame 1 from concept_to_native, plus the hand-fix list;
+                  frame 2 is a breathing bob (upper body down 1 px)
+  normal.pal      the front's 15 colors
+  shiny.pal       the old shiny scheme carried over by hue/saturation/value
+                  shift, index for index
+  back.png        from <name>_back.png when it exists; otherwise an interim
+                  back from the mirrored front with the face painted out
+  icon.png        the new front reduced to 32x32 in the species' shared icon
+                  palette, two frames (bob up 1 px)
+
+Writes design/dex/sprites/<name>/; run `python3 tools/dex/rom/gen.py` after it
+to copy into graphics/pokemon/ and re-measure battle coordinates.
+
+A concept PNG in that folder protects the species: tools/dex/sprites/build.py
+will not overwrite it. The concept-sprites skill (.claude/skills) runs it all.
+
+  python3 tools/ichor/art/mon_from_concept.py ingest FOLDER [--dry-run]
+  python3 tools/ichor/art/mon_from_concept.py [NAME ...] [--preview DIR] [--sheet PNG]
+"""
+import argparse
+import colorsys
+import json
+import re
+import sys
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import concept_to_native as c2n  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[3]
+CONCEPTS = ROOT / "tools/ichor/art/concepts/mon"
+OUT = ROOT / "design/dex/sprites"
+ICON_PALS = ROOT / "graphics/pokemon/icon_palettes"
+
+SPECIES_FILE = CONCEPTS / "species.json"
+PROMPTS = ROOT / "design/dex/concept_prompts.json"
+
+# Per-species settings live in concepts/mon/species.json; a species without an
+# entry gets defaults from its evolution stage (STYLE.md §3.1).
+#   fit    the subject's largest dimension in native pixels, for concepts that
+#          are not on a true grid (ignored when the pitch is detected)
+#   pivot  the row, as a fraction of the subject's height from the top, above
+#          which frame 2 lowers by one pixel
+#   fixes  the hand-fix pass: [x, y, [r, g, b]] in frame-1 canvas coordinates,
+#          each color snapped to the nearest palette entry; null color = clear
+STAGE_FIT = {"basic": 56, "middle": 60, "final": 63, "single": 60}
+
+
+def stage_of(name):
+    if PROMPTS.exists():
+        for r in json.loads(PROMPTS.read_text()):
+            if r["name"].lower() == name:
+                return r.get("stage", "single")
+    return "single"
+
+
+def config(name):
+    table = json.loads(SPECIES_FILE.read_text()) if SPECIES_FILE.exists() else {}
+    c = {"fit": STAGE_FIT[stage_of(name)], "pivot": 0.5, "fixes": []}
+    c.update(table.get(name, {}))
+    return c
+
+
+def concept_names():
+    return sorted(p.stem for p in CONCEPTS.glob("*.png") if not p.stem.endswith("_back"))
+
+
+def grid_pitch(path):
+    """Pixels per native pixel for a true-grid concept from the prompt page.
+
+    The prompts ask for a 64x64 grid rendered at 512x512; any square image
+    whose side is a multiple of 64 (256 or more) is read at that exact pitch,
+    so nothing is resized. Anything else returns None (fit-based sampling).
+    """
+    w, h = Image.open(path).size
+    if w == h and w >= 256 and w % 64 == 0:
+        return w / 64
+    return None
+
+
+def read_jasc(path):
+    lines = Path(path).read_text().split()
+    n = int(lines[2])
+    v = list(map(int, lines[3:3 + 3 * n]))
+    return np.array(v, int).reshape(n, 3)
+
+
+def write_jasc(pal, path):
+    rows = ["JASC-PAL", "0100", str(len(pal))] + [f"{r} {g} {b}" for r, g, b in pal]
+    Path(path).write_text("\r\n".join(rows) + "\r\n")
+
+
+def save_indexed(a, pal, path):
+    im = Image.fromarray(a.astype(np.uint8), "P")
+    flat = [int(v) for c in pal for v in c]
+    im.putpalette(flat + [0] * (768 - len(flat)))
+    im.save(path, bits=4, transparency=0)
+
+
+def nearest(pal, rgb, skip0=True):
+    d = ((pal - np.asarray(rgb)) ** 2).sum(-1).astype(float)
+    if skip0:
+        d[0] = 1e18
+    return int(d.argmin())
+
+
+def front_frames(name, cfg):
+    src = CONCEPTS / f"{name}.png"
+    img = c2n.convert(src, fit=cfg["fit"], concept_pitch=grid_pitch(src))
+    f0 = np.array(img)
+    pal = np.array(img.getpalette()[:48], int).reshape(16, 3)
+    for x, y, rgb in cfg.get("fixes", []):
+        f0[y, x] = 0 if rgb is None else nearest(pal, rgb)
+    ys = np.where(f0.any(1))[0]
+    top, bot = ys.min(), ys.max()
+    pivot = int(top + (bot - top) * cfg["pivot"])
+    f1 = f0.copy()
+    f1[top + 1:pivot + 1] = f0[top:pivot]  # upper body sinks one pixel
+    f1[top] = 0
+    return f0, f1, pal
+
+
+def shiny_from_old(pal, old_normal, old_shiny):
+    """Carry the designed shiny scheme to the new palette, by nearest hue."""
+    out = pal.copy()
+    on = old_normal[1:] / 255.0
+    os_ = old_shiny[1:] / 255.0
+    on_hsv = np.array([colorsys.rgb_to_hsv(*c) for c in on])
+    os_hsv = np.array([colorsys.rgb_to_hsv(*c) for c in os_])
+    for i in range(1, len(pal)):
+        h, s, v = colorsys.rgb_to_hsv(*(pal[i] / 255.0))
+        # nearest old color, weighting hue for saturated colors
+        dh = np.minimum(abs(on_hsv[:, 0] - h), 1 - abs(on_hsv[:, 0] - h))
+        d = dh * 4 * min(s, on_hsv[:, 1].max() + 1e-6) + abs(on_hsv[:, 1] - s) + abs(on_hsv[:, 2] - v)
+        j = int(d.argmin())
+        a, b = on_hsv[j], os_hsv[j]
+        nh = (h + (b[0] - a[0])) % 1.0
+        ns = min(1.0, s * (b[1] / a[1])) if a[1] > 0.05 else b[1]
+        nv = min(1.0, v * (b[2] / a[2])) if a[2] > 0.05 else b[2]
+        r, g, bl = colorsys.hsv_to_rgb(nh, ns, nv)
+        out[i] = (np.round(np.array([r, g, bl]) * 255 / 8) * 8).clip(0, 248)
+    return out
+
+
+def back_from_front(f0, pal):
+    """Interim back pic until a back concept exists (STYLE.md §3.1).
+
+    Gen 3 backs show the player's own Pokémon turned away, set low and cropped
+    by the bottom edge. Mirror the front so it faces up-right, drop it 6 px so
+    the base is cropped, and paint out the face: interior eye ink and shine in
+    the head become the surrounding fur, so the head reads from behind.
+    """
+    a = f0[:, ::-1].copy()
+    L = c2n.lum(pal)
+    ys, xs = np.where(a != 0)
+    top, bot, left, right = ys.min(), ys.max(), xs.min(), xs.max()
+    head_y = top + int((bot - top) * 0.5)
+    head_x = right - int((right - left) * 0.45)  # facing right after the mirror
+    ink = set(np.argsort(L)[:2].tolist()) - {0}
+    shine = set(np.argsort(L)[-2:].tolist()) - {0}
+    out = a.copy()
+    for y in range(top, head_y):
+        for x in range(head_x, right + 1):
+            v = a[y, x]
+            if v == 0 or (v not in ink and v not in shine):
+                continue
+            nb = a[max(0, y - 2):y + 3, max(0, x - 2):x + 3].ravel()
+            if (nb == 0).any():
+                continue  # silhouette outline stays
+            fur = [int(n) for n in nb if n and n not in ink and n not in shine]
+            if fur:
+                out[y, x] = max(set(fur), key=fur.count)
+    drop = 6
+    back = np.zeros_like(out)
+    back[drop:] = out[:-drop]
+    return back
+
+
+def remap(a, old_pal, new_pal):
+    lut = np.zeros(16, int)
+    for i in range(1, len(old_pal)):
+        lut[i] = nearest(new_pal, old_pal[i])
+    return lut[a]
+
+
+def icon_frames(f0, pal, icon_pal):
+    """32x32 icon from the front: median-sample the subject, map to the shared palette."""
+    ys, xs = np.where(f0 != 0)
+    sub = f0[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+    rgb = pal[sub]
+    alpha = sub != 0
+    h, w = sub.shape
+    k = 28 / max(h, w)
+    nh, nw = max(1, round(h * k)), max(1, round(w * k))
+    out = np.zeros((32, 32), int)
+    oy, ox = 31 - nh, (32 - nw) // 2
+    for j in range(nh):
+        for i in range(nw):
+            y0, y1 = int(j / k), max(int(j / k) + 1, int((j + 1) / k))
+            x0, x1 = int(i / k), max(int(i / k) + 1, int((i + 1) / k))
+            m = alpha[y0:y1, x0:x1]
+            if m.mean() < 0.4:
+                continue
+            col = np.median(rgb[y0:y1, x0:x1][m], axis=0)
+            out[oy + j, ox + i] = nearest(icon_pal, col)
+    # close the silhouette with the icon palette's darkest color
+    dark = 1 + int(c2n.lum(icon_pal[1:]).argmin())
+    a = out != 0
+    edge = a & ~(np.roll(a, 1, 0) & np.roll(a, -1, 0) & np.roll(a, 1, 1) & np.roll(a, -1, 1))
+    out[edge] = dark
+    up = np.zeros_like(out)
+    up[:-1] = out[1:]
+    return out, up
+
+
+def icon_pal_index(name):
+    src = (ROOT / "src/data/pokemon/species_info/aethos_families.h").read_text()
+    m = re.search(rf"\[SPECIES_{name.upper()}\] =.*?\.iconPalIndex = (\d+)", src, re.S)
+    return int(m.group(1))
+
+
+def build(name, cfg):
+    d = OUT / name
+    old_normal = read_jasc(d / "normal.pal")
+    old_shiny = read_jasc(d / "shiny.pal")
+    f0, f1, pal = front_frames(name, cfg)
+    shiny = shiny_from_old(pal, old_normal, old_shiny)
+    back_src = CONCEPTS / f"{name}_back.png"
+    if back_src.exists():
+        bimg = c2n.convert(back_src, fit=64, concept_pitch=grid_pitch(back_src))
+        bpal = np.array(bimg.getpalette()[:48], int).reshape(16, 3)
+        back = remap(np.array(bimg), bpal, pal)
+    else:
+        back = back_from_front(f0, pal)
+    ipal = read_jasc(ICON_PALS / f"pal{icon_pal_index(name)}.pal")
+    i0, i1 = icon_frames(f0, pal, ipal)
+    # the follower shares the battle palette (check_elaia); move it across
+    follow = remap(np.array(Image.open(d / "overworld.png")),
+                   read_jasc(d / "overworld_normal.pal"), pal)
+    return {"front": np.vstack([f0, f1]), "pal": pal, "shiny": shiny, "follow": follow,
+            "back": back, "icon": np.vstack([i0, i1]), "icon_pal": ipal}
+
+
+def write(name, b):
+    d = OUT / name
+    save_indexed(b["front"], b["pal"], d / "anim_front.png")
+    save_indexed(b["back"], b["pal"], d / "back.png")
+    write_jasc(b["pal"], d / "normal.pal")
+    write_jasc(b["shiny"], d / "shiny.pal")
+    save_indexed(b["follow"], b["pal"], d / "overworld.png")
+    write_jasc(b["pal"], d / "overworld_normal.pal")
+    write_jasc(b["shiny"], d / "overworld_shiny.pal")
+    save_indexed(b["icon"], b["icon_pal"], d / "icon.png")
+
+
+def preview(name, b, out):
+    Z = 4
+    tiles = []
+    for a, p in ((b["front"][:64], b["pal"]), (b["front"][64:], b["pal"]),
+                 (b["front"][:64], b["shiny"]), (b["back"], b["pal"])):
+        rgb = np.zeros((64, 64, 3), np.uint8) + np.array([168, 200, 120], np.uint8)
+        m = a != 0
+        rgb[m] = p[a[m]]
+        tiles.append(Image.fromarray(rgb).resize((64 * Z, 64 * Z), Image.NEAREST))
+    ic = np.zeros((32, 32, 3), np.uint8) + np.array([232, 226, 212], np.uint8)
+    m = b["icon"][:32] != 0
+    ic[m] = b["icon_pal"][b["icon"][:32][m]]
+    tiles.append(Image.fromarray(ic).resize((32 * Z, 32 * Z), Image.NEAREST))
+    W = sum(t.width for t in tiles) + 8 * (len(tiles) + 1)
+    card = Image.new("RGB", (W, 64 * Z + 16), (232, 226, 212))
+    x = 8
+    for t in tiles:
+        card.paste(t, (x, 8))
+        x += t.width + 8
+    card.save(Path(out) / f"{name}.png")
+
+
+NAME_RE = re.compile(r"^(?:(\d{1,3})_)?([a-z]+?)(?:_(front|back))?$")
+
+
+def ingest(folder, dry_run=False):
+    """Check a folder of returned concepts and file them under concepts/mon/.
+
+    Accepts the prompt page's names (004_kynder_front.png, 004_kynder_back.png)
+    or bare <name>.png. Every file is checked before anything is copied: the
+    species exists, the number matches it, the backdrop is flat, and the
+    subject fits the 64x64 frame. Returns the species names ingested.
+    """
+    dex = {r["name"].lower(): r for r in json.loads(PROMPTS.read_text())}
+    plan, problems = [], []
+    for f in sorted(Path(folder).iterdir()):
+        if f.suffix.lower() not in (".png", ".webp", ".jpg", ".jpeg"):
+            continue
+        m = NAME_RE.match(f.stem.lower())
+        if not m or m.group(2) not in dex:
+            problems.append(f"{f.name}: not a dex species name (expected e.g. 004_kynder_front.png)")
+            continue
+        num, name, view = m.group(1), m.group(2), m.group(3) or "front"
+        if num and int(num) != dex[name]["dex"]:
+            problems.append(f"{f.name}: {name} is #{dex[name]['dex']:03d}, not #{int(num):03d}")
+            continue
+        try:
+            im = Image.open(f).convert("RGB")
+        except Exception as e:  # unreadable or not an image
+            problems.append(f"{f.name}: can't read it ({e})")
+            continue
+        a = np.asarray(im).astype(int)
+        corners = np.concatenate([a[:4, :4].reshape(-1, 3), a[:4, -4:].reshape(-1, 3),
+                                  a[-4:, :4].reshape(-1, 3), a[-4:, -4:].reshape(-1, 3)])
+        if np.abs(corners - corners.mean(0)).sum(-1).max() > 60:
+            problems.append(f"{f.name}: the background isn't flat; regenerate on solid magenta")
+            continue
+        warn = ""
+        if not (im.width == im.height and im.width % 64 == 0 and im.width >= 256):
+            warn = f" (not on a 64-grid, {im.width}x{im.height}: sampled by size, check detail)"
+        dst = CONCEPTS / (f"{name}_back.png" if view == "back" else f"{name}.png")
+        tmp = CONCEPTS / f".check_{name}_{view}.png"
+        im.save(tmp)
+        try:
+            c2n.convert(tmp, fit=64 if view == "back" else config(name)["fit"],
+                        concept_pitch=grid_pitch(tmp))
+        except SystemExit as e:
+            problems.append(f"{f.name}: {e}")
+            continue
+        finally:
+            tmp.unlink(missing_ok=True)
+        plan.append((tmp, dst, im, name, view, warn))
+    for _, dst, im, name, view, warn in plan:
+        print(f"{'would file' if dry_run else 'filed'} {name} {view} -> {dst.relative_to(ROOT)}{warn}")
+        if not dry_run:
+            im.save(dst)
+    for p_ in problems:
+        print("SKIPPED", p_)
+    return sorted({n for _, _, _, n, _, _ in plan})
+
+
+def sheet(rows, path):
+    """Before/after review sheet: old front and back beside the new set, 3x."""
+    Z, pad, green = 3, 8, (168, 200, 120)
+
+    def tile(a, pal, size=64, bg=green):
+        rgb = np.zeros((size, size, 3), np.uint8) + np.array(bg, np.uint8)
+        m = a != 0
+        rgb[m] = np.asarray(pal)[a[m]]
+        return Image.fromarray(rgb).resize((size * Z, size * Z), Image.NEAREST)
+
+    cards = []
+    for name, before, b in rows:
+        tiles = [tile(before["front"], before["pal"]), tile(before["back"], before["pal"]),
+                 tile(b["front"][:64], b["pal"]), tile(b["front"][64:], b["pal"]),
+                 tile(b["front"][:64], b["shiny"]), tile(b["back"], b["pal"]),
+                 tile(b["icon"][:32], b["icon_pal"], 32, (232, 226, 212))]
+        w = sum(t.width for t in tiles) + pad * (len(tiles) + 2)
+        card = Image.new("RGB", (w, 64 * Z + 2 * pad + 14), (232, 226, 212))
+        x = pad
+        for k, t in enumerate(tiles):
+            card.paste(t, (x, pad + 14))
+            x += t.width + pad + (pad if k == 1 else 0)
+        from PIL import ImageDraw
+        ImageDraw.Draw(card).text((pad, 2), f"{name}:  BEFORE front, back  |  AFTER front, frame 2, shiny, back, icon", fill=0)
+        cards.append(card)
+    out = Image.new("RGB", (max(c.width for c in cards), sum(c.height for c in cards)), (232, 226, 212))
+    y = 0
+    for c in cards:
+        out.paste(c, (0, y))
+        y += c.height
+    out.save(path)
+
+
+def grid(name, b, out, Z=10):
+    """Frame 1 at 10x with every 5th column/row numbered, for writing fixes."""
+    from PIL import ImageDraw
+    a, pal = b["front"][:64], b["pal"]
+    im = Image.new("RGB", (64 * Z, 64 * Z), (168, 200, 120))
+    d = ImageDraw.Draw(im)
+    for y in range(64):
+        for x in range(64):
+            if a[y, x]:
+                d.rectangle([x * Z, y * Z, x * Z + Z - 1, y * Z + Z - 1], fill=tuple(int(v) for v in pal[a[y, x]]))
+    for k in range(0, 64, 5):
+        d.line([k * Z, 0, k * Z, 64 * Z], fill=(40, 40, 220) if k % 10 == 0 else (150, 150, 240))
+        d.line([0, k * Z, 64 * Z, k * Z], fill=(40, 40, 220) if k % 10 == 0 else (150, 150, 240))
+        d.text((k * Z + 1, 1), str(k), fill=(20, 20, 160))
+        d.text((1, k * Z + 1), str(k), fill=(20, 20, 160))
+    im.save(Path(out) / f"{name}_grid.png")
+    pal_txt = ", ".join(f"{i}:{tuple(int(v) for v in c)}" for i, c in enumerate(pal) if i)
+    print(f"{name} palette {pal_txt}")
+
+
+def current(name):
+    d = OUT / name
+    pal = read_jasc(d / "normal.pal")
+    return {"front": np.array(Image.open(d / "anim_front.png"))[:64],
+            "back": np.array(Image.open(d / "back.png")), "pal": pal}
+
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "ingest":
+        ap = argparse.ArgumentParser(prog="mon_from_concept.py ingest")
+        ap.add_argument("folder")
+        ap.add_argument("--dry-run", action="store_true")
+        a = ap.parse_args(sys.argv[2:])
+        names = ingest(a.folder, a.dry_run)
+        print("species:", " ".join(names) if names else "(none)")
+        return
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("names", nargs="*")
+    ap.add_argument("--preview", help="write review cards here instead of writing sprites")
+    ap.add_argument("--sheet", help="also write a before/after review sheet (PNG)")
+    ap.add_argument("--grid", help="with --preview: also write numbered 10x grids of frame 1 here")
+    a = ap.parse_args()
+    rows = []
+    for n in [x.lower() for x in a.names] or concept_names():
+        if not (CONCEPTS / f"{n}.png").exists():
+            raise SystemExit(f"no concept for {n}: expected {(CONCEPTS / (n + '.png')).relative_to(ROOT)}")
+        before = current(n)
+        b = build(n, config(n))
+        rows.append((n, before, b))
+        if a.preview:
+            Path(a.preview).mkdir(parents=True, exist_ok=True)
+            preview(n, b, a.preview)
+            if a.grid:
+                Path(a.grid).mkdir(parents=True, exist_ok=True)
+                grid(n, b, a.grid)
+        else:
+            write(n, b)
+        print(n, "front colors", len(np.unique(b["front"])) - 1)
+    if a.sheet and rows:
+        sheet(rows, a.sheet)
+        print("review sheet:", a.sheet)
+
+
+if __name__ == "__main__":
+    main()

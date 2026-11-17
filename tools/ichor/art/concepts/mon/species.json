@@ -1,0 +1,122 @@
+{
+ "kynder": {
+  "fit": 56,
+  "pivot": 0.55
+ },
+ "dikyon": {
+  "fit": 60,
+  "pivot": 0.5
+ },
+ "pylakyon": {
+  "fit": 63,
+  "pivot": 0.5
+ },
+ "nebrel": {
+  "fit": 56,
+  "pivot": 0.45
+ },
+ "kladoe": {
+  "fit": 60,
+  "pivot": 0.45
+ },
+ "daphnyad": {
+  "fit": 63,
+  "pivot": 0.4,
+  "note": "Her face survived the reduction as a pale blank; the concept's amber eyes (2x2, shine upper-left) and a mouth are restored by hand.",
+  "fixes": [
+   [
+    26,
+    16,
+    [
+     240,
+     232,
+     200
+    ]
+   ],
+   [
+    27,
+    16,
+    [
+     16,
+     16,
+     16
+    ]
+   ],
+   [
+    26,
+    17,
+    [
+     16,
+     16,
+     16
+    ]
+   ],
+   [
+    27,
+    17,
+    [
+     224,
+     176,
+     64
+    ]
+   ],
+   [
+    31,
+    16,
+    [
+     240,
+     232,
+     200
+    ]
+   ],
+   [
+    32,
+    16,
+    [
+     16,
+     16,
+     16
+    ]
+   ],
+   [
+    31,
+    17,
+    [
+     16,
+     16,
+     16
+    ]
+   ],
+   [
+    32,
+    17,
+    [
+     224,
+     176,
+     64
+    ]
+   ],
+   [
+    29,
+    19,
+    [
+     208,
+     184,
+     160
+    ]
+   ]
+  ]
+ },
+ "hipling": {
+  "fit": 56,
+  "pivot": 0.5
+ },
+ "thalamare": {
+  "fit": 60,
+  "pivot": 0.5
+ },
+ "seismare": {
+  "fit": 63,
+  "pivot": 0.45
+ }
+}

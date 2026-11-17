@@ -31,13 +31,13 @@
             "senses danger, it bolts, and it is said\n"
             "that no one has ever caught one that\n"
             "did not wish to be caught."),
-        .pokemonScale = 531,
-        .pokemonOffset = 14,
+        .pokemonScale = 583,
+        .pokemonOffset = 15,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nebrel,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
-        .frontPicYOffset = 3,
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -45,7 +45,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Nebrel,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Nebrel,
@@ -53,7 +53,7 @@
         .iconSprite = gMonIcon_Nebrel,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(6, 10, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nebrel)
         OVERWORLD(
             sPicTable_Nebrel,
@@ -89,7 +89,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_GRASS),
         .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_LEAF_GUARD },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Kladoe"),
         .cryId = CRY_STANTLER,
         .natDexNum = NATIONAL_DEX_KLADOE,
@@ -101,13 +101,13 @@
             "deer. Bark is creeping up its shins, and\n"
             "twigs sprout from its brow wherever its\n"
             "flight takes it."),
-        .pokemonScale = 317,
-        .pokemonOffset = 5,
+        .pokemonScale = 312,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kladoe,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -115,7 +115,7 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Kladoe,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Kladoe,
@@ -123,7 +123,7 @@
         .iconSprite = gMonIcon_Kladoe,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(9, 11, SHADOW_SIZE_M)
+        SHADOW(6, 12, SHADOW_SIZE_M)
         FOOTPRINT(Kladoe)
         OVERWORLD(
             sPicTable_Kladoe,
@@ -172,10 +172,10 @@
             "wear. It gives it only to the worthy."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 285,
+        .trainerScale = 281,
         .trainerOffset = 2,
         .frontPic = gMonFrontPic_Daphnyad,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -184,7 +184,7 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Daphnyad,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Daphnyad,
@@ -225,7 +225,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_STRONG_JAW },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Kynder"),
         .cryId = CRY_GROWLITHE,
         .natDexNum = NATIONAL_DEX_KYNDER,
@@ -237,13 +237,13 @@
             "The other two doze in its warm ruff. It\n"
             "is said they dream of a gate they have\n"
             "not yet been asked to guard."),
-        .pokemonScale = 500,
-        .pokemonOffset = 13,
+        .pokemonScale = 699,
+        .pokemonOffset = 17,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kynder,
-        .frontPicSize = MON_COORDS_SIZE(48, 40),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -251,7 +251,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Kynder,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kynder,
@@ -259,7 +259,7 @@
         .iconSprite = gMonIcon_Kynder,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(0, 11, SHADOW_SIZE_S)
+        SHADOW(-3, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kynder)
         OVERWORLD(
             sPicTable_Kynder,
@@ -307,13 +307,13 @@
             "go. One follows the trail while the other\n"
             "barks at its own shadow. Both take care\n"
             "not to wake the third."),
-        .pokemonScale = 272,
+        .pokemonScale = 284,
         .pokemonOffset = 1,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Dikyon,
-        .frontPicSize = MON_COORDS_SIZE(56, 48),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -321,7 +321,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Dikyon,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(64, 48),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         .palette = gMonPalette_Dikyon,
@@ -329,7 +329,7 @@
         .iconSprite = gMonIcon_Dikyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 11, SHADOW_SIZE_M)
+        SHADOW(1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Dikyon)
         OVERWORLD(
             sPicTable_Dikyon,
@@ -363,7 +363,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_STRONG_JAW },
-        .bodyColor = BODY_COLOR_RED,
+        .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Pylakyon"),
         .cryId = CRY_ARCANINE,
         .natDexNum = NATIONAL_DEX_PYLAKYON,
@@ -377,11 +377,11 @@
             "have never all slept at once."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 290,
-        .trainerOffset = 3,
+        .trainerScale = 334,
+        .trainerOffset = 6,
         .frontPic = gMonFrontPic_Pylakyon,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -389,7 +389,7 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Pylakyon,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 48),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         .palette = gMonPalette_Pylakyon,
@@ -397,7 +397,7 @@
         .iconSprite = gMonIcon_Pylakyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 11, SHADOW_SIZE_L)
+        SHADOW(-1, 12, SHADOW_SIZE_L)
         FOOTPRINT(Pylakyon)
         OVERWORLD(
             sPicTable_Pylakyon,
@@ -442,13 +442,13 @@
             "with its front hooves. Fishermen say a\n"
             "foal that splashes your boat brings you\n"
             "a calm sea home."),
-        .pokemonScale = 479,
-        .pokemonOffset = 14,
+        .pokemonScale = 572,
+        .pokemonOffset = 15,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hipling,
-        .frontPicSize = MON_COORDS_SIZE(48, 48),
-        .frontPicYOffset = 4,
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicYOffset = 2,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -464,7 +464,7 @@
         .iconSprite = gMonIcon_Hipling,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(3, 9, SHADOW_SIZE_S)
+        SHADOW(-2, 11, SHADOW_SIZE_S)
         FOOTPRINT(Hipling)
         OVERWORLD(
             sPicTable_Hipling,
@@ -518,7 +518,7 @@
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Thalamare,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 2,
+        .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -526,7 +526,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Thalamare,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Thalamare,
@@ -534,7 +534,7 @@
         .iconSprite = gMonIcon_Thalamare,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(14, 11, SHADOW_SIZE_M)
+        SHADOW(12, 12, SHADOW_SIZE_M)
         FOOTPRINT(Thalamare)
         OVERWORLD(
             sPicTable_Thalamare,
@@ -583,8 +583,8 @@
             "they cross deep water."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 352,
-        .trainerOffset = 7,
+        .trainerScale = 347,
+        .trainerOffset = 6,
         .frontPic = gMonFrontPic_Seismare,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
@@ -603,7 +603,7 @@
         .iconSprite = gMonIcon_Seismare,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(12, 12, SHADOW_SIZE_L)
+        SHADOW(8, 12, SHADOW_SIZE_L)
         FOOTPRINT(Seismare)
         OVERWORLD(
             sPicTable_Seismare,
@@ -858,7 +858,7 @@
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Galekit,
-        .frontPicSize = MON_COORDS_SIZE(56, 32),
+        .frontPicSize = MON_COORDS_SIZE(48, 32),
         .frontPicYOffset = 4,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -867,7 +867,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Galekit,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicSize = MON_COORDS_SIZE(56, 40),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Galekit,
@@ -1740,7 +1740,7 @@
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Eripip,
-        .frontPicSize = MON_COORDS_SIZE(48, 40),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 2,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1938,12 +1938,12 @@
             "winter sea. While it sleeps there, the\n"
             "wind holds its breath and the waves lie\n"
             "down flat."),
-        .pokemonScale = 749,
-        .pokemonOffset = 20,
+        .pokemonScale = 687,
+        .pokemonOffset = 19,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Halcyling,
-        .frontPicSize = MON_COORDS_SIZE(48, 40),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 7,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1952,7 +1952,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Halcyling,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
+        .backPicSize = MON_COORDS_SIZE(40, 40),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Halcyling,
@@ -1960,7 +1960,7 @@
         .iconSprite = gMonIcon_Halcyling,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 6, SHADOW_SIZE_S)
+        SHADOW(-5, 6, SHADOW_SIZE_S)
         FOOTPRINT(Halcyling)
         OVERWORLD(
             sPicTable_Halcyling,
@@ -2007,13 +2007,13 @@
             "and for seven days no wind dares blow.\n"
             "Sailors time their voyages by its\n"
             "nesting."),
-        .pokemonScale = 389,
-        .pokemonOffset = 12,
+        .pokemonScale = 326,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Galenyon,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
-        .frontPicYOffset = 7,
+        .frontPicSize = MON_COORDS_SIZE(56, 48),
+        .frontPicYOffset = 8,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2021,7 +2021,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Galenyon,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Galenyon,
@@ -2029,7 +2029,7 @@
         .iconSprite = gMonIcon_Galenyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 6, SHADOW_SIZE_M)
+        SHADOW(0, 5, SHADOW_SIZE_M)
         FOOTPRINT(Galenyon)
         OVERWORLD(
             sPicTable_Galenyon,
@@ -2344,12 +2344,12 @@
             "Arrows and thorns slide off its gold fur.\n"
             "It is far too sure of itself, and it\n"
             "picks fights with lions twice its size."),
-        .pokemonScale = 447,
-        .pokemonOffset = 11,
+        .pokemonScale = 416,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nemecub,
-        .frontPicSize = MON_COORDS_SIZE(40, 48),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 2,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2415,8 +2415,8 @@
             "not lend that to anyone."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 277,
-        .trainerOffset = 2,
+        .trainerScale = 287,
+        .trainerOffset = 3,
         .frontPic = gMonFrontPic_Nemeleon,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 2,
@@ -2427,7 +2427,7 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Nemeleon,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Nemeleon,
@@ -2435,7 +2435,7 @@
         .iconSprite = gMonIcon_Nemeleon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-2, 11, SHADOW_SIZE_L)
+        SHADOW(2, 11, SHADOW_SIZE_L)
         FOOTPRINT(Nemeleon)
         OVERWORLD(
             sPicTable_Nemeleon,
@@ -2875,7 +2875,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_PICKPOCKET, ABILITY_STENCH, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Harpelle"),
         .cryId = CRY_MANDIBUZZ,
         .natDexNum = NATIONAL_DEX_HARPELLE,
