@@ -162,3 +162,21 @@ The Hoenn cut freed Hoenn's map-section ids 0–57 and 59–85 for the Oikoumene
   - 68 (Seafloor Cavern) and 85: the Pokédex area screen
   - 16–49 (routes): `landmark.c`
   - 0–15 (towns): `event_object_movement.c`
+
+## Act III's chapter builds (2026-11-17)
+
+The director split the rest of Act III across parallel builders. Each claims
+only inside its own bank-flag and trainer-ID range, from the reserve:
+
+| Builder | Beats (`design/phase4/SCRIPT.md`) | bankflag offsets | trainer ids |
+|---|---|---|---|
+| Knossa above ground (Amnisos, the Bull Road, the palace, the court) | III-3A–3E, III-3O, III-4 | 0x900–0x94F | 345–364 |
+| The Labyrinth I (Rings I–IV, Daedalus's workshop, Minos's tomb) | III-3F–3I | 0x950–0x99F | 365–389 |
+| The Labyrinth II (Rings V–VII, the forge, the Starry Chamber, the Turning, the Icarus Shaft) | III-3J–3N, III-3P | 0x9A0–0x9EF | 390–409 |
+| Lakonia (Malea, Gytheion, the Eurotas, Lakonia) | III-5A–5J | 0x9F0–0xA3F | 410–424 |
+| Delphoi (Kirrha's olives, the Kastalian Gorge, Delphoi, the Temple of Apollo, the Omphalos) | III-6A–III-8 | 0xA40–0xA8F | 425–444 |
+| The climax (the Loom, the Frozen Hour, the Stair of Hours, Elpis's line) | III-9–III-12 | 0xA90–0xADF | 445–459 |
+
+Shared state: `VAR_ICHOR_ACT3` (bankvar 0xC) with the values SCRIPT.md fixes,
+and Knossa's `VAR_ICHOR_KNOSSA` (0xD) and `VAR_ICHOR_LABYRINTH` (0xE), claimed
+by the director. Trainer ids 300–327 are the director's reserve.

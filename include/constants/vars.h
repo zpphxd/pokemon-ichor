@@ -296,6 +296,8 @@
 #define VAR_ICHOR_HUNT_STAGE                    (ICHOR_VARS_START + 0x00A) // Ichor: Artemis hunt stage: 0 teach, 1 test, 2 master, 3 complete
 #define VAR_ICHOR_HIND_TOUCHES                  (ICHOR_VARS_START + 0x00B) // Ichor: Golden hind antler touches: 0–3
 #define VAR_ICHOR_ACT3 (ICHOR_VARS_START + 0x00C) // Ichor: saved Act III story stage
+#define VAR_ICHOR_KNOSSA                        (ICHOR_VARS_START + 0x00D) // Ichor: Knossa story state 0-20 (design/LABYRINTH.md §13): arrival, palace, leap, thread, rings, heart, Turning, escape, dawn
+#define VAR_ICHOR_LABYRINTH                     (ICHOR_VARS_START + 0x00E) // Ichor: Labyrinth bits (LABYRINTH.md §13): dials W1-W3, Ring V walls, the Turning, Ring II's last gate
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000
