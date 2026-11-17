@@ -1257,4 +1257,45 @@
 #define METATILE_EleusaSanctumHall_Basin_1                    0x2B1
 // --- EleusaSanctum: end ---
 
+
+// gTileset_Kythera (Ichor: the Foam Road and the Spring of Kallirhoe), written by tools/ichor/art/kythera_build.py
+#define METATILE_Kythera_GirdleGate_TL            0x2DE
+#define METATILE_Kythera_GirdleGate_TR            0x2DF
+#define METATILE_Kythera_GirdleGate_BL            0x2E6
+#define METATILE_Kythera_GirdleGate_BR            0x2E7
+#define METATILE_Kythera_GirdleGate_Moved         0x2EB
+// end gTileset_Kythera
+
+// gTileset_Skandeia (Ichor: Skandeia, Kythera's harbor town), written by tools/ichor/art/kythera_build.py
+#define METATILE_Skandeia_Slip_Empty_TL            0x218
+#define METATILE_Skandeia_Slip_Boat_TL             0x21A
+// end gTileset_Skandeia
+
+// gTileset_Neraida (Ichor: the Neraida falls), written by tools/ichor/art/kythera_build.py
+#define METATILE_Neraida_Altar_Horn               0x224
+#define METATILE_Neraida_Altar_Empty              0x225
+#define METATILE_Neraida_MillWheel_TL             0x243
+#define METATILE_Neraida_MillWheelStill_TL        0x253
+// end gTileset_Neraida
+
+// gTileset_Melos (Ichor: Melos, the sea of Routes 22 and 23, and Echo's sea caves), written by tools/ichor/art/kythera_build.py
+#define METATILE_Melos_Brazier_Cold             0x39C
+#define METATILE_Melos_Brazier_Lit              0x39D
+// end gTileset_Melos
+
+// gTileset_Paphia (Ichor: Paphia, the temple town), written by tools/ichor/art/kythera_build.py
+#define METATILE_Paphia_AppleGold_L              0x2CD
+#define METATILE_Paphia_AppleGold_R              0x2CE
+#define METATILE_Paphia_Apple_TL                 0x2BD
+#define METATILE_Paphia_Apple_TR                 0x2BE
+#define METATILE_Paphia_Mirror                   0x219
+#define METATILE_Paphia_Mirror_Dim               0x21A
+// end gTileset_Paphia
+
+// gTileset_TempleAphrodite (Ichor: the Temple of Aphrodite, Galatea's Gallery), written by tools/ichor/art/kythera_build.py
+#define METATILE_TempleAphrodite_Mirror_N                 0x22D
+#define METATILE_TempleAphrodite_Mirror_Dim               0x22F
+// end gTileset_TempleAphrodite
+
+
 #endif // GUARD_METATILE_LABELS_H

@@ -45,5 +45,15 @@ void InitTilesetAnim_Thyrsa(void); // Ichor: Semele's smoke (src/tileset_anims.c
 void InitTilesetAnim_PorytilesManaged_Aethos(void);
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_CaveDark(void);
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Melos(void);
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Neraida(void);
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Paphia(void);
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Skandeia(void);
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Kythera(void);
 
 #endif // GUARD_TILESET_ANIMS_H
