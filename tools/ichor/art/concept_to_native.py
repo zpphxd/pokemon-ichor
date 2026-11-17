@@ -100,6 +100,36 @@ def detail_palette(px, k):
     return np.unique(pal, axis=0)
 
 
+def magentaness(c):
+    """How far a color leans magenta: min(R, B) - G. The backdrop is ~240."""
+    c = np.asarray(c, float)
+    return np.minimum(c[..., 0], c[..., 2]) - c[..., 1]
+
+
+def chroma_key(nat, alpha, key=90, spill=25):
+    """Key a magenta backdrop everywhere, not just from the border.
+
+    Magenta never appears in a subject (STYLE.md §3.2), so enclosed gaps (a
+    lyre's strings, the space between legs) are backdrop too. Edge pixels
+    that JPEG or anti-aliasing blended with magenta take the median of their
+    clean neighbors, so no purple fringe survives into the palette.
+    """
+    m = magentaness(nat)
+    alpha = alpha & (m < key)
+    nat = nat.copy()
+    h, w = m.shape
+    clean = alpha & (m < spill)
+    for y, x in zip(*np.where(alpha & (m >= spill))):
+        y0, y1, x0, x1 = max(0, y - 1), min(h, y + 2), max(0, x - 1), min(w, x + 2)
+        nb = nat[y0:y1, x0:x1][clean[y0:y1, x0:x1]]
+        if len(nb):
+            nat[y, x] = np.median(nb, axis=0)
+        else:
+            g = nat[y, x, 1]
+            nat[y, x] = (g, g, g)
+    return alpha, nat
+
+
 def kmeans(px, k, seed=3, iters=30):
     k = min(k, len(np.unique(px, axis=0)))
     rng = np.random.default_rng(seed)
@@ -164,39 +194,213 @@ def cleanup(idx, alpha, pal):
     return new, alpha
 
 
-def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None):
+def detect_grid(a, bg, tol=60):
+    """Find the concept's own pixel grid: (pitch, phase_x, phase_y, strength).
+
+    Image-model "pixel art" is drawn on a grid of its own choosing (Kynder's at
+    16 screen pixels per pixel, others at 10 or 5). Color steps line up on the
+    grid lines, so a comb of candidate lines is scored against the summed
+    gradient; the smallest pitch within 8% of the best wins (multiples of the
+    true pitch score as well, halves score worse).
+    """
+    sub = np.abs(a - bg).sum(-1) > tol
+    if magentaness(bg) > 120:
+        sub &= magentaness(a) < 90
+    ys, xs = np.where(sub)
+    y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    r = a[y0:y1, x0:x1].astype(float)
+    gx = np.abs(np.diff(r, axis=1)).sum(-1).sum(0)
+    gy = np.abs(np.diff(r, axis=0)).sum(-1).sum(1)
+    gx = np.maximum.reduce([gx, np.r_[0, gx[:-1]], np.r_[gx[1:], 0]])  # tolerate 1 px of blur
+    gy = np.maximum.reduce([gy, np.r_[0, gy[:-1]], np.r_[gy[1:], 0]])
+
+    def comb(g, p):
+        best, phase = 0.0, 0.0
+        for ph in np.arange(0, p, 0.5):
+            pos = np.round(np.arange(ph, len(g) - 1, p)).astype(int)
+            if len(pos) < 4:
+                return 0.0, 0.0
+            sc = g[pos].mean() / (g.mean() + 1e-9)
+            if sc > best:
+                best, phase = sc, ph
+        return best, phase
+
+    # Image models draw an N x N grid and scale it to the canvas, so the grid
+    # lines sit at round(k * W / N) from the image's own edge: test whole grid
+    # counts first, exactly aligned.
+    H, W = a.shape[:2]
+
+    def at_edges(g, p, origin):
+        pos = np.round(np.arange(0, origin + len(g) + p, p)).astype(int) - origin - 1
+        pos = pos[(pos >= 0) & (pos < len(g))]
+        return g[pos].mean() / (g.mean() + 1e-9) if len(pos) >= 4 else 0.0
+
+    grids = []
+    for n in range(48, 257):  # coarser "grids" are chunky strokes, not pixels
+        p = W / n
+        if p < 3:
+            break
+        grids.append(((at_edges(gx, p, x0) + at_edges(gy, H / n, y0)) / 2, p))
+    top = max(sc for sc, _ in grids)
+    sc, p = min((t for t in grids if t[0] >= top * 0.92), key=lambda t: t[1])
+    if sc >= 1.4:
+        return p, 0.0, 0.0, sc
+    # otherwise a free search over pitch and phase
+    scores = []
+    for p in np.arange(3.0, 24.01, 0.05):
+        sx, px = comb(gx, p)
+        sy, py = comb(gy, p)
+        scores.append(((sx + sy) / 2, p, px, py))
+    top = max(sc for sc, *_ in scores)
+    sc, p, px, py = min((t for t in scores if t[0] >= top * 0.92), key=lambda t: t[1])
+    # phases are boundary positions relative to the crop; +1 for diff indexing
+    return p, x0 + px + 1, y0 + py + 1, sc
+
+
+def sample_grid(a, p, phx, phy):
+    """Median of each grid cell's center: one value per concept pixel."""
+    h, w = a.shape[:2]
+    cx = np.arange(phx % p, w - p / 2, p)
+    cy = np.arange(phy % p, h - p / 2, p)
+    r = max(1, int(p * 0.25))
+    out = np.zeros((len(cy), len(cx), 3), int)
+    for j, y in enumerate(cy):
+        yc = int(y + p / 2)
+        for i, x in enumerate(cx):
+            xc = int(x + p / 2)
+            blk = a[max(0, yc - r):yc + r + 1, max(0, xc - r):xc + r + 1]
+            out[j, i] = np.median(blk.reshape(-1, 3), axis=0)
+    return out
+
+
+def pixel_downscale(idx, alpha, pal, scale):
+    """Reduce indexed pixel art by `scale` (< 1) keeping what reads at 1x.
+
+    Per output pixel, over its source window: rare extreme colors (eye shine,
+    pupils) win if present; the outline ink wins when it covers a third of
+    the window, so 1 px lines survive; otherwise the most common color.
+    """
+    h, w = idx.shape
+    oh, ow = max(1, round(h * scale)), max(1, round(w * scale))
+    L = lum(pal)
+    order = np.argsort(L)
+    ink = int(order[0])
+    freq = np.bincount(idx[alpha], minlength=len(pal)) / max(1, alpha.sum())
+    extreme = set(order[:2].tolist()) | set(order[-2:].tolist())
+    rare = {i for i in extreme if 0 < freq[i] < 0.015}
+    out = np.zeros((oh, ow), int)
+    oa = np.zeros((oh, ow), bool)
+    for j in range(oh):
+        y0, y1 = int(j * h / oh), max(int(j * h / oh) + 1, int(round((j + 1) * h / oh)))
+        for i in range(ow):
+            x0, x1 = int(i * w / ow), max(int(i * w / ow) + 1, int(round((i + 1) * w / ow)))
+            win, am = idx[y0:y1, x0:x1], alpha[y0:y1, x0:x1]
+            if am.mean() < 0.5:
+                continue
+            vals = win[am]
+            oa[j, i] = True
+            hit = [v for v in vals if v in rare]
+            if hit:
+                out[j, i] = hit[0]
+            elif (vals == ink).mean() >= 0.34:
+                out[j, i] = ink
+            else:
+                out[j, i] = np.bincount(vals).argmax()
+    return out, oa
+
+
+def hybrid_downscale(nat, alpha, pal, scale, sharpen=80):
+    """Reduce a concept that's bigger than the frame, keeping as much as fits.
+
+    The interior comes from an area average (alpha-premultiplied, lightly
+    sharpened) snapped to the palette, which keeps faces, eyes and texture
+    that single-pixel picks drop. The line art and silhouette come from
+    pixel_downscale's ink, so edges stay crisp.
+    """
+    from PIL import ImageFilter
+    h, w = alpha.shape
+    oh, ow = max(1, round(h * scale)), max(1, round(w * scale))
+    rgba = np.dstack([nat * alpha[..., None], alpha * 255]).clip(0, 255).astype(np.uint8)
+    r = np.asarray(Image.fromarray(rgba, "RGBA").resize((ow, oh), Image.BOX)).astype(float)
+    oa = r[..., 3] > 127
+    col = np.where(oa[..., None], r[..., :3] * 255 / np.maximum(r[..., 3:4], 1), 0).clip(0, 255)
+    if sharpen:
+        col = np.asarray(Image.fromarray(col.astype(np.uint8)).filter(
+            ImageFilter.UnsharpMask(radius=1, percent=sharpen, threshold=2))).astype(float)
+    out = ((col[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+    idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+    lines, _ = pixel_downscale(idx, alpha, pal, scale)
+    lines = lines[:oh, :ow]
+    ink = int(np.argmin(lum(pal)))
+    out[(lines == ink) & oa] = ink
+    return out, oa
+
+
+def despeckle(idx, alpha):
+    """Remove lone pixels inside flat areas and stray specks off the silhouette."""
+    h, w = idx.shape
+    for y in range(1, h - 1):
+        for x in range(1, w - 1):
+            if not alpha[y, x]:
+                continue
+            if alpha[y - 1:y + 2, x - 1:x + 2].sum() - 1 <= 1:
+                alpha[y, x] = False
+                continue
+            n = {idx[y - 1, x], idx[y + 1, x], idx[y, x - 1], idx[y, x + 1]}
+            if alpha[y - 1:y + 2, x - 1:x + 2].all() and len(n) == 1 and idx[y, x] not in n:
+                idx[y, x] = n.pop()
+    return idx, alpha
+
+
+def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto"):
     a = np.asarray(Image.open(src).convert("RGB")).astype(int)
     bg = np.asarray(bg, float) if bg is not None else border_color(a)
-    a = trim(a, bg, tol)
-    a = np.pad(a, ((8, 8), (8, 8), (0, 0)))
-    a[:8], a[-8:], a[:, :8], a[:, -8:] = bg, bg, bg, bg
-    # Sample at the concept's own pixel pitch when given; shrinking a concept
-    # below its drawn scale is what destroys detail (STYLE.md §3.2).
-    pitch = concept_pitch or (max(a.shape[:2]) - 16) / fit
-    nat = sample(a, pitch)
+    found = None
+    if concept_pitch or grid == "auto":
+        p, phx, phy, strength = detect_grid(a, bg, tol)
+        if concept_pitch:
+            p = concept_pitch
+        if concept_pitch or strength >= 1.4:
+            found = (p, phx, phy)
+    if found:
+        # Read the concept on its own grid: one value per concept pixel.
+        nat = sample_grid(a, *found)
+    else:
+        # No grid (a painted illustration): sample by size, as before.
+        a = trim(a, bg, tol)
+        a = np.pad(a, ((8, 8), (8, 8), (0, 0)))
+        a[:8], a[-8:], a[:, :8], a[:, -8:] = bg, bg, bg, bg
+        nat = sample(a, (max(a.shape[:2]) - 16) / fit)
     alpha = flood_alpha(nat, bg, tol)
+    if magentaness(bg) > 120:
+        alpha, nat = chroma_key(nat, alpha)
     ys, xs = np.where(alpha)
     nat, alpha = nat[ys.min():ys.max() + 1, xs.min():xs.max() + 1], alpha[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
     exact = np.unique((np.round(nat[alpha] / 8) * 8).clip(0, 248).astype(int), axis=0)
-    if concept_pitch and len(exact) <= colors:
-        # Already clean pixel art on the grid: keep the artist's colors and
-        # outline exactly; only the backdrop is removed.
-        pal = exact
-        idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+    if found and len(exact) <= colors:
+        pal = exact  # clean pixel art: keep the artist's colors exactly
     else:
         pal = detail_palette(nat[alpha].astype(float), colors)
-        idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+    idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
+    h, w = idx.shape
+    if found and max(h, w) > size - 1:
+        # Bigger than the frame at its own scale: reduce once, to fill the
+        # frame, keeping faces and line art (STYLE.md §3.3).
+        idx, alpha = hybrid_downscale(nat, alpha, pal, (size - 1) / max(h, w))
+    if found:
+        idx, alpha = despeckle(idx, alpha)  # keep the concept's own outline
+    else:
         idx, alpha = cleanup(idx, alpha, pal)
     h, w = idx.shape
     if h > size or w > size:
-        raise SystemExit(f"subject {w}x{h} exceeds the {size}px canvas: regenerate the "
-                         f"concept at native scale rather than shrinking it (STYLE.md §3.2)")
+        raise SystemExit(f"subject {w}x{h} exceeds the {size}px canvas")
     out = np.zeros((size, size), np.uint8)
     oy, ox = size - h - 1, (size - w) // 2  # feet on the floor, centred
     out[oy:oy + h, ox:ox + w] = np.where(alpha, idx + 1, 0)
     img = Image.fromarray(out, "P")
     flat = [248, 0, 248] + [int(v) for c in pal for v in c]
     img.putpalette(flat + [0] * (768 - len(flat)))
+    img.info["concept_grid"] = found
     return img
 
 

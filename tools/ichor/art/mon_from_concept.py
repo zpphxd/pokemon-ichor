@@ -114,7 +114,7 @@ def nearest(pal, rgb, skip0=True):
 
 def front_frames(name, cfg):
     src = CONCEPTS / f"{name}.png"
-    img = c2n.convert(src, fit=cfg["fit"], concept_pitch=grid_pitch(src))
+    img = c2n.convert(src, fit=cfg["fit"])
     f0 = np.array(img)
     pal = np.array(img.getpalette()[:48], int).reshape(16, 3)
     for x, y, rgb in cfg.get("fixes", []):
@@ -235,7 +235,7 @@ def build(name, cfg):
     shiny = shiny_from_old(pal, old_normal, old_shiny)
     back_src = CONCEPTS / f"{name}_back.png"
     if back_src.exists():
-        bimg = c2n.convert(back_src, fit=64, concept_pitch=grid_pitch(back_src))
+        bimg = c2n.convert(back_src, fit=64)
         bpal = np.array(bimg.getpalette()[:48], int).reshape(16, 3)
         back = remap(np.array(bimg), bpal, pal)
     else:
@@ -313,9 +313,11 @@ def ingest(folder, dry_run=False):
             problems.append(f"{f.name}: can't read it ({e})")
             continue
         a = np.asarray(im).astype(int)
-        corners = np.concatenate([a[:4, :4].reshape(-1, 3), a[:4, -4:].reshape(-1, 3),
-                                  a[-4:, :4].reshape(-1, 3), a[-4:, -4:].reshape(-1, 3)])
-        if np.abs(corners - corners.mean(0)).sum(-1).max() > 60:
+        # Compare the four corners' averages, not single pixels: JPEG noise and
+        # a gentle gradient are fine (the flood fill handles them); a scene isn't.
+        corners = np.array([c.reshape(-1, 3).mean(0) for c in
+                            (a[:8, :8], a[:8, -8:], a[-8:, :8], a[-8:, -8:])])
+        if np.abs(corners - corners.mean(0)).sum(-1).max() > 90:
             problems.append(f"{f.name}: the background isn't flat; regenerate on solid magenta")
             continue
         warn = ""
@@ -325,8 +327,7 @@ def ingest(folder, dry_run=False):
         tmp = CONCEPTS / f".check_{name}_{view}.png"
         im.save(tmp)
         try:
-            c2n.convert(tmp, fit=64 if view == "back" else config(name)["fit"],
-                        concept_pitch=grid_pitch(tmp))
+            c2n.convert(tmp, fit=64 if view == "back" else config(name)["fit"])
         except SystemExit as e:
             problems.append(f"{f.name}: {e}")
             continue
