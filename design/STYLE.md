@@ -260,7 +260,7 @@ The play screen is **15×10 metatiles**. Judge every rule at that size.
 3. **Fix the tiles first.** Missing corners, canopy-wall pieces, ground variants and transitions get drawn into the tileset (§4.3) before any layout change.
 4. **Re-lay the map.** Restructure the masses, then paths and height, then landmarks, then props.
 5. **Re-render** and compare before and after. Do at least **three critique passes**.
-6. **Check it.** `python3 tools/ichor/map_audit.py` and the map's test pass, and you walk the map in the game.
+6. **Check it.** `python3 tools/ichor/map_audit.py` and the map's test pass, and you walk the map in the game. `python3 tools/ichor/map_style_audit.py <Map>` measures this section's rules: flat ground, barren screens, long straight edges, no height, and too few distinct tiles. It orders maps worst first; use it to find where to look, then judge the render.
 
 For a new biome, start with a **beauty shot**: a 240×160 mock-up of one typical screen at native resolution, drawn to these rules and approved before the tileset is cut. It does for a tileset what the concept does for a sprite.
 
