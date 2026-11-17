@@ -191,3 +191,59 @@ script Arkadia_TempleOfArtemis_EventScript_Altar {
     setspeaker(SP_NAME_NONE)
     goto(EventScript_IchorTempleAltar_Artemis)
 }
+
+// ---------------------------------------------------------------------------
+// The grove's kennels, basin and stelai, ported from claude/world-act2-0a92e7
+// ---------------------------------------------------------------------------
+
+script Arkadia_TempleOfArtemis_EventScript_Kennel {
+    msgbox(format("A hound's kennel. It smells of dog and cold straw. Nobody's home."), MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Pool {
+    msgbox(format("A basin cut in the rock, full of still water. The moon lies in it, perfectly round."),
+        MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleHound {
+    msgbox(format("A hound carved in the stone, one ear up. Someone has rubbed its nose smooth for luck."),
+        MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleBears {
+    msgbox(format("Girls in bear masks, dancing in a ring. The goddess's little bears."), MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleAktaion {
+    msgbox(format("Aktaion, who saw the goddess bathing. His own hounds didn't know him after."),
+        MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleAtalanta {
+    msgbox(format("A she-bear nursing a baby girl. Atalanta, left on these hills to die. She didn't."),
+        MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleKeryneia {
+    msgbox(format("A doe with golden antlers. Under her: KERYNEIA. Even Herakles took a year."),
+        MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleWorn {
+    msgbox(format("The stele the hound circles. Its name is worn away. Only a bow is left."),
+        MSGBOX_SIGN)
+    end
+}
+
+script Arkadia_TempleOfArtemis_EventScript_SteleOrion {
+    msgbox(format("Orion, who swore he'd hunt every beast on earth. The earth sent a scorpion."),
+        MSGBOX_SIGN)
+    end
+}
