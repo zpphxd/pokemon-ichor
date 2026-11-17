@@ -39,4 +39,15 @@ cp "$ROM" "$tmp/ichor_latest.gba"
 (cd "$tmp" && zip -q ichor_latest.zip ichor_latest.gba)
 cp "$tmp/ichor_latest.zip" "$LIB"
 rm -rf "$tmp"
+
+# OpenEmu doesn't run the zip: it unpacks it once into a temp cache keyed by
+# the ROM's original checksum and reuses that copy on every launch. Overwrite
+# every cached ichor_latest.gba so the next launch runs this build.
+CACHE="${TMPDIR:-/tmp}/org.openemu.OpenEmu"
+n=0
+for f in "$CACHE"/*/ichor_latest.gba; do
+  [ -f "$f" ] || continue
+  cp "$ROM" "$f"; n=$((n + 1))
+done
+echo "Refreshed $n cached copies OpenEmu launches from."
 echo "OpenEmu's Ichor now runs this build ($(git rev-parse --short HEAD)). Launch it from the library as usual."
