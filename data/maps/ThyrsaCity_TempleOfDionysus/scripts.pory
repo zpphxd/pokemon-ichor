@@ -12,18 +12,19 @@
 // wrong mask means a fight with the chorus.
 mapscripts ThyrsaCity_TempleOfDionysus_MapScripts {
     MAP_SCRIPT_ON_LOAD {
-        // A door you came through stays open.
+        // A door you came through stays open (0x29D/0x29E: DOORWAY_TOP/BOTTOM in
+        // tools/ichor/art/thyrsa_stage_ids.json).
         if (var(VAR_ICHOR_MASK_ACT) >= 1) {
-            setmetatile(18, 31, 0x26D, FALSE)
-            setmetatile(18, 32, 0x26D, FALSE)
+            setmetatile(18, 31, 0x29D, FALSE)
+            setmetatile(18, 32, 0x29E, FALSE)
         }
         if (var(VAR_ICHOR_MASK_ACT) >= 2) {
-            setmetatile(12, 23, 0x26D, FALSE)
-            setmetatile(12, 24, 0x26D, FALSE)
+            setmetatile(12, 23, 0x29D, FALSE)
+            setmetatile(12, 24, 0x29E, FALSE)
         }
         if (var(VAR_ICHOR_MASK_ACT) >= 3) {
-            setmetatile(18, 15, 0x26D, FALSE)
-            setmetatile(18, 16, 0x26D, FALSE)
+            setmetatile(18, 15, 0x29D, FALSE)
+            setmetatile(18, 16, 0x29E, FALSE)
         }
     }
 }

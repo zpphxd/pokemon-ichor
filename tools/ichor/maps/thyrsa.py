@@ -235,23 +235,37 @@ def hall(name, w, h):
 # Backstage (the green room) is at the south door. Three painted scenery walls
 # stand between it and the roof, one per act, each with a left, middle and right
 # door. The right door with the right mask walks you onto the next stage; the
-# wrong door drops you through the trapdoor back to the green room.
+# wrong door drops you through the trapdoor back to the green room. Each stage is
+# dressed as its act's scene: the harbor (Act I), the vintner's courtyard (Act II)
+# and the god's hillside (Act III). The stage art is tools/ichor/art/thyrsa_stage.py.
 VOID, WTOP, WBOT = 0x200, 0x25E, 0x204
 FLOOR, FLOOR_SHADOW, FLOOR_EDGE = 0x26D, 0x267, 0x26C
+STONES = (0x21A, 0x21A, 0x21A, 0x214, 0x21A, 0x21B, 0x21A, 0x21A)
 DOOR = 0x238
 DOOR_X = (6, 12, 18)
-# Painted panels beside each door: vines (left), a house (middle), a ship (right).
-PANELS = ((7, 0x239, "PanelLeft"), (13, 0x207, "PanelMiddle"), (19, 0x208, "PanelRight"))
 # (wall top row, act index) for each scenery wall, south to north.
 FACADES = ((31, 0), (23, 1), (15, 2))
 
 
+def stage_ids():
+    path = ROOT / "tools/ichor/art/thyrsa_stage_ids.json"
+    return {k: int(v, 16) for k, v in json.loads(path.read_text()).items()}
+
+
+def scatter(x, y, seed=0):
+    """A fixed, irregular pick for ground variants (no visible grid)."""
+    return (x * 7 + y * 13 + seed * 5 + (x * y) % 3) % 8
+
+
 def temple():
+    A = stage_ids()
+    panels = ((7, A["PANEL_VINES"], "PanelLeft"), (13, A["PANEL_HOUSE"], "PanelMiddle"),
+              (19, A["PANEL_SHIP"], "PanelRight"))
     m = Map("ThyrsaCity_TempleOfDionysus", 25, 41, True, "gTileset_ThyrsaRooms")
     m.rect(0, 0, 24, 40, VOID, True)
 
     def room(x0, y0, x1, y1):
-        """Floor with a shadow under the wall above and a shaded left edge."""
+        """Boards with a shadow under the wall above and a shaded left edge."""
         m.rect(x0, y0, x1, y1, FLOOR)
         m.rect(x0, y0, x1, y0, FLOOR_SHADOW)
         m.rect(x0, y0 + 1, x0, y1, FLOOR_EDGE)
@@ -260,82 +274,152 @@ def temple():
         m.rect(x0, y, x1, y, WTOP, True)
         m.rect(x0, y + 1, x1, y + 1, WBOT, True)
 
-    # The roof of the stage building, where the crane sets gods down.
+    # --- The roof of the stage building: Dionysus's statue, and Thespis ---------------
     wall(7, 17, 1)
     for x, mask in zip(range(8, 17, 2), (0x233, 0x234, 0x236, 0x235, 0x27E)):
         m.put(x, 1, mask, True)
     room(7, 3, 17, 6)
     m.put(7, 3, 0x28F, True)
     m.put(17, 3, 0x28F, True)
+    m.put(15, 3, A["STATUE_TOP_SHADOW"], True)
+    m.sign("Altar", 15, 4, A["STATUE_BASE_WOOD"])
+    m.put(16, 4, 0x265, True)
+    m.put(14, 4, 0x264, True)
     m.person("Thespis", 12, 4, gfx="ACOLYTE_M")
-    m.sign("Altar", 15, 4, 0x265)
-    m.sign("MechaneDown", 9, 5, 0x26B)
-    # Act III's stage, and the crane at the back of it.
+    m.sign("MechaneDown", 9, 5, A["CRANE_HOOK_WOOD"])
+    m.put(12, 6, 0x291)
+    m.put(13, 6, 0x292)
+
+    # --- Act III: the god's hillside, with the crane at the back -------------------
     wall(1, 23, 7)
+    for x in range(1, 24):
+        if x not in (10, 11, 12, 13):
+            m.put(x, 7, A["BACKDROP_HILL_TREE"] if x in (4, 17, 21) else A["BACKDROP_HILL"], True)
+    m.put(11, 7, A["CRANE_BEAM"], True)
+    m.put(12, 7, A["CRANE_PULLEY"], True)
+    m.sign("MechaneUp", 12, 8, A["CRANE_HOOK"])
     room(1, 9, 23, 14)
-    m.sign("MechaneUp", 12, 8, 0x26B)
-    for y in range(9, 13):
-        m.put(11, y, 0x278 if y % 2 else 0x28F, True)
-        m.put(13, y, 0x278 if y % 2 else 0x28F, True)
-    m.put(11, 11, FLOOR)  # the satyr acolyte stands in the line of props
+    m.rect(2, 10, 22, 14, A["GRASS"])
+    for x, y in ((3, 13), (4, 14), (16, 12), (17, 12), (20, 13), (8, 14), (6, 10)):
+        m.put(x, y, A["GRASS_FLOWERS"])
+    # The corridor to the crane, lined with the satyr play's props.
+    for y, left, right in ((9, 0x28F, 0x28F), (10, A["KRATER_GRASS"], A["GOAT_POLE_GRASS"]),
+                           (11, None, A["AMPHORA_GRASS"]), (12, A["GOAT_POLE_GRASS"], A["TORCH_GRASS"])):
+        if left:
+            m.put(11, y, left, True)
+        m.put(13, y, right, True)
     m.person("SatyrActor", 11, 11, gfx="ACOLYTE_M", facing="RIGHT", sight=1)
-    for x in (3, 21):
-        m.put(x, 10, 0x27B, True)
-    m.stamp(4, 12, [[0x24B, 0x24C]])  # the ekkyklema, parked
-    m.put(17, 11, 0x291)
-    m.put(18, 11, 0x292)
-    # Act II's stage: the vintner's house is behind it.
+    for x, y in ((4, 11), (7, 12), (16, 10), (21, 11)):
+        m.put(x, y, A["GOAT_POLE_GRASS"], True)
+    m.put(5, 11, A["KRATER_GRASS"], True)
+    m.put(20, 11, A["AMPHORA_GRASS"], True)
+    m.put(9, 13, A["KRATER_GRASS"], True)
+    m.put(19, 12, A["GOAT_POLE_GRASS"], True)
+    m.put(2, 13, A["TORCH_GRASS"], True)
+    m.put(22, 13, A["TORCH_GRASS"], True)
+
+    # --- Act II: the vintner's courtyard, his house behind it ------------------------
     room(1, 17, 23, 22)
-    m.person("Koryphaios", 4, 19, gfx="ACTOR")
-    m.person("Tragic", 21, 19, gfx="ACOLYTE_M", facing="UP")
-    m.stamp(16, 20, [[0x275, 0x276]])
-    m.put(8, 19, 0x28D)
-    m.put(9, 19, 0x28E)
-    m.put(18, 20, 0x284, True)
-    m.put(2, 21, 0x278, True)
-    m.put(22, 21, 0x278, True)
-    # Act I's stage: a bench of footlights with one gap, and the comic acolyte.
+    for y in range(19, 23):
+        for x in range(2, 23):
+            m.put(x, y, STONES[scatter(x, y)])
+    m.put(9, 18, A["EKKYKLEMA_L_WOOD"], True)   # the rolling stage, parked
+    m.put(10, 18, A["EKKYKLEMA_R_WOOD"], True)
+    for x, y in ((2, 19), (7, 19), (16, 19), (21, 19)):   # the vintner's vines
+        m.put(x, y, 0x21C, True)
+        m.put(x + 1, y, 0x21D, True)
+    m.put(5, 19, 0x209, True)          # a tall wine jar
+    m.put(5, 20, 0x211, True)
+    m.put(15, 21, A["TABLE_L_STONE"], True)
+    m.put(16, 21, A["TABLE_R_STONE"], True)
+    m.put(17, 21, A["AMPHORA_STONE"], True)
+    m.put(18, 22, A["AMPHORA_STONE"], True)
+    m.put(8, 21, A["AMPHORA_STONE"], True)
+    m.put(9, 21, A["AMPHORA_STONE"], True)
+    m.put(2, 22, 0x212, True)
+    m.put(22, 22, 0x212, True)
+    m.person("Koryphaios", 4, 21, gfx="ACTOR")
+    m.person("Tragic", 20, 20, gfx="ACOLYTE_M", facing="UP")
+
+    # --- Act I: the harbor, behind a row of footlights with one gap ---------------------
     room(1, 25, 23, 30)
+    m.rect(2, 27, 22, 27, A["SAND"])
+    m.rect(2, 29, 22, 30, A["SAND"])
+    for x, y in ((4, 29), (15, 30), (21, 30), (8, 27), (17, 29)):
+        m.put(x, y, A["SAND_SHELL"])
     for x in range(1, 24):
         if x != 21:
-            m.put(x, 28, (0x28F, 0x275, 0x276)[(x - 1) % 3], True)
-    m.put(20, 28, 0x28F, True)
-    m.put(22, 28, 0x28F, True)
-    m.put(5, 26, 0x291)
-    m.put(6, 26, 0x292)
+            m.put(x, 28, A["FOOTLIGHTS_WOOD"], True)
+    for x in (3, 13):
+        m.put(x, 27, A["SHIP_L_SAND"], True)
+        m.put(x + 1, 27, A["SHIP_R_SAND"], True)
+    m.put(2, 30, A["AMPHORA_SAND"], True)
+    m.put(3, 30, A["URN_SAND"], True)
+    m.put(10, 30, A["TORCH_SAND"], True)
+    m.put(14, 30, A["AMPHORA_SAND"], True)
+    m.put(6, 30, A["URN_SAND"], True)
+    m.put(7, 30, A["AMPHORA_SAND"], True)
+    m.put(22, 29, A["TORCH_SAND"], True)
     # He faces the row behind the gap, so once beaten he never blocks it.
     m.person("Comic", 18, 27, gfx="ACOLYTE_M", facing="RIGHT", sight=3)
-    # The green room, backstage.
-    room(1, 33, 23, 40)
+
+    # --- The scenery walls --------------------------------------------------------------
     for y, act in FACADES:
         wall(1, 23, y)
-        m.put(1 if act else 9, y, 0x233, True)  # laughing and weeping, the theater's sign
-        m.put(23 if act else 10, y, 0x234, True)
+        m.put(1, y, 0x233, True)  # laughing and weeping, the theater's sign
+        m.put(23, y, 0x234, True)
         for i, x in enumerate(DOOR_X):
             m.put(x, y + 1, DOOR, True)
             m.json["bg_events"].append(bg(x, y + 1, m.prefix + f"Door{act + 1}{'LMR'[i]}"))
-        for x, tile, name in PANELS:
+        for x, tile, name in panels:
             m.sign(name, x, y + 1, tile)
+    # Act I's harbor is painted on the wall behind it; Act II's house wears vines.
+    for x in range(2, 23):
+        m.put(x, 23, A["BACKDROP_SEA_SAIL"] if x in (5, 15) else A["BACKDROP_SEA"], True)
+        if x not in DOOR_X and x not in (3, 7, 13, 19):
+            m.put(x, 24, A["DADO_SEA"], True)
+        m.put(x, 15, 0x201 if x % 2 else 0x202, True)
     m.sign("FrescoLast", 3, 24, 0x203)
     m.sign("FrescoFollow", 3, 16, 0x203)
-    # The mask rack, the rules, the script, the costume pegs, the prompter.
+    for y in (18, 26):   # trapdoors in front of every door the acts can drop you from
+        for x in DOOR_X:
+            m.put(x, y, A["TRAPDOOR"])
+
+    # --- The green room, backstage -------------------------------------------------------
+    room(1, 33, 23, 40)
     for x, mask, shelf in ((2, 0x233, 0x280), (3, 0x27E, 0x281), (4, 0x235, 0x282)):
         m.put(x, 31, mask, True)
         m.sign("Masks", x, 32, shelf)
     m.sign("Rules", 22, 32, 0x241)
-    m.sign("Script", 9, 35, 0x287)
-    m.sign("Costumes", 16, 35, 0x28A)
-    m.put(16, 34, 0x288, True)
+    for x in (7, 9):     # two dressing places: a bronze mirror and a stool
+        m.put(x, 33, A["MIRROR_SHADOW"], True)
+        m.put(x, 34, A["STOOL_WOOD"], True)
+    m.sign("Costumes", 15, 33, A["RACK_SHADOW"])
+    m.put(14, 33, A["SHELVES_SHADOW"], True)
+    m.put(16, 33, A["RACK_SHADOW"], True)
+    m.put(17, 33, A["SHELVES_SHADOW"], True)
+    m.sign("Script", 11, 35, 0x287)
+    m.put(10, 35, 0x268, True)
     m.put(12, 36, 0x28D)  # the trapdoor drops you onto this rug
     m.put(13, 36, 0x28E)
     m.person("Prompter", 20, 36, gfx="ELDER_F", facing="LEFT")
-    for x, y in ((1, 34), (23, 34), (1, 39), (23, 39)):
+    m.put(2, 38, A["CRATE_L_WOOD"], True)
+    m.put(3, 38, A["CRATE_R_WOOD"], True)
+    m.put(2, 37, 0x278, True)
+    m.put(5, 38, 0x27B, True)
+    m.put(16, 37, 0x285, True)
+    m.put(17, 37, 0x286, True)
+    m.put(21, 39, 0x278, True)
+    m.put(22, 39, 0x27B, True)
+    for x in (6, 7):     # spare costumes waiting on their rails
+        m.put(x, 37, 0x28A, True)
+    m.put(8, 38, 0x275, True)   # a prop table with a stool
+    m.put(9, 38, 0x276, True)
+    m.put(10, 38, 0x284, True)
+    m.put(15, 39, 0x27B, True)
+    m.put(19, 34, 0x288, True)
+    for x, y in ((1, 35), (23, 35)):
         m.put(x, y, 0x28F, True)
-    m.put(5, 38, 0x278, True)
-    m.put(8, 35, 0x268, True)
-    m.put(10, 35, 0x26A, True)
-    m.put(15, 35, 0x28B, True)
-    m.put(19, 38, 0x27B, True)
     m.put(12, 40, 0x295)
     m.put(13, 40, 0x296)
     m.json["warp_events"] = [warp(12, 40, "ThyrsaCity", 2), warp(13, 40, "ThyrsaCity", 2)]
@@ -343,27 +427,49 @@ def temple():
 
 
 def amphitheater():
-    m = Map("ThyrsaCity_Amphitheater", 25, 27, True)
-    m.rect(1, 2, 23, 26, 0x250)
-    m.rect(0, 0, 24, 0, 0x205, True)
-    m.rect(0, 1, 24, 1, 0x208, True)
-    m.put(12, 26, 0x242)
-    m.json["warp_events"] = [warp(12, 26, "ThyrsaCity", 3)]
-    for x in (2, 22):
-        for y in (5, 11, 17, 23):
-            m.stamp(x, y, [[0x20B], [0x20C], [0x20D]])
-    # The skene's three doors, each with the same painted panel as the temple's.
+    """The Dionysia's theater, on the room tileset so its doors wear the temple's panels."""
+    A = stage_ids()
+    m = Map("ThyrsaCity_Amphitheater", 25, 27, True, "gTileset_ThyrsaRooms")
+    m.rect(0, 0, 24, 26, VOID, True)
+    m.rect(1, 0, 23, 0, WTOP, True)
+    m.rect(1, 1, 23, 1, WBOT, True)
+    for x, mask in zip(range(3, 23, 3), (0x233, 0x234, 0x236, 0x235, 0x27E, 0x233, 0x234)):
+        m.put(x, 0, mask, True)
+    # The stage, and the skene's front with its three doors.
+    m.rect(1, 2, 23, 8, FLOOR)
+    m.rect(1, 2, 23, 2, FLOOR_SHADOW)
+    m.rect(4, 7, 20, 7, WTOP, True)
+    m.rect(4, 8, 20, 8, WBOT, True)
+    for x in range(5, 20):
+        if x not in (6, 7, 12, 13, 18, 19):
+            m.put(x, 7, 0x201 if x % 2 else 0x202, True)
     for x, door in ((6, "DoorLeft"), (12, "DoorMiddle"), (18, "DoorRight")):
-        m.put(x, 8, 0x208, True)
+        m.put(x, 8, DOOR, True)
         m.json["bg_events"].append(bg(x, 8, m.prefix + door))
-    for x, name, tile in ((7, "PanelLeft", 0x219), (13, "PanelMiddle", 0x21C), (19, "PanelRight", 0x21B)):
+    for x, name, tile in ((7, "PanelLeft", A["PANEL_VINES"]), (13, "PanelMiddle", A["PANEL_HOUSE"]),
+                          (19, "PanelRight", A["PANEL_SHIP"])):
         m.put(x, 8, tile, True)
         m.json["bg_events"].append(bg(x, 8, "ThyrsaCity_TempleOfDionysus_EventScript_" + name))
-    m.sign("Masks", 4, 21, 0x003)
-    m.sign("Program", 20, 21, 0x003)
+    for x in (2, 22):
+        m.put(x, 3, 0x28F, True)
+    for x, tile in ((3, 0x265), (4, 0x278), (20, 0x278), (21, 0x265)):
+        m.put(x, 5, tile, True)   # the festival's kraters and jars, set out on the stage
+    # The orchestra and the seats, in stone.
+    for y in range(9, 27):
+        for x in range(1, 24):
+            m.put(x, y, STONES[scatter(x, y, 1)])
     for y in (12, 16, 20):
-        for x in (6, 8, 14, 16):
-            m.stamp(x, y, [[0x240, 0x241]])
+        for x in (3, 4, 5, 6, 7, 8, 9, 10, 14, 15, 16, 17, 18, 19, 20, 21):
+            m.put(x, y, A["BENCH_STONE"], True)
+    m.put(12, 11, 0x219, True)   # the thymele, the god's altar in the orchestra
+    for x in (2, 22):
+        for y in (11, 17, 23):
+            m.put(x, y, 0x212, True)
+    m.sign("Masks", 4, 21, A["RACK_STONE"])
+    m.sign("Program", 20, 21, A["LECTERN_STONE"])
+    m.put(12, 26, 0x295)
+    m.put(13, 26, 0x296)
+    m.json["warp_events"] = [warp(12, 26, "ThyrsaCity", 3), warp(13, 26, "ThyrsaCity", 3)]
     m.person("Thespis", 4, 18, gfx="ACOLYTE_M")
     m.person("Chorus", 12, 4, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_DIONYSIA_BROKEN")
     m.person("Actor", 6, 4, gfx="YOUTH_M")

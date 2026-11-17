@@ -931,7 +931,7 @@
       "width": 25,
       "height": 27,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
       "border_filepath": "data/layouts/ThyrsaCity_Amphitheater/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_Amphitheater/map.bin",
       "layout_version": "emerald"

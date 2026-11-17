@@ -233,6 +233,13 @@
       "elevation": 0,
       "dest_map": "MAP_THYRSA_CITY",
       "dest_warp_id": "3"
+    },
+    {
+      "x": 13,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [
