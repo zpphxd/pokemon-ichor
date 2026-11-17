@@ -14,6 +14,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Idea (user, 2026-11-17):** improve all the routes, both how they look and how complex they are to explore.
 - **The model:** Route 6 and Mt. Kithairon's rebuild (tools/ichor/maps/kithairon.py): trainers on chokepoints you can't walk around, forced grass, ledges and one-way shortcuts, terrain that reads (climbs, cliffs, water), optional branches with rewards, and three render → critique → fix passes.
 - **Also for each route:** fuller time-of-day wild tables, fishable water with a fishing table, relic gates that invite a return, and a landmark per screen.
+- **Relics and terrain (user, 2026-11-17):** use the relics (our HMs) much more, with gates the player can open now as well as ones for later, and vary the terrain so each route is a different place: marsh, scree, rivers and fords, terraces, forest, beaches, grottos.
 - **First up when it lands:** Route 7 (Kronia Grounds) and Routes 8–9 around Lebadeia, which the user asked about; then Routes 1, 4 and 5, and every route after.
 - **In progress (2026-11-17):** Routes 7, 8, 9, 11, 13 and 14, with the bare stops (Lebadeia, Kirrha, Aigion, Nemea) each getting a temple, shrine or outcamp that can carry a later quest. Routes 1, 4, 5 and the rest are still to come.
 
