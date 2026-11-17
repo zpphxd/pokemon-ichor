@@ -10,6 +10,7 @@ import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+OPEN_WATER = {0x170}  # aethos's sea
 
 
 def read(path):
@@ -59,6 +60,12 @@ class Map:
 
     def put(self, x, y, tile, solid=False):
         assert 0 <= x < self.w and 0 <= y < self.h, (self.name, x, y)
+        if tile in OPEN_WATER:
+            # Open water sits at elevation 1 with no collision, below the land's 3: the
+            # elevation step keeps walkers out, and the rod and Surf work from the shore
+            # (tools/ichor/fishing_audit.py). Solid water at 3 can't be fished.
+            self.cells[y * self.w + x] = 0x1000 | tile
+            return
         self.cells[y * self.w + x] = 0x3000 | (0x400 if solid else 0) | tile
 
     def rect(self, x0, y0, x1, y1, tile, solid=False):

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Build the approved Arkadia--Nemea--Emporion return loop."""
+import water_tables
 from thyrsa import Map, const, obj, read, write, ROOT
 
 ROADS = [
@@ -141,6 +142,7 @@ def encounters_and_teams(records=ROADS, chapter="Nemea return"):
                 base_label=f"g{name}_{time}", land_mons=dict(encounter_rate=15,
                     mons=[dict(min_level=level, max_level=level + 2,
                                species="SPECIES_" + species[i % 6]) for i in range(12)])))
+    water_tables.apply(group["encounters"], {"MAP_ROUTE15_MYSTERY_ROAD"})
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"
     start, end = f"/* {chapter} teams. */", f"/* End {chapter} teams. */"

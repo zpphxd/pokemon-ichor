@@ -3,6 +3,7 @@
 import struct
 import sys
 
+import water_tables
 from thyrsa import ROOT, Map, asclepeion, bg, const, hall, read, warp, write
 from astyra import CLINIC, HOUSE, LIBRARY
 from salt_well import hidden, item
@@ -184,7 +185,9 @@ def forge():
     tiles = kit.autotile(["".join(r) for r in grid], CAT, "wet")
     for y, row in enumerate(tiles):
         for x, tile in enumerate(row):
-            m.put(x, y, tile, grid[y][x] in "#~")
+            m.put(x, y, tile, grid[y][x] == "#")
+            if grid[y][x] == "~":  # the pool: elevation 1, open, so it can be fished (as in the Salt Well)
+                m.cells[y * m.w + x] = tile | 0x1000
     m.put(6, 25, PIECES["hole_down"][0][0])
     m.stamp(23, 5, [[0x2FA, 0x2FB], [0x302, 0x303]])
     m.rect(7, 20, 17, 20, 0x2C1, True)
@@ -229,6 +232,7 @@ def encounters_and_teams():
                         dict(min_level=34, max_level=37, species="SPECIES_" + sea[i % 4])
                         for i in range(count)])
             group["encounters"].append(entry)
+    water_tables.apply(group["encounters"], {"MAP_KALDERA_TELCHINES_FORGE"})
     write("src/data/wild_encounters.json", wild)
     teams = [
         ("SMITH_ONE", "ALKIMOS", [("Taurivet", 38), ("Karkitox", 38)]),
