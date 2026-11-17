@@ -272,23 +272,7 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 4,
-      "y": 45,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
-    },
-    {
-      "type": "sign",
-      "x": 6,
-      "y": 45,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
-    },
-    {
-      "type": "sign",
-      "x": 4,
+      "x": 13,
       "y": 46,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -296,7 +280,7 @@
     },
     {
       "type": "sign",
-      "x": 5,
+      "x": 15,
       "y": 46,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -304,8 +288,24 @@
     },
     {
       "type": "sign",
-      "x": 6,
-      "y": 46,
+      "x": 13,
+      "y": 47,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 47,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 47,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Arkadia_TempleOfArtemis_EventScript_Altar"
