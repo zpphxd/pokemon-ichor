@@ -1670,10 +1670,13 @@ const u16 gTilesetPalettes_PorytilesManaged_Stymphalia[][16] =
     INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/15.gbapal")
+};
+
 // Ichor: daidaleion
 const u32 gTilesetTiles_PorytilesManaged_Daidaleion[] = INCBIN_U32("data/tilesets/secondary/daidaleion/porytiles_bin/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_PorytilesManaged_Daidaleion[][16] =
+{
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/00.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/01.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/02.gbapal"),
@@ -1690,12 +1693,14 @@ const u16 gTilesetPalettes_PorytilesManaged_Daidaleion[][16] =
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/15.gbapal")
+};
 
 // The dawn set (LABYRINTH.md §8, scene L): the workshop dimmed and cooled but for the
 // grey light down the Icarus Shaft. Load it over palettes 6-12 for the scene, and on
 // the Icarus Shaft. Written by tools/ichor/art/labyrinth_build.py; not yet wired
 // into the engine.
 const u16 gTilesetPalettes_DaidaleionDawn[][16] =
+{
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/06.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/07.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/08.gbapal"),

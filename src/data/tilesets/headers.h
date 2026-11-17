@@ -1017,6 +1017,7 @@ const struct Tileset gTileset_Stymphalia =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Stymphalia,
     .callback = InitTilesetAnim_PorytilesManaged_Stymphalia,
 };
+
 // Ichor: daidaleion, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
 // built by tools/ichor/art/labyrinth_build.py: the house's masonry, Daedalus's workshop
 // and the Icarus Shaft. It uses only
@@ -1024,7 +1025,12 @@ const struct Tileset gTileset_Stymphalia =
 // primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_DaidaleionDawn)
 // are in graphics.h. No layout uses it yet.
 const struct Tileset gTileset_Daidaleion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
     .tiles = gTilesetTiles_PorytilesManaged_Daidaleion,
     .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
     .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
+    .callback = NULL,
+};
