@@ -138,6 +138,10 @@ const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/ti
 const u16 gMetatiles_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: astra
+const u16 gMetatiles_PorytilesManaged_Astra[] = INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Astra[] = INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: the Mystery sanctum's derived sets (written by tools/ichor/maps/sanctum.py)
 const u16 gMetatiles_EleusaSanctumRock[] = INCBIN_U16("data/tilesets/secondary/eleusa_sanctum_rock/metatiles.bin");
 const u16 gMetatileAttributes_EleusaSanctumRock[] = INCBIN_U16("data/tilesets/secondary/eleusa_sanctum_rock/metatile_attributes.bin");

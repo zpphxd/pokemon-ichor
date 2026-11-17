@@ -553,12 +553,10 @@ const struct Tileset gTileset_Labyrinth =
 };
 
 // Ichor: mychos, the Labyrinth's heart under Knossa (LABYRINTH.md §11, LABYRINTH_MAZE.md §4):
-// Rings V-VII, the forge, the archive, the vault, the shrine, the Starry Chamber and the Icarus
-// Shaft. Porytiles-managed, first drawn on world-act3 by labyrinth_build.py; the Labyrinth II
-// builder owns it now. It uses only
-// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
-// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_MychosGlow)
-// are in graphics.h. No layout uses it yet.
+// Ring V (the Hunt's lake cave) and Ring VI (the forge cavern, the Hall of Dials, the archive,
+// the vault, the shrine): the house's masonry and the cave kit. Porytiles-managed, built by
+// tools/ichor/art/mychos_build.py from world-act3's art (tools/ichor/art/mychos_base/). It uses
+// only its own tiles and palettes 6-12, so it works on any interior primary (drawn for oikos).
 const struct Tileset gTileset_Mychos =
 {
     .isCompressed = TRUE,
@@ -568,6 +566,20 @@ const struct Tileset gTileset_Mychos =
     .metatiles = gMetatiles_PorytilesManaged_Mychos,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Mychos,
     .callback = InitTilesetAnim_PorytilesManaged_Mychos,
+};
+
+// Ichor: astra, the Labyrinth's deepest caves (LABYRINTH_MAZE.md §1, §4): Ring VII's dome and
+// dancing floor, the Starry Chamber's crystal stars, the Icarus Shaft's chimney. Mychos's
+// sister, built by tools/ichor/art/mychos_build.py from the same house and cave kit.
+const struct Tileset gTileset_Astra =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Astra,
+    .palettes = gTilesetPalettes_PorytilesManaged_Astra,
+    .metatiles = gMetatiles_PorytilesManaged_Astra,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Astra,
+    .callback = InitTilesetAnim_PorytilesManaged_Astra,
 };
 
 // Ichor: the Mystery sanctum under Eleusa (tools/ichor/maps/sanctum.py). Two derived

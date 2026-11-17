@@ -1483,3 +1483,4 @@ void InitTilesetAnim_Thyrsa(void)
 #include "porytiles_generated/tilesets/mychos/generated_anim_code.h"
 // [Porytiles] Auto-generated include. Do not remove.
 #include "porytiles_generated/tilesets/labyrinth/generated_anim_code.h"
+#include "porytiles_generated/tilesets/astra/generated_anim_code.h"

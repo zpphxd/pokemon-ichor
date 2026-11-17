@@ -23,11 +23,6 @@ const u16 gTilesetAnims_PorytilesManaged_Mychos_Forge_Frame0[] = INCBIN_U16("dat
 const u16 gTilesetAnims_PorytilesManaged_Mychos_Forge_Frame1[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/anim/forge/1.4bpp");
 const u16 gTilesetAnims_PorytilesManaged_Mychos_Forge_Frame2[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/anim/forge/2.4bpp");
 
-const u16 gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/anim/stars/0.4bpp");
-const u16 gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame1[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/anim/stars/1.4bpp");
-const u16 gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame2[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/anim/stars/2.4bpp");
-const u16 gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame3[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/anim/stars/3.4bpp");
-
 // ============================================
 // Frame Pointer Arrays
 // ============================================
@@ -46,25 +41,6 @@ const u16 *const gTilesetAnims_PorytilesManaged_Mychos_Forge[] = {
     gTilesetAnims_PorytilesManaged_Mychos_Forge_Frame1
 };
 
-const u16 *const gTilesetAnims_PorytilesManaged_Mychos_Stars[] = {
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame1,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame2,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame1,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame3,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame1,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame2,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame3,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame2,
-    gTilesetAnims_PorytilesManaged_Mychos_Stars_Frame0
-};
-
 // ============================================
 // Queue Functions
 // ============================================
@@ -81,12 +57,6 @@ static void QueueAnimTiles_PorytilesManaged_Mychos_Forge(u16 timer)
     AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Mychos_Forge[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 3)), 14 * TILE_SIZE_4BPP);
 }
 
-static void QueueAnimTiles_PorytilesManaged_Mychos_Stars(u16 timer)
-{
-    u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Mychos_Stars);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Mychos_Stars[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 17)), 20 * TILE_SIZE_4BPP);
-}
-
 // ============================================
 // Driver Function
 // ============================================
@@ -97,7 +67,6 @@ static void TilesetAnim_PorytilesManaged_Mychos(u16 timer)
     {
         QueueAnimTiles_PorytilesManaged_Mychos_Flame(timer / 16);
         QueueAnimTiles_PorytilesManaged_Mychos_Forge(timer / 16);
-        QueueAnimTiles_PorytilesManaged_Mychos_Stars(timer / 16);
     }
 }
 
