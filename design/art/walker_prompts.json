@@ -1,0 +1,346 @@
+[
+ {
+  "name": "acolyte_f",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_acolyte_f.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Acolyte F, an ancient Greek character: Auburn hair in a bun tied with saffron, a white peplos with a saffron girdle and hem, a clay oil lamp held up beside her head."
+ },
+ {
+  "name": "acolyte_m",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_acolyte_m.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Acolyte M, an ancient Greek character: Close-cropped black hair, a smear of hearth soot across his cheek, a white chiton under a broad saffron himation that wraps his waist, a saffron hem, and bronze tongs holding a glowing coal at his side."
+ },
+ {
+  "name": "actor",
+  "palette": "wine",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_actor.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #A02848, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #382050, #703888, #B888D0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Actor, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "aiakides",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_aiakides.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Aiakides, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "alethea",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_alethea.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Alethea, an ancient Greek character: Dark ponytail tied under a blue headband, and a sun-gold chiton to the knee. She has a leather satchel of scrolls on her left hip and a small trowel in her right hand.."
+ },
+ {
+  "name": "apollo",
+  "palette": "theoxenia",
+  "frames": 12,
+  "from_catalog": false,
+  "file": "walker_apollo.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #503028, #805030, #A86840, #D09038, #E8B838, #F8E890, #E09870, #F8D0B0, #C8C0A8, #F8F8E8, #887868, #584840, #386838, #68A048. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Apollo, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "augur",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_augur.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Augur, an ancient Greek character: White hair and beard, a gold fillet with a black crow feather, an indigo robe under a slate himation, a hem frieze of black birds on terracotta, a staff."
+ },
+ {
+  "name": "cami",
+  "palette": "theoxenia",
+  "frames": 11,
+  "from_catalog": false,
+  "file": "walker_cami.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #503028, #805030, #A86840, #D09038, #E8B838, #F8E890, #E09870, #F8D0B0, #C8C0A8, #F8F8E8, #887868, #584840, #386838, #68A048. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Cami, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "demeter",
+  "palette": "theoxenia",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_demeter.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #503028, #805030, #A86840, #D09038, #E8B838, #F8E890, #E09870, #F8D0B0, #C8C0A8, #F8F8E8, #887868, #584840, #386838, #68A048. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Demeter, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "diver",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_diver.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Diver, an ancient Greek character: Wet black hair to the shoulders with a blue sheen, a short sea-blue wrap tied with linen, barefoot, a net bag of sponges at her hip."
+ },
+ {
+  "name": "elder_f",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_elder_f.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an elder about 20 pixels tall, slightly stooped, with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Elder F, an ancient Greek character: A dark wool himation pushed back off parted gray hair, a kind face with smiling eyes and rosy cheeks, the himation wrapped round her with her hands folded. From behind: a gray bun under the hood's edge, the himation as a shawl, a linen chiton below."
+ },
+ {
+  "name": "elder_m",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_elder_m.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an elder about 20 pixels tall, slightly stooped, with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Elder M, an ancient Greek character: Bald with a white fringe and a long white beard, an olive-wool himation to mid-calf, a walking staff in his right hand."
+ },
+ {
+  "name": "endeis",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_endeis.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Endeis, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "fisher",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_fisher.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Fisher, an ancient Greek character: A brown felt pilos, a gray beard, a faded sea-blue tunic with a rope belt, a net over the shoulder."
+ },
+ {
+  "name": "goatherd",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_goatherd.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Goatherd, an ancient Greek character: Wild graying curls and beard, a syrinx at his lips, a shaggy goat-hair cloak over an undyed tunic, a bronze bell on a rope belt, leg thongs."
+ },
+ {
+  "name": "harvester",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_harvester.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Harvester, an ancient Greek character: A terracotta headscarf knotted at the side, an olive-green dress, a linen apron, a wicker basket of olives on her left hip."
+ },
+ {
+  "name": "healer",
+  "palette": "folk",
+  "frames": 10,
+  "from_catalog": true,
+  "file": "walker_healer.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Healer, an ancient Greek character: Long brown hair to her shoulders under an olive-green fillet, a white chiton to the floor with a green sash, a gold serpent armlet, and the rod of Asclepius (a green serpent coiled on a staff) in her right hand."
+ },
+ {
+  "name": "hierophant_ione",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_hierophant_ione.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Hierophant Ione, an ancient Greek character: Cream veil to the waist, and a terracotta robe with a gold hem. She holds a lit bronze oil lamp in both hands.."
+ },
+ {
+  "name": "hoplite",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_hoplite.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Hoplite, an ancient Greek character: A Corinthian helmet pushed up with a crimson crest, a linen corselet over a crimson chiton, bronze greaves, a spear, a crimson hoplon with a bronze rim and the Lakonian lambda."
+ },
+ {
+  "name": "kedalion",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_kedalion.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kedalion, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "kerykos",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_kerykos.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kerykos, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "kid_f",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_kid_f.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: a child about 16 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kid F, an ancient Greek character: Two short pigtails tied with terracotta, a short saffron tunic, barefoot. Child-sized.."
+ },
+ {
+  "name": "kid_m",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_kid_m.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: a child about 16 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kid M, an ancient Greek character: A mop of dark hair, a short terracotta tunic, barefoot. Child-sized: 16 rows tall.."
+ },
+ {
+  "name": "kleon",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_kleon.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kleon, an ancient Greek character: Short-cropped dark hair, linen exomis, a crimson chlamys behind, and a bronze armband on his right arm."
+ },
+ {
+  "name": "kleon_seasick",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_kleon_seasick.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kleon Seasick, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "kleon_tablet",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_kleon_tablet.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Kleon Tablet, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "man",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_man.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Man, an ancient Greek character: Short dark hair and a full beard, an ochre exomis off the right shoulder, sandals."
+ },
+ {
+  "name": "manto",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_manto.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Manto, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "merchant",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_merchant.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Merchant, an ancient Greek character: Bald with a full brown beard, blue/gold himation over linen, belt purse."
+ },
+ {
+  "name": "mom",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_mom.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Mom, an ancient Greek character: Dark hair up in a bun tied with a honey-gold ribbon, a terracotta peplos, a linen apron."
+ },
+ {
+  "name": "pheidon",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_pheidon.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Pheidon, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "pilgrim",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_pilgrim.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Pilgrim, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "priestess",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_priestess.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Priestess, an ancient Greek character: A saffron veil with a terracotta border over gray hair, falling in folds to a terracotta hem behind; a white peplos with a saffron girdle; a drop spindle hanging from her left hand, seen from front and back."
+ },
+ {
+  "name": "professor_daphne",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_professor_daphne.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Professor Daphne, an ancient Greek character: Chestnut bun under a laurel wreath, and a floor-length Aegean-blue chiton with a white himation over her left shoulder. She carries a scroll in the crook of her left arm.."
+ },
+ {
+  "name": "pronomos",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_pronomos.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Pronomos, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "sailor",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_sailor.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Sailor, an ancient Greek character: Tousled hair under a terracotta headband with tails, a short jaw beard, bare-chested above an undyed linen kilt with a blue sash, a shoulder rope."
+ },
+ {
+  "name": "sam",
+  "palette": "theoxenia",
+  "frames": 12,
+  "from_catalog": false,
+  "file": "walker_sam.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #503028, #805030, #A86840, #D09038, #E8B838, #F8E890, #E09870, #F8D0B0, #C8C0A8, #F8F8E8, #887868, #584840, #386838, #68A048. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Sam, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "shepherd",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_shepherd.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Shepherd, an ancient Greek character: A bronze felt pilos, a sheepskin mantle over a blue tunic, a crook in his right hand."
+ },
+ {
+  "name": "titan_grunt",
+  "palette": "cast",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_titan_grunt.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #782028, #A85830, #D84038, #E09868, #F8D0A8, #D8A040, #F8D870, #C8B090, #F8F0D8, #183878, #3068B0, #484060, #789038. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Titan Grunt, an ancient Greek character: Bronze Corinthian helmet with a crimson crest and a T-shaped face opening with red eyes. Slate tunic with a bronze sickle emblem, bronze shoulder guards and greaves.."
+ },
+ {
+  "name": "vintner",
+  "palette": "wine",
+  "frames": 9,
+  "from_catalog": false,
+  "file": "walker_vintner.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #A02848, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #382050, #703888, #B888D0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Vintner, an ancient Greek figure: keep this character's existing costume, hair and colors exactly; the attached reference is the current sprite enlarged, redraw it in the proportions above."
+ },
+ {
+  "name": "woman",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_woman.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Woman, an ancient Greek character: A linen kerchief over brown hair, a blue peplos, an ochre himation over her left shoulder."
+ },
+ {
+  "name": "youth_f",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_youth_f.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Youth F, an ancient Greek character: A sky-blue chiton to mid-calf with a linen girdle, a long braid tied with a terracotta ribbon."
+ },
+ {
+  "name": "youth_m",
+  "palette": "folk",
+  "frames": 9,
+  "from_catalog": true,
+  "file": "walker_youth_m.png",
+  "prompt": "Pokémon Emerald (Gen 3, Game Boy Advance) overworld character sprite sheet, true pixel art. A 3x3 grid of frames, each frame exactly 16x32 pixels, drawn at 8x so every pixel is an 8x8 square (the whole image is 384x768). Row 1 faces down toward the viewer, row 2 faces up (seen from behind), row 3 faces left (side view). Column 1 stands still, column 2 walks with the left foot forward, column 3 walks with the right foot forward; the head stays level. Chibi Gen 3 proportions exactly like Emerald's townsfolk: an adult about 21 pixels tall with the feet on the bottom row of every frame, a big head about half the height (about 11 pixels tall and 13 wide), two 1x2-pixel dark eyes in the front view, a short sturdy body. One continuous 1-pixel dark outline, two flat tones per material lit from the top left, no texture noise, no anti-aliasing, no gradients. Use only these colors: #201818, #583020, #B84830, #C89028, #F0C040, #C07848, #E8B078, #C8B898, #F8F0D8, #989088, #183878, #3068B0, #70A8E0, #405020, #788838. Solid flat magenta background (#F800F8) everywhere else: no grid lines, no text, no shadow. Character: Youth M, an ancient Greek character: The festival's olive wreath, its leaves sprigging out past his brown hair and tied behind with terracotta ribbons; a short linen chiton."
+ }
+]
