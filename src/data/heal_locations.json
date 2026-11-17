@@ -115,24 +115,24 @@
     {
       "id": "HEAL_LOCATION_NEMEA",
       "map": "MAP_NEMEA",
-      "x": 18,
-      "y": 12,
+      "x": 12,
+      "y": 16,
       "respawn_map": "MAP_NEMEA",
       "respawn_npc": "LOCALID_NEMEA_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "respawn_x": 12,
+      "respawn_y": 16
     },
     {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_13",
       "map": "MAP_ROUTE13_HIGHLAND_ROAD",
-      "x": 27,
-      "y": 9
+      "x": 25,
+      "y": 10
     },
     {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_14",
       "map": "MAP_ROUTE14_NEMEA_ROAD",
-      "x": 27,
-      "y": 9
+      "x": 23,
+      "y": 8
     },
     {
       "id": "HEAL_LOCATION_DAPHNI",

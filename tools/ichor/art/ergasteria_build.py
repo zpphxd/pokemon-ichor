@@ -106,7 +106,8 @@ def room_modules():
     import route5_rooms        # Route 5's inn, on domos; after Emporion's, so their ids don't move
     import eleusa_rooms        # Eleusa's six rooms (batch 4)
     import gulf_rooms          # Kirrha's hostel and Aigion's Homarion, on domos (tools/ichor/maps/gulf.py)
-    return [aegina_homes, emporion_rooms, route5_rooms, eleusa_rooms, gulf_rooms]
+    import nemea_rooms         # Nemea's palaestra and cottage; last, so older ids don't move
+    return [aegina_homes, emporion_rooms, route5_rooms, eleusa_rooms, gulf_rooms, nemea_rooms]
 
 
 # --------------------------------------------------------------------------

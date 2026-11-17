@@ -219,7 +219,13 @@
 #define TRAINER_ICHOR_KORYKIAN_TITYROS             848
 #define TRAINER_ICHOR_KORYKIAN_KORYKIA             849
 // End Gulf.
-#define TRAINERS_END_ACT2                   850
+// Nemea's rebuild (tools/ichor/maps/nemea.py): ids from the top of Act II's block
+// (296-299), so a parallel session taking the next free ids can't collide.
+#define TRAINER_ICHOR_R14_ANTIKLES          296
+#define TRAINER_ICHOR_R14_DORKON            297
+#define TRAINER_ICHOR_TRETOS_LYSANDRA       298
+#define TRAINER_ICHOR_NEMEA_KLEITOMACHOS    299
+#define TRAINERS_END_ACT2                   850 // the highest Act II id is Gulf's 849
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328

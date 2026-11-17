@@ -1148,10 +1148,10 @@
     {
       "id": "LAYOUT_ROUTE13_HIGHLAND_ROAD",
       "name": "Route13_HighlandRoad_Layout",
-      "width": 48,
-      "height": 24,
+      "width": 56,
+      "height": 28,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route13_HighlandRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route13_HighlandRoad/map.bin",
       "layout_version": "emerald"
@@ -1159,10 +1159,10 @@
     {
       "id": "LAYOUT_NEMEA",
       "name": "Nemea_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 44,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Nemea/border.bin",
       "blockdata_filepath": "data/layouts/Nemea/map.bin",
       "layout_version": "emerald"
@@ -1170,10 +1170,10 @@
     {
       "id": "LAYOUT_ROUTE14_NEMEA_ROAD",
       "name": "Route14_NemeaRoad_Layout",
-      "width": 48,
-      "height": 24,
+      "width": 80,
+      "height": 26,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route14_NemeaRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route14_NemeaRoad/map.bin",
       "layout_version": "emerald"
@@ -2221,6 +2221,39 @@
       "secondary_tileset": "gTileset_CaveDark",
       "border_filepath": "data/layouts/Route9_KorykianCave/border.bin",
       "blockdata_filepath": "data/layouts/Route9_KorykianCave/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE14_TRETOS",
+      "name": "Route14_Tretos_Layout",
+      "width": 36,
+      "height": 20,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/Route14_Tretos/border.bin",
+      "blockdata_filepath": "data/layouts/Route14_Tretos/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_NEMEA_PALAESTRA",
+      "name": "Nemea_Palaestra_Layout",
+      "width": 16,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Nemea_Palaestra/border.bin",
+      "blockdata_filepath": "data/layouts/Nemea_Palaestra/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_NEMEA_MOLORCHOS_HOUSE",
+      "name": "Nemea_MolorchosHouse_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Nemea_MolorchosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Nemea_MolorchosHouse/map.bin",
       "layout_version": "emerald"
     }
   ]

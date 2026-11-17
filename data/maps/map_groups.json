@@ -165,7 +165,10 @@
     "ThyrsaCity_SownHouse",
     "ThyrsaCity_VintnerHouse",
     "Lebadeia_Trophoneion",
-    "Lebadeia_HoneyHouse"
+    "Lebadeia_HoneyHouse",
+    "Route14_Tretos",
+    "Nemea_Palaestra",
+    "Nemea_MolorchosHouse"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",

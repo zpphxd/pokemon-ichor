@@ -216,7 +216,7 @@ Built: **270** metatiles (`0x200`-`0x30d`) of 512, **494** tiles of 504, palette
 
 <!-- domos_build: begin generated -->
 
-Built: **295** metatiles (`0x200`-`0x326`) of 512, **493** tiles of 504, palettes 6-12.
+Built: **297** metatiles (`0x200`-`0x328`) of 512, **493** tiles of 504, palettes 6-12.
 
 | Piece | Metatile |
 |---|---|
