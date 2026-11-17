@@ -172,3 +172,6 @@
 	.include "data/maps/LabyrinthRing7/scripts.inc"
 	.include "data/maps/LabyrinthStarryChamber/scripts.inc"
 	.include "data/maps/LabyrinthIcarusShaft/scripts.inc"
+	.include "data/maps/Route14_Tretos/scripts.inc"
+	.include "data/maps/Nemea_Palaestra/scripts.inc"
+	.include "data/maps/Nemea_MolorchosHouse/scripts.inc"

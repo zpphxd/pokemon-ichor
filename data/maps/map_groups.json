@@ -162,7 +162,10 @@
     "ThyrsaCity_MantoHouse",
     "ThyrsaCity_PindarosHouse",
     "ThyrsaCity_SownHouse",
-    "ThyrsaCity_VintnerHouse"
+    "ThyrsaCity_VintnerHouse",
+    "Route14_Tretos",
+    "Nemea_Palaestra",
+    "Nemea_MolorchosHouse"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",

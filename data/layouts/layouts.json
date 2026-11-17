@@ -2156,6 +2156,39 @@
       "border_filepath": "data/layouts/LabyrinthIcarusShaft/border.bin",
       "blockdata_filepath": "data/layouts/LabyrinthIcarusShaft/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE14_TRETOS",
+      "name": "Route14_Tretos_Layout",
+      "width": 20,
+      "height": 11,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/Route14_Tretos/border.bin",
+      "blockdata_filepath": "data/layouts/Route14_Tretos/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_NEMEA_PALAESTRA",
+      "name": "Nemea_Palaestra_Layout",
+      "width": 16,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Nemea_Palaestra/border.bin",
+      "blockdata_filepath": "data/layouts/Nemea_Palaestra/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_NEMEA_MOLORCHOS_HOUSE",
+      "name": "Nemea_MolorchosHouse_Layout",
+      "width": 16,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Nemea_MolorchosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Nemea_MolorchosHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
