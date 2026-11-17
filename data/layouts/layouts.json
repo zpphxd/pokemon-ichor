@@ -1914,6 +1914,193 @@
       "border_filepath": "data/layouts/LabyrinthWorkshop/border.bin",
       "blockdata_filepath": "data/layouts/LabyrinthWorkshop/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS",
+      "name": "KnossaAmnisos_Layout",
+      "width": 40,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Amnisos",
+      "border_filepath": "data/layouts/KnossaAmnisos/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_ASCLEPEION",
+      "name": "KnossaAmnisos_Asclepeion_Layout",
+      "width": 13,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_AGORA",
+      "name": "KnossaAmnisos_Agora_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_KYDONS_HOUSE",
+      "name": "KnossaAmnisos_KydonsHouse_Layout",
+      "width": 9,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_KydonsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_KydonsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_TAVERN",
+      "name": "KnossaAmnisos_Tavern_Layout",
+      "width": 14,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_Tavern/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_Tavern/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_XENIA_HOUSE",
+      "name": "KnossaAmnisos_XeniaHouse_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_XeniaHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_XeniaHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_LEAPERS_HOUSE",
+      "name": "KnossaAmnisos_LeapersHouse_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_LeapersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_LeapersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_AMNISOS_FISHERS_HUT",
+      "name": "KnossaAmnisos_FishersHut_Layout",
+      "width": 8,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaAmnisos_FishersHut/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaAmnisos_FishersHut/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_BULL_ROAD_HUT",
+      "name": "KnossaBullRoad_Hut_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaBullRoad_Hut/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaBullRoad_Hut/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_PALACE_THRONE_ROOM",
+      "name": "KnossaPalace_ThroneRoom_Layout",
+      "width": 13,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaPalace_ThroneRoom/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaPalace_ThroneRoom/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_PALACE_WEST_MAGAZINES",
+      "name": "KnossaPalace_WestMagazines_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaPalace_WestMagazines/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaPalace_WestMagazines/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_PALACE_QUEENS_MEGARON",
+      "name": "KnossaPalace_QueensMegaron_Layout",
+      "width": 12,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaPalace_QueensMegaron/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaPalace_QueensMegaron/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_PALACE_GRAND_STAIRCASE",
+      "name": "KnossaPalace_GrandStaircase_Layout",
+      "width": 11,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_PalaceRooms",
+      "border_filepath": "data/layouts/KnossaPalace_GrandStaircase/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaPalace_GrandStaircase/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_BULL_ROAD",
+      "name": "KnossaBullRoad_Layout",
+      "width": 30,
+      "height": 50,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_BullRoad",
+      "border_filepath": "data/layouts/KnossaBullRoad/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaBullRoad/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_BULL_ROAD_VINEYARD",
+      "name": "KnossaBullRoad_Vineyard_Layout",
+      "width": 20,
+      "height": 16,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_BullRoad",
+      "border_filepath": "data/layouts/KnossaBullRoad_Vineyard/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaBullRoad_Vineyard/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_BRONZE_HEEL",
+      "name": "KnossaBronzeHeel_Layout",
+      "width": 30,
+      "height": 20,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_BullRoad",
+      "border_filepath": "data/layouts/KnossaBronzeHeel/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaBronzeHeel/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KNOSSA_PALACE",
+      "name": "KnossaPalace_Layout",
+      "width": 60,
+      "height": 50,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_PalaceMinos",
+      "border_filepath": "data/layouts/KnossaPalace/border.bin",
+      "blockdata_filepath": "data/layouts/KnossaPalace/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

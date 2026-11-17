@@ -1,0 +1,63 @@
+// Polypos's hut (SCRIPT.md Part 2; LABYRINTH seed 14, the Pyanopsia's beans): an old
+// octopus fisher under an upturned hull. An in-game trade: his Karkitox, Telchis,
+// for an Aphrell (INGAME_TRADE_ICHOR_TELCHIS, src/data/trade.h).
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaAmnisos_FishersHut_MapScripts {}
+
+text KnossaAmnisos_FishersHut_Name_Polypos { "POLYPOS" }
+
+script KnossaAmnisos_FishersHut_EventScript_Polypos {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_FishersHut_Name_Polypos)
+    if (flag(FLAG_ICHOR_TRADED_TELCHIS)) {
+        msgbox(format("There. Soft as foam. It's already asleep in a pot.\p"
+                      "Telchis'll hammer for you instead. Point it at something you hate."))
+        release
+        end
+    }
+    msgbox(format("Octopus. You put a pot down, the octopus moves in. It thinks it's clever.\p"
+                  "Beans? Ha. Every autumn the Astyrans boil beans in one big pot.\p"
+                  "Some prince of theirs sailed home from here with only beans left.\p"
+                  "We sold him the beans. Knossan beans. They still owe us for the pot.\p"
+                  "Now. This one. Smith of the sea. Hammers everything. My pots!\p"
+                  "I want something soft. Something that comes in on the foam."))
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_TELCHIS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(KnossaAmnisos_FishersHut_Name_Polypos)
+    msgbox(format("You wouldn't trade me an Aphrell? From Kythera, over the water?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(KnossaAmnisos_FishersHut_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(KnossaAmnisos_FishersHut_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(KnossaAmnisos_FishersHut_Name_Polypos)
+        msgbox(format("That's not soft. That's not foam. Try again."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_TELCHIS)
+    setspeaker(KnossaAmnisos_FishersHut_Name_Polypos)
+    msgbox(format("There. Soft as foam. It's already asleep in a pot.\p"
+                  "Telchis'll hammer for you instead. Point it at something you hate."))
+    release
+}
+
+script KnossaAmnisos_FishersHut_EventScript_NoTrade {
+    setspeaker(KnossaAmnisos_FishersHut_Name_Polypos)
+    msgbox(format("Then I'll keep buying pots. The potter loves me."))
+    release
+}
+
+script KnossaAmnisos_FishersHut_EventScript_BeanPot {
+    msgbox(format("Beans, simmering. The pot is never empty and never quite full."), MSGBOX_SIGN)
+}

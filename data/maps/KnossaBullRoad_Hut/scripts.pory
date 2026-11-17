@@ -1,0 +1,53 @@
+// Bombylia's hut, the Bull Road's rest point (SCRIPT.md Part 2; MAP_DESIGN §1): one
+// round room over a spring. Drink and the party is healed; two jars of honey once.
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaBullRoad_Hut_MapScripts {}
+
+text KnossaBullRoad_Hut_Name_Bombylia { "BOMBYLIA" }
+
+script KnossaBullRoad_Hut_EventScript_Bombylia {
+    lock
+    faceplayer
+    setspeaker(KnossaBullRoad_Hut_Name_Bombylia)
+    if (flag(FLAG_ICHOR_GOT_BOMBYLIA_HONEY)) {
+        msgbox(format("Drink. Rest. The bees and I won't mind. Much."))
+        call(KnossaBullRoad_Hut_EventScript_Heal)
+        release
+        end
+    }
+    msgbox(format("Come in, come in. They know you're here. They told me.\p"
+                  "Drink from the spring. It comes up cold from under the mountain."))
+    call(KnossaBullRoad_Hut_EventScript_Heal)
+    setspeaker(KnossaBullRoad_Hut_Name_Bombylia)
+    msgbox(format("Here. Two jars. The bees say you'll need them below."))
+    giveitem(ITEM_HONEY, 2)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_BOMBYLIA_HONEY)
+        setspeaker(KnossaBullRoad_Hut_Name_Bombylia)
+        msgbox(format("They're never wrong about honey. About people, sometimes."))
+    }
+    release
+}
+
+script KnossaBullRoad_Hut_EventScript_Heal {
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The cold spring water. Your Pokémon are rested."))
+    return
+}
+
+script KnossaBullRoad_Hut_EventScript_Spring {
+    lockall
+    msgbox(format("The spring rises cold in its stone basin and runs out under the door.\pDrink?"),
+           MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        call(KnossaBullRoad_Hut_EventScript_Heal)
+    }
+    releaseall
+}

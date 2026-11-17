@@ -1,0 +1,71 @@
+{
+  "id": "MAP_KNOSSA_PALACE_GRAND_STAIRCASE",
+  "name": "KnossaPalace_GrandStaircase",
+  "layout": "LAYOUT_KNOSSA_PALACE_GRAND_STAIRCASE",
+  "music": "MUS_ICHOR_TEMPLE",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_PALACE_OF_MINOS",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_STAIR_ARIADNE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ARIADNE",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_GrandStaircase_EventScript_Ariadne",
+      "flag": "FLAG_ICHOR_HIDE_ARIADNE_STAIR"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_PALACE",
+      "dest_warp_id": "3"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "KnossaPalace_GrandStaircase_EventScript_StairDown"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_GrandStaircase_EventScript_LightWell"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_GrandStaircase_EventScript_LightWell"
+    }
+  ]
+}

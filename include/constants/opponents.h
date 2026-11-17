@@ -228,6 +228,23 @@
 #define TRAINER_ICHOR_KERINTHOS               342
 #define TRAINER_ICHOR_MOPSOS_KYTHERA                  343
 #define TRAINER_ICHOR_THESTYLIS_KYTHERA       344
+// Knossa above ground, ids 345-364 (claim_ranges.md): the Bull Road's nine (SCRIPT's
+// Kerinthe, Euphemos and Phaistia, and six more for MAP_DESIGN.md §8's late-route
+// density), the vineyard's two, the Bronze Heel's one and the North Entrance's two.
+#define TRAINER_ICHOR_KERINTHE              345
+#define TRAINER_ICHOR_BOUKOLION             346
+#define TRAINER_ICHOR_EUPHEMOS              347
+#define TRAINER_ICHOR_KYBISTE               348
+#define TRAINER_ICHOR_KROKALE               349
+#define TRAINER_ICHOR_TELEMOS               350
+#define TRAINER_ICHOR_ELAIS                 351
+#define TRAINER_ICHOR_THEORIS               352
+#define TRAINER_ICHOR_PHAISTIA              353
+#define TRAINER_ICHOR_IPHITOS               354
+#define TRAINER_ICHOR_PROPOLIS              355
+#define TRAINER_ICHOR_GLAUKE_KNOSSA         356
+#define TRAINER_ICHOR_KERAMOS               357
+#define TRAINER_ICHOR_GYPSOS                358
 #define TRAINER_ICHOR_LYKON_KYTHERA                  490
 #define TRAINER_ICHOR_THEANO                 491
 #define TRAINER_ICHOR_KYMODOKE               492

@@ -1693,6 +1693,262 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 /* Ichor: world-act3 (ids 320-499) */
 
+/*
+Knossa above ground (ids 345-358), from design/phase4/SCRIPT.md Part 3, "The Bull Road,
+levels 44-47". Kerinthe, Euphemos, Phaistia, Iphitos, Propolis and Glauke are
+SCRIPT's, team for team. The Bull Road is a late route of ten screens, so
+MAP_DESIGN.md §8 asks nine trainers of it: Boukolion, Kybiste, Krokale,
+Telemos, Elais and Theoris are new, each in the place's own trade (the palace
+herd, a girl leaper, a saffron gatherer, an augur at the herm, an olive
+harvester, a pilgrim to the Mistress), every one on Aethos species.
+Where the build differs from the script:
+  - Class: Minoan Priest shows as PRIESTESS (the class name holds 12 letters).
+  - Pic: Bull-leaper is the male placeholder; Kybiste and Glauke use Bull-leaper F.
+*/
+
+=== TRAINER_ICHOR_KERINTHE ===
+Name: KERINTHE
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melibee (M)
+Level: 44
+Ability: Honey Gather
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 44
+Ability: Forewarn
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_BOUKOLION ===
+Name: BOUKOLION
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kerazap
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Onotis
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_EUPHEMOS ===
+Name: EUPHEMOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Ikaroth
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KYBISTE ===
+Name: KYBISTE
+Class: Bull-leaper
+Pic: Bull-leaper F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Galenyon
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KROKALE ===
+Name: KROKALE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Psychora
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Korantha
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TELEMOS ===
+Name: TELEMOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Amnoze
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ELAIS ===
+Name: ELAIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Gelasable
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hierolive
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_THEORIS ===
+Name: THEORIS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerastorm
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHAISTIA ===
+Name: PHAISTIA
+Class: Minoan Priest
+Pic: Minoan Priestess
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Korantha
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_IPHITOS ===
+Name: IPHITOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PROPOLIS ===
+Name: PROPOLIS
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Melisseer
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melibee (M)
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Thyrsivy
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GLAUKE_KNOSSA ===
+Name: GLAUKE
+Class: Bull-leaper
+Pic: Bull-leaper F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KERAMOS ===
+Name: KERAMOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GYPSOS ===
+Name: GYPSOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+
 
 /* Ichor: the post-game (ids 500-679) */
 

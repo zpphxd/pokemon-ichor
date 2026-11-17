@@ -2196,6 +2196,71 @@
 #define FLAG_ICHOR_ITEM_R1_ETHER                (FLAG_ICHOR_GENERAL2_START + 0x455) // Ichor: Labyrinth Ring I: an Ether in the cave pocket
 #define FLAG_ICHOR_HIDDEN_ITEM_R1_BRONZE_OBOL   (FLAG_ICHOR_GENERAL2_START + 0x456) // Ichor: Labyrinth Ring I: a Bronze Obol in a dead end
 #define FLAG_ICHOR_HIDDEN_ITEM_R1_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x457) // Ichor: Labyrinth Ring I: a Revive in the cleft
+#define FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_PEARL    (FLAG_ICHOR_GENERAL2_START + 0x400) // Ichor: Knossa hidden: Amnisos, Pearl at the jetty's end
+#define FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_OBOL     (FLAG_ICHOR_GENERAL2_START + 0x401) // Ichor: Knossa hidden: Amnisos, Bronze Obol behind the harbor shrine
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_OLIVE_OIL (FLAG_ICHOR_GENERAL2_START + 0x402) // Ichor: Knossa hidden: the Bull Road, Olive Oil behind the great herm
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_SILVER_OWL (FLAG_ICHOR_GENERAL2_START + 0x403) // Ichor: Knossa hidden: the Bull Road, Silver Owl in the cutting
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x404) // Ichor: Knossa hidden: the Bull Road, Star Piece in the spring trough
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_MAX_ETHER (FLAG_ICHOR_GENERAL2_START + 0x405) // Ichor: Knossa hidden: the Bull Road, Max Ether under the oldest olive
+#define FLAG_ICHOR_HIDDEN_ITEM_VINEYARD_WINE    (FLAG_ICHOR_GENERAL2_START + 0x406) // Ichor: Knossa hidden: the vineyard, Wine in the walled corner
+#define FLAG_ICHOR_HIDDEN_ITEM_VINEYARD_ELIXIR  (FLAG_ICHOR_GENERAL2_START + 0x407) // Ichor: Knossa hidden: the vineyard, Elixir under the vintner's sign
+#define FLAG_ICHOR_HIDDEN_ITEM_BRONZE_HEEL_METAL_COAT (FLAG_ICHOR_GENERAL2_START + 0x408) // Ichor: Knossa hidden: the Bronze Heel, Metal Coat at the point
+#define FLAG_ICHOR_HIDDEN_ITEM_BRONZE_HEEL_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x409) // Ichor: Knossa hidden: the Bronze Heel, Stardust in the ankle's hollow
+#define FLAG_ICHOR_HIDDEN_ITEM_PALACE_SILVER_OWL (FLAG_ICHOR_GENERAL2_START + 0x40A) // Ichor: Knossa hidden: the palace, Silver Owl under the gypsum bench
+#define FLAG_ICHOR_HIDDEN_ITEM_PALACE_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x40B) // Ichor: Knossa hidden: the palace, Star Piece in the light well
+#define FLAG_ICHOR_HIDDEN_ITEM_PALACE_GOLD_STATER (FLAG_ICHOR_GENERAL2_START + 0x40C) // Ichor: Knossa hidden: the palace, Gold Stater by the horns
+#define FLAG_ICHOR_ARRIVED_KNOSSA               (FLAG_ICHOR_GENERAL2_START + 0x40D) // Ichor: Knossa: III-3A, landed at Amnisos and met Alethea on the quay
+#define FLAG_ICHOR_VISITED_AMNISOS              (FLAG_ICHOR_GENERAL2_START + 0x40E) // Ichor: Knossa: Amnisos visited (fly; heal location its Asclepeion)
+#define FLAG_ICHOR_MET_ARIADNE                  (FLAG_ICHOR_GENERAL2_START + 0x40F) // Ichor: Knossa: III-3D, Scene A in the Throne Room
+#define FLAG_ICHOR_FIRST_LEAP                   (FLAG_ICHOR_GENERAL2_START + 0x410) // Ichor: Knossa: III-3E, the first clean leap over the Gentle Bull
+#define FLAG_ICHOR_MILON_PRACTICE               (FLAG_ICHOR_GENERAL2_START + 0x411) // Ichor: Knossa: the Bull Road, Milon's practice leap landed clean (his Lum Berry)
+#define FLAG_ICHOR_SHOWED_KLEON_TABLET          (FLAG_ICHOR_GENERAL2_START + 0x412) // Ichor: Knossa: III-3O, Scene K, Kleon read Iapetos's hand and left
+#define FLAG_ICHOR_ALETHEA_TOLD                 (FLAG_ICHOR_GENERAL2_START + 0x413) // Ichor: Knossa: III-3O, Alethea heard about Phaedon in the court
+#define FLAG_ICHOR_DAPHNE_LETTER_KNOSSA         (FLAG_ICHOR_GENERAL2_START + 0x414) // Ichor: Knossa: III-4, Daphne's letter read on Amnisos's quay
+#define FLAG_ICHOR_CAUGHT_ASTERION              (FLAG_ICHOR_GENERAL2_START + 0x415) // Ichor: Knossa: Asterion stepped into your ball in the court (LABYRINTH §10)
+#define FLAG_ICHOR_LEAP_PRIZE_3                 (FLAG_ICHOR_GENERAL2_START + 0x416) // Ichor: Knossa: Sarpedon's prize for 3 leaps (Olive Oil x5)
+#define FLAG_ICHOR_LEAP_PRIZE_5                 (FLAG_ICHOR_GENERAL2_START + 0x417) // Ichor: Knossa: Sarpedon's prize for 5 leaps (TM Body Slam)
+#define FLAG_ICHOR_LEAP_PRIZE_10                (FLAG_ICHOR_GENERAL2_START + 0x418) // Ichor: Knossa: Sarpedon's prize for 10 leaps
+#define FLAG_ICHOR_LEAP_PRIZE_20                (FLAG_ICHOR_GENERAL2_START + 0x419) // Ichor: Knossa: Sarpedon's prize for 20 leaps (a palace-herd Taurivet)
+#define FLAG_ICHOR_GOT_KYDON_HONEY              (FLAG_ICHOR_GENERAL2_START + 0x41A) // Ichor: Knossa: Amnisos, Kydon's three jars of thyme honey
+#define FLAG_ICHOR_GOT_KYDON_LEFTOVERS          (FLAG_ICHOR_GENERAL2_START + 0x41B) // Ichor: Knossa: Amnisos, Kydon's good jar (Leftovers) after the raid
+#define FLAG_ICHOR_KNUCKLEBONES_AMNISOS         (FLAG_ICHOR_GENERAL2_START + 0x41C) // Ichor: Knossa: Amnisos, beat Lykastos, the Double Axe's champion (TM Taunt)
+#define FLAG_ICHOR_BONES_KRESSA                 (FLAG_ICHOR_GENERAL2_START + 0x41D) // Ichor: Knossa: Amnisos, beat Kressa at knucklebones (Olive Oil)
+#define FLAG_ICHOR_BONES_DORION                 (FLAG_ICHOR_GENERAL2_START + 0x41E) // Ichor: Knossa: Amnisos, beat Dorion at knucklebones (Wine)
+#define FLAG_ICHOR_BROKEN_RING_2                (FLAG_ICHOR_GENERAL2_START + 0x41F) // Ichor: Knossa: Amnisos, Aithon's guest-gift (xenia chain link 2)
+#define FLAG_ICHOR_GOT_FOCUS_BAND_KNOSSA        (FLAG_ICHOR_GENERAL2_START + 0x420) // Ichor: Knossa: Amnisos, Euanthe's Focus Band after the first leap
+#define FLAG_ICHOR_TRADED_TELCHIS               (FLAG_ICHOR_GENERAL2_START + 0x421) // Ichor: Knossa: Amnisos, traded Polypos an Aphrell for Telchis
+#define FLAG_ICHOR_GOT_BOMBYLIA_HONEY           (FLAG_ICHOR_GENERAL2_START + 0x422) // Ichor: Knossa: the Bull Road, Bombylia's two jars of honey
+#define FLAG_ICHOR_FOSSIL_DUG                   (FLAG_ICHOR_GENERAL2_START + 0x423) // Ichor: Knossa: the Bronze Heel, dug one fossil from the tide ledge
+#define FLAG_ICHOR_GOT_AKESTOR_SALVE            (FLAG_ICHOR_GENERAL2_START + 0x424) // Ichor: Knossa: Amnisos Asclepeion, Akestor's gift
+#define FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY    (FLAG_ICHOR_GENERAL2_START + 0x425) // Ichor: Knossa: hide Alethea on Amnisos's quay
+#define FLAG_ICHOR_HIDE_ALETHEA_HEEL            (FLAG_ICHOR_GENERAL2_START + 0x426) // Ichor: Knossa: hide Alethea at the Bronze Heel
+#define FLAG_ICHOR_HIDE_ALETHEA_MEGARON         (FLAG_ICHOR_GENERAL2_START + 0x427) // Ichor: Knossa: hide Alethea in the Queen's Megaron
+#define FLAG_ICHOR_HIDE_ALETHEA_COURT           (FLAG_ICHOR_GENERAL2_START + 0x428) // Ichor: Knossa: hide Alethea in the Central Court
+#define FLAG_ICHOR_HIDE_KLEON_KNOSSA            (FLAG_ICHOR_GENERAL2_START + 0x429) // Ichor: Knossa: hide Kleon in the palace court (Scene K)
+#define FLAG_ICHOR_HIDE_PALACE_GRUNTS           (FLAG_ICHOR_GENERAL2_START + 0x42A) // Ichor: Knossa: hide the palace's Titanborn after the Turning
+#define FLAG_ICHOR_HIDE_AMNISOS_VETERAN         (FLAG_ICHOR_GENERAL2_START + 0x42B) // Ichor: Knossa: hide the Titanborn veteran on Amnisos's mole after the Turning
+#define FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS        (FLAG_ICHOR_GENERAL2_START + 0x42C) // Ichor: Knossa: hide the two Titanborn at the Bull Road's south end
+#define FLAG_ICHOR_HIDE_ARIADNE_THRONE          (FLAG_ICHOR_GENERAL2_START + 0x42D) // Ichor: Knossa: hide Ariadne in the Throne Room
+#define FLAG_ICHOR_HIDE_ARIADNE_STAIR           (FLAG_ICHOR_GENERAL2_START + 0x42E) // Ichor: Knossa: hide Ariadne at the Grand Staircase
+#define FLAG_ICHOR_HIDE_ARIADNE_COURT           (FLAG_ICHOR_GENERAL2_START + 0x42F) // Ichor: Knossa: hide Ariadne in the Central Court
+#define FLAG_ICHOR_HIDE_ASTERION_COURT          (FLAG_ICHOR_GENERAL2_START + 0x430) // Ichor: Knossa: hide Asterion in the Central Court
+#define FLAG_ICHOR_HIDE_NAUSIKLES_AMNISOS       (FLAG_ICHOR_GENERAL2_START + 0x431) // Ichor: Knossa: hide Nausikles on Amnisos's quay
+#define FLAG_ICHOR_ITEM_AMNISOS_MAX_REPEL       (FLAG_ICHOR_GENERAL2_START + 0x432) // Ichor: Knossa item ball: Amnisos, Max Repel up the cave path
+#define FLAG_ICHOR_ITEM_AMNISOS_HYPER_POTION    (FLAG_ICHOR_GENERAL2_START + 0x433) // Ichor: Knossa item ball: Amnisos, Hyper Potion on the hive roof
+#define FLAG_ICHOR_ITEM_BULL_ROAD_FULL_HEAL     (FLAG_ICHOR_GENERAL2_START + 0x434) // Ichor: Knossa item ball: the Bull Road, Full Heal
+#define FLAG_ICHOR_ITEM_BULL_ROAD_ULTRA_BALL    (FLAG_ICHOR_GENERAL2_START + 0x435) // Ichor: Knossa item ball: the Bull Road, Ultra Ball
+#define FLAG_ICHOR_ITEM_BULL_ROAD_MAX_POTION    (FLAG_ICHOR_GENERAL2_START + 0x436) // Ichor: Knossa item ball: the Bull Road, Max Potion
+#define FLAG_ICHOR_ITEM_BULL_ROAD_HP_UP         (FLAG_ICHOR_GENERAL2_START + 0x437) // Ichor: Knossa item ball: the Bull Road, HP Up
+#define FLAG_ICHOR_ITEM_BULL_ROAD_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x438) // Ichor: Knossa item ball: the Bull Road, Revive
+#define FLAG_ICHOR_ITEM_VINEYARD_PP_UP          (FLAG_ICHOR_GENERAL2_START + 0x439) // Ichor: Knossa item ball: the vineyard's sealed jar, PP Up
+#define FLAG_ICHOR_ITEM_VINEYARD_ULTRA_BALL     (FLAG_ICHOR_GENERAL2_START + 0x43A) // Ichor: Knossa item ball: the vineyard, Ultra Ball
+#define FLAG_ICHOR_ITEM_BRONZE_HEEL_BIG_PEARL   (FLAG_ICHOR_GENERAL2_START + 0x43B) // Ichor: Knossa item ball: the Bronze Heel, Big Pearl on the giant's ankle
+#define FLAG_ICHOR_ITEM_BRONZE_HEEL_RARE_CANDY  (FLAG_ICHOR_GENERAL2_START + 0x43C) // Ichor: Knossa item ball: the Bronze Heel, Rare Candy
+#define FLAG_ICHOR_ITEM_PALACE_HYPER_POTION     (FLAG_ICHOR_GENERAL2_START + 0x43D) // Ichor: Knossa item ball: the West Magazines' open pithos, Hyper Potion
+#define FLAG_ICHOR_ITEM_PALACE_ELIXIR           (FLAG_ICHOR_GENERAL2_START + 0x43E) // Ichor: Knossa item ball: the palace, Elixir in the Theatral Area
+#define FLAG_ICHOR_ARIADNE_WOKE_YOU             (FLAG_ICHOR_GENERAL2_START + 0x43F) // Ichor: Knossa: III-3P, Ariadne at the Megaron's door before dawn (He wants you)
+#define FLAG_ICHOR_ALETHEA_DAWN_DONE            (FLAG_ICHOR_GENERAL2_START + 0x440) // Ichor: Knossa: III-3P, Alethea sent the gull at dawn and went down to the quay
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

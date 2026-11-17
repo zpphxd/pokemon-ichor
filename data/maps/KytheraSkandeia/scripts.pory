@@ -292,7 +292,19 @@ script KytheraSkandeia_EventScript_NausiklesStory {
         release
         end
     }
-    msgbox(format("The Knossa crossing is not open in this build.\pYou can still sail back to earlier ports."))
+    msgbox(format("I said don't. You heard me say don't. Remember that."))
+    closemessage
+    // Beat III-1I: the night crossing along Route 23, then Amnisos's quay at dawn,
+    // where the Knossa chapter's arrival scene (KnossaAmnisos, beat III-3A) takes over.
+    setflag(FLAG_ICHOR_SAILED_FOR_KNOSSA)
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_M_SURF)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Euploia slips out on the night wind, along Knossa's north coast."))
+    msgbox(format("LOOKOUT: Land. And a lot of boats on it."))
+    closemessage
+    warpsilent(MAP_KNOSSA_AMNISOS, 16, 7)
+    waitstate
     release
 }
 

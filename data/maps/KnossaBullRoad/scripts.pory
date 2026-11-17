@@ -1,0 +1,235 @@
+// The Bull Road (design/maps/KnossaBullRoad.md; SCRIPT.md III-3B, Part 2-3;
+// LABYRINTH.md §2): five screens south from Amnisos through the olive terraces,
+// the fork and the great herm, the limestone cutting, the meadow where the
+// palace herd crosses, Bombylia's hut and the olive grove, to the palace.
+// Map: tools/ichor/maps/knossa_bull_road.py.
+//
+// Milon's practice leap: stand on his scratched line at (15,32), facing the line
+// at (15,31), and the herd's big bull charges down the road from (15,26).
+
+mapscripts KnossaBullRoad_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (var(VAR_ICHOR_KNOSSA) >= 18) {
+            setflag(FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS)
+        }
+    }
+}
+
+text KnossaBullRoad_Name_Milon { "MILON" }
+text KnossaBullRoad_Name_Titanborn { "TITANBORN" }
+text KnossaBullRoad_Name_Kerinthe { "KERINTHE" }
+text KnossaBullRoad_Name_Boukolion { "BOUKOLION" }
+text KnossaBullRoad_Name_Euphemos { "EUPHEMOS" }
+text KnossaBullRoad_Name_Kybiste { "KYBISTE" }
+text KnossaBullRoad_Name_Krokale { "KROKALE" }
+text KnossaBullRoad_Name_Telemos { "TELEMOS" }
+text KnossaBullRoad_Name_Elais { "ELAIS" }
+text KnossaBullRoad_Name_Theoris { "THEORIS" }
+text KnossaBullRoad_Name_Phaistia { "PHAISTIA" }
+
+// ---------------------------------------------------------------------------
+// The trainers (SCRIPT.md Part 3, "The Bull Road, levels 44-47")
+// ---------------------------------------------------------------------------
+
+script KnossaBullRoad_EventScript_Kerinthe {
+    trainerbattle_single(TRAINER_ICHOR_KERINTHE, format("Shh. They're working. Battle quietly."),
+                         format("You didn't get stung once. They like you."))
+    setspeaker(KnossaBullRoad_Name_Kerinthe)
+    msgbox(format("Minoans kept bees before anyone. We painted them on everything."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Telemos {
+    trainerbattle_single(TRAINER_ICHOR_TELEMOS, format("The birds over the herm flew east. That means you. Probably."),
+                         format("The birds didn't mention this part."))
+    setspeaker(KnossaBullRoad_Name_Telemos)
+    msgbox(format("East is the Bronze Heel. The birds go round it. So should you, after dark."),
+           MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Euphemos {
+    trainerbattle_single(TRAINER_ICHOR_EUPHEMOS,
+                         format("You walk like someone who's never been thrown. Let's fix that."),
+                         format("Thrown! By a walker!"))
+    setspeaker(KnossaBullRoad_Name_Euphemos)
+    msgbox(format("Sarpedon says watch the head. Sarpedon says a lot of things."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Boukolion {
+    trainerbattle_single(TRAINER_ICHOR_BOUKOLION, format("These are the palace's cows. I'm the palace's boy. Fight me."),
+                         format("The cows saw that. I'll never hear the end of it."))
+    setspeaker(KnossaBullRoad_Name_Boukolion)
+    msgbox(format("Milon carries the big one. I carry the buckets. One day I'll carry the big one."),
+           MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Kybiste {
+    trainerbattle_single(TRAINER_ICHOR_KYBISTE, format("Kybiste means somersault. Guess what I'm good at."),
+                         format("Not battles. Somersaults. I said."))
+    setspeaker(KnossaBullRoad_Name_Kybiste)
+    msgbox(format("The girls leap too. Look at any old pot. We're on all of them."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Krokale {
+    trainerbattle_single(TRAINER_ICHOR_KROKALE, format("Three threads from every crocus. Don't tread on my crocuses!"),
+                         format("You trod on one. I saw."))
+    setspeaker(KnossaBullRoad_Name_Krokale)
+    msgbox(format("Saffron's worth more than silver. By weight. By a lot of weight."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Theoris {
+    trainerbattle_single(TRAINER_ICHOR_THEORIS, format("I walked from Phaistos to see the Mistress's house. It's shut."),
+                         format("Even my Pokémon want to go home."))
+    setspeaker(KnossaBullRoad_Name_Theoris)
+    msgbox(format("They say the palace is closed for repairs. Repairs don't carry spears."),
+           MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Elais {
+    trainerbattle_single(TRAINER_ICHOR_ELAIS, format("This grove's older than the palace. Mind your manners in it."),
+                         format("The olives approve. They don't say much."))
+    setspeaker(KnossaBullRoad_Name_Elais)
+    msgbox(format("The oldest tree's at the grove's west edge. Its roots have opinions."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_EventScript_Phaistia {
+    trainerbattle_single(TRAINER_ICHOR_PHAISTIA,
+                         format("The palace is closed. The priestess decides who it's closed to."),
+                         format("…Not to you, it seems."))
+    setspeaker(KnossaBullRoad_Name_Phaistia)
+    msgbox(format("Ariadne will want to see you. She wants to see very few people."), MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// The herd crossing (the set piece): Milon and his practice leap
+// ---------------------------------------------------------------------------
+
+script KnossaBullRoad_EventScript_Milon {
+    lock
+    faceplayer
+    setspeaker(KnossaBullRoad_Name_Milon)
+    if (flag(FLAG_ICHOR_MILON_PRACTICE)) {
+        msgbox(format("Sarpedon's in the court. Thirty summers of leaping.\p"
+                      "Still has all his teeth. Most of them."))
+        release
+        end
+    }
+    msgbox(format("Mind them. They're the palace herd. They don't mind you.\p"
+                  "See the big one? I've carried him every day since he was born.\p"
+                  "It's how I got these arms. One day a calf, next day a bit more calf.\p"
+                  "Now he's a bull. I still carry him. Some days.\p"
+                  "You're going up to leap? Practice on old Lampos here first.\p"
+                  "Stand on the line I scratched in the road, by the bend. Face north.\p"
+                  "Wait for his head to cross the line. Then up and over."))
+    release
+}
+
+script KnossaBullRoad_EventScript_MilonsLine {
+    lockall
+    if (flag(FLAG_ICHOR_MILON_PRACTICE)) {
+        msgbox(format("Milon's scratch in the road. Lampos ignores it now. He's seen you leap."), MSGBOX_SIGN)
+        releaseall
+        end
+    }
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A line scratched across the road. Down the road, old Lampos lowers his head."))
+    setspeaker(KnossaBullRoad_Name_Milon)
+    msgbox(format("Try a practice leap?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Wise. Most people who say yes are wiser afterward."))
+        releaseall
+        end
+    }
+    closemessage
+    setobjectxy(LOCALID_BULL_ROAD_HERD_1, 15, 26)
+    turnobject(LOCALID_BULL_ROAD_HERD_1, DIR_SOUTH)
+    playmoncry(SPECIES_TAURIVET, CRY_MODE_NORMAL)
+    waitmoncry
+    // Mortal's speed and window, whatever the difficulty (SCRIPT.md III-3B)
+    setvar(VAR_0x8004, LOCALID_BULL_ROAD_HERD_1)
+    setvar(VAR_0x8005, ICHOR_TILE(15, 31))
+    setvar(VAR_0x8006, 14)
+    setvar(VAR_0x8007, 8)
+    special(Ichor_BullLeap)
+    if (var(VAR_RESULT) == ICHOR_LEAP_EARLY) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Too soon!"))
+        setspeaker(KnossaBullRoad_Name_Milon)
+        msgbox(format("You jumped at the morning. Again?"))
+    } elif (var(VAR_RESULT) == ICHOR_LEAP_LATE) {
+        fadescreen(FADE_TO_BLACK)
+        playse(SE_M_DOUBLE_SLAP)
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Ooof."))
+        fadescreen(FADE_FROM_BLACK)
+        setspeaker(KnossaBullRoad_Name_Milon)
+        msgbox(format("He jumped at you. That's the other way round."))
+    } else {
+        applymovement(OBJ_EVENT_ID_PLAYER, KnossaBullRoad_Movement_Vault)
+        waitmovement(0)
+        playse(SE_M_JUMP_KICK)
+        setspeaker(KnossaBullRoad_Name_Milon)
+        msgbox(format("Ha! Over and down! He didn't even notice. That's the compliment.\p"
+                      "Here. For your trouble. Sarpedon will make you do it properly."))
+        giveitem(ITEM_LUM_BERRY)
+        setflag(FLAG_ICHOR_MILON_PRACTICE)
+    }
+    closemessage
+    setobjectxy(LOCALID_BULL_ROAD_HERD_1, 11, 29)
+    releaseall
+}
+
+// The vault: a two-tile jump over the bull, turning through four facings mid-air.
+movement KnossaBullRoad_Movement_Vault {
+    face_left face_down face_right jump_2_up face_down
+}
+
+script KnossaBullRoad_EventScript_Herd {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    playmoncry(SPECIES_TAURIVET, CRY_MODE_NORMAL)
+    msgbox(format("A bull of the palace herd. It looks at you the way bulls do, and keeps chewing."))
+    waitmoncry
+    release
+}
+
+script KnossaBullRoad_EventScript_SouthGrunt {
+    lock
+    faceplayer
+    setspeaker(KnossaBullRoad_Name_Titanborn)
+    msgbox(format("Palace is closed. Repairs.\p"
+                  "What are we repairing? Hm. Ask the priestess."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Signs, the herm, the labrys door
+// ---------------------------------------------------------------------------
+
+script KnossaBullRoad_EventScript_NorthSign {
+    msgbox(format("THE BULL ROAD. The palace, south. Mind the herd."), MSGBOX_SIGN)
+}
+
+script KnossaBullRoad_EventScript_Herm {
+    msgbox(format("A great herm, Hermes's head on a stone post, garlanded with thyme.\p"
+                  "East: the Bronze Heel. South: the palace."), MSGBOX_SIGN)
+}
+
+script KnossaBullRoad_EventScript_LabrysDoor {
+    lockall
+    if (flag(FLAG_ICHOR_GOT_LABRYS)) {
+        msgbox(format("The Labrys fits the hollow as if it grew there.\p"
+                      "But the door is sealed from within. Something behind it is still settling."),
+               MSGBOX_SIGN)
+    } else {
+        msgbox(format("A door with no handle. In its middle, a hollow the shape of a double axe."),
+               MSGBOX_SIGN)
+    }
+    releaseall
+}
+
+script KnossaBullRoad_EventScript_SouthSign {
+    msgbox(format("The Palace of Minos. The Mistress's house. Walk softly."), MSGBOX_SIGN)
+}

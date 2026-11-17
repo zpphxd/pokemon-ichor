@@ -13,7 +13,8 @@
     "gMapGroup_IndoorKaldera",
     "gMapGroup_Kythera",
     "gMapGroup_League",
-    "gMapGroup_Labyrinth"
+    "gMapGroup_Labyrinth",
+    "gMapGroup_Knossa"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -217,5 +218,24 @@
     "LabyrinthRing4",
     "LabyrinthMinosTomb",
     "LabyrinthWorkshop"
+  ],
+  "gMapGroup_Knossa": [
+    "KnossaAmnisos",
+    "KnossaAmnisos_Agora",
+    "KnossaAmnisos_Asclepeion",
+    "KnossaAmnisos_FishersHut",
+    "KnossaAmnisos_KydonsHouse",
+    "KnossaAmnisos_LeapersHouse",
+    "KnossaAmnisos_Tavern",
+    "KnossaAmnisos_XeniaHouse",
+    "KnossaBronzeHeel",
+    "KnossaBullRoad",
+    "KnossaBullRoad_Hut",
+    "KnossaBullRoad_Vineyard",
+    "KnossaPalace",
+    "KnossaPalace_GrandStaircase",
+    "KnossaPalace_QueensMegaron",
+    "KnossaPalace_ThroneRoom",
+    "KnossaPalace_WestMagazines"
   ]
 }

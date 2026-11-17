@@ -1,0 +1,491 @@
+// The Palace of Minos above ground (design/maps/KnossaPalace.md; SCRIPT.md III-3C,
+// III-3E, III-3O, III-3P's landing; LABYRINTH.md §3, §7, §8 Scenes K and L, §10).
+// Map: tools/ichor/maps/knossa_palace.py.
+//
+// Hand-offs with the Labyrinth chapters (both land here, MAP_KNOSSA_PALACE):
+//   - out through the threshold after the Turning, at night: warp to (29,16) with
+//     VAR_ICHOR_KNOSSA = 18. Kleon waits at (29,14) for Scene K.
+//   - the Icarus Shaft at dawn: warp to (30,23) with VAR_ICHOR_KNOSSA = 19. The
+//     landing (Ariadne asleep against Asterion) plays here and sets VAR_ICHOR_ACT3 = 6.
+//
+// The bull-leap: stand at the lane's south end (30,27) and face the painted line
+// (30,26); the Gentle Bull charges down from (30,19).
+
+mapscripts KnossaPalace_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_1, 0)
+        if (var(VAR_ICHOR_KNOSSA) >= 18) {
+            setflag(FLAG_ICHOR_HIDE_PALACE_GRUNTS)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_PALACE_GRUNTS)
+        }
+        if (var(VAR_ICHOR_KNOSSA) == 18 && !flag(FLAG_ICHOR_SHOWED_KLEON_TABLET)) {
+            clearflag(FLAG_ICHOR_HIDE_KLEON_KNOSSA)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_KLEON_KNOSSA)
+        }
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_COURT)
+        if (var(VAR_ICHOR_KNOSSA) >= 19) {
+            clearflag(FLAG_ICHOR_HIDE_ARIADNE_COURT)
+            if (!flag(FLAG_ICHOR_CAUGHT_ASTERION)) {
+                clearflag(FLAG_ICHOR_HIDE_ASTERION_COURT)
+            }
+            if (!flag(FLAG_ICHOR_ALETHEA_DAWN_DONE)) {
+                clearflag(FLAG_ICHOR_HIDE_ALETHEA_COURT)
+                setobjectxyperm(LOCALID_PALACE_ALETHEA, 37, 15)
+                setobjectmovementtype(LOCALID_PALACE_ALETHEA, MOVEMENT_TYPE_FACE_LEFT)
+            }
+            if (var(VAR_ICHOR_ACT3) < 6) {
+                setvar(VAR_TEMP_1, 1)
+            }
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ARIADNE_COURT)
+            setflag(FLAG_ICHOR_HIDE_ASTERION_COURT)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: KnossaPalace_EventScript_DawnLanding
+    ]
+}
+
+text KnossaPalace_Name_Sarpedon { "SARPEDON" }
+text KnossaPalace_Name_Ariadne { "ARIADNE" }
+text KnossaPalace_Name_Alethea { "ALETHEA" }
+text KnossaPalace_Name_Kleon { "KLEON" }
+text KnossaPalace_Name_Keramos { "KERAMOS" }
+text KnossaPalace_Name_Gypsos { "GYPSOS" }
+text KnossaPalace_Name_Titanborn { "TITANBORN" }
+text KnossaPalace_Name_Dancer { "PRIESTESS" }
+
+// ---------------------------------------------------------------------------
+// Beat III-3C: the North Entrance, held by Keramos and Gypsos
+// ---------------------------------------------------------------------------
+
+script KnossaPalace_EventScript_Keramos {
+    trainerbattle_single(TRAINER_ICHOR_KERAMOS, format("Palace is closed. For repairs. We're the repairs."),
+                         format("Repairs are going badly."), KnossaPalace_EventScript_GateCheck)
+    setspeaker(KnossaPalace_Name_Keramos)
+    msgbox(format("Don't go under. Not because we said. Because of the bull."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaPalace_EventScript_Gypsos {
+    trainerbattle_single(TRAINER_ICHOR_GYPSOS, format("In the golden age, do we still get to eat? I keep asking."),
+                         format("Nobody ever answers. You didn't either."), KnossaPalace_EventScript_GateCheck)
+    setspeaker(KnossaPalace_Name_Gypsos)
+    msgbox(format("Fine. The priestess will deal with you."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaPalace_EventScript_GateCheck {
+    if (defeated(TRAINER_ICHOR_KERAMOS) && defeated(TRAINER_ICHOR_GYPSOS) && var(VAR_ICHOR_KNOSSA) < 2) {
+        setspeaker(KnossaPalace_Name_Gypsos)
+        msgbox(format("Fine. The priestess will deal with you."))
+        closemessage
+        setvar(VAR_ICHOR_KNOSSA, 2)
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-3E: Sarpedon, the Gentle Bull and the first leap
+// ---------------------------------------------------------------------------
+
+script KnossaPalace_EventScript_Sarpedon {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_Name_Sarpedon)
+    if (var(VAR_ICHOR_KNOSSA) >= 18) {
+        msgbox(format("They're gone. The court's ours. Leap any time. I'll count.\p"
+                      "Ariadne's brother likes to watch. Don't let him join in. He cheats."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_MET_ARIADNE)) {
+        msgbox(format("Nobody leaps in this court without the priestess's say.\p"
+                      "Throne Room. West side, behind the frieze. Go on."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_FIRST_LEAP)) {
+        msgbox(format("Want to leap for prizes? I count. Miss once and we start over.\p"
+                      "The near end of the lane. Face him. You know the rest."))
+        release
+        end
+    }
+    msgbox(format("Ariadne sent you. She sends me everyone she likes.\p"
+                  "And a few she doesn't, to see what happens.\p"
+                  "I'm Sarpedon. I leapt bulls in this court for thirty summers.\p"
+                  "Now I teach. It's the same job, done sitting down.\p"
+                  "That's the Gentle Bull. He's earned the name. He'll still flatten you.\p"
+                  "Stand on the near end. He runs at you. You don't run at him.\p"
+                  "See the painted line? When his head crosses it, take the horns.\p"
+                  "Not before. Before, you're jumping at air.\p"
+                  "Not after. After, you're jumping at a bull.\p"
+                  "Near end of the lane, facing him. Tell me when you're ready."))
+    release
+}
+
+script KnossaPalace_EventScript_GentleBull {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    playmoncry(SPECIES_TAURIVET, CRY_MODE_NORMAL)
+    msgbox(format("The Gentle Bull chews, and watches you with one calm eye."))
+    waitmoncry
+    release
+}
+
+// The line, read from the lane's south end (30,27) facing north.
+script KnossaPalace_EventScript_LeapLine {
+    lockall
+    if (!flag(FLAG_ICHOR_MET_ARIADNE)) {
+        msgbox(format("A painted line across the leaping lane. The paint is fresh."), MSGBOX_SIGN)
+        releaseall
+        end
+    }
+    setspeaker(KnossaPalace_Name_Sarpedon)
+    msgbox(format("Ready?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Nobody's ready. That's why it's called practice."))
+        releaseall
+        end
+    }
+    closemessage
+    // LABYRINTH §3's table; an unconfirmed difficulty is Hero's.
+    setvar(VAR_TEMP_5, 10)
+    setvar(VAR_TEMP_6, 6)
+    if (flag(FLAG_ICHOR_DIFFICULTY_CHOSEN) && var(VAR_ICHOR_DIFFICULTY) == DIFFICULTY_EASY) {
+        setvar(VAR_TEMP_5, 14)
+        setvar(VAR_TEMP_6, 8)
+    } elif (flag(FLAG_ICHOR_DIFFICULTY_CHOSEN) && var(VAR_ICHOR_DIFFICULTY) == DIFFICULTY_HARD) {
+        setvar(VAR_TEMP_5, 6)
+        setvar(VAR_TEMP_6, 5)
+    }
+    if (var(VAR_ICHOR_KNOSSA) >= 19 && !flag(FLAG_ICHOR_CAUGHT_ASTERION)) {
+        addvar(VAR_TEMP_5, 2)       // he's helping (LABYRINTH §10)
+    }
+    copyvar(VAR_TEMP_7, VAR_TEMP_5)
+    addvar(VAR_TEMP_7, VAR_TEMP_5)  // the window grows to double at most
+    setvar(VAR_TEMP_4, 0)
+    goto(KnossaPalace_EventScript_LeapOnce)
+}
+
+script KnossaPalace_EventScript_LeapOnce {
+    setobjectxy(LOCALID_PALACE_GENTLE_BULL, 30, 19)
+    turnobject(LOCALID_PALACE_GENTLE_BULL, DIR_SOUTH)
+    playmoncry(SPECIES_TAURIVET, CRY_MODE_NORMAL)
+    waitmoncry
+    setvar(VAR_0x8004, LOCALID_PALACE_GENTLE_BULL)
+    setvar(VAR_0x8005, ICHOR_TILE(30, 26))
+    copyvar(VAR_0x8006, VAR_TEMP_5)
+    copyvar(VAR_0x8007, VAR_TEMP_6)
+    special(Ichor_BullLeap)
+    if (var(VAR_RESULT) == ICHOR_LEAP_CLEAN) {
+        goto(KnossaPalace_EventScript_LeapClean)
+    }
+    if (var(VAR_RESULT) == ICHOR_LEAP_EARLY) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Too soon!"))
+        setspeaker(KnossaPalace_Name_Sarpedon)
+        msgbox(format("Early. You hugged the air. Again."))
+    } else {
+        fadescreen(FADE_TO_BLACK)
+        playse(SE_M_DOUBLE_SLAP)
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Ooof."))
+        fadescreen(FADE_FROM_BLACK)
+        setspeaker(KnossaPalace_Name_Sarpedon)
+        msgbox(format("Late. You hugged the bull. Again. Slower, old friend."))
+    }
+    // after each miss: a wider window (to double) and a slower bull
+    if (var(VAR_TEMP_5) < VAR_TEMP_7) {
+        addvar(VAR_TEMP_5, 2)
+    }
+    if (var(VAR_TEMP_6) < 10) {
+        addvar(VAR_TEMP_6, 1)
+    }
+    if (var(VAR_TEMP_4) > 0) {
+        msgbox(format("And that's the count gone. We start over."))
+        setvar(VAR_TEMP_4, 0)
+    }
+    goto(KnossaPalace_EventScript_LeapAgain)
+}
+
+script KnossaPalace_EventScript_LeapClean {
+    applymovement(OBJ_EVENT_ID_PLAYER, KnossaPalace_Movement_Vault)
+    waitmovement(0)
+    playse(SE_M_JUMP_KICK)
+    setobjectxy(LOCALID_PALACE_GENTLE_BULL, 30, 19)
+    turnobject(LOCALID_PALACE_GENTLE_BULL, DIR_SOUTH)
+    applymovement(OBJ_EVENT_ID_PLAYER, KnossaPalace_Movement_BackToLane)
+    waitmovement(0)
+    setspeaker(KnossaPalace_Name_Sarpedon)
+    if (!flag(FLAG_ICHOR_FIRST_LEAP)) {
+        msgbox(format("…\p"
+                      "Ha! Clean! Over the horns and down on your feet!\p"
+                      "Thirty summers, and I still like seeing that.\p"
+                      "Go and tell her you can leap a bull. She'll know what it means."))
+        setflag(FLAG_ICHOR_FIRST_LEAP)
+        if (var(VAR_ICHOR_KNOSSA) < 4) {
+            setvar(VAR_ICHOR_KNOSSA, 4)
+        }
+        releaseall
+        end
+    }
+    addvar(VAR_TEMP_4, 1)
+    buffernumberstring(STR_VAR_1, VAR_TEMP_4)
+    msgbox(format("Clean! That's {STR_VAR_1}."))
+    if (var(VAR_TEMP_4) == 3 && !flag(FLAG_ICHOR_LEAP_PRIZE_3)) {
+        msgbox(format("Three! Oil for your trouble. The good oil."))
+        giveitem(ITEM_OLIVE_OIL, 5)
+        setflag(FLAG_ICHOR_LEAP_PRIZE_3)
+    } elif (var(VAR_TEMP_4) == 5 && !flag(FLAG_ICHOR_LEAP_PRIZE_5)) {
+        msgbox(format("Five! Now you're showing off. Take this, and go on showing off."))
+        giveitem(ITEM_TM_RETURN)
+        setflag(FLAG_ICHOR_LEAP_PRIZE_5)
+    } elif (var(VAR_TEMP_4) == 10 && !flag(FLAG_ICHOR_LEAP_PRIZE_10)) {
+        msgbox(format("Ten. Ten! I wore this sash the summer I did ten. Nobody flinches in it."))
+        giveitem(ITEM_FOCUS_SASH)
+        setflag(FLAG_ICHOR_LEAP_PRIZE_10)
+    } elif (var(VAR_TEMP_4) == 20 && !flag(FLAG_ICHOR_LEAP_PRIZE_20)) {
+        msgbox(format("Twenty. I've seen that once before, and I was the one doing it.\p"
+                      "The herd will follow you after that. One of them already has."))
+        givemon(SPECIES_TAURIVET, 50)
+        setflag(FLAG_ICHOR_LEAP_PRIZE_20)
+    }
+    goto(KnossaPalace_EventScript_LeapAgain)
+}
+
+script KnossaPalace_EventScript_LeapAgain {
+    setspeaker(KnossaPalace_Name_Sarpedon)
+    msgbox(format("Again?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Rest your knees. The bull's not going anywhere. Neither am I."))
+        releaseall
+        end
+    }
+    closemessage
+    goto(KnossaPalace_EventScript_LeapOnce)
+}
+
+// The vault: over the bull on the line, turning through four facings in the air.
+movement KnossaPalace_Movement_Vault { face_left face_down face_right jump_2_up face_down }
+movement KnossaPalace_Movement_BackToLane { walk_down walk_down face_up }
+
+// ---------------------------------------------------------------------------
+// Beat III-3O: the palace court at night (Scene K), and Alethea
+// ---------------------------------------------------------------------------
+
+script KnossaPalace_EventScript_Kleon {
+    lock
+    faceplayer
+    msgbox(format("Show Kleon the wax tablet?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Kleon is pretending not to wait for you."))
+        release
+        end
+    }
+    setspeaker(KnossaPalace_Name_Kleon)
+    msgbox(format("What's that. …Give it here.\p"
+                  "That's Iapetos's hand. He signs everything with that little hook.\p"
+                  "“He'll run straight at it.”\p"
+                  "…\p"
+                  "I'm going to Lakonia. I'm going to ask him to his face.\p"
+                  "Don't follow me. …Follow me later."))
+    closemessage
+    setflag(FLAG_ICHOR_SHOWED_KLEON_TABLET)
+    getplayerxy(VAR_0x8000, VAR_0x8001)
+    if (var(VAR_0x8001) < 14) {
+        applymovement(LOCALID_PALACE_KLEON, KnossaPalace_Movement_KleonLeavesAround)
+    } else {
+        applymovement(LOCALID_PALACE_KLEON, KnossaPalace_Movement_KleonLeaves)
+    }
+    waitmovement(0)
+    removeobject(LOCALID_PALACE_KLEON)
+    setflag(FLAG_ICHOR_HIDE_KLEON_KNOSSA)
+    // Alethea runs in through the North Entrance as Kleon goes out of it.
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_COURT)
+    setobjectxyperm(LOCALID_PALACE_ALETHEA, 29, 7)
+    addobject(LOCALID_PALACE_ALETHEA)
+    applymovement(LOCALID_PALACE_ALETHEA, KnossaPalace_Movement_AletheaRunsIn)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, KnossaPalace_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(KnossaPalace_Name_Alethea)
+    msgbox(format("{PLAYER}! Was that Kleon? He nearly knocked me into a fresco.\p"
+                  "The Titan ships left the mole an hour ago. All four. No lights.\p"
+                  "…You look like you've seen somebody you know."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("You tell her."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(KnossaPalace_Name_Alethea)
+    msgbox(format("Phaedon. The healer. Elpis's father.\p"
+                  "…\p"
+                  "Daphne loves them both. She's sitting with that little girl right now.\p"
+                  "I have to write to her. Tonight. Before anyone else does.\p"
+                  "“Dear Daphne. Your friend is the man in the gold mask.” No.\p"
+                  "I'll find the words. Writing things down is the one thing I'm good at."))
+    msgbox(format("Show Alethea the sealed tablet?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("That seal. That's his little hook. Lykophron's. Iapetos's.\p"
+                      "“ELPIS, DAUGHTER OF PHAEDON. Revised.”\p"
+                      "He revised a seven-year-old.\p"
+                      "I want to open it so badly my teeth hurt. Truthfully.\p"
+                      "It isn't ours to open. Not here. Not like this.\p"
+                      "Keep it safe. Somebody's going to need to read it."))
+    } else {
+        msgbox(format("Whatever you're not telling me, I'll dig it up eventually. I always do."))
+    }
+    msgbox(format("Go and sleep. Ariadne's given us her rooms. She says the Titans won't."))
+    closemessage
+    setflag(FLAG_ICHOR_ALETHEA_TOLD)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_COURT)
+    fadescreen(FADE_TO_BLACK)
+    warpsilent(MAP_KNOSSA_PALACE_QUEENS_MEGARON, 6, 6)
+    waitstate
+    release
+}
+
+movement KnossaPalace_Movement_KleonLeaves { walk_up * 8 }
+movement KnossaPalace_Movement_KleonLeavesAround { walk_left walk_up * 8 }
+movement KnossaPalace_Movement_AletheaRunsIn { walk_fast_down * 5 face_down }
+movement KnossaPalace_Movement_FaceUp { face_up }
+
+script KnossaPalace_EventScript_AletheaNight {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_Name_Alethea)
+    if (var(VAR_ICHOR_KNOSSA) >= 19) {
+        goto(KnossaPalace_EventScript_AletheaDawn)
+    }
+    msgbox(format("Go and sleep. I'll be up. Writing."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-3P: dawn. The landing from the Icarus Shaft; Asterion; Alethea's gull.
+// ---------------------------------------------------------------------------
+
+script KnossaPalace_EventScript_DawnLanding {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("You come down in the Central Court, in the first grey light.\p"
+                  "Ariadne is asleep against Asterion's flank, and so is he."))
+    closemessage
+    setvar(VAR_ICHOR_ACT3, 6)
+    releaseall
+}
+
+script KnossaPalace_EventScript_Ariadne {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_Name_Ariadne)
+    if (flag(FLAG_ICHOR_CAUGHT_ASTERION)) {
+        msgbox(format("He's decided. Don't look at me. He's never once asked me first.\p"
+                      "Bring him back sometimes. The court's too quiet without him bellowing."))
+    } else {
+        msgbox(format("Mm. You flew. I heard Daedalus laugh from down here.\p"
+                      "He's awake. My brother. Go and say good morning. He's been waiting."))
+    }
+    release
+}
+
+script KnossaPalace_EventScript_Asterion {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    playmoncry(SPECIES_ASTERLORN, CRY_MODE_NORMAL)
+    msgbox(format("Asterion lowers his great head to you, and waits."))
+    waitmoncry
+    msgbox(format("Offer him a ball?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("He snorts, not unkindly, and lies down again in the sun."))
+        release
+        end
+    }
+    msgbox(format("He steps into the ball as if he'd always meant to."))
+    givemon(SPECIES_ASTERLORN, 50)
+    if (var(VAR_RESULT) == MON_CANT_GIVE) {
+        msgbox(format("…There's no room for him. Not in the party, not in the Pithos."))
+        release
+        end
+    }
+    playfanfare(MUS_ICHOR_OBTAIN_MON)
+    msgbox(format("{PLAYER} received Asterion!"))
+    waitfanfare
+    removeobject(LOCALID_PALACE_ASTERION)
+    setflag(FLAG_ICHOR_HIDE_ASTERION_COURT)
+    setflag(FLAG_ICHOR_CAUGHT_ASTERION)
+    setspeaker(KnossaPalace_Name_Ariadne)
+    msgbox(format("He's decided. Don't look at me. He's never once asked me first."))
+    release
+}
+
+script KnossaPalace_EventScript_AletheaDawn {
+    setspeaker(KnossaPalace_Name_Alethea)
+    msgbox(format("I wrote it. Six times. The seventh one's going.\p"
+                  "It just says what happened. Plainly. She'd hate anything else."))
+    closemessage
+    playse(SE_M_WING_ATTACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("She opens her hand. The gull flies north."))
+    setspeaker(KnossaPalace_Name_Alethea)
+    msgbox(format("Kydon lent me one of his order gulls. He swears they find anyone.\p"
+                  "The captain says the wind for Gytheion comes up this evening.\p"
+                  "Kleon's gone home to Lakonia. So are we. I'm coming with you.\p"
+                  "Truthfully, I've never been.\p"
+                  "They say you can hear the whole town not talking."))
+    closemessage
+    setflag(FLAG_ICHOR_ALETHEA_DAWN_DONE)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_PALACE_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_COURT)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY)
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The palace's people and walls
+// ---------------------------------------------------------------------------
+
+script KnossaPalace_EventScript_WestGrunt {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_Name_Titanborn)
+    msgbox(format("The priestess is inside. Mind your feet on her floor. She notices."))
+    release
+}
+
+script KnossaPalace_EventScript_Dancer {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_Name_Dancer)
+    msgbox(format("Round and round, like the cranes. The old ones danced it here.\p"
+                  "Ariadne knows all of it. She won't dance it for the helmets."))
+    release
+}
+
+script KnossaPalace_EventScript_WornSteps {
+    msgbox(format("Worn steps in the paving, in a pattern. Someone danced here a long time.\p"
+                  "The same feet, round and round. Like a crane wading."), MSGBOX_SIGN)
+}
+
+script KnossaPalace_EventScript_ChargingBull {
+    msgbox(format("A painted relief: a red bull, head down at the charge, under an olive tree."),
+           MSGBOX_SIGN)
+}
+
+script KnossaPalace_EventScript_Leapers {
+    msgbox(format("A white bull at the gallop. One leaper vaults his back, one grips his horns,\p"
+                  "one waits at his tail to catch. Two of the three are girls."), MSGBOX_SIGN)
+}
+
+script KnossaPalace_EventScript_LilyPrince {
+    msgbox(format("A red-skinned youth in a crown of lilies and plumes, walking among lilies.\p"
+                  "His hand reaches back for something on a lead. That part is gone."), MSGBOX_SIGN)
+}

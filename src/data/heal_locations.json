@@ -187,6 +187,16 @@
       "respawn_y": 4
     },
     {
+      "id": "HEAL_LOCATION_KNOSSA_AMNISOS",
+      "map": "MAP_KNOSSA_AMNISOS",
+      "x": 10,
+      "y": 14,
+      "respawn_map": "MAP_KNOSSA_AMNISOS_ASCLEPEION",
+      "respawn_npc": "LOCALID_AMNISOS_HEALER",
+      "respawn_x": 6,
+      "respawn_y": 6
+    },
+    {
       "id": "HEAL_LOCATION_KYTHERA_PAPHIA",
       "map": "MAP_KYTHERA_PAPHIA",
       "x": 39,
