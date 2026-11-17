@@ -552,6 +552,24 @@ const struct Tileset gTileset_Labyrinth =
     .callback = NULL,
 };
 
+// Ichor: mychos, the Labyrinth's heart under Knossa (LABYRINTH.md §11, LABYRINTH_MAZE.md §4):
+// Rings V-VII, the forge, the archive, the vault, the shrine, the Starry Chamber and the Icarus
+// Shaft. Porytiles-managed, first drawn on world-act3 by labyrinth_build.py; the Labyrinth II
+// builder owns it now. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_MychosGlow)
+// are in graphics.h. No layout uses it yet.
+const struct Tileset gTileset_Mychos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Mychos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Mychos,
+    .metatiles = gMetatiles_PorytilesManaged_Mychos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Mychos,
+    .callback = InitTilesetAnim_PorytilesManaged_Mychos,
+};
+
 // Ichor: the Mystery sanctum under Eleusa (tools/ichor/maps/sanctum.py). Two derived
 // secondaries, drawn from nothing new: each shares a base set's tiles, palettes and
 // animation, and has its own metatiles: the base set's, then a few composed from

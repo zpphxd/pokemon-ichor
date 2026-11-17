@@ -53,6 +53,7 @@ void InitTilesetAnim_PorytilesManaged_Neraida(void);
 void InitTilesetAnim_PorytilesManaged_Melos(void);
 void InitTilesetAnim_PorytilesManaged_Amnisos(void);
 void InitTilesetAnim_PorytilesManaged_BullRoad(void);
+void InitTilesetAnim_PorytilesManaged_Mychos(void);
 
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_Lakonia(void);
