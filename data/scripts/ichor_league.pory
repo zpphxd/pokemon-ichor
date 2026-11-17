@@ -1,0 +1,44 @@
+// The League's shared pieces (design/LEAGUE.md): speaker names, the
+// Pantheon's walk-in, and the gate on all eight Laurels.
+
+text Ichor_League_Text_NameBrasidas { "BRASIDAS" }
+text Ichor_League_Text_NameThemistokles { "THEMISTOKLES" }
+text Ichor_League_Text_NameHypatia { "HYPATIA" }
+text Ichor_League_Text_NameOlympias { "OLYMPIAS" }
+text Ichor_League_Text_NameAristeides { "ARISTEIDES" }
+text Ichor_League_Text_NameGuard { "GUARD" }
+text Ichor_League_Text_NameMuleteer { "MULETEER" }
+text Ichor_League_Text_NameCook { "COOK" }
+text Ichor_League_Text_NameKerykos { "KERYKOS" }
+text Ichor_League_Text_NameAlethea { "ALETHEA" }
+text Ichor_League_Text_NameIapetos { "IAPETOS" }
+text Ichor_League_Text_NameIone { "IONE" }
+
+// Entering a seat: three steps up the hall, then the way in shuts behind you
+// (Emerald's PokemonLeague_EliteFour_EventScript_WalkInCloseDoor).
+movement Ichor_League_Movement_WalkIn { walk_up * 3 }
+
+script Ichor_League_EventScript_WalkIn {
+    applymovement(LOCALID_PLAYER, Ichor_League_Movement_WalkIn)
+    waitmovement(0)
+    playse(SE_TRUCK_DOOR)
+    return
+}
+
+// VAR_RESULT = TRUE when the player holds all eight Laurels.
+script Ichor_League_EventScript_CheckLaurels {
+    setvar(VAR_RESULT, FALSE)
+    if (flag(FLAG_BADGE01_GET) && flag(FLAG_BADGE02_GET) && flag(FLAG_BADGE03_GET) && flag(FLAG_BADGE04_GET)
+        && flag(FLAG_BADGE05_GET) && flag(FLAG_BADGE06_GET) && flag(FLAG_BADGE07_GET) && flag(FLAG_BADGE08_GET)) {
+        setvar(VAR_RESULT, TRUE)
+    }
+    return
+}
+
+// A seat's far door opening: the sound and the redraw (each map swaps its own cells first).
+script Ichor_League_EventScript_DoorOpened {
+    special(DrawWholeMapView)
+    playse(SE_DOOR)
+    waitse
+    return
+}

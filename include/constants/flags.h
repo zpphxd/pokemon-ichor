@@ -2085,7 +2085,39 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_SCALE    (FLAG_ICHOR_GENERAL2_START + 0x064) // Ichor: Kaldera pier scale
 #define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_FORGE_SHARD (FLAG_ICHOR_GENERAL2_START + 0x065) // Ichor: Telchines forge red shard
 #define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_FORGE_NUGGET (FLAG_ICHOR_GENERAL2_START + 0x066) // Ichor: Telchines forge nugget
+#define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
+#define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
+#define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted
+#define FLAG_ICHOR_SENTENCES_HEARD              (FLAG_ICHOR_GENERAL2_START + 0x1C3) // Ichor: League L-3: heard the sentences in Akti (Phaedon, Hyperion, Rhea)
+#define FLAG_ICHOR_PANTHEON_ENTERED             (FLAG_ICHOR_GENERAL2_START + 0x1C4) // Ichor: League: the Propylaia's guard let you into the Pantheon (Emerald's FLAG_ENTERED_ELITE_FOUR)
+#define FLAG_ICHOR_ARCHON_DEFEATED              (FLAG_ICHOR_GENERAL2_START + 0x1C5) // Ichor: League L-8: beat Aristeides on the summit the first time
+#define FLAG_ICHOR_KNOT_UNTIED                  (FLAG_ICHOR_GENERAL2_START + 0x1C6) // Ichor: League L-8: untied Medon's Knot with Aristeides
+#define FLAG_ICHOR_HIDE_ARCHON_SUMMIT           (FLAG_ICHOR_GENERAL2_START + 0x1C7) // Ichor: League: Aristeides gone home from the summit after the first Hall of Heroes
+#define FLAG_ICHOR_EPILOGUE_DONE                (FLAG_ICHOR_GENERAL2_START + 0x1C8) // Ichor: League L-10: the Klotheia epilogue in Elaia played
+#define FLAG_ICHOR_HIDE_DECREE_CROWD            (FLAG_ICHOR_GENERAL2_START + 0x1C9) // Ichor: League L-1: Kerykos's decree crowd in Astyra dispersed
+#define FLAG_ICHOR_HIDE_TRIAL_STOA              (FLAG_ICHOR_GENERAL2_START + 0x1CA) // Ichor: League L-2: the trial's people gone from the Stoa
+#define FLAG_ICHOR_ITEM_ASCENT1_FULL_RESTORE    (FLAG_ICHOR_GENERAL2_START + 0x1CB) // Ichor: Ascent 1F: Full Restore on the beacon knoll
+#define FLAG_ICHOR_ITEM_ASCENT1_ULTRA_BALL      (FLAG_ICHOR_GENERAL2_START + 0x1CC) // Ichor: Ascent 1F: Ultra Ball behind the drum
+#define FLAG_ICHOR_ITEM_ASCENT1_MAX_REPEL       (FLAG_ICHOR_GENERAL2_START + 0x1CD) // Ichor: Ascent 1F: Max Repel in the torrent bed
+#define FLAG_ICHOR_ITEM_ASCENT2_MAX_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x1CE) // Ichor: Ascent 2F: Max Revive on the cloud ledge
+#define FLAG_ICHOR_ITEM_ASCENT2_PP_MAX          (FLAG_ICHOR_GENERAL2_START + 0x1CF) // Ichor: Ascent 2F: PP Max under the overhang
+#define FLAG_ICHOR_ITEM_ASCENT3_FULL_HEAL       (FLAG_ICHOR_GENERAL2_START + 0x1D0) // Ichor: Ascent 3F: Full Heal by the snow cairn
+#define FLAG_ICHOR_ITEM_ASCENT3_RARE_CANDY      (FLAG_ICHOR_GENERAL2_START + 0x1D1) // Ichor: Ascent 3F: Rare Candy past the rubble
+#define FLAG_ICHOR_GOT_ASCENT_LEFTOVERS         (FLAG_ICHOR_GENERAL2_START + 0x1D2) // Ichor: Ascent 2F: the camp's cook gave Leftovers
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT1_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x1D3) // Ichor: Ascent 1F: in the fallen climbers' stelai
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_BIG_NUGGET (FLAG_ICHOR_GENERAL2_START + 0x1D4) // Ichor: Ascent 2F: at the ledge's end in the cloud
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1D5) // Ichor: Ascent 3F: in the snow by the last cairn
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_ELIXIR   (FLAG_ICHOR_GENERAL2_START + 0x1D6) // Ichor: Ascent 2F: behind the camp's second tent
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1D7) // Ichor: Ascent 3F: on the summit shoulder above the stair
 // Ichor bank flags: end
+
+// Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the
+// whiteout and Hall of Heroes resets (EverGrandeCity_HallOfFame_EventScript_ResetEliteFour)
+// keep working unchanged (design/LEAGUE.md).
+#define FLAG_ICHOR_BEAT_BRASIDAS                FLAG_DEFEATED_ELITE_4_SIDNEY
+#define FLAG_ICHOR_BEAT_THEMISTOKLES            FLAG_DEFEATED_ELITE_4_PHOEBE
+#define FLAG_ICHOR_BEAT_HYPATIA                 FLAG_DEFEATED_ELITE_4_GLACIA
+#define FLAG_ICHOR_BEAT_OLYMPIAS                FLAG_DEFEATED_ELITE_4_DRAKE
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
 #define ICHOR_DAILY_FLAGS_START                 0x2800

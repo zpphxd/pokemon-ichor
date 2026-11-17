@@ -1,0 +1,100 @@
+// The Propylaia: the Pantheon's gatehouse, built round Hestia's hearth
+// (design/LEAGUE.md). The League's healer and merchant, and the Archon's guard
+// at the inner door (Emerald's EverGrandeCity_PokemonLeague_1F, adapted).
+
+mapscripts Olympus_Propylaia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_OLYMPUS_PROPYLAIA)
+        if (flag(FLAG_ICHOR_PANTHEON_ENTERED)) {
+            setobjectxyperm(LOCALID_OLYMPUS_PROPYLAIA_GUARD, 7, 3)
+        }
+    }
+}
+
+script Olympus_Propylaia_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_OLYMPUS_PROPYLAIA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Olympus_Propylaia_EventScript_Merchant {
+    lock
+    faceplayer
+    message(format("Last stall before the gods. Prices are high. So is the altitude."))
+    waitmessage
+    pokemart(Olympus_Propylaia_Stock)
+    release
+}
+
+mart Olympus_Propylaia_Stock {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_RESTORE
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+}
+
+script Olympus_Propylaia_EventScript_Guard {
+    lock
+    faceplayer
+    setspeaker(Ichor_League_Text_NameGuard)
+    if (flag(FLAG_ICHOR_PANTHEON_ENTERED)) {
+        msgbox(format("The four seats wait beyond the door. Then the summit.\pNo one will heal you between them. That's the law."))
+        release
+        end
+    }
+    msgbox(format("Halt. Only those who wear every Laurel of the Twelve may enter the Pantheon."))
+    call(Ichor_League_EventScript_CheckLaurels)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("You don't wear all eight. Come back when the temples have crowned you."))
+        release
+        end
+    }
+    msgbox(format("Eight Laurels. Hestia's to Apollo's.\pThen go in. Four seats, one after another. The doors close behind you.\pBeat all four, and the Archon waits on the summit."))
+    closemessage
+    applymovement(LOCALID_OLYMPUS_PROPYLAIA_GUARD, Olympus_Propylaia_Movement_GuardAside)
+    waitmovement(0)
+    copyobjectxytoperm(LOCALID_OLYMPUS_PROPYLAIA_GUARD)
+    setflag(FLAG_ICHOR_PANTHEON_ENTERED)
+    playfanfare(MUS_OBTAIN_BADGE)
+    waitfanfare
+    release
+}
+
+movement Olympus_Propylaia_Movement_GuardAside { walk_left face_right }
+
+script Olympus_Propylaia_EventScript_GuardB {
+    msgbox(format("I've stood at this door eleven years. You're the first one the hearth has sung for.\pIt crackles when it likes someone."), MSGBOX_NPC)
+}
+
+script Olympus_Propylaia_EventScript_InnerDoor {
+    lockall
+    if (!flag(FLAG_ICHOR_PANTHEON_ENTERED)) {
+        msgbox(format("The inner door to the Pantheon. The Archon's guard keeps it."))
+        releaseall
+        end
+    }
+    msgbox(format("The inner door to the Pantheon. Beyond it, the four seats.\pThere's no coming back out until it's done. Go in?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    call(EverGrandeCity_HallOfFame_EventScript_ResetEliteFour)
+    playse(SE_DOOR)
+    waitse
+    warp(MAP_OLYMPUS_SEAT_OF_ARES, 0)
+    waitstate
+    releaseall
+}
+
+script Olympus_Propylaia_EventScript_Stele {
+    msgbox(format("THE LAW OF OLYMPUS\pWhoever would speak to the Archon must first answer the four seats:\pAres, Poseidon, Athena, Hera.\pWhoever beats the Archon keeps the box."), MSGBOX_SIGN)
+}
+
+script Olympus_Propylaia_EventScript_Hearth {
+    msgbox(format("Hestia's hearth. A hearth isn't the fire. It's what you come back to."), MSGBOX_SIGN)
+}

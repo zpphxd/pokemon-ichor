@@ -1,0 +1,33 @@
+// The Ascent, 3F: the snowline and the processional stair to the Pantheon's
+// propylaia (design/LEAGUE.md).
+
+mapscripts Ascent_3F_MapScripts {}
+
+script Ascent_3F_EventScript_Sthenelos {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_STHENELOS,
+        format("The stair begins here. So does the Archon's peace.\pDraw, challenger."),
+        format("Peace kept. Barely."))
+    msgbox(format("Three terraces, three stairs. Then the doors.\pDon't stop at the top to look at the view. Everyone does. It's a trap."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_3F_EventScript_Gorgo {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_GORGO,
+        format("I held a rank in Team Titan. I had a tablet with my name on it.\pThe last draft. My draft. Do you know what it said?"),
+        format("…It didn't say this."))
+    msgbox(format("It said I'd stand at the master's right hand when the hours stopped.\pThe hours stopped. I was in a ditch outside Delphoi.\pFunny. I feel lighter."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_3F_EventScript_Melite {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_MELITE,
+        format("Snow on the Twelve's own stair. Isn't it lovely?\pLet's see if you are."),
+        format("Lovelier than I thought."))
+    msgbox(format("Hypatia taught me once. She asked me who I was.\pI said my name. She said, “That's what they call you.”"), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_3F_EventScript_SnowSign {
+    msgbox(format("THE SNOWLINE\nAbove: the Propylaia of the Pantheon.\pLeave the mountain as you found it."), MSGBOX_SIGN)
+}
+
+script Ascent_3F_EventScript_Herm {
+    msgbox(format("A herm of Hermes, who walks the gods' messages up and down this stair.\pSomeone has tied a strip of red wool round its neck for luck."), MSGBOX_SIGN)
+}

@@ -213,6 +213,26 @@
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0
 
+// The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's
+// claims from 320 up (tools/ichor/claim_ranges.md): the Ascent, the Pantheon, the Archon.
+#define TRAINER_ICHOR_ASCENT_PHILON          460
+#define TRAINER_ICHOR_ASCENT_LAMPON          461
+#define TRAINER_ICHOR_ASCENT_THEANO          462
+#define TRAINER_ICHOR_ASCENT_KALLIAS         463
+#define TRAINER_ICHOR_ASCENT_AGATHE          464
+#define TRAINER_ICHOR_ASCENT_NIKIAS          465
+#define TRAINER_ICHOR_ASCENT_EIRENE          466
+#define TRAINER_ICHOR_ASCENT_DEXIOS          467
+#define TRAINER_ICHOR_ASCENT_STHENELOS       468
+#define TRAINER_ICHOR_ASCENT_GORGO           469
+#define TRAINER_ICHOR_ASCENT_MELITE          470
+#define TRAINER_ICHOR_BRASIDAS               471
+#define TRAINER_ICHOR_THEMISTOKLES           472
+#define TRAINER_ICHOR_HYPATIA                473
+#define TRAINER_ICHOR_OLYMPIAS               474
+#define TRAINER_ICHOR_ARISTEIDES             475
+#define TRAINERS_END_LEAGUE                  476
+
 // The post-game, ids 500-679 and 1024-1223: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0
 
@@ -226,7 +246,7 @@
                                                                                         TRAINERS_END_SLICE2), \
                                                                      ICHOR_TRAINERS_MAX(TRAINERS_END_ACT1, TRAINERS_END_ACT2)), \
                                                   ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_ACT3, TRAINERS_END_POSTGAME), \
-                                                                     TRAINERS_END_OIKOUMENE))
+                                                                     ICHOR_TRAINERS_MAX(TRAINERS_END_OIKOUMENE, TRAINERS_END_LEAGUE)))
 
 // Ichor: one trainer flag per id, from TRAINER_FLAGS_START (0x500): ids 1-1535. Raised
 // from upstream's 864, to 1,024 for the Oikoumene's champion halls (design/OIKOUMENE.md

@@ -10,7 +10,8 @@
     "gMapGroup_DungeonsAct1",
     "gMapGroup_IndoorThyrsa",
     "gMapGroup_DungeonsAct2",
-    "gMapGroup_IndoorKaldera"
+    "gMapGroup_IndoorKaldera",
+    "gMapGroup_League"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -170,5 +171,17 @@
     "Kaldera_Agora",
     "Kaldera_SmithsHouse",
     "Kaldera_TempleOfHephaestus"
+  ],
+  "gMapGroup_League": [
+    "Ascent_1F",
+    "Ascent_2F",
+    "Ascent_3F",
+    "Olympus_Propylaia",
+    "Olympus_SeatOfAres",
+    "Olympus_SeatOfPoseidon",
+    "Olympus_SeatOfAthena",
+    "Olympus_SeatOfHera",
+    "Olympus_Summit",
+    "Olympus_HallOfHeroes"
   ]
 }
