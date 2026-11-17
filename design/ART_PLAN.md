@@ -86,7 +86,7 @@ Still to do:
 
 ## 6. How it's made
 
-- **One style guide.** The master palette, Gen 3 readability, top-left light, outlines on objects but not on terrain. It's in `design/phase1/PLAN.md`, to be promoted to `design/STYLE.md` once the slice is approved.
+- **One style guide:** `design/STYLE.md`. It holds the look, sprite budgets, native-scale concepts, the converter, the hand-fix pass, the review gate and the map composition rules. The master palette stays in `design/phase1/PLAN.md`.
 - **Shared toolkits** in `tools/ichor/art/`:
   - existing pixel-by-pixel ASCII painters for legacy assets; these are not the
     artistic authoring method for the approved character redraw below
