@@ -383,7 +383,8 @@ def events(m):
     m.obj("ICHOR_ACOLYTE_M", 8, 11, P + "Pegaios", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3)
     m.obj("ICHOR_ACOLYTE_F", 23, 30, P + "Dexithea", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3)
 
-    m.connect("down", PAPHIA_ROAD_X - SOUTH_ROAD[0], "MAP_KYTHERA_PAPHIA")
+    # Paphia sits 16 cells west of the falls (its x 30 is our x 14): offset -16
+    m.connect("down", SOUTH_ROAD[0] - PAPHIA_ROAD_X, "MAP_KYTHERA_PAPHIA")
     m.seam("down")
 
 

@@ -2087,6 +2087,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_ROUTE23_STAR_PIECE (FLAG_ICHOR_GENERAL_START + 0x26B) // Ichor: Kythera port: Route 23 hidden item: Star Piece in the wreck's ribs
 #define FLAG_ICHOR_HIDDEN_ITEM_SKANDEIA_BIG_PEARL (FLAG_ICHOR_GENERAL_START + 0x26C) // Ichor: Kythera port: Skandeia hidden item: Big Pearl in the harbor shrine's niche, among the shells
 #define FLAG_ICHOR_HIDDEN_ITEM_SKANDEIA_HEART_SCALE (FLAG_ICHOR_GENERAL_START + 0x26D) // Ichor: Kythera port: Skandeia hidden item: Heart Scale at the north slip's end
+#define FLAG_ICHOR_GOT_RAZOR_CLAW_MELANIPPOS    (FLAG_ICHOR_GENERAL_START + 0x26E) // Ichor: Kythera port: Melos: Melanippos's obsidian edge (a Razor Claw) for the seam's lump
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

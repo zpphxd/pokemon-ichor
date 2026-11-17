@@ -316,7 +316,7 @@ def specs():
         obj("ICHOR_ELDER_M", 28, 20, "left", P + "OldSailor", "LOCALID_SKANDEIA_OLD_SAILOR"),
         obj("ICHOR_TITAN_GRUNT", 11, 10, "leftright", P + "Porter", "LOCALID_SKANDEIA_PORTER_1",
             "FLAG_ICHOR_HIDE_SKANDEIA_PORTERS", rng=(2, 0)),
-        obj("ICHOR_TITAN_GRUNT", 18, 11, "leftright", P + "Porter", "LOCALID_SKANDEIA_PORTER_2",
+        obj("ICHOR_TITAN_GRUNT", 27, 12, "leftright", P + "Porter", "LOCALID_SKANDEIA_PORTER_2",
             "FLAG_ICHOR_HIDE_SKANDEIA_PORTERS", rng=(2, 0)),
         obj("ICHOR_WOMAN", 26, 21, "left", P + "Philinna", "LOCALID_SKANDEIA_PHILINNA"),
         obj("ICHOR_ALETHEA", 11, 16, "up", P + "Alethea", "LOCALID_SKANDEIA_ALETHEA_DOOR",

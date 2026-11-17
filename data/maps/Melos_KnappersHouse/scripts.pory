@@ -12,9 +12,8 @@
 // for a TM.
 //
 // TODO(act3): exit to MAP_MELOS.
-// TODO(balance): TM Stone Edge isn't in the TM list yet. When it is, give it
-// where marked and set FLAG_ICHOR_GOT_TM_STONE_EDGE (claim it then); until then
-// he knaps the blade every time you bring the lump.
+// TM Stone Edge isn't in main's TM list, so his blade is a Razor Claw for now
+// (FLAG_ICHOR_GOT_RAZOR_CLAW_MELANIPPOS); swap in the TM when it exists.
 
 mapscripts Melos_KnappersHouse_MapScripts {}
 
@@ -31,6 +30,11 @@ script Melos_KnappersHouse_EventScript_Melanippos {
                       "A big man's crews dug half my slope last night. For edges, they said.\p"
                       "Bring me a good lump. Not chips. There's a seam at the top.\p"
                       "The young one in the helmet's sitting on it, I expect."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_RAZOR_CLAW_MELANIPPOS)) {
+        msgbox(format("Bronze bends. Glass doesn't. It breaks, but it doesn't bend."))
         release
         end
     }
@@ -52,8 +56,16 @@ script Melos_KnappersHouse_EventScript_Melanippos {
     applymovement(LOCALID_MELOS_MELANIPPOS, Common_Movement_FacePlayer)
     waitmovement(0)
     setspeaker(Melos_KnappersHouse_Name_Melanippos)
-    msgbox(format("The oldest edge in the world. Teach it to your Pokémon."))
-    // TODO(balance): {PLAYER} received TM Stone Edge! (see the header)
+    msgbox(format("The oldest edge in the world. Let your Pokémon carry it."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_RAZOR_CLAW)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(Melos_KnappersHouse_Name_Melanippos)
+        msgbox(format("No room? Then come back for it. Glass keeps."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_RAZOR_CLAW_MELANIPPOS)
     setspeaker(Melos_KnappersHouse_Name_Melanippos)
     msgbox(format("Bronze bends. Glass doesn't. It breaks, but it doesn't bend."))
     release

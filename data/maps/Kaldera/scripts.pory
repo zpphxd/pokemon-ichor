@@ -15,8 +15,9 @@ mapscripts Kaldera_MapScripts {
     ]
 }
 script Kaldera_EventScript_Nausikles {
-    // Act III (STORY III-1): once the letter is read, the Euploia sails south
-    // for Kythera, and Daphne says goodbye on deck (TriremeEuploia_DeckSouth).
+    // Act III (STORY III-1): once the letter is read, the ferry's lanes add
+    // Kythera, and choosing it boards the southern deck, where Daphne says
+    // goodbye (TriremeEuploia_DeckSouth).
     if (flag(FLAG_BADGE06_GET) && flag(FLAG_ICHOR_MOM_MISSING) && var(VAR_ICHOR_ACT3) == 0) {
         goto(Kaldera_EventScript_SouthernVoyage)
     }
@@ -28,14 +29,29 @@ script Kaldera_EventScript_SouthernVoyage {
     lock
     faceplayer
     setspeaker(Kaldera_Text_NameNausikles)
+    setvar(VAR_ICHOR_FERRY_DEST, 0)
     msgbox(format("The Titans' whole fleet went west in the night. I don't like it.\p"
-                  "Your professor's on deck with a letter. Come aboard and hear it."))
-    closemessage
-    setspeaker(SP_NAME_NONE)
-    playse(SE_EXIT)
-    fadescreen(FADE_TO_BLACK)
-    warp(MAP_TRIREME_EUPLOIA_DECK_SOUTH, 12, 6)
-    waitstate
+                  "Where to? The old lanes, or south for Kythera?"))
+    // the ferry's lanes as ever, with Kythera where Kaldera stood
+    dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE,
+        "AKTI", "EMPORION", "ASTYRA", "KYTHERA", "STAY")
+    if (var(VAR_RESULT) == 3) {
+        msgbox(format("Your professor's on deck with a letter. Come aboard and hear it."))
+        closemessage
+        setspeaker(SP_NAME_NONE)
+        playse(SE_EXIT)
+        fadescreen(FADE_TO_BLACK)
+        warp(MAP_TRIREME_EUPLOIA_DECK_SOUTH, 12, 6)
+        waitstate
+        release
+        end
+    }
+    if (var(VAR_RESULT) < 3) {
+        copyvar(VAR_ICHOR_FERRY_DEST, VAR_RESULT)
+        addvar(VAR_ICHOR_FERRY_DEST, 1)
+        goto(Ichor_EventScript_FerryBoard)
+    }
+    msgbox(format("Suit yourself. I'll be here. The boat'll be here. Probably."))
     release
 }
 script Kaldera_EventScript_Daphne {

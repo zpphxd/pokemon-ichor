@@ -182,7 +182,9 @@
       "x": 22,
       "y": 16,
       "respawn_map": "MAP_KYTHERA_SKANDEIA_ASCLEPEION",
-      "respawn_npc": "LOCALID_SKANDEIA_HEALER"
+      "respawn_npc": "LOCALID_SKANDEIA_HEALER",
+      "respawn_x": 5,
+      "respawn_y": 4
     },
     {
       "id": "HEAL_LOCATION_HERM_KYTHERA_FOAM_ROAD",
@@ -196,7 +198,9 @@
       "x": 39,
       "y": 17,
       "respawn_map": "MAP_KYTHERA_PAPHIA_ASCLEPEION",
-      "respawn_npc": "LOCALID_PAPHIA_HEALER"
+      "respawn_npc": "LOCALID_PAPHIA_HEALER",
+      "respawn_x": 3,
+      "respawn_y": 4
     }
   ]
 }
