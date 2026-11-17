@@ -429,13 +429,21 @@ def seat_of_hera():
             lit = x in (5, 13)
             g.set(x, y, dem("columns", "torch_lit" if lit else "top"), True)
             g.set(x, y + 1, dem("columns", "bottom_lit" if lit else ("bottom_b" if y == 10 else "bottom")), True)
-    # the serpent pits between them
+    # the serpent pits between them: sunken dens with a lit lip and side walls
+    # (temple_demeter_art.serpent_pits), a coiled serpent showing in some
+    snakes = {(7, 10): "bot_s_snake", (6, 14): "bot_l_snake", (15, 17): "one_m_snake",
+              (3, 17): "one_m_snake"}
     for (x0, y0, w, h) in ((3, 8, 2, 1), (14, 8, 2, 1), (7, 9, 1, 2), (11, 9, 1, 2),
                            (3, 12, 2, 1), (14, 12, 2, 1), (6, 13, 2, 2), (11, 13, 2, 2),
                            (2, 17, 3, 1), (14, 17, 3, 1)):
         for y in range(y0, y0 + h):
             for x in range(x0, x0 + w):
-                g.set(x, y, dem("floor", "void"), True, "pit")
+                row = "one" if h == 1 else ("top" if y == y0 else "bot")
+                col = "s" if w == 1 else ("l" if x == x0 else "r" if x == x0 + w - 1 else "m")
+                name = f"{row}_{col}"
+                if snakes.get((x, y), "").rsplit("_snake", 1)[0] == name:
+                    name = snakes[(x, y)]
+                g.set(x, y, dem("serpent_pit", name), True, "pit")
     for x in (8, 10):
         g.set(x, 18, dem("sentinel", None)[0][0], True)
         g.set(x, 19, dem("sentinel", None)[1][0], True)

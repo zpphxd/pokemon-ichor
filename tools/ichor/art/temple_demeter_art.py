@@ -1412,7 +1412,69 @@ def sentinel():
     return s
 
 
+
+# --------------------------------------------------------------------------
+# Hera's serpent pits (the Seat of Hera on Olympus borrows this set)
+# --------------------------------------------------------------------------
+
+PIT_COLS = ("l", "m", "r", "s")
+SERPENT = [
+    "....gg......",
+    "...gGGg.....",
+    "..gG..Gg.y..",
+    "..gG...gGGg.",
+    "...gGGGGGkg.",
+    "....gggggg..",
+]
+
+
+def pit_cell(L, ox, oy, row, col, snake=False):
+    """One cell of a sunken pit seen from above at 3/4: the far wall's face
+    under a lit lip, black depth, thin side walls, and a near lip where the
+    floor resumes. row: top/bot of a two-row pit, or one; col: l/m/r, or s
+    for a one-wide pit."""
+    L.rect(ox, oy, 16, 16, "dk0")
+    for (x, y) in ((3, 9), (11, 12), (7, 14), (13, 6)):
+        L.px(ox + x, oy + y, "dk1")
+    if row in ("top", "one"):
+        L.hline(ox, ox + 15, oy, "dk4")
+        for y, c in ((1, "dk3"), (2, "dk2"), (3, "dk2"), (4, "dk1")):
+            L.hline(ox, ox + 15, oy + y, c)
+        for x in range(0, 16, 5):
+            L.px(ox + x, oy + 2, "dk1")
+    if col in ("l", "s"):
+        L.vline(ox, oy, oy + 15, "dk2")
+        L.vline(ox + 1, oy + (5 if row in ("top", "one") else 0), oy + 15, "dk1")
+    if col in ("r", "s"):
+        L.vline(ox + 15, oy, oy + 15, "dk3")
+        L.vline(ox + 14, oy + (5 if row in ("top", "one") else 0), oy + 15, "dk2")
+    if row in ("bot", "one"):
+        L.hline(ox, ox + 15, oy + 15, "dk3")
+    if snake:
+        put(L, ox + 2, oy + (8 if row != "top" else 7), SERPENT,
+            {"g": "fg", "G": "dk3", "y": "fy", "k": "dk0"})
+
+
+def serpent_pits():
+    names = {}
+    order = ([("top", c, False) for c in PIT_COLS] + [("bot", c, False) for c in PIT_COLS]
+             + [("one", c, False) for c in PIT_COLS]
+             + [("bot", "l", True), ("bot", "s", True), ("one", "m", True), ("top", "m", True)])
+    s = struct("serpent_pit", "Hera's serpent pits", 8, 2, walk=["XXXXXXXX", "XXXXXXXX"],
+               notes="Sunken pits for the Seat of Hera, where Hera's serpents (the Hydra's "
+                     "kin, Ladon's) keep their dens between the columns. Pieces by row "
+                     "(`top`, `bot` of a two-row pit, or `one`) and column (`l`, `m`, `r`, "
+                     "or `s` for a one-wide pit), e.g. `top_l`; `bot_l_snake`, "
+                     "`bot_s_snake`, `one_m_snake` and `top_m_snake` show a coiled serpent.")
+    L = s.B
+    for i, (row, col, snake) in enumerate(order):
+        ox, oy = (i % 8) * 16, (i // 8) * 16
+        pit_cell(L, ox, oy, row, col, snake)
+        names[f"{row}_{col}" + ("_snake" if snake else "")] = (i % 8, i // 8)
+    s.names = names
+    return s
+
 def build():
     return [floor_pieces(), glow_ring(), *wall_pieces(), wall_lights(), tiers(), columns(),
             braziers(), overturned(), partition(), anaktoron(), throne(), dais(), vessels(),
-            stairs(), sentinel()]
+            stairs(), sentinel(), serpent_pits()]
