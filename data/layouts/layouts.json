@@ -884,10 +884,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY",
       "name": "ThyrsaCity_Layout",
-      "width": 36,
-      "height": 32,
+      "width": 56,
+      "height": 48,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Thyrsa",
       "border_filepath": "data/layouts/ThyrsaCity/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity/map.bin",
       "layout_version": "emerald"

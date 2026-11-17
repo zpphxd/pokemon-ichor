@@ -3319,6 +3319,144 @@
           }
         },
         {
+          "map": "MAP_THYRSA_CITY",
+          "base_label": "gThyrsaCity_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_MIDONOS"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_MIDONOS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_THYRSA_CITY",
+          "base_label": "gThyrsaCity_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_AMPELIX"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_BOTRYKIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_GELASABLE"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_ROUTE7_KRONIA_GROUNDS",
           "base_label": "gRoute7_KroniaGrounds_Morning",
           "land_mons": {

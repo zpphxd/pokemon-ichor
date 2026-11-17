@@ -41,7 +41,7 @@ Approach_SetupScript:
     setflag FLAG_ICHOR_ACT1_COMPLETE
     setflag FLAG_ICHOR_DIONYSIA_BROKEN
     setvar VAR_REPEL_STEP_COUNT, 999
-    warp MAP_THYRSA_CITY, 4, 19
+    warp MAP_THYRSA_CITY, 3, 24
     waitstate
     releaseall
     end
