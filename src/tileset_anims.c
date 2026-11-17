@@ -1432,6 +1432,34 @@ void InitTilesetAnim_CeladonGym(void)
     sSecondaryTilesetAnimCallback = TilesetAnim_CeladonGym;
 }
 
+// Ichor: Thyrsa City (gTileset_Thyrsa): the smoke curling up from the crack in
+// Semele's chamber, two frames. tools/ichor/art/thyrsa_build.py moves the smoke's six
+// tiles to the secondary's tiles 1-6 and writes each frame as a strip of them.
+#define THYRSA_SMOKE_FIRST_TILE 1
+#define THYRSA_SMOKE_TILES      6
+static const u16 sTilesetAnims_Thyrsa_Smoke_Frame0[] = INCBIN_U16("data/tilesets/secondary/thyrsa/anim/smoke/0.4bpp");
+static const u16 sTilesetAnims_Thyrsa_Smoke_Frame1[] = INCBIN_U16("data/tilesets/secondary/thyrsa/anim/smoke/1.4bpp");
+
+static const u16 *const sTilesetAnims_Thyrsa_Smoke[] = {
+    sTilesetAnims_Thyrsa_Smoke_Frame0,
+    sTilesetAnims_Thyrsa_Smoke_Frame1,
+};
+
+static void TilesetAnim_Thyrsa(u16 timer)
+{
+    if (timer % 20 == 0)
+        AppendTilesetAnimToBuffer(sTilesetAnims_Thyrsa_Smoke[(timer / 20) % ARRAY_COUNT(sTilesetAnims_Thyrsa_Smoke)],
+                                  (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + THYRSA_SMOKE_FIRST_TILE)),
+                                  THYRSA_SMOKE_TILES * TILE_SIZE_4BPP);
+}
+
+void InitTilesetAnim_Thyrsa(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = 240;
+    sSecondaryTilesetAnimCallback = TilesetAnim_Thyrsa;
+}
+
 // [Porytiles] Auto-generated include. Do not remove.
 #include "porytiles_generated/tilesets/aethos/generated_anim_code.h"
 

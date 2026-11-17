@@ -579,3 +579,62 @@ const struct Tileset gTileset_EleusaSanctumHall =
     .metatileAttributes = gMetatileAttributes_EleusaSanctumHall,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary, ported from claude/world-act2-0a92e7 (its generator,
+// tools/ichor/art/thyrsa_build.py, stays on that branch; porytiles_src is here): Thyrsa City
+// (its Cyclopean walls and gates, streets, houses, the Agora, the Temple of Dionysus's
+// front, the Asclepeion, Semele's chamber and the vineyards). It uses only its own
+// tiles and palettes 6-12; cells on grass borrow aethos's, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Thyrsa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Thyrsa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Thyrsa,
+    .metatiles = gMetatiles_PorytilesManaged_Thyrsa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Thyrsa,
+    .callback = InitTilesetAnim_Thyrsa,     // Semele's smoke (src/tileset_anims.c)
+};
+
+// Ichor (Act II rooms): Thyrsa's plastered rooms: the Asclepeion, the Agora, Pindaros's and Polos's houses. A Porytiles-managed secondary for the oikos
+// primary, ported from claude/world-act2-0a92e7 (generator tools/ichor/maps/thyrsa_rooms.py stays there).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ThyrsaRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ThyrsaRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaRooms,
+    .metatiles = gMetatiles_PorytilesManaged_ThyrsaRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaRooms,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms): Thyrsa's households: Staphylos's, Eudora's, Euthykles's workshop and Manto's. A Porytiles-managed secondary for the oikos
+// primary, ported from claude/world-act2-0a92e7 (generator tools/ichor/maps/thyrsa_rooms.py stays there).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ThyrsaHomes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ThyrsaHomes,
+    .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaHomes,
+    .metatiles = gMetatiles_PorytilesManaged_ThyrsaHomes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaHomes,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms): the stone rooms: Eleutherai's watch-house and homes, the Kantharos tavern and Chthonia's house. A Porytiles-managed secondary for the oikos
+// primary, ported from claude/world-act2-0a92e7 (generator tools/ichor/maps/thyrsa_rooms.py stays there).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ThyrsaStone =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ThyrsaStone,
+    .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaStone,
+    .metatiles = gMetatiles_PorytilesManaged_ThyrsaStone,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
+    .callback = NULL,
+};
