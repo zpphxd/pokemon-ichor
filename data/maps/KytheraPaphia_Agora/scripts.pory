@@ -1,0 +1,53 @@
+// The Agora, Paphia (design/phase4/SCRIPT.md, Part 2): Theodote sells offerings
+// to pilgrims from a covered stoa with a long marble counter. Little marble feet
+// and hands, the parts people want healed, stand on the counter and the wall.
+// Lysis's sister helps on market days.
+// Room: tools/ichor/maps/kythera_homes.py. Theodote stands at (6,2), behind the
+// counter; the player talks from (6,4). The mat is (6,8).
+//
+// TODO(engine §3): Frankincense and Olive Oil join the stock, and the marble
+// votives ("a marble foot", 100; SCRIPT.md Open questions 12), once they exist
+// as items.
+
+mapscripts KytheraPaphia_Agora_MapScripts {}
+
+text KytheraPaphia_Agora_Name_Theodote { "THEODOTE" }
+
+script KytheraPaphia_Agora_EventScript_Theodote {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Agora_Name_Theodote)
+    message(format("Frankincense for the goddess. Honey for you. Feet for your sore feet."))
+    waitmessage
+    if (flag(FLAG_BADGE07_GET)) {
+        pokemart(KytheraPaphia_Agora_Mart_AfterLaurel)
+    } else {
+        pokemart(KytheraPaphia_Agora_Mart_BeforeLaurel)
+    }
+    setspeaker(KytheraPaphia_Agora_Name_Theodote)
+    msgbox(format("The marble feet. People leave them at the temple. It's a whole thing."))
+    release
+}
+
+mart KytheraPaphia_Agora_Mart_BeforeLaurel {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+}
+
+mart KytheraPaphia_Agora_Mart_AfterLaurel {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+}
+
+script KytheraPaphia_Agora_EventScript_Votives {
+    msgbox(format("Little marble feet and hands, the parts people want healed."), MSGBOX_SIGN)
+}

@@ -1,0 +1,341 @@
+// The Foam Road (design/phase4/SCRIPT.md Part 2, beats III-1D and III-1D2).
+// Layout and events: tools/ichor/maps/kythera_foam_road.py (64 x 24). East to
+// west: Skandeia's gate, Lykon and the road sign, band 1 (8 deep, between the
+// myrtle and the sea-cliff), Theano on the terrace above it, Amphitos by his
+// jetty, the fork (the great herm, the stair up to the Spring of Kallirhoe), the
+// cutting and Skopas, the rock beach (Alethea's dig, the freshwater basin,
+// Pontinos on the reef spit, Kymodoke on the islet), the quarry behind its drums
+// (the Girdle), the headland's cascade (the Horn), Amaryllis and band 3 in the
+// myrtle grove, Kassiteros at the neck, and Paphia's gate. Menalkas grazes his
+// flock in the clifftop meadow under the east wood.
+//
+// Hidden items: an Ether behind the great herm (43,4), a Heart Scale in the
+// Horn's clifftop meadow (13,13), a Net Ball on the rock past the jetty (47,17)
+// and Stardust in the cove under the east wood (54,22).
+// TODO(engine §5): Alethea's dig is scripted here; the trowel's dig spots and
+// the quarry's fixed dig (sherd 4, FLAG_ICHOR_SHERDS_START + 43, at the quarry
+// floor) come with the excavation system.
+// TODO(theoxenia): Hermes's E1 visit waits for ichor-engine's theoxenia flags
+// (FLAG_ICHOR_THEOXENIA_DEMETER, _HEPHAESTUS, _POSEIDON); until they exist the
+// messenger stays hidden. His whole visit is scripted below.
+
+const KYTHERA_SHERD_PARIS_1 = FLAG_ICHOR_SHERDS_START + 40
+
+mapscripts KytheraFoamRoad_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_0, 0)
+        if (var(VAR_ICHOR_ACT3) >= 6) {
+            setflag(FLAG_ICHOR_HIDE_KASSITEROS)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_KASSITEROS)
+        }
+        // Alethea waits by the rock once she has rejoined you in Skandeia (III-1C2).
+        if (flag(FLAG_ICHOR_ALETHEA_REJOINED) && !flag(KYTHERA_SHERD_PARIS_1)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD)
+            setvar(VAR_TEMP_0, 1)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD)
+        }
+        // TODO(theoxenia): show him when Demeter's, Hephaestus's and Poseidon's tests
+        // are passed and his own isn't: clearflag(FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD).
+        // While the Talaria are lent he waits at Paphia's gate instead.
+        setflag(FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_FOAM_ROAD_DRUMS_MOVED)) {
+            call(KytheraFoamRoad_EventScript_DrawDrumsMoved)
+        }
+    }
+}
+
+text KytheraFoamRoad_Text_NameAlethea { "ALETHEA" }
+text KytheraFoamRoad_Text_NameMessenger { "MESSENGER" }
+
+// ---------------------------------------------------------------------------
+// Signs and things to read
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_SignEast {
+    msgbox(format("THE FOAM ROAD.\nPaphia and the temple, west. The spring of Kallirhoe, north."), MSGBOX_SIGN)
+}
+
+script KytheraFoamRoad_EventScript_SignFork {
+    msgbox(format("North: the spring of Kallirhoe.\nWest: Paphia. East: Skandeia."), MSGBOX_SIGN)
+}
+
+script KytheraFoamRoad_EventScript_SignPaphia {
+    msgbox(format("PAPHIA.\nThe Temple of Aphrodite."), MSGBOX_SIGN)
+}
+
+// Kythera's great herm (beat III-1D): its plinth, then the engine's anointing
+// (design/ENGINE_API.md §4, HERM_KYTHERA_FOAM_ROAD).
+script KytheraFoamRoad_EventScript_Herm {
+    lockall
+    msgbox(format("A herm of Hermes, the oil on his face long dried.\p"
+                  "His plinth reads: WEST, PAPHIA AND THE GODDESS. NORTH, THE SPRING."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+// The rest point: the pilgrims' basin under the cliff heals the party.
+script KytheraFoamRoad_EventScript_Basin {
+    lockall
+    msgbox(format("Fresh water runs out of the cliff into a stone basin. Pilgrims drink here."))
+    special(HealPlayerParty)
+    playse(SE_USE_ITEM)
+    msgbox(format("It's cold and sweet. Your Pokémon drink, and look rested."))
+    releaseall
+}
+
+script KytheraFoamRoad_EventScript_DigSpot {
+    if (flag(KYTHERA_SHERD_PARIS_1)) {
+        msgbox(format("Turned earth above the tide line. You've dug here already."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Turned earth above the tide line. Somebody's dug here and given up."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraFoamRoad_EventScript_Cascade {
+    msgbox(format("A little waterfall pours off the cliff. Something glints at the top."), MSGBOX_SIGN)
+}
+
+script KytheraFoamRoad_EventScript_Boat {
+    if (defeated(TRAINER_ICHOR_KASSITEROS) || var(VAR_ICHOR_ACT3) >= 6) {
+        msgbox(format("A fishing boat on log rollers, halfway to nowhere.\p"
+                      "KASSITEROS is painted on its bow.\p"
+                      "That's not its name. That's the Titan's. He wanted it remembered."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A fishing boat on log rollers, hauled up the road toward Paphia."), MSGBOX_SIGN)
+    }
+}
+
+// ---------------------------------------------------------------------------
+// The quarry's drums (relic gate: the Girdle of Herakles)
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_Drums {
+    lockall
+    if (flag(FLAG_ICHOR_FOAM_ROAD_DRUMS_MOVED)) {
+        releaseall
+        end
+    }
+    msgbox(format("Column drums, cut and never used, fallen across the quarry path."))
+    if (!flag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)) {
+        msgbox(format("Too heavy to move by hand. Herakles could, probably."))
+        releaseall
+        end
+    }
+    msgbox(format("Move them with the Girdle of Herakles?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, ITEM_GIRDLE_OF_HERAKLES)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_STRENGTH)
+    setflag(FLAG_ICHOR_FOAM_ROAD_DRUMS_MOVED)
+    call(KytheraFoamRoad_EventScript_DrawDrumsMoved)
+    special(DrawWholeMapView)
+    msgbox(format("The drums roll aside. The quarry path is open."))
+    releaseall
+}
+
+script KytheraFoamRoad_EventScript_DrawDrumsMoved {
+    setmetatile(18, 4, METATILE_Kythera_GirdleGate_Moved, FALSE)
+    setmetatile(19, 4, METATILE_Kythera_GirdleGate_Moved, FALSE)
+    setmetatile(18, 5, METATILE_Kythera_GirdleGate_Moved, FALSE)
+    setmetatile(19, 5, METATILE_Kythera_GirdleGate_Moved, FALSE)
+}
+
+// ---------------------------------------------------------------------------
+// Trainers (texts: data/scripts/ichor_act3_kythera_trainers.pory)
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_Amphitos {
+    trainerbattle_single(TRAINER_ICHOR_AMPHITOS, Kythera_Text_AmphitosIntro, Kythera_Text_AmphitosDefeat)
+    setspeaker(Kythera_Text_SpeakerAmphitos)
+    msgbox(Kythera_Text_AmphitosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Skopas {
+    trainerbattle_single(TRAINER_ICHOR_SKOPAS, Kythera_Text_SkopasIntro, Kythera_Text_SkopasDefeat)
+    setspeaker(Kythera_Text_SpeakerSkopas)
+    msgbox(Kythera_Text_SkopasAfter)
+    msgbox(format("My Glyphlet? It doesn't love me yet. I'm not very lovable. I'm a sculptor."), MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Pontinos {
+    trainerbattle_single(TRAINER_ICHOR_PONTINOS, Kythera_Text_PontinosIntro, Kythera_Text_PontinosDefeat)
+    setspeaker(Kythera_Text_SpeakerPontinos)
+    msgbox(Kythera_Text_PontinosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Kassiteros {
+    trainerbattle_single(TRAINER_ICHOR_KASSITEROS, Kythera_Text_KassiterosIntro, Kythera_Text_KassiterosDefeat)
+    setspeaker(Kythera_Text_SpeakerKassiteros)
+    msgbox(Kythera_Text_KassiterosAfter, MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-1D: Aphrodite's rock, and the first sherd of amphora #11
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_Alethea {
+    goto(KytheraFoamRoad_EventScript_AletheaRock)
+}
+
+script KytheraFoamRoad_EventScript_AletheaRock {
+    lockall
+    setvar(VAR_TEMP_0, 2)
+    applymovement(LOCALID_FOAM_ROAD_ALETHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(KytheraFoamRoad_Text_NameAlethea)
+    msgbox(format("There you are. Look. That's the rock.\p"
+                  "Where she came ashore on the foam. Aphrodite. They say.\p"
+                  "Hesiod says she sailed past Kythera first and landed on Cyprus.\p"
+                  "Kythera says Hesiod was seasick and missed it."))
+    applymovement(LOCALID_FOAM_ROAD_ALETHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    msgbox(format("Somebody's dug here and given up. Badly. Go on. You've got a trowel."))
+    setspeaker(SP_NAME_NONE)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 27 && var(VAR_0x8005) == 7) {
+        applymovement(OBJ_EVENT_ID_PLAYER, KytheraFoamRoad_Movement_ToDigFromRow7)
+    } elif (var(VAR_0x8004) == 27 && var(VAR_0x8005) == 8) {
+        applymovement(OBJ_EVENT_ID_PLAYER, KytheraFoamRoad_Movement_ToDigFromRow8)
+    }
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    playse(SE_M_DIG)
+    delay(30)
+    setflag(KYTHERA_SHERD_PARIS_1)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} dug up a potsherd!"))
+    waitfanfare
+    msgbox(format("Three pairs of feet in a row, painted in black. And a golden apple."))
+    applymovement(LOCALID_FOAM_ROAD_ALETHEA, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraFoamRoad_Text_NameAlethea)
+    msgbox(format("Three goddesses and one apple. The judgement of Paris.\p"
+                  "He gave it to her. Aphrodite. She promised him the loveliest woman alive.\p"
+                  "She was already married. It went badly. Ten years badly.\p"
+                  "There'll be more pieces on the island. There always are."))
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_FOAM_ROAD_ALETHEA, KytheraFoamRoad_Movement_AletheaToSpring)
+    waitmovement(0)
+    removeobject(LOCALID_FOAM_ROAD_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD)
+    releaseall
+}
+
+movement KytheraFoamRoad_Movement_ToDigFromRow7 {
+    walk_down * 4
+    walk_left * 4
+}
+
+movement KytheraFoamRoad_Movement_ToDigFromRow8 {
+    walk_down * 3
+    walk_left * 4
+}
+
+// North to the beach's top, then east along the foot of the cliff toward the
+// fork's stair and the spring.
+movement KytheraFoamRoad_Movement_AletheaToSpring {
+    walk_up * 2
+    walk_right * 6
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-1D2: Hermes at the herm (theoxenia E1). The reveal is at Paphia's
+// gate herm (data/maps/KytheraPaphia/scripts.pory).
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_Messenger {
+    lock
+    faceplayer
+    setspeaker(KytheraFoamRoad_Text_NameMessenger)
+    if (flag(FLAG_ICHOR_TALARIA_LENT)) {
+        // He's back after a Fly or a warp: the test resumes from here.
+        msgbox(format("You took a shortcut. I could tell. Your feet are clean."))
+        release
+        end
+    }
+    msgbox(format("Sandals. You've got sandals. Good ones. Winged, almost.\p"
+                  "I had sandals. I'm a messenger. I've a message for Paphia.\p"
+                  "I won't get there by sunset on these feet. Look at them.\p"
+                  "Lend me yours? I'll wait for you at the herm by Paphia's gate.\p"
+                  "You'd have to walk. No running. The whole way."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Lend him your Talaria?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(KytheraFoamRoad_Text_NameMessenger)
+        msgbox(format("Fair. Most people say no. I'll sit here and bleed a bit more."))
+        release
+        end
+    }
+    msgbox(format("{PLAYER} handed over the Talaria."))
+    // No running until Paphia's gate herm (FLAG_SYS_B_DASH is the Talaria).
+    clearflag(FLAG_SYS_B_DASH)
+    setflag(FLAG_ICHOR_TALARIA_LENT)
+    setspeaker(KytheraFoamRoad_Text_NameMessenger)
+    msgbox(format("Ah. Ahh. Whoever made these knew feet.\p"
+                  "See you at the gate. Don't hurry. You can't."))
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_FOAM_ROAD_MESSENGER, KytheraFoamRoad_Movement_MessengerWest)
+    waitmovement(0)
+    removeobject(LOCALID_FOAM_ROAD_MESSENGER)
+    setflag(FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD)
+    clearflag(FLAG_ICHOR_HIDE_HERMES_PAPHIA)
+    // TODO(theoxenia): if the player Flies or warps instead of walking, put him back
+    // at this herm wearing the Talaria (the resume line above).
+    release
+}
+
+movement KytheraFoamRoad_Movement_MessengerWest {
+    walk_left * 2
+    walk_down * 3
+    walk_left * 4
+}
+
+// ---------------------------------------------------------------------------
+// The second wave of trainers (MAP_DESIGN §8; texts in ichor_act3_kythera_trainers.pory)
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_Lykon {
+    trainerbattle_single(TRAINER_ICHOR_LYKON_KYTHERA, Kythera_Text_LykonIntro, Kythera_Text_LykonDefeat)
+    setspeaker(Kythera_Text_SpeakerLykon)
+    msgbox(Kythera_Text_LykonAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Theano {
+    trainerbattle_single(TRAINER_ICHOR_THEANO, Kythera_Text_TheanoIntro, Kythera_Text_TheanoDefeat)
+    setspeaker(Kythera_Text_SpeakerTheano)
+    msgbox(Kythera_Text_TheanoAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Kymodoke {
+    trainerbattle_single(TRAINER_ICHOR_KYMODOKE, Kythera_Text_KymodokeIntro, Kythera_Text_KymodokeDefeat)
+    setspeaker(Kythera_Text_SpeakerKymodoke)
+    msgbox(Kythera_Text_KymodokeAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Menalkas {
+    trainerbattle_single(TRAINER_ICHOR_MENALKAS_KYTHERA, Kythera_Text_MenalkasIntro, Kythera_Text_MenalkasDefeat)
+    setspeaker(Kythera_Text_SpeakerMenalkas)
+    msgbox(Kythera_Text_MenalkasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Amaryllis {
+    trainerbattle_single(TRAINER_ICHOR_AMARYLLIS, Kythera_Text_AmaryllisIntro, Kythera_Text_AmaryllisDefeat)
+    setspeaker(Kythera_Text_SpeakerAmaryllis)
+    msgbox(Kythera_Text_AmaryllisAfter, MSGBOX_AUTOCLOSE)
+}
+
+// Menalkas's flock on the clifftop meadow.
+script KytheraFoamRoad_EventScript_Sheep {
+    lock
+    faceplayer
+    msgbox(format("The sheep chews, and faces inland. It has never once looked at the sea."), MSGBOX_DEFAULT)
+    release
+}

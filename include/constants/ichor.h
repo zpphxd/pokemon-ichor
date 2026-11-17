@@ -63,6 +63,8 @@
 #define HERM_AETHOS_ROUTE_31        23
 #define HERM_AETHOS_ROUTE_32        24
 #define HERM_EMPORION_CITY          25  // town anchor, outside the 23-route completion count
+#define HERM_KYTHERA_FOAM_ROAD      26  // Kythera's great herm at the Foam Road's fork (STORY III-1); no map
+                                        // section, so Skandeia stays the island's fly target
 #define HERM_AETHOS_MAX             32  // FLAG_ICHOR_HERMS_START's range
 // The Oikoumene's waystones (OIKOUMENE §4): herms, Thoth's ibis pillars, stone
 // babas and cairns of Ammon. Ids 32-63, flagged in FLAG_ICHOR_WAYSTONES_START's

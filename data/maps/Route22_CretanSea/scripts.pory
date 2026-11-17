@@ -1,0 +1,62 @@
+// Route 22, the Cretan Sea: Kaldera (east, Act II's) to Melos (west), optional,
+// by Surf (design/phase4/SCRIPT.md Part 2, "Route 22, past Melos"). The story
+// crosses it on the Euploia's deck. Layout: tools/ichor/maps/kythera_seas.py.
+//
+// TODO(act2): the east seam with Kaldera, once Kaldera's map exists; its 8
+// columns nearest the seam are aethos-only.
+// Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
+
+mapscripts Route22_CretanSea_MapScripts {}
+
+script Route22_CretanSea_EventScript_Kymaios {
+    trainerbattle_single(TRAINER_ICHOR_KYMAIOS, Kythera_Text_KymaiosIntro, Kythera_Text_KymaiosDefeat)
+    setspeaker(Kythera_Text_SpeakerKymaios)
+    msgbox(Kythera_Text_KymaiosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Antalkidas {
+    trainerbattle_single(TRAINER_ICHOR_ANTALKIDAS, Kythera_Text_AntalkidasIntro, Kythera_Text_AntalkidasDefeat)
+    setspeaker(Kythera_Text_SpeakerAntalkidas)
+    msgbox(Kythera_Text_AntalkidasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Aktaios {
+    trainerbattle_single(TRAINER_ICHOR_AKTAIOS_KYTHERA, Kythera_Text_AktaiosIntro, Kythera_Text_AktaiosDefeat)
+    setspeaker(Kythera_Text_SpeakerAktaios)
+    msgbox(Kythera_Text_AktaiosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Nerine {
+    trainerbattle_single(TRAINER_ICHOR_NERINE, Kythera_Text_NerineIntro, Kythera_Text_NerineDefeat)
+    setspeaker(Kythera_Text_SpeakerNerine)
+    msgbox(Kythera_Text_NerineAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Phorbas {
+    trainerbattle_single(TRAINER_ICHOR_PHORBAS, Kythera_Text_PhorbasIntro, Kythera_Text_PhorbasDefeat)
+    setspeaker(Kythera_Text_SpeakerPhorbas)
+    msgbox(Kythera_Text_PhorbasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Lampros {
+    trainerbattle_single(TRAINER_ICHOR_LAMPROS, Kythera_Text_LamprosIntro, Kythera_Text_LamprosDefeat)
+    setspeaker(Kythera_Text_SpeakerLampros)
+    msgbox(Kythera_Text_LamprosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Anydros {
+    msgbox(format("Anydros, the waterless. A bare rock and one fig tree, dead of thirst."), MSGBOX_SIGN)
+}
+
+script Route22_CretanSea_EventScript_SignPolyaigos {
+    msgbox(format("POLYAIGOS. Many goats, the name says.\p"
+                  "One goat, these days. He's in charge."), MSGBOX_SIGN)
+}
+
+script Route22_CretanSea_EventScript_SignMelos {
+    msgbox(format("ROUTE 22\pWest: Melos. Water for every ship that asks."), MSGBOX_SIGN)
+}
+
+script Route22_CretanSea_EventScript_SignKaldera {
+    msgbox(format("ROUTE 22\pEast: Kaldera, under the smoke."), MSGBOX_SIGN)
+}

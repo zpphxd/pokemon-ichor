@@ -1,0 +1,17 @@
+// The boathouse, Melos, ground floor (design/phase4/SCRIPT.md, Part 2): Myrtis
+// and Kalchedon, fishers, and their baby live in the room over their boat
+// (Melos_BoathouseLoft, up the stair at (9,2)). Down here the boat sits on its
+// slip and the sea comes in under the painted doors (the water at (6..10,6..7)).
+// Room: tools/ichor/maps/kythera_homes.py. The street door's mat is (2..3,7).
+//
+// TODO(act3): exit to MAP_MELOS (one of Klima's boathouses at the waterline).
+
+mapscripts Melos_Boathouse_MapScripts {}
+
+script Melos_Boathouse_EventScript_Boat {
+    msgbox(format("Their boat, hauled up on rollers on the stone slip."), MSGBOX_SIGN)
+}
+
+script Melos_Boathouse_EventScript_SeaDoors {
+    msgbox(format("The sea comes in under the painted doors."), MSGBOX_SIGN)
+}

@@ -1366,7 +1366,47 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_GELASABLE,
         .level = 31,                         // BALANCE.md: Arkadia's wild band is 29-33
-    }
+    },
+    // Skandeia, the divers' house: Bathykleia's Telkanvil hammers sponges and
+    // won't stop; she wants a Glyphlet that just sits. Its hidden ability is
+    // Sharpness, and the Metal Coat is for its claws (design/phase4/SCRIPT.md).
+    [INGAME_TRADE_ICHOR_ANKYRA] =
+    {
+        .nickname = _("ANKYRA"),
+        .species = SPECIES_TELKANVIL,
+        .ivs = {22, 28, 24, 14, 18, 16},
+        .abilityNum = 2,
+        .otId = 52817,
+        .conditions = {20, 5, 5, 5, 30},
+        .personality = 0x87,
+        .heldItem = ITEM_METAL_COAT,
+        .mailNum = -1,
+        .otName = _("KLEIA"),
+        .otGender = FEMALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GLYPHLET,
+        .level = 42,                         // BALANCE.md: Kythera's wild band is 38-45
+    },
+    // Paphia, the potter's house: Lysis's Himerow keeps diving at him; he wants
+    // a Galenyon, which fishes and doesn't look at anybody. Super Luck, with a
+    // Razor Claw.
+    [INGAME_TRADE_ICHOR_POTHOS] =
+    {
+        .nickname = _("POTHOS"),
+        .species = SPECIES_HIMEROW,
+        .ivs = {18, 20, 16, 26, 20, 26},
+        .abilityNum = 1,
+        .otId = 30944,
+        .conditions = {5, 30, 20, 5, 5},
+        .personality = 0x4E,
+        .heldItem = ITEM_RAZOR_CLAW,
+        .mailNum = -1,
+        .otName = _("LYSIS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GALENYON,
+        .level = 43,                         // BALANCE.md: Kythera's wild band is 38-45
+    },
 };
 
 static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =

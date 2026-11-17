@@ -1,0 +1,70 @@
+// The orchard house, Paphia (design/phase4/SCRIPT.md, Part 2): Eumelos, who
+// keeps the apple orchard below the north gate, and one old tree in his own yard
+// that hasn't fruited "since the goddesses quarrelled".
+// Room: tools/ichor/maps/kythera_homes.py. The street door opens into the walled
+// yard (the mat is (2,10)); the old tree stands at (6..7,7..9), its roots read
+// from (6..7,10). Across the stone threshold, the kitchen at the back: the apple
+// racks (1..2,0..2), the painted plate (5..6,0..1), the crates. Eumelos stands
+// by the tree at (5,8).
+//
+// The tree's roots are a fixed dig spot: the third sherd of amphora #11, the
+// judgement of Paris. When the amphora is complete (Daphne mends it at the
+// Akademia) the tree bears gold.
+//
+// TODO(engine §5): the roots' fixed dig spot (Alethea's Trowel) giving the third
+// sherd, FLAG_ICHOR_SHERDS_START + 42 (amphora #11 is FLAG_ICHOR_SHERDS_START + 40,
+// SCRIPT.md Part 8). Until digging exists, the roots only describe themselves.
+// TODO(balance): the Gold Stater isn't an item yet. When it is, give it where
+// marked and set FLAG_ICHOR_GOT_EUMELOS_STATER (claim it then). Until then
+// Eumelos tells the gold-apple story without the gift.
+
+mapscripts KytheraPaphia_OrchardHouse_MapScripts {}
+
+text KytheraPaphia_OrchardHouse_Name_Eumelos { "EUMELOS" }
+
+// Amphora #11 (the judgement of Paris), complete: SCRIPT.md's
+// FLAG_ICHOR_AMPHORA_PARIS, the eleventh of the amphora range.
+const KYTHERA_AMPHORA_PARIS = FLAG_ICHOR_AMPHORAE_START + 10
+
+script KytheraPaphia_OrchardHouse_EventScript_Eumelos {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_OrchardHouse_Name_Eumelos)
+    if (flag(KYTHERA_AMPHORA_PARIS)) {
+        msgbox(format("Look. LOOK. The tree. Overnight.\p"
+                      "Leaves. Blossom. And one apple, and it's… it's gold. Real gold.\p"
+                      "I can't eat that. I can't sell it. Nobody would believe me.\p"
+                      "Here. You found the pot. You have the apple's worth."))
+        // TODO(balance): {PLAYER} received a Gold Stater! (see the header)
+        setspeaker(KytheraPaphia_OrchardHouse_Name_Eumelos)
+        msgbox(format("Somebody'll come for the apple one day. Something with a lot of heads.\p"
+                      "That's what my grandmother said. She said it about everything."))
+        release
+        end
+    }
+    msgbox(format("That tree? It hasn't fruited since the goddesses quarrelled.\p"
+                  "That's what my grandmother said. She said it about everything.\p"
+                  "There's a story about an apple. Gold. Thrown among three goddesses.\p"
+                  "“For the fairest.” Well. That'll start an argument.\p"
+                  "People say this is the tree it grew on. People say a lot of things.\p"
+                  "Dig round the roots if you like. I've dug. I found nothing but bits of pot."))
+    release
+}
+
+script KytheraPaphia_OrchardHouse_EventScript_Tree {
+    // TODO(engine §5): the fixed dig spot (see the header).
+    if (flag(KYTHERA_AMPHORA_PARIS)) {
+        msgbox(format("The old tree is in leaf and blossom. One apple hangs in it, and it's gold."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The old tree: gray, twisted, leafless.\p"
+                      "The earth round its roots has been dug and dug."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraPaphia_OrchardHouse_EventScript_Racks {
+    msgbox(format("Apple racks, all empty but one. On it, three small green apples."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_OrchardHouse_EventScript_Plate {
+    msgbox(format("A painted plate on the wall, with a golden apple on it."), MSGBOX_SIGN)
+}

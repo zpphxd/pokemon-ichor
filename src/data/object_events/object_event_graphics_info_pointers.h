@@ -460,6 +460,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorWomanT
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthFThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidMThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMerchantThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMirror;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMirrorMark;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -913,6 +915,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA] = &gObjectEventGraphicsInfo_IchorYouthFThyrsa,
     [OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA] = &gObjectEventGraphicsInfo_IchorKidMThyrsa,
     [OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA] = &gObjectEventGraphicsInfo_IchorMerchantThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_MIRROR] =             &gObjectEventGraphicsInfo_IchorMirror,
+    [OBJ_EVENT_GFX_ICHOR_MIRROR_MARK] =        &gObjectEventGraphicsInfo_IchorMirrorMark,
     // End of Ichor object events
 };
 

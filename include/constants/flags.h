@@ -1977,6 +1977,116 @@
 #define FLAG_ICHOR_ITEM_KALDERA_FORGE_ETHER     (FLAG_ICHOR_GENERAL_START + 0x159) // Ichor: Telchines forge supply
 #define FLAG_ICHOR_ITEM_KALDERA_FORGE_REVIVE    (FLAG_ICHOR_GENERAL_START + 0x15A) // Ichor: Telchines forge side grotto gift
 #define FLAG_ICHOR_HIDE_DAPHNE_LIBRARY          (FLAG_ICHOR_GENERAL_START + 0x15B) // Ichor: Daphne followed the player to Kaldera
+#define FLAG_ICHOR_ALETHEA_REJOINED             (FLAG_ICHOR_GENERAL_START + 0x200) // Ichor: Kythera port: Act III: III-1C2, Alethea met you on Skandeia's main street
+#define FLAG_ICHOR_ALETHEA_SAILED_KNOSSA        (FLAG_ICHOR_GENERAL_START + 0x201) // Ichor: Kythera port: Paphia: Alethea sailed for Knossa on the honey boat (beat III-1F)
+#define FLAG_ICHOR_BAD_GUESTS_GONE              (FLAG_ICHOR_GENERAL_START + 0x202) // Ichor: Kythera port: Skandeia: drove the bad guests from Axylos's table; also hides them and Alethea there
+#define FLAG_ICHOR_CROSSED_ROUTE22              (FLAG_ICHOR_GENERAL_START + 0x203) // Ichor: Kythera port: Act III: III-1B3, rounded Malea and landed at Skandeia (hides Nausikles on Melos's jetty)
+#define FLAG_ICHOR_DAPHNE_SAILED_ASTYRA         (FLAG_ICHOR_GENERAL_START + 0x204) // Ichor: Kythera port: Act III: III-1A, boarded the Euploia at Kaldera; Daphne sailed home to Astyra (hides her on the southern deck)
+#define FLAG_ICHOR_EUPLOIA_KEPT                 (FLAG_ICHOR_GENERAL_START + 0x205) // Ichor: Kythera port: Act III: III-1C, beat Molybdos; the Euploia isn't requisitioned
+#define FLAG_ICHOR_FOAM_ROAD_DRUMS_MOVED        (FLAG_ICHOR_GENERAL_START + 0x206) // Ichor: Kythera port: Foam Road: the Girdle of Herakles moved the quarry's column drums
+#define FLAG_ICHOR_GALATEA_FALLS_HINT           (FLAG_ICHOR_GENERAL_START + 0x207) // Ichor: Kythera port: Temple of Aphrodite: Galatea sent the player to the Neraida falls
+#define FLAG_ICHOR_GALLERY_DONE                 (FLAG_ICHOR_GENERAL_START + 0x208) // Ichor: Kythera port: Temple of Aphrodite: first reached Galatea's dais
+#define FLAG_ICHOR_GALLERY_MIRROR_P2_BIT0       (FLAG_ICHOR_GENERAL_START + 0x209) // Ichor: Kythera port: Temple of Aphrodite: turnable mirror P2's facing, bit 0
+#define FLAG_ICHOR_GALLERY_MIRROR_P2_BIT1       (FLAG_ICHOR_GENERAL_START + 0x20A) // Ichor: Kythera port: Temple of Aphrodite: turnable mirror P2's facing, bit 1
+#define FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0       (FLAG_ICHOR_GENERAL_START + 0x20B) // Ichor: Kythera port: Temple of Aphrodite: turnable mirror P3's facing, bit 0
+#define FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1       (FLAG_ICHOR_GENERAL_START + 0x20C) // Ichor: Kythera port: Temple of Aphrodite: turnable mirror P3's facing, bit 1
+#define FLAG_ICHOR_GOT_DAMP_ROCK                (FLAG_ICHOR_GENERAL_START + 0x20D) // Ichor: Kythera port: Melos: Kalchedon's Damp Rock, in the boathouse
+#define FLAG_ICHOR_GOT_EROSIE_EGG               (FLAG_ICHOR_GENERAL_START + 0x20E) // Ichor: Kythera port: Paphia: Peristera's Egg (Erosie)
+#define FLAG_ICHOR_GOT_METRONOME                (FLAG_ICHOR_GENERAL_START + 0x20F) // Ichor: Kythera port: Neraida falls: Myles the miller's Metronome
+#define FLAG_ICHOR_GOT_MIRROR_HERB              (FLAG_ICHOR_GENERAL_START + 0x210) // Ichor: Kythera port: Paphia: Leukippe's Mirror Herb, after the Foam Laurel
+#define FLAG_ICHOR_GOT_ROSE_INCENSE             (FLAG_ICHOR_GENERAL_START + 0x211) // Ichor: Kythera port: Melos: Kentrios's Rose Incense, after the statue's rite
+#define FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION    (FLAG_ICHOR_GENERAL_START + 0x212) // Ichor: Kythera port: Paphia: Pygmalion's Shiny Stone, after the climax
+#define FLAG_ICHOR_GOT_SOOTHE_BELL_EUODIA       (FLAG_ICHOR_GENERAL_START + 0x213) // Ichor: Kythera port: Skandeia: Euodia the perfumer's Soothe Bell (SCRIPT.md's GOT_SOOTHE_BELL is Akti's)
+#define FLAG_ICHOR_GOT_TM_DAZZLING_GLEAM        (FLAG_ICHOR_GENERAL_START + 0x214) // Ichor: Kythera port: Temple of Aphrodite: Galatea's TM Dazzling Gleam
+#define FLAG_ICHOR_HEARD_KRONIST                (FLAG_ICHOR_GENERAL_START + 0x215) // Ichor: Kythera port: Act III: Skandeia: the Kronist has preached at you once (his walk-past trigger)
+#define FLAG_ICHOR_HIDDEN_MELOS_HEART_SCALE     (FLAG_ICHOR_GENERAL_START + 0x216) // Ichor: Kythera port: Melos: the Heart Scale at the foot of the niche, after the rite (scripted, so it waits for the rite)
+#define FLAG_ICHOR_HIDE_ALETHEA_CALL            (FLAG_ICHOR_GENERAL_START + 0x217) // Ichor: Kythera port: Act III: Skandeia: hides Alethea at the gangplank (shown only during the call)
+#define FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD       (FLAG_ICHOR_GENERAL_START + 0x218) // Ichor: Kythera port: Foam Road: hides Alethea at Aphrodite's rock once her scene is done (beat III-1D)
+#define FLAG_ICHOR_HIDE_ALETHEA_KALLIRHOE       (FLAG_ICHOR_GENERAL_START + 0x219) // Ichor: Kythera port: Spring of Kallirhoe: hides Alethea at the spring
+#define FLAG_ICHOR_HIDE_ALETHEA_PAPHIA          (FLAG_ICHOR_GENERAL_START + 0x21A) // Ichor: Kythera port: Paphia: hides Alethea and the honey boat's skipper on the jetty
+#define FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21B) // Ichor: Kythera port: Act III: Skandeia: hides Alethea at Axylos's door (shown from III-1C2 until the bad guests go)
+#define FLAG_ICHOR_HIDE_DECK_ACT3               (FLAG_ICHOR_GENERAL_START + 0x21C) // Ichor: Kythera port: Act III: southern deck: hides the voyage's passengers (boarding at Kaldera, the run to Amnisos)
+#define FLAG_ICHOR_HIDE_HERMES_PAPHIA           (FLAG_ICHOR_GENERAL_START + 0x21D) // Ichor: Kythera port: Paphia: hides Hermes at the gate herm (theoxenia E1; move to the theoxenia range with ichor-engine)
+#define FLAG_ICHOR_HIDE_KALLIRHOE_MOTHER        (FLAG_ICHOR_GENERAL_START + 0x21E) // Ichor: Kythera port: Spring of Kallirhoe: hides the youth's mother (shown evenings and nights after the scene)
+#define FLAG_ICHOR_HIDE_KASSITEROS              (FLAG_ICHOR_GENERAL_START + 0x21F) // Ichor: Kythera port: Foam Road: hides Kassiteros after Knossa (VAR_ICHOR_ACT3 >= 6)
+#define FLAG_ICHOR_HIDE_KRONIST_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x220) // Ichor: Kythera port: Act III: Skandeia: hides the Kronist (after the climax, VAR_ICHOR_ACT3 19)
+#define FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD     (FLAG_ICHOR_GENERAL_START + 0x221) // Ichor: Kythera port: Foam Road: hides Hermes the messenger at the great herm (theoxenia E1; move to the theoxenia range with ichor-engine)
+#define FLAG_ICHOR_HIDE_MOLYBDOS                (FLAG_ICHOR_GENERAL_START + 0x222) // Ichor: Kythera port: Act III: Skandeia: hides Molybdos once he is beaten
+#define FLAG_ICHOR_HIDE_SKANDEIA_PORTERS        (FLAG_ICHOR_GENERAL_START + 0x223) // Ichor: Kythera port: Act III: Skandeia: hides the Titanborn porters (from VAR_ICHOR_ACT3 6)
+#define FLAG_ICHOR_ITEM_DECK_SOUTH_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x224) // Ichor: Kythera port: Act III item ball: the southern deck's Hyper Potion among the oil amphorae
+#define FLAG_ICHOR_ITEM_ECHO_CAVES_BIG_PEARL    (FLAG_ICHOR_GENERAL_START + 0x225) // Ichor: Kythera port: Echo's caves: the Big Pearl on the Speaking Hall's ledge
+#define FLAG_ICHOR_ITEM_ECHO_CAVES_ZINC         (FLAG_ICHOR_GENERAL_START + 0x226) // Ichor: Kythera port: Echo's caves: the Zinc in the dark gallery's dead end
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_HYPER_POTION  (FLAG_ICHOR_GENERAL_START + 0x227) // Ichor: Kythera port: Foam Road: the jar on the reef spit past Pontinos
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_PEARL_STRING  (FLAG_ICHOR_GENERAL_START + 0x228) // Ichor: Kythera port: Foam Road item ball: Pearl String on the islet
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_PRETTY_FEATHER (FLAG_ICHOR_GENERAL_START + 0x229) // Ichor: Kythera port: Foam Road: the Pretty Feathers in the cliff cove (the Horn)
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_RARE_CANDY    (FLAG_ICHOR_GENERAL_START + 0x22A) // Ichor: Kythera port: Foam Road: the jar on the quarry's top step (the Girdle)
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_ULTRA_BALL    (FLAG_ICHOR_GENERAL_START + 0x22B) // Ichor: Kythera port: Foam Road item ball: Ultra Ball in the barley by the bay
+#define FLAG_ICHOR_ITEM_KALLIRHOE_MIRACLE_SEED  (FLAG_ICHOR_GENERAL_START + 0x22C) // Ichor: Kythera port: Spring of Kallirhoe: the Miracle Seed on the ledge behind the myrtle
+#define FLAG_ICHOR_ITEM_MELOS_BLACK_GLASSES     (FLAG_ICHOR_GENERAL_START + 0x22D) // Ichor: Kythera port: Act III item ball: Melos's Black Glasses at the obsidian slope's east end, past Theion
+#define FLAG_ICHOR_ITEM_MELOS_REVIVE            (FLAG_ICHOR_GENERAL_START + 0x22E) // Ichor: Kythera port: Act III item ball: Melos's Revive in the wild grass under wall B's east step
+#define FLAG_ICHOR_ITEM_MELOS_STAR_PIECE        (FLAG_ICHOR_GENERAL_START + 0x22F) // Ichor: Kythera port: Act III item ball: Melos's Star Piece on the pumice cliffs' lip
+#define FLAG_ICHOR_ITEM_NERAIDA_BIG_ROOT        (FLAG_ICHOR_GENERAL_START + 0x230) // Ichor: Kythera port: Neraida falls item ball: Big Root in the east bank's meadow
+#define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x231) // Ichor: Kythera port: Neraida falls item ball: Elixir on the upper shelf
+#define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x232) // Ichor: Kythera port: Neraida falls item ball: Max Potion on the plunge pool's west bank
+#define FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL       (FLAG_ICHOR_GENERAL_START + 0x233) // Ichor: Kythera port: Neraida falls: the jar on the top terrace
+#define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x234) // Ichor: Kythera port: Neraida falls: the Protein on a rock in the upper pool
+#define FLAG_ICHOR_ITEM_PAPHIA_LOVE_BALL        (FLAG_ICHOR_GENERAL_START + 0x235) // Ichor: Kythera port: Paphia item ball: Love Ball on the green by the Asclepeion
+#define FLAG_ICHOR_ITEM_ROUTE22_DIVE_BALL       (FLAG_ICHOR_GENERAL_START + 0x236) // Ichor: Kythera port: Act III item ball: Route 22's Dive Ball on the shingle bank where Malea's cliffs end
+#define FLAG_ICHOR_ITEM_ROUTE22_FULL_HEAL       (FLAG_ICHOR_GENERAL_START + 0x237) // Ichor: Kythera port: Act III item ball: Route 22's Full Heal on the Myrtoan sandbar
+#define FLAG_ICHOR_ITEM_ROUTE22_HYPER_POTION    (FLAG_ICHOR_GENERAL_START + 0x238) // Ichor: Kythera port: Act III item ball: Route 22's Hyper Potion on the sandbar off Kaldera
+#define FLAG_ICHOR_ITEM_ROUTE22_MAX_ETHER       (FLAG_ICHOR_GENERAL_START + 0x239) // Ichor: Kythera port: Act III item ball: Route 22's Max Ether on Anydros's ledge
+#define FLAG_ICHOR_ITEM_ROUTE22_MYSTIC_WATER    (FLAG_ICHOR_GENERAL_START + 0x23A) // Ichor: Kythera port: Act III item ball: Route 22's Mystic Water in the clearing on Melos's east cape
+#define FLAG_ICHOR_ITEM_ROUTE22_NET_BALL        (FLAG_ICHOR_GENERAL_START + 0x23B) // Ichor: Kythera port: Act III item ball: Route 22's Net Ball under Polyaigos's pine, in the grass
+#define FLAG_ICHOR_ITEM_ROUTE22_PP_UP           (FLAG_ICHOR_GENERAL_START + 0x23C) // Ichor: Kythera port: Act III item ball: Route 22's PP Up behind Myrtilos's grave
+#define FLAG_ICHOR_ITEM_ROUTE23_BIG_PEARL       (FLAG_ICHOR_GENERAL_START + 0x23D) // Ichor: Kythera port: Act III item ball: Route 23's Big Pearl on Antikythera's beach
+#define FLAG_ICHOR_ITEM_ROUTE23_HP_UP           (FLAG_ICHOR_GENERAL_START + 0x23E) // Ichor: Kythera port: Act III item ball: Route 23's HP Up behind Antikythera's grass
+#define FLAG_ICHOR_ITEM_ROUTE23_ULTRA_BALL      (FLAG_ICHOR_GENERAL_START + 0x23F) // Ichor: Kythera port: Act III item ball: Route 23's Ultra Ball on the second sandbar
+#define FLAG_ICHOR_ITEM_SKANDEIA_SEA_INCENSE    (FLAG_ICHOR_GENERAL_START + 0x240) // Ichor: Kythera port: Act III item ball: Skandeia's Sea Incense at the pocket beach's end
+#define FLAG_ICHOR_ITEM_TEMPLE_APHRODITE_MAX_REVIVE (FLAG_ICHOR_GENERAL_START + 0x241) // Ichor: Kythera port: Temple of Aphrodite: the jar in Anthousa's alcove
+#define FLAG_ICHOR_KALLIRHOE_MYRTLE_CUT         (FLAG_ICHOR_GENERAL_START + 0x242) // Ichor: Kythera port: Spring of Kallirhoe: Demeter's Sickle cut the myrtle on the back path
+#define FLAG_ICHOR_KNUCKLEBONES_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x243) // Ichor: Kythera port: Skandeia: first knucklebones win against Phereklos (Big Pearl)
+#define FLAG_ICHOR_KRENAIA_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x244) // Ichor: Kythera port: Neraida falls: Krenaia told the laureled player about the silent falls and the horn (beat III-1H)
+#define FLAG_ICHOR_LITHOS_HOME                  (FLAG_ICHOR_GENERAL_START + 0x245) // Ichor: Kythera port: Skandeia: Lithos, home after the climax, gave the Ability Capsule
+#define FLAG_ICHOR_MELOS_OBSIDIAN_LUMP          (FLAG_ICHOR_GENERAL_START + 0x246) // Ichor: Kythera port: Melos: dug the lump of black glass at the slope's seam (set on MAP_MELOS; read by Melanippos)
+#define FLAG_ICHOR_MELOS_RITE                   (FLAG_ICHOR_GENERAL_START + 0x247) // Ichor: Kythera port: Melos: made the armless goddess an offering (set on MAP_MELOS; read by Kentrios)
+#define FLAG_ICHOR_MET_KENTRIOS                 (FLAG_ICHOR_GENERAL_START + 0x248) // Ichor: Kythera port: Act III: III-1B2, Kentrios warned you on Melos's terrace stair
+#define FLAG_ICHOR_REACHED_MELOS                (FLAG_ICHOR_GENERAL_START + 0x249) // Ichor: Kythera port: Act III: III-1B, slept through Route 22's night and landed at Melos
+#define FLAG_ICHOR_SAILED_FOR_GYTHEION          (FLAG_ICHOR_GENERAL_START + 0x24A) // Ichor: Kythera port: Act III: sailed on from Skandeia's call for Gytheion (Route 24 starts from it)
+#define FLAG_ICHOR_SAILED_FOR_KNOSSA            (FLAG_ICHOR_GENERAL_START + 0x24B) // Ichor: Kythera port: Act III: III-1I, sailed from Skandeia for Amnisos
+#define FLAG_ICHOR_SAW_BAD_GUESTS               (FLAG_ICHOR_GENERAL_START + 0x24C) // Ichor: Kythera port: Skandeia: saw the Titan guests at Axylos's table (beat III-1C2)
+#define FLAG_ICHOR_SAW_GEAR_BOX                 (FLAG_ICHOR_GENERAL_START + 0x24D) // Ichor: Kythera port: Route 23: saw Skyllias's box of gears off Antikythera (set there; read in the divers' house)
+#define FLAG_ICHOR_SAW_KALLIRHOE                (FLAG_ICHOR_GENERAL_START + 0x24E) // Ichor: Kythera port: Spring of Kallirhoe: saw the youth at the pool with Alethea (beat III-1E)
+#define FLAG_ICHOR_SAW_TITAN_FLEET              (FLAG_ICHOR_GENERAL_START + 0x24F) // Ichor: Kythera port: Act III: III-1B, the lookout showed you the dark fleet
+#define FLAG_ICHOR_SKANDEIA_CALL                (FLAG_ICHOR_GENERAL_START + 0x250) // Ichor: Kythera port: Act III: the Euploia's call at Skandeia between Amnisos and Gytheion (set by the Knossa writer's departure)
+#define FLAG_ICHOR_TALARIA_LENT                 (FLAG_ICHOR_GENERAL_START + 0x251) // Ichor: Kythera port: Foam Road: lent the Talaria to the messenger (theoxenia E1; move to the theoxenia range with ichor-engine)
+#define FLAG_ICHOR_TRADED_HIMEROW               (FLAG_ICHOR_GENERAL_START + 0x252) // Ichor: Kythera port: Paphia: traded Lysis a Galenyon for Pothos the Himerow
+#define FLAG_ICHOR_TRADED_TELKANVIL             (FLAG_ICHOR_GENERAL_START + 0x253) // Ichor: Kythera port: Skandeia: traded Bathykleia a Glyphlet for Ankyra the Telkanvil
+#define FLAG_ICHOR_VISITED_MELOS                (FLAG_ICHOR_GENERAL_START + 0x254) // Ichor: Kythera port: Act III: Melos visited (Nausikles's southern lanes; not a fly target)
+#define FLAG_ICHOR_VISITED_SKANDEIA             (FLAG_ICHOR_GENERAL_START + 0x255) // Ichor: Kythera port: Act III: Skandeia visited (fly target, MAPSEC_KYTHERA_ISLE)
+#define FLAG_ICHOR_HIDDEN_ITEM_ECHO_CAVES_HEART_SCALE (FLAG_ICHOR_GENERAL_START + 0x256) // Ichor: Kythera port: Echo's caves hidden item: Heart Scale at the dark gallery's end
+#define FLAG_ICHOR_HIDDEN_ITEM_ECHO_CAVES_SHELL_BELL (FLAG_ICHOR_GENERAL_START + 0x257) // Ichor: Kythera port: Echo's caves hidden item: Shell Bell in the Speaking Hall's west nook
+#define FLAG_ICHOR_HIDDEN_ITEM_FOAM_ROAD_ETHER  (FLAG_ICHOR_GENERAL_START + 0x258) // Ichor: Kythera port: Foam Road hidden item: Ether behind the great herm
+#define FLAG_ICHOR_HIDDEN_ITEM_FOAM_ROAD_HEART_SCALE (FLAG_ICHOR_GENERAL_START + 0x259) // Ichor: Kythera port: Foam Road hidden item: Heart Scale in the Horn's cliff-top meadow
+#define FLAG_ICHOR_HIDDEN_ITEM_FOAM_ROAD_NET_BALL (FLAG_ICHOR_GENERAL_START + 0x25A) // Ichor: Kythera port: Foam Road hidden item: Net Ball on the rock past Amphitos's jetty
+#define FLAG_ICHOR_HIDDEN_ITEM_FOAM_ROAD_STARDUST (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: Kythera port: Foam Road hidden item: Stardust in the cove under the east wood
+#define FLAG_ICHOR_HIDDEN_ITEM_KALLIRHOE_PP_UP  (FLAG_ICHOR_GENERAL_START + 0x25C) // Ichor: Kythera port: Spring of Kallirhoe hidden item: PP Up at the fall's rock
+#define FLAG_ICHOR_HIDDEN_ITEM_KALLIRHOE_REVIVE (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Kythera port: Spring of Kallirhoe hidden item: Revive in the nook under the cave rock
+#define FLAG_ICHOR_HIDDEN_ITEM_MELOS_PEARL      (FLAG_ICHOR_GENERAL_START + 0x25E) // Ichor: Kythera port: Melos hidden item: Pearl in the pumice hollow, reached by sea
+#define FLAG_ICHOR_HIDDEN_ITEM_MELOS_ULTRA_BALL (FLAG_ICHOR_GENERAL_START + 0x25F) // Ichor: Kythera port: Melos hidden item: Ultra Ball under the jetty's last stone
+#define FLAG_ICHOR_HIDDEN_ITEM_NERAIDA_HEART_SCALE (FLAG_ICHOR_GENERAL_START + 0x260) // Ichor: Kythera port: Neraida falls hidden item: Heart Scale at the ledge path's foot
+#define FLAG_ICHOR_HIDDEN_ITEM_NERAIDA_HONEY    (FLAG_ICHOR_GENERAL_START + 0x261) // Ichor: Kythera port: Neraida falls hidden item: Honey in Kerinthos's bee wall
+#define FLAG_ICHOR_HIDDEN_ITEM_NERAIDA_MYSTIC_WATER (FLAG_ICHOR_GENERAL_START + 0x262) // Ichor: Kythera port: Neraida falls hidden item: Mystic Water in the mill-race
+#define FLAG_ICHOR_HIDDEN_ITEM_NERAIDA_PEARL    (FLAG_ICHOR_GENERAL_START + 0x263) // Ichor: Kythera port: Neraida falls hidden item: Pearl behind the shrine's basin
+#define FLAG_ICHOR_HIDDEN_ITEM_PAPHIA_PEARL     (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Kythera port: Paphia hidden item: Pearl under the mirror by the jetty
+#define FLAG_ICHOR_HIDDEN_ITEM_PAPHIA_ULTRA_BALL (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Kythera port: Paphia hidden item: Ultra Ball behind the dovecote
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE22_BIG_PEARL (FLAG_ICHOR_GENERAL_START + 0x266) // Ichor: Kythera port: Route 22 hidden item: Big Pearl at Hagne's column in the drowned temple
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE22_ELIXIR   (FLAG_ICHOR_GENERAL_START + 0x267) // Ichor: Kythera port: Route 22 hidden item: Elixir under Polyaigos's beach boulder
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE22_HEART_SCALE (FLAG_ICHOR_GENERAL_START + 0x268) // Ichor: Kythera port: Route 22 hidden item: Heart Scale under the rock on Myrtilos's islet
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE22_STARDUST (FLAG_ICHOR_GENERAL_START + 0x269) // Ichor: Kythera port: Route 22 hidden item: Stardust in the roots of Anydros's dead fig
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE23_PEARL    (FLAG_ICHOR_GENERAL_START + 0x26A) // Ichor: Kythera port: Route 23 hidden item: Pearl at the tip of Bathyllos's sandbar
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE23_STAR_PIECE (FLAG_ICHOR_GENERAL_START + 0x26B) // Ichor: Kythera port: Route 23 hidden item: Star Piece in the wreck's ribs
+#define FLAG_ICHOR_HIDDEN_ITEM_SKANDEIA_BIG_PEARL (FLAG_ICHOR_GENERAL_START + 0x26C) // Ichor: Kythera port: Skandeia hidden item: Big Pearl in the harbor shrine's niche, among the shells
+#define FLAG_ICHOR_HIDDEN_ITEM_SKANDEIA_HEART_SCALE (FLAG_ICHOR_GENERAL_START + 0x26D) // Ichor: Kythera port: Skandeia hidden item: Heart Scale at the north slip's end
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

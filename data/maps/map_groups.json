@@ -10,7 +10,8 @@
     "gMapGroup_DungeonsAct1",
     "gMapGroup_IndoorThyrsa",
     "gMapGroup_DungeonsAct2",
-    "gMapGroup_IndoorKaldera"
+    "gMapGroup_IndoorKaldera",
+    "gMapGroup_IndoorKythera"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -53,7 +54,17 @@
     "StyxFalls_OathHouse",
     "StyxFalls_StoneHouse",
     "Route12_CaveOfMaia",
-    "Kaldera"
+    "Kaldera",
+    "KytheraSkandeia",
+    "KytheraFoamRoad",
+    "KytheraSpringOfKallirhoe",
+    "KytheraPaphia",
+    "KytheraNeraidaFalls",
+    "Route22_MyrtoanSea",
+    "Melos",
+    "Route22_CretanSea",
+    "Route23_CretanSea",
+    "TriremeEuploia_DeckSouth"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -169,5 +180,28 @@
     "Kaldera_Agora",
     "Kaldera_SmithsHouse",
     "Kaldera_TempleOfHephaestus"
+  ],
+  "gMapGroup_IndoorKythera": [
+    "KytheraSkandeia_Asclepeion",
+    "KytheraSkandeia_Agora",
+    "KytheraSkandeia_AxylosHouse",
+    "KytheraSkandeia_NikareteHouse",
+    "KytheraSkandeia_PerfumersHouse",
+    "KytheraSkandeia_DiversHouse",
+    "KytheraSkandeia_ShipwrightsHouse",
+    "KytheraPaphia_Asclepeion",
+    "KytheraPaphia_Agora",
+    "KytheraPaphia_PygmalionsWorkshop",
+    "KytheraPaphia_Dovecote",
+    "KytheraPaphia_MirrorHouse",
+    "KytheraPaphia_OrchardHouse",
+    "KytheraPaphia_PottersHouse",
+    "KytheraTempleOfAphrodite",
+    "KytheraNeraidaFalls_Mill",
+    "KytheraEchoCaves",
+    "Melos_Farmhouse",
+    "Melos_KnappersHouse",
+    "Melos_Boathouse",
+    "Melos_BoathouseLoft"
   ]
 }

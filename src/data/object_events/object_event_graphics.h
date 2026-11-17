@@ -703,3 +703,7 @@ const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
 const u32 gObjectEventPic_IchorItemJar[] = INCGFX_U32("graphics/object_events/pics/misc/ichor_item_jar.png", ".4bpp", "-mwidth 2 -mheight 2");
+
+// Ichor: Kythera, the Temple of Aphrodite's mirrors (ported from claude/world-act3-4e546d)
+const u32 gObjectEventPic_IchorMirror[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mirror_stand.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMirrorMark[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mirror_mark.png", ".4bpp");

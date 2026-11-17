@@ -1,0 +1,524 @@
+// The Temple of Aphrodite, Paphia: Galatea's Gallery (design/phase4/SCRIPT.md beat
+// III-1G and Part 5). Layout, objects and the model checks: tools/ichor/maps/kythera_temple.py.
+//
+// Three rooms, entered from the south, each larger than the last:
+//   0 the pronaos (teach): S1 in its niche, M0 the tall mirror at the end, Charis
+//     by the dove altar. The door to the gallery is (5,23-24).
+//   1 the gallery (test): S2-S5 among the columns, W1 over the west aisle, W2 on
+//     the east wall, Rhodanthe at the north door (16,13-14).
+//   2 the rose court (master): S7-S9 among the beds, P1 fixed, P2 and P3 turnable,
+//     Anthousa in her alcove, Galatea on her dais.
+//
+// VAR_TEMP_1 is the room the player is in. Only that room's statues are live
+// (MOVEMENT_TYPE_ICHOR_STATUE, src/ichor_statue.c); the rest stand still. Stepping
+// into a room puts every statue back on its plinth and wakes that room's. A touch
+// (a statue's own script, with VAR_FACING = DIR_NONE) sends the player back to the
+// room's door, and the warp puts that room's statues back. Turned mirrors stay
+// turned: P2's and P3's facings are kept in two flags each.
+//
+// After the Foam Laurel the statues face the dais and never move again, the mirrors
+// stay as they were left, and the acolytes count as beaten (MAP_DESIGN.md §4).
+//
+// TODO(music): MUS_ICHOR_TEMPLE_APHRODITE (SCRIPT.md Part 9) isn't written: the
+// slice's temple theme stands in. The beat of silence when a statue moves isn't
+// in the engine either (ENGINE_ACT3.md, "Not in the engine").
+// TODO(art): the statues are the Trick House statue until Galatea's are drawn.
+// TODO(engine §3): the dove altar's offerings (Aphrodite's rites) are ichor-engine's.
+// TODO(engine §8): Cygnus is set here; the Star Chart's chime and screen are ichor-engine's.
+
+const FLAG_ICHOR_CONSTELLATION_CYGNUS = FLAG_ICHOR_CONSTELLATIONS_START + 5
+
+mapscripts KytheraTempleOfAphrodite_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(KytheraTempleOfAphrodite_EventScript_RestoreMirrors)
+        if (flag(FLAG_BADGE07_GET)) {
+            call(KytheraTempleOfAphrodite_EventScript_StillAll)
+            setvar(VAR_TEMP_1, 3)
+        } else {
+            getplayerxy(VAR_TEMP_2, VAR_TEMP_3)
+            if (var(VAR_TEMP_3) >= 25) {
+                setvar(VAR_TEMP_1, 0)
+            } elif (var(VAR_TEMP_3) >= 15) {
+                setvar(VAR_TEMP_1, 1)
+            } else {
+                setvar(VAR_TEMP_1, 2)
+            }
+            call(KytheraTempleOfAphrodite_EventScript_SetStatueTypes)
+        }
+    }
+}
+
+text KytheraTempleOfAphrodite_Text_NameCharis { "CHARIS" }
+text KytheraTempleOfAphrodite_Text_NameGalatea { "GALATEA" }
+
+// ---------------------------------------------------------------------------
+// The rooms and their statues
+// ---------------------------------------------------------------------------
+
+// The statues' templates from VAR_TEMP_1: the room's walk, the rest stand still.
+script KytheraTempleOfAphrodite_EventScript_SetStatueTypes {
+    if (var(VAR_TEMP_1) == 0) {
+        setobjectmovementtype(LOCALID_GALLERY_S1, MOVEMENT_TYPE_ICHOR_STATUE)
+    } else {
+        setobjectmovementtype(LOCALID_GALLERY_S1, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        setobjectmovementtype(LOCALID_GALLERY_S2, MOVEMENT_TYPE_ICHOR_STATUE)
+        setobjectmovementtype(LOCALID_GALLERY_S3, MOVEMENT_TYPE_ICHOR_STATUE)
+        setobjectmovementtype(LOCALID_GALLERY_S4, MOVEMENT_TYPE_ICHOR_STATUE)
+        setobjectmovementtype(LOCALID_GALLERY_S5, MOVEMENT_TYPE_ICHOR_STATUE)
+    } else {
+        setobjectmovementtype(LOCALID_GALLERY_S2, MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(LOCALID_GALLERY_S3, MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(LOCALID_GALLERY_S4, MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(LOCALID_GALLERY_S5, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        setobjectmovementtype(LOCALID_GALLERY_S7, MOVEMENT_TYPE_ICHOR_STATUE)
+        setobjectmovementtype(LOCALID_GALLERY_S8, MOVEMENT_TYPE_ICHOR_STATUE)
+        setobjectmovementtype(LOCALID_GALLERY_S9, MOVEMENT_TYPE_ICHOR_STATUE)
+    } else {
+        setobjectmovementtype(LOCALID_GALLERY_S7, MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(LOCALID_GALLERY_S8, MOVEMENT_TYPE_FACE_DOWN)
+        setobjectmovementtype(LOCALID_GALLERY_S9, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    return
+}
+
+// After the Laurel: every statue on its plinth, facing the dais, for good.
+script KytheraTempleOfAphrodite_EventScript_StillAll {
+    setobjectmovementtype(LOCALID_GALLERY_S1, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S2, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S3, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S4, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S5, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S7, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S8, MOVEMENT_TYPE_FACE_UP)
+    setobjectmovementtype(LOCALID_GALLERY_S9, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+// Every statue back on its plinth, from its (new) template.
+script KytheraTempleOfAphrodite_EventScript_RespawnStatues {
+    removeobject(LOCALID_GALLERY_S1)
+    removeobject(LOCALID_GALLERY_S2)
+    removeobject(LOCALID_GALLERY_S3)
+    removeobject(LOCALID_GALLERY_S4)
+    removeobject(LOCALID_GALLERY_S5)
+    removeobject(LOCALID_GALLERY_S7)
+    removeobject(LOCALID_GALLERY_S8)
+    removeobject(LOCALID_GALLERY_S9)
+    addobject(LOCALID_GALLERY_S1)
+    addobject(LOCALID_GALLERY_S2)
+    addobject(LOCALID_GALLERY_S3)
+    addobject(LOCALID_GALLERY_S4)
+    addobject(LOCALID_GALLERY_S5)
+    addobject(LOCALID_GALLERY_S7)
+    addobject(LOCALID_GALLERY_S8)
+    addobject(LOCALID_GALLERY_S9)
+    return
+}
+
+script KytheraTempleOfAphrodite_EventScript_EnterRoom {
+    call(KytheraTempleOfAphrodite_EventScript_SetStatueTypes)
+    call(KytheraTempleOfAphrodite_EventScript_RespawnStatues)
+    return
+}
+
+script KytheraTempleOfAphrodite_EventScript_EnterPronaos {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    call(KytheraTempleOfAphrodite_EventScript_EnterRoom)
+    releaseall
+}
+
+script KytheraTempleOfAphrodite_EventScript_EnterGallery {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    call(KytheraTempleOfAphrodite_EventScript_EnterRoom)
+    releaseall
+}
+
+script KytheraTempleOfAphrodite_EventScript_EnterCourt {
+    lockall
+    setvar(VAR_TEMP_1, 2)
+    call(KytheraTempleOfAphrodite_EventScript_EnterRoom)
+    releaseall
+}
+
+// Every statue's script: a touch sends you back to the room's door; a look is a look.
+script KytheraTempleOfAphrodite_EventScript_Statue {
+    if (var(VAR_FACING) == DIR_NONE) {
+        lockall
+        playse(SE_M_STRENGTH)
+        msgbox(format("A cold marble hand rests on your shoulder.\p…You're back at the door."))
+        closemessage
+        if (var(VAR_TEMP_1) == 0) {
+            warpsilent(MAP_KYTHERA_TEMPLE_OF_APHRODITE, 5, 34)
+        } elif (var(VAR_TEMP_1) == 1) {
+            warpsilent(MAP_KYTHERA_TEMPLE_OF_APHRODITE, 5, 22)
+        } else {
+            warpsilent(MAP_KYTHERA_TEMPLE_OF_APHRODITE, 16, 12)
+        }
+        waitstate
+        releaseall
+        end
+    }
+    if (flag(FLAG_BADGE07_GET)) {
+        msgbox(format("A marble statue, turned to face the dais. It doesn't look at you at all."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A marble figure on a low plinth, white with faint pink veins.\p"
+                      "Its eyes are blank, and on you."), MSGBOX_SIGN)
+    }
+}
+
+// ---------------------------------------------------------------------------
+// The mirrors
+// ---------------------------------------------------------------------------
+
+// P2 (initially east) and P3 (initially north): each keeps its quarter-turns
+// clockwise from there in two flags, 0-3.
+script KytheraTempleOfAphrodite_EventScript_RestoreMirrors {
+    setvar(VAR_TEMP_4, 0)
+    if (flag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT0)) {
+        addvar(VAR_TEMP_4, 1)
+    }
+    if (flag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT1)) {
+        addvar(VAR_TEMP_4, 2)
+    }
+    switch (var(VAR_TEMP_4)) {
+        case 0: setobjectmovementtype(LOCALID_GALLERY_P2, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+        case 1: setobjectmovementtype(LOCALID_GALLERY_P2, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 2: setobjectmovementtype(LOCALID_GALLERY_P2, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+        case 3: setobjectmovementtype(LOCALID_GALLERY_P2, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+    }
+    setvar(VAR_TEMP_4, 0)
+    if (flag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0)) {
+        addvar(VAR_TEMP_4, 1)
+    }
+    if (flag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1)) {
+        addvar(VAR_TEMP_4, 2)
+    }
+    switch (var(VAR_TEMP_4)) {
+        case 0: setobjectmovementtype(LOCALID_GALLERY_P3, MOVEMENT_TYPE_ICHOR_MIRROR_UP)
+        case 1: setobjectmovementtype(LOCALID_GALLERY_P3, MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT)
+        case 2: setobjectmovementtype(LOCALID_GALLERY_P3, MOVEMENT_TYPE_ICHOR_MIRROR)
+        case 3: setobjectmovementtype(LOCALID_GALLERY_P3, MOVEMENT_TYPE_ICHOR_MIRROR_LEFT)
+    }
+    return
+}
+
+// VAR_TEMP_4 = the mirror's turns (0-3); VAR_TEMP_5 = its facing as a DIR_* now.
+script KytheraTempleOfAphrodite_EventScript_TurnMirror {
+    lock
+    if (var(VAR_LAST_TALKED) == LOCALID_GALLERY_P2) {
+        setvar(VAR_TEMP_4, 0)
+        if (flag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT0)) {
+            addvar(VAR_TEMP_4, 1)
+        }
+        if (flag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT1)) {
+            addvar(VAR_TEMP_4, 2)
+        }
+        // P2 starts pointing east: east, south, west, north
+        switch (var(VAR_TEMP_4)) {
+            case 0: setvar(VAR_TEMP_5, DIR_EAST)
+            case 1: setvar(VAR_TEMP_5, DIR_SOUTH)
+            case 2: setvar(VAR_TEMP_5, DIR_WEST)
+            case 3: setvar(VAR_TEMP_5, DIR_NORTH)
+        }
+    } else {
+        setvar(VAR_TEMP_4, 0)
+        if (flag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0)) {
+            addvar(VAR_TEMP_4, 1)
+        }
+        if (flag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1)) {
+            addvar(VAR_TEMP_4, 2)
+        }
+        // P3 starts pointing north: north, east, south, west
+        switch (var(VAR_TEMP_4)) {
+            case 0: setvar(VAR_TEMP_5, DIR_NORTH)
+            case 1: setvar(VAR_TEMP_5, DIR_EAST)
+            case 2: setvar(VAR_TEMP_5, DIR_SOUTH)
+            case 3: setvar(VAR_TEMP_5, DIR_WEST)
+        }
+    }
+    switch (var(VAR_TEMP_5)) {
+        case DIR_NORTH: msgbox(format("A bronze mirror on a stand. It's pointing north.\pTurn it?"), MSGBOX_YESNO)
+        case DIR_EAST: msgbox(format("A bronze mirror on a stand. It's pointing east.\pTurn it?"), MSGBOX_YESNO)
+        case DIR_SOUTH: msgbox(format("A bronze mirror on a stand. It's pointing south.\pTurn it?"), MSGBOX_YESNO)
+        default: msgbox(format("A bronze mirror on a stand. It's pointing west.\pTurn it?"), MSGBOX_YESNO)
+    }
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    // a quarter-turn clockwise, kept in the flags
+    addvar(VAR_TEMP_4, 1)
+    if (var(VAR_TEMP_4) == 4) {
+        setvar(VAR_TEMP_4, 0)
+    }
+    if (var(VAR_LAST_TALKED) == LOCALID_GALLERY_P2) {
+        clearflag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT0)
+        clearflag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT1)
+        if (var(VAR_TEMP_4) == 1 || var(VAR_TEMP_4) == 3) {
+            setflag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT0)
+        }
+        if (var(VAR_TEMP_4) >= 2) {
+            setflag(FLAG_ICHOR_GALLERY_MIRROR_P2_BIT1)
+        }
+    } else {
+        clearflag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0)
+        clearflag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1)
+        if (var(VAR_TEMP_4) == 1 || var(VAR_TEMP_4) == 3) {
+            setflag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0)
+        }
+        if (var(VAR_TEMP_4) >= 2) {
+            setflag(FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1)
+        }
+    }
+    call(KytheraTempleOfAphrodite_EventScript_RestoreMirrors)
+    playse(SE_M_STRENGTH)
+    switch (var(VAR_TEMP_5)) {
+        case DIR_NORTH:
+            turnobject(VAR_LAST_TALKED, DIR_EAST)
+            msgbox(format("The mirror swings round on its stand. It's pointing east now."))
+        case DIR_EAST:
+            turnobject(VAR_LAST_TALKED, DIR_SOUTH)
+            msgbox(format("The mirror swings round on its stand. It's pointing south now."))
+        case DIR_SOUTH:
+            turnobject(VAR_LAST_TALKED, DIR_WEST)
+            msgbox(format("The mirror swings round on its stand. It's pointing west now."))
+        default:
+            turnobject(VAR_LAST_TALKED, DIR_NORTH)
+            msgbox(format("The mirror swings round on its stand. It's pointing north now."))
+    }
+    release
+}
+
+script KytheraTempleOfAphrodite_EventScript_FixedMirror {
+    msgbox(format("A bronze mirror on a stand, pointing east down the walk.\p"
+                  "This one's set into the stone. It won't turn."), MSGBOX_SIGN)
+}
+
+script KytheraTempleOfAphrodite_EventScript_WallMirror {
+    if (var(VAR_LAST_TALKED) == LOCALID_GALLERY_M0) {
+        msgbox(format("A tall bronze mirror. You see yourself, and the corridor behind you."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A polished bronze mirror on the wall. It shows what's behind you."), MSGBOX_SIGN)
+    }
+}
+
+// ---------------------------------------------------------------------------
+// The pronaos: Charis, the fresco, the altar
+// ---------------------------------------------------------------------------
+
+script KytheraTempleOfAphrodite_EventScript_Charis {
+    lock
+    faceplayer
+    setspeaker(KytheraTempleOfAphrodite_Text_NameCharis)
+    if (flag(FLAG_BADGE07_GET)) {
+        msgbox(format("The statues have turned to face her. They do that, when someone wins.\p"
+                      "They're sulking. It's very beautiful."))
+        release
+        end
+    }
+    if (var(VAR_TEMP_6) == 0) {
+        setvar(VAR_TEMP_6, 1)
+        msgbox(format("Welcome to the house of the goddess. Mind the statues.\p"
+                      "They're very beautiful. And very jealous.\p"
+                      "Look at them, and they stand still. Look away, and they come closer.\p"
+                      "A statue you can see in a mirror is a statue you can see.\p"
+                      "If one touches you, you'll find yourself back at the door of that room.\p"
+                      "No harm done. Only pride.\p"
+                      "The Living Marble waits in the rose court. She doesn't move either.\p"
+                      "Until she does."))
+        release
+        end
+    }
+    msgbox(format("Would you like me to show you the first room?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Faces and mirrors. Nothing else counts."))
+        release
+        end
+    }
+    closemessage
+    // Charis walks up the corridor facing the mirror at its end. Behind her the
+    // statue steps out of its niche when she turns aside, and stops when she
+    // faces the mirror again.
+    applymovement(LOCALID_GALLERY_CHARIS, KytheraTempleOfAphrodite_Movement_CharisUp)
+    waitmovement(0)
+    applymovement(LOCALID_GALLERY_CHARIS, Common_Movement_FaceLeft)
+    waitmovement(0)
+    playse(SE_M_STRENGTH)
+    applymovement(LOCALID_GALLERY_S1, KytheraTempleOfAphrodite_Movement_StatueSlide)
+    waitmovement(0)
+    delay(30)
+    applymovement(LOCALID_GALLERY_CHARIS, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(40)
+    applymovement(LOCALID_GALLERY_CHARIS, KytheraTempleOfAphrodite_Movement_CharisBack)
+    waitmovement(0)
+    setobjectxy(LOCALID_GALLERY_S1, 2, 29)
+    turnobject(LOCALID_GALLERY_S1, DIR_SOUTH)
+    applymovement(LOCALID_GALLERY_CHARIS, Common_Movement_FaceLeft)
+    waitmovement(0)
+    msgbox(format("Like that. Faces and mirrors. Nothing else counts."))
+    release
+}
+
+movement KytheraTempleOfAphrodite_Movement_CharisUp {
+    walk_up * 4
+}
+
+movement KytheraTempleOfAphrodite_Movement_CharisBack {
+    walk_down * 4
+}
+
+movement KytheraTempleOfAphrodite_Movement_StatueSlide {
+    walk_in_place_faster_down
+    walk_up
+}
+
+script KytheraTempleOfAphrodite_EventScript_Fresco {
+    msgbox(format("A painted dove. Its eye seems to follow you."), MSGBOX_SIGN)
+}
+
+script KytheraTempleOfAphrodite_EventScript_DoveAltar {
+    // TODO(engine §3): Aphrodite's rites and offerings (she loves Frankincense and
+    // likes Pretty Feathers and sea gifts) are ichor-engine's.
+    msgbox(format("An altar of pink marble, shaped like a dove at rest.\p"
+                  "Pilgrims leave frankincense here, and feathers, and shells."), MSGBOX_SIGN)
+}
+
+script KytheraTempleOfAphrodite_EventScript_Bench {
+    msgbox(format("A marble bench at the mouth of the niche. A rose lies on it."), MSGBOX_SIGN)
+}
+
+script KytheraTempleOfAphrodite_EventScript_Urn {
+    msgbox(format("A marble urn, spilling roses."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The acolytes
+// ---------------------------------------------------------------------------
+
+script KytheraTempleOfAphrodite_EventScript_Rhodanthe {
+    trainerbattle_single(TRAINER_ICHOR_RHODANTHE, Kythera_Text_RhodantheIntro, Kythera_Text_RhodantheDefeat)
+    setspeaker(Kythera_Text_SpeakerRhodanthe)
+    msgbox(Kythera_Text_RhodantheAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraTempleOfAphrodite_EventScript_Anthousa {
+    trainerbattle_single(TRAINER_ICHOR_ANTHOUSA, Kythera_Text_AnthousaIntro, Kythera_Text_AnthousaDefeat)
+    setspeaker(Kythera_Text_SpeakerAnthousa)
+    msgbox(Kythera_Text_AnthousaAfter, MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// Galatea, the Living Marble
+// ---------------------------------------------------------------------------
+
+// The step before the dais: she steps down to meet you.
+// TODO(engine): she should also step down when the player turns away from her
+// (beat III-1G); the engine has no turn hook, so only the step and a talk do it.
+script KytheraTempleOfAphrodite_EventScript_DaisStep {
+    if (flag(FLAG_BADGE07_GET)) {
+        end
+    }
+    lockall
+    setflag(FLAG_ICHOR_GALLERY_DONE)
+    playse(SE_M_STRENGTH)
+    applymovement(LOCALID_GALLERY_GALATEA, KytheraTempleOfAphrodite_Movement_StepDown)
+    waitmovement(0)
+    releaseall
+    goto(KytheraTempleOfAphrodite_EventScript_GalateaBattle)
+}
+
+movement KytheraTempleOfAphrodite_Movement_StepDown {
+    walk_slow_down
+}
+
+movement KytheraTempleOfAphrodite_Movement_StepUp {
+    walk_slow_up
+    face_down
+}
+
+script KytheraTempleOfAphrodite_EventScript_Galatea {
+    if (flag(FLAG_BADGE07_GET)) {
+        lock
+        faceplayer
+        setspeaker(KytheraTempleOfAphrodite_Text_NameGalatea)
+        msgbox(format("I'm practicing standing still. I'm terrible at it now. Isn't it wonderful?"))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GALLERY_DONE)
+    goto(KytheraTempleOfAphrodite_EventScript_GalateaBattle)
+}
+
+// Her speech, then the battle. From the dais step this isn't a talk, so the battle
+// starts without the talk's own lock (which would hold her still) and the speech is
+// shown first. Beaten already, yet the Laurel never changed hands: give it now.
+script KytheraTempleOfAphrodite_EventScript_GalateaBattle {
+    lockall
+    setvar(VAR_LAST_TALKED, LOCALID_GALLERY_GALATEA)
+    if (!defeated(TRAINER_ICHOR_GALATEA_1)) {
+        setspeaker(KytheraTempleOfAphrodite_Text_NameGalatea)
+        msgbox(Kythera_Text_GalateaIntro)
+        closemessage
+        setspeaker(SP_NAME_NONE)
+        trainerbattle_no_intro(TRAINER_ICHOR_GALATEA_1, Kythera_Text_GalateaDefeat)
+    }
+    goto(KytheraTempleOfAphrodite_EventScript_GalateaDefeated)
+}
+
+script KytheraTempleOfAphrodite_EventScript_GalateaDefeated {
+    setspeaker(KytheraTempleOfAphrodite_Text_NameGalatea)
+    msgbox(format("Well. That's how it's supposed to feel. I'd forgotten.\p"
+                  "Take this. The Foam Laurel. She came ashore on the foam, you know.\p"
+                  "Wet, cold, and not at all sure about any of it. Like everyone."))
+    setflag(FLAG_BADGE07_GET)
+    setvar(VAR_ICHOR_ACT3, 3)
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} received the Foam Laurel from Galatea!"))
+    waitmessage
+    call(Common_EventScript_PlayGymBadgeFanfare)
+    setflag(FLAG_ICHOR_CONSTELLATION_CYGNUS)
+    playse(SE_SHINY)
+    msgbox(format("A new star has appeared in your Star Chart: Cygnus, the swan."))
+    setspeaker(KytheraTempleOfAphrodite_Text_NameGalatea)
+    msgbox(format("And this. It's a kind light. It doesn't burn. It just shows things."))
+    // TODO(balance): TM Dazzling Gleam isn't a TM item yet. When it is, give it
+    // here: additem, playfanfare(MUS_OBTAIN_TMHM), "{PLAYER} received TM Dazzling Gleam!".
+    setflag(FLAG_ICHOR_GOT_TM_DAZZLING_GLEAM)
+    msgbox(format("You came by the spring, I expect. Everyone does.\p"
+                  "Did you see the boy?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Then you saw the most faithful lover on this island."))
+    } else {
+        msgbox(format("You walked right past him. People do. He doesn't notice."))
+    }
+    msgbox(format("He looks at the one face that will never get older or cross with him.\p"
+                  "Love that won't let a thing change isn't love. It's a pool.\p"
+                  "My husband learned that. It took him forty years and a goddess."))
+    msgbox(format("You're going to Knossa. All Kythera knows where the ships went.\p"
+                  "Ask the Knossans who their old queen loved.\p"
+                  "Then don't ask again."))
+    msgbox(format("One more thing. The falls north of town have gone quiet.\p"
+                  "Krenaia keeps sending to the temple for a laureled one.\p"
+                  "That's you now. Go and see what the water wants."))
+    setflag(FLAG_ICHOR_GALATEA_FALLS_HINT)
+    closemessage
+    // The room keeps its peace: the acolytes count as beaten, the statues turn to her.
+    settrainerflag(TRAINER_ICHOR_RHODANTHE)
+    settrainerflag(TRAINER_ICHOR_ANTHOUSA)
+    call(KytheraTempleOfAphrodite_EventScript_StillAll)
+    call(KytheraTempleOfAphrodite_EventScript_RespawnStatues)
+    setvar(VAR_TEMP_1, 3)
+    getobjectxy(LOCALID_GALLERY_GALATEA, CURRENT_POSITION, VAR_TEMP_2, VAR_TEMP_3)
+    if (var(VAR_TEMP_3) == 4) {
+        applymovement(LOCALID_GALLERY_GALATEA, KytheraTempleOfAphrodite_Movement_StepUp)
+        waitmovement(0)
+    }
+    releaseall
+}

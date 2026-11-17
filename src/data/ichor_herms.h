@@ -48,4 +48,9 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_AETHOS_ROUTE_16,
         .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_16,
     },
+    [HERM_KYTHERA_FOAM_ROAD] = {
+        .map = MAP_KYTHERA_FOAM_ROAD,
+        .mapsec = MAPSEC_NONE,                                 // Skandeia is Kythera's fly target
+        .healLocation = HEAL_LOCATION_HERM_KYTHERA_FOAM_ROAD,  // the fork, (43,6); land at (43,7)
+    },
 };

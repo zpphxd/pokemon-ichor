@@ -1,0 +1,85 @@
+// Phereklos's yard, Skandeia (design/phase4/SCRIPT.md, Part 2): the shipwright
+// with no ships. In the Iliad a Phereklos built the ships Paris sailed to fetch
+// Helen; this one says it wasn't him.
+// Room: tools/ichor/maps/kythera_homes.py. The mat is (6..7,8). Phereklos sits at
+// his game, (6,5), beside the barrel table and the knucklebones.
+//
+// Knucklebones (SYSTEMS §9): Phereklos plays Bold, chasing the Aphrodite throw.
+// The first win gives a Big Pearl (FLAG_ICHOR_KNUCKLEBONES_SKANDEIA).
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
+// TODO(engine §9): the knucklebones match itself (best of 5, a Bold opponent).
+// Until it lands, a coin flip stands in for the match.
+// TODO(act3): later wins give a small prize once a day (Pearl, Stardust or Honey,
+// FLAG_DAILY_ICHOR_KNUCKLEBONES_SKANDEIA). The daily flag isn't claimed (it comes
+// from world-act3's daily range), so later wins give nothing yet.
+// TODO(act3): the sea-story pointer should also check that Poseidon's test isn't
+// done (!FLAG_ICHOR_THEOXENIA_POSEIDON, beat III-2) once that flag exists.
+
+mapscripts KytheraSkandeia_ShipwrightsHouse_MapScripts {}
+
+text KytheraSkandeia_ShipwrightsHouse_Name_Phereklos { "PHEREKLOS" }
+
+script KytheraSkandeia_ShipwrightsHouse_EventScript_Phereklos {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_ShipwrightsHouse_Name_Phereklos)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("They brought back nineteen of my forty. Patched with Titan helmets.\p"
+                      "You can't buy bronze like that. I'm keeping the helmets."))
+    } else {
+        msgbox(format("No hulls, no timber, no work. Sit. Throw bones with me.\p"
+                      "I always go for the Aphrodite. All four faces. One, three, four, six.\p"
+                      "It's her island. It'd be rude not to."))
+    }
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Play knucklebones?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    closemessage
+    // TODO(engine §9): the match. A coin flip stands in for it.
+    random(2)
+    if (var(VAR_RESULT) == 0) {
+        setspeaker(KytheraSkandeia_ShipwrightsHouse_Name_Phereklos)
+        msgbox(format("Aphrodite smiles on me today. She doesn't usually. Again tomorrow?"))
+    } elif (!flag(FLAG_ICHOR_KNUCKLEBONES_SKANDEIA)) {
+        setspeaker(KytheraSkandeia_ShipwrightsHouse_Name_Phereklos)
+        msgbox(format("Ha! Beaten in my own shed. Here. I found it in a keel joint."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_BIG_PEARL)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_KNUCKLEBONES_SKANDEIA)
+    } else {
+        setspeaker(KytheraSkandeia_ShipwrightsHouse_Name_Phereklos)
+        msgbox(format("Again! Take the shavings. No, take this. Shavings are for me."))
+        // TODO(act3): once a day, a random small prize (Pearl, Stardust or Honey).
+    }
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Ask Phereklos about the ships?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        setspeaker(KytheraSkandeia_ShipwrightsHouse_Name_Phereklos)
+        msgbox(format("People say a Phereklos built the ships that took Helen. Not me.\p"
+                      "My great-great-grandfather. Every family's got one.\p"
+                      "Now Titans have all my ships.\p"
+                      "And I don't even know where they're going."))
+        if (flag(FLAG_BADGE07_GET)) {
+            setspeaker(KytheraSkandeia_ShipwrightsHouse_Name_Phereklos)
+            msgbox(format("You want a sea story? Ask the old men about the dry man under the cape."))
+        }
+    }
+    release
+}
+
+script KytheraSkandeia_ShipwrightsHouse_EventScript_Model {
+    msgbox(format("A model of a long black ship with a painted eye."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_ShipwrightsHouse_EventScript_Tools {
+    msgbox(format("Adzes and augers on the wall. Nothing to use them on this week."), MSGBOX_SIGN)
+}

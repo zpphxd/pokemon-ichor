@@ -1,0 +1,244 @@
+// Axylos's house, Skandeia: the xenia host (design/phase4/SCRIPT.md, Part 2, and
+// beat III-1C2, "Alethea, and the bad guests").
+// Room: tools/ichor/maps/kythera_homes.py. The mat is (6..7,8). Axylos stands at
+// the head of the long table, (9,5). Ochros sits at (4,4) and Psephos at (7,6);
+// Alethea waits by the door at (5,8). All three hide behind
+// FLAG_ICHOR_BAD_GUESTS_GONE.
+//
+// The street scene (Alethea rejoins and walks to this door) is the outdoor
+// map's; it must run before the player can reach the door. On the first entry
+// the guests' scene plays; challenging them can be refused, and talking to
+// Axylos, the guests or Alethea asks again.
+//
+// The guests are one double battle, both trainers at once:
+// TRAINER_ICHOR_OCHROS and TRAINER_ICHOR_PSEPHOS (SCRIPT.md Part 3). A loss
+// whites out with both still at the table, and talking to anyone asks again.
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA (the warp goes to a placeholder until
+// the outdoor map exists; kythera_homes.py's DOORS takes its warp id).
+// TODO(engine §3): Zeus +5 Favor when the guests go (special Ichor_AddFavor).
+// TODO(engine §10): half of the Broken Ring (a key item, not yet in the game) and
+// FLAG_ICHOR_XENIA_BROKEN_RING_1; and the xenia rest until a chosen hour.
+
+mapscripts KytheraSkandeia_AxylosHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_SAW_BAD_GUESTS)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: KytheraSkandeia_AxylosHouse_EventScript_BadGuests
+    ]
+}
+
+text KytheraSkandeia_AxylosHouse_Name_Axylos { "AXYLOS" }
+text KytheraSkandeia_AxylosHouse_Name_Ochros { "OCHROS" }
+text KytheraSkandeia_AxylosHouse_Name_Psephos { "PSEPHOS" }
+text KytheraSkandeia_AxylosHouse_Name_Alethea { "ALETHEA" }
+
+// The double battle's defeat lines (SCRIPT.md Part 3).
+text KytheraSkandeia_AxylosHouse_Text_OchrosDefeat { format("Full. I was full anyway.") }
+text KytheraSkandeia_AxylosHouse_Text_PsephosDefeat { format("I wasn't full.") }
+
+// ---------------------------------------------------------------------------
+// The bad guests (beat III-1C2), on the first entry
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_AxylosHouse_EventScript_BadGuests {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setflag(FLAG_ICHOR_SAW_BAD_GUESTS)
+    applymovement(LOCALID_PLAYER, KytheraSkandeia_AxylosHouse_Movement_OffTheMat)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    msgbox(format("Guests! Sit. Eat first.\p"
+                  "Then tell me who you are. Not before."))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
+    msgbox(format("There's no more bread, old man."))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    msgbox(format("There's always more bread."))
+    closemessage
+    // He takes the last loaf from the shelf and sets it in front of them.
+    applymovement(LOCALID_SKANDEIA_AXYLOS, KytheraSkandeia_AxylosHouse_Movement_FetchLoaf)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Psephos)
+    msgbox(format("And the wine."))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    msgbox(format("And the wine."))
+    closemessage
+    applymovement(LOCALID_SKANDEIA_ALETHEA, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Alethea)
+    msgbox(format("Three days. They've eaten his fish, his figs and both his goats.\p"
+                  "He keeps smiling. He has to. It's the law.\p"
+                  "A host can't refuse a guest. Zeus watches the door.\p"
+                  "Nobody ever said anything about guests refusing guests, though."))
+    call(KytheraSkandeia_AxylosHouse_EventScript_Challenge)
+    releaseall
+}
+
+script KytheraSkandeia_AxylosHouse_EventScript_Challenge {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Challenge the Titan guests?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(KytheraSkandeia_AxylosHouse_Name_Alethea)
+        msgbox(format("…Truthfully, I'd have said no too. Then I'd have hated myself."))
+        return
+    }
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
+    msgbox(format("The kid wants the table. Hear that, Psephos?"))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Psephos)
+    msgbox(format("I heard. I'm still eating."))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
+    msgbox(format("Eat faster."))
+    closemessage
+    trainerbattle_two_trainers(TRAINER_ICHOR_OCHROS, KytheraSkandeia_AxylosHouse_Text_OchrosDefeat,
+                               TRAINER_ICHOR_PSEPHOS, KytheraSkandeia_AxylosHouse_Text_PsephosDefeat)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
+    msgbox(format("Bad bread anyway."))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Psephos)
+    msgbox(format("It was good bread."))
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
+    msgbox(format("It was good bread."))
+    closemessage
+
+    // They take their helmets and go. At the door Psephos turns round, puts a
+    // coin on the table, thinks better of it, and takes it back.
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_SKANDEIA_OCHROS)
+    setobjectxy(LOCALID_SKANDEIA_PSEPHOS, 7, 8)
+    fadescreen(FADE_FROM_BLACK)
+    applymovement(LOCALID_SKANDEIA_PSEPHOS, KytheraSkandeia_AxylosHouse_Movement_PsephosHesitates)
+    waitmovement(0)
+    removeobject(LOCALID_SKANDEIA_PSEPHOS)
+    setflag(FLAG_ICHOR_BAD_GUESTS_GONE)
+    // TODO(engine §3): Zeus +5 Favor:
+    //   setvar(VAR_0x8004, ICHOR_GOD_ZEUS) setvar(VAR_0x8005, 5) special(Ichor_AddFavor)
+
+    applymovement(LOCALID_SKANDEIA_AXYLOS, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    msgbox(format("Well! Now there's room at the table.\p"
+                  "Sit. Both of you. I've got… I've got olives.\p"
+                  "I've always got olives."))
+    call(Kythera_EventScript_HostHeals)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    msgbox(format("My father had a guest-friend in Amnisos, on Knossa. And I have his son.\p"
+                  "Thirty years since either of us crossed. But the ring remembers.\p"
+                  "Take him my half. He'll feed you. He has to. It's the law."))
+    // TODO(engine §10): {PLAYER} received half of a Broken Ring! (giveitem, once the
+    // key item exists) and setflag(FLAG_ICHOR_XENIA_BROKEN_RING_1).
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Alethea)
+    msgbox(format("I'm going to walk up to the temple town. Paphia. Come with me?\p"
+                  "There's a spring on the way I want to see. Everyone says it's sad.\p"
+                  "I'll go ahead. Catch me up on the Foam Road. Truthfully, I'll be digging."))
+    closemessage
+    applymovement(LOCALID_SKANDEIA_ALETHEA, KytheraSkandeia_AxylosHouse_Movement_AletheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_SKANDEIA_ALETHEA)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The people
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_AxylosHouse_EventScript_Axylos {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    if (!flag(FLAG_ICHOR_BAD_GUESTS_GONE)) {
+        msgbox(format("Sit. Eat first. Then tell me who you are. Not before.\p"
+                      "Oh. There's not much left. There's always something, though."))
+        call(KytheraSkandeia_AxylosHouse_EventScript_Challenge)
+        release
+        end
+    }
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Two Titans came by this morning. Helmets off. With a goat.\p"
+                      "Not my goat. A goat. I fed them, of course. They cried. Of course."))
+    } else {
+        msgbox(format("Sit. Eat first. Then tell me who you are. Not before."))
+    }
+    call(Kythera_EventScript_HostHeals)
+    setspeaker(KytheraSkandeia_AxylosHouse_Name_Axylos)
+    msgbox(format("Stay the night? I can wake you when you like."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        // TODO(engine §10): the xenia rest: dawn, noon, dusk or night, whichever
+        // are still ahead today (SYSTEMS §10). Until it exists, a night's sleep
+        // that doesn't move the clock.
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        delay(60)
+        fadescreen(FADE_FROM_BLACK)
+    }
+    release
+}
+
+script KytheraSkandeia_AxylosHouse_EventScript_Guest {
+    lock
+    faceplayer
+    call(KytheraSkandeia_AxylosHouse_EventScript_Challenge)
+    release
+}
+
+script KytheraSkandeia_AxylosHouse_EventScript_Alethea {
+    lock
+    faceplayer
+    call(KytheraSkandeia_AxylosHouse_EventScript_Challenge)
+    release
+}
+
+// The xenia hosts' table (SYSTEMS §10), shared by Kythera's and Melos's hosts.
+script Kythera_EventScript_HostHeals {
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The room
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_AxylosHouse_EventScript_Hearth {
+    msgbox(format("A bronze pot on the hearth. It's never cold."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_AxylosHouse_EventScript_Bowls {
+    msgbox(format("A shelf of mismatched bowls. More bowls than one man could ever need."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_AxylosHouse_EventScript_Tether {
+    msgbox(format("A peg with an empty goat's tether."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+
+movement KytheraSkandeia_AxylosHouse_Movement_OffTheMat {
+    walk_up
+}
+
+movement KytheraSkandeia_AxylosHouse_Movement_FetchLoaf {
+    face_up
+    delay_16
+    delay_16
+    face_left
+    delay_16
+}
+
+movement KytheraSkandeia_AxylosHouse_Movement_PsephosHesitates {
+    face_up
+    delay_16
+    delay_16
+    delay_16
+    face_down
+    delay_16
+}
+
+movement KytheraSkandeia_AxylosHouse_Movement_AletheaLeaves {
+    walk_right
+}

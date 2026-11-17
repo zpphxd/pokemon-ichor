@@ -211,7 +211,59 @@
 #define TRAINERS_END_ACT2                   263
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
-#define TRAINERS_END_ACT3                     0
+// Kythera and Melos (Act III, Laurel 7), ported from claude/world-act3-4e546d in
+// its order: the Euploia's southern voyage, Melos, Routes 22-23, Skandeia, the
+// Foam Road, the spring and Echo's caves, the Temple of Aphrodite and the falls.
+#define TRAINER_ICHOR_EUDOROS                      320
+#define TRAINER_ICHOR_KERDON_KYTHERA               321
+#define TRAINER_ICHOR_KIMOLOS                      322
+#define TRAINER_ICHOR_THEION                       323
+#define TRAINER_ICHOR_KYMAIOS                      324
+#define TRAINER_ICHOR_ANTALKIDAS                   325
+#define TRAINER_ICHOR_NIKANDROS                    326
+#define TRAINER_ICHOR_HAGNE                        327
+#define TRAINER_ICHOR_MOLYBDOS                     328
+#define TRAINER_ICHOR_OCHROS                       329
+#define TRAINER_ICHOR_PSEPHOS                      330
+#define TRAINER_ICHOR_AMPHITOS                     331
+#define TRAINER_ICHOR_SKOPAS                       332
+#define TRAINER_ICHOR_PONTINOS                     333
+#define TRAINER_ICHOR_KASSITEROS                   334
+#define TRAINER_ICHOR_PHILOTES                     335
+#define TRAINER_ICHOR_KALAMIS                      336
+#define TRAINER_ICHOR_KOLYMBOS                     337
+#define TRAINER_ICHOR_ANTHOUSA                     338
+#define TRAINER_ICHOR_RHODANTHE                    339
+#define TRAINER_ICHOR_GALATEA_1                    340
+#define TRAINER_ICHOR_LYKIDAS_KYTHERA              341
+#define TRAINER_ICHOR_KERINTHOS                    342
+#define TRAINER_ICHOR_MOPSOS_KYTHERA               343
+#define TRAINER_ICHOR_THESTYLIS_KYTHERA            344
+#define TRAINER_ICHOR_BATHYLLOS                    345
+#define TRAINER_ICHOR_EUTHYKLES                    346
+#define TRAINER_ICHOR_MYRSINE                      347
+#define TRAINER_ICHOR_AKTAIOS_KYTHERA              348
+#define TRAINER_ICHOR_NERINE                       349
+#define TRAINER_ICHOR_PHORBAS                      350
+#define TRAINER_ICHOR_LAMPROS                      351
+#define TRAINER_ICHOR_PSAMATHE                     352
+#define TRAINER_ICHOR_PELAGON                      353
+#define TRAINER_ICHOR_KLEITOS                      354
+#define TRAINER_ICHOR_DOROS                        355
+#define TRAINER_ICHOR_AKAMAS                       356
+#define TRAINER_ICHOR_EIONE                        357
+#define TRAINER_ICHOR_NAUPLIOS                     358
+#define TRAINER_ICHOR_LYKON_KYTHERA                359
+#define TRAINER_ICHOR_THEANO                       360
+#define TRAINER_ICHOR_KYMODOKE                     361
+#define TRAINER_ICHOR_MENALKAS_KYTHERA             362
+#define TRAINER_ICHOR_AMARYLLIS                    363
+#define TRAINER_ICHOR_DAPHNIS_KYTHERA              364
+#define TRAINER_ICHOR_OPORA                        365
+#define TRAINER_ICHOR_PEGAIOS                      366
+#define TRAINER_ICHOR_DEXITHEA                     367
+
+#define TRAINERS_END_ACT3                     368
 
 // The post-game, ids 500-679 and 1024-1223: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0

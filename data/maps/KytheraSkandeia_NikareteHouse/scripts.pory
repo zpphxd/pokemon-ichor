@@ -1,0 +1,88 @@
+// Nikarete's house, Skandeia (design/phase4/SCRIPT.md, Part 2): a net-mender,
+// whose grandson Lithos went with Hyperion's crews last year.
+// Room: tools/ichor/maps/kythera_homes.py. Two rooms: the front one all loom and
+// nets (Nikarete at her loom, (3,7)), the back one Lithos's, through the doorway
+// at (4..5,5..6). The mat is (4..5,11).
+//
+// After the climax (VAR_ICHOR_ACT3 >= 19) Lithos is home: he sits by his bed at
+// (6,4) and gives the Ability Capsule. Until then his object hides behind
+// FLAG_TEMP_1, set on every load (SCRIPT.md's FLAG_ICHOR_HIDE_LITHOS_HOME isn't
+// needed).
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
+// TODO(act3, Open questions 9): if Lithos was beaten in the Labyrinth's Ring IV,
+// he adds "You knocked me flat at Knossa. Grandmother says I deserved it." Gate
+// it on that trainer's flag once LABYRINTH's Titanborn exist.
+
+mapscripts KytheraSkandeia_NikareteHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (var(VAR_ICHOR_ACT3) < 19) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text KytheraSkandeia_NikareteHouse_Name_Nikarete { "NIKARETE" }
+text KytheraSkandeia_NikareteHouse_Name_Lithos { "LITHOS" }
+
+script KytheraSkandeia_NikareteHouse_EventScript_Nikarete {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_NikareteHouse_Name_Nikarete)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Look at him. All that way to stop dying.\p"
+                      "And he came back to mend nets.\p"
+                      "Badly. He mends them badly. Oh, I'm glad."))
+        release
+        end
+    }
+    msgbox(format("My grandson went with the Titans. Lithos. A year last spring.\p"
+                  "The big man came through with silver. Shouting. Kind, I suppose.\p"
+                  "Lithos said they'd stop the dying. His mother died, you see.\p"
+                  "I said, then who'll mend the nets? He laughed. He has a nice laugh.\p"
+                  "He's skinny. His helmet's too big for him.\p"
+                  "If you see him, tell him to come home.\p"
+                  "Tell him I'm not angry. Tell him I'm a bit angry."))
+    release
+}
+
+script KytheraSkandeia_NikareteHouse_EventScript_Lithos {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_NikareteHouse_Name_Lithos)
+    if (flag(FLAG_ICHOR_LITHOS_HOME)) {
+        msgbox(format("I didn't like it. I came home."))
+        release
+        end
+    }
+    msgbox(format("I was on the stair. I was frozen on it. Did you know that?\p"
+                  "I could see my own hand in front of my face. Gray. And not moving.\p"
+                  "They said we'd live forever. I think I did, for an hour.\p"
+                  "I didn't like it. I came home.\p"
+                  "Grandmother says I'm to give you this. She says you know why."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_ABILITY_CAPSULE)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_LITHOS_HOME)
+    release
+}
+
+script KytheraSkandeia_NikareteHouse_EventScript_Helmet {
+    msgbox(format("A clay Titan helmet he made himself as a child, painted badly gold."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_NikareteHouse_EventScript_Window {
+    msgbox(format("The window looks out on the empty slips."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_NikareteHouse_EventScript_Bed {
+    msgbox(format("A narrow bed, still made. A slingshot hangs on a nail above it."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_NikareteHouse_EventScript_Loom {
+    msgbox(format("Nikarete's loom, strung with net."), MSGBOX_SIGN)
+}

@@ -2761,3 +2761,11 @@ static const struct SpriteFrameImage sPicTable_IchorCrows[] = {
 static const struct SpriteFrameImage sPicTable_IchorItemJar[] = {
     overworld_frame(gObjectEventPic_IchorItemJar, 2, 2, 0),
 };
+
+static const struct SpriteFrameImage sPicTable_IchorMirror[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMirror, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMirrorMark[] = {
+    obj_frame_tiles(gObjectEventPic_IchorMirrorMark),
+};

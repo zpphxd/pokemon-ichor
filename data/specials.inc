@@ -1148,3 +1148,5 @@ gSpecials::
 	def_special Ichor_PlaceConstellation
 	def_special Ichor_CountConstellations
 	def_special Ichor_ShowNightSky
+	@ Ichor: world-act3, Kythera (src/ichor_kythera.c)
+	def_special Ichor_TakeFirstFruits

@@ -486,6 +486,8 @@ enum
     OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA,
     OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA,
     OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_MIRROR, // Kythera: the Temple of Aphrodite's turnable bronze mirror
+    OBJ_EVENT_GFX_ICHOR_MIRROR_MARK, // Kythera: a wall mirror's blank marker
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

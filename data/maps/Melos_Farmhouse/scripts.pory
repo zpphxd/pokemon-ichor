@@ -1,0 +1,53 @@
+// Kentrios's farmhouse, Melos (design/phase4/SCRIPT.md, Part 2): the farmer who
+// found the armless statue with his hoe.
+// Room: tools/ichor/maps/kythera_homes.py. One low room: the hearth, the hoe on
+// its pegs (8,0..1), and the shelf of things he dug up looking for her arms
+// (4..5,0..1). Kentrios stands at (5,3). The mat is (6..7,5).
+//
+// After the statue's rite (FLAG_ICHOR_MELOS_RITE, set on MAP_MELOS, beat
+// III-1B2) he gives Rose Incense: "Take it to Kythera."
+//
+// TODO(act3): exit to MAP_MELOS.
+
+mapscripts Melos_Farmhouse_MapScripts {}
+
+text Melos_Farmhouse_Name_Kentrios { "KENTRIOS" }
+
+script Melos_Farmhouse_EventScript_Kentrios {
+    lock
+    faceplayer
+    setspeaker(Melos_Farmhouse_Name_Kentrios)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("An hour, they say, everything stood still. Like her.\p"
+                      "When it started again she was facing my door. She's never done that."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_MELOS_RITE) && !flag(FLAG_ICHOR_GOT_ROSE_INCENSE)) {
+        msgbox(format("She turned back to the sea when you gave her that. I saw.\p"
+                      "Here. I found this in the niche when I stood her up. It smells of roses."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_ROSE_INCENSE)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_ROSE_INCENSE)
+        setspeaker(Melos_Farmhouse_Name_Kentrios)
+        msgbox(format("Take it to Kythera. Somebody there will know what it's for."))
+        release
+        end
+    }
+    msgbox(format("Everything on that shelf came out of the field. Looking for her arms.\p"
+                  "A lamp. A coin. A toe. Not hers. She's got all hers."))
+    release
+}
+
+script Melos_Farmhouse_EventScript_Shelf {
+    msgbox(format("A clay lamp, a coin, a marble toe that isn't hers, a broken comb."), MSGBOX_SIGN)
+}
+
+script Melos_Farmhouse_EventScript_Hoe {
+    msgbox(format("The hoe that hit her shoulder, on its pegs."), MSGBOX_SIGN)
+}
