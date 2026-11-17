@@ -217,8 +217,9 @@ def paint_screen():
     # The drachma, where the Hoenn bag had its ball sticker.
     paint_coin(c, 8, 8)
 
-    # Item icon plate: parchment, cols 1-4 rows 9-12 (the icon is 24x24 at 24,88).
-    bx, by, bw, bh = 9, 73, 30, 29
+    # Item icon plate: parchment, cols 1-4 rows 9-12, framing the 24x24 pic.
+    check_icon_plate()
+    bx, by, bw, bh = ICON_PLATE
     c.rect(bx, by, bw, bh, I_P)
     c.frame(bx, by, bw, bh, I_INK)
     c.frame(bx + 2, by + 2, bw - 4, bh - 4, I_PS)

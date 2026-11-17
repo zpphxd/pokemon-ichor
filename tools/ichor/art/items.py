@@ -1,11 +1,13 @@
 """Ichor's item icons (24x24, graphics/items/icons) and their palettes.
 
 Usage:
-    /usr/bin/python3 tools/ichor/art/items.py [--write] [--only PIC] [--preview DIR]
+    /usr/bin/python3 tools/ichor/art/items.py [--write] [--only PIC] [--check] [--preview DIR]
 
 --write    rewrites the icon PNGs and palettes this file owns, keeping every
            item that shares a pic or a palette consistent
 --only PIC limits --write to one icon PNG and its associated palettes
+--check    only checks: the sharing, and that every icon this file owns is
+           centred in its frame to within half a pixel (also run after --write)
 --preview  writes DIR/items_icons.png (before and after at 4x and 1x, on the
            bag's parchment plate and on clay) and DIR/items_icons_tm.png (the
            sealed scroll and the tablet in all 19 type colors)
@@ -47,8 +49,9 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(__file__))
-from items_lib import (C, Icon, ROOT, mix, palette_colors, ramp4,  # noqa: E402
-                       save_indexed, to_rgb, upscale, write_jasc)
+from items_lib import (C, Icon, ROOT, centre_offset, centred, mix,  # noqa: E402
+                       palette_colors, ramp4, save_indexed, to_rgb, upscale,
+                       write_jasc)
 
 ICONS = os.path.join(ROOT, "graphics/items/icons")
 PALS = os.path.join(ROOT, "graphics/items/icon_palettes")
@@ -1340,7 +1343,7 @@ def write_all(only=None):
     palettes = PALETTES if only is None else {stem: PALETTES[stem] for stem in PIC_PALS[only]}
     for pic, ic in pics.items():
         first = PALETTES[PIC_PALS[pic][0]][1]
-        save_indexed(ic.a, palette_colors(ic.roles, first), os.path.join(ICONS, pic + ".png"))
+        save_indexed(centred(ic.a), palette_colors(ic.roles, first), os.path.join(ICONS, pic + ".png"))
     for stem, (roles, cols) in palettes.items():
         write_jasc(os.path.join(PALS, stem + ".pal"), palette_colors(roles, cols))
     print(f"items.py: wrote {len(pics)} pics and {len(palettes)} palettes")
@@ -1482,9 +1485,26 @@ def preview_jar(outdir):
     sheet.save(os.path.join(outdir, "items_ground_jar.png"))
 
 
+def check_centred():
+    """Every icon this file owns, as written in graphics/items/icons, must be
+    centred in its 24x24 frame to within half a pixel (see centred())."""
+    from PIL import Image as _Image
+    ok = True
+    for pic in sorted(PICS):
+        a = np.array(_Image.open(os.path.join(ICONS, pic + ".png")))
+        dx, dy = centre_offset(a)
+        if max(abs(dx), abs(dy)) > 0.5:
+            print(f"items.py: {pic}.png is off-centre by ({dx:+.1f}, {dy:+.1f}) px;"
+                  f" run items.py --write --only {pic}")
+            ok = False
+    return ok
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--check", action="store_true",
+                    help="only check the sharing and that every written icon is centred")
     ap.add_argument("--only", choices=sorted(PICS))
     ap.add_argument("--preview")
     args = ap.parse_args()
@@ -1499,6 +1519,10 @@ def main():
     if args.preview:
         preview(args.preview)
         preview_jar(args.preview)
+    if not check_centred():
+        sys.exit(1)
+    if args.check:
+        print(f"items.py: {len(PICS)} icons shared consistently and centred")
 
 
 if __name__ == "__main__":

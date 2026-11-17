@@ -64,6 +64,34 @@ MEANDER = [
 TRANSPARENT = (112, 200, 160)   # placeholder for index 0 in previews
 
 
+# --- The item icon plate (bag and shop) ------------------------------------
+# AddItemIconSprite (src/item_icon.c) makes a 32x32 sprite and copies the
+# 24x24 pic into its TOP-LEFT 24x24, so the pic's top-left corner is the
+# sprite's centre minus 16 px. The bag (item_menu_icons.c) and the shop
+# (shop.c) centre the sprite at ICON_SPRITE_CENTER, which puts the pic at
+# x 12-35, y 76-99: exactly the inside of the plate's inner frame.
+ICON_SPRITE_CENTER = (28, 92)
+ICON_PIC = (ICON_SPRITE_CENTER[0] - 16, ICON_SPRITE_CENTER[1] - 16, 24, 24)
+ICON_PLATE = (9, 73, 30, 30)   # outer ink frame; inner shade frame 2 px in
+
+
+def check_icon_plate():
+    """Fail unless the C code puts the icon where the plate expects it and the
+    24x24 pic sits centred inside the plate's inner frame."""
+    import re
+    for src in ("src/item_menu_icons.c", "src/shop.c"):
+        text = (ROOT / src).read_text()
+        found = re.findall(r"gSprites\[\w+\]\.x2 = (\d+);\s*gSprites\[\w+\]\.y2 = (\d+);", text)
+        assert found, f"{src}: no item icon x2/y2 found"
+        for xy in found:
+            assert tuple(map(int, xy)) == ICON_SPRITE_CENTER, \
+                f"{src} puts the item icon sprite at {xy}, the plate expects {ICON_SPRITE_CENTER}"
+    bx, by, bw, bh = ICON_PLATE
+    px, py, pw, ph = ICON_PIC
+    inner = (bx + 3, by + 3, bw - 6, bh - 6)   # inside the inner frame
+    assert inner == (px, py, pw, ph), f"icon pic {ICON_PIC} is not centred in the plate interior {inner}"
+
+
 def gba(c):
     """Snap an RGB triple to the GBA's 5-bit channels."""
     return tuple(v - v % 8 for v in c)
