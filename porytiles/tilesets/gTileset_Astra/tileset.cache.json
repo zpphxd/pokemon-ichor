@@ -24,7 +24,7 @@
   "data/tilesets/secondary/astra/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/astra/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/astra/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/astra/porytiles_bin/tiles.png": "55074b68e4d8ddec0577e8de990c6361",
+  "data/tilesets/secondary/astra/porytiles_bin/tiles.png": "7911d209acb2b411d99e31e9e0804115",
   "data/tilesets/secondary/astra/porytiles_src/anim/anim.json": "21c81a989f326a2b3e48ed2bd35c481e",
   "data/tilesets/secondary/astra/porytiles_src/anim/flame/0.png": "afc510e29559d63f1dcb19fc1ba1523d",
   "data/tilesets/secondary/astra/porytiles_src/anim/flame/1.png": "3defdbb2dadb6d3a7de50bf2b0c1ba9e",
@@ -36,7 +36,7 @@
   "data/tilesets/secondary/astra/porytiles_src/anim/stars/3.png": "e54585c109d811fee1f930aeea39ce16",
   "data/tilesets/secondary/astra/porytiles_src/anim/stars/key.png": "b9316f1161015038fcdc3f9a236f7707",
   "data/tilesets/secondary/astra/porytiles_src/attributes.csv": "898b31d376ecdbcf943c1e2aec9a9175",
-  "data/tilesets/secondary/astra/porytiles_src/bottom.png": "af2417082f914e2b3e35b7935930cdc1",
+  "data/tilesets/secondary/astra/porytiles_src/bottom.png": "5694ac5af8398f8a917243265328566a",
   "data/tilesets/secondary/astra/porytiles_src/middle.png": "cd3e28edb8461ad0a2be4b4b42f69b2c",
   "data/tilesets/secondary/astra/porytiles_src/top.png": "66bc46e0564ef703c37bf2faf8c361f2",
   "include/porytiles_generated/tilesets/astra/generated_anim_code.h": "7b5dd0cf4a8326f4358b72a727c3003c"

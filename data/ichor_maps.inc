@@ -167,3 +167,5 @@
 	.include "data/maps/KnossaBullRoad_Vineyard/scripts.inc"
 	.include "data/maps/KnossaBronzeHeel/scripts.inc"
 	.include "data/maps/KnossaPalace/scripts.inc"
+	.include "data/maps/LabyrinthRing6/scripts.inc"
+	.include "data/maps/LabyrinthRing5/scripts.inc"

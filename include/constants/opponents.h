@@ -267,6 +267,20 @@
 #define TRAINER_ICHOR_CHALKOS                 374
 #define TRAINER_ICHOR_PELOS                   375
 #define TRAINER_ICHOR_ENKELADOS               376
+// the Labyrinth's heart (the Labyrinth II build), ids 390-409
+#define TRAINER_ICHOR_ANTHRAKOS                  390
+#define TRAINER_ICHOR_PORINOS                    391
+#define TRAINER_ICHOR_ARGILLOS                   392
+#define TRAINER_ICHOR_SMYRIS                     393
+#define TRAINER_ICHOR_MIMAS                      394
+#define TRAINER_ICHOR_ALKYONEUS                  395
+#define TRAINER_ICHOR_HYPERION_KNOSSA            396
+#define TRAINER_ICHOR_PORPHYRION                 397
+#define TRAINER_ICHOR_KLYTIOS                    398
+#define TRAINER_ICHOR_ENKELADOS_CHOROS           399
+#define TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON      400
+#define TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE      401
+#define TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD      402
 #define TRAINERS_END_ACT3 499
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's

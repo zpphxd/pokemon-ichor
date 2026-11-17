@@ -2270,6 +2270,61 @@
 #define FLAG_ICHOR_ITEM_R2_ULTRA_BALL           (FLAG_ICHOR_GENERAL2_START + 0x45E) // Ichor: Labyrinth Ring II: an Ultra Ball in the grotto
 #define FLAG_ICHOR_HIDDEN_ITEM_R2_STARDUST      (FLAG_ICHOR_GENERAL2_START + 0x45F) // Ichor: Labyrinth Ring II: Stardust in the Moon Room
 #define FLAG_ICHOR_HIDDEN_ITEM_R2_OBOL          (FLAG_ICHOR_GENERAL2_START + 0x460) // Ichor: Labyrinth Ring II: a Bronze Obol in a dead end
+#define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
+#define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
+#define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken
+#define FLAG_ICHOR_KLEON_HUMBLED                (FLAG_ICHOR_GENERAL2_START + 0x4A3) // Ichor: Ring V: Scene E, Kleon bowled over at pool 1
+#define FLAG_ICHOR_HIDE_KLEON_RING5             (FLAG_ICHOR_GENERAL2_START + 0x4A4) // Ichor: Ring V: Kleon gone after Scene E (set at new game until the scene)
+#define FLAG_ICHOR_RING5_DOOR_BACK              (FLAG_ICHOR_GENERAL2_START + 0x4A5) // Ichor: Ring V: the bronze grate back to the gallery, opened from the south
+#define FLAG_ICHOR_RING5_BELL_RUNG              (FLAG_ICHOR_GENERAL2_START + 0x4A6) // Ichor: Ring V: the bell rung once (its first-time line)
+#define FLAG_ICHOR_RING5_ITEM_1                 (FLAG_ICHOR_GENERAL2_START + 0x4A7) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_2                 (FLAG_ICHOR_GENERAL2_START + 0x4A8) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_3                 (FLAG_ICHOR_GENERAL2_START + 0x4A9) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_4                 (FLAG_ICHOR_GENERAL2_START + 0x4AA) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_5                 (FLAG_ICHOR_GENERAL2_START + 0x4AB) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_6                 (FLAG_ICHOR_GENERAL2_START + 0x4AC) // Ichor: Ring V: item
+#define FLAG_ICHOR_TOMB_ITEM                    (FLAG_ICHOR_GENERAL2_START + 0x4AD) // Ichor: Minos's tomb: the gold stater (Big Nugget)
+#define FLAG_ICHOR_HIDE_HELM_BIER               (FLAG_ICHOR_GENERAL2_START + 0x4AE) // Ichor: Minos's tomb: the Helm taken from the bier
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_ISLAND     (FLAG_ICHOR_GENERAL2_START + 0x4AF) // Ichor: Ring V: the lake island
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_A          (FLAG_ICHOR_GENERAL2_START + 0x4B0) // Ichor: Ring V: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_B          (FLAG_ICHOR_GENERAL2_START + 0x4B1) // Ichor: Ring V: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_C          (FLAG_ICHOR_GENERAL2_START + 0x4B2) // Ichor: Ring V: hidden
+#define FLAG_ICHOR_ASTERION_FREED               (FLAG_ICHOR_GENERAL2_START + 0x4B3) // Ichor: Starry Chamber: Scene J, the collar cut; Asterion is free (hides every chained or patrolling Asterion)
+#define FLAG_ICHOR_PHAEDON_UNMASKED             (FLAG_ICHOR_GENERAL2_START + 0x4B4) // Ichor: Starry Chamber: Scene J, Kronos took off the gold mask
+#define FLAG_ICHOR_RHEA_MERCY                   (FLAG_ICHOR_GENERAL2_START + 0x4B5) // Ichor: Starry Chamber: Scene J, Rhea left the threshold open; the Turning begins
+#define FLAG_ICHOR_SHOWED_PHAEDON_TABLET        (FLAG_ICHOR_GENERAL2_START + 0x4B6) // Ichor: Starry Chamber: showed Phaedon the sealed tablet
+#define FLAG_ICHOR_TURNING_DONE                 (FLAG_ICHOR_GENERAL2_START + 0x4B7) // Ichor: The Turning: out through the threshold
+#define FLAG_ICHOR_ICARUS_FLIGHT                (FLAG_ICHOR_GENERAL2_START + 0x4B8) // Ichor: Scene L: flew up the Icarus Shaft
+#define FLAG_ICHOR_HIDE_STARRY_CAST             (FLAG_ICHOR_GENERAL2_START + 0x4B9) // Ichor: Starry Chamber: Kronos, Rhea, Kleon and the chained Asterion gone after Scene J
+#define FLAG_ICHOR_ARCHIVE_TABLET               (FLAG_ICHOR_GENERAL2_START + 0x4BA) // Ichor: Ring VI archive: took Kleon's draft (Scene H)
+#define FLAG_ICHOR_GOT_ELPIS_TABLET             (FLAG_ICHOR_GENERAL2_START + 0x4BB) // Ichor: Ring VI archive: took Elpis's sealed tablet (Scene H)
+#define FLAG_ICHOR_HIDE_HYPERION_KNOSSA         (FLAG_ICHOR_GENERAL2_START + 0x4BC) // Ichor: Ring VI: Hyperion gone after Scene G
+#define FLAG_ICHOR_MISTRESS_HONEY               (FLAG_ICHOR_GENERAL2_START + 0x4BD) // Ichor: Ring VI shrine: offered Honey to the Mistress
+#define FLAG_ICHOR_ARIADNE_JOINED               (FLAG_ICHOR_GENERAL2_START + 0x4BE) // Ichor: Ring VII: Scene I, Ariadne joined; the Gigas beaten
+#define FLAG_ICHOR_DANCE_DONE                   (FLAG_ICHOR_GENERAL2_START + 0x4BF) // Ichor: Ring VII: the crane dance danced; the stair to the heart opens
+#define FLAG_ICHOR_RING7_BEAM_DONE              (FLAG_ICHOR_GENERAL2_START + 0x4C0) // Ichor: Ring VII: the mirrors carry the beam to the crystal; the floor is lit
+#define FLAG_ICHOR_HIDE_ARIADNE_RING7           (FLAG_ICHOR_GENERAL2_START + 0x4C1) // Ichor: Ring VII: Ariadne out of sight (before Scene I, and after the dance)
+#define FLAG_ICHOR_HIDE_GIGAS_RING7             (FLAG_ICHOR_GENERAL2_START + 0x4C2) // Ichor: Ring VII: the Gigas gone after the double battle
+#define FLAG_ICHOR_RING6_DIALS_SET              (FLAG_ICHOR_GENERAL2_START + 0x4C3) // Ichor: Ring VI: the dials stood at the clerks' setting (ABA) on first entry
+#define FLAG_ICHOR_RING6_TEACH_OPEN             (FLAG_ICHOR_GENERAL2_START + 0x4C4) // Ichor: Ring VI: the teaching dial turned; the Hall of Dials is open
+#define FLAG_ICHOR_HIDE_SENTRY_1                (FLAG_ICHOR_GENERAL2_START + 0x4C5) // Ichor: Ring VI: Bronzong sentry 1 rang its alarm and wound down
+#define FLAG_ICHOR_HIDE_SENTRY_2                (FLAG_ICHOR_GENERAL2_START + 0x4C6) // Ichor: Ring VI: Bronzong sentry 2 rang its alarm and wound down
+#define FLAG_ICHOR_HIDE_SENTRY_3                (FLAG_ICHOR_GENERAL2_START + 0x4C7) // Ichor: Ring VI: Bronzong sentry 3 rang its alarm and wound down
+#define FLAG_ICHOR_RING6_LANDING_OPEN           (FLAG_ICHOR_GENERAL2_START + 0x4C8) // Ichor: Ring VI: the sealed landing door opened (Hyperion beaten)
+#define FLAG_ICHOR_RING6_ARCHIVE_BACK           (FLAG_ICHOR_GENERAL2_START + 0x4C9) // Ichor: Ring VI: the archive's back grate opened from inside
+#define FLAG_ICHOR_RING6_ITEM_1                 (FLAG_ICHOR_GENERAL2_START + 0x4CA) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_ITEM_2                 (FLAG_ICHOR_GENERAL2_START + 0x4CB) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_ITEM_3                 (FLAG_ICHOR_GENERAL2_START + 0x4CC) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_ITEM_4                 (FLAG_ICHOR_GENERAL2_START + 0x4CD) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_VAULT_1                (FLAG_ICHOR_GENERAL2_START + 0x4CE) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_RING6_VAULT_2                (FLAG_ICHOR_GENERAL2_START + 0x4CF) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_RING6_VAULT_3                (FLAG_ICHOR_GENERAL2_START + 0x4D0) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_RING6_VAULT_4                (FLAG_ICHOR_GENERAL2_START + 0x4D1) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_GOT_TM_FLARE                 (FLAG_ICHOR_GENERAL2_START + 0x4D2) // Ichor: Ring VI: Hyperion's TM after Scene G
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_A          (FLAG_ICHOR_GENERAL2_START + 0x4D3) // Ichor: Ring VI: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_B          (FLAG_ICHOR_GENERAL2_START + 0x4D4) // Ichor: Ring VI: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_C          (FLAG_ICHOR_GENERAL2_START + 0x4D5) // Ichor: Ring VI: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_FALLS      (FLAG_ICHOR_GENERAL2_START + 0x4D6) // Ichor: Ring VI: above the falls
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

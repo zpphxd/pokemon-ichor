@@ -2101,6 +2101,28 @@
       "border_filepath": "data/layouts/KnossaPalace/border.bin",
       "blockdata_filepath": "data/layouts/KnossaPalace/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING6",
+      "name": "LabyrinthRing6_Layout",
+      "width": 48,
+      "height": 48,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Mychos",
+      "border_filepath": "data/layouts/LabyrinthRing6/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing6/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING5",
+      "name": "LabyrinthRing5_Layout",
+      "width": 56,
+      "height": 48,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Mychos",
+      "border_filepath": "data/layouts/LabyrinthRing5/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing5/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -7660,6 +7660,42 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_StarChart,
     },
 
+    // Ichor: the archive's two tablets (LABYRINTH.md Scene H; SCRIPT.md beat III-3K).
+    // Key items, never used from the bag. The icons are stand-ins until the art
+    // team draws the wax tablet and the sealed one. The sealed tablet's text
+    // changes at Lakonia (Alethea reads the scraped wax) and in the Frozen Hour
+    // (the seal is broken): the Lakonia and climax builders own those.
+    [ITEM_KLEONS_DRAFT] =
+    {
+        .name = ITEM_NAME("Kleon's Draft"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Iapetos's draft of\n"
+            "Kleon's prophecy,\n"
+            "scraped, rewritten."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_OldSeaMap,
+        .iconPalette = gItemIconPalette_OldSeaMap,
+    },
+    [ITEM_SEALED_TABLET] =
+    {
+        .name = ITEM_NAME("Sealed Tablet"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Tied shut, sealed\n"
+            "with a little hook.\n"
+            "ELPIS…Revised."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_Letter,
+        .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+    },
+
 // Gems
 #if I_PRICE >= GEN_9
     #define GEM_PRICE 15000
