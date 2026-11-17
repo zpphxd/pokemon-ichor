@@ -48,7 +48,11 @@ script AktiTown_Agora_EventScript_CustomerMan {
            MSGBOX_NPC)
 }
 
+// Her last page hints at the catch mash (src/ichor_catch.c). It breaks its own
+// lines: format() can't measure the A-button icon.
 script AktiTown_Agora_EventScript_CustomerGirl {
     msgbox(format("What are Poké Balls made of? Nobody knows. My dad says “trade secrets.”\p"
-                  "I think he doesn't know either."), MSGBOX_NPC)
+                  "I think he doesn't know either.\p"
+                  "He did teach me one trick, though.\n"
+                  "Tap {A_BUTTON} fast as you throw. It helps!"), MSGBOX_NPC)
 }
