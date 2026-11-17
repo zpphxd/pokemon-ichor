@@ -172,3 +172,6 @@
 	.include "data/maps/LabyrinthRing7/scripts.inc"
 	.include "data/maps/LabyrinthStarryChamber/scripts.inc"
 	.include "data/maps/LabyrinthIcarusShaft/scripts.inc"
+	.include "data/maps/Kirrha_PilgrimsHostel/scripts.inc"
+	.include "data/maps/Aigion_Homarion/scripts.inc"
+	.include "data/maps/Route9_KorykianCave/scripts.inc"
