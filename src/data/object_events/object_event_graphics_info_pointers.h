@@ -463,6 +463,13 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMercha
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMirror;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMirrorMark;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAlfred;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRhea;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRheaUnmasked;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorIapetos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGigas;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCadet;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCadetF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorBrasidas;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -919,6 +926,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_MIRROR] = &gObjectEventGraphicsInfo_IchorMirror,
     [OBJ_EVENT_GFX_ICHOR_MIRROR_MARK] = &gObjectEventGraphicsInfo_IchorMirrorMark,
     [OBJ_EVENT_GFX_ICHOR_ALFRED] = &gObjectEventGraphicsInfo_IchorAlfred,
+    [OBJ_EVENT_GFX_ICHOR_RHEA] = &gObjectEventGraphicsInfo_IchorRhea,
+    [OBJ_EVENT_GFX_ICHOR_RHEA_UNMASKED] = &gObjectEventGraphicsInfo_IchorRheaUnmasked,
+    [OBJ_EVENT_GFX_ICHOR_IAPETOS] = &gObjectEventGraphicsInfo_IchorIapetos,
+    [OBJ_EVENT_GFX_ICHOR_GIGAS] = &gObjectEventGraphicsInfo_IchorGigas,
+    [OBJ_EVENT_GFX_ICHOR_CADET] = &gObjectEventGraphicsInfo_IchorCadet,
+    [OBJ_EVENT_GFX_ICHOR_CADET_F] = &gObjectEventGraphicsInfo_IchorCadetF,
+    [OBJ_EVENT_GFX_ICHOR_BRASIDAS] = &gObjectEventGraphicsInfo_IchorBrasidas,
     // End of Ichor object events
 };
 
