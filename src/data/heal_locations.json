@@ -85,22 +85,22 @@
     {
       "id": "HEAL_LOCATION_KIRRHA",
       "map": "MAP_KIRRHA",
-      "x": 18,
+      "x": 12,
       "y": 12,
       "respawn_map": "MAP_KIRRHA",
       "respawn_npc": "LOCALID_KIRRHA_HEALER",
-      "respawn_x": 18,
+      "respawn_x": 12,
       "respawn_y": 12
     },
     {
       "id": "HEAL_LOCATION_AIGION",
       "map": "MAP_AIGION",
-      "x": 18,
-      "y": 12,
+      "x": 19,
+      "y": 15,
       "respawn_map": "MAP_AIGION",
       "respawn_npc": "LOCALID_AIGION_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "respawn_x": 19,
+      "respawn_y": 15
     },
     {
       "id": "HEAL_LOCATION_ARKADIA",

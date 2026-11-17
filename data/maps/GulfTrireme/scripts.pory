@@ -5,10 +5,10 @@ script GulfTrireme_EventScript_Captain {
     faceplayer
     if (var(VAR_ICHOR_GULF_DEST) == 1) {
         msgbox(format("Kirrha ahead. Keep clear of the steering oar."))
-        warp(MAP_KIRRHA, 19, 25)
+        warp(MAP_KIRRHA, 16, 26)
     } else {
         msgbox(format("Aigion ahead. Mind the gap at the pier."))
-        warp(MAP_AIGION, 19, 25)
+        warp(MAP_AIGION, 16, 5)
     }
     waitstate
     releaseall

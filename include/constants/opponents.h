@@ -209,7 +209,12 @@
 #define TRAINER_ICHOR_KALDERA_TALOS          261
 #define TRAINER_ICHOR_KALDERA_HYPERION       262
 #define TRAINER_ICHOR_THYRSA_CHORUS          263 // The Three-Act Play's chorus: fought again after each wrong mask
-#define TRAINERS_END_ACT2                   264
+// Gulf: tools/ichor/maps/gulf.py
+#define TRAINER_ICHOR_R9_THEANO                    847
+#define TRAINER_ICHOR_KORYKIAN_TITYROS             848
+#define TRAINER_ICHOR_KORYKIAN_KORYKIA             849
+// End Gulf.
+#define TRAINERS_END_ACT2                   850
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328

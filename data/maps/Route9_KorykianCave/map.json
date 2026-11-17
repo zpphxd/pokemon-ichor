@@ -5,17 +5,366 @@
   "music": "MUS_ICHOR_HOLLOW",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AETHOS_ROUTE_9",
-  "requires_flash": false,
+  "requires_flash": true,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": false,
-  "allow_escaping": false,
+  "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "object_events": [
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_TITYROS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOATHERD",
+      "x": 15,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route9_KorykianCave_EventScript_TITYROS",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_KORYKIA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 24,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route9_KorykianCave_EventScript_KORYKIA",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_DRUM",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "x": 28,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_StrengthBoulder",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_WEB0",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 5,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route9_KorykianCave_EventScript_Web",
+      "flag": "FLAG_ICHOR_KORYKIAN_WEB_BURNT"
+    },
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_THORN0",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 17,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route9_KorykianCave_EventScript_Thornweb",
+      "flag": "FLAG_ICHOR_KORYKIAN_THORNWEB_BURNT"
+    },
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_WEB1",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 5,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route9_KorykianCave_EventScript_Web",
+      "flag": "FLAG_ICHOR_KORYKIAN_WEB_BURNT"
+    },
+    {
+      "local_id": "LOCALID_ROUTE9_KORYKIAN_CAVE_THORN1",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 17,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route9_KorykianCave_EventScript_Thornweb",
+      "flag": "FLAG_ICHOR_KORYKIAN_THORNWEB_BURNT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 30,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HARD_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KORYKIAN_GROTTO"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 3,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MOON_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KORYKIAN_CHAMBER"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_PEARL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KORYKIAN_ISLET"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 16,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_LEFTOVERS",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KORYKIAN_SANCTUM"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 25,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ESCAPE_ROPE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KORYKIAN_HALL"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 15,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_EnterHall"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_EnterHall"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_EnterHall"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_EnterHall"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_EnterHall"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_EnterHall"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_LeaveHall"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_LeaveHall"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_LeaveHall"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_LeaveHall"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_LeaveHall"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "Route9_KorykianCave_EventScript_LeaveHall"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 7,
+      "elevation": 3,
+      "item": "ITEM_HONEY",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_KORYKIAN_ALTAR",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 32,
+      "y": 12,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_KORYKIAN_BAY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route9_KorykianCave_EventScript_Brazier"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route9_KorykianCave_EventScript_Brazier"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Route9_KorykianCave_EventScript_Niche"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route9_KorykianCave_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route9_KorykianCave_EventScript_Stele"
+    }
+  ]
 }

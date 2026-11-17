@@ -46,24 +46,24 @@ L.start(function()
     L.battleMode = nil
     L.expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST
              and L.mapId() == S.MAP_AIGION, "a real pass whiteout returns to Aigion's outdoor healer")
-    L.expect(L.canReachNextTo(19, 26), "the outdoor recovery point has a walkable route back to the ferry")
+    L.expect(L.canReachNextTo(15, 4), "the outdoor recovery point has a walkable route back to the ferry")
     L.shot("aigion_recovery")
     L.expect(emu:loadStateFile(L.OUT .. "before_drum_pass.ss", 31), "restored the pass for onward travel")
     L.wait(30)
     L.waitUntil(L.idle, 600, "control after restoring the journey")
     L.setBeat("girdle_gate", false)
-    L.go(11, 23)
+    L.go(12, 36)
     L.talk(L.npc("EventScript_StrengthBoulder"))
     L.tap(K.DOWN, 8)
     L.wait(40)
     local _, y = L.pos()
-    L.expect(y == 23 and L.itemCount(S.ITEM_GIRDLE) == 0,
+    L.expect(y == 36 and L.itemCount(S.ITEM_GIRDLE) == 0,
              "the real column drum blocks the pass without the Girdle")
     L.runHeader("Approach_GirdleHeader")
     L.talk(L.npc("EventScript_StrengthBoulder"))
     for _ = 1, 7 do L.tap(K.DOWN, 8); L.wait(48) end
     _, y = L.pos()
-    L.expect(y >= 26, "the native Girdle/Strength action pushes the actual column drum")
+    L.expect(y >= 39, "the native Girdle/Strength action pushes the actual column drum")
     L.shot("girdle_pass")
     cross("down", S.MAP_STYX, "styx_falls")
     L.talk(L.npc("StyxFalls_EventScript_Guide"))
