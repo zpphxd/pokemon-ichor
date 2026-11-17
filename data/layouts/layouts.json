@@ -2123,6 +2123,39 @@
       "border_filepath": "data/layouts/LabyrinthRing5/border.bin",
       "blockdata_filepath": "data/layouts/LabyrinthRing5/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_RING7",
+      "name": "LabyrinthRing7_Layout",
+      "width": 32,
+      "height": 32,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Astra",
+      "border_filepath": "data/layouts/LabyrinthRing7/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthRing7/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_STARRY_CHAMBER",
+      "name": "LabyrinthStarryChamber_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Astra",
+      "border_filepath": "data/layouts/LabyrinthStarryChamber/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthStarryChamber/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_ICARUS_SHAFT",
+      "name": "LabyrinthIcarusShaft_Layout",
+      "width": 10,
+      "height": 40,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Astra",
+      "border_filepath": "data/layouts/LabyrinthIcarusShaft/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthIcarusShaft/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

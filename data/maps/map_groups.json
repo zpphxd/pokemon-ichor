@@ -219,7 +219,10 @@
     "LabyrinthMinosTomb",
     "LabyrinthWorkshop",
     "LabyrinthRing6",
-    "LabyrinthRing5"
+    "LabyrinthRing5",
+    "LabyrinthRing7",
+    "LabyrinthStarryChamber",
+    "LabyrinthIcarusShaft"
   ],
   "gMapGroup_Knossa": [
     "KnossaAmnisos",

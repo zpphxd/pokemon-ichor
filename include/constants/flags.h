@@ -2325,6 +2325,11 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_RING6_B          (FLAG_ICHOR_GENERAL2_START + 0x4D4) // Ichor: Ring VI: hidden
 #define FLAG_ICHOR_HIDDEN_ITEM_RING6_C          (FLAG_ICHOR_GENERAL2_START + 0x4D5) // Ichor: Ring VI: hidden
 #define FLAG_ICHOR_HIDDEN_ITEM_RING6_FALLS      (FLAG_ICHOR_GENERAL2_START + 0x4D6) // Ichor: Ring VI: above the falls
+#define FLAG_ICHOR_RING7_ITEM_1                 (FLAG_ICHOR_GENERAL2_START + 0x4D7) // Ichor: Ring VII: item
+#define FLAG_ICHOR_RING7_ITEM_2                 (FLAG_ICHOR_GENERAL2_START + 0x4D8) // Ichor: Ring VII: item
+#define FLAG_ICHOR_RING7_DISC                   (FLAG_ICHOR_GENERAL2_START + 0x4D9) // Ichor: Ring VII: the teaching mirror lit the disc
+#define FLAG_ICHOR_HIDDEN_ITEM_RING7_A          (FLAG_ICHOR_GENERAL2_START + 0x4DA) // Ichor: Ring VII: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING7_B          (FLAG_ICHOR_GENERAL2_START + 0x4DB) // Ichor: Ring VII: hidden
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

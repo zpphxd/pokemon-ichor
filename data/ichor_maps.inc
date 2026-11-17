@@ -169,3 +169,6 @@
 	.include "data/maps/KnossaPalace/scripts.inc"
 	.include "data/maps/LabyrinthRing6/scripts.inc"
 	.include "data/maps/LabyrinthRing5/scripts.inc"
+	.include "data/maps/LabyrinthRing7/scripts.inc"
+	.include "data/maps/LabyrinthStarryChamber/scripts.inc"
+	.include "data/maps/LabyrinthIcarusShaft/scripts.inc"

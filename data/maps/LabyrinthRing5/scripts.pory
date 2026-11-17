@@ -51,16 +51,20 @@ mapscripts LabyrinthRing5_MapScripts {
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_SOUTH)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 16)
-    setvar(VAR_0x8005, 32)
+    setvar(VAR_0x8005, 30)
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_WEST)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 16)
+    setvar(VAR_0x8005, 32)
+    setvar(VAR_0x8006, THREAD_ANCHOR_RING5_EAST)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 18)
     setvar(VAR_0x8005, 22)
-    setvar(VAR_0x8006, THREAD_ANCHOR_RING5_EAST)
+    setvar(VAR_0x8006, THREAD_ANCHOR_RING5_DEEP)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 35)
     setvar(VAR_0x8005, 2)
-    setvar(VAR_0x8006, THREAD_ANCHOR_RING5_DEEP)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 27)
     setvar(VAR_0x8005, 22)
@@ -277,4 +281,21 @@ script LabyrinthRing5_EventScript_Grate {
         msgbox(format("A bronze grate. It's barred from the other side."))
     }
     release
+}
+
+// The sinkhole: the floor gives, and you land in Ring VI's east caves at the same spot.
+script LabyrinthRing5_EventScript_Sinkhole {
+    lockall
+    delay(20)
+    applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthRing5_Movement_Vanish)
+    waitmovement(0)
+    playse(SE_FALL)
+    delay(60)
+    warphole(MAP_LABYRINTH_RING6)
+    waitstate
+    releaseall
+}
+
+movement LabyrinthRing5_Movement_Vanish {
+    set_invisible
 }

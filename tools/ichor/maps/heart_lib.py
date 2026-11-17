@@ -399,5 +399,19 @@ class HeartMap(KM.Map):
                 "dead_ends": len(dead), "dead_cells": sorted(dead), "loops": loops, "longest_run": longest, "longest_at": where,
                 "components": comps}
 
+    def check(self, starts, must_reach=(), blockers=(), extra=()):
+        """kythera_maps' checks, less the warps a script opens later (a stair the dance
+        reveals): they sit on a plain floor until then, flagged `_scripted`."""
+        errors, reach = super().check(starts, must_reach, blockers, extra)
+        scripted = {(w["x"], w["y"]) for w in self.warps if w.get("_scripted")}
+        errors = [e for e in errors if not any(f"warp at ({x},{y}) is on" in e for (x, y) in scripted)]
+        return errors, reach
+
+    def write(self):
+        for w in self.warps:
+            w.pop("_scripted", None)
+            w.pop("unreached_ok", None)
+        super().write()
+
     def ascii(self):
         return "\n".join("".join(r) for r in self.t)

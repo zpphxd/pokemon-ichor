@@ -1151,3 +1151,4 @@ gSpecials::
 	def_special Ichor_TakeFirstFruits
 	@ Ichor: Act III engine (design/phase4/ENGINE_ACT3.md E7)
 	def_special Ichor_BullLeap
+	def_special Ichor_TraceBeam
