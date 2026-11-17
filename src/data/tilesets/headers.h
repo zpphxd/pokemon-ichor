@@ -1044,6 +1044,9 @@ const struct Tileset gTileset_Daidaleion =
     .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
     .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
+    .callback = NULL,
+};
+
 // Ichor: loom, the Loom under the Omphalos (beat III-9). Porytiles-managed, built by tools/ichor/art/loom_build.py
 // (design/phase4/TILES_loom.md): the map is painted whole and sliced into cells. It uses
 // only its own tiles and palettes 6-12, with opaque floors, on the oikos primary.

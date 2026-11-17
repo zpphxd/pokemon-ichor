@@ -274,6 +274,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/t
 // Ichor: daidaleion
 const u16 gMetatiles_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: loom
 const u16 gMetatiles_PorytilesManaged_Loom[] = INCBIN_U16("data/tilesets/secondary/loom/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Loom[] = INCBIN_U16("data/tilesets/secondary/loom/porytiles_bin/metatile_attributes.bin");

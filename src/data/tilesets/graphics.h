@@ -1718,6 +1718,8 @@ const u16 gTilesetPalettes_DaidaleionDawn[][16] =
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/10.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/11.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/12.gbapal")
+};
+
 // Ichor: loom, the Loom under the Omphalos (beat III-9). Built by tools/ichor/art/loom_build.py.
 const u32 gTilesetTiles_PorytilesManaged_Loom[] = INCBIN_U32("data/tilesets/secondary/loom/porytiles_bin/tiles.4bpp.lz");
 
