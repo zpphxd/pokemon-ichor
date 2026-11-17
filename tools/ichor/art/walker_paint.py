@@ -1,0 +1,1212 @@
+#!/usr/bin/env python3
+"""Hand-drawn Gen 3 walkers, built from layered pixel parts (STYLE.md §3.6).
+
+Every character shares one Gen 3 build (big head about half the height, short
+sturdy body, feet on the bottom row) and is drawn from parts: a face, a body
+garment, hair, beard, headwear, overgarments, a cape and props. Each part is a
+hand-drawn grid per view (down, up, left) and, where it moves, per walk phase.
+Parts are drawn without an outline; one continuous ink outline is added round
+the finished silhouette, as Gen 3 does.
+
+Grid symbols are roles, not colors; each character maps roles to its family
+palette (graphics/object_events/palettes/ichor_<family>.pal):
+
+  S s  skin, skin shade          e   eye (ink)
+  H h  hair, hair shade          W w white / linen, its shade
+  C c  garment, its shade        D d overgarment (himation, peplos fold)
+  A    accent (belt, armband)    F   footwear
+  M m  metal (bronze), shade     R r crest / shield field, shade
+  X x  cape, its shade           P p wood (staff, spear shaft), shade
+  k    explicit ink line
+
+  python3 tools/ichor/art/walker_paint.py NAME [...] [--write] [--preview DIR]
+"""
+import argparse
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[3]
+PALS = ROOT / "graphics/object_events/palettes"
+SHEETS = ROOT / "graphics/object_events/pics/people/ichor"
+VIEWS = ("down", "up", "left")
+
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import walker_parts as WP  # noqa: E402
+from walker_parts import T, phases  # noqa: E402
+
+
+# ── faces ────────────────────────────────────────────────────────────────────
+FACE = {
+    "down": phases(T(13, """
+....SSSSSSSS....
+...SSSSSSSSSS...
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+...SSSeSSeSSS...
+...sSSeSSeSSs...
+....ssSSSSss....
+""")),
+    "up": phases(T(13, """
+....SSSSSSSS....
+...SSSSSSSSSS...
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+...SSSSSSSSSS...
+...sSSSSSSSSs...
+....ssSSSSss....
+""")),
+    "left": phases(T(13, """
+....SSSSSSS.....
+...SSSSSSSSS....
+..SSSSSSSSSSS...
+..SSSSSSSSSSS...
+..SSSSSSSSSSS...
+.SSSSSSSSSSSS...
+..SSeSSSSSSSS...
+..SSeSSSSSSSs...
+...sSSSSSSss....
+""")),
+}
+
+# ── bodies ───────────────────────────────────────────────────────────────────
+_SHORT_DOWN = T(22, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..SOCCCCCCCCOS..
+..sOAAAAAAAAOs..
+...cCCCCCCCCc...
+....cCCCCCCc....
+....SS....SS....
+....Ss....sS....
+...FFF....FFF...
+""")
+_SHORT_DOWN_A = T(22, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..sOCCCCCCCCOS..
+...OAAAAAAAAOS..
+...cCCCCCCCCs...
+....cCCCCCCc....
+....SS....SS....
+....Ss....FFF...
+...FFF..........
+""")
+_SHORT_SIDE = (T(22, """
+.....CCCCCC.....
+....CCOSSCCC....
+....CCOSSCCC....
+....AAOssAAA....
+....cCCCCCCc....
+.....cCCCCc.....
+.....SSSS.......
+.....SsSs.......
+....FFFFF.......
+"""), T(22, """
+.....CCCCCC.....
+....CCCCSSCC....
+....CCCCSSCC....
+....AAAAAssA....
+....cCCCCCCc....
+.....cCCCCc.....
+....SS...Ss.....
+...Ss.....ss....
+..FFF.....FFF...
+"""), T(22, """
+.....CCCCCC.....
+....CSSCCCCC....
+....CSSCCCCC....
+....AssAAAAA....
+....cCCCCCCc....
+.....cCCCCc.....
+....sS...SS.....
+...ss.....Ss....
+..FFF.....FFF...
+"""))
+
+_LONG_DOWN = T(22, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..SOCCCCCCCCOS..
+..sOCCCCCCCCOs..
+...CCCCCCCCCC...
+..cCCCCCCCCCCc..
+..cCCCCCCCCCCc..
+..ccCCCCCCCCcc..
+...FF......FF...
+""")
+_LONG_DOWN_A = T(22, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..sOCCCCCCCCOS..
+...OCCCCCCCCOs..
+...CCCCCCCCCCs..
+..cCCCCCCCCCCc..
+..cCCCCCCCCCCc..
+..ccCCCCCCCCcc..
+...FF...........
+""")
+_LONG_SIDE = (T(22, """
+.....CCCCCC.....
+....CCOSSCCC....
+....CCOSSCCC....
+....CCOssCCC....
+....CCCCCCCC....
+...cCCCCCCCCc...
+...cCCCCCCCCc...
+...ccCCCCCCcc...
+..FFF...........
+"""), T(22, """
+.....CCCCCC.....
+....CCCCSSCC....
+....CCCCSSCC....
+....CCCCssCC....
+....CCCCCCCC....
+...cCCCCCCCCc...
+...cCCCCCCCCc...
+...ccCCCCCCcc...
+..FFF......FF...
+"""), T(22, """
+.....CCCCCC.....
+....CSSCCCCC....
+....CSSCCCCC....
+....CssCCCCC....
+....CCCCCCCC....
+...cCCCCCCCCc...
+...cCCCCCCCCc...
+...ccCCCCCCcc...
+..FF............
+"""))
+
+
+def _up(t):
+    """The back view of a down-view body: the neck is behind the hair."""
+    rows = list(t.rows)
+    rows[0] = rows[0].replace("SSSS", "CCCC")
+    u = T.__new__(T)
+    u.start, u.rows = t.start, rows
+    return u
+
+
+BODY = {
+    "chiton": {
+        "down": phases(_SHORT_DOWN, _SHORT_DOWN_A),
+        "left": _SHORT_SIDE,
+    },
+    "robe": {
+        "down": phases(_LONG_DOWN, _LONG_DOWN_A),
+        "left": _LONG_SIDE,
+    },
+}
+for _b in BODY.values():
+    _b["up"] = tuple(_up(t) for t in _b["down"])
+
+# ── hair, beards, headwear ───────────────────────────────────────────────────
+HAIR = {
+    "short": {
+        "down": phases(T(12, """
+.....HHHHHH.....
+...HHGGHHHHHH...
+..HHGHHHHhHHHH..
+..HHHHHhHHHHhH..
+..HhHHHHHHHHHH..
+..HHhHhHHhHhHH..
+..HH.h....h.HH..
+..H..........H..
+""")),
+        "up": phases(T(12, """
+.....HHHHHH.....
+...HHGGHHHHHH...
+..HHGHHHHhHHHH..
+..HHHHHhHHHHhH..
+..HhHHHHHHHHHH..
+..HHHHhHHHHHhH..
+..HhHHHHHHhHHH..
+...hHHhHHHHHh...
+....hhhhhhhh....
+""")),
+        "left": phases(T(12, """
+.....HHHHHH.....
+...HHGGHHHHH....
+..HHGHHHhHHHH...
+..HHHHhHHHHhH...
+..HhHHHHHHHHH...
+...hh.HHHhHHH...
+.......HHHHhH...
+........hHHHH...
+.........hhh....
+""")),
+    },
+    "bald_fringe": {
+        "down": phases(T(13, """
+.....GG.........
+................
+................
+..W..........W..
+..WW........WW..
+..Ww........wW..
+""")),
+        "up": phases(T(13, """
+.....GGG........
+................
+................
+..WWWWWWWWWWWW..
+..WWWWWWWWWWWW..
+..wWWWWWWWWWWw..
+...wwwwwwwwww...
+""")),
+        "left": phases(T(13, """
+.....GG.........
+................
+................
+.......WWWWWW...
+.......WWWWWW...
+........WWwWW...
+.........www....
+""")),
+    },
+}
+
+BEARD = {
+    "long_white": {
+        "down": phases(T(20, """
+..W..........W..
+..sWWWWWWWWWWs..
+...WWWWWWWWWW...
+....WWWWWWWW....
+.....WWWWWW.....
+.....wWWWWw.....
+......wwww......
+""")),
+        "up": phases(T(21, """
+..W..........W..
+""")),
+        "left": phases(T(20, """
+..W.............
+.WWWWWW.........
+.WWWWWW.........
+..WWWWW.........
+..wWWWw.........
+...www..........
+""")),
+    },
+}
+
+HEADWEAR = {
+    "kerchief": {
+        "down": phases(T(13, """
+....WWWWWWWW....
+...WWWWWWWWWW...
+..WWWWWWWWWWWW..
+..wWWWWWWWWWWw..
+..HH........HH..
+..HH........HH..
+..H..........H..
+""")),
+        "up": phases(T(13, """
+....WWWWWWWW....
+...WWWWWWWWWW...
+..WWWWWWWWWWWW..
+..WWWWWWWWWWWW..
+..wWWWWWWWWWWw..
+..HHHHHHHHHHHH..
+..HHHHHHHHHHHH..
+..hHHHHHHHHHHh..
+...hHHHHHHHHh...
+....hhHHHHhh....
+""")),
+        "left": phases(T(13, """
+....WWWWWWW.....
+...WWWWWWWWW....
+..WWWWWWWWWWW...
+..wWWWWWWWWWW...
+......wWWWWWW...
+.......HHHHHH...
+.......HHHHHH...
+........hHHHH...
+.........hHHH...
+""")),
+    },
+    "helmet_crest": {
+        "down": phases(T(7, """
+......RRRR......
+.....RRRRRR.....
+.....RrRRrR.....
+......rRRr......
+.....MMMMMM.....
+...MMMMMMMMMM...
+..MmMMMMMMMMmM..
+..mm........mm..
+..m..........m..
+""")),
+        "up": phases(T(7, """
+......RRRR......
+.....RRRRRR.....
+.....RRRRRR.....
+......rRRr......
+.....MMMMMM.....
+...MMMMMMMMMM...
+..MMMMMMMMMMMM..
+..mMMMMMMMMMMm..
+..mmMMMMMMMMmm..
+...mmmmmmmmmm...
+""")),
+        "left": phases(T(7, """
+.....RRRRRR.....
+...RRRRRRRRRR...
+..RRrrrrrrrrRR..
+...r.......rRR..
+.....MMMMMM.....
+...MMMMMMMMMM...
+..MmMMMMMMMMM...
+..m...MMMMMMM...
+......mMMMMMM...
+.......mmmmm....
+""")),
+    },
+}
+
+# ── overgarments, capes, props ───────────────────────────────────────────────
+OVER = {
+    "himation": {  # draped over the left shoulder, across the body
+        "down": phases(T(22, """
+..........DDD...
+.........DDDDS..
+........DDDDdS..
+.......DDDDd.S..
+......DDDDd..s..
+.....DDDDd......
+....dDDDd.......
+....ddd.........
+""")),
+        "up": phases(T(22, """
+...DDD..........
+..SDDDD.........
+..SdDDDD........
+..S.dDDDD.......
+..s..dDDDD......
+......dDDDD.....
+.......dDDDd....
+.........ddd....
+""")),
+        "left": phases(T(22, """
+.......DDD......
+......DDDDD.....
+.....DDDDDd.....
+....DDDDDd......
+....DDDDd.......
+....dDDd........
+""")),
+    },
+    "corselet": {
+        "down": phases(T(22, """
+...WWWSSSSWWW...
+...WWWWWWWWWW...
+...WWWWWWWWWW...
+...wwwwwwwwww...
+""")),
+        "up": phases(T(22, """
+...WWWWWWWWWW...
+...WWWWWWWWWW...
+...WWWWWWWWWW...
+...wwwwwwwwww...
+""")),
+        "left": phases(T(22, """
+.....WWWWWW.....
+....WWWWWWWW....
+....WWW..WWW....
+....www..www....
+""")),
+    },
+    "armband": {
+        "down": phases(T(24, """
+..A.............
+""")),
+        "up": phases(T(24, """
+.............A..
+""")),
+        "left": phases(T(24, """
+................
+""")),
+    },
+    "greaves": {
+        "down": phases(T(28, """
+....MM....MM....
+....mm....mm....
+"""), T(28, """
+....MM....MM....
+....mm..........
+""")),
+        "up": phases(T(28, """
+....MM....MM....
+....mm....mm....
+"""), T(28, """
+....MM....MM....
+....mm..........
+""")),
+        "left": phases(T(28, """
+.....MMMM.......
+.....mmmm.......
+"""), T(28, """
+....MM...mm.....
+...mm.....mm....
+"""), T(28, """
+....mm...MM.....
+...mm.....mm....
+""")),
+    },
+}
+
+CAPE = {  # drawn behind the body, except from behind
+    "chlamys": {
+        "down": phases(T(22, """
+..X..........X..
+.XX..........XX.
+.XX..........XX.
+.xX..........Xx.
+..x..........x..
+""")),
+        "up": phases(T(22, """
+..XXXXXXXXXXXX..
+..XXXXXXXXXXXX..
+..XXXXXXXXXXXX..
+..XXXXXXXXXXXX..
+..xXXXXXXXXXXx..
+..xXXXXXXXXXXx..
+...xxXXXXXXxx...
+""")),
+        "left": phases(T(22, """
+..........X.....
+..........XX....
+..........XXX...
+..........XXX...
+..........XXXX..
+..........xXXX..
+...........xxx..
+""")),
+    },
+}
+
+PROP = {
+    "staff": {
+        "down": phases(T(16, "\n".join([".p.............."] + [".P.............."] * 17))),
+        "up": phases(T(16, "\n".join(["..............p."] + ["..............P."] * 17))),
+        "left": phases(T(16, "\n".join([".p.............."] + [".P.............."] * 17))),
+    },
+    "spear": {
+        "down": phases(T(7, "\n".join(["..............M."] * 3 + ["..............p."] * 23))),
+        "up": phases(T(7, "\n".join([".M.............."] * 3 + [".p.............."] * 23))),
+        "left": phases(T(7, "\n".join(["...........M...."] * 3 + ["...........p...."] * 23))),
+    },
+    "hoplon": {
+        "down": phases(T(24, """
+..MMMM..........
+.MRRRRM.........
+MRRRRRRM........
+MRRMMRRM........
+MRRMMRRM........
+MRRRRRRM........
+.MRRRRM.........
+..MMMM..........
+""")),
+        "up": phases(T(24, """
+..........MMMM..
+.........MrrrrM.
+........MrrrrrrM
+........MrrrrrrM
+........MrrrrrrM
+........MrrrrrrM
+.........MrrrrM.
+..........MMMM..
+""")),
+        "left": phases(T(24, """
+...MMMMMM.......
+..MRRRRRRM......
+..MRRMMRRM......
+..MRRMMRRM......
+..MRRRRRRM......
+...MMMMMM.......
+""")),
+    },
+}
+
+# ── the shared library: these parts plus walker_parts.py ─────────────────────
+HAIR.update(WP.HAIR)
+BEARD.update(WP.BEARD)
+HEADWEAR.update(WP.HEADWEAR)
+OVER.update(WP.OVER)
+CAPE.update(WP.CAPE)
+HELD = dict(WP.HELD)
+HELD["hoplon"] = PROP.pop("hoplon")
+PROP.update(WP.PROP)
+
+OVER["exomis"] = {  # one shoulder bare (the wearer's right)
+    "down": phases(T(22, """
+...SSSS.........
+..SSS...........
+""")),
+    "up": phases(T(22, """
+.........SSSS...
+...........SSS..
+""")),
+    "left": phases(T(22, """
+................
+""")),
+}
+OVER["belt"] = {
+    "down": phases(T(25, """
+...AAAAAAAAAA...
+""")),
+    "up": phases(T(25, """
+...AAAAAAAAAA...
+""")),
+    "left": phases(T(25, """
+....AAAAAAAA....
+""")),
+}
+HELD["lyre_play1"] = {"down": phases(T(21, """
+.....M..M.......
+.....M..M.......
+.....MWWM.S.....
+.....MWWMS......
+.....mMMm.......
+"""))}
+HELD["lyre_play2"] = {"down": phases(T(21, """
+.....M..M.......
+.....M..M.......
+.....MWWM.......
+.....MWWM.......
+.....mMMmS......
+..........S.....
+"""))}
+HELD["lyre_rest"] = {"down": phases(T(21, """
+.....M..M.......
+.....M..M.......
+.....MWWM.......
+.....MWWM.......
+.....mMMm.......
+"""))}
+HELD["hands_folded"] = {"down": phases(T(26, """
+.......SS.......
+"""))}
+
+FACE_CLOSED = phases(T(19, """
+...SSSSSSSSSS...
+...sSkkSSkkSs...
+"""))
+
+
+def _kilt(t, rows=3):
+    """A bare-chested body from a tunic body: the top rows' cloth becomes skin."""
+    u = T.__new__(T)
+    u.start = t.start
+    u.rows = [r.replace("C", "S").replace("c", "s") if i < rows else r for i, r in enumerate(t.rows)]
+    return u
+
+
+BODY["kilt"] = {v: tuple(_kilt(t) for t in BODY["chiton"][v]) for v in VIEWS}
+
+# Running: a wider stride, the arms pumping, the body leaning into it.
+_RUN_DOWN_A = T(22, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..sOCCCCCCCCOS..
+...OAAAAAAAAOs..
+...cCCCCCCCCs...
+....cCCCCCCc....
+...SS......SS...
+..FFF......Ss...
+...........FFF..
+""")
+_RUN_LEFT_A = T(22, """
+.....CCCCCC.....
+....CSSOCCCC....
+...SsAOAAAAA....
+....cCCCCCCc....
+.....cCCCCc.....
+....SS...sS.....
+...Ss.....Ss....
+..Ss.......ss...
+.FF.........FF..
+""")
+_RUN_LEFT_B = T(22, """
+.....CCCCCC.....
+....CCCCOSSC....
+....AAAAOssAS...
+....cCCCCCCc....
+.....cCCCCc.....
+....sS...SS.....
+...ss.....Ss....
+..ss.......Ss...
+.FF.........FF..
+""")
+BODY["chiton_run"] = {
+    "down": phases(BODY["chiton"]["down"][0], _RUN_DOWN_A),
+    "up": phases(BODY["chiton"]["up"][0], _up(_RUN_DOWN_A)),
+    "left": (BODY["chiton"]["left"][0], _RUN_LEFT_A, _RUN_LEFT_B),
+}
+BODY["child"] = {
+    "down": phases(T(25, """
+...SOCCCCCCOS...
+...SOCCCCCCOS...
+...sOCCCCCCOs...
+....cCCCCCCc....
+.....SS..SS.....
+.....FF..FF.....
+"""), T(25, """
+...SOCCCCCCOS...
+...sOCCCCCCOS...
+....OCCCCCCOs...
+....cCCCCCCc....
+.....SS..FF.....
+.....FF.........
+""")),
+    "left": (T(25, """
+.....CCCCCC.....
+.....COSSCC.....
+.....COssCC.....
+.....cCCCCc.....
+......SSS.......
+.....FFFF.......
+"""), T(25, """
+.....CCCCCC.....
+.....CCOSSC.....
+.....CCOssC.....
+.....cCCCCc.....
+.....SS..Ss.....
+....FF....FF....
+"""), T(25, """
+.....CCCCCC.....
+.....OSSCCC.....
+.....OssCCC.....
+.....cCCCCc.....
+.....sS..SS.....
+....FF....FF....
+""")),
+}
+BODY["child"]["up"] = BODY["child"]["down"]
+BODY["seated"] = {"up": phases(T(25, """
+...CCCCCCCCCC...
+..SOCCCCCCCCOS..
+..SOCCCCCCCCOS..
+..cCCCCCCCCCCc..
+..cCCCCCCCCCCc..
+...cccccccccc...
+"""))}
+
+# ── characters ───────────────────────────────────────────────────────────────
+# Default roles per family palette (ichor_<family>.pal); each character
+# overrides what it wears. Q/q: flame, coal, fruit. L/l: leaves. Y/y: hat,
+# veil, hood. B: band, ribbon. N/n: net, strap, purse. O: soft outline.
+CAST = dict(S=7, s=6, e=1, k=1, O=2, G=4, H=2, h=1, C=11, c=10, W=11, w=10, A=8, F=2,
+            M=8, m=4, R=5, r=3, X=5, x=3, P=4, p=2, D=13, d=12, N=2, n=1, Q=9, q=5,
+            L=15, l=4, Y=14, y=1, B=13)
+FOLK = dict(S=7, s=6, e=1, k=1, O=2, G=6, H=2, h=1, C=12, c=11, W=9, w=8, A=4, F=2,
+            M=4, m=6, R=3, r=2, X=3, x=2, P=6, p=2, D=4, d=6, N=2, n=1, Q=5, q=3,
+            L=15, l=14, Y=3, y=2, B=3)
+THEO = dict(S=9, s=8, e=1, k=1, O=2, G=4, H=3, h=2, C=11, c=10, W=11, w=10, A=6, F=3,
+            M=6, m=5, R=5, r=3, X=3, x=2, P=4, p=2, D=12, d=13, N=2, n=1, Q=7, q=6,
+            L=15, l=14, Y=12, y=13, B=6)
+WINE = dict(S=7, s=6, e=1, k=1, O=2, G=6, H=2, h=1, C=8, c=10, W=9, w=8, A=5, F=2,
+            M=5, m=4, R=3, r=11, X=3, x=11, P=6, p=2, D=12, d=11, N=2, n=1, Q=12, q=11,
+            L=15, l=14, Y=12, y=11, B=5)
+# The player's palettes (brendan.pal / may.pal) are shared by every player
+# sheet (walking, running, surfing, fishing, bikes...), so they stay as they are.
+THEO_PAL = dict(S=1, s=2, e=15, k=15, O=4, G=3, H=4, h=15, C=14, c=9, W=14, w=9, A=3, F=4,
+                M=11, m=13, R=13, r=4, X=6, x=7, P=3, p=4, D=6, d=7, N=3, n=4, Q=10, q=13,
+                L=11, l=13, Y=10, y=11, B=13)
+IANTHE_PAL = dict(THEO_PAL, H=7, h=8, X=5, x=6, D=5, d=6)
+PLAYER_PALS = ("brendan", "may")
+FAMILY = {"cast": CAST, "folk": FOLK, "theoxenia": THEO, "wine": WINE,
+          "brendan": THEO_PAL, "may": IANTHE_PAL}
+
+
+def C_(family, roles=None, **parts):
+    spec = dict(family=family, **parts)
+    spec["roles"] = dict(FAMILY[family], **(roles or {}))
+    return spec
+
+
+_KLEON = dict(body="chiton", hair="short", cape="chlamys", over=["exomis", "armband"])
+CHARACTERS = {
+    # the named cast
+    "kleon": C_("cast", dict(H=2, h=1, C=11, c=10, A=8, X=5, x=3), **_KLEON),
+    "kleon_seasick": C_("cast", dict(S=10, s=15, C=11, c=10, X=5, x=3), head_dy=1,
+                        held=["hand_mouth"], **_KLEON),
+    "kleon_tablet": C_("cast", dict(C=11, c=10, X=5, x=3, Y=14, y=1), held=["tablet"], **_KLEON),
+    "alethea": C_("cast", dict(H=2, h=1, B=13, C=8, c=4, A=2, N=2, W=11, w=10, M=10, P=4),
+                  body="chiton", hair="ponytail", over=["satchel"], held=["trowel"]),
+    "professor_daphne": C_("cast", dict(H=4, h=2, G=8, B=15, L=15, l=4, C=13, c=12, D=11, d=10,
+                                         W=11, w=10),
+                           body="robe", hair="bun", headwear=["wreath"], over=["himation"],
+                           held=["scroll"]),
+    "hierophant_ione": C_("cast", dict(C=4, c=3, Y=11, y=10, M=8, m=4, Q=9, q=5),
+                          body="robe", hair="short", headwear=["veil_long"], held=["lamp_both"]),
+    "titan_grunt": C_("cast", dict(C=14, c=1, A=9, M=8, m=4, R=5, r=3),
+                      body="chiton", headwear=["helmet_closed"],
+                      over=["shoulder_guards", "greaves", "emblem"]),
+    "kerykos": C_("cast", dict(H=10, h=4, C=11, c=10, Y=14, y=1, X=3, x=1, M=8, L=4),
+                  body="chiton", hair="short", beard="full", headwear=["petasos"],
+                  cape="chlamys", props=["kerykeion"]),
+    # classes (cast palette)
+    "hoplite": C_("cast", dict(C=5, c=3, W=11, w=10, M=8, m=4, R=5, r=3, P=4, p=2, A=8),
+                  body="chiton", hair="short", headwear=["helmet_crest"],
+                  over=["corselet", "greaves"], held=["hoplon"], props=["spear"]),
+    "shepherd": C_("cast", dict(H=2, C=13, c=12, Y=8, y=4, W=11, w=10, P=4, p=2),
+                   body="chiton", hair="short", headwear=["pilos"], over=["sheepskin"],
+                   props=["crook"]),
+    "augur": C_("cast", dict(H=11, h=10, G=11, W=11, w=10, B=9, C=13, c=12, D=14, d=1, P=4, p=2),
+                body="robe", hair="curly", beard="long_white", headwear=["band", "feather"],
+                over=["himation"], props=["staff"]),
+    "acolyte_m": C_("cast", dict(H=14, h=1, G=14, C=11, c=10, D=9, d=8, A=8, M=8, m=4, Q=5, q=3),
+                    body="chiton", hair="crop", over=["waist_wrap", "soot"], held=["tongs"]),
+    "acolyte_f": C_("cast", dict(H=4, h=3, G=9, B=9, C=11, c=10, P=4, p=2, Q=9, q=5),
+                    body="robe", hair="bun", held=["lamp_high"]),
+    # townsfolk (folk palette)
+    "mom": C_("folk", dict(H=2, h=1, G=6, B=5, C=3, c=2, W=9, w=8),
+              body="robe", hair="bun", over=["apron"]),
+    "woman": C_("folk", dict(H=2, h=1, C=12, c=11, W=9, w=8, D=4, d=6),
+                body="robe", headwear=["kerchief"], over=["himation"]),
+    "man": C_("folk", dict(H=2, h=1, C=4, c=6, A=2),
+              body="chiton", hair="short", beard="full", over=["exomis"]),
+    "elder_m": C_("folk", dict(C=15, c=14, W=9, w=10, P=6, p=2, G=9),
+                  body="robe", hair="bald_fringe", beard="long_white", props=["staff"]),
+    "elder_f": C_("folk", dict(H=10, h=2, G=8, Y=2, y=1, C=8, c=10, B=3),
+                  body="robe", hair="long", headwear=["hood"], over=["blush"]),
+    "youth_m": C_("folk", dict(H=2, h=1, G=6, L=15, l=14, B=3, C=9, c=8, A=4),
+                  body="chiton", hair="short", headwear=["wreath"]),
+    "youth_f": C_("folk", dict(H=2, h=1, G=6, B=3, C=13, c=12, A=9),
+                  body="robe", hair="braid", over=["belt"]),
+    "kid_m": C_("folk", dict(H=2, h=1, G=6, C=3, c=2, F=6),
+                body="child", hair="curly", head_dy=3),
+    "kid_f": C_("folk", dict(H=2, h=1, G=6, B=3, C=5, c=4, F=6),
+                body="child", hair="pigtails", head_dy=3),
+    "fisher": C_("folk", dict(H=10, h=2, Y=2, y=1, C=13, c=12, A=8, N=8, n=10),
+                 body="chiton", hair="short", beard="full", headwear=["pilos"], over=["net"]),
+    "sailor": C_("folk", dict(H=2, h=1, G=6, B=3, C=8, c=10, A=12),
+                 body="kilt", hair="short", beard="jaw", headwear=["band"]),
+    "diver": C_("folk", dict(H=1, h=1, G=11, C=13, c=12, A=9, F=6, N=10, n=2, Q=5),
+                body="chiton", hair="long", held=["net_bag"]),
+    "healer": C_("folk", dict(H=2, h=1, G=6, B=15, A=15, C=9, c=8, P=6, p=2, L=15, l=14),
+                 body="robe", hair="long", headwear=["band"], over=["sash"], props=["rod"],
+                 extra=["bow"]),
+    "merchant": C_("folk", dict(H=2, h=1, W=2, w=1, G=9, C=9, c=8, D=12, d=11, N=2, n=1),
+                   body="robe", hair="bald_fringe", beard="full", over=["himation", "purse"]),
+    "harvester": C_("folk", dict(H=2, h=1, Y=3, y=2, C=15, c=14, W=9, w=8, P=4, p=6, L=14, l=15),
+                    body="robe", headwear=["scarf"], over=["apron"], held=["basket"]),
+    "goatherd": C_("folk", dict(H=10, h=2, G=9, C=8, c=10, A=6, X=2, x=1, M=4, m=2, P=6, p=2),
+                   body="chiton", hair="curly", beard="full", cape="cloak_long",
+                   over=["bell"], held=["syrinx"]),
+    "aiakides": C_("folk", dict(H=9, h=10, G=9, W=9, w=10, C=9, c=8, X=3, x=2, P=6, p=2),
+                   body="robe", hair="curly", beard="long_white", cape="cloak_long",
+                   props=["staff"]),
+    "endeis": C_("folk", dict(H=3, h=2, G=4, C=4, c=6, W=9, w=8),
+                 body="robe", hair="long", over=["apron"]),
+    "kedalion": C_("folk", dict(H=2, h=1, W=2, w=1, G=9, C=10, c=2, A=2),
+                   body="chiton", hair="bald_fringe", beard="full"),
+    "manto": C_("folk", dict(H=9, h=10, G=9, Y=9, y=8, C=12, c=11, P=6, p=2),
+                body="robe", hair="long", headwear=["veil_long"], props=["staff"]),
+    "pheidon": C_("folk", dict(H=2, h=1, G=6, C=9, c=8, D=3, d=2, P=6, p=2),
+                  body="chiton", hair="short", over=["himation"], props=["staff"]),
+    "pilgrim": C_("folk", dict(Y=12, y=11, X=12, x=11, C=12, c=11, W=9, w=8, A=5, P=6, p=2),
+                  body="robe", hair="short", headwear=["hood"], cape="cloak_long",
+                  over=["front_panel"], props=["staff"]),
+    "priestess": C_("folk", dict(H=10, h=2, Y=5, y=4, C=9, c=8, A=5, p=2),
+                    body="robe", hair="long", headwear=["veil_long"], over=["belt"],
+                    props=["spindle"]),
+    "pronomos": C_("folk", dict(H=2, h=1, G=6, C=9, c=8, A=3, P=6, p=2),
+                   body="chiton", hair="curly", held=["aulos"]),
+    # the Theoxenia
+    "sam": C_("theoxenia", dict(H=2, h=1, G=3, C=11, c=10, A=4, X=3, x=2, M=6, m=5, W=11),
+              body="chiton", hair="curly", cape="cloak_long", held=["lyre"],
+              extra=["strum1", "strum2", "strum3"]),
+    "apollo": C_("theoxenia", dict(H=2, h=1, G=3, C=11, c=10, A=6, L=6, l=5, M=6, m=5, W=11),
+                 body="robe", hair="curly", headwear=["wreath"], held=["lyre"],
+                 extra=["strum1", "strum2", "strum3"]),
+    "cami": C_("theoxenia", dict(H=3, h=2, G=4, C=11, c=10, D=12, d=13),
+               body="robe", hair="long", over=["himation"], extra=["sit", "rise"]),
+    "demeter": C_("theoxenia", dict(H=6, h=5, G=7, L=7, l=5, B=5, C=15, c=14, D=6, d=5),
+                  body="robe", hair="long", headwear=["wreath"], over=["himation"]),
+    # the wine palette
+    "actor": C_("wine", dict(H=2, h=1, G=6, C=3, c=11, A=5, B=5, W=9, w=8),
+                body="robe", hair="short", headwear=["band"], over=["stripes"], held=["mask"]),
+    "vintner": C_("wine", dict(H=2, h=1, Y=12, y=11, C=8, c=10, A=2, Q=12, q=11, L=15),
+                  body="chiton", hair="short", headwear=["cap"], held=["grapes"]),
+}
+
+# The player: the traveler's petasos and blue chlamys over a linen tunic, a
+# satchel strap across the chest. Ianthe wears her braid down her back.
+PLAYERS = {
+    "theo": C_("brendan", None, body="chiton", hair="short", headwear=["petasos"],
+               cape="chlamys", over=["satchel"]),
+    "ianthe": C_("may", None, body="chiton", hair="long", headwear=["petasos"],
+                 cape="chlamys", over=["satchel"]),
+}
+PLAYER_DIR = {"theo": "brendan", "ianthe": "may"}
+
+
+def read_pal(family):
+    path = PALS / (f"{family}.pal" if family in PLAYER_PALS else f"ichor_{family}.pal")
+    v = list(map(int, path.read_text().split()[3:]))
+    return np.array(v, int).reshape(-1, 3)[:16]
+
+
+def stamp(grid, part, view, phase, behind=False, dy=0, dx=0):
+    if not part or view not in part:
+        return
+    t = part[view][phase]
+    for i, row in enumerate(t.rows):
+        y = t.start + i + dy
+        if not 0 <= y < 32:
+            continue
+        for x, ch in enumerate(row):
+            x += dx
+            if ch != "." and 0 <= x < len(grid[0]) and (not behind or grid[y][x] == "."):
+                grid[y][x] = ch
+
+
+DARK_EDGE = set("HhGekMmRrXxPpFADYyNnQqLl")
+
+
+def outline(grid):
+    """One continuous outline round the silhouette (4-way), tinted like Gen 3:
+    ink beside hair, metal, crests, capes, hats and wood; a dark brown ("O")
+    beside skin and light cloth, so faces and linen don't sit in a black line."""
+    out = [row[:] for row in grid]
+    W = len(grid[0])
+    for y in range(32):
+        for x in range(W):
+            if grid[y][x] != ".":
+                continue
+            near = [grid[y + dy][x + dx] for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                    if 0 <= y + dy < 32 and 0 <= x + dx < W and grid[y + dy][x + dx] not in ".kO"]
+            if near:
+                out[y][x] = "k" if any(c in DARK_EDGE for c in near) else "O"
+    return out
+
+
+POSES = {
+    # pose: (view, phase, head offset, eyes shut, body override, held override)
+    "strum1": ("down", 0, 0, False, None, ["lyre_play1"]),
+    "strum2": ("down", 0, 0, False, None, ["lyre_play2"]),
+    "strum3": ("down", 0, 0, True, None, ["lyre_rest"]),
+    "bow": ("down", 0, 2, True, None, ["hands_folded"]),
+    "sit": ("up", 0, 3, False, "seated", []),
+    "rise": ("up", 0, 1, False, None, []),
+}
+
+
+def frame(spec, view, phase, pose=None, run=False, width=16, x0=0, body_override=None,
+          head_dy=0, extra_held=(), drawings=(), thin=()):
+    """One frame. width/x0 place the 16-wide figure on a wider canvas (the
+    32x32 player poses); drawings(grid) run before the outline, thin(grid)
+    after it (rods and sparkles, one pixel, no outline of their own)."""
+    g = [["."] * width for _ in range(32)]
+    dy = spec.get("head_dy", 0) + head_dy
+    dx = 0
+    shut = False
+    body = spec["body"]
+    if body_override:
+        body = body_override
+    if run:
+        body = body + "_run"
+        if phase:  # mid-stride: the head dips, and leans forward in profile
+            dy += 1
+            dx = -1 if view == "left" else 0
+    held = [HELD[h] for h in spec.get("held", [])]
+    if pose:
+        view, phase, pdy, shut, pbody, pheld = POSES[pose]
+        dy += pdy
+        body = pbody or body
+        if pheld is not None:
+            held = [HELD[h] for h in pheld]
+    held = held + [HELD[h] for h in extra_held]
+    get = lambda table, key: table.get(key) if key else None  # noqa: E731
+    X = x0  # the figure's left edge on the canvas
+    cape = get(CAPE, spec.get("cape"))
+    if view != "up":
+        stamp(g, cape, view, phase, dx=X)
+    else:
+        for h in held:
+            stamp(g, h, view, phase, dx=X)
+    stamp(g, BODY[body], view, phase, dx=X)
+    for o in spec.get("over", []):
+        stamp(g, OVER[o], view, phase, dy=dy if o in ("soot", "blush") else 0, dx=X)
+    stamp(g, FACE, view, phase, dy=dy, dx=dx + X)
+    if shut and view == "down":
+        stamp(g, {"down": FACE_CLOSED}, view, 0, dy=dy, dx=dx + X)
+    stamp(g, get(HAIR, spec.get("hair")), view, phase, dy=dy, dx=dx + X)
+    stamp(g, get(BEARD, spec.get("beard")), view, phase, dy=dy, dx=dx + X)
+    for hw in spec.get("headwear", []):
+        stamp(g, HEADWEAR[hw], view, phase, dy=dy, dx=dx + X)
+    if view == "up":
+        stamp(g, cape, view, phase, dx=X)
+    else:
+        for h in held:
+            stamp(g, h, view, phase, dx=X)
+    for draw in drawings:
+        draw(g)
+    g = outline(g)
+    # thin props (staff, spear, crook) go on after the outline, one pixel wide,
+    # as Gen 3 draws them; from behind they only show where the body isn't
+    for pr in spec.get("props", []):
+        stamp(g, PROP[pr], view, phase, behind=(view == "up"), dx=X)
+    for draw in thin:
+        draw(g)
+    return g
+
+
+ORDER = [("down", 0), ("up", 0), ("left", 0), ("down", 1), ("down", 2),
+         ("up", 1), ("up", 2), ("left", 1), ("left", 2)]
+
+
+def build(name):
+    spec = CHARACTERS[name]
+    roles = spec["roles"]
+    grids = [frame(spec, v, ph) for v, ph in ORDER]
+    grids += [frame(spec, None, None, pose) for pose in spec.get("extra", [])]
+    frames = [np.array([[0 if c == "." else roles[c] for c in row] for row in g], np.uint8)
+              for g in grids]
+    return np.hstack(frames), read_pal(spec["family"])
+
+
+def build_player(name, sheet="walking"):
+    """Theo's or Ianthe's walking or running sheet (9 frames, engine order)."""
+    spec = PLAYERS[name]
+    roles = spec["roles"]
+    grids = [frame(spec, v, ph, run=(sheet == "running")) for v, ph in ORDER]
+    frames = [np.array([[0 if c == "." else roles[c] for c in row] for row in g], np.uint8)
+              for g in grids]
+    return np.hstack(frames), read_pal(spec["family"])
+
+
+# ── the player's 32x32 poses ─────────────────────────────────────────────────
+# The seated rider for surfing: the same body folded at the knees.
+BODY["surf"] = {
+    "down": phases(T(25, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..sOAAAAAAAAOs..
+..cCCCCCCCCCCc..
+..SSScCCCCcSSS..
+...SS......SS...
+""")),
+    "up": phases(T(25, """
+...CCCCCCCCCC...
+..SOCCCCCCCCOS..
+..SOAAAAAAAAOS..
+..cCCCCCCCCCCc..
+..cCCCCCCCCCCc..
+...cccccccccc...
+""")),
+    "left": phases(T(25, """
+.....CCCCCC.....
+....CCOSSCCC....
+....AAOssAAA....
+...CCCCCCCCC....
+..SSSCCCCCcc....
+..FF............
+""")),
+}
+
+
+def _px(g, x, y, ch):
+    if 0 <= y < len(g) and 0 <= x < len(g[0]):
+        g[y][x] = ch
+
+
+def _line(g, x1, y1, x2, y2, ch):
+    """A one-pixel line (Bresenham)."""
+    dx, dy = abs(x2 - x1), -abs(y2 - y1)
+    sx, sy = (1 if x1 < x2 else -1), (1 if y1 < y2 else -1)
+    err = dx + dy
+    while True:
+        _px(g, x1, y1, ch)
+        if (x1, y1) == (x2, y2):
+            return
+        e2 = 2 * err
+        if e2 >= dy:
+            err += dy
+            x1 += sx
+        if e2 <= dx:
+            err += dx
+            y1 += sy
+
+
+def _ball(cx, cy):
+    """A capture ball, 3x3: red top, ink band, white bottom (outlined)."""
+    def draw(g):
+        for x in (cx - 1, cx, cx + 1):
+            _px(g, x, cy - 1, "R")
+            _px(g, x, cy + 1, "W")
+        _px(g, cx - 1, cy, "k"), _px(g, cx, cy, "W"), _px(g, cx + 1, cy, "k")
+    return draw
+
+
+def _arm_up(x, top, bottom):
+    def draw(g):
+        for y in range(top, bottom + 1):
+            _px(g, x, y, "S")
+    return draw
+
+
+def _sparkle(points):
+    def draw(g):
+        for x, y in points:
+            _px(g, x, y, "Q")
+    return draw
+
+
+def _rod(hand, tip, line=0):
+    """A rod held at `hand`, its tip at `tip`, `line` pixels of line hanging."""
+    def draw(g):
+        _line(g, *hand, *tip, "p")
+        for i in range(1, line + 1):
+            _px(g, tip[0], tip[1] + i, "W")
+    return draw
+
+
+def _hands(*points):
+    def draw(g):
+        for x, y in points:
+            _px(g, x, y, "S")
+    return draw
+
+
+X0 = 8  # the 16-wide figure centred on the 32-wide canvas
+
+
+def _pose_frames(sheet):
+    """(view, phase, frame keyword arguments) per frame, in the engine's order."""
+    if sheet == "field_move":  # facing down: reach, hold, lift, raise high
+        return [
+            ("down", 0, {}),
+            ("down", 0, {"drawings": [_ball(X0 + 13, 26)]}),
+            ("down", 0, {"drawings": [_hands((X0 + 6, 24)), _hands((X0 + 10, 24)), _ball(X0 + 8, 24)]}),
+            ("down", 0, {"drawings": [_hands((X0 + 6, 22)), _hands((X0 + 10, 22)), _ball(X0 + 8, 21)]}),
+            ("down", 0, {"drawings": [_arm_up(X0 + 13, 16, 23), _ball(X0 + 13, 14)],
+                         "thin": [_sparkle([(X0 + 10, 11), (X0 + 16, 12), (X0 + 13, 9), (X0 + 17, 15)])]}),
+        ]
+    if sheet == "surfing":  # seated rider and the jump on/off, per direction
+        jump = lambda: [_arm_up(X0 + 1, 18, 23), _arm_up(X0 + 14, 18, 23)]  # noqa: E731
+        return [
+            ("down", 0, {"body_override": "surf", "head_dy": 3}),
+            ("down", 0, {"drawings": jump()}),
+            ("up", 0, {"body_override": "surf", "head_dy": 3}),
+            ("up", 0, {"drawings": jump()}),
+            ("left", 0, {"body_override": "surf", "head_dy": 3}),
+            ("left", 0, {"drawings": [_arm_up(X0 + 5, 18, 23)]}),
+        ]
+    if sheet == "fishing":  # west 0-3, north 4-7, south 8-11: out, raise, cast, taut
+        west, north, south = (X0 + 5, 24), (X0 + 12, 22), (X0 + 10, 25)
+        return [
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (X0 + 10, 11))]}),
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (X0 + 2, 8))]}),
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (1, 19))]}),
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (0, 23), 3)]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 16, 9))]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 9, 3))]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 8, 0))]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 11, 1))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 15, 13))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 9, 5))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 17, 31))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 19, 29), 2)]}),
+        ]
+    raise KeyError(sheet)
+
+
+POSE_SHEETS = ("field_move", "surfing", "fishing")
+
+
+def build_player_pose(name, sheet):
+    spec = PLAYERS[name]
+    roles = spec["roles"]
+    grids = [frame(spec, v, ph, width=32, x0=X0, **kw) for v, ph, kw in _pose_frames(sheet)]
+    frames = [np.array([[0 if c == "." else roles[c] for c in row] for row in g], np.uint8)
+              for g in grids]
+    return np.hstack(frames), read_pal(spec["family"])
+
+
+def player_path(name, sheet):
+    return ROOT / "graphics/object_events/pics/people" / PLAYER_DIR[name] / f"{sheet}.png"
+
+
+def save(sheet, pal, path):
+    im = Image.fromarray(sheet, "P")
+    im.putpalette([int(v) for c in pal for v in c] + [0] * (768 - 48))
+    im.save(path, bits=4, transparency=0)
+
+
+def to_rgba(sheet, pal):
+    a = np.zeros(sheet.shape + (4,), np.uint8)
+    m = sheet != 0
+    a[m, :3] = pal[sheet[m]]
+    a[m, 3] = 255
+    return Image.fromarray(a)
+
+
+def preview(names, out, Z=4):
+    """Old sheet, new sheet, Theo and an Emerald townsperson, at 4x on grass."""
+    rows = []
+    for n in names:
+        sheet, pal = build(n)
+        parts = []
+        old = SHEETS / f"{n}.png"
+        if old.exists():
+            parts.append(Image.open(old).convert("RGBA"))
+        parts.append(to_rgba(sheet, pal))
+        parts.append(Image.open(ROOT / "graphics/object_events/pics/people/brendan/walking.png")
+                     .convert("RGBA").crop((0, 0, 48, 32)))
+        parts.append(Image.open(ROOT / "graphics/object_events/pics/people/boy_1.png")
+                     .convert("RGBA").crop((0, 0, 48, 32)))
+        W = sum(p.width for p in parts) + 8 * len(parts)
+        row = Image.new("RGBA", (W, 32), (168, 200, 120, 255))
+        x = 0
+        for p in parts:
+            row.alpha_composite(p, (x, 0))
+            x += p.width + 8
+        rows.append(row)
+    W = max(r.width for r in rows)
+    img = Image.new("RGBA", (W, 34 * len(rows)), (232, 226, 212, 255))
+    for i, r in enumerate(rows):
+        img.alpha_composite(r, (0, 34 * i))
+    img.convert("RGB").resize((img.width * Z, img.height * Z), Image.NEAREST).save(out)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("names", nargs="*")
+    ap.add_argument("--write", action="store_true")
+    ap.add_argument("--preview")
+    a = ap.parse_args()
+    names = a.names or list(CHARACTERS) + list(PLAYERS)
+    if a.write:
+        for n in [n for n in names if n in PLAYERS]:
+            for sheet_name in ("walking", "running"):
+                sheet, pal = build_player(n, sheet_name)
+                save(sheet, pal, player_path(n, sheet_name))
+                print("wrote", n, sheet_name)
+            for sheet_name in POSE_SHEETS:
+                sheet, pal = build_player_pose(n, sheet_name)
+                save(sheet, pal, player_path(n, sheet_name))
+                print("wrote", n, sheet_name)
+    names = [n for n in names if n in CHARACTERS]
+    if a.preview:
+        preview(names, a.preview)
+    if a.write:
+        for n in names:
+            sheet, pal = build(n)
+            save(sheet, pal, SHEETS / f"{n}.png")
+            print("wrote", n)
+
+
+if __name__ == "__main__":
+    main()

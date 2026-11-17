@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 import sprites_folk as folk
 import human_classes as humans
 import model_cast as cast
+import walker_paint as hand_drawn  # owns the hand-drawn Gen 3 walkers (STYLE.md §3.6)
 
 
 class FolkSpriteTests(unittest.TestCase):
@@ -16,7 +17,9 @@ class FolkSpriteTests(unittest.TestCase):
         for spec in folk.WALKERS:
             with self.subTest(walker=spec["name"]):
                 path = Path(folk.OUT_DIR) / (spec["name"] + ".png")
-                if ("walkers", spec["name"]) in humans.BY_KEY:
+                if spec["name"] in hand_drawn.CHARACTERS:
+                    expected = hand_drawn.build(spec["name"])[0]
+                elif ("walkers", spec["name"]) in humans.BY_KEY:
                     with humans.source_image("walkers", spec["name"]) as authored:
                         expected = np.array(authored)
                 elif cast.is_owned(path):

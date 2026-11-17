@@ -226,7 +226,7 @@ The right-facing frames are the left ones mirrored, so nothing may be one-sided 
 - **Columns:** standing, step A, step B.
 - **Frames:** each 16x32 on a true pixel grid, drawn at 8x.
 
-`tools/ichor/art/walker_from_concept.py` checks a sheet, reads each frame on its grid, sets the feet on the bottom row, maps the colors into the family palette, and writes the 144x32 strip in engine order. Review every walker at 1x on a real map beside Theo and an Emerald townsperson, before and after.
+**The walkers are hand-drawn** in `tools/ichor/art/walker_paint.py` and `walker_parts.py`: one shared Gen 3 body (face, tunic or robe, child and seated builds) with layered hair, beards, headwear, clothes, capes and props, a tinted outline added round the silhouette, and thin props drawn last without one. Each character is a short spec of parts and palette roles; `python3 tools/ichor/art/walker_paint.py --write` rebuilds every sheet, and `--preview` shows old beside new with Theo and an Emerald townsperson. For a concept sheet instead, `tools/ichor/art/walker_from_concept.py` checks a sheet, reads each frame on its grid, sets the feet on the bottom row, maps the colors into the family palette, and writes the 144x32 strip in engine order. Review every walker at 1x on a real map beside Theo and an Emerald townsperson, before and after.
 
 ---
 

@@ -11,6 +11,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 import model_cast as cast
+import walker_paint as hand_drawn  # owns the hand-drawn Gen 3 walkers (STYLE.md §3.6)
 from sprites_lib import Palette, save_indexed
 
 
@@ -52,6 +53,11 @@ class ModelCastTests(unittest.TestCase):
     def test_native_pngs_reproduce_production(self):
         for path, expected in self.outputs.items():
             with self.subTest(path=path):
+                if path.parent == cast.PEOPLE and path.stem in hand_drawn.CHARACTERS:
+                    # walkers are redrawn by hand now; the model output is history
+                    with Image.open(cast.ROOT / path) as image:
+                        np.testing.assert_array_equal(np.array(image), hand_drawn.build(path.stem)[0])
+                    continue
                 data = io.BytesIO()
                 expected.save(data, format="PNG", bits=4, transparency=0)
                 self.assertEqual((cast.ROOT / path).read_bytes(), data.getvalue())
