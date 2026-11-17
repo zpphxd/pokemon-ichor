@@ -3,7 +3,7 @@
 import struct
 import sys
 
-from thyrsa import ROOT, Map, bg, const, hall, read, warp, write
+from thyrsa import ROOT, Map, asclepeion, bg, const, hall, read, warp, write
 from astyra import CLINIC, HOUSE, LIBRARY
 from salt_well import hidden, item
 
@@ -78,10 +78,8 @@ def town():
 def rooms():
     m = hall("Kaldera_Asclepeion", 18, 12)
     m.json["music"] = read("data/maps/ThyrsaCity_Asclepeion/map.json")["music"]
-    m.rect(2, 3, 6, 3, 0x20C, True)
-    m.rect(11, 6, 15, 6, 0x20C, True)
-    m.person("Healer", 8, 4, gfx="HEALER")
-    m.sign("Pithos", 3, 4, tile=0x20C)
+    asclepeion(m, 8, 2)
+    m.person("Healer", 8, 2, gfx="HEALER")
     m.json["warp_events"] = [warp(9, 11, "Kaldera", 0)]
     m.save()
     m = hall("Kaldera_Agora", 16, 12)

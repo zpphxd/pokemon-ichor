@@ -225,6 +225,22 @@ script {m.prefix}Kronist {{
     return m
 
 
+def asclepeion(m, hx, pithos_x):
+    """The standard Asclepeion pieces from civic_rooms.py, the same in every
+    town: the healer's station with her at (hx, 2), and the Pithos against
+    the back wall at columns pithos_x, pithos_x + 1 (bg events on its foot).
+    Adds the healer; the caller names her."""
+    import sys
+    sys.path.insert(0, str(ROOT / "tools/ichor/art"))
+    import civic_tiles as ct
+    import civic_rooms as CR
+    ct.define()
+    for x, y, n in CR.station_cells(hx, 2) + CR.pithos_cells(pithos_x):
+        m.cells[y * m.w + x] = CR.block_of(n)
+    for x in (pithos_x, pithos_x + 1):
+        m.json["bg_events"].append(bg(x, 2, m.prefix + "Pithos"))
+
+
 def hall(name, w, h):
     m = Map(name, w, h, True)
     m.rect(1, 2, w - 2, h - 1, 0x201)
@@ -288,12 +304,8 @@ def main():
     town.save()
 
     clinic = hall("ThyrsaCity_Asclepeion", 15, 12)
-    clinic.rect(4, 4, 10, 4, 0x213, True)
-    clinic.rect(4, 3, 10, 3, 0x211)
-    clinic.person("Healer", 7, 3, gfx="HEALER")
-    clinic.stamp(11, 2, [[0x21F, 0x220], [0x221, 0x222], [0x223, 0x224]])
-    clinic.json["bg_events"].append(bg(11, 4, clinic.prefix + "Pithos"))
-    clinic.json["bg_events"].append(bg(12, 4, clinic.prefix + "Pithos"))
+    asclepeion(clinic, 7, 11)
+    clinic.person("Healer", 7, 2, gfx="HEALER")
     clinic.stamp(2, 6, [[0x21B, 0x21C], [0x21D, 0x21E]])
     clinic.json["warp_events"] = [warp(7, 11, "ThyrsaCity", 0)]
     clinic.save()

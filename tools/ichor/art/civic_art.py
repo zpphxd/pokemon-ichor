@@ -546,6 +546,41 @@ art("pithos_big", [
     "." * 32,
 ])
 
+
+
+def _pithos_seal(rows):
+    """Marks the Pithos as the one jar that keeps Pokémon: a glowing wax seal
+    on the lid and a cream medallion on the belly with Asclepius's rod (the
+    staff and its serpent), ringed in the seal's orange. Clay colors only, so
+    every changed tile still fits the clay palette."""
+    g = [list(r) for r in rows]
+    # The seal on the lid, lit.
+    g[1][14:18] = "XPPX"
+    g[2][13:19] = "XXrrXX"
+    # The medallion: a disc on the belly, centered between the two cells.
+    cx, cy = 15.5, 23.5
+    for y in range(17, 31):
+        for x in range(9, 23):
+            d = ((x - cx) ** 2 + (y - cy) ** 2) ** 0.5
+            if d <= 4.6:
+                g[y][x] = "P"
+            elif d <= 5.6:
+                g[y][x] = "X"
+            elif d <= 6.5:
+                g[y][x] = "R"
+    # The rod, and the serpent winding up it.
+    for y in range(19, 29):
+        g[y][15] = "T"
+    for y, xs in ((19, (17, 18)), (20, (16,)), (21, (14, 15)), (22, (13,)),
+                  (23, (14, 15)), (24, (16, 17)), (25, (17,)), (26, (15, 16)),
+                  (27, (14,))):
+        for x in xs:
+            g[y][x] = "r"
+    return ["".join(r) for r in g]
+
+
+art("pithos_big", _pithos_seal(ART["pithos_big"]))
+
 # A smaller lidded storage jar for the Pithos corner.
 art("pithos_small", [
     "." * 16,
