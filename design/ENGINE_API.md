@@ -469,6 +469,15 @@ its loop. Native assisted progression is not natural-level acceptance.
 The independent Route 19/Paros sea journey, finished map presentation and
 remaining Kaldera side integrations are still open.
 
+`tools/ichor/tests/ichor_statues.sh` exercises Galatea's watched-statue mechanic
+in a temporary native fixture: facing a statue directly or through a mirror
+stops it; turning alone does not move it; an unwatched statue advances on a
+player step. Rooted statues turn without moving, people block sight, and an
+adjacent walking statue invokes its own touch script with `VAR_FACING = DIR_NONE`
+and its local ID in `VAR_LAST_TALKED`. The twelve statue/mirror movement types
+are appended after the existing Frozen Hour types, preserving published IDs.
+This engine check is not evidence that the Kythera chapter is connected.
+
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.

@@ -2,6 +2,7 @@
 #include "ichor_frozen.h"
 #include "ichor_rites.h"
 #include "ichor_relics.h"
+#include "ichor_statue.h"
 #include "battle_setup.h"
 #include "bike.h"
 #include "coord_event_weather.h"
@@ -188,6 +189,8 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
+        if (Ichor_StatuesOnPlayerStep())
+            return TRUE;
         if (FindTaskIdByFunc(Task_FollowerNPCOutOfDoor) == TASK_NONE && TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }

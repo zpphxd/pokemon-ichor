@@ -355,6 +355,18 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP] = MovementType_IchorFrozenStep,
     [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT] = MovementType_IchorFrozenStep,
     [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT] = MovementType_IchorFrozenStep,
+    [MOVEMENT_TYPE_ICHOR_STATUE] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_UP] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_LEFT] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_RIGHT] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_UP] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_LEFT] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_RIGHT] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_MIRROR] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_MIRROR_UP] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_MIRROR_LEFT] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT] = MovementType_FaceDirection,
 };
 
 static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
@@ -494,6 +506,18 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
     [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_ICHOR_STATUE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_ICHOR_STATUE_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_ICHOR_STATUE_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_ICHOR_STATUE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED] = DIR_SOUTH,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_ICHOR_MIRROR] = DIR_SOUTH,
+    [MOVEMENT_TYPE_ICHOR_MIRROR_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_ICHOR_MIRROR_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT] = DIR_EAST,
 };
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
