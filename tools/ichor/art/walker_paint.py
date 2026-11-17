@@ -76,6 +76,35 @@ FACE = {
 """)),
 }
 
+# Eyes drawn as short level strokes (2x1) instead of the round 1x2 ones: a
+# calm, steady look. Chosen per character with face="level".
+FACE_LEVEL = {
+    "down": phases(T(13, """
+....SSSSSSSS....
+...SSSSSSSSSS...
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+..SSSSSSSSSSSS..
+...SSSSSSSSSS...
+...sSeeSSeeSs...
+....ssSSSSss....
+""")),
+    "up": FACE["up"],
+    "left": phases(T(13, """
+....SSSSSSS.....
+...SSSSSSSSS....
+..SSSSSSSSSSS...
+..SSSSSSSSSSS...
+..SSSSSSSSSSS...
+.SSSSSSSSSSSS...
+..SSSSSSSSSSS...
+..SeeSSSSSSSs...
+...sSSSSSSss....
+""")),
+}
+FACES = {"round": FACE, "level": FACE_LEVEL}
+
 # ── bodies ───────────────────────────────────────────────────────────────────
 _SHORT_DOWN = T(22, """
 ...CCCSSSSCCC...
@@ -821,6 +850,11 @@ CHARACTERS = {
     "priestess": C_("folk", dict(H=10, h=2, Y=5, y=4, C=9, c=8, A=5, p=2),
                     body="robe", hair="long", headwear=["veil_long"], over=["belt"],
                     props=["spindle"]),
+    # Alfred of Waltz Chariots: a wheelwright from the far east, come in by sea.
+    # Black hair in a topknot tied with red, a deep-blue robe, a red sash, and a
+    # leather work apron for the trade.
+    "alfred": C_("folk", dict(H=1, h=2, G=11, B=3, C=12, c=11, W=6, w=2, A=3),
+                 body="robe", hair="bun", over=["apron", "sash"], face="level"),
     "pronomos": C_("folk", dict(H=2, h=1, G=6, C=9, c=8, A=3, P=6, p=2),
                    body="chiton", hair="curly", held=["aulos"]),
     # the Theoxenia
@@ -947,7 +981,7 @@ def frame(spec, view, phase, pose=None, run=False, width=16, x0=0, body_override
     stamp(g, BODY[body], view, phase, dx=X)
     for o in spec.get("over", []):
         stamp(g, OVER[o], view, phase, dy=dy if o in ("soot", "blush") else 0, dx=X)
-    stamp(g, FACE, view, phase, dy=dy, dx=dx + X)
+    stamp(g, FACES[spec.get("face", "round")], view, phase, dy=dy, dx=dx + X)
     if shut and view == "down":
         stamp(g, {"down": FACE_CLOSED}, view, 0, dy=dy, dx=dx + X)
     stamp(g, get(HAIR, spec.get("hair")), view, phase, dy=dy, dx=dx + X)

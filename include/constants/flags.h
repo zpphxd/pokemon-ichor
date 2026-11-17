@@ -1789,6 +1789,7 @@
 #define FLAG_ICHOR_ELEUSA_PERSENYX              (FLAG_ICHOR_GENERAL_START + 0x030) // Ichor: caught or defeated the Persephone amphora's field visitor
 #define FLAG_ICHOR_HIDE_AMPHORA_PERSENYX        (FLAG_ICHOR_GENERAL_START + 0x031) // Ichor: derived visibility of the dusk-only restored-amphora visitor
 #define FLAG_ICHOR_OATH_CHOICE_PENDING          (FLAG_ICHOR_GENERAL_START + 0x032) // Ichor: new game may choose its starting Oath; cleared by either answer
+#define FLAG_ICHOR_BOUGHT_CHARIOT               (FLAG_ICHOR_GENERAL_START + 0x033) // Ichor: bought the chariot from Alfred at Waltz Chariots, Emporion
 #define FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x040) // Ichor: Route 5: the Super Potion in the pine clearing
 #define FLAG_ICHOR_ITEM_ROUTE5_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x041) // Ichor: Route 5: the Great Ball beside the rock seat
 #define FLAG_ICHOR_ITEM_ROUTE5_PP_UP            (FLAG_ICHOR_GENERAL_START + 0x042) // Ichor: Route 5: the PP Up at the watchtower (the Girdle, Act II)

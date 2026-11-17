@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emporion's nine interiors.
+"""Emporion's ten interiors.
 
 Every house is a home and every interior is unique (design/MAP_DESIGN.md
 section 2). Who is in each room and what happens there is in
@@ -454,6 +454,56 @@ ROOMS = {
             ("bg", "the half-painted cup on the wheel", (8, 7), (7, 7, "east")),
             ("bg", "EUPHRONIOS PAINTED ME, on the wall", (3, 1), (3, 2, "north")),
             ("bg", "the drying shelves", (0, 1), (0, 2, "north")),
+        ],
+    },
+    # ------------------------------------------------------------------
+    # Waltz Chariots, Alfred's chariot store, beside the Deigma. A wheelwright
+    # from the far east, come in by sea, who builds light racing chariots.
+    # Spare wheels hang on pegs at either end of the back wall; between the
+    # windows every road he has driven is scratched into the plaster. His
+    # table and stool on the left, a bench for buyers on the right. The
+    # chariot he sells stands on show in the yard outside. On domos (the
+    # forge set, ergasteria, is full), from pieces it already holds.
+    "chariot": {
+        "set": "domos",
+        "title": "Waltz Chariots, Alfred's chariot store, Emporion",
+        "map": "MAP_EMPORION_CITY_CHARIOT_STORE",
+        "layout": "EmporionCity_ChariotStore",
+        "render": "emporion_chariot_store.png",
+        "floor": "terracotta",
+        "wall": "red",
+        "grid": [
+            "WWWWWWWWWWWW",
+            "WWWWWWWWWWWW",
+            "............",
+            "............",
+            "............",
+            "............",
+            "............",
+            "............",
+            "............",
+        ],
+        "rugs": [],
+        "stamps": [
+            ("wheel_pegs", 0, 1),
+            ("window", 3, 0),
+            ("road_map", 5, 0),
+            ("window", 8, 0),
+            ("wheel_pegs", 10, 1),
+            ("table", 1, 3),
+            ("stool", 3, 3),
+            ("bench", 8, 4),
+            ("pithos", 0, 5),
+            ("amphora_plain", 10, 6),
+            ("lampstand", 11, 6),
+            ("mat", 5, 8),
+        ],
+        "spots": [
+            ("warp", "door to Emporion (south-arrow mat)", [(5, 8), (6, 8)]),
+            ("npc", "Alfred, at the middle of his shop", (6, 4), "south"),
+            ("bg", "the roads scratched on the plaster", (5, 1), (5, 2, "north")),
+            ("bg", "the spare wheels", (1, 1), (1, 2, "north")),
+            ("bg", "his table", (2, 3), (2, 4, "north")),
         ],
     },
     # ------------------------------------------------------------------

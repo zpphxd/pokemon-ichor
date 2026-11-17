@@ -35,6 +35,7 @@
 	.include "data/maps/EmporionCity_WidowsHouse/scripts.inc"
 	.include "data/maps/EmporionCity_RunnersHouse/scripts.inc"
 	.include "data/maps/EmporionCity_PottersWorkshop/scripts.inc"
+	.include "data/maps/EmporionCity_ChariotStore/scripts.inc"
 	.include "data/maps/EmporionCity_HiringHall/scripts.inc"
 	.include "data/maps/EmporionCity_TempleOfHermes/scripts.inc"
 	.include "data/maps/EleusaVillage/scripts.inc"

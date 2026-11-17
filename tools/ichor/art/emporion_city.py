@@ -369,6 +369,8 @@ SIGNS = {
               "   aaa   ", "         "],
     "grain": ["   k k   ", "  kakak  ", "  koook  ", " k1ooook ", " k1ooook ", " k1ooook ",
               "  kkkkk  ", "         "],
+    "wheel": ["  kkkkk  ", " k1 o 1k ", " k  o  k ", " kooaook ", " k  o  k ", " k1 o 1k ",
+              "  kkkkk  ", "         "],
 }
 
 
@@ -464,16 +466,17 @@ def upper_storey():
 
 
 def signs_storey():
-    kinds = ("tavern", "bronze", "potter", "perfume", "ships", "grain")
-    s = Struct("signs", "House upper storey with trade signs, ochre", 6, 1, walk=["XXXXXX"],
+    kinds = ("tavern", "bronze", "potter", "perfume", "ships", "grain", "wheel")
+    s = Struct("signs", "House upper storey with trade signs, ochre", 7, 1, walk=["XXXXXXX"],
                ground="none",
                notes="Upper-storey wall cells with a trade sign hung from an iron bracket: "
                      "(0) tavern (a kantharos cup), (1) bronze-smith (a Corinthian helmet), "
                      "(2) potter (an amphora), (3) perfumer (an aryballos), (4) shipwright "
-                     "(a hull and sail), (5) grain and the hiring hall (a sack). Put one over "
+                     "(a hull and sail), (5) grain and the hiring hall (a sack), (6) the "
+                     "wheelwright, Alfred's chariot store (a spoked wheel). Put one over "
                      "the door of the trade's house.")
     L = s.B
-    _upper_wall(L, 0, 96)
+    _upper_wall(L, 0, 112)
     for i, k in enumerate(kinds):
         _sign(L, i * 16, k)
     s.names = {k: (i, 0) for i, k in enumerate(kinds)}

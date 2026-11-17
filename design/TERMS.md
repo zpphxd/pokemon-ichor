@@ -43,6 +43,8 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 | Hall of Fame | the Hall of Heroes | HALL OF HEROES | **Flag.** The bible has no name for it. "Heroes" in the Greek sense: people the age remembers. *Heroön* (a hero's shrine) is the scholarly option. |
 | Battle Frontier | the Olympiad | OLYMPIAD | PITCH §6. A cut system for now; its text is left alone. |
 | Ferry, S.S. Tidal | trireme | TRIREME | PITCH §1. The Phase 1 trireme is the *Euploia*. |
+| Mach Bike, Bike | the Chariot | CHARIOT | The user's decision (2026-11-16). One chariot, pulled by a pony, with the Mach Bike's speed; the Acro Bike stays unused. Sold, not given: ¥10,000 from Alfred at Waltz Chariots, beside the Deigma in Emporion (`data/maps/EmporionCity_ChariotStore`). The item is still `ITEM_MACH_BIKE` in code. |
+| Rydel's Cycles (the bike shop) | Waltz Chariots | WALTZ CHARIOTS | The user's names: the store and its owner, Alfred, a wheelwright from the far east who came in by sea. Both are the user's exceptions to CLAUDE.md's Greek-rooted naming rule. |
 
 ## Things you carry and use
 

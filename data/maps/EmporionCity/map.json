@@ -436,6 +436,13 @@
       "elevation": 0,
       "dest_map": "MAP_EMPORION_CITY_DEIGMA",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 43,
+      "y": 35,
+      "elevation": 0,
+      "dest_map": "MAP_EMPORION_CITY_CHARIOT_STORE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -722,6 +729,14 @@
       "elevation": 3,
       "item": "ITEM_STARDUST",
       "flag": "FLAG_ICHOR_HIDDEN_EMPORION_STARDUST"
+    },
+    {
+      "type": "sign",
+      "x": 40,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_EventScript_WaltzChariotsSign"
     }
   ]
 }

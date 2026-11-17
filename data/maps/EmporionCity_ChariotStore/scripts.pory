@@ -1,0 +1,75 @@
+// Waltz Chariots: Alfred's chariot store, beside the Deigma in Emporion.
+// Alfred is a wheelwright from the far east who came in by sea and builds light
+// racing chariots, each sold with a pony. The chariot is Ichor's bicycle: the
+// Mach Bike item, renamed (src/data/items.h), ridden with the Mach Bike's speed.
+// It costs ¥10,000, a saving-up goal around the second Laurel.
+// Room: tools/ichor/maps/emporion_rooms.py ("chariot"), on domos. The street
+// door is the mat at (5..6, 8), warp 0; the city's door is its warp 10, (43,35).
+
+mapscripts EmporionCity_ChariotStore_MapScripts {}
+
+const CHARIOT_PRICE = 10000
+
+text EmporionCity_ChariotStore_Text_NameAlfred { "ALFRED" }
+
+script EmporionCity_ChariotStore_EventScript_Alfred {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_ChariotStore_Text_NameAlfred)
+    if (flag(FLAG_ICHOR_BOUGHT_CHARIOT)) {
+        msgbox(format("How's she running? Keep her to the roads and she'll keep you out of trouble.\p"
+                      "And feed the pony. She knows where you live."))
+        release
+        end
+    }
+    msgbox(format("Welcome to Waltz Chariots! I'm Alfred.\p"
+                  "I came a long way west to build these. You saw her in the yard: a light car, "
+                  "wheels shod in bronze, and a pony that never tires.\p"
+                  "On a chariot you'll cover the road twice as fast as on foot."))
+    showmoneybox(0, 0)
+    msgbox(format("One chariot, pony included: ¥10,000. Shall I hitch her up?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        hidemoneybox
+        msgbox(format("Take your time. She'll be here, and so will I."))
+        release
+        end
+    }
+    checkmoney(CHARIOT_PRICE)
+    if (var(VAR_RESULT) == FALSE) {
+        hidemoneybox
+        msgbox(format("Ah. You're a little short.\p"
+                      "Come back when your purse is heavier. I'll keep her polished."))
+        release
+        end
+    }
+    checkitemspace(ITEM_MACH_BIKE)
+    if (var(VAR_RESULT) == FALSE) {
+        hidemoneybox
+        msgbox(format("Your Bag's too full to take the reins. Make some room first."))
+        release
+        end
+    }
+    removemoney(CHARIOT_PRICE)
+    updatemoneybox
+    playse(SE_SHOP)
+    waitse
+    hidemoneybox
+    giveitem(ITEM_MACH_BIKE)
+    setflag(FLAG_ICHOR_BOUGHT_CHARIOT)
+    setspeaker(EmporionCity_ChariotStore_Text_NameAlfred)
+    msgbox(format("She's yours! Take her out from your Bag, or register her to SELECT.\p"
+                  "Roads and open country suit her. Indoors, she waits outside."))
+    release
+}
+
+script EmporionCity_ChariotStore_EventScript_RoadMap {
+    msgbox(format("Roads scratched into the plaster, from the far east to this very door. Every one driven."), MSGBOX_SIGN)
+}
+
+script EmporionCity_ChariotStore_EventScript_Wheels {
+    msgbox(format("Spare wheels, rimmed in bronze, hung on pegs so they stay true."), MSGBOX_SIGN)
+}
+
+script EmporionCity_ChariotStore_EventScript_Table {
+    msgbox(format("Alfred's table: bread, olives, and a ledger of orders kept in two scripts."), MSGBOX_SIGN)
+}

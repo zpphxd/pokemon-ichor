@@ -662,6 +662,17 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_EMPORION_CITY_CHARIOT_STORE",
+      "name": "EmporionCity_ChariotStore_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/EmporionCity_ChariotStore/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_ChariotStore/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_EMPORION_CITY_HIRING_HALL",
       "name": "EmporionCity_HiringHall_Layout",
       "width": 17,

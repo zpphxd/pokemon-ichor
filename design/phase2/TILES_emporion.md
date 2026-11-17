@@ -88,7 +88,7 @@ in ochre and recolored to rose is the same 4bpp tile in another palette: Porytil
 the slots and stores it once. Every rose house part, and the rose and green awnings, cost
 no tiles.
 
-**Tile budget.** 481 of 504 tiles are used. A secondary has 512, but the door
+**Tile budget.** 494 of 504 tiles are used. A secondary has 512, but the door
 animations copy their frames into tiles 504-511 (`DOOR_TILE_START_SIZE1` in
 `src/field_door.c`), so the build fails past 504. To fit, the art is drawn for reuse:
 symmetric fronts are mirrored about a tile edge (Porytiles stores a flipped tile once);
@@ -232,25 +232,25 @@ Parts: `W` 0x260, `door` 0x261, `door_arched` 0x262, `shop` 0x263, `wall` 0x264,
 
 ### House upper storey with trade signs, ochre
 
-`signs`, 6 wide by 1 tall. Upper-storey wall cells with a trade sign hung from an iron bracket: (0) tavern (a kantharos cup), (1) bronze-smith (a Corinthian helmet), (2) potter (an amphora), (3) perfumer (an aryballos), (4) shipwright (a hull and sail), (5) grain and the hiring hall (a sack). Put one over the door of the trade's house.
+`signs`, 7 wide by 1 tall. Upper-storey wall cells with a trade sign hung from an iron bracket: (0) tavern (a kantharos cup), (1) bronze-smith (a Corinthian helmet), (2) potter (an amphora), (3) perfumer (an aryballos), (4) shipwright (a hull and sail), (5) grain and the hiring hall (a sack), (6) the wheelwright, Alfred's chariot store (a spoked wheel). Put one over the door of the trade's house.
 
 ```text
-ids                                   walk
-0x268 0x269 0x26A 0x26B 0x26C 0x26D   X X X X X X
+ids                                         walk
+0x268 0x269 0x26A 0x26B 0x26C 0x26D 0x26E   X X X X X X X
 ```
 
-Parts: `tavern` 0x268, `bronze` 0x269, `potter` 0x26A, `perfume` 0x26B, `ships` 0x26C, `grain` 0x26D.
+Parts: `tavern` 0x268, `bronze` 0x269, `potter` 0x26A, `perfume` 0x26B, `ships` 0x26C, `grain` 0x26D, `wheel` 0x26E.
 
 ### House upper storey with trade signs, rose
 
-`signs_rose`, 6 wide by 1 tall. Upper-storey wall cells with a trade sign hung from an iron bracket: (0) tavern (a kantharos cup), (1) bronze-smith (a Corinthian helmet), (2) potter (an amphora), (3) perfumer (an aryballos), (4) shipwright (a hull and sail), (5) grain and the hiring hall (a sack). Put one over the door of the trade's house. The rose parts are the ochre parts' own tiles in the rose palette.
+`signs_rose`, 7 wide by 1 tall. Upper-storey wall cells with a trade sign hung from an iron bracket: (0) tavern (a kantharos cup), (1) bronze-smith (a Corinthian helmet), (2) potter (an amphora), (3) perfumer (an aryballos), (4) shipwright (a hull and sail), (5) grain and the hiring hall (a sack), (6) the wheelwright, Alfred's chariot store (a spoked wheel). Put one over the door of the trade's house. The rose parts are the ochre parts' own tiles in the rose palette.
 
 ```text
-ids                                   walk
-0x270 0x271 0x272 0x273 0x274 0x275   X X X X X X
+ids                                         walk
+0x270 0x271 0x272 0x273 0x274 0x275 0x276   X X X X X X X
 ```
 
-Parts: `tavern` 0x270, `bronze` 0x271, `potter` 0x272, `perfume` 0x273, `ships` 0x274, `grain` 0x275.
+Parts: `tavern` 0x270, `bronze` 0x271, `potter` 0x272, `perfume` 0x273, `ships` 0x274, `grain` 0x275, `wheel` 0x276.
 
 ## House recipes
 
@@ -743,6 +743,18 @@ ids           walk
 ```
 
 Ground: all on poros yard paving.
+
+### Alfred's chariot on show
+
+`chariot`, 2 wide by 2 tall. A light two-wheeled racing chariot, its car painted red with a gold rim, parked with its pole resting on the yoke: the one Alfred builds and sells. In the wheelwright's dirt yard.
+
+```text
+ids           walk
+0x3D0 0x3D1   X X
+0x3D8 0x3D9   X X
+```
+
+Ground: all on aethos path.
 
 ## Mock scenes
 

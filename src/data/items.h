@@ -14370,12 +14370,13 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_MACH_BIKE] =
     {
-        .name = ITEM_NAME("Mach Bike"),
+        // Ichor: the chariot from Waltz Chariots, Emporion (data/maps/EmporionCity_ChariotStore)
+        .name = ITEM_NAME("Chariot"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "A folding bicycle\n"
-            "that doubles your\n"
-            "speed or better."),
+            "A light racing\n"
+            "chariot drawn by\n"
+            "a sturdy pony."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

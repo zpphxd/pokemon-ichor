@@ -2744,6 +2744,10 @@ static const struct SpriteFrameImage sPicTable_IchorVintner[] = {
     overworld_ascending_frames(gObjectEventPic_IchorVintner, 2, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_IchorAlfred[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAlfred, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_IchorActor[] = {
     overworld_ascending_frames(gObjectEventPic_IchorActor, 2, 4),
 };

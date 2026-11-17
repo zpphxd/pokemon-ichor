@@ -457,8 +457,62 @@ def timber():
     return finish(s)
 
 
+CHARIOT_LEG = {"k": "ink", "r": "rd", "f": "fl", "g": "g0", "G": "g1", "0": "wd0", "1": "wd1",
+               "2": "wd2", "3": "wd3", "w": "fc"}
+CHARIOT_CAR = [
+    "..........kkkk..................",
+    ".........kGGGGk.................",
+    "........kGwfffGkk...............",
+    "........kGfrrrrfGGkk............",
+    "........kGfrrrrrrrfGGk..........",
+    "........kGfrrrrrrrrrrfGk........",
+    "........kGfrgggrrrrrrrrGk.......",
+    "........kGfrrrrgggrrrrrrGk......",
+    "........kGfrrrrrrrgggrrrrk......",
+    "........kGfrrrrrrrrrrgggrk......",
+    "........kGfrrrrrrrrrrrrrrk......",
+    "........kGfrrrrrrrrrrrrrrk......",
+    "........k3222222222222222k......",
+    "........k1111111111111111k......",
+    ".........kkkkkkkkkkkkkkkk.......",
+]
+
+
+def chariot():
+    s = Struct("chariot", "Alfred's chariot on show", 2, 2, walk=["XX", "XX"], ground="path",
+               notes="A light two-wheeled racing chariot, its car painted red with a gold "
+                     "rim, parked with its pole resting on the yoke: the one Alfred builds "
+                     "and sells. In the wheelwright's dirt yard.")
+    M = s.M
+    M.blit(CHARIOT_CAR, CHARIOT_LEG, 0, 6)
+    # the pole, from under the car's front down to the yoke on the ground
+    # the wheel over the car's back: rim, six spokes, a gold hub
+    cx, cy, R = 20, 22, 7
+    for y in range(cy - R - 1, cy + R + 2):
+        for x in range(cx - R - 1, cx + R + 2):
+            d = math.hypot(x - cx, y - cy)
+            if R - 1.2 <= d <= R + 0.6:
+                lit = (x - cx) + (y - cy) < 0
+                M.px(x, y, "wd2" if lit else "wd1")
+            elif R + 0.6 < d <= R + 1.5:
+                M.px(x, y, "ink")
+    for a in range(0, 360, 60):
+        r = math.radians(a + 15)
+        for t in range(2, R - 1):
+            M.px(round(cx + t * math.cos(r)), round(cy + t * math.sin(r)), "wd3")
+    M.blit([".k.", "kGk", ".k."], CHARIOT_LEG, cx - 1, cy - 1)
+    E.silhouette_outline(M, (0, 0, 32, 32), "ink")
+    # the pole goes on after the outline, as Gen 3 draws thin props: from under
+    # the car's front down to the yoke resting on the ground
+    for i in range(11):
+        x, y = 9 - i, 20 + (i * 6) // 10
+        M.px(x, y, "wd3"); M.px(x, y + 1, "wd1"); M.px(x, y + 2, "ink")
+    M.blit(["kkk", "kGk", "k1k", "k1k", "kkk"], CHARIOT_LEG, 0, 23)
+    return finish(s)
+
+
 def build_city():
-    return [acrocorinth(), forge(), smith_props(), kiln(), vase_rack(), perfumer()]
+    return [acrocorinth(), forge(), smith_props(), kiln(), vase_rack(), perfumer(), chariot()]
 
 
 def build_shipwright():
