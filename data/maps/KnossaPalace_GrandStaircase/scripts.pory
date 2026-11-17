@@ -91,7 +91,7 @@ script KnossaPalace_GrandStaircase_EventScript_ToRing1 {
 script KnossaPalace_GrandStaircase_EventScript_ToWorkshop {
     playse(SE_ELEVATOR)
     fadescreen(FADE_TO_BLACK)
-    warpsilent(MAP_LABYRINTH_WORKSHOP, 10, 20)
+    warpsilent(MAP_LABYRINTH_WORKSHOP, 5)  // the lift's landing (Labyrinth_System.md)
     waitstate
     releaseall
 }

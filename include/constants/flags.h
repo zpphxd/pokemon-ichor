@@ -2270,6 +2270,23 @@
 #define FLAG_ICHOR_ITEM_R2_ULTRA_BALL           (FLAG_ICHOR_GENERAL2_START + 0x45E) // Ichor: Labyrinth Ring II: an Ultra Ball in the grotto
 #define FLAG_ICHOR_HIDDEN_ITEM_R2_STARDUST      (FLAG_ICHOR_GENERAL2_START + 0x45F) // Ichor: Labyrinth Ring II: Stardust in the Moon Room
 #define FLAG_ICHOR_HIDDEN_ITEM_R2_OBOL          (FLAG_ICHOR_GENERAL2_START + 0x460) // Ichor: Labyrinth Ring II: a Bronze Obol in a dead end
+#define FLAG_ICHOR_HIDE_R3_WEB_1A               (FLAG_ICHOR_GENERAL2_START + 0x461) // Ichor: Labyrinth Ring III: web 1, west strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_1B               (FLAG_ICHOR_GENERAL2_START + 0x462) // Ichor: Labyrinth Ring III: web 1, east strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_2A               (FLAG_ICHOR_GENERAL2_START + 0x463) // Ichor: Labyrinth Ring III: web 2, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_2B               (FLAG_ICHOR_GENERAL2_START + 0x464) // Ichor: Labyrinth Ring III: web 2, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_3A               (FLAG_ICHOR_GENERAL2_START + 0x465) // Ichor: Labyrinth Ring III: web 3, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_3B               (FLAG_ICHOR_GENERAL2_START + 0x466) // Ichor: Labyrinth Ring III: web 3, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_4A               (FLAG_ICHOR_GENERAL2_START + 0x467) // Ichor: Labyrinth Ring III: the web pocket's web, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_4B               (FLAG_ICHOR_GENERAL2_START + 0x468) // Ichor: Labyrinth Ring III: the web pocket's web, a strand burned
+#define FLAG_ICHOR_ITEM_R3_MAX_ETHER            (FLAG_ICHOR_GENERAL2_START + 0x469) // Ichor: Labyrinth Ring III: the Max Ether behind the first web
+#define FLAG_ICHOR_ITEM_R3_RARE_BONE            (FLAG_ICHOR_GENERAL2_START + 0x46A) // Ichor: Labyrinth Ring III: the Rare Bone in the web pocket
+#define FLAG_ICHOR_ITEM_R3_TM                   (FLAG_ICHOR_GENERAL2_START + 0x46B) // Ichor: Labyrinth Ring III: Automaton No. 7's TM
+#define FLAG_ICHOR_ITEM_R3_STAR_PIECE           (FLAG_ICHOR_GENERAL2_START + 0x46C) // Ichor: Labyrinth Ring III: the Star Piece by the glow trail's spur
+#define FLAG_ICHOR_ITEM_R3_PEARL                (FLAG_ICHOR_GENERAL2_START + 0x46D) // Ichor: Labyrinth Ring III: a Big Pearl on the stream's islet
+#define FLAG_ICHOR_HIDDEN_ITEM_R3_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x46E) // Ichor: Labyrinth Ring III: a Revive in a dead end
+#define FLAG_ICHOR_MET_DAEDALUS                 (FLAG_ICHOR_GENERAL2_START + 0x46F) // Ichor: Labyrinth: scene D, Daedalus met in his workshop
+#define FLAG_ICHOR_DAEDALUS_LIFT                (FLAG_ICHOR_GENERAL2_START + 0x470) // Ichor: Labyrinth: Daedalus's lift runs between the workshop and the Grand Staircase
+#define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL2_START + 0x471) // Ichor: Labyrinth: Daedalus gave the Master Ball (scene D)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

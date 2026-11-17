@@ -1874,8 +1874,8 @@
     {
       "id": "LAYOUT_LABYRINTH_RING3",
       "name": "LabyrinthRing3_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 54,
+      "height": 46,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthRing3/border.bin",
@@ -1907,8 +1907,8 @@
     {
       "id": "LAYOUT_LABYRINTH_WORKSHOP",
       "name": "LabyrinthWorkshop_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 24,
+      "height": 18,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Daidaleion",
       "border_filepath": "data/layouts/LabyrinthWorkshop/border.bin",
