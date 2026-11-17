@@ -1,1 +1,84 @@
+// Lysandros's house, Gytheion (design/phase4/SCRIPT.md, Part 2): the old
+// harbor-master, who once commanded Lakonia's ships and is still annoyed about
+// it. A window that's mostly sea, the gulf scratched into the plaster, three
+// model triremes on a shelf, a bronze ram for a doorstop.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (4..5, 7), warps 0 and 1
+// to MAP_GYTHEION warp 2.
+//
+// The trade: a Karkitox for his Kynoketos, MALEA (INGAME_TRADE_ICHOR_MALEA:
+// hidden ability, Wide Lens), FLAG_ICHOR_TRADED_KYNOKETOS. An in-game trade
+// takes the level of the Pokémon you give, so MALEA comes at the Karkitox's.
+
 mapscripts Gytheion_LysandrosHouse_MapScripts {}
+
+text Gytheion_LysandrosHouse_Name_Lysandros { "LYSANDROS" }
+
+script Gytheion_LysandrosHouse_EventScript_Lysandros {
+    lock
+    faceplayer
+    setspeaker(Gytheion_LysandrosHouse_Name_Lysandros)
+    if (flag(FLAG_ICHOR_TRADED_KYNOKETOS)) {
+        msgbox(format("Malea. Named for the cape. Same temper.\p"
+                      "He'll pull you round any headland. Just don't let him choose where."))
+        release
+        end
+    }
+    msgbox(format("Lakonians hate the sea. I'm Lakonian. I love the sea. You see my problem.\p"
+                  "They made me admiral once. Won them a war.\p"
+                  "Then they made me harbor-master. That's how Lakonia says thank you.\p"
+                  "My Kynoketos has got the same problem. Too big for a harbor.\p"
+                  "I'd trade him for something that likes mud. A Karkitox, from the marsh."))
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_MALEA)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    msgbox(format("Trade me a Karkitox for Malea?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(Gytheion_LysandrosHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(Gytheion_LysandrosHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Gytheion_LysandrosHouse_Name_Lysandros)
+        msgbox(format("That's not a Karkitox. I've been at sea forty years. I know a crab."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_KYNOKETOS)
+    setspeaker(Gytheion_LysandrosHouse_Name_Lysandros)
+    msgbox(format("Malea. Named for the cape. Same temper.\p"
+                  "He'll pull you round any headland. Just don't let him choose where."))
+    release
+}
+
+script Gytheion_LysandrosHouse_EventScript_NoTrade {
+    setspeaker(Gytheion_LysandrosHouse_Name_Lysandros)
+    msgbox(format("Then he'll keep circling the harbor.\p"
+                  "He's got lovely manners. For a sea monster."))
+    release
+    end
+}
+
+script Gytheion_LysandrosHouse_EventScript_GulfMap {
+    msgbox(format("The gulf, scratched straight into the plaster.\p"
+                  "Every rock and every current is marked. Malea has three warnings cut beside it."), MSGBOX_SIGN)
+}
+
+script Gytheion_LysandrosHouse_EventScript_Window {
+    msgbox(format("The window is mostly sea. There's a little sky at the top, for form's sake."), MSGBOX_SIGN)
+}
+
+script Gytheion_LysandrosHouse_EventScript_Triremes {
+    msgbox(format("Three model triremes on a shelf, rigged to the last rope.\p"
+                  "One has a tiny name on its stern: VICTORY. The paint's been touched up recently."), MSGBOX_SIGN)
+}
+
+script Gytheion_LysandrosHouse_EventScript_Ram {
+    msgbox(format("A bronze ship's ram, green with age, holding the door open.\p"
+                  "It's sunk better ships than this door."), MSGBOX_SIGN)
+}

@@ -1,1 +1,64 @@
+// Lichas's house, Lakonia (design/phase4/SCRIPT.md, Part 2; SYSTEMS.md §10): the
+// town's host, who once won the chariot race at Olympia under a false name.
+// The only house in Lakonia with cushions, a hearth, a guest bed behind a
+// curtain, a bronze tripod with someone else's name on it, a basket of figs.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (4..5, 7), warps 0 and 1
+// to MAP_LAKONIA warp 9.
+//
+// Xenia: his table heals, his bed rests you forward to dawn, noon, dusk or
+// night (EventScript_IchorXeniaRest), FLAG_ICHOR_XENIA_LAKONIA.
+// TODO(engine §10): the Broken Ring's third link (Kythera, Amnisos, Lakonia,
+// Delphoi) waits on the ring halves existing as key items (Skandeia's Axylos has
+// the same TODO); when they do, match the Amnisos half here and give the Delphoi
+// half.
+
 mapscripts Lakonia_LichasHouse_MapScripts {}
+
+text Lakonia_LichasHouse_Name_Lichas { "LICHAS" }
+
+script Lakonia_LichasHouse_EventScript_Lichas {
+    lock
+    faceplayer
+    setspeaker(Lakonia_LichasHouse_Name_Lichas)
+    msgbox(format("Sit. Eat first. Then tell me who you are. Not before."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Lakonia_LichasHouse_Name_Lichas)
+    if (!flag(FLAG_ICHOR_XENIA_LAKONIA)) {
+        setflag(FLAG_ICHOR_XENIA_LAKONIA)
+        msgbox(format("Lakonians are poor hosts. Too few words. Too little soup.\p"
+                      "I'm the exception.\p"
+                      "I won at Olympia once, you know. Under another name.\p"
+                      "They whipped me for it. Worth it."))
+    } else {
+        msgbox(format("Figs. Cushions. A fire. The neighbors think I'm Persian."))
+    }
+    msgbox(format("Rest a while?"))
+    setspeaker(SP_NAME_NONE)
+    call(EventScript_IchorXeniaRest)
+    if (var(VAR_RESULT) == TRUE) {
+        playfanfare(MUS_HEAL)
+        waitfanfare
+        special(HealPlayerParty)
+        msgbox(format("{PLAYER} slept behind the curtain, on the only soft bed in Lakonia."))
+    }
+    release
+}
+
+script Lakonia_LichasHouse_EventScript_Tripod {
+    msgbox(format("A bronze tripod from Olympia. The name on it isn't Lichas.\p"
+                  "Underneath, somebody has scratched, very small: IT WAS ME."), MSGBOX_SIGN)
+}
+
+script Lakonia_LichasHouse_EventScript_Bed {
+    msgbox(format("A guest bed behind a striped curtain. There are cushions on it. Several."), MSGBOX_SIGN)
+}
+
+script Lakonia_LichasHouse_EventScript_Figs {
+    msgbox(format("A basket of figs. Lichas says they're for guests.\p"
+                  "There are fewer every time you look."), MSGBOX_SIGN)
+}

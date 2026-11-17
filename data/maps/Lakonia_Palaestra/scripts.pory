@@ -1,1 +1,62 @@
+// The palaestra, Lakonia (design/phase4/SCRIPT.md, Part 2): an open court with a
+// stone porch: oil flasks and bronze scrapers on hooks, a sandpit for wrestling,
+// a bench of folded cloaks, and six olive crowns, dried brown, above the door.
+// Hipposthenes, six times crowned at Olympia, wants to see a Geogrip from the
+// wrestling sands outside.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (5..6, 8), warps 0 and 1
+// to MAP_LAKONIA warp 6.
+//
+// Show him a Geogrip in the party: a Choice Band, FLAG_ICHOR_GOT_CHOICE_BAND.
+
 mapscripts Lakonia_Palaestra_MapScripts {}
+
+text Lakonia_Palaestra_Name_Hipposthenes { "HIPPOSTHENES" }
+
+script Lakonia_Palaestra_EventScript_Hipposthenes {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Palaestra_Name_Hipposthenes)
+    if (flag(FLAG_ICHOR_GOT_CHOICE_BAND)) {
+        msgbox(format("You can only do one thing in it. So do it well.\p"
+                      "Best advice I ever had. Best I ever gave."))
+        release
+        end
+    }
+    checkspecies(SPECIES_GEOGRIP)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Six crowns. Olympia, six times. Wrestling. Nobody ever threw me.\p"
+                      "There's a thing on the sands out there. Comes up out of the ground.\p"
+                      "Stronger every time you knock it down. Like that giant in the old story.\p"
+                      "Catch me one. I want to see if I can lift it."))
+        release
+        end
+    }
+    msgbox(format("There! Look at it. Feet in the sand. It's drinking the ground.\p"
+                  "Don't let it touch the earth, they said. That's how you beat it.\p"
+                  "Easier said. Here. I wore this my last three crowns."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_CHOICE_BAND)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(Lakonia_Palaestra_Name_Hipposthenes)
+        msgbox(format("Bag's full. Make room. I'm not going anywhere. I'm sixty."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_CHOICE_BAND)
+    setspeaker(Lakonia_Palaestra_Name_Hipposthenes)
+    msgbox(format("You can only do one thing in it. So do it well."))
+    release
+}
+
+script Lakonia_Palaestra_EventScript_Crowns {
+    msgbox(format("Six olive crowns, dried brown, nailed above the door. Olympia, six times."), MSGBOX_SIGN)
+}
+
+script Lakonia_Palaestra_EventScript_Oil {
+    msgbox(format("Oil flasks and bronze scrapers on hooks.\p"
+                  "Wrestlers oil themselves, roll in the sand, fight, and scrape it all off."), MSGBOX_SIGN)
+}
+
+script Lakonia_Palaestra_EventScript_Cloaks {
+    msgbox(format("A bench of folded cloaks. Their owners are out on the sands."), MSGBOX_SIGN)
+}

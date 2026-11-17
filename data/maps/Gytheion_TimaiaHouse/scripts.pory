@@ -1,1 +1,96 @@
+// Timaia's house, Gytheion (design/phase4/SCRIPT.md, Part 2): a fisherman's
+// widow whose only son, Teleklos, went up to the battle school at seven. The
+// house smells of bread: the oven in the corner, nets on a bench, a child's
+// wooden spear behind the door, a cloth over something fig-shaped.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (4..5, 6), warps 0 and 1
+// to MAP_GYTHEION warp 3.
+//
+// The fig cake: YES sets FLAG_ICHOR_CARRYING_FIG_CAKE ("Timaia's fig cake",
+// carried as a flag). Teleklos on Route 25 eats it and sets
+// FLAG_ICHOR_DELIVERED_FIG_CAKE; then Timaia gives Leftovers,
+// FLAG_ICHOR_GOT_LEFTOVERS_GYTHEION.
+
 mapscripts Gytheion_TimaiaHouse_MapScripts {}
+
+text Gytheion_TimaiaHouse_Name_Timaia { "TIMAIA" }
+
+script Gytheion_TimaiaHouse_EventScript_Timaia {
+    lock
+    faceplayer
+    setspeaker(Gytheion_TimaiaHouse_Name_Timaia)
+    if (flag(FLAG_ICHOR_GOT_LEFTOVERS_GYTHEION)) {
+        msgbox(format("Fine, he said. Fine. Two words, and one of them twice.\p"
+                      "I'll bake another next month. I'll eat it myself. I always do."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_DELIVERED_FIG_CAKE)) {
+        msgbox(format("He ate it? He ATE it?\p"
+                      "“Fewer words,” he said. Course he did. His father said that.\p"
+                      "Here. He'd never take these. You might."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_LEFTOVERS)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(Gytheion_TimaiaHouse_Name_Timaia)
+            msgbox(format("No room in your bag? Come back for it. It'll keep. That's the point of it."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_LEFTOVERS_GYTHEION)
+        setspeaker(Gytheion_TimaiaHouse_Name_Timaia)
+        msgbox(format("Funny name for it.\p"
+                      "That's all that's ever left in this house, when he's gone."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_CARRYING_FIG_CAKE)) {
+        msgbox(format("Teleklos. By the river, cutting reeds.\p"
+                      "Don't tell anyone. Least of all him."))
+        release
+        end
+    }
+    msgbox(format("My boy's in the school. Nine years now.\p"
+                  "They let him write. Two words. “Fine. Fine.”\p"
+                  "They're not allowed food from home. It makes them soft, the elders say.\p"
+                  "I bake him one every month. Then I eat it.\p"
+                  "I'm very soft. Look at me.\p"
+                  "You're going up the valley. He cuts reeds by the river. Teleklos.\p"
+                  "Would you…? Don't tell anyone. Least of all him."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("No. No, you're right. It's against the rules.\p"
+                      "I'll eat it. I'm good at that."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_CARRYING_FIG_CAKE)
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} took Timaia's fig cake, wrapped in a cloth."))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    setspeaker(Gytheion_TimaiaHouse_Name_Timaia)
+    msgbox(format("Teleklos. By the river. He's the one with the sore hands."))
+    release
+}
+
+script Gytheion_TimaiaHouse_EventScript_Oven {
+    msgbox(format("A bread oven built into the corner. It's still warm."), MSGBOX_SIGN)
+}
+
+script Gytheion_TimaiaHouse_EventScript_Cake {
+    if (flag(FLAG_ICHOR_CARRYING_FIG_CAKE)) {
+        msgbox(format("A cloth on the table, folded. Nothing under it now."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A cloth on the table, over something fig-shaped."), MSGBOX_SIGN)
+    }
+}
+
+script Gytheion_TimaiaHouse_EventScript_Spear {
+    msgbox(format("A child's wooden spear, propped behind the door.\p"
+                  "It's been dusted. It hasn't been moved."), MSGBOX_SIGN)
+}
+
+script Gytheion_TimaiaHouse_EventScript_Nets {
+    msgbox(format("Nets, mended and folded on a bench. Nobody's taken them out in a long time."), MSGBOX_SIGN)
+}

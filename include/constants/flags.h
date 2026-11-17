@@ -2208,6 +2208,17 @@
 #define FLAG_ICHOR_DELIVERED_FIG_CAKE           (FLAG_ICHOR_GENERAL2_START + 0x501) // Ichor: Lakonia: Teleklos ate the fig cake
 #define FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI        (FLAG_ICHOR_GENERAL2_START + 0x502) // Ichor: Lakonia: Polyboia's Heat Rock
 #define FLAG_ICHOR_READ_SCYTALE                 (FLAG_ICHOR_GENERAL2_START + 0x503) // Ichor: Lakonia: read Gylippos's strap on Othryades's staff (Route 27)
+#define FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION      (FLAG_ICHOR_GENERAL2_START + 0x520) // Ichor: Lakonia: Porphyris's King's Rock for three Shoal Shells (Gytheion dye-works)
+#define FLAG_ICHOR_TRADED_KYNOKETOS             (FLAG_ICHOR_GENERAL2_START + 0x521) // Ichor: Lakonia: traded a Karkitox for Lysandros's Kynoketos MALEA
+#define FLAG_ICHOR_GOT_SHINY_STONE_KRANAI       (FLAG_ICHOR_GENERAL2_START + 0x522) // Ichor: Lakonia: Klymene's Shiny Stone, after the climax (Kranai)
+#define FLAG_ICHOR_GOT_LEFTOVERS_GYTHEION       (FLAG_ICHOR_GENERAL2_START + 0x523) // Ichor: Lakonia: Timaia's Leftovers, after the fig cake
+#define FLAG_ICHOR_GOT_SCYTALE_STRAP            (FLAG_ICHOR_GENERAL2_START + 0x524) // Ichor: Lakonia: Gylippos's leather strap (the scytale)
+#define FLAG_ICHOR_GOT_TM_BULK_UP               (FLAG_ICHOR_GENERAL2_START + 0x525) // Ichor: Lakonia: Dexippos's TM Bulk Up for finishing the black broth
+#define FLAG_ICHOR_GOT_FOCUS_SASH               (FLAG_ICHOR_GENERAL2_START + 0x526) // Ichor: Lakonia: Archidamos's Focus Sash, after Kleon's ring
+#define FLAG_ICHOR_GOT_CHOICE_BAND              (FLAG_ICHOR_GENERAL2_START + 0x527) // Ichor: Lakonia: Hipposthenes's Choice Band, for showing him a Geogrip
+#define FLAG_ICHOR_GOT_SCOPE_LENS               (FLAG_ICHOR_GENERAL2_START + 0x528) // Ichor: Lakonia: Kleta's Scope Lens, for the cheese game at Orthia
+#define FLAG_ICHOR_GOT_WISE_GLASSES             (FLAG_ICHOR_GENERAL2_START + 0x529) // Ichor: Lakonia: Chilon's Wise Glasses, for answering in the fewest words
+#define FLAG_ICHOR_XENIA_LAKONIA                (FLAG_ICHOR_GENERAL2_START + 0x52A) // Ichor: Lakonia: Lichas has fed you (xenia)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the
