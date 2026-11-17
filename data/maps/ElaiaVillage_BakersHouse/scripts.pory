@@ -9,7 +9,14 @@
 // he trades his Halcyling, Arion, for a Galekit from Route 1. After the Hearth
 // Laurel he gives you the pearls he dived for as a boy.
 
-mapscripts ElaiaVillage_BakersHouse_MapScripts {}
+mapscripts ElaiaVillage_BakersHouse_MapScripts {
+    // The Pokémon the player traded in shows only after the trade.
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_DID_KIMON_TRADE)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
 
 text ElaiaVillage_BakersHouse_Name_Glykera { "GLYKERA" }
 text ElaiaVillage_BakersHouse_Name_Kimon { "KIMON" }
@@ -70,7 +77,7 @@ script ElaiaVillage_BakersHouse_EventScript_Kimon {
         end
     }
     if (!flag(FLAG_ICHOR_GOT_POKEBALLS)) {
-        msgbox(format("Forty years on the rowing benches. Top bench, the thranites. Best view of the sky.\pUp there you learn the sea. When the halcyons nest, it goes flat as oil.\pDays with no wind at all. No sail moves a ship then. Only oars.\pMy knees are done with oars. Arion isn't done with the sea. He sulks in his ball all day.\pCome back when you've some Poké Balls of your own. I've a thought about Arion."))
+        msgbox(format("Forty years on the rowing benches. Top bench, the thranites. Best view of the sky.\pUp there you learn the sea. When the halcyons nest, it goes flat as oil.\pDays with no wind at all. No sail moves a ship then. Only oars.\pMy knees are done with oars. Arion isn't done with the sea. He sulks by the window all day.\pCome back when you've some Poké Balls of your own. I've a thought about Arion."))
         release
         end
     }
@@ -103,6 +110,9 @@ script ElaiaVillage_BakersHouse_EventScript_Kimon {
     special(CreateInGameTradePokemon)
     special(DoInGameTradeScene)
     setflag(FLAG_ICHOR_DID_KIMON_TRADE)
+    removeobject(LOCALID_BAKERS_HOUSE_ARION)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_BAKERS_HOUSE_GALEKIT)
     setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
     msgbox(format("Mind this one, Arion. Stubborn chin. Runs in the family."))
     release
@@ -130,4 +140,24 @@ script ElaiaVillage_BakersHouse_EventScript_ModelTrireme {
 
 script ElaiaVillage_BakersHouse_EventScript_Window {
     msgbox(format("Between the olive trees, a sliver of sea. It hardly moves."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_BakersHouse_EventScript_Arion {
+    lock
+    faceplayer
+    playmoncry(SPECIES_HALCYLING, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Arion, Kimon's Halcyling, watches the window. Its feathers are the color of a calm sea."))
+    waitmoncry
+    release
+}
+
+script ElaiaVillage_BakersHouse_EventScript_Galekit {
+    lock
+    faceplayer
+    playmoncry(SPECIES_GALEKIT, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Galekit is curled up on Kimon's feet, fast asleep."))
+    waitmoncry
+    release
 }
