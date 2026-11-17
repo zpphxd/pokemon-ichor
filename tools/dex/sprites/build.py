@@ -309,7 +309,7 @@ def quantize_icon(frames, pal: Palette, force=None):
 def concept_sourced():
     """Species whose sprites come from approved concepts (design/STYLE.md §3)."""
     path = os.path.join(os.path.dirname(__file__), "..", "..", "ichor", "art", "concepts", "mon")
-    return {f[:-4] for f in os.listdir(path) if f.endswith(".png")} if os.path.isdir(path) else set()
+    return {f[:-4] for f in os.listdir(path) if f.endswith(".png") and not f.endswith("_back.png")} if os.path.isdir(path) else set()
 
 
 def write_mon(b: Built):

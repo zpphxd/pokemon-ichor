@@ -123,7 +123,7 @@ Use `--pitch` whenever the concept was made to the template in §3.2. Use `--fit
 - the icon, in its shared icon palette
 - the back, from `<name>_back.png` when one exists. Until it does, an interim back is made from the mirrored front, set low and cropped, with the face painted out.
 
-Then `python3 tools/dex/rom/gen.py` copies the files into `graphics/pokemon/` and re-measures the battle coordinates. A concept PNG in that folder protects the species from the old painter (`tools/dex/sprites/build.py`); `tools/dex/sprites/check_elaia.py` then checks it against this builder instead.
+Then `python3 tools/dex/rom/gen.py` copies the files into `graphics/pokemon/` and re-measures the battle coordinates. **The `concept-sprites` skill** (`.claude/skills/concept-sprites/SKILL.md`) runs the whole path for a folder of returned concepts: ingest and checks, previews, the hand-fix pass (fixes live in `tools/ichor/art/concepts/mon/species.json`), writing into the game, verification and landing. True-grid concepts that already use 15 colors or fewer convert losslessly. A concept PNG in that folder protects the species from the old painter (`tools/dex/sprites/build.py`); `tools/dex/sprites/check_elaia.py` then checks it against this builder instead.
 
 ### 3.4 The hand-fix pass (required)
 

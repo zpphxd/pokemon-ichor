@@ -77,7 +77,7 @@ def check(names=NAMES):
         assert (source / "normal.pal").read_bytes() != (source / "shiny.pal").read_bytes(), name
         if name.lower() in build.concept_sourced():
             # built from an approved concept (design/STYLE.md §3), not the painter
-            c = concept_builder().build(name.lower(), concept_builder().SPECIES[name.lower()])
+            c = concept_builder().build(name.lower(), concept_builder().config(name.lower()))
             for file, want in (("anim_front.png", c["front"]), ("back.png", c["back"]),
                                ("overworld.png", c["follow"]), ("icon.png", c["icon"])):
                 assert np.array_equal(arrays[file], want), (name, file, "concept reproducibility")

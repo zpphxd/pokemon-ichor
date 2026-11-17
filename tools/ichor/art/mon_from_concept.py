@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 """Build Pokémon sprites from approved concepts (design/STYLE.md §3).
 
-For each species in SPECIES, from tools/ichor/art/concepts/mon/<name>.png:
+For each species with a concept in tools/ichor/art/concepts/mon/<name>.png:
 
   anim_front.png  frame 1 from concept_to_native, plus the hand-fix list;
                   frame 2 is a breathing bob (upper body down 1 px)
   normal.pal      the front's 15 colors
   shiny.pal       the old shiny scheme carried over by hue/saturation/value
                   shift, index for index
-  back.png        the existing back pic re-indexed into the new palette, until
-                  a back concept exists (its colors then match the front)
+  back.png        from <name>_back.png when it exists; otherwise an interim
+                  back from the mirrored front with the face painted out
   icon.png        the new front reduced to 32x32 in the species' shared icon
                   palette, two frames (bob up 1 px)
 
 Writes design/dex/sprites/<name>/; run `python3 tools/dex/rom/gen.py` after it
 to copy into graphics/pokemon/ and re-measure battle coordinates.
 
-These species are protected: tools/dex/sprites/build.py will not overwrite them
-(CONCEPT_SOURCED below is read from manifest.json).
+A concept PNG in that folder protects the species: tools/dex/sprites/build.py
+will not overwrite it. The concept-sprites skill (.claude/skills) runs it all.
 
-  python3 tools/ichor/art/mon_from_concept.py [NAME ...] [--preview DIR]
+  python3 tools/ichor/art/mon_from_concept.py ingest FOLDER [--dry-run]
+  python3 tools/ichor/art/mon_from_concept.py [NAME ...] [--preview DIR] [--sheet PNG]
 """
 import argparse
 import colorsys
@@ -39,28 +40,50 @@ CONCEPTS = ROOT / "tools/ichor/art/concepts/mon"
 OUT = ROOT / "design/dex/sprites"
 ICON_PALS = ROOT / "graphics/pokemon/icon_palettes"
 
-# fit: the subject's largest dimension in native pixels (STYLE.md §3.1).
-# pivot: the row (fraction of the subject's height from the top) above which
-# frame 2 lowers by one pixel.
-# fixes: hand-fix pass, (x, y, (r, g, b)) in frame-1 canvas coordinates; each
-# color snaps to the nearest palette entry. None makes the pixel transparent.
-SPECIES = {
-    "kynder":    {"fit": 56, "pivot": 0.55, "fixes": []},
-    "dikyon":    {"fit": 60, "pivot": 0.50, "fixes": []},
-    "pylakyon":  {"fit": 63, "pivot": 0.50, "fixes": []},
-    "nebrel":    {"fit": 56, "pivot": 0.45, "fixes": []},
-    "kladoe":    {"fit": 60, "pivot": 0.45, "fixes": []},
-    # Her face survived the reduction as a pale blank; give her the concept's
-    # amber eyes (2x2, shine upper-left) and a mouth.
-    "daphnyad":  {"fit": 63, "pivot": 0.40, "fixes": [
-        (26, 16, (240, 232, 200)), (27, 16, (16, 16, 16)), (26, 17, (16, 16, 16)), (27, 17, (224, 176, 64)),
-        (31, 16, (240, 232, 200)), (32, 16, (16, 16, 16)), (31, 17, (16, 16, 16)), (32, 17, (224, 176, 64)),
-        (29, 19, (208, 184, 160)),
-    ]},
-    "hipling":   {"fit": 56, "pivot": 0.50, "fixes": []},
-    "thalamare": {"fit": 60, "pivot": 0.50, "fixes": []},
-    "seismare":  {"fit": 63, "pivot": 0.45, "fixes": []},
-}
+SPECIES_FILE = CONCEPTS / "species.json"
+PROMPTS = ROOT / "design/dex/concept_prompts.json"
+
+# Per-species settings live in concepts/mon/species.json; a species without an
+# entry gets defaults from its evolution stage (STYLE.md §3.1).
+#   fit    the subject's largest dimension in native pixels, for concepts that
+#          are not on a true grid (ignored when the pitch is detected)
+#   pivot  the row, as a fraction of the subject's height from the top, above
+#          which frame 2 lowers by one pixel
+#   fixes  the hand-fix pass: [x, y, [r, g, b]] in frame-1 canvas coordinates,
+#          each color snapped to the nearest palette entry; null color = clear
+STAGE_FIT = {"basic": 56, "middle": 60, "final": 63, "single": 60}
+
+
+def stage_of(name):
+    if PROMPTS.exists():
+        for r in json.loads(PROMPTS.read_text()):
+            if r["name"].lower() == name:
+                return r.get("stage", "single")
+    return "single"
+
+
+def config(name):
+    table = json.loads(SPECIES_FILE.read_text()) if SPECIES_FILE.exists() else {}
+    c = {"fit": STAGE_FIT[stage_of(name)], "pivot": 0.5, "fixes": []}
+    c.update(table.get(name, {}))
+    return c
+
+
+def concept_names():
+    return sorted(p.stem for p in CONCEPTS.glob("*.png") if not p.stem.endswith("_back"))
+
+
+def grid_pitch(path):
+    """Pixels per native pixel for a true-grid concept from the prompt page.
+
+    The prompts ask for a 64x64 grid rendered at 512x512; any square image
+    whose side is a multiple of 64 (256 or more) is read at that exact pitch,
+    so nothing is resized. Anything else returns None (fit-based sampling).
+    """
+    w, h = Image.open(path).size
+    if w == h and w >= 256 and w % 64 == 0:
+        return w / 64
+    return None
 
 
 def read_jasc(path):
@@ -90,10 +113,11 @@ def nearest(pal, rgb, skip0=True):
 
 
 def front_frames(name, cfg):
-    img = c2n.convert(CONCEPTS / f"{name}.png", fit=cfg["fit"])
+    src = CONCEPTS / f"{name}.png"
+    img = c2n.convert(src, fit=cfg["fit"], concept_pitch=grid_pitch(src))
     f0 = np.array(img)
     pal = np.array(img.getpalette()[:48], int).reshape(16, 3)
-    for x, y, rgb in cfg["fixes"]:
+    for x, y, rgb in cfg.get("fixes", []):
         f0[y, x] = 0 if rgb is None else nearest(pal, rgb)
     ys = np.where(f0.any(1))[0]
     top, bot = ys.min(), ys.max()
@@ -211,7 +235,7 @@ def build(name, cfg):
     shiny = shiny_from_old(pal, old_normal, old_shiny)
     back_src = CONCEPTS / f"{name}_back.png"
     if back_src.exists():
-        bimg = c2n.convert(back_src, fit=64)
+        bimg = c2n.convert(back_src, fit=64, concept_pitch=grid_pitch(back_src))
         bpal = np.array(bimg.getpalette()[:48], int).reshape(16, 3)
         back = remap(np.array(bimg), bpal, pal)
     else:
@@ -259,19 +283,159 @@ def preview(name, b, out):
     card.save(Path(out) / f"{name}.png")
 
 
+NAME_RE = re.compile(r"^(?:(\d{1,3})_)?([a-z]+?)(?:_(front|back))?$")
+
+
+def ingest(folder, dry_run=False):
+    """Check a folder of returned concepts and file them under concepts/mon/.
+
+    Accepts the prompt page's names (004_kynder_front.png, 004_kynder_back.png)
+    or bare <name>.png. Every file is checked before anything is copied: the
+    species exists, the number matches it, the backdrop is flat, and the
+    subject fits the 64x64 frame. Returns the species names ingested.
+    """
+    dex = {r["name"].lower(): r for r in json.loads(PROMPTS.read_text())}
+    plan, problems = [], []
+    for f in sorted(Path(folder).iterdir()):
+        if f.suffix.lower() not in (".png", ".webp", ".jpg", ".jpeg"):
+            continue
+        m = NAME_RE.match(f.stem.lower())
+        if not m or m.group(2) not in dex:
+            problems.append(f"{f.name}: not a dex species name (expected e.g. 004_kynder_front.png)")
+            continue
+        num, name, view = m.group(1), m.group(2), m.group(3) or "front"
+        if num and int(num) != dex[name]["dex"]:
+            problems.append(f"{f.name}: {name} is #{dex[name]['dex']:03d}, not #{int(num):03d}")
+            continue
+        try:
+            im = Image.open(f).convert("RGB")
+        except Exception as e:  # unreadable or not an image
+            problems.append(f"{f.name}: can't read it ({e})")
+            continue
+        a = np.asarray(im).astype(int)
+        corners = np.concatenate([a[:4, :4].reshape(-1, 3), a[:4, -4:].reshape(-1, 3),
+                                  a[-4:, :4].reshape(-1, 3), a[-4:, -4:].reshape(-1, 3)])
+        if np.abs(corners - corners.mean(0)).sum(-1).max() > 60:
+            problems.append(f"{f.name}: the background isn't flat; regenerate on solid magenta")
+            continue
+        warn = ""
+        if not (im.width == im.height and im.width % 64 == 0 and im.width >= 256):
+            warn = f" (not on a 64-grid, {im.width}x{im.height}: sampled by size, check detail)"
+        dst = CONCEPTS / (f"{name}_back.png" if view == "back" else f"{name}.png")
+        tmp = CONCEPTS / f".check_{name}_{view}.png"
+        im.save(tmp)
+        try:
+            c2n.convert(tmp, fit=64 if view == "back" else config(name)["fit"],
+                        concept_pitch=grid_pitch(tmp))
+        except SystemExit as e:
+            problems.append(f"{f.name}: {e}")
+            continue
+        finally:
+            tmp.unlink(missing_ok=True)
+        plan.append((tmp, dst, im, name, view, warn))
+    for _, dst, im, name, view, warn in plan:
+        print(f"{'would file' if dry_run else 'filed'} {name} {view} -> {dst.relative_to(ROOT)}{warn}")
+        if not dry_run:
+            im.save(dst)
+    for p_ in problems:
+        print("SKIPPED", p_)
+    return sorted({n for _, _, _, n, _, _ in plan})
+
+
+def sheet(rows, path):
+    """Before/after review sheet: old front and back beside the new set, 3x."""
+    Z, pad, green = 3, 8, (168, 200, 120)
+
+    def tile(a, pal, size=64, bg=green):
+        rgb = np.zeros((size, size, 3), np.uint8) + np.array(bg, np.uint8)
+        m = a != 0
+        rgb[m] = np.asarray(pal)[a[m]]
+        return Image.fromarray(rgb).resize((size * Z, size * Z), Image.NEAREST)
+
+    cards = []
+    for name, before, b in rows:
+        tiles = [tile(before["front"], before["pal"]), tile(before["back"], before["pal"]),
+                 tile(b["front"][:64], b["pal"]), tile(b["front"][64:], b["pal"]),
+                 tile(b["front"][:64], b["shiny"]), tile(b["back"], b["pal"]),
+                 tile(b["icon"][:32], b["icon_pal"], 32, (232, 226, 212))]
+        w = sum(t.width for t in tiles) + pad * (len(tiles) + 2)
+        card = Image.new("RGB", (w, 64 * Z + 2 * pad + 14), (232, 226, 212))
+        x = pad
+        for k, t in enumerate(tiles):
+            card.paste(t, (x, pad + 14))
+            x += t.width + pad + (pad if k == 1 else 0)
+        from PIL import ImageDraw
+        ImageDraw.Draw(card).text((pad, 2), f"{name}:  BEFORE front, back  |  AFTER front, frame 2, shiny, back, icon", fill=0)
+        cards.append(card)
+    out = Image.new("RGB", (max(c.width for c in cards), sum(c.height for c in cards)), (232, 226, 212))
+    y = 0
+    for c in cards:
+        out.paste(c, (0, y))
+        y += c.height
+    out.save(path)
+
+
+def grid(name, b, out, Z=10):
+    """Frame 1 at 10x with every 5th column/row numbered, for writing fixes."""
+    from PIL import ImageDraw
+    a, pal = b["front"][:64], b["pal"]
+    im = Image.new("RGB", (64 * Z, 64 * Z), (168, 200, 120))
+    d = ImageDraw.Draw(im)
+    for y in range(64):
+        for x in range(64):
+            if a[y, x]:
+                d.rectangle([x * Z, y * Z, x * Z + Z - 1, y * Z + Z - 1], fill=tuple(int(v) for v in pal[a[y, x]]))
+    for k in range(0, 64, 5):
+        d.line([k * Z, 0, k * Z, 64 * Z], fill=(40, 40, 220) if k % 10 == 0 else (150, 150, 240))
+        d.line([0, k * Z, 64 * Z, k * Z], fill=(40, 40, 220) if k % 10 == 0 else (150, 150, 240))
+        d.text((k * Z + 1, 1), str(k), fill=(20, 20, 160))
+        d.text((1, k * Z + 1), str(k), fill=(20, 20, 160))
+    im.save(Path(out) / f"{name}_grid.png")
+    pal_txt = ", ".join(f"{i}:{tuple(int(v) for v in c)}" for i, c in enumerate(pal) if i)
+    print(f"{name} palette {pal_txt}")
+
+
+def current(name):
+    d = OUT / name
+    pal = read_jasc(d / "normal.pal")
+    return {"front": np.array(Image.open(d / "anim_front.png"))[:64],
+            "back": np.array(Image.open(d / "back.png")), "pal": pal}
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "ingest":
+        ap = argparse.ArgumentParser(prog="mon_from_concept.py ingest")
+        ap.add_argument("folder")
+        ap.add_argument("--dry-run", action="store_true")
+        a = ap.parse_args(sys.argv[2:])
+        names = ingest(a.folder, a.dry_run)
+        print("species:", " ".join(names) if names else "(none)")
+        return
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("names", nargs="*")
     ap.add_argument("--preview", help="write review cards here instead of writing sprites")
+    ap.add_argument("--sheet", help="also write a before/after review sheet (PNG)")
+    ap.add_argument("--grid", help="with --preview: also write numbered 10x grids of frame 1 here")
     a = ap.parse_args()
-    for n in a.names or SPECIES:
-        b = build(n, SPECIES[n])
+    rows = []
+    for n in [x.lower() for x in a.names] or concept_names():
+        if not (CONCEPTS / f"{n}.png").exists():
+            raise SystemExit(f"no concept for {n}: expected {(CONCEPTS / (n + '.png')).relative_to(ROOT)}")
+        before = current(n)
+        b = build(n, config(n))
+        rows.append((n, before, b))
         if a.preview:
             Path(a.preview).mkdir(parents=True, exist_ok=True)
             preview(n, b, a.preview)
+            if a.grid:
+                Path(a.grid).mkdir(parents=True, exist_ok=True)
+                grid(n, b, a.grid)
         else:
             write(n, b)
         print(n, "front colors", len(np.unique(b["front"])) - 1)
+    if a.sheet and rows:
+        sheet(rows, a.sheet)
+        print("review sheet:", a.sheet)
 
 
 if __name__ == "__main__":
