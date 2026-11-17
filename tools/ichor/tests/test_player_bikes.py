@@ -25,8 +25,9 @@ class RetainedBikeArtTests(unittest.TestCase):
                         self.assertFalse(np.array_equal(frames[first], frames[second]))
 
     def test_bicycle_contact_planes_are_unchanged_in_every_source_frame(self):
+        # the Mach Bike's sheet is the chariot now; only the Acro Bike keeps its bicycle
         for who in bikes.FOLDERS:
-            for kind, specs in (("mach_bike", bikes.NORMAL), ("acro_bike", bikes.ACRO)):
+            for kind, specs in (("acro_bike", bikes.ACRO),):
                 original = np.array(Image.open(bikes.BASE / f"{who}_{kind}.png"))
                 actual = np.hsplit(np.array(Image.open(bikes.path(who, kind))), len(specs))
                 for index, (frame, (_, plane, _, _)) in enumerate(zip(actual, specs)):
