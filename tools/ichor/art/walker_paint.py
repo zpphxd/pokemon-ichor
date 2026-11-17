@@ -612,6 +612,46 @@ def _kilt(t, rows=3):
 
 
 BODY["kilt"] = {v: tuple(_kilt(t) for t in BODY["chiton"][v]) for v in VIEWS}
+
+# Running: a wider stride, the arms pumping, the body leaning into it.
+_RUN_DOWN_A = T(22, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..sOCCCCCCCCOS..
+...OAAAAAAAAOs..
+...cCCCCCCCCs...
+....cCCCCCCc....
+...SS......SS...
+..FFF......Ss...
+...........FFF..
+""")
+_RUN_LEFT_A = T(22, """
+.....CCCCCC.....
+....CSSOCCCC....
+...SsAOAAAAA....
+....cCCCCCCc....
+.....cCCCCc.....
+....SS...sS.....
+...Ss.....Ss....
+..Ss.......ss...
+.FF.........FF..
+""")
+_RUN_LEFT_B = T(22, """
+.....CCCCCC.....
+....CCCCOSSC....
+....AAAAOssAS...
+....cCCCCCCc....
+.....cCCCCc.....
+....sS...SS.....
+...ss.....Ss....
+..ss.......Ss...
+.FF.........FF..
+""")
+BODY["chiton_run"] = {
+    "down": phases(BODY["chiton"]["down"][0], _RUN_DOWN_A),
+    "up": phases(BODY["chiton"]["up"][0], _up(_RUN_DOWN_A)),
+    "left": (BODY["chiton"]["left"][0], _RUN_LEFT_A, _RUN_LEFT_B),
+}
 BODY["child"] = {
     "down": phases(T(25, """
 ...SOCCCCCCOS...
@@ -677,7 +717,15 @@ THEO = dict(S=9, s=8, e=1, k=1, O=2, G=4, H=3, h=2, C=11, c=10, W=11, w=10, A=6,
 WINE = dict(S=7, s=6, e=1, k=1, O=2, G=6, H=2, h=1, C=8, c=10, W=9, w=8, A=5, F=2,
             M=5, m=4, R=3, r=11, X=3, x=11, P=6, p=2, D=12, d=11, N=2, n=1, Q=12, q=11,
             L=15, l=14, Y=12, y=11, B=5)
-FAMILY = {"cast": CAST, "folk": FOLK, "theoxenia": THEO, "wine": WINE}
+# The player's palettes (brendan.pal / may.pal) are shared by every player
+# sheet (walking, running, surfing, fishing, bikes...), so they stay as they are.
+THEO_PAL = dict(S=1, s=2, e=15, k=15, O=4, G=3, H=4, h=15, C=14, c=9, W=14, w=9, A=3, F=4,
+                M=11, m=13, R=13, r=4, X=6, x=7, P=3, p=4, D=6, d=7, N=3, n=4, Q=10, q=13,
+                L=11, l=13, Y=10, y=11, B=13)
+IANTHE_PAL = dict(THEO_PAL, H=7, h=8, X=5, x=6, D=5, d=6)
+PLAYER_PALS = ("brendan", "may")
+FAMILY = {"cast": CAST, "folk": FOLK, "theoxenia": THEO, "wine": WINE,
+          "brendan": THEO_PAL, "may": IANTHE_PAL}
 
 
 def C_(family, roles=None, **parts):
@@ -793,13 +841,24 @@ CHARACTERS = {
                   body="chiton", hair="short", headwear=["cap"], held=["grapes"]),
 }
 
+# The player: the traveler's petasos and blue chlamys over a linen tunic, a
+# satchel strap across the chest. Ianthe wears her braid down her back.
+PLAYERS = {
+    "theo": C_("brendan", None, body="chiton", hair="short", headwear=["petasos"],
+               cape="chlamys", over=["satchel"]),
+    "ianthe": C_("may", None, body="chiton", hair="long", headwear=["petasos"],
+                 cape="chlamys", over=["satchel"]),
+}
+PLAYER_DIR = {"theo": "brendan", "ianthe": "may"}
+
 
 def read_pal(family):
-    v = list(map(int, (PALS / f"ichor_{family}.pal").read_text().split()[3:]))
+    path = PALS / (f"{family}.pal" if family in PLAYER_PALS else f"ichor_{family}.pal")
+    v = list(map(int, path.read_text().split()[3:]))
     return np.array(v, int).reshape(-1, 3)[:16]
 
 
-def stamp(grid, part, view, phase, behind=False, dy=0):
+def stamp(grid, part, view, phase, behind=False, dy=0, dx=0):
     if not part or view not in part:
         return
     t = part[view][phase]
@@ -808,7 +867,8 @@ def stamp(grid, part, view, phase, behind=False, dy=0):
         if not 0 <= y < 32:
             continue
         for x, ch in enumerate(row):
-            if ch != "." and (not behind or grid[y][x] == "."):
+            x += dx
+            if ch != "." and 0 <= x < len(grid[0]) and (not behind or grid[y][x] == "."):
                 grid[y][x] = ch
 
 
@@ -820,12 +880,13 @@ def outline(grid):
     ink beside hair, metal, crests, capes, hats and wood; a dark brown ("O")
     beside skin and light cloth, so faces and linen don't sit in a black line."""
     out = [row[:] for row in grid]
+    W = len(grid[0])
     for y in range(32):
-        for x in range(16):
+        for x in range(W):
             if grid[y][x] != ".":
                 continue
             near = [grid[y + dy][x + dx] for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1))
-                    if 0 <= y + dy < 32 and 0 <= x + dx < 16 and grid[y + dy][x + dx] not in ".kO"]
+                    if 0 <= y + dy < 32 and 0 <= x + dx < W and grid[y + dy][x + dx] not in ".kO"]
             if near:
                 out[y][x] = "k" if any(c in DARK_EDGE for c in near) else "O"
     return out
@@ -842,11 +903,23 @@ POSES = {
 }
 
 
-def frame(spec, view, phase, pose=None):
-    g = [["."] * 16 for _ in range(32)]
-    dy = spec.get("head_dy", 0)
+def frame(spec, view, phase, pose=None, run=False, width=16, x0=0, body_override=None,
+          head_dy=0, extra_held=(), drawings=(), thin=()):
+    """One frame. width/x0 place the 16-wide figure on a wider canvas (the
+    32x32 player poses); drawings(grid) run before the outline, thin(grid)
+    after it (rods and sparkles, one pixel, no outline of their own)."""
+    g = [["."] * width for _ in range(32)]
+    dy = spec.get("head_dy", 0) + head_dy
+    dx = 0
     shut = False
     body = spec["body"]
+    if body_override:
+        body = body_override
+    if run:
+        body = body + "_run"
+        if phase:  # mid-stride: the head dips, and leans forward in profile
+            dy += 1
+            dx = -1 if view == "left" else 0
     held = [HELD[h] for h in spec.get("held", [])]
     if pose:
         view, phase, pdy, shut, pbody, pheld = POSES[pose]
@@ -854,33 +927,39 @@ def frame(spec, view, phase, pose=None):
         body = pbody or body
         if pheld is not None:
             held = [HELD[h] for h in pheld]
+    held = held + [HELD[h] for h in extra_held]
     get = lambda table, key: table.get(key) if key else None  # noqa: E731
+    X = x0  # the figure's left edge on the canvas
     cape = get(CAPE, spec.get("cape"))
     if view != "up":
-        stamp(g, cape, view, phase)
+        stamp(g, cape, view, phase, dx=X)
     else:
         for h in held:
-            stamp(g, h, view, phase)
-    stamp(g, BODY[body], view, phase)
+            stamp(g, h, view, phase, dx=X)
+    stamp(g, BODY[body], view, phase, dx=X)
     for o in spec.get("over", []):
-        stamp(g, OVER[o], view, phase, dy=dy if o in ("soot", "blush") else 0)
-    stamp(g, FACE, view, phase, dy=dy)
+        stamp(g, OVER[o], view, phase, dy=dy if o in ("soot", "blush") else 0, dx=X)
+    stamp(g, FACE, view, phase, dy=dy, dx=dx + X)
     if shut and view == "down":
-        stamp(g, {"down": FACE_CLOSED}, view, 0, dy=dy)
-    stamp(g, get(HAIR, spec.get("hair")), view, phase, dy=dy)
-    stamp(g, get(BEARD, spec.get("beard")), view, phase, dy=dy)
+        stamp(g, {"down": FACE_CLOSED}, view, 0, dy=dy, dx=dx + X)
+    stamp(g, get(HAIR, spec.get("hair")), view, phase, dy=dy, dx=dx + X)
+    stamp(g, get(BEARD, spec.get("beard")), view, phase, dy=dy, dx=dx + X)
     for hw in spec.get("headwear", []):
-        stamp(g, HEADWEAR[hw], view, phase, dy=dy)
+        stamp(g, HEADWEAR[hw], view, phase, dy=dy, dx=dx + X)
     if view == "up":
-        stamp(g, cape, view, phase)
+        stamp(g, cape, view, phase, dx=X)
     else:
         for h in held:
-            stamp(g, h, view, phase)
+            stamp(g, h, view, phase, dx=X)
+    for draw in drawings:
+        draw(g)
     g = outline(g)
     # thin props (staff, spear, crook) go on after the outline, one pixel wide,
     # as Gen 3 draws them; from behind they only show where the body isn't
     for pr in spec.get("props", []):
-        stamp(g, PROP[pr], view, phase, behind=(view == "up"))
+        stamp(g, PROP[pr], view, phase, behind=(view == "up"), dx=X)
+    for draw in thin:
+        draw(g)
     return g
 
 
@@ -896,6 +975,168 @@ def build(name):
     frames = [np.array([[0 if c == "." else roles[c] for c in row] for row in g], np.uint8)
               for g in grids]
     return np.hstack(frames), read_pal(spec["family"])
+
+
+def build_player(name, sheet="walking"):
+    """Theo's or Ianthe's walking or running sheet (9 frames, engine order)."""
+    spec = PLAYERS[name]
+    roles = spec["roles"]
+    grids = [frame(spec, v, ph, run=(sheet == "running")) for v, ph in ORDER]
+    frames = [np.array([[0 if c == "." else roles[c] for c in row] for row in g], np.uint8)
+              for g in grids]
+    return np.hstack(frames), read_pal(spec["family"])
+
+
+# ── the player's 32x32 poses ─────────────────────────────────────────────────
+# The seated rider for surfing: the same body folded at the knees.
+BODY["surf"] = {
+    "down": phases(T(25, """
+...CCCSSSSCCC...
+..SOCcCCCCcCOS..
+..sOAAAAAAAAOs..
+..cCCCCCCCCCCc..
+..SSScCCCCcSSS..
+...SS......SS...
+""")),
+    "up": phases(T(25, """
+...CCCCCCCCCC...
+..SOCCCCCCCCOS..
+..SOAAAAAAAAOS..
+..cCCCCCCCCCCc..
+..cCCCCCCCCCCc..
+...cccccccccc...
+""")),
+    "left": phases(T(25, """
+.....CCCCCC.....
+....CCOSSCCC....
+....AAOssAAA....
+...CCCCCCCCC....
+..SSSCCCCCcc....
+..FF............
+""")),
+}
+
+
+def _px(g, x, y, ch):
+    if 0 <= y < len(g) and 0 <= x < len(g[0]):
+        g[y][x] = ch
+
+
+def _line(g, x1, y1, x2, y2, ch):
+    """A one-pixel line (Bresenham)."""
+    dx, dy = abs(x2 - x1), -abs(y2 - y1)
+    sx, sy = (1 if x1 < x2 else -1), (1 if y1 < y2 else -1)
+    err = dx + dy
+    while True:
+        _px(g, x1, y1, ch)
+        if (x1, y1) == (x2, y2):
+            return
+        e2 = 2 * err
+        if e2 >= dy:
+            err += dy
+            x1 += sx
+        if e2 <= dx:
+            err += dx
+            y1 += sy
+
+
+def _ball(cx, cy):
+    """A capture ball, 3x3: red top, ink band, white bottom (outlined)."""
+    def draw(g):
+        for x in (cx - 1, cx, cx + 1):
+            _px(g, x, cy - 1, "R")
+            _px(g, x, cy + 1, "W")
+        _px(g, cx - 1, cy, "k"), _px(g, cx, cy, "W"), _px(g, cx + 1, cy, "k")
+    return draw
+
+
+def _arm_up(x, top, bottom):
+    def draw(g):
+        for y in range(top, bottom + 1):
+            _px(g, x, y, "S")
+    return draw
+
+
+def _sparkle(points):
+    def draw(g):
+        for x, y in points:
+            _px(g, x, y, "Q")
+    return draw
+
+
+def _rod(hand, tip, line=0):
+    """A rod held at `hand`, its tip at `tip`, `line` pixels of line hanging."""
+    def draw(g):
+        _line(g, *hand, *tip, "p")
+        for i in range(1, line + 1):
+            _px(g, tip[0], tip[1] + i, "W")
+    return draw
+
+
+def _hands(*points):
+    def draw(g):
+        for x, y in points:
+            _px(g, x, y, "S")
+    return draw
+
+
+X0 = 8  # the 16-wide figure centred on the 32-wide canvas
+
+
+def _pose_frames(sheet):
+    """(view, phase, frame keyword arguments) per frame, in the engine's order."""
+    if sheet == "field_move":  # facing down: reach, hold, lift, raise high
+        return [
+            ("down", 0, {}),
+            ("down", 0, {"drawings": [_ball(X0 + 13, 26)]}),
+            ("down", 0, {"drawings": [_hands((X0 + 6, 24)), _hands((X0 + 10, 24)), _ball(X0 + 8, 24)]}),
+            ("down", 0, {"drawings": [_hands((X0 + 6, 22)), _hands((X0 + 10, 22)), _ball(X0 + 8, 21)]}),
+            ("down", 0, {"drawings": [_arm_up(X0 + 13, 16, 23), _ball(X0 + 13, 14)],
+                         "thin": [_sparkle([(X0 + 10, 11), (X0 + 16, 12), (X0 + 13, 9), (X0 + 17, 15)])]}),
+        ]
+    if sheet == "surfing":  # seated rider and the jump on/off, per direction
+        jump = lambda: [_arm_up(X0 + 1, 18, 23), _arm_up(X0 + 14, 18, 23)]  # noqa: E731
+        return [
+            ("down", 0, {"body_override": "surf", "head_dy": 3}),
+            ("down", 0, {"drawings": jump()}),
+            ("up", 0, {"body_override": "surf", "head_dy": 3}),
+            ("up", 0, {"drawings": jump()}),
+            ("left", 0, {"body_override": "surf", "head_dy": 3}),
+            ("left", 0, {"drawings": [_arm_up(X0 + 5, 18, 23)]}),
+        ]
+    if sheet == "fishing":  # west 0-3, north 4-7, south 8-11: out, raise, cast, taut
+        west, north, south = (X0 + 5, 24), (X0 + 12, 22), (X0 + 10, 25)
+        return [
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (X0 + 10, 11))]}),
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (X0 + 2, 8))]}),
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (1, 19))]}),
+            ("left", 0, {"drawings": [_hands(west)], "thin": [_rod(west, (0, 23), 3)]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 16, 9))]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 9, 3))]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 8, 0))]}),
+            ("up", 0, {"thin": [_rod(north, (X0 + 11, 1))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 15, 13))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 9, 5))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 17, 31))]}),
+            ("down", 0, {"drawings": [_hands(south)], "thin": [_rod(south, (X0 + 19, 29), 2)]}),
+        ]
+    raise KeyError(sheet)
+
+
+POSE_SHEETS = ("field_move", "surfing", "fishing")
+
+
+def build_player_pose(name, sheet):
+    spec = PLAYERS[name]
+    roles = spec["roles"]
+    grids = [frame(spec, v, ph, width=32, x0=X0, **kw) for v, ph, kw in _pose_frames(sheet)]
+    frames = [np.array([[0 if c == "." else roles[c] for c in row] for row in g], np.uint8)
+              for g in grids]
+    return np.hstack(frames), read_pal(spec["family"])
+
+
+def player_path(name, sheet):
+    return ROOT / "graphics/object_events/pics/people" / PLAYER_DIR[name] / f"{sheet}.png"
 
 
 def save(sheet, pal, path):
@@ -946,7 +1187,18 @@ def main():
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--preview")
     a = ap.parse_args()
-    names = a.names or list(CHARACTERS)
+    names = a.names or list(CHARACTERS) + list(PLAYERS)
+    if a.write:
+        for n in [n for n in names if n in PLAYERS]:
+            for sheet_name in ("walking", "running"):
+                sheet, pal = build_player(n, sheet_name)
+                save(sheet, pal, player_path(n, sheet_name))
+                print("wrote", n, sheet_name)
+            for sheet_name in POSE_SHEETS:
+                sheet, pal = build_player_pose(n, sheet_name)
+                save(sheet, pal, player_path(n, sheet_name))
+                print("wrote", n, sheet_name)
+    names = [n for n in names if n in CHARACTERS]
     if a.preview:
         preview(names, a.preview)
     if a.write:

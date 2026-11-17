@@ -347,24 +347,30 @@ _KERCHIEF = {  # the woman's linen kerchief (roles W/w), reused as a scarf below
 """),
 }
 HEADWEAR = {
-    "petasos": {
-        "down": same(T(10, """
-....YYYYYYYY....
-...YYYYYYYYYY...
-.yYYYYYYYYYYYYy.
-yyyyyyyyyyyyyyyy
-""")),
-        "up": same(T(10, """
-....YYYYYYYY....
-...YYYYYYYYYY...
-.yYYYYYYYYYYYYy.
-yyyyyyyyyyyyyyyy
-""")),
-        "left": same(T(10, """
+    "petasos": {  # crown, hatband, a brim that dips at the sides (darker below)
+        "down": same(T(9, """
 .....YYYYYY.....
 ....YYYYYYYY....
-..yYYYYYYYYYYy..
+...BBBBBBBBBB...
+.YYYYYYYYYYYYYY.
+yyyyyyyyyyyyyyyy
+yy............yy
+""")),
+        "up": same(T(9, """
+.....YYYYYY.....
+....YYYYYYYY....
+...BBBBBBBBBB...
+.YYYYYYYYYYYYYY.
+yyyyyyyyyyyyyyyy
+yy............yy
+""")),
+        "left": same(T(9, """
+.....YYYYYY.....
+....YYYYYYYY....
+...BBBBBBBBB....
+.YYYYYYYYYYYYY..
 yyyyyyyyyyyyyyy.
+yy...........yy.
 """)),
     },
     "pilos": {
