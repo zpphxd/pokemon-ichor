@@ -230,3 +230,8 @@ data/maps/KnossaBullRoad/scripts.inc
 data/maps/KnossaBullRoad_Vineyard/scripts.inc
 data/maps/KnossaBronzeHeel/scripts.inc
 data/maps/KnossaPalace/scripts.inc
+data/maps/TheLoom/scripts.inc
+data/maps/StairOfHours/scripts.inc
+data/scripts/ichor_climax.inc
+data/scripts/ichor_climax_tiles.inc
+data/scripts/ichor_climax_world.inc

@@ -1,0 +1,682 @@
+{
+  "id": "MAP_STAIR_OF_HOURS",
+  "name": "StairOfHours",
+  "layout": "LAYOUT_STAIR_OF_HOURS",
+  "music": "MUS_ICHOR_ELPIS_LULLABY_BOX",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_DELPHOI",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 14,
+      "y": 95,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Titanborn",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 19,
+      "y": 95,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_TitanbornShut",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 4,
+      "y": 85,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Titanborn",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 9,
+      "y": 87,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Titanborn",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_STAIR_PETROS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 4,
+      "y": 71,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Petros",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_STAIR_AMATHOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 5,
+      "y": 71,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Amathos",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 3,
+      "y": 87,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_RESTORE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 3,
+      "y": 55,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REVIVE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_STAIR_MAX_REVIVE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 20,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_RESTORE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_2"
+    },
+    {
+      "local_id": "LOCALID_STAIR_SPARK_4",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SPARK",
+      "x": 18,
+      "y": 77,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Spark",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_STAIR_SPARK_8",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SPARK",
+      "x": 18,
+      "y": 45,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Spark",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_STAIR_SPARK_11",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SPARK",
+      "x": 7,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Spark",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_STAIR_SPARK_12",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SPARK",
+      "x": 8,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Spark",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_SPARK"
+    },
+    {
+      "local_id": "LOCALID_STAIR_KLEON_CLIMB",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_FREE",
+      "x": 19,
+      "y": 93,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_KleonClimb",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_KLEON"
+    },
+    {
+      "local_id": "LOCALID_STAIR_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_FREE",
+      "x": 14,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_KleonTop",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_KLEON_TOP"
+    },
+    {
+      "local_id": "LOCALID_STAIR_KLEON_FROZEN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 7,
+      "y": 106,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_KleonFrozen",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_FROZEN"
+    },
+    {
+      "local_id": "LOCALID_STAIR_PHAEDON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PHAEDON",
+      "x": 12,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Phaedon",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_RIVALS"
+    },
+    {
+      "local_id": "LOCALID_STAIR_HYPERION",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HYPERION",
+      "x": 13,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Hyperion",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_HYPERION"
+    },
+    {
+      "local_id": "LOCALID_STAIR_LORD",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KRONOLITH)",
+      "x": 13,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Lord",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_LORD",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_STAIR_SPINNER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(NEMIRA)",
+      "x": 6,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Fate",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_FATES"
+    },
+    {
+      "local_id": "LOCALID_STAIR_MEASURER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LOTIRA)",
+      "x": 16,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Fate",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_FATES"
+    },
+    {
+      "local_id": "LOCALID_STAIR_CUTTER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(THANIRA)",
+      "x": 15,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "StairOfHours_EventScript_Fate",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_FATES"
+    },
+    {
+      "local_id": "LOCALID_STAIR_MOMENT",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KAIRAZOR)",
+      "x": 22,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_FATES",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_STAIR_HARPE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARPE",
+      "x": 14,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_STAIR_FATES",
+      "_floats": true
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 109,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "StairOfHours_EventScript_Down"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 109,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "StairOfHours_EventScript_Down"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 109,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "StairOfHours_EventScript_Down"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 107,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "StairOfHours_EventScript_KleonWakesTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 95,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "16",
+      "script": "StairOfHours_EventScript_KleonLine"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 95,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "16",
+      "script": "StairOfHours_EventScript_KleonLine"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 95,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "16",
+      "script": "StairOfHours_EventScript_KleonLine"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 15,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "16",
+      "script": "StairOfHours_EventScript_TwelfthLanding"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 15,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "16",
+      "script": "StairOfHours_EventScript_TwelfthLanding"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 15,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "16",
+      "script": "StairOfHours_EventScript_TwelfthLanding"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "17",
+      "script": "StairOfHours_EventScript_Shadow"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "17",
+      "script": "StairOfHours_EventScript_Shadow"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "17",
+      "script": "StairOfHours_EventScript_Shadow"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 102,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial1"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 102,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial1"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 94,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial2"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 94,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial2"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 86,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial3"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 86,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial3"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 78,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial4"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 78,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial4"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 70,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial5"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 70,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial5"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 62,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial6"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 62,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial6"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 54,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial7"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 54,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial7"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial8"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial8"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial9"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial9"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 30,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial10"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 30,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial10"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial11"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial11"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial12"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_Dial12"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 75,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_HeldStep"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "StairOfHours_EventScript_HeldStep"
+    }
+  ],
+  "ichor_kind": "interior"
+}
