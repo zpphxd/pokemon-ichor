@@ -7,7 +7,7 @@
   "region_map_section": "MAPSEC_STYX_FALLS",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_ROUTE",
+  "map_type": "MAP_TYPE_TOWN",
   "allow_cycling": true,
   "allow_escaping": false,
   "allow_running": true,
@@ -17,22 +17,22 @@
     {
       "direction": "up",
       "map": "MAP_ROUTE11_DRUM_PASS",
-      "offset": 0
+      "offset": 1
     },
     {
       "direction": "down",
       "map": "MAP_ROUTE12_CYPRESS_ROAD",
-      "offset": 0
+      "offset": 24
     }
   ],
   "object_events": [
     {
       "local_id": "LOCALID_STYX_FALLS_GUIDE",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
-      "x": 6,
-      "y": 13,
+      "x": 21,
+      "y": 19,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -46,8 +46,8 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 14,
-      "y": 14,
+      "x": 28,
+      "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "StyxFalls_EventScript_Sign"

@@ -22,7 +22,7 @@
     {
       "direction": "down",
       "map": "MAP_STYX_FALLS",
-      "offset": 0
+      "offset": -1
     }
   ],
   "object_events": [

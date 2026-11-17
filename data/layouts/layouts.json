@@ -1093,10 +1093,10 @@
     {
       "id": "LAYOUT_STYX_FALLS",
       "name": "StyxFalls_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_StyxFalls",
       "border_filepath": "data/layouts/StyxFalls/border.bin",
       "blockdata_filepath": "data/layouts/StyxFalls/map.bin",
       "layout_version": "emerald"
@@ -1104,10 +1104,10 @@
     {
       "id": "LAYOUT_ROUTE12_CYPRESS_ROAD",
       "name": "Route12_CypressRoad_Layout",
-      "width": 24,
-      "height": 40,
+      "width": 56,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Kyllene",
       "border_filepath": "data/layouts/Route12_CypressRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route12_CypressRoad/map.bin",
       "layout_version": "emerald"
