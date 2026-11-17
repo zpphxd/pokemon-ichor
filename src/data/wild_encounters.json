@@ -5237,27 +5237,162 @@
           "map": "MAP_ROUTE13_HIGHLAND_ROAD",
           "base_label": "gRoute13_HighlandRoad_Morning",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
             "mons": [
               {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
                 "species": "SPECIES_CAIRNOLITH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_ELAPLING"
               },
               {
                 "min_level": 30,
@@ -5267,27 +5402,7 @@
               {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_NEMELEON"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
                 "species": "SPECIES_CAIRNOLITH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_ELAPLING"
               },
               {
                 "min_level": 30,
@@ -5297,7 +5412,7 @@
               {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_NEMELEON"
+                "species": "SPECIES_CAIRNOLITH"
               }
             ]
           }
@@ -5306,8 +5421,13 @@
           "map": "MAP_ROUTE13_HIGHLAND_ROAD",
           "base_label": "gRoute13_HighlandRoad_Day",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
               {
                 "min_level": 30,
                 "max_level": 32,
@@ -5316,7 +5436,12 @@
               {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_MELISSEER"
               },
               {
                 "min_level": 30,
@@ -5329,9 +5454,14 @@
                 "species": "SPECIES_ELAPLING"
               },
               {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_KERAZAP"
+                "species": "SPECIES_KLADOE"
               },
               {
                 "min_level": 30,
@@ -5339,29 +5469,14 @@
                 "species": "SPECIES_NEMELEON"
               },
               {
-                "min_level": 30,
+                "min_level": 31,
                 "max_level": 32,
-                "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_MELISSEER"
               },
               {
                 "min_level": 30,
                 "max_level": 32,
                 "species": "SPECIES_CAIRNOLITH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_ELAPLING"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_KERAZAP"
               },
               {
                 "min_level": 30,
@@ -5375,22 +5490,12 @@
           "map": "MAP_ROUTE13_HIGHLAND_ROAD",
           "base_label": "gRoute13_HighlandRoad_Evening",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
-                "min_level": 30,
+                "min_level": 31,
                 "max_level": 32,
                 "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_CAIRNOLITH"
               },
               {
                 "min_level": 30,
@@ -5401,6 +5506,31 @@
                 "min_level": 30,
                 "max_level": 32,
                 "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KLADOE"
               },
               {
                 "min_level": 30,
@@ -5408,29 +5538,14 @@
                 "species": "SPECIES_NEMELEON"
               },
               {
-                "min_level": 30,
+                "min_level": 31,
                 "max_level": 32,
-                "species": "SPECIES_KLADOE"
+                "species": "SPECIES_HARPELLE"
               },
               {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_CAIRNOLITH"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_ELAPLING"
-              },
-              {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_KERAZAP"
+                "species": "SPECIES_PROSOMIME"
               },
               {
                 "min_level": 30,
@@ -5444,10 +5559,10 @@
           "map": "MAP_ROUTE13_HIGHLAND_ROAD",
           "base_label": "gRoute13_HighlandRoad_Night",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
-                "min_level": 30,
+                "min_level": 31,
                 "max_level": 32,
                 "species": "SPECIES_LYKANAX"
               },
@@ -5459,7 +5574,17 @@
               {
                 "min_level": 30,
                 "max_level": 32,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
                 "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
               },
               {
                 "min_level": 30,
@@ -5467,9 +5592,14 @@
                 "species": "SPECIES_ELAPLING"
               },
               {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_KERAZAP"
+                "species": "SPECIES_HARPELLE"
               },
               {
                 "min_level": 30,
@@ -5477,6 +5607,11 @@
                 "species": "SPECIES_NEMELEON"
               },
               {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
                 "min_level": 30,
                 "max_level": 32,
                 "species": "SPECIES_LYKANAX"
@@ -5484,26 +5619,367 @@
               {
                 "min_level": 30,
                 "max_level": 32,
-                "species": "SPECIES_HARPELLE"
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NEMEA",
+          "base_label": "gNemea_Morning",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
               },
               {
-                "min_level": 30,
-                "max_level": 32,
-                "species": "SPECIES_CAIRNOLITH"
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
               },
               {
-                "min_level": 30,
-                "max_level": 32,
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
                 "species": "SPECIES_ELAPLING"
               },
               {
-                "min_level": 30,
-                "max_level": 32,
+                "min_level": 31,
+                "max_level": 33,
                 "species": "SPECIES_KERAZAP"
               },
               {
-                "min_level": 30,
-                "max_level": 32,
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NEMEA",
+          "base_label": "gNemea_Day",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NEMEA",
+          "base_label": "gNemea_Evening",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_ELAPLING"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NEMEA",
+          "base_label": "gNemea_Night",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
                 "species": "SPECIES_NEMELEON"
               }
             ]
@@ -5513,17 +5989,167 @@
           "map": "MAP_ROUTE14_NEMEA_ROAD",
           "base_label": "gRoute14_NemeaRoad_Morning",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
             "mons": [
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_KLADOE"
+                "species": "SPECIES_CAIRNOLITH"
               },
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_KERAZAP"
               },
               {
                 "min_level": 31,
@@ -5538,42 +6164,7 @@
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_MELISSEER"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_NEMELEON"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
                 "species": "SPECIES_CAIRNOLITH"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_HOPLOMEX"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_MELISSEER"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_NEMELEON"
               }
             ]
           }
@@ -5582,17 +6173,12 @@
           "map": "MAP_ROUTE14_NEMEA_ROAD",
           "base_label": "gRoute14_NemeaRoad_Day",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
-                "min_level": 31,
+                "min_level": 32,
                 "max_level": 33,
-                "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_HOPLOMEX"
               },
               {
                 "min_level": 31,
@@ -5602,7 +6188,12 @@
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_HOPLOMEX"
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
               },
               {
                 "min_level": 31,
@@ -5612,17 +6203,12 @@
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_NEMELEON"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
                 "species": "SPECIES_KLADOE"
               },
               {
-                "min_level": 31,
+                "min_level": 32,
                 "max_level": 33,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_HOPLOMEX"
               },
               {
                 "min_level": 31,
@@ -5632,7 +6218,12 @@
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_HOPLOMEX"
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
               },
               {
                 "min_level": 31,
@@ -5651,20 +6242,10 @@
           "map": "MAP_ROUTE14_NEMEA_ROAD",
           "base_label": "gRoute14_NemeaRoad_Evening",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_KLADOE"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 31,
+                "min_level": 32,
                 "max_level": 33,
                 "species": "SPECIES_CAIRNOLITH"
               },
@@ -5676,7 +6257,32 @@
               {
                 "min_level": 31,
                 "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
                 "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_PROSOMIME"
               },
               {
                 "min_level": 31,
@@ -5684,29 +6290,14 @@
                 "species": "SPECIES_NEMELEON"
               },
               {
-                "min_level": 31,
+                "min_level": 32,
                 "max_level": 33,
-                "species": "SPECIES_KLADOE"
+                "species": "SPECIES_HARPELLE"
               },
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_CAIRNOLITH"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_HOPLOMEX"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_MELISSEER"
+                "species": "SPECIES_LYKANAX"
               },
               {
                 "min_level": 31,
@@ -5720,10 +6311,10 @@
           "map": "MAP_ROUTE14_NEMEA_ROAD",
           "base_label": "gRoute14_NemeaRoad_Night",
           "land_mons": {
-            "encounter_rate": 15,
+            "encounter_rate": 25,
             "mons": [
               {
-                "min_level": 31,
+                "min_level": 32,
                 "max_level": 33,
                 "species": "SPECIES_LYKANAX"
               },
@@ -5738,6 +6329,11 @@
                 "species": "SPECIES_CAIRNOLITH"
               },
               {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
                 "min_level": 31,
                 "max_level": 33,
                 "species": "SPECIES_HOPLOMEX"
@@ -5745,7 +6341,17 @@
               {
                 "min_level": 31,
                 "max_level": 33,
-                "species": "SPECIES_MELISSEER"
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
               },
               {
                 "min_level": 31,
@@ -5753,14 +6359,9 @@
                 "species": "SPECIES_NEMELEON"
               },
               {
-                "min_level": 31,
+                "min_level": 32,
                 "max_level": 33,
-                "species": "SPECIES_LYKANAX"
-              },
-              {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_HARPELLE"
+                "species": "SPECIES_PROSOMIME"
               },
               {
                 "min_level": 31,
@@ -5770,16 +6371,259 @@
               {
                 "min_level": 31,
                 "max_level": 33,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14_TRETOS",
+          "base_label": "gRoute14_Tretos_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
                 "species": "SPECIES_HOPLOMEX"
               },
               {
-                "min_level": 31,
-                "max_level": 33,
-                "species": "SPECIES_MELISSEER"
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
               },
               {
-                "min_level": 31,
-                "max_level": 33,
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE14_TRETOS",
+          "base_label": "gRoute14_Tretos_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_PROSOMIME"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
                 "species": "SPECIES_NEMELEON"
               }
             ]

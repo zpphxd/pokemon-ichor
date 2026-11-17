@@ -209,7 +209,13 @@
 #define TRAINER_ICHOR_KALDERA_TALOS          261
 #define TRAINER_ICHOR_KALDERA_HYPERION       262
 #define TRAINER_ICHOR_THYRSA_CHORUS          263 // The Three-Act Play's chorus: fought again after each wrong mask
-#define TRAINERS_END_ACT2                   264
+// Nemea's rebuild (tools/ichor/maps/nemea.py): ids from the top of Act II's block
+// (296-299), so a parallel session taking the next free ids can't collide.
+#define TRAINER_ICHOR_R14_ANTIKLES          296
+#define TRAINER_ICHOR_R14_DORKON            297
+#define TRAINER_ICHOR_TRETOS_LYSANDRA       298
+#define TRAINER_ICHOR_NEMEA_KLEITOMACHOS    299
+#define TRAINERS_END_ACT2                   300
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328

@@ -53,7 +53,9 @@ DECORATIVE = {
     "StyxFalls": (None, "nothing lives in the Styx: the pool under the fall is solid by design "
                         "(af9b59a670); Stygiad waits for the post-game Katabasis"),
     "Olympus_SeatOfPoseidon": (None, "the Pantheon seat's ornamental basin around its model trireme"),
-    "AktiTown": ({0x2A7}, "a water cell inside the moored boat's stamp; the quay faces open sea all round it"),
+    "Nemea": ({0x0B0, 0x0B1, 0x0B2, 0x0B8, 0x0B9, 0x0BA, 0x0C0, 0x0C1, 0x0C2},
+              "the Langia spring's stone basin, a fountain (a Horn of Achelous hook); the river pool is fished"),
+    "AktiTown": ({0x2A7},"a water cell inside the moored boat's stamp; the quay faces open sea all round it"),
 }
 
 

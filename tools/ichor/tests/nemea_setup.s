@@ -59,6 +59,8 @@ Nemea_MoonScript:
     setvar VAR_TEMP_F, 1
     setflag FLAG_BADGE05_GET
     additem ITEM_OLIVE_OIL, 2
+    additem ITEM_BRONZE_HAMMER, 1
+    additem ITEM_HECATES_TORCH, 1
     end
 
     test_header Nemea_SaveHeader, Nemea_SaveScript

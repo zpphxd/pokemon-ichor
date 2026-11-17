@@ -2170,6 +2170,33 @@
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Neraida falls item ball: Max Potion on the plunge pool's west bank
 #define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Neraida falls item ball: Elixir on the upper shelf
 #define FLAG_ICHOR_NERAIDA_BERRIES_PLANTED (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: initialized the falls' first-fruits trees once
+#define FLAG_ICHOR_ITEM_R13_GLADE               (FLAG_ICHOR_GENERAL2_START + 0x120) // Ichor: Route 13 glade jar behind the thicket
+#define FLAG_ICHOR_ITEM_R13_CELL                (FLAG_ICHOR_GENERAL2_START + 0x121) // Ichor: Route 13 hermit's cell jar behind the rubble
+#define FLAG_ICHOR_ITEM_R13_CRAG                (FLAG_ICHOR_GENERAL2_START + 0x122) // Ichor: Route 13 crag jar up the handholds (climbing relic)
+#define FLAG_ICHOR_R13_BEEKEEPER_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x123) // Ichor: Route 13 beekeeper's gift
+#define FLAG_ICHOR_ITEM_NEMEA_TRACK             (FLAG_ICHOR_GENERAL2_START + 0x124) // Ichor: Nemea stadium jar
+#define FLAG_ICHOR_ITEM_NEMEA_ISLET             (FLAG_ICHOR_GENERAL2_START + 0x125) // Ichor: Nemea river islet jar (Conch)
+#define FLAG_ICHOR_NEMEA_HONEY_GIVEN            (FLAG_ICHOR_GENERAL2_START + 0x126) // Ichor: Molorchos got his honey
+#define FLAG_ICHOR_NEMEA_PALAESTRA_GIFT         (FLAG_ICHOR_GENERAL2_START + 0x127) // Ichor: palaestra trainer's gift
+#define FLAG_ICHOR_NEMEA_LION_BOULDER           (FLAG_ICHOR_GENERAL2_START + 0x128) // Ichor: lion's den boulder split (Hephaestus's Hammer)
+#define FLAG_ICHOR_ITEM_R14_GULLY               (FLAG_ICHOR_GENERAL2_START + 0x129) // Ichor: Route 14 gully jar behind the rubble
+#define FLAG_ICHOR_ITEM_R14_ISLET               (FLAG_ICHOR_GENERAL2_START + 0x12A) // Ichor: Route 14 gorge islet jar (Conch)
+#define FLAG_ICHOR_R14_GREAT_BOULDER            (FLAG_ICHOR_GENERAL2_START + 0x12B) // Ichor: Route 14 great boulder split
+#define FLAG_ICHOR_ITEM_TRETOS_HEAL             (FLAG_ICHOR_GENERAL2_START + 0x12C) // Ichor: Tretos jar
+#define FLAG_ICHOR_ITEM_TRETOS_BALL             (FLAG_ICHOR_GENERAL2_START + 0x12D) // Ichor: Tretos jar behind the cobweb
+#define FLAG_ICHOR_ITEM_TRETOS_POOL             (FLAG_ICHOR_GENERAL2_START + 0x12E) // Ichor: Tretos pool islet jar (Conch)
+#define FLAG_ICHOR_ITEM_TRETOS_DEEP             (FLAG_ICHOR_GENERAL2_START + 0x12F) // Ichor: Tretos deep jar behind the thornweb
+#define FLAG_ICHOR_HIDE_TRETOS_WEB              (FLAG_ICHOR_GENERAL2_START + 0x130) // Ichor: Tretos cobweb burnt
+#define FLAG_ICHOR_HIDE_TRETOS_THORNWEB         (FLAG_ICHOR_GENERAL2_START + 0x131) // Ichor: Tretos thornweb burnt
+#define FLAG_ICHOR_TRETOS_GREAT_BOULDER         (FLAG_ICHOR_GENERAL2_START + 0x132) // Ichor: Tretos great boulder split
+#define FLAG_ICHOR_HIDDEN_ITEM_NEMEA_MOUND      (FLAG_ICHOR_GENERAL2_START + 0x133) // Ichor: Nemea, at Opheltes's mound
+#define FLAG_ICHOR_HIDDEN_ITEM_NEMEA_SPRING     (FLAG_ICHOR_GENERAL2_START + 0x134) // Ichor: Nemea, by the Langia spring
+#define FLAG_ICHOR_HIDDEN_ITEM_TRETOS_BONES     (FLAG_ICHOR_GENERAL2_START + 0x135) // Ichor: Tretos, in the bones
+#define FLAG_ICHOR_HIDDEN_ITEM_TRETOS_SEEP      (FLAG_ICHOR_GENERAL2_START + 0x136) // Ichor: Tretos, at the seep
+#define FLAG_ICHOR_R14_HERDSMAN_GIFT            (FLAG_ICHOR_GENERAL2_START + 0x137) // Ichor: Route 14 herdsman's gift
+#define FLAG_ICHOR_TRETOS_RUBBLE                (FLAG_ICHOR_GENERAL2_START + 0x138) // Ichor: Tretos rubble broken (Hammer)
+#define FLAG_ICHOR_R13_RUBBLE                   (FLAG_ICHOR_GENERAL2_START + 0x139) // Ichor: Route 13 hermit's cell rubble broken
+#define FLAG_ICHOR_R14_RUBBLE                   (FLAG_ICHOR_GENERAL2_START + 0x13A) // Ichor: Route 14 gully rubble broken
 #define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
 #define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
 #define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted

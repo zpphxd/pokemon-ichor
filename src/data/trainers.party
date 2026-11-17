@@ -3231,6 +3231,86 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Nemea return teams. */
 
+/* Nemea rebuild teams (tools/ichor/maps/nemea.py). */
+
+=== TRAINER_ICHOR_R14_ANTIKLES ===
+Name: ANTIKLES
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_DORKON ===
+Name: DORKON
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Galenyon
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_TRETOS_LYSANDRA ===
+Name: LYSANDRA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Prosomime
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Lykanax
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Harpelle
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_NEMEA_KLEITOMACHOS ===
+Name: KLEITOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Nemeleon
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Nemea rebuild teams. */
+
 /* Astyra approach teams. */
 
 === TRAINER_ICHOR_R15_TIMON ===
