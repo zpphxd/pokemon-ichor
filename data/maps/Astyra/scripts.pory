@@ -2,7 +2,54 @@ mapscripts Astyra_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         special(Ichor_ReleaseTimeOfDay)
         setflag(FLAG_ICHOR_VISITED_ASTYRA)
+        // The League, L-1: Kerykos reads the Archon's decree the morning after the Stair.
+        if (flag(FLAG_ICHOR_ACT3_COMPLETE) && !flag(FLAG_ICHOR_LEAGUE_DECREE)) {
+            clearflag(FLAG_ICHOR_HIDE_DECREE_CROWD)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_DECREE_CROWD)
+        }
     }
+}
+
+// ---------------------------------------------------------------------------
+// The League (design/LEAGUE.md)
+// ---------------------------------------------------------------------------
+
+// The road to Olympus. Placeholder until Route 29, Thermopylai, Route 30 and the
+// Vale of Tempe are built: then the Ascent connects to Tempe and this goes.
+script Astyra_EventScript_Muleteer {
+    lock
+    faceplayer
+    setspeaker(Ichor_League_Text_NameMuleteer)
+    call(Ichor_League_EventScript_CheckLaurels)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Olympus? I carry pilgrims to the foot of the Ascent.\pBut the guard turns back anyone without all eight Laurels. Saves us both a trip."))
+        release
+        end
+    }
+    msgbox(format("Eight Laurels! You're for the Archon, then.\pThe Tempe road's washed out. I'll take you round by the coast to the foot of the Ascent. Up you get?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("When you're ready. The goat's in no hurry."))
+        release
+        end
+    }
+    msgbox(format("Mind the goat."))
+    closemessage
+    warp(MAP_ASCENT_1F, 42, 27)
+    waitstate
+    release
+}
+
+// L-1: the decree.
+script Astyra_EventScript_Kerykos {
+    lock
+    faceplayer
+    setspeaker(Ichor_League_Text_NameKerykos)
+    msgbox(format("Hear the Archon's decree! Hermes remembers everyone who passes, so listen well.\pAt the new moon, the Archon carries Medon's Knot to Delphoi, and fate will be made safe again."))
+    setspeaker(Ichor_League_Text_NameKerykos)
+    msgbox(format("Until then he sits on Olympus, as the law says, to answer any challenger.\p…That's the decree. Between us? The merchants are hoarding grain and Lakonia's sharpening spears.\pAnd the Pythia's laughing in her temple. I've never heard her laugh."))
+    setflag(FLAG_ICHOR_LEAGUE_DECREE)
+    release
 }
 text Astyra_Text_NamePhaedon { "PHAEDON" }
 text Astyra_Text_NameElpis { "ELPIS" }

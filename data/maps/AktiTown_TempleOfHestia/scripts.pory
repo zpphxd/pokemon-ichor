@@ -251,6 +251,9 @@ script AktiTown_TempleOfHestia_EventScript_Ione {
         if (!flag(FLAG_ICHOR_GOT_TM_FACADE)) {
             goto(AktiTown_TempleOfHestia_EventScript_GiveFacade)
         }
+        if (flag(FLAG_ICHOR_ACT3_COMPLETE)) {
+            goto(AktiTown_TempleOfHestia_EventScript_IoneSentences)
+        }
         setspeaker(AktiTown_TempleOfHestia_Text_NameIone)
         msgbox(format(
             "The trireme sails for the mainland when the winds turn.\p"
@@ -543,3 +546,19 @@ movement AktiTown_TempleOfHestia_Movement_CameraDown5 { walk_down * 5 }
 movement AktiTown_TempleOfHestia_Movement_CameraDown6 { walk_down * 6 }
 movement AktiTown_TempleOfHestia_Movement_CameraDown7 { walk_down * 7 }
 movement AktiTown_TempleOfHestia_Movement_CameraDown8 { walk_down * 8 }
+
+// The League, L-3 (STORY.md §3): after the Stair, the sentences. Phaedon a
+// suppliant at Hestia's hearth, at Ione's own request; Hyperion to Talos's
+// forge; Rhea to her own house. Mercy as a sentence.
+script AktiTown_TempleOfHestia_EventScript_IoneSentences {
+    setspeaker(AktiTown_TempleOfHestia_Text_NameIone)
+    if (!flag(FLAG_ICHOR_SENTENCES_HEARD)) {
+        msgbox(format("The Assembly sent me the sentences. I asked for one of them.\pPhaedon comes here. A suppliant at the hearth. He'll sweep, and cook, and mind his girl.\pSend him to me, I told them. I feed everyone either way."))
+        setspeaker(AktiTown_TempleOfHestia_Text_NameIone)
+        msgbox(format("Hyperion goes to Talos's forge. Talos says a man who can't see still knows heat.\pAnd Rhea goes home. To her own house, and her son's visits.\pNot one of them in chains. Funny, how that feels like the harder sentence."))
+        setflag(FLAG_ICHOR_SENTENCES_HEARD)
+    } else {
+        msgbox(format("Phaedon burns the bread every morning. Elpis eats it anyway.\pThe Archon's waiting on Olympus, they say. Go on. Come back whenever you're cold."))
+    }
+    release
+}

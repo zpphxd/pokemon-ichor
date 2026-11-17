@@ -4,11 +4,36 @@ mapscripts Astyra_Stoa_MapScripts {
         special(Ichor_HoldTimeOfDay)
         if (!flag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE)) {
             setvar(VAR_TEMP_1, 1)
+        } elif (flag(FLAG_ICHOR_ACT3_COMPLETE) && !flag(FLAG_ICHOR_IAPETOS_TRIED)) {
+            setvar(VAR_TEMP_1, 2)
         }
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_1, 1: Astyra_Stoa_EventScript_Assembly
+        VAR_TEMP_1, 2: Astyra_Stoa_EventScript_TrialOfIapetos
     ]
+}
+
+// The League, L-2 (STORY.md §3): the trial of Iapetos. The forger is exiled by
+// the tool he used. Told in the Stoa as it stands; Iapetos's own walker and the
+// ostraka's pile are for the Act III builder to stage (design/LEAGUE.md).
+script Astyra_Stoa_EventScript_TrialOfIapetos {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setspeaker(Ichor_League_Text_NameAlethea)
+    msgbox(format("The Assembly is called again. This time I'm the one bringing evidence.\pThe frozen decree. The archive's tablets. Kleon's. Elpis's.\pAnd every fragment of prophecy {PLAYER} carried home from eight temples."))
+    setspeaker(Ichor_League_Text_NameAlethea)
+    msgbox(format("Lay them side by side and the hand is the same.\pEvery revised fate ends in a little hook. Lykophron's hook.\pHe didn't read the future. He wrote it."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    msgbox(format("The ostraka come out, one by one.\p“LYKOPHRON.” “LYKOPHRON.” “LYKOPHRON.”\pThe vote is unanimous. Ten years' exile. Alethea's own exile is lifted."))
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Ichor_League_Text_NameIapetos)
+    msgbox(format("Exiled by a potsherd. How very fitting.\pOne parting note, Unwoven. Ask your Just Archon about Kalliste."))
+    setspeaker(Ichor_League_Text_NameAlethea)
+    msgbox(format("…He wants you to climb Olympus angry. Don't.\pClimb it honest. Truthfully, that's harder."))
+    setflag(FLAG_ICHOR_IAPETOS_TRIED)
+    releaseall
 }
 text AstyraStoa_Text_Archon { "THE ARCHON" }
 text AstyraStoa_Text_Keeper { "LYKOPHRON" }
