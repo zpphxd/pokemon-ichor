@@ -1060,10 +1060,10 @@
     {
       "id": "LAYOUT_ROUTE9_PARNASSOS_CROSSROADS",
       "name": "Route9_ParnassosCrossroads_Layout",
-      "width": 24,
-      "height": 40,
+      "width": 32,
+      "height": 58,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route9_ParnassosCrossroads/border.bin",
       "blockdata_filepath": "data/layouts/Route9_ParnassosCrossroads/map.bin",
       "layout_version": "emerald"
@@ -1074,7 +1074,7 @@
       "width": 28,
       "height": 32,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Kirrha/border.bin",
       "blockdata_filepath": "data/layouts/Kirrha/map.bin",
       "layout_version": "emerald"
@@ -1085,7 +1085,7 @@
       "width": 28,
       "height": 32,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Aigion/border.bin",
       "blockdata_filepath": "data/layouts/Aigion/map.bin",
       "layout_version": "emerald"
@@ -1093,10 +1093,10 @@
     {
       "id": "LAYOUT_ROUTE11_DRUM_PASS",
       "name": "Route11_DrumPass_Layout",
-      "width": 24,
-      "height": 40,
+      "width": 30,
+      "height": 52,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route11_DrumPass/border.bin",
       "blockdata_filepath": "data/layouts/Route11_DrumPass/map.bin",
       "layout_version": "emerald"
@@ -2188,6 +2188,39 @@
       "secondary_tileset": "gTileset_Oikia",
       "border_filepath": "data/layouts/Lebadeia_HoneyHouse/border.bin",
       "blockdata_filepath": "data/layouts/Lebadeia_HoneyHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KIRRHA_PILGRIMS_HOSTEL",
+      "name": "Kirrha_PilgrimsHostel_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Kirrha_PilgrimsHostel/border.bin",
+      "blockdata_filepath": "data/layouts/Kirrha_PilgrimsHostel/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AIGION_HOMARION",
+      "name": "Aigion_Homarion_Layout",
+      "width": 15,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Aigion_Homarion/border.bin",
+      "blockdata_filepath": "data/layouts/Aigion_Homarion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE9_KORYKIAN_CAVE",
+      "name": "Route9_KorykianCave_Layout",
+      "width": 34,
+      "height": 26,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/Route9_KorykianCave/border.bin",
+      "blockdata_filepath": "data/layouts/Route9_KorykianCave/map.bin",
       "layout_version": "emerald"
     }
   ]

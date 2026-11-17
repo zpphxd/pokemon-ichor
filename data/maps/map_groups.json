@@ -14,7 +14,8 @@
     "gMapGroup_Kythera",
     "gMapGroup_League",
     "gMapGroup_Labyrinth",
-    "gMapGroup_Knossa"
+    "gMapGroup_Knossa",
+    "gMapGroup_Gulf"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -245,5 +246,10 @@
     "KnossaPalace_QueensMegaron",
     "KnossaPalace_ThroneRoom",
     "KnossaPalace_WestMagazines"
+  ],
+  "gMapGroup_Gulf": [
+    "Kirrha_PilgrimsHostel",
+    "Aigion_Homarion",
+    "Route9_KorykianCave"
   ]
 }

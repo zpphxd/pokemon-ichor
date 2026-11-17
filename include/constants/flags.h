@@ -2188,6 +2188,42 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_KATAVOTHRA_BONES (FLAG_ICHOR_GENERAL2_START + 0x10F) // Ichor: Kopais katavothres: among the old bones
 #define FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_SPRING  (FLAG_ICHOR_GENERAL2_START + 0x110) // Ichor: Lebadeia: by the spring of Lethe
 #define FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_TEMENOS (FLAG_ICHOR_GENERAL2_START + 0x111) // Ichor: Lebadeia: in the temenos wall's corner
+// Gulf (gulf.py): moved from +0x100-0x122 to +0x0D0-0x0F2 on merge, clear of Kopais and Nemea
+#define FLAG_ICHOR_AIGION_FISHER_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x0D0) // Ichor: Gulf (gulf.py): AIGION_FISHER_GIFT
+#define FLAG_ICHOR_AIGION_OATH_GIFT             (FLAG_ICHOR_GENERAL2_START + 0x0D1) // Ichor: Gulf (gulf.py): AIGION_OATH_GIFT
+#define FLAG_ICHOR_AIGION_PRIEST_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x0D2) // Ichor: Gulf (gulf.py): AIGION_PRIEST_GIFT
+#define FLAG_ICHOR_ITEM_AIGION                  (FLAG_ICHOR_GENERAL2_START + 0x0D3) // Ichor: Gulf (gulf.py): ITEM_AIGION
+#define FLAG_ICHOR_ITEM_AIGION_HELIKE           (FLAG_ICHOR_GENERAL2_START + 0x0D4) // Ichor: Gulf (gulf.py): ITEM_AIGION_HELIKE
+#define FLAG_ICHOR_ITEM_KIRRHA                  (FLAG_ICHOR_GENERAL2_START + 0x0D5) // Ichor: Gulf (gulf.py): ITEM_KIRRHA
+#define FLAG_ICHOR_ITEM_KIRRHA_ISLET            (FLAG_ICHOR_GENERAL2_START + 0x0D6) // Ichor: Gulf (gulf.py): ITEM_KIRRHA_ISLET
+#define FLAG_ICHOR_ITEM_KORYKIAN_CHAMBER        (FLAG_ICHOR_GENERAL2_START + 0x0D7) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_CHAMBER
+#define FLAG_ICHOR_ITEM_KORYKIAN_GROTTO         (FLAG_ICHOR_GENERAL2_START + 0x0D8) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_GROTTO
+#define FLAG_ICHOR_ITEM_KORYKIAN_HALL           (FLAG_ICHOR_GENERAL2_START + 0x0D9) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_HALL
+#define FLAG_ICHOR_ITEM_KORYKIAN_ISLET          (FLAG_ICHOR_GENERAL2_START + 0x0DA) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_ISLET
+#define FLAG_ICHOR_ITEM_KORYKIAN_SANCTUM        (FLAG_ICHOR_GENERAL2_START + 0x0DB) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_SANCTUM
+#define FLAG_ICHOR_ITEM_R11_FALLS               (FLAG_ICHOR_GENERAL2_START + 0x0DC) // Ichor: Gulf (gulf.py): ITEM_R11_FALLS
+#define FLAG_ICHOR_ITEM_R11_ISLET               (FLAG_ICHOR_GENERAL2_START + 0x0DD) // Ichor: Gulf (gulf.py): ITEM_R11_ISLET
+#define FLAG_ICHOR_ITEM_R9_DAULIS               (FLAG_ICHOR_GENERAL2_START + 0x0DE) // Ichor: Gulf (gulf.py): ITEM_R9_DAULIS
+#define FLAG_ICHOR_ITEM_R9_RAVINE               (FLAG_ICHOR_GENERAL2_START + 0x0DF) // Ichor: Gulf (gulf.py): ITEM_R9_RAVINE
+#define FLAG_ICHOR_KIRRHA_BEE_ASKED             (FLAG_ICHOR_GENERAL2_START + 0x0E0) // Ichor: Gulf (gulf.py): KIRRHA_BEE_ASKED
+#define FLAG_ICHOR_KIRRHA_BEE_FOUND             (FLAG_ICHOR_GENERAL2_START + 0x0E1) // Ichor: Gulf (gulf.py): KIRRHA_BEE_FOUND
+#define FLAG_ICHOR_KIRRHA_BELL_GIFT             (FLAG_ICHOR_GENERAL2_START + 0x0E2) // Ichor: Gulf (gulf.py): KIRRHA_BELL_GIFT
+#define FLAG_ICHOR_KIRRHA_WATER_GIFT            (FLAG_ICHOR_GENERAL2_START + 0x0E3) // Ichor: Gulf (gulf.py): KIRRHA_WATER_GIFT
+#define FLAG_ICHOR_KORYKIAN_THORNWEB_BURNT      (FLAG_ICHOR_GENERAL2_START + 0x0E4) // Ichor: Gulf (gulf.py): KORYKIAN_THORNWEB_BURNT
+#define FLAG_ICHOR_KORYKIAN_WEB_BURNT           (FLAG_ICHOR_GENERAL2_START + 0x0E5) // Ichor: Gulf (gulf.py): KORYKIAN_WEB_BURNT
+#define FLAG_ICHOR_R11_RUBBLE_BROKEN            (FLAG_ICHOR_GENERAL2_START + 0x0E6) // Ichor: Gulf (gulf.py): R11_RUBBLE_BROKEN
+#define FLAG_ICHOR_R9_GREAT_BOULDER             (FLAG_ICHOR_GENERAL2_START + 0x0E7) // Ichor: Gulf (gulf.py): R9_GREAT_BOULDER
+#define FLAG_ICHOR_R9_SCREE_BROKEN              (FLAG_ICHOR_GENERAL2_START + 0x0E8) // Ichor: Gulf (gulf.py): R9_SCREE_BROKEN
+#define FLAG_ICHOR_R9_THICKET_CUT               (FLAG_ICHOR_GENERAL2_START + 0x0E9) // Ichor: Gulf (gulf.py): R9_THICKET_CUT
+#define FLAG_ICHOR_HIDDEN_ITEM_AIGION_CAMP      (FLAG_ICHOR_GENERAL2_START + 0x0EA) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_AIGION_CAMP
+#define FLAG_ICHOR_HIDDEN_ITEM_AIGION_TERRACE   (FLAG_ICHOR_GENERAL2_START + 0x0EB) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_AIGION_TERRACE
+#define FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_HEADLAND  (FLAG_ICHOR_GENERAL2_START + 0x0EC) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KIRRHA_HEADLAND
+#define FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_SHRINE    (FLAG_ICHOR_GENERAL2_START + 0x0ED) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KIRRHA_SHRINE
+#define FLAG_ICHOR_HIDDEN_ITEM_KORYKIAN_ALTAR   (FLAG_ICHOR_GENERAL2_START + 0x0EE) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KORYKIAN_ALTAR
+#define FLAG_ICHOR_HIDDEN_ITEM_KORYKIAN_BAY     (FLAG_ICHOR_GENERAL2_START + 0x0EF) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KORYKIAN_BAY
+#define FLAG_ICHOR_HIDDEN_ITEM_R9_TOMB          (FLAG_ICHOR_GENERAL2_START + 0x0F0) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_R9_TOMB
+#define FLAG_ICHOR_R9_SPRING_GIFT               (FLAG_ICHOR_GENERAL2_START + 0x0F1) // Ichor: Gulf (gulf.py): R9 spring keeper's gift
+#define FLAG_ICHOR_R11_SPRING_GIFT              (FLAG_ICHOR_GENERAL2_START + 0x0F2) // Ichor: Gulf (gulf.py): R11 nymph spring's gift
 #define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
 #define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
 #define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted

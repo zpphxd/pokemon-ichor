@@ -214,7 +214,12 @@
 #define TRAINER_ICHOR_R8_SCHOINIS            291 // Route 8: the reed-cutter at the dike's west landing
 #define TRAINER_ICHOR_KOPAIS_AGAMEDES        292 // the katavothres: a pilgrim walking the drain to Lebadeia
 #define TRAINER_ICHOR_KOPAIS_DIPSAS          293 // the katavothres: a Titanborn mapping the drains
-#define TRAINERS_END_ACT2                   294
+// Gulf: tools/ichor/maps/gulf.py
+#define TRAINER_ICHOR_R9_THEANO                    847
+#define TRAINER_ICHOR_KORYKIAN_TITYROS             848
+#define TRAINER_ICHOR_KORYKIAN_KORYKIA             849
+// End Gulf.
+#define TRAINERS_END_ACT2                   850
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328
