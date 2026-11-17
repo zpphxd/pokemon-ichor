@@ -143,3 +143,112 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Night Slash
 - Quick Attack
 - Taunt
+
+/* Ichor: Kleon beside you on the Stair of Hours (design/phase4/SCRIPT.md III-11B):
+ * his starter's final stage by VAR_STARTER_MON (0 Nebrel: Pylakyon, 1 Kynder: Seismare,
+ * 2 Hipling: Daphnyad), the hoplite cockerel and his mother's Kourodin. */
+
+=== PARTNER_ICHOR_KLEON_STAIR_PYLAKYON ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Pylakyon
+Level: 58
+Ability: Strong Jaw
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Flare Blitz
+- Phantom Force
+- Crunch
+- Protect
+
+Hoplektor
+Level: 57
+Ability: Defiant
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Wide Guard
+- Bulk Up
+
+Kourodin
+Level: 57
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Sacred Sword
+- Heavy Slam
+- Noble Roar
+
+=== PARTNER_ICHOR_KLEON_STAIR_SEISMARE ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Seismare
+Level: 58
+Ability: Torrent
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Wave Crash
+- High Horsepower
+- Aqua Jet
+- Protect
+
+Hoplektor
+Level: 57
+Ability: Defiant
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Wide Guard
+- Bulk Up
+
+Kourodin
+Level: 57
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Sacred Sword
+- Heavy Slam
+- Noble Roar
+
+=== PARTNER_ICHOR_KLEON_STAIR_DAPHNYAD ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Daphnyad
+Level: 58
+Ability: Overgrow
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Energy Ball
+- Dazzling Gleam
+- Synthesis
+
+Hoplektor
+Level: 57
+Ability: Defiant
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Wide Guard
+- Bulk Up
+
+Kourodin
+Level: 57
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Sacred Sword
+- Heavy Slam
+- Noble Roar

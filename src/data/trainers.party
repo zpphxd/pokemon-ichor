@@ -6608,3 +6608,233 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Kolossard
 Level: 49
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* Ichor: the climax (ids 445-459): the Stair of Hours, beat III-11B. Phaedon wears the
+ * Titan Admin class until a KRONOS class and his and Hyperion's portraits are drawn. */
+
+=== TRAINER_ICHOR_PHAEDON_STAIR ===
+Name: PHAEDON
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move / Try To Faint
+
+Kolossard @ Leftovers
+Level: 58
+Ability: Clear Body
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- High Horsepower
+- Heavy Slam
+- Rock Slide
+- Protect
+
+Bouldyphus @ Lum Berry
+Level: 59
+Ability: Sturdy
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Phantom Force
+- Endeavor
+- Block
+
+Panacoil @ Black Sludge
+Level: 60
+Ability: Hospitality
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Sludge Bomb
+- Life Dew
+- Heal Pulse
+
+=== TRAINER_ICHOR_HYPERION_STAIR ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move
+
+Taurivet @ Charcoal
+Level: 57
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Iron Head
+- Rock Slide
+- Shift Gear
+
+Hymnaria
+Level: 58
+Ability: Flash Fire
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Heat Wave
+- Hurricane
+- Mystical Fire
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 59
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Earth Power
+- Stone Edge
+- Heat Crash
+
+=== TRAINER_ICHOR_PHAEDON_STAIR ===
+Difficulty: Easy
+Name: PHAEDON
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move / Try To Faint
+
+Kolossard @ Leftovers
+Level: 55
+Ability: Clear Body
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- High Horsepower
+- Heavy Slam
+- Rock Slide
+- Protect
+
+Bouldyphus @ Lum Berry
+Level: 56
+Ability: Sturdy
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Phantom Force
+- Endeavor
+- Block
+
+Panacoil @ Black Sludge
+Level: 57
+Ability: Hospitality
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Sludge Bomb
+- Life Dew
+- Heal Pulse
+
+=== TRAINER_ICHOR_HYPERION_STAIR ===
+Difficulty: Easy
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move
+
+Taurivet @ Charcoal
+Level: 54
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Iron Head
+- Rock Slide
+- Shift Gear
+
+Hymnaria
+Level: 55
+Ability: Flash Fire
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Heat Wave
+- Hurricane
+- Mystical Fire
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 56
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Earth Power
+- Stone Edge
+- Heat Crash
+
+=== TRAINER_ICHOR_PHAEDON_STAIR ===
+Difficulty: Hard
+Name: PHAEDON
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move / Try To Faint / Smart Switching
+
+Kolossard @ Leftovers
+Level: 58
+Ability: Clear Body
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- High Horsepower
+- Heavy Slam
+- Rock Slide
+- Protect
+
+Bouldyphus @ Lum Berry
+Level: 59
+Ability: Sturdy
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Phantom Force
+- Endeavor
+- Block
+
+Panacoil @ Black Sludge
+Level: 60
+Ability: Hospitality
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Sludge Bomb
+- Life Dew
+- Heal Pulse
+
+=== TRAINER_ICHOR_HYPERION_STAIR ===
+Difficulty: Hard
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move
+
+Taurivet @ Charcoal
+Level: 57
+Ability: Flame Body
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Flare Blitz
+- Iron Head
+- Rock Slide
+- Shift Gear
+
+Hymnaria
+Level: 58
+Ability: Flash Fire
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heat Wave
+- Hurricane
+- Mystical Fire
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 59
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Earth Power
+- Stone Edge
+- Heat Crash
+

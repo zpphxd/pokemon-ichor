@@ -267,6 +267,9 @@
 #define TRAINER_ICHOR_CHALKOS                 374
 #define TRAINER_ICHOR_PELOS                   375
 #define TRAINER_ICHOR_ENKELADOS               376
+// The climax (ids 445-459): the Stair of Hours.
+#define TRAINER_ICHOR_PHAEDON_STAIR           445
+#define TRAINER_ICHOR_HYPERION_STAIR          446
 #define TRAINERS_END_ACT3 499
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's
