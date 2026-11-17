@@ -19,7 +19,7 @@ It is one of the Knossa family of secondaries; see [`TILES_amnisos.md`](TILES_am
 ## How to use it
 
 **Ids.** Each grid lists metatile ids as Porymap shows them, row by row. Each section
-starts on a fixed row of the sheet (road at 0x200, vineyard at 0x2B0, heel at 0x2D0). Structures are placed first-fit in build
+starts on a fixed row of the sheet (road at 0x200, vineyard at 0x2B0, heel at 0x2D0, meadow at 0x318). Structures are placed first-fit in build
 order, so appending a new one never moves an old one. Map builders should place pieces
 by key and name, never by raw id: `tools/ichor/maps/knossa_tiles.py` holds every Knossa
 catalog as a Python dict (`mid('bull_road', 'cliff', 'back', ...)`, `place(...)`, `front(...)`),
@@ -66,7 +66,7 @@ hints:
 | bronze | Bronze and verdigris (Talos's foot, the Kouretes' shields, door fittings), and the marble herm |
 | terra | Kythera's timber and terracotta: boats, the triremes, nets, trellis posts |
 
-**Tile budget.** 421 of 504 tiles (280 metatiles). The door animations copy their
+**Tile budget.** 453 of 504 tiles (304 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -293,6 +293,40 @@ ids                                      walk
 | 0x2C3 | `S` | `G` | `MB_TALL_GRASS` | COVERED | grass |
 | 0x2C4 | `SE` | `G` | `MB_TALL_GRASS` | COVERED | grass |
 | 0x2C5 | `C_dig` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+
+## Meadow
+
+### Tall grass: the herd's pasture, soft-edged
+
+`meadow`, 6 wide by 3 tall. Tall grass (`MB_TALL_GRASS`, the road's encounters) on borrowed grass, as a soft-edged patch: `NW` `N` `NE` / `W` `C` `E` / `SW` `S` `SE` are a patch's rim, where the stems thin out and stop short of the cell's edge; `iNE` `iNW` `iSE` `iSW` are the inside corners of a bend (full grass, a bite missing at that corner); `C`, `C_b` (a barley head or two) and `C_f` (asphodel in the stems) fill the middle. Map builders pick each cell's piece from its neighbours (`tools/ichor/maps/knossa_maps.py`, `Map.meadow`).
+
+```text
+ids                                      walk
+0x318 0x319 0x31A 0x31B 0x31C 0x31D   G G G G G G
+0x320 0x321 0x322 0x323 0x324 0x325   G G G G G G
+0x328 0x329 0x32A 0x32B 0x32C 0x32D   G G G . . .
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x318 | `NW` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x319 | `N` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x31A | `NE` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x31B | `iSE` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x31C | `iSW` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x31D | `C` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x320 | `W` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x321 | `C_b` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x322 | `E` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x323 | `iNE` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x324 | `iNW` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x325 | `C_f` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x328 | `SW` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x329 | `S` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x32A | `SE` | `G` | `MB_TALL_GRASS` | COVERED | grass |
+| 0x32B | (3, 2) | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x32C | (4, 2) | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x32D | (5, 2) | `.` | `MB_NORMAL` | COVERED | grass |
 
 ## The Bronze Heel
 

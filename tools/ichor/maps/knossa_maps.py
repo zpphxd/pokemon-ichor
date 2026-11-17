@@ -136,6 +136,42 @@ class Map(KM.Map):
         for (x, y) in cells:
             self.set(x, y, A.TALL, False)
 
+    def meadow(self, cells, walls_in=True):
+        """Soft-edged tall grass (bull_road's `meadow` kit) over a set of cells: each
+        cell's piece by which neighbours are grass too. Where the patch meets
+        something solid (a wall, a wood, the map's edge) it runs full to it."""
+        cells = set(cells)
+        solid = self.solid.copy()
+
+        def g(x, y):
+            if (x, y) in cells:
+                return True
+            if not self.ok(x, y):
+                return walls_in
+            return walls_in and bool(solid[y, x])
+        for (x, y) in cells:
+            n, s, e, w = g(x, y - 1), g(x, y + 1), g(x + 1, y), g(x - 1, y)
+            v = "N" if not n else ("S" if not s else "")
+            hz = "W" if not w else ("E" if not e else "")
+            name = v + hz
+            if not name:
+                if not g(x + 1, y - 1):
+                    name = "iNE"
+                elif not g(x - 1, y - 1):
+                    name = "iNW"
+                elif not g(x + 1, y + 1):
+                    name = "iSE"
+                elif not g(x - 1, y + 1):
+                    name = "iSW"
+                else:
+                    k = KM._hash(x, y, 77) % 10
+                    name = "C_b" if k == 0 else ("C_f" if k == 1 else "C")
+            elif name in ("N", "S") and not (w or e):
+                name = name + "W"
+            elif name in ("W", "E") and not (n or s):
+                name = "N" + name
+            self.piece("meadow", name, x, y, solid=False)
+
     def grass_mix(self, x0, y0, x1, y1, salt=0, accents=(A.ANEMONE,)):
         """Open ground with aethos's grass and a few clustered accents (STYLE §4.2):
         only cells still plain grass change."""

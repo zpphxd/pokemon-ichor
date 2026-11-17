@@ -230,6 +230,11 @@ script KnossaBullRoad_EventScript_LabrysDoor {
     releaseall
 }
 
+script KnossaBullRoad_EventScript_Shrine {
+    msgbox(format("A wayside shrine: a bronze tripod between two cypresses.\p"
+                  "Someone has hung a garland of thyme on it, and left a honeycomb."), MSGBOX_SIGN)
+}
+
 script KnossaBullRoad_EventScript_SouthSign {
     msgbox(format("The Palace of Minos. The Mistress's house. Walk softly."), MSGBOX_SIGN)
 }

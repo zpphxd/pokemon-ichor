@@ -19,6 +19,9 @@ Built by `tools/ichor/maps/knossa_amnisos.py` on `gTileset_Amnisos` (aethos prim
 | 1 | `design/phase4/img/maps/knossa_amnisos_pass1_1x.png` | Layout: headland, quay, jetty, mole with two Titan triremes, beach; Asclepeion and Agora on the quay; five houses; the town wall and the south gap. Critique: an 18-cell straight street, flat open grass, no height. |
 | 2 | `knossa_amnisos_pass2_1x.png`, `_views.png` | A paved harbor plaza before the Asclepeion and Agora with a herm at its corner; flower beds by the doors and walls; the headland raised a level (elevation 4, the cave stair the join); boulders and anemones break the south lawn. |
 | 3 | `knossa_amnisos_pass3.png`, `_1x`, `_events`, `_views` | Clear the mole's single-file walk (the bollards moved off it, the sailor off its root) so the veteran can be reached; final audit pass. |
+| 4 | `knossa_amnisos_pass4_1x.png`, `_views` | Design round 2 (director: the south third read as a lawn): the upper town rebuilt as stepped clusters behind the street (Aithon's, Euanthe's and Kydon's houses at different heights), lanes winding round their courtyard walls, a paved fountain square with a spout, a wall of hives and skeps (the brief's landmark), a terrace brow with steps in the east gardens, the headland rising as a second cliff tier on the west. |
+| 5 | `knossa_amnisos_pass5_1x.png`, `_views` | The town wall follows the contour in six stepped runs instead of one ruler line; the gaps between them closed. |
+| 6 | `knossa_amnisos_pass6.png`, `_1x`, `_events`, `_views` | The olive country beyond the gate as staggered clumps with cypresses, never rows; the road jogs through it to the Bull Road's seam. Final. |
 
 At 15×10 every screen holds one landmark: the jetty and harbor shrine, the Titan ships on the mole, the cave mouth, the plaza's two civic fronts, the beach tavern and boats, the south gap with its sign.
 

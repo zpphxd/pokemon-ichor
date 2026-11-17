@@ -81,7 +81,7 @@
       "local_id": "LOCALID_AMNISOS_GIRL",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_F",
       "x": 18,
-      "y": 20,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -95,7 +95,7 @@
       "local_id": "LOCALID_AMNISOS_BOMBOS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MELIBEE)",
       "x": 19,
-      "y": 20,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -137,7 +137,7 @@
       "local_id": "LOCALID_AMNISOS_KID",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
       "x": 33,
-      "y": 18,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
@@ -190,8 +190,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 16,
-      "y": 17,
+      "x": 15,
+      "y": 18,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -232,22 +232,22 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 11,
-      "y": 19,
+      "x": 8,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_KNOSSA_AMNISOS_XENIA_HOUSE",
       "dest_warp_id": "0"
     },
     {
-      "x": 17,
-      "y": 19,
+      "x": 16,
+      "y": 20,
       "elevation": 0,
       "dest_map": "MAP_KNOSSA_AMNISOS_LEAPERS_HOUSE",
       "dest_warp_id": "0"
     },
     {
-      "x": 24,
-      "y": 19,
+      "x": 26,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_KNOSSA_AMNISOS_KYDONS_HOUSE",
       "dest_warp_id": "0"
