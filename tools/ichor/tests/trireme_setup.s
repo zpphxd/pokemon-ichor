@@ -74,7 +74,8 @@ TriremeTest_LastLeg:
 	setflag FLAG_ICHOR_ARRIVED_AEGINA
 	setflag FLAG_ICHOR_VISITED_AEGINA
 	setflag FLAG_ICHOR_AEGINA_NIGHT
-	warp MAP_TRIREME_EUPLOIA_DECK, 0
+	@ The inn's warp: straight to the starboard rail.
+	warp MAP_TRIREME_EUPLOIA_DECK, 8, 4
 	waitstate
 	releaseall
 	end
