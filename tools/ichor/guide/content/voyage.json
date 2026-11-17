@@ -2,7 +2,10 @@
  "areas": [
   {
    "id": "trireme-euploia",
-   "maps": ["TriremeEuploia_Deck", "TriremeEuploia_Hold"],
+   "maps": [
+    "TriremeEuploia_Deck",
+    "TriremeEuploia_Hold"
+   ],
    "title": "The Trireme Euploia",
    "kind": "dungeon",
    "blurb": "Captain Nausikles's trireme, carrying you, Kleon and Alethea from Akti across the open sea toward Emporion.",
@@ -13,62 +16,150 @@
     "That night the Euploia puts in at Aigina instead of making Emporion. You'll come back on deck the next morning for the last short leg; just watch the mainland come up ahead, and the ship carries you into Emporion's harbor."
    ],
    "key_npcs": [
-    {"map": "TriremeEuploia_Deck", "script": "TriremeDeck_EventScript_Nausikles", "label": "Nausikles", "note": "Take the steering oar to start the halcyon calm, the event that moves the story on. After the crossing he runs the ferry: talk to him on deck to make port."},
-    {"map": "TriremeEuploia_Deck", "script": "TriremeDeck_EventScript_Alethea", "label": "Alethea", "note": "Optional practice battle against her Spalunk (Lv 12). You can't black out; if you lose, your party is healed. One battle only."}
+    {
+     "map": "TriremeEuploia_Deck",
+     "script": "TriremeDeck_EventScript_Nausikles",
+     "label": "Nausikles",
+     "note": "Take the steering oar to start the halcyon calm, the event that moves the story on. After the crossing he runs the ferry: talk to him on deck to make port."
+    },
+    {
+     "map": "TriremeEuploia_Deck",
+     "script": "TriremeDeck_EventScript_Alethea",
+     "label": "Alethea",
+     "note": "Optional practice battle against her Spalunk (Lv 12). You can't black out; if you lose, your party is healed. One battle only."
+    }
    ],
    "shops": [],
    "statics": [
-    {"species": "SPECIES_HARPECK", "level": 12, "where": "The bow of the Euploia", "condition": "The first snatcher at the halcyon nest. You can't run, and losing doesn't send you home."},
-    {"species": "SPECIES_HARPECK", "level": 13, "where": "The bow of the Euploia", "condition": "The second snatcher, straight after the first. Same rules."},
-    {"species": "SPECIES_HALCYLING", "level": 11, "where": "The bow of the Euploia", "condition": "Gift. After the nest hatches, one chick hops onto your hat. Answer YES to keep it. It knows Water Gun, Wing Attack, Quick Attack and Mist. Say no and it flies away for good."}
+    {
+     "species": "SPECIES_HARPECK",
+     "level": 12,
+     "where": "The bow of the Euploia",
+     "condition": "The first snatcher at the halcyon nest. You can't run, and losing doesn't send you home."
+    },
+    {
+     "species": "SPECIES_HARPECK",
+     "level": 13,
+     "where": "The bow of the Euploia",
+     "condition": "The second snatcher, straight after the first. Same rules."
+    },
+    {
+     "species": "SPECIES_HALCYLING",
+     "level": 11,
+     "where": "The bow of the Euploia",
+     "condition": "Gift. After the nest hatches, one chick hops onto your hat. Answer YES to keep it. It knows Water Gun, Wing Attack, Quick Attack and Mist. Say no and it flies away for good."
+    }
    ],
    "tips": [
-    {"kind": "Hot Tip", "text": "Say YES to the halcyon chick. Halcyling is a Water and Flying type, and it's the only one you'll be offered on this crossing."},
-    {"kind": "Pro Tip", "text": "Battle Phormion and Lykon before you take the steering oar. Once the calm starts, the story keeps you busy until the ship reaches Aigina."},
-    {"kind": "Lore", "text": "The kingfisher's 'halcyon days' are the calm weeks when Aeolus holds the winds so the birds can hatch their eggs on the sea. Nausikles knows the story. He just didn't expect it out here."}
+    {
+     "kind": "Hot Tip",
+     "text": "Say YES to the halcyon chick. Halcyling is a Water and Flying type, and it's the only one you'll be offered on this crossing."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Battle Phormion and Lykon before you take the steering oar. Once the calm starts, the story keeps you busy until the ship reaches Aigina."
+    },
+    {
+     "kind": "Lore",
+     "text": "The kingfisher's 'halcyon days' are the calm weeks when Aeolus holds the winds so the birds can hatch their eggs on the sea. Nausikles knows the story. He just didn't expect it out here."
+    }
    ],
    "puzzles": [],
    "spoilers": [
-    {"title": "The ship with no lamps", "text": "On the night leg a long dark trireme slides past with no lights and muffled oars. For a moment you can see a sickle on its furled sail. The tide runs the wrong way too, for the third night that month."},
-    {"title": "Soon", "text": "A sailor whose cousin is back from Delphoi says the Pythia now answers every question with one word: soon."}
+    {
+     "title": "The ship with no lamps",
+     "text": "On the night leg a long dark trireme slides past with no lights and muffled oars. For a moment you can see a sickle on its furled sail. The tide runs the wrong way too, for the third night that month."
+    },
+    {
+     "title": "Soon",
+     "text": "A sailor whose cousin is back from Delphoi says the Pythia now answers every question with one word: soon."
+    }
    ],
    "hierophant": null
   },
   {
    "id": "aegina-town",
-   "maps": ["AeginaTown", "AeginaTown_Inn", "AeginaTown_Mint", "AeginaTown_AiakidesHouse"],
+   "maps": [
+    "AeginaTown",
+    "AeginaTown_Inn",
+    "AeginaTown_Mint",
+    "AeginaTown_AiakidesHouse"
+   ],
    "title": "Aigina Town",
    "kind": "town",
    "blurb": "An island harbor halfway to everywhere, where the first coins were struck and the Euploia stops for the night.",
    "walkthrough": [
     "You step off the gangplank after dark. Kleon is thrilled to be standing on land, Alethea heads for the mint, and Nausikles tells you the inn is paid for. It stays night here for as long as you're in town.",
     "Before you go to bed, look around. The road north to Aphaia's temple is shut and guarded, so the town is all you can explore tonight. Pheidon the moneyer at the mint will trade, and old Aiakides wants to see an Ergant.",
-    "When you're done, go into the inn and tell Endeis you're ready for bed. Kleon and Alethea are waiting by the fire. After the evening's talk your party is healed, and you wake on the Euploia's deck for the last leg to Emporion."
+    "When you're done, go into the inn and tell Endeis you're ready for bed. Kleon and Alethea are waiting by the fire. After the evening's talk your party is healed, and you wake at the Euploia's starboard rail beside Alethea, with the coast in view, for the last leg to Emporion."
    ],
    "key_npcs": [
-    {"map": "AeginaTown_Inn", "script": "AeginaTown_Inn_EventScript_Endeis", "label": "Endeis (innkeeper)", "note": "On the voyage night, answer YES to 'Ready for bed?' to play the night scene, heal your party and sail on. On any later visit she heals your party."},
-    {"map": "AeginaTown_Mint", "script": "AeginaTown_Mint_EventScript_Pheidon", "label": "Pheidon (moneyer)", "note": "In-game trade: your Karkipool for his Chelonet, nicknamed STATER. It holds an Oran Berry. One trade only."},
-    {"map": "AeginaTown_AiakidesHouse", "script": "AeginaTown_AiakidesHouse_EventScript_Aiakides", "label": "Aiakides", "note": "Bring an Ergant anywhere in your party and he gives you a Black Belt. Once only."},
-    {"map": "AeginaTown", "script": "AeginaTown_EventScript_Nausikles", "label": "Nausikles", "note": "On the voyage night he just sends you to the inn."},
-    {"map": "AeginaTown", "script": "AeginaTown_EventScript_Gatekeeper", "label": "Gatekeeper", "note": "Keeps the Aphaia Road gate shut. It opens in Act II, when Nausikles adds Aigina to his ferry."}
+    {
+     "map": "AeginaTown_Inn",
+     "script": "AeginaTown_Inn_EventScript_Endeis",
+     "label": "Endeis (innkeeper)",
+     "note": "On the voyage night, answer YES to 'Ready for bed?' to play the night scene, heal your party and sail on. On any later visit she heals your party."
+    },
+    {
+     "map": "AeginaTown_Mint",
+     "script": "AeginaTown_Mint_EventScript_Pheidon",
+     "label": "Pheidon (moneyer)",
+     "note": "In-game trade: your Karkipool for his Chelonet, nicknamed STATER. It holds an Oran Berry. One trade only."
+    },
+    {
+     "map": "AeginaTown_AiakidesHouse",
+     "script": "AeginaTown_AiakidesHouse_EventScript_Aiakides",
+     "label": "Aiakides",
+     "note": "Bring an Ergant anywhere in your party and he gives you a Black Belt. Once only."
+    },
+    {
+     "map": "AeginaTown",
+     "script": "AeginaTown_EventScript_Nausikles",
+     "label": "Nausikles",
+     "note": "On the voyage night he just sends you to the inn."
+    },
+    {
+     "map": "AeginaTown",
+     "script": "AeginaTown_EventScript_Gatekeeper",
+     "label": "Gatekeeper",
+     "note": "Keeps the Aphaia Road gate shut. It opens in Act II, when Nausikles adds Aigina to his ferry."
+    }
    ],
    "shops": [],
    "statics": [],
    "tips": [
-    {"kind": "Hot Tip", "text": "Do your Aigina errands before you talk to Endeis. Once you go to bed the ship sails at first light, and the Euploia's ferry doesn't stop at Aigina again until Act II."},
-    {"kind": "Pro Tip", "text": "Ergant live on Route 1 and Kronion Hill back on Kalliste. If one is already in your party or Pithos, put it in your party and the Black Belt is yours tonight."},
-    {"kind": "Pro Tip", "text": "Karkipool turn up in the water around Akti and Route 1. Trade one to Pheidon and you get a Chelonet, which Euphronios the vase-painter in Emporion wants to paint."},
-    {"kind": "Lore", "text": "Aigina's coins carry a sea turtle, and its people say their ancestors were ants: King Aiakos asked Zeus for as many people as there were ants on an oak, and woke to the Myrmidons. That's why every Ergant in town is called Myrmidon."}
+    {
+     "kind": "Hot Tip",
+     "text": "Do your Aigina errands before you talk to Endeis. Once you go to bed the ship sails at first light, and the Euploia's ferry doesn't stop at Aigina again until Act II."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Ergant live on Route 1 and Kronion Hill back on Kalliste. If one is already in your party or Pithos, put it in your party and the Black Belt is yours tonight."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Karkipool turn up in the water around Akti and Route 1. Trade one to Pheidon and you get a Chelonet, which Euphronios the vase-painter in Emporion wants to paint."
+    },
+    {
+     "kind": "Lore",
+     "text": "Aigina's coins carry a sea turtle, and its people say their ancestors were ants: King Aiakos asked Zeus for as many people as there were ants on an oak, and woke to the Myrmidons. That's why every Ergant in town is called Myrmidon."
+    }
    ],
    "puzzles": [],
    "spoilers": [
-    {"title": "Kleon's prophecy", "text": "By the fire, Kleon admits the Oracle called him 'young and glorious' as a child. Everyone has watched him ever since, and when he loses they look at him 'like I'm already gone'. Alethea vows to find out the real story before it happens to him."}
+    {
+     "title": "Kleon's prophecy",
+     "text": "By the fire, Kleon admits the Oracle called him 'young and glorious' as a child. Everyone has watched him ever since, and when he loses they look at him 'like I'm already gone'. Alethea vows to find out the real story before it happens to him."
+    }
    ],
    "hierophant": null
   },
   {
    "id": "emporion-harbor",
-   "maps": ["EmporionHarbor", "EmporionCity_HiringHall"],
+   "maps": [
+    "EmporionHarbor",
+    "EmporionCity_HiringHall"
+   ],
    "title": "Emporion Harbor",
    "kind": "town",
    "blurb": "Emporion's busy quay and shipsheds, where every ship in the sea ties up and the rites of the gods are first explained.",
@@ -79,33 +170,103 @@
     "Walk north off the quay into Emporion City."
    ],
    "key_npcs": [
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_QuayHerm", "label": "Quay herm", "note": "Kerykos's prayer tutorial happens here. Afterward it's an altar of Hermes: pray, make offerings, check Favor."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_Planter", "label": "Planter dig spot", "note": "Alethea's tutorial dig. A fixed find: a sherd of the Arachne amphora."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_DigShipsheds", "label": "Shipsheds dig spot", "note": "A daily dig spot. Needs Alethea's Trowel. Can turn up more Arachne amphora sherds."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_PoseidonAltar", "label": "Altar of Poseidon", "note": "Isthmian Poseidon's altar at the root of the mole: pray or make offerings."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_Alethea", "label": "Alethea", "note": "If you've lost Alethea's Trowel, she waits on the quay and gives you another."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_Glykera", "label": "Glykera (fishwife)", "note": "Trade her one Olive Oil for her fan, which is really Daedalus's page I."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_Halitherses", "label": "Halitherses (augur)", "note": "Meet him once, then come back each day for an omen: a swarm, the weather, a lucky number, a wandering visitor, or Hermes's blessing (YES to accept)."},
-    {"map": "EmporionHarbor", "script": "EmporionHarbor_EventScript_Nausikles", "label": "Nausikles", "note": "The ferry. From here it sails to Akti."},
-    {"map": "EmporionCity_HiringHall", "script": "EmporionCity_HiringHall_EventScript_CrewBoss", "label": "Crew boss", "note": "Optional battle. Beat him and he gives you a Rocky Helmet. Once only."}
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_QuayHerm",
+     "label": "Quay herm",
+     "note": "Kerykos's prayer tutorial happens here. Afterward it's an altar of Hermes: pray, make offerings, check Favor."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_Planter",
+     "label": "Planter dig spot",
+     "note": "Alethea's tutorial dig. A fixed find: a sherd of the Arachne amphora."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_DigShipsheds",
+     "label": "Shipsheds dig spot",
+     "note": "A daily dig spot. Needs Alethea's Trowel. Can turn up more Arachne amphora sherds."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_PoseidonAltar",
+     "label": "Altar of Poseidon",
+     "note": "Isthmian Poseidon's altar at the root of the mole: pray or make offerings."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_Alethea",
+     "label": "Alethea",
+     "note": "If you've lost Alethea's Trowel, she waits on the quay and gives you another."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_Glykera",
+     "label": "Glykera (fishwife)",
+     "note": "Trade her one Olive Oil for her fan, which is really Daedalus's page I."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_Halitherses",
+     "label": "Halitherses (augur)",
+     "note": "Meet him once, then come back each day for an omen: a swarm, the weather, a lucky number, a wandering visitor, or Hermes's blessing (YES to accept)."
+    },
+    {
+     "map": "EmporionHarbor",
+     "script": "EmporionHarbor_EventScript_Nausikles",
+     "label": "Nausikles",
+     "note": "The ferry. From here it sails to Akti."
+    },
+    {
+     "map": "EmporionCity_HiringHall",
+     "script": "EmporionCity_HiringHall_EventScript_CrewBoss",
+     "label": "Crew boss",
+     "note": "Optional battle. Beat him and he gives you a Rocky Helmet. Once only."
+    }
    ],
    "shops": [],
    "statics": [],
    "tips": [
-    {"kind": "Hot Tip", "text": "Hold on to Kerykos's Olive Oil. One flask buys Daedalus's first page from Glykera, and the great herm in the city takes another. The herms inside the temple use the temple's own free oil."},
-    {"kind": "Pro Tip", "text": "Visit Halitherses every day. When he says a jar in the Agora barked at a priest, go to the jar with the paw-print by the stoa for a Pithound."},
-    {"kind": "Pro Tip", "text": "Hermes's blessing from an omen makes Agora prices 20% lower, raises what you get for selling by 20%, and adds 20% to trainer prize money while it lasts."},
-    {"kind": "Lore", "text": "The pine crown hanging by Poseidon's altar is the prize of the Isthmian Games. Winners there were crowned with pine, not laurel."}
+    {
+     "kind": "Hot Tip",
+     "text": "Hold on to Kerykos's Olive Oil. One flask buys Daedalus's first page from Glykera, and the great herm in the city takes another. The herms inside the temple use the temple's own free oil."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Visit Halitherses every day. When he says a jar in the Agora barked at a priest, go to the jar with the paw-print by the stoa for a Pithound."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Hermes's blessing from an omen makes Agora prices 20% lower, raises what you get for selling by 20%, and adds 20% to trainer prize money while it lasts."
+    },
+    {
+     "kind": "Lore",
+     "text": "The pine crown hanging by Poseidon's altar is the prize of the Isthmian Games. Winners there were crowned with pine, not laurel."
+    }
    ],
    "puzzles": [],
    "spoilers": [
-    {"title": "The hiring hall", "text": "The crew boss is Titanborn. His crates are full of shovels and identical bronze helmets, one has a small sickle chalked on it, and he says 'May your thread never be cut.' Half the quay has gone digging for a big man who shouts and pays in silver. After Act I the hall stands empty, and the open ledger reads: ELEUSA. FORTY LAMPS. ALL PAID."}
+    {
+     "title": "The hiring hall",
+     "text": "The crew boss is Titanborn. His crates are full of shovels and identical bronze helmets, one has a small sickle chalked on it, and he says 'May your thread never be cut.' Half the quay has gone digging for a big man who shouts and pays in silver. After Act I the hall stands empty, and the open ledger reads: ELEUSA. FORTY LAMPS. ALL PAID."
+    }
    ],
    "hierophant": null
   },
   {
    "id": "emporion-city",
-   "maps": ["EmporionCity", "EmporionCity_Asclepeion", "EmporionCity_Deigma", "EmporionCity_Hephaisteion", "EmporionCity_Tavern", "EmporionCity_PhiloxenosHouse", "EmporionCity_WidowsHouse", "EmporionCity_RunnersHouse", "EmporionCity_PottersWorkshop"],
+   "maps": [
+    "EmporionCity",
+    "EmporionCity_Asclepeion",
+    "EmporionCity_Deigma",
+    "EmporionCity_Hephaisteion",
+    "EmporionCity_Tavern",
+    "EmporionCity_PhiloxenosHouse",
+    "EmporionCity_WidowsHouse",
+    "EmporionCity_RunnersHouse",
+    "EmporionCity_PottersWorkshop"
+   ],
    "title": "Emporion City",
    "kind": "town",
    "blurb": "The harbor of the whole wide world: a crowded Agora, a smith's temple, a tavern full of gamblers, and the Temple of Hermes on its terrace.",
@@ -117,62 +278,280 @@
     "With the Herald Laurel in hand, go to the Isthmus Gate in the north-west corner. Without it, the hoplites turn you back. Kleon is waiting in the gateway and challenges you to a proper battle. Win or lose, the story carries on, and then the hoplites let you through. North of the gate is Route 4, the Isthmus road. The western Nemea Gate stays shut for now."
    ],
    "key_npcs": [
-    {"map": "EmporionCity_Asclepeion", "script": "EmporionCity_Asclepeion_EventScript_Healer", "label": "Healer", "note": "Heals your party. Emporion's Asclepeion is also where you respawn after a blackout."},
-    {"map": "EmporionCity_Asclepeion", "script": "EmporionCity_Asclepeion_EventScript_Pithos", "label": "The Pithos of Emporion", "note": "Store Pokémon and your stored things."},
-    {"map": "EmporionCity_Hephaisteion", "script": "EmporionCity_Hephaisteion_EventScript_Kedalion", "label": "Kedalion (smith)", "note": "Have Charcoal in your Bag and give him a sliver. He relights the forge and gives you the Bronze Hammer relic, and Hephaestus's Favor rises by 5."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_GeneralStallkeeper", "label": "General stall", "note": "Poké Balls and medicine. More stock after the Herald Laurel."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_OfferingsStallkeeper", "label": "Offerings stall", "note": "Olive Oil, Barley Cake, Wine and Frankincense for the gods' altars."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_ScrollStallkeeper", "label": "Scroll stall", "note": "Sells five TMs."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_Kydon", "label": "Kydon (honey-seller)", "note": "Sells Honey, the offering Hermes loves most."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_Pasion", "label": "Pasion (moneychanger)", "note": "Buys Bronze Obols, Silver Owls and Gold Staters for 20% more than usual."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_Sykeas", "label": "Sykeas (fig-seller)", "note": "Deal with the snatcher on his awning, by battle or by catching it, and he gives you 3 Figy Berries and a Pretty Feather."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_MarkedPithos", "label": "Jar with the paw-print", "note": "On days when Halitherses's omen names it, a Pithound (Lv 16) is hiding inside. Beat it or catch it and it's gone until the omen comes round again."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_Pithos", "label": "Stoa jar", "note": "Each check has a 1 in 4 chance of a wild Pithound (Lv 14 to 16)."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_GreatHerm", "label": "Great herm", "note": "Anoint it with Olive Oil. Hermes remembers you passed, and his Favor rises by 1."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_DigHephaisteion", "label": "Dig spot by the Hephaisteion", "note": "A daily dig spot. Needs Alethea's Trowel."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_NumberNine", "label": "Number Nine", "note": "A wooden statue 'by Daedalus', roped to its plinth. Untie it if you dare."},
-    {"map": "EmporionCity", "script": "EmporionCity_EventScript_IsthmusGateX8", "label": "Isthmus Gate", "note": "Shut until you have the Herald Laurel. Then Kleon's second battle starts here, and afterward the way to Route 4 opens."},
-    {"map": "EmporionCity_Deigma", "script": "EmporionCity_Deigma_EventScript_Thaletas", "label": "Thaletas", "note": "In-game trade: your Onotis for his Narkeray, nicknamed SOCRATES. It holds a Shell Bell."},
-    {"map": "EmporionCity_Tavern", "script": "EmporionCity_Tavern_EventScript_Myrtale", "label": "Myrtale (knucklebones champion)", "note": "Beat her at knucklebones for TM Fling. You can play her again whenever you like."},
-    {"map": "EmporionCity_Tavern", "script": "EmporionCity_Tavern_EventScript_Strepsiades", "label": "Strepsiades", "note": "A cautious knucklebones player. Your first win earns 2 Olive Oil."},
-    {"map": "EmporionCity_Tavern", "script": "EmporionCity_Tavern_EventScript_Stratyllis", "label": "Stratyllis", "note": "A bold knucklebones player. Your first win earns a Wine."},
-    {"map": "EmporionCity_PhiloxenosHouse", "script": "EmporionCity_PhiloxenosHouse_EventScript_Philoxenos", "label": "Philoxenos (host)", "note": "Feeds you, which heals your party, and offers his guest bed to rest. Once you hold the Herald Laurel, tell him the story for a Wine (and again after the Harvest Laurel)."},
-    {"map": "EmporionCity_WidowsHouse", "script": "EmporionCity_WidowsHouse_EventScript_Penelopeia", "label": "Penelopeia", "note": "Gives you her husband's Sea Incense. Once only."},
-    {"map": "EmporionCity_RunnersHouse", "script": "EmporionCity_RunnersHouse_EventScript_Dromokleia", "label": "Dromokleia (chief runner)", "note": "Gives you a Quick Claw on your first visit. After Act I, her runners carry a letter home to your mother."},
-    {"map": "EmporionCity_PottersWorkshop", "script": "EmporionCity_PottersWorkshop_EventScript_Euphronios", "label": "Euphronios (vase-painter)", "note": "Show him a Harpeck for 2 Super Potions, then a Chelonet for 3 Great Balls, then a Stachyss (from Eleusa) for a Star Piece. One at a time, in that order."}
+    {
+     "map": "EmporionCity_Asclepeion",
+     "script": "EmporionCity_Asclepeion_EventScript_Healer",
+     "label": "Healer",
+     "note": "Heals your party. Emporion's Asclepeion is also where you respawn after a blackout."
+    },
+    {
+     "map": "EmporionCity_Asclepeion",
+     "script": "EmporionCity_Asclepeion_EventScript_Pithos",
+     "label": "The Pithos of Emporion",
+     "note": "The great storage jar. 'Store & move Pokémon' opens your jars (the first time, it explains how they work); 'Your things' opens your stored items."
+    },
+    {
+     "map": "EmporionCity_Hephaisteion",
+     "script": "EmporionCity_Hephaisteion_EventScript_Kedalion",
+     "label": "Kedalion (smith)",
+     "note": "Have Charcoal in your Bag and give him a sliver. He relights the forge and gives you the Bronze Hammer relic, and Hephaestus's Favor rises by 5."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_GeneralStallkeeper",
+     "label": "General stall",
+     "note": "Poké Balls and medicine. More stock after the Herald Laurel."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_OfferingsStallkeeper",
+     "label": "Offerings stall",
+     "note": "Olive Oil, Barley Cake, Wine and Frankincense for the gods' altars."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_ScrollStallkeeper",
+     "label": "Scroll stall",
+     "note": "Sells five TMs."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_Kydon",
+     "label": "Kydon (honey-seller)",
+     "note": "Sells Honey, the offering Hermes loves most."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_Pasion",
+     "label": "Pasion (moneychanger)",
+     "note": "Buys Bronze Obols, Silver Owls and Gold Staters for 20% more than usual."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_Sykeas",
+     "label": "Sykeas (fig-seller)",
+     "note": "Deal with the snatcher on his awning, by battle or by catching it, and he gives you 3 Figy Berries and a Pretty Feather."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_MarkedPithos",
+     "label": "Jar with the paw-print",
+     "note": "On days when Halitherses's omen names it, a Pithound (Lv 16) is hiding inside. Beat it or catch it and it's gone until the omen comes round again."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_Pithos",
+     "label": "Stoa jar",
+     "note": "Each check has a 1 in 4 chance of a wild Pithound (Lv 14 to 16)."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_GreatHerm",
+     "label": "Great herm",
+     "note": "Anoint it with Olive Oil. Hermes remembers you passed, and his Favor rises by 1."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_DigHephaisteion",
+     "label": "Dig spot by the Hephaisteion",
+     "note": "A daily dig spot. Needs Alethea's Trowel."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_NumberNine",
+     "label": "Number Nine",
+     "note": "A wooden statue 'by Daedalus', roped to its plinth. Untie it if you dare."
+    },
+    {
+     "map": "EmporionCity",
+     "script": "EmporionCity_EventScript_IsthmusGateX8",
+     "label": "Isthmus Gate",
+     "note": "Shut until you have the Herald Laurel. Then Kleon's second battle starts here, and afterward the way to Route 4 opens."
+    },
+    {
+     "map": "EmporionCity_Deigma",
+     "script": "EmporionCity_Deigma_EventScript_Thaletas",
+     "label": "Thaletas",
+     "note": "In-game trade: your Onotis for his Narkeray, nicknamed SOCRATES. It holds a Shell Bell."
+    },
+    {
+     "map": "EmporionCity_Tavern",
+     "script": "EmporionCity_Tavern_EventScript_Myrtale",
+     "label": "Myrtale (knucklebones champion)",
+     "note": "Beat her at knucklebones for TM Fling. You can play her again whenever you like."
+    },
+    {
+     "map": "EmporionCity_Tavern",
+     "script": "EmporionCity_Tavern_EventScript_Strepsiades",
+     "label": "Strepsiades",
+     "note": "A cautious knucklebones player. Your first win earns 2 Olive Oil."
+    },
+    {
+     "map": "EmporionCity_Tavern",
+     "script": "EmporionCity_Tavern_EventScript_Stratyllis",
+     "label": "Stratyllis",
+     "note": "A bold knucklebones player. Your first win earns a Wine."
+    },
+    {
+     "map": "EmporionCity_PhiloxenosHouse",
+     "script": "EmporionCity_PhiloxenosHouse_EventScript_Philoxenos",
+     "label": "Philoxenos (host)",
+     "note": "Feeds you, which heals your party, and offers his guest bed to rest. Once you hold the Herald Laurel, tell him the story for a Wine (and again after the Harvest Laurel)."
+    },
+    {
+     "map": "EmporionCity_WidowsHouse",
+     "script": "EmporionCity_WidowsHouse_EventScript_Penelopeia",
+     "label": "Penelopeia",
+     "note": "Gives you her husband's Sea Incense. Once only."
+    },
+    {
+     "map": "EmporionCity_RunnersHouse",
+     "script": "EmporionCity_RunnersHouse_EventScript_Dromokleia",
+     "label": "Dromokleia (chief runner)",
+     "note": "Gives you a Quick Claw on your first visit. After Act I, her runners carry a letter home to your mother."
+    },
+    {
+     "map": "EmporionCity_PottersWorkshop",
+     "script": "EmporionCity_PottersWorkshop_EventScript_Euphronios",
+     "label": "Euphronios (vase-painter)",
+     "note": "Show him a Harpeck for 2 Super Potions, then a Chelonet for 3 Theseus Balls, then a Stachyss (from Eleusa) for a Star Piece. One at a time, in that order."
+    }
    ],
    "shops": [
-    {"where": "Emporion Agora, general stall", "when": "before the Herald Laurel", "items": ["ITEM_POKE_BALL", "ITEM_POTION", "ITEM_SUPER_POTION", "ITEM_ANTIDOTE", "ITEM_PARALYZE_HEAL", "ITEM_AWAKENING", "ITEM_BURN_HEAL", "ITEM_REPEL", "ITEM_ESCAPE_ROPE"]},
-    {"where": "Emporion Agora, general stall", "when": "after the Herald Laurel", "items": ["ITEM_POKE_BALL", "ITEM_GREAT_BALL", "ITEM_POTION", "ITEM_SUPER_POTION", "ITEM_ANTIDOTE", "ITEM_PARALYZE_HEAL", "ITEM_AWAKENING", "ITEM_BURN_HEAL", "ITEM_ICE_HEAL", "ITEM_REPEL", "ITEM_SUPER_REPEL", "ITEM_ESCAPE_ROPE"]},
-    {"where": "Emporion Agora, offerings stall", "when": "always", "items": ["ITEM_OLIVE_OIL", "ITEM_BARLEY_CAKE", "ITEM_WINE", "ITEM_FRANKINCENSE"]},
-    {"where": "Emporion Agora, scroll stall", "when": "always", "items": ["ITEM_TM17", "ITEM_TM34", "ITEM_TM44", "ITEM_TM_BULLDOZE", "ITEM_TM_ROUND"]},
-    {"where": "Emporion Agora, Kydon's honey stall", "when": "always", "items": ["ITEM_HONEY"]}
+    {
+     "where": "Emporion Agora, general stall",
+     "when": "before the Herald Laurel",
+     "items": [
+      "ITEM_POKE_BALL",
+      "ITEM_POTION",
+      "ITEM_SUPER_POTION",
+      "ITEM_ANTIDOTE",
+      "ITEM_PARALYZE_HEAL",
+      "ITEM_AWAKENING",
+      "ITEM_BURN_HEAL",
+      "ITEM_REPEL",
+      "ITEM_ESCAPE_ROPE"
+     ]
+    },
+    {
+     "where": "Emporion Agora, general stall",
+     "when": "after the Herald Laurel",
+     "items": [
+      "ITEM_POKE_BALL",
+      "ITEM_GREAT_BALL",
+      "ITEM_POTION",
+      "ITEM_SUPER_POTION",
+      "ITEM_ANTIDOTE",
+      "ITEM_PARALYZE_HEAL",
+      "ITEM_AWAKENING",
+      "ITEM_BURN_HEAL",
+      "ITEM_ICE_HEAL",
+      "ITEM_REPEL",
+      "ITEM_SUPER_REPEL",
+      "ITEM_ESCAPE_ROPE"
+     ]
+    },
+    {
+     "where": "Emporion Agora, offerings stall",
+     "when": "always",
+     "items": [
+      "ITEM_OLIVE_OIL",
+      "ITEM_BARLEY_CAKE",
+      "ITEM_WINE",
+      "ITEM_FRANKINCENSE"
+     ]
+    },
+    {
+     "where": "Emporion Agora, scroll stall",
+     "when": "always",
+     "items": [
+      "ITEM_TM17",
+      "ITEM_TM34",
+      "ITEM_TM44",
+      "ITEM_TM_BULLDOZE",
+      "ITEM_TM_ROUND"
+     ]
+    },
+    {
+     "where": "Emporion Agora, Kydon's honey stall",
+     "when": "always",
+     "items": [
+      "ITEM_HONEY"
+     ]
+    }
    ],
    "statics": [
-    {"species": "SPECIES_HARPECK", "level": 13, "where": "On Sykeas's fig-stall awning in the Agora", "condition": "One battle. Win, lose or catch it, the snatcher is gone afterward, and you can't black out."},
-    {"species": "SPECIES_PITHOUND", "level": 16, "where": "The jar with the paw-print by the stoa", "condition": "Only on days when Halitherses's omen sends you here."},
-    {"species": "SPECIES_PITHOUND", "level": 14, "where": "The stoa jar next to the marked one", "condition": "A 1 in 4 chance each time you check it. Level 14, 15 or 16."}
+    {
+     "species": "SPECIES_HARPECK",
+     "level": 13,
+     "where": "On Sykeas's fig-stall awning in the Agora",
+     "condition": "One battle. Win, lose or catch it, the snatcher is gone afterward, and you can't black out."
+    },
+    {
+     "species": "SPECIES_PITHOUND",
+     "level": 16,
+     "where": "The jar with the paw-print by the stoa",
+     "condition": "Only on days when Halitherses's omen sends you here."
+    },
+    {
+     "species": "SPECIES_PITHOUND",
+     "level": 14,
+     "where": "The stoa jar next to the marked one",
+     "condition": "A 1 in 4 chance each time you check it. Level 14, 15 or 16."
+    }
    ],
    "tips": [
-    {"kind": "Hot Tip", "text": "Get the Bronze Hammer before you leave town. The gate hoplites warn that the Titans brought half a hill down on the road past the tombs, and that Kedalion's hammer is the answer."},
-    {"kind": "Hot Tip", "text": "TM34 at the scroll stall is Shock Wave. Electric moves hit all three of Kerykos's Pokémon super effectively, and Halcyling takes four times the damage."},
-    {"kind": "Pro Tip", "text": "Trade Pheidon a Karkipool on Aigina and you'll already have the Chelonet Euphronios wants for his second painting. The Harpeck on Sykeas's awning can be caught for the first one."},
-    {"kind": "Pro Tip", "text": "Kleon's team at the gate is Lophops (Lv 19), Alekrow (Lv 20) and a Lv 21 ace chosen to beat your starter: Dikyon if you picked Nebrel, Thalamare if you picked Kynder, Kladoe if you picked Hipling. Bring something that covers your starter's weakness."},
-    {"kind": "Pro Tip", "text": "Philoxenos's table heals you for free, and it's closer to the temple than the Asclepeion."},
-    {"kind": "Pro Tip", "text": "Knucklebones is a best-of-five match. Strepsiades only rethrows his ones and plays it safe; Stratyllis and Myrtale throw boldly."},
-    {"kind": "Lore", "text": "The man searching the Agora with a lamp for an honest man is borrowed from Diogenes. Kedalion is the smith who carried blind Orion on his shoulders to the sunrise."}
+    {
+     "kind": "Hot Tip",
+     "text": "Get the Bronze Hammer before you leave town. The gate hoplites warn that the Titans brought half a hill down on the road past the tombs, and that Kedalion's hammer is the answer."
+    },
+    {
+     "kind": "Hot Tip",
+     "text": "TM34 at the scroll stall is Shock Wave. Electric moves hit all three of Kerykos's Pokémon super effectively, and Halcyling takes four times the damage."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Trade Pheidon a Karkipool on Aigina and you'll already have the Chelonet Euphronios wants for his second painting. The Harpeck on Sykeas's awning can be caught for the first one."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Kleon's team at the gate is Lophops (Lv 19), Alekrow (Lv 20) and a Lv 21 ace chosen to beat your starter: Dikyon if you picked Nebrel, Thalamare if you picked Kynder, Kladoe if you picked Hipling. Bring something that covers your starter's weakness."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Philoxenos's table heals you for free, and it's closer to the temple than the Asclepeion."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Knucklebones is a best-of-five match. Strepsiades only rethrows his ones and plays it safe; Stratyllis and Myrtale throw boldly."
+    },
+    {
+     "kind": "Lore",
+     "text": "The man searching the Agora with a lamp for an honest man is borrowed from Diogenes. Kedalion is the smith who carried blind Orion on his shoulders to the sunrise."
+    }
    ],
    "puzzles": [],
    "spoilers": [
-    {"title": "Forty lamps", "text": "The bronze-helmet crew who bought the lamps asked the road to Eleusa and said they'd go round over the goat paths. Alethea works it out: you don't take forty lamps to a field, you take them underground, under Eleusa where the Mysteries are held."},
-    {"title": "The hook under the owl", "text": "The Archon's notice closing the Sacred Way has a tiny hook drawn under the owl seal. Alethea brushes it off as a clerk's habit. Remember it."},
-    {"title": "Kleon at the gate", "text": "Whether he wins or loses, Kleon admits that winning doesn't feel the way it should. He's heading for the Mysteries at Eleusa because he wants to hear someone say, out loud, that dying isn't the end."}
+    {
+     "title": "Forty lamps",
+     "text": "The bronze-helmet crew who bought the lamps asked the road to Eleusa and said they'd go round over the goat paths. Alethea works it out: you don't take forty lamps to a field, you take them underground, under Eleusa where the Mysteries are held."
+    },
+    {
+     "title": "The hook under the owl",
+     "text": "The Archon's notice closing the Sacred Way has a tiny hook drawn under the owl seal. Alethea brushes it off as a clerk's habit. Remember it."
+    },
+    {
+     "title": "Kleon at the gate",
+     "text": "Whether he wins or loses, Kleon admits that winning doesn't feel the way it should. He's heading for the Mysteries at Eleusa because he wants to hear someone say, out loud, that dying isn't the end."
+    }
    ],
    "hierophant": null
   },
   {
    "id": "temple-of-hermes",
-   "maps": ["EmporionCity_TempleOfHermes"],
+   "maps": [
+    "EmporionCity_TempleOfHermes"
+   ],
    "title": "Temple of Hermes",
    "kind": "temple",
    "blurb": "Kerykos's stoa on the city terrace, three terraces of colonnades, turnstiles and herms where you must run the Herald's Run against a step-glass.",
@@ -183,19 +562,56 @@
     "Deliver the third scroll and the bronze gate to the dais swings open. Climb up to Kerykos for the Herald Laurel. Afterward he can send you straight back to the door, and you're free to take the laurel to the Isthmus Gate."
    ],
    "key_npcs": [
-    {"map": "EmporionCity_TempleOfHermes", "script": "EmporionCity_TempleOfHermes_EventScript_Kerykos", "label": "Kerykos", "note": "Starts the Herald's Run. Once all three scrolls are delivered, battle him on the dais. After the laurel he gives TM40 and a Honey, and offers 'the short way down' to the door. Once Hermes's Favor reaches 30, he teaches one of your Pokémon U-turn as Hermes's gift."},
-    {"map": "EmporionCity_TempleOfHermes", "script": "EmporionCity_TempleOfHermes_EventScript_Angelos", "label": "Angelos (guide)", "note": "After a failed run he gives a hint about the herms."},
-    {"map": "EmporionCity_TempleOfHermes", "script": "EmporionCity_TempleOfHermes_EventScript_OilJar", "label": "Jar of temple oil", "note": "One flask per use, up to three. Free. You lose the flasks when you leave the room."},
-    {"map": "EmporionCity_TempleOfHermes", "script": "EmporionCity_TempleOfHermes_EventScript_StepGlass", "label": "Step-glass", "note": "During the run, check it for the exact number of steps left."},
-    {"map": "EmporionCity_TempleOfHermes", "script": "EmporionCity_TempleOfHermes_EventScript_Altar", "label": "Great altar of Hermes", "note": "Kerykos's own altar beside the statues on the dais. Offerings left on a god's own temple altar count double."}
+    {
+     "map": "EmporionCity_TempleOfHermes",
+     "script": "EmporionCity_TempleOfHermes_EventScript_Kerykos",
+     "label": "Kerykos",
+     "note": "Starts the Herald's Run. Once all three scrolls are delivered, battle him on the dais. After the laurel he gives TM40 and a Honey, and offers 'the short way down' to the door. Once Hermes's Favor reaches 30, he teaches one of your Pokémon U-turn as Hermes's gift."
+    },
+    {
+     "map": "EmporionCity_TempleOfHermes",
+     "script": "EmporionCity_TempleOfHermes_EventScript_Angelos",
+     "label": "Angelos (guide)",
+     "note": "After a failed run he gives a hint about the herms."
+    },
+    {
+     "map": "EmporionCity_TempleOfHermes",
+     "script": "EmporionCity_TempleOfHermes_EventScript_OilJar",
+     "label": "Jar of temple oil",
+     "note": "One flask per use, up to three. Free. You lose the flasks when you leave the room."
+    },
+    {
+     "map": "EmporionCity_TempleOfHermes",
+     "script": "EmporionCity_TempleOfHermes_EventScript_StepGlass",
+     "label": "Step-glass",
+     "note": "During the run, check it for the exact number of steps left."
+    },
+    {
+     "map": "EmporionCity_TempleOfHermes",
+     "script": "EmporionCity_TempleOfHermes_EventScript_Altar",
+     "label": "Great altar of Hermes",
+     "note": "Kerykos's own altar beside the statues on the dais. Offerings left on a god's own temple altar count double."
+    }
    ],
    "shops": [],
    "statics": [],
    "tips": [
-    {"kind": "Hot Tip", "text": "The glass warns you when it's half run and again at 30 steps. If you're lost at the half mark, oil the next junction herm and follow its gaze."},
-    {"kind": "Pro Tip", "text": "A failed run isn't wasted. Oiled herms stay oiled, so a second attempt with all four junction herms pointing is easy."},
-    {"kind": "Pro Tip", "text": "Bring Honey. Hermes loves it, and leaving it on his temple altar counts double toward his Favor."},
-    {"kind": "Lore", "text": "Kerykos comes from the Kerykes, the family of heralds who have called the holy silence at the Eleusinian Mysteries for twenty generations. He ran off to sea instead."}
+    {
+     "kind": "Hot Tip",
+     "text": "The glass warns you when it's half run and again at 30 steps. If you're lost at the half mark, oil the next junction herm and follow its gaze."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "A failed run isn't wasted. Oiled herms stay oiled, so a second attempt with all four junction herms pointing is easy."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Bring Honey. Hermes loves it, and leaving it on his temple altar counts double toward his Favor."
+    },
+    {
+     "kind": "Lore",
+     "text": "Kerykos comes from the Kerykes, the family of heralds who have called the holy silence at the Eleusinian Mysteries for twenty generations. He ran off to sea instead."
+    }
    ],
    "puzzles": [
     {
@@ -205,8 +621,14 @@
     }
    ],
    "spoilers": [
-    {"title": "Kerykos and Chloe", "text": "Kerykos's cousin is Chloe, who hasn't spoken to him since he ran off to sea. He'll be at Eleusa for the Mysteries, where it's his job to shout 'Silence!'"},
-    {"title": "The short way", "text": "Kerykos never runs the stoa. He hops the oil jar and takes 'the short way', and he's on the dais before you. Nobody knows where it is."}
+    {
+     "title": "Kerykos and Chloe",
+     "text": "Kerykos's cousin is Chloe, who hasn't spoken to him since he ran off to sea. He'll be at Eleusa for the Mysteries, where it's his job to shout 'Silence!'"
+    },
+    {
+     "title": "The short way",
+     "text": "Kerykos never runs the stoa. He hops the oil jar and takes 'the short way', and he's on the dais before you. Nobody knows where it is."
+    }
    ],
    "hierophant": {
     "trainer": "TRAINER_ICHOR_KERYKOS_1",
@@ -214,8 +636,11 @@
     "title": "the Herald",
     "type": "Flying",
     "laurel": "Herald Laurel",
-    "rewards": ["ITEM_TM40", "ITEM_HONEY"],
-    "unlocks": "The Isthmus Gate to Route 4 (the Sacred Way's truce lets heralds through), Great Balls, Ice Heals and Super Repels at the Agora's general stall, and +15 Hermes Favor.",
+    "rewards": [
+     "ITEM_TM40",
+     "ITEM_HONEY"
+    ],
+    "unlocks": "The Isthmus Gate to Route 4 (the Sacred Way's truce lets heralds through), Theseus Balls, Ice Heals and Super Repels at the Agora's general stall, and +15 Hermes Favor.",
     "strategy": [
      "On Hero, Kerykos leads with Lophops (Normal/Flying, Lv 18, Keen Eye), then Halcyling (Water/Flying, Lv 19, Cloud Nine, Oran Berry) and his ace Harpelle (Dark/Flying, Lv 20, Pickpocket, Sitrus Berry). He also carries two Super Potions. Every one of them is part Flying, so Electric and Rock moves are your friends. Shock Wave from the scroll stall never misses and hits Halcyling four times over.",
      "Lophops opens with Feather Dance to cut your Attack, and Harpelle sets up Tailwind to double its team's Speed for a few turns. Special attackers shrug off Feather Dance. Once Tailwind is up, hit hard rather than set up.",
@@ -227,7 +652,9 @@
   },
   {
    "id": "aegina-aphaia-road",
-   "maps": ["AeginaAphaiaRoad"],
+   "maps": [
+    "AeginaAphaiaRoad"
+   ],
    "title": "The Aphaia Road",
    "kind": "route",
    "blurb": "Aigina's pine-covered interior, climbing from the town gate past pistachio orchards and ant hills to a fork below the island's temple and peak.",
@@ -236,12 +663,20 @@
     "From the gate, the road climbs through the pistachios, west along the lower terrace, north past the ant hills, then east along the upper terrace and through the golden grass to a great herm. There it forks: west to Mount Oros, east up the marble steps to the Temple of Aphaia."
    ],
    "key_npcs": [
-    {"map": "AeginaAphaiaRoad", "script": "AeginaAphaiaRoad_EventScript_GreatHerm", "label": "Great herm at the fork", "note": "Anoint it so Hermes remembers you passed."}
+    {
+     "map": "AeginaAphaiaRoad",
+     "script": "AeginaAphaiaRoad_EventScript_GreatHerm",
+     "label": "Great herm at the fork",
+     "note": "Anoint it so Hermes remembers you passed."
+    }
    ],
    "shops": [],
    "statics": [],
    "tips": [
-    {"kind": "Pro Tip", "text": "Ergant, Karkipool, Onotis and Chelonet all live along this road. That covers Aiakides's Black Belt, Pheidon's trade and Thaletas's trade in Emporion."}
+    {
+     "kind": "Pro Tip",
+     "text": "Ergant, Karkipool, Onotis and Chelonet all live along this road. That covers Aiakides's Black Belt, Pheidon's trade and Thaletas's trade in Emporion."
+    }
    ],
    "puzzles": [],
    "spoilers": [],
@@ -249,7 +684,9 @@
   },
   {
    "id": "aegina-temple-of-aphaia",
-   "maps": ["AeginaTempleOfAphaia"],
+   "maps": [
+    "AeginaTempleOfAphaia"
+   ],
    "title": "Temple of Aphaia",
    "kind": "temple",
    "blurb": "Aigina's hilltop sanctuary to Aphaia, 'the one who isn't seen', with an altar of Artemis before its dark doorway.",
@@ -258,12 +695,20 @@
     "East of the altar lie the foundations of an older temple, where the earth has been turned over and something pottery glints. It won't come up by hand."
    ],
    "key_npcs": [
-    {"map": "AeginaTempleOfAphaia", "script": "AeginaTempleOfAphaia_EventScript_Priestess", "label": "Priestess of Aphaia", "note": "Keeper of the temple steps."}
+    {
+     "map": "AeginaTempleOfAphaia",
+     "script": "AeginaTempleOfAphaia_EventScript_Priestess",
+     "label": "Priestess of Aphaia",
+     "note": "Keeper of the temple steps."
+    }
    ],
    "shops": [],
    "statics": [],
    "tips": [
-    {"kind": "Lore", "text": "Aphaia is 'the one who isn't seen'. The temple-road gatekeeper says she likes her privacy, and that she's very good at it."}
+    {
+     "kind": "Lore",
+     "text": "Aphaia is 'the one who isn't seen'. The temple-road gatekeeper says she likes her privacy, and that she's very good at it."
+    }
    ],
    "puzzles": [],
    "spoilers": [],
@@ -271,7 +716,9 @@
   },
   {
    "id": "aegina-mount-oros",
-   "maps": ["AeginaMountOros"],
+   "maps": [
+    "AeginaMountOros"
+   ],
    "title": "Mount Oros",
    "kind": "route",
    "blurb": "Aigina's windy peak, crowned by the altar of Zeus where King Aiakos once prayed a drought away.",
@@ -282,7 +729,10 @@
    "shops": [],
    "statics": [],
    "tips": [
-    {"kind": "Lore", "text": "When all of Greece suffered a drought, the oracle said only Aiakos's prayer would end it. He prayed to Zeus on this mountain, and the rain came."}
+    {
+     "kind": "Lore",
+     "text": "When all of Greece suffered a drought, the oracle said only Aiakos's prayer would end it. He prayed to Zeus on this mountain, and the rain came."
+    }
    ],
    "puzzles": [],
    "spoilers": [],
