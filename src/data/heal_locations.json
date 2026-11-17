@@ -187,6 +187,16 @@
       "respawn_y": 4
     },
     {
+      "id": "HEAL_LOCATION_KNOSSA_AMNISOS",
+      "map": "MAP_KNOSSA_AMNISOS",
+      "x": 10,
+      "y": 14,
+      "respawn_map": "MAP_KNOSSA_AMNISOS_ASCLEPEION",
+      "respawn_npc": "LOCALID_AMNISOS_HEALER",
+      "respawn_x": 6,
+      "respawn_y": 6
+    },
+    {
       "id": "HEAL_LOCATION_KYTHERA_PAPHIA",
       "map": "MAP_KYTHERA_PAPHIA",
       "x": 39,
@@ -195,6 +205,22 @@
       "respawn_npc": "LOCALID_PAPHIA_HEALER",
       "respawn_x": 3,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_OLYMPUS_PROPYLAIA",
+      "map": "MAP_ASCENT_3F",
+      "x": 18,
+      "y": 7,
+      "respawn_map": "MAP_OLYMPUS_PROPYLAIA",
+      "respawn_npc": "LOCALID_OLYMPUS_PROPYLAIA_HEALER",
+      "respawn_x": 3,
+      "respawn_y": 7
+    },
+    {
+      "id": "HEAL_LOCATION_ELAIA_VILLAGE_PLAYERS_ROOM",
+      "map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
+      "x": 5,
+      "y": 5
     }
   ]
 }

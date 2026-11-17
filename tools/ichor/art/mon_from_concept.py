@@ -53,6 +53,57 @@ PROMPTS = ROOT / "design/dex/concept_prompts.json"
 #          each color snapped to the nearest palette entry; null color = clear
 STAGE_FIT = {"basic": 56, "middle": 60, "final": 63, "single": 60}
 
+# The size ladder (STYLE.md §3.1): each species' largest dimension in the
+# battle frame, from its place in its line, its dex height and its build,
+# benchmarked on Emerald (basics ~41 px, middles ~52, finals ~61; Taillow 43x30,
+# Natu 25). Concepts are drawn filling their canvas, so without this every
+# stage came out 63 px. "size" in species.json overrides it.
+SPECIES_YAML = ROOT / "design/dex/species"
+LADDER = {  # (position, line length): (low, high) px; height picks the spot
+    ("basic", 3): (34, 46), ("middle", 3): (46, 56), ("final", 3): (58, 63),
+    ("basic", 2): (36, 50), ("final", 2): (54, 63),
+    ("single", 1): (44, 62),
+}
+LEGENDARY_BST = 600
+H_SMALL, H_LARGE = 0.2, 2.0  # metres at the low and high ends of a band
+FLYER_SHRINK = 4             # small birds read small
+
+
+def _dex():
+    import yaml
+    out = {}
+    for f in sorted(SPECIES_YAML.glob("*.yaml")):
+        sp = yaml.safe_load(f.read_text())["species"]
+        for i, s in enumerate(sp):
+            out[s["name"].lower()] = (i, len(sp), s)
+    return out
+
+
+_DEX = None
+
+
+def ladder_size(name):
+    """The species' front size on the ladder, or 63 when it has no dex entry."""
+    global _DEX
+    _DEX = _DEX if _DEX is not None else _dex()
+    if name not in _DEX:
+        return 63
+    pos, n, s = _DEX[name]
+    if sum(s["base_stats"].values()) >= LEGENDARY_BST:
+        return 63
+    stage = "single" if n == 1 else "basic" if pos == 0 else "final" if pos == n - 1 else "middle"
+    lo, hi = LADDER[(stage, 1 if n == 1 else min(n, 3))]
+    t = (np.log(max(s.get("height_m", 1.0), 0.15)) - np.log(H_SMALL)) / (np.log(H_LARGE) - np.log(H_SMALL))
+    v = lo + (hi - lo) * min(max(t, 0.0), 1.0)
+    if "Flying" in s["types"] and stage in ("basic", "middle"):
+        v -= FLYER_SHRINK
+    return int(round(min(max(v, 28), 63)))
+
+
+def back_size(front):
+    """Gen 3 backs sit a little bigger than small fronts (Mudkip 41 -> 53)."""
+    return int(round(min(63, front + (63 - front) * 0.35)))
+
 
 def stage_of(name):
     if PROMPTS.exists():
@@ -64,7 +115,7 @@ def stage_of(name):
 
 def config(name):
     table = json.loads(SPECIES_FILE.read_text()) if SPECIES_FILE.exists() else {}
-    c = {"fit": STAGE_FIT[stage_of(name)], "pivot": 0.5, "fixes": []}
+    c = {"fit": STAGE_FIT[stage_of(name)], "pivot": 0.5, "fixes": [], "size": ladder_size(name)}
     c.update(table.get(name, {}))
     return c
 
@@ -114,7 +165,7 @@ def nearest(pal, rgb, skip0=True):
 
 def front_frames(name, cfg):
     src = CONCEPTS / f"{name}.png"
-    img = c2n.convert(src, fit=cfg["fit"], sharpen=cfg.get("sharpen", 40))
+    img = c2n.convert(src, fit=cfg["fit"], sharpen=cfg.get("sharpen", 40), target=cfg["size"])
     f0 = np.array(img)
     pal = np.array(img.getpalette()[:48], int).reshape(16, 3)
     for x, y, rgb in cfg.get("fixes", []):
@@ -341,15 +392,23 @@ def build(name, cfg):
         shiny = shiny_from_old(pal, old_normal, old_shiny)
     back_src = CONCEPTS / f"{name}_back.png"
     if back_src.exists():
-        bimg = c2n.convert(back_src, fit=64, sharpen=cfg.get("sharpen", 40))
+        bimg = c2n.convert(back_src, fit=64, sharpen=cfg.get("sharpen", 40), target=back_size(cfg["size"]))
         bpal = np.array(bimg.getpalette()[:48], int).reshape(16, 3)
         back = remap(np.array(bimg), bpal, pal0)
     else:
-        back = back_from_front(f0, pal0)
+        bf, _, bp = front_frames(name, dict(cfg, size=back_size(cfg["size"])))
+        back = back_from_front(remap(bf, bp, pal0), pal0)
     if cfg.get("rim_light"):
         f0, f1, back = (rim_light(x, pal) for x in (f0, f1, back))
     ipal = read_jasc(ICON_PALS / f"pal{icon_pal_index(name)}.pal")
-    i0, i1 = icon_frames(f0, pal, ipal)
+    # icons are reduced from the full-frame conversion, so a small battle
+    # sprite still gets a detailed party icon
+    full = f0 if cfg["size"] >= 63 else front_frames(name, dict(cfg, size=63))
+    if full is not f0:
+        full = remap(full[0], full[2], pal0)
+        if cfg.get("rim_light"):
+            full = rim_light(full, pal)
+    i0, i1 = icon_frames(full, pal, ipal)
     # the follower shares the battle palette (check_elaia); move it across,
     # unless this builder already wrote it in this palette's index layout
     follow = np.array(Image.open(d / "overworld.png"))

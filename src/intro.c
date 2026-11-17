@@ -25,6 +25,11 @@
 #include "intro_frlg.h"
 #include "constants/rgb.h"
 #include "pokemon.h"
+#include "bg.h"                        // Ichor: the credits' text band
+#include "window.h"
+#include "menu.h"
+#include "string_util.h"
+#include "international_string_util.h"
 #include "data/intro_ichor_layout.h"
 
 /*
@@ -1102,3 +1107,215 @@ static void Task_IchorIntro(u8 taskId)
         break;
     }
 }
+
+// ---------------------------------------------------------------------------
+// Ichor: the credits (STORY.md L-9 and §6.15, design/LEAGUE.md)
+// ---------------------------------------------------------------------------
+// The boot intro's frieze, scrolled the other way: from Olympus back past the
+// temple and the sea to Elaia's olive, with the golden thread running home along
+// it. The names play in an ink cartouche over the frieze's lower meander. The
+// main theme plays, then Elaia's (MUSIC.md). After THE END, a button (or a long
+// wait) soft-resets to the title, as Emerald's credits do. src/hall_of_fame.c
+// calls this in place of Emerald's bike-ride credits.
+#define CR_SB_TEXT      SB_WHITE   // the white thread isn't drawn here
+#define CR_TEXT_TILE    128        // after the frieze's aux tiles in charblock 2
+#define CR_PAL_TEXT     15
+#define CR_PAN_FRAMES   4200
+#define CR_PAGE_FRAMES  600
+#define CR_FADE         32
+
+enum { CR_LOAD, CR_RUN, CR_END_WAIT, CR_END_FADE };
+
+static const struct BgTemplate sCreditsBgTemplates[] =
+{
+    { .bg = 0, .charBaseIndex = 2, .mapBaseIndex = CR_SB_TEXT, .screenSize = 0, .paletteMode = 0, .priority = 0, .baseTile = 0 },
+    { .bg = 1, .charBaseIndex = 2, .mapBaseIndex = SB_GOLD, .screenSize = 1, .paletteMode = 0, .priority = 1, .baseTile = 0 },
+    { .bg = 2, .charBaseIndex = 0, .mapBaseIndex = SB_FRIEZE, .screenSize = 1, .paletteMode = 0, .priority = 2, .baseTile = 0 },
+    { .bg = 3, .charBaseIndex = 2, .mapBaseIndex = SB_CLAY, .screenSize = 0, .paletteMode = 0, .priority = 3, .baseTile = 0 },
+};
+
+static const struct WindowTemplate sCreditsWindows[] =
+{
+    { .bg = 0, .tilemapLeft = 0, .tilemapTop = 16, .width = 30, .height = 4, .paletteNum = CR_PAL_TEXT, .baseBlock = CR_TEXT_TILE },
+    DUMMY_WIN_TEMPLATE
+};
+
+// ink, then gold lettering over a dark shadow
+static const u16 sCreditsText_Pal[16] = { RGB(0, 0, 0), RGB(4, 3, 3), RGB(31, 26, 12), RGB(13, 9, 5) };
+static const u8 sCreditsTextColors[] = { 1, 2, 3 };
+
+struct CreditsPage
+{
+    const u8 *title;
+    const u8 *name;
+};
+
+static const struct CreditsPage sCreditsPages[] =
+{
+    { COMPOUND_STRING("POKéMON ICHOR"), COMPOUND_STRING("") },
+    { COMPOUND_STRING("A GAME BY"), COMPOUND_STRING("ZACH POWERS AND SAMUEL GUTKNECHT") },
+    { COMPOUND_STRING("BUILT ON"), COMPOUND_STRING("POKEEMERALD-EXPANSION, BY RH-HIDEOUT") },
+    { COMPOUND_STRING("FROM THE DECOMPILATION BY"), COMPOUND_STRING("PRET") },
+    { COMPOUND_STRING("POKéMON CREATED BY"), COMPOUND_STRING("GAME FREAK, CREATURES AND NINTENDO") },
+    { COMPOUND_STRING("ARCHON OF AETHOS"), COMPOUND_STRING("{PLAYER}") },
+    { COMPOUND_STRING("THE UNWOVEN"), COMPOUND_STRING("THE END") },
+};
+
+static EWRAM_DATA u8 *sCreditsTilemap = NULL;
+
+static void VBlankCB_IchorCredits(void)
+{
+    TransferPlttBuffer();
+}
+
+static void CB2_IchorCredits(void)
+{
+    RunTasks();
+}
+
+// The columns on screen at camera x `cam`, written fresh each frame: the pan
+// runs leftward, so the forward-only stream of the intro won't do.
+static void Credits_StreamFrieze(s32 cam)
+{
+    s32 first = cam / 8, col;
+
+    for (col = first; col <= first + DISPLAY_WIDTH / 8 && col < FRIEZE_COLS; col++)
+    {
+        WriteColumn(SB_FRIEZE, sFrieze_Tilemap, col);
+        WriteColumn(SB_GOLD, sFriezeGold_Tilemap, col);
+    }
+}
+
+static void Credits_ShowPage(u32 page)
+{
+    const u8 *name;
+    int x;
+
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, sCreditsPages[page].title, 30 * 8);
+    AddTextPrinterParameterized3(0, FONT_NORMAL, x, 1, sCreditsTextColors, TEXT_SKIP_DRAW, sCreditsPages[page].title);
+    StringExpandPlaceholders(gStringVar4, sCreditsPages[page].name);
+    name = gStringVar4;
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, name, 30 * 8);
+    AddTextPrinterParameterized3(0, FONT_NORMAL, x, 16, sCreditsTextColors, TEXT_SKIP_DRAW, name);
+    CopyWindowToVram(0, COPYWIN_FULL);
+}
+
+static void Credits_Load(void)
+{
+    ResetIntroGpu();
+    ResetSpriteData();
+    DmaClear16(3, (void *)BG_SCREEN_ADDR(24), BG_SCREEN_SIZE * 8);
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sCreditsBgTemplates, ARRAY_COUNT(sCreditsBgTemplates));
+    DecompressDataWithHeaderVram(sFrieze_Gfx, (void *)BG_CHAR_ADDR(0));
+    DecompressDataWithHeaderVram(sFriezeAux_Gfx, (void *)BG_CHAR_ADDR(2));
+    DecompressDataWithHeaderVram(sClay_Tilemap, (void *)BG_SCREEN_ADDR(SB_CLAY));
+    sCreditsTilemap = AllocZeroed(BG_SCREEN_SIZE);
+    SetBgTilemapBuffer(0, sCreditsTilemap);
+    InitWindows(sCreditsWindows);
+    DeactivateAllTextPrinters();
+    LoadPalette(sPaint_Pal, BG_PLTT_ID(PAL_PAINT), PLTT_SIZE_4BPP);
+    LoadPalette(sClay_Pal, BG_PLTT_ID(PAL_CLAY), PLTT_SIZE_4BPP);
+    LoadPalette(sThreadGold_Pal, BG_PLTT_ID(PAL_GOLD), PLTT_SIZE_4BPP);
+    LoadPalette(sCreditsText_Pal, BG_PLTT_ID(CR_PAL_TEXT), PLTT_SIZE_4BPP);
+    Credits_StreamFrieze(FRIEZE_CAM_END);
+    PutWindowTilemap(0);
+    Credits_ShowPage(0);
+    CopyBgTilemapBufferToVram(0);
+    // The golden thread glows over what it crosses, as in the intro.
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 8));
+    // bg.c writes a BG's control register only when it shows it.
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON);
+}
+
+#define tState  data[0]
+#define tTimer  data[1]
+#define tPage   data[2]
+
+static void Task_IchorCredits(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s32 t = tTimer, cam;
+    u32 page;
+
+    ResetFadedPalettes();
+    switch (tState)
+    {
+    case CR_RUN:
+        cam = Lerp(FRIEZE_CAM_END, 0, t, 0, CR_PAN_FRAMES);
+        Credits_StreamFrieze(cam);
+        SetGpuReg(REG_OFFSET_BG1HOFS, cam);
+        SetGpuReg(REG_OFFSET_BG2HOFS, cam);
+        page = t / CR_PAGE_FRAMES;
+        if (page >= ARRAY_COUNT(sCreditsPages))
+            page = ARRAY_COUNT(sCreditsPages) - 1;
+        if (page != (u32)tPage)
+        {
+            tPage = page;
+            Credits_ShowPage(page);
+        }
+        // the main theme, then Elaia's for the way home (MUSIC.md)
+        if (t == CR_PAN_FRAMES / 2)
+            m4aSongNumStart(MUS_ICHOR_ELAIA);
+        // the golden thread's glints pulse, like the title's
+        BlendRange(BG_PLTT_ID(PAL_GOLD) + FRIEZE_GOLD_GLINT, 1, 6 + Sin((t * 5) & 0xFF, 6), RGB(31, 31, 28));
+        FadeAll(Lerp(16, 0, t, 0, CR_FADE), RGB_BLACK);
+        if (t >= CR_PAN_FRAMES)
+        {
+            tState = CR_END_WAIT;
+            tTimer = 0;
+            return;
+        }
+        break;
+    case CR_END_WAIT:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON) || t >= 900)
+        {
+            tState = CR_END_FADE;
+            tTimer = 0;
+            return;
+        }
+        break;
+    case CR_END_FADE:
+        FadeAll(Lerp(0, 16, t, 0, CR_FADE), RGB_BLACK);
+        if (t >= CR_FADE + 8)
+        {
+            FreeAllWindowBuffers();
+            Free(sCreditsTilemap);
+            sCreditsTilemap = NULL;
+            SoftReset(RESET_ALL);
+        }
+        break;
+    }
+    tTimer++;
+}
+
+void CB2_StartIchorCredits(void)
+{
+    u8 taskId;
+
+    SetVBlankCallback(NULL);
+    InitHeap(gHeap, HEAP_SIZE);
+    ResetPaletteFade();
+    ResetTasks();
+    Credits_Load();
+    taskId = CreateTask(Task_IchorCredits, 0);
+    gTasks[taskId].tState = CR_RUN;
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tPage = 0;
+    // start dark; the first frame's fade brings the frieze up
+    BlendPalettesFine(PALETTES_ALL, gPlttBufferUnfaded, gPlttBufferFaded, 16, RGB_BLACK);
+    EnableInterrupts(INTR_FLAG_VBLANK);
+    SetVBlankCallback(VBlankCB_IchorCredits);
+    m4aSongNumStart(MUS_TITLE);
+    SetMainCallback2(CB2_IchorCredits);
+}
+
+#undef tState
+#undef tTimer
+#undef tPage

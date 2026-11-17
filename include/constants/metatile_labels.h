@@ -1261,4 +1261,101 @@
 #define METATILE_EleusaSanctumHall_Basin_1                    0x2B1
 // --- EleusaSanctum: end ---
 
+// gTileset_BullRoad (Ichor: the Bull Road, its vineyard terraces and the Bronze Heel), written by tools/ichor/art/knossa_build.py
+#define METATILE_BullRoad_VaultDoor_TL             0x230
+#define METATILE_BullRoad_VaultDoor_T              0x231
+#define METATILE_BullRoad_VaultDoor_TR             0x232
+#define METATILE_BullRoad_VaultDoor_BL             0x238
+#define METATILE_BullRoad_VaultDoor_B              0x239
+#define METATILE_BullRoad_VaultDoor_BR             0x23A
+#define METATILE_BullRoad_VaultOpen_TL             0x233
+#define METATILE_BullRoad_VaultOpen_T              0x234
+#define METATILE_BullRoad_VaultOpen_TR             0x235
+#define METATILE_BullRoad_VaultOpen_BL             0x23B
+#define METATILE_BullRoad_VaultOpen_B              0x23C
+#define METATILE_BullRoad_VaultOpen_BR             0x23D
+#define METATILE_BullRoad_IdaGate_Top              0x241
+#define METATILE_BullRoad_IdaGate                  0x249
+#define METATILE_BullRoad_IdaGate_OpenTop          0x243
+#define METATILE_BullRoad_IdaGate_Open             0x24B
+#define METATILE_BullRoad_FossilLedge_L            0x2F8
+#define METATILE_BullRoad_FossilLedge_R            0x2F9
+#define METATILE_BullRoad_FossilLedge_Gone_L       0x2FA
+#define METATILE_BullRoad_FossilLedge_Gone_R       0x2FB
+// end gTileset_BullRoad
+
+// gTileset_PalaceMinos (Ichor: the Palace of Minos above ground), written by tools/ichor/art/knossa_build.py
+#define METATILE_PalaceMinos_PenGate                  0x22C
+// end gTileset_PalaceMinos
+// gTileset_Lakonia (Ichor: Lakonia, the town with no walls), written by tools/ichor/art/lakonia_build.py
+#define METATILE_Lakonia_SownField_Teeth          0x324
+#define METATILE_Lakonia_SownField                0x322
+// end gTileset_Lakonia
+
+// gTileset_Eurotas (Ichor: Route 25, up the Eurotas), written by tools/ichor/art/lakonia_build.py
+#define METATILE_Eurotas_Hearth_Lit_L             0x2A0
+#define METATILE_Eurotas_Hearth_Lit_R             0x2A1
+#define METATILE_Eurotas_Hearth_L                 0x2A4
+#define METATILE_Eurotas_Hearth_R                 0x2A5
+#define METATILE_Eurotas_FarmRoof_TL              0x2B3
+#define METATILE_Eurotas_Shrine_Lit               0x28D
+#define METATILE_Eurotas_Shrine_Unlit             0x28E
+#define METATILE_Eurotas_VapheioDoor_TL           0x2C9
+#define METATILE_Eurotas_VapheioOpen_TL           0x2CC
+#define METATILE_Eurotas_Reeds                    0x266
+// end gTileset_Eurotas
+
+// gTileset_Stymphalia (Ichor: Route 26, Lake Stymphalia and Route 27), written by tools/ichor/art/lakonia_build.py
+#define METATILE_Stymphalia_ReedWall                 0x29C
+#define METATILE_Stymphalia_ReedWall_Cut             0x29E
+#define METATILE_Stymphalia_Drum_L                   0x362
+#define METATILE_Stymphalia_Drum_Moved               0x364
+#define METATILE_Stymphalia_HammerRock               0x365
+#define METATILE_Stymphalia_HammerRock_Broken        0x366
+// end gTileset_Stymphalia
+
+// gTileset_Mychos (Ichor: the Labyrinth's heart), written by tools/ichor/art/mychos_build.py
+#define METATILE_Mychos_CaveFloor            0x258
+#define METATILE_Mychos_SunFloor             0x280
+#define METATILE_Mychos_Grate                0x2CB
+#define METATILE_Mychos_Cracked              0x273
+#define METATILE_Mychos_DialA                0x2C0
+#define METATILE_Mychos_DialB                0x2C1
+#define METATILE_Mychos_DialPivot            0x2C2
+#define METATILE_Mychos_DialTopSeg           0x2C5
+#define METATILE_Mychos_DialFaceSeg          0x2C3
+#define METATILE_Mychos_DialTopEnd           0x2C6
+#define METATILE_Mychos_DialFaceEnd          0x2C4
+#define METATILE_Mychos_Lever                0x2C7
+#define METATILE_Mychos_Seal                 0x2CA
+#define METATILE_Mychos_SlabL                0x240
+#define METATILE_Mychos_SlabR                0x24B
+// end gTileset_Mychos
+
+// gTileset_Astra (Ichor: the Labyrinth's heart), written by tools/ichor/art/mychos_build.py
+#define METATILE_Astra_CaveFloor            0x268
+#define METATILE_Astra_Marble               0x258
+#define METATILE_Astra_DanceBlank           0x2D8
+#define METATILE_Astra_DanceX               0x2D9
+#define METATILE_Astra_DanceW               0x2DA
+#define METATILE_Astra_DanceL               0x2DB
+#define METATILE_Astra_DanceR               0x2DC
+#define METATILE_Astra_DanceS               0x2DD
+#define METATILE_Astra_DanceXLit            0x2E1
+#define METATILE_Astra_DanceWLit            0x2E2
+#define METATILE_Astra_DanceLLit            0x2E3
+#define METATILE_Astra_DanceRLit            0x2E4
+#define METATILE_Astra_DanceSLit            0x2E5
+#define METATILE_Astra_DanceStair           0x2E0
+#define METATILE_Astra_BeamSunEW            0x2C8
+#define METATILE_Astra_BeamStarEW           0x2D0
+#define METATILE_Astra_AnvilEmptyL          0x2C2
+#define METATILE_Astra_AnvilEmptyR          0x2C3
+#define METATILE_Astra_FrescoIV_l0          0x303
+#define METATILE_Astra_FrescoIv             0x303
+#define METATILE_Astra_FrescoV              0x2EB
+#define METATILE_Astra_FrescoVi             0x300
+#define METATILE_Astra_FrescoFaded          0x2E8
+// end gTileset_Astra
+
 #endif // GUARD_METATILE_LABELS_H

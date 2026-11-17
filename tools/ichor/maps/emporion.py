@@ -646,6 +646,7 @@ def city_plan():
     P.fill(8, 33, 12, 38, "g")             # the Asclepeion's herb garden
     P.fill(9, 34, 11, 36, "t")
     P.fill(40, 33, 47, 38, "g")            # the cypress court east of the Deigma
+    P.fill(41, 36, 46, 39, "p")            # Alfred's yard: beaten earth for the wheels
     return P
 
 
@@ -835,8 +836,16 @@ def compose_city():
     for x in range(28, 38):
         g.put("steps", x, 37, cx=0 if x == 28 else 2 if x == 37 else 1, cy=1, w=1, h=1)
     g.trees(cypresses=((9, 32), (11, 32)))
-    g.trees(cypresses=((40, 33), (42, 33), (44, 33), (46, 33), (41, 36), (45, 36)),
-            olives=((43, 36),))
+    # Waltz Chariots, Alfred's chariot store beside the Deigma: a wheelwright from the far east who
+    # came in by sea and builds racing chariots. The wheel hangs over his open
+    # counter, door (43,35); the chariot he sells stands in his yard.
+    house(g, 41, 32, roof(5, chimney=3) + [
+        [("upper", "W"), ("upper", "shutters"), ("signs", "wheel"), ("upper", "shutters"),
+         ("upper", "E")],
+        storey("lower", ["W", "window", "shop", "window", "E"])])
+    g.put("chariot", 44, 37)
+    g.set(40, 38, STELE, True)                        # WALTZ CHARIOTS, read from the street
+    g.trees(cypresses=((40, 33), (46, 33), (40, 36), (47, 36)))
     g.put("planter", 13, 35)
     g.put("planter", 19, 35)
     g.put("planter", 38, 35)
@@ -883,6 +892,7 @@ SCREENS = {
     "4_agora_south": (21, 29), "5_agora_north": (16, 23), "6_tavern": (30, 23),
     "7_temple": (23, 13), "8_gate": (9, 6), "9_hephaisteion": (4, 13),
     "10_potters": (3, 20), "11_east_grid": (40, 25), "12_nemea": (5, 41),
+    "13_chariot_store": (43, 37),
 }
 
 # Cells the scenes walk people across: they must stay open.

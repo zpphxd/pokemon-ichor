@@ -639,6 +639,10 @@ script EmporionCity_EventScript_AgoraSign {
     msgbox(format("THE AGORA\nFair weights. Fair measures. Fair warning: mind your figs."), MSGBOX_SIGN)
 }
 
+script EmporionCity_EventScript_WaltzChariotsSign {
+    msgbox(format("WALTZ CHARIOTS\nRacing chariots built and sold. Pony included. Ask for Alfred."), MSGBOX_SIGN)
+}
+
 script EmporionCity_EventScript_DeigmaSign {
     msgbox(format("THE DEIGMA\nMerchants' samples shown within. Look, but don't lick."), MSGBOX_SIGN)
 }

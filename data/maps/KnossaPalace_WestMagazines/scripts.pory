@@ -1,0 +1,52 @@
+// The West Magazines (SCRIPT.md III-3D; LABYRINTH.md §3, §6 Ring IV): the Titan camp
+// among pithoi taller than you. Overheard talk starts Ring IV's password trail
+// without giving the answers away. Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaPalace_WestMagazines_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (var(VAR_ICHOR_KNOSSA) >= 18) {
+            setflag(FLAG_ICHOR_HIDE_PALACE_GRUNTS)
+        }
+    }
+}
+
+text KnossaPalace_WestMagazines_Name_Titanborn { "TITANBORN" }
+
+script KnossaPalace_WestMagazines_EventScript_Grunt1 {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_WestMagazines_Name_Titanborn)
+    msgbox(format("Down there they ask you three questions at the stair. Like a sphinx.\p"
+                  "A sphinx in a big helmet. Enkelados. Don't laugh at him."))
+    release
+}
+
+script KnossaPalace_WestMagazines_EventScript_Grunt2 {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_WestMagazines_Name_Titanborn)
+    msgbox(format("First one's easy. What does the sickle reap. Everybody knows that."))
+    release
+}
+
+script KnossaPalace_WestMagazines_EventScript_Grunt3 {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_WestMagazines_Name_Titanborn)
+    msgbox(format("The second one I get wrong every time. I always say the bull.\p"
+                  "You don't say the bull."))
+    release
+}
+
+script KnossaPalace_WestMagazines_EventScript_Doubter {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_WestMagazines_Name_Titanborn)
+    msgbox(format("In the golden age, do we still get to eat? I've asked three times.\p"
+                  "Nobody answers. They just say “the feast.” Which feast?"))
+    release
+}
+
+script KnossaPalace_WestMagazines_EventScript_OpenPithos {
+    msgbox(format("A pithos with its lid off. It smells of old oil and new shovels."), MSGBOX_SIGN)
+}

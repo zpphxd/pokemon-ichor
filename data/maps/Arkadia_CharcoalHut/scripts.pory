@@ -6,7 +6,14 @@
 // ICHOR_STUB_AETHOS_DEX: both species are stand-ins until the dex lands.
 // ICHOR_STUB_MUSIC: Arkadia's own cue.
 
-mapscripts Arkadia_CharcoalHut_MapScripts {}
+mapscripts Arkadia_CharcoalHut_MapScripts {
+    // The Pokémon the player traded in shows only after the trade.
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_ARKOBY)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
 
 text Arkadia_CharcoalHut_Name_Hippothoos { "HIPPOTHOOS" }
 
@@ -55,6 +62,8 @@ script Arkadia_CharcoalHut_EventScript_Hippothoos {
     special(DoInGameTradeScene)
     setflag(FLAG_ICHOR_TRADED_ARKOBY)
     removeobject(LOCALID_ARKADIA_ARKAS)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_ARKADIA_GELASABLE)
     setspeaker(Arkadia_CharcoalHut_Name_Hippothoos)
     msgbox(format("Her name's Arkas. After Kallisto's boy. The one who nearly hunted her.\p"
                   "She carries that ball of soot everywhere. Throws it when she's scared.\p"
@@ -81,4 +90,14 @@ script Arkadia_CharcoalHut_EventScript_Sacks {
 
 script Arkadia_CharcoalHut_EventScript_Rake {
     msgbox(format("A long iron rake for drawing the kiln. The handle is worn smooth and black."), MSGBOX_SIGN)
+}
+
+script Arkadia_CharcoalHut_EventScript_Gelasable {
+    lock
+    faceplayer
+    playmoncry(SPECIES_GELASABLE, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Gelasable sits by the sacks, watching for rats. It looks very pleased with itself."))
+    waitmoncry
+    release
 }

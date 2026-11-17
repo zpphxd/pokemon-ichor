@@ -19,4 +19,21 @@
 #define ICHOR_CUT_MAUVILLE_MAN  1    // The Mauville Old Man: the bard's Easy Chat songs (165 KB of phonemes), the storyteller,
                                      // the hipster, the trader, Giddy. Not on INVENTORY's approved list, but its maps are gone.
 
+// Ichor: the catch mash (src/ichor_catch.c, design/ENGINE_API.md §12). When the player throws
+// a ball, a short "Tap A!" beat opens before the odds are rolled, and each A press raises the
+// modified catch rate a little. The odds are still rolled once, after the beat, so the shakes
+// the player sees always match the result.
+//   - Ten presses is about 6.7 a second over the 1.5 s window: steady mashing gets there,
+//     and the window closes as soon as it does, so a good masher also throws sooner.
+//   - x1.3 at the cap. Catch chance tracks the modified rate almost linearly below the
+//     auto-catch line, so a 20% throw becomes 26%: well short of a Great Ball's x1.5.
+//   - The boosted rate is capped at 254, one short of the auto-catch line, so the shake
+//     rolls always happen and mashing never guarantees a catch. Master Balls, auto-catches,
+//     trainer battles, the catch tutorial and Oath-refused battles get no window at all.
+#define ICHOR_CATCH_MASH              1    // 0 turns the window and the bonus off
+#define ICHOR_CATCH_MASH_FRAMES       80   // the longest the silent window holds the message (1.3 s; ten fast taps fit)
+#define ICHOR_CATCH_MASH_CAP          10   // presses that count; more add nothing
+#define ICHOR_CATCH_MASH_MAX_BONUS    30   // percent added to the catch rate at the cap
+#define ICHOR_CATCH_MASH_ODDS_CEILING 254  // the highest rate mashing can reach (255 auto-catches)
+
 #endif // GUARD_CONFIG_ICHOR_H

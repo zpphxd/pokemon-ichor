@@ -1,7 +1,9 @@
-"""Source adapters for four rider-only bike redraws; bikes stay unavailable.
+"""Source adapters for the player's riding sheets; the Acro Bike stays unavailable.
 
-The original contact planes and VEHICLE_EXTRAS remain exact, including transparent
-pixels. Image-led rider assembly does not authorize replacement vehicle geometry.
+For the Acro Bike's rider-only redraws, the original contact planes and
+VEHICLE_EXTRAS remain exact, including transparent pixels. The Mach Bike's sheet
+is now the chariot (walker_paint.py draws it: a pony and a two-wheeled car), so
+it keeps only the atlas, palette and ground-anchor checks; no bicycle is retained.
 """
 import argparse
 import re
@@ -162,13 +164,15 @@ def check():
                     frames(who, bike), contract["prior_source_frame_bounds"], specs)):
                 assert np.nonzero(frame)[0].max() + 1 == bounds[3], "original ground anchor"
                 assert np.any(frame == 0)
+                if bike == "mach_bike":
+                    continue  # the chariot replaces the bicycle: no vehicle plane to keep
                 retained = original[:, index * 32:(index + 1) * 32]
                 assert np.array_equal(frame[plane:], retained[plane:]), (
                     who, bike, index, "retained vehicle contact plane")
                 for x0, y0, x1, y1 in VEHICLE_EXTRAS.get(index, []):
                     assert np.array_equal(frame[y0:y1, x0:x1], retained[y0:y1, x0:x1]), (
                         who, bike, index, "retained VEHICLE_EXTRAS", (x0, y0, x1, y1))
-    print("PASS: four source-exact indexed atlases, 72 frames, exact vehicle planes/extras")
+    print("PASS: four source-exact indexed atlases, 72 frames; Acro vehicle planes/extras exact")
 
 
 def rgba(array, colors):

@@ -480,8 +480,11 @@ void AddBagItemIconSprite(enum Item itemId, u8 id)
         if (iconSpriteId != MAX_SPRITES)
         {
             *spriteId = iconSpriteId;
-            gSprites[iconSpriteId].x2 = 24;
-            gSprites[iconSpriteId].y2 = 88;
+            // Ichor: the 24x24 pic fills the top-left of a 32x32 sprite, so the
+            // sprite sits 4 px right and down of the old 24,88 to centre the pic
+            // in the plate (ICON_PLATE in tools/ichor/art/ui_menus_lib.py).
+            gSprites[iconSpriteId].x2 = 28;
+            gSprites[iconSpriteId].y2 = 92;
         }
     }
 }

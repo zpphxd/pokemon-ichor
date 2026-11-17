@@ -1,0 +1,59 @@
+// Amnisos's Agora (SCRIPT.md Part 2): Anthousa's saffron hall, red Minoan walls,
+// pithoi of oil along the back, the loom-weight scale. Anthousa stands at (4,3)
+// behind the counter; the player talks from (4,5). The mat is (5,7).
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaAmnisos_Agora_MapScripts {}
+
+text KnossaAmnisos_Agora_Name_Anthousa { "ANTHOUSA" }
+text KnossaAmnisos_Agora_Name_Customer { "OLD MAN" }
+
+script KnossaAmnisos_Agora_EventScript_Anthousa {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Agora_Name_Anthousa)
+    if (var(VAR_ICHOR_ACT3) >= 6) {
+        message(format("The palace is ours again? Then the herd's ours. Then the price goes up."))
+        waitmessage
+        pokemart(KnossaAmnisos_Agora_MartAfter)
+    } else {
+        message(format("Saffron! Picked by hand, one thread at a time. That's why it costs."))
+        waitmessage
+        pokemart(KnossaAmnisos_Agora_Mart)
+    }
+    setspeaker(KnossaAmnisos_Agora_Name_Anthousa)
+    msgbox(format("No, you can't have it cheaper. Pick it yourself, then."))
+    release
+}
+
+mart KnossaAmnisos_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+    ITEM_OLIVE_OIL
+}
+
+mart KnossaAmnisos_Agora_MartAfter {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_RESTORE
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+    ITEM_OLIVE_OIL
+}
+
+script KnossaAmnisos_Agora_EventScript_Customer {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Agora_Name_Customer)
+    msgbox(format("I've bought saffron off her mother, and her mother's mother.\p"
+                  "Every one of them said it was the last of the good crop. Every year."))
+    release
+}

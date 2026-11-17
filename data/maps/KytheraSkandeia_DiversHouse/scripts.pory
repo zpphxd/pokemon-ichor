@@ -12,7 +12,14 @@
 // TODO(balance): TM Liquidation doesn't exist yet. When it does, give it where
 // marked and set FLAG_ICHOR_GOT_TM_LIQUIDATION (claim it then).
 
-mapscripts KytheraSkandeia_DiversHouse_MapScripts {}
+mapscripts KytheraSkandeia_DiversHouse_MapScripts {
+    // The Pokémon the player traded in shows only after the trade.
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_TELKANVIL)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
 
 text KytheraSkandeia_DiversHouse_Name_Skyllias { "SKYLLIAS" }
 text KytheraSkandeia_DiversHouse_Name_Bathykleia { "BATHYKLEIA" }
@@ -77,6 +84,8 @@ script KytheraSkandeia_DiversHouse_EventScript_Bathykleia {
     waitstate
     setflag(FLAG_ICHOR_TRADED_TELKANVIL)
     removeobject(LOCALID_SKANDEIA_ANKYRA)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_SKANDEIA_GLYPHLET)
     setspeaker(KytheraSkandeia_DiversHouse_Name_Bathykleia)
     msgbox(format("Look at it. It's just sitting. On my hand. Oh, I love it.\p"
                   "Ankyra's yours. The coat's for its claws. It gets cold."))
@@ -108,4 +117,14 @@ script KytheraSkandeia_DiversHouse_EventScript_Tank {
 
 script KytheraSkandeia_DiversHouse_EventScript_Urchins {
     msgbox(format("A basket of black sea-urchins."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_DiversHouse_EventScript_Glyphlet {
+    lock
+    faceplayer
+    playmoncry(SPECIES_GLYPHLET, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Glyphlet sits by Bathykleia. It doesn't do anything else. She looks delighted."))
+    waitmoncry
+    release
 }

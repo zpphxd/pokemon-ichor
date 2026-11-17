@@ -1693,6 +1693,262 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 /* Ichor: world-act3 (ids 320-499) */
 
+/*
+Knossa above ground (ids 345-358), from design/phase4/SCRIPT.md Part 3, "The Bull Road,
+levels 44-47". Kerinthe, Euphemos, Phaistia, Iphitos, Propolis and Glauke are
+SCRIPT's, team for team. The Bull Road is a late route of ten screens, so
+MAP_DESIGN.md §8 asks nine trainers of it: Boukolion, Kybiste, Krokale,
+Telemos, Elais and Theoris are new, each in the place's own trade (the palace
+herd, a girl leaper, a saffron gatherer, an augur at the herm, an olive
+harvester, a pilgrim to the Mistress), every one on Aethos species.
+Where the build differs from the script:
+  - Class: Minoan Priest shows as PRIESTESS (the class name holds 12 letters).
+  - Pic: Bull-leaper is the male placeholder; Kybiste and Glauke use Bull-leaper F.
+*/
+
+=== TRAINER_ICHOR_KERINTHE ===
+Name: KERINTHE
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melibee (M)
+Level: 44
+Ability: Honey Gather
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 44
+Ability: Forewarn
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_BOUKOLION ===
+Name: BOUKOLION
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kerazap
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Onotis
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_EUPHEMOS ===
+Name: EUPHEMOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Ikaroth
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KYBISTE ===
+Name: KYBISTE
+Class: Bull-leaper
+Pic: Bull-leaper F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Galenyon
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KROKALE ===
+Name: KROKALE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Psychora
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Korantha
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TELEMOS ===
+Name: TELEMOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Amnoze
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ELAIS ===
+Name: ELAIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Gelasable
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hierolive
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_THEORIS ===
+Name: THEORIS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerastorm
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHAISTIA ===
+Name: PHAISTIA
+Class: Minoan Priest
+Pic: Minoan Priestess
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Korantha
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_IPHITOS ===
+Name: IPHITOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PROPOLIS ===
+Name: PROPOLIS
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Melisseer
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melibee (M)
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Thyrsivy
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GLAUKE_KNOSSA ===
+Name: GLAUKE
+Class: Bull-leaper
+Pic: Bull-leaper F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KERAMOS ===
+Name: KERAMOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GYPSOS ===
+Name: GYPSOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+
 
 /* Ichor: the post-game (ids 500-679) */
 
@@ -2035,6 +2291,22 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Raknit
 Level: 29
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+
+=== TRAINER_ICHOR_THYRSA_CHORUS ===
+Name: CHORUS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Elapling
+Level: 28
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+
+Botrykit
+Level: 28
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_ICHOR_THESPIS ===
@@ -4874,3 +5146,1857 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 
 /* Ichor: the Oikoumene (ids 680-819) */
+
+/* Ichor: the League (ids 460-475): the Ascent, the Pantheon, the Archon. Generated by tools/ichor/maps/league_trainers.py */
+
+=== TRAINER_ICHOR_ASCENT_PHILON ===
+Name: PHILON
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossard
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Bulldoze
+- Rock Slide
+- Iron Defense
+
+Gigantomb
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Rock Slide
+- Will-O-Wisp
+- Earth Power
+
+=== TRAINER_ICHOR_ASCENT_LAMPON ===
+Name: LAMPON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- X-Scissor
+- Brick Break
+- Swords Dance
+- Rock Slide
+
+Kourodin
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Drain Punch
+- Bullet Punch
+- Bulk Up
+
+Laolith
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Stone Edge
+- Close Combat
+- Stealth Rock
+- Iron Defense
+
+=== TRAINER_ICHOR_ASCENT_THEANO ===
+Name: THEANO
+Class: Augur
+Pic: Augur
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Sophowl
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Psychic
+- Air Slash
+- Calm Mind
+- Roost
+
+Melisseer
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Bug Buzz
+- Psychic
+- Quiver Dance
+- Dazzling Gleam
+
+Mantipod
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Psyshock
+- Energy Ball
+- Calm Mind
+
+=== TRAINER_ICHOR_ASCENT_KALLIAS ===
+Name: KALLIAS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Earthquake
+- Body Slam
+- Rock Slide
+- Yawn
+
+Kaprodon
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Earthquake
+- Head Smash
+- Ice Fang
+
+Pythoros
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Dragon Claw
+- Earthquake
+- Glare
+- Coil
+
+=== TRAINER_ICHOR_ASCENT_AGATHE ===
+Name: AGATHE
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Gigantomb
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Stone Edge
+- Will-O-Wisp
+- Earth Power
+
+Kolossard
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Earthquake
+- Rock Slide
+- Iron Defense
+
+=== TRAINER_ICHOR_ASCENT_NIKIAS ===
+Name: NIKIAS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kerastorm
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Thunderbolt
+- Moonblast
+- Thunder Wave
+- Charge Beam
+
+Basilops
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Brave Bird
+- Body Slam
+- U-turn
+- Roost
+
+Nemeleon
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Body Slam
+- Roar
+- Work Up
+
+=== TRAINER_ICHOR_ASCENT_EIRENE ===
+Name: EIRENE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Korantha
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Petal Blizzard
+- Moonblast
+- Synthesis
+- Leech Seed
+
+Chionyad
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Ice Beam
+- Moonblast
+- Calm Mind
+- Aurora Veil
+
+=== TRAINER_ICHOR_ASCENT_DEXIOS ===
+Name: DEXIOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Laolith
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Stone Edge
+- Close Combat
+- Stealth Rock
+- Rock Polish
+
+Kaprodon
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Earthquake
+- Head Smash
+- Stone Edge
+
+Kolossard
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Earthquake
+- Rock Slide
+- Iron Defense
+
+=== TRAINER_ICHOR_ASCENT_STHENELOS ===
+Name: STHENELOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 60
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Dragon Claw
+- Close Combat
+- Dragon Dance
+- Iron Head
+
+Hoplektor
+Level: 60
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Brave Bird
+- Close Combat
+- Bulk Up
+- Roost
+
+Kourodin
+Level: 60
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Drain Punch
+- Bullet Punch
+- Swords Dance
+
+=== TRAINER_ICHOR_ASCENT_GORGO ===
+Name: GORGO
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Gigantomb
+Level: 61
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flamethrower
+- Stone Edge
+- Earth Power
+- Will-O-Wisp
+
+Pythoros
+Level: 61
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Dragon Claw
+- Earthquake
+- Glare
+- Coil
+
+Kolossard
+Level: 61
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Earthquake
+- Stone Edge
+- Iron Defense
+
+Kaprodon
+Level: 61
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Earthquake
+- Head Smash
+- Ice Fang
+
+=== TRAINER_ICHOR_ASCENT_MELITE ===
+Name: MELITE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Himerow
+Level: 61
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Moonblast
+- Air Slash
+- Roost
+- Calm Mind
+
+Kalliglyph
+Level: 61
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Power Gem
+- Moonblast
+- Stealth Rock
+- Calm Mind
+
+Chionyad
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Blizzard
+- Moonblast
+- Calm Mind
+- Aurora Veil
+
+=== TRAINER_ICHOR_BRASIDAS ===
+Name: BRASIDAS
+Class: Elite Four
+Pic: Hoplite
+Gender: Male
+Music: Elite Four
+AI: Smart Trainer
+
+Laolith @ Focus Sash
+Level: 60
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Close Combat
+- Stealth Rock
+- Rock Polish
+
+Hoplomex @ Life Orb
+Level: 60
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- X-Scissor
+- Swords Dance
+- Stone Edge
+
+Geogrip @ Leftovers
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Drain Punch
+- Earthquake
+- Bulk Up
+- Rock Slide
+
+Kourodin @ Shell Bell
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Iron Head
+- Drain Punch
+- Bullet Punch
+- Swords Dance
+
+Dorydrake @ Black Belt
+Level: 62
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Dragon Claw
+- Dragon Dance
+- Earthquake
+
+Hoplektor @ Sitrus Berry
+Level: 63
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Bulk Up
+- Roost
+
+=== TRAINER_ICHOR_BRASIDAS ===
+Name: BRASIDAS
+Class: Elite Four
+Pic: Hoplite
+Gender: Male
+Music: Elite Four
+Difficulty: Easy
+AI: Basic Trainer
+
+Laolith
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Stone Edge
+- Close Combat
+- Stealth Rock
+- Rock Polish
+
+Hoplomex
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Close Combat
+- X-Scissor
+- Swords Dance
+- Stone Edge
+
+Geogrip
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Drain Punch
+- Earthquake
+- Bulk Up
+- Rock Slide
+
+Kourodin
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Drain Punch
+- Bullet Punch
+- Swords Dance
+
+Dorydrake
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Close Combat
+- Dragon Claw
+- Dragon Dance
+- Earthquake
+
+Hoplektor
+Level: 60
+Ability: Guts
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Brave Bird
+- Close Combat
+- Bulk Up
+- Roost
+
+=== TRAINER_ICHOR_BRASIDAS ===
+Name: BRASIDAS
+Class: Elite Four
+Pic: Hoplite
+Gender: Male
+Music: Elite Four
+Difficulty: Hard
+AI: Smart Trainer
+
+Laolith @ Focus Sash
+Level: 60
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Stone Edge
+- Close Combat
+- Stealth Rock
+- Rock Polish
+
+Hoplomex @ Life Orb
+Level: 60
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Jolly Nature
+- Close Combat
+- X-Scissor
+- Swords Dance
+- Stone Edge
+
+Geogrip @ Leftovers
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Careful Nature
+- Drain Punch
+- Earthquake
+- Bulk Up
+- Rock Slide
+
+Kourodin @ Shell Bell
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Iron Head
+- Drain Punch
+- Bullet Punch
+- Swords Dance
+
+Dorydrake @ Black Belt
+Level: 62
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Jolly Nature
+- Close Combat
+- Dragon Claw
+- Dragon Dance
+- Earthquake
+
+Hoplektor @ Sitrus Berry
+Level: 63
+Ability: Guts
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Brave Bird
+- Close Combat
+- Bulk Up
+- Roost
+
+=== TRAINER_ICHOR_THEMISTOKLES ===
+Name: THEMISTOK.
+Class: Elite Four
+Pic: Ichor Sailor
+Gender: Male
+Music: Elite Four
+AI: Smart Trainer
+
+Dakrock @ Damp Rock
+Level: 60
+Ability: Drizzle
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Scald
+- Stealth Rock
+- Power Gem
+- Recover
+
+Narkeray @ Expert Belt
+Level: 60
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Thunder
+- Surf
+- Ice Beam
+- Volt Switch
+
+Galenyon @ Sharp Beak
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hurricane
+- Surf
+- Tailwind
+- Roost
+
+Telkanvil @ Leftovers
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Liquidation
+- Iron Head
+- Aqua Jet
+- Swords Dance
+
+Trybdis @ Rocky Helmet
+Level: 62
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Whirlpool
+- Earthquake
+- Scald
+- Toxic
+
+Hexylla @ Mystic Water
+Level: 63
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Liquidation
+- Crunch
+- Aqua Jet
+- Dragon Dance
+
+=== TRAINER_ICHOR_THEMISTOKLES ===
+Name: THEMISTOK.
+Class: Elite Four
+Pic: Ichor Sailor
+Gender: Male
+Music: Elite Four
+Difficulty: Easy
+AI: Basic Trainer
+
+Dakrock
+Level: 57
+Ability: Drizzle
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Scald
+- Stealth Rock
+- Power Gem
+- Recover
+
+Narkeray
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Thunder
+- Surf
+- Ice Beam
+- Volt Switch
+
+Galenyon
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Hurricane
+- Surf
+- Tailwind
+- Roost
+
+Telkanvil
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Liquidation
+- Iron Head
+- Aqua Jet
+- Swords Dance
+
+Trybdis
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Whirlpool
+- Earthquake
+- Scald
+- Toxic
+
+Hexylla
+Level: 60
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Liquidation
+- Crunch
+- Aqua Jet
+- Dragon Dance
+
+=== TRAINER_ICHOR_THEMISTOKLES ===
+Name: THEMISTOK.
+Class: Elite Four
+Pic: Ichor Sailor
+Gender: Male
+Music: Elite Four
+Difficulty: Hard
+AI: Smart Trainer
+
+Dakrock @ Damp Rock
+Level: 60
+Ability: Drizzle
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Bold Nature
+- Scald
+- Stealth Rock
+- Power Gem
+- Recover
+
+Narkeray @ Expert Belt
+Level: 60
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Modest Nature
+- Thunder
+- Surf
+- Ice Beam
+- Volt Switch
+
+Galenyon @ Sharp Beak
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Timid Nature
+- Hurricane
+- Surf
+- Tailwind
+- Roost
+
+Telkanvil @ Leftovers
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Liquidation
+- Iron Head
+- Aqua Jet
+- Swords Dance
+
+Trybdis @ Rocky Helmet
+Level: 62
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Relaxed Nature
+- Whirlpool
+- Earthquake
+- Scald
+- Toxic
+
+Hexylla @ Mystic Water
+Level: 63
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Liquidation
+- Crunch
+- Aqua Jet
+- Dragon Dance
+
+=== TRAINER_ICHOR_HYPATIA ===
+Name: HYPATIA
+Class: Elite Four
+Pic: Augur
+Gender: Female
+Music: Elite Four
+AI: Smart Trainer
+
+Enigmaw @ Expert Belt
+Level: 60
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Psychic
+- Focus Blast
+- Shadow Ball
+- Nasty Plot
+
+Mantipod @ Wise Glasses
+Level: 60
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Psyshock
+- Flamethrower
+- Energy Ball
+- Calm Mind
+
+Melisseer @ Sitrus Berry
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Bug Buzz
+- Psychic
+- Quiver Dance
+- Dazzling Gleam
+
+Pithound @ Leftovers
+Level: 61
+Ability: Unaware
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Psychic Fangs
+- Crunch
+- Thunder Wave
+- Protect
+
+Amnoze @ Lum Berry
+Level: 62
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Psychic
+- Body Slam
+- Yawn
+- Calm Mind
+
+Sophowl @ Twisted Spoon
+Level: 63
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Psychic
+- Hurricane
+- Calm Mind
+- Roost
+
+=== TRAINER_ICHOR_HYPATIA ===
+Name: HYPATIA
+Class: Elite Four
+Pic: Augur
+Gender: Female
+Music: Elite Four
+Difficulty: Easy
+AI: Basic Trainer
+
+Enigmaw
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Psychic
+- Focus Blast
+- Shadow Ball
+- Nasty Plot
+
+Mantipod
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Psyshock
+- Flamethrower
+- Energy Ball
+- Calm Mind
+
+Melisseer
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Bug Buzz
+- Psychic
+- Quiver Dance
+- Dazzling Gleam
+
+Pithound
+Level: 58
+Ability: Unaware
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Psychic Fangs
+- Crunch
+- Thunder Wave
+- Protect
+
+Amnoze
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Psychic
+- Body Slam
+- Yawn
+- Calm Mind
+
+Sophowl
+Level: 60
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Psychic
+- Hurricane
+- Calm Mind
+- Roost
+
+=== TRAINER_ICHOR_HYPATIA ===
+Name: HYPATIA
+Class: Elite Four
+Pic: Augur
+Gender: Female
+Music: Elite Four
+Difficulty: Hard
+AI: Smart Trainer
+
+Enigmaw @ Expert Belt
+Level: 60
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+- Psychic
+- Focus Blast
+- Shadow Ball
+- Nasty Plot
+
+Mantipod @ Wise Glasses
+Level: 60
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Timid Nature
+- Psyshock
+- Flamethrower
+- Energy Ball
+- Calm Mind
+
+Melisseer @ Sitrus Berry
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Timid Nature
+- Bug Buzz
+- Psychic
+- Quiver Dance
+- Dazzling Gleam
+
+Pithound @ Leftovers
+Level: 61
+Ability: Unaware
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Impish Nature
+- Psychic Fangs
+- Crunch
+- Thunder Wave
+- Protect
+
+Amnoze @ Lum Berry
+Level: 62
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Calm Nature
+- Psychic
+- Body Slam
+- Yawn
+- Calm Mind
+
+Sophowl @ Twisted Spoon
+Level: 63
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Timid Nature
+- Psychic
+- Hurricane
+- Calm Mind
+- Roost
+
+=== TRAINER_ICHOR_OLYMPIAS ===
+Name: OLYMPIAS
+Class: Elite Four
+Pic: Acolyte F
+Gender: Female
+Music: Elite Four
+AI: Smart Trainer
+
+Pythoros @ Leftovers
+Level: 61
+Ability: Intimidate
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Earthquake
+- Dragon Tail
+- Glare
+- Coil
+
+Stachypter @ Miracle Seed
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Pulse
+- Giga Drain
+- Sleep Powder
+- Leech Seed
+
+Persenyx @ Sitrus Berry
+Level: 61
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Shadow Ball
+- Giga Drain
+- Will-O-Wisp
+- Synthesis
+
+Kynoketos @ Dragon Fang
+Level: 62
+Ability: Intimidate
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Waterfall
+- Outrage
+- Crunch
+- Dragon Dance
+
+Melodrakon @ Rocky Helmet
+Level: 62
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Pulse
+- Moonblast
+- Glare
+- Recover
+
+Lernathan @ Life Orb
+Level: 64
+Ability: Regenerator
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Draco Meteor
+- Sludge Bomb
+- Fire Blast
+- Dragon Pulse
+
+=== TRAINER_ICHOR_OLYMPIAS ===
+Name: OLYMPIAS
+Class: Elite Four
+Pic: Acolyte F
+Gender: Female
+Music: Elite Four
+Difficulty: Easy
+AI: Basic Trainer
+
+Pythoros
+Level: 58
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Earthquake
+- Dragon Tail
+- Glare
+- Coil
+
+Stachypter
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Dragon Pulse
+- Giga Drain
+- Sleep Powder
+- Leech Seed
+
+Persenyx
+Level: 58
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Shadow Ball
+- Giga Drain
+- Will-O-Wisp
+- Synthesis
+
+Kynoketos
+Level: 59
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Waterfall
+- Outrage
+- Crunch
+- Dragon Dance
+
+Melodrakon
+Level: 59
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Dragon Pulse
+- Moonblast
+- Glare
+- Recover
+
+Lernathan
+Level: 61
+Ability: Regenerator
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Draco Meteor
+- Sludge Bomb
+- Fire Blast
+- Dragon Pulse
+
+=== TRAINER_ICHOR_OLYMPIAS ===
+Name: OLYMPIAS
+Class: Elite Four
+Pic: Acolyte F
+Gender: Female
+Music: Elite Four
+Difficulty: Hard
+AI: Smart Trainer
+
+Pythoros @ Leftovers
+Level: 61
+Ability: Intimidate
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Impish Nature
+- Earthquake
+- Dragon Tail
+- Glare
+- Coil
+
+Stachypter @ Miracle Seed
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+- Dragon Pulse
+- Giga Drain
+- Sleep Powder
+- Leech Seed
+
+Persenyx @ Sitrus Berry
+Level: 61
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Calm Nature
+- Shadow Ball
+- Giga Drain
+- Will-O-Wisp
+- Synthesis
+
+Kynoketos @ Dragon Fang
+Level: 62
+Ability: Intimidate
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Waterfall
+- Outrage
+- Crunch
+- Dragon Dance
+
+Melodrakon @ Rocky Helmet
+Level: 62
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Bold Nature
+- Dragon Pulse
+- Moonblast
+- Glare
+- Recover
+
+Lernathan @ Life Orb
+Level: 64
+Ability: Regenerator
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+- Draco Meteor
+- Sludge Bomb
+- Fire Blast
+- Dragon Pulse
+
+=== TRAINER_ICHOR_ARISTEIDES ===
+Name: ARISTEIDES
+Class: Champion
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Smart Trainer
+
+Lebetron @ Magnet
+Level: 65
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Thunderbolt
+- Flash Cannon
+- Volt Switch
+- Thunder Wave
+
+Krystolos @ Never-Melt Ice
+Level: 65
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Icicle Crash
+- Stone Edge
+- Stealth Rock
+- Earthquake
+
+Elektear @ Leftovers
+Level: 65
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Thunderbolt
+- Giga Drain
+- Leech Seed
+- Protect
+
+Kerastorm @ Sitrus Berry
+Level: 66
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Thunderbolt
+- Moonblast
+- Thunder Wave
+- Nasty Plot
+
+Sepivolt @ Expert Belt
+Level: 66
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Thunder
+- Power Gem
+- Ancient Power
+- Discharge
+
+Aetarch @ Life Orb
+Level: 67
+Ability: Intimidate
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Wild Charge
+- Close Combat
+- Roost
+
+=== TRAINER_ICHOR_ARISTEIDES ===
+Name: ARISTEIDES
+Class: Champion
+Pic: Pilgrim
+Gender: Male
+Music: Male
+Difficulty: Easy
+AI: Basic Trainer
+
+Lebetron
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Thunderbolt
+- Flash Cannon
+- Volt Switch
+- Thunder Wave
+
+Krystolos
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Icicle Crash
+- Stone Edge
+- Stealth Rock
+- Earthquake
+
+Elektear
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Thunderbolt
+- Giga Drain
+- Leech Seed
+- Protect
+
+Kerastorm
+Level: 63
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Thunderbolt
+- Moonblast
+- Thunder Wave
+- Nasty Plot
+
+Sepivolt
+Level: 63
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Thunder
+- Power Gem
+- Ancient Power
+- Discharge
+
+Aetarch
+Level: 64
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Brave Bird
+- Wild Charge
+- Close Combat
+- Roost
+
+=== TRAINER_ICHOR_ARISTEIDES ===
+Name: ARISTEIDES
+Class: Champion
+Pic: Pilgrim
+Gender: Male
+Music: Male
+Difficulty: Hard
+AI: Smart Trainer
+
+Lebetron @ Magnet
+Level: 65
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+- Thunderbolt
+- Flash Cannon
+- Volt Switch
+- Thunder Wave
+
+Krystolos @ Never-Melt Ice
+Level: 65
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Icicle Crash
+- Stone Edge
+- Stealth Rock
+- Earthquake
+
+Elektear @ Leftovers
+Level: 65
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Calm Nature
+- Thunderbolt
+- Giga Drain
+- Leech Seed
+- Protect
+
+Kerastorm @ Sitrus Berry
+Level: 66
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Timid Nature
+- Thunderbolt
+- Moonblast
+- Thunder Wave
+- Nasty Plot
+
+Sepivolt @ Expert Belt
+Level: 66
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+Modest Nature
+- Thunder
+- Power Gem
+- Ancient Power
+- Discharge
+
+Aetarch @ Life Orb
+Level: 67
+Ability: Intimidate
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Jolly Nature
+- Brave Bird
+- Wild Charge
+- Close Combat
+- Roost
+
+/* End League teams. */
+
+/* Ichor: Labyrinth I (ids 365-389): Rings I-IV, design/phase4/SCRIPT.md Part 3 */
+
+=== TRAINER_ICHOR_AKAKALLIS ===
+Name: AKAKALLIS
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_XENODIKE ===
+Name: XENODIKE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Korantha
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Persenyx
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_TEPHRA ===
+Name: TEPHRA
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Gigantomb
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SINOPOS ===
+Name: SINOPOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_AUTOMATON_3 ===
+Name: NO. 3
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_AUTOMATON_7 ===
+Name: NO. 7
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kourodin
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_LITHOS ===
+Name: LITHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KONIORTOS ===
+Name: KONIORTOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SIDEROS ===
+Name: SIDEROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_CHALKOS ===
+Name: CHALKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PELOS ===
+Name: PELOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ENKELADOS ===
+Name: ENKELADOS
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* Ichor: the Labyrinth's heart (the Labyrinth II build, ids 390-409; design/phase4/SCRIPT.md
+   Part 3, "Ring VI, the Forge" to "The Starry Chamber"). The Gigas wear the Titanborn class
+   and the grunt's portrait until a Gigas class and portrait are drawn. */
+
+=== TRAINER_ICHOR_ANTHRAKOS ===
+Name: ANTHRAKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PORINOS ===
+Name: PORINOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ARGILLOS ===
+Name: ARGILLOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Plouteras
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SMYRIS ===
+Name: SMYRIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Cairnolith
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MIMAS ===
+Name: MIMAS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ALKYONEUS ===
+Name: ALKYONEUS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Plouteras
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Geogrip
+Level: 50
+Ability: Earth Eater
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_HYPERION_KNOSSA ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Taurivet
+Level: 50
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Heavy Slam
+- Stomping Tantrum
+- Scary Face
+
+Laolith
+Level: 50
+Ability: Sturdy
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Drain Punch
+- Stealth Rock
+
+Pyrapod @ Eviolite
+Level: 51
+Ability: Magic Bounce
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flamethrower
+- Will-O-Wisp
+- Iron Defense
+- Calm Mind
+
+Hymnaria
+Level: 51
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Heat Wave
+- Air Slash
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 53
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Earth Power
+- Heat Crash
+- Stealth Rock
+
+=== TRAINER_ICHOR_PORPHYRION ===
+Name: PORPHYRION
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Laolith
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KLYTIOS ===
+Name: KLYTIOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Gigantomb
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ENKELADOS_CHOROS ===
+Name: ENKELADOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Pylakyon @ Sitrus Berry
+Level: 54
+Ability: Blaze
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Phantom Force
+- Flamethrower
+- Crunch
+- Will-O-Wisp
+
+=== TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Seismare @ Sitrus Berry
+Level: 54
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Wave Crash
+- Earthquake
+- Bounce
+- Agility
+
+=== TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Daphnyad @ Sitrus Berry
+Level: 54
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Petal Blizzard
+- Dazzling Gleam
+- Leaf Blade
+- Synthesis

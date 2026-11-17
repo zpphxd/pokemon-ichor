@@ -11,7 +11,10 @@
     "gMapGroup_IndoorThyrsa",
     "gMapGroup_DungeonsAct2",
     "gMapGroup_IndoorKaldera",
-    "gMapGroup_Kythera"
+    "gMapGroup_Kythera",
+    "gMapGroup_League",
+    "gMapGroup_Labyrinth",
+    "gMapGroup_Knossa"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -114,6 +117,7 @@
     "EmporionCity_WidowsHouse",
     "EmporionCity_RunnersHouse",
     "EmporionCity_PottersWorkshop",
+    "EmporionCity_ChariotStore",
     "EmporionCity_HiringHall",
     "EmporionCity_TempleOfHermes"
   ],
@@ -194,5 +198,49 @@
     "KytheraNeraidaFalls",
     "KytheraEchoCaves",
     "KytheraTempleOfAphrodite"
+  ],
+  "gMapGroup_League": [
+    "Ascent_1F",
+    "Ascent_2F",
+    "Ascent_3F",
+    "Olympus_Propylaia",
+    "Olympus_SeatOfAres",
+    "Olympus_SeatOfPoseidon",
+    "Olympus_SeatOfAthena",
+    "Olympus_SeatOfHera",
+    "Olympus_Summit",
+    "Olympus_HallOfHeroes"
+  ],
+  "gMapGroup_Labyrinth": [
+    "LabyrinthRing1",
+    "LabyrinthRing2",
+    "LabyrinthRing3",
+    "LabyrinthRing4",
+    "LabyrinthMinosTomb",
+    "LabyrinthWorkshop",
+    "LabyrinthRing6",
+    "LabyrinthRing5",
+    "LabyrinthRing7",
+    "LabyrinthStarryChamber",
+    "LabyrinthIcarusShaft"
+  ],
+  "gMapGroup_Knossa": [
+    "KnossaAmnisos",
+    "KnossaAmnisos_Agora",
+    "KnossaAmnisos_Asclepeion",
+    "KnossaAmnisos_FishersHut",
+    "KnossaAmnisos_KydonsHouse",
+    "KnossaAmnisos_LeapersHouse",
+    "KnossaAmnisos_Tavern",
+    "KnossaAmnisos_XeniaHouse",
+    "KnossaBronzeHeel",
+    "KnossaBullRoad",
+    "KnossaBullRoad_Hut",
+    "KnossaBullRoad_Vineyard",
+    "KnossaPalace",
+    "KnossaPalace_GrandStaircase",
+    "KnossaPalace_QueensMegaron",
+    "KnossaPalace_ThroneRoom",
+    "KnossaPalace_WestMagazines"
   ]
 }

@@ -1,0 +1,261 @@
+{
+  "id": "MAP_ASCENT_1F",
+  "name": "Ascent_1F",
+  "layout": "LAYOUT_ASCENT_1F",
+  "music": "MUS_VICTORY_ROAD",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_THE_ASCENT",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ASCENT_2F",
+      "offset": 0,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_ASCENT_1F_PHILON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 35,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Ascent_1F_EventScript_Philon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_LAMPON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 20,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Ascent_1F_EventScript_Lampon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_THEANO",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
+      "x": 41,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Ascent_1F_EventScript_Theano",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_KALLIAS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 9,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Ascent_1F_EventScript_Kallias",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_MULETEER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 44,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Ascent_1F_EventScript_Muleteer",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_GOAT",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
+      "x": 45,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Ascent_1F_EventScript_Goat",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_FOLD_GOAT_A",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ERIPIP)",
+      "x": 39,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Ascent_1F_EventScript_FoldGoat",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_GOATHERD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOATHERD",
+      "x": 42,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Ascent_1F_EventScript_Goatherd",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_1F_DRUM",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "x": 22,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_StrengthBoulder",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 21,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_RESTORE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ASCENT1_FULL_RESTORE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 43,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ASCENT1_ULTRA_BALL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 37,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REPEL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ASCENT1_MAX_REPEL"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 25,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_ASCENT1_STARDUST",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 41,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_1F_EventScript_RoadSign"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_1F_EventScript_Beacon"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_1F_EventScript_Beacon"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_1F_EventScript_Stelai"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Ascent_1F_EventScript_Niches"
+    },
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 26,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_1F_EventScript_Herm"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_1F_EventScript_CloudSign"
+    }
+  ],
+  "ichor_kind": "dungeon"
+}

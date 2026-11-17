@@ -1,0 +1,170 @@
+// The summit of Olympus: the Archon, Medon's Knot (STORY.md L-8, §6.15, §7.10).
+// Arrival from Hera's seat (VAR_ELITE_4_STATE 8) walks the player through the
+// propylon to the altar. After the first Hall of Heroes, Aristeides has gone
+// home (FLAG_ICHOR_HIDE_ARCHON_SUMMIT) and the altar takes a champion straight
+// to the Hall again. Rematch teams belong to the post-game (BALANCE.md).
+
+mapscripts Olympus_Summit_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_TEMP_1, 0: Olympus_Summit_EventScript_FaceNorth
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ELITE_4_STATE, 8: Olympus_Summit_EventScript_Arrive
+    ]
+}
+
+script Olympus_Summit_EventScript_FaceNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+}
+
+movement Olympus_Summit_Movement_ToAltar { walk_up * 11 }
+movement Olympus_Summit_Movement_ThreadSouth { walk_in_place_slow_down }
+
+script Olympus_Summit_EventScript_Arrive {
+    lockall
+    setvar(VAR_ELITE_4_STATE, 9)
+    applymovement(LOCALID_PLAYER, Olympus_Summit_Movement_ToAltar)
+    waitmovement(0)
+    if (flag(FLAG_ICHOR_HIDE_ARCHON_SUMMIT)) {
+        msgbox(format("The altar stands empty under the open sky. The box is gone.\pThe wind smells of snow and, faintly, of honey."))
+        closemessage
+        goto(Olympus_Summit_EventScript_ToHall)
+    }
+    goto(Olympus_Summit_EventScript_Archon)
+}
+
+script Olympus_Summit_EventScript_Aristeides {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_KNOT_UNTIED)) {
+        setspeaker(Ichor_League_Text_NameAristeides)
+        msgbox(format("Go in. They'll want your name on the wall."))
+        release
+        end
+    }
+    goto(Olympus_Summit_EventScript_Archon)
+}
+
+text Olympus_Summit_Text_WhatHappened { "WHAT HAPPENED?" }
+text Olympus_Summit_Text_IThinkIKnow { "I THINK I KNOW." }
+text Olympus_Summit_Text_ArchonDefeat { "…Unwritten. All of it. Even this." }
+
+script Olympus_Summit_EventScript_Archon {
+    lockall
+    playbgm(MUS_ENCOUNTER_CHAMPION, FALSE)
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("You climbed. Everyone said you would. I didn't need an oracle.\pI've been Archon for twenty years. Do you know what the job is?\pKeeping a box."))
+    closemessage
+    msgbox(format("He opens the little bronze box on the altar.\pInside lies a fist-sized knot of black thread, with one red strand through it."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("Medon's Knot. The last of the chain. The one that holds the rest.\pTie it on the Loom, and every knot goes tight again.\pEvery oracle comes true. No chains needed."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("A thousand years of peace. Kings who stepped down when they were told.\pWars nobody fought, because everyone knew who'd win.\pAnd now? Lakonia sharpens spears. Emporion hoards grain."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("The Pythia sits in her temple and laughs. Have you heard her laugh?\pPeople are frightened, child. I'm frightened."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    message(format("That forger told you to ask me about Kalliste. So ask."))
+    waitmessage
+    dynmultichoice(16, 6, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, Olympus_Summit_Text_WhatHappened, Olympus_Summit_Text_IThinkIKnow)
+    if (var(VAR_RESULT) == 1) {
+        setspeaker(Ichor_League_Text_NameAristeides)
+        msgbox(format("Then you can tell me if I get it wrong."))
+    }
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("Twelve years ago, the old Archon sent me to find a runaway bee.\pA melissa who left Delphoi before the night the Oracle went blind.\pI found a beekeeper on Kalliste. And a baby who never cried."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("I knocked. She didn't ask my name. She sat me down.\pBread. Honey. The good honey.\pYou don't harm the house that feeds you. That's older than Archons."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("So I went home and wrote that she'd drowned. Both of you.\pMy first lie. I wrote it very badly.\pThe Keeper read it. A forger knows a forgery."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("He's held it over me ever since. That's how he got his post.\pThat's how they found you. That's why a girl was voted out of my city."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("Everything else in my life was written. That wasn't.\pThe one thing I ever chose. And look what it did.\pI spared one free child, and the world stopped.\pWhat happens when everyone is free?"))
+    closemessage
+    msgbox(format("He closes the box."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("The law of Olympus is simple. Whoever beats the Archon keeps the box.\pIf I win, I carry this to Delphoi and tie it at the new moon.\pIf you win… it's yours. And so is the fear.\pI won't go easy. A just man doesn't."))
+    trainerbattle_no_intro(TRAINER_ICHOR_ARISTEIDES, Olympus_Summit_Text_ArchonDefeat)
+    setflag(FLAG_ICHOR_ARCHON_DEFEATED)
+    goto(Olympus_Summit_EventScript_Knot)
+}
+
+script Olympus_Summit_EventScript_Knot {
+    lockall
+    msgbox(format("Aristeides sits down on the altar step and holds out the box."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("It's yours. The box. The knot. The office. The fear.\pArchon of Aethos. Gods help you."))
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+    message(format("{PLAYER} received Medon's Knot."))
+    waitmessage
+    waitfanfare
+    msgbox(format("It's cold and heavy. Heavier than it should be."))
+    msgbox(format("Untie Medon's Knot?"), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        msgbox(format("The knot sits in your palm. It isn't going anywhere."))
+        msgbox(format("Untie Medon's Knot?"), MSGBOX_YESNO)
+    }
+    msgbox(format("You pull at the red strand. It doesn't move.\pIt's tied tight. Tighter than anything you've ever held."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("It took a grieving man a whole night to tie that.\pIt'll take two to undo it. Here. I'll hold. You pull."))
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_TEMP_2, 0)
+    while (var(VAR_TEMP_2) < 6) {
+        msgbox(format("Pull?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            playse(SE_M_BIND)
+            waitse
+            addvar(VAR_TEMP_2, 1)
+            if (var(VAR_TEMP_2) == 2) {
+                msgbox(format("The red strand slides a little."))
+            } elif (var(VAR_TEMP_2) == 4) {
+                msgbox(format("…A little more."))
+            } elif (var(VAR_TEMP_2) == 6) {
+                msgbox(format("The black loops loosen, one by one."))
+            }
+        }
+    }
+    fadescreenspeed(FADE_TO_WHITE, 4)
+    fadescreenspeed(FADE_FROM_WHITE, 4)
+    msgbox(format("It isn't black anymore. It's gold."))
+    setflag(FLAG_ICHOR_KNOT_UNTIED)
+    msgbox(format("A wind off the summit lifts the thread out of your hands.\pIt drifts away over the clouds, south, toward the sea."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("…There it goes.\pI'm going home. My father collects my name on broken pots.\pHe'll be pleased. He was always sick of hearing me called the Just."))
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("But first, the Hall. Come. They'll want your name on the wall."))
+    closemessage
+    goto(Olympus_Summit_EventScript_ToHall)
+}
+
+script Olympus_Summit_EventScript_ToHall {
+    setvar(VAR_ELITE_4_STATE, 9)
+    playse(SE_DOOR)
+    warp(MAP_OLYMPUS_HALL_OF_HEROES, 0)
+    waitstate
+    releaseall
+}
+
+script Olympus_Summit_EventScript_TempleDoor {
+    lockall
+    if (!flag(FLAG_ICHOR_KNOT_UNTIED)) {
+        msgbox(format("The temple of the Twelve. Its door won't open while the Archon waits at the altar."))
+        closemessage
+        applymovement(LOCALID_PLAYER, Common_Movement_WalkDown)
+        waitmovement(0)
+        releaseall
+        end
+    }
+    goto(Olympus_Summit_EventScript_ToHall)
+}
+
+script Olympus_Summit_EventScript_Altar {
+    lockall
+    if (!flag(FLAG_ICHOR_KNOT_UNTIED)) {
+        msgbox(format("The great altar of Zeus. A small bronze box sits on it."))
+    } else {
+        msgbox(format("The great altar of Zeus, under an open sky. The box is gone."))
+    }
+    releaseall
+}

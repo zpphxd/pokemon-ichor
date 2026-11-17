@@ -1,0 +1,75 @@
+// The Ascent, 2F: the cloud ledges and the ex-Titanborn camp, the midway rest
+// (design/LEAGUE.md; STORY.md L-6).
+
+mapscripts Ascent_2F_MapScripts {}
+
+script Ascent_2F_EventScript_Cook {
+    lock
+    faceplayer
+    setspeaker(Ichor_League_Text_NameCook)
+    msgbox(format("Sit. Eat. You look like the mountain's been chewing on you.\pIn the golden age, did we still get to eat? Nobody ever answered that."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Ichor_League_Text_NameCook)
+    msgbox(format("There. Barley and goat. Same as the Titans fed us, without the speeches."))
+    if (!flag(FLAG_ICHOR_GOT_ASCENT_LEFTOVERS)) {
+        msgbox(format("Take this for your Pokémon. A heel of bread that never seems to run out.\pI stole it from the master's own table. He never noticed. He was busy with fate."))
+        giveitem(ITEM_LEFTOVERS)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Your pack's full. Come back. The bread will wait."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_ASCENT_LEFTOVERS)
+    }
+    msgbox(format("Come down this way again, there'll be more. We're not going anywhere.\pWhere would we go?"))
+    release
+}
+
+script Ascent_2F_EventScript_Sitter {
+    msgbox(format("We were promised a world with no surprises.\pThen the hours started again, and every morning is a surprise.\pI hate it. I think. I haven't decided."), MSGBOX_NPC)
+}
+
+script Ascent_2F_EventScript_Watcher {
+    msgbox(format("I keep watch on the road. Out of habit.\pThe Titans always said someone was coming to ruin everything.\pIt was you, wasn't it? …Fair enough."), MSGBOX_NPC)
+}
+
+script Ascent_2F_EventScript_Agathe {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_AGATHE,
+        format("This ledge is one wide and the drop's a long one.\pYou go round me or through me."),
+        format("Through, then."))
+    msgbox(format("Don't look down. I did, once. Just cloud. Then the cloud moved."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_2F_EventScript_Nikias {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_NIKIAS,
+        format("I'm climbing to ask the Archon one question. You're in my way."),
+        format("Fine. Ask him for me too, then."))
+    msgbox(format("My question? Whether my father's oracle was true.\pHe went to war because of it. He didn't come back.\pI suppose it doesn't matter now. I'm still going to ask."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_2F_EventScript_Eirene {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_EIRENE,
+        format("A pilgrimage to the Twelve, through the cloud. Let's see if you're worthy."),
+        format("Worthy enough. Go on."))
+    msgbox(format("I pray at every shrine on the road. I used to ask for answers.\pNow I just say thank you. It's shorter."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_2F_EventScript_Dexios {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_DEXIOS,
+        format("Above the cloud there's nothing for us. Below it there's nothing either.\pSo I stand here."),
+        format("…I'll stand somewhere else, then."))
+    msgbox(format("The light's coming through up there. That's the top of the cloud.\pGo on. Somebody should see it."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_2F_EventScript_LedgeSign {
+    msgbox(format("Ledge road. Single file.\pThe camp under the overhang shares its fire."), MSGBOX_SIGN)
+}
+
+script Ascent_2F_EventScript_Cookfire {
+    msgbox(format("A cookfire of pine. A pot of barley mush hangs over it, bubbling.\pIt smells better than it looks."), MSGBOX_SIGN)
+}

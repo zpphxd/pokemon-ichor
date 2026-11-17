@@ -1,0 +1,82 @@
+// The Queen's Megaron, Ariadne's rooms (SCRIPT.md III-3D, III-3O, III-3P;
+// LABYRINTH.md §7): the dolphin fresco Alethea reads with her nose an inch from the
+// plaster; where you sleep after the raid; where Ariadne wakes you before dawn.
+// Room: tools/ichor/maps/knossa_rooms.py.
+//
+// VAR_TEMP_1 == 1  the night after the raid, before dawn: Ariadne at the door.
+
+mapscripts KnossaPalace_QueensMegaron_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_1, 0)
+        if (flag(FLAG_ICHOR_ARRIVED_KNOSSA) && var(VAR_ICHOR_KNOSSA) < 18) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_MEGARON)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_MEGARON)
+        }
+        if (var(VAR_ICHOR_KNOSSA) == 18 && flag(FLAG_ICHOR_ALETHEA_TOLD) && !flag(FLAG_ICHOR_ARIADNE_WOKE_YOU)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: KnossaPalace_QueensMegaron_EventScript_BeforeDawn
+    ]
+}
+
+text KnossaPalace_QueensMegaron_Name_Alethea { "ALETHEA" }
+text KnossaPalace_QueensMegaron_Name_Ariadne { "ARIADNE" }
+
+script KnossaPalace_QueensMegaron_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_QueensMegaron_Name_Alethea)
+    msgbox(format("Dolphins. Lilies. A prince with a feather crown, walking something.\p"
+                  "Whatever he was walking, somebody scraped it off. Long ago.\p"
+                  "People always scrape off the part they don't like. Then paint flowers."))
+    closemessage
+    applymovement(LOCALID_MEGARON_ALETHEA, KnossaPalace_QueensMegaron_Movement_ToLeaper)
+    waitmovement(0)
+    msgbox(format("That one's new. A sickle, over the leaper. Scratched last week.\p"
+                  "They're not repairing anything. They're signing it.\p"
+                  "Ariadne's in the Throne Room. She said she was expecting you.\p"
+                  "She said it like a threat. I liked her immediately."))
+    closemessage
+    applymovement(LOCALID_MEGARON_ALETHEA, KnossaPalace_QueensMegaron_Movement_Back)
+    waitmovement(0)
+    release
+}
+
+movement KnossaPalace_QueensMegaron_Movement_ToLeaper { face_right }
+movement KnossaPalace_QueensMegaron_Movement_Back { face_up }
+
+script KnossaPalace_QueensMegaron_EventScript_BeforeDawn {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    fadescreen(FADE_FROM_BLACK)
+    special(HealPlayerParty)
+    clearflag(FLAG_ICHOR_HIDE_ARIADNE_THRONE)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Before dawn. Ariadne stands at the door."))
+    setspeaker(KnossaPalace_QueensMegaron_Name_Ariadne)
+    msgbox(format("He wants you. He says bring the wings."))
+    closemessage
+    setflag(FLAG_ICHOR_HIDE_ARIADNE_THRONE)
+    setflag(FLAG_ICHOR_ARIADNE_WOKE_YOU)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Daedalus's lift waits at the foot of the Grand Staircase."))
+    releaseall
+}
+
+script KnossaPalace_QueensMegaron_EventScript_Dolphins {
+    msgbox(format("Blue dolphins in a blue sea, with little fish going the other way."), MSGBOX_SIGN)
+}
+
+script KnossaPalace_QueensMegaron_EventScript_Leaper {
+    lockall
+    if (flag(FLAG_ICHOR_ARRIVED_KNOSSA)) {
+        msgbox(format("A saffron gatherer, a bull-leaper. A sickle has been scratched across the leaper. Fresh."),
+               MSGBOX_SIGN)
+    } else {
+        msgbox(format("A saffron gatherer, bending to her crocus."), MSGBOX_SIGN)
+    }
+    releaseall
+}

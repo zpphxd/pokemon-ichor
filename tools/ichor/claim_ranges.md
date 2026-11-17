@@ -35,7 +35,8 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_... "commen
 |---|---|---|---|
 | **world-act1** | 0x000–0x0FF | 0x40–0x4B | 0–5 |
 | **world-act2** | 0x100–0x1FF, and 0x500–0x63F | 0x4C–0x57 | 6–11 |
-| **world-act3** | 0x200–0x2FF, 0x4C0–0x4FF, and 0x640–0x6FF | 0x58–0x63 | 12–17 |
+| **world-act3** | 0x200–0x2FF, 0x4C0–0x4FF, and 0x640–0x6BF | 0x58–0x63 | 12–17 |
+| **world-act3, the League** (the Ascent, Olympus, L-1 to L-10; `design/LEAGUE.md`) | 0x6C0–0x6FF (24 used: 0x6C0–0x6D7) | — | — |
 | **the post-game** | 0x300–0x3BF, and 0x700–0x7FF | 0x64–0x6F | 18–23 |
 | **the Oikoumene** | 0x3C0–0x47F, and 0x800–0x8FF | — | 24–27 |
 | **ichor-engine** | 0x480–0x4BF | 0x00–0x3F | 28–31 |
@@ -126,7 +127,8 @@ Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,536 (raised
 | Reserve | 26–39 | Ask the director |
 | **world-act1** | 40–159 | |
 | **world-act2** | 160–319, 820–849 and 1344–1403 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182. 1344–1403 added with the 1,536 raise |
-| **world-act3** | 320–499 and 1404–1503 | Includes the League. 1404–1503 added with the 1,536 raise |
+| **world-act3** | 320–459 and 1404–1503 | Kythera to the Stair. 1404–1503 added with the 1,536 raise |
+| **world-act3, the League** | 460–499 | 460–475 used: the Ascent's eleven, the Pantheon's four, the Archon. Its own `TRAINERS_END_LEAGUE` line, so it never shares a line with Act III's |
 | **the post-game** | 500–679 and 1024–1223 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
 | **the Oikoumene** | 680–819, 864–1023 and 1224–1343 | 420 in all, for its ten champion halls and its routes |
 | Reserve | 850–863 and 1504–1535 | Shared; ask the director |
@@ -160,3 +162,21 @@ The Hoenn cut freed Hoenn's map-section ids 0–57 and 59–85 for the Oikoumene
   - 68 (Seafloor Cavern) and 85: the Pokédex area screen
   - 16–49 (routes): `landmark.c`
   - 0–15 (towns): `event_object_movement.c`
+
+## Act III's chapter builds (2026-11-17)
+
+The director split the rest of Act III across parallel builders. Each claims
+only inside its own bank-flag and trainer-ID range, from the reserve:
+
+| Builder | Beats (`design/phase4/SCRIPT.md`) | bankflag offsets | trainer ids |
+|---|---|---|---|
+| Knossa above ground (Amnisos, the Bull Road, the palace, the court) | III-3A–3E, III-3O, III-4 | 0x900–0x94F | 345–364 |
+| The Labyrinth I (Rings I–IV, Daedalus's workshop, Minos's tomb) | III-3F–3I | 0x950–0x99F | 365–389 |
+| The Labyrinth II (Rings V–VII, the forge, the Starry Chamber, the Turning, the Icarus Shaft) | III-3J–3N, III-3P | 0x9A0–0x9EF | 390–409 |
+| Lakonia (Malea, Gytheion, the Eurotas, Lakonia) | III-5A–5J | 0x9F0–0xA3F | 410–424 |
+| Delphoi (Kirrha's olives, the Kastalian Gorge, Delphoi, the Temple of Apollo, the Omphalos) | III-6A–III-8 | 0xA40–0xA8F | 425–444 |
+| The climax (the Loom, the Frozen Hour, the Stair of Hours, Elpis's line) | III-9–III-12 | 0xA90–0xADF | 445–459 |
+
+Shared state: `VAR_ICHOR_ACT3` (bankvar 0xC) with the values SCRIPT.md fixes,
+and Knossa's `VAR_ICHOR_KNOSSA` (0xD) and `VAR_ICHOR_LABYRINTH` (0xE), claimed
+by the director. Trainer ids 300–327 are the director's reserve.

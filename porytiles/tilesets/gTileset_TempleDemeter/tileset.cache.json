@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/temple_demeter/porytiles_bin/metatile_attributes.bin": "b9f6117e45b5921ee3905d51720aa61b",
-  "data/tilesets/secondary/temple_demeter/porytiles_bin/metatiles.bin": "dd5e0a67af55552c88f8e9521047140e",
+  "data/tilesets/secondary/temple_demeter/porytiles_bin/metatile_attributes.bin": "9eba9ce90636aa786ea67747e5a6681d",
+  "data/tilesets/secondary/temple_demeter/porytiles_bin/metatiles.bin": "5c71215ecf70b64b40d88046a669a9e8",
   "data/tilesets/secondary/temple_demeter/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/temple_demeter/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/temple_demeter/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/temple_demeter/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/temple_demeter/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/temple_demeter/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/temple_demeter/porytiles_bin/tiles.png": "bd16a9a345656585c1b130ba4730afd0",
+  "data/tilesets/secondary/temple_demeter/porytiles_bin/tiles.png": "dcc211adc10b7ecf454636e2e9356762",
   "data/tilesets/secondary/temple_demeter/porytiles_src/attributes.csv": "9638e08f4ba5cf979c67c3ec934d4cdc",
-  "data/tilesets/secondary/temple_demeter/porytiles_src/bottom.png": "5696951f70418175987ffaa1309ec131",
-  "data/tilesets/secondary/temple_demeter/porytiles_src/middle.png": "2b4673cdaf2b05178a63bd6572181801",
-  "data/tilesets/secondary/temple_demeter/porytiles_src/top.png": "842ad75ee1ba03a95895c1ebfb1bfab0"
+  "data/tilesets/secondary/temple_demeter/porytiles_src/bottom.png": "4141f62336098280372f2e1e89b94c88",
+  "data/tilesets/secondary/temple_demeter/porytiles_src/middle.png": "f9c57af6749472b51891c739321181af",
+  "data/tilesets/secondary/temple_demeter/porytiles_src/top.png": "5edf8a9b04406f805371bfd0977e0620"
 }

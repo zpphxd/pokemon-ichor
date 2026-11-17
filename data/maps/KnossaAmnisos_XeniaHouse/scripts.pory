@@ -1,0 +1,50 @@
+// Aithon's house, the xenia host (SCRIPT.md Part 2; SYSTEMS §10): a heal, a bed
+// until a chosen hour, and the guest-friend's gift. Aithon stands at (5,4) by the
+// table that is always set for more people than live here.
+// Room: tools/ichor/maps/knossa_rooms.py.
+//
+// The Broken Ring chain (SYSTEMS §10, link 2) needs the Kythera half-ring item,
+// which isn't built yet; until it is, Aithon gives his guest-gift once
+// (FLAG_ICHOR_BROKEN_RING_2) without asking for the half.
+
+mapscripts KnossaAmnisos_XeniaHouse_MapScripts {}
+
+text KnossaAmnisos_XeniaHouse_Name_Aithon { "AITHON" }
+
+script KnossaAmnisos_XeniaHouse_EventScript_Aithon {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_XeniaHouse_Name_Aithon)
+    msgbox(format("Sit. Eat first.\pThen tell me who you are. Not before."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(KnossaAmnisos_XeniaHouse_Name_Aithon)
+    msgbox(format("I've hosted kings. Two of them. One was lying, so call it one and a half."))
+    if (!flag(FLAG_ICHOR_BROKEN_RING_2)) {
+        msgbox(format("A guest who eats and doesn't lie. That's rarer than kings.\p"
+                      "Here. Cretan wine. My cousin in Kythera swears by it. He lies too."))
+        giveitem(ITEM_WINE, 2)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_BROKEN_RING_2)
+        }
+        setspeaker(KnossaAmnisos_XeniaHouse_Name_Aithon)
+    }
+    msgbox(format("Stay the night, if you like. Or till noon. I'll wake you when you say."))
+    goto(KnossaAmnisos_XeniaHouse_EventScript_Rest)
+}
+
+script KnossaAmnisos_XeniaHouse_EventScript_Rest {
+    call(EventScript_IchorXeniaRest)
+    setspeaker(KnossaAmnisos_XeniaHouse_Name_Aithon)
+    if (var(VAR_RESULT) == TRUE) {
+        special(HealPlayerParty)
+        msgbox(format("Up! You slept like someone with nothing on their mind. I envy you."))
+    } else {
+        msgbox(format("Then sit a while. The lamp's lit for whoever's late."))
+    }
+    release
+}

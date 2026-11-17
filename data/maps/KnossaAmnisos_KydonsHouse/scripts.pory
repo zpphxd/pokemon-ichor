@@ -1,0 +1,53 @@
+// Kydon's honey house (SCRIPT.md Part 2; LABYRINTH seed 3 pays off): the back wall
+// is the hillside, hive tubes built into the rock. Three jars of honey on the
+// first visit; Leftovers, the good jar, once the bellowing under the palace stops.
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaAmnisos_KydonsHouse_MapScripts {}
+
+text KnossaAmnisos_KydonsHouse_Name_Kydon { "KYDON" }
+
+script KnossaAmnisos_KydonsHouse_EventScript_Kydon {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_KydonsHouse_Name_Kydon)
+    if (!flag(FLAG_ICHOR_GOT_KYDON_HONEY)) {
+        msgbox(format("You! From Emporion. You bought nothing and asked a lot of questions.\p"
+                      "Welcome to the hive. Mind your head. Mind your hands. Mind everything.\p"
+                      "Thyme honey. The bees drink thyme and fear. I told you that.\p"
+                      "Take some. Three jars. Don't tell my sister."))
+        giveitem(ITEM_HONEY, 3)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Your bag's full. Come back with room. The honey keeps. Forever, nearly."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_KYDON_HONEY)
+        setspeaker(KnossaAmnisos_KydonsHouse_Name_Kydon)
+        msgbox(format("If you go under the palace, and you won't, take a jar for the Mistress.\p"
+                      "The old ones always did. There's a landing down there. She keeps it."))
+        release
+        end
+    }
+    if (var(VAR_ICHOR_KNOSSA) >= 17 && !flag(FLAG_ICHOR_GOT_KYDON_LEFTOVERS)) {
+        msgbox(format("It's stopped. The bellowing. First new moon in two winters, and nothing.\p"
+                      "Taste that. Thyme. Only thyme. No fear in it at all.\p"
+                      "That's the good jar. I don't sell the good jar. Here."))
+        giveitem(ITEM_LEFTOVERS)
+        if (var(VAR_RESULT) == FALSE) {
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_KYDON_LEFTOVERS)
+        setspeaker(KnossaAmnisos_KydonsHouse_Name_Kydon)
+        msgbox(format("Keep a bit of something back. Always. That's the beekeeper's rule."))
+        release
+        end
+    }
+    msgbox(format("My gulls carry orders all over the island. Honey, mostly. Sometimes gossip."))
+    release
+}
+
+script KnossaAmnisos_KydonsHouse_EventScript_WaxPress {
+    msgbox(format("A wax press and its drip tray. The whole room smells of thyme."), MSGBOX_SIGN)
+}

@@ -1,0 +1,95 @@
+// The Ascent, 1F: the Pierian slopes (design/LEAGUE.md, STORY.md L-6).
+// The Tempe road isn't built yet: the muleteer at the east road end carries
+// the player to and from Astyra (Astyra_EventScript_Muleteer). Replace both
+// with the Vale of Tempe's connection when Route 30 and Tempe land.
+
+mapscripts Ascent_1F_MapScripts {}
+
+script Ascent_1F_EventScript_Muleteer {
+    lock
+    faceplayer
+    setspeaker(Ichor_League_Text_NameMuleteer)
+    msgbox(format("The Tempe road's washed out past the rocks. Spring floods.\pWant me to take you back down to Astyra? The long way, by the coast."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Up on the cart, then. Mind the goat."))
+        closemessage
+        warp(MAP_ASTYRA, 42, 33)
+        waitstate
+    }
+    msgbox(format("Suit yourself. I'll be here. The goat won't climb any higher anyway."))
+    release
+}
+
+script Ascent_1F_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("The goat chews your sleeve, decides it isn't bread, and lets go."))
+    waitmoncry
+    release
+}
+
+script Ascent_1F_EventScript_FoldGoat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ERIPIP, CRY_MODE_NORMAL)
+    msgbox(format("Eripip! It butts the fold's wall to show it can."))
+    waitmoncry
+    release
+}
+
+script Ascent_1F_EventScript_Goatherd {
+    msgbox(format("Forty years I've grazed this slope. Every year, one or two climb past me to the top.\pI used to ask the oracle who'd come back down. Now there's no oracle.\pI'll just have to wait and see. Like everyone else."), MSGBOX_NPC)
+}
+
+script Ascent_1F_EventScript_Philon {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_PHILON,
+        format("We came up here because the Titans said there'd be a new world at the top.\pThere's just more mountain."),
+        format("More mountain, and now this."))
+    msgbox(format("The master said every one of us had a place in the last draft.\pThen he got carried down a stair. Where's my place now?"), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_1F_EventScript_Lampon {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_LAMPON,
+        format("The Archon's guard holds the road. Nobody climbs without a fight."),
+        format("The road's yours. The guard is bruised."))
+    msgbox(format("The beacon up on the knoll? We light it when a challenger passes.\pNobody's lit it in years. I think the Archon would like to see it burning."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_1F_EventScript_Theano {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_THEANO,
+        format("I came to read the birds on Olympus. They don't say anything anymore.\pYou'll do instead."),
+        format("I didn't see that coming. I suppose nobody does now."))
+    msgbox(format("An augur with no omens. I'm going to have to learn the weather, like a farmer.\pMy mother will be delighted."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_1F_EventScript_Kallias {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_KALLIAS,
+        format("Turn back. The cloud up there eats people. I've watched it."),
+        format("…It hasn't eaten you yet."))
+    msgbox(format("I used to guard a gate for the Titans. Now I guard a cloud.\pIt doesn't need guarding. Neither did the gate."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_1F_EventScript_RoadSign {
+    msgbox(format("THE ASCENT\nOlympus. The Pantheon above the cloud.\pLeft: the Tempe road (closed by rockfall)."), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_Beacon {
+    msgbox(format("The guard's beacon tower. Old ash lies cold in the fire-basket on top.\pWhen a challenger climbs, the fire tells the summit."), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_Stelai {
+    msgbox(format("Grave stelai at the bend. Each names a climber who didn't reach the top.\pOne is carved: “He was told he would fall here. He came anyway.”"), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_Niches {
+    msgbox(format("Votive niches cut in the rock over the spring. Nine small figures:\pthe Muses of Pieria, who were born on this slope."), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_Herm {
+    msgbox(format("A herm by the road, its face worn smooth by travelers' hands."), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_CloudSign {
+    msgbox(format("The road climbs into the cloud from here.\pKeep to the path. The ledges are narrow."), MSGBOX_SIGN)
+}

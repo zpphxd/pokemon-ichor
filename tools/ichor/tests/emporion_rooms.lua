@@ -1,11 +1,12 @@
 -- Emporion's interiors check, run by tools/ichor/tests/emporion_rooms.sh (read it first).
 --
--- Plays each of the nine rooms' events as a player would, with key presses, and
+-- Plays each of the ten rooms' events as a player would, with key presses, and
 -- checks the game's state after each: the Asclepeion's healer, beat 12 in the
 -- Deigma and Thaletas's trade, beat 13 at the Hephaisteion's forge, knucklebones
 -- at the Dolphin, Philoxenos's table and a laurel story, Penelopeia's gift, the
 -- runners' Quick Claw and letter home, Euphronios's three paintings, and the crew
--- boss's battle and the empty hiring hall after Act I.
+-- boss's battle and the empty hiring hall after Act I, and buying the chariot
+-- from Alfred at Waltz Chariots.
 --
 -- Setup touches no ROM data. After Quickstart it writes small event scripts into
 -- spare EWRAM and points the current map header's script table at them as an
@@ -85,6 +86,12 @@ local function itemCount(item)
     end
   end
   return n
+end
+local function money()
+  return emu:read32(sb1() + S.OFF_SB1_MONEY) ~ emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY)
+end
+local function setMoney(amount)
+  emu:write32(sb1() + S.OFF_SB1_MONEY, amount ~ emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY))
 end
 local function partyMon(slot) return S.gParties + slot * S.POKEMON_SIZE end
 local function partyHp(slot)
@@ -535,6 +542,37 @@ local function potter()
   talk(K.UP, "potter_03_after")
 end
 
+-- Waltz Chariots: Alfred sells the chariot (ITEM_MACH_BIKE) for 10,000. Short of
+-- money he waits; with it he takes the coin and hands over the reins.
+local function chariot()
+  warpInto({}, S.MAP_CHARIOT_STORE)
+  shot("chariot_01_room.png")
+  walkTo({ { 5, 5 }, { 6, 5 } })
+  setMoney(5000)
+  talk(K.UP, "chariot_02_short")
+  expect(not getFlag(S.FLAG_BOUGHT_CHARIOT) and itemCount(S.ITEM_CHARIOT) == 0 and money() == 5000,
+         "short of 10,000, no sale: the money and the Bag are untouched")
+  setMoney(12000)
+  talk(K.UP, "chariot_03_buy")
+  expect(getFlag(S.FLAG_BOUGHT_CHARIOT), "the chariot is bought (FLAG_ICHOR_BOUGHT_CHARIOT)")
+  expect(itemCount(S.ITEM_CHARIOT) == 1, "the Chariot is in the Bag")
+  expect(money() == 2000, "it cost 10,000 (12,000 -> " .. money() .. ")")
+  talk(K.UP, "chariot_04_after")
+  expect(itemCount(S.ITEM_CHARIOT) == 1 and money() == 2000, "talking again sells nothing more")
+  -- Out through the door to the yard, and the street sign at the yard's corner.
+  walkTo({ { 5, 7 } })
+  emu:addKey(K.DOWN)
+  waitUntil(function() return mapId() == S.MAP_EMPORION_CITY end, 4000, "the walk out to the city")
+  emu:clearKey(K.DOWN)
+  waitUntil(idle, 4000, "the door's exit walk")
+  wait(40)
+  local x, y = pos()
+  expect(x == 43 and y == 36, string.format("out of Waltz Chariots' door into its yard at (43,36), at (%d,%d)", x, y))
+  shot("chariot_05_yard.png")
+  walkTo({ { 43, 39 }, { 40, 39 } })
+  talk(K.UP, "chariot_06_sign")
+end
+
 local function hiringHall()
   warpInto({}, S.MAP_HIRING_HALL)
   local full = metatileAt(14, 2)
@@ -543,7 +581,7 @@ local function hiringHall()
   walkTo({ { 8, 6 }, { 9, 6 }, { 9, 5 } })
   face(K.UP)
   tap(K.A); wait(10)
-  playThrough("hall_02_crew_boss", nil, 30000)
+  playThrough("hall_02_crew_boss", nil, 60000)  -- room for a sleep turn or two
   expect(getFlag(S.TRAINER_FLAGS_START + S.TRAINER_CREW_BOSS), "the crew boss is beaten")
   expect(getFlag(S.FLAG_HIRING_HALL), "he gives his Rocky Helmet (FLAG_ICHOR_HIRING_HALL)")
   -- After Act I: the hall is empty, the ledger left open.
@@ -585,6 +623,7 @@ local co = coroutine.create(function()
   potter()
   hiringHall()
   runners()
+  chariot()
 end)
 
 local realEmu = _G.emu

@@ -434,4 +434,32 @@ Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table;
 | 6 | bg | (3,1) | (3,2) facing north | EUPHRONIOS PAINTED ME, on the wall |
 | 7 | bg | (0,1) | (0,2) facing north | the drying shelves |
 
+### Waltz Chariots, Alfred's chariot store, Emporion
+
+- Map: `MAP_EMPORION_CITY_CHARIOT_STORE`. Layout: `data/layouts/EmporionCity_ChariotStore/map.bin`, **12x9** blocks, `gTileset_Oikos` + `gTileset_Domos`.
+- Floor: terracotta. Wall: red. Render: `design/phase2/img/emporion_chariot_store.png` (2x).
+
+Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table; a bg event is marked on its furniture tile.
+
+```
+    012345678901
+  0 ############
+  1 #4###3######
+  2 ............
+  3 .#5#........
+  4 ......2.##..
+  5 #...........
+  6 #.........##
+  7 ..........##
+  8 .....11.....
+```
+
+| # | Kind | Tile | Read from | What |
+|---|---|---|---|---|
+| 1 | warp | (5,8), (6,8) |  | door to Emporion (south-arrow mat) |
+| 2 | npc | (6,4) | faces south | Alfred, at the middle of his shop |
+| 3 | bg | (5,1) | (5,2) facing north | the roads scratched on the plaster |
+| 4 | bg | (1,1) | (1,2) facing north | the spare wheels |
+| 5 | bg | (2,3) | (2,4) facing north | his table |
+
 <!-- domos_build: end generated -->

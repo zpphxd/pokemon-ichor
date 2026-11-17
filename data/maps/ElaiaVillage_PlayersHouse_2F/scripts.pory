@@ -5,7 +5,93 @@
 mapscripts ElaiaVillage_PlayersHouse_2F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_ELAIA_VILLAGE)
+        // The League's epilogue (STORY.md L-10): CONTINUE after the credits wakes
+        // the player here on the next Klotheia (GameClear's continue warp).
+        if (flag(FLAG_SYS_GAME_CLEAR) && !flag(FLAG_ICHOR_EPILOGUE_DONE)) {
+            setvar(VAR_TEMP_2, 1)
+        }
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_2, 1: ElaiaVillage_PlayersHouse_2F_EventScript_Epilogue
+    ]
+}
+
+// ---------------------------------------------------------------------------
+// The epilogue, STORY.md §7.11, told as a wake-up and a short montage. The
+// full staging (Halia's line in the square, the footrace, the Akademia's third
+// krater) belongs to the post-game builder: each beat below names its place.
+// ---------------------------------------------------------------------------
+text Epilogue_Text_NamePhaedon { "PHAEDON" }
+text Epilogue_Text_NameElpis { "ELPIS" }
+text Epilogue_Text_NameHalia { "HALIA" }
+text Epilogue_Text_NameKleon { "KLEON" }
+text Epilogue_Text_NameGylippos { "GYLIPPOS" }
+text Epilogue_Text_NameRhea { "RHEA" }
+text Epilogue_Text_NameDaphne { "DAPHNE" }
+text Epilogue_Text_NameAlethea { "ALETHEA" }
+text Epilogue_Text_Pokemon { "THE POKéMON" }
+text Epilogue_Text_Story { "THE STORY" }
+text Epilogue_Text_WellSee { "WE'LL SEE" }
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_Epilogue {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    setflag(FLAG_ICHOR_EPILOGUE_DONE)
+    delay(30)
+    msgbox(format("The klepsydra drips. Morning light on the floor."))
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("{PLAYER}! Did you fill your water clock?\pFestival day! You can't be late on festival day!"))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("There you are. Archon of Aethos, and you still sleep like a stone.\pLet me look at you. …Hm. You'll do."))
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("Halia's in the square. She says she's reading threads anyway.\p“Tradition,” she says. She can't see a single one. She's never been happier.\pOh. And there's a man from Akti in my kitchen. And his little girl."))
+    setspeaker(Epilogue_Text_NamePhaedon)
+    msgbox(format("Good morning. Your mother is very honest about honey.\pIone lets me come to the festival. One day a year. With a guard.\pThe guard's at the door. He's asleep. Ione fed him."))
+    setspeaker(Epilogue_Text_NameElpis)
+    msgbox(format("I'm having my thread read! Papa says nobody can read it. That's the fun part."))
+    setspeaker(Epilogue_Text_NameHalia)
+    msgbox(format("And who's this? A little one. Hold out your hand, little one.\p…Nothing at all. Isn't that grand?"))
+    setspeaker(Epilogue_Text_NameElpis)
+    msgbox(format("Is that bad?"))
+    setspeaker(Epilogue_Text_NameHalia)
+    msgbox(format("Every thread has knots, child. You'll pull through. Next!"))
+    setspeaker(Epilogue_Text_NameKleon)
+    msgbox(format("Second! I came SECOND. To a Wooloo.\p…It was a really fast Wooloo."))
+    setspeaker(Epilogue_Text_NameGylippos)
+    msgbox(format("Kleon."))
+    setspeaker(Epilogue_Text_NameKleon)
+    msgbox(format("Fewer words. I know, Elder. I know."))
+    setspeaker(Epilogue_Text_NameRhea)
+    msgbox(format("Second. Good.\pNext year, first. Or not. We'll see."))
+    setspeaker(Epilogue_Text_NameDaphne)
+    msgbox(format("There you are! Come in. Mind the scrolls. They still bite.\pElpis! You came. There's someone here who's waited a whole year."))
+    setspeaker(Epilogue_Text_NameElpis)
+    msgbox(format("Hello. I'm Elpis. I don't know how long I've got. Do you?"))
+    setspeaker(Epilogue_Text_NameAlethea)
+    msgbox(format("I'm writing it all down. The Loom. The Stair. All of it.\pTruthfully. Every word. It's going to be very long.\pKleon asked me to leave him out of it. I said no."))
+    setspeaker(Epilogue_Text_NameDaphne)
+    message(format("{PLAYER}. Before anything else, a question. Humor me.\pWhich came first? The Pokémon, or the story?"))
+    waitmessage
+    dynmultichoice(16, 4, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Epilogue_Text_Pokemon, Epilogue_Text_Story, Epilogue_Text_WellSee)
+    setspeaker(Epilogue_Text_NameDaphne)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("Still my answer too. I'd still love to be wrong."))
+        case 1:
+            msgbox(format("Still a heretic! Wonderful."))
+        default:
+            msgbox(format("…Ha! Oh, that's the best one yet."))
+    }
+    setspeaker(Epilogue_Text_NameDaphne)
+    msgbox(format("Alethea, write that down."))
+    setspeaker(Epilogue_Text_NameAlethea)
+    msgbox(format("…I'm writing that down."))
+    setspeaker(SP_NAME_NONE)
+    closemessage
+    fadescreen(FADE_FROM_BLACK)
+    releaseall
 }
 
 script ElaiaVillage_PlayersHouse_2F_EventScript_StairGate {

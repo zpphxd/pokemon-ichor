@@ -47,7 +47,7 @@ extern const u8 EventScript_IchorAsterionKnockdown[];
 extern const u8 EventScript_IchorAsterionBrokeWall[];
 extern const u8 EventScript_IchorRecruitBump[];
 
-#define MAX_FLOORS        4
+#define MAX_FLOORS        8  // Ichor: 8 (was 4) for the cave rings: two slab halves, cave floor, gravel, beam, plate
 #define MAX_ANCHORS_HERE  8
 #define MAX_WALLS         8
 #define MAX_DRIFTS        8

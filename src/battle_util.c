@@ -9688,6 +9688,8 @@ bool32 MoveEffectIsGuaranteed(enum BattlerId battler, enum Ability battlerAbilit
 
 bool32 IsGen6ExpShareEnabled(void)
 {
+    if (I_EXP_SHARE_ALWAYS) // Ichor: party-wide experience is always on (include/config/item.h)
+        return TRUE;
     if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
         return FALSE;
 

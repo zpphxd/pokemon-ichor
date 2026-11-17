@@ -72,15 +72,21 @@ Every sprite type has a fixed size and color budget.
 | Trainer back | `graphics/trainers/back_pics/<name>.png` | 64×256: four frames | 15 | Keep each frame's anchor and throw contact |
 | Walker (NPC/player) | `graphics/object_events/pics/people/ichor/<name>.png` | 16×32 frames (e.g. 144×32 for nine) | Shared walker palette | Keep the frame count, order and feet position |
 
-**How big the subject is in the frame** decides how much detail survives. Measure the subject's bounding box at 1× and aim for these sizes:
+**How big the subject is in the frame** is the size ladder, and it is what makes a basic read as young and a final as grown. Emerald's benchmark: basics about 41 px at their largest dimension, middles about 52, finals about 61; small birds smaller still (Taillow 43×30, Natu 25). `mon_from_concept.py` (`ladder_size`) sets every species' size from its place in its line, its dex `height_m` (which picks the spot inside the band, 0.2 m low to 2.0 m high) and its build:
 
-| Stage | Largest dimension | Examples |
+| Place in line | Largest dimension | Examples |
 |---|---|---|
-| Basic, small | 48–54 px | Kynder, Nebrel, Hipling, early bugs and birds |
-| Middle stage / single-stage | 54–60 px | Dikyon, Kladoe, Thalamare |
-| Final stage / large | 60–64 px | Pylakyon, Daphnyad, Seismare |
-| Legendary / colossal | 64 px, and may crop | Olympian-tier species |
+| Basic of three | 34–46 px | Nebrel 40, Kynder 39, Hipling 40 |
+| Basic of two | 36–50 px | Eripip, Glyphlet |
+| Middle of three | 46–56 px | Kladoe 54, Dikyon 53, Thalamare 55 |
+| Final | 54–63 px | Daphnyad, Pylakyon, Seismare |
+| Single stage | 44–62 px | by height |
+| Legendary (base stat total 600+) | 63 px | Olympian-tier species |
+| Flying basic or middle | 4 px less than the above | Epopoi 30, Aetling 39 |
+| Back | front + 35% of the gap to 63 | Mudkip 41 front, 53 back |
 | Trainer portrait | 56–62 px tall | All fronts |
+
+Each evolution should grow about 1.7× in area, as Emerald's do. A concept larger than its target is reduced once, straight from its own grid to the target; a smaller one is never enlarged. Party icons are reduced from the full-frame conversion, so a small battle sprite keeps a detailed icon. Override a species with `"size"` in `species.json` only with a reason in its `"note"`.
 
 Keep 1–2 px of clear space at the frame edges. Front sprites stand on a shared base line, 1–2 px above the bottom edge.
 

@@ -382,7 +382,12 @@ def despeckle(idx, alpha):
     return idx, alpha
 
 
-def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto", sharpen=40):
+def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None, grid="auto", sharpen=40,
+            target=None):
+    """target: the subject's largest dimension in the frame (the size ladder,
+    STYLE.md §3.1). A concept bigger than that at its own scale is reduced to
+    it once; a smaller one is never enlarged. Default: fill the frame."""
+    lim = min(target, size - 1) if target else size - 1
     a = np.asarray(Image.open(src).convert("RGB")).astype(int)
     bg = np.asarray(bg, float) if bg is not None else border_color(a)
     found = None
@@ -400,7 +405,7 @@ def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None
         a = trim(a, bg, tol)
         a = np.pad(a, ((8, 8), (8, 8), (0, 0)))
         a[:8], a[-8:], a[:, :8], a[:, -8:] = bg, bg, bg, bg
-        nat = sample(a, (max(a.shape[:2]) - 16) / fit)
+        nat = sample(a, (max(a.shape[:2]) - 16) / min(fit, lim))
     alpha = flood_alpha(nat, bg, tol)
     if magentaness(bg) > 120:
         alpha, nat = chroma_key(nat, alpha)
@@ -413,19 +418,19 @@ def convert(src, size=64, fit=60, colors=15, bg=None, tol=60, concept_pitch=None
         pal = detail_palette(nat[alpha].astype(float), colors)
     idx = ((nat[..., None, :] - pal[None, None]) ** 2).sum(-1).argmin(-1)
     h, w = idx.shape
-    if found and max(h, w) > size - 1:
-        # Bigger than the frame at its own scale: reduce once, to fill the
-        # frame, keeping faces and line art (STYLE.md §3.3).
-        idx, alpha = hybrid_downscale(nat, alpha, pal, (size - 1) / max(h, w), sharpen)
+    if found and max(h, w) > lim:
+        # Bigger than its target at its own scale: reduce once, to the target,
+        # keeping faces and line art (STYLE.md §3.3).
+        idx, alpha = hybrid_downscale(nat, alpha, pal, lim / max(h, w), sharpen)
     if found:
         idx, alpha = despeckle(idx, alpha)  # keep the concept's own outline
     else:
         idx, alpha = cleanup(idx, alpha, pal)
     h, w = idx.shape
-    if max(h, w) > size - 1:
-        # still too tall or wide for the frame plus a row of floor (the
+    if max(h, w) > lim:
+        # still bigger than the target or the frame plus a row of floor (the
         # no-grid path samples by size): reduce once more, keeping line art
-        idx, alpha = pixel_downscale(idx, alpha, pal, (size - 1) / max(h, w))
+        idx, alpha = pixel_downscale(idx, alpha, pal, lim / max(h, w))
         h, w = idx.shape
     out = np.zeros((size, size), np.uint8)
     oy, ox = size - h - 1, (size - w) // 2  # feet on the floor, centred

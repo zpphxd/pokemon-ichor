@@ -1,0 +1,101 @@
+// The Double Axe, Amnisos's tavern (SCRIPT.md Part 2; SYSTEMS §9). Knucklebones:
+// Lykastos the champion (Bold, eyes shut; TM Taunt on his first loss), Kressa
+// (Cautious; Olive Oil) and Dorion (Bold; Wine). Lykastos sits at the gypsum
+// table, (6,3); the player plays from (6,5) across it.
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaAmnisos_Tavern_MapScripts {}
+
+text KnossaAmnisos_Tavern_Name_Lykastos { "LYKASTOS" }
+text KnossaAmnisos_Tavern_Name_Kressa { "KRESSA" }
+text KnossaAmnisos_Tavern_Name_Dorion { "DORION" }
+text KnossaAmnisos_Tavern_Text_Lykastos { "Lykastos" }
+text KnossaAmnisos_Tavern_Text_Kressa { "Kressa" }
+text KnossaAmnisos_Tavern_Text_Dorion { "Dorion" }
+
+script KnossaAmnisos_Tavern_EventScript_Lykastos {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Tavern_Name_Lykastos)
+    msgbox(format("Bones? I don't look when I throw. Looking's for people who doubt."))
+    msgbox(format("Play knucklebones?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    bufferstring(STR_VAR_3, KnossaAmnisos_Tavern_Text_Lykastos)
+    setvar(VAR_0x8004, ICHOR_BONES_BOLD)
+    call(EventScript_IchorKnucklebones)
+    setspeaker(KnossaAmnisos_Tavern_Name_Lykastos)
+    if (var(VAR_RESULT) != TRUE) {
+        msgbox(format("Didn't look. Didn't need to. Again, when you like."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_KNUCKLEBONES_AMNISOS)) {
+        msgbox(format("…I looked, that time. Don't tell anyone I looked."))
+        giveitem(ITEM_TM_TAUNT)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_KNUCKLEBONES_AMNISOS)
+        }
+    } else {
+        msgbox(format("Twice. Twice! I'm opening my eyes from now on."))
+    }
+    release
+}
+
+script KnossaAmnisos_Tavern_EventScript_Kressa {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Tavern_Name_Kressa)
+    msgbox(format("Rethrow the ones. Only the ones. Everything else, you live with."))
+    msgbox(format("Play knucklebones?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    bufferstring(STR_VAR_3, KnossaAmnisos_Tavern_Text_Kressa)
+    setvar(VAR_0x8004, ICHOR_BONES_CAUTIOUS)
+    call(EventScript_IchorKnucklebones)
+    setspeaker(KnossaAmnisos_Tavern_Name_Kressa)
+    if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_BONES_KRESSA)) {
+        msgbox(format("Fair throw. Here. Oil for your lamp. I always pay."))
+        giveitem(ITEM_OLIVE_OIL)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_BONES_KRESSA)
+        }
+    } elif (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Again? You live with your throws better than most."))
+    } else {
+        msgbox(format("Careful wins. Most days."))
+    }
+    release
+}
+
+script KnossaAmnisos_Tavern_EventScript_Dorion {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Tavern_Name_Dorion)
+    msgbox(format("Go for Aphrodite! Always go for Aphrodite! …I'm very poor."))
+    msgbox(format("Play knucklebones?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    bufferstring(STR_VAR_3, KnossaAmnisos_Tavern_Text_Dorion)
+    setvar(VAR_0x8004, ICHOR_BONES_BOLD)
+    call(EventScript_IchorKnucklebones)
+    setspeaker(KnossaAmnisos_Tavern_Name_Dorion)
+    if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_BONES_DORION)) {
+        msgbox(format("Aphrodite let me down. Again. Here, take the wine. I'd only drink it."))
+        giveitem(ITEM_WINE)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_BONES_DORION)
+        }
+    } elif (var(VAR_RESULT) == TRUE) {
+        msgbox(format("I'm going to row to Kythera and complain to her personally."))
+    } else {
+        msgbox(format("Aphrodite! She loves me! Sometimes!"))
+    }
+    release
+}

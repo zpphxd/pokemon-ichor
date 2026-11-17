@@ -1,4 +1,5 @@
 #include "global.h"
+#include "intro.h"
 #include "hall_of_fame.h"
 #include "task.h"
 #include "palette.h"
@@ -775,7 +776,7 @@ static void Task_Hof_HandleExit(u8 taskId)
 
 static void StartCredits(void)
 {
-    SetMainCallback2(CB2_StartCreditsSequence);
+    SetMainCallback2(CB2_StartIchorCredits); // Ichor: the frieze credits (src/intro.c), not the Hoenn bike ride
 }
 
 #undef tDontSaveData

@@ -331,9 +331,10 @@ ROOMS = {
 # round a courtyard herb garden that the counter looks out on: the garden open
 # to the sky in the middle of the hall, its gate between two posts facing the
 # counter, a laurel (Apollo's, Asclepius's father's) over the herbs and the
-# poppies; the Pithos, an old grain jar, in the back-left corner; herbs drying
-# from the beam and the sheaves stacked in the back-right corner; the couches
-# for the sick down the left side.
+# poppies; the Pithos alone in the back-left corner; the healer at the
+# standard station (civic_rooms.healer_station); herbs drying from the beam and
+# the sheaves stacked in the back-right corner; the couches for the sick down
+# the left side.
 ASCLEPEION = {
     "title": "The Asclepeion, Eleusa",
     "map": "MAP_ELEUSA_VILLAGE_ASCLEPEION",
@@ -363,23 +364,14 @@ def asclepeion_room():
     r.row(0, 0, ["asc_wall_top_l"] + ["asc_wall_top"] * (W - 2) + ["asc_wall_top_r"])
     r.row(1, 0, ["asc_wall_l"] + ["asc_wall"] * (W - 2) + ["asc_wall_r"])
     r.row(2, 0, [("asc_floor_a_sh" if x % 2 == 0 else "asc_floor_b_sh") for x in range(W)])
-    # The Pithos between two jars, back left; Asclepius beside it.
-    r.put("asc_jar", 0, 1, 1, 2)
-    r.put("asc_pithos", 1, 0, 2, 3)
-    r.put("asc_jar", 3, 1, 1, 2)
+    # The Pithos alone, back left; Asclepius beside it.
+    CR.pithos(r, 1)
     r.put("asc_statue", 4, 0, 1, 3)
-    # The counter, the rod relief over the healer, votives on its end.
-    r.put("asc_relief", 9, 0, 1, 2)
-    r.set(7, 2, "asc_counter_l")
-    r.set(8, 2, "asc_counter_m")
-    r.set(9, 2, "asc_counter_staff")
-    r.put("asc_votive_counter", 10, 2, 2, 1)
-    r.set(12, 2, "asc_counter_r")
-    r.row(3, 7, ["asc_counter_front_l"] + ["asc_counter_front_m"] * 4 + ["asc_counter_front_r"])
-    # Herbs drying from the beam; clay votives; the sheaves in the corner.
+    # The healer's station, the same in every Asclepeion (civic_rooms.py).
+    CR.healer_station(r, 9, 2)
+    # Herbs drying from the beam; the sheaves in the corner.
     r.put("asc_herbs", 13, 0, 1, 2)
     r.put("asc_herbs", 14, 0, 1, 2)
-    r.put("asc_votive_wall", 7, 1, 2, 1)
     for (x, y) in ((15, 2), (16, 2), (16, 3)):
         r.put_checkered("asc_basket_grain", x, y, single=True)
     # The courtyard garden, open to the sky: grass and poppies, the laurel,

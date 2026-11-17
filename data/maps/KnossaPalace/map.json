@@ -1,0 +1,273 @@
+{
+  "id": "MAP_KNOSSA_PALACE",
+  "name": "KnossaPalace",
+  "layout": "LAYOUT_KNOSSA_PALACE",
+  "music": "MUS_ICHOR_TEMPLE",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_PALACE_OF_MINOS",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_KNOSSA_BULL_ROAD",
+      "offset": 14,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_PALACE_KERAMOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 27,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "KnossaPalace_EventScript_Keramos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PALACE_GYPSOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 31,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "KnossaPalace_EventScript_Gypsos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PALACE_GENTLE_BULL",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(TAURIVET)",
+      "x": 30,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_GentleBull",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PALACE_SARPEDON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SARPEDON",
+      "x": 32,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_Sarpedon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PALACE_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 29,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_KNOSSA"
+    },
+    {
+      "local_id": "LOCALID_PALACE_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 29,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_AletheaNight",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_COURT"
+    },
+    {
+      "local_id": "LOCALID_PALACE_ARIADNE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ARIADNE",
+      "x": 32,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_Ariadne",
+      "flag": "FLAG_ICHOR_HIDE_ARIADNE_COURT"
+    },
+    {
+      "local_id": "LOCALID_PALACE_ASTERION",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ASTERLORN)",
+      "x": 33,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_Asterion",
+      "flag": "FLAG_ICHOR_HIDE_ASTERION_COURT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 13,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_WestGrunt",
+      "flag": "FLAG_ICHOR_HIDE_PALACE_GRUNTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "x": 9,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 2,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_EventScript_Dancer",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 32,
+      "y": 44,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ELIXIR",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_PALACE_ELIXIR"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 14,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_PALACE_THRONE_ROOM",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 7,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_PALACE_WEST_MAGAZINES",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 47,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_PALACE_QUEENS_MEGARON",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 45,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_PALACE_GRAND_STAIRCASE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 11,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_PALACE_STAR_PIECE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 25,
+      "y": 32,
+      "elevation": 3,
+      "item": "ITEM_RELIC_GOLD",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_PALACE_GOLD_STATER"
+    },
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 26,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KnossaPalace_EventScript_LeapLine"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_EventScript_WornSteps"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_EventScript_ChargingBull"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_EventScript_Leapers"
+    },
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_EventScript_LilyPrince"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_EventScript_LilyPrince"
+    }
+  ]
+}

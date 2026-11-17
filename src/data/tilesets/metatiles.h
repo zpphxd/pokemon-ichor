@@ -134,6 +134,14 @@ const u16 gMetatileAttributes_PorytilesManaged_CaveDark[] = INCBIN_U16("data/til
 const u16 gMetatiles_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: mychos
+const u16 gMetatiles_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: astra
+const u16 gMetatiles_PorytilesManaged_Astra[] = INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Astra[] = INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: the Mystery sanctum's derived sets (written by tools/ichor/maps/sanctum.py)
 const u16 gMetatiles_EleusaSanctumRock[] = INCBIN_U16("data/tilesets/secondary/eleusa_sanctum_rock/metatiles.bin");
 const u16 gMetatileAttributes_EleusaSanctumRock[] = INCBIN_U16("data/tilesets/secondary/eleusa_sanctum_rock/metatile_attributes.bin");
@@ -232,3 +240,37 @@ const u16 gMetatileAttributes_PorytilesManaged_OikiaMelos[] = INCBIN_U16("data/t
 const u16 gMetatiles_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatiles.bin");
 
 const u16 gMetatileAttributes_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: amnisos
+const u16 gMetatiles_PorytilesManaged_Amnisos[] = INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Amnisos[] = INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: bull_road
+const u16 gMetatiles_PorytilesManaged_BullRoad[] = INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_BullRoad[] = INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: palace_minos
+const u16 gMetatiles_PorytilesManaged_PalaceMinos[] = INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_PalaceMinos[] = INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: palace_rooms
+const u16 gMetatiles_PorytilesManaged_PalaceRooms[] = INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_PalaceRooms[] = INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/metatile_attributes.bin");
+// Ichor: lakonia
+const u16 gMetatiles_PorytilesManaged_Lakonia[] = INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Lakonia[] = INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: gytheion
+const u16 gMetatiles_PorytilesManaged_Gytheion[] = INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Gytheion[] = INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: eurotas
+const u16 gMetatiles_PorytilesManaged_Eurotas[] = INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Eurotas[] = INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: stymphalia
+const u16 gMetatiles_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/metatile_attributes.bin");
+// Ichor: daidaleion
+const u16 gMetatiles_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatile_attributes.bin");

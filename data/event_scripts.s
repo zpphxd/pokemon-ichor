@@ -35,6 +35,7 @@
 #include "constants/field_weather.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
+#include "constants/ichor_act3.h"
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"
@@ -804,6 +805,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_star_chart.inc"
 	.include "data/scripts/ichor_world.inc" @ Ichor: the world's small systems
 	.include "data/scripts/ichor_bones.inc" @ Ichor: knucklebones
+	.include "data/scripts/ichor_league.inc" @ Ichor: the League
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"

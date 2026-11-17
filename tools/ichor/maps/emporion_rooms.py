@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emporion's nine interiors.
+"""Emporion's ten interiors.
 
 Every house is a home and every interior is unique (design/MAP_DESIGN.md
 section 2). Who is in each room and what happens there is in
@@ -457,6 +457,56 @@ ROOMS = {
         ],
     },
     # ------------------------------------------------------------------
+    # Waltz Chariots, Alfred's chariot store, beside the Deigma. A wheelwright
+    # from the far east, come in by sea, who builds light racing chariots.
+    # Spare wheels hang on pegs at either end of the back wall; between the
+    # windows every road he has driven is scratched into the plaster. His
+    # table and stool on the left, a bench for buyers on the right. The
+    # chariot he sells stands on show in the yard outside. On domos (the
+    # forge set, ergasteria, is full), from pieces it already holds.
+    "chariot": {
+        "set": "domos",
+        "title": "Waltz Chariots, Alfred's chariot store, Emporion",
+        "map": "MAP_EMPORION_CITY_CHARIOT_STORE",
+        "layout": "EmporionCity_ChariotStore",
+        "render": "emporion_chariot_store.png",
+        "floor": "terracotta",
+        "wall": "red",
+        "grid": [
+            "WWWWWWWWWWWW",
+            "WWWWWWWWWWWW",
+            "............",
+            "............",
+            "............",
+            "............",
+            "............",
+            "............",
+            "............",
+        ],
+        "rugs": [],
+        "stamps": [
+            ("wheel_pegs", 0, 1),
+            ("window", 3, 0),
+            ("road_map", 5, 0),
+            ("window", 8, 0),
+            ("wheel_pegs", 10, 1),
+            ("table", 1, 3),
+            ("stool", 3, 3),
+            ("bench", 8, 4),
+            ("pithos", 0, 5),
+            ("amphora_plain", 10, 6),
+            ("lampstand", 11, 6),
+            ("mat", 5, 8),
+        ],
+        "spots": [
+            ("warp", "door to Emporion (south-arrow mat)", [(5, 8), (6, 8)]),
+            ("npc", "Alfred, at the middle of his shop", (6, 4), "south"),
+            ("bg", "the roads scratched on the plaster", (5, 1), (5, 2, "north")),
+            ("bg", "the spare wheels", (1, 1), (1, 2, "north")),
+            ("bg", "his table", (2, 3), (2, 4, "north")),
+        ],
+    },
+    # ------------------------------------------------------------------
     # The hiring hall: a long warehouse among the shipsheds where the Titans'
     # crew boss signs on dockhands. Crates of shovels and bronze helmets
     # stacked along the walls (one with a sickle chalked small on it), the
@@ -534,12 +584,12 @@ ROOMS = {
 # The Asclepeion is built from civic, the slice's set of public halls, so it
 # shares Akti's counter, Pithos, statue and couches; it is laid out with
 # civic_rooms.py's Room (a grid of civic metatile names) rather than composed.
-# A harbor Asclepeion, long and bright: the Pithos in its niche between two
-# jars at the back left; Asclepius by the wide sea window; the healer at her
-# counter with the harbor at her back and the Panacoil coiled round the
-# counter's post; the ship's-rope bell-pull at the counter's end; bronze
-# anchors and clay votives hung by sailors on the wall to the right; and the
-# couches of the ward down the right side behind a colonnade.
+# A harbor Asclepeion, long and bright: the Pithos alone in its niche at the
+# back left, a sailor's bronze anchor beside it; the ship's-rope bell-pull at
+# the end of the healer's counter, the standard station
+# (civic_rooms.healer_station); the wide sea window over the ward, Asclepius
+# beside it and the Panacoil coiled beneath it; and the ward's couches down
+# the right side behind a colonnade.
 ASCLEPEION = {
     "title": "The Asclepeion, Emporion",
     "map": "MAP_EMPORION_CITY_ASCLEPEION",
@@ -549,16 +599,16 @@ ASCLEPEION = {
     "spots": [
         ("warp", "door to Emporion (the threshold mosaic)", [(8, 8)]),
         ("perch", "the healer, at the counter with the sea behind her", (8, 2), (8, 4, "north")),
-        ("perch", "the Panacoil, coiled round the counter's post", (6, 2), (6, 4, "north")),
+        ("npc", "the Panacoil, under the sea window", (12, 2), "south"),
         ("npc", "the sailor with a sunburn, by the couches", (13, 4), "east"),
-        ("npc", "the old woman, by the statue", (4, 3), "north"),
+        ("npc", "the old woman, by the statue", (14, 3), "east"),
         ("npc", "the young healer, in the ward", (13, 7), "west"),
         ("bg", "the Pithos", (1, 2), (1, 3, "north")),
         ("bg", "the Pithos", (2, 2), (2, 3, "north")),
-        ("bg", "the statue of Asclepius", (5, 2), (5, 3, "north")),
-        ("bg", "the bell-pull", (11, 1), (11, 2, "north")),
-        ("bg", "the sea window (beside the counter)", (5, 2), (5, 3, "north")),
-        ("bg", "the anchors", (12, 1), (12, 2, "north")),
+        ("bg", "the statue of Asclepius", (15, 2), (15, 3, "north")),
+        ("bg", "the bell-pull", (4, 1), (4, 2, "north")),
+        ("bg", "the sea window (over the ward)", (12, 1), (12, 2, "north")),
+        ("bg", "the anchors", (3, 1), (3, 2, "north")),
     ],
 }
 
@@ -570,29 +620,21 @@ def asclepeion_room():
     r.row(0, 0, ["asc_wall_top_l"] + ["asc_wall_top"] * (W - 2) + ["asc_wall_top_r"])
     r.row(1, 0, ["asc_wall_l"] + ["asc_wall"] * (W - 2) + ["asc_wall_r"])
     r.row(2, 0, [("asc_floor_a_sh" if x % 2 == 0 else "asc_floor_b_sh") for x in range(W)])
-    # The Pithos in its niche between two jars, back left.
-    r.put("asc_jar", 0, 1, 1, 2)
-    r.put("asc_pithos", 1, 0, 2, 3)
-    r.put("asc_jar", 3, 1, 1, 2)
-    # Asclepius by the window; the sea window behind the counter.
-    r.put("asc_statue", 5, 0, 1, 3)
-    r.put("asc_sea_window", 6, 0, 4, 2)
-    r.set(6, 2, "asc_counter_l")
-    r.set(7, 2, "asc_counter_m")
-    r.set(8, 2, "asc_counter_staff")
-    r.put("asc_votive_counter", 9, 2, 2, 1)
-    r.row(3, 6, ["asc_counter_front_l", "asc_counter_front_m", "asc_counter_front_m",
-                 "asc_counter_front_m", "asc_counter_front_r"])
-    r.set(10, 2, "asc_counter_r")
-    # The bell-pull at the counter's end; anchors and clay votives by sailors.
-    r.put("asc_bell_rope", 11, 0, 1, 2)
-    r.put("asc_anchors", 12, 1, 1, 1)
-    r.put("asc_votive_wall", 13, 1, 2, 1)
-    r.put("asc_anchors", 15, 1, 1, 1)
+    # The Pithos alone in its niche, back left; Asclepius beside it, an anchor
+    # hung by a sailor between him and the counter.
+    CR.pithos(r, 1)
+    r.put("asc_anchors", 3, 1, 1, 1)
+    # The ship's-rope bell-pull at the counter's end, then the healer's
+    # station, the same in every Asclepeion (civic_rooms.py).
+    r.put("asc_bell_rope", 4, 0, 1, 2)
+    CR.healer_station(r, 8, 2)
+    # The sea window over the ward, Asclepius beside it.
+    r.put("asc_sea_window", 11, 0, 4, 2)
+    r.put("asc_statue", 15, 0, 1, 3)
     # The ward: a colonnade, and the couches down the right side.
     for y in (3, 6):
         r.put_checkered("asc_column", 12, y, 1, 3)
-    r.put_checkered("asc_kline", 15, 3, 2, 2)
+    r.put_checkered("asc_kline", 15, 4, 2, 2)
     r.put_checkered("asc_kline", 15, 6, 2, 2)
     r.put_checkered("asc_snake", 14, 8)
     # A brazier by the Pithos niche, a bench for those waiting, the threshold.

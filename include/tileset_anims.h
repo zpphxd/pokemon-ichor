@@ -51,5 +51,22 @@ void InitTilesetAnim_PorytilesManaged_Skandeia(void);
 void InitTilesetAnim_PorytilesManaged_Paphia(void);
 void InitTilesetAnim_PorytilesManaged_Neraida(void);
 void InitTilesetAnim_PorytilesManaged_Melos(void);
+void InitTilesetAnim_PorytilesManaged_Amnisos(void);
+void InitTilesetAnim_PorytilesManaged_BullRoad(void);
+void InitTilesetAnim_PorytilesManaged_Mychos(void);
+void InitTilesetAnim_PorytilesManaged_Astra(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Lakonia(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Gytheion(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Eurotas(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Stymphalia(void);
+void InitTilesetAnim_PorytilesManaged_Labyrinth(void);
 
 #endif // GUARD_TILESET_ANIMS_H

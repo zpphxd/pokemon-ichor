@@ -536,11 +536,11 @@ const struct Tileset gTileset_CaveDark =
 };
 
 // Ichor: labyrinth, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
-// built by tools/ichor/art/labyrinth_build.py; so far it holds the house's masonry and
-// Daedalus's workshop. It uses only its own tiles and palettes 6-12, with opaque floors,
-// so it works on any interior primary (drawn for oikos). Its variant palette sets,
-// gTilesetPalettes_LabyrinthGlow (the doused torch) and gTilesetPalettes_LabyrinthDawn
-// (scene L), are in graphics.h. No layout uses it yet.
+// built by tools/ichor/art/labyrinth_build.py: the house's masonry, the karst cave it
+// was cut into, Rings I-IV and Minos's tomb (LABYRINTH_MAZE.md). It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_LabyrinthGlow)
+// are in graphics.h. No layout uses it yet.
 const struct Tileset gTileset_Labyrinth =
 {
     .isCompressed = TRUE,
@@ -549,7 +549,37 @@ const struct Tileset gTileset_Labyrinth =
     .palettes = gTilesetPalettes_PorytilesManaged_Labyrinth,
     .metatiles = gMetatiles_PorytilesManaged_Labyrinth,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
-    .callback = NULL,
+    .callback = InitTilesetAnim_PorytilesManaged_Labyrinth,
+};
+
+// Ichor: mychos, the Labyrinth's heart under Knossa (LABYRINTH.md §11, LABYRINTH_MAZE.md §4):
+// Ring V (the Hunt's lake cave) and Ring VI (the forge cavern, the Hall of Dials, the archive,
+// the vault, the shrine): the house's masonry and the cave kit. Porytiles-managed, built by
+// tools/ichor/art/mychos_build.py from world-act3's art (tools/ichor/art/mychos_base/). It uses
+// only its own tiles and palettes 6-12, so it works on any interior primary (drawn for oikos).
+const struct Tileset gTileset_Mychos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Mychos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Mychos,
+    .metatiles = gMetatiles_PorytilesManaged_Mychos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Mychos,
+    .callback = InitTilesetAnim_PorytilesManaged_Mychos,
+};
+
+// Ichor: astra, the Labyrinth's deepest caves (LABYRINTH_MAZE.md §1, §4): Ring VII's dome and
+// dancing floor, the Starry Chamber's crystal stars, the Icarus Shaft's chimney. Mychos's
+// sister, built by tools/ichor/art/mychos_build.py from the same house and cave kit.
+const struct Tileset gTileset_Astra =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Astra,
+    .palettes = gTilesetPalettes_PorytilesManaged_Astra,
+    .metatiles = gMetatiles_PorytilesManaged_Astra,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Astra,
+    .callback = InitTilesetAnim_PorytilesManaged_Astra,
 };
 
 // Ichor: the Mystery sanctum under Eleusa (tools/ichor/maps/sanctum.py). Two derived
@@ -878,5 +908,141 @@ const struct Tileset gTileset_CivicKythera =
     .palettes = gTilesetPalettes_PorytilesManaged_CivicKythera,
     .metatiles = gMetatiles_PorytilesManaged_CivicKythera,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicKythera,
+    .callback = NULL,
+};
+
+// Ichor: amnisos, Amnisos, the harbor of Knossa (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Amnisos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Amnisos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Amnisos,
+    .metatiles = gMetatiles_PorytilesManaged_Amnisos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Amnisos,
+    .callback = InitTilesetAnim_PorytilesManaged_Amnisos,
+};
+
+// Ichor: bull_road, the Bull Road, its vineyard terraces and the Bronze Heel (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_BullRoad =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_BullRoad,
+    .palettes = gTilesetPalettes_PorytilesManaged_BullRoad,
+    .metatiles = gMetatiles_PorytilesManaged_BullRoad,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_BullRoad,
+    .callback = InitTilesetAnim_PorytilesManaged_BullRoad,
+};
+
+// Ichor: palace_minos, the Palace of Minos above ground (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_PalaceMinos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_PalaceMinos,
+    .palettes = gTilesetPalettes_PorytilesManaged_PalaceMinos,
+    .metatiles = gMetatiles_PorytilesManaged_PalaceMinos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_PalaceMinos,
+    .callback = NULL,
+};
+
+// Ichor: palace_rooms, the Palace of Minos's rooms and the Bull Road vault (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py; it uses only its own tiles and palettes
+// 6-12, so it works on any primary.
+const struct Tileset gTileset_PalaceRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_PalaceRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_PalaceRooms,
+    .metatiles = gMetatiles_PorytilesManaged_PalaceRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_PalaceRooms,
+    .callback = NULL,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): lakonia, Lakonia, the town with no walls (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Lakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Lakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Lakonia,
+    .metatiles = gMetatiles_PorytilesManaged_Lakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Lakonia,
+    .callback = InitTilesetAnim_PorytilesManaged_Lakonia,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): gytheion, Gytheion and the strait off Malea (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Gytheion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Gytheion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Gytheion,
+    .metatiles = gMetatiles_PorytilesManaged_Gytheion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Gytheion,
+    .callback = InitTilesetAnim_PorytilesManaged_Gytheion,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): eurotas, Route 25, up the Eurotas (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Eurotas =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Eurotas,
+    .palettes = gTilesetPalettes_PorytilesManaged_Eurotas,
+    .metatiles = gMetatiles_PorytilesManaged_Eurotas,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Eurotas,
+    .callback = InitTilesetAnim_PorytilesManaged_Eurotas,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): stymphalia, Route 26, Lake Stymphalia and Route 27 (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Stymphalia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Stymphalia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Stymphalia,
+    .metatiles = gMetatiles_PorytilesManaged_Stymphalia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Stymphalia,
+    .callback = InitTilesetAnim_PorytilesManaged_Stymphalia,
+};
+
+// Ichor: daidaleion, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
+// built by tools/ichor/art/labyrinth_build.py: the house's masonry, Daedalus's workshop
+// and the Icarus Shaft. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_DaidaleionDawn)
+// are in graphics.h. No layout uses it yet.
+const struct Tileset gTileset_Daidaleion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Daidaleion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
+    .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
     .callback = NULL,
 };

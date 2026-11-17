@@ -19,7 +19,9 @@
 #   7. Euphronios's workshop: three paintings and their pay;
 #   8. the hiring hall: the crew boss's battle and Rocky Helmet, then the hall
 #      empty after Act I and the ledger left open;
-#   9. the runners' house: the Quick Claw, then the letter home after Act I.
+#   9. the runners' house: the Quick Claw, then the letter home after Act I;
+#  10. Waltz Chariots: Alfred won't sell short of 10,000, then sells the chariot,
+#      and the sign at the yard reads WALTZ CHARIOTS.
 # Screenshots land in build/emporion_rooms/; the run fails on any failed check,
 # a crash or a timeout.
 set -u

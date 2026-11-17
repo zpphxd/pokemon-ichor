@@ -1,0 +1,167 @@
+{
+  "id": "MAP_OLYMPUS_PROPYLAIA",
+  "name": "Olympus_Propylaia",
+  "layout": "LAYOUT_OLYMPUS_PROPYLAIA",
+  "music": "MUS_ICHOR_ASCLEPEION",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_MOUNT_OLYMPUS",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_OLYMPUS_PROPYLAIA_HEALER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
+      "x": 2,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Olympus_Propylaia_EventScript_Healer",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_OLYMPUS_PROPYLAIA_MERCHANT",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
+      "x": 14,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Olympus_Propylaia_EventScript_Merchant",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_OLYMPUS_PROPYLAIA_GUARD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 8,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Olympus_Propylaia_EventScript_Guard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_OLYMPUS_PROPYLAIA_GUARD_B",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 9,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Olympus_Propylaia_EventScript_GuardB",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_ASCENT_3F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Olympus_Propylaia_EventScript_InnerDoor"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Stele"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Propylaia_EventScript_Hearth"
+    }
+  ]
+}

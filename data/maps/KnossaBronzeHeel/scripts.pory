@@ -1,0 +1,94 @@
+// The Bronze Heel (design/maps/KnossaBronzeHeel.md; SCRIPT.md III-3B, Part 2-6;
+// LABYRINTH seed 16): a shore spur east of the Bull Road's fork. Talos's ruined
+// foot stands on the beach; tide pools and a fossil ledge; a spit of rocks out to
+// the point. Alethea kneels by the foot on the first visit.
+// Map: tools/ichor/maps/knossa_bull_road.py.
+
+mapscripts KnossaBronzeHeel_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_ARRIVED_KNOSSA) || var(VAR_ICHOR_KNOSSA) >= 18) {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_HEEL)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_FOSSIL_DUG)) {
+            setmetatile(20, 13, METATILE_BullRoad_FossilLedge_Gone_L, FALSE)
+            setmetatile(21, 13, METATILE_BullRoad_FossilLedge_Gone_R, FALSE)
+        }
+    }
+}
+
+text KnossaBronzeHeel_Name_Alethea { "ALETHEA" }
+text KnossaBronzeHeel_Name_Glauke { "GLAUKE" }
+
+script KnossaBronzeHeel_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(KnossaBronzeHeel_Name_Alethea)
+    msgbox(format("One vein, neck to heel, stoppered with a bronze nail.\p"
+                  "They said ichor ran in it. The gods' blood.\p"
+                  "Or a very good grease. Truthfully, nobody checked.\p"
+                  "The foot's standing on old seabed. Look in the rock by the tide line.\p"
+                  "Two shapes. Bones, or something that used to be.\p"
+                  "The tide's eating that ledge. Dig one out before it eats both."))
+    closemessage
+    applymovement(LOCALID_HEEL_ALETHEA, KnossaBronzeHeel_Movement_AletheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_HEEL_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_HEEL)
+    release
+}
+
+movement KnossaBronzeHeel_Movement_AletheaLeaves { walk_left * 6 }
+
+script KnossaBronzeHeel_EventScript_Glauke {
+    trainerbattle_single(TRAINER_ICHOR_GLAUKE_KNOSSA, format("I leap the bronze one. He never moves. He's perfect."),
+                         format("You moved. That's cheating."))
+    setspeaker(KnossaBronzeHeel_Name_Glauke)
+    msgbox(format("A bronze giant walked this shore every day once. Three laps a day."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBronzeHeel_EventScript_Foot {
+    msgbox(format("A bronze foot, taller than a house. The rest of him is nowhere.\p"
+                  "A nail of bronze stops a vein in the heel. It's been hammered in hard."), MSGBOX_SIGN)
+}
+
+// The fossil ledge: two shapes in the rock by the tide line; dig one, and the tide
+// takes the other (SCRIPT.md Part 6). Daedalus revives them in the workshop.
+script KnossaBronzeHeel_EventScript_FossilLedge {
+    lockall
+    if (flag(FLAG_ICHOR_FOSSIL_DUG)) {
+        msgbox(format("Wet rock, freshly broken. The tide has taken the rest."), MSGBOX_SIGN)
+        releaseall
+        end
+    }
+    msgbox(format("Two shapes in the old seabed: a skull with one great eye socket,\p"
+                  "and a stone dart, like a thunderbolt. The tide is already at them."))
+    message(format("Dig out which?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, KnossaBronzeHeel_Text_Skull,
+                   KnossaBronzeHeel_Text_Dart, KnossaBronzeHeel_Text_Neither)
+    if (var(VAR_RESULT) == 0) {
+        giveitem(ITEM_SKULL_FOSSIL)
+    } elif (var(VAR_RESULT) == 1) {
+        giveitem(ITEM_HELIX_FOSSIL)
+    } else {
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        releaseall
+        end
+    }
+    setflag(FLAG_ICHOR_FOSSIL_DUG)
+    setmetatile(20, 13, METATILE_BullRoad_FossilLedge_Gone_L, FALSE)
+    setmetatile(21, 13, METATILE_BullRoad_FossilLedge_Gone_R, FALSE)
+    special(DrawWholeMapView)
+    playse(SE_M_SURF)
+    msgbox(format("A wave runs up over the ledge. When it draws back, the other shape is gone."))
+    releaseall
+}
+
+text KnossaBronzeHeel_Text_Skull { "THE SKULL" }
+text KnossaBronzeHeel_Text_Dart { "THE DART" }
+text KnossaBronzeHeel_Text_Neither { "LEAVE THEM" }

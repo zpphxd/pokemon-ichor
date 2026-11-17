@@ -204,6 +204,11 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_HIEROPHANT_GALATEA,
     TRAINER_PIC_SCULPTOR,
     TRAINER_PIC_BEEKEEPER,
+    // Ichor: Knossa (design/phase4/SCRIPT.md Part 3, LABYRINTH.md §11), on placeholder art
+    // until the class portraits are drawn. The Labyrinth's priestesses use these too.
+    TRAINER_PIC_BULL_LEAPER,
+    TRAINER_PIC_BULL_LEAPER_F,
+    TRAINER_PIC_MINOAN_PRIESTESS,
     TRAINER_PIC_COUNT,
 };
 
@@ -573,6 +578,9 @@ enum TrainerClassID
     TRAINER_CLASS_SCULPTOR,
     TRAINER_CLASS_BEEKEEPER,
     TRAINER_CLASS_DIVER,
+    // Ichor: Knossa's (LABYRINTH.md §9); the Labyrinth's priestesses use MINOAN_PRIEST too
+    TRAINER_CLASS_BULL_LEAPER,
+    TRAINER_CLASS_MINOAN_PRIEST,
 
     TRAINER_CLASS_COUNT,
 };

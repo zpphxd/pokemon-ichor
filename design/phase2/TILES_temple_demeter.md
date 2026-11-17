@@ -69,7 +69,7 @@ chalk latent), `fire` (bronze, flame, ash), `marble` (the dais, throne and altar
 (vessels, baskets, ribbons) and `warm` (the fresco and stone under firelight). Slot 12 is
 free.
 
-**Tile budget.** 379 of 504 tiles are used (137 metatiles). The door animations own
+**Tile budget.** 395 of 504 tiles are used (153 metatiles). The door animations own
 tiles 504-511.
 
 **Labels.** The build writes `METATILE_TempleDemeter_*` for everything a script swaps to
@@ -260,6 +260,18 @@ ids     walk
 0x216   X
 0x21E   X
 ```
+
+### Hera's serpent pits
+
+`serpent_pit`, 8 wide by 2 tall. Sunken pits for the Seat of Hera, where Hera's serpents (the Hydra's kin, Ladon's) keep their dens between the columns. Pieces by row (`top`, `bot` of a two-row pit, or `one`) and column (`l`, `m`, `r`, or `s` for a one-wide pit), e.g. `top_l`; `bot_l_snake`, `bot_s_snake`, `one_m_snake` and `top_m_snake` show a coiled serpent.
+
+```text
+ids                                               walk
+0x2B0 0x2B1 0x2B2 0x2B3 0x2B4 0x2B5 0x2B6 0x2B7   X X X X X X X X
+0x2B8 0x2B9 0x2BA 0x2BB 0x2BC 0x2BD 0x2BE 0x2BF   X X X X X X X X
+```
+
+Pieces: `top_l` 0x2B0, `top_m` 0x2B1, `top_r` 0x2B2, `top_s` 0x2B3, `bot_l` 0x2B4, `bot_m` 0x2B5, `bot_r` 0x2B6, `bot_s` 0x2B7, `one_l` 0x2B8, `one_m` 0x2B9, `one_r` 0x2BA, `one_s` 0x2BB, `bot_l_snake` 0x2BC, `bot_s_snake` 0x2BD, `one_m_snake` 0x2BE, `top_m_snake` 0x2BF.
 
 ## The sample rite (`temple_demeter_scene.py`)
 

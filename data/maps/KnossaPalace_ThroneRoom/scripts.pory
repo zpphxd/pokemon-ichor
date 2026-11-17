@@ -1,0 +1,62 @@
+// The Throne Room (SCRIPT.md III-3D; LABYRINTH.md §8 Scene A, word for word): the
+// gypsum throne between its griffins, the council's benches, the lustral basin.
+// Ariadne sits beside the throne, not on it. Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaPalace_ThroneRoom_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_MET_ARIADNE)) {
+            setflag(FLAG_ICHOR_HIDE_ARIADNE_THRONE)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_ARIADNE_THRONE)
+        }
+        if (var(VAR_ICHOR_KNOSSA) >= 18) {
+            setflag(FLAG_ICHOR_HIDE_PALACE_GRUNTS)
+        }
+    }
+}
+
+text KnossaPalace_ThroneRoom_Name_Ariadne { "ARIADNE" }
+text KnossaPalace_ThroneRoom_Name_Titanborn { "TITANBORN" }
+
+script KnossaPalace_ThroneRoom_EventScript_Ariadne {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_ThroneRoom_Name_Ariadne)
+    msgbox(format("So you're the one the Titans whisper about. No thread.\p"
+                  "Sit. Not there. That's the throne. Nobody sits there.\p"
+                  "I'm Ariadne. I keep the house for the Mistress of the Labyrinth.\p"
+                  "The Mistress takes honey. The Titans take everything else.\p"
+                  "I let them in. Don't look at me like that.\p"
+                  "Their master swears he can mend anything. Even what's under us.\p"
+                  "Under us is my brother.\p"
+                  "They call him the Minotaur. His name is Asterion.\p"
+                  "It means starry. Our mother named him.\p"
+                  "Before everyone decided what he was.\p"
+                  "Can you leap a bull?\p"
+                  "If you can leap a bull, you can understand one. Go and see Sarpedon."))
+    closemessage
+    setflag(FLAG_ICHOR_MET_ARIADNE)
+    if (var(VAR_ICHOR_KNOSSA) < 3) {
+        setvar(VAR_ICHOR_KNOSSA, 3)
+    }
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_THRONE_ARIADNE)
+    setflag(FLAG_ICHOR_HIDE_ARIADNE_THRONE)
+    clearflag(FLAG_ICHOR_HIDE_ARIADNE_STAIR)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("When you look up, Ariadne has gone. Sarpedon is in the court."))
+    release
+}
+
+script KnossaPalace_ThroneRoom_EventScript_Guard {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_ThroneRoom_Name_Titanborn)
+    msgbox(format("We salute her. She ignores us. It's a good arrangement."))
+    release
+}
+
+script KnossaPalace_ThroneRoom_EventScript_Throne {
+    msgbox(format("A gypsum throne with a wavy back, worn smooth. Nobody sits there."), MSGBOX_SIGN)
+}
