@@ -2754,6 +2754,26 @@ static const struct SpriteFrameImage sPicTable_IchorAriadne[] = {
     overworld_ascending_frames(gObjectEventPic_IchorAriadne, 2, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_IchorKleonFree[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKleonFree, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPhaedon[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPhaedon, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHyperion[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHyperion, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorSpark[] = {
+    obj_frame_tiles(gObjectEventPic_IchorSpark),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHarpe[] = {
+    obj_frame_tiles(gObjectEventPic_IchorHarpe),
+};
+
 static const struct SpriteFrameImage sPicTable_IchorActor[] = {
     overworld_ascending_frames(gObjectEventPic_IchorActor, 2, 4),
 };

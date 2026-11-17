@@ -875,6 +875,22 @@ CHARACTERS = {
                  extra=["strum1", "strum2", "strum3"]),
     "cami": C_("theoxenia", dict(H=3, h=2, G=4, C=11, c=10, D=12, d=13),
                body="robe", hair="long", over=["himation"], extra=["sit", "rise"]),
+    # the climax (design/phase4/SCRIPT.md III-9 to III-12), on the theoxenia
+    # palette so they keep their color in the Frozen Hour without coloring the
+    # cast and folk standing frozen round them.
+    # Phaedon: the healer of Astyra in his plain white chiton, a gold sash, the
+    # gold mask he no longer wears held at his side.
+    "phaedon": C_("theoxenia", dict(H=13, h=2, G=12, C=11, c=10, W=11, w=10, A=6, M=6, m=5),
+                  body="robe", hair="short", beard="jaw", over=["sash"], held=["mask"]),
+    # Hyperion: the big bronze-breasted Titan of light, bareheaded, his eyes
+    # clouded white (the eye role mapped to pale linen).
+    # Kleon after he breaks his own thread (III-10G): the same boy, redrawn on the
+    # theoxenia palette so his color can't spill onto the frozen Titanborn.
+    "kleon_free": C_("theoxenia", dict(H=13, h=1, C=11, c=10, A=6, X=4, x=3), **_KLEON),
+    "hyperion": C_("theoxenia", dict(H=3, h=2, G=12, e=10, C=13, c=2, A=6, M=6, m=5, R=6, r=5,
+                                     X=3, x=2, F=2),
+                   body="chiton", hair="bald_fringe", beard="full", cape="cloak_long",
+                   over=["corselet", "greaves"]),
     "demeter": C_("theoxenia", dict(H=6, h=5, G=7, L=7, l=5, B=5, C=15, c=14, D=6, d=5),
                   body="robe", hair="long", headwear=["wreath"], over=["himation"]),
     # the wine palette
