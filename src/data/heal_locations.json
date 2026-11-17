@@ -105,12 +105,12 @@
     {
       "id": "HEAL_LOCATION_ARKADIA",
       "map": "MAP_ARKADIA",
-      "x": 18,
-      "y": 12,
+      "x": 16,
+      "y": 15,
       "respawn_map": "MAP_ARKADIA",
       "respawn_npc": "LOCALID_ARKADIA_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "respawn_x": 16,
+      "respawn_y": 15
     },
     {
       "id": "HEAL_LOCATION_NEMEA",

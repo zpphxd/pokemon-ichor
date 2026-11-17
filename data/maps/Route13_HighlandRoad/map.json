@@ -17,7 +17,7 @@
     {
       "direction": "left",
       "map": "MAP_ARKADIA",
-      "offset": 0
+      "offset": -12
     },
     {
       "direction": "right",

@@ -1115,10 +1115,10 @@
     {
       "id": "LAYOUT_ARKADIA",
       "name": "Arkadia_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 50,
+      "height": 44,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Arkadia",
       "border_filepath": "data/layouts/Arkadia/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia/map.bin",
       "layout_version": "emerald"

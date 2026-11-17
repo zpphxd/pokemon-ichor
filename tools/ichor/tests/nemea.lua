@@ -28,11 +28,11 @@ L.start(function()
     L.expect(x == 2 and L.mapId() == S.MAP_EMPORION and not L.getFlag(S.FLAG_ROAD_OPEN),
              "the closed single-tile gate cannot bypass the Girdle approach to Arkadia")
     L.runHeader("Nemea_ArkadiaHeader")
-    L.go(25, 12)
+    L.go(47, 23)
     L.tap(K.RIGHT, 8)
     L.settle()
     x = L.pos()
-    L.expect(L.mapId() == S.MAP_ARKADIA and x == 25 and not L.getFlag(S.FLAG_ROAD_OPEN),
+    L.expect(L.mapId() == S.MAP_ARKADIA and x == 47 and not L.getFlag(S.FLAG_ROAD_OPEN),
              "Arkadia's onward road waits for the actual Moon Laurel milestone")
     L.runHeader("Nemea_MoonHeader")
     L.setBeat("down_from_arkadia", false)
