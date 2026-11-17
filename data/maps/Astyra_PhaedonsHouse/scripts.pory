@@ -1,0 +1,20 @@
+mapscripts Astyra_PhaedonsHouse_MapScripts {}
+script Astyra_PhaedonsHouse_EventScript_Elpis {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NameElpis)
+    msgbox(format("That's Starry. He's a bull. He doesn't mind when I get the song wrong.\pI'll go when the hours stop. Papa says hours don't stop."))
+    setflag(FLAG_ICHOR_MET_ELPIS)
+    release
+}
+script Astyra_PhaedonsHouse_EventScript_Starry {
+    msgbox(format("A little clay bull with stars painted on its back.\pOne horn has been carefully glued on again."), MSGBOX_SIGN)
+    end
+}
+script Astyra_PhaedonsHouse_EventScript_MusicBox {
+    lockall
+    playbgm(MUS_ICHOR_ELPIS_LULLABY_BOX, TRUE)
+    msgbox(format("A music box. Its tune stops just before the last note.\pOn the bottom: From Papa's friend under the island."))
+    playbgm(MUS_ICHOR_ELPIS_LULLABY, TRUE)
+    releaseall
+}

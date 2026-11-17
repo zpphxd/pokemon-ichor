@@ -34,6 +34,10 @@ The single source for levels across the whole game. Every script, encounter tabl
   Route 14 uses wild 31–33 and trainers 34–36. These begin the Astyra stage
   after the Moon Laurel. Their evolved encounters respect evolution timing;
   assisted native travel is not natural-level balance approval.
+- **Implemented capital approach:** Route 15 uses wild 32–34 and trainers 35–37;
+  Route 16 uses wild 34–36 and trainers 36–38. Daphnyad replaces Kladoe in
+  Route 16's daytime encounters and both roads' late trainer parties.
+  These are implemented bands, not natural-level approval.
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,

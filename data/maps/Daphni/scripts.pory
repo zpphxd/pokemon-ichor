@@ -1,0 +1,26 @@
+mapscripts Daphni_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_DAPHNI)
+    }
+}
+script Daphni_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_DAPHNI_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+script Daphni_EventScript_Merchant {
+    goto(ArkadiaApproach_EventScript_Merchant)
+}
+script Daphni_EventScript_Guide {
+    msgbox(format("The pass opens onto Astyra.\pThe city's full of people who know exactly when the world ends. None of them agree what to do until then."), MSGBOX_NPC)
+}
+script Daphni_EventScript_Sign {
+    msgbox(format("DAPHNI\pWest: Eleusa and the salt lakes.\nEast: Astyra."), MSGBOX_SIGN)
+    end
+}
+script Daphni_EventScript_Laurel {
+    msgbox(format("Someone tied a little prayer to the laurel.\pThe string has cut into its bark."), MSGBOX_SIGN)
+    end
+}

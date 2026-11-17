@@ -133,6 +133,38 @@
       "map": "MAP_ROUTE14_NEMEA_ROAD",
       "x": 27,
       "y": 9
+    },
+    {
+      "id": "HEAL_LOCATION_DAPHNI",
+      "map": "MAP_DAPHNI",
+      "x": 18,
+      "y": 12,
+      "respawn_map": "MAP_DAPHNI",
+      "respawn_npc": "LOCALID_DAPHNI_HEALER",
+      "respawn_x": 18,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_ASTYRA",
+      "map": "MAP_ASTYRA",
+      "x": 9,
+      "y": 32,
+      "respawn_map": "MAP_ASTYRA_ASCLEPEION",
+      "respawn_npc": "LOCALID_ASTYRA_ASCLEPEION_PHAEDON",
+      "respawn_x": 8,
+      "respawn_y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_15",
+      "map": "MAP_ROUTE15_MYSTERY_ROAD",
+      "x": 27,
+      "y": 9
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_16",
+      "map": "MAP_ROUTE16_CAPITAL_PASS",
+      "x": 27,
+      "y": 9
     }
   ]
 }

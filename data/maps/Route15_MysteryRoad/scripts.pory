@@ -1,0 +1,63 @@
+mapscripts Route15_MysteryRoad_MapScripts {}
+
+script Route15_MysteryRoad_EventScript_TIMON {
+    trainerbattle_single(TRAINER_ICHOR_R15_TIMON,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_HEGESO {
+    trainerbattle_single(TRAINER_ICHOR_R15_HEGESO,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_POLEMON {
+    trainerbattle_single(TRAINER_ICHOR_R15_POLEMON,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_PHILA {
+    trainerbattle_single(TRAINER_ICHOR_R15_PHILA,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_AGIS {
+    trainerbattle_single(TRAINER_ICHOR_R15_AGIS,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_PRAXON {
+    trainerbattle_single(TRAINER_ICHOR_R15_PRAXON,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_Sign0 {
+    msgbox(format("West: Eleusa. East: Daphni, past the salt lakes."), MSGBOX_SIGN)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_Sign1 {
+    msgbox(format("West: Eleusa. East: Daphni, past the salt lakes."), MSGBOX_SIGN)
+    end
+}
+
+script Route15_MysteryRoad_EventScript_Herm {
+    goto(EventScript_IchorGreatHerm)
+}

@@ -1078,6 +1078,83 @@
       "border_filepath": "data/layouts/Route14_NemeaRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route14_NemeaRoad/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE15_MYSTERY_ROAD",
+      "name": "Route15_MysteryRoad_Layout",
+      "width": 48,
+      "height": 24,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Route15_MysteryRoad/border.bin",
+      "blockdata_filepath": "data/layouts/Route15_MysteryRoad/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DAPHNI",
+      "name": "Daphni_Layout",
+      "width": 28,
+      "height": 32,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Daphni/border.bin",
+      "blockdata_filepath": "data/layouts/Daphni/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE16_CAPITAL_PASS",
+      "name": "Route16_CapitalPass_Layout",
+      "width": 48,
+      "height": 24,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Route16_CapitalPass/border.bin",
+      "blockdata_filepath": "data/layouts/Route16_CapitalPass/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA",
+      "name": "Astyra_Layout",
+      "width": 48,
+      "height": 48,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Astyra/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA_ASCLEPEION",
+      "name": "Astyra_Asclepeion_Layout",
+      "width": 18,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Astyra_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA_PHAEDONS_HOUSE",
+      "name": "Astyra_PhaedonsHouse_Layout",
+      "width": 16,
+      "height": 14,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Astyra_PhaedonsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra_PhaedonsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASTYRA_LIBRARY",
+      "name": "Astyra_Library_Layout",
+      "width": 22,
+      "height": 16,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/Astyra_Library/border.bin",
+      "blockdata_filepath": "data/layouts/Astyra_Library/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

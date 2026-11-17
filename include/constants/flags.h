@@ -1925,6 +1925,17 @@
 #define FLAG_ICHOR_ITEM_R14_HEAL                (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Nemea road visible healing jar
 #define FLAG_ICHOR_ITEM_R14_BALL                (FLAG_ICHOR_GENERAL_START + 0x126) // Ichor: Nemea road visible ball jar
 #define FLAG_ICHOR_ITEM_R14_ETHER               (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Nemea road visible ether jar
+#define FLAG_ICHOR_VISITED_ASTYRA               (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Visited the capital
+#define FLAG_ICHOR_MET_PHAEDON                  (FLAG_ICHOR_GENERAL_START + 0x129) // Ichor: Phaedon healed the player in Astyra
+#define FLAG_ICHOR_MET_ELPIS                    (FLAG_ICHOR_GENERAL_START + 0x12A) // Ichor: Met Elpis and Starry
+#define FLAG_ICHOR_DAPHNE_ASTYRA                (FLAG_ICHOR_GENERAL_START + 0x12B) // Ichor: Heard Daphne unwriting her book in the capital
+#define FLAG_ICHOR_ITEM_R15_HEAL                (FLAG_ICHOR_GENERAL_START + 0x12C) // Ichor: Mystery road healing jar
+#define FLAG_ICHOR_ITEM_R15_BALL                (FLAG_ICHOR_GENERAL_START + 0x12D) // Ichor: Mystery road ball jar
+#define FLAG_ICHOR_ITEM_R15_ETHER               (FLAG_ICHOR_GENERAL_START + 0x12E) // Ichor: Mystery road ether jar
+#define FLAG_ICHOR_ITEM_R16_HEAL                (FLAG_ICHOR_GENERAL_START + 0x12F) // Ichor: Capital pass healing jar
+#define FLAG_ICHOR_ITEM_R16_BALL                (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Capital pass ball jar
+#define FLAG_ICHOR_ITEM_R16_ETHER               (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Capital pass ether jar
+#define FLAG_ICHOR_ELEUSA_CAPITAL_OPEN          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Eleusa eastern watch stood down after the Moon Laurel
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
@@ -1956,6 +1967,12 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R14_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x018) // Ichor: Nemea road grove honey
 #define FLAG_ICHOR_HIDDEN_ITEM_R14_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x019) // Ichor: Nemea road ridge revive
 #define FLAG_ICHOR_HIDDEN_ITEM_R14_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x01A) // Ichor: Nemea road wall repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R15_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x01B) // Ichor: Salt lake honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R15_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x01C) // Ichor: Salt lake revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R15_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x01D) // Ichor: Salt lake repel
+#define FLAG_ICHOR_HIDDEN_ITEM_R16_HONEY        (FLAG_ICHOR_GENERAL2_START + 0x01E) // Ichor: Capital pass honey
+#define FLAG_ICHOR_HIDDEN_ITEM_R16_REVIVE       (FLAG_ICHOR_GENERAL2_START + 0x01F) // Ichor: Capital pass revive
+#define FLAG_ICHOR_HIDDEN_ITEM_R16_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Capital pass repel
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

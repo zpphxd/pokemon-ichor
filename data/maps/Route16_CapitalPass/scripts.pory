@@ -1,0 +1,63 @@
+mapscripts Route16_CapitalPass_MapScripts {}
+
+script Route16_CapitalPass_EventScript_NIKIAS {
+    trainerbattle_single(TRAINER_ICHOR_R16_NIKIAS,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route16_CapitalPass_EventScript_TIMARETE {
+    trainerbattle_single(TRAINER_ICHOR_R16_TIMARETE,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route16_CapitalPass_EventScript_KLEOBIS {
+    trainerbattle_single(TRAINER_ICHOR_R16_KLEOBIS,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route16_CapitalPass_EventScript_DIOTIMA {
+    trainerbattle_single(TRAINER_ICHOR_R16_DIOTIMA,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route16_CapitalPass_EventScript_ARISTON {
+    trainerbattle_single(TRAINER_ICHOR_R16_ARISTON,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route16_CapitalPass_EventScript_EUBIOS {
+    trainerbattle_single(TRAINER_ICHOR_R16_EUBIOS,
+        format("The capital is close. Are you ready for its welcome?"),
+        format("You kept your footing."))
+    msgbox(format("Daphni's healer tends travelers on the capital road."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route16_CapitalPass_EventScript_Sign0 {
+    msgbox(format("West: Daphni. East: Astyra, beneath the Akropolis."), MSGBOX_SIGN)
+    end
+}
+
+script Route16_CapitalPass_EventScript_Sign1 {
+    msgbox(format("West: Daphni. East: Astyra, beneath the Akropolis."), MSGBOX_SIGN)
+    end
+}
+
+script Route16_CapitalPass_EventScript_Herm {
+    goto(EventScript_IchorGreatHerm)
+}

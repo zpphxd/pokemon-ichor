@@ -1,0 +1,75 @@
+mapscripts Astyra_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ASTYRA)
+    }
+}
+script Astyra_Asclepeion_EventScript_Phaedon {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NamePhaedon)
+    msgbox(format("Easy now."))
+    setvar(VAR_0x800B, LOCALID_ASTYRA_ASCLEPEION_PHAEDON)
+    incrementgamestat(GAME_STAT_USED_POKECENTER)
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    if (!flag(FLAG_POKERUS_EXPLAINED)) {
+        specialvar(VAR_RESULT, IsPokerusInParty)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox(gText_PokerusExplanation)
+            setflag(FLAG_POKERUS_EXPLAINED)
+        }
+    }
+    msgbox(format("There. Every hurt closes, if you let it."))
+    setflag(FLAG_ICHOR_MET_PHAEDON)
+    release
+}
+script Astyra_Asclepeion_EventScript_AfterWhiteOut {
+    lockall
+    setspeaker(Astyra_Text_NamePhaedon)
+    msgbox(format("Easy now. Let's tend your Pokémon first."))
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    msgbox(format("There. Every hurt closes, if you let it."))
+    setflag(FLAG_ICHOR_MET_PHAEDON)
+    fadedefaultbgm
+    releaseall
+    end
+}
+script Astyra_Asclepeion_EventScript_Panacoil {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    msgbox(format("Panacoil nudges a clean bandage toward Phaedon."))
+    waitmoncry
+    release
+}
+script Astyra_Asclepeion_EventScript_Hearth {
+    lockall
+    setspeaker(Astyra_Text_NamePhaedon)
+    msgbox(format("People used to bring me readings. Ask me how many days they had.\pI've stopped asking."))
+    releaseall
+}
+script Astyra_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(Astyra_Asclepeion_EventScript_PithosMenu)
+}
+script Astyra_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE,
+        Ichor_Text_PithosOptionPokemon, Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Astyra opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(Astyra_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(Astyra_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+}

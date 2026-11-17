@@ -1,0 +1,36 @@
+mapscripts Astyra_Library_MapScripts {}
+script Astyra_Library_EventScript_Daphne {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NameDaphne)
+    msgbox(format("I used to be rather pleased with this book.\pNow every page tells me who else I sent to the wrong door.\pI'm unwriting it. Slower work than the first time."))
+    setflag(FLAG_ICHOR_DAPHNE_ASTYRA)
+    release
+}
+text AstyraLibrary_Text_Gull { "A GULL" }
+text AstyraLibrary_Text_Partridge { "A PARTRIDGE" }
+text AstyraLibrary_Text_Owl { "AN OWL" }
+script Astyra_Library_EventScript_Librarian {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_PAGES_START + 4)) {
+        msgbox(format("That page belongs with the others. Not in Birds.\pI do wish people would label things."))
+    } else {
+        msgbox(format("A loose page? I filed it under Birds. It mentioned Perdix.\pWhat did Athena turn him into?"))
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE,
+            AstyraLibrary_Text_Gull, AstyraLibrary_Text_Partridge, AstyraLibrary_Text_Owl)
+        if (var(VAR_RESULT) == 1) {
+            setflag(FLAG_ICHOR_PAGES_START + 4)
+            playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+            msgbox(format("You received Daedalus's Page V!\pA sketch of a bronze bell. Beneath it: Asterion rests when it rings."))
+            waitfanfare
+        } else {
+            msgbox(format("No, I don't think so.\pThere's a plaque below the Akropolis steps. Try there."))
+        }
+    }
+    release
+}
+script Astyra_Library_EventScript_Book {
+    msgbox(format("A BOOK OF READINGS, by Daphne.\pWhole passages have been crossed out. The margins are full."), MSGBOX_SIGN)
+    end
+}

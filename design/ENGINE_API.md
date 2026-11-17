@@ -402,6 +402,23 @@ after `python3 tools/ichor/maps/arkadia.py`. New heal locations append after
 all existing entries. This fixture does not certify natural-level balance,
 final presentation, the lion Labor or the onward Astyra chapter.
 
+`tools/ichor/tests/astyra.sh` checks the assisted Eleusa--Daphni--Astyra
+approach, actual doors to Phaedon/Elpis/the Library, both herms, real healing,
+Pithos closure, the composed lullaby/music-box return, Page V's incorrect/
+correct riddle paths, Phaedon whiteout recovery and save/reset/CONTINUE.
+Eleusa retains its original wall/watch in Act I; its load script opens the
+wall after the Moon Laurel and a separate hide flag retires the watch.
+Regenerate with `python3 tools/ichor/maps/astyra.py` after `arkadia.py` and
+`nemea.py` in that order. The shared road/team builders take optional records;
+their default Nemea output remains unchanged.
+
+Phaedon's ordinary male stand-in cannot play `ANIM_NURSE_BOW`. His healing
+reuses `EventScript_PkmnCenterNurse_TakeAndHealPkmn` without the nurse-only
+bow. The existing whiteout dispatcher selects his dedicated recovery script
+only for `HEAL_LOCATION_ASTYRA`; all other recovery scripts are unchanged.
+New map, layout and heal IDs remain append-only. These checks do not certify
+natural-level balance, final capital art or the unfinished midpoint chapter.
+
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.

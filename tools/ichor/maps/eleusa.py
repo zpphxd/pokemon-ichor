@@ -610,7 +610,7 @@ OBJECTS = [
     ("DYSAULES", GFX + "HARVESTER", 28, 34, "RIGHT", "Dysaules", "0"),
     # a swineherd, optional: he watches the threshing floor (SCRIPT.md Part 3)
     ("EUBOULEUS", GFX + "GOATHERD", 14, 28, "RIGHT", "Eubouleus", "0", 3),
-    ("HOPLITE", GFX + "HOPLITE", 48, 25, "LEFT", "Hoplite", "0"),
+    ("HOPLITE", GFX + "HOPLITE", 48, 25, "LEFT", "Hoplite", "FLAG_ICHOR_ELEUSA_CAPITAL_OPEN"),
     # beat 20: Kleon in the square, waiting for the procession (gone once the Mysteries begin)
     ("KLEON", GFX + "KLEON", 24, 23, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELEUSA"),
     # beat 22: the procession, in the sanctuary's court and the square. Alethea comes up to
@@ -666,9 +666,9 @@ SIGNS = [
     (18, 34, "ANY", "FieldShrine"),
     (41, 31, "ANY", "Beehives"),
 ]
-# The road of the Mysteries is shut in Act I: a hoplite at (47,25) turns the player
-# back from the line x = 46. (The story batch opens it in Act II.)
-EAST_GUARD_LINE = []
+# The original wall and watch close Act I's road. The Moon Laurel opens the
+# wall on load; the edge trigger also protects the connected seam.
+EAST_GUARD_LINE = [(49, y) for y in EAST_SEAM]
 DIG = [(9, 36, "DigSpotWest"), (38, 35, "DigSpotEast")]
 
 
@@ -701,7 +701,8 @@ def write_events(g):
     m["music"] = "MUS_ICHOR_ELEUSA"
     m["weather"] = "WEATHER_SUNNY"
     m["connections"] = [{"map": "MAP_ROUTE5_SKIRONIAN_CLIFFS", "offset": 3, "direction": "left"},
-                        {"map": "MAP_ROUTE6_ELEUTHERAI_ROAD", "offset": 34, "direction": "up"}]
+                        {"map": "MAP_ROUTE6_ELEUTHERAI_ROAD", "offset": 34, "direction": "up"},
+                        {"map": "MAP_ROUTE15_MYSTERY_ROAD", "offset": 14, "direction": "right"}]
     objs = []
     for lid, gfx, x, y, facing, script, flag, *sight in OBJECTS:
         objs.append({

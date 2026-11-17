@@ -5249,6 +5249,558 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE15_MYSTERY_ROAD",
+          "base_label": "gRoute15_MysteryRoad_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE15_MYSTERY_ROAD",
+          "base_label": "gRoute15_MysteryRoad_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE15_MYSTERY_ROAD",
+          "base_label": "gRoute15_MysteryRoad_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KLADOE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE15_MYSTERY_ROAD",
+          "base_label": "gRoute15_MysteryRoad_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE16_CAPITAL_PASS",
+          "base_label": "gRoute16_CapitalPass_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_DAPHNYAD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_DAPHNYAD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE16_CAPITAL_PASS",
+          "base_label": "gRoute16_CapitalPass_Day",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_DAPHNYAD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_DAPHNYAD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE16_CAPITAL_PASS",
+          "base_label": "gRoute16_CapitalPass_Evening",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_DAPHNYAD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_DAPHNYAD"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE16_CAPITAL_PASS",
+          "base_label": "gRoute16_CapitalPass_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_THYRSIVY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
         }
       ]
     },

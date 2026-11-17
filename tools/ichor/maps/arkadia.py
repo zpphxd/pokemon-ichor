@@ -158,7 +158,7 @@ def hubs():
             m.rect(14, 7, 20, 8, 0x1D9)
             m.json["warp_events"] = [warp(20, 6, "Arkadia_TempleOfArtemis", 0)]
             m.person("Kleon", 7, 22, gfx="KLEON", flag="FLAG_ICHOR_KLEON_JOINED_TITANS")
-            m.person("Alethea", 15, 22, gfx="ALETHEA")
+            m.person("Alethea", 15, 22, gfx="ALETHEA", flag="FLAG_ICHOR_VISITED_ASTYRA")
             m.person("Iapetos", 5, 22, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_HIDE_IAPETOS_ARKADIA")
             for x in range(10, 14):
                 m.json["coord_events"].append(dict(type="trigger", x=x, y=23, elevation=3,

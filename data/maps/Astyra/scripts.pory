@@ -1,0 +1,59 @@
+mapscripts Astyra_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_ASTYRA)
+    }
+}
+text Astyra_Text_NamePhaedon { "PHAEDON" }
+text Astyra_Text_NameElpis { "ELPIS" }
+text Astyra_Text_NameDaphne { "DAPHNE" }
+text Astyra_Text_NameAlethea { "ALETHEA" }
+script Astyra_EventScript_Preacher {
+    msgbox(format("Ask any seer. Every thread ends on the same day.\pThey won't tell you why. We will.\pNo more moments. Only the hour."), MSGBOX_NPC)
+}
+script Astyra_EventScript_Herald {
+    msgbox(format("The Archon's proclamation:\pIf it is written, meet it with dignity.\pMy sister asked the Oracle. Same day as mine. Same as everyone."), MSGBOX_NPC)
+}
+script Astyra_EventScript_Merchant {
+    goto(ArkadiaApproach_EventScript_Merchant)
+}
+script Astyra_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NameAlethea)
+    msgbox(format("The Archon has to see the program. The little hook, the forged readings. All of it.\pIf I put it in front of everyone, they can't look away."))
+    release
+}
+script Astyra_EventScript_Clerk {
+    msgbox(format("The Assembly is being called.\pKeep the steps clear. We have enough people trying to be heard."), MSGBOX_NPC)
+}
+script Astyra_EventScript_Guard {
+    msgbox(format("The Akropolis is closed by the Archon's order.\pThe inscription? Read it if you like. Just stay below the steps."), MSGBOX_NPC)
+}
+script Astyra_EventScript_Sign {
+    msgbox(format("ASTYRA\pAsclepeion: west. Library: north.\nAgora and Stoa: east."), MSGBOX_SIGN)
+    end
+}
+script Astyra_EventScript_ClinicSign {
+    msgbox(format("ASCLEPEION\pPhaedon. Come in, whoever you are."), MSGBOX_SIGN)
+    end
+}
+script Astyra_EventScript_HouseSign {
+    msgbox(format("PHAEDON AND ELPIS\pPlease knock softly."), MSGBOX_SIGN)
+    end
+}
+script Astyra_EventScript_LibrarySign {
+    msgbox(format("THE LIBRARY OF ASTYRA\pPut it back where you found it."), MSGBOX_SIGN)
+    end
+}
+script Astyra_EventScript_Kodros {
+    msgbox(format("KING KODROS\pHe walked into the spears for his city. The Oracle asked it."), MSGBOX_SIGN)
+    end
+}
+script Astyra_EventScript_Kairos {
+    msgbox(format("KAIROS\pA runner on a razor. Long hair in front, none behind.\pSeize him as he comes.\pSomeone has scratched a sickle across his face."), MSGBOX_SIGN)
+    end
+}
+script Astyra_EventScript_Perdix {
+    msgbox(format("PERDIX\pThe clever boy fell from these walls.\pAthena caught him before the stones could, and made him a partridge."), MSGBOX_SIGN)
+    end
+}

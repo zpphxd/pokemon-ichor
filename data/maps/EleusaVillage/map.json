@@ -23,6 +23,11 @@
       "direction": "up",
       "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
       "offset": 34
+    },
+    {
+      "direction": "right",
+      "map": "MAP_ROUTE15_MYSTERY_ROAD",
+      "offset": 14
     }
   ],
   "object_events": [
@@ -122,7 +127,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EleusaVillage_EventScript_Hoplite",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_ELEUSA_CAPITAL_OPEN"
     },
     {
       "local_id": "LOCALID_ELEUSA_KLEON",
@@ -576,6 +581,42 @@
       "var": "VAR_TEMP_4",
       "var_value": "0",
       "script": "EleusaVillage_EventScript_NorthRoadBarrier"
+    },
+    {
+      "type": "trigger",
+      "x": 49,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_RoadShut"
+    },
+    {
+      "type": "trigger",
+      "x": 49,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_RoadShut"
+    },
+    {
+      "type": "trigger",
+      "x": 49,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_RoadShut"
+    },
+    {
+      "type": "trigger",
+      "x": 49,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_RoadShut"
     }
   ],
   "bg_events": [

@@ -10,12 +10,18 @@ ROADS = [
 ]
 
 
-def roads():
-    for name, tag, base, names in ROADS:
+def roads(records=ROADS):
+    links = {"R13": ("Arkadia", "Nemea", 0, 0),
+             "R14": ("Nemea", "EmporionCity", 0, -30),
+             "R15": ("EleusaVillage", "Daphni", -14, 0),
+             "R16": ("Daphni", "Astyra", 0, -22)}
+    for name, tag, base, names in records:
         m = Map(name, 48, 24)
         m.json["music"] = "MUS_ICHOR_ROAD"
-        if tag == "R13":
+        if tag in ("R13", "R16"):
             m.rect(0, 0, 47, 23, 0x0E1, True)
+        if tag == "R15":
+            m.rect(0, 0, 47, 23, 0x170, True)
         m.rect(0, 10, 47, 13, 0x1D9)
         for x0, x1 in ((4, 11), (23, 31), (39, 43)):
             m.rect(x0, 4, x1, 19, 0x001)
@@ -27,9 +33,9 @@ def roads():
             # Emporion's established Nemea gate is one tile wide, at city y=41.
             m.rect(44, 0, 47, 23, 0x0E1, True)
             m.rect(44, 11, 47, 11, 0x1D9)
-        m.connection("left", "Arkadia" if tag == "R13" else "Nemea")
-        m.connection("right", "Nemea" if tag == "R13" else "EmporionCity",
-                     0 if tag == "R13" else -30)
+        left, right, left_offset, right_offset = links[tag]
+        m.connection("left", left, left_offset)
+        m.connection("right", right, right_offset)
         scripts = [f"mapscripts {name}_MapScripts {{}}"]
         positions = [(14, 10, "DOWN", 3), (6, 6, "RIGHT", 1), (26, 6, "DOWN", 1),
                      (32, 10, "DOWN", 3), (29, 18, "LEFT", 1), (41, 18, "UP", 1)]
@@ -37,11 +43,15 @@ def roads():
             m.person(trainer, x, y, gfx=("HOPLITE", "HARVESTER", "PILGRIM",
                                        "ACOLYTE_F", "SHEPHERD", "AUGUR")[i],
                      facing=facing, sight=sight)
+            greeting = ("The capital is close. Are you ready for its welcome?" if tag in ("R15", "R16")
+                        else "The Isthmus is below us. One more battle before the descent?")
+            rest = ("Daphni's healer tends travelers on the capital road." if tag in ("R15", "R16")
+                    else "Nemea's healer keeps a lamp burning by the road.")
             scripts.append(f'''script {m.prefix}{trainer} {{
     trainerbattle_single(TRAINER_ICHOR_{tag}_{trainer},
-        format("The Isthmus is below us. One more battle before the descent?"),
+        format("{greeting}"),
         format("You kept your footing."))
-    msgbox(format("Nemea's healer keeps a lamp burning by the road."), MSGBOX_AUTOCLOSE)
+    msgbox(format("{rest}"), MSGBOX_AUTOCLOSE)
     end
 }}''')
         for (x, y), suffix, item in zip(((4, 4), (23, 19), (42, 4)),
@@ -57,8 +67,12 @@ def roads():
             m.json["bg_events"].append(dict(type="hidden_item", x=x, y=y, elevation=3,
                 item="ITEM_" + item, flag=f"FLAG_ICHOR_HIDDEN_ITEM_{tag}_{suffix}",
                 quantity=1, underfoot=False))
-        directions = ("West: Arkadia. East: Nemea, then Emporion." if tag == "R13"
-                      else "West: Nemea and Arkadia. East: Emporion's Nemea Gate.")
+        directions = {
+            "R13": "West: Arkadia. East: Nemea, then Emporion.",
+            "R14": "West: Nemea and Arkadia. East: Emporion's Nemea Gate.",
+            "R15": "West: Eleusa. East: Daphni, past the salt lakes.",
+            "R16": "West: Daphni. East: Astyra, beneath the Akropolis.",
+        }[tag]
         for i, x in enumerate((2, 45)):
             m.sign("Sign" + str(i), x, 10 if tag == "R14" and i == 1 else 9)
             scripts.append(f'''script {m.prefix}Sign{i} {{
@@ -107,16 +121,20 @@ def old_connections():
     write(path, m)
 
 
-def encounters_and_teams():
+def encounters_and_teams(records=ROADS, chapter="Nemea return"):
     wild = read("src/data/wild_encounters.json")
     group = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
-    ids = {"MAP_" + const(r[0]) for r in ROADS}
+    ids = {"MAP_" + const(r[0]) for r in records}
     group["encounters"] = [e for e in group["encounters"] if e.get("map") not in ids]
-    for name, tag, level, _ in ROADS:
+    for name, tag, level, _ in records:
         for time in ("Morning", "Day", "Evening", "Night"):
             species = ["KLADOE", "GALENYON", "CAIRNOLITH", "ELAPLING", "KERAZAP", "NEMELEON"]
             if tag == "R14":
                 species[3:5] = ["HOPLOMEX", "MELISSEER"]
+            if tag in ("R15", "R16"):
+                species[3:5] = ["THYRSIVY", "HOPLOMEX"]
+            if tag == "R16":
+                species[0] = "DAPHNYAD"
             if time == "Night":
                 species[0:2] = ["LYKANAX", "HARPELLE"]
             group["encounters"].append(dict(map="MAP_" + const(name),
@@ -125,14 +143,14 @@ def encounters_and_teams():
                                species="SPECIES_" + species[i % 6]) for i in range(12)])))
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"
-    start, end = "/* Nemea return teams. */", "/* End Nemea return teams. */"
+    start, end = f"/* {chapter} teams. */", f"/* End {chapter} teams. */"
     before, _, old = path.read_text().partition(start)
     after = old.partition(end)[2]
     text = before.rstrip() + "\n\n" + start + "\n"
     pairs = [("Galenyon", "Hoplomex"), ("Thyrsivy", "Elapling"),
              ("Cairnolith", "Kerazap"), ("Harpelle", "Prosomime"),
              ("Nemeleon", "Kladoe"), ("Lykanax", "Melisseer")]
-    for _, tag, base, names in ROADS:
+    for _, tag, base, names in records:
         for i, name in enumerate(names):
             cls, pic = [("Hoplite", "Hoplite"), ("Harvester", "Harvester"),
                         ("Pilgrim", "Pilgrim"), ("Acolyte", "Acolyte F"),
@@ -141,7 +159,9 @@ def encounters_and_teams():
             text += ("Gender: Female\n" if i in (1, 3) else "Gender: Male\n")
             text += "Music: Male\nAI: Basic Trainer\n"
             for j, species in enumerate(pairs[i]):
-                text += f"\n{species}\nLevel: {base + 3 + i // 3 + j}\n"
+                if tag in ("R15", "R16") and species == "Kladoe":
+                    species = "Daphnyad"
+                text += f"\n{species}\nLevel: {base + (2 if tag == 'R16' else 3) + i // 3 + j}\n"
                 text += "IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe\n"
     path.write_text(text + "\n" + end + after + ("" if after else "\n"))
 

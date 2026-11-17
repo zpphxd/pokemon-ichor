@@ -25,12 +25,21 @@ mapscripts EleusaVillage_MapScripts {
         special(Ichor_SetOmenWeather)
         special(Ichor_SetPersephoneVisitor)
         call(EleusaVillage_EventScript_PlaceOmenVisitor)
+        if (flag(FLAG_BADGE05_GET)) {
+            setflag(FLAG_ICHOR_ELEUSA_CAPITAL_OPEN)
+            removeobject(LOCALID_ELEUSA_HOPLITE)
+        }
         if (flag(FLAG_ICHOR_SAFFRON_THREAD)) {
             setvar(VAR_TEMP_8, 1)
         }
         call(EleusaVillage_EventScript_PlaceCast)
     }
     MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_BADGE05_GET)) {
+            setmetatile(48, 24, 0x1D9, FALSE)
+            setmetatile(48, 26, 0x1D9, FALSE)
+            setmetatile(48, 27, 0x1D9, FALSE)
+        }
         if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {
             call(EleusaVillage_EventScript_ShutPloutonion)
         }
@@ -505,11 +514,19 @@ script EleusaVillage_EventScript_WaterCarrier {
 // The road of the Mysteries (Route 15) is shut in Act I. The hoplite turns the
 // player back from the line x = 46.
 script EleusaVillage_EventScript_Hoplite {
-    msgbox(format("The road of the Mysteries is shut past the salt streams.\p"
-                  "Orders from Astyra. They didn't say why. They never do."), MSGBOX_NPC)
+    if (flag(FLAG_BADGE05_GET)) {
+        msgbox(format("The road of the Mysteries is open. Daphni first, then Astyra.\p"
+                      "The Assembly's been called. Everyone's suddenly in a hurry."), MSGBOX_NPC)
+    } else {
+        msgbox(format("The road of the Mysteries is shut past the salt streams.\p"
+                      "Orders from Astyra. They didn't say why. They never do."), MSGBOX_NPC)
+    }
 }
 
 script EleusaVillage_EventScript_RoadShut {
+    if (flag(FLAG_BADGE05_GET)) {
+        end
+    }
     lockall
     turnobject(LOCALID_ELEUSA_HOPLITE, DIR_WEST)
     msgbox(format("Halt. The road of the Mysteries is shut past the salt streams.\p"

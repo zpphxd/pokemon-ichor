@@ -1515,6 +1515,11 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
                     StringCopy(gStringVar1, COMPOUND_STRING("Daphne")); // Ichor: Mom heard it from her
                 ScriptContext_SetupScript(EventScript_AfterWhiteOutMomHeal);
             }
+            // Ichor: Phaedon has his own voice and no Nurse Joy bow animation.
+            else if (GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation) == HEAL_LOCATION_ASTYRA)
+            {
+                ScriptContext_SetupScript(Astyra_Asclepeion_EventScript_AfterWhiteOut);
+            }
             else if (IS_FRLG)
             {
                 ScriptContext_SetupScript(EventScript_AfterWhiteOutHeal_Frlg);
