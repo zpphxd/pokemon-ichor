@@ -30,6 +30,7 @@
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
 #define I_EXP_SHARE_FLAG        0           // If this flag is set, every Pokémon in the party will gain experience, regardless if they participated in the battle or not.
 #define I_EXP_SHARE_ITEM        GEN_5       // In Gen6+, the Exp. Share is a Key item that toggles the effect described above.
+#define I_EXP_SHARE_ALWAYS      TRUE        // Ichor: the whole party always gains experience, as with Gen 6+'s Exp. Share switched on (battlers full, the rest half per B_SPLIT_EXP). No flag, so it holds for existing saves too.
 
 // Repel/Lure config
 // These two settings are both independent and complementary.

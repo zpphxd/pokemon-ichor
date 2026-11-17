@@ -156,6 +156,7 @@ WILD_BATTLE_TEST("Transformed Pokemon gives the experience points of the copied 
 
 #if I_EXP_SHARE_ITEM < GEN_6
 
+#if !I_EXP_SHARE_ALWAYS
 WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not participate in battle")
 {
     enum Item item = ITEM_NONE;
@@ -181,6 +182,24 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
     }
 }
+#else
+// Ichor: party-wide experience is always on (include/config/item.h, I_EXP_SHARE_ALWAYS).
+WILD_BATTLE_TEST("Ichor: every party member gains experience without an Exp. Share")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT) { Level(40); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("The wild Caterpie fainted!");
+    } THEN {
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
+    }
+}
+#endif
 
 #endif // I_EXP_SHARE_ITEM
 
