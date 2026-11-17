@@ -2188,6 +2188,26 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1D5) // Ichor: Ascent 3F: in the snow by the last cairn
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_ELIXIR   (FLAG_ICHOR_GENERAL2_START + 0x1D6) // Ichor: Ascent 2F: behind the camp's second tent
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1D7) // Ichor: Ascent 3F: on the summit shoulder above the stair
+#define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion
+#define FLAG_ICHOR_VISITED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F1) // Ichor: Lakonia: Gytheion visited (fly target)
+#define FLAG_ICHOR_GYTHEION_DUSK                (FLAG_ICHOR_GENERAL2_START + 0x4F2) // Ichor: Lakonia: III-5B, the fisherman and Kleon's helmet
+#define FLAG_ICHOR_SAW_LAKONIA                  (FLAG_ICHOR_GENERAL2_START + 0x4F3) // Ichor: Lakonia: III-5C, the town in view from Route 25
+#define FLAG_ICHOR_LAKONIA_ARRIVED              (FLAG_ICHOR_GENERAL2_START + 0x4F4) // Ichor: Lakonia: III-5D, Gylippos at the agora
+#define FLAG_ICHOR_VISITED_LAKONIA              (FLAG_ICHOR_GENERAL2_START + 0x4F5) // Ichor: Lakonia: Lakonia visited (fly target)
+#define FLAG_ICHOR_RHEA_UNMASKED                (FLAG_ICHOR_GENERAL2_START + 0x4F6) // Ichor: Lakonia: III-5E, the helmet comes off
+#define FLAG_ICHOR_IAPETOS_LAKONIA_DONE         (FLAG_ICHOR_GENERAL2_START + 0x4F7) // Ichor: Lakonia: III-5F, Iapetos beaten in the lane
+#define FLAG_ICHOR_ALETHEA_READ_TABLET          (FLAG_ICHOR_GENERAL2_START + 0x4F8) // Ichor: Lakonia: III-5G, Alethea read the sealed tablet
+#define FLAG_ICHOR_KLEON_GOT_KOURODIN           (FLAG_ICHOR_GENERAL2_START + 0x4F9) // Ichor: Lakonia: III-5H, Rhea gave Kleon her Kourodin
+#define FLAG_ICHOR_KLEON_LAKONIA_DONE           (FLAG_ICHOR_GENERAL2_START + 0x4FA) // Ichor: Lakonia: III-5I, the clean battle in the ring
+#define FLAG_ICHOR_LAKONIA_PARTED               (FLAG_ICHOR_GENERAL2_START + 0x4FB) // Ichor: Lakonia: III-5J, the goat paths
+#define FLAG_ICHOR_HIDE_RHEA_LAKONIA            (FLAG_ICHOR_GENERAL2_START + 0x4FC) // Ichor: Lakonia: hides Rhea after III-5J (shown again at VAR_ICHOR_ACT3 19)
+#define FLAG_ICHOR_HIDE_KLEON_LAKONIA           (FLAG_ICHOR_GENERAL2_START + 0x4FD) // Ichor: Lakonia: hides Kleon after III-5J
+#define FLAG_ICHOR_HIDE_ALETHEA_LAKONIA         (FLAG_ICHOR_GENERAL2_START + 0x4FE) // Ichor: Lakonia: hides Alethea after III-5J
+#define FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA        (FLAG_ICHOR_GENERAL2_START + 0x4FF) // Ichor: Lakonia: hides Brasidas after III-5I
+#define FLAG_ICHOR_CARRYING_FIG_CAKE            (FLAG_ICHOR_GENERAL2_START + 0x500) // Ichor: Lakonia: carrying Timaia's fig cake to Teleklos
+#define FLAG_ICHOR_DELIVERED_FIG_CAKE           (FLAG_ICHOR_GENERAL2_START + 0x501) // Ichor: Lakonia: Teleklos ate the fig cake
+#define FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI        (FLAG_ICHOR_GENERAL2_START + 0x502) // Ichor: Lakonia: Polyboia's Heat Rock
+#define FLAG_ICHOR_READ_SCYTALE                 (FLAG_ICHOR_GENERAL2_START + 0x503) // Ichor: Lakonia: read Gylippos's strap on Othryades's staff (Route 27)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the
