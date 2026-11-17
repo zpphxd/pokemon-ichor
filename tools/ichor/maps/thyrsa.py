@@ -260,6 +260,9 @@ def hall(name, w, h):
 
 
 KITHAIRON_MAPS = ("Route6_EleutheraiRoad", "MtKithairon")   # built by kithairon.py
+# Route 7 is built by kopais.py (layout, events, scripts, wild tables); trainers() still
+# writes its parties. Both lists are skipped below.
+BUILT_ELSEWHERE = KITHAIRON_MAPS + ("Route7_KroniaGrounds",)
 
 # The Temple of Dionysus: Thespis's Three-Act Play (SYSTEMS §12, redesigned).
 # Backstage (the green room) is at the south door. Three painted scenery walls
@@ -519,9 +522,7 @@ def amphitheater():
 
 
 def main():
-    roads = [road(*r) for r in ROADS if r[0] not in KITHAIRON_MAPS]
-    roads[0].connection("down", "MtKithairon")
-    roads[0].connection("up", "ThyrsaCity")
+    roads = [road(*r) for r in ROADS if r[0] not in BUILT_ELSEWHERE]
     for m in roads:
         m.save()
     eleusa = read("data/maps/EleusaVillage/map.json")
@@ -539,7 +540,7 @@ def main():
     town.rect(10, 7, 13, 31, 0x1D9)
     town.rect(5, 17, 30, 21, 0x1D9)
     town.rect(10, 7, 29, 12, 0x1D9)
-    town.connection("down", roads[2].name)
+    town.connection("down", "Route7_KroniaGrounds")
     town.connection("left", "Route8_KopaisRoad", 8)
     town.rect(0, 18, 5, 21, 0x1D9)
     clinic = [[0x048, 0x049, 0x04A, 0x04B], [0x050, 0x051, 0x052, 0x053],
@@ -586,10 +587,10 @@ def main():
 
     wild = read("src/data/wild_encounters.json")
     group = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
-    ids = {"MAP_" + const(r[0]) for r in ROADS if r[0] not in KITHAIRON_MAPS}
+    ids = {"MAP_" + const(r[0]) for r in ROADS if r[0] not in BUILT_ELSEWHERE}
     group["encounters"] = [e for e in group["encounters"] if e.get("map") not in ids]
     for name, _, level, _ in ROADS:
-        if name in KITHAIRON_MAPS:
+        if name in BUILT_ELSEWHERE:
             continue
         for time in ("Morning", "Day", "Evening", "Night"):
             species = ["AMPELIX", "GALEKIT", "NEBREL", "SPALUNK", "MELIBEE", "PEBBLITH"]

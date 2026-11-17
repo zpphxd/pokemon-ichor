@@ -75,12 +75,12 @@
     {
       "id": "HEAL_LOCATION_LEBADEIA",
       "map": "MAP_LEBADEIA",
-      "x": 18,
-      "y": 12,
-      "respawn_map": "MAP_LEBADEIA",
-      "respawn_npc": "LOCALID_LEBADEIA_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "x": 15,
+      "y": 15,
+      "respawn_map": "MAP_LEBADEIA_TROPHONEION",
+      "respawn_npc": "LOCALID_LEBADEIA_TROPHONEION_HEALER",
+      "respawn_x": 10,
+      "respawn_y": 5
     },
     {
       "id": "HEAL_LOCATION_KIRRHA",

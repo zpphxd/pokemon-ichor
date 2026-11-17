@@ -2170,6 +2170,24 @@
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Neraida falls item ball: Max Potion on the plunge pool's west bank
 #define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Neraida falls item ball: Elixir on the upper shelf
 #define FLAG_ICHOR_NERAIDA_BERRIES_PLANTED (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: initialized the falls' first-fruits trees once
+#define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
+#define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
+#define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)
+#define FLAG_ICHOR_R8_REEDS_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x103) // Ichor: Route 8: the reed thicket on the south boardwalk cut (Sickle)
+#define FLAG_ICHOR_ITEM_R8_GLA                  (FLAG_ICHOR_GENERAL2_START + 0x104) // Ichor: Route 8: the jar on Gla's island (Conch)
+#define FLAG_ICHOR_ITEM_R8_ISLET                (FLAG_ICHOR_GENERAL2_START + 0x105) // Ichor: Route 8: the reed islet at the boardwalk's end
+#define FLAG_ICHOR_R8_FISHER_GIFT               (FLAG_ICHOR_GENERAL2_START + 0x106) // Ichor: Route 8: the eel-fisher's gift
+#define FLAG_ICHOR_ITEM_KATAVOTHRA_GALLERY      (FLAG_ICHOR_GENERAL2_START + 0x107) // Ichor: Kopais katavothres: the side gallery behind the rubble
+#define FLAG_ICHOR_ITEM_KATAVOTHRA_ISLET        (FLAG_ICHOR_GENERAL2_START + 0x108) // Ichor: Kopais katavothres: the rock in the channel (Conch)
+#define FLAG_ICHOR_ITEM_KATAVOTHRA_PASSAGE      (FLAG_ICHOR_GENERAL2_START + 0x109) // Ichor: Kopais katavothres: the main passage
+#define FLAG_ICHOR_ITEM_LEBADEIA                (FLAG_ICHOR_GENERAL2_START + 0x10A) // Ichor: Lebadeia: the jar by the springs
+#define FLAG_ICHOR_LEBADEIA_HONEY_TRADE         (FLAG_ICHOR_GENERAL2_START + 0x10B) // Ichor: Lebadeia: Euanthe's honey cakes, for Honey
+#define FLAG_ICHOR_LEBADEIA_KEEPER_TALK         (FLAG_ICHOR_GENERAL2_START + 0x10C) // Ichor: Lebadeia: the Trophoneion's keeper told of the descent
+#define FLAG_ICHOR_HIDDEN_ITEM_R7_SHRINE        (FLAG_ICHOR_GENERAL2_START + 0x10D) // Ichor: Route 7: under Kronos's stone
+#define FLAG_ICHOR_HIDDEN_ITEM_KATAVOTHRA_SEEP  (FLAG_ICHOR_GENERAL2_START + 0x10E) // Ichor: Kopais katavothres: at the seep
+#define FLAG_ICHOR_HIDDEN_ITEM_KATAVOTHRA_BONES (FLAG_ICHOR_GENERAL2_START + 0x10F) // Ichor: Kopais katavothres: among the old bones
+#define FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_SPRING  (FLAG_ICHOR_GENERAL2_START + 0x110) // Ichor: Lebadeia: by the spring of Lethe
+#define FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_TEMENOS (FLAG_ICHOR_GENERAL2_START + 0x111) // Ichor: Lebadeia: in the temenos wall's corner
 #define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
 #define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
 #define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted

@@ -52,6 +52,13 @@ Approach_GirdleScript:
     additem ITEM_GIRDLE_OF_HERAKLES
     end
 
+    @ the one Kynder runs out of Flamethrower on the long Kopais road: top it up
+    test_header Approach_HealHeader, Approach_HealScript
+Approach_HealScript:
+    setvar VAR_TEMP_F, 1
+    special HealPlayerParty
+    end
+
     test_header Approach_SaveHeader, Approach_SaveScript
 Approach_SaveScript:
     lockall

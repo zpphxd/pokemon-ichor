@@ -162,12 +162,15 @@
     "ThyrsaCity_MantoHouse",
     "ThyrsaCity_PindarosHouse",
     "ThyrsaCity_SownHouse",
-    "ThyrsaCity_VintnerHouse"
+    "ThyrsaCity_VintnerHouse",
+    "Lebadeia_Trophoneion",
+    "Lebadeia_HoneyHouse"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",
     "SaltWell_B2F",
-    "Kaldera_TelchinesForge"
+    "Kaldera_TelchinesForge",
+    "KopaisKatavothres"
   ],
   "gMapGroup_IndoorKaldera": [
     "Kaldera_Asclepeion",

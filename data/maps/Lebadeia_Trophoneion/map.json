@@ -1,0 +1,141 @@
+{
+  "id": "MAP_LEBADEIA_TROPHONEION",
+  "name": "Lebadeia_Trophoneion",
+  "layout": "LAYOUT_LEBADEIA_TROPHONEION",
+  "music": "MUS_ICHOR_ASCLEPEION",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_LEBADEIA",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_LEBADEIA_TROPHONEION_HEALER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_Trophoneion_EventScript_Healer",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LEBADEIA_TROPHONEION_MERCHANT",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
+      "x": 15,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_Trophoneion_EventScript_Merchant",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LEBADEIA_TROPHONEION_KEEPER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "x": 1,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_Trophoneion_EventScript_Keeper",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LEBADEIA_TROPHONEION_SLEEPER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 2,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_Trophoneion_EventScript_Sleeper",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LEBADEIA_TROPHONEION_ACOLYTE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
+      "x": 11,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_Trophoneion_EventScript_Acolyte",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_LEBADEIA",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_Trophoneion_EventScript_Pithos"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_Trophoneion_EventScript_Pithos"
+    },
+    {
+      "type": "sign",
+      "x": 0,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_Trophoneion_EventScript_Descent"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_Trophoneion_EventScript_Mosaic"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_Trophoneion_EventScript_Statue"
+    }
+  ]
+}

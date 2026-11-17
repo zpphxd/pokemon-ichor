@@ -8,7 +8,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Now:** a bare outdoor hamlet between Route 8 and Route 9, with an outdoor healer, a merchant and one sign (no buildings).
 - **Idea (user, 2026-11-17):** a temple stands here as a rest stop for travelers.
 - **Later:** a side quest, perhaps in the post-game. Trophonios's oracle cave (AETHOS_MAP.md's proposal: an optional dark cave for the Torch, entered feet first) fits it.
-- **In progress (2026-11-17):** the user asked to build it now, with the Route 7–8 rebuild. The oracle's descent stays a sealed hook for the later side quest.
+- **Built (2026-11-17, tools/ichor/maps/kopais.py):** the Trophoneion, Lebadeia's temple, rest-house and Asclepeion, with the honey-baker's house and the springs of Lethe and Mnemosyne. The oracle's descent is sealed (the roped stair inside, the grilled mouth outside); the side quest's hooks are in design/maps/Lebadeia.md under "Hooks for later".
 
 ### Every route: a design and complexity pass
 - **Idea (user, 2026-11-17):** improve all the routes, both how they look and how complex they are to explore.

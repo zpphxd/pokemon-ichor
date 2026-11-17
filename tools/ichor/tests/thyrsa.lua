@@ -46,6 +46,7 @@ L.start(function()
     local mandatory = {
         [S.MAP_R6] = {"SOSTRATOS", "PHANO", "MELANIPPE", "DAMON"},
         [S.MAP_MOUNTAIN] = {"AKTAIOS", "BROMIOS", "NYSA", "CHARINOS", "EUPHRON"},
+        [S.MAP_R7] = {"EUXENOS", "DORIS", "HAGES"},   -- the cut stair, the scree road, the camp gate
     }
     for _, map in ipairs({S.MAP_R6, S.MAP_MOUNTAIN, S.MAP_R7, S.MAP_CITY}) do
         L.leaveEdge("up", map)

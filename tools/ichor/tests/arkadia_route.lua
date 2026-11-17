@@ -28,9 +28,44 @@ L.start(function()
     L.runHeader("Approach_SetupHeader")
     L.setBeat("kopais_and_parnassos", false)
     cross("left", S.MAP_R8, "kopais")
+    -- Route 8: the dike and the shore road to the katavothra, through the mountain
+    -- (the road's only way west), then the Herkyna's valley down to Lebadeia
+    L.useWarp(S.MAP_KATAVOTHRES)
+    L.expect(L.mapId() == S.MAP_KATAVOTHRES, "the road enters the katavothres")
+    L.shot("katavothres")
+    L.go(5, 19)
+    L.runHeader("Approach_HealHeader")   -- assisted: one Kynder's PP, not balance evidence
+    L.useWarp(S.MAP_R8)
+    local _, wy = L.pos()
+    L.expect(L.mapId() == S.MAP_R8 and wy < 12, "the katavothres come out in the Herkyna's valley")
+    for _, name in ipairs({"ENCHELYS", "PANOS", "SCHOINIS", "DIPSAS", "AGAMEDES"}) do
+        L.expect(L.defeated(S["TRAINER_" .. name]), name .. " stopped the walk to the katavothra")
+    end
     cross("left", S.MAP_LEBADEIA, "lebadeia")
-    L.talk(L.npc("Lebadeia_EventScript_Healer"))
-    L.expect(L.idle(), "Lebadeia's actual healer returns control")
+    for _, name in ipairs({"MEDA", "THYONE"}) do
+        L.expect(L.defeated(S["TRAINER_" .. name]), name .. " stopped the walk down the valley")
+    end
+    -- the Trophoneion: Lebadeia's temple heals and becomes the respawn
+    L.useWarp(S.MAP_TROPHONEION)
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 40)
+    L.talk(L.npc("Lebadeia_Trophoneion_EventScript_Healer"))
+    L.expect(L.idle() and emu:read16(L.partyMon(0) + S.OFF_MON_HP) > 40, "the Trophoneion's healer heals")
+    L.expect(L.lastHeal() == S.MAP_LEBADEIA, "Lebadeia becomes the respawn")
+    L.talk(L.npc("Lebadeia_Trophoneion_EventScript_Keeper"), {every = true})
+    L.expect(L.idle(), "the keeper's word on the closed descent returns control")
+    L.shot("trophoneion")
+    -- a real whiteout on Route 8 sends the player back to the Trophoneion's healer
+    L.useWarp(S.MAP_LEBADEIA)
+    cross("right", S.MAP_R8, "valley_again")
+    L.go(12, 20)                          -- beside Melas, out of his sight and the grass
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    L.battleMode = "lose"
+    L.talk(L.npc("Route8_KopaisRoad_EventScript_MELAS"))
+    L.battleMode = nil
+    L.expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST and L.mapId() == S.MAP_TROPHONEION,
+             "a whiteout on Route 8 returns to the Trophoneion")
+    L.shot("trophoneion_respawn")
+    L.useWarp(S.MAP_LEBADEIA)
     cross("down", S.MAP_R9, "parnassos")
     cross("down", S.MAP_KIRRHA, "kirrha")
     L.setBeat("gulf_crossing", false)

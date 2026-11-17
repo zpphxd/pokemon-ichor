@@ -27,58 +27,154 @@
   ],
   "object_events": [
     {
-      "local_id": "LOCALID_LEBADEIA_HEALER",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
-      "x": 18,
-      "y": 10,
+      "local_id": "LOCALID_LEBADEIA_PILGRIM",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 16,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Lebadeia_EventScript_Healer",
+      "script": "Lebadeia_EventScript_Pilgrim",
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_LEBADEIA_MERCHANT",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
-      "x": 19,
-      "y": 18,
+      "local_id": "LOCALID_LEBADEIA_TRAVELER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 24,
+      "y": 15,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Lebadeia_EventScript_Merchant",
+      "script": "Lebadeia_EventScript_Traveler",
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_LEBADEIA_GUIDE",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
-      "x": 6,
-      "y": 13,
+      "local_id": "LOCALID_LEBADEIA_CHILD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_F",
+      "x": 17,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Child",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 24,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Lebadeia_EventScript_Guide",
-      "flag": "0"
+      "trainer_sight_or_berry_tree_id": "ITEM_SITRUS_BERRY",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_LEBADEIA"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 15,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_LEBADEIA_TROPHONEION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_LEBADEIA_HONEY_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
       "x": 14,
-      "y": 14,
+      "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Lebadeia_EventScript_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_EventScript_TempleSign"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Oracle"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Lethe"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Lethe"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Mnemosyne"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Mnemosyne"
+    },
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 7,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_SPRING",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 20,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_TEMENOS",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }
