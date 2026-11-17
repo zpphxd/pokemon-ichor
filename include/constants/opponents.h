@@ -152,7 +152,11 @@
 #define TRAINER_ICHOR_R12_DAMO              204
 #define TRAINER_ICHOR_R12_PHANES            205
 #define TRAINER_ICHOR_R12_KALLIN            206
-#define TRAINERS_END_ACT2                   207
+#define TRAINER_ICHOR_ARTEMIS_TEACH          207
+#define TRAINER_ICHOR_ARTEMIS_TEST           208
+#define TRAINER_ICHOR_ARTEMIS_MASTER         209
+#define TRAINER_ICHOR_KALLISTO               210
+#define TRAINERS_END_ACT2                   211
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

@@ -18,6 +18,7 @@ u32 GetCurrentLevelCap(void)
         {FLAG_BADGE02_GET, 20},
         {FLAG_BADGE03_GET, 26},
         {FLAG_BADGE04_GET, 32},
+        {FLAG_BADGE05_GET, 37},
     };
 
     u32 i;
@@ -32,7 +33,7 @@ u32 GetCurrentLevelCap(void)
             if (!FlagGet(sLevelCapFlagMap[i][0]))
                 return sLevelCapFlagMap[i][1];
         }
-        return 37; // Arkadia is the next Laurel.
+        return 40; // Astyra's Kleon battle is the next story milestone.
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {

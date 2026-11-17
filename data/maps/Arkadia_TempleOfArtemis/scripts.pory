@@ -1,0 +1,193 @@
+mapscripts Arkadia_TempleOfArtemis_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_0x8004, TIME_NIGHT)
+        special(Ichor_HoldTimeOfDay)
+        if (flag(FLAG_ICHOR_KALLISTO_TRIAL)) {
+            setvar(VAR_TEMP_4, 1)
+        }
+        if (var(VAR_ICHOR_HIND_TOUCHES) == 1) {
+            setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 7, 15)
+        } elif (var(VAR_ICHOR_HIND_TOUCHES) == 2) {
+            setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 20, 9)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 0: Arkadia_TempleOfArtemis_EventScript_Entry
+    ]
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Entry {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    if (!flag(FLAG_ICHOR_KLEON_JOINED_TITANS)) {
+        msgbox(format("A huntress bars the path.\p"
+                      "“Your friend is still among the cypresses. Don't leave him there.”"))
+        warp(MAP_ARKADIA, 20, 7)
+        waitstate
+    }
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Instructions {
+    lockall
+    msgbox(format("THE HUNT FOR THE HIND\p"
+                  "Let the hound pass. A cypress breaks its sight.\p"
+                  "In the moonlit sand, a hound sees twice as far.\p"
+                  "The hind waits beyond the third glade. Touch her antler three times.\p"
+                  "If a hound sees you, return to this stage's entrance. What you have learned stays learned."))
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Hound {
+    lock
+    msgbox(format("The hound scents the night air."))
+    release
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Caught {
+    lockall
+    addvar(VAR_TEMP_2, 1)
+    msgbox(format("A hound bays. The huntresses guide you back to this glade's entrance.\p"
+                  "Wait for its head to turn. Keep a cypress between you."))
+    if (var(VAR_ICHOR_HUNT_STAGE) == 0) {
+        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 12, 66)
+    } elif (var(VAR_ICHOR_HUNT_STAGE) == 1) {
+        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 12, 46)
+    } else {
+        warp(MAP_ARKADIA_TEMPLE_OF_ARTEMIS, 12, 24)
+    }
+    waitstate
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_TeachExit {
+    lockall
+    if (var(VAR_ICHOR_HUNT_STAGE) == 0) {
+        if (!defeated(TRAINER_ICHOR_ARTEMIS_TEACH)) {
+            msgbox(format("The first huntress raises her hand. “One battle, before the next glade.”"))
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
+            waitmovement(0)
+        } else {
+            setvar(VAR_ICHOR_HUNT_STAGE, 1)
+            msgbox(format("Three hounds beyond. In the pale clearings, their sight reaches twice as far."))
+        }
+    }
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_TestExit {
+    lockall
+    if (var(VAR_ICHOR_HUNT_STAGE) == 1) {
+        setvar(VAR_ICHOR_HUNT_STAGE, 2)
+        msgbox(format("The golden hind waits among the next clearings.\p"
+                      "Touch her antler. Follow where she goes. Three times."))
+    }
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Dais {
+    lockall
+    if (!flag(FLAG_ICHOR_KALLISTO_TRIAL) || !defeated(TRAINER_ICHOR_ARTEMIS_MASTER)) {
+        msgbox(format("Kallisto's voice carries from the rock.\p"
+                      "“The hind first. Then my last huntress. I can wait.”"))
+        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
+        waitmovement(0)
+    }
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Hind {
+    lockall
+    if (var(VAR_ICHOR_HUNT_STAGE) < 2) {
+        msgbox(format("The hind keeps her antlers out of reach. Enter through the glades below."))
+        releaseall
+        end
+    }
+    msgbox(format("You touch the golden antler. For a moment, the grove holds its breath."))
+    addvar(VAR_ICHOR_HIND_TOUCHES, 1)
+    removeobject(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND)
+    if (var(VAR_ICHOR_HIND_TOUCHES) == 1) {
+        setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 7, 15)
+        clearflag(FLAG_ICHOR_KALLISTO_TRIAL)
+        addobject(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND)
+        msgbox(format("Gold flashes in the western clearing."))
+    } elif (var(VAR_ICHOR_HIND_TOUCHES) == 2) {
+        setobjectxyperm(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND, 20, 9)
+        clearflag(FLAG_ICHOR_KALLISTO_TRIAL)
+        addobject(LOCALID_ARKADIA_TEMPLE_OF_ARTEMIS_HIND)
+        msgbox(format("She bounds to the northeastern clearing."))
+    } else {
+        setvar(VAR_ICHOR_HUNT_STAGE, 3)
+        setflag(FLAG_ICHOR_KALLISTO_TRIAL)
+        msgbox(format("The hind lowers her head. The hounds fall quiet.\p"
+                      "Kallisto waits on the moonlit rock."))
+    }
+    releaseall
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Teach {
+    trainerbattle_single(TRAINER_ICHOR_ARTEMIS_TEACH,
+        format("You waited. Now show me what you do when you must move."),
+        format("A clean crossing."))
+    msgbox(format("A cypress blocks a hound's eye. Running does not."), MSGBOX_AUTOCLOSE)
+    end
+}
+script Arkadia_TempleOfArtemis_EventScript_Test {
+    trainerbattle_single(TRAINER_ICHOR_ARTEMIS_TEST,
+        format("This path is optional. The practice isn't wasted."),
+        format("Go on. I'll watch the hounds."))
+    msgbox(format("The pale sand gives you away at twice the distance."), MSGBOX_AUTOCLOSE)
+    end
+}
+script Arkadia_TempleOfArtemis_EventScript_Master {
+    trainerbattle_single(TRAINER_ICHOR_ARTEMIS_MASTER,
+        format("No more hiding. Meet my eyes."),
+        format("The rock is yours to climb."))
+    msgbox(format("Kallisto has not left the grove since the new moon."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+text Arkadia_Text_NameKallisto { "KALLISTO" }
+text Arkadia_Text_KallistoDefeat { "A step I did not see coming." }
+
+script Arkadia_TempleOfArtemis_EventScript_Kallisto {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Text_NameKallisto)
+    if (!flag(FLAG_BADGE05_GET)) {
+        if (!flag(FLAG_ICHOR_KLEON_JOINED_TITANS) || !flag(FLAG_ICHOR_KALLISTO_TRIAL)
+            || !defeated(TRAINER_ICHOR_ARTEMIS_TEACH) || !defeated(TRAINER_ICHOR_ARTEMIS_MASTER)) {
+            msgbox(format("Finish the hunt. There is no prize for outrunning the lesson."))
+            release
+            end
+        }
+        msgbox(format("You let the hounds pass. You touched the hind without taking her.\p"
+                      "Now hunt a victory of your own."))
+        trainerbattle_no_intro(TRAINER_ICHOR_KALLISTO, Arkadia_Text_KallistoDefeat)
+        setflag(FLAG_BADGE05_GET)
+        setvar(VAR_0x8004, ICHOR_GOD_ARTEMIS)
+        setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL)
+        special(Ichor_AddFavor)
+        message(format("{PLAYER} received the Moon Laurel!"))
+        waitmessage
+        call(Common_EventScript_PlayGymBadgeFanfare)
+    }
+    if (!flag(FLAG_ICHOR_GOT_KALLISTO_SCROLL)) {
+        msgbox(format("Torment. A hunter learns which step the prey cannot take twice."))
+        giveitem(ITEM_TM_TORMENT)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Make room for the scroll. It will keep."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_KALLISTO_SCROLL)
+    }
+    msgbox(format("Your friend... I fought the new moon, as I was told.\p"
+                  "I didn't see his face."))
+    release
+}
+
+script Arkadia_TempleOfArtemis_EventScript_Altar {
+    setspeaker(SP_NAME_NONE)
+    goto(EventScript_IchorTempleAltar_Artemis)
+}

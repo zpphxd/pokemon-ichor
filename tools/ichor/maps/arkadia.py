@@ -146,6 +146,14 @@ def hubs():
             m.rect(22, 3, 23, 16, 0x0B3, True)
             m.put(20, 18, 0x01B, True)
         if name == "Arkadia":
+            m.stamp(17, 2, [
+                [0x1AA, 0x1AB, 0x1AB, 0x1AB, 0x1AB, 0x1AC],
+                [0x1B2, 0x1B3, 0x1B3, 0x1B3, 0x1B3, 0x1B4],
+                [0x1B8, 0x1B9, 0x1BA, 0x1B3, 0x1BB, 0x1BC],
+                [0x1C0, 0x1C1, 0x1C2, 0x1C5, 0x1C3, 0x1C4],
+                [0x1C8, 0x1C9, 0x1CA, 0x1CD, 0x1CB, 0x1CC]])
+            m.rect(14, 7, 20, 8, 0x1D9)
+            m.json["warp_events"] = [warp(20, 6, "Arkadia_TempleOfArtemis", 0)]
             m.person("Kleon", 7, 22, gfx="KLEON", flag="FLAG_ICHOR_KLEON_JOINED_TITANS")
             m.person("Alethea", 15, 22, gfx="ALETHEA")
             m.person("Iapetos", 5, 22, gfx="TITAN_GRUNT", flag="FLAG_ICHOR_HIDE_IAPETOS_ARKADIA")
@@ -153,6 +161,46 @@ def hubs():
                 m.json["coord_events"].append(dict(type="trigger", x=x, y=23, elevation=3,
                     var="VAR_TEMP_1", var_value="0", script="Arkadia_EventScript_Recruitment"))
         m.save()
+
+
+def grove():
+    m = Map("Arkadia_TempleOfArtemis", 28, 72)
+    m.json.update(allow_fly=False, allow_escape_rope=False)
+    m.rect(12, 2, 13, 71, 0x1D9)
+    for y0, y1 in ((50, 68), (28, 47), (6, 25)):
+        m.rect(7, y0, 21, y1, 0x001)
+    for x0, y0, x1, y1 in ((8, 39, 13, 43), (14, 31, 19, 35),
+                           (17, 19, 21, 23), (6, 13, 10, 17), (17, 7, 21, 11)):
+        m.rect(x0, y0, x1, y1, 0x1D9)
+    for x, y in ((11, 60), (15, 44), (11, 38), (15, 32),
+                 (15, 22), (11, 16), (15, 10)):
+        m.put(x, y, 0x00E, True)
+        m.put(x, y + 1, 0x016, True)
+    hounds = [("HoundTeach", 12, 58, 4), ("HoundTest1", 12, 44, 4),
+              ("HoundTest2", 16, 38, 4), ("HoundTest3", 12, 32, 4),
+              ("HoundMaster1", 12, 20, 4), ("HoundMaster2", 16, 14, 4),
+              ("HoundMaster3", 12, 8, 4)]
+    for name, x, y, radius in hounds:
+        m.person(name, x, y, script=m.prefix + "Hound")
+        e = m.json["object_events"][-1]
+        e.update(graphics_id="OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
+                 movement_type="MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+                 movement_range_x=radius, movement_range_y=0)
+    m.person("Hind", 20, 21, flag="FLAG_ICHOR_KALLISTO_TRIAL")
+    m.json["object_events"][-1]["graphics_id"] = "OBJ_EVENT_GFX_SPECIES(KERAZAP)"
+    for name, x, y in (("Teach", 10, 52), ("Test", 19, 36), ("Master", 10, 6)):
+        m.person(name, x, y, gfx="ACOLYTE_F", facing="RIGHT", sight=3 if name != "Test" else 0)
+    m.rect(10, 1, 15, 4, 0x1D9)
+    m.person("Kallisto", 12, 2, gfx="ACOLYTE_F")
+    m.sign("Altar", 15, 2, tile=0x01B)
+    m.sign("Instructions", 16, 67)
+    m.put(12, 71, 0x024)
+    m.json["warp_events"] = [warp(12, 71, "Arkadia", 0)]
+    for y, script in ((49, "TeachExit"), (27, "TestExit"), (5, "Dais")):
+        for x in (12, 13):
+            m.json["coord_events"].append(dict(type="trigger", x=x, y=y, elevation=3,
+                var="VAR_TEMP_4", var_value="0", script=m.prefix + script))
+    m.save()
 
 
 def ferry():
@@ -197,11 +245,50 @@ def encounters_and_teams():
     path.write_text(text + "\n" + end + after + ("" if after else "\n"))
 
 
+def hunt_teams():
+    path = ROOT / "src/data/trainers.party"
+    start, end = "/* Artemis hunt teams. */", "/* End Artemis hunt teams. */"
+    before, _, old = path.read_text().partition(start)
+    after = old.partition(end)[2]
+    text = before.rstrip() + "\n\n" + start + "\n"
+    for tag, team in (("TEACH", [("Lykopup", 32), ("Harpelle", 33)]),
+                      ("TEST", [("Botrykit", 33), ("Lykanax", 34)]),
+                      ("MASTER", [("Harpelle", 34), ("Lykanax", 35), ("Arkoby", 35)])):
+        text += f"\n=== TRAINER_ICHOR_ARTEMIS_{tag} ===\nName: HUNTRESS\nClass: Acolyte\n"
+        text += "Pic: Acolyte F\nGender: Female\nMusic: Female\nAI: Basic Trainer\n"
+        for species, level in team:
+            text += f"\n{species}\nLevel: {level}\n"
+            text += "IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe\n"
+    team = [
+        ("Lykanax", 35, "Adamant", "4 HP / 252 Atk / 252 Spe", ["Crunch", "Ice Fang", "Howl", "Roar"]),
+        ("Harpelle", 35, "Jolly", "4 HP / 252 Atk / 252 Spe", ["Night Slash", "Wing Attack", "Quick Attack", "Taunt"]),
+        ("Oinopard", 36, "Jolly", "4 HP / 252 Atk / 252 Spe", ["Poison Jab", "Night Slash", "Fake Out", "Hone Claws"]),
+        ("Starkos", 37, "Adamant", "252 HP / 252 Atk / 4 SpD", ["Crunch", "Play Rough", "Bulk Up", "Protect"]),
+    ]
+    for difficulty in ("Normal", "Easy", "Hard"):
+        hard = difficulty == "Hard"
+        text += "\n=== TRAINER_ICHOR_KALLISTO ===\nName: KALLISTO\nClass: Hierophant\nPic: Acolyte F\nGender: Female\nMusic: Female\n"
+        if difficulty != "Normal":
+            text += f"Difficulty: {difficulty}\n"
+        text += "AI: " + ("Smart Trainer" if hard else "Basic Trainer") + "\n"
+        for species, level, nature, evs, moves in team:
+            text += f"\n{species}" + (" @ Sitrus Berry" if hard else "") + "\n"
+            text += f"Level: {level - (3 if difficulty == 'Easy' else 0)}\n"
+            iv = 31 if hard else 20
+            text += f"IVs: {iv} HP / {iv} Atk / {iv} Def / {iv} SpA / {iv} SpD / {iv} Spe\n"
+            if hard:
+                text += f"EVs: {evs}\n{nature} Nature\n"
+            text += "".join("- " + move + "\n" for move in moves)
+    path.write_text(text + "\n" + end + after + ("" if after else "\n"))
+
+
 def main():
     routes()
     hubs()
+    grove()
     ferry()
     encounters_and_teams()
+    hunt_teams()
 
 
 if __name__ == "__main__":

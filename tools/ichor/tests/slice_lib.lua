@@ -161,6 +161,17 @@ function L.objectAt(localId)
   end
 end
 
+-- setobjectxyperm changes the saved template even while its sprite is culled.
+local function savedObjectAt(localId)
+  local ev = emu:read32(S.gMapHeader + S.OFF_MAPHEADER_EVENTS)
+  for i = 0, emu:read8(ev + S.OFF_EVENTS_OBJECT_COUNT) - 1 do
+    local t = L.sb1() + S.OFF_SB1_OBJECT_TEMPLATES + i * S.OBJECT_TEMPLATE_SIZE
+    if emu:read8(t + S.OFF_TEMPLATE_LOCAL_ID) == localId then
+      return emu:read16(t + S.OFF_TEMPLATE_X), emu:read16(t + S.OFF_TEMPLATE_Y)
+    end
+  end
+end
+
 -- Whether a person or object (not the player or the follower) stands on (x, y).
 function L.objectOn(x, y)
   local me = emu:read8(S.gPlayerAvatar + S.OFF_AVATAR_OBJECT_EVENT_ID)
@@ -639,7 +650,10 @@ local function grid()
     if emu:read8(o) & 1 == 1 and onCurrentMap(o) then live[emu:read8(o + S.OFF_OBJ_LOCAL_ID)] = true end
   end
   for _, t in ipairs(L.mapEvents().objects) do
-    if not live[t.localId] and (t.flag == 0 or not L.getFlag(t.flag)) then g.people[t.x .. "," .. t.y] = true end
+    if not live[t.localId] and (t.flag == 0 or not L.getFlag(t.flag)) then
+      local x, y = savedObjectAt(t.localId)
+      g.people[(x or t.x) .. "," .. (y or t.y)] = true
+    end
   end
   local events = emu:read32(S.gMapHeader + S.OFF_MAPHEADER_EVENTS)
   local nw, warps = emu:read8(events + S.OFF_EVENTS_WARP_COUNT), emu:read32(events + S.OFF_EVENTS_WARPS)
@@ -798,7 +812,9 @@ function L.npc(script, nth)
       found = found + 1
       if found == (nth or 1) then
         local x, y = L.objectAt(o.localId)
-        return { x = x or o.x, y = y or o.y, localId = o.localId, range = o.range, present = x ~= nil,
+        local present = x ~= nil
+        if not present then x, y = savedObjectAt(o.localId) end
+        return { x = x or o.x, y = y or o.y, localId = o.localId, range = o.range, present = present,
                  tiles = { { x = x or o.x, y = y or o.y } }, what = script }
       end
     end

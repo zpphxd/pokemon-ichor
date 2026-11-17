@@ -70,3 +70,4 @@
 	.include "data/maps/Route12_CypressRoad/scripts.inc"
 	.include "data/maps/Arkadia/scripts.inc"
 	.include "data/maps/GulfTrireme/scripts.inc"
+	.include "data/maps/Arkadia_TempleOfArtemis/scripts.inc"

@@ -19,6 +19,7 @@
 #include "fldeff.h"
 #include "follower_npc.h"
 #include "ichor_frozen.h"
+#include "ichor_hunt.h"
 #include "ichor_labyrinth.h"
 #include "ichor_omen.h"
 #include "ichor_relics.h"
@@ -133,6 +134,7 @@ void Ichor_OnFieldFrame(void)
     Ichor_FrozenHourFrame();
     Ichor_LabyrinthFrame();
     Ichor_TheoxeniaFrame();
+    Ichor_HuntFrame();
 }
 
 // --- Light (SYSTEMS §2) -------------------------------------------------------

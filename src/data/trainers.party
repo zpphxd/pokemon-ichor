@@ -2576,3 +2576,189 @@ Level: 35
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Arkadia approach teams. */
+
+/* Artemis hunt teams. */
+
+=== TRAINER_ICHOR_ARTEMIS_TEACH ===
+Name: HUNTRESS
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Lykopup
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Harpelle
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ARTEMIS_TEST ===
+Name: HUNTRESS
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Botrykit
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Lykanax
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ARTEMIS_MASTER ===
+Name: HUNTRESS
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpelle
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Lykanax
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Arkoby
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KALLISTO ===
+Name: KALLISTO
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Lykanax
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Ice Fang
+- Howl
+- Roar
+
+Harpelle
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Oinopard
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Poison Jab
+- Night Slash
+- Fake Out
+- Hone Claws
+
+Starkos
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Play Rough
+- Bulk Up
+- Protect
+
+=== TRAINER_ICHOR_KALLISTO ===
+Name: KALLISTO
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+Difficulty: Easy
+AI: Basic Trainer
+
+Lykanax
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Ice Fang
+- Howl
+- Roar
+
+Harpelle
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Oinopard
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Poison Jab
+- Night Slash
+- Fake Out
+- Hone Claws
+
+Starkos
+Level: 34
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Crunch
+- Play Rough
+- Bulk Up
+- Protect
+
+=== TRAINER_ICHOR_KALLISTO ===
+Name: KALLISTO
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+Difficulty: Hard
+AI: Smart Trainer
+
+Lykanax @ Sitrus Berry
+Level: 35
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Crunch
+- Ice Fang
+- Howl
+- Roar
+
+Harpelle @ Sitrus Berry
+Level: 35
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Jolly Nature
+- Night Slash
+- Wing Attack
+- Quick Attack
+- Taunt
+
+Oinopard @ Sitrus Berry
+Level: 36
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Jolly Nature
+- Poison Jab
+- Night Slash
+- Fake Out
+- Hone Claws
+
+Starkos @ Sitrus Berry
+Level: 37
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 SpD
+Adamant Nature
+- Crunch
+- Play Rough
+- Bulk Up
+- Protect
+
+/* End Artemis hunt teams. */

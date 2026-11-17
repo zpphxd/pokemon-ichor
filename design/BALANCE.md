@@ -33,10 +33,10 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,
-  both Chloe parties and Thespis, retaining Hero's species and moves at three levels lower.
+  both Chloe parties, Thespis and Kallisto, retaining Hero's species and moves at three levels lower.
   Spartan uses those species and levels with trained EV spreads, natures,
-  held items and smart AI. Its EXP/candy caps are 14, 20, 26 and 32, advancing when
-  each Laurel is won; after Laurel 4 the next cap is Arkadia's 37. Extend the
+  held items and smart AI. Its EXP/candy caps are 14, 20, 26, 32 and 37, advancing when
+  each Laurel is won; after Laurel 5 the next cap is Astyra's Kleon battle at 40. Extend the
   milestone mapping as later chapters are connected. Hero's existing parties
   and uncapped EXP are unchanged. These integrations are not natural-level
   balance approval.

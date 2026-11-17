@@ -395,7 +395,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
 | Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
-| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia; Mask Laurel 4, Dionysus altar, playable Dionysia, Silenos's Girdle quest and Kleon's recruitment | Chapter presentation and natural-level acceptance; Artemis trial, then Astyra and Kaldera; Laurels 5–6 |
+| Act II | Connected Eleusa → Thyrsa → Kopais → Lebadeia → Kirrha → Gulf ferry → Aigion → Styx → Arkadia; Laurels 4–5, Dionysus/Artemis altars, playable Dionysia, Silenos's Girdle quest, Kleon's recruitment and the Hunt for the Hind | Chapter presentation and natural-level acceptance; Astyra and Kaldera, Laurel 6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
 | Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
@@ -618,7 +618,28 @@ onward-travel foundation. Arkadia now stages Kleon's six-to-nothing defeat
 aftermath and Iapetos's forged prophecy, with Alethea's soft-wax objection,
 Kleon's choice and their saved departure before Laurel 5. The scene holds
 night without waiting for the real clock. Its mask/stump/ink close-ups remain
-presentation debt; the Artemis trial and Laurel 5 are still unimplemented.
+presentation debt.
+
+Artemis's endless-night grove now has the three-stage Hunt for the Hind:
+one patrol and a cypress refuge, three hounds and two moonlit clearings,
+then three antler touches in different clearings. Hounds check sight every
+field frame, including while the player waits; cypresses block it and
+moonlight doubles its range from three to six tiles. A catch returns the
+player to the current stage, preserving antler progress. Three huntresses
+include one optional battle. Kallisto's real 35–37 battle awards the Moon
+Laurel, Favor and a retryable Torment scroll; her new-moon confession follows.
+The Artemis altar supports real offerings and existing Favor gifts.
+Spartan's cap advances from 37 to Astyra's 40 after the Laurel.
+
+An assisted native trial covers the moving patrol route, exact sight limits,
+cypress occlusion, all three reset points, antler persistence, optional-battle
+bypass, actual boss loss/recovery, full-scroll-pocket retry, the Artemis
+offering and save/reset/CONTINUE. Mortal and Spartan parties are integrated.
+This is not a continuous NEW GAME run or natural-level approval. Dedicated
+grove/raised-dais/hind-flight presentation, Kallisto's portrait, map pacing,
+shared offering/whiteout text fit, and human look/fun approval remain open.
+Astyra and Kaldera are not yet
+connected; the rest of Act II remains unfinished.
 
 **Continuation order.** Prioritize connected playable Act II and Act III chapters
 while keeping Act I's remaining acceptance gates visible. Integrate shared systems at

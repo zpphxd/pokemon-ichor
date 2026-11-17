@@ -375,6 +375,22 @@ The shared native walker scopes local object IDs to their owning map: connected
 neighbor objects can remain loaded with the same local ID as a current-map NPC.
 New heal locations are append-only because their numeric IDs are saved.
 
+`tools/ichor/tests/arkadia_hunt.sh` plays the assisted Artemis trial and
+Kallisto chapter. `Ichor_HuntFrame` runs from the existing field-frame hook
+only in Artemis's grove and outside scripts, menus, fades and tile transitions.
+It reads the actual patrol positions/facing: sight is three tiles, six when
+the player stands in one of the marked pale clearings, with collision stopping
+the ray. The catch script warps to the saved stage's entrance without clearing
+the antler counter. The hind's saved template is relocated after each touch;
+the shared walker reads mutable saved coordinates for culled objects.
+`removeobject` also sets its hide flag, so the first two relocations explicitly
+clear that flag before respawning the hind; only the third completes the hunt.
+The fixture includes controlled, restored sight-boundary probes separately
+from ordinary key-play traversal, actual reset and boss-loss paths, full-scroll
+retry, temple offerings, native Spartan cap transitions and save/CONTINUE.
+Night is held on grove entry and released by Arkadia's transition, including
+whiteout recovery. It does not certify natural-level balance or final art.
+
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.

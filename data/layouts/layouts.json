@@ -1034,6 +1034,17 @@
       "border_filepath": "data/layouts/Arkadia/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ARKADIA_TEMPLE_OF_ARTEMIS",
+      "name": "Arkadia_TempleOfArtemis_Layout",
+      "width": 28,
+      "height": 72,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
+      "border_filepath": "data/layouts/Arkadia_TempleOfArtemis/border.bin",
+      "blockdata_filepath": "data/layouts/Arkadia_TempleOfArtemis/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

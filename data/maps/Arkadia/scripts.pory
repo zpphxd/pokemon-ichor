@@ -1,5 +1,6 @@
 mapscripts Arkadia_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        special(Ichor_ReleaseTimeOfDay)
         setrespawn(HEAL_LOCATION_ARKADIA)
         setflag(FLAG_ICHOR_HIDE_IAPETOS_ARKADIA)
         removeobject(LOCALID_ARKADIA_IAPETOS)

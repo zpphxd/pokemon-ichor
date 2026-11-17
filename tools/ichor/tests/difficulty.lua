@@ -28,6 +28,7 @@ local function parties()
         {S.TRAINER_CHLOE_DAY, {24, 24, 25, 26}},
         {S.TRAINER_CHLOE_NIGHT, {24, 24, 25, 26}},
         {S.TRAINER_THESPIS, {30, 30, 31, 32}},
+        {S.TRAINER_KALLISTO, {35, 35, 36, 37}},
     }
     for _, boss in ipairs(bosses) do
         local normal = trainers + boss[1] * S.SIZE_TRAINER

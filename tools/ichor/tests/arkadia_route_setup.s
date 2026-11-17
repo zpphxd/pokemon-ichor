@@ -59,3 +59,30 @@ Approach_SaveScript:
     special SaveGame
     releaseall
     end
+
+    test_header Hunt_SetupHeader, Hunt_SetupScript
+Hunt_SetupScript:
+    setvar VAR_TEMP_F, 1
+    setflag FLAG_ICHOR_DIFFICULTY_CHOSEN
+    setvar VAR_ICHOR_DIFFICULTY, 1
+    setflag FLAG_ICHOR_KLEON_JOINED_TITANS
+    additem ITEM_PRETTY_FEATHER
+    warp MAP_ARKADIA, 20, 7
+    waitstate
+    end
+
+    test_header Hunt_CapHeader, Hunt_CapScript
+Hunt_CapScript:
+    setvar VAR_TEMP_F, 1
+    callnative Hunt_ReadCap
+    end
+    .align 2
+    .thumb
+    .thumb_func
+Hunt_ReadCap:
+    push {lr}
+    bl GetCurrentLevelCap
+    ldr r1, =gSpecialVar_Result
+    strh r0, [r1]
+    pop {pc}
+    .pool
