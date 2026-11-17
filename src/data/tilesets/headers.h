@@ -938,4 +938,62 @@ const struct Tileset gTileset_PalaceRooms =
     .metatiles = gMetatiles_PorytilesManaged_PalaceRooms,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_PalaceRooms,
     .callback = NULL,
+// Ichor (ported from claude/world-act3-4e546d): lakonia, Lakonia, the town with no walls (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Lakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Lakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Lakonia,
+    .metatiles = gMetatiles_PorytilesManaged_Lakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Lakonia,
+    .callback = InitTilesetAnim_PorytilesManaged_Lakonia,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): gytheion, Gytheion and the strait off Malea (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Gytheion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Gytheion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Gytheion,
+    .metatiles = gMetatiles_PorytilesManaged_Gytheion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Gytheion,
+    .callback = InitTilesetAnim_PorytilesManaged_Gytheion,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): eurotas, Route 25, up the Eurotas (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Eurotas =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Eurotas,
+    .palettes = gTilesetPalettes_PorytilesManaged_Eurotas,
+    .metatiles = gMetatiles_PorytilesManaged_Eurotas,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Eurotas,
+    .callback = InitTilesetAnim_PorytilesManaged_Eurotas,
+};
+
+// Ichor (ported from claude/world-act3-4e546d): stymphalia, Route 26, Lake Stymphalia and Route 27 (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Stymphalia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Stymphalia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Stymphalia,
+    .metatiles = gMetatiles_PorytilesManaged_Stymphalia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Stymphalia,
+    .callback = InitTilesetAnim_PorytilesManaged_Stymphalia,
 };

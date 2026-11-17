@@ -1472,3 +1472,11 @@ void InitTilesetAnim_Thyrsa(void)
 #include "porytiles_generated/tilesets/melos/generated_anim_code.h"
 #include "porytiles_generated/tilesets/amnisos/generated_anim_code.h"
 #include "porytiles_generated/tilesets/bull_road/generated_anim_code.h"
+// [Porytiles] Auto-generated include. Do not remove.
+#include "porytiles_generated/tilesets/lakonia/generated_anim_code.h"
+// [Porytiles] Auto-generated include. Do not remove.
+#include "porytiles_generated/tilesets/gytheion/generated_anim_code.h"
+// [Porytiles] Auto-generated include. Do not remove.
+#include "porytiles_generated/tilesets/eurotas/generated_anim_code.h"
+// [Porytiles] Auto-generated include. Do not remove.
+#include "porytiles_generated/tilesets/stymphalia/generated_anim_code.h"
