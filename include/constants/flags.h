@@ -1982,6 +1982,7 @@
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
 #define FLAG_ICHOR_MOM_CONFESSED                (FLAG_ICHOR_GENERAL_START + 0x483) // Ichor: Mom confessed the bee at the Kastalian spring: her knucklebones play fair (engine, ENGINE_API §7; set by world-act3 at III-7)
+#define FLAG_ICHOR_PITHOS_EXPLAINED             (FLAG_ICHOR_GENERAL_START + 0x484) // Ichor: first lid lifted on a Pithos: what it is for was explained
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x000) // Ichor: Eleutherai shrine honey
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x001) // Ichor: Eleutherai terrace Revive
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x002) // Ichor: Eleutherai verge Repel

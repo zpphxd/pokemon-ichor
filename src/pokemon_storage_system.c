@@ -872,11 +872,11 @@ struct {
     const u8 *desc;
 } static const sMainMenuTexts[OPTIONS_COUNT] =
 {
-    [OPTION_WITHDRAW]   = {COMPOUND_STRING("WITHDRAW POKéMON"), COMPOUND_STRING("Move Pokémon from the jars to\nyour party.")},
-    [OPTION_DEPOSIT]    = {COMPOUND_STRING("DEPOSIT POKéMON"),  COMPOUND_STRING("Store Pokémon from your party\nin the jars.")},
-    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("MOVE POKéMON"),     COMPOUND_STRING("Arrange the Pokémon in the jars\nand in your party.")},
+    [OPTION_WITHDRAW]   = {COMPOUND_STRING("WITHDRAW POKéMON"), COMPOUND_STRING("Take Pokémon out of the jars\nand into your party.")},
+    [OPTION_DEPOSIT]    = {COMPOUND_STRING("DEPOSIT POKéMON"),  COMPOUND_STRING("Put Pokémon from your party\ninto the jars to rest.")},
+    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("MOVE POKéMON"),     COMPOUND_STRING("Move Pokémon between the jars\nand your party, as you like.")},
     [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("MOVE ITEMS"),       COMPOUND_STRING("Move items held by Pokémon in\nthe jars or your party.")},
-    [OPTION_EXIT]       = {COMPOUND_STRING("CLOSE THE LID"),    COMPOUND_STRING("Return to the previous menu.")}
+    [OPTION_EXIT]       = {COMPOUND_STRING("CLOSE THE LID"),    COMPOUND_STRING("Close the jars and step back.")}
 };
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =

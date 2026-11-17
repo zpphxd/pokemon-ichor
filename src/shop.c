@@ -712,13 +712,17 @@ static void BuyMenuAddItemIcon(enum Item item, u8 iconSlot)
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdPtr = spriteId;
-            gSprites[spriteId].x2 = 24;
-            gSprites[spriteId].y2 = 88;
+            // Ichor: the 24x24 pic fills the top-left of a 32x32 sprite, so the
+            // sprite sits 4 px right and down of the old 24,88 to centre the pic
+            // in the plate (ICON_PLATE in tools/ichor/art/ui_menus_lib.py).
+            gSprites[spriteId].x2 = 28;
+            gSprites[spriteId].y2 = 92;
         }
     }
     else
     {
-        spriteId = AddDecorationIconObject(item, 20, 84, 1, iconSlot + TAG_ITEM_ICON_BASE, iconSlot + TAG_ITEM_ICON_BASE);
+        // Ichor: 4 px right and down, as the item icon above.
+        spriteId = AddDecorationIconObject(item, 24, 88, 1, iconSlot + TAG_ITEM_ICON_BASE, iconSlot + TAG_ITEM_ICON_BASE);
         if (spriteId != MAX_SPRITES)
             *spriteIdPtr = spriteId;
     }
