@@ -476,7 +476,26 @@ player step. Rooted statues turn without moving, people block sight, and an
 adjacent walking statue invokes its own touch script with `VAR_FACING = DIR_NONE`
 and its local ID in `VAR_LAST_TALKED`. The twelve statue/mirror movement types
 are appended after the existing Frozen Hour types, preserving published IDs.
-This engine check is not evidence that the Kythera chapter is connected.
+This engine check alone is not evidence that the Kythera chapter is connected.
+
+`tools/ichor/tests/kythera.sh` plays the connected chapter from Kaldera's actual
+quay, using a low-met-level test team and the existing level assist. It awards
+no Kythera story receipts in setup. Its 27 checks cover the saved Euploia
+destination, requisition, bad guests and Zeus Favor, real Asclepeia, road and
+spring scenes, all three Gallery rooms, a real statue-catch retry, Galatea's
+actual scroll and one-time Laurel Favor, harvested berries, declined and
+insufficient First Fruits, full-pocket refusal, exactly three berries consumed,
+the actual Horn, and final save/reset/CONTINUE. It captures 34 native screenshots.
+`tools/ichor/tests/act3_galatea_gallery.sh` separately checks the original
+model-authored statue routes and saved mirror angles (34 checks, 64 screenshots).
+Neither fixture is natural-level balance or final presentation acceptance.
+
+`specialvar(VAR_RESULT, Ichor_TakeFirstFruits)` preflights the entire berry
+pocket and removes exactly three berries, in item-ID order, only when enough
+are present. Callers must preflight their reward capacity before taking payment.
+Neraida's two trees use slots 120 and 121 and are planted only once, so reentry
+does not replenish harvested fruit. Kythera map/layout IDs and trainer portraits
+are appended; the explicit stock portrait stand-ins are not finished art.
 
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing

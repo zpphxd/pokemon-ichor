@@ -201,6 +201,9 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_POTTER,
     TRAINER_PIC_INITIATE_F,
     TRAINER_PIC_RUNNER,
+    TRAINER_PIC_HIEROPHANT_GALATEA,
+    TRAINER_PIC_SCULPTOR,
+    TRAINER_PIC_BEEKEEPER,
     TRAINER_PIC_COUNT,
 };
 
@@ -566,6 +569,10 @@ enum TrainerClassID
     TRAINER_CLASS_SWINEHERD,           // Eubouleus at Eleusa; the Goatherd's pic stands in until the Swineherd is drawn
     // Ichor: the Titans' admins (Hyperion, Iapetos, Rhea); GetBattleBGM gives them MUS_ICHOR_BATTLE_ADMIN
     TRAINER_CLASS_TITAN_ADMIN,
+    TRAINER_CLASS_FISHER,
+    TRAINER_CLASS_SCULPTOR,
+    TRAINER_CLASS_BEEKEEPER,
+    TRAINER_CLASS_DIVER,
 
     TRAINER_CLASS_COUNT,
 };

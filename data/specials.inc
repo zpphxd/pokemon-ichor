@@ -1148,3 +1148,4 @@ gSpecials::
 	def_special Ichor_PlaceConstellation
 	def_special Ichor_CountConstellations
 	def_special Ichor_ShowNightSky
+	def_special Ichor_TakeFirstFruits

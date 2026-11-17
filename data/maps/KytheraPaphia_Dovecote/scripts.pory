@@ -1,0 +1,72 @@
+// The dovecote, Paphia (design/phase4/SCRIPT.md, Part 2): Peristera, the
+// temple's dove-keeper, an old woman with seed in every pocket.
+// Room: tools/ichor/maps/kythera_homes.py. A round tower house: her stove and bed
+// below, the nesting floor up the ladder at (7,2) (blocked: it's the doves'),
+// and the wool basket by the stove at (4,3) with one egg in it. Peristera stands
+// beside it at (5,3). The mat is (4..5,8).
+//
+// She gives the Egg (it hatches an Erosie, which is never found in the wild and
+// grows into Himerow through friendship).
+//
+
+mapscripts KytheraPaphia_Dovecote_MapScripts {}
+
+text KytheraPaphia_Dovecote_Name_Peristera { "PERISTERA" }
+
+script KytheraPaphia_Dovecote_EventScript_Peristera {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Dovecote_Name_Peristera)
+    if (flag(FLAG_ICHOR_GOT_EROSIE_EGG)) {
+        msgbox(format("When it hatches, be nice to it. That's how they grow up."))
+        release
+        end
+    }
+    msgbox(format("Mind the feathers. Mind the doves. Mind me, I'm old.\p"
+                  "See that egg? A Himerow left it in my dovecote. They do that.\p"
+                  "They're Eros's birds. They dive at people and fall in love with them.\p"
+                  "The doves won't sit on it. I've tried. I sat on it myself one night."))
+    setspeaker(KytheraPaphia_Dovecote_Name_Peristera)
+    msgbox(format("Take it. Keep it warm. Walk about with it. That's all eggs want."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(KytheraPaphia_Dovecote_EventScript_EggKeeps)
+    }
+    getpartysize
+    if (var(VAR_RESULT) == PARTY_SIZE) {
+        goto(KytheraPaphia_Dovecote_EventScript_EggKeeps)
+    }
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received an Egg!"))
+    waitfanfare
+    giveegg(SPECIES_EROSIE)
+    setflag(FLAG_ICHOR_GOT_EROSIE_EGG)
+    setspeaker(KytheraPaphia_Dovecote_Name_Peristera)
+    msgbox(format("When it hatches, be nice to it. That's how they grow up."))
+    release
+}
+
+script KytheraPaphia_Dovecote_EventScript_EggKeeps {
+    setspeaker(KytheraPaphia_Dovecote_Name_Peristera)
+    msgbox(format("It'll keep. Eggs are patient. Doves aren't."))
+    release
+    end
+}
+
+script KytheraPaphia_Dovecote_EventScript_Basket {
+    if (flag(FLAG_ICHOR_GOT_EROSIE_EGG)) {
+        msgbox(format("A basket by the stove, heaped with wool. Feathers have drifted into it."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A basket by the stove. A single egg in it, wrapped in wool. It isn't a dove's."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraPaphia_Dovecote_EventScript_Ladder {
+    msgbox(format("A ladder up through a hole in the ceiling.\p"
+                  "Above, nesting holes, and doves going in and out of the windows."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_Dovecote_EventScript_Stove {
+    msgbox(format("Peristera's stove.\p"
+                  "Feathers drift down through the ladder hole onto everything."), MSGBOX_SIGN)
+}

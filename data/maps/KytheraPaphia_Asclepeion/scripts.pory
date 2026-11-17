@@ -1,0 +1,75 @@
+// The Asclepeion, Paphia (design/phase4/SCRIPT.md, Part 2): built round an open
+// courtyard full of roses, the counter on the shady side, beds under a colonnade
+// on the other, and a little fountain the doves bathe in. Panacoil sleeps in the
+// rose bed, not on the counter.
+// Room: tools/ichor/maps/kythera_homes.py. The healer stands at (3,2) with the
+// spring basin at (1..2,1..2); the player talks from (3,4). The mat is (7,10).
+//
+// A whiteout after resting here returns the player to this healer
+// (HEAL_LOCATION_KYTHERA_PAPHIA: respawn here, in front of the door outside).
+// Paphia isn't a fly target: Skandeia is the island's (SCRIPT.md Open questions 2).
+
+mapscripts KytheraPaphia_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_KYTHERA_PAPHIA)
+    }
+}
+
+text KytheraPaphia_Asclepeion_Name_Healer { "HEALER" }
+
+script KytheraPaphia_Asclepeion_EventScript_Healer {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Asclepeion_Name_Healer)
+    msgbox(format("Rest in the roses. Panacoil does. It won't get up for anyone."))
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x800B, LOCALID_PAPHIA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script KytheraPaphia_Asclepeion_EventScript_Panacoil {
+    lock
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    waitmoncry
+    release
+}
+
+script KytheraPaphia_Asclepeion_EventScript_Fountain {
+    msgbox(format("A little fountain. The doves bathe in it."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The Pithos, with Paphia's name (see KytheraSkandeia_Asclepeion).
+// ---------------------------------------------------------------------------
+
+script KytheraPaphia_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(KytheraPaphia_Asclepeion_EventScript_PithosMenu)
+}
+
+script KytheraPaphia_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Paphia opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(KytheraPaphia_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(KytheraPaphia_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}

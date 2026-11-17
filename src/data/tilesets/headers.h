@@ -769,3 +769,114 @@ const struct Tileset gTileset_ArkadiaWood =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaWood,
     .callback = NULL,
 };
+
+// Restored Kythera-family tilesets.
+const struct Tileset gTileset_Kythera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kythera,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kythera,
+    .metatiles = gMetatiles_PorytilesManaged_Kythera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kythera,
+    .callback = InitTilesetAnim_PorytilesManaged_Kythera,
+};
+
+const struct Tileset gTileset_Skandeia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Skandeia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Skandeia,
+    .metatiles = gMetatiles_PorytilesManaged_Skandeia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skandeia,
+    .callback = InitTilesetAnim_PorytilesManaged_Skandeia,
+};
+
+const struct Tileset gTileset_Paphia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Paphia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Paphia,
+    .metatiles = gMetatiles_PorytilesManaged_Paphia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Paphia,
+    .callback = InitTilesetAnim_PorytilesManaged_Paphia,
+};
+
+const struct Tileset gTileset_Neraida =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Neraida,
+    .palettes = gTilesetPalettes_PorytilesManaged_Neraida,
+    .metatiles = gMetatiles_PorytilesManaged_Neraida,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Neraida,
+    .callback = InitTilesetAnim_PorytilesManaged_Neraida,
+};
+
+const struct Tileset gTileset_Melos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Melos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Melos,
+    .metatiles = gMetatiles_PorytilesManaged_Melos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Melos,
+    .callback = InitTilesetAnim_PorytilesManaged_Melos,
+};
+
+const struct Tileset gTileset_TempleAphrodite =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleAphrodite,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleAphrodite,
+    .metatiles = gMetatiles_PorytilesManaged_TempleAphrodite,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleAphrodite,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaSkandeia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaSkandeia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaSkandeia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaSkandeia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaSkandeia,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaPaphia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaPaphia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaPaphia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaPaphia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaPaphia,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaMelos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaMelos,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaMelos,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaMelos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaMelos,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_CivicKythera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CivicKythera,
+    .palettes = gTilesetPalettes_PorytilesManaged_CivicKythera,
+    .metatiles = gMetatiles_PorytilesManaged_CivicKythera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicKythera,
+    .callback = NULL,
+};

@@ -1,0 +1,40 @@
+// The Agora, Skandeia (design/phase4/SCRIPT.md, Part 2): Teukros's stall in a
+// rope-and-sailcloth market hall. Frankincense on the high shelves, myrtle
+// bundles from the beam, oil jars by the posts.
+// Room: tools/ichor/maps/kythera_homes.py. Teukros stands at (7,2), behind the
+// counter; the player talks from (7,4). The mat is (5,8).
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
+// TODO(engine §3): Olive Oil, Barley Cake and Frankincense (500) join the stock
+// (SCRIPT.md Part 6) once the offerings exist as items.
+
+mapscripts KytheraSkandeia_Agora_MapScripts {}
+
+text KytheraSkandeia_Agora_Name_Teukros { "TEUKROS" }
+
+script KytheraSkandeia_Agora_EventScript_Teukros {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Agora_Name_Teukros)
+    message(format("Rope? Oil? Myrtle for the goddess? Frankincense, she loves it."))
+    waitmessage
+    pokemart(KytheraSkandeia_Agora_Mart)
+    setspeaker(KytheraSkandeia_Agora_Name_Teukros)
+    msgbox(format("Don't buy a boat. I haven't got one. Nobody has."))
+    release
+}
+
+mart KytheraSkandeia_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_GREAT_BALL
+    ITEM_HYPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_ESCAPE_ROPE
+    ITEM_HONEY
+}
+
+script KytheraSkandeia_Agora_EventScript_Frankincense {
+    msgbox(format("Jars of Frankincense on a high shelf, under a dove carved in the beam."), MSGBOX_SIGN)
+}

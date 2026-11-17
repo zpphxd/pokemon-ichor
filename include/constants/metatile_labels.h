@@ -1,6 +1,10 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+#define METATILE_Kythera_GirdleGate_Moved 0x2EB
+#define METATILE_Neraida_Altar_Empty 0x225
+#define METATILE_Neraida_MillWheel_TL 0x243
+
 // gTileset_BattleArena
 #define METATILE_BattleArena_Door  0x21B
 
