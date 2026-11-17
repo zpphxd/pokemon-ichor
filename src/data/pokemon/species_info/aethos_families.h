@@ -31,12 +31,12 @@
             "senses danger, it bolts, and it is said\n"
             "that no one has ever caught one that\n"
             "did not wish to be caught."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 416,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nebrel,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -45,7 +45,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Nebrel,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Nebrel,
@@ -53,7 +53,7 @@
         .iconSprite = gMonIcon_Nebrel,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(6, 12, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nebrel)
         OVERWORLD(
             sPicTable_Nebrel,
@@ -101,12 +101,12 @@
             "deer. Bark is creeping up its shins, and\n"
             "twigs sprout from its brow wherever its\n"
             "flight takes it."),
-        .pokemonScale = 328,
-        .pokemonOffset = 5,
+        .pokemonScale = 281,
+        .pokemonOffset = 1,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kladoe,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -123,7 +123,7 @@
         .iconSprite = gMonIcon_Kladoe,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-8, 12, SHADOW_SIZE_M)
+        SHADOW(-6, 12, SHADOW_SIZE_M)
         FOOTPRINT(Kladoe)
         OVERWORLD(
             sPicTable_Kladoe,
@@ -237,12 +237,12 @@
             "The other two doze in its warm ruff. It\n"
             "is said they dream of a gate they have\n"
             "not yet been asked to guard."),
-        .pokemonScale = 624,
-        .pokemonOffset = 16,
+        .pokemonScale = 487,
+        .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kynder,
-        .frontPicSize = MON_COORDS_SIZE(48, 56),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -251,7 +251,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Kynder,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kynder,
@@ -259,7 +259,7 @@
         .iconSprite = gMonIcon_Kynder,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-2, 12, SHADOW_SIZE_S)
+        SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kynder)
         OVERWORLD(
             sPicTable_Kynder,
@@ -307,12 +307,12 @@
             "go. One follows the trail while the other\n"
             "barks at its own shadow. Both take care\n"
             "not to wake the third."),
-        .pokemonScale = 318,
-        .pokemonOffset = 4,
+        .pokemonScale = 267,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Dikyon,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(56, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -321,7 +321,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Dikyon,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         .palette = gMonPalette_Dikyon,
@@ -329,7 +329,7 @@
         .iconSprite = gMonIcon_Dikyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 12, SHADOW_SIZE_M)
+        SHADOW(1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Dikyon)
         OVERWORLD(
             sPicTable_Dikyon,
@@ -442,12 +442,12 @@
             "with its front hooves. Fishermen say a\n"
             "foal that splashes your boat brings you\n"
             "a calm sea home."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 416,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hipling,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -456,7 +456,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Hipling,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Hipling,
@@ -464,7 +464,7 @@
         .iconSprite = gMonIcon_Hipling,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-4, 12, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Hipling)
         OVERWORLD(
             sPicTable_Hipling,
@@ -512,12 +512,12 @@
             "Islanders once harnessed them in pairs\n"
             "to carry messages across the sea, and\n"
             "they never lost one."),
-        .pokemonScale = 262,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 256,
-        .trainerOffset = 0,
+        .trainerScale = 284,
+        .trainerOffset = 2,
         .frontPic = gMonFrontPic_Thalamare,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -526,7 +526,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Thalamare,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Thalamare,
@@ -534,7 +534,7 @@
         .iconSprite = gMonIcon_Thalamare,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(14, 12, SHADOW_SIZE_M)
+        SHADOW(12, 12, SHADOW_SIZE_M)
         FOOTPRINT(Thalamare)
         OVERWORLD(
             sPicTable_Thalamare,
@@ -647,12 +647,12 @@
             "All day it calls out its own name from\n"
             "the olive branches. Epopoi, popoi! When\n"
             "startled, its tiny crest pops up."),
-        .pokemonScale = 1967,
-        .pokemonOffset = 24,
+        .pokemonScale = 937,
+        .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Epopoi,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 32),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -661,7 +661,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Epopoi,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Epopoi,
@@ -669,7 +669,7 @@
         .iconSprite = gMonIcon_Epopoi,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(4, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Epopoi)
         OVERWORLD(
             sPicTable_Epopoi,
@@ -717,12 +717,12 @@
             "bird for a mile comes to listen. None of\n"
             "them remembers what it said, only that\n"
             "they all agreed."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 489,
+        .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lophops,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -731,7 +731,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Lophops,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Lophops,
@@ -786,8 +786,8 @@
             "the cliffs, and calls itself king. The\n"
             "smoke of altars drifts up into it, and\n"
             "it is said the gods go hungry."),
-        .pokemonScale = 303,
-        .pokemonOffset = 3,
+        .pokemonScale = 298,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Basilops,
@@ -853,12 +853,12 @@
             "even its young. Its markings make it\n"
             "look as if it is laughing at you, and\n"
             "it usually is."),
-        .pokemonScale = 833,
-        .pokemonOffset = 19,
+        .pokemonScale = 500,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Galekit,
-        .frontPicSize = MON_COORDS_SIZE(64, 40),
+        .frontPicSize = MON_COORDS_SIZE(40, 24),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -867,7 +867,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Galekit,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Galekit,
@@ -875,7 +875,7 @@
         .iconSprite = gMonIcon_Galekit,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
-        SHADOW(0, 12, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Galekit)
         OVERWORLD(
             sPicTable_Galekit,
@@ -922,12 +922,12 @@
             "lanes, laughing softly. Farmers leave\n"
             "it scraps at the crossroads, for it runs\n"
             "errands for the goddess of the night."),
-        .pokemonScale = 437,
+        .pokemonScale = 416,
         .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Gelasable,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -936,7 +936,7 @@
         ),
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Gelasable,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Gelasable,
@@ -988,12 +988,12 @@
             "Hold one up to the light and something\n"
             "flickers inside it. Old women in Elaia\n"
             "say it is a soul, waiting for wings."),
-        .pokemonScale = 1082,
-        .pokemonOffset = 21,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kampillar,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1002,7 +1002,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Kampillar,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kampillar,
@@ -1056,12 +1056,12 @@
             "It hangs perfectly still under its veil\n"
             "of silk. Lift the veil to peek, and it\n"
             "will not hatch until it forgives you."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 531,
+        .pokemonOffset = 14,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nymveil,
-        .frontPicSize = MON_COORDS_SIZE(32, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1070,7 +1070,7 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Nymveil,
-        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicSize = MON_COORDS_SIZE(32, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         .palette = gMonPalette_Nymveil,
@@ -1078,7 +1078,7 @@
         .iconSprite = gMonIcon_Nymveil,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(1, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nymveil)
         OVERWORLD(
             sPicTable_Nymveil,
@@ -1125,8 +1125,8 @@
             "while it sleeps. Its scales bring a sleep\n"
             "so deep that only a kiss is said to wake\n"
             "the sleeper."),
-        .pokemonScale = 307,
-        .pokemonOffset = 3,
+        .pokemonScale = 301,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Psychora,
@@ -1192,12 +1192,12 @@
             "stands up the next day. Every one in\n"
             "Elaia is said to come from a cutting of\n"
             "Athena's first tree."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Elaleaf,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1206,7 +1206,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Elaleaf,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Elaleaf,
@@ -1214,7 +1214,7 @@
         .iconSprite = gMonIcon_Elaleaf,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-7, 12, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Elaleaf)
         OVERWORLD(
             sPicTable_Elaleaf,
@@ -1261,12 +1261,12 @@
             "by morning. It raises its branches like\n"
             "fists whenever it hears a fight, and it\n"
             "hears a lot of them."),
-        .pokemonScale = 393,
-        .pokemonOffset = 8,
+        .pokemonScale = 331,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Elapling,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1275,7 +1275,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Elapling,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Elapling,
@@ -1396,12 +1396,12 @@
             "It carries ten times its own weight and\n"
             "never rests. Where one marches, a long\n"
             "line follows, all of them in step."),
-        .pokemonScale = 983,
-        .pokemonOffset = 20,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ergant,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1410,7 +1410,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Ergant,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Ergant,
@@ -1418,7 +1418,7 @@
         .iconSprite = gMonIcon_Ergant,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(4, 12, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Ergant)
         OVERWORLD(
             sPicTable_Ergant,
@@ -1464,7 +1464,7 @@
             "They fight in a line, shield beside\n"
             "shield. If one falls, the line closes so\n"
             "fast that no enemy ever sees the gap."),
-        .pokemonScale = 277,
+        .pokemonScale = 272,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -1531,12 +1531,12 @@
             "over a shoulder long ago, and that it has\n"
             "been trying to grow into a person ever\n"
             "since."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Pebblith,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1545,7 +1545,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Pebblith,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Pebblith,
@@ -1553,7 +1553,7 @@
         .iconSprite = gMonIcon_Pebblith,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(2, 12, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Pebblith)
         OVERWORLD(
             sPicTable_Pebblith,
@@ -1600,12 +1600,12 @@
             "a traveler leaves becomes part of it.\n"
             "By dawn it stands a little farther down\n"
             "the road than it did at dusk."),
-        .pokemonScale = 358,
-        .pokemonOffset = 7,
+        .pokemonScale = 301,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Cairnolith,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1614,7 +1614,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Cairnolith,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         .palette = gMonPalette_Cairnolith,
@@ -1735,12 +1735,12 @@
             "sleeps curled up in caves. Goatherds say\n"
             "a child who naps beside one cannot be\n"
             "found by anyone who means it harm."),
-        .pokemonScale = 1270,
-        .pokemonOffset = 22,
+        .pokemonScale = 728,
+        .pokemonOffset = 17,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Eripip,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1749,7 +1749,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Eripip,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Eripip,
@@ -1803,12 +1803,12 @@
             "The stubby horns on its head spark when\n"
             "it is pleased. It looks after any lost\n"
             "young Pokémon it finds on the hills."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 510,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerazap,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1817,7 +1817,7 @@
         ),
         .frontAnimId = ANIM_H_STRETCH,
         .backPic = gMonBackPic_Kerazap,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         .palette = gMonPalette_Kerazap,
@@ -1871,8 +1871,8 @@
             "never runs out. When it shakes its\n"
             "fleece, thunderheads gather. It is said\n"
             "a god was raised on its milk."),
-        .pokemonScale = 328,
-        .pokemonOffset = 5,
+        .pokemonScale = 323,
+        .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerastorm,
@@ -1938,12 +1938,12 @@
             "winter sea. While it sleeps there, the\n"
             "wind holds its breath and the waves lie\n"
             "down flat."),
-        .pokemonScale = 1166,
-        .pokemonOffset = 21,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Halcyling,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(32, 32),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -1952,7 +1952,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Halcyling,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(48, 40),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Halcyling,
@@ -1960,7 +1960,7 @@
         .iconSprite = gMonIcon_Halcyling,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(1, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Halcyling)
         OVERWORLD(
             sPicTable_Halcyling,
@@ -2007,12 +2007,12 @@
             "and for seven days no wind dares blow.\n"
             "Sailors time their voyages by its\n"
             "nesting."),
-        .pokemonScale = 347,
-        .pokemonOffset = 6,
+        .pokemonScale = 333,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Galenyon,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(64, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2029,7 +2029,7 @@
         .iconSprite = gMonIcon_Galenyon,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(8, 12, SHADOW_SIZE_M)
+        SHADOW(7, 12, SHADOW_SIZE_M)
         FOOTPRINT(Galenyon)
         OVERWORLD(
             sPicTable_Galenyon,
@@ -2074,12 +2074,12 @@
             "the sea god keeps it weak on purpose,\n"
             "so that no one notices what it will\n"
             "become."),
-        .pokemonScale = 952,
-        .pokemonOffset = 20,
+        .pokemonScale = 593,
+        .pokemonOffset = 15,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ketofry,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2088,7 +2088,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Ketofry,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Ketofry,
@@ -2209,12 +2209,12 @@
             "It hides in tide pools and pinches the\n"
             "toes of anyone who wades in. It is never\n"
             "sorry, and it never lets go first."),
-        .pokemonScale = 999,
-        .pokemonOffset = 20,
+        .pokemonScale = 604,
+        .pokemonOffset = 15,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Karkipool,
-        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicSize = MON_COORDS_SIZE(40, 32),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2223,7 +2223,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Karkipool,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Karkipool,
@@ -2231,7 +2231,7 @@
         .iconSprite = gMonIcon_Karkipool,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 12, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Karkipool)
         OVERWORLD(
             sPicTable_Karkipool,
@@ -2278,7 +2278,7 @@
             "where it lurks beside the many-headed\n"
             "serpent. It is said a goddess set its\n"
             "ancestor among the stars for its loyalty."),
-        .pokemonScale = 259,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -2300,7 +2300,7 @@
         .iconSprite = gMonIcon_Karkitox,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-2, 12, SHADOW_SIZE_M)
+        SHADOW(-1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Karkitox)
         OVERWORLD(
             sPicTable_Karkitox,
@@ -2344,12 +2344,12 @@
             "Arrows and thorns slide off its gold fur.\n"
             "It is far too sure of itself, and it\n"
             "picks fights with lions twice its size."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 447,
+        .pokemonOffset = 11,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nemecub,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2358,7 +2358,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Nemecub,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Nemecub,
@@ -2366,7 +2366,7 @@
         .iconSprite = gMonIcon_Nemecub,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(3, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Nemecub)
         OVERWORLD(
             sPicTable_Nemecub,
@@ -2415,7 +2415,7 @@
             "not lend that to anyone."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 264,
+        .trainerScale = 268,
         .trainerOffset = 1,
         .frontPic = gMonFrontPic_Nemeleon,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -2479,12 +2479,12 @@
             "It wakes long before dawn and peeps at\n"
             "the dark sky, as if afraid it will miss\n"
             "the sun. It cannot bear to be late."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Eopeep,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2493,7 +2493,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Eopeep,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Eopeep,
@@ -2548,12 +2548,12 @@
             "the sun is watching. It fights anything\n"
             "that steps into its yard, even its own\n"
             "reflection."),
-        .pokemonScale = 492,
-        .pokemonOffset = 12,
+        .pokemonScale = 406,
+        .pokemonOffset = 9,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Alekrow,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2562,7 +2562,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Alekrow,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         .palette = gMonPalette_Alekrow,
@@ -2616,7 +2616,7 @@
             "It is said its ancestor once slept on\n"
             "watch and was punished for it. It has\n"
             "not closed its eyes on duty since."),
-        .pokemonScale = 262,
+        .pokemonScale = 258,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -2683,12 +2683,12 @@
             "and it cannot keep one. Old herders say\n"
             "the reeds by its pasture learned to talk\n"
             "from listening to it."),
-        .pokemonScale = 492,
-        .pokemonOffset = 12,
+        .pokemonScale = 343,
+        .pokemonOffset = 6,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Onotis,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2697,7 +2697,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Onotis,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Onotis,
@@ -2705,7 +2705,7 @@
         .iconSprite = gMonIcon_Onotis,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(4, 12, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Onotis)
         OVERWORLD(
             sPicTable_Onotis,
@@ -2752,8 +2752,8 @@
             "it is always hungry. It hides its huge\n"
             "ears under a cap and kicks anyone who\n"
             "stares at them."),
-        .pokemonScale = 281,
-        .pokemonOffset = 1,
+        .pokemonScale = 277,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Midonos,
@@ -2818,12 +2818,12 @@
             "It swoops on picnics and snatches food\n"
             "from the plate before it reaches a mouth.\n"
             "What it cannot carry off, it spoils."),
-        .pokemonScale = 983,
-        .pokemonOffset = 20,
+        .pokemonScale = 562,
+        .pokemonOffset = 14,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Harpeck,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2832,7 +2832,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Harpeck,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Harpeck,
@@ -2840,7 +2840,7 @@
         .iconSprite = gMonIcon_Harpeck,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(6, 12, SHADOW_SIZE_S)
+        SHADOW(4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Harpeck)
         OVERWORLD(
             sPicTable_Harpeck,
@@ -2875,7 +2875,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_PICKPOCKET, ABILITY_STENCH, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_BLUE,
+        .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Harpelle"),
         .cryId = CRY_MANDIBUZZ,
         .natDexNum = NATIONAL_DEX_HARPELLE,
@@ -2886,7 +2886,7 @@
             "It arrives as a sudden squall. When the\n"
             "wind drops, every loaf in the market is\n"
             "gone, and what is left smells awful."),
-        .pokemonScale = 262,
+        .pokemonScale = 258,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -2952,12 +2952,12 @@
             "Its hollow shell hums in the wind. It\n"
             "listens to the hum all day, trying to\n"
             "learn the song its shell was made for."),
-        .pokemonScale = 1290,
-        .pokemonOffset = 22,
+        .pokemonScale = 770,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Chelonet,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -2966,7 +2966,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Chelonet,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Chelonet,
@@ -2974,7 +2974,7 @@
         .iconSprite = gMonIcon_Chelonet,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-2, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Chelonet)
         OVERWORLD(
             sPicTable_Chelonet,
@@ -3021,7 +3021,7 @@
             "Strings run between two horns on its\n"
             "shell. It is said a god once forgave a\n"
             "cattle thief in exchange for its song."),
-        .pokemonScale = 393,
+        .pokemonScale = 375,
         .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -3043,7 +3043,7 @@
         .iconSprite = gMonIcon_Chelyra,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 12, SHADOW_SIZE_M)
+        SHADOW(-1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Chelyra)
         OVERWORLD(
             sPicTable_Chelyra,
@@ -3089,12 +3089,12 @@
             "day with a lit lamp, looking for an\n"
             "honest Trainer. It hasn't found one, and\n"
             "it doesn't expect to."),
-        .pokemonScale = 392,
-        .pokemonOffset = 8,
+        .pokemonScale = 339,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Pithound,
-        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicSize = MON_COORDS_SIZE(56, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3111,7 +3111,7 @@
         .iconSprite = gMonIcon_Pithound,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-11, 12, SHADOW_SIZE_S)
+        SHADOW(-8, 12, SHADOW_SIZE_S)
         FOOTPRINT(Pithound)
         OVERWORLD(
             sPicTable_Pithound,
@@ -3156,12 +3156,12 @@
             "It gathers honey from Eleusa's meadows.\n"
             "Old tales say its honey fed a god when\n"
             "he was small, hidden in a mountain cave."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 791,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Melibee,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3170,7 +3170,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Melibee,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Melibee,
@@ -3178,7 +3178,7 @@
         .iconSprite = gMonIcon_Melibee,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(7, 12, SHADOW_SIZE_S)
+        SHADOW(4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Melibee)
         OVERWORLD(
             sPicTable_Melibee,
@@ -3226,12 +3226,12 @@
             "What it hums today, it is said, will\n"
             "happen tomorrow. Its wings bear the net\n"
             "of the Omphalos."),
-        .pokemonScale = 358,
-        .pokemonOffset = 7,
+        .pokemonScale = 346,
+        .pokemonOffset = 6,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Melisseer,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3293,12 +3293,12 @@
             "A bearded face on its back seems about\n"
             "to ask a question. Touch it and you go\n"
             "numb, unable to answer anything at all."),
-        .pokemonScale = 346,
-        .pokemonOffset = 6,
+        .pokemonScale = 312,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Narkeray,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3307,7 +3307,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Narkeray,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Narkeray,
@@ -3360,12 +3360,12 @@
             "It slides through the wheat unseen, for\n"
             "the ears on its back look just like the\n"
             "crop. Any field it lives in grows thick."),
-        .pokemonScale = 328,
-        .pokemonOffset = 5,
-        .trainerScale = 256,
-        .trainerOffset = 0,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 266,
+        .trainerOffset = 1,
         .frontPic = gMonFrontPic_Stachyss,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3374,7 +3374,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Stachyss,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Stachyss,
@@ -3382,7 +3382,7 @@
         .iconSprite = gMonIcon_Stachyss,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(7, 12, SHADOW_SIZE_M)
+        SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Stachyss)
         OVERWORLD(
             sPicTable_Stachyss,
@@ -3495,12 +3495,12 @@
             "It sleeps deep in the dark sanctum, but\n"
             "its sprout always leans toward the sun.\n"
             "No one knows which way it will grow."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Rhoaril,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3509,7 +3509,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Rhoaril,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Rhoaril,
@@ -3517,7 +3517,7 @@
         .iconSprite = gMonIcon_Rhoaril,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(0, 12, SHADOW_SIZE_S)
+        SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Rhoaril)
         OVERWORLD(
             sPicTable_Rhoaril,
@@ -3565,12 +3565,12 @@
             "By day it walks the wheat fields, and\n"
             "flowers open in its footsteps. When it\n"
             "goes below, they say, winter comes."),
-        .pokemonScale = 262,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 256,
-        .trainerOffset = 0,
+        .trainerScale = 284,
+        .trainerOffset = 2,
         .frontPic = gMonFrontPic_Korantha,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3579,7 +3579,7 @@
         ),
         .frontAnimId = ANIM_SHRINK_GROW,
         .backPic = gMonBackPic_Korantha,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         .palette = gMonPalette_Korantha,
@@ -3698,12 +3698,12 @@
             "It roots through Eleusa's furrows from\n"
             "dawn to dusk. Farmers say a field it\n"
             "has turned needs no plow that year."),
-        .pokemonScale = 549,
-        .pokemonOffset = 14,
+        .pokemonScale = 387,
+        .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kaplet,
-        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicSize = MON_COORDS_SIZE(48, 32),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3712,7 +3712,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Kaplet,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kaplet,
@@ -3720,7 +3720,7 @@
         .iconSprite = gMonIcon_Kaplet,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-2, 12, SHADOW_SIZE_S)
+        SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kaplet)
         OVERWORLD(
             sPicTable_Kaplet,
@@ -3832,12 +3832,12 @@
             "It cannot see, so it digs at random and\n"
             "gives away what it finds to whoever is\n"
             "nearest, worthy or not."),
-        .pokemonScale = 1228,
-        .pokemonOffset = 22,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Spalunk,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3846,7 +3846,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Spalunk,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Spalunk,
@@ -3900,8 +3900,8 @@
             "It hugs a horn full of grain and hands\n"
             "out the harvest to anyone it bumps into.\n"
             "It never asks who deserves it."),
-        .pokemonScale = 307,
-        .pokemonOffset = 3,
+        .pokemonScale = 301,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Plouteras,
@@ -3955,7 +3955,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
         .abilities = { ABILITY_CHLOROPHYLL, ABILITY_LIQUID_OOZE, ABILITY_SEED_SOWER },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Ampelix"),
         .cryId = CRY_BELLSPROUT,
         .natDexNum = NATIONAL_DEX_AMPELIX,
@@ -3967,12 +3967,12 @@
             "reaches for it. Vintners say the first\n"
             "vine was a boy the wine god loved, and\n"
             "that every Ampelix is still reaching."),
-        .pokemonScale = 983,
-        .pokemonOffset = 20,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ampelix,
-        .frontPicSize = MON_COORDS_SIZE(40, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -3981,7 +3981,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Ampelix,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(32, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Ampelix,
@@ -3989,7 +3989,7 @@
         .iconSprite = gMonIcon_Ampelix,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(2, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Ampelix)
         OVERWORLD(
             sPicTable_Ampelix,
@@ -4036,7 +4036,7 @@
             "and wine wells up from the stone. Those\n"
             "who drink it dance until dawn and then\n"
             "remember nothing at all."),
-        .pokemonScale = 258,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -4058,7 +4058,7 @@
         .iconSprite = gMonIcon_Thyrsivy,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-4, 12, SHADOW_SIZE_M)
+        SHADOW(-3, 12, SHADOW_SIZE_M)
         FOOTPRINT(Thyrsivy)
         OVERWORLD(
             sPicTable_Thyrsivy,
@@ -4103,12 +4103,12 @@
             "spots, not fruit, but it still smells\n"
             "of the wine press. Hunters once caught\n"
             "its kind by leaving wine by a spring."),
-        .pokemonScale = 749,
-        .pokemonOffset = 18,
+        .pokemonScale = 500,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Botrykit,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4117,7 +4117,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Botrykit,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Botrykit,
@@ -4125,7 +4125,7 @@
         .iconSprite = gMonIcon_Botrykit,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-1, 12, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Botrykit)
         OVERWORLD(
             sPicTable_Botrykit,
@@ -4172,7 +4172,7 @@
             "faster than the eye can follow. It is\n"
             "said the wine god rode one to the very\n"
             "ends of the earth and back."),
-        .pokemonScale = 263,
+        .pokemonScale = 259,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -4194,7 +4194,7 @@
         .iconSprite = gMonIcon_Oinopard,
         .iconPalIndex = 0,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(1, 12, SHADOW_SIZE_M)
+        SHADOW(2, 12, SHADOW_SIZE_M)
         FOOTPRINT(Oinopard)
         OVERWORLD(
             sPicTable_Oinopard,
@@ -4239,12 +4239,12 @@
             "can wear the look of any Pokémon it has\n"
             "met, and plays the part so well that the\n"
             "audience forgets it is wearing a mask."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 552,
+        .pokemonOffset = 14,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Prosomime,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4253,7 +4253,7 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Prosomime,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Prosomime,
@@ -4261,7 +4261,7 @@
         .iconSprite = gMonIcon_Prosomime,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
-        SHADOW(-5, 12, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Prosomime)
         OVERWORLD(
             sPicTable_Prosomime,
@@ -4295,7 +4295,7 @@
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_INTIMIDATE, ABILITY_STRONG_JAW, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_BLACK,
+        .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Lykopup"),
         .cryId = CRY_POOCHYENA,
         .natDexNum = NATIONAL_DEX_LYKOPUP,
@@ -4307,12 +4307,12 @@
             "At night it trails lone travelers, and\n"
             "old shepherds say it is counting them\n"
             "as guests for a feast."),
-        .pokemonScale = 724,
-        .pokemonOffset = 17,
+        .pokemonScale = 512,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lykopup,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4321,7 +4321,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Lykopup,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Lykopup,
@@ -4443,12 +4443,12 @@
             "clear nights. When it is lost, it looks\n"
             "up, finds the stars that match them,\n"
             "and walks the way they point."),
-        .pokemonScale = 787,
-        .pokemonOffset = 18,
+        .pokemonScale = 524,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Arkoby,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4457,7 +4457,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Arkoby,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Arkoby,
@@ -4465,7 +4465,7 @@
         .iconSprite = gMonIcon_Arkoby,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-1, 12, SHADOW_SIZE_S)
+        SHADOW(1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Arkoby)
         OVERWORLD(
             sPicTable_Arkoby,
@@ -4580,12 +4580,12 @@
             "chases, and its bolts never miss. Yet\n"
             "one Kerdovix has fled it for an age,\n"
             "and it has never once drawn closer."),
-        .pokemonScale = 358,
-        .pokemonOffset = 7,
+        .pokemonScale = 324,
+        .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Skylaps,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4649,12 +4649,12 @@
             "its starlit tail leaves afterimages.\n"
             "One Skylaps has hunted it for an age.\n"
             "Some say the chase ends only in stone."),
-        .pokemonScale = 358,
-        .pokemonOffset = 7,
+        .pokemonScale = 324,
+        .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kerdovix,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4663,7 +4663,7 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Kerdovix,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Kerdovix,
@@ -4717,12 +4717,12 @@
             "Each web shows a picture, and travelers\n"
             "say the pictures are always of someone\n"
             "important behaving badly."),
-        .pokemonScale = 1436,
-        .pokemonOffset = 23,
+        .pokemonScale = 812,
+        .pokemonOffset = 19,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Raknit,
-        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicSize = MON_COORDS_SIZE(40, 32),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4731,7 +4731,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Raknit,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicSize = MON_COORDS_SIZE(48, 32),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Raknit,
@@ -4739,7 +4739,7 @@
         .iconSprite = gMonIcon_Raknit,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(2, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Raknit)
         OVERWORLD(
             sPicTable_Raknit,
@@ -4786,8 +4786,8 @@
             "worst, woven so well that no one can\n"
             "find a flaw. It once dared a goddess to\n"
             "do better. She could not."),
-        .pokemonScale = 325,
-        .pokemonOffset = 4,
+        .pokemonScale = 312,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hyphantis,
@@ -4800,7 +4800,7 @@
         ),
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Hyphantis,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Hyphantis,
@@ -4853,12 +4853,12 @@
             "never grow old. On moonlit nights a pale\n"
             "light settles beside it, and it smiles\n"
             "in its sleep."),
-        .pokemonScale = 604,
-        .pokemonOffset = 15,
+        .pokemonScale = 510,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Amnoze,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4867,7 +4867,7 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Amnoze,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Amnoze,
@@ -4921,12 +4921,12 @@
             "In Astyra people still call their coins\n"
             "owls, and say a purse of them keeps\n"
             "watch over you while you sleep."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 708,
+        .pokemonOffset = 17,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Glaukoin,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -4935,7 +4935,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Glaukoin,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Glaukoin,
@@ -4943,7 +4943,7 @@
         .iconSprite = gMonIcon_Glaukoin,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-6, 12, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Glaukoin)
         OVERWORLD(
             sPicTable_Glaukoin,
@@ -4990,7 +4990,7 @@
             "blinks. Philosophers say it can read a\n"
             "thought before the thinker has finished\n"
             "thinking it."),
-        .pokemonScale = 437,
+        .pokemonScale = 416,
         .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -5057,12 +5057,12 @@
             "Healers at the Asclepeion say only the\n"
             "dose decides, and they keep it in their\n"
             "gardens to watch over the herbs."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 447,
+        .pokemonOffset = 11,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ophidrop,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5071,7 +5071,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Ophidrop,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Ophidrop,
@@ -5079,7 +5079,7 @@
         .iconSprite = gMonIcon_Ophidrop,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-2, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Ophidrop)
         OVERWORLD(
             sPicTable_Ophidrop,
@@ -5181,7 +5181,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
         .abilities = { ABILITY_CURSED_BODY, ABILITY_PICKUP, ABILITY_INFILTRATOR },
-        .bodyColor = BODY_COLOR_BLUE,
+        .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Obolorn"),
         .cryId = CRY_DUSKULL,
         .natDexNum = NATIONAL_DEX_OBOLORN,
@@ -5193,12 +5193,12 @@
             "meets, hoping for a coin. Those who give\n"
             "one are said to hear a faint thank-you on\n"
             "the night wind."),
-        .pokemonScale = 562,
-        .pokemonOffset = 14,
+        .pokemonScale = 416,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Obolorn,
-        .frontPicSize = MON_COORDS_SIZE(48, 56),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5207,7 +5207,7 @@
         ),
         .frontAnimId = ANIM_H_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Obolorn,
-        .backPicSize = MON_COORDS_SIZE(48, 56),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         .palette = gMonPalette_Obolorn,
@@ -5215,7 +5215,7 @@
         .iconSprite = gMonIcon_Obolorn,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(8, 12, SHADOW_SIZE_S)
+        SHADOW(6, 12, SHADOW_SIZE_S)
         FOOTPRINT(Obolorn)
         OVERWORLD(
             sPicTable_Obolorn,
@@ -5262,12 +5262,12 @@
             "low and both hands reaching for the far\n"
             "bank. It has waited so long that it no\n"
             "longer remembers why."),
-        .pokemonScale = 281,
-        .pokemonOffset = 1,
-        .trainerScale = 256,
-        .trainerOffset = 0,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 270,
+        .trainerOffset = 1,
         .frontPic = gMonFrontPic_Kalyptor,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5276,7 +5276,7 @@
         ),
         .frontAnimId = ANIM_H_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Kalyptor,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         .palette = gMonPalette_Kalyptor,
@@ -5284,7 +5284,7 @@
         .iconSprite = gMonIcon_Kalyptor,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(8, 12, SHADOW_SIZE_M)
+        SHADOW(3, 12, SHADOW_SIZE_M)
         FOOTPRINT(Kalyptor)
         OVERWORLD(
             sPicTable_Kalyptor,
@@ -5398,9 +5398,9 @@
             "each traveler a riddle. Its tail tightens\n"
             "on those who fail. If one ever answers, it\n"
             "leaps from its rock and is gone."),
-        .pokemonScale = 262,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 256,
+        .trainerScale = 260,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Enigmaw,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
@@ -5465,12 +5465,12 @@
             "Its nose ring glows like a coal. When it\n"
             "is cross, it snorts sparks, so the herders\n"
             "of Kaldera keep it well away from hay."),
-        .pokemonScale = 368,
-        .pokemonOffset = 7,
+        .pokemonScale = 264,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kaminoo,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(48, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5479,7 +5479,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Kaminoo,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kaminoo,
@@ -5487,7 +5487,7 @@
         .iconSprite = gMonIcon_Kaminoo,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(4, 12, SHADOW_SIZE_M)
+        SHADOW(3, 12, SHADOW_SIZE_M)
         FOOTPRINT(Kaminoo)
         OVERWORLD(
             sPicTable_Kaminoo,
@@ -5601,12 +5601,12 @@
             "say each one is a spark of a giant's\n"
             "breath, still trying to find its way home\n"
             "to him under the ground."),
-        .pokemonScale = 983,
-        .pokemonOffset = 20,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kapnub,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5615,7 +5615,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Kapnub,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kapnub,
@@ -5737,12 +5737,12 @@
             "tiny hammer. Its kind were the first\n"
             "smiths, and even the youngest beat out\n"
             "the same curved shape, over and over."),
-        .pokemonScale = 699,
-        .pokemonOffset = 17,
+        .pokemonScale = 512,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Telpup,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5751,7 +5751,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Telpup,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Telpup,
@@ -5808,7 +5808,7 @@
             "where the sickle went."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 264,
+        .trainerScale = 268,
         .trainerOffset = 1,
         .frontPic = gMonFrontPic_Telkanvil,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
@@ -5828,7 +5828,7 @@
         .iconSprite = gMonIcon_Telkanvil,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(5, 12, SHADOW_SIZE_L)
+        SHADOW(6, 12, SHADOW_SIZE_L)
         FOOTPRINT(Telkanvil)
         OVERWORLD(
             sPicTable_Telkanvil,
@@ -5873,12 +5873,12 @@
             "loves warm, dry hillsides and turns its\n"
             "head to follow the sun, as if it were\n"
             "waiting to be lit."),
-        .pokemonScale = 787,
-        .pokemonOffset = 18,
+        .pokemonScale = 524,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Narthip,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -5887,7 +5887,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Narthip,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Narthip,
@@ -6008,12 +6008,12 @@
             "It drifts in on the surf, peeking out of\n"
             "its shell. When it opens wide, the foam\n"
             "that spills out smells of roses."),
-        .pokemonScale = 780,
-        .pokemonOffset = 18,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Aphrell,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6022,7 +6022,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Aphrell,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Aphrell,
@@ -6078,12 +6078,12 @@
             "open shell. Where it first steps ashore,\n"
             "flowers spring up from the sand and every\n"
             "quarrel on the beach falls quiet."),
-        .pokemonScale = 262,
+        .pokemonScale = 258,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Aphrogene,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6092,7 +6092,7 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Aphrogene,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         .palette = gMonPalette_Aphrogene,
@@ -6100,7 +6100,7 @@
         .iconSprite = gMonIcon_Aphrogene,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 12, SHADOW_SIZE_M)
+        SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Aphrogene)
         OVERWORLD(
             sPicTable_Aphrogene,
@@ -6145,12 +6145,12 @@
             "Even as a bulb it turns to face the\n"
             "water, never the soft voice in the caves\n"
             "that keeps calling back to it."),
-        .pokemonScale = 1249,
-        .pokemonOffset = 22,
+        .pokemonScale = 791,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Narcibulb,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6159,7 +6159,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Narcibulb,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Narcibulb,
@@ -6214,8 +6214,8 @@
             "at its own face. A voice in the caves\n"
             "repeats every word it murmurs. It has\n"
             "never once turned around to look."),
-        .pokemonScale = 358,
-        .pokemonOffset = 7,
+        .pokemonScale = 346,
+        .pokemonOffset = 6,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Narcisheen,
@@ -6236,7 +6236,7 @@
         .iconSprite = gMonIcon_Narcisheen,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 12, SHADOW_SIZE_M)
+        SHADOW(1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Narcisheen)
         OVERWORLD(
             sPicTable_Narcisheen,
@@ -6281,8 +6281,8 @@
             "last words it hears. It lingers in the\n"
             "caves below a certain spring, saying a\n"
             "flower's words back to it, unheard."),
-        .pokemonScale = 303,
-        .pokemonOffset = 3,
+        .pokemonScale = 283,
+        .pokemonOffset = 1,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Echolali,
@@ -6349,12 +6349,12 @@
             "likes. The arrows don't hurt, but those\n"
             "it hits can't stay cross with it, even\n"
             "when it steals their honey."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 791,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Erosie,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6363,7 +6363,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Erosie,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Erosie,
@@ -6371,7 +6371,7 @@
         .iconSprite = gMonIcon_Erosie,
         .iconPalIndex = 0,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-5, 12, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Erosie)
         OVERWORLD(
             sPicTable_Erosie,
@@ -6419,8 +6419,8 @@
             "kindle love, and lead ones make the\n"
             "target flee. It is said its aim started\n"
             "the oldest chase in Aethos."),
-        .pokemonScale = 328,
-        .pokemonOffset = 5,
+        .pokemonScale = 317,
+        .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Himerow,
@@ -6486,12 +6486,12 @@
             "eye. It sits in the sculptors' yards for\n"
             "days, and is said to grow a little warmer\n"
             "each time someone praises it."),
-        .pokemonScale = 1249,
-        .pokemonOffset = 22,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Glyphlet,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6500,7 +6500,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Glyphlet,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Glyphlet,
@@ -6508,7 +6508,7 @@
         .iconSprite = gMonIcon_Glyphlet,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-5, 12, SHADOW_SIZE_S)
+        SHADOW(-3, 12, SHADOW_SIZE_S)
         FOOTPRINT(Glyphlet)
         OVERWORLD(
             sPicTable_Glyphlet,
@@ -6558,7 +6558,7 @@
             "rest of it is still cold stone."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 264,
+        .trainerScale = 268,
         .trainerOffset = 1,
         .frontPic = gMonFrontPic_Kalliglyph,
         .frontPicSize = MON_COORDS_SIZE(40, 64),
@@ -6570,7 +6570,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Kalliglyph,
-        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicSize = MON_COORDS_SIZE(32, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Kalliglyph,
@@ -6625,8 +6625,8 @@
             "say they heard it weeping."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 396,
-        .trainerOffset = 8,
+        .trainerScale = 403,
+        .trainerOffset = 9,
         .frontPic = gMonFrontPic_Asterlorn,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
@@ -6645,7 +6645,7 @@
         .iconSprite = gMonIcon_Asterlorn,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(10, 12, SHADOW_SIZE_L)
+        SHADOW(9, 12, SHADOW_SIZE_L)
         FOOTPRINT(Asterlorn)
         OVERWORLD(
             sPicTable_Asterlorn,
@@ -6691,12 +6691,12 @@
             "the way out. Lost travelers who follow\n"
             "its loose end come home, though the ball\n"
             "grows smaller every time."),
-        .pokemonScale = 952,
-        .pokemonOffset = 20,
+        .pokemonScale = 749,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Mitoclew,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6705,7 +6705,7 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Mitoclew,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Mitoclew,
@@ -6713,7 +6713,7 @@
         .iconSprite = gMonIcon_Mitoclew,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
-        SHADOW(4, 12, SHADOW_SIZE_S)
+        SHADOW(2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Mitoclew)
         OVERWORLD(
             sPicTable_Mitoclew,
@@ -6759,12 +6759,12 @@
             "its wings begins to melt. It always falls,\n"
             "and it always climbs again the next\n"
             "sunny day."),
-        .pokemonScale = 329,
-        .pokemonOffset = 5,
+        .pokemonScale = 295,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Ikaroth,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6773,7 +6773,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Ikaroth,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Ikaroth,
@@ -6827,12 +6827,12 @@
             "its job to heart. It walks laps around\n"
             "anything it is told to guard, three\n"
             "times a day."),
-        .pokemonScale = 983,
-        .pokemonOffset = 20,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kolossette,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6841,7 +6841,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Kolossette,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(32, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kolossette,
@@ -6964,12 +6964,12 @@
             "loud enough to drown any cry. Its noise\n"
             "once hid a crying baby from a king who\n"
             "swallowed his own children."),
-        .pokemonScale = 614,
-        .pokemonOffset = 15,
+        .pokemonScale = 416,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kymbash,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -6978,7 +6978,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Kymbash,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kymbash,
@@ -7100,12 +7100,12 @@
             "in its brow. Sailors who found such\n"
             "skulls on lonely islands told tales of\n"
             "one-eyed giants."),
-        .pokemonScale = 437,
-        .pokemonOffset = 10,
+        .pokemonScale = 312,
+        .pokemonOffset = 3,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Monophant,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7114,7 +7114,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Monophant,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Monophant,
@@ -7122,7 +7122,7 @@
         .iconSprite = gMonIcon_Monophant,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(4, 12, SHADOW_SIZE_M)
+        SHADOW(3, 12, SHADOW_SIZE_M)
         FOOTPRINT(Monophant)
         OVERWORLD(
             sPicTable_Monophant,
@@ -7236,12 +7236,12 @@
             "lightning. Farmers once kept its fossils\n"
             "in their roofs, believing that no bolt\n"
             "would strike the same stone twice."),
-        .pokemonScale = 787,
-        .pokemonOffset = 18,
+        .pokemonScale = 524,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Sepidart,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7250,7 +7250,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Sepidart,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Sepidart,
@@ -7372,12 +7372,12 @@
             "bronze pin-feathers harden. One clash of\n"
             "metal sends a whole brood flapping and\n"
             "shrieking, though none of them can fly."),
-        .pokemonScale = 787,
-        .pokemonOffset = 18,
+        .pokemonScale = 475,
+        .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Chalkip,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7386,7 +7386,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Chalkip,
-        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicSize = MON_COORDS_SIZE(32, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Chalkip,
@@ -7443,7 +7443,7 @@
             "pots together to drive a flock away."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 268,
+        .trainerScale = 273,
         .trainerOffset = 1,
         .frontPic = gMonFrontPic_Belornis,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -7508,12 +7508,12 @@
             "bury it again at once. Left alone, it\n"
             "sprouts into a warrior, and warriors\n"
             "will fight anything, even each other."),
-        .pokemonScale = 983,
-        .pokemonOffset = 20,
+        .pokemonScale = 624,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Sporadon,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7522,7 +7522,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Sporadon,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Sporadon,
@@ -7530,7 +7530,7 @@
         .iconSprite = gMonIcon_Sporadon,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-1, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Sporadon)
         OVERWORLD(
             sPicTable_Sporadon,
@@ -7647,10 +7647,10 @@
             "try to lift it off its feet instead."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 420,
-        .trainerOffset = 9,
+        .trainerScale = 427,
+        .trainerOffset = 10,
         .frontPic = gMonFrontPic_Geogrip,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7659,7 +7659,7 @@
         ),
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Geogrip,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Geogrip,
@@ -7713,12 +7713,12 @@
             "rain. Its eyes seem far older than it,\n"
             "and some at Delphoi whisper that it\n"
             "remembers the world before the flood."),
-        .pokemonScale = 276,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 256,
-        .trainerOffset = 0,
+        .trainerScale = 312,
+        .trainerOffset = 4,
         .frontPic = gMonFrontPic_Pelython,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(48, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7727,7 +7727,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Pelython,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Pelython,
@@ -7850,12 +7850,12 @@
             "on three bronze legs, and pilgrims drop\n"
             "laurel leaves into its fire. It will\n"
             "not burn for anyone it dislikes."),
-        .pokemonScale = 562,
-        .pokemonOffset = 14,
+        .pokemonScale = 392,
+        .pokemonOffset = 8,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Pyrapod,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -7864,7 +7864,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Pyrapod,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Pyrapod,
@@ -7872,7 +7872,7 @@
         .iconSprite = gMonIcon_Pyrapod,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
-        SHADOW(-5, 12, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Pyrapod)
         OVERWORLD(
             sPicTable_Pyrapod,
@@ -7986,12 +7986,12 @@
             "morning. Its wingtips glow like coals,\n"
             "and the spring water steams wherever\n"
             "it has been swimming."),
-        .pokemonScale = 737,
-        .pokemonOffset = 18,
+        .pokemonScale = 487,
+        .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Hymnet,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8000,7 +8000,7 @@
         ),
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         .backPic = gMonBackPic_Hymnet,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Hymnet,
@@ -8008,7 +8008,7 @@
         .iconSprite = gMonIcon_Hymnet,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-4, 12, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Hymnet)
         OVERWORLD(
             sPicTable_Hymnet,
@@ -8055,7 +8055,7 @@
             "burn. It is said it sings most\n"
             "beautifully of all just before it\n"
             "faints, so no Trainer wants to hear it."),
-        .pokemonScale = 262,
+        .pokemonScale = 258,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -8122,12 +8122,12 @@
             "fall. When the beads rub together they\n"
             "spark, so its weeping crackles and\n"
             "flashes all night along the stream."),
-        .pokemonScale = 281,
-        .pokemonOffset = 1,
+        .pokemonScale = 263,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Elektear,
-        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8136,7 +8136,7 @@
         ),
         .frontAnimId = ANIM_GROW_STUTTER,
         .backPic = gMonBackPic_Elektear,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         .palette = gMonPalette_Elektear,
@@ -8144,7 +8144,7 @@
         .iconSprite = gMonIcon_Elektear,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-3, 12, SHADOW_SIZE_M)
+        SHADOW(-4, 12, SHADOW_SIZE_M)
         FOOTPRINT(Elektear)
         OVERWORLD(
             sPicTable_Elektear,
@@ -8190,12 +8190,12 @@
             "twice its size. Shepherds on the Ascent\n"
             "say it is looking for a king worth\n"
             "serving, and has not found one yet."),
-        .pokemonScale = 635,
-        .pokemonOffset = 16,
+        .pokemonScale = 395,
+        .pokemonOffset = 9,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Aetling,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8204,7 +8204,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Aetling,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Aetling,
@@ -8212,7 +8212,7 @@
         .iconSprite = gMonIcon_Aetling,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-2, 12, SHADOW_SIZE_S)
+        SHADOW(0, 12, SHADOW_SIZE_S)
         FOOTPRINT(Aetling)
         OVERWORLD(
             sPicTable_Aetling,
@@ -8327,12 +8327,12 @@
             "refused to melt. In a snowfall, a\n"
             "careful eye can pick it out by the\n"
             "sleepy face at its center."),
-        .pokemonScale = 1311,
-        .pokemonOffset = 22,
+        .pokemonScale = 791,
+        .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Niflake,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8341,7 +8341,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Niflake,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Niflake,
@@ -8349,7 +8349,7 @@
         .iconSprite = gMonIcon_Niflake,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-8, 12, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Niflake)
         OVERWORLD(
             sPicTable_Niflake,
@@ -8396,7 +8396,7 @@
             "settles. Where it walks, the air turns\n"
             "still and cold, and travelers say they\n"
             "hear a soft voice in the snowfall."),
-        .pokemonScale = 262,
+        .pokemonScale = 258,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -8410,7 +8410,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH_BOTH_ENDS,
         .backPic = gMonBackPic_Chionyad,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Chionyad,
@@ -8418,7 +8418,7 @@
         .iconSprite = gMonIcon_Chionyad,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-2, 12, SHADOW_SIZE_M)
+        SHADOW(-3, 12, SHADOW_SIZE_M)
         FOOTPRINT(Chionyad)
         OVERWORLD(
             sPicTable_Chionyad,
@@ -8463,12 +8463,12 @@
             "frost forms on everything nearby. When\n"
             "it runs out of breath, it shrinks to\n"
             "the size of a sigh and drifts away."),
-        .pokemonScale = 718,
-        .pokemonOffset = 17,
+        .pokemonScale = 453,
+        .pokemonOffset = 11,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Kryopuff,
-        .frontPicSize = MON_COORDS_SIZE(64, 48),
+        .frontPicSize = MON_COORDS_SIZE(40, 32),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8477,7 +8477,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Kryopuff,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(48, 40),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Kryopuff,
@@ -8485,7 +8485,7 @@
         .iconSprite = gMonIcon_Kryopuff,
         .iconPalIndex = 0,
         .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
-        SHADOW(-8, 12, SHADOW_SIZE_S)
+        SHADOW(-4, 12, SHADOW_SIZE_S)
         FOOTPRINT(Kryopuff)
         OVERWORLD(
             sPicTable_Kryopuff,
@@ -8600,12 +8600,12 @@
             "will not melt even in a fire. Miners in\n"
             "the ice caves say it is ice that froze\n"
             "so hard it forgot how to thaw."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 447,
+        .pokemonOffset = 11,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Pagoshard,
-        .frontPicSize = MON_COORDS_SIZE(40, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8614,7 +8614,7 @@
         ),
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         .backPic = gMonBackPic_Pagoshard,
-        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicSize = MON_COORDS_SIZE(32, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Pagoshard,
@@ -8739,8 +8739,8 @@
             "no one has ever seen it smile."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 330,
-        .trainerOffset = 5,
+        .trainerScale = 335,
+        .trainerOffset = 6,
         .frontPic = gMonFrontPic_Dakrock,
         .frontPicSize = MON_COORDS_SIZE(48, 64),
         .frontPicYOffset = 1,
@@ -8759,7 +8759,7 @@
         .iconSprite = gMonIcon_Dakrock,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 12, SHADOW_SIZE_L)
+        SHADOW(-1, 12, SHADOW_SIZE_L)
         FOOTPRINT(Dakrock)
         OVERWORLD(
             sPicTable_Dakrock,
@@ -8806,8 +8806,8 @@
             "sound like thunder and waves torches as\n"
             "lightning. Somehow the real lightning\n"
             "always finds it, and it never learns."),
-        .pokemonScale = 358,
-        .pokemonOffset = 7,
+        .pokemonScale = 324,
+        .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lebetron,
@@ -8874,8 +8874,8 @@
             "At the top it slips and rolls back down.\n"
             "It only grins and starts again. It\n"
             "once tied up Death with a chain, they say."),
-        .pokemonScale = 281,
-        .pokemonOffset = 1,
+        .pokemonScale = 263,
+        .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Bouldyphus,
@@ -8942,12 +8942,12 @@
             "a thin song all night. It is said to be\n"
             "mourning a girl who was carried down into\n"
             "the earth, long ago."),
-        .pokemonScale = 787,
-        .pokemonOffset = 18,
+        .pokemonScale = 524,
+        .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Elegull,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -8956,7 +8956,7 @@
         ),
         .frontAnimId = ANIM_H_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Elegull,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         .palette = gMonPalette_Elegull,
@@ -8964,7 +8964,7 @@
         .iconSprite = gMonIcon_Elegull,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(18, 12, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Elegull)
         OVERWORLD(
             sPicTable_Elegull,
@@ -9011,8 +9011,8 @@
             "rocks with smiles on their faces. Wise\n"
             "captains stop their crews' ears with wax\n"
             "and have themselves tied to the mast."),
-        .pokemonScale = 303,
-        .pokemonOffset = 3,
+        .pokemonScale = 293,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Seirenade,
@@ -9080,10 +9080,10 @@
             "cold and breathless for a whole year."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 264,
-        .trainerOffset = 1,
+        .trainerScale = 277,
+        .trainerOffset = 2,
         .frontPic = gMonFrontPic_Stygiad,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9092,7 +9092,7 @@
         ),
         .frontAnimId = ANIM_SHRINK_GROW,
         .backPic = gMonBackPic_Stygiad,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         .palette = gMonPalette_Stygiad,
@@ -9148,7 +9148,7 @@
             "and lose six sailors rather than all."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 624,
+        .trainerScale = 635,
         .trainerOffset = 14,
         .frontPic = gMonFrontPic_Hexylla,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -9216,7 +9216,7 @@
             "into reach of Hexylla's six heads."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 792,
+        .trainerScale = 805,
         .trainerOffset = 16,
         .frontPic = gMonFrontPic_Trybdis,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -9236,7 +9236,7 @@
         .iconSprite = gMonIcon_Trybdis,
         .iconPalIndex = 4,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-4, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
+        SHADOW(-2, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Trybdis)
         OVERWORLD(
             sPicTable_Trybdis,
@@ -9285,10 +9285,10 @@
             "tires, and it must tell you your future."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 269,
-        .trainerOffset = 1,
+        .trainerScale = 279,
+        .trainerOffset = 2,
         .frontPic = gMonFrontPic_Haligeron,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9339,7 +9339,7 @@
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
         .abilities = { ABILITY_STAKEOUT, ABILITY_KEEN_EYE, ABILITY_MINDS_EYE },
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Nostail"),
         .cryId = CRY_BOLTUND,
         .natDexNum = NATIONAL_DEX_NOSTAIL,
@@ -9351,12 +9351,12 @@
             "one who sailed away. It knows them in\n"
             "any disguise. When they come home, it\n"
             "wags its tail once, and at last it rests."),
-        .pokemonScale = 382,
-        .pokemonOffset = 8,
+        .pokemonScale = 354,
+        .pokemonOffset = 6,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nostail,
-        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9365,7 +9365,7 @@
         ),
         .frontAnimId = ANIM_GROW_VIBRATE,
         .backPic = gMonBackPic_Nostail,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Nostail,
@@ -9373,7 +9373,7 @@
         .iconSprite = gMonIcon_Nostail,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-22, 12, SHADOW_SIZE_M)
+        SHADOW(-21, 12, SHADOW_SIZE_M)
         FOOTPRINT(Nostail)
         OVERWORLD(
             sPicTable_Nostail,
@@ -9422,8 +9422,8 @@
             "The apples it guards never run out."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 528,
-        .trainerOffset = 12,
+        .trainerScale = 537,
+        .trainerOffset = 13,
         .frontPic = gMonFrontPic_Melodrakon,
         .frontPicSize = MON_COORDS_SIZE(56, 64),
         .frontPicYOffset = 1,
@@ -9442,7 +9442,7 @@
         .iconSprite = gMonIcon_Melodrakon,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(2, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
+        SHADOW(1, 12, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Melodrakon)
         OVERWORLD(
             sPicTable_Melodrakon,
@@ -9488,12 +9488,12 @@
             "reeds of a still lake. Its one head bites\n"
             "anything that moves. Two lumps on its\n"
             "neck are heads that have not woken yet."),
-        .pokemonScale = 656,
-        .pokemonOffset = 16,
+        .pokemonScale = 416,
+        .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lernip,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9502,7 +9502,7 @@
         ),
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .backPic = gMonBackPic_Lernip,
-        .backPicSize = MON_COORDS_SIZE(48, 64),
+        .backPicSize = MON_COORDS_SIZE(40, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Lernip,
@@ -9510,7 +9510,7 @@
         .iconSprite = gMonIcon_Lernip,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-6, 12, SHADOW_SIZE_S)
+        SHADOW(-2, 12, SHADOW_SIZE_S)
         FOOTPRINT(Lernip)
         OVERWORLD(
             sPicTable_Lernip,
@@ -9559,10 +9559,10 @@
             "birds will not nest anywhere near it."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 314,
-        .trainerOffset = 4,
+        .trainerScale = 353,
+        .trainerOffset = 7,
         .frontPic = gMonFrontPic_Trilerna,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicSize = MON_COORDS_SIZE(56, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9693,12 +9693,12 @@
             "begins. It is said that a baby who laughs\n"
             "in its sleep has felt that thread tug.\n"
             "For ages its wings were chained."),
-        .pokemonScale = 437,
-        .pokemonOffset = 10,
+        .pokemonScale = 291,
+        .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Nemira,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(40, 48),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9707,7 +9707,7 @@
         ),
         .frontAnimId = ANIM_GROW_IN_STAGES,
         .backPic = gMonBackPic_Nemira,
-        .backPicSize = MON_COORDS_SIZE(56, 64),
+        .backPicSize = MON_COORDS_SIZE(48, 48),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
         .palette = gMonPalette_Nemira,
@@ -9716,7 +9716,7 @@
         .iconPalIndex = 0,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         .enemyMonElevation = 8,
-        SHADOW(5, 12, SHADOW_SIZE_M)
+        SHADOW(0, 12, SHADOW_SIZE_M)
         FOOTPRINT(Nemira)
         OVERWORLD(
             sPicTable_Nemira,
@@ -9765,12 +9765,12 @@
             "and sets how long that life will run. It\n"
             "has never given anyone more than their\n"
             "share, and never one breath less."),
-        .pokemonScale = 393,
-        .pokemonOffset = 8,
+        .pokemonScale = 331,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lotira,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 1,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -9779,7 +9779,7 @@
         ),
         .frontAnimId = ANIM_GROW_IN_STAGES,
         .backPic = gMonBackPic_Lotira,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 56),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
         .palette = gMonPalette_Lotira,
@@ -9836,7 +9836,7 @@
             "every life, and nothing can turn them\n"
             "aside. It does not hate the living. It\n"
             "only keeps the promise its sisters made."),
-        .pokemonScale = 437,
+        .pokemonScale = 423,
         .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
@@ -9859,7 +9859,7 @@
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         .enemyMonElevation = 8,
-        SHADOW(5, 12, SHADOW_SIZE_M)
+        SHADOW(6, 12, SHADOW_SIZE_M)
         FOOTPRINT(Thanira)
         OVERWORLD(
             sPicTable_Thanira,
@@ -10049,7 +10049,7 @@
             "a cold spring wells up."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 363,
+        .trainerScale = 369,
         .trainerOffset = 7,
         .frontPic = gMonFrontPic_Pegaunos,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -10340,7 +10340,7 @@
         ),
         .frontAnimId = ANIM_GLOW_ORANGE,
         .backPic = gMonBackPic_Ichorin,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
         .palette = gMonPalette_Ichorin,

@@ -20,7 +20,7 @@ The prompts that produce the concepts are in `design/dex/CONCEPT_PROMPTS.md` and
 export DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM PATH="$HOME/.local/bin:/opt/homebrew/bin:$PATH"
 PY=/usr/bin/python3            # has Pillow and numpy
 REVIEW=build/concept_review    # review images; not committed
-git fetch origin && git merge --ff-only origin/main   # start from the latest main
+git fetch origin && git merge --ff-only origin/zach-main   # start from our branch (never main)
 ```
 
 ## 1. Ingest the folder
@@ -37,7 +37,7 @@ $PY tools/ichor/art/mon_from_concept.py ingest "<folder>"
   - the background is flat
   - the subject fits the 64×64 frame at the concept's own scale
 - It files fronts as `tools/ichor/art/concepts/mon/<name>.png` and backs as `<name>_back.png`. Its last line lists the species ingested; use that list below.
-- **Report every `SKIPPED` line to the user.** Each means a regenerate: wrong number, busy background, or a subject too big for the frame. Never shrink a concept to make it fit; that's what loses detail.
+- **Report every `SKIPPED` line to the user.** Each means a regenerate: wrong number, busy background, or a subject too big for the frame. Don't squeeze a concept to make it fit; regenerate it. The size ladder's one deliberate reduction is the only resize a concept gets.
 - A file flagged "not on a 64-grid" is still usable, but expect more hand-fixing.
 - Work **one evolution line at a time**, so a line's stages land together.
 
@@ -64,7 +64,7 @@ Look at every card and `sheet.png` yourself, at 1× and zoomed. A sprite passes 
   - Limbs have gaps between them.
   - No blobs.
 - **Cleanliness:** no single-pixel noise in flat areas, no outline breaks, no halo.
-- **Size:** it fills its stage's size (STYLE.md §3.1), and evolutions grow from stage to stage.
+- **Size:** it sits on the size ladder (STYLE.md §3.1, `ladder_size` in `mon_from_concept.py`): basics small, finals filling the frame, birds smaller, each evolution about 1.7× the area of the last.
 - **Shiny:** matches the species' `shiny:` line in its dex file.
 - **Back:**
   - With a back concept: it shows the same colors and features from behind.
@@ -73,7 +73,7 @@ Look at every card and `sheet.png` yourself, at 1× and zoomed. A sprite passes 
 **Fixing:** add entries to the species in `species.json`, then rebuild the previews and look again.
 - `"fixes": [[x, y, [r, g, b]], ...]` sets pixels, using the grid's coordinates. A color snaps to the nearest palette entry; `null` clears the pixel.
 - `"pivot"` sets the row that frame 2 bends at, as a fraction of the height. Use 0.4–0.55.
-- `"fit"` sets the size, but only for concepts that aren't on the grid.
+- `"size"` overrides the species' ladder size (largest dimension in px). Use it rarely, with a `"note"`. `"fit"` only matters for concepts that aren't on a grid.
 - Add a `"note"` saying why each fix exists.
 - Repeat until every card passes. **If a concept can't pass without redrawing large areas, stop and ask the user for a new concept** rather than painting one in.
 
@@ -107,7 +107,7 @@ make -j$(sysctl -n hw.ncpu) && tools/ichor/smoke_test.sh
   - `aethos_families.h`
 
   Use the format from `CLAUDE.md`, e.g. `feat(art): build the <line> line from its approved concepts`, and give the reason in the body.
-- `git fetch origin && git rebase origin/main`, rebuild with `make` and `smoke_test.sh` if anything came in, then `git push origin main`.
+- `git fetch origin && git rebase origin/zach-main`, rebuild with `make` and `smoke_test.sh` if anything came in, then `git push origin HEAD:zach-main`. Never push to main; merging into main is the user's call.
 - Package a playtest ROM for the user:
 
   ```bash
@@ -125,6 +125,6 @@ Send the user `$REVIEW/sheet.png` and a battle screenshot. Tell them:
 ## Rules
 
 - **Concepts are the artistic source of truth.** Never paint a species from scratch here, and never fall back to the old ASCII painter (`tools/dex/sprites/build.py`). It now skips any species with a concept, and `check_elaia.py` checks those against this builder instead.
-- **Never shrink a concept to fit.** Ask for a regenerate.
+- **Never squeeze a concept to fit.** Ask for a regenerate. The size ladder's single reduction to the species' size is the exception.
 - **Don't edit shared icon palettes** (`graphics/pokemon/icon_palettes/`) or another species' files.
 - **Never commit** ROMs, saves, or the `build/` review images.
