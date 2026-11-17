@@ -237,6 +237,22 @@
 #define TRAINER_ICHOR_OPORA                  496
 #define TRAINER_ICHOR_PEGAIOS                497
 #define TRAINER_ICHOR_DEXITHEA               498
+// Lakonia (ids 410-424): Gytheion, Route 25 and the town
+#define TRAINER_ICHOR_GIGAS_GRATION             410
+#define TRAINER_ICHOR_IAPETOS_LAKONIA           411
+#define TRAINER_ICHOR_KLEON_LAKONIA_NEBREL      412
+#define TRAINER_ICHOR_KLEON_LAKONIA_KYNDER      413
+#define TRAINER_ICHOR_KLEON_LAKONIA_HIPLING     414
+#define TRAINER_ICHOR_TITANBORN_KACHLEX         415
+#define TRAINER_ICHOR_TITANBORN_PLINTHOS        416
+#define TRAINER_ICHOR_AGIATIS                   417
+#define TRAINER_ICHOR_TELEKLOS                  418
+#define TRAINER_ICHOR_ISADAS                    419
+#define TRAINER_ICHOR_PHOIBIDAS                 420
+#define TRAINER_ICHOR_ALPHEIOS                  421
+#define TRAINER_ICHOR_THEODORA                  422
+#define TRAINER_ICHOR_AMOMPHARETOS              423
+#define TRAINER_ICHOR_EUTHYMIA                  424
 #define TRAINERS_END_ACT3 499
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's

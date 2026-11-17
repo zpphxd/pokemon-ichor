@@ -1852,7 +1852,7 @@
     {
       "id": "LAYOUT_GYTHEION",
       "name": "Gytheion_Layout",
-      "width": 40,
+      "width": 34,
       "height": 30,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Gytheion",
@@ -1863,8 +1863,8 @@
     {
       "id": "LAYOUT_ROUTE25_EUROTAS",
       "name": "Route25_Eurotas_Layout",
-      "width": 40,
-      "height": 30,
+      "width": 28,
+      "height": 50,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Eurotas",
       "border_filepath": "data/layouts/Route25_Eurotas/border.bin",
@@ -1874,8 +1874,8 @@
     {
       "id": "LAYOUT_LAKONIA",
       "name": "Lakonia_Layout",
-      "width": 40,
-      "height": 30,
+      "width": 52,
+      "height": 42,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Lakonia",
       "border_filepath": "data/layouts/Lakonia/border.bin",

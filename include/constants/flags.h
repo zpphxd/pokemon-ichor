@@ -2208,6 +2208,29 @@
 #define FLAG_ICHOR_DELIVERED_FIG_CAKE           (FLAG_ICHOR_GENERAL2_START + 0x501) // Ichor: Lakonia: Teleklos ate the fig cake
 #define FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI        (FLAG_ICHOR_GENERAL2_START + 0x502) // Ichor: Lakonia: Polyboia's Heat Rock
 #define FLAG_ICHOR_READ_SCYTALE                 (FLAG_ICHOR_GENERAL2_START + 0x503) // Ichor: Lakonia: read Gylippos's strap on Othryades's staff (Route 27)
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_1 (FLAG_ICHOR_GENERAL2_START + 0x504) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDE_ALETHEA_GYTHEION        (FLAG_ICHOR_GENERAL2_START + 0x505) // Ichor: Lakonia: hides Alethea on Gytheion's quay after III-5B
+#define FLAG_ICHOR_HIDE_ROUTE25_HESTIA          (FLAG_ICHOR_GENERAL2_START + 0x506) // Ichor: Lakonia: hides the woman at the roofless farmhouse (E2)
+#define FLAG_ICHOR_ITEM_GYTHEION_NET_BALL       (FLAG_ICHOR_GENERAL2_START + 0x507) // Ichor: Lakonia: Gytheion beach item
+#define FLAG_ICHOR_ITEM_ROUTE25_MEADOW          (FLAG_ICHOR_GENERAL2_START + 0x508) // Ichor: Lakonia: Route 25 item
+#define FLAG_ICHOR_ITEM_ROUTE25_FARM            (FLAG_ICHOR_GENERAL2_START + 0x509) // Ichor: Lakonia: Route 25 item
+#define FLAG_ICHOR_ITEM_ROUTE25_WEST            (FLAG_ICHOR_GENERAL2_START + 0x50A) // Ichor: Lakonia: Route 25 item
+#define FLAG_ICHOR_ITEM_ROUTE25_FIELD           (FLAG_ICHOR_GENERAL2_START + 0x50B) // Ichor: Lakonia: Route 25 item
+#define FLAG_ICHOR_ITEM_ROUTE25_AMYKLAI         (FLAG_ICHOR_GENERAL2_START + 0x50C) // Ichor: Lakonia: Route 25 item
+#define FLAG_ICHOR_ITEM_LAKONIA_MENELAION       (FLAG_ICHOR_GENERAL2_START + 0x50D) // Ichor: Lakonia: the Menelaion item
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_2 (FLAG_ICHOR_GENERAL2_START + 0x50E) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_3 (FLAG_ICHOR_GENERAL2_START + 0x50F) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_4 (FLAG_ICHOR_GENERAL2_START + 0x510) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_THEATER (FLAG_ICHOR_GENERAL2_START + 0x511) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_KRANAI  (FLAG_ICHOR_GENERAL2_START + 0x512) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_THRONE   (FLAG_ICHOR_GENERAL2_START + 0x513) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_FORD     (FLAG_ICHOR_GENERAL2_START + 0x514) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_MEADOW   (FLAG_ICHOR_GENERAL2_START + 0x515) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_TERRACE  (FLAG_ICHOR_GENERAL2_START + 0x516) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_SCREE    (FLAG_ICHOR_GENERAL2_START + 0x517) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_MENELAION (FLAG_ICHOR_GENERAL2_START + 0x518) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_AGOGE    (FLAG_ICHOR_GENERAL2_START + 0x519) // Ichor: Lakonia: hidden item
+#define FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_BRIDGE   (FLAG_ICHOR_GENERAL2_START + 0x51A) // Ichor: Lakonia: hidden item
 #define FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION      (FLAG_ICHOR_GENERAL2_START + 0x520) // Ichor: Lakonia: Porphyris's King's Rock for three Shoal Shells (Gytheion dye-works)
 #define FLAG_ICHOR_TRADED_KYNOKETOS             (FLAG_ICHOR_GENERAL2_START + 0x521) // Ichor: Lakonia: traded a Karkitox for Lysandros's Kynoketos MALEA
 #define FLAG_ICHOR_GOT_SHINY_STONE_KRANAI       (FLAG_ICHOR_GENERAL2_START + 0x522) // Ichor: Lakonia: Klymene's Shiny Stone, after the climax (Kranai)
