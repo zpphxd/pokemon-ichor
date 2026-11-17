@@ -13,12 +13,12 @@
 // you're already over the count there, you've lost; else it sets
 // FLAG_ICHOR_KLYMENE_RACE_TURNED. Coming back in through her door runs the finish
 // (ON_FRAME). Steps onto a warp or a trigger tile aren't counted, so the count runs about
-// two short of the true walk; the counts below are SCRIPT.md's and should be tuned on the
-// built town (the best route is meant to be 38, the lamp-tree and pasture route 52).
+// two short of the true walk.
 // The counter wraps at 128, so a race abandoned and finished 128 or more steps later could
 // read short; the turn's check keeps that to a return leg of ninety-odd steps or more.
 //
-// The race's own step counts: 50 on Mortal (DIFFICULTY_EASY), 44 on Hero, 40 on Spartan.
+// The race's own step counts, tuned on main's built town (the shortest door-to-stair-and-back
+// walk is 78 steps): 100 on Mortal (DIFFICULTY_EASY), 88 on Hero, 82 on Spartan.
 // ICHOR_STUB_DIG: Klymene's Atalanta potsherd lines read amphora #9's four sherd flags,
 // taken as FLAG_ICHOR_SHERDS_START + 32..35 (#n at +4(n-1)); confirm when digs land.
 // ICHOR_STUB_MUSIC: Arkadia's own cue.
@@ -108,11 +108,11 @@ script Arkadia_KlymeneHouse_EventScript_AskRace {
 script Arkadia_KlymeneHouse_EventScript_RaceLimit {
     getdifficulty(VAR_RESULT)
     if (var(VAR_RESULT) == DIFFICULTY_EASY) {
-        setvar(VAR_RESULT, 50)
+        setvar(VAR_RESULT, 100)
     } elif (var(VAR_RESULT) == DIFFICULTY_HARD) {
-        setvar(VAR_RESULT, 40)
+        setvar(VAR_RESULT, 82)
     } else {
-        setvar(VAR_RESULT, 44)
+        setvar(VAR_RESULT, 88)
     }
     return
 }
