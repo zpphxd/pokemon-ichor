@@ -120,8 +120,8 @@
       "x": 33,
       "y": 12,
       "elevation": 0,
-      "dest_map": "MAP_THE_LOOM",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_DELPHOI_OMPHALOS_STAIR",
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [

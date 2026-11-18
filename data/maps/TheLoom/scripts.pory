@@ -15,6 +15,8 @@ mapscripts TheLoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         // The Lord of Time and the Harpe stand only inside the scene (addobject).
         setflag(FLAG_ICHOR_HIDE_FROZEN_ONLY)
+        // Delphoi's chapter held the night from III-7 on; the climax lets it go.
+        special(Ichor_ReleaseTimeOfDay)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ICHOR_ACT3, 14: TheLoom_EventScript_TheLoom

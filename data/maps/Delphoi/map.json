@@ -471,6 +471,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_IchorTownHermSign",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_KLEON_FREE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_FREE",
+      "x": 23,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Climax_EventScript_DelphoiKleonTalk",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI"
     }
   ],
   "warp_events": [
@@ -624,6 +638,78 @@
       "var": "VAR_TEMP_4",
       "var_value": "1",
       "script": "Delphoi_EventScript_OmphalosNight"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_ICHOR_ACT3",
+      "var_value": "15",
+      "script": "Climax_EventScript_DelphoiKleonWakes"
     }
   ],
   "bg_events": [

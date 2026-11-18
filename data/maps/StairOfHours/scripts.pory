@@ -39,12 +39,8 @@ script StairOfHours_EventScript_SetObjects {
     setflag(FLAG_ICHOR_HIDE_STAIR_RIVALS)
     setflag(FLAG_ICHOR_HIDE_STAIR_HYPERION)
     setflag(FLAG_ICHOR_HIDE_STAIR_LORD)
-    setflag(FLAG_ICHOR_HIDE_KLEON_FROZEN)
     if (var(VAR_ICHOR_ACT3) >= 18) {
         return
-    }
-    if (var(VAR_ICHOR_ACT3) == 15) {
-        clearflag(FLAG_ICHOR_HIDE_KLEON_FROZEN)
     }
     if (var(VAR_ICHOR_ACT3) == 16) {
         clearflag(FLAG_ICHOR_HIDE_STAIR_KLEON)
@@ -79,70 +75,6 @@ script StairOfHours_EventScript_Unfreeze {
     setvar(VAR_0x8004, LOCALID_STAIR_KLEON_CLIMB)
     special(Ichor_UnfreezeObject)
     return
-}
-
-// ---------------------------------------------------------------------------
-// III-10G (stand-in). Kleon wakes. In the story he wakes at Delphoi's gate, mid-swing,
-// beside his mother; until Delphoi's court is built he stands frozen at the foot of
-// the Stair, where every road of the Frozen Hour comes back to.
-// ---------------------------------------------------------------------------
-
-script StairOfHours_EventScript_KleonFrozen {
-    if (!flag(FLAG_ICHOR_ROUSED_CUTTER) || !flag(FLAG_ICHOR_ROUSED_MEASURER)
-        || !flag(FLAG_ICHOR_ROUSED_SPINNER) || !flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
-        msgbox(format("Kleon's mouth is open on a shout."), MSGBOX_SIGN)
-        end
-    }
-    goto(StairOfHours_EventScript_KleonWakes)
-}
-
-script StairOfHours_EventScript_KleonWakesTrigger {
-    if (!flag(FLAG_ICHOR_ROUSED_CUTTER) || !flag(FLAG_ICHOR_ROUSED_MEASURER)
-        || !flag(FLAG_ICHOR_ROUSED_SPINNER) || !flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
-        end
-    }
-    goto(StairOfHours_EventScript_KleonWakes)
-}
-
-script StairOfHours_EventScript_KleonWakes {
-    lockall
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
-    waitmovement(0)
-    // A crack, like ice. Color runs into Kleon from his fist, then everywhere.
-    playse(SE_ICE_CRACK)
-    setvar(VAR_0x8004, LOCALID_STAIR_KLEON_FROZEN)
-    special(Ichor_UnfreezeObject)
-    delay(24)
-    setobjectmovementtype(LOCALID_STAIR_KLEON_FROZEN, MOVEMENT_TYPE_FACE_LEFT)
-    applymovement(LOCALID_STAIR_KLEON_FROZEN, Common_Movement_FaceLeft)
-    waitmovement(0)
-    setspeaker(Climax_Name_Kleon)
-    msgbox(format("-ow. OW. What-\p"
-                  "Why's everyone… why is everything gray?\p"
-                  "I heard you. Walking. Everything else stopped, and I could hear you walking.\p"
-                  "I had a thread. I could feel it. Like a leash. Stopped tight.\p"
-                  "I pulled. It hurt. I pulled anyway."))
-    closemessage
-    // He opens his fist. A short gray thread lies across his palm, snapped.
-    playse(SE_PIN)
-    setspeaker(SP_NAME_NONE)
-    msgbox(format("A short gray thread lies across his palm, snapped."))
-    setspeaker(Climax_Name_Kleon)
-    msgbox(format("…I think I broke it.\p"
-                  "So I'm like you now. No prophecy. Nothing written.\p"
-                  "I'll die when I die. Huh.\p"
-                  "That's either the worst thing that's ever happened to me, or the best."))
-    msgbox(format("She was standing in front of me. When it stopped. Arms out, like a wall.\p"
-                  "…Mother.\p"
-                  "Right. Where's the fight? Up there? Good. Let's go up."))
-    closemessage
-    applymovement(LOCALID_STAIR_KLEON_FROZEN, StairOfHours_Movement_KleonRunsUp)
-    waitmovement(0)
-    removeobject(LOCALID_STAIR_KLEON_FROZEN)
-    setflag(FLAG_ICHOR_HIDE_KLEON_FROZEN)
-    setflag(FLAG_ICHOR_KLEON_WOKE)
-    setvar(VAR_ICHOR_ACT3, 16)
-    releaseall
 }
 
 // ---------------------------------------------------------------------------
@@ -215,7 +147,7 @@ script StairOfHours_EventScript_Down {
         end
     }
     playse(SE_EXIT)
-    warp(MAP_THE_LOOM, 2, 12)
+    warp(MAP_DELPHOI, 21, 16)
     waitstate
     releaseall
 }
@@ -644,7 +576,7 @@ script StairOfHours_EventScript_Chimes {
     playse(SE_M_MORNING_SUN)
     fadescreenspeed(FADE_TO_WHITE, 1)
     fadescreenspeed(FADE_FROM_WHITE, 1)
-    fadeoutbgm(1)
+    special(StopMapMusic)
     setspeaker(SP_NAME_NONE)
     msgbox(format("You have it by the forelock."))
     closemessage
@@ -703,7 +635,6 @@ script StairOfHours_EventScript_Chimes {
     goto(Climax_EventScript_Dawn)
 }
 
-movement StairOfHours_Movement_KleonRunsUp { walk_fast_left walk_fast_up * 6 }
 movement StairOfHours_Movement_KleonAhead { walk_up * 2 walk_right walk_up * 6 }
 movement StairOfHours_Movement_StepDown { walk_down }
 movement StairOfHours_Movement_CameraSky { walk_up * 4 }

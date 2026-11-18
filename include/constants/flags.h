@@ -2676,6 +2676,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_OMPHALOS_STAIR_1 (FLAG_ICHOR_GENERAL2_START + 0x589) // Ichor: Omphalos stair: hidden item in the first niche
 #define FLAG_ICHOR_HIDDEN_ITEM_OMPHALOS_STAIR_2 (FLAG_ICHOR_GENERAL2_START + 0x58A) // Ichor: Omphalos stair: hidden item on the lower landing
 #define FLAG_ICHOR_ITEM_OMPHALOS_STAIR          (FLAG_ICHOR_GENERAL2_START + 0x58B) // Ichor: Omphalos stair: Hyperion's dropped pack
+#define FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI      (FLAG_ICHOR_GENERAL2_START + 0x5B3) // Ichor: hides Kleon, awake and in color, at Delphoi's gate (III-10G)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

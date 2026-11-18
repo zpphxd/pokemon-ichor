@@ -68,6 +68,18 @@ ADD = {
                 "FLAG_ICHOR_HIDE_FATE_MEASURER"),
         ],
     },
+    # III-10G: Kleon, awake and in color, where he stood mid-swing in the court's
+    # gate; the wake runs as you pass him (any tile round the gate)
+    "Delphoi": {
+        "objects": [
+            obj("LOCALID_DELPHOI_KLEON_FREE", "OBJ_EVENT_GFX_ICHOR_KLEON_FREE", 23, 18,
+                "Climax_EventScript_DelphoiKleonTalk", "MOVEMENT_TYPE_FACE_DOWN",
+                "FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI"),
+        ],
+        "coords": [coord(x, y, "Climax_EventScript_DelphoiKleonWakes", "VAR_ICHOR_ACT3", 15)
+                   for (x, y) in ((21, 18), (22, 18), (24, 18), (25, 18), (23, 19), (24, 19),
+                                  (21, 16), (22, 16))],
+    },
     # III-10E: Lykophron's desk in the Stoa, the unfinished decree under his hand
     "Astyra_Stoa": {
         "bgs": [sign(21, 12, "Astyra_Stoa_EventScript_UnfinishedDecree")],

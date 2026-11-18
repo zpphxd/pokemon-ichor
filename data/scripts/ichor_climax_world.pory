@@ -355,13 +355,10 @@ script Climax_EventScript_HomeHearth {
 // III-12. Dawn, and Elpis's line
 // ===========================================================================
 
-// After the twelfth chime the screen is white. III-12A (Delphoi at dawn: Mom, Hyperion
-// turning to the sun, Rhea's wrists, Phaedon asking to be taken to her) belongs on
-// Delphoi's court; until that map is built, the light carries straight on to
-// Astyra, and the state III-12A sets is set here.
+// After the twelfth chime the screen is white, and the light carries the player to
+// the top of the Omphalos stair at dawn (III-12A, ichor_climax_delphoi.pory).
 script Climax_EventScript_Dawn {
-    setflag(FLAG_ICHOR_RHEA_SURRENDERED)
-    warpsilent(MAP_ASTYRA_PHAEDONS_HOUSE, 9, 12)
+    warpsilent(MAP_DELPHOI, 21, 13)
     waitstate
     releaseall
 }
@@ -398,7 +395,7 @@ script Astyra_PhaedonsHouse_EventScript_ElpisLine {
     setspeaker(Climax_Name_Elpis)
     msgbox(format("Then my thread isn't finished yet."))
     closemessage
-    fadeoutbgm(1)
+    special(StopMapMusic)
     delay(120)
     applymovement(LOCALID_PHAEDONS_HOUSE_PHAEDON_DAWN, Common_Movement_FaceDown)
     waitmovement(0)

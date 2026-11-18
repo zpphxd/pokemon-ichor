@@ -28,8 +28,9 @@
     .align 2
     .endm
 
-@ The state Delphoi's chapter hands over (III-8): eight Laurels, the Omphalos open
-@ (VAR_ICHOR_ACT3 14), and the player coming down the Omphalos stair into the Loom.
+@ The state Delphoi's chapter hands over (III-8): eight Laurels, Melitta's Honey and
+@ Elpis's sealed tablet in the bag, the Omphalos open (VAR_ICHOR_ACT3 14), the night
+@ held, and the player at the top of the Omphalos stair (3,2), as delphoi.sh ends.
 @ Kynder was the starter, so Kleon fights beside you with Seismare.
     test_header Climax_SetupHeader, Climax_Setup
 Climax_Setup:
@@ -50,10 +51,19 @@ Climax_Setup:
     setflag FLAG_ICHOR_MET_PHAEDON
     setflag FLAG_ICHOR_PHAEDON_DAPHNE_VISIT
     setflag FLAG_ICHOR_ASTYRA_OSTRACISM_DONE
+    setflag FLAG_ICHOR_OMPHALOS_NIGHT
+    setflag FLAG_ICHOR_OMPHALOS_OPEN
+    setflag FLAG_ICHOR_VISITED_DELPHOI
+    setflag FLAG_ICHOR_DELPHOI_ARRIVED
+    setflag FLAG_ICHOR_MOM_SPRING
+    additem ITEM_MELITTAS_HONEY
+    additem ITEM_SEALED_TABLET
     setvar VAR_STARTER_MON, 1
     setvar VAR_ICHOR_ACT3, 14
     setvar VAR_REPEL_STEP_COUNT, 999
-    warp MAP_THE_LOOM, 0
+    setvar VAR_0x8004, TIME_NIGHT
+    special Ichor_HoldTimeOfDay
+    warp MAP_DELPHOI_OMPHALOS_STAIR, 3, 2
     waitstate
     releaseall
     end
@@ -76,6 +86,16 @@ Climax_Setup:
     fly_header Climax_ToPhaedonsHouse, MAP_ASTYRA_PHAEDONS_HOUSE, 0
     fly_header Climax_ToElaia, MAP_ELAIA_VILLAGE, 1
     fly_header Climax_ToHome, MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F, 0
+
+@ Delphoi's court, below the gate where Kleon stands frozen mid-swing.
+    test_header Climax_ToDelphoiHeader, Climax_ToDelphoi
+Climax_ToDelphoi:
+    lockall
+    setvar VAR_TEMP_F, 1
+    warp MAP_DELPHOI, 23, 21
+    waitstate
+    releaseall
+    end
 
 @ Back to the Loom's west end, at the foot of the Stair's lowest flight.
     test_header Climax_ToLoomWestHeader, Climax_ToLoomWest

@@ -138,8 +138,8 @@ def build_loom(render):
           local_id="LOCALID_LOOM_HARPE")
     # the way up (the Omphalos stair) and, after the cut, the Stair of Hours' foot
     m.trigger(33, 12, P + "LeaveUp")
-    # warp 0: where the Omphalos stair comes down (Delphoi's chapter warps here)
-    m.warp(33, 12, "MAP_THE_LOOM", 0)
+    # warp 0: where the Omphalos stair comes down (Delphoi_OmphalosStair's warp 2 and 3)
+    m.warp(33, 12, "MAP_DELPHOI_OMPHALOS_STAIR", 2)
     m.trigger(1, 11, P + "StairFoot")
     m.trigger(2, 11, P + "StairFoot")
     m.forced_open |= {(1, 11), (2, 11), (2, 12)}
@@ -197,9 +197,6 @@ def build_stair(render):
     m.obj("ICHOR_KLEON_FREE", 14, 15, P + "KleonTop", "MOVEMENT_TYPE_FACE_UP", "FLAG_ICHOR_HIDE_STAIR_KLEON_TOP",
           local_id="LOCALID_STAIR_KLEON")
     # the twelfth landing
-    # Kleon frozen mid-swing: the stand-in for Delphoi's gate until its court lands
-    m.obj("ICHOR_KLEON", 7, 106, P + "KleonFrozen", "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN",
-          "FLAG_ICHOR_HIDE_KLEON_FROZEN", local_id="LOCALID_STAIR_KLEON_FROZEN")
     m.obj("ICHOR_PHAEDON", 12, 14, P + "Phaedon", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_HIDE_STAIR_RIVALS",
           local_id="LOCALID_STAIR_PHAEDON")
     m.obj("ICHOR_HYPERION", 13, 13, P + "Hyperion", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_HIDE_STAIR_HYPERION",
@@ -218,7 +215,6 @@ def build_stair(render):
     # the Lord of Time's shadow, the painted line where the Moment runs
     for x in (5, 6, 7):
         m.trigger(x, 109, P + "Down")
-    m.trigger(6, 107, P + "KleonWakesTrigger", var="VAR_ICHOR_ACT3", value=15)
     x0, x1, t, face = L[2]
     for x in (13, 14, 15):
         m.trigger(x, t + 3, P + "KleonLine", var="VAR_ICHOR_ACT3", value=16)

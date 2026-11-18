@@ -219,20 +219,6 @@
       "flag": "FLAG_ICHOR_HIDE_STAIR_KLEON_TOP"
     },
     {
-      "local_id": "LOCALID_STAIR_KLEON_FROZEN",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
-      "x": 7,
-      "y": 106,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "StairOfHours_EventScript_KleonFrozen",
-      "flag": "FLAG_ICHOR_HIDE_KLEON_FROZEN"
-    },
-    {
       "local_id": "LOCALID_STAIR_PHAEDON",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PHAEDON",
       "x": 12,
@@ -376,15 +362,6 @@
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "StairOfHours_EventScript_Down"
-    },
-    {
-      "type": "trigger",
-      "x": 6,
-      "y": 107,
-      "elevation": 3,
-      "var": "VAR_ICHOR_ACT3",
-      "var_value": "15",
-      "script": "StairOfHours_EventScript_KleonWakesTrigger"
     },
     {
       "type": "trigger",

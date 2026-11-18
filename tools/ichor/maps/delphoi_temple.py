@@ -159,7 +159,7 @@ def events(m):
 # ==========================================================================
 
 STAIR = "Delphoi_OmphalosStair"
-LOOM = ("MAP_DELPHOI_OMPHALOS_STAIR", 0)     # -> ("MAP_THE_LOOM", 0) once III-9's map exists
+LOOM = ("MAP_THE_LOOM", 0)     # the Loom's east door (tools/ichor/maps/climax.py)
 
 
 def build_stair():
