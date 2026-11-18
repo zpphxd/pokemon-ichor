@@ -319,8 +319,13 @@ L.start(function()
              "a real Rhea whiteout keeps the uprooted olive but does not award raid completion")
     leave()
     L.useWarp(S.MAP_AKROPOLIS)
-    L.goTrigger(L.triggers("Astyra_Akropolis_EventScript_Rhea"))
-    L.settle()
+    -- a step script on the climb (the Repel running out, its count set by how long the
+    -- Sacred Way's roads are) can take the walk over first: play it out and walk on
+    for _ = 1, 3 do
+        L.goTrigger(L.triggers("Astyra_Akropolis_EventScript_Rhea"))
+        L.settle()
+        if L.mapId() ~= S.MAP_AKROPOLIS then break end
+    end
     L.expect(L.getFlag(S.FLAG_OLIVE) and L.getFlag(S.FLAG_RAID) and L.mapId() == S.MAP_CLINIC,
              "Rhea's battle, escape with the second fragment and olive aftermath reach Phaedon")
     L.expect(L.getFlag(S.FLAG_RECOVERY) and emu:read8(L.ichor() + S.OFF_HELD_TIME) == 0,

@@ -4450,6 +4450,170 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Astyra approach teams. */
 
+/* Sacred Way teams (tools/ichor/maps/sacredway.py). */
+
+=== TRAINER_ICHOR_R15_KERKOPS ===
+Name: KERKOPS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Gelasable
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R15_SIMMIAS ===
+Name: SIMMIAS
+Class: Sculptor
+Pic: Sculptor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R15_THEOXENOS ===
+Name: THEOXENOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Melisseer
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Thyrsivy
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R15_LAMPON ===
+Name: LAMPON
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykanax
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Harpelle
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Persenyx
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R15_KALLIDIKE ===
+Name: KALLIDIKE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Korantha
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R16_EXEKIAS ===
+Name: EXEKIAS
+Class: Potter
+Pic: Potter
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R16_SPEUSIPPOS ===
+Name: SPEUSIPPOS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Sophowl
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R16_MENEXENOS ===
+Name: MENEXENOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Nemeleon
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R16_STRATON ===
+Name: STRATON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Nemeleon
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Ophidrop
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 38
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Sacred Way teams. */
+
 /* Akropolis raid teams. */
 
 === TRAINER_ICHOR_AKROPOLIS_LITHOS ===

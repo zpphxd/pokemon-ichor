@@ -137,12 +137,12 @@
     {
       "id": "HEAL_LOCATION_DAPHNI",
       "map": "MAP_DAPHNI",
-      "x": 18,
-      "y": 12,
+      "x": 16,
+      "y": 23,
       "respawn_map": "MAP_DAPHNI",
       "respawn_npc": "LOCALID_DAPHNI_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "respawn_x": 16,
+      "respawn_y": 23
     },
     {
       "id": "HEAL_LOCATION_ASTYRA",
@@ -157,14 +157,14 @@
     {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_15",
       "map": "MAP_ROUTE15_MYSTERY_ROAD",
-      "x": 27,
-      "y": 9
+      "x": 48,
+      "y": 5
     },
     {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_16",
       "map": "MAP_ROUTE16_CAPITAL_PASS",
-      "x": 27,
-      "y": 9
+      "x": 57,
+      "y": 10
     },
     {
       "id": "HEAL_LOCATION_KALDERA",

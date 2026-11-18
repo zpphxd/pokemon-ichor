@@ -56,7 +56,7 @@ TOWNS = [
     ("StyxFalls",         (15, 12),  (16, 12),  (15, 13),  "the north pass, from Route 11"),
     ("Arkadia",           (21, 3),   (20, 3),   (22, 3),   "the north road, from Route 12"),
     ("Nemea",             (2, 16),   (1, 16),   (2, 17),   "the west road, from Route 13"),
-    ("Daphni",            (2, 9),    (3, 9),    (2, 10),   "the west road, from Route 15"),
+    ("Daphni",            (4, 15),   (5, 15),   (4, 16),   "the west road, from Route 15"),
     ("Astyra",            (4, 32),   (5, 32),   (4, 33),   "the west gate, from Route 16"),
     ("Kaldera",           (17, 33),  (16, 33),  (17, 34),  "the landing, from the ferry"),
     ("KytheraSkandeia",   (29, 11),  (28, 12),  (28, 11),  "the harbor, from the ferry"),
