@@ -28,6 +28,9 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
 - Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere (SYSTEMS §4 and §1 need updating).
 
+### The road north from Lakonia: Route 26, Lake Stymphalia, Route 27
+- Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
+
 ### Wild Pokémon distribution pass
 - **Problem found:** Act II adds only 10 new species; Galenyon, Cairnolith, Pebblith, Kerazap, Gelasable and Galekit fill 40–57 maps each; about 18 regular lines can't be caught wild in the story (Chalkip, Elegull, Elektear, Erosie, Hymnet, Kalliglyph, Kerdovix, Skylaps, Sepidart, Sporadon, Ophidrop, Pagoshard, Lebetron, Bouldyphus, Enigmaw, Aetling and more); Nebrel, a starter, is wild on Routes 7–9.
 - **Plan:** a species-by-area table first, then apply it: one or two signature species per area, Act II gets its own new species, each evolution line gets a catch point before its evolution level, the filler thins out, starters leave the wild, rares go to night, fishing, rock smash and hidden spots.
