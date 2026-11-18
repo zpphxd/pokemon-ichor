@@ -181,6 +181,8 @@ K(OFF_SB1_VARS, offsetof(struct SaveBlock1, vars))
 K(VARS_START, VARS_START)
 K(OFF_SB2_OPTIONS, offsetof(struct SaveBlock2, optionsButtonMode) + 1) // the options bitfield follows
 K(OFF_SB1_BAG, offsetof(struct SaveBlock1, bag))
+K(OFF_SB1_PC_ITEMS, offsetof(struct SaveBlock1, pcItems))
+K(PC_ITEMS_COUNT, PC_ITEMS_COUNT)
 K(OFF_SB2_ENCRYPTION_KEY, offsetof(struct SaveBlock2, encryptionKey))
 K(BAG_SLOTS, sizeof(struct Bag) / sizeof(struct ItemSlot))
 K(ITEM_SLOT_SIZE, sizeof(struct ItemSlot))

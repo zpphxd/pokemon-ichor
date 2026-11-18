@@ -12,9 +12,11 @@ gText_PutItemInPocket::
 gText_PlayerFoundOneItem::
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
+@ Ichor: only when the Pithos is full as well (additem and checkitemspace
+@ overflow to it), or for a key item, whose pocket holds every one in the game.
 gText_TooBadBagIsFull::
-	.string "Too bad!\n"
-	.string "The Bag is full…$"
+	.string "Too bad! Your Bag and your\n"
+	.string "Pithos are both full…$"
 
 gText_PlayerPutItemInBag::
 	.string "{PLAYER} tucked the {STR_VAR_2}\n"

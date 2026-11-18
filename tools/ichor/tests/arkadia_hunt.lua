@@ -82,7 +82,9 @@ local function fullScrollPocket()
         emu:write16(slot, S.ITEM_OTHER_SCROLL)
         emu:write16(slot + 2, 1 ~ key)
     end
+    local restorePithos = L.fillPithos()   -- or the scroll would go to the Pithos
     return function()
+        restorePithos()
         local live = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_SCROLLS
         local liveKey = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
         for i = 0, S.BAG_SCROLL_COUNT - 1 do

@@ -1157,11 +1157,11 @@ static void BuyMenuTryMakePurchase(u8 taskId)
 
     if (sMartInfo.martType == MART_TYPE_NORMAL)
     {
-        if (AddBagItem(tItemId, tItemCount) == TRUE)
+        if (Ichor_AddBagOrPithosItem(tItemId, tItemCount) == TRUE) // Ichor: overflows to the Pithos
         {
             GetSetItemObtained(tItemId, FLAG_SET_ITEM_OBTAINED);
             RecordItemPurchase(taskId);
-            BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
+            BuyMenuDisplayMessage(taskId, gIchorItemWentToPithos ? gText_IchorBoughtToPithos : gText_HereYouGoThankYou, BuyMenuSubtractMoney);
         }
         else
         {

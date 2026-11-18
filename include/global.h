@@ -1116,9 +1116,10 @@ struct SaveBlock1
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
+    // Ichor: the Pithos's stored things fill what were the old 50 PC slots and
+    // the old 186-slot Bag; the Bag itself moved to the end of this block.
+    // Ichor_MigrateBagLayout (src/item.c) converts saves made before the move.
     /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
-    /*0x560 -> 0x848 is bag storage*/
-    /*0x560*/ struct Bag bag;
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
     /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
@@ -1213,6 +1214,12 @@ struct SaveBlock1
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
     struct DaycareMon route5DayCareMon;
 #endif
+    // Ichor: the Bag, last, in the room freed by Mystery Gift, the Enigma Berry
+    // and the Mystery Event script (include/config/save.h).
+    struct Bag bag;
+    // Ichor: ICHOR_BAG_LAYOUT_MAGIC once the Bag lives here. It sits past the old
+    // block's end, which old saves wrote as zeros (include/item.h).
+    u32 ichorBagLayout;
     // sizeof: 0x3???
 };
 

@@ -403,6 +403,21 @@ local function hephaisteion()
   shot("hephaisteion_05_room_lit.png")
 end
 
+-- A full Bag's prize goes to the Pithos (src/item.c), so the "no room" path
+-- needs the Pithos full too. Returns a function that puts it back.
+local function fillPithos()
+  local base, saved = sb1() + S.OFF_SB1_PC_ITEMS, {}
+  for i = 0, S.PC_ITEMS_COUNT - 1 do
+    saved[i] = emu:read32(base + i * S.ITEM_SLOT_SIZE)
+    emu:write16(base + i * S.ITEM_SLOT_SIZE, S.ITEM_HONEY)
+    emu:write16(base + i * S.ITEM_SLOT_SIZE + S.OFF_ITEM_SLOT_QUANTITY, 999)
+  end
+  return function()
+    local live = sb1() + S.OFF_SB1_PC_ITEMS
+    for i = 0, S.PC_ITEMS_COUNT - 1 do emu:write32(live + i * S.ITEM_SLOT_SIZE, saved[i]) end
+  end
+end
+
 local function tavern()
   warpInto({}, S.MAP_TAVERN)
   shot("tavern_01_room.png")
@@ -423,6 +438,7 @@ local function tavern()
         emu:write16(slot, S.ITEM_TM17)
         emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, S.MAX_BAG_ITEM_CAPACITY ~ encryptionKey)
       end
+      local restorePithos = fillPithos()   -- or the scroll would go to the Pithos
       local attempts = 0
       while not getFlag(S.FLAG_MYRTALE_PRIZE_PENDING) do
         attempts = attempts + 1
@@ -434,6 +450,7 @@ local function tavern()
       expect(not getFlag(flag) and itemCount(item) == 0,
              "Myrtale saves the owed scroll but does not award a missing prize")
       for i = 0, S.BAG_TMHM_COUNT * S.ITEM_SLOT_SIZE - 1 do emu:write8(bag + i, saved[i]) end
+      restorePithos()
       expect(itemCount(item) == before, "the TM pocket is restored before collecting the owed prize")
     end
     if item == S.ITEM_OLIVE_OIL then
@@ -446,6 +463,7 @@ local function tavern()
         emu:write16(slot, item)
         emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, (S.MAX_BAG_ITEM_CAPACITY - (i == 0 and 1 or 0)) ~ encryptionKey)
       end
+      local restorePithos = fillPithos()   -- or the Oil would go to the Pithos
       local fullCount = itemCount(item)
       local function fullBagMessage()
         local text = S.EmporionCity_Tavern_EventScript_Strepsiades_Text_2
@@ -465,6 +483,7 @@ local function tavern()
       expect(not getFlag(flag) and itemCount(item) == fullCount,
              "a won match with one Oil space grants no partial prize or reward flag")
       for i = 0, S.BAG_ITEMS_COUNT * S.ITEM_SLOT_SIZE - 1 do emu:write8(bag + i, saved[i]) end
+      restorePithos()
       expect(itemCount(item) == before, "the player's Bag is restored before retrying the prize")
     end
     local tries = 0

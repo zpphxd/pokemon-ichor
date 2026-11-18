@@ -69,7 +69,9 @@ local function fillPocket()
     emu:write16(slot, S.ITEM_HONEY)
     emu:write16(slot + 2, S.MAX_BAG_ITEM_CAPACITY ~ key)
   end
+  local restorePithos = L.fillPithos()   -- or the reward would go to the Pithos
   return function()
+    restorePithos()
     pocket = L.sb1() + S.OFF_SB1_BAG
     key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
     for i = 0, S.BAG_ITEMS_COUNT - 1 do

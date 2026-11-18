@@ -5,6 +5,7 @@
 #include "ichor_omen.h"
 #include "ichor_oath.h"
 #include "ichor_save.h"
+#include "item.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 
@@ -52,6 +53,7 @@ void Ichor_InitSave(void)
 // `reserved`.
 void Ichor_OnSaveLoaded(void)
 {
+    Ichor_MigrateBagLayout(); // SaveBlock1's Bag moved and grew; its own marker says when (src/item.c)
     if (gIchorSave.version == 0)
     {
         SetDefaults();

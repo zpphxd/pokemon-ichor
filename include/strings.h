@@ -652,6 +652,9 @@ extern const u8 gText_InBagVar1[];
 extern const u8 gText_Var1AndYouWantedVar2[];
 extern const u8 gText_HereYouGoThankYou[];
 extern const u8 gText_NoMoreRoomForThis[];
+extern const u8 gText_IchorItemWentToPithos[]; // Ichor
+extern const u8 gText_IchorBoughtToPithos[];   // Ichor
+extern const u8 gText_PutItemInPocket[];       // data/text/obtain_item.inc
 extern const u8 gText_ThankYouIllSendItHome[];
 extern const u8 gText_ThanksIllSendItHome[];
 extern const u8 gText_SpaceForVar1Full[];

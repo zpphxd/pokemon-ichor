@@ -121,6 +121,29 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 **Check:** `tools/ichor/tests/ichor_save.sh`.
 
+### The Bag and the Pithos (never full)
+
+The player is never refused an item. The engine edit is in `src/item.c` (`Ichor_AddBagOrPithosItem`, `Ichor_CheckBagOrPithosHasSpace`), `src/scrcmd.c` and `src/shop.c`.
+
+| Pocket | Slots | Was |
+|---|---|---|
+| Items | 254 | 30 |
+| Key Items | 80 | 30 |
+| Poké Balls | 40 | 16 |
+| TMs (scrolls) | 64 | 64 |
+| Berries | 80 | 46 |
+| The Pithos's stored things (`PC_ITEMS_COUNT`) | 236 | 50 |
+
+A stack holds 999. 254 is the most a pocket can have, because the bag menu counts slots in a u8.
+
+- **Overflow.** `additem`, `giveitem`, `finditem`, hidden items and shop purchases put an item in the Bag. If it doesn't fit, they put it in the Pithos's stored things. `checkitemspace` counts both. When an item overflows, the obtain, find and hidden-item scripts say "Your Bag was full, so the X went to your Pithos." in place of the pocket line (`special Ichor_BufferPutAwayText`). The shop says it in place of "Here you go!". `gIchorItemWentToPithos` is set by the last add.
+- **Key items never overflow.** Relic flags (`Ichor_OnItemAdded`) and quest `checkitem`s look in the Bag. The Key Items pocket has room for every key item the game defines. The Battle Pyramid's bag doesn't overflow either.
+- **Refusal.** A script's "bag is full" branch now runs only when the Bag and the Pithos are both full. `gText_TooBadBagIsFull` says so. A gift script should still keep its `if (var(VAR_RESULT) == FALSE)` branch, so nothing is lost in that case.
+- **`checkitem` looks only in the Bag.** A quest that wants an item the player might have overflowed should use a key item, or check the Pithos too (`CheckPCHasItem`).
+- **Save layout.** The Bag moved to the end of SaveBlock1, into the room freed by `FREE_MYSTERY_GIFT`, `FREE_ENIGMA_BERRY` and `FREE_MYSTERY_EVENT_BUFFERS` (all three features are cut). The Pithos's slots fill what were the old PC slots and the old Bag (0x498–0x848). `SaveBlock1.ichorBagLayout` holds `ICHOR_BAG_LAYOUT_MAGIC` on new-layout saves. It sits past the old block's end, which old saves stored as zeros. As a save loads, `Ichor_MigrateBagLayout` converts any save without the magic: it moves the dex flags and the record-mixing-to-Walda block down, copies the old pockets into the new ones, keeps the 50 old PC slots, and sets the magic. `STATIC_ASSERT`s in `src/item.c` pin the offsets it relies on. 44 bytes of SaveBlock1 remain free.
+
+**Checks:** `tools/ichor/tests/bag_overflow.sh` covers a full pocket with an item ball, a gift, a hidden item and the shop, and the case where both are full. `tools/ichor/tests/bag_save_compat.sh OLD_ROM [REAL_SAVE]` has a pre-change ROM make a save, then checks that the new ROM migrates it and keeps it through a save. With REAL_SAVE it does the same for a copy of a real save.
+
 ---
 
 ## Status of the rest of this file

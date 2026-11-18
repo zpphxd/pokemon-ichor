@@ -55,7 +55,7 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 | Badge, in the Oikoumene | Emblem | EMBLEMS | `oikoumene/PERIODOS.md` §1 (decision PG-34). The Greek *emblēma* is a picture set into something, like the inlaid panel of a mosaic floor: each champion's Emblem is set into its land's panel of Alethea's chart. Capitalized when named ("the Scarab Emblem"), lower case otherwise. EMBLEMS is 42 px, the same as LAURELS. The ten names are below. |
 | PC / Pokémon Storage System | the Pithos | PITHOS | PITCH §1. The great storage jar. |
 | Box (in the PC) | Jar | JAR | **Flag.** The Pithos holds jars; the storage art is being redrawn as jars (INVENTORY §5). New games name them JAR1 to JAR14. |
-| Item storage in the PC | your stored things | ITEM STORAGE | Shared by the Pithos and the kibotos (the wooden chest at home), so the wording names neither. |
+| Item storage in the PC | your stored things | ITEM STORAGE | Shared by the Pithos and the kibotos (the wooden chest at home), so the wording names neither. One exception: when the Bag overflows, the line says where the item went: "Your Bag was full, so the Oil went to your Pithos." (ENGINE_API §1). |
 | Pokédex | Pokédex | POKéDEX | SCRIPT beat 3: "It's a Pokédex." The art is a codex. |
 | DexNav | the Augur's Eye | AUGURY | PITCH §5 and SCRIPT beat 5. The start menu has 48 px for a label and "AUGUR'S EYE" needs 60, so the menu reads AUGURY, the augur's craft. **Flag:** the alternative is widening the start menu two tiles, which is an engine edit. |
 | Trainer Card | Trainer Card | TRAINER CARD | **Flag.** The art becomes a kylix (ART_PLAN §5), but "Kylix" alone doesn't tell a player what it is. Kept until the director decides. |

@@ -209,6 +209,7 @@ void NewGameInitData(void)
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
+    gSaveBlock1Ptr->ichorBagLayout = ICHOR_BAG_LAYOUT_MAGIC; // Ichor: the big Bag (src/item.c)
     NewGameInitPCItems();
     ClearPokeblocks();
     ClearDecorationInventories();

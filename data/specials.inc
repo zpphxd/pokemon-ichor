@@ -1162,3 +1162,5 @@ gSpecials::
 	def_special Ichor_TraceBeam
 	@ Ichor: the Nursery of Nysa's yard on Route 7 (src/ichor_nursery.c)
 	def_special Ichor_SetNurseryYardMons
+	@ Ichor: the put-away line, or the Pithos line when the Bag overflowed (src/item.c)
+	def_special Ichor_BufferPutAwayText
