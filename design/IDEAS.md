@@ -41,6 +41,15 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Then:** the user plays the whole game themselves (user, 2026-11-18) and reports where it's too easy or slow; balance changes come from their notes.
 - **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
 
+## Queued next (user, 2026-11-18)
+
+### Labyrinth identity pass
+- Rings I–IV read as the same grey brick with red markers. Give each ring its own colour and fresco motif per LABYRINTH_MAZE §2 (bulls, dolphins, lilies, griffins, octopus and argonauts, double axes, stars), with floor and wall variants and one big landmark per screen.
+- The treasure cellars are plain boxes; make each a small treasure room worth the climb (Minoan pithoi, gilded frescoes, an altar, a fallen explorer's cache).
+
+### The awe pass
+- Build from design/AWE_PASS.md's top 10 (colossi, grand temples, city improvements, the ruins kit) once the user picks.
+
 ## Done
 
 ### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
