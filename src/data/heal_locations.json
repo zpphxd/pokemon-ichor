@@ -221,6 +221,22 @@
       "map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
       "x": 5,
       "y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_DELPHOI",
+      "map": "MAP_DELPHOI",
+      "x": 32,
+      "y": 37,
+      "respawn_map": "MAP_DELPHOI_ASCLEPEION",
+      "respawn_npc": "LOCALID_DELPHOI_HEALER",
+      "respawn_x": 5,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_28",
+      "map": "MAP_ROUTE28_KASTALIAN_GORGE",
+      "x": 11,
+      "y": 16
     }
   ]
 }

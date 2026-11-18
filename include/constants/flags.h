@@ -2488,6 +2488,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x584) // Ichor: Delphoi: hidden item (delphoi_stardust)
 #define FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_BRONZE_OBOL (FLAG_ICHOR_GENERAL2_START + 0x585) // Ichor: Delphoi: hidden item (delphoi_bronze_obol)
 #define FLAG_ICHOR_HIDDEN_ITEM_APOLLO_HEAL_POWDER (FLAG_ICHOR_GENERAL2_START + 0x586) // Ichor: Delphoi: hidden item (apollo_heal_powder)
+#define FLAG_ICHOR_HIDE_OCHTHOS_DELPHOI         (FLAG_ICHOR_GENERAL2_START + 0x587) // Ichor: Delphoi: hide Ochthos and his mother in the Asclepeion (until the climax)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

@@ -1399,6 +1399,7 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_MINOAN_PRIESTESS] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
+    },
     // Ichor: Delphoi's stand-ins; the bespoke portraits remain an art gate.
     [TRAINER_PIC_MELISSA] =
     {

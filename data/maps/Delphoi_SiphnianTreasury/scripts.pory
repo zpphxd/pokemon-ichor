@@ -1,1 +1,62 @@
+// The treasury of the Siphnians, Delphoi (design/phase4/SCRIPT.md Part 2): the
+// richest building on the Sacred Way and now the emptiest. Pay the god the tenth
+// the Siphnians never did: give Eupolis a Nugget for Choice Specs. The room is
+// delphoi_rooms.py's.
+
 mapscripts Delphoi_SiphnianTreasury_MapScripts {}
+
+text Siphnos_Text_NameEupolis { "EUPOLIS" }
+
+script Delphoi_SiphnianTreasury_EventScript_Eupolis {
+    lock
+    faceplayer
+    setspeaker(Siphnos_Text_NameEupolis)
+    if (flag(FLAG_ICHOR_SIPHNIAN_TITHE)) {
+        msgbox(format("The god has his tenth. I sleep better. Two hundred years better."))
+        release
+        end
+    }
+    msgbox(format("Siphnos had gold mines. The god said: a tenth to me, every year.\p"
+                  "One year we sent him a gilded rock instead. That one. On the chest.\p"
+                  "The sea came into the mines that winter. All of them. Gone.\p"
+                  "So now I keep a treasury with nothing in it, and I apologize."))
+    checkitem(ITEM_NUGGET)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("If you ever find a Nugget, the god's still owed one."))
+        release
+        end
+    }
+    msgbox(format("Would you pay our tenth? One Nugget. I'd give you something back."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("No. Of course. Nobody likes paying for someone else's rock."))
+        release
+        end
+    }
+    removeitem(ITEM_NUGGET)
+    msgbox(format("Into the chest. There. The god has his tenth. Two hundred years late.\p"
+                  "Take these. Lenses from our last good year.\pFor seeing clearly."))
+    giveitem(ITEM_CHOICE_SPECS)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_SIPHNIAN_TITHE)
+    } else {
+        additem(ITEM_NUGGET)
+    }
+    release
+}
+
+// the frieze
+script Delphoi_SiphnianTreasury_EventScript_Thing1 {
+    if (flag(FLAG_ICHOR_OMPHALOS_OPEN)) {
+        msgbox(format("Gods fighting Giants, all the way round.\p"
+                      "The Giant with the arrow in his eye. He looks like someone you've met."), MSGBOX_SIGN)
+        end
+    }
+    msgbox(format("Gods fighting Giants, all the way round.\pA brother and sister with bows, side by side.\p"
+                  "One Giant has an arrow in his left eye. He's still coming."), MSGBOX_SIGN)
+}
+
+// the gilded rock
+script Delphoi_SiphnianTreasury_EventScript_Thing2 {
+    msgbox(format("A heavy chest with a padlock. On it, a gilded egg-shaped rock.\p"
+                  "The gilt is flaking. Underneath, it's just a rock."), MSGBOX_SIGN)
+}

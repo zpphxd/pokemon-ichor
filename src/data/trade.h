@@ -1417,6 +1417,25 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_APHRELL,
     },
+    // Ichor: Koretas's goat bleats in verse and has never once been right. Aix
+    // wants a bee for the thyme meadow (phase4 SCRIPT.md Part 2, Koretas's house).
+    [INGAME_TRADE_ICHOR_PROPHET] =
+    {
+        .nickname = _("PROPHET"),
+        .species = SPECIES_KERAZAP,
+        .ivs = {20, 22, 18, 16, 18, 24},
+        .abilityNum = 2,
+        .otId = 51770,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x7A31,
+        .heldItem = ITEM_THUNDER_STONE,
+        .mailNum = -1,
+        .otName = _("AIX"),
+        .otGender = FEMALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_MELIBEE,
+        .level = 50,
+    },
 };
 
 static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =

@@ -478,12 +478,21 @@ def props_kirrha(g):
     g.piece("niches", 21, 11)                          # Apollo Delphinios's rock shrine
     g.set(22, 14, TRIPOD_TOP, True, "altar")
     g.set(22, 15, TRIPOD_BASE, True, "altar")
+    # Delphoi's chapter: the road east onto Route 28, the Sacred Olives (rows 9-11
+    # meet the Olives' 15-17; tools/ichor/maps/delphoi_olives.py). aethos only.
+    for x in range(23, 28):
+        for y in (9, 10, 11):
+            g.set(x, y, 0x1D9, False, "road")
+    for x in range(25, 28):
+        g.set(x, 8, 0x0E0, True, "rock")
+        g.set(x, 12, 0x0E0, True, "rock")
 
 
 def spec_kirrha():
     s = Spec(KIRRHA)
     s.header = {"music": "MUS_ICHOR_AKTI", "map_type": "MAP_TYPE_TOWN"}
-    s.connections = [{"direction": "up", "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS", "offset": 0}]
+    s.connections = [{"direction": "up", "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS", "offset": 0},
+                     {"direction": "right", "map": "MAP_ROUTE28_SACRED_OLIVES", "offset": -6}]
     s.mapscripts = '''mapscripts Kirrha_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_KIRRHA)

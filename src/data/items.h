@@ -7674,14 +7674,6 @@ const struct ItemInfo gItemsInfo[] =
             "Iapetos's draft of\n"
             "Kleon's prophecy,\n"
             "scraped, rewritten."),
-    [ITEM_MELITTAS_HONEY] =
-    {
-        .name = ITEM_NAME("Melitta's Honey"),
-        .price = 0,
-        .description = COMPOUND_STRING(
-            "The last Delphoi\n"
-            "honey. The label\n"
-            "says NOT FOR YOU."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -7703,6 +7695,20 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_Letter,
         .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+    },
+
+    [ITEM_MELITTAS_HONEY] =
+    {
+        .name = ITEM_NAME("Melitta's Honey"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "The last Delphoi\n"
+            "honey. The label\n"
+            "says NOT FOR YOU."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_Honey,
         .iconPalette = gItemIconPalette_Honey,
     },

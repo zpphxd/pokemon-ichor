@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/parnassos/porytiles_bin/metatile_attributes.bin": "4939e3638ce9beb068f6d07a232958c5",
-  "data/tilesets/secondary/parnassos/porytiles_bin/metatiles.bin": "37eedc88035c1fa775ca05866293d206",
+  "data/tilesets/secondary/parnassos/porytiles_bin/metatile_attributes.bin": "81344ffdf15db0eec72779ec2a6ccdd4",
+  "data/tilesets/secondary/parnassos/porytiles_bin/metatiles.bin": "ba7d536ef6b38002bc71343b27e8bbbb",
   "data/tilesets/secondary/parnassos/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/parnassos/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/parnassos/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/parnassos/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/parnassos/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/parnassos/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/parnassos/porytiles_bin/tiles.png": "71132776d915aba2094c9c1f203a1699",
-  "data/tilesets/secondary/parnassos/porytiles_src/attributes.csv": "db3f235df980260eaa79e0ba3553cada",
-  "data/tilesets/secondary/parnassos/porytiles_src/bottom.png": "0cf5902d925b12203ef53cd711f18855",
-  "data/tilesets/secondary/parnassos/porytiles_src/middle.png": "5f54a2523e2b803c5acf6626779341f6",
-  "data/tilesets/secondary/parnassos/porytiles_src/top.png": "609aa00e8d25eef97e75271166af8974"
+  "data/tilesets/secondary/parnassos/porytiles_bin/tiles.png": "a561feb052c50f42c569d852aa8a26f7",
+  "data/tilesets/secondary/parnassos/porytiles_src/attributes.csv": "4a00c5542907d7dd8a087a0726cfd2a1",
+  "data/tilesets/secondary/parnassos/porytiles_src/bottom.png": "966687a6771cc1c2452d1d1889b068e9",
+  "data/tilesets/secondary/parnassos/porytiles_src/middle.png": "15fabc03a47c2b4cbe9143fc357afc2a",
+  "data/tilesets/secondary/parnassos/porytiles_src/top.png": "ff85255e2d614fcd3c04d50b2602c87d"
 }

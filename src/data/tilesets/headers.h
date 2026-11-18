@@ -1044,7 +1044,10 @@ const struct Tileset gTileset_Daidaleion =
     .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
     .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
-// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py).
+    .callback = NULL,
+};
+
+// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py, tools/ichor/maps/delphoi_rooms.py).
 const struct Tileset gTileset_Delphoi =
 {
     .isCompressed = TRUE,
@@ -1078,7 +1081,6 @@ const struct Tileset gTileset_TempleApollo =
     .callback = NULL,
 };
 
-
 const struct Tileset gTileset_OikiaDelphoi =
 {
     .isCompressed = TRUE,
@@ -1089,3 +1091,4 @@ const struct Tileset gTileset_OikiaDelphoi =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaDelphoi,
     .callback = NULL,
 };
+

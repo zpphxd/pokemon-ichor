@@ -1381,6 +1381,38 @@ def ground_kit():
     return finish(s)
 
 
+def rapids():
+    """The Kastalian's white water between the pools: too fast to swim, too loud
+    to fish; solid (walk code X, no water behavior). A west bank, a middle and an
+    east bank, two of each so the foam doesn't line up."""
+    s = S("rapids", "White water: the Kastalian's rapids (solid)", 6, 1, walk=["XXXXXX"],
+          ground=["nnnnnn"], names={"W": (0, 0), "M": (1, 0), "E": (2, 0), "W2": (3, 0), "M2": (4, 0),
+                                    "E2": (5, 0)})
+    B = s.B
+    for i in range(6):
+        ox = i * 16
+        for y in range(16):
+            for x in range(16):
+                ph = (y * 2 + x + i * 5) % 9
+                c = "b1" if ph < 4 else "wr" if ph < 6 else "wa3" if ph < 8 else "b3"
+                if (y + x // 3 + i) % 7 == 0:
+                    c = "w0"
+                B.px(ox + x, y, c)
+        if i % 3 == 0:          # the west bank: wet stone
+            for y in range(16):
+                w = 3 + (y * 7 + i) % 3
+                for x in range(w):
+                    B.px(ox + x, y, "m3" if x < w - 1 else "ink")
+                B.px(ox + w, y, "w0")
+        if i % 3 == 2:          # the east bank
+            for y in range(16):
+                w = 3 + (y * 5 + i) % 3
+                for x in range(16 - w, 16):
+                    B.px(ox + x, y, "m4" if x > 16 - w else "ink")
+                B.px(ox + 15 - w, y, "w0")
+    return finish(s)
+
+
 def bushes():
     """Maquis that fills the gaps in a wood: a mastic bush and a young laurel,
     one cell each, solid."""
@@ -1414,7 +1446,7 @@ def build():
 
 def build_parnassos():
     """Route 28: the Sacred Olives and the Kastalian Gorge."""
-    land = [cliff_kit(), cliff_scree(), pezoula_kit(), ground_kit(), bushes()] + rocks()
+    land = [cliff_kit(), cliff_scree(), pezoula_kit(), ground_kit(), bushes(), rapids()] + rocks()
     trees = laurels() + [oldest_olive()]
     camp = tents() + [hut()]
     return _sections([("land", land), ("trees", trees), ("camp", camp)])

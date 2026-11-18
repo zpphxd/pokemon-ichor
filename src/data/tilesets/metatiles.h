@@ -274,18 +274,13 @@ const u16 gMetatileAttributes_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/t
 // Ichor: daidaleion
 const u16 gMetatiles_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatile_attributes.bin");
-// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py).
+
+// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py, tools/ichor/maps/delphoi_rooms.py).
 const u16 gMetatiles_PorytilesManaged_Delphoi[] = INCBIN_U16("data/tilesets/secondary/delphoi/porytiles_bin/metatiles.bin");
-
 const u16 gMetatileAttributes_PorytilesManaged_Delphoi[] = INCBIN_U16("data/tilesets/secondary/delphoi/porytiles_bin/metatile_attributes.bin");
-
 const u16 gMetatiles_PorytilesManaged_Parnassos[] = INCBIN_U16("data/tilesets/secondary/parnassos/porytiles_bin/metatiles.bin");
-
 const u16 gMetatileAttributes_PorytilesManaged_Parnassos[] = INCBIN_U16("data/tilesets/secondary/parnassos/porytiles_bin/metatile_attributes.bin");
-
 const u16 gMetatiles_PorytilesManaged_TempleApollo[] = INCBIN_U16("data/tilesets/secondary/temple_apollo/porytiles_bin/metatiles.bin");
-
 const u16 gMetatileAttributes_PorytilesManaged_TempleApollo[] = INCBIN_U16("data/tilesets/secondary/temple_apollo/porytiles_bin/metatile_attributes.bin");
-
 const u16 gMetatiles_PorytilesManaged_OikiaDelphoi[] = INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_OikiaDelphoi[] = INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/metatile_attributes.bin");

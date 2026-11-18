@@ -97,12 +97,24 @@ def build():
     m = DMap(NAME, "parnassos", W, H)
     m.seam("up")
     get = paint(m, rows, salt=40)
-    m.pond(get("r"), solid=True)          # white water: nobody swims the rapids
+    # white water: nobody swims the rapids, and nobody fishes them
+    r = get("r")
+    for (x, y) in r:
+        side = "W" if (x - 1, y) not in r else "E" if (x + 1, y) not in r else "M"
+        m.piece("rapids", side + ("2" if y % 2 else ""), x, y, solid=True)
     for (x, y) in get("F"):
         m.set(x, y, A.FALL, False)
     for (x, y) in get("b"):
         m.piece("camp_props", "bridge_EW", x, y, solid=False)
     m.scatter({c for c in get(".") if c[1] >= 6}, "ground", ["tuft", "pebbles", "stones", "thyme"], rate=170)
+    # long grass grown up between the guy-ropes and along the west bank: nobody
+    # in the muster has cut anything
+    for y in range(27, 47):
+        for x in list(range(4, 7)) + list(range(16, 25)):
+            if int(m.mid[y, x]) == A.GRASS and not m.solid[y, x] and (x, y) not in ((5, 28), (5, 29)):
+                m.set(x, y, A.TALL, False)
+    for x in range(17, 25):                # the gorge's foot east of the lane: thicket
+        m.piece("bush", "mastic" if x % 2 else "laurel", x, 46, solid=True)
     # the camp's tents and furniture
     for (k, x, y) in (("tent", 17, 34), ("tent", 21, 34), ("tent_small", 17, 38), ("tent", 20, 38),
                       ("tent_small", 23, 38), ("tent", 17, 42), ("tent", 21, 42)):
@@ -142,6 +154,7 @@ def build():
                 m.s("phaedriades")["ids"][2][1], m.s("phaedriades")["ids"][2][2]]
     m.border = [A.PINE_TOP[0], A.PINE_TOP[1], A.PINE_BOT[0], A.PINE_BOT[1]]
     events(m)
+    m.break_runs(keep=get("p") | get("G") | get("."), longest=9)
     m.connect("down", -30, "MAP_ROUTE28_SACRED_OLIVES")
     m.connect("up", -26, "MAP_DELPHOI")
     return m, rows

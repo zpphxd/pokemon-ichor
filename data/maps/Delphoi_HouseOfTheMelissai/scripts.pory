@@ -1,1 +1,60 @@
-mapscripts Delphoi_HouseOfTheMelissai_MapScripts {}
+// The House of the Melissai, Delphoi (design/phase4/SCRIPT.md Part 2): the
+// bee-priestesses' long low house, its back wall a honeycomb of hive-jars. Hagne,
+// the eldest, was a novice when Melitta was. Mom hid here before III-7; the inner
+// room is "for the bees" until then. After the climax Hagne gives honey. The
+// room is delphoi_rooms.py's. Mom keeps to the spring on the night of III-7 (the
+// scene's staging), so her inner-room object stays hidden.
+
+mapscripts Delphoi_HouseOfTheMelissai_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_HIDE_MOM_MELISSAI)
+    }
+}
+
+text Melissai_Text_NameHagne { "HAGNE" }
+
+script Delphoi_HouseOfTheMelissai_EventScript_Hagne {
+    lock
+    faceplayer
+    setspeaker(Melissai_Text_NameHagne)
+    if (var(VAR_ICHOR_ACT3) >= 26) {
+        msgbox(format("Melitta writes. She's started a new jar. She labelled it the same.\p“Habit,” she says."))
+    } elif (var(VAR_ICHOR_ACT3) >= 19 && !flag(FLAG_ICHOR_GOT_MELISSAI_HONEY)) {
+        msgbox(format("Melitta's gone home. She cried at the door. She'll say she didn't.\p"
+                      "We've no one to carry honey down to, now. The cave's empty.\p"
+                      "So we're keeping it. Take some. It was always for whoever came late."))
+        giveitem(ITEM_HONEY, 5)
+        if (var(VAR_RESULT) == TRUE) {
+            giveitem(ITEM_SILVER_POWDER)
+            setflag(FLAG_ICHOR_GOT_MELISSAI_HONEY)
+        }
+    } else {
+        msgbox(format("A visitor. We don't get visitors. We get pilgrims. It's different.\p"
+                      "Mind the bees. They come and go through the wall. It's their house too.\p"
+                      "We carry honey for the god. And for…\pFor the god. Just the god."))
+    }
+    release
+}
+
+script Delphoi_HouseOfTheMelissai_EventScript_Mom {
+    setspeaker(Melissai_Text_NameHagne)
+    msgbox(format("Hagne still snores. Thirteen years, and she still snores."), MSGBOX_NPC)
+}
+
+// the honey racks
+script Delphoi_HouseOfTheMelissai_EventScript_Thing1 {
+    msgbox(format("Rows of honey jars, each labelled in a neat hand.\pOne place on the shelf is empty.\p"
+                  "There's a clean ring in the dust there, the shape of a jar."), MSGBOX_SIGN)
+}
+
+// the curtain
+script Delphoi_HouseOfTheMelissai_EventScript_Thing2 {
+    lockall
+    setspeaker(Melissai_Text_NameHagne)
+    if (flag(FLAG_ICHOR_MOM_SPRING)) {
+        msgbox(format("Go on, look. It's only a little bed. She was very small."))
+    } else {
+        msgbox(format("Not that room. That room's for the bees. Only the bees.\p…Very particular bees."))
+    }
+    releaseall
+}

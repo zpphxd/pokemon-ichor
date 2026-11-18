@@ -2,7 +2,7 @@
 
 `gTileset_Parnassos` is Route 28: the Sacred Olives and the Kastalian Gorge, on the `aethos` primary. **Generated** by `tools/ichor/art/delphoi_build.py parnassos`; the art is `tools/ichor/art/delphoi_art.py`.
 
-Built: **282** tiles of 504.
+Built: **306** tiles of 504.
 
 ![pieces](img/parnassos_pieces.png)
 
@@ -15,6 +15,7 @@ Map builders place pieces by key and name (`tools/ichor/maps/delphoi_maps.py`, `
 | `pezoula` | 4x1 | land | Dry-stone terrace wall (a ledge) | `W`, `M`, `M2`, `E` |
 | `ground` | 7x1 | land | Ground variants on grass | `tuft`, `pebbles`, `leaves`, `thyme`, `stones`, `worn`, `shade_N` |
 | `bush` | 2x1 | land | Maquis: a mastic bush, a young laurel | `mastic`, `laurel` |
+| `rapids` | 6x1 | land | White water: the Kastalian's rapids (solid) | `W`, `M`, `E`, `W2`, `M2`, `E2` |
 | `sibyl_rock` | 2x2 | land | The Rock of the Sibyl |  |
 | `oldest_altar` | 1x1 | land | The oldest altar |  |
 | `laurel` | 2x2 | trees | Bay laurel |  |

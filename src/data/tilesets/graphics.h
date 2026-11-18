@@ -1718,7 +1718,9 @@ const u16 gTilesetPalettes_DaidaleionDawn[][16] =
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/10.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/11.gbapal"),
     INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/12.gbapal")
-// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py).
+};
+
+// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py, tools/ichor/maps/delphoi_rooms.py).
 const u32 gTilesetTiles_PorytilesManaged_Delphoi[] = INCBIN_U32("data/tilesets/secondary/delphoi/porytiles_bin/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_PorytilesManaged_Delphoi[][16] =
@@ -1806,3 +1808,4 @@ const u16 gTilesetPalettes_PorytilesManaged_OikiaDelphoi[][16] =
     INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/palettes/15.gbapal")
 };
+

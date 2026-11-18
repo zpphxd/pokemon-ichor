@@ -6538,67 +6538,6 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ICHOR_TEPHRA ===
 Name: TEPHRA
-/* Delphoi and Laurel 8 (ids 425-444; phase4 SCRIPT.md Part 3, "The Sacred Olives"
- * to "The Omphalos at night"). Kept in tools/ichor/maps/delphoi_trainers.party and
- * spliced here by tools/ichor/maps/delphoi_trainers.py. Route trainers IVs 14,
- * Gigas and acolytes 20, the Hierophant 24 with her ace 31. The pilgrim sisters,
- * the augurs, Skaphe and the corral twins are this build's (the route standard's
- * trainer counts); the rest are the script's. */
-
-=== TRAINER_ICHOR_EUANGELOS ===
-Name: EUANGELOS
-Class: Pilgrim
-Pic: Pilgrim
-Gender: Male
-Music: Hiker
-AI: Basic Trainer
-
-Sophowl
-Level: 52
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Melisseer
-Level: 52
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_PSAMMOS ===
-Name: PSAMMOS
-Class: Titanborn
-Pic: Titan Grunt
-Gender: Male
-Music: Titan
-AI: Basic Trainer
-
-Cairnolith
-Level: 52
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Kaprodon
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_PHAYLLOS ===
-Name: PHAYLLOS
-Class: Runner
-Pic: Runner
-Gender: Male
-Music: Cool
-AI: Basic Trainer
-
-Harpelle
-Level: 52
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Basilops
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Galenyon
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_PLINTHIS ===
-Name: PLINTHIS
 Class: Titanborn
 Pic: Titan Grunt
 Gender: Female
@@ -6615,70 +6554,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_SINOPOS ===
 Name: SINOPOS
-Taurivet
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Gigantomb
-Level: 54
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_ARISTA_AND_KLEO ===
-Name: ARISTA & KLEO
-Class: Pilgrim
-Pic: Pilgrim
-Gender: Female
-Music: Girl
-Double Battle: Yes
-AI: Basic Trainer
-
-Melisseer
-Level: 52
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Elektear
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_MELAMPOUS_AND_POLYIDOS ===
-Name: MELAMPOUS&POLY
-Class: Augur
-Pic: Augur
-Gender: Male
-Music: Hiker
-Double Battle: Yes
-AI: Basic Trainer
-
-Sophowl
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Basilops
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Harpelle
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_KISSERIS ===
-Name: KISSERIS
-Class: Titanborn
-Pic: Titan Grunt
-Gender: Male
-Music: Titan
-AI: Basic Trainer
-
-Hoplomex
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-Cairnolith
-Level: 53
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-
-=== TRAINER_ICHOR_CHOMAS ===
-Name: CHOMAS
 Class: Titanborn
 Pic: Titan Grunt
 Gender: Male
@@ -7337,6 +7212,145 @@ Level: 33
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Gulf teams. */
+
+/* Delphoi and Laurel 8 (ids 425-444; phase4 SCRIPT.md Part 3, "The Sacred Olives"
+ * to "The Omphalos at night"). Kept in tools/ichor/maps/delphoi_trainers.party and
+ * spliced here by tools/ichor/maps/delphoi_trainers.py. Route trainers IVs 14,
+ * Gigas and acolytes 20, the Hierophant 24 with her ace 31. The pilgrim sisters,
+ * the augurs, Skaphe and the corral twins are this build's (the route standard's
+ * trainer counts); the rest are the script's. */
+
+=== TRAINER_ICHOR_EUANGELOS ===
+Name: EUANGELOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Sophowl
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PSAMMOS ===
+Name: PSAMMOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHAYLLOS ===
+Name: PHAYLLOS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Harpelle
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Basilops
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PLINTHIS ===
+Name: PLINTHIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ARISTA_AND_KLEO ===
+Name: ARIS&KLEO
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Girl
+Double Battle: Yes
+AI: Basic Trainer
+
+Melisseer
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Elektear
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MELAMPOUS_AND_POLYIDOS ===
+Name: MELAM&POLY
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+Double Battle: Yes
+AI: Basic Trainer
+
+Sophowl
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Basilops
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KISSERIS ===
+Name: KISSERIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Hoplomex
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_CHOMAS ===
+Name: CHOMAS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
 Level: 53
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
@@ -7419,7 +7433,7 @@ Level: 54
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_DORYX_AND_DOROS ===
-Name: DORYX & DOROS
+Name: DOROI
 Class: Titanborn
 Pic: Titan Grunt
 Gender: Male
@@ -7436,7 +7450,7 @@ Level: 53
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_ONOMAKRITOS ===
-Name: ONOMAKRITOS
+Name: ONOMAKRITO
 Class: Prophetes
 Pic: Prophetes
 Gender: Male
@@ -7701,7 +7715,7 @@ Level: 57
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ICHOR_CHRYSOTHEMIS ===
-Name: CHRYSOTHEMIS
+Name: CHRYSOTHEM
 Class: Kitharode
 Pic: Kitharode
 Gender: Male

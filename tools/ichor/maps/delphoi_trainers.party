@@ -75,7 +75,7 @@ Level: 54
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_ARISTA_AND_KLEO ===
-Name: ARISTA & KLEO
+Name: ARIS&KLEO
 Class: Pilgrim
 Pic: Pilgrim
 Gender: Female
@@ -92,7 +92,7 @@ Level: 53
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_MELAMPOUS_AND_POLYIDOS ===
-Name: MELAMPOUS&POLY
+Name: MELAM&POLY
 Class: Augur
 Pic: Augur
 Gender: Male
@@ -219,7 +219,7 @@ Level: 54
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_DORYX_AND_DOROS ===
-Name: DORYX & DOROS
+Name: DOROI
 Class: Titanborn
 Pic: Titan Grunt
 Gender: Male
@@ -236,7 +236,7 @@ Level: 53
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 === TRAINER_ICHOR_ONOMAKRITOS ===
-Name: ONOMAKRITOS
+Name: ONOMAKRITO
 Class: Prophetes
 Pic: Prophetes
 Gender: Male
@@ -501,7 +501,7 @@ Level: 57
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ICHOR_CHRYSOTHEMIS ===
-Name: CHRYSOTHEMIS
+Name: CHRYSOTHEM
 Class: Kitharode
 Pic: Kitharode
 Gender: Male

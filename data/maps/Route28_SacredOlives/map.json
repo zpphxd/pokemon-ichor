@@ -16,7 +16,7 @@
   "connections": [
     {
       "map": "MAP_KIRRHA",
-      "offset": 3,
+      "offset": 6,
       "direction": "left"
     },
     {
@@ -382,7 +382,7 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_LEAF_STONE",
-      "flag": "FLAG_ICHOR_HIDDEN_OLIVES_LEAF_STONE"
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_OLIVES_LEAF_STONE"
     },
     {
       "type": "hidden_item",
@@ -390,7 +390,7 @@
       "y": 14,
       "elevation": 3,
       "item": "ITEM_REVIVE",
-      "flag": "FLAG_ICHOR_HIDDEN_OLIVES_REVIVE"
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_OLIVES_REVIVE"
     },
     {
       "type": "hidden_item",
@@ -398,7 +398,7 @@
       "y": 23,
       "elevation": 3,
       "item": "ITEM_BIG_MUSHROOM",
-      "flag": "FLAG_ICHOR_HIDDEN_OLIVES_BIG_MUSHROOM"
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_OLIVES_BIG_MUSHROOM"
     },
     {
       "type": "hidden_item",
@@ -406,7 +406,7 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "FLAG_ICHOR_HIDDEN_OLIVES_STAR_PIECE"
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_OLIVES_STAR_PIECE"
     }
   ]
 }

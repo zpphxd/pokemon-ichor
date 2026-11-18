@@ -1,1 +1,86 @@
+// Koretas's house, Delphoi (design/phase4/SCRIPT.md Part 2): old Koretas, named
+// for the goatherd who found the Oracle, and his granddaughter Aix, who does the
+// work. Half the house is a byre. The trade: a Melibee for their meadow, for
+// Prophet the Kerazap (Lv 50, Thunder Stone). The room is delphoi_rooms.py's.
+
 mapscripts Delphoi_KoretasHouse_MapScripts {}
+
+text Koretas_Text_Name { "KORETAS" }
+text Koretas_Text_NameAix { "AIX" }
+
+script Delphoi_KoretasHouse_EventScript_Koretas {
+    lock
+    faceplayer
+    setspeaker(Koretas_Text_Name)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("The crack's quiet. The old fumes have stopped. The goats are bored.\pSo am I. It's restful."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_TRADED_KERAZAP_DELPHOI)) {
+        msgbox(format("He'll tell you the future. It'll be wrong. That's half the fun."))
+        release
+        end
+    }
+    msgbox(format("My great-great-ever-so-great grandfather found the Oracle.\pHim and his goats.\p"
+                  "His goats wandered near a crack in the hill and started jumping about.\p"
+                  "Bleating in verse. Well. Bleating. He leaned over the crack to look.\p"
+                  "And he started prophesying. Couldn't stop.\pSo they built a temple on it."))
+    goto(Delphoi_KoretasHouse_EventScript_Trade)
+}
+
+script Delphoi_KoretasHouse_EventScript_Aix {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_TRADED_KERAZAP_DELPHOI)) {
+        setspeaker(Koretas_Text_NameAix)
+        msgbox(format("The bees are in the thyme. The goats are cross. Everyone's happy."))
+        release
+        end
+    }
+    goto(Delphoi_KoretasHouse_EventScript_Trade)
+}
+
+script Delphoi_KoretasHouse_EventScript_Trade {
+    setspeaker(Koretas_Text_NameAix)
+    msgbox(format("Grandfather. The trade."))
+    setspeaker(Koretas_Text_Name)
+    msgbox(format("Yes. The goat. Our goat bleats in verse too. We call him Prophet.\p"
+                  "He's never once been right. Lovely goat."))
+    setspeaker(Koretas_Text_NameAix)
+    msgbox(format("We need a bee for the thyme meadow.\pThe goats eat the flowers before they set."))
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_PROPHET)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    msgbox(format("Would you trade us a Melibee? For Prophet?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(Delphoi_KoretasHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(Delphoi_KoretasHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Koretas_Text_NameAix)
+        msgbox(format("That's not a Melibee. The goats would eat it."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_KERAZAP_DELPHOI)
+    setspeaker(Koretas_Text_NameAix)
+    msgbox(format("There. Prophet's yours. He likes thyme and arguments."))
+    setspeaker(Koretas_Text_Name)
+    msgbox(format("He'll tell you the future. It'll be wrong. That's half the fun."))
+    release
+}
+
+script Delphoi_KoretasHouse_EventScript_NoTrade {
+    setspeaker(Koretas_Text_NameAix)
+    msgbox(format("The meadow will wait. Meadows are good at that."))
+    release
+    end
+}

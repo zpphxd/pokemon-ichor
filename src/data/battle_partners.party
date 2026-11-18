@@ -148,12 +148,6 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Name: ARIADNE
 Class: Acolyte
 Pic: Acolyte F
-/* Delphoi: Rhea beside you at the Omphalos (phase4 SCRIPT.md Part 3). She
- * never uses a move that hits her partner. */
-=== PARTNER_ICHOR_RHEA_DELPHOI ===
-Name: RHEA
-Class: Titan Admin
-Pic: Rhea Partner
 Gender: Female
 Music: Female
 AI: Basic Trainer
@@ -184,6 +178,17 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Energy Ball
 - Grassy Terrain
 - Synthesis
+
+/* Delphoi: Rhea beside you at the Omphalos (phase4 SCRIPT.md Part 3). She
+ * never uses a move that hits her partner. */
+=== PARTNER_ICHOR_RHEA_DELPHOI ===
+Name: RHEA
+Class: Titan Admin
+Pic: Rhea Partner
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
 Laolith
 Level: 57
 Ability: Iron Fist

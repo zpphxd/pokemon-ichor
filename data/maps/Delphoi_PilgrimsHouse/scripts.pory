@@ -1,1 +1,63 @@
+// The Pilgrims' House, Delphoi (design/phase4/SCRIPT.md Part 2): Theoxena keeps
+// the house where pilgrims wait for the Oracle, a xenia host (rest until a chosen
+// hour). Philagros has waited a year to ask whether his daughter forgives him;
+// after the climax he goes home, and leaves you his Soothe Bell. The room is
+// delphoi_rooms.py's.
+
 mapscripts Delphoi_PilgrimsHouse_MapScripts {}
+
+text Pilgrims_Text_NameTheoxena { "THEOXENA" }
+text Pilgrims_Text_NamePhilagros { "PHILAGROS" }
+
+script Delphoi_PilgrimsHouse_EventScript_Theoxena {
+    lock
+    faceplayer
+    setspeaker(Pilgrims_Text_NameTheoxena)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Half my mats are empty this week.\pEveryone's gone home to ask each other.\p"
+                      "I've made too many lentils. I always make too many lentils."))
+    } else {
+        msgbox(format("Come in, come in. Sit. Eat. Then tell me your name. In that order.\p"
+                      "Everyone here's waiting for the Oracle. Some of them for a year.\p"
+                      "I don't mind. A house is for filling."))
+    }
+    msgbox(format("Stay, if you like. Rest till you want to wake."))
+    call(EventScript_IchorXeniaRest)
+    if (var(VAR_RESULT) == TRUE) {
+        special(HealPlayerParty)
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} slept on a mat under the gallery and woke well rested."))
+    }
+    release
+}
+
+script Delphoi_PilgrimsHouse_EventScript_Philagros {
+    lock
+    faceplayer
+    setspeaker(Pilgrims_Text_NamePhilagros)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("I went back. She laughed. A real laugh, from the tripod.\p"
+                      "Then she said, “I told you. Ask. Her.”\p"
+                      "A whole sentence. Of a kind. I'm going home to ask her.\p"
+                      "Here. I won't need it. I'm done waiting for bells."))
+        giveitem(ITEM_SOOTHE_BELL)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_PHILAGROS_BELL)
+            removeobject(LOCALID_PILGRIMS_PHILAGROS)
+        }
+        release
+        end
+    }
+    msgbox(format("I came to ask one thing. Whether my daughter forgives me.\p"
+                  "I've waited a year. The Pythia gave me one word. “Ask.”\p"
+                  "Ask who? Ask what? I've written it on six strips.\p"
+                  "I'll wait for a proper answer. A whole sentence. I've got time."))
+    release
+}
+
+// the question strips
+script Delphoi_PilgrimsHouse_EventScript_Thing1 {
+    msgbox(format("Hundreds of folded lead strips on nails. Questions for the god.\p"
+                  "“Is the child mine?” “Will the ship come in?” “Should I sell the mule?”\p"
+                  "One just says “WHY.” Nothing else."), MSGBOX_SIGN)
+}

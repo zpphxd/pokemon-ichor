@@ -29,6 +29,7 @@ for _name in ("delphoi", "parnassos", "temple_apollo"):
         _s["names"] = {k: tuple(v) for k, v in _s["names"].items()}
 
 POND = 0x0A1          # aethos still water (MB_POND_WATER, surfable)
+SURFB = KM.SURF
 
 
 class DMap(Map):
@@ -65,6 +66,49 @@ class DMap(Map):
         for (x, y) in cells:
             w, e = (x - 1, y) in cells, (x + 1, y) in cells
             self.set(x, y, A.LEDGE["SL"] if not w else A.LEDGE["SR"] if not e else A.LEDGE["S"], False)
+
+    def break_runs(self, keep=(), longest=9, props=None, allow=None):
+        """MAP_DESIGN/STYLE §4.2: no straight edge longer than ~6-10 cells. Walk
+        every run of open cells along a blocked line, and every `longest` cells
+        stand a prop in it (a bush, a boulder, a stele): only where the cell
+        behind it, away from the edge, stays open, and never on a cell in
+        `keep` (roads, people, triggers, warps), so no way is ever shut."""
+        keep = set(keep) | {(o["x"], o["y"]) for o in self.objects} | {(w["x"], w["y"]) for w in self.warps} \
+            | {(t["x"], t["y"]) for t in self.coords} | {(b["x"], b["y"]) for b in self.bgs}
+        props = props or [("bush", "mastic"), ("bush", "laurel")]
+
+        def open_(x, y):
+            b = self.behavior(int(self.mid[y, x])) if self.ok(x, y) else ""
+            return self.ok(x, y) and not self.solid[y, x] and b not in SURFB and not b.startswith("MB_JUMP")
+
+        def blocked(x, y):
+            return self.ok(x, y) and not open_(x, y)
+        placed = 0
+        for horiz in (True, False):
+            for d in (-1, 1):
+                outer = self.h if horiz else self.w
+                inner = self.w if horiz else self.h
+                for a in range(outer):
+                    run = 0
+                    for b in range(inner):
+                        x, y = (b, a) if horiz else (a, b)
+                        ex, ey = (x, y + d) if horiz else (x + d, y)
+                        bx, by = (x, y - d) if horiz else (x - d, y)
+                        if open_(x, y) and blocked(ex, ey):
+                            run += 1
+                            if run > longest and (x, y) not in keep and open_(bx, by) \
+                                    and int(self.mid[y, x]) in (allow or (A.GRASS, A.TALL, A.SHADE)) \
+                                    and not self.in_seam(x, y):
+                                k, n = props[(x * 3 + y) % len(props)]
+                                if k is None:
+                                    self.set(x, y, n, True)
+                                else:
+                                    self.piece(k, n, x, y, solid=True)
+                                placed += 1
+                                run = 0
+                        else:
+                            run = 0
+        return placed
 
     def in_seam(self, x, y):
         for side, depth in self.seams:

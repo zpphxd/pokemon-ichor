@@ -163,8 +163,9 @@ def build():
     m.olive(19, 12)
     m.olive(24, 12)
     events(m)
+    m.break_runs(keep=get("p") | get("G") | get("s"))
     m.border = [A.OLIVE_TOP[0], A.OLIVE_TOP[1], A.OLIVE_BOT[0], A.OLIVE_BOT[1]]
-    m.connect("left", 3, "MAP_KIRRHA")
+    m.connect("left", 6, "MAP_KIRRHA")
     m.connect("up", 30, "MAP_ROUTE28_KASTALIAN_GORGE")
     return m, rows
 

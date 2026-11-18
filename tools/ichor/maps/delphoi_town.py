@@ -176,6 +176,11 @@ def build():
                 m.s("phaedriades")["ids"][2][1], m.s("phaedriades")["ids"][2][2]]
     m.border = [A.PINE_TOP[0], A.PINE_TOP[1], A.PINE_BOT[0], A.PINE_BOT[1]]
     events(m)
+    way = m.s("way")
+    allow = {A.GRASS, A.TALL, way_kit(m)["C"], way_kit(m)["T"], way_kit(m)["B"], way_kit(m)["L"], way_kit(m)["R"]}
+    allow |= {m.s("tiers")["ids"][0][i] for i in (1, 2)}
+    m.break_runs(keep=get("p") | {(23, y) for y in range(13, 20)}, allow=allow, longest=9,
+                 props=[("torch", "cold"), (None, A.STELE), ("bush", "laurel")])
     m.connect("down", 26, "MAP_ROUTE28_KASTALIAN_GORGE")
     m.header = {"ichor_kind": "town"}
     return m, rows
