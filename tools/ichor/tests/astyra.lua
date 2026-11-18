@@ -284,11 +284,11 @@ L.start(function()
     door(S.MAP_AKROPOLIS, "forged_order_gate", true)
     L.expect(L.getFlag(S.FLAG_GATE) and emu:read8(S.gTimeOfDay) == S.TIME_NIGHT,
              "the captain actually steps aside for the forged owl/hook order at staged night")
-    L.go(17, 44)
+    L.go(13, 48)
     L.expect(emu:saveStateFile(L.OUT .. "before_multi_loss.ss", 31), "saved the partner loss branch")
     emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
     L.battleMode = "lose"
-    L.step(K.UP)
+    L.step(K.LEFT)
     L.settle()
     L.battleMode = nil
     L.expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST
@@ -297,17 +297,17 @@ L.start(function()
     L.expect(emu:loadStateFile(L.OUT .. "before_multi_loss.ss", 31), "restored the partner climb")
     L.wait(30)
     L.waitUntil(L.idle, 600, "control after restoring the climb")
-    L.go(17, 42)
+    L.go(10, 48)
     L.expect(L.getFlag(S.FLAG_PAIR_ONE), "Lithos and Koniortos must actually be defeated")
     L.talk(L.hidden(S.FLAG_RAID_REVIVE))
-    L.go(17, 30)
+    L.go(31, 43)
     L.expect(L.getFlag(S.FLAG_PAIR_TWO) and multiCount == 3 and not L.getFlag(S.FLAG_RAID),
              "Sideros and Chalkos are a second distinct native multi battle, not a player double")
     local heals = L.itemCount(S.ITEM_HYPER_POTION)
     L.talk(L.npc("Astyra_Akropolis_EventScript_HealingJar"))
     L.expect(L.getFlag(S.FLAG_RAID_JAR) and L.itemCount(S.ITEM_HYPER_POTION) == heals + 1,
              "the Sacred Way's side branch pays with an actual healing supply")
-    L.go(17, 18)
+    L.go(25, 14)
     L.expect(L.getFlag(S.FLAG_KLEON), "beating Kleon plays his they-want-you revelation")
     L.shot("parthenon_steps")
     emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
@@ -334,10 +334,10 @@ L.start(function()
     leave()
     L.useWarp(S.MAP_AKROPOLIS)
     local fought = #L.battles
-    L.go(17, 9)
+    L.go(19, 9)
     L.talk(L.npc("Astyra_Akropolis_EventScript_Caretaker"))
-    L.expect(#L.battles == fought and L.grid().tile(16, 5) == 0x001
-             and L.grid().tile(21, 6) == 0x0E1,
+    L.expect(#L.battles == fought and L.grid().tile(16, 6) == 0x001
+             and L.grid().tile(20, 4) == S.TILE_RUBBLE,
              "reentry preserves the fallen olive and collapsed spring without replaying combat")
     L.shot("olive_after_raid")
     L.talk(L.hidden(S.FLAG_RAID_ETHER))

@@ -149,3 +149,78 @@ script Astyra_EventScript_Perdix {
     msgbox(format("PERDIX\pThe clever boy fell from these walls.\pAthena caught him before the stones could, and made him a partridge."), MSGBOX_SIGN)
     end
 }
+
+// ---------------------------------------------------------------------------
+// The awe pass: the first sight of the capital, the Pnyx, the fountain house
+// ---------------------------------------------------------------------------
+
+// Through the Dipylon for the first time: the camera runs up the Panathenaic
+// Way, past the agora, to the rock and Athena's spear over it (AWE_PASS §3).
+script Astyra_EventScript_Reveal {
+    if (flag(FLAG_ICHOR_ASTYRA_REVEAL)) {
+        end
+    }
+    lockall
+    setflag(FLAG_ICHOR_ASTYRA_REVEAL)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Astyra_Movement_CameraUpTheWay)
+    waitmovement(0)
+    delay(60)
+    msgbox(format("Astyra. The rock stands over the city, the Parthenon on top.\pAnd above them all, Athena in bronze, her spear up in the sun.\pSailors say they can see that spear tip from the open sea."))
+    closemessage
+    delay(20)
+    applymovement(OBJ_EVENT_ID_CAMERA, Astyra_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    releaseall
+}
+movement Astyra_Movement_CameraUpTheWay {
+    walk_slow_right * 2
+    walk_right * 12
+    walk_up * 6
+    walk_fast_up * 17
+    walk_slow_up * 7
+    step_end
+}
+movement Astyra_Movement_CameraBack {
+    walk_fast_down * 30
+    walk_fast_left * 14
+    step_end
+}
+
+// The Pnyx: the speaker's platform, and the whole rock from it.
+script Astyra_EventScript_Bema {
+    lockall
+    msgbox(format("THE PNYX\pStand here and speak, and the whole city can answer.\pLook up at the rock?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    closemessage
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Astyra_Movement_CameraPnyx)
+    waitmovement(0)
+    delay(60)
+    msgbox(format("The Akropolis, wall to wall. Promachos looks out over the sea road."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, Astyra_Movement_CameraPnyxBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    releaseall
+}
+movement Astyra_Movement_CameraPnyx {
+    walk_up * 6
+    walk_left * 12
+    walk_slow_up * 10
+    step_end
+}
+movement Astyra_Movement_CameraPnyxBack {
+    walk_fast_down * 16
+    walk_fast_right * 12
+    step_end
+}
+
+script Astyra_EventScript_Fountain {
+    msgbox(format("THE NINE SPOUTS\pA bronze lion pours the spring's water.\pIt's cold even in summer."), MSGBOX_SIGN)
+    end
+}

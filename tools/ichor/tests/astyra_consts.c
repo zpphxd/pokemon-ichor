@@ -7,6 +7,7 @@
 #include "constants/battle_partner.h"
 #include "field_player_avatar.h"
 #include "ichor_star_chart.h"
+#include "constants/metatile_labels.h"
 K(MAP_ELEUSA, MAP_ELEUSA_VILLAGE)
 K(MAP_R15, MAP_ROUTE15_MYSTERY_ROAD)
 K(MAP_DAPHNI, MAP_DAPHNI)
@@ -75,3 +76,4 @@ K(ITEM_HYPER_POTION, ITEM_HYPER_POTION)
 K(ITEM_HONEY, ITEM_HONEY)
 K(MUS_LULLABY, MUS_ICHOR_ELPIS_LULLABY)
 K(MUS_CITY, MUS_ICHOR_EMPORION)
+K(TILE_RUBBLE, METATILE_Akropolis_Rubble)

@@ -15,17 +15,17 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
       "map": "MAP_ROUTE16_CAPITAL_PASS",
-      "offset": 22
+      "offset": 22,
+      "direction": "left"
     }
   ],
   "object_events": [
     {
       "local_id": "LOCALID_ASTYRA_PREACHER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
-      "x": 17,
-      "y": 34,
+      "x": 22,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -38,8 +38,8 @@
     {
       "local_id": "LOCALID_ASTYRA_HERALD",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
-      "x": 29,
-      "y": 34,
+      "x": 27,
+      "y": 18,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -52,8 +52,8 @@
     {
       "local_id": "LOCALID_ASTYRA_MERCHANT",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
-      "x": 37,
-      "y": 36,
+      "x": 23,
+      "y": 28,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -66,7 +66,7 @@
     {
       "local_id": "LOCALID_ASTYRA_ALETHEA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
-      "x": 31,
+      "x": 30,
       "y": 23,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -80,8 +80,8 @@
     {
       "local_id": "LOCALID_ASTYRA_CLERK",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
-      "x": 37,
-      "y": 19,
+      "x": 26,
+      "y": 17,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -94,8 +94,8 @@
     {
       "local_id": "LOCALID_ASTYRA_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
-      "x": 24,
-      "y": 12,
+      "x": 12,
+      "y": 10,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -122,8 +122,8 @@
     {
       "local_id": "LOCALID_ASTYRA_KERYKOS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KERYKOS",
-      "x": 28,
-      "y": 30,
+      "x": 25,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -132,6 +132,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Astyra_EventScript_Kerykos",
       "flag": "FLAG_ICHOR_HIDE_DECREE_CROWD"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 5,
+      "y": 37,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_ETHER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ASTYRA_KERAMEIKOS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_GREAT_HERM",
@@ -162,53 +175,106 @@
   ],
   "warp_events": [
     {
-      "x": 9,
+      "x": 12,
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_ASCLEPEION",
       "dest_warp_id": "0"
     },
     {
-      "x": 36,
+      "x": 20,
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_PHAEDONS_HOUSE",
       "dest_warp_id": "0"
     },
     {
-      "x": 10,
-      "y": 19,
+      "x": 38,
+      "y": 15,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_LIBRARY",
       "dest_warp_id": "0"
     },
     {
-      "x": 35,
-      "y": 18,
+      "x": 24,
+      "y": 15,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_STOA",
       "dest_warp_id": "0"
     },
     {
-      "x": 25,
-      "y": 11,
+      "x": 11,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_AKROPOLIS",
       "dest_warp_id": "0"
     },
     {
       "x": 25,
-      "y": 46,
+      "y": 47,
       "elevation": 0,
       "dest_map": "MAP_ASTYRA_HARBOR",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 32,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "Astyra_EventScript_Reveal"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 33,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "Astyra_EventScript_Reveal"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 34,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "Astyra_EventScript_Reveal"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 35,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "Astyra_EventScript_Reveal"
+    }
+  ],
   "bg_events": [
     {
+      "type": "hidden_item",
+      "x": 30,
+      "y": 21,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_ASTYRA_AGORA"
+    },
+    {
+      "type": "hidden_item",
+      "x": 42,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ASTYRA_PNYX"
+    },
+    {
       "type": "sign",
-      "x": 8,
+      "x": 10,
       "y": 36,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -216,51 +282,67 @@
     },
     {
       "type": "sign",
-      "x": 12,
-      "y": 32,
+      "x": 14,
+      "y": 31,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Astyra_EventScript_ClinicSign"
     },
     {
       "type": "sign",
-      "x": 39,
-      "y": 32,
+      "x": 22,
+      "y": 31,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Astyra_EventScript_HouseSign"
     },
     {
       "type": "sign",
-      "x": 13,
-      "y": 20,
+      "x": 37,
+      "y": 17,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Astyra_EventScript_LibrarySign"
     },
     {
       "type": "sign",
-      "x": 18,
-      "y": 26,
+      "x": 17,
+      "y": 25,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Astyra_EventScript_Kodros"
     },
     {
       "type": "sign",
-      "x": 29,
-      "y": 26,
+      "x": 27,
+      "y": 25,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Astyra_EventScript_Kairos"
     },
     {
       "type": "sign",
-      "x": 27,
-      "y": 13,
+      "x": 14,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Astyra_EventScript_Perdix"
+    },
+    {
+      "type": "sign",
+      "x": 40,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Astyra_EventScript_Bema"
+    },
+    {
+      "type": "sign",
+      "x": 33,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Astyra_EventScript_Fountain"
     }
   ]
 }

@@ -2262,6 +2262,11 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R16_SHRINE       (FLAG_ICHOR_GENERAL2_START + 0x0AA) // Ichor: Sacred Way: Route 16: at the Nymphs' shrine (Pan's Crook)
 #define FLAG_ICHOR_R16_AKROPOLIS_SEEN           (FLAG_ICHOR_GENERAL2_START + 0x0AB) // Ichor: Sacred Way: Route 16: the first sight of the Akropolis from the lookout
 #define FLAG_ICHOR_R16_AKADEMIA_GIFT            (FLAG_ICHOR_GENERAL2_START + 0x0AC) // Ichor: Sacred Way: Route 16: Aristokles's gift in the Akademia's grove
+#define FLAG_ICHOR_ASTYRA_REVEAL                (FLAG_ICHOR_GENERAL2_START + 0x0C0) // Ichor: the first sight of Astyra, the camera up the Panathenaic Way to Promachos's spear
+#define FLAG_ICHOR_AKROPOLIS_REVEAL             (FLAG_ICHOR_GENERAL2_START + 0x0C1) // Ichor: the first sight of the Akropolis plateau through the Propylaia
+#define FLAG_ICHOR_HIDDEN_ASTYRA_AGORA          (FLAG_ICHOR_GENERAL2_START + 0x0C2) // Ichor: Astyra: hidden under the fountain house's basin
+#define FLAG_ICHOR_HIDDEN_ASTYRA_PNYX           (FLAG_ICHOR_GENERAL2_START + 0x0C3) // Ichor: Astyra: hidden behind the speaker's platform on the Pnyx
+#define FLAG_ICHOR_ITEM_ASTYRA_KERAMEIKOS       (FLAG_ICHOR_GENERAL2_START + 0x0C4) // Ichor: Astyra: the jar among the Kerameikos graves
 #define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
 #define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
 #define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)

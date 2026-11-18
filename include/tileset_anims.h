@@ -69,4 +69,10 @@ void InitTilesetAnim_PorytilesManaged_Eurotas(void);
 void InitTilesetAnim_PorytilesManaged_Stymphalia(void);
 void InitTilesetAnim_PorytilesManaged_Labyrinth(void);
 
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Akropolis(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Astyra(void);
+
 #endif // GUARD_TILESET_ANIMS_H

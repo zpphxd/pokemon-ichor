@@ -333,3 +333,11 @@ const u16 gMetatileAttributes_PorytilesManaged_SeatAthena[] = INCBIN_U16("data/t
 // Ichor: seat_hera
 const u16 gMetatiles_PorytilesManaged_SeatHera[] = INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_SeatHera[] = INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: akropolis
+const u16 gMetatiles_PorytilesManaged_Akropolis[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Akropolis[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: astyra
+const u16 gMetatiles_PorytilesManaged_Astyra[] = INCBIN_U16("data/tilesets/secondary/astyra/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Astyra[] = INCBIN_U16("data/tilesets/secondary/astyra/porytiles_bin/metatile_attributes.bin");
