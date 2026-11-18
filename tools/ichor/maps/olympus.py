@@ -4,10 +4,7 @@ the Hall of Heroes (design/LEAGUE.md). Each room is drawn on its own tileset, so
 each seat has its own floor, walls and signature motif:
 
   Olympus_Propylaia       gTileset_TempleHestia  the hearth, the healer, the guard
-  Olympus_SeatOfAres      gTileset_Labyrinth     two files of bronze kouroi
-  Olympus_SeatOfPoseidon  gTileset_Aegina        the trireme in the sacred basin
-  Olympus_SeatOfAthena    gTileset_TempleHermes  scroll walls and the rostrum
-  Olympus_SeatOfHera      gTileset_TempleDemeter the throne behind the serpent pits
+  Olympus_SeatOf*         gTileset_Seat*         the four seats (tools/ichor/maps/pantheon_halls.py)
   Olympus_Summit          gTileset_Aegina        Zeus's altar, the temple of the Twelve
   Olympus_HallOfHeroes    gTileset_Civic         the cella and its record stone
 
@@ -20,15 +17,13 @@ Usage: /usr/bin/python3 tools/ichor/maps/olympus.py [--render DIR] [--tag TAG] [
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
-import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import league_lib as L  # noqa: E402
-from league_lib import ROOT, Grid, noise  # noqa: E402
+from league_lib import Grid, noise  # noqa: E402
 
 GFX = "OBJ_EVENT_GFX_ICHOR_"
 
@@ -140,336 +135,9 @@ def propylaia():
 
 
 # ---------------------------------------------------------------------------
-# The seat of Ares: bronze files under a grey arcade (gTileset_Labyrinth)
+# The four seats: tools/ichor/maps/pantheon_halls.py, each on its own tileset
+# (tools/ichor/art/pantheon_build.py), since 2026-11-18.
 # ---------------------------------------------------------------------------
-LAB = None
-
-
-def lab(key, name):
-    s = LAB[key]
-    cx, cy = s["names"][name]
-    return s["ids"][cy][cx]
-
-
-def lab_col(key, name):
-    """An arcade column's three cells, top to bottom."""
-    s = LAB[key]
-    cx, _ = s["names"][name]
-    return [s["ids"][r][cx] for r in range(s["h"])]
-
-
-ARES_DOOR = (9, 2)
-
-
-def seat_of_ares():
-    global LAB
-    LAB = L.catalog("labyrinth")
-    W, H = 19, 20
-    g = Grid("Olympus_SeatOfAres", W, H, primary="gTileset_Oikos", secondary="gTileset_Labyrinth", cat=None)
-    for y in range(H):
-        for x in range(W):
-            if y == 3:
-                mid = lab("floor", "shade_l" if (x + y) % 2 == 0 else "shade_r")
-            else:
-                mid = lab("floor", "slab_l" if (x + y) % 2 == 0 else "slab_r")
-                if (x + y) % 2 == 0 and noise(x, y, 5) < 6:
-                    mid = lab("floor", "labrys")
-                elif (x + y) % 2 == 1 and noise(x, y, 6) < 6:
-                    mid = lab("floor", "crack")
-            g.set(x, y, mid, False, "floor")
-    # the arcade: piers every fourth cell, the door through the middle pier
-    for x in range(W):
-        if x == 0:
-            col = lab_col("arcade", "side_w")
-        elif x == W - 1:
-            col = lab_col("arcade", "side_e")
-        elif x == ARES_DOOR[0]:
-            col = lab_col("arcade", "door_pier")
-        elif (x - 1) % 4 == 0:
-            col = lab_col("arcade", "pier_sconce" if x in (5, 13) else "pier")
-        else:
-            col = lab_col("arcade", ("bay_l", "bay_m", "bay_r")[(x - 1) % 4 - 1])
-        for y in range(3):
-            g.set(x, y, col[y], True, "arcade")
-    for y in range(3, H - 1):
-        g.set(0, y, lab("edge", "wall_w"), True)
-        g.set(W - 1, y, lab("edge", "wall_e"), True)
-    for x in range(W):
-        g.set(x, H - 1, lab("floor", "void"), True)
-    g.set(9, H - 1, lab("edge", "sill_l"), False, "sill")
-    g.set(10, H - 1, lab("edge", "sill_r"), False, "sill")
-    # (Rebuilt 2026-11-17 on the Labyrinth's current kit: the old runner and
-    # bronze-kouros pieces were cut from the tileset and drew as void.)
-    def quad(key, x, y, names=("tl", "tr", "bl", "br")):
-        for (dx, dy), n in zip(((0, 0), (1, 0), (0, 1), (1, 1)), names):
-            g.set(x + dx, y + dy, lab(key, n), True, key)
-
-    # the bronze way up the middle: plates laid end to end from the door to the dais
-    for y in range(5, H - 1):
-        g.set(9, y, lab("plate", "plate_cap_n" if y == 5 else "plate_cap_s" if y == H - 2 else "plate_v"),
-              False, "bronze way")
-    # the polemarch's dais: two braziers burning either side of him
-    quad("brazier", 6, 3, ("cold_tl", "cold_tr", "cold_bl", "cold_br"))
-    quad("brazier", 11, 3, ("cold_tl", "cold_tr", "cold_bl", "cold_br"))
-    # the phalanx: two files of arms racks, shields and helmets, eyes front, the way a
-    # Lakonian line stands; you walk the file to reach him
-    for i, y in enumerate((7, 10, 13)):
-        for x in (3, 13):
-            quad("armory" if (i + (x > 9)) % 2 == 0 else "helmets", x, y)
-        for x in (6, 11):
-            g.set(x, y, LAB["column"]["ids"][0][0], True, "column")
-            g.set(x, y + 1, LAB["column"]["ids"][1][0], True, "column")
-    # the mess where the seat's hoplites eat together (the syssitia), by the way in
-    for x0 in (2, 14):
-        tab = LAB["mess_table"]
-        for j in range(2):
-            for i in range(3):
-                g.set(x0 + i, 16 + j, tab["ids"][j][i], True, "mess")
-    for x in (7, 11):
-        g.set(x, 16, lab("lamp_stand", "top"), True)
-        g.set(x, 17, lab("lamp_stand", "base"), True)
-    # the door is shut until Brasidas falls (the scripts open it)
-    g.solid[ARES_DOOR[1], ARES_DOOR[0]] = True
-    g.person("BRASIDAS", "HOPLITE", 9, 4, "Brasidas", facing="DOWN")
-    g.warp(9, H - 1, "Olympus_Propylaia", 0)
-    g.warp(*ARES_DOOR, "Olympus_SeatOfPoseidon", 0)
-    g.save([lab("floor", "void") | 0x400] * 4, seat_fields())
-    g.check((9, H - 2), [("brasidas", (9, 4))])
-    return g, [("hall", 9, 12), ("dais", 9, 4)]
-
-
-# ---------------------------------------------------------------------------
-# The seat of Poseidon: the wooden wall in the sacred basin (gTileset_Aegina)
-# ---------------------------------------------------------------------------
-POSEIDON_GATE = (8, 0)       # the gate piece's top-left; its walkable middle is x 9-10
-
-
-def seat_of_poseidon():
-    W, H = 20, 21
-    g = Grid("Olympus_SeatOfPoseidon", W, H, secondary="gTileset_Aegina", cat="aegina",
-             base=0x209, base_kind="quay")
-    for y in range(H):
-        for x in range(W):
-            g.set(x, y, 0x209, False, "quay")
-    # the basin and its trireme, lifted from Aegina's round harbor
-    lay = next(l for l in json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
-               if l.get("id") == "LAYOUT_AEGINA_TOWN")
-    src = np.fromfile(ROOT / lay["blockdata_filepath"], "<u2").reshape(lay["height"], lay["width"])
-    bx, by = 3, 5
-    for j in range(10):
-        for i in range(14):
-            c = int(src[3 + j, 6 + i])
-            mid = c & 0x3FF
-            if 0x218 <= mid <= 0x225:          # the kaiki: moored elsewhere
-                mid, c = 0x170, 0x170
-            if j == 0 and i in (6, 7):         # close the harbor mouth to the north quay
-                mid, c = 0x201, 0x201
-            water = mid == 0x170 or mid in (0x247, 0x258, 0x25d, 0x270)
-            g.set(bx + i, by + j, mid, bool(c & 0x400) or water, "basin")
-    # cypress and stone pine close the court; the gate at the north
-    for y in range(H):
-        for x in (0, W - 1):
-            g.set(x, y, L.A_CYPRESS[y % 2], True, "cypress")
-    for x in range(1, W - 1):
-        g.set(x, H - 1, L.A_CYPRESS[1], True)
-        g.set(x, H - 2, L.A_CYPRESS[0], True) if x in (1, 2, 17, 18) else None
-    for x in list(range(1, 8)) + list(range(12, W - 1)):
-        g.set(x, 0, L.A_CYPRESS[0], True)
-        g.set(x, 1, L.A_CYPRESS[1], True)
-        if x in (1, 2, 3, 16, 17, 18):
-            g.set(x, 2, L.A_CYPRESS[0] if x % 2 else 0x001, True)
-    g.piece("gate", *POSEIDON_GATE)
-    g.piece("gate_shut", POSEIDON_GATE[0] + 1, POSEIDON_GATE[1] + 2)
-    # the way in: the pebble threshold
-    g.set(9, H - 1, 0x024, False, "mat")
-    g.set(10, H - 1, 0x024, False, "mat")
-    g.piece("turtle_mosaic", 9, 16)
-    for x, y in ((2, 7), (2, 11), (17, 7), (17, 11)):
-        g.piece("bollard_line", x, y)
-    g.piece("amphora_stack", 1, 15)
-    g.piece("amphora_stack", 17, 15)
-    g.piece("rope_coil", 2, 16)
-    g.piece("rope_coil", 16, 3)
-    g.set(4, 3, L.A_TRIPOD_TOP, False)
-    g.set(4, 4, L.A_TRIPOD_BASE, True)
-    g.set(15, 3, L.A_TRIPOD_TOP, False)
-    g.set(15, 4, L.A_TRIPOD_BASE, True)
-    g.person("THEMISTOKLES", "SAILOR", 9, 4, "Themistokles", facing="DOWN")
-    g.warp(9, H - 1, "Olympus_SeatOfAres", 1)
-    for x in (9, 10):
-        g.trigger(x, 1, "ExitGate")
-    g.set(16, 17, 0x003, True)
-    g.sign(16, 17, "WoodenWall")
-    g.save([L.A_CYPRESS[1] | 0x400] * 4, seat_fields())
-    g.check((9, H - 2), [("themistokles", (9, 4))])
-    return g, [("court", 10, 10), ("gate", 9, 4)]
-
-
-# ---------------------------------------------------------------------------
-# The seat of Athena: the library and the rostrum (gTileset_TempleHermes)
-# ---------------------------------------------------------------------------
-TH = dict(void=0x200, slab=0x201, vein_a=0x202, vein_b=0x203, worn=0x204,
-          cornice=0x218, cornice_w=0x219, cornice_e=0x21A, side_w=0x21B, side_e=0x21C, acro=0x21E,
-          frieze=0x227, frieze_lyre=0x224, lower=0x228, lower_torch=0x229, lower_niche=0x22A,
-          lower_plaque=0x22B, side_face_w=0x22E, side_face_e=0x22F, mat=0x233,
-          gate_shut=0x24C, gate_open=0x24D,
-          ph_wall=((0x270, 0x271), (0x278, 0x279)), cab=((0x272, 0x273), (0x27A, 0x27B)),
-          table=(0x280, 0x281), col=(0x284, 0x28C),
-          dais=0x298, dais_roundel=0x299, dais_lip=0x29A, edge_w=0x29B, edge_e=0x29C, lectern=0x29D,
-          dais_lamp=0x29E, riser=0x2A0, riser_w=0x2A1, riser_e=0x2A2, steps=0x2A3,
-          torch=(0x260, 0x268), oil=0x263, basket=0x264)
-ATHENA_GATE = (9, 2)
-
-
-def seat_of_athena():
-    W, H = 19, 21
-    g = Grid("Olympus_SeatOfAthena", W, H, primary="gTileset_Oikos", secondary="gTileset_TempleHermes", cat=None)
-    for y in range(H):
-        for x in range(W):
-            n = noise(x, y, 8)
-            g.set(x, y, TH["vein_a"] if n < 8 else TH["vein_b"] if n < 14 else TH["slab"], False, "floor")
-    for x in range(W):
-        g.set(x, 0, TH["cornice_w"] if x == 0 else TH["cornice_e"] if x == W - 1 else
-              TH["acro"] if x in (4, 14) else TH["cornice"], True)
-    # the north wall: walls of scroll pigeonholes either side of the gate
-    for x in range(1, W - 1):
-        g.set(x, 1, TH["frieze_lyre"] if x == 9 else TH["frieze"], True)
-        g.set(x, 2, TH["lower_torch"] if x in (8, 10) else TH["lower"], True)
-    for x0 in (1, 3, 5, 12, 14, 16):
-        g.stamp(x0, 1, TH["ph_wall"])
-    g.set(*ATHENA_GATE, TH["gate_shut"], True, "gate")
-    for y in range(1, H - 1):
-        g.set(0, y, TH["side_face_w"] if y < 3 else TH["side_w"], True)
-        g.set(W - 1, y, TH["side_face_e"] if y < 3 else TH["side_e"], True)
-    for x in range(W):
-        g.set(x, H - 1, TH["void"], True)
-    g.set(9, H - 1, TH["mat"], False, "mat")
-    # the rostrum across the head of the hall
-    for x in range(5, 14):
-        g.set(x, 3, TH["dais_roundel"] if x == 10 else TH["dais_lamp"] if x in (6, 12) else TH["dais"],
-              x in (6, 12), "dais")
-        g.set(x, 4, TH["dais_lip"], False, "dais")
-        g.set(x, 5, TH["steps"] if x in (8, 9, 10) else TH["riser"], x not in (8, 9, 10), "dais")
-    g.set(5, 4, TH["edge_w"], True)
-    g.set(13, 4, TH["edge_e"], True)
-    g.set(5, 5, TH["riser_w"], True)
-    g.set(13, 5, TH["riser_e"], True)
-    g.set(10, 4, TH["lectern"], True, "lectern")
-    # the hall: cabinets of scrolls in rows, reading tables between, columns on the aisle
-    for y in (8, 12, 16):
-        for x in (1, 4, 13, 16):
-            g.stamp(x, y, TH["cab"])
-    for y in (10, 14):
-        g.stamp(2, y, [list(TH["table"])])
-        g.stamp(15, y, [list(TH["table"])])
-    for y in (7, 11, 15):
-        for x in (7, 11):
-            g.set(x, y, TH["col"][0], True)
-            g.set(x, y + 1, TH["col"][1], True)
-    for x in (1, 17):
-        g.set(x, 3, TH["torch"][0], True)
-        g.set(x, 4, TH["torch"][1], True)
-    g.set(3, 18, TH["basket"], True)
-    g.set(15, 18, TH["oil"], True)
-    for y in range(6, H - 1):
-        if g.mt[y, 9] in (TH["slab"], TH["vein_a"], TH["vein_b"]):
-            g.set(9, y, TH["worn"], False)
-    g.person("HYPATIA", "AUGUR", 10, 3, "Hypatia", facing="DOWN")
-    g.warp(9, H - 1, "Olympus_SeatOfPoseidon", 0)
-    g.trigger(9, 2, "ExitGate")
-    g.save([TH["void"] | 0x400] * 4, seat_fields())
-    g.check((9, H - 2), [("hypatia", (10, 5)), ("gate", (9, 3))])
-    return g, [("hall", 9, 13), ("rostrum", 9, 5)]
-
-
-# ---------------------------------------------------------------------------
-# The seat of Hera: the throne behind the serpent pits (gTileset_TempleDemeter)
-# ---------------------------------------------------------------------------
-DEM = None
-
-
-def dem(key, name):
-    s = DEM[key]
-    if name is None:
-        return s["ids"]
-    cx, cy = s["names"][name]
-    return s["ids"][cy][cx]
-
-
-HERA_DOOR = (14, 2)
-
-
-def seat_of_hera():
-    global DEM
-    DEM = L.catalog("temple_demeter")
-    W, H = 19, 22
-    g = Grid("Olympus_SeatOfHera", W, H, primary="gTileset_Oikos", secondary="gTileset_TempleDemeter", cat=None)
-    for y in range(H):
-        for x in range(W):
-            n = noise(x, y, 4)
-            g.set(x, y, dem("floor", "floor_b" if n < 18 else "floor_c" if n < 26 else
-                            "floor_cracked" if n < 29 else "floor"), False, "floor")
-    for x in range(W):
-        g.set(x, 0, dem("wall", "corner_l" if x == 0 else "corner_r" if x == W - 1 else "top"), True)
-        if 0 < x < W - 1:
-            g.set(x, 1, dem("frieze", "key"), True)
-            g.set(x, 2, dem("wall_lights", "sconce_lit") if x % 4 == 2 else dem("wall", "lower"), True)
-    for y in range(1, H - 1):
-        g.set(0, y, dem("wall", "side_l"), True)
-        g.set(W - 1, y, dem("wall", "side_r"), True)
-    g.set(HERA_DOOR[0], 1, dem("wall_lights", "door_top_painted"), True)
-    g.set(HERA_DOOR[0], 2, dem("wall_lights", "door_bottom_painted"), True, "door")
-    for x in range(W):
-        g.set(x, H - 1, dem("floor", "void"), True)
-    for i, x in enumerate((8, 9, 10)):
-        g.set(x, H - 1, dem("stairs", ("up_L", "up_M", "up_R")[i]), False, "stairs")
-    # the dais and the throne
-    d = DEM["dais"]
-    for x in range(6, 13):
-        g.set(x, 3, dem("dais", "L" if x == 6 else "R" if x == 12 else "M"), False, "dais")
-        g.set(x, 4, dem("dais", "steps") if x == 9 else
-              dem("dais", "riser_L" if x == 6 else "riser_R" if x == 12 else "riser_M"), x != 9, "dais")
-    th = dem("throne", None)
-    g.set(9, 2, th[0][0], True, "throne")
-    g.set(9, 3, th[1][0], True, "throne")
-    # Hera's fire waits cold until Olympias rises (league_seats.py lights it, torch by torch)
-    for x in (5, 13):
-        g.set(x, 3, dem("braziers", "top_cold"), True)
-        g.set(x, 4, dem("braziers", "summer_cold"), True)
-    # a forest of dark columns, torches on the aisle
-    for y in (6, 10, 14):
-        for x in (2, 5, 13, 16):
-            lit = x in (5, 13)
-            g.set(x, y, dem("columns", "torch_cold" if lit else "top"), True)
-            g.set(x, y + 1, dem("columns", "bottom" if lit else ("bottom_b" if y == 10 else "bottom")), True)
-    # the serpent pits between them: sunken dens with a lit lip and side walls
-    # (temple_demeter_art.serpent_pits), a coiled serpent showing in some
-    snakes = {(7, 10): "bot_s_snake", (6, 14): "bot_l_snake", (15, 17): "one_m_snake",
-              (3, 17): "one_m_snake"}
-    for (x0, y0, w, h) in ((3, 8, 2, 1), (14, 8, 2, 1), (7, 9, 1, 2), (11, 9, 1, 2),
-                           (3, 12, 2, 1), (14, 12, 2, 1), (6, 13, 2, 2), (11, 13, 2, 2),
-                           (2, 17, 3, 1), (14, 17, 3, 1)):
-        for y in range(y0, y0 + h):
-            for x in range(x0, x0 + w):
-                row = "one" if h == 1 else ("top" if y == y0 else "bot")
-                col = "s" if w == 1 else ("l" if x == x0 else "r" if x == x0 + w - 1 else "m")
-                name = f"{row}_{col}"
-                if snakes.get((x, y), "").rsplit("_snake", 1)[0] == name:
-                    name = snakes[(x, y)]
-                g.set(x, y, dem("serpent_pit", name), True, "pit")
-    for x in (8, 10):
-        g.set(x, 18, dem("sentinel", None)[0][0], True)
-        g.set(x, 19, dem("sentinel", None)[1][0], True)
-    g.set(1, 19, dem("vessels", "lamp_lit"), True)
-    g.set(17, 19, dem("vessels", "lamp_lit"), True)
-    g.set(16, 3, dem("vessels", "kernos"), True)
-    g.set(2, 3, dem("vessels", "kylikes"), True)
-    g.person("OLYMPIAS", "PRIESTESS", 9, 5, "Olympias", facing="DOWN")
-    g.warp(9, H - 1, "Olympus_SeatOfAthena", 0)
-    g.warp(*HERA_DOOR, "Olympus_Summit", 0)
-    g.save([dem("floor", "void") | 0x400] * 4, seat_fields())
-    g.check((9, H - 2), [("olympias", (9, 5)), ("door front", (14, 3))])
-    return g, [("hall", 9, 12), ("throne", 9, 5)]
 
 
 # ---------------------------------------------------------------------------
@@ -609,8 +277,9 @@ def hall_of_heroes():
     return g, [("nave", 7, 9)]
 
 
-BUILDERS = {"Propylaia": propylaia, "Ares": seat_of_ares, "Poseidon": seat_of_poseidon,
-            "Athena": seat_of_athena, "Hera": seat_of_hera, "Hall": hall_of_heroes}
+import pantheon_halls  # noqa: E402
+
+BUILDERS = {"Propylaia": propylaia, **pantheon_halls.BUILDERS, "Hall": hall_of_heroes}
 # The summit moved to gTileset_Chion on 2026-11-18 (tools/ichor/maps/ascent_peak.py);
 # summit() below is the old Aegina build, kept for reference and no longer run.
 

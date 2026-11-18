@@ -83,43 +83,49 @@ is the Hall of Heroes. Levels come from BALANCE.md's League row.
 - **Signature:** the League's hearth: the healer at a sacred fire.
 
 ### Olympus_SeatOfAres (Brasidas, Fighting)
-- **Sentence:** a stern grey hall of bronze hoplites, Lakonian and unadorned.
-- **Land:** inside. Grey ashlar arcades (`gTileset_Labyrinth`), a long crimson runner, Brasidas at the
-  far end under the arcade.
-- **Settlement logic:** Lakonians build nothing they don't need: no paint, no gold, only bronze men in
-  two files, eyes front, the way a phalanx stands. You walk the file to reach him.
-- **Reveal:** the doors close; the bronze files lead the eye straight to the polemarch.
-- **Signature:** two files of bronze kouroi standing as a phalanx.
+- **Sentence:** a war hall on a bloodred floor, where captured armor stands in files to the bronze god.
+- **Land:** inside (`gTileset_SeatAres`). Blood-red flags, an oxblood runner edged in bronze, smoke-dark
+  walls hung with hoplons, crossed spears and war banners; the bronze Ares on his plinth at the head.
+- **Settlement logic:** Lakonians build nothing they don't need, so nothing is painted: red stone,
+  dark stone, bronze. Trophies of captured armor (tropaia) stand down the aisle the way a phalanx
+  stands, tripod braziers burning between them; dark columns and the armory (spear racks, crested
+  helmets) line the walls. You walk the file to reach him.
+- **Reveal:** the door shuts and the camera climbs the runner to the polemarch under the god.
+- **Signature:** the bronze Ares, and the two great braziers that catch when Brasidas raises his spear.
 
 ### Olympus_SeatOfPoseidon (Themistokles, Water)
-- **Sentence:** a sea-court open to the sky, where a trireme rides in a sacred basin: the "wooden wall"
-  Themistokles read out of the oracle.
-- **Land:** a paved quay court (`gTileset_Aegina`) round a rectangular basin of sea water, a mole with
-  a beacon at each end; the trireme moored along the basin.
+- **Sentence:** a sea hall flooded to the walls, crossed by one causeway: the "wooden wall"
+  Themistokles read out of the oracle rides at its mooring.
+- **Land:** inside (`gTileset_SeatPoseidon`). A basin of sea water each side of a causeway laid with
+  a wave-and-trident mosaic, white marble coping, coral columns standing out of the water, a
+  deep-sea wall with a wave frieze and scallop niches; the colossal trident over the admiral's dais.
 - **Settlement logic:** the oracle said "trust the wooden wall"; everyone read walls, Themistokles read
-  ships. The Pantheon keeps his ship as an offering, as the Greeks hung up the prows of Salamis.
-  You walk the quay round the water to reach him on the far mole.
-- **Reveal:** the doors open on daylight and the trireme.
-- **Signature:** the moored trireme in the sacred basin.
+  ships. The Pantheon keeps his trireme as an offering, moored against the causeway, as the Greeks
+  hung up the prows of Salamis; a bronze dolphin leaps in the other basin.
+- **Reveal:** the causeway runs straight across the water to the trident.
+- **Signature:** the trireme in the sacred basin, and the trident.
 
 ### Olympus_SeatOfAthena (Hypatia, Psychic)
-- **Sentence:** a white marble library where the question is asked aloud.
-- **Land:** inside. White marble and blue frieze (`gTileset_TempleHermes`), walls of scroll
-  pigeonholes, reading tables in rows, a rostrum at the far end.
-- **Settlement logic:** Athena's seat is a school: shelves where the light is, tables between them, the
-  philosopher at the rostrum where a teacher stands. The tables make a grid you thread through.
-- **Reveal:** Hypatia at the rostrum, behind the last row of tables.
-- **Signature:** the scroll walls and the rostrum.
+- **Sentence:** a library of lamps at night, where the question is asked aloud.
+- **Land:** inside (`gTileset_SeatAthena`). Ivory marble set with gold-and-olive stars, night-indigo
+  walls of scroll pigeonholes, lampstands down the aisle, marble owls on pedestals, scroll cabinets,
+  the owl roundel in the floor, and Athena's sacred olive growing out of the rostrum.
+- **Settlement logic:** Athena's seat is a school: the shelves along the walls, the reading tables
+  between them, the philosopher at the rostrum under the olive, as Athena's olive grew from the rock
+  of the Akropolis. The lamps burn low until her owl wakes; then every one flares.
+- **Reveal:** the aisle crosses the owl roundel to the olive and the rostrum.
+- **Signature:** the sacred olive over the rostrum, and the hall of lamps.
 
 ### Olympus_SeatOfHera (Olympias, Dragon)
-- **Sentence:** a dark forest of columns where Hera's serpents keep their pits, and a queen sits on a
-  throne.
-- **Land:** inside. Dark basalt floor and columns (`gTileset_TempleDemeter`), a painted frieze, sunken
-  pits between the columns, a dais and throne at the far end.
-- **Settlement logic:** Hera raised the Hydra and set Ladon on the golden apples; her seat is built for
-  serpents, and the way to the throne winds between their pits.
-- **Reveal:** braziers flare along the dais as you near the throne.
-- **Signature:** the throne on its dais, behind the serpent pits.
+- **Sentence:** a royal hall in plum and gold, where every column has Argos's eyes and the queen sits
+  under a peacock's fan.
+- **Land:** inside (`gTileset_SeatHera`). A checker of plum marble with gold studs, a purple runner
+  with peacock eyes, columns painted with peacock feathers, torches on bronze stands up the aisle,
+  gold urns of pomegranates (her fruit), the gold throne under a great fanned tail on the wall.
+- **Settlement logic:** Hera set the hundred eyes of Argos in the peacock's tail; she raised the Hydra
+  and set Ladon on the golden apples, so bronze serpents coil either side of her throne.
+- **Reveal:** Olympias rises and the torches catch pair by pair from the door to her feet.
+- **Signature:** the peacock fan over the throne, and the feather columns.
 
 ### Olympus_Summit, the altar above the cloud
 - **Sentence:** through a propylon onto the bare summit: the great altar of Zeus under an open sky, and
@@ -238,8 +244,8 @@ and Korinna (63–67, held items, smart AI, an Ice Pokémon on most teams).
 - **Tiles:** a snowfield ground and snow-capped cliff set (the snowline uses Skiron under falling
   snow); a cloud-sea for below the summit and the ledges (the ledges show the sea through fog);
   a monumental propylaia (3F uses the palaestra front); a temple of the Twelve façade (the summit
-  uses Aphaia's); a Hera frieze (peacock, Hydra, Ladon, the pomegranate) for her seat, which uses
-  Demeter's key band; an Ares frieze or shields for his arcade; a record stone for the Hall.
+  uses Aphaia's); a record stone for the Hall. (The four seats have their own tilesets since
+  2026-11-18: `tools/ichor/art/pantheon_build.py`.)
 - **Objects:** Medon's Knot as an item icon with three looser frames and the gold thread (§6.15);
   the gold thread drifting south; the bronze box on the altar.
 - **Portraits:** Brasidas, Themistokles, Hypatia, Olympias and Aristeides use Hoplite, Ichor

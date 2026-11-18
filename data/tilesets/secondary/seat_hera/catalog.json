@@ -1,0 +1,907 @@
+{
+ "tileset": "gTileset_SeatHera",
+ "primary": "gTileset_Oikos",
+ "tiles_used": 198,
+ "pieces": [
+  {
+   "key": "floor_0_0",
+   "title": "Plum marble",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     512
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_0_0",
+   "title": "Plum marble in the shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     513
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_1_0",
+   "title": "Plum marble",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     514
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_1_0",
+   "title": "Plum marble in the shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     515
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_0_1",
+   "title": "Plum marble",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     516
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_0_1",
+   "title": "Plum marble in the shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     517
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_1_1",
+   "title": "Plum marble",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     518
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_1_1",
+   "title": "Plum marble in the shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     519
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_l",
+   "title": "The aisle runner",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     520
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_m",
+   "title": "The aisle runner",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     521
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_r",
+   "title": "The aisle runner",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     522
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_eye",
+   "title": "The aisle runner",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     523
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "void",
+   "title": "Outside the hall",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     524
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "mat",
+   "title": "The south door's gold sill",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     525
+    ]
+   ],
+   "walk": [
+    "v"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_SOUTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "mat_shut",
+   "title": "The south door, shut",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     526
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall0_0",
+   "title": "The north wall, row 0",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     544
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall0_1",
+   "title": "The north wall, row 0",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     545
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_0",
+   "title": "The north wall, row 1",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     546
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_1",
+   "title": "The north wall, row 1",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     547
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall2_0",
+   "title": "The north wall, row 2",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     548
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall2_1",
+   "title": "The north wall, row 2",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     549
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_feather",
+   "title": "A painted peacock feather",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     550
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "side_w",
+   "title": "The w wall",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     551
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "side_e",
+   "title": "The e wall",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     552
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_shut1",
+   "title": "The summit door, shut",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     553
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_shut2",
+   "title": "The summit door, shut",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     554
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_open1",
+   "title": "The summit door, open",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     555
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_open2",
+   "title": "The summit door, open",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     556
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "dais_l",
+   "title": "The queen's dais",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     576
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "riser_l",
+   "title": "The dais's riser",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     577
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "dais_m",
+   "title": "The queen's dais",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     578
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "riser_m",
+   "title": "The dais's riser",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     579
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "dais_r",
+   "title": "The queen's dais",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     580
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "riser_r",
+   "title": "The dais's riser",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     581
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "steps",
+   "title": "The dais steps",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     582
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "throne",
+   "title": "Hera's throne under the peacock's fan",
+   "section": "props",
+   "w": 7,
+   "h": 4,
+   "ids": [
+    [
+     592,
+     593,
+     594,
+     595,
+     596,
+     597,
+     598
+    ],
+    [
+     600,
+     601,
+     602,
+     603,
+     604,
+     605,
+     606
+    ],
+    [
+     608,
+     609,
+     610,
+     611,
+     612,
+     613,
+     614
+    ],
+    [
+     616,
+     617,
+     618,
+     619,
+     620,
+     621,
+     622
+    ]
+   ],
+   "walk": [
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX",
+    "--XXX--"
+   ],
+   "notes": "",
+   "names": {
+    "seat": [
+     3,
+     3
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "pcolumn",
+   "title": "A peacock-feather column",
+   "section": "props",
+   "w": 1,
+   "h": 3,
+   "ids": [
+    [
+     599
+    ],
+    [
+     607
+    ],
+    [
+     615
+    ]
+   ],
+   "walk": [
+    "X",
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "capital": [
+     0,
+     0
+    ],
+    "shaft": [
+     0,
+     1
+    ],
+    "base": [
+     0,
+     2
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "torch_cold",
+   "title": "A torch up the aisle",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     624
+    ],
+    [
+     632
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "torch_lit",
+   "title": "A torch up the aisle",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     625
+    ],
+    [
+     633
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "brazier_cold",
+   "title": "A brazier at the queen's feet",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     626
+    ],
+    [
+     634
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "brazier_lit",
+   "title": "A brazier at the queen's feet",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     627
+    ],
+    [
+     635
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "serpent",
+   "title": "A coiled bronze serpent",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     628
+    ],
+    [
+     636
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "urn",
+   "title": "A gold urn of pomegranates",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     629
+    ],
+    [
+     637
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  }
+ ]
+}

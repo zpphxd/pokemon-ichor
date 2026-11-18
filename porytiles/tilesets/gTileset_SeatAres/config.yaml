@@ -1,0 +1,80 @@
+# Per-tileset Porytiles config for gTileset_SeatAres, a seat of the Pantheon.
+# Written by tools/ichor/art/pantheon_build.py, which compiles it against an
+# empty stand-in primary and checks its metatiles use only its own tiles and
+# palettes 6-12. Pair it with oikos when compiling it directly.
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Oikos]
+  tiles:
+    sharing:
+      packing: biased
+      alignment: greedy
+  palettes:
+    packing:
+      hints_enabled: true
+      hints:
+        - name: floor
+          colors:
+            - [24, 16, 16]
+            - [64, 16, 16]
+            - [104, 24, 24]
+            - [144, 32, 32]
+            - [160, 48, 40]
+            - [184, 64, 48]
+            - [208, 104, 72]
+            - [72, 16, 24]
+            - [96, 24, 32]
+            - [112, 64, 24]
+            - [160, 96, 32]
+            - [200, 136, 48]
+            - [232, 184, 88]
+        - name: wall
+          colors:
+            - [24, 16, 16]
+            - [32, 24, 32]
+            - [56, 40, 48]
+            - [80, 64, 72]
+            - [112, 96, 96]
+            - [152, 136, 128]
+            - [104, 24, 24]
+            - [144, 32, 32]
+            - [184, 64, 48]
+            - [112, 64, 24]
+            - [160, 96, 32]
+            - [200, 136, 48]
+            - [232, 184, 88]
+            - [248, 232, 160]
+        - name: bronze
+          colors:
+            - [24, 16, 16]
+            - [64, 40, 16]
+            - [112, 64, 24]
+            - [160, 96, 32]
+            - [200, 136, 48]
+            - [232, 184, 88]
+            - [248, 232, 160]
+            - [176, 24, 24]
+            - [232, 64, 40]
+            - [88, 96, 112]
+            - [152, 160, 176]
+            - [216, 224, 232]
+            - [72, 40, 24]
+            - [120, 72, 40]
+            - [168, 112, 64]
+        - name: fire
+          colors:
+            - [24, 16, 16]
+            - [224, 80, 24]
+            - [248, 152, 40]
+            - [248, 216, 96]
+            - [248, 248, 208]
+            - [64, 40, 16]
+            - [112, 64, 24]
+            - [160, 96, 32]
+            - [200, 136, 48]
+            - [232, 184, 88]
+            - [56, 40, 48]
+            - [80, 64, 72]
+            - [104, 24, 24]
+            - [144, 32, 32]

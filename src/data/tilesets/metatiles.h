@@ -317,3 +317,19 @@ const u16 gMetatileAttributes_PorytilesManaged_StairOfHours[] = INCBIN_U16("data
 const u16 gMetatiles_PorytilesManaged_Chion[] = INCBIN_U16("data/tilesets/secondary/chion/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Chion[] = INCBIN_U16("data/tilesets/secondary/chion/porytiles_bin/metatile_attributes.bin");
 
+
+// Ichor: seat_ares
+const u16 gMetatiles_PorytilesManaged_SeatAres[] = INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_SeatAres[] = INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: seat_poseidon
+const u16 gMetatiles_PorytilesManaged_SeatPoseidon[] = INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_SeatPoseidon[] = INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: seat_athena
+const u16 gMetatiles_PorytilesManaged_SeatAthena[] = INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_SeatAthena[] = INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: seat_hera
+const u16 gMetatiles_PorytilesManaged_SeatHera[] = INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_SeatHera[] = INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/metatile_attributes.bin");

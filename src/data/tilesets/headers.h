@@ -1197,3 +1197,63 @@ const struct Tileset gTileset_StairOfHours =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_StairOfHours,
     .callback = NULL,
 };
+
+// Ichor: seat_ares, the war hall of Ares: bloodred floor, trophy armor, spear racks, braziers, the bronze Ares (design/maps/Olympus_Pantheon.md).
+// Porytiles-managed, built by tools/ichor/art/pantheon_build.py. It uses only its own
+// tiles and palettes 6-12, with opaque floors, so it works on any primary; the seat
+// pairs it with oikos.
+const struct Tileset gTileset_SeatAres =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SeatAres,
+    .palettes = gTilesetPalettes_PorytilesManaged_SeatAres,
+    .metatiles = gMetatiles_PorytilesManaged_SeatAres,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SeatAres,
+    .callback = NULL,
+};
+
+// Ichor: seat_poseidon, the sea hall of Poseidon: the basin, coral columns, the trireme, the trident (design/maps/Olympus_Pantheon.md).
+// Porytiles-managed, built by tools/ichor/art/pantheon_build.py. It uses only its own
+// tiles and palettes 6-12, with opaque floors, so it works on any primary; the seat
+// pairs it with oikos.
+const struct Tileset gTileset_SeatPoseidon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SeatPoseidon,
+    .palettes = gTilesetPalettes_PorytilesManaged_SeatPoseidon,
+    .metatiles = gMetatiles_PorytilesManaged_SeatPoseidon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SeatPoseidon,
+    .callback = NULL,
+};
+
+// Ichor: seat_athena, the hall of lamps of Athena: owls, scroll walls, lampstands, the sacred olive (design/maps/Olympus_Pantheon.md).
+// Porytiles-managed, built by tools/ichor/art/pantheon_build.py. It uses only its own
+// tiles and palettes 6-12, with opaque floors, so it works on any primary; the seat
+// pairs it with oikos.
+const struct Tileset gTileset_SeatAthena =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SeatAthena,
+    .palettes = gTilesetPalettes_PorytilesManaged_SeatAthena,
+    .metatiles = gMetatiles_PorytilesManaged_SeatAthena,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SeatAthena,
+    .callback = NULL,
+};
+
+// Ichor: seat_hera, the peacock hall of Hera: feather columns, torches up the aisle, the throne (design/maps/Olympus_Pantheon.md).
+// Porytiles-managed, built by tools/ichor/art/pantheon_build.py. It uses only its own
+// tiles and palettes 6-12, with opaque floors, so it works on any primary; the seat
+// pairs it with oikos.
+const struct Tileset gTileset_SeatHera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SeatHera,
+    .palettes = gTilesetPalettes_PorytilesManaged_SeatHera,
+    .metatiles = gMetatiles_PorytilesManaged_SeatHera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SeatHera,
+    .callback = NULL,
+};

@@ -1,0 +1,1196 @@
+{
+ "tileset": "gTileset_SeatAres",
+ "primary": "gTileset_Oikos",
+ "tiles_used": 267,
+ "pieces": [
+  {
+   "key": "floor_0_0",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     512
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_1_0",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     513
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_2_0",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     514
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_3_0",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     515
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_0_1",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     516
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_1_1",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     517
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_2_1",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     518
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "floor_3_1",
+   "title": "The blood-red flags",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     519
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crack_1_0",
+   "title": "A cracked flag",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     520
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crack_2_1",
+   "title": "A cracked flag",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     521
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crack_3_0",
+   "title": "A cracked flag",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     522
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_0_0",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     523
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_1_0",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     524
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_2_0",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     525
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_3_0",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     526
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_0_1",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     527
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_1_1",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     528
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_2_1",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     529
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shade_3_1",
+   "title": "The flags in the north wall's shade",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     530
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_l",
+   "title": "The oxblood runner, west edge",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     531
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_m",
+   "title": "The oxblood runner",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     532
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_r",
+   "title": "The oxblood runner, east edge",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     533
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "runner_point",
+   "title": "The runner's bronze spear-point",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     534
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "void",
+   "title": "Outside the hall",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     535
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "mat",
+   "title": "The south door's bronze sill",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     536
+    ]
+   ],
+   "walk": [
+    "v"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_SOUTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "mat_shut",
+   "title": "The south door, shut behind the challenger",
+   "section": "kit",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     537
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall0_0",
+   "title": "The north wall, row 0",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     560
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall0_1",
+   "title": "The north wall, row 0",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     561
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_0",
+   "title": "The north wall, row 1",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     562
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_1",
+   "title": "The north wall, row 1",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     563
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall2_0",
+   "title": "The north wall, row 2",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     564
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall2_1",
+   "title": "The north wall, row 2",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     565
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_shield",
+   "title": "A hoplon hung on the wall",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     566
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_spears",
+   "title": "Crossed spears on the wall",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     567
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall1_banner",
+   "title": "The war banner",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     568
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "wall2_banner",
+   "title": "The war banner's tail",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     569
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "side_w",
+   "title": "The w wall",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     570
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "side_e",
+   "title": "The e wall",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     571
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_shut1",
+   "title": "The far door, shut",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     572
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_shut2",
+   "title": "The far door, shut",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     573
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_open1",
+   "title": "The far door, open",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     574
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "door_open2",
+   "title": "The far door, open",
+   "section": "walls",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     575
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "dais_l",
+   "title": "The dais",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     592
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "riser_l",
+   "title": "The dais's riser",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     593
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "dais_m",
+   "title": "The dais",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     594
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "riser_m",
+   "title": "The dais's riser",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     595
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "dais_r",
+   "title": "The dais",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     596
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "riser_r",
+   "title": "The dais's riser",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     597
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "steps",
+   "title": "The dais steps",
+   "section": "dais",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     598
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "column",
+   "title": "A column of the hall",
+   "section": "props",
+   "w": 1,
+   "h": 3,
+   "ids": [
+    [
+     608
+    ],
+    [
+     616
+    ],
+    [
+     624
+    ]
+   ],
+   "walk": [
+    "X",
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "capital": [
+     0,
+     0
+    ],
+    "shaft": [
+     0,
+     1
+    ],
+    "base": [
+     0,
+     2
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "statue",
+   "title": "The bronze Ares on his plinth",
+   "section": "props",
+   "w": 3,
+   "h": 4,
+   "ids": [
+    [
+     609,
+     610,
+     611
+    ],
+    [
+     617,
+     618,
+     619
+    ],
+    [
+     625,
+     626,
+     627
+    ],
+    [
+     633,
+     634,
+     635
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX",
+    "XXX",
+    "XXX"
+   ],
+   "notes": "",
+   "names": {
+    "head": [
+     1,
+     0
+    ],
+    "plinth": [
+     1,
+     3
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "brazier_cold",
+   "title": "The polemarch's brazier",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     612,
+     613
+    ],
+    [
+     620,
+     621
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "",
+   "names": {
+    "tl": [
+     0,
+     0
+    ],
+    "tr": [
+     1,
+     0
+    ],
+    "bl": [
+     0,
+     1
+    ],
+    "br": [
+     1,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "brazier_lit",
+   "title": "The polemarch's brazier",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     614,
+     615
+    ],
+    [
+     622,
+     623
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "",
+   "names": {
+    "tl": [
+     0,
+     0
+    ],
+    "tr": [
+     1,
+     0
+    ],
+    "bl": [
+     0,
+     1
+    ],
+    "br": [
+     1,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "tripod_cold",
+   "title": "A tripod brazier on the aisle",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     640
+    ],
+    [
+     648
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "tripod_lit",
+   "title": "A tripod brazier on the aisle",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     641
+    ],
+    [
+     649
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "tropaion",
+   "title": "A tropaion of captured armor",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     642
+    ],
+    [
+     650
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "base": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "spear_rack",
+   "title": "A rack of spears",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     643,
+     644
+    ],
+    [
+     651,
+     652
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "helmet_stand",
+   "title": "A crested helmet on its stand",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     645
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  }
+ ]
+}

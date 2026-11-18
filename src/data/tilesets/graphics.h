@@ -1990,3 +1990,95 @@ const u16 gTilesetPalettes_PorytilesManaged_Chion[][16] =
     INCBIN_U16("data/tilesets/secondary/chion/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/chion/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: seat_ares, the war hall of Ares: bloodred floor, trophy armor, spear racks, braziers, the bronze Ares (tools/ichor/art/pantheon_build.py)
+const u32 gTilesetTiles_PorytilesManaged_SeatAres[] = INCBIN_U32("data/tilesets/secondary/seat_ares/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_SeatAres[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_ares/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: seat_poseidon, the sea hall of Poseidon: the basin, coral columns, the trireme, the trident (tools/ichor/art/pantheon_build.py)
+const u32 gTilesetTiles_PorytilesManaged_SeatPoseidon[] = INCBIN_U32("data/tilesets/secondary/seat_poseidon/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_SeatPoseidon[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_poseidon/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: seat_athena, the hall of lamps of Athena: owls, scroll walls, lampstands, the sacred olive (tools/ichor/art/pantheon_build.py)
+const u32 gTilesetTiles_PorytilesManaged_SeatAthena[] = INCBIN_U32("data/tilesets/secondary/seat_athena/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_SeatAthena[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_athena/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: seat_hera, the peacock hall of Hera: feather columns, torches up the aisle, the throne (tools/ichor/art/pantheon_build.py)
+const u32 gTilesetTiles_PorytilesManaged_SeatHera[] = INCBIN_U32("data/tilesets/secondary/seat_hera/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_SeatHera[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/15.gbapal")
+};

@@ -18,43 +18,18 @@ lays them, so they never go stale when a tileset is rebuilt.
 
 Usage: python3 tools/ichor/maps/league_seats.py
 """
+import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import league_lib as L  # noqa: E402
 
-LAB = L.catalog("labyrinth")
-DEM = L.catalog("temple_demeter")
+SWAPS = json.loads((Path(__file__).resolve().parent / "pantheon_swaps.json").read_text())
 
 
-def lab(key, name):
-    s = LAB[key]
-    cx, cy = s["names"][name]
-    return s["ids"][cy][cx]
-
-
-def dem(key, name):
-    s = DEM[key]
-    cx, cy = s["names"][name]
-    return s["ids"][cy][cx]
-
-
-def h(v):
-    return f"0x{v:03X}"
-
-
-def quad(key, x, y, names, getter=lab):
-    return [(x + dx, y + dy, h(getter(key, n))) for (dx, dy), n in zip(((0, 0), (1, 0), (0, 1), (1, 1)), names)]
-
-
-LIT = ("lit_tl", "lit_tr", "lit_bl", "lit_br")
-ARES_LIT = quad("brazier", 6, 3, LIT) + quad("brazier", 11, 3, LIT)
-HERA_TORCHES = [(y, [(x, y, h(dem("columns", "torch_lit"))), (x, y + 1, h(dem("columns", "bottom_lit")))])
-                for y in (14, 10, 6) for x in (5, 13)]
-HERA_BRAZIERS = [(x, 3, h(dem("braziers", "top_lit"))) for x in (5, 13)] + \
-                [(x, 4, h(dem("braziers", "summer_lit"))) for x in (5, 13)]
+def cells(seat, what):
+    return [(x, y, f"0x{mid:03X}", solid) for x, y, mid, solid in SWAPS[seat][what]]
 
 
 def shake(h_, v, n, d):
@@ -62,28 +37,33 @@ def shake(h_, v, n, d):
             f"    setvar(VAR_0x8007, {d})", "    special(ShakeCamera)", "    waitstate"]
 
 
-def sets(cells, indent="    "):
-    return [f"{indent}setmetatile({x}, {y}, {mid}, TRUE)" for x, y, mid in cells]
+def sets(cs, indent="    "):
+    return [f"{indent}setmetatile({x}, {y}, {mid}, {'TRUE' if solid else 'FALSE'})" for x, y, mid, solid in cs]
+
+
+def pan(s):
+    """Tiles the walk-in camera climbs: from the player, three steps in from the
+    south door, to four rows below the seat-holder, so the whole dais shows."""
+    sw = SWAPS[s["swaps"]]
+    return sw["walk_in"][1] - 3 - (sw["seat"][1] + 4)
 
 
 def hera_scene():
     out = []
-    for i in range(0, len(HERA_TORCHES), 2):
-        pair = HERA_TORCHES[i][1] + HERA_TORCHES[i + 1][1]
-        out += sets(pair) + ["    special(DrawWholeMapView)", "    playse(SE_M_FLAME_WHEEL)", "    delay(24)"]
-    out += sets(HERA_BRAZIERS) + ["    special(DrawWholeMapView)", "    playse(SE_M_FLAMETHROWER)", "    delay(30)"]
+    for row in SWAPS["Hera"]["torches"]:
+        out += sets([(x, y, f"0x{m:03X}", sd) for x, y, m, sd in row]) + \
+            ["    special(DrawWholeMapView)", "    playse(SE_M_FLAME_WHEEL)", "    delay(24)"]
+    out += sets(cells("Hera", "braziers")) + ["    special(DrawWholeMapView)", "    playse(SE_M_FLAMETHROWER)",
+                                               "    delay(30)"]
     return out
 
 
 SEATS = [
     dict(map="Olympus_SeatOfAres", member="Brasidas", flag="FLAG_ICHOR_BEAT_BRASIDAS",
          trainer="TRAINER_ICHOR_BRASIDAS", state=(0, 1, 2), next_map="MAP_OLYMPUS_SEAT_OF_POSEIDON",
-         close=[(9, 19, h(lab("floor", "void"))), (10, 19, h(lab("floor", "void")))],
-         open_=[(9, 2, h(lab("arcade", "door_pier")) if False else
-                 h(LAB["arcade"]["ids"][2][LAB["arcade"]["names"]["door_pier"][0]]))],
-         gate=False, lit=ARES_LIT,
+         gate=False, swaps="Ares",
          scene=["    msgbox(format(\"Brasidas raises his spear. Fire catches in the braziers at his side.\"), MSGBOX_DEFAULT)",
-                "    closemessage"] + sets(ARES_LIT) + ["    special(DrawWholeMapView)", "    playse(SE_M_FLAMETHROWER)",
+                "    closemessage"] + sets(cells("Ares", "lit")) + ["    special(DrawWholeMapView)", "    playse(SE_M_FLAMETHROWER)",
                                                          "    delay(20)"] +
                ["    playse(SE_M_STRENGTH)"] + shake(0, 2, 3, 4) + ["    delay(10)", "    playse(SE_M_STRENGTH)"] +
                shake(0, 2, 3, 4) + ["    delay(10)", "    playse(SE_M_STRENGTH)"] + shake(0, 3, 4, 4) +
@@ -98,8 +78,7 @@ SEATS = [
                "If you see Kleon, tell him the polemarch said: well."]),
     dict(map="Olympus_SeatOfPoseidon", member="Themistokles", flag="FLAG_ICHOR_BEAT_THEMISTOKLES",
          trainer="TRAINER_ICHOR_THEMISTOKLES", state=(2, 3, 4), next_map="MAP_OLYMPUS_SEAT_OF_ATHENA",
-         close=[(9, 20, "0x016"), (10, 20, "0x016")], open_=[(9, 2, "0x2BC"), (10, 2, "0x2BD")], gate=True,
-         lit=[],
+         gate=True, swaps="Poseidon",
          scene=["    msgbox(format(\"Themistokles raps his staff on the trireme's bronze ram.\"), MSGBOX_DEFAULT)",
                 "    closemessage",
                 "    playse(SE_M_SURF)"] + shake(3, 0, 6, 5) +
@@ -119,12 +98,13 @@ SEATS = [
                "Tell Aristeides I said hello. He'll hate that."]),
     dict(map="Olympus_SeatOfAthena", member="Hypatia", flag="FLAG_ICHOR_BEAT_HYPATIA",
          trainer="TRAINER_ICHOR_HYPATIA", state=(4, 5, 6), next_map="MAP_OLYMPUS_SEAT_OF_HERA",
-         close=[(9, 20, "0x200")], open_=[(9, 2, "0x24D")], gate=True, lit=[],
+         gate=True, swaps="Athena",
          scene=["    msgbox(format(\"Hypatia rolls up the scroll she was reading. Somewhere above, an owl wakes.\"), MSGBOX_DEFAULT)",
                 "    closemessage",
                 "    playmoncry(SPECIES_SOPHOWL, CRY_MODE_NORMAL)",
                 "    waitmoncry",
-                "    fadescreenspeed(FADE_TO_WHITE, 2)",
+                "    fadescreenspeed(FADE_TO_WHITE, 2)"] + sets(cells("Athena", "lit")) + [
+                "    special(DrawWholeMapView)",
                 "    fadescreenspeed(FADE_FROM_WHITE, 2)",
                 "    msgbox(format(\"Every lamp in the library brightens at once, as if the room were listening.\"), MSGBOX_DEFAULT)",
                 "    closemessage",
@@ -153,13 +133,11 @@ SEATS = [
                "Olympias waits beyond. She tells stories. Be careful which ones you believe."]),
     dict(map="Olympus_SeatOfHera", member="Olympias", flag="FLAG_ICHOR_BEAT_OLYMPIAS",
          trainer="TRAINER_ICHOR_OLYMPIAS", state=(6, 7, 8), next_map="MAP_OLYMPUS_SUMMIT",
-         close=[(8, 21, "0x20D"), (9, 21, "0x20D"), (10, 21, "0x20D")],
-         open_=[(14, 1, "0x23E"), (14, 2, "0x247")], gate=False,
-         lit=[c for _, cs in HERA_TORCHES for c in cs] + HERA_BRAZIERS,
+         gate=False, swaps="Hera",
          scene=["    msgbox(format(\"Olympias rises from Hera's throne. At the door behind you, a torch catches.\"), MSGBOX_DEFAULT)",
                 "    closemessage"] + hera_scene() +
                ["    msgbox(format(\"Fire runs up the aisle, column to column, to the braziers at her feet.\\p"
-                "In the pits between the columns, the serpents lift their heads to the light.\"), MSGBOX_DEFAULT)",
+                "Every eye on the peacock columns catches the light, and the bronze serpents by the throne seem to lift their heads.\"), MSGBOX_DEFAULT)",
                 "    closemessage"],
          intro=["Hera's serpents keep this hall. She raised the Hydra, you know. She loved it.",
                 "I told my son a god was his father. He believed me, and he conquered the world.",
@@ -209,14 +187,25 @@ def seat(s):
            f"    call({P}SetClosed)",
            "    special(DrawWholeMapView)",
            f"    setvar(VAR_ELITE_4_STATE, {walked})",
+           # the entrance view: the camera runs up the hall to the seat-holder and back
+           "    special(SpawnCameraObject)",
+           f"    applymovement(OBJ_EVENT_ID_CAMERA, {P}Movement_CameraUp)",
+           "    waitmovement(0)",
+           "    delay(50)",
+           f"    applymovement(OBJ_EVENT_ID_CAMERA, {P}Movement_CameraDown)",
+           "    waitmovement(0)",
+           "    special(RemoveCameraObject)",
            "    releaseall",
            "}",
            "",
+           f"movement {P}Movement_CameraUp {{ walk_up * {pan(s)} }}",
+           f"movement {P}Movement_CameraDown {{ walk_fast_down * {pan(s)} }}",
+           "",
            f"script {P}SetClosed {{"]
-    out += [f"    setmetatile({x}, {y}, {mid}, TRUE)" for x, y, mid in s["close"]]
+    out += sets(cells(s["swaps"], "close"))
     out += ["    return", "}", "", f"script {P}SetOpen {{"]
-    out += [f"    setmetatile({x}, {y}, {mid}, FALSE)" for x, y, mid in s["open_"]]
-    out += sets(s["lit"])
+    out += sets(cells(s["swaps"], "open"))
+    out += sets(cells(s["swaps"], "lit"))
     out += ["    return", "}", "",
             f'text {s["map"]}_Text_Defeat {{ "{s["defeat"]}" }}',
             "",

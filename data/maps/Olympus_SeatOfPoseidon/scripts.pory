@@ -28,18 +28,27 @@ script Olympus_SeatOfPoseidon_EventScript_WalkIn {
     call(Olympus_SeatOfPoseidon_EventScript_SetClosed)
     special(DrawWholeMapView)
     setvar(VAR_ELITE_4_STATE, 3)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Olympus_SeatOfPoseidon_EventScript_Movement_CameraUp)
+    waitmovement(0)
+    delay(50)
+    applymovement(OBJ_EVENT_ID_CAMERA, Olympus_SeatOfPoseidon_EventScript_Movement_CameraDown)
+    waitmovement(0)
+    special(RemoveCameraObject)
     releaseall
 }
 
+movement Olympus_SeatOfPoseidon_EventScript_Movement_CameraUp { walk_up * 14 }
+movement Olympus_SeatOfPoseidon_EventScript_Movement_CameraDown { walk_fast_down * 14 }
+
 script Olympus_SeatOfPoseidon_EventScript_SetClosed {
-    setmetatile(9, 20, 0x016, TRUE)
-    setmetatile(10, 20, 0x016, TRUE)
+    setmetatile(10, 25, 0x20D, TRUE)
     return
 }
 
 script Olympus_SeatOfPoseidon_EventScript_SetOpen {
-    setmetatile(9, 2, 0x2BC, FALSE)
-    setmetatile(10, 2, 0x2BD, FALSE)
+    setmetatile(4, 1, 0x23C, TRUE)
+    setmetatile(4, 2, 0x23D, FALSE)
     return
 }
 

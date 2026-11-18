@@ -28,16 +28,47 @@ script Olympus_SeatOfAthena_EventScript_WalkIn {
     call(Olympus_SeatOfAthena_EventScript_SetClosed)
     special(DrawWholeMapView)
     setvar(VAR_ELITE_4_STATE, 5)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Olympus_SeatOfAthena_EventScript_Movement_CameraUp)
+    waitmovement(0)
+    delay(50)
+    applymovement(OBJ_EVENT_ID_CAMERA, Olympus_SeatOfAthena_EventScript_Movement_CameraDown)
+    waitmovement(0)
+    special(RemoveCameraObject)
     releaseall
 }
 
+movement Olympus_SeatOfAthena_EventScript_Movement_CameraUp { walk_up * 14 }
+movement Olympus_SeatOfAthena_EventScript_Movement_CameraDown { walk_fast_down * 14 }
+
 script Olympus_SeatOfAthena_EventScript_SetClosed {
-    setmetatile(9, 20, 0x200, TRUE)
+    setmetatile(9, 25, 0x20C, TRUE)
     return
 }
 
 script Olympus_SeatOfAthena_EventScript_SetOpen {
-    setmetatile(9, 2, 0x24D, FALSE)
+    setmetatile(15, 1, 0x22C, TRUE)
+    setmetatile(15, 2, 0x22D, FALSE)
+    setmetatile(5, 3, 0x255, TRUE)
+    setmetatile(5, 4, 0x25D, TRUE)
+    setmetatile(12, 3, 0x255, TRUE)
+    setmetatile(12, 4, 0x25D, TRUE)
+    setmetatile(6, 9, 0x255, TRUE)
+    setmetatile(6, 10, 0x25D, TRUE)
+    setmetatile(12, 9, 0x255, TRUE)
+    setmetatile(12, 10, 0x25D, TRUE)
+    setmetatile(6, 13, 0x255, TRUE)
+    setmetatile(6, 14, 0x25D, TRUE)
+    setmetatile(12, 13, 0x255, TRUE)
+    setmetatile(12, 14, 0x25D, TRUE)
+    setmetatile(6, 17, 0x255, TRUE)
+    setmetatile(6, 18, 0x25D, TRUE)
+    setmetatile(12, 17, 0x255, TRUE)
+    setmetatile(12, 18, 0x25D, TRUE)
+    setmetatile(6, 21, 0x255, TRUE)
+    setmetatile(6, 22, 0x25D, TRUE)
+    setmetatile(12, 21, 0x255, TRUE)
+    setmetatile(12, 22, 0x25D, TRUE)
     return
 }
 
@@ -59,6 +90,27 @@ script Olympus_SeatOfAthena_EventScript_Hypatia {
     playmoncry(SPECIES_SOPHOWL, CRY_MODE_NORMAL)
     waitmoncry
     fadescreenspeed(FADE_TO_WHITE, 2)
+    setmetatile(5, 3, 0x255, TRUE)
+    setmetatile(5, 4, 0x25D, TRUE)
+    setmetatile(12, 3, 0x255, TRUE)
+    setmetatile(12, 4, 0x25D, TRUE)
+    setmetatile(6, 9, 0x255, TRUE)
+    setmetatile(6, 10, 0x25D, TRUE)
+    setmetatile(12, 9, 0x255, TRUE)
+    setmetatile(12, 10, 0x25D, TRUE)
+    setmetatile(6, 13, 0x255, TRUE)
+    setmetatile(6, 14, 0x25D, TRUE)
+    setmetatile(12, 13, 0x255, TRUE)
+    setmetatile(12, 14, 0x25D, TRUE)
+    setmetatile(6, 17, 0x255, TRUE)
+    setmetatile(6, 18, 0x25D, TRUE)
+    setmetatile(12, 17, 0x255, TRUE)
+    setmetatile(12, 18, 0x25D, TRUE)
+    setmetatile(6, 21, 0x255, TRUE)
+    setmetatile(6, 22, 0x25D, TRUE)
+    setmetatile(12, 21, 0x255, TRUE)
+    setmetatile(12, 22, 0x25D, TRUE)
+    special(DrawWholeMapView)
     fadescreenspeed(FADE_FROM_WHITE, 2)
     msgbox(format("Every lamp in the library brightens at once, as if the room were listening."), MSGBOX_DEFAULT)
     closemessage

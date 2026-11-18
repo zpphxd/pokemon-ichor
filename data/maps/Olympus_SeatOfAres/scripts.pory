@@ -28,25 +28,39 @@ script Olympus_SeatOfAres_EventScript_WalkIn {
     call(Olympus_SeatOfAres_EventScript_SetClosed)
     special(DrawWholeMapView)
     setvar(VAR_ELITE_4_STATE, 1)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Olympus_SeatOfAres_EventScript_Movement_CameraUp)
+    waitmovement(0)
+    delay(50)
+    applymovement(OBJ_EVENT_ID_CAMERA, Olympus_SeatOfAres_EventScript_Movement_CameraDown)
+    waitmovement(0)
+    special(RemoveCameraObject)
     releaseall
 }
 
+movement Olympus_SeatOfAres_EventScript_Movement_CameraUp { walk_up * 14 }
+movement Olympus_SeatOfAres_EventScript_Movement_CameraDown { walk_fast_down * 14 }
+
 script Olympus_SeatOfAres_EventScript_SetClosed {
-    setmetatile(9, 19, 0x200, TRUE)
-    setmetatile(10, 19, 0x200, TRUE)
+    setmetatile(9, 25, 0x219, TRUE)
     return
 }
 
 script Olympus_SeatOfAres_EventScript_SetOpen {
-    setmetatile(9, 2, 0x21C, FALSE)
-    setmetatile(6, 3, 0x33D, TRUE)
-    setmetatile(7, 3, 0x33E, TRUE)
-    setmetatile(6, 4, 0x345, TRUE)
-    setmetatile(7, 4, 0x346, TRUE)
-    setmetatile(11, 3, 0x33D, TRUE)
-    setmetatile(12, 3, 0x33E, TRUE)
-    setmetatile(11, 4, 0x345, TRUE)
-    setmetatile(12, 4, 0x346, TRUE)
+    setmetatile(15, 1, 0x23E, TRUE)
+    setmetatile(15, 2, 0x23F, FALSE)
+    setmetatile(5, 3, 0x266, TRUE)
+    setmetatile(6, 3, 0x267, TRUE)
+    setmetatile(5, 4, 0x26E, TRUE)
+    setmetatile(6, 4, 0x26F, TRUE)
+    setmetatile(12, 3, 0x266, TRUE)
+    setmetatile(13, 3, 0x267, TRUE)
+    setmetatile(12, 4, 0x26E, TRUE)
+    setmetatile(13, 4, 0x26F, TRUE)
+    setmetatile(7, 22, 0x281, TRUE)
+    setmetatile(7, 23, 0x289, TRUE)
+    setmetatile(11, 22, 0x281, TRUE)
+    setmetatile(11, 23, 0x289, TRUE)
     return
 }
 
@@ -65,14 +79,18 @@ script Olympus_SeatOfAres_EventScript_Brasidas {
     setspeaker(SP_NAME_NONE)
     msgbox(format("Brasidas raises his spear. Fire catches in the braziers at his side."), MSGBOX_DEFAULT)
     closemessage
-    setmetatile(6, 3, 0x33D, TRUE)
-    setmetatile(7, 3, 0x33E, TRUE)
-    setmetatile(6, 4, 0x345, TRUE)
-    setmetatile(7, 4, 0x346, TRUE)
-    setmetatile(11, 3, 0x33D, TRUE)
-    setmetatile(12, 3, 0x33E, TRUE)
-    setmetatile(11, 4, 0x345, TRUE)
-    setmetatile(12, 4, 0x346, TRUE)
+    setmetatile(5, 3, 0x266, TRUE)
+    setmetatile(6, 3, 0x267, TRUE)
+    setmetatile(5, 4, 0x26E, TRUE)
+    setmetatile(6, 4, 0x26F, TRUE)
+    setmetatile(12, 3, 0x266, TRUE)
+    setmetatile(13, 3, 0x267, TRUE)
+    setmetatile(12, 4, 0x26E, TRUE)
+    setmetatile(13, 4, 0x26F, TRUE)
+    setmetatile(7, 22, 0x281, TRUE)
+    setmetatile(7, 23, 0x289, TRUE)
+    setmetatile(11, 22, 0x281, TRUE)
+    setmetatile(11, 23, 0x289, TRUE)
     special(DrawWholeMapView)
     playse(SE_M_FLAMETHROWER)
     delay(20)
