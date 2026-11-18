@@ -429,7 +429,7 @@
       "x": 45,
       "y": 44,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_Sinkhole"
     },
@@ -438,8 +438,8 @@
       "x": 27,
       "y": 42,
       "elevation": 3,
-      "var": "VAR_ICHOR_KNOSSA",
-      "var_value": "11",
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
       "script": "LabyrinthRing5_EventScript_SouthStair"
     },
     {
@@ -447,8 +447,8 @@
       "x": 28,
       "y": 42,
       "elevation": 3,
-      "var": "VAR_ICHOR_KNOSSA",
-      "var_value": "11",
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
       "script": "LabyrinthRing5_EventScript_SouthStair"
     },
     {
@@ -456,7 +456,7 @@
       "x": 44,
       "y": 3,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -465,7 +465,7 @@
       "x": 44,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -474,7 +474,7 @@
       "x": 44,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -483,7 +483,7 @@
       "x": 45,
       "y": 3,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -492,7 +492,7 @@
       "x": 45,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -501,7 +501,7 @@
       "x": 46,
       "y": 3,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -510,7 +510,7 @@
       "x": 46,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -519,7 +519,7 @@
       "x": 46,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -528,7 +528,7 @@
       "x": 47,
       "y": 3,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -537,7 +537,7 @@
       "x": 47,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -546,7 +546,7 @@
       "x": 48,
       "y": 3,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -555,7 +555,7 @@
       "x": 48,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -564,7 +564,7 @@
       "x": 48,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_PlatesA"
     },
@@ -573,7 +573,7 @@
       "x": 54,
       "y": 45,
       "elevation": 3,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_TEMP_E",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_Hole2"
     },

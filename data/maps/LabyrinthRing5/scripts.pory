@@ -62,6 +62,10 @@ mapscripts LabyrinthRing5_MapScripts {
     setvar(VAR_0x8005, 32)
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_DEEP)
     special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 38)
+    setvar(VAR_0x8005, 15)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
+    special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 22)
     setvar(VAR_0x8005, 2)
     setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
@@ -314,17 +318,17 @@ script LabyrinthRing5_EventScript_PlatesA {
     }
     setvar(VAR_TEMP_9, 0)
     getobjectxy(LOCALID_LABYRINTHRING5_A_DRUM0, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
-    if (var(VAR_0x8007) == 45 && var(VAR_0x8008) == 6) {
+    if (var(VAR_0x8007) == 45 && var(VAR_0x8008) == 5) {
         addvar(VAR_TEMP_9, 1)
     }
-    if (var(VAR_0x8007) == 47 && var(VAR_0x8008) == 6) {
+    if (var(VAR_0x8007) == 47 && var(VAR_0x8008) == 5) {
         addvar(VAR_TEMP_9, 1)
     }
     getobjectxy(LOCALID_LABYRINTHRING5_A_DRUM1, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
-    if (var(VAR_0x8007) == 45 && var(VAR_0x8008) == 6) {
+    if (var(VAR_0x8007) == 45 && var(VAR_0x8008) == 5) {
         addvar(VAR_TEMP_9, 1)
     }
-    if (var(VAR_0x8007) == 47 && var(VAR_0x8008) == 6) {
+    if (var(VAR_0x8007) == 47 && var(VAR_0x8008) == 5) {
         addvar(VAR_TEMP_9, 1)
     }
     if (var(VAR_TEMP_9) == 2) {

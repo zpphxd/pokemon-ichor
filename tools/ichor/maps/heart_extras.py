@@ -137,7 +137,7 @@ def treasure_hole(m, prefix, tag, item, flag, story, avoid=(), far_from=None):
     m.warps[-1]["unreached_ok"] = True
     nb = [(hx + dx, hy + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)) if m.walkable_t(hx + dx, hy + dy)]
     arrival(m, *nb[0])                                    # a+2: back up beside the hole
-    m.trigger(hx, hy, prefix + f"Hole{tag}", var="VAR_TEMP_0", value=0)
+    m.trigger(hx, hy, prefix + f"Hole{tag}", var="VAR_TEMP_E", value=0)
     m.item_ball(px + 2, py + 1 + rows, item, flag)
     m.extra_scripts = getattr(m, "extra_scripts", []) + [
         "", f"script {prefix}Hole{tag} {{", "    lockall",
@@ -185,7 +185,7 @@ def floor_seal(m, prefix, tag, temp_flag, item, flag, why, avoid=(), near=None, 
     m.cell(x0 + 2, y0, "M")
     m.place(x0 + 2, y0, "dials", "lever", solid=True)
     drums = [(x0 + 1, y0 + 2), (x0 + 3, y0 + 2)]
-    plates = [(x0 + 1, y0 + 4), (x0 + 3, y0 + 4)]
+    plates = [(x0 + 1, y0 + 3), (x0 + 3, y0 + 3)]
     for (x, y) in plates:
         m.place(x, y, "plate", "plate", solid=False)
         m.nothread.add((x, y))
@@ -198,7 +198,7 @@ def floor_seal(m, prefix, tag, temp_flag, item, flag, why, avoid=(), near=None, 
     for x in range(x0, x0 + 5):
         for y in range(y0 + 1, y0 + 4):
             if (x, y) not in drums:
-                m.trigger(x, y, prefix + f"Plates{tag}", var="VAR_TEMP_0", value=0)
+                m.trigger(x, y, prefix + f"Plates{tag}", var="VAR_TEMP_E", value=0)
     cave = "METATILE_Mychos_CaveFloor"
     m.gen += [f"if (flag({temp_flag})) {{", f"    setmetatile({x0 + 5}, {y0 + 3}, {cave}, FALSE)",
               "} else {", f"    setmetatile({x0 + 5}, {y0 + 3}, METATILE_Mychos_Grate, TRUE)", "}"]

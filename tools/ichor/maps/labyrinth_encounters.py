@@ -48,6 +48,20 @@ TOMB = [("Kalyptor", 46, 48), ("Mitoclew", 46, 48), ("Persenyx", 46, 48), ("Kaly
         ("Mitoclew", 47, 48), ("Persenyx", 47, 48), ("Kalyptor", 48, 48), ("Lykanax", 47, 48),
         ("Persenyx", 48, 48), ("Mitoclew", 48, 48), ("Lykanax", 48, 48), ("Kolossard", 48, 48)]
 
+# the heart (Rings V-VII; SCRIPT.md Part 4's tables, the Labyrinth II build)
+R5 = [("Kalyptor", 46, 48), ("Mitoclew", 46, 48), ("Lykanax", 46, 48), ("Hyphantis", 46, 48),
+      ("Plouteras", 46, 48), ("Kalyptor", 46, 48), ("Lykanax", 47, 48), ("Mitoclew", 47, 48),
+      ("Hyphantis", 47, 48), ("Cairnolith", 47, 48), ("Kaprodon", 48, 48), ("Persenyx", 48, 48)]
+R6 = [("Kolossette", 46, 48), ("Taurivet", 46, 48), ("Gigantomb", 46, 48), ("Cairnolith", 46, 48),
+      ("Kolossette", 46, 48), ("Taurivet", 46, 48), ("Gigantomb", 47, 48), ("Kourodin", 47, 48),
+      ("Kolossard", 47, 48), ("Kolossette", 47, 48), ("Kolossard", 48, 48), ("Gigantomb", 48, 48)]
+R7 = [("Sophowl", 47, 49), ("Mitoclew", 47, 49), ("Psychora", 47, 49), ("Chelyra", 47, 49),
+      ("Melisseer", 47, 49), ("Sophowl", 47, 49), ("Mitoclew", 48, 49), ("Psychora", 48, 49),
+      ("Chelyra", 48, 49), ("Melisseer", 48, 49), ("Kerastorm", 49, 49), ("Amnoze", 49, 49)]
+R7N = [("Sophowl", 47, 49), ("Mitoclew", 47, 49), ("Psychora", 47, 49), ("Chelyra", 47, 49),
+       ("Amnoze", 47, 49), ("Sophowl", 47, 49), ("Mitoclew", 48, 49), ("Psychora", 48, 49),
+       ("Chelyra", 48, 49), ("Amnoze", 48, 49), ("Amnoze", 49, 49), ("Kerastorm", 49, 49)]
+
 TABLES = {
     ("MAP_LABYRINTH_RING1", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R1)},
     ("MAP_LABYRINTH_RING2", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R2), "water_mons": land(WATER, 4),
@@ -59,8 +73,12 @@ TABLES = {
     ("MAP_LABYRINTH_RING4", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R4, 6), "water_mons": land(WATER, 4),
                                          "fishing_mons": land(FISH, 20)},
     # Rings V and VI: the same stream fills the cisterns around the heart
-    ("MAP_LABYRINTH_RING5", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
-    ("MAP_LABYRINTH_RING6", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
+    ("MAP_LABYRINTH_RING5", "Morning"): {"land_mons": land(R5, 10), "rock_smash_mons": land(ROCK, 20),
+                                         "water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
+    ("MAP_LABYRINTH_RING6", "Morning"): {"land_mons": land(R6, 8), "rock_smash_mons": land(ROCK, 20),
+                                         "water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
+    ("MAP_LABYRINTH_RING7", "Morning"): {"land_mons": land(R7, 10), "rock_smash_mons": land(ROCK, 20)},
+    ("MAP_LABYRINTH_RING7", "Night"): {"land_mons": land(R7N, 10), "rock_smash_mons": land(ROCK, 20)},
     ("MAP_LABYRINTH_MINOS_TOMB", "Morning"): {"land_mons": land(TOMB, 4)},
     ("MAP_LABYRINTH_CELLARS", "Morning"): {"land_mons": land(TOMB, 6)},
 }

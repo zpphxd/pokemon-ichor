@@ -266,7 +266,15 @@ def ring5(stem_suffix="", render=True):
     m = H.HeartMap("LabyrinthRing5", "mychos", 56, 48)
     x0, y0, x1, y1 = R5_LOOP
     # the lake: its north arm under the gallery, the basin inside the loop, an island
-    m.carve(15, 11, 40, 15, "~")
+    # the north arm under the gallery: three bays between spurs of rock
+    for (bx0, bx1, by0) in ((15, 22, 11), (24, 31, 12), (33, 40, 11)):
+        m.carve(bx0, by0, bx1, 15, "~")
+    m.carve(23, 14, 23, 15, "~")
+    m.carve(32, 14, 32, 15, "~")
+    for (x, y) in ((16, 11), (21, 11), (34, 11), (39, 11), (28, 12)):
+        m.cell(x, y, "R")
+    for (x, y) in ((27, 15), (28, 15), (38, 15)):   # strands of gravel where the road meets the water
+        m.cell(x, y, ".")
     m.carve(21, 17, 34, 30, "~")
     m.draw(["RRRR ", "R..RR", "RR.oR", " RRRR"], 26, 21)   # the island: a skylight on a ledge
     m.carve(14, 12, 14, 14, "~")
@@ -430,9 +438,9 @@ def finish_ring5(m, stem_suffix, render):
           flag="FLAG_ICHOR_HIDE_KLEON_RING5")
     for x in (20, 21, 22):
         m.trigger(x, 10, "LabyrinthRing5_EventScript_SceneE", var="VAR_ICHOR_KNOSSA", value=9)
-    m.trigger(*R5_HOLE, "LabyrinthRing5_EventScript_Sinkhole", var="VAR_TEMP_0", value=0)
-    m.trigger(dx_, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_ICHOR_KNOSSA", value=11)
-    m.trigger(dx_ + 1, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_ICHOR_KNOSSA", value=11)
+    m.trigger(*R5_HOLE, "LabyrinthRing5_EventScript_Sinkhole", var="VAR_TEMP_E", value=0)
+    m.trigger(dx_, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_TEMP_E", value=0)
+    m.trigger(dx_ + 1, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_TEMP_E", value=0)
     # signs: the Titans' notice, the bell, the fresco, the spill, the grate, the island
     m.sign(25, 10, "LabyrinthRing5_EventScript_Notice")
     m.sign(18, 22, "LabyrinthRing5_EventScript_Bell")
@@ -911,7 +919,7 @@ def finish_ring6(m, stem_suffix, render):
           local_id="LOCALID_RING6_PRIESTESS")
     # triggers: Scene H at the archive's door, Scene G at the cavern's mouth
     m.trigger(38, 18, "LabyrinthRing6_EventScript_SceneH", var="VAR_TEMP_1", value=0)
-    m.trigger(7, 29, "LabyrinthRing6_EventScript_SceneG", var="VAR_TEMP_1", value=0)
+    m.trigger(7, 29, "LabyrinthRing6_EventScript_SceneG", var="VAR_TEMP_8", value=0)
     # signs and dials
     for bit, (x, y) in R6_DIALS.items():
         m.sign(x, y, f"LabyrinthRing6_EventScript_Dial{bit + 1}")
@@ -1025,6 +1033,8 @@ def ring7(stem_suffix="", render=True):
     m.carve(x1_, y1_, x2_, y2_, ".")
     m.carve(x2_, y2_, x3_, y3_, ".")
     m.carve(x3_, R7_CRYSTAL[1], x3_, y3_, ".")
+    m.no_dress = {(x1_, y) for y in range(y1_, y2_ + 1)} | {(x, y2_) for x in range(x2_, x3_ + 1)} \
+        | {(x3_, y) for y in range(R7_CRYSTAL[1], y3_ + 1)}
     # the teaching antechamber (north-east) and the fresco corridor (north-west)
     m.carve(23, 3, 28, 8, "m")
     m.carve(R7_FRESCO[0], 6, R7_FRESCO[0] + 8, 6, "m")
@@ -1236,8 +1246,11 @@ def icarus(stem_suffix="", render=True):
     climb, the light growing toward the top (Scene L is scripted)."""
     m = H.HeartMap("LabyrinthIcarusShaft", "astra", 10, 40)
     m.carve(4, 3, 5, 38, ".")
+    for y in range(5, 38, 3):                  # footholds Daedalus cut in the chimney's floor
+        m.carve(4, y, 5, y, "m")
     for y in range(6, 38, 5):
         m.carve(3, y, 6, y + 1, ".")            # ledges where the rock steps out
+        m.place(3 if y % 2 else 6, y, "formations", "crystal_a" if y < 20 else "mite_a", solid=True)
     m.lay()
     for y in range(0, 4):
         for x in range(10):
