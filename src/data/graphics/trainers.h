@@ -1433,4 +1433,9 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorGigas, gTrainerPalette_IchorGigas),
     },
+    [TRAINER_PIC_ARIADNE_PARTNER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
+        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_May, gTrainerPalette_May, sBackAnims_Hoenn),
+    },
 };

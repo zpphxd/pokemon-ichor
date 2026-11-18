@@ -267,6 +267,12 @@ script LabyrinthRing4_EventScript_Register {
     setvar(VAR_0x8005, 22)
     setvar(VAR_0x8006, THREAD_ANCHOR_R4_DIG)
     special(Ichor_AddThreadAnchor)
+    if (var(VAR_ICHOR_KNOSSA) == 17) {
+        call(LabyrinthRing4_EventScript_TurningWalls)
+    } else {
+        setvar(VAR_TEMP_D, 1)
+        setvar(VAR_TEMP_E, 1)
+    }
 }
 
 // The ring's state, drawn on load and after every change: lit braziers, opened
@@ -364,6 +370,102 @@ script LabyrinthRing4_EventScript_Lair4 {
     } else {
         msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
     }
+    releaseall
+}
+
+// The Turning (LABYRINTH §7): the turned layout, from tools/ichor/maps/labyrinth_turning.py.
+script LabyrinthRing4_EventScript_TurningWalls {
+    setmetatile(9, 14, 0x23A, TRUE)
+    setmetatile(10, 14, 0x251, TRUE)
+    setmetatile(11, 14, 0x251, TRUE)
+    setmetatile(12, 14, 0x239, TRUE)
+    setmetatile(9, 15, 0x240, TRUE)
+    setmetatile(10, 15, 0x261, TRUE)
+    setmetatile(11, 15, 0x25F, TRUE)
+    setmetatile(12, 15, 0x23C, TRUE)
+    setmetatile(32, 37, 0x24C, TRUE)
+    setmetatile(33, 37, 0x248, TRUE)
+    setmetatile(32, 38, 0x24C, TRUE)
+    setmetatile(33, 38, 0x248, TRUE)
+    setmetatile(32, 39, 0x24C, TRUE)
+    setmetatile(33, 39, 0x248, TRUE)
+    setmetatile(32, 40, 0x239, TRUE)
+    setmetatile(33, 40, 0x23A, TRUE)
+    if (var(VAR_TEMP_D) != 0) {
+        setmetatile(32, 37, 0x25B, TRUE)
+        setmetatile(33, 37, 0x25D, TRUE)
+        setmetatile(32, 38, 0x320, FALSE)
+        setmetatile(33, 38, 0x32B, FALSE)
+        setmetatile(32, 39, 0x32B, FALSE)
+        setmetatile(33, 39, 0x320, FALSE)
+        setmetatile(32, 40, 0x251, TRUE)
+        setmetatile(33, 40, 0x251, TRUE)
+    }
+    if (var(VAR_TEMP_E) != 0) {
+        setmetatile(9, 14, 0x248, TRUE)
+        setmetatile(10, 14, 0x320, FALSE)
+        setmetatile(11, 14, 0x32B, FALSE)
+        setmetatile(12, 14, 0x24C, TRUE)
+        setmetatile(9, 15, 0x248, TRUE)
+        setmetatile(10, 15, 0x32B, FALSE)
+        setmetatile(11, 15, 0x320, FALSE)
+        setmetatile(12, 15, 0x24C, TRUE)
+    }
+}
+
+script LabyrinthRing4_EventScript_TurningBreak0 {
+    lockall
+    setvar(VAR_TEMP_D, 1)
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("The wall ahead grinds shut across the passage."), MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    playse(SE_M_MEGA_KICK)
+    setmetatile(32, 37, 0x25B, TRUE)
+    setmetatile(33, 37, 0x25D, TRUE)
+    setmetatile(32, 38, 0x320, FALSE)
+    setmetatile(33, 38, 0x32B, FALSE)
+    setmetatile(32, 39, 0x32B, FALSE)
+    setmetatile(33, 39, 0x320, FALSE)
+    setmetatile(32, 40, 0x251, TRUE)
+    setmetatile(33, 40, 0x251, TRUE)
+    special(Ichor_DrawThread)
+    special(DrawWholeMapView)
+    msgbox(format("Then it bursts. Horns, a tail, a cloud of dust, and Asterion is gone ahead.\pHe's clearing the way."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+}
+
+script LabyrinthRing4_EventScript_TurningBreak1 {
+    lockall
+    setvar(VAR_TEMP_E, 1)
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("The wall ahead grinds shut across the passage."), MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    playse(SE_M_MEGA_KICK)
+    setmetatile(9, 14, 0x248, TRUE)
+    setmetatile(10, 14, 0x320, FALSE)
+    setmetatile(11, 14, 0x32B, FALSE)
+    setmetatile(12, 14, 0x24C, TRUE)
+    setmetatile(9, 15, 0x248, TRUE)
+    setmetatile(10, 15, 0x32B, FALSE)
+    setmetatile(11, 15, 0x320, FALSE)
+    setmetatile(12, 15, 0x24C, TRUE)
+    special(Ichor_DrawThread)
+    special(DrawWholeMapView)
+    msgbox(format("Then it bursts. Horns, a tail, a cloud of dust, and Asterion is gone ahead.\pHe's clearing the way."), MSGBOX_DEFAULT)
+    closemessage
     releaseall
 }
 // ---- END GENERATED ----

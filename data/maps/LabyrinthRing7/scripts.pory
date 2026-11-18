@@ -70,6 +70,11 @@ mapscripts LabyrinthRing7_MapScripts {
     setvar(VAR_0x8006, THREAD_ANCHOR_RING7_DEEP)
     special(Ichor_AddThreadAnchor)
     call(LabyrinthRing7_EventScript_OnLoadExtra)
+    if (var(VAR_ICHOR_KNOSSA) == 17) {
+        call(LabyrinthRing7_EventScript_TurningWalls)
+    } else {
+    }
+    special(Ichor_DrawThread)
     // ---- END GENERATED ----
     }
 }
@@ -119,10 +124,25 @@ script LabyrinthRing7_EventScript_SceneI {
     // III-3L); if you beat him in Ring IV, Klytios takes his place. LabyrinthRing7_EventScript_
     // EnkeladosFought is the one place that asks Ring IV (the Labyrinth I build) which it was.
     call(LabyrinthRing7_EventScript_EnkeladosFought)
-    if (var(VAR_RESULT) == TRUE) {
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+    if (var(VAR_TEMP_4) == TRUE) {
         setmultitrainerbattle(TRAINER_ICHOR_PORPHYRION, LabyrinthRing7_Text_PorphyrionDefeat, TRAINER_ICHOR_KLYTIOS, LabyrinthRing7_Text_KlytiosDefeat, PARTNER_ICHOR_ARIADNE)
     } else {
         setmultitrainerbattle(TRAINER_ICHOR_PORPHYRION, LabyrinthRing7_Text_PorphyrionDefeat, TRAINER_ICHOR_ENKELADOS_CHOROS, LabyrinthRing7_Text_EnkeladosDefeat, PARTNER_ICHOR_ARIADNE)
+    }
+    // setmultitrainerbattle only sets the battle up (as at Delphoi's Omphalos): start it
+    setvar(VAR_0x8005, MULTI_BATTLE_2_VS_2)
+    callnative(BattleSetup_StartMultiBattle)
+    waitstate
+    if (var(VAR_RESULT) != B_OUTCOME_WON) {
+        releaseall
+        end
+    }
+    settrainerflag(TRAINER_ICHOR_PORPHYRION)
+    if (var(VAR_TEMP_4) == TRUE) {
+        settrainerflag(TRAINER_ICHOR_KLYTIOS)
+    } else {
+        settrainerflag(TRAINER_ICHOR_ENKELADOS_CHOROS)
     }
     removeobject(LOCALID_RING7_PORPHYRION)
     removeobject(LOCALID_RING7_GIGAS2)
@@ -135,10 +155,13 @@ script LabyrinthRing7_EventScript_SceneI {
     releaseall
 }
 
-// TRUE when Enkelados was beaten at his Ring IV checkpoint. Until Ring IV lands, nobody
-// has fought him there, so he always stands here.
+// TRUE when Enkelados was beaten at his Ring IV checkpoint (a wrong answer to his catechism
+// starts TRAINER_ICHOR_ENKELADOS): then Klytios takes his place on the dancing floor.
 script LabyrinthRing7_EventScript_EnkeladosFought {
     setvar(VAR_RESULT, FALSE)
+    if (defeated(TRAINER_ICHOR_ENKELADOS)) {
+        setvar(VAR_RESULT, TRUE)
+    }
 }
 
 script LabyrinthRing7_EventScript_AriadneAfter {
@@ -717,3 +740,17 @@ script LabyrinthRing7_EventScript_Remains3 {
     msgbox(format("A Titan's lantern and a scrawl: The priestess's floor won't light.\pKronos says leave it. The stars do the work below."), MSGBOX_SIGN)
 }
 // ---- END GENERATED EXTRAS ----
+
+// ---- BEGIN GENERATED TURNING ----
+// The Turning (LABYRINTH §7): the turned layout, from tools/ichor/maps/labyrinth_turning.py.
+script LabyrinthRing7_EventScript_TurningWalls {
+    setmetatile(21, 3, 0x32F, TRUE)
+    setmetatile(22, 3, 0x32B, TRUE)
+    setmetatile(21, 4, 0x32F, TRUE)
+    setmetatile(22, 4, 0x32B, TRUE)
+    setmetatile(21, 5, 0x32F, TRUE)
+    setmetatile(22, 5, 0x32B, TRUE)
+    setmetatile(21, 6, 0x32F, TRUE)
+    setmetatile(22, 6, 0x32B, TRUE)
+}
+// ---- END GENERATED TURNING ----

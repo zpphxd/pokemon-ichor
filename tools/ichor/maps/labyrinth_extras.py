@@ -241,10 +241,32 @@ def cellar_entries(m, mz, rooms, prefix):
     return slots[:len(rooms)]
 
 
+def remains_gfx(text):
+    """The drawn remains object for a remains text (tools/ichor/art/sprites_objects.py), or None."""
+    t = text.lower()
+    if "shield" in t or "helmet" in t:
+        return "ICHOR_REMAINS_SHIELD"
+    if "spear" in t:
+        return "ICHOR_REMAINS_SPEAR"
+    if "bones" in t:
+        return "ICHOR_REMAINS_BONES"
+    if "satchel" in t or " pack" in t:
+        return "ICHOR_REMAINS_SATCHEL"
+    return None
+
+
 def remains(m, x, y, prefix, tag, text, item=None, flag=None):
     m.sign(x, y, prefix + f"Remains{tag}")
     if item:
         m.hidden(x, y, item, flag)
+    gfx = remains_gfx(text)
+    if gfx and not item:
+        # the remains themselves, drawn on the floor where they lie (or just below a wall sign)
+        busy = {(int(e["x"]), int(e["y"])) for coll in (m.objects, m.warps, m.coords) for e in coll}
+        for (cx, cy) in ((x, y), (x, y + 1)):
+            if 0 <= cx < m.w and 0 <= cy < m.h and not m.solid[cy, cx] and (cx, cy) not in busy:
+                m.obj(gfx, cx, cy, prefix + f"Remains{tag}", move="MOVEMENT_TYPE_FACE_DOWN")
+                break
     s = ["", f"script {prefix}Remains{tag} {{", f"    msgbox(format(\"{text}\"), MSGBOX_SIGN)", "}"]
     m.extra_scripts = getattr(m, "extra_scripts", []) + s
     m.lost_log = getattr(m, "lost_log", [])

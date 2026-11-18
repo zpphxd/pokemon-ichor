@@ -402,6 +402,9 @@ function L.battle()
       L.pilot.learnMove()
     elseif L.pilot and L.taskRunning("Task_HandleChooseMonInput") then
       L.pilot.chooseReplacement()
+    elseif L.taskRunning("Task_HandleChooseMonInput") then
+      -- a Pokémon fainted: send out the next one (the cursor starts on the fainted lead)
+      wait(10); tap(K.DOWN); tap(K.A); wait(16); tap(K.A); wait(20)
     elseif L.inBattle() and controller("HandleInputChooseAction") then
       if not shotTaken then
         rec.song = L.playingHeader()
@@ -432,7 +435,7 @@ function L.battle()
     else
       tap(K.A); wait(4)
     end
-    if now() - t0 > 30000 then L.shot("stuck_battle"); fail("a battle never ended") end
+    if now() - t0 > (L.battleLimit or 30000) then L.shot("stuck_battle"); fail("a battle never ended") end
   end
   rec.outcome = emu:read8(S.gBattleOutcome)
   if L.pilot then L.pilot.afterBattle(rec) end

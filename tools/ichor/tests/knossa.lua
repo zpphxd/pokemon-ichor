@@ -101,6 +101,9 @@ L.start(function()
     -- III-3O: the court at night after the Turning (Scene K), Alethea, the Megaron
     L.runHeader("Knossa_TurningHeader")
     L.settle()
+    flag(S.FLAG_TURNING_DONE, "out through the threshold: the Turning ends")
+    L.expect(not L.getFlag(S.FLAG_TURNING_QUIET) and knossa() == 18 and L.mapId() == S.MAP_PALACE,
+             "the court at night: wild Pokémon and trainers again, VAR_ICHOR_KNOSSA 18")
     L.talk(L.npc("KnossaPalace_EventScript_Kleon"), {answers = {"yes", "yes"}})
     L.settle()
     flag(S.FLAG_KLEON, "Scene K: Kleon reads the tablet and goes")
@@ -111,7 +114,12 @@ L.start(function()
 
     -- III-3P: the landing from the Icarus Shaft, Asterion, Alethea's gull
     L.runHeader("Knossa_IcarusHeader")
+    L.settle({answers = {"yes"}})
+    L.expect(L.mapId() == S.MAP_SHAFT, "Scene L: Daedalus at the open grate sends you up the Icarus Shaft")
+    L.shot("icarus_shaft")
+    L.step(K.UP)
     L.settle()
+    L.expect(L.getFlag(S.FLAG_ICARUS) and knossa() == 19 and L.mapId() == S.MAP_PALACE, "the flight lands in the court at dawn")
     L.expect(L.getVar(S.VAR_ICHOR_ACT3) == 6, "the dawn landing sets VAR_ICHOR_ACT3 6")
     L.shot("court_at_dawn")
     L.talk(L.npc("KnossaPalace_EventScript_Asterion"), {answers = {"yes"}})

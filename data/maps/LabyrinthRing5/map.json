@@ -266,6 +266,32 @@
       "trainer_sight_or_berry_tree_id": "ITEM_RELIC_GOLD",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_RING5_POCKET_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_REMAINS_BONES",
+      "x": 35,
+      "y": 37,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing5_EventScript_Remains1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_REMAINS_SPEAR",
+      "x": 14,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing5_EventScript_Remains2",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -630,6 +656,24 @@
       "var": "VAR_TEMP_4",
       "var_value": "0",
       "script": "LabyrinthRing5_EventScript_Awe"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 34,
+      "elevation": 3,
+      "var": "VAR_TEMP_D",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_TurningBreak0"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 37,
+      "elevation": 3,
+      "var": "VAR_TEMP_D",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_TurningBreak0"
     }
   ],
   "bg_events": [

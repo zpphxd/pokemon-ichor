@@ -26,13 +26,6 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 
 ## Queued (user, 2026-11-17): start when the Act III helpers free up
 
-### Labyrinth hookups (small, before the end-to-end test)
-- The Turning: the escape after Scene J (shifting walls, encounters off) isn't built; FLAG_ICHOR_TURNING_DONE is waiting for the threshold above ground.
-- Daedalus's Workshop must call LabyrinthIcarusShaft_EventScript_SceneL at dawn.
-- Ring VII should field Klytios instead of Enkelados if the player beat Enkelados in Ring IV.
-- Scene J's bull-leaps are untested headlessly.
-- Art: walkers for Kronos/Phaedon, Rhea, Hyperion and the Gigas; a Gigas trainer class; tablet icons; drawn bones and shields (needs a labyrinth tileset repack); Labyrinth music cues.
-
 ### The road north from Lakonia: Route 26, Lake Stymphalia, Route 27
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
 
@@ -60,6 +53,11 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
 
 ## Done
+
+### Labyrinth hookups (built 2026-11-18)
+- The Turning (tools/ichor/maps/labyrinth_turning.py, design/maps/Labyrinth_System.md), Scene L at dawn in the workshop,
+  Klytios in Ring VII after a Ring IV fight, Scene J's bull-leaps (fixed and tested), the remains, Kronos, Gigas and
+  tablet art. Still open: Labyrinth music cues (LABYRINTH §11).
 
 ### Herm fast travel, made clear and early (user, 2026-11-17)
 - A great herm stands right at each town's entrance, easy to spot, with a sign that names it a travel stop.

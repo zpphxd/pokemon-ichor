@@ -107,7 +107,7 @@
     },
     {
       "local_id": "LOCALID_RING7_PORPHYRION",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GIGAS",
       "x": 15,
       "y": 18,
       "elevation": 3,
@@ -121,7 +121,7 @@
     },
     {
       "local_id": "LOCALID_RING7_GIGAS2",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GIGAS",
       "x": 17,
       "y": 18,
       "elevation": 3,
@@ -285,7 +285,7 @@
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_STARRY_CHAMBER",
-      "dest_warp_id": "0"
+      "dest_warp_id": "3"
     },
     {
       "x": 27,
@@ -349,6 +349,13 @@
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING7",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING7",
+      "dest_warp_id": "12"
     }
   ],
   "coord_events": [

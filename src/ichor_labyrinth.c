@@ -46,6 +46,7 @@ extern const u8 EventScript_IchorThreadLow[];
 extern const u8 EventScript_IchorAsterionKnockdown[];
 extern const u8 EventScript_IchorAsterionBrokeWall[];
 extern const u8 EventScript_IchorRecruitBump[];
+extern const u8 EventScript_IchorTurningPulse[];
 
 #define MAX_FLOORS        8  // Ichor: 8 (was 4) for the cave rings: two slab halves, cave floor, gravel, beam, plate
 #define MAX_ANCHORS_HERE  8
@@ -119,6 +120,7 @@ static EWRAM_DATA struct
     u8 aPatrolFacing;      // the way he faced when he left his patrol
     bool8 aPendingFace;
     u8 recruitBumped;      // the Titanborn object that last said "Watch it, recruit." + 1
+    u8 turnSteps;          // the Turning: steps since the last pulse (LABYRINTH §7)
 } sLab = {0};
 
 #define sThread (gIchorSave.thread)
@@ -448,6 +450,9 @@ static void DrawThreadTile(s32 x, s32 y, u32 conn, bool32 toScreen)
     {
         if (conn == 0 || FindAnchorAt(x - MAP_OFFSET, y - MAP_OFFSET))
             return;  // bare, or a bronze ring: it stays in view
+        if (!MapGridGetCollisionAt(x, y))
+            return;  // passable already: the stair a segment starts on keeps its warp
+
         floor = 0;
     }
     MapGridSetMetatileIdAt(x, y, shape < 0 ? sLab.floors[floor].floor : sLab.floors[floor].firstTwin + shape);
@@ -1165,6 +1170,13 @@ void Ichor_LabyrinthFrame(void)
             StartMapSegment(x, y);
         else if (stepped)
             OnThreadStep(sLab.lastX, sLab.lastY, x, y);
+    }
+    // The Turning (LABYRINTH §7): every 16 steps on a threaded map the house
+    // shakes and grinds. The turned walls themselves are drawn by each ring's ON_LOAD.
+    if (stepped && sLab.floorCount != 0 && VarGet(VAR_ICHOR_KNOSSA) == 17 && ++sLab.turnSteps >= 16)
+    {
+        sLab.turnSteps = 0;
+        ScriptContext_SetupScript(EventScript_IchorTurningPulse);
     }
     UpdateAsterion(stepped, x, y);
     sLab.lastX = x;

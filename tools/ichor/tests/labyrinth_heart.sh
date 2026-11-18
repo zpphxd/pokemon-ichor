@@ -13,4 +13,4 @@ engine_prepare LABHEART "$OUT" tools/ichor/tests/labyrinth_heart_consts.c tools/
     arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(Labyrinth|KnossaPalace_GrandStaircase).*EventScript_/ { print "  " $3 " = 0x" $1 "," }'
     echo "}"
 } > "$OUT/labyrinth_scripts.lua"
-engine_run LABHEART "$OUT" tools/ichor/tests/labyrinth_heart.lua 180000 1200
+engine_run LABHEART "$OUT" tools/ichor/tests/labyrinth_heart.lua 300000 1200

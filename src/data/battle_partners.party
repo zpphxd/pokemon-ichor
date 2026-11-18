@@ -147,7 +147,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 === PARTNER_ICHOR_ARIADNE ===
 Name: ARIADNE
 Class: Acolyte
-Pic: Acolyte F
+Pic: Ariadne Partner
 Gender: Female
 Music: Female
 AI: Basic Trainer

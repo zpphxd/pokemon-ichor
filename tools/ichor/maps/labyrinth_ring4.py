@@ -134,7 +134,7 @@ def finish(m, mz, render=True):
     m.item(ax + 3, ay + 2, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_R4_HYPER_POTION")
     m.objects[-3]["trainer_type"] = "TRAINER_TYPE_ICHOR_TITANBORN"
     # Enkelados at the checkpoint's door
-    o("ICHOR_TITAN_GRUNT", cx, cy + 1, P + "Enkelados", move="MOVEMENT_TYPE_FACE_LEFT",
+    o("ICHOR_GIGAS", cx, cy + 1, P + "Enkelados", move="MOVEMENT_TYPE_FACE_LEFT",
       local_id="LOCALID_R4_ENKELADOS")
     m.trigger(cx - 1, cy, P + "Checkpoint", var="VAR_TEMP_2", value="0")
     m.trigger(cx - 1, cy + 1, P + "Checkpoint", var="VAR_TEMP_2", value="0")
@@ -210,6 +210,8 @@ def finish(m, mz, render=True):
     X.cellar_entries(m, mz, [5, 6], P)
     m.break_runs(starts)
     water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
+    import labyrinth_turning as TURN
+    TURN.lmap(m, (44, 34), (4, 1))   # the Turning: up from Ring V to the stair to the workshop
     errs, reach = m.build("labyrinth_ring4", starts, views=VIEWS, render=render, extra=water)
     return errs
 

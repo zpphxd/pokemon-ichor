@@ -2310,6 +2310,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1D5) // Ichor: Ascent 3F: in the snow by the last cairn
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_ELIXIR   (FLAG_ICHOR_GENERAL2_START + 0x1D6) // Ichor: Ascent 2F: behind the camp's second tent
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1D7) // Ichor: Ascent 3F: on the summit shoulder above the stair
+#define FLAG_ICHOR_TURNING_QUIET                (FLAG_ICHOR_GENERAL2_START + 0x4E6) // Ichor: The Turning: no wild encounters and no trainer sight while the house turns (WE_FLAG_NO_ENCOUNTER, OW_FLAG_NO_TRAINER_SEE)
 #define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion
 #define FLAG_ICHOR_VISITED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F1) // Ichor: Lakonia: Gytheion visited (fly target)
 #define FLAG_ICHOR_GYTHEION_DUSK                (FLAG_ICHOR_GENERAL2_START + 0x4F2) // Ichor: Lakonia: III-5B, the fisherman and Kleon's helmet

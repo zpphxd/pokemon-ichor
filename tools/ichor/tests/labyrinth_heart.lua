@@ -90,8 +90,11 @@ L.start(function()
   shot("r7_arrival")
   L.setVar(0x400F, 0); L.runHeader("Heart_HealHeader"); L.wait(10)
   L.talk(15, 6, yes); L.talk(15, 8, yes)
+  L.setFlag(S.TRAINER_FLAGS_START + S.TRAINER_ENKELADOS, true)   -- as if a wrong answer had cost the Ring IV fight
   L.go(15, 9); L.settle()
   expect(L.getFlag(S.FLAG_ARIADNE_JOINED), "Scene I: Ariadne joins and the Gigas fall")
+  expect(L.defeated(S.TRAINER_KLYTIOS) and not L.defeated(S.TRAINER_ENKELADOS_CHOROS),
+         "Enkelados was beaten in Ring IV: Klytios takes his place on the dancing floor")
   shot("r7_scene_i")
   for _ = 1, 3 do L.talk(9, 13, yes) end
   L.talk(9, 23, yes)
@@ -108,4 +111,62 @@ L.start(function()
   L.waitUntil(function() return L.mapId() == S.MAP_STARRY and L.idle() end, 600, "the Starry Chamber")
   expect(L.mapId() == S.MAP_STARRY, "down the dance's stair: the Starry Chamber")
   shot("starry_arrival")
+
+  -- Scene J: the Harpe, Asterion's three bull-leaps (A pressed inside each window), the
+  -- collar, Kleon, the unmasking, Rhea turns the house
+  L.setVar(0x400F, 0); L.runHeader("Heart_HealHeader"); L.wait(10)
+  L.battleLimit = 90000      -- Kleon's Lv 62 team against the first-move pilot can run long
+  L.go(9, 16); L.settle()
+  L.step(K.UP); L.wait(4)
+  local leaps, clean, leapShots = 0, 0, 0
+  local function leapTask()
+    local t = L.taskAddress("Ichor_BullLeapTask")
+    return t and t + S.OFF_TASK_DATA or nil
+  end
+  local function d(t, i) local v = emu:read16(t + 2 * i); return v >= 0x8000 and v - 0x10000 or v end
+  for _ = 1, 12 do
+    L.settle({ stop = function() return leapTask() ~= nil end, limit = 40000 })
+    local t = leapTask()
+    if not t then break end
+    leaps = leaps + 1
+    emu:clearKey(K.A)
+    local pressed = false
+    while leapTask() do
+      t = leapTask()
+      if not pressed and d(t, 7) >= 2 then
+        if leapShots < 1 then shot("starry_leap_window"); leapShots = leapShots + 1 end
+        emu:addKey(K.A); L.wait(2); emu:clearKey(K.A); pressed = true
+      end
+      L.frame()
+    end
+    if emu:read16(S.gSpecialVar_Result) == S.ICHOR_LEAP_CLEAN then clean = clean + 1 end
+    L.log("leap " .. leaps .. ": result " .. emu:read16(S.gSpecialVar_Result))
+    L.wait(8)
+  end
+  L.settle({ limit = 60000 })
+  expect(leaps == 3 and clean == 3, "Scene J: three clean bull-leaps over Asterion (" .. clean .. " of " .. leaps .. ")")
+  expect(L.getFlag(S.FLAG_ASTERION_FREED), "the Labrys cuts Asterion's collar")
+  expect(L.getFlag(S.FLAG_PHAEDON_UNMASKED), "Kronos unmasked: Phaedon")
+  expect(L.getVar(S.VAR_KNOSSA) == 17 and L.getFlag(S.FLAG_RHEA_MERCY) and L.getFlag(S.FLAG_TURNING_QUIET),
+         "Rhea turns the house: the Turning begins, no wild Pokémon, no trainers")
+  shot("starry_turning")
+
+  -- the Turning: up the dance's stair, the house's walls shifted
+  L.useWarp(S.MAP_RING7)
+  L.waitUntil(function() return L.mapId() == S.MAP_RING7 and L.idle() end, 600, "Ring VII, turned")
+  expect(collision(21, 4) ~= 0 and collision(22, 3) ~= 0, "Ring VII: a hall off the dome has sealed itself")
+  shot("r7_turned")
+  -- the chain and the web are back (field obstacles return on a new load): cut them again
+  L.go(15, 9); L.settle()
+  L.talk(15, 8, yes); L.talk(15, 6, yes)
+  L.go(15, 2)
+  L.settle()
+  shot("r7_turned_stair")
+  L.useWarp(S.MAP_RING6)
+  L.waitUntil(function() return L.mapId() == S.MAP_RING6 and L.idle() end, 600, "Ring VI, turned")
+  expect(collision(30, 37) ~= 0, "Ring VI: the escape's way is shut ahead")
+  shot("r6_turned")
+  L.go(30, 39, { trigger = true }); L.settle()
+  expect(collision(30, 37) == 0 and L.getVar(0x400D) == 1, "Ring VI: Asterion breaks the wall open ahead")
+  shot("r6_breakthrough")
 end)

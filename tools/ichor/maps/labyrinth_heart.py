@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import heart_lib as H  # noqa: E402
 import heart_extras as X  # noqa: E402
+import labyrinth_turning as TURN  # noqa: E402
 
 ROOT = H.ROOT
 DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
@@ -467,6 +468,7 @@ def finish_ring5(m, stem_suffix, render):
             m.notes[c] = "pool"
     m.gen += ["call(LabyrinthRing5_EventScript_OnLoadExtra)"]
     extras_ring5(m)
+    TURN.heart(m, (27, 40), (27, 2))   # the Turning: up from Ring VI to the stair to Ring IV
     if render:
         H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_HOLLOW")
         m.build("labyrinth_ring5" + stem_suffix, starts=[(27, 3)],
@@ -907,13 +909,13 @@ def finish_ring6(m, stem_suffix, render):
     for o in m.objects:
         o["graphics_id"] = "OBJ_EVENT_GFX_SPECIES(BRONZONG)"
     # the Gigas and the last grunt; Hyperion at his anvil
-    m.obj("ICHOR_TITAN_GRUNT", 8, 24, "LabyrinthRing6_EventScript_Mimas", move="MOVEMENT_TYPE_FACE_LEFT",
+    m.obj("ICHOR_GIGAS", 8, 24, "LabyrinthRing6_EventScript_Mimas", move="MOVEMENT_TYPE_FACE_LEFT",
           trainer=True, sight=1, local_id="LOCALID_RING6_MIMAS")
-    m.obj("ICHOR_TITAN_GRUNT", 38, 6, "LabyrinthRing6_EventScript_Alkyoneus", move="MOVEMENT_TYPE_FACE_LEFT",
+    m.obj("ICHOR_GIGAS", 38, 6, "LabyrinthRing6_EventScript_Alkyoneus", move="MOVEMENT_TYPE_FACE_LEFT",
           trainer=True, sight=1, local_id="LOCALID_RING6_ALKYONEUS")
     m.obj("ICHOR_TITAN_GRUNT", 26, 29, "LabyrinthRing6_EventScript_Smyris", move="MOVEMENT_TYPE_FACE_LEFT",
           trainer=True, sight=4, local_id="LOCALID_RING6_SMYRIS")
-    m.obj("ICHOR_TITAN_GRUNT", 9, 32, "LabyrinthRing6_EventScript_Hyperion", move="MOVEMENT_TYPE_FACE_UP",
+    m.obj("ICHOR_HYPERION", 9, 32, "LabyrinthRing6_EventScript_Hyperion", move="MOVEMENT_TYPE_FACE_UP",
           local_id="LOCALID_RING6_HYPERION", flag="FLAG_ICHOR_HIDE_HYPERION_KNOSSA")
     m.obj("ICHOR_PRIESTESS", 19, 36, "LabyrinthRing6_EventScript_ShrinePriestess", move="MOVEMENT_TYPE_FACE_DOWN",
           local_id="LOCALID_RING6_PRIESTESS")
@@ -951,6 +953,7 @@ def finish_ring6(m, stem_suffix, render):
                          skip={(15, 24), (14, 24), (16, 24), (14, 25), (16, 25), (2, 31)})
     m.gen += ["call(LabyrinthRing6_EventScript_OnLoadExtra)"]
     extras_ring6(m)
+    TURN.heart(m, (27, 39), (23, 2))   # the Turning: up from Ring VII to the stair to Ring V
     if render:
         H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_TITAN")
         extra = {(x, y) for bars in R6_BARS.values() for (x, y, _, _) in bars} | set(R6_TEACH_WALL) \
@@ -1102,8 +1105,8 @@ def finish_ring7(m, stem_suffix, render):
     # --- events ---------------------------------------------------------------------------------
     m.warp(15, 1, "MAP_LABYRINTH_RING6", 2)              # 0
     m.warp(16, 1, "MAP_LABYRINTH_RING6", 3)              # 1
-    m.warp(fx + 2, fy + 2, "MAP_LABYRINTH_STARRY_CHAMBER", 0)   # 2: the stair the dance opens
-    m.warps[-1]["unreached_ok"] = True
+    m.warp(fx + 2, fy + 2, "MAP_LABYRINTH_STARRY_CHAMBER", 3)   # 2: the stair the dance opens (lands at its foot)
+    m.warps[-1].update({"unreached_ok": True, "_scripted": True})   # an arrival, not a door
     m.warps[-1]["_scripted"] = True
     m.header.update({"music": "MUS_ICHOR_HOLLOW", "map_type": "MAP_TYPE_UNDERGROUND", "region_map_section": "MAPSEC_WATER_LABYRINTH", "allow_escaping": True,
                      "requires_flash": False})
@@ -1120,9 +1123,9 @@ def finish_ring7(m, stem_suffix, render):
     m.obj("ICHOR_MIRROR_MARK", *R7_DISC, "LabyrinthRing7_EventScript_Disc", local_id="LOCALID_RING7_DISC")
     m.objects[-1]["_floats"] = True
     # Scene I: Ariadne, and the two Gigas on the dancing floor
-    m.obj("ICHOR_TITAN_GRUNT", fx + 1, fy + 2, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_RING7_PORPHYRION",
+    m.obj("ICHOR_GIGAS", fx + 1, fy + 2, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_RING7_PORPHYRION",
           flag="FLAG_ICHOR_HIDE_GIGAS_RING7")
-    m.obj("ICHOR_TITAN_GRUNT", fx + 3, fy + 2, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_RING7_GIGAS2",
+    m.obj("ICHOR_GIGAS", fx + 3, fy + 2, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_RING7_GIGAS2",
           flag="FLAG_ICHOR_HIDE_GIGAS_RING7")
     m.obj("ICHOR_ARIADNE", 13, 11, "LabyrinthRing7_EventScript_Ariadne", move="MOVEMENT_TYPE_FACE_DOWN",
           local_id="LOCALID_RING7_ARIADNE", flag="FLAG_ICHOR_HIDE_ARIADNE_RING7")
@@ -1144,6 +1147,12 @@ def finish_ring7(m, stem_suffix, render):
                          anchor_names=["THREAD_ANCHOR_RING7_DEEP"])
     m.gen += ["call(LabyrinthRing7_EventScript_OnLoadExtra)"]
     extras_ring7(m)
+    # 12: the landing below the dance's stair, up from the Starry Chamber. (Landing on the stair
+    # itself, a north-arrow warp, would send a player who walks up straight back down.)
+    m.warp(fx + 2, fy + 3, "MAP_LABYRINTH_RING7", R7_FROM_STARRY)
+    m.warps[-1].update({"unreached_ok": True, "_scripted": True})   # an arrival, not a door
+    assert len(m.warps) - 1 == R7_FROM_STARRY, len(m.warps)
+    TURN.heart(m, (fx + 2, fy + 3), (15, 1))   # the Turning: up from the Starry Chamber to the stair to Ring VI
     if render:
         H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_HOLLOW")
         m.build("labyrinth_ring7" + stem_suffix, starts=[(15, 2)],
@@ -1214,15 +1223,24 @@ def starry(stem_suffix="", render=True):
             if m.T(x, y) == "R" and (x, y) not in m.deco and int(m.mid[y, x]) == m.catalog["kit"].get("T|...", -1) \
                     and kit_hash(x, y) % 3 == 0:
                 m.set(x, y, m.pid("stars", "abcd"[kit_hash(x, y) % 4]), True)
-    m.warp(9, 19, "MAP_LABYRINTH_RING7", 2)       # 0: back up the dance's stair
-    m.warp(10, 19, "MAP_LABYRINTH_RING7", 2)      # 1
+    m.warp(9, 19, "MAP_LABYRINTH_RING7", R7_FROM_STARRY)    # 0: back up the dance's stair
+    m.warp(10, 19, "MAP_LABYRINTH_RING7", R7_FROM_STARRY)   # 1
     m.warp(9, 1, "MAP_LABYRINTH_STARRY_CHAMBER", 0)   # 2: Phaedon's stair (sealed behind him)
     m.warps[-1].update({"_scripted": True})
+    # 3: the landing at the stair's foot, where Ring VII's dance stair sets you down. The stair
+    # (9-10,19) is in the south wall, so a step down onto it climbs it: a trigger, not an arrow.
+    m.warp(9, 18, "MAP_LABYRINTH_STARRY_CHAMBER", 3)
+    m.warps[-1].update({"unreached_ok": True, "_scripted": True})   # an arrival, not a door
+    for x in (9, 10):
+        m.trigger(x, 19, "LabyrinthStarryChamber_EventScript_StairUp", var="VAR_TEMP_0", value=0)
     m.header.update({"music": "MUS_ICHOR_REVELATION", "map_type": "MAP_TYPE_UNDERGROUND",
                      "region_map_section": "MAPSEC_WATER_LABYRINTH", "allow_escaping": False})
-    m.obj("ICHOR_MASK", 11, 11, "0", move="MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_STARRY_KRONOS",
+    m.obj("ICHOR_KRONOS", 11, 11, "0", move="MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_STARRY_KRONOS",
           flag="FLAG_ICHOR_HIDE_STARRY_CAST")
-    m.obj("ICHOR_WOMAN", 8, 5, "0", move="MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_STARRY_RHEA",
+    # the same man with the gold mask off, swapped in at the unmasking (FLAG_TEMP_1 hides him till then)
+    m.obj("ICHOR_PHAEDON", 11, 11, "0", move="MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_STARRY_PHAEDON",
+          flag="FLAG_TEMP_1")
+    m.obj("ICHOR_RHEA", 8, 5, "0", move="MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_STARRY_RHEA",
           flag="FLAG_ICHOR_HIDE_STARRY_CAST")
     m.obj("SPECIES(ASTERLORN)", 10, 5, "LabyrinthStarryChamber_EventScript_Asterion", move="MOVEMENT_TYPE_FACE_DOWN",
           local_id="LOCALID_STARRY_ASTERION", flag="FLAG_ICHOR_HIDE_STARRY_CAST")
@@ -1317,6 +1335,8 @@ def write_dance_script(m):
 def kit_hash(x, y):
     return H.kit.h("star", x, y)
 
+
+R7_FROM_STARRY = 12   # Ring VII's warp up from the Starry Chamber
 
 BUILDERS = {"ring5": ring5, "ring6": ring6, "ring7": ring7, "starry": starry, "icarus": icarus}
 

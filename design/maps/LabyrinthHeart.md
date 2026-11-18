@@ -60,6 +60,11 @@ Ring V warps: 0/3 stair up ↔ Ring IV warp 6; 1/4 the tomb stair ↔ tomb warp 
 ## Known gaps
 
 - Ring V has no trainers by design (LABYRINTH §4: Asterion is its checkpoint) and Ring VII's Gigas are a scripted double, so `map_audit.py` reports "trainers in the whole dungeon" for both.
-- The Turning: Scene J sets `FLAG_ICHOR_RHEA_MERCY`, `FLAG_ICHOR_THREAD_NO_RETURN` and `VAR_ICHOR_KNOSSA` 17; the rings don't yet redraw shifting walls or stop encounters while it runs, and `FLAG_ICHOR_TURNING_DONE` is for the threshold (Knossa above ground) to set.
-- Scene L's first half lives in the workshop (Labyrinth I): it should `call(LabyrinthIcarusShaft_EventScript_SceneL)` at dawn.
-- Stand-in walkers: Kronos/Phaedon (`ICHOR_MASK`), Rhea (`ICHOR_WOMAN`), Hyperion and the Gigas (`ICHOR_TITAN_GRUNT`).
+- The Turning is built (Labyrinth_System.md, The Turning). Rings VII and VI's sealed halls are few: their loops leave few
+  dead-end pockets, and Ring VII's escape (the dome to the stair) is too short for a breakthrough.
+- Scene J's bull-leaps now run on the west lane below the basin, (4,12) to the line at (8,12); the old lane started
+  the bull eight rows off, outside the object window, so the special found no bull and every leap was late.
+- The Starry Chamber's way in lands at the stair's foot (warp 3), and the stair out is a trigger: landing on the
+  north-arrow stair in the south wall sent a player who walked north straight back up.
+- Ring VII's double battle now starts (`BattleSetup_StartMultiBattle`, as at Delphoi): `setmultitrainerbattle` alone
+  only set it up. Ariadne fights with `TRAINER_PIC_ARIADNE_PARTNER` (a back-pic stand-in, like Rhea's at Delphoi).

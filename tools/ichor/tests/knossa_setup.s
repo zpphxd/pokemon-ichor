@@ -67,8 +67,9 @@ Knossa_Setup:
 Knossa_Turning:
     lockall
     setvar VAR_TEMP_F, 1
-    setvar VAR_ICHOR_KNOSSA, 18
-    warp MAP_KNOSSA_PALACE, 29, 16
+    setvar VAR_ICHOR_KNOSSA, 17
+    setflag FLAG_ICHOR_TURNING_QUIET
+    warp MAP_KNOSSA_PALACE_GRAND_STAIRCASE, 1    @ up Ring I's stair, out of the turning house
     waitstate
     releaseall
     end
@@ -77,8 +78,7 @@ Knossa_Turning:
 Knossa_Icarus:
     lockall
     setvar VAR_TEMP_F, 1
-    setvar VAR_ICHOR_KNOSSA, 19
-    warp MAP_KNOSSA_PALACE, 30, 23
+    warpsilent MAP_LABYRINTH_WORKSHOP, 5         @ Daedalus's lift down, at dawn (Scene L)
     waitstate
     releaseall
     end
