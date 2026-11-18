@@ -204,8 +204,7 @@ def build():
     m.sign(3, 15, S + "Herm")
     m.sign(26, 12, S + "Cape")
     m.sign(5, 12, S + "TheaterView")
-    m.set(23, 13, A.HERM, True)                 # the town's great herm, by the Euploia's berth
-    m.sign(23, 13, S + "TownHerm")
+    # the town's travel herm, by the Euploia's berth: tools/ichor/maps/town_herms.py
     # the Shoal Shells for Porphyris (four, so one can be missed), and the town's own
     m.hidden(0, 29, "ITEM_SHOAL_SHELL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_1")
     m.hidden(30, 27, "ITEM_SHOAL_SHELL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_2")

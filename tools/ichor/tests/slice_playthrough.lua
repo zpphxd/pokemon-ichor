@@ -1128,7 +1128,6 @@ beat("11_asclepeion", function()
       visitTalk("asclepius", sign(A .. "Statue")),
       visitTalk("bell_pull", sign(A .. "BellPull")),
       visitTalk("anchors", sign(A .. "Anchors")),
-      visitTalk("votives", sign(A .. "Votives")),
     })
   end)
 end)

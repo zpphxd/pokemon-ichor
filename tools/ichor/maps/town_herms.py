@@ -63,6 +63,10 @@ TOWNS = [
     ("KytheraPaphia",     (40, 21),  (41, 21),  (40, 22),  "the east gate, from the Foam Road"),
     ("KnossaAmnisos",     (13, 7),   (12, 8),   (14, 7),   "the quay, from the crossing"),
     ("Ascent_3F",         (21, 6),   (20, 6),   (21, 7),   "the Propylaia's steps, the League"),
+    ("Gytheion",          (23, 13),  (22, 13),  (23, 14),  "the Euploia's berth, from the crossing"),
+    ("Lakonia",           (37, 35),  (38, 35),  (37, 36),  "the bridge, from Route 25"),
+    ("Route28_SacredOlives", (42, 2), (42, 3),  (43, 2),   "the gorge path, above Hieron's clearing"),
+    ("Delphoi",           (37, 41),  (37, 40),  (38, 41),  "the falls road, from the Kastalian Gorge"),
 ]
 
 

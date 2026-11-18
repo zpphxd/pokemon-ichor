@@ -781,15 +781,6 @@ script Lakonia_EventScript_BurialPlot {
     releaseall
 }
 
-// The town's great herm at its main entrance: fast travel between herms
-// (the travel system hooks EventScript_IchorAnointHerm in on merge)
-script Lakonia_EventScript_TownHerm {
-    lockall
-    msgbox(format("The herm of Lakonia. Touch it to travel between herms."))
-    call(EventScript_IchorAnointHerm)
-    releaseall
-}
-
 script Lakonia_EventScript_Leonidas {
     msgbox(format("A plain stone for a king who never came home.\p"
                   "LEONIDAS. THE THREE HUNDRED.\p"

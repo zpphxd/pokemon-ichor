@@ -215,15 +215,6 @@ script Gytheion_EventScript_Proteus {
                   "Ask in Egypt. Ask at Pharos.”"), MSGBOX_SIGN)
 }
 
-// The town's great herm at its main entrance: fast travel between herms
-// (the travel system hooks EventScript_IchorAnointHerm in on merge)
-script Gytheion_EventScript_TownHerm {
-    lockall
-    msgbox(format("The herm of Gytheion. Touch it to travel between herms."))
-    call(EventScript_IchorAnointHerm)
-    releaseall
-}
-
 script Gytheion_EventScript_TheaterView {
     msgbox(format("A painted panel by the door, the view from the theater's top row: the whole gulf, purple at the edges where the dyers rinse.\p"
                   "Kranai in the bay. Malea's cliffs to the east. Behind, the valley climbs to the mountains."), MSGBOX_SIGN)

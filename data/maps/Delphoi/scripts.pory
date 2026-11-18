@@ -977,12 +977,3 @@ script Delphoi_EventScript_Titanborn {
     msgbox(format("The master's gone down! The cloth runs out tonight!"), MSGBOX_NPC)
 }
 
-// The entrance herm (the user's rule: every town and rest stop has one at its
-// way in). Touching it registers the herm for travel; the herm-travel system
-// hooks EventScript_IchorGreatHerm on merge.
-script Delphoi_EventScript_EntranceHerm {
-    lockall
-    msgbox(format("The herm of Delphoi. Touch it to travel between herms."))
-    call(EventScript_IchorGreatHerm)
-    releaseall
-}

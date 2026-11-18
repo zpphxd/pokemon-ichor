@@ -280,9 +280,7 @@ def events(m):
     for i, (x, y) in enumerate(((22, 20), (24, 21), (34, 22), (12, 25))):
         npc(m, "ICHOR_TITAN_GRUNT", x, y, S + "Titanborn", face="up", flag="FLAG_ICHOR_HIDE_OMPHALOS_MUSTER",
             local_id=f"LOCALID_DELPHOI_MUSTER_{i + 1}")
-    # the entrance herm, beside the arrival from the falls (fast travel)
-    m.set(37, 41, A.HERM, True)
-    m.sign(37, 41, S + "EntranceHerm")
+    # the travel herm, beside the arrival from the falls: tools/ichor/maps/town_herms.py
     # items
     m.item_ball(2, 18, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_DELPHOI_ULTRA_BALL")
     m.hidden(KASTALIA[0] + 1, KASTALIA[1] + 2, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_PEARL")

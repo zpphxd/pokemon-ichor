@@ -230,12 +230,3 @@ script Route28_SacredOlives_EventScript_Augurs {
                   "Not since the year the Oracle went blind."), MSGBOX_AUTOCLOSE)
 }
 
-// The entrance herm (the user's rule: every town and rest stop has one at its
-// way in). Touching it registers the herm for travel; the herm-travel system
-// hooks EventScript_IchorGreatHerm on merge.
-script Route28_SacredOlives_EventScript_EntranceHerm {
-    lockall
-    msgbox(format("The herm of the Sacred Olives. Touch it to travel between herms."))
-    call(EventScript_IchorGreatHerm)
-    releaseall
-}

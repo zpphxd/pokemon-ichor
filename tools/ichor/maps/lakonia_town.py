@@ -258,8 +258,7 @@ def build():
     m.set(27, 29, A.STELE, True)                 # Leonidas's cenotaph, on the road up from the bridge
     m.sign(27, 29, S + "Leonidas")
     m.sign(3, 24, S + "Kaiadas")                 # the mountain's face over the west village
-    m.set(37, ENTRY_ROW - 2, A.HERM, True)      # the town's great herm, at the bridge's west end
-    m.sign(37, ENTRY_ROW - 2, S + "TownHerm")
+    # the town's travel herm, at the bridge's west end: tools/ichor/maps/town_herms.py
     m.sign(24, 24, S + "Enyalios")
     m.sign(30, 25, S + "PersianStoa")
     m.sign(6, 28, S + "BurialPlot")
