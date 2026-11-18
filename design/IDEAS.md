@@ -21,6 +21,9 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 ### The whole world: hidden parts and return gates
 - **Planned (2026-11-17):** `design/WORLD_EXPLORATION.md` plans every region's return gates, cave back sections and what pays behind them (story, stronger Pokémon, leads), proposes Pan's Crook as the climbing relic, and gives a build order.
 
+### The Oikoumene and the post-game epics, at the new bar
+- **Planned (2026-11-17):** `design/OIKOUMENE_GUIDE.md` is the build-ready guide for the ten lands and the epics: the bar every land passes, where every other generation lives, each land's maps, stops, roads, puzzles, gates, species and story, the art and ROM, a build order (the Troad first), and proposals P-1 to P-11 for the user.
+
 ## Queued (user, 2026-11-17): start when the Act III helpers free up
 
 ### First: herm fast travel, made clear and early (user, 2026-11-17)
