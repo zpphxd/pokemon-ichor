@@ -36,7 +36,7 @@
 	.endm
 
 @ --- What the earlier beats leave behind, and down the Anaktoron's stair ----------
-@ A party at Eleusa's levels (BALANCE.md: Chloe 24-26, Kleon about 23), each with
+@ A party a few levels over Eleusa's (so Hyperion's fight never hangs on a roll), each with
 @ one move so a level-up never asks to forget one; three Laurels, so they obey;
 @ Hecate's Torch; the Lesser Mysteries done and the sanctum open (beat 22). Then
 @ to B1F's warp 0, the foot of the stair, where beat 22 lands the player.
@@ -44,9 +44,9 @@
 SanctumTest_Setup:
 	lockall
 	setvar VAR_TEMP_F, 1
-	givemon SPECIES_THALAMARE, 26, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SURF
-	givemon SPECIES_KERAZAP, 25, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_THUNDERBOLT
-	givemon SPECIES_HALCYLING, 24, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_WATER_PULSE
+	givemon SPECIES_THALAMARE, 32, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_SURF
+	givemon SPECIES_KERAZAP, 31, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_THUNDERBOLT
+	givemon SPECIES_HALCYLING, 30, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, move1=MOVE_WATER_PULSE
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_BADGE01_GET
 	setflag FLAG_BADGE02_GET
