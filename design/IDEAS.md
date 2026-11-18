@@ -48,6 +48,10 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - Rings I–IV read as the same grey brick with red markers. Give each ring its own colour and fresco motif per LABYRINTH_MAZE §2 (bulls, dolphins, lilies, griffins, octopus and argonauts, double axes, stars), with floor and wall variants and one big landmark per screen.
 - The treasure cellars are plain boxes; make each a small treasure room worth the climb (Minoan pithoi, gilded frescoes, an altar, a fallen explorer's cache).
 
+### The architecture pass across the world (after Astyra lands)
+- Once Astyra's STYLE.md "Architecture: Gen 3 craft and Greek forms" section and the shared column kit are in and approved, apply them to every city and temple in waves of two or three helpers: Emporion, Thyrsa, Eleusa (and the Telesterion), Arkadia, Delphoi (with AWE_PASS item 7), Knossa, Lakonia, Kythera's towns, the eight Laurel temples, and the ruins (with the ruins kit, AWE_PASS item 6). Same layouts and story; better facades, columns, platforms, rooflines, landmarks and ruins.
+- Check every city's render against the new rules first, and fix the worst ones first.
+
 ### The awe pass
 - Build from design/AWE_PASS.md's top 10 (colossi, grand temples, city improvements, the ruins kit) once the user picks.
 
