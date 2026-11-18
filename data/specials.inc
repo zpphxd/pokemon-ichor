@@ -1149,5 +1149,7 @@ gSpecials::
 	def_special Ichor_CountConstellations
 	def_special Ichor_ShowNightSky
 	def_special Ichor_TakeFirstFruits
+	@ Ichor: Act III engine (design/phase4/ENGINE_ACT3.md E7)
+	def_special Ichor_BullLeap
 	// Ichor: the beam trace (E9), ported from world-act3 for the Pythian Light
 	def_special Ichor_TraceBeam

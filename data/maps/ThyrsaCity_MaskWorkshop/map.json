@@ -31,7 +31,7 @@
     },
     {
       "local_id": "LOCALID_MASK_WORKSHOP_MASK",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MASK",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PROSOMIME)",
       "x": 13,
       "y": 1,
       "elevation": 3,
@@ -42,6 +42,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ThyrsaCity_MaskWorkshop_EventScript_ShelfMask",
       "flag": "FLAG_ICHOR_TRADED_PROSOMIME"
+    },
+    {
+      "local_id": "LOCALID_MASK_WORKSHOP_GELASABLE",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(GELASABLE)",
+      "x": 11,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_MaskWorkshop_EventScript_Gelasable",
+      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [

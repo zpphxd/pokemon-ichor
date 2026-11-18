@@ -12,7 +12,8 @@
 # animated door on the slice's maps (and the aethos doors no map uses yet,
 # written into Akti's grid), photographs the ground jars where the maps put
 # them, fills the bag with the slice's items and pages through every pocket,
-# and opens the Agora's buy list. Nothing in the ROM is patched.
+# and opens the Agora's buy list. Nothing in the ROM is patched. First it checks
+# that every Ichor item icon is centred and the icon plate frames the sprite.
 set -u
 cd "$(dirname "$0")/../../.."
 ROM="${1:-pokeemerald.gba}"
@@ -21,6 +22,12 @@ MODE="${3:-all}"
 ELF="${ROM%.gba}.elf"
 [ -f "$ROM" ] && [ -f "$ELF" ] || { echo "ITEMS FAIL: $ROM or $ELF missing (run make first)"; exit 1; }
 mkdir -p "$OUT" && rm -f "$OUT"/*.png
+
+# The icons Ichor draws must sit centred in their frame, and the bag's and
+# shop's icon plate must frame the sprite where the C code puts it.
+/usr/bin/python3 tools/ichor/art/items.py --check || { echo "ITEMS FAIL: an item icon is off-centre"; exit 1; }
+( cd tools/ichor/art && /usr/bin/python3 -c "from ui_menus_lib import check_icon_plate; check_icon_plate()" ) \
+  || { echo "ITEMS FAIL: the icon plate and the icon sprite disagree"; exit 1; }
 export PATH="${DEVKITARM:-/opt/devkitpro/devkitARM}/bin:/opt/homebrew/bin:$PATH"
 TIMEOUT=$(command -v gtimeout || command -v timeout)
 

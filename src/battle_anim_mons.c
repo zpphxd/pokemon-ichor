@@ -1340,7 +1340,7 @@ u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, 
     if (battleBackground)
     {
         if (!IsContest())
-            selectedPalettes = 0xe; // Palettes 1, 2, and 3
+            selectedPalettes = BATTLE_BG_PALETTES_MASK; // Ichor: palettes 1-4, was 1-3
         else
             selectedPalettes = 1 << GetBattleBgPaletteNum();
     }

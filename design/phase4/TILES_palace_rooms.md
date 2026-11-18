@@ -18,7 +18,7 @@ It is one of the Knossa family of secondaries; see [`TILES_amnisos.md`](TILES_am
 ## How to use it
 
 **Ids.** Each grid lists metatile ids as Porymap shows them, row by row. Each section
-starts on a fixed row of the sheet (rooms at 0x200). Structures are placed first-fit in build
+starts on a fixed row of the sheet (rooms at 0x200, breach at 0x268). Structures are placed first-fit in build
 order, so appending a new one never moves an old one. Map builders should place pieces
 by key and name, never by raw id: `tools/ichor/maps/knossa_tiles.py` holds every Knossa
 catalog as a Python dict (`mid('palace_rooms', 'house', 'corbel', ...)`, `place(...)`, `front(...)`),
@@ -58,8 +58,9 @@ hints:
 | bronze | Bronze and verdigris (Talos's foot, the Kouretes' shields, door fittings), and the marble herm |
 | terra | Kythera's timber and terracotta: boats, the triremes, nets, trellis posts |
 | titan | Titan slate and gold, timber and canvas: the West Magazines' camp |
+| cave | The caves' dark limestone, the worn floor, the polished birth-stone |
 
-**Tile budget.** 335 of 504 tiles (104 metatiles). The door animations copy their
+**Tile budget.** 359 of 504 tiles (120 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -172,8 +173,8 @@ ids                                                  walk
 | 0x23E | `bedroll` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x23F | `crate` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x240 | `banner` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x241 | `table_L` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x242 | `table_R` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x241 | `table_L` | `X` | `MB_COUNTER` | COVERED |  |
+| 0x242 | `table_R` | `X` | `MB_COUNTER` | COVERED |  |
 | 0x243 | `spears` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x244 | `bed_top` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x245 | `bath` | `X` | `MB_NORMAL` | COVERED |  |
@@ -216,3 +217,24 @@ ids                                walk
 | 0x262 | `deep_R` | `.` | `MB_NORMAL` | COVERED |  |
 | 0x263 | `balustrade_end` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x264 | `dark` | `D` | `MB_NON_ANIMATED_DOOR` | COVERED |  |
+
+## Breach
+
+### The breach: dressed stone breaking into the rock behind
+
+`breach`, 3 wide by 2 tall. A north wall's field and dado where the plaster and the gypsum slabs have fallen, showing the hill's raw rock and a dark hollow leading on into the cave (LABYRINTH_MAZE §1). `TL` `T` `TR` over `BL` `B` `BR` replace three cells of a wall's `field` and `dado` rows (keep its `frieze` above). All impassable. Drawn in the cave group only, so its plaster is the limestone's palest values.
+
+```text
+ids                    walk
+0x268 0x269 0x26A   X X X
+0x270 0x271 0x272   X X X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x268 | `TL` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x269 | `T` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x26A | `TR` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x270 | `BL` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x271 | `B` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x272 | `BR` | `X` | `MB_NORMAL` | COVERED |  |

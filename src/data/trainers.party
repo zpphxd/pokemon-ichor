@@ -1693,6 +1693,262 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 /* Ichor: world-act3 (ids 320-499) */
 
+/*
+Knossa above ground (ids 345-358), from design/phase4/SCRIPT.md Part 3, "The Bull Road,
+levels 44-47". Kerinthe, Euphemos, Phaistia, Iphitos, Propolis and Glauke are
+SCRIPT's, team for team. The Bull Road is a late route of ten screens, so
+MAP_DESIGN.md §8 asks nine trainers of it: Boukolion, Kybiste, Krokale,
+Telemos, Elais and Theoris are new, each in the place's own trade (the palace
+herd, a girl leaper, a saffron gatherer, an augur at the herm, an olive
+harvester, a pilgrim to the Mistress), every one on Aethos species.
+Where the build differs from the script:
+  - Class: Minoan Priest shows as PRIESTESS (the class name holds 12 letters).
+  - Pic: Bull-leaper is the male placeholder; Kybiste and Glauke use Bull-leaper F.
+*/
+
+=== TRAINER_ICHOR_KERINTHE ===
+Name: KERINTHE
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melibee (M)
+Level: 44
+Ability: Honey Gather
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 44
+Ability: Forewarn
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_BOUKOLION ===
+Name: BOUKOLION
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kerazap
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Onotis
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_EUPHEMOS ===
+Name: EUPHEMOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Ikaroth
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KYBISTE ===
+Name: KYBISTE
+Class: Bull-leaper
+Pic: Bull-leaper F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Galenyon
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KROKALE ===
+Name: KROKALE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Psychora
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Korantha
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TELEMOS ===
+Name: TELEMOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Amnoze
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ELAIS ===
+Name: ELAIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Gelasable
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hierolive
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_THEORIS ===
+Name: THEORIS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerastorm
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHAISTIA ===
+Name: PHAISTIA
+Class: Minoan Priest
+Pic: Minoan Priestess
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Korantha
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_IPHITOS ===
+Name: IPHITOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PROPOLIS ===
+Name: PROPOLIS
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Melisseer
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melibee (M)
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Thyrsivy
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GLAUKE_KNOSSA ===
+Name: GLAUKE
+Class: Bull-leaper
+Pic: Bull-leaper F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KERAMOS ===
+Name: KERAMOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GYPSOS ===
+Name: GYPSOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+
 
 /* Ichor: the post-game (ids 500-679) */
 
@@ -2035,6 +2291,22 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Raknit
 Level: 29
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+
+=== TRAINER_ICHOR_THYRSA_CHORUS ===
+Name: CHORUS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Elapling
+Level: 28
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+
+Botrykit
+Level: 28
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_ICHOR_THESPIS ===
@@ -2958,6 +3230,86 @@ Level: 36
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 /* End Nemea return teams. */
+
+/* Nemea rebuild teams (tools/ichor/maps/nemea.py). */
+
+=== TRAINER_ICHOR_R14_ANTIKLES ===
+Name: ANTIKLES
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Cairnolith
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hoplomex
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R14_DORKON ===
+Name: DORKON
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Galenyon
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Elapling
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_TRETOS_LYSANDRA ===
+Name: LYSANDRA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Prosomime
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Lykanax
+Level: 35
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Harpelle
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_NEMEA_KLEITOMACHOS ===
+Name: KLEITOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 36
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Nemeleon
+Level: 37
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Nemea rebuild teams. */
 
 /* Astyra approach teams. */
 
@@ -6146,6 +6498,46 @@ Jolly Nature
 
 /* End League teams. */
 
+/* Ichor: Labyrinth I (ids 365-389): Rings I-IV, design/phase4/SCRIPT.md Part 3 */
+
+=== TRAINER_ICHOR_AKAKALLIS ===
+Name: AKAKALLIS
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_XENODIKE ===
+Name: XENODIKE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Korantha
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Persenyx
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_TEPHRA ===
+Name: TEPHRA
 /* Delphoi and Laurel 8 (ids 425-444; phase4 SCRIPT.md Part 3, "The Sacred Olives"
  * to "The Omphalos at night"). Kept in tools/ichor/maps/delphoi_trainers.party and
  * spliced here by tools/ichor/maps/delphoi_trainers.py. Route trainers IVs 14,
@@ -6213,6 +6605,16 @@ Gender: Female
 Music: Titan
 AI: Basic Trainer
 
+Gigantomb
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SINOPOS ===
+Name: SINOPOS
 Taurivet
 Level: 53
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -6284,6 +6686,657 @@ Music: Titan
 AI: Basic Trainer
 
 Plouteras
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_AUTOMATON_3 ===
+Name: NO. 3
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_AUTOMATON_7 ===
+Name: NO. 7
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kourodin
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_LITHOS ===
+Name: LITHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KONIORTOS ===
+Name: KONIORTOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SIDEROS ===
+Name: SIDEROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_CHALKOS ===
+Name: CHALKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PELOS ===
+Name: PELOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ENKELADOS ===
+Name: ENKELADOS
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* Ichor: the Labyrinth's heart (the Labyrinth II build, ids 390-409; design/phase4/SCRIPT.md
+   Part 3, "Ring VI, the Forge" to "The Starry Chamber"). The Gigas wear the Titanborn class
+   and the grunt's portrait until a Gigas class and portrait are drawn. */
+
+=== TRAINER_ICHOR_ANTHRAKOS ===
+Name: ANTHRAKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PORINOS ===
+Name: PORINOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ARGILLOS ===
+Name: ARGILLOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Plouteras
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SMYRIS ===
+Name: SMYRIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Cairnolith
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MIMAS ===
+Name: MIMAS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ALKYONEUS ===
+Name: ALKYONEUS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Plouteras
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Geogrip
+Level: 50
+Ability: Earth Eater
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_HYPERION_KNOSSA ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Taurivet
+Level: 50
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Heavy Slam
+- Stomping Tantrum
+- Scary Face
+
+Laolith
+Level: 50
+Ability: Sturdy
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Drain Punch
+- Stealth Rock
+
+Pyrapod @ Eviolite
+Level: 51
+Ability: Magic Bounce
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flamethrower
+- Will-O-Wisp
+- Iron Defense
+- Calm Mind
+
+Hymnaria
+Level: 51
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Heat Wave
+- Air Slash
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 53
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Earth Power
+- Heat Crash
+- Stealth Rock
+
+=== TRAINER_ICHOR_PORPHYRION ===
+Name: PORPHYRION
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Laolith
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KLYTIOS ===
+Name: KLYTIOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Gigantomb
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ENKELADOS_CHOROS ===
+Name: ENKELADOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Pylakyon @ Sitrus Berry
+Level: 54
+Ability: Blaze
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Phantom Force
+- Flamethrower
+- Crunch
+- Will-O-Wisp
+
+=== TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Seismare @ Sitrus Berry
+Level: 54
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Wave Crash
+- Earthquake
+- Bounce
+- Agility
+
+=== TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Daphnyad @ Sitrus Berry
+Level: 54
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Petal Blizzard
+- Dazzling Gleam
+- Leaf Blade
+- Synthesis
+
+/* Kopais road teams: generated by tools/ichor/maps/kopais.py. */
+
+=== TRAINER_ICHOR_R8_ENCHELYS ===
+Name: ENCHELYS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Karkipool
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Galenyon
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_R8_SCHOINIS ===
+Name: SCHOINIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Ampelix
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Stachyss
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Karkitox
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KOPAIS_AGAMEDES ===
+Name: AGAMEDES
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Chelonet
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KOPAIS_DIPSAS ===
+Name: DIPSAS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Raknit
+Level: 30
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Spalunk
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Prosomime
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Kopais road teams. */
+
+/* Gulf teams (tools/ichor/maps/gulf.py). */
+
+=== TRAINER_ICHOR_R9_THEANO ===
+Name: THEANO
+Class: Augur
+Pic: Augur
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Prosomime
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kerazap
+Level: 32
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KORYKIAN_TITYROS ===
+Name: TITYROS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Arkoby
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Lykopup
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Arkoby
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_KORYKIAN_KORYKIA ===
+Name: KORYKIA
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melibee
+Level: 31
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 33
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+/* End Gulf teams. */
 Level: 53
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 

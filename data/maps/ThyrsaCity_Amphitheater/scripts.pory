@@ -52,11 +52,17 @@ script ThyrsaCity_Amphitheater_EventScript_Thespis {
     if (!flag(FLAG_ICHOR_DIONYSIA_WATCHED)) {
         msgbox(format("Take your seat. Then tell me if this is the play you expected."))
     } elif (!flag(FLAG_ICHOR_DIONYSIA_BROKEN)) {
+        // No doors named: the painted panels and the temple's play tell you which.
         msgbox(format("My masks. Someone's making them speak without actors.\p"
-                      "A tragedy with no satyr play after it is just a funeral.\p"
-                      "Take the goat mask. Walk on. Comedy left, tragedy middle. Then the part they left out."))
-        setvar(VAR_ICHOR_MASK, 3)
-        msgbox(format("The rack has the other masks. Three entrances. Give them back their laughter."))
+                      "Their play has nobody in it to laugh. We give it three entrances, in order.\p"
+                      "First, a fool who's been drunk in the vineyards since dawn.\p"
+                      "Then someone from the golden king's own house, to mourn him.\p"
+                      "Last, the goat-men. You know by now which way they come in."))
+        if (var(VAR_ICHOR_MASK) == 0) {
+            setvar(VAR_ICHOR_MASK, 3)
+            msgbox(format("Here, the goat mask. The rack has the others."))
+        }
+        msgbox(format("Our doors are painted like the temple's. Miss a cue and the trance takes them back."))
     } else {
         msgbox(format("There. A city awake. Never trust a play that won't let you leave."))
     }
@@ -75,22 +81,23 @@ script ThyrsaCity_Amphitheater_EventScript_Masks {
 
 script ThyrsaCity_Amphitheater_EventScript_Program {
     lockall
-    msgbox(format("The tragedy ends at the Loom. There is no satyr play in the program.\p"
-                  "Three doors: comedy left, tragedy middle, satyr right."))
+    msgbox(format("THE UNWOVEN. A tragedy in one act. It ends at the Loom.\p"
+                  "No comedy before it. No satyr play after it.\p"
+                  "Where the playwright's name should be, there's only a little hook."))
     releaseall
 }
 
-script ThyrsaCity_Amphitheater_EventScript_Comedy {
+script ThyrsaCity_Amphitheater_EventScript_DoorLeft {
     setvar(VAR_0x8008, 0)
     setvar(VAR_0x8009, 1)
     goto(ThyrsaCity_Amphitheater_EventScript_Entrance)
 }
-script ThyrsaCity_Amphitheater_EventScript_Tragedy {
+script ThyrsaCity_Amphitheater_EventScript_DoorMiddle {
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 2)
     goto(ThyrsaCity_Amphitheater_EventScript_Entrance)
 }
-script ThyrsaCity_Amphitheater_EventScript_Satyr {
+script ThyrsaCity_Amphitheater_EventScript_DoorRight {
     setvar(VAR_0x8008, 2)
     setvar(VAR_0x8009, 3)
     goto(ThyrsaCity_Amphitheater_EventScript_Entrance)
@@ -130,8 +137,18 @@ script ThyrsaCity_Amphitheater_EventScript_Entrance {
     releaseall
 }
 
+// A wrong entrance costs the entrances already made: the trance closes again.
 script ThyrsaCity_Amphitheater_EventScript_WrongEntrance {
-    msgbox(format("The silence holds. Another entrance, another mask."))
+    if (var(VAR_ICHOR_SATYR_ACT) == 0) {
+        msgbox(format("Nobody looks up. The same note hangs over the seats.\p"
+                      "That isn't the entrance this play is missing."))
+    } else {
+        setvar(VAR_ICHOR_SATYR_ACT, 0)
+        playbgm(MUS_ICHOR_TITAN, TRUE)
+        msgbox(format("Wrong cue. The chorus drowns you out.\p"
+                      "The laughter dies. The trance settles back over every seat.\p"
+                      "You'll have to start again from the first entrance."))
+    }
     releaseall
 }
 

@@ -1084,8 +1084,12 @@ enum __attribute__((packed)) Item
     // Ichor: Mom's lucky knucklebone (design/SYSTEMS.md §9): one extra rethrow a match
     ITEM_APHRODITE_BONE = 895,
     ITEM_STAR_CHART = 896,
+    // Ichor: Act III's story items from the Labyrinth's archive (LABYRINTH.md
+    // Scene H, STORY.md §7.4); Lakonia and the Frozen Hour read the tablet
+    ITEM_KLEONS_DRAFT = 897,
+    ITEM_SEALED_TABLET = 898,
     // Ichor: Mom's jar, labelled NOT FOR {PLAYER} (phase4 SCRIPT.md III-7); used up at the Loom
-    ITEM_MELITTAS_HONEY = 897,
+    ITEM_MELITTAS_HONEY = 899,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,

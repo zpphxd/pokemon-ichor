@@ -208,7 +208,24 @@
 #define TRAINER_ICHOR_KALDERA_PHLOGIOS       260
 #define TRAINER_ICHOR_KALDERA_TALOS          261
 #define TRAINER_ICHOR_KALDERA_HYPERION       262
-#define TRAINERS_END_ACT2                   263
+#define TRAINER_ICHOR_THYRSA_CHORUS          263 // The Three-Act Play's chorus: fought again after each wrong mask
+// Lake Kopais and its katavothres (tools/ichor/maps/kopais.py); ids 290-293 leave 264-289 for the other Act II builders
+#define TRAINER_ICHOR_R8_ENCHELYS            290 // Route 8: the eel-fisher on Kopais's dike
+#define TRAINER_ICHOR_R8_SCHOINIS            291 // Route 8: the reed-cutter at the dike's west landing
+#define TRAINER_ICHOR_KOPAIS_AGAMEDES        292 // the katavothres: a pilgrim walking the drain to Lebadeia
+#define TRAINER_ICHOR_KOPAIS_DIPSAS          293 // the katavothres: a Titanborn mapping the drains
+// Gulf: tools/ichor/maps/gulf.py
+#define TRAINER_ICHOR_R9_THEANO                    847
+#define TRAINER_ICHOR_KORYKIAN_TITYROS             848
+#define TRAINER_ICHOR_KORYKIAN_KORYKIA             849
+// End Gulf.
+// Nemea's rebuild (tools/ichor/maps/nemea.py): ids from the top of Act II's block
+// (296-299), so a parallel session taking the next free ids can't collide.
+#define TRAINER_ICHOR_R14_ANTIKLES          296
+#define TRAINER_ICHOR_R14_DORKON            297
+#define TRAINER_ICHOR_TRETOS_LYSANDRA       298
+#define TRAINER_ICHOR_NEMEA_KLEITOMACHOS    299
+#define TRAINERS_END_ACT2                   850 // the highest Act II id is Gulf's 849
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328
@@ -228,6 +245,23 @@
 #define TRAINER_ICHOR_KERINTHOS               342
 #define TRAINER_ICHOR_MOPSOS_KYTHERA                  343
 #define TRAINER_ICHOR_THESTYLIS_KYTHERA       344
+// Knossa above ground, ids 345-364 (claim_ranges.md): the Bull Road's nine (SCRIPT's
+// Kerinthe, Euphemos and Phaistia, and six more for MAP_DESIGN.md §8's late-route
+// density), the vineyard's two, the Bronze Heel's one and the North Entrance's two.
+#define TRAINER_ICHOR_KERINTHE              345
+#define TRAINER_ICHOR_BOUKOLION             346
+#define TRAINER_ICHOR_EUPHEMOS              347
+#define TRAINER_ICHOR_KYBISTE               348
+#define TRAINER_ICHOR_KROKALE               349
+#define TRAINER_ICHOR_TELEMOS               350
+#define TRAINER_ICHOR_ELAIS                 351
+#define TRAINER_ICHOR_THEORIS               352
+#define TRAINER_ICHOR_PHAISTIA              353
+#define TRAINER_ICHOR_IPHITOS               354
+#define TRAINER_ICHOR_PROPOLIS              355
+#define TRAINER_ICHOR_GLAUKE_KNOSSA         356
+#define TRAINER_ICHOR_KERAMOS               357
+#define TRAINER_ICHOR_GYPSOS                358
 #define TRAINER_ICHOR_LYKON_KYTHERA                  490
 #define TRAINER_ICHOR_THEANO                 491
 #define TRAINER_ICHOR_KYMODOKE               492
@@ -237,6 +271,33 @@
 #define TRAINER_ICHOR_OPORA                  496
 #define TRAINER_ICHOR_PEGAIOS                497
 #define TRAINER_ICHOR_DEXITHEA               498
+// Labyrinth I (ids 365-389; tools/ichor/claim_ranges.md): Rings I-IV.
+#define TRAINER_ICHOR_AKAKALLIS               365
+#define TRAINER_ICHOR_XENODIKE                366
+#define TRAINER_ICHOR_TEPHRA                  367
+#define TRAINER_ICHOR_SINOPOS                 368
+#define TRAINER_ICHOR_AUTOMATON_3             369
+#define TRAINER_ICHOR_AUTOMATON_7             370
+#define TRAINER_ICHOR_LITHOS                  371
+#define TRAINER_ICHOR_KONIORTOS               372
+#define TRAINER_ICHOR_SIDEROS                 373
+#define TRAINER_ICHOR_CHALKOS                 374
+#define TRAINER_ICHOR_PELOS                   375
+#define TRAINER_ICHOR_ENKELADOS               376
+// the Labyrinth's heart (the Labyrinth II build), ids 390-409
+#define TRAINER_ICHOR_ANTHRAKOS                  390
+#define TRAINER_ICHOR_PORINOS                    391
+#define TRAINER_ICHOR_ARGILLOS                   392
+#define TRAINER_ICHOR_SMYRIS                     393
+#define TRAINER_ICHOR_MIMAS                      394
+#define TRAINER_ICHOR_ALKYONEUS                  395
+#define TRAINER_ICHOR_HYPERION_KNOSSA            396
+#define TRAINER_ICHOR_PORPHYRION                 397
+#define TRAINER_ICHOR_KLYTIOS                    398
+#define TRAINER_ICHOR_ENKELADOS_CHOROS           399
+#define TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON      400
+#define TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE      401
+#define TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD      402
 // Delphoi and Laurel 8 (ids 425-444): Route 28, the Temple of Apollo, the Omphalos.
 #define TRAINER_ICHOR_EUANGELOS               425
 #define TRAINER_ICHOR_PSAMMOS                 426

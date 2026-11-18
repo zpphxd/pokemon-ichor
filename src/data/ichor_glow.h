@@ -17,6 +17,9 @@
 //
 // then add a row here: { &gTileset_..., gTilesetPalettes_TrophoniosGlow }.
 
+extern const struct Tileset gTileset_Labyrinth;
+extern const u16 gTilesetPalettes_LabyrinthGlowFull[][16];
+
 struct IchorGlow
 {
     const struct Tileset *tileset;
@@ -25,5 +28,6 @@ struct IchorGlow
 
 static const struct IchorGlow sGlowTilesets[] =
 {
+    { &gTileset_Labyrinth, gTilesetPalettes_LabyrinthGlowFull },  // Ring III's glow-marks, the faint thread
     { NULL, NULL },  // the end
 };

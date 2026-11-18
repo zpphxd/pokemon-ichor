@@ -1,0 +1,50 @@
+// The old leaper's house (SCRIPT.md Part 2): Euanthe, Sarpedon's wife, who leapt
+// before he did. A timing hint before your first leap; the Focus Band after it.
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaAmnisos_LeapersHouse_MapScripts {}
+
+text KnossaAmnisos_LeapersHouse_Name_Euanthe { "EUANTHE" }
+
+script KnossaAmnisos_LeapersHouse_EventScript_Euanthe {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_LeapersHouse_Name_Euanthe)
+    if (flag(FLAG_ICHOR_FIRST_LEAP) && !flag(FLAG_ICHOR_GOT_FOCUS_BAND_KNOSSA)) {
+        msgbox(format("You leapt! I can smell bull on you. Good. Here.\p"
+                      "He wore this round his wrist every summer. He fell anyway.\p"
+                      "Then he got up. That's what it's for. Getting up."))
+        giveitem(ITEM_FOCUS_BAND)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_FOCUS_BAND_KNOSSA)
+            setspeaker(KnossaAmnisos_LeapersHouse_Name_Euanthe)
+            msgbox(format("I leapt before him, you know. Three summers. Nobody paints the girls."))
+        }
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_FIRST_LEAP)) {
+        msgbox(format("Nobody paints the girls. I painted myself, once, on the kitchen wall.\p"
+                      "He whitewashed it. Said it frightened the cat."))
+        release
+        end
+    }
+    msgbox(format("You're going up to Sarpedon. I can tell. You've got leaping knees.\p"
+                  "I'll tell you what he won't, because he likes watching people learn.\p"
+                  "Watch the head, not the horns. The horns lie. The head can't.\p"
+                  "And don't jump. Let the bull throw you. He's stronger than you are."))
+    release
+}
+
+script KnossaAmnisos_LeapersHouse_EventScript_Cat {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Gelasable is asleep on the warp of the loom. It opens one eye, and grins."))
+    release
+}
+
+script KnossaAmnisos_LeapersHouse_EventScript_Bulls {
+    msgbox(format("Little bronze bulls in a row, one for every summer.\p"
+                  "A charcoal circle on the wall picks out a skinny leaper. “That's him.”"), MSGBOX_SIGN)
+}

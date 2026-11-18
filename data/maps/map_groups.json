@@ -13,6 +13,9 @@
     "gMapGroup_IndoorKaldera",
     "gMapGroup_Kythera",
     "gMapGroup_League",
+    "gMapGroup_Labyrinth",
+    "gMapGroup_Knossa",
+    "gMapGroup_Gulf",
     "gMapGroup_Delphoi"
   ],
   "gMapGroup_TownsAndRoutes": [
@@ -161,12 +164,18 @@
     "ThyrsaCity_MantoHouse",
     "ThyrsaCity_PindarosHouse",
     "ThyrsaCity_SownHouse",
-    "ThyrsaCity_VintnerHouse"
+    "ThyrsaCity_VintnerHouse",
+    "Lebadeia_Trophoneion",
+    "Lebadeia_HoneyHouse",
+    "Route14_Tretos",
+    "Nemea_Palaestra",
+    "Nemea_MolorchosHouse"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",
     "SaltWell_B2F",
-    "Kaldera_TelchinesForge"
+    "Kaldera_TelchinesForge",
+    "KopaisKatavothres"
   ],
   "gMapGroup_IndoorKaldera": [
     "Kaldera_Asclepeion",
@@ -209,6 +218,43 @@
     "Olympus_SeatOfHera",
     "Olympus_Summit",
     "Olympus_HallOfHeroes"
+  ],
+  "gMapGroup_Labyrinth": [
+    "LabyrinthRing1",
+    "LabyrinthRing2",
+    "LabyrinthRing3",
+    "LabyrinthRing4",
+    "LabyrinthMinosTomb",
+    "LabyrinthWorkshop",
+    "LabyrinthRing6",
+    "LabyrinthRing5",
+    "LabyrinthRing7",
+    "LabyrinthStarryChamber",
+    "LabyrinthIcarusShaft"
+  ],
+  "gMapGroup_Knossa": [
+    "KnossaAmnisos",
+    "KnossaAmnisos_Agora",
+    "KnossaAmnisos_Asclepeion",
+    "KnossaAmnisos_FishersHut",
+    "KnossaAmnisos_KydonsHouse",
+    "KnossaAmnisos_LeapersHouse",
+    "KnossaAmnisos_Tavern",
+    "KnossaAmnisos_XeniaHouse",
+    "KnossaBronzeHeel",
+    "KnossaBullRoad",
+    "KnossaBullRoad_Hut",
+    "KnossaBullRoad_Vineyard",
+    "KnossaPalace",
+    "KnossaPalace_GrandStaircase",
+    "KnossaPalace_QueensMegaron",
+    "KnossaPalace_ThroneRoom",
+    "KnossaPalace_WestMagazines"
+  ],
+  "gMapGroup_Gulf": [
+    "Kirrha_PilgrimsHostel",
+    "Aigion_Homarion",
+    "Route9_KorykianCave"
   ],
   "gMapGroup_Delphoi": [
     "Route28_SacredOlives",

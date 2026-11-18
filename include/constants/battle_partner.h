@@ -10,8 +10,10 @@
 #define PARTNER_ICHOR_KLEON_ELEUSA_HIPLING 3
 #define PARTNER_ICHOR_KLEON_ELEUSA_NEBREL 4
 #define PARTNER_ICHOR_ALETHEA_AKROPOLIS 5
+// Ichor: Ariadne beside you on the dancing floor (LABYRINTH.md Scene I)
+#define PARTNER_ICHOR_ARIADNE 6
 // Ichor: Rhea beside you on the night of the Omphalos (phase4 SCRIPT.md III-8).
-#define PARTNER_ICHOR_RHEA_DELPHOI 6
-#define PARTNER_COUNT 7
+#define PARTNER_ICHOR_RHEA_DELPHOI 7
+#define PARTNER_COUNT 8
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H

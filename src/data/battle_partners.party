@@ -144,6 +144,10 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Quick Attack
 - Taunt
 
+=== PARTNER_ICHOR_ARIADNE ===
+Name: ARIADNE
+Class: Acolyte
+Pic: Acolyte F
 /* Delphoi: Rhea beside you at the Omphalos (phase4 SCRIPT.md Part 3). She
  * never uses a move that hits her partner. */
 === PARTNER_ICHOR_RHEA_DELPHOI ===
@@ -154,6 +158,32 @@ Gender: Female
 Music: Female
 AI: Basic Trainer
 
+Melisseer
+Level: 50
+Ability: Forewarn
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Pollen Puff
+- Psychic
+- Defend Order
+- Quiver Dance
+
+Panacoil
+Level: 49
+Ability: Hospitality
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Wish
+- Dazzling Gleam
+- Sludge Bomb
+- Helping Hand
+
+Korantha
+Level: 49
+Ability: Natural Cure
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Moonblast
+- Energy Ball
+- Grassy Terrain
+- Synthesis
 Laolith
 Level: 57
 Ability: Iron Fist

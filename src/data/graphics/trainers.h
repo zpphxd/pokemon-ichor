@@ -1387,6 +1387,18 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_BugCatcher, gTrainerPalette_BugCatcher),
     },
+    // Ichor: Knossa's classes, on placeholder art (an acolyte stands in for the priestess).
+    [TRAINER_PIC_BULL_LEAPER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_BlackBelt, gTrainerPalette_BlackBelt),
+    },
+    [TRAINER_PIC_BULL_LEAPER_F] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_BattleGirl, gTrainerPalette_BattleGirl),
+    },
+    [TRAINER_PIC_MINOAN_PRIESTESS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
     // Ichor: Delphoi's stand-ins; the bespoke portraits remain an art gate.
     [TRAINER_PIC_MELISSA] =
     {

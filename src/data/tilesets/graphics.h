@@ -910,19 +910,73 @@ const u16 gTilesetPalettes_LabyrinthGlow[][16] =
     INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/12.gbapal")
 };
 
-// The dawn set (LABYRINTH.md §8, scene L): the workshop dimmed and cooled but for the
-// grey light down the Icarus Shaft. Load it over palettes 6-12 for the scene. Written
-// by tools/ichor/art/labyrinth_build.py; not yet wired into the engine.
-const u16 gTilesetPalettes_LabyrinthDawn[][16] =
+// Ichor: labyrinth's glow set as all sixteen slots, for src/data/ichor_glow.h (the doused torch).
+const u16 gTilesetPalettes_LabyrinthGlowFull[][16] =
 {
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/06.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/07.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/08.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/09.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/10.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/11.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/12.gbapal")
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/15.gbapal")
 };
+
+// Ichor: mychos
+const u32 gTilesetTiles_PorytilesManaged_Mychos[] = INCBIN_U32("data/tilesets/secondary/mychos/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Mychos[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: astra
+const u32 gTilesetTiles_PorytilesManaged_Astra[] = INCBIN_U32("data/tilesets/secondary/astra/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Astra[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/astra/porytiles_bin/palettes/15.gbapal")
+};
+
 
 // Ichor: thyrsa
 const u32 gTilesetTiles_PorytilesManaged_Thyrsa[] = INCBIN_U32("data/tilesets/secondary/thyrsa/porytiles_bin/tiles.4bpp.lz");
@@ -1444,6 +1498,226 @@ const u16 gTilesetPalettes_PorytilesManaged_CivicKythera[][16] =
     INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/15.gbapal")
 };
 
+// Ichor: amnisos (Amnisos, the harbor of Knossa), written by tools/ichor/art/knossa_build.py
+const u32 gTilesetTiles_PorytilesManaged_Amnisos[] = INCBIN_U32("data/tilesets/secondary/amnisos/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Amnisos[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: bull_road (the Bull Road, its vineyard terraces and the Bronze Heel), written by tools/ichor/art/knossa_build.py
+const u32 gTilesetTiles_PorytilesManaged_BullRoad[] = INCBIN_U32("data/tilesets/secondary/bull_road/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_BullRoad[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: palace_minos (the Palace of Minos above ground), written by tools/ichor/art/knossa_build.py
+const u32 gTilesetTiles_PorytilesManaged_PalaceMinos[] = INCBIN_U32("data/tilesets/secondary/palace_minos/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_PalaceMinos[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: palace_rooms (the Palace of Minos's rooms and the Bull Road vault), written by tools/ichor/art/knossa_build.py
+const u32 gTilesetTiles_PorytilesManaged_PalaceRooms[] = INCBIN_U32("data/tilesets/secondary/palace_rooms/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_PalaceRooms[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: lakonia (Lakonia, the town with no walls), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Lakonia[] = INCBIN_U32("data/tilesets/secondary/lakonia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Lakonia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: gytheion (Gytheion and the strait off Malea), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Gytheion[] = INCBIN_U32("data/tilesets/secondary/gytheion/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Gytheion[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: eurotas (Route 25, up the Eurotas), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Eurotas[] = INCBIN_U32("data/tilesets/secondary/eurotas/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Eurotas[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: stymphalia (Route 26, Lake Stymphalia and Route 27), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Stymphalia[] = INCBIN_U32("data/tilesets/secondary/stymphalia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Stymphalia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: daidaleion
+const u32 gTilesetTiles_PorytilesManaged_Daidaleion[] = INCBIN_U32("data/tilesets/secondary/daidaleion/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Daidaleion[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/palettes/15.gbapal")
+};
+
+// The dawn set (LABYRINTH.md §8, scene L): the workshop dimmed and cooled but for the
+// grey light down the Icarus Shaft. Load it over palettes 6-12 for the scene, and on
+// the Icarus Shaft. Written by tools/ichor/art/labyrinth_build.py; not yet wired
+// into the engine.
+const u16 gTilesetPalettes_DaidaleionDawn[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/dawn/12.gbapal")
 // Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py).
 const u32 gTilesetTiles_PorytilesManaged_Delphoi[] = INCBIN_U32("data/tilesets/secondary/delphoi/porytiles_bin/tiles.4bpp.lz");
 

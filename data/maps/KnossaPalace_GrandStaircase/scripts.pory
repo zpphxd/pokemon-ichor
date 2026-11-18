@@ -1,0 +1,103 @@
+// The Grand Staircase (SCRIPT.md III-3E; LABYRINTH.md §8 Scene B, word for word;
+// LABYRINTH_MAZE.md §1): the flight down into the dark beside its light well,
+// the way to Ring I. Ariadne gives the Thread here once you have leapt the bull.
+// Room: tools/ichor/maps/knossa_rooms.py.
+//
+// The stair's foot is a trigger at (2,3). It goes down to the Labyrinth's Ring I
+// once the Thread is in hand; the Labyrinth I chapter owns MAP_LABYRINTH_RING1.
+// Before dawn after the raid (FLAG_ICHOR_ARIADNE_WOKE_YOU), Daedalus's lift at the
+// stair's foot takes you to the workshop (the Labyrinth chapters' Scene L).
+
+mapscripts KnossaPalace_GrandStaircase_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_MET_ARIADNE) && var(VAR_ICHOR_KNOSSA) < 6) {
+            clearflag(FLAG_ICHOR_HIDE_ARIADNE_STAIR)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ARIADNE_STAIR)
+        }
+    }
+}
+
+text KnossaPalace_GrandStaircase_Name_Ariadne { "ARIADNE" }
+
+script KnossaPalace_GrandStaircase_EventScript_Ariadne {
+    lock
+    faceplayer
+    setspeaker(KnossaPalace_GrandStaircase_Name_Ariadne)
+    if (flag(FLAG_ICHOR_GOT_ARIADNES_THREAD)) {
+        msgbox(format("Tie it at the bronze rings. Walk back along it and it winds itself."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_FIRST_LEAP)) {
+        msgbox(format("Have you leapt the bull yet? No? Then you'd only get lost."))
+        release
+        end
+    }
+    msgbox(format("Hold out your hand. No, palm up."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("She presses a spool of red thread into it."))
+    setspeaker(KnossaPalace_GrandStaircase_Name_Ariadne)
+    msgbox(format("Daedalus spun this for me when I was small. So I'd stop getting lost.\p"
+                  "Tie it at the bronze rings. Walk back along it and it winds itself.\p"
+                  "If you see what they're doing to him, come back and tell me.\p"
+                  "And if I'm wrong… the thread brings you home either way."))
+    giveitem(ITEM_ARIADNES_THREAD)
+    if (var(VAR_ICHOR_KNOSSA) < 5) {
+        setvar(VAR_ICHOR_KNOSSA, 5)
+    }
+    release
+}
+
+script KnossaPalace_GrandStaircase_EventScript_StairDown {
+    lockall
+    if (var(VAR_ICHOR_KNOSSA) == 18 && flag(FLAG_ICHOR_ARIADNE_WOKE_YOU)) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("At the stair's foot, Daedalus's lift creaks on its ropes, waiting."))
+        closemessage
+        goto(KnossaPalace_GrandStaircase_EventScript_ToWorkshop)
+    }
+    if (!flag(FLAG_ICHOR_GOT_ARIADNES_THREAD)) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("The stair goes down into a dark that smells of wet stone and old fire.\p"
+                      "Without a thread, you'd never find your way back up."))
+        closemessage
+        applymovement(OBJ_EVENT_ID_PLAYER, KnossaPalace_GrandStaircase_Movement_StepBack)
+        waitmovement(0)
+        releaseall
+        end
+    }
+    goto(KnossaPalace_GrandStaircase_EventScript_ToRing1)
+}
+
+movement KnossaPalace_GrandStaircase_Movement_StepBack { walk_down face_up }
+
+script KnossaPalace_GrandStaircase_EventScript_LightWell {
+    msgbox(format("A light well, open to the sky. Far below the dressed gypsum,\p"
+                  "the shaft's walls turn to raw grey rock, wet and uncut. The house goes down into the hill."),
+           MSGBOX_SIGN)
+}
+
+script KnossaPalace_GrandStaircase_EventScript_Breach {
+    msgbox(format("The plaster and the gypsum slabs have fallen away here.\p"
+                  "Behind them is no wall at all: raw grey rock, wet, and a hollow going on into the dark.\p"
+                  "The palace was built on top of something older."), MSGBOX_SIGN)
+}
+
+// The ways down: Ring I (MAP_LABYRINTH_RING1, arriving on its warp 0, the stair up)
+// and, before dawn after the raid, the lift to MAP_LABYRINTH_WORKSHOP (Scene L).
+script KnossaPalace_GrandStaircase_EventScript_ToRing1 {
+    playse(SE_EXIT)
+    warp(MAP_LABYRINTH_RING1, 0)
+    waitstate
+    releaseall
+}
+
+script KnossaPalace_GrandStaircase_EventScript_ToWorkshop {
+    playse(SE_ELEVATOR)
+    fadescreen(FADE_TO_BLACK)
+    warpsilent(MAP_LABYRINTH_WORKSHOP, 10, 20)
+    waitstate
+    releaseall
+}

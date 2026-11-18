@@ -1,0 +1,92 @@
+// Amnisos's Asclepeion (SCRIPT.md Part 2): a Minoan hall lit from above, a sunken
+// pool under the light well where the Panacoil coils, salve shelves, the painted
+// Pithos. Akestor stands at (6,4) with the basin at (4..5,3..4) for the heal; the
+// player talks across the counter from (6,6). The mat is (6,9).
+// Room: tools/ichor/maps/knossa_rooms.py.
+
+mapscripts KnossaAmnisos_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_KNOSSA_AMNISOS)
+    }
+}
+
+text KnossaAmnisos_Asclepeion_Name_Akestor { "AKESTOR" }
+text KnossaAmnisos_Asclepeion_Name_Sailor { "SAILOR" }
+
+script KnossaAmnisos_Asclepeion_EventScript_Akestor {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Asclepeion_Name_Akestor)
+    if (var(VAR_ICHOR_KNOSSA) >= 17) {
+        msgbox(format("Phaedon? No. You must have it wrong. Not him.\p"
+                      "…Rest them. I'll do the stitch he taught me. It's still a good stitch."))
+    } else {
+        msgbox(format("Rest them here. Honey in the wounds. Nothing heals cleaner.\p"
+                      "An Astyran taught me that. Phaedon. The best of us.\p"
+                      "He came through two winters ago. Taught us a stitch. Healer's hands."))
+    }
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x800B, LOCALID_AMNISOS_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    if (!flag(FLAG_ICHOR_GOT_AKESTOR_SALVE)) {
+        setspeaker(KnossaAmnisos_Asclepeion_Name_Akestor)
+        msgbox(format("Here. Honey and wax, stamped with the axe. For the road up."))
+        giveitem(ITEM_FULL_RESTORE)
+        setflag(FLAG_ICHOR_GOT_AKESTOR_SALVE)
+    }
+    release
+}
+
+script KnossaAmnisos_Asclepeion_EventScript_Panacoil {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    msgbox(format("The Panacoil lifts its head from the pool, tastes the air, and coils again."))
+    waitmoncry
+    release
+}
+
+script KnossaAmnisos_Asclepeion_EventScript_Patient {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Asclepeion_Name_Sailor)
+    msgbox(format("Stung. By a bee. On the eyelid. Don't laugh.\p"
+                  "Akestor put honey on it. Honey! From the bee! I don't understand medicine."))
+    release
+}
+
+script KnossaAmnisos_Asclepeion_EventScript_Pool {
+    msgbox(format("A sunken pool under a square of sky. The water is warm from the sun."), MSGBOX_SIGN)
+}
+
+script KnossaAmnisos_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(KnossaAmnisos_Asclepeion_EventScript_PithosMenu)
+}
+
+script KnossaAmnisos_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Amnisos opened. Octopus arms wind round it."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(KnossaAmnisos_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(KnossaAmnisos_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}

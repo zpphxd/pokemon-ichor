@@ -6,7 +6,7 @@
 //
 // "Show me a Pokémon." He paints from life, and pays his models three times:
 //   1. a Harpeck   -> Super Potion x2   FLAG_ICHOR_EUPHRONIOS_1
-//   2. a Chelonet  -> Great Ball x3     FLAG_ICHOR_EUPHRONIOS_2
+//   2. a Chelonet  -> Theseus Ball x3     FLAG_ICHOR_EUPHRONIOS_2
 //   3. a Stachyss  -> Star Piece        FLAG_ICHOR_EUPHRONIOS_3
 // The third waits on progress: Stachyss lives at Eleusa. checkspecies looks
 // through the whole party.

@@ -35,6 +35,7 @@
 #include "constants/field_weather.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
+#include "constants/ichor_act3.h"
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"

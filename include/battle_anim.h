@@ -161,6 +161,12 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode);
 void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
+// The BG palettes an animation fades as "the battle background". Upstream's mask
+// is 1-3, because its backgrounds only draw with palettes 2 and 3. Ichor: the
+// painted backgrounds (tools/ichor/art/battle_bg_*.py) also draw the ground in
+// palette 4, which LoadBattleEnvironmentGfx loads with them. Leaving it out
+// faded only the top of the screen during moves like Brick Break and Mega Drain.
+#define BATTLE_BG_PALETTES_MASK ((1 << 1) | (1 << 2) | (1 << 3) | (1 << 4))
 u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2);
 u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLeft, u8 opponentRight);
 s16 CloneBattlerSpriteWithBlend(enum AnimBattler animBattler);

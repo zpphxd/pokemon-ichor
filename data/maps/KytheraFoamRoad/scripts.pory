@@ -10,7 +10,7 @@
 // flock in the clifftop meadow under the east wood.
 //
 // Hidden items: an Ether behind the great herm (43,4), a Heart Scale in the
-// Horn's clifftop meadow (13,13), a Net Ball on the rock past the jetty (47,17)
+// Horn's clifftop meadow (13,13), an Arachne Ball on the rock past the jetty (47,17)
 // and Stardust in the cove under the east wood (54,22).
 // TODO(engine §5): Alethea's dig is scripted here; the trowel's dig spots and
 // the quarry's fixed dig (sherd 4, FLAG_ICHOR_SHERDS_START + 43, at the quarry

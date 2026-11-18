@@ -1,0 +1,520 @@
+{
+  "id": "MAP_LABYRINTH_RING7",
+  "name": "LabyrinthRing7",
+  "layout": "LAYOUT_LABYRINTH_RING7",
+  "music": "MUS_ICHOR_HOLLOW",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_WATER_LABYRINTH",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_RING7_M1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MIRROR",
+      "x": 9,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_MIRROR_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_Mirror1",
+      "flag": "0",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_RING7_M2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MIRROR",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_MIRROR_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_Mirror2",
+      "flag": "0",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_RING7_M3",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MIRROR",
+      "x": 12,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_MIRROR",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_Mirror3",
+      "flag": "0",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_RING7_CRYSTAL",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MIRROR_MARK",
+      "x": 12,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_Crystal",
+      "flag": "0",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_RING7_TEACH",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MIRROR",
+      "x": 26,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_ICHOR_MIRROR_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_TeachMirror",
+      "flag": "0",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_RING7_DISC",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MIRROR_MARK",
+      "x": 26,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_Disc",
+      "flag": "0",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_RING7_PORPHYRION",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 15,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_GIGAS_RING7"
+    },
+    {
+      "local_id": "LOCALID_RING7_GIGAS2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 17,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_GIGAS_RING7"
+    },
+    {
+      "local_id": "LOCALID_RING7_ARIADNE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "x": 13,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthRing7_EventScript_Ariadne",
+      "flag": "FLAG_ICHOR_HIDE_ARIADNE_RING7"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 23,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_STAR_PIECE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_RING7_ITEM_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 12,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MOON_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_RING7_ITEM_2"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 15,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING6",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING6",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 16,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_STARRY_CHAMBER",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ICHOR_KNOSSA",
+      "var_value": "14",
+      "script": "LabyrinthRing7_EventScript_SceneI"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ICHOR_KNOSSA",
+      "var_value": "14",
+      "script": "LabyrinthRing7_EventScript_SceneI"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step0"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step1"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step2"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step3"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step4"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step5"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step6"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step7"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step8"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step9"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step10"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step11"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step12"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step13"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step14"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step15"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step16"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step17"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step18"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step19"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step20"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step21"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step22"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step23"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 20,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "LabyrinthRing7_EventScript_Step24"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "2",
+      "script": "LabyrinthRing7_EventScript_Rearm"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "2",
+      "script": "LabyrinthRing7_EventScript_Rearm"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "2",
+      "script": "LabyrinthRing7_EventScript_Rearm"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "2",
+      "script": "LabyrinthRing7_EventScript_Rearm"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 21,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "2",
+      "script": "LabyrinthRing7_EventScript_Rearm"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthRing7_EventScript_Fresco"
+    },
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_RING7_A",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_MAX_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_RING7_B",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
+}

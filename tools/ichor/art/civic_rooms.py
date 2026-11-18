@@ -74,6 +74,55 @@ def checker(a, b):
     return lambda x, y: a if (x + y) % 2 == 0 else b
 
 
+# --- the Asclepeion's standard pieces ----------------------------------------
+#
+# Every Asclepeion uses the same healer's station and the same Pithos, so the
+# heal looks the same in every town. FldEff_PokecenterHeal (src/field_effect.c)
+# draws the Poke Balls at fixed screen offsets from the player, who talks to the
+# healer from two cells below her: the balls land in the spring basin only when
+# the basin is the 2x2 just left of the healer, its lower row level with her.
+# The rod relief over the healer is where the monitor sprite lights.
+
+def station_cells(hx, hy):
+    """(x, y, name) for the healer's station, the healer standing at (hx, hy):
+    the rod relief over her, the spring basin to her left, the votives to her
+    right, and the counter's front below, seven cells wide (hx-3 .. hx+3)."""
+    cells = [(hx, hy - 2, "asc_relief_0_0"), (hx, hy - 1, "asc_relief_0_1")]
+    cells += [(hx - 2 + i, hy - 1 + j, f"asc_basin_{i}_{j}") for j in range(2) for i in range(2)]
+    cells += [(hx + 1 + i, hy - 1, f"asc_votive_wall_{i}_0") for i in range(2)]
+    cells += [(hx - 3, hy, "asc_counter_l"), (hx, hy, "asc_counter_staff"),
+              (hx + 1, hy, "asc_votive_counter_0_0"), (hx + 2, hy, "asc_votive_counter_1_0"),
+              (hx + 3, hy, "asc_counter_r")]
+    cells += [(hx - 3, hy + 1, "asc_counter_front_l")]
+    cells += [(hx + i, hy + 1, "asc_counter_front_m") for i in range(-2, 3)]
+    cells += [(hx + 3, hy + 1, "asc_counter_front_r")]
+    return cells
+
+
+def pithos_cells(x):
+    """(x, y, name) for the Pithos against the back wall at columns x, x+1. It
+    stands alone, with no jars beside it: the jar with the sealed medallion is
+    the one that keeps Pokemon. Its lower row (y 2) is the MB_PC cell."""
+    return [(x + i, j, f"asc_pithos_{i}_{j}") for j in range(3) for i in range(2)]
+
+
+def block_of(name):
+    """The map.bin block for a civic metatile: collision 1 if solid, else
+    elevation 3 (Room.blocks's convention)."""
+    i = ct.BY_NAME[name]
+    return ct.FIRST_ID + i | (0x0400 if ct.METATILES[i]["solid"] else 0x3000)
+
+
+def healer_station(r, hx, hy):
+    for x, y, name in station_cells(hx, hy):
+        r.set(x, y, name)
+
+
+def pithos(r, x):
+    for cx, cy, name in pithos_cells(x):
+        r.set(cx, cy, name)
+
+
 # --- the Akti Asclepeion -----------------------------------------------------
 
 def asclepeion():
@@ -85,19 +134,10 @@ def asclepeion():
     # Stairs up in the back-left corner, Asclepius in his niche beside them.
     r.put("asc_stairs", 0, 0, 2, 3)
     r.put("asc_statue", 2, 0, 1, 3)
-    # The healer's counter: spring basin, the healer, the votives.
-    r.put("asc_relief", 7, 0, 1, 2)
-    r.put("asc_basin", 5, 1, 2, 2)
-    r.put("asc_votive_wall", 8, 1, 2, 1)
-    r.set(4, 2, "asc_counter_l")
-    r.set(7, 2, "asc_counter_staff")
-    r.put("asc_votive_counter", 8, 2, 2, 1)
-    r.set(10, 2, "asc_counter_r")
-    r.row(3, 4, ["asc_counter_front_l"] + ["asc_counter_front_m"] * 5 + ["asc_counter_front_r"])
-    # The Pithos corner.
-    r.put("asc_jar", 11, 1, 1, 2)
-    r.put("asc_pithos", 12, 0, 2, 3)
-    r.put("asc_jar", 14, 1, 1, 2)
+    # The healer's station: spring basin, the healer, the votives.
+    healer_station(r, 7, 2)
+    # The Pithos, alone in its corner.
+    pithos(r, 12)
     # Colonnade and the couches' alcove.
     # Row 3 stays clear so nothing draws over a player using the statue or
     # the Pithos.
