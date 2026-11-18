@@ -41,4 +41,12 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 ### Grand bazaar: the Great Deigma (Emporion)
 - A covered market of many stalls: foreign traders (Phoenician, Egyptian, Scythian), stones, TMs, berries, a daily rare stall and a coin exchange for Obols and Staters. A reason to sail back.
 
+### The Ascent of Olympus: Ichor's Victory Road (user, 2026-11-17)
+- **Awesome:** a long climb from the foothills to the clouds, over many floors with mixed terrain: caves, cliff ledges and switchbacks, an ice band, and a stretch above the cloud line.
+- **Somewhat difficult:** strong trainer pairs on narrow paths you can't avoid, tougher wilds, puzzles that use every relic held, limited healing with one midpoint shrine, and a gatekeeper battle before the Pantheon.
+- **Lots to find:** rare items, TMs, evolution stones, top held items, artifacts and amphora sherds, and an Olympian story fragment at each floor's shrine.
+- **Post-game hooks everywhere:** sealed doors, boulders, falls and Pan's Crook cliffs toward the post-game peaks (Pegaunos above the clouds, the Moment's shrine), and side paths you can see but can't reach until after the credits.
+- **Built with:** the Elite Four (Pantheon) and Archon upgrade: new halls, teams rebalanced for team-wide EXP, a short scene before each battle.
+- **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
+
 ## Done
