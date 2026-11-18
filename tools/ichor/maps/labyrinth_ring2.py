@@ -300,6 +300,24 @@ def finish(m, mz, dead, render=True):
     for e in (SUN_GATE, MOON_GATE, CRACK_ALCOVE) + tuple(h[2] for h in HERALDS):
         m.forced_open |= set(gap(*e))
     m.stops |= m.forced_open
+    import labyrinth_extras as X
+    from labyrinth_lib import mid as mid_
+    grate = mid_("doorways", "grate")
+    X.block_gap(m, (1, 1), (2, 1), "rubble", "the only way out of the stair room: the ceiling came down")
+    X.block_gap(m, (9, 2), (10, 2), "roots", "roots from far above choke the way into the grotto")
+
+    def lanes(y, xs):
+        return [(x, y, int(m.mid[y, x]), False, grate, True) for x in xs]
+    room = lambda x0, y0, x1, y1, skip: [(x, y) for y in range(y0, y1 + 1) for x in range(x0, x1 + 1)
+                                         if (x, y) not in skip and m.walkable(x, y)]
+    X.plate_puzzle(m, "Sun", [(8, 16)], [(8, 18)], lanes(20, (6, 7)), "FLAG_TEMP_4",
+                   room(6, 14, 11, 19, {(8, 16), (8, 18)}), (10, 13, 9, 15), P,
+                   "the TM room's way on is grated until a drum sits on its plate (Ring II teaches the idea)")
+    X.plate_puzzle(m, "Moon", [(23, 12), (25, 12)], [(23, 14), (25, 14)], lanes(16, (26, 27)), "FLAG_TEMP_5",
+                   room(22, 10, 27, 15, {(23, 12), (25, 12), (23, 14), (25, 14), (27, 15)}), (24, 9, 24, 11), P,
+                   "the Moon Room's way on: two drums, two plates")
+    X.remains(m, 44, 9, P, "1", "A dropped sandal, the strap cut clean through, by the trickle.")
+    X.remains(m, 22, 21, P, "2", "Carved shallow in the Long Hall's wall: IT RAN AT THE FIRE, NOT AT US.")
     m.break_runs(starts)
     errs, reach = m.build("labyrinth_ring2", starts, views=VIEWS, render=render)
     return errs

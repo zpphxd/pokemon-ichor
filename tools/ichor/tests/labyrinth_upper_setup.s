@@ -46,6 +46,9 @@ Lab_Setup:
     additem ITEM_HECATES_TORCH
     additem ITEM_ARIADNES_THREAD
     additem ITEM_POSEIDONS_CONCH
+    additem ITEM_BRONZE_HAMMER
+    additem ITEM_DEMETERS_SICKLE
+    additem ITEM_GIRDLE_OF_HERAKLES
     setvar VAR_REPEL_STEP_COUNT, 999
     setflag FLAG_ICHOR_FIRST_LEAP
     setvar VAR_ICHOR_KNOSSA, 5

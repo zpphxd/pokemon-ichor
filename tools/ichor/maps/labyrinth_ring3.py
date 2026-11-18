@@ -32,7 +32,7 @@ POCKET_EXIT = ((2, 4), (2, 5))
 FRONT_DOOR = (30, 37)        # in the front room's north face
 BACK_DOOR = (50, 13)         # in the back room's north face
 STREAM_X = (44, 45)          # the channel, between node columns 10 and 11
-FORD_Y = (30, 31)
+FORD_Y = ()          # no ford: the back way needs Poseidon's Conch
 CAVE_NODES = {(11, y) for y in range(11)} | {(12, y) for y in range(11)} | {(10, 0), (10, 1)} | \
              {POCKET, (1, 4), (0, 8), (1, 8), (0, 9), (1, 9), (2, 9), (0, 10), (1, 10), (2, 10), (3, 10)}
 
@@ -80,7 +80,7 @@ def grid_of(mz):
     return g
 
 
-def walk(g, start, blocked=()):
+def walk(g, start, blocked=(), surf=False):
     d = {start: 0}
     prev = {}
     q = deque([start])
@@ -90,7 +90,7 @@ def walk(g, start, blocked=()):
             n = (x + dx, y + dy)
             if n in d or n in blocked or not (0 <= n[0] < W and 0 <= n[1] < H):
                 continue
-            if g[n[1]][n[0]] in "#%~o":
+            if g[n[1]][n[0]] in ("#%o" if surf else "#%~o"):
                 continue
             d[n] = d[(x, y)] + 1
             prev[n] = (x, y)
@@ -134,7 +134,8 @@ def build(render=True):
 
     # --- the two ways: the glow trail (back) and the webs (front) -----------------------
     d, prev = walk(m.g, start)
-    back = path(prev, start, (BACK_DOOR[0], BACK_DOOR[1] + 1))
+    ds, prevs = walk(m.g, start, surf=True)
+    back = path(prevs, start, (BACK_DOOR[0], BACK_DOOR[1] + 1))
     front = path(prev, start, (FRONT_DOOR[0], FRONT_DOOR[1] + 1))
     backset = set(back)
     # glow-marks: a labrys sign on a wall top beside the trail wherever it turns or branches
@@ -243,8 +244,22 @@ def finish(m, mz, front, back, render=True):
     starts = [(4, 2)]
     blockers = set()
     m.forced_open = set()
+    import labyrinth_extras as X
+    from labyrinth_lib import mid as mid_
+    X.block_gap(m, (1, 1), (2, 1), "rubble", "the stair room's way out, fallen in")
+    seal = mid_("doorways", "seal")
+    door = ST["arcade"]["ids"][2][4]
+    rm = [(x, y) for y in range(38, 44) for x in range(26, 36)
+          if m.walkable(x, y) and (x, y) not in {(28, 40), (33, 40), (31, 41), (28, 42), (33, 42), (31, 39)}]
+    X.plate_puzzle(m, "Door", [(28, 40), (33, 40), (31, 41)], [(28, 42), (33, 42), (31, 39)],
+                   [(FRONT_DOOR[0], FRONT_DOOR[1], door, False, seal, True)], "FLAG_TEMP_4", rm,
+                   (34, 37, 32, 42), P, "the workshop's front door is sealed: three drums onto three plates")
+    X.remains(m, 6, 5, P, "1", "Bones under a drift of old web. A bronze pin in the dust: a girl's.")
+    X.remains(m, 20, 25, P, "2", "Scratched deep: THE BRONZE MEN DROVE IT AT US WITH FIRE.\\pIT DID NOT WANT TO.")
+    X.remains(m, 40, 30, P, "3", "An explorer's satchel, rotted through. A map inside, every line crossed out.")
     m.break_runs(starts)
-    errs, reach = m.build("labyrinth_ring3", starts, views=VIEWS, render=render)
+    water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
+    errs, reach = m.build("labyrinth_ring3", starts, views=VIEWS, render=render, extra=water)
     return errs
 
 

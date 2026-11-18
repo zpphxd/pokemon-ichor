@@ -383,4 +383,16 @@ script LabyrinthRing1_EventScript_BrazierG {
     releaseall
     end
 }
+
+script LabyrinthRing1_EventScript_Remains1 {
+    msgbox(format("Scratched in the plaster, a row of marks: days, counted.\pThey stop at nine."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing1_EventScript_Remains2 {
+    msgbox(format("Cut small in the gypsum: SEVEN TURNED LEFT. I TURNED RIGHT.\pThe hand is Athenian."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing1_EventScript_Remains3 {
+    msgbox(format("A torch, burned out and snapped in two, wedged in a crack in the rock."), MSGBOX_SIGN)
+}
 // ---- END GENERATED ----

@@ -100,7 +100,7 @@ def build(render=True):
     # the sickle banners on the barracks' and the checkpoint's north faces
     m.put("banners", bx + 1, by - 1)
     m.put("banners", cx + 1, cy - 1)
-    m.anchor(cx + 2, cy + 4, "THREAD_ANCHOR_UNNAMED")
+    m.anchor(cx + 4, cy + 5, "THREAD_ANCHOR_UNNAMED")
     m.anchor(bx + 4, by + 2, "THREAD_ANCHOR_R4_BARRACKS")
     m.anchor(6, 22, "THREAD_ANCHOR_R4_DIG")
     m.rooms = dict(barracks=(bx, by), mess=(mx, my), armory=(ax, ay), check=(cx, cy))
@@ -184,8 +184,26 @@ def finish(m, mz, render=True):
     m.gen = []
     starts = [(4, 2)]
     m.forced_open = set()
+    import labyrinth_extras as X
+    from labyrinth_lib import mid as mid_
+    grate = mid_("doorways", "grate")
+    X.block_gap(m, (1, 1), (1, 2), "rubble", "the stair room's way down, blocked by a Titan cave-in")
+    X.block_gap(m, (8, 8), (9, 8), "chain", "bronze chains across the checkpoint's door: the Labrys cuts them")
+    rx, ry = min(((x, y) for y in range(28, 40) for x in range(2, 11) if m.at(x, y) == "," and m.walkable(x, y)),
+                 key=lambda c: abs(c[0] - 9) + abs(c[1] - 32))
+    X.obstacle(m, rx, ry, "roots", why="roots in the dig's side tunnel")
+    stairs = [(STAIR[0], STAIR[1], mid_("stairs", "down_l"), False, grate, True),
+              (STAIR[0] + 1, STAIR[1], mid_("stairs", "down_r"), False, grate, True)]
+    drums, plates = [(40, 36), (43, 36), (46, 37)], [(40, 38), (43, 38), (42, 37)]
+    rm = [(x, y) for y in range(34, 40) for x in range(38, 48) if m.walkable(x, y) and (x, y) not in set(drums + plates)]
+    X.plate_puzzle(m, "Stair", drums, plates, stairs, "FLAG_TEMP_4", rm, (43, 33, 46, 38), P,
+                   "the stair down is grated: three drums, and the third must go in first or wait")
+    X.remains(m, 5, 30, P, "1", "A snapped spear, Titan-made, and claw marks on the rock beside it.")
+    X.remains(m, 30, 13, P, "2", "Chalked on the barracks wall: DRIVE IT WITH THE TORCHES. IT HATES THE TORCHES.")
+    X.remains(m, 20, 37, P, "3", "Bones, a broken shield with an owl on it, and a pack. The owl is Astyra's.")
     m.break_runs(starts)
-    errs, reach = m.build("labyrinth_ring4", starts, views=VIEWS, render=render)
+    water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
+    errs, reach = m.build("labyrinth_ring4", starts, views=VIEWS, render=render, extra=water)
     return errs
 
 

@@ -2383,6 +2383,17 @@
 #define FLAG_ICHOR_ITEM_TOMB_GOLD_STATER        (FLAG_ICHOR_GENERAL2_START + 0x478) // Ichor: Minos's tomb: the Gold Stater among the grave goods
 #define FLAG_ICHOR_HIDDEN_ITEM_R4_ULTRA_BALL    (FLAG_ICHOR_GENERAL2_START + 0x479) // Ichor: Labyrinth Ring IV: an Ultra Ball under a bunk
 #define FLAG_ICHOR_HIDDEN_ITEM_R4_NUGGET        (FLAG_ICHOR_GENERAL2_START + 0x47A) // Ichor: Labyrinth Ring IV: a Nugget in the dig's spoil
+#define FLAG_ICHOR_HIDE_R1_SEAL                 (FLAG_ICHOR_GENERAL2_START + 0x47B) // Ichor: Labyrinth Ring I: the labrys seal on the treasury door, cut (return gate)
+#define FLAG_ICHOR_HIDE_R2_SEAL                 (FLAG_ICHOR_GENERAL2_START + 0x47C) // Ichor: Labyrinth Ring II: the labrys seal on the runners' shrine, cut (return gate)
+#define FLAG_ICHOR_HIDE_R3_THORNWEB             (FLAG_ICHOR_GENERAL2_START + 0x47D) // Ichor: Labyrinth Ring III: the thornweb over the spiders' nest, burned (post-game gate)
+#define FLAG_ICHOR_HIDE_R4_BOULDER              (FLAG_ICHOR_GENERAL2_START + 0x47E) // Ichor: Labyrinth Ring IV: the great boulder in the dig, broken (post-game gate)
+#define FLAG_ICHOR_R1_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x47F) // Ichor: Labyrinth Ring I: the treasury's guardian battled
+#define FLAG_ICHOR_R2_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x480) // Ichor: Labyrinth Ring II: the runners' shrine's Taurivet battled
+#define FLAG_ICHOR_R3_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x481) // Ichor: Labyrinth Ring III: the nest's Hyphantis battled
+#define FLAG_ICHOR_R4_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x482) // Ichor: Labyrinth Ring IV: the deep dig's Geogrip battled
+#define FLAG_ICHOR_ITEM_R1_TREASURY             (FLAG_ICHOR_GENERAL2_START + 0x483) // Ichor: Labyrinth Ring I: the treasury's reward
+#define FLAG_ICHOR_ITEM_R3_NEST                 (FLAG_ICHOR_GENERAL2_START + 0x484) // Ichor: Labyrinth Ring III: the nest's reward
+#define FLAG_ICHOR_ITEM_R4_DEEP                 (FLAG_ICHOR_GENERAL2_START + 0x485) // Ichor: Labyrinth Ring IV: the deep dig's reward
 #define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
 #define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
 #define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken

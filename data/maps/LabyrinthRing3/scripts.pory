@@ -69,8 +69,8 @@ script LabyrinthRing3_EventScript_Register {
     setvar(VAR_0x8004, 0x2E8)
     setvar(VAR_0x8005, 0x2E9)
     special(Ichor_AddThreadFloor)
-    setvar(VAR_0x8004, 0x2F3)
-    setvar(VAR_0x8005, 0x2F4)
+    setvar(VAR_0x8004, 0x350)
+    setvar(VAR_0x8005, 0x351)
     special(Ichor_AddThreadFloor)
     setvar(VAR_0x8004, 4)
     setvar(VAR_0x8005, 2)
@@ -79,10 +79,6 @@ script LabyrinthRing3_EventScript_Register {
     setvar(VAR_0x8004, 30)
     setvar(VAR_0x8005, 38)
     setvar(VAR_0x8006, THREAD_ANCHOR_R3_WORKSHOP_DOOR)
-    special(Ichor_AddThreadAnchor)
-    setvar(VAR_0x8004, 3)
-    setvar(VAR_0x8005, 11)
-    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 15)
     setvar(VAR_0x8005, 27)
@@ -96,11 +92,90 @@ script LabyrinthRing3_EventScript_Register {
     setvar(VAR_0x8005, 15)
     setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
     special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 51)
+    setvar(VAR_0x8005, 23)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
+    special(Ichor_AddThreadAnchor)
 }
 
 // The ring's state, drawn on load and after every change: lit braziers, opened
 // doors and gates. Ichor_DrawThread goes after it.
 script LabyrinthRing3_EventScript_DrawState {
-    end
+    if (flag(FLAG_TEMP_4)) {
+        setmetatile(30, 37, 0x21C, FALSE)
+    } else {
+        setmetatile(30, 37, 0x3CA, TRUE)
+    }
+}
+
+// Daedalus's floor seal Door: the workshop's front door is sealed: three drums onto three plates
+script LabyrinthRing3_EventScript_PlatesDoor {
+    if (flag(FLAG_TEMP_4)) {
+        end
+    }
+    setvar(VAR_TEMP_9, 0)
+    getobjectxy(LOCALID_LABYRINTHRING3_Door_DRUM0, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 28 && var(VAR_0x8008) == 42) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 33 && var(VAR_0x8008) == 42) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 31 && var(VAR_0x8008) == 39) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    getobjectxy(LOCALID_LABYRINTHRING3_Door_DRUM1, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 28 && var(VAR_0x8008) == 42) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 33 && var(VAR_0x8008) == 42) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 31 && var(VAR_0x8008) == 39) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    getobjectxy(LOCALID_LABYRINTHRING3_Door_DRUM2, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 28 && var(VAR_0x8008) == 42) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 33 && var(VAR_0x8008) == 42) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 31 && var(VAR_0x8008) == 39) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_TEMP_9) == 3) {
+        lockall
+        setflag(FLAG_TEMP_4)
+        call(LabyrinthRing3_EventScript_DrawState)
+        special(DrawWholeMapView)
+        playse(SE_DOOR)
+        msgbox(format("Bronze clanks deep in the wall. Something has opened."), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing3_EventScript_LeverDoor {
+    lockall
+    msgbox(format("A bronze lever with a double axe for a handle: Daedalus's reset.\pPull it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_CLICK)
+        warpsilent(MAP_LABYRINTH_RING3, 32, 42)
+        waitstate
+    }
+    releaseall
+}
+
+script LabyrinthRing3_EventScript_Remains1 {
+    msgbox(format("Bones under a drift of old web. A bronze pin in the dust: a girl's."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing3_EventScript_Remains2 {
+    msgbox(format("Scratched deep: THE BRONZE MEN DROVE IT AT US WITH FIRE.\pIT DID NOT WANT TO."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing3_EventScript_Remains3 {
+    msgbox(format("An explorer's satchel, rotted through. A map inside, every line crossed out."), MSGBOX_SIGN)
 }
 // ---- END GENERATED ----

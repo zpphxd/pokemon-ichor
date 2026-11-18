@@ -244,6 +244,9 @@ script LabyrinthRing4_EventScript_Register {
     setvar(VAR_0x8004, 0x2F3)
     setvar(VAR_0x8005, 0x2F4)
     special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x350)
+    setvar(VAR_0x8005, 0x351)
+    special(Ichor_AddThreadFloor)
     setvar(VAR_0x8004, 4)
     setvar(VAR_0x8005, 2)
     setvar(VAR_0x8006, THREAD_ANCHOR_R4_ENTRANCE)
@@ -252,8 +255,8 @@ script LabyrinthRing4_EventScript_Register {
     setvar(VAR_0x8005, 34)
     setvar(VAR_0x8006, THREAD_ANCHOR_R4_CHECKPOINT)
     special(Ichor_AddThreadAnchor)
-    setvar(VAR_0x8004, 40)
-    setvar(VAR_0x8005, 38)
+    setvar(VAR_0x8004, 42)
+    setvar(VAR_0x8005, 39)
     setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 18)
@@ -269,6 +272,83 @@ script LabyrinthRing4_EventScript_Register {
 // The ring's state, drawn on load and after every change: lit braziers, opened
 // doors and gates. Ichor_DrawThread goes after it.
 script LabyrinthRing4_EventScript_DrawState {
-    end
+    if (flag(FLAG_TEMP_4)) {
+        setmetatile(44, 33, 0x234, FALSE)
+        setmetatile(45, 33, 0x235, FALSE)
+    } else {
+        setmetatile(44, 33, 0x3CB, TRUE)
+        setmetatile(45, 33, 0x3CB, TRUE)
+    }
+}
+
+// Daedalus's floor seal Stair: the stair down is grated: three drums, and the third must go in first or wait
+script LabyrinthRing4_EventScript_PlatesStair {
+    if (flag(FLAG_TEMP_4)) {
+        end
+    }
+    setvar(VAR_TEMP_9, 0)
+    getobjectxy(LOCALID_LABYRINTHRING4_Stair_DRUM0, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 40 && var(VAR_0x8008) == 38) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 43 && var(VAR_0x8008) == 38) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 42 && var(VAR_0x8008) == 37) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    getobjectxy(LOCALID_LABYRINTHRING4_Stair_DRUM1, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 40 && var(VAR_0x8008) == 38) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 43 && var(VAR_0x8008) == 38) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 42 && var(VAR_0x8008) == 37) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    getobjectxy(LOCALID_LABYRINTHRING4_Stair_DRUM2, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 40 && var(VAR_0x8008) == 38) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 43 && var(VAR_0x8008) == 38) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 42 && var(VAR_0x8008) == 37) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_TEMP_9) == 3) {
+        lockall
+        setflag(FLAG_TEMP_4)
+        call(LabyrinthRing4_EventScript_DrawState)
+        special(DrawWholeMapView)
+        playse(SE_DOOR)
+        msgbox(format("Bronze clanks deep in the wall. Something has opened."), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing4_EventScript_LeverStair {
+    lockall
+    msgbox(format("A bronze lever with a double axe for a handle: Daedalus's reset.\pPull it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_CLICK)
+        warpsilent(MAP_LABYRINTH_RING4, 46, 38)
+        waitstate
+    }
+    releaseall
+}
+
+script LabyrinthRing4_EventScript_Remains1 {
+    msgbox(format("A snapped spear, Titan-made, and claw marks on the rock beside it."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing4_EventScript_Remains2 {
+    msgbox(format("Chalked on the barracks wall: DRIVE IT WITH THE TORCHES. IT HATES THE TORCHES."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing4_EventScript_Remains3 {
+    msgbox(format("Bones, a broken shield with an owl on it, and a pack. The owl is Astyra's."), MSGBOX_SIGN)
 }
 // ---- END GENERATED ----
