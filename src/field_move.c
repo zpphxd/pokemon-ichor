@@ -177,11 +177,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_ROCK_CLIMB] =
     {
         .fieldMoveFunc = SetUpFieldMove_RockClimb,
-#if OW_ROCK_CLIMB_FIELD_MOVE
-        .unlockType = ALWAYS_UNLOCKED,
-#else
-        .unlockType = CANT_UNLOCK,
-#endif
+        .unlockType = CANT_UNLOCK, // Ichor: Pan's Crook climbs (OW_ROCK_CLIMB_FIELD_MOVE is on for it); no Pokémon offers it
         .moveID = MOVE_ROCK_CLIMB,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .hideIfLocked = TRUE,

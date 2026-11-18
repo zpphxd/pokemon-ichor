@@ -924,5 +924,41 @@ def watchtower():
     return [s]
 
 
+# --------------------------------------------------------------------------
+# Pan's Crook's climbable face (WORLD_EXPLORATION §2; tools/ichor/art/crook_marks.py)
+# --------------------------------------------------------------------------
+
+CROOK_ROLES = {"H": "ink", "h": "k1", "L": "w0", "W": "p2", "I": "gd", "i": "g1", "v": "g2",
+               "V": "k1", "S": "p3"}
+
+
+def crook():
+    """One column of the cliff (or the cut bank) with paired handholds, ivy over
+    the brink and the hoof votive at the foot: MB_ROCK_CLIMB, climbed with Pan's
+    Crook in either direction. Stack `brink`, any number of `face_u`/`face_l`,
+    then `foot`, in place of one column of the plain cliff."""
+    import crook_marks as CM
+    s = Struct("crook", "Pan's Crook's face: handholds up the cliff", 4, 1, SEC, walk=["XXXX"],
+               names={"brink": (0, 0), "face_u": (1, 0), "face_l": (2, 0), "foot": (3, 0)},
+               notes="A climbable column for the cliff and the cut bank: `brink` (ivy over the "
+                     "lip), `face_u` and `face_l` (stack as many as the drop needs), then `foot` "
+                     "(the bank's foot, with the goat-hoof votive). Every cell is MB_ROCK_CLIMB and "
+                     "impassable: face it and press A to climb with Pan's Crook, up or down. Put "
+                     "walkable ground at both ends. `crook_path` borrows the path above the brink "
+                     "and below the foot instead of grass.")
+    paint_brink(s.M, 0, 0, "A")
+    paint_profile(s.B, 16, 0, 16, 31)
+    paint_profile(s.B, 32, 0, 32, 47)
+    paint_bank_foot(s.M, 48, 0)
+    CM.paint(s.M.px, CM.marks("top", lip=brink_top(1)), CROOK_ROLES, 0, 0)
+    CM.paint(s.B.px, CM.marks("face"), CROOK_ROLES, 16, 0)
+    CM.paint(s.B.px, CM.marks("face"), CROOK_ROLES, 32, 0)
+    CM.paint(s.M.px, CM.marks("foot", foot_base=9 + _wob(2, 3.3)), CROOK_ROLES, 48, 0)
+    ground(s, "grass", [(0, 0), (3, 0)])
+    behave(s, [(0, 0), (1, 0), (2, 0), (3, 0)], "MB_ROCK_CLIMB")
+    return [s, regrounded(s, "crook_path", "Pan's Crook's face, on the path", "path")]
+
+
 def build():
-    return [*rocks(), *ledges(), *cliff(), *bank(), niches(), *seat(), *orchard_wall(), *watchtower()]
+    return [*rocks(), *ledges(), *cliff(), *bank(), niches(), *seat(), *orchard_wall(), *watchtower(),
+            *crook()]

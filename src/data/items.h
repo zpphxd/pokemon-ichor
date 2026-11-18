@@ -7712,6 +7712,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_Honey,
         .iconPalette = gItemIconPalette_Honey,
     },
+    // Ichor: the climbing relic (WORLD_EXPLORATION §2)
+    [ITEM_PANS_CROOK] =
+    {
+        .name = ITEM_NAME("Pan's Crook"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A goatherd's crook.\n"
+            "It climbs faces cut\n"
+            "with handholds."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_PansCrook,
+        .iconPalette = gItemIconPalette_PansCrook,
+    },
 
 // Gems
 #if I_PRICE >= GEN_9

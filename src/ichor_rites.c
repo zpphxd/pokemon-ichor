@@ -116,7 +116,7 @@ static const struct IchorGod sGods[ICHOR_GOD_COUNT] =
         .loved = {ITEM_WINE}, .liked = {ITEM_FIGY_BERRY, ITEM_GREPA_BERRY},
         .giftMove = MOVE_SWAGGER,
         .giftFlag = FLAG_ICHOR_THYRSUS,
-        .giftText = COMPOUND_STRING("He gives you a thyrsus, a fennel\nstaff crowned with a pine cone.\pWith it you can climb walls\nthick with ivy."),
+        .giftText = COMPOUND_STRING("He gives you a thyrsus, a fennel\nstaff crowned with a pine cone.\pHis Revels will turn to Frenzy\nfar more often."),
         .animal = COMPOUND_STRING("a panther"),
     },
     [ICHOR_GOD_ARTEMIS] = {
@@ -364,7 +364,8 @@ static u32 ScaleByRank(u32 god, u32 steps)
 }
 
 // Bless the player with `god`'s blessing. Dionysus passes on another god's, at
-// 1.5x the length; one time in eight a major Revel is a Frenzy instead.
+// 1.5x the length; one time in eight a major Revel is a Frenzy instead, one time
+// in three once he has given the thyrsus (his gift II).
 static void Bless(u32 god, u32 steps, bool32 major)
 {
     u32 flags = major ? ICHOR_BLESSING_MAJOR : 0;
@@ -372,7 +373,7 @@ static void Bless(u32 god, u32 steps, bool32 major)
     steps = ScaleByRank(god, steps);
     if (god == ICHOR_GOD_DIONYSUS)
     {
-        if (major && (Random() % 8) == 0)
+        if (major && (Random() % (FlagGet(FLAG_ICHOR_THYRSUS) ? 3 : 8)) == 0)
         {
             Ichor_SetBlessingTo(ICHOR_GOD_DIONYSUS, steps, flags | ICHOR_BLESSING_FRENZY);
             return;

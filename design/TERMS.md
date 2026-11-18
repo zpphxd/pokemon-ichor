@@ -61,7 +61,8 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 | Trainer Card | Trainer Card | TRAINER CARD | **Flag.** The art becomes a kylix (ART_PLAN §5), but "Kylix" alone doesn't tell a player what it is. Kept until the director decides. |
 | PokéNav | none | | A cut system (INVENTORY §10). Its menu entry never shows, because its flag is never set. |
 | Running Shoes | Talaria | | PITCH §5. Mom's gift. |
-| HMs | relics | | PITCH §5. Cut becomes the Labrys, Fly Daedalus's Wings, Surf Poseidon's Conch, Strength the Girdle of Herakles, Rock Smash the Bronze Hammer, Flash Hecate's Torch, Dive the Nereid Pearl. **Not applied yet:** none of the relics exist, and the field prompts ("Would you like to SURF?") still describe the HM mechanic. They change when the relic system lands. |
+| HMs | relics | | PITCH §5 and SYSTEMS §1. Cut is Demeter's Sickle, Fly Daedalus's Wings, Surf Poseidon's Conch, Strength the Girdle of Herakles, Rock Smash the Bronze Hammer, Flash Hecate's Torch, Waterfall the Horn of Achelous, Dive the Nereid Pearl, Defog Aeolus's Bag. The field prompts name the relic, never a Pokémon ("Cut it with Demeter's Sickle?"). |
+| Rock Climb | Pan's Crook; a climbable face | | WORLD_EXPLORATION §2. The relic is **Pan's Crook** (`ITEM_PANS_CROOK`), a god's possessive plus a plain object, like Hecate's Torch. What it climbs is a **face**: paired handholds up a cliff, ivy over the top, a hoof votive at the foot. The prompt: "Handholds, cut in pairs up the rock. Climb with Pan's Crook?" After its quest, no prompt mentions goats or Pan himself. Never *satyr* (LAZARUS). |
 | Mega Ring | the Omphalos | | PITCH §5. **Not applied yet**, with the next two rows: see the note below the table. |
 | Mega Stones | Ichor Stones | | PITCH §5. Item names (`src/data/items.h`). |
 | Mega Evolution | Apotheosis | | PITCH §5. Form names keep "Mega" (Mega Charizard X), so the battle line becomes "rose to Apotheosis as Mega Charizard X!". |

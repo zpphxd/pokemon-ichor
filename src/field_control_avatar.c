@@ -604,7 +604,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         SetMsgSignPostAndVarFacing(direction);
         return Common_EventScript_ShowPokemonCenterSign;
     }
-    if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive()) // Ichor: ivy walls; the script checks the thyrsus
+    if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive()) // Ichor: handhold faces; the script checks Pan's Crook
         return EventScript_UseRockClimb;
 
 #if !ICHOR_CUT_SECRET_BASES // Ichor: secret bases are cut

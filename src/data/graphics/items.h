@@ -1048,6 +1048,8 @@ const u32 gItemIcon_NereidPearl[] = INCGFX_U32("graphics/items/icons/nereid_pear
 const u16 gItemIconPalette_NereidPearl[] = INCGFX_U16("graphics/items/icon_palettes/nereid_pearl.pal", ".gbapal");
 const u32 gItemIcon_AeolusBag[] = INCGFX_U32("graphics/items/icons/aeolus_bag.png", ".4bpp.smol");
 const u16 gItemIconPalette_AeolusBag[] = INCGFX_U16("graphics/items/icon_palettes/aeolus_bag.pal", ".gbapal");
+const u32 gItemIcon_PansCrook[] = INCGFX_U32("graphics/items/icons/pans_crook.png", ".4bpp.smol");
+const u16 gItemIconPalette_PansCrook[] = INCGFX_U16("graphics/items/icon_palettes/pans_crook.pal", ".gbapal");
 
 // Gems
 

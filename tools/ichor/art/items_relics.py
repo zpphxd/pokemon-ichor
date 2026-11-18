@@ -16,7 +16,7 @@ import numpy as np
 RELIC_PICS = [
     "ichor_talaria", "bronze_hammer", "hecates_torch", "demeters_sickle", "girdle_of_herakles",
     "poseidons_conch", "daedalus_wings", "horn_of_achelous", "labrys", "helm_of_darkness",
-    "nereid_pearl", "aeolus_bag", "aletheas_trowel", "aphrodite_bone",
+    "nereid_pearl", "aeolus_bag", "aletheas_trowel", "aphrodite_bone", "pans_crook",
 ]
 
 
@@ -295,6 +295,36 @@ def register(icon, pal, ramp_roles, C, Icon):
         ], {"w": "w1", "W": "w2"})
         return ic
 
+
+    # ----------------------------------------------------------------------
+    # Pan's Crook (WORLD_EXPLORATION §2): the goatherd's kalaurops, a wild-olive
+    # staff on the diagonal, its head bent over in a hook, a tuft of red wool
+    # tied under the hook and a bronze ferrule at the butt.
+    @icon("pans_crook", {
+        "pans_crook": pal(ramp_roles("w", WOOD + [C["lp_m"]]), **ramp_roles("r", [C["tc_d"], C["tc_m"]]),
+                          b=C["br_m"]),
+    }, labels={"pans_crook": "Pan's Crook"})
+    def _crook():
+        ic = Icon("K w1 w2 w3 w4 r1 r2 b")
+        staff = ic.tube((3.5, 21.5), (14.5, 7.5), 1.7, ["w1", "w2", "w3"], caps=True)
+        # the hook: a thick arc from the staff's top over to the right and down
+        cx, cy, ro, ri = 17.5, 6.5, 5.0, 2.4
+        yy, xx = np.mgrid[0:ic.h, 0:ic.w]
+        dx, dy = xx + 0.5 - cx, yy + 0.5 - cy
+        rr = np.hypot(dx, dy)
+        ang = np.arctan2(dy, dx)
+        hook = (rr <= ro) & (rr >= ri) & ((ang <= 0.55) | (ang >= 2.3))
+        ic.shade(hook, ["w1", "w2", "w3"], kind="sphere")
+        ic.outline(staff | hook)
+        # the worn grip, bright on the outside of the bend
+        ic.pxs([(15, 3), (16, 2), (17, 2), (18, 2)], "w4")
+        ic.pxs([(21, 5), (21, 6)], "w3")
+        # red wool tied under the hook, its loose end hanging
+        ic.pxs([(13, 9), (14, 9), (13, 10), (12, 10)], "r2")
+        ic.pxs([(12, 11), (11, 12), (12, 12)], "r1")
+        # the bronze ferrule
+        ic.pxs([(3, 21), (4, 21), (4, 22), (3, 20)], "b")
+        return ic
 
     # ----------------------------------------------------------------------
     # Alethea's Trowel (§5, a tool beside the relics): a pointed bronze blade,

@@ -26,7 +26,7 @@ Forced grass 13 (bands 1-4). Trainers 7 (4 on the only road: Polyon, Mnason, Ake
 | Gate | Relic | Where | Behind it |
 |---|---|---|---|
 | Great boulder | Hephaestus's Hammer | the ravine's mouth (2, 37) | a Nugget (1, 40); room for a hermit's cell |
-| Ivy and handholds on tier 2's cliff | the climbing relic | face row 32, x 20-25 (tag only: no ivy piece yet) | a shortcut from tier 3 back to the camp |
+| Ivy and handholds on tier 2's cliff | Pan's Crook | **built**: the face at (27, 31-33), Skiron `crook` (gulf.py) | a shortcut from tier 3 back to the camp |
 | The Daulis road | none now (Sickle, Act I) | the thicket (5, 11), the milestone (5, 9) | today a PP Up; later the road west to Daulis and Phokis |
 | The lookout | the Horn (from Kirrha) | (29-30, 35-39) | Delphoi in view; Theano's "one day the falls will let you up" points at Route 28 |
 | The Korykian Cave | Torch and Girdle now; Conch and Three-Flamed Torch later | (29, 8) | see `Route9_KorykianCave.md` |

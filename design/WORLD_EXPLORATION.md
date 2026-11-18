@@ -36,8 +36,10 @@ This file plans the whole of Aethos as one explorable world: what each region sh
 
 ---
 
-## 2. A climbing relic: Pan's Crook (proposal)
+## 2. A climbing relic: Pan's Crook (built 2026-11-18)
 
+> **Built:** the item, the faces (Skiron's limestone and Arkadia's grey crag), "Noon in Arkadia", and the faces on Route 13 and Route 9 (ENGINE_API §2). The other hooks stay later; see "Faces placed" at the end of this section. The original proposal follows.
+>
 > **Proposal for the director and the user to approve.** It adds a 14th relic and reverses `SYSTEMS.md` §13's ruling that Rock Climb stays optional-only as Dionysus's gift II. The user's new direction ("rock climb, surf, etc.") asks for climbing gates across the world, which a Favor gift can't carry: a gate has to open for every player at a known point in the story.
 
 ### The pick
@@ -95,6 +97,12 @@ Talaria, Bronze Hammer, Hecate's Torch, Demeter's Sickle, Girdle of Herakles, **
 - **Nothing on the main path needs it.** Arkadia's exits (Route 12 back to Styx Falls, Route 13 on to Nemea) are untouched.
 - **It lands before the Conch,** so for one stretch of Act II the player can climb but not swim: the Act I regions they walk back through on Routes 13–14 and the capital road (Isthmus, Eleusa) are the first payoffs.
 - **Its upgrade:** none. Pan's caves quest (§7, loop 4) gives a key item, not a stronger crook.
+
+### As built (2026-11-18)
+
+- **The quest:** Krotos (`Arkadia_GoatherdHouse`) tells of his kid on the crag over the grotto; the reed bed by Arkadia's falls pool, where the water runs off toward the Ladon, takes the Sickle; piping at the grotto shakes the screen and a panicked Kaprodon (Lv 36) bursts out; Pan's voice gives the Crook; the player climbs the crag (x9, rows 10-12) to the kid; Krotos gives Kerazap Lv 34. Flags `FLAG_ICHOR_NOON_*`. The crag is `tools/ichor/maps/polish/arkadia_crook.py`.
+- **Faces placed:** Arkadia's crag (the teach); Route 13's scarp at (47, 14-16) to the crag pocket's PP Up (`nemea.py`); Route 9's tier 2 cliff at (27, 31-33), a shortcut between the tier 3 traverse and the scree pocket under the camp (`gulf.py`).
+- **Later, and why:** Nemea's den (the upper chamber isn't built); Route 7's scree pocket (no cliff or ledge there yet: a new terrace over the camp is needed, through `kopais.py`); Route 8's Katavothres shaft and Route 11's rim and watchtower (not built); Route 28's Hyampeia face, the Ascent's storm face, the Crystal Vault's crack and Olympus's crag (post-game; Chion would need its prop packing kept stable before a climbable copy can be added); the Labyrinth's Ring II and IV faces (its tileset has 3 tiles free). The cave's flowstone family is not drawn yet: no cave hook has its reward built.
 
 ---
 

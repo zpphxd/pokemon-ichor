@@ -444,6 +444,11 @@ def props_r13(g):
     g.piece("pine_tall", 46, 20)
     for x, y in ((22, 17), (44, 17), (48, 17)):   # fallen rock at the cliff foot
         g.piece("rock_path" if g.g[y][x] == "p" else "rock", x, y)
+    # Pan's Crook's face up the scarp to the crag pocket (WORLD_EXPLORATION §2):
+    # grass above the brink, the valley road below the foot
+    g.named("crook", "brink", 47, 14)
+    g.named("crook", "face_u", 47, 15)
+    g.named("crook_path", "foot", 47, 16)
 
 
 def spec_r13():
@@ -486,8 +491,6 @@ def spec_r13():
     s.scripts.append(f'''script {s.px}Herm {{
     goto(EventScript_IchorGreatHerm)
 }}''')
-    sign(s, "Handholds", 47, 16, "Old handholds climb the rock. They lead to a ledge up on the scarp.\\p"
-         "Something glints up there, out of reach.", "NORTH")
     sign(s, "Cell", 19, 3, "A hermit's stone. The name is worn away, but not the little carved bee.")
     sign(s, "Niches", 21, 16, "Niches cut in the scarp, with clay goats and a bow left in them.\p"
          "Offerings to Artemis, from hunters going down to the valley.", "NORTH")

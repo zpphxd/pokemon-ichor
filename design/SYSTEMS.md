@@ -89,6 +89,7 @@ Main-path relics are in bold.
 | 3 | **Hecate's Torch** | Flash; light braziers; burn webs; douse to see glow-paint | Act I, after Laurel 2 | Hecate's Hollow, a cave crossroads on the Eleusa road | Eleusa's trial and the Mystery sanctum | Three-Flamed Torch, at Hecate Favor 60: bigger radius, burns thornwebs |
 | 4 | **Demeter's Sickle** | Cut (thickets, vines, reeds) | End of Act I, after Laurel 3 | Eleusa, Chloe, after the theft | The vine-choked road to Thyrsa | — |
 | 5 | **Girdle of Herakles** | Strength (column drums) | Act II, after Laurel 4 | Thyrsa, Silenos the old actor | The drum-blocked pass to Arkadia | — |
+| 5b | Pan's Crook | Rock Climb: climbs handhold faces, up or down | Act II, after Laurel 5 | Arkadia: Pan, at his grotto ("Noon in Arkadia", WORLD_EXPLORATION §2) | Nothing: every face is optional | — |
 | 6 | **Poseidon's Conch** | Surf, riding a dolphin | Act II, after the Akropolis battle | Astyra, the salt well under the Akropolis | Open sea; your own route to Thera | Triton's Conch, at Poseidon Favor 60: calm whirlpools (post-game Odyssey) |
 | 7 | **Daedalus's Wings** | Fly | End of Act II, after Laurel 6 | Kaldera, Talos the Bronzesmith | Fly from anywhere, not only from a herm (herm travel between towns works from the start, §4). Every route herm you anointed goes live on the fly map. | — |
 | 8 | **Horn of Achelous** | Waterfall | Act III, after Laurel 7 | Kythera, the Naiads of the Neraida falls | The Kastalian falls up to Delphoi, then the Ascent | — |
@@ -237,7 +238,15 @@ Each relic is a short quest of 5 to 20 minutes. None needs a time of day.
 
 ### Using relics: the prompt and the Relic Ring
 
-**Contextual relics.** These are the Hammer, Sickle, Girdle, Conch, Horn, Labrys, Trowel, and the Torch when used on braziers and webs. Face the obstacle and press A.
+**Contextual relics.** These are the Hammer, Sickle, Girdle, **Crook**, Conch, Horn, Labrys, Trowel, and the Torch when used on braziers and webs. Face the obstacle and press A.
+
+- **Pan's Crook** on a handhold face (`MB_ROCK_CLIMB`):
+  ```text
+  Handholds, cut in pairs up the rock.
+
+  Climb with Pan's Crook?
+  ```
+  AUTO: "{PLAYER} climbed with Pan's Crook." Without it: "Handholds are cut up the rock in pairs, worn smooth, under a fringe of ivy. A good crook would hold you to it." The player raises the Crook (its icon, the chime), then climbs on foot to the first tile past the face, either way.
 
 - **Option "Relic prompts": ASK (default) or AUTO.**
   - ASK:
@@ -517,7 +526,7 @@ There are 15 gods: the Twelve, plus Zeus, Hecate and, in the post-game, Hades. U
 | **Hestia** | Olive Oil / Barley Cake, Honey | **Hearthfire.** Stores one full party heal. Use it from the Relic Ring anywhere outside battle; the blessing ends when used. The minor version heals HP only. | **I** Wish (tutor)<br>**II** **Ever-Ember**: Hearthfire no longer counts down, and you can heal at any home's hearth<br>**III** the hearth donkey: Kanthos's foal, Akti's temple donkey from the slice |
 | **Hermes** | Honey / Frankincense, Olive Oil | **Swift Trade.** Agora prices −20% when buying and +20% when selling; trainer prize money +20%. | **I** U-turn<br>**II** **Winged Talaria**: gap leaps<br>**III** the lyre-tortoise |
 | **Demeter** | Barley Cake / First Fruits (any berry except Pomeg) | **Harvest.** Wild Pokémon carry held items twice as often; berry trees give +1; each dig rolls twice and keeps the rarer result. | **I** Leech Seed<br>**II** **Harvest Basket**: berry trees always give +1<br>**III** her chariot-serpent |
-| **Dionysus** | Wine / Figy and Grepa Berries (fig and grape) | **Revel.** Gives a random other god's major blessing at 1.5× duration (never Zeus or Hades). One time in eight it is **Frenzy** instead: wild encounters ×2, wild levels +3, EXP ×1.5. | **I** Swagger<br>**II** **Thyrsus**: climb marked ivy walls (the expansion's Rock Climb), opening optional ledges<br>**III** the panther |
+| **Dionysus** | Wine / Figy and Grepa Berries (fig and grape) | **Revel.** Gives a random other god's major blessing at 1.5× duration (never Zeus or Hades). One time in eight it is **Frenzy** instead: wild encounters ×2, wild levels +3, EXP ×1.5. | **I** Swagger<br>**II** **Thyrsus**: the maenads' staff; a major Revel turns to Frenzy one time in three, not eight (climbing moved to Pan's Crook, §13)<br>**III** the panther |
 | **Artemis** | Any feather (the first of the hunt) / Barley Cake (her moon-cakes) | **Moonlit Hunt.** At night, a route's three rarest land slots are 3× as likely; wild encounter rate −25% at all times; the Augur's Eye sneaking range +2 tiles. | **I** Night Slash<br>**II** **Hunter's Moon**: the Augur's Eye lists each map's rare-slot species<br>**III** the golden-horned deer |
 | **Hephaestus** | Bronze Votive / Wine (he came home to Olympus drunk) | **Forge-sight.** Hidden items within 6 tiles glint every 2 seconds; smashed rocks drop items 3× as often. | **I** Flash Cannon<br>**II** **Hephaestus's Hammer**: great boulders<br>**III** the golden automaton |
 | **Aphrodite** | Frankincense / Pretty Feather (her doves), sea gifts | **Charm.** Friendship gains ×2; wild Pokémon are the opposite gender of your lead two times in three. | **I** Draining Kiss<br>**II** **Myrtle Wreath**: a held item; friendship can't drop<br>**III** the swan |
@@ -1717,7 +1726,7 @@ Every trial also has:
 | Festivals on real dates | **Replaced** by the 36-day Aethos year | Players would rarely see them |
 | Knucklebones for money | **Cut** | It stays a friendly game |
 | Overworld wild encounters (`WE_OW_ENCOUNTERS`) | **Not proposed** | The config warns about VRAM with compressed followers on |
-| Rock Climb as a main-path relic | **Optional only:** Dionysus's Thyrsus, gift II | The expansion has it (`OW_ROCK_CLIMB_FIELD_MOVE`), but the main path doesn't need another verb |
+| Rock Climb as a main-path relic | **Reversed (2026-11-18): Pan's Crook**, an optional relic after Laurel 5 (§1, WORLD_EXPLORATION §2) | Climbing gates have to open for every player at a known point, which a Favor gift can't do. No main-path gate needs it. The Thyrsus (Dionysus's gift II) no longer climbs: it makes his Frenzy come one Revel in three. WORLD_EXPLORATION Q1 suggested moving the panther to gift II instead; gift III's animals aren't built, so the smaller change was taken. |
 | Brazier halos in open caves | **Stretch** | Lit zones do the job in 1.0 |
 
 ---

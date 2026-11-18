@@ -63,7 +63,7 @@ Every closed thing here is visible from where the player stands, with a line tha
 | Nemea (27-29,8-10) | the Langia spring's waterfall, "a hollow behind the fall" | Horn of Achelous | a grotto behind the fall (not built): an amphora or Opheltes's relic |
 | Nemea (36,31) | the river pool's islet | Poseidon's Conch | Big Pearl (FLAG_ICHOR_ITEM_NEMEA_ISLET); the pool also gets a surf table now |
 | Nemea (2,28-29) | the athletes' tunnel, bricked up, wings scratched on it | Winged Talaria (gap-jump/sprint upgrade) | the stadium race with the runner in the outcamp and Chionis in the palaestra (a minigame hook) |
-| Route 13 (47,12) | the crag pocket above the scarp; handholds on the cliff foot at (47,16) | the climbing relic | PP Up (FLAG_ICHOR_ITEM_R13_CRAG) |
+| Route 13 (47,12) | the crag pocket above the scarp: **built**, Pan's Crook's face at (47,14-16) (Skiron `crook`) | Pan's Crook | PP Up (FLAG_ICHOR_ITEM_R13_CRAG) |
 | Route 14 (11,5) | great boulder closing the gorge's north cleft | Hephaestus's Hammer | the lion hunters' stele and nook, with a hidden Super Repel (FLAG_ICHOR_HIDDEN_ITEM_R14_REPEL) FLAG_ICHOR_R14_GREAT_BOULDER |
 | Route 14 (54-55,19-21) | the ravine pool's islet | Poseidon's Conch | Pearl (FLAG_ICHOR_ITEM_R14_ISLET) |
 | Route 14, the stream bed | the stream "goes into the hill and never comes out" (Neokles) | Poseidon's Conch | surfable now-unreachable water; leads the eye to the Tretos's pool |

@@ -52,6 +52,7 @@
 
 extern const u8 EventScript_UseSurf[];
 extern const u8 EventScript_UseWaterfall[];
+extern const u8 EventScript_UseRockClimb[];
 extern const u8 EventScript_UseDive[];
 extern const u8 EventScript_UseDiveUnderwater[];
 extern const u8 EventScript_CutTree[];
@@ -87,6 +88,8 @@ u16 Ichor_GetRelicFlag(u16 itemId)
         return FLAG_ICHOR_GOT_TALARIA;
     if (itemId > ICHOR_RELIC_FIRST && itemId <= ICHOR_RELIC_LAST)
         return FLAG_ICHOR_RELICS_START + (itemId - ICHOR_RELIC_FIRST);
+    if (itemId == ITEM_PANS_CROOK)
+        return FLAG_ICHOR_GOT_PANS_CROOK;
     return 0;
 }
 
@@ -238,8 +241,8 @@ bool8 Ichor_IsInDarkMap(void)
 #define ICHOR_RELIC_ICON_TAG 0x7A10
 #define RELIC_SHOW_FRAMES    44
 
-// ICHOR_FIELD_EFFECT_RELIC | item: any item's icon, or none for ITEM_NONE (the
-// thyrsus, a gift with no item, just raises a hand).
+// ICHOR_FIELD_EFFECT_RELIC | item: any item's icon, or none for ITEM_NONE (a
+// gift with no item just raises a hand).
 bool32 Ichor_IsRelicShowArg(u32 arg)
 {
     u32 value = arg & 0xFFFF;
@@ -429,6 +432,11 @@ static const u8 *GetContextualScript(u16 itemId)
     case ITEM_HORN_OF_ACHELOUS:
         if (IsPlayerSurfingNorth() && MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)))
             return EventScript_UseWaterfall;
+        break;
+    case ITEM_PANS_CROOK:
+        if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
+         && MetatileBehavior_IsRockClimbable(MapGridGetMetatileBehaviorAt(x, y)))
+            return EventScript_UseRockClimb;
         break;
     case ITEM_NEREID_PEARL:
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)

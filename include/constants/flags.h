@@ -1715,6 +1715,7 @@
 #define FLAG_ICHOR_GOT_HELM_OF_DARKNESS         (FLAG_ICHOR_RELICS_START + 0x0A)
 #define FLAG_ICHOR_GOT_NEREID_PEARL             (FLAG_ICHOR_RELICS_START + 0x0B)
 #define FLAG_ICHOR_GOT_AEOLUS_BAG               (FLAG_ICHOR_RELICS_START + 0x0C)
+#define FLAG_ICHOR_GOT_PANS_CROOK               (FLAG_ICHOR_RELICS_START + 0x0D) // ITEM_PANS_CROOK sits past the relic block
 // upgrades, from the rites' gift II
 #define FLAG_ICHOR_WINGED_TALARIA               (FLAG_ICHOR_RELICS_START + 0x20) // Hermes: leap one-tile gaps
 #define FLAG_ICHOR_THREE_FLAMED_TORCH           (FLAG_ICHOR_RELICS_START + 0x21) // Hecate: wider light, burns thornwebs
@@ -1728,7 +1729,7 @@
 // gift II upgrades that aren't relics (SYSTEMS §3)
 #define FLAG_ICHOR_EVER_EMBER                   (FLAG_ICHOR_RELICS_START + 0x25) // Hestia: Hearthfire never counts down; hearths heal
 #define FLAG_ICHOR_HARVEST_BASKET               (FLAG_ICHOR_RELICS_START + 0x26) // Demeter: berry trees always give one more
-#define FLAG_ICHOR_THYRSUS                      (FLAG_ICHOR_RELICS_START + 0x27) // Dionysus: climb marked ivy walls (Rock Climb)
+#define FLAG_ICHOR_THYRSUS                      (FLAG_ICHOR_RELICS_START + 0x27) // Dionysus: a Revel turns to Frenzy one time in three, not eight
 #define FLAG_ICHOR_HUNTERS_MOON                 (FLAG_ICHOR_RELICS_START + 0x28) // Artemis: the Augur's Eye lists rare slots (hook)
 #define FLAG_ICHOR_ATHENAS_STYLUS               (FLAG_ICHOR_RELICS_START + 0x29) // Athena: Scroll of Deeds hints (hook)
 #define FLAG_ICHOR_EYES_OF_ARGUS                (FLAG_ICHOR_RELICS_START + 0x2A) // Hera: the Augur's Eye detector always on (hook)
@@ -1793,6 +1794,11 @@
 #define FLAG_ICHOR_HIDE_AMPHORA_PERSENYX        (FLAG_ICHOR_GENERAL_START + 0x031) // Ichor: derived visibility of the dusk-only restored-amphora visitor
 #define FLAG_ICHOR_OATH_CHOICE_PENDING          (FLAG_ICHOR_GENERAL_START + 0x032) // Ichor: new game may choose its starting Oath; cleared by either answer
 #define FLAG_ICHOR_BOUGHT_CHARIOT               (FLAG_ICHOR_GENERAL_START + 0x033) // Ichor: bought the chariot from Alfred at Waltz Chariots, Emporion
+#define FLAG_ICHOR_NOON_HEARD                   (FLAG_ICHOR_GENERAL_START + 0x034) // Ichor: Arkadia: Krotos told of the kid on the crag over Pan's grotto (Noon in Arkadia)
+#define FLAG_ICHOR_NOON_REEDS                   (FLAG_ICHOR_GENERAL_START + 0x035) // Ichor: Arkadia: cut fresh syrinx reeds by the falls pool with the Sickle
+#define FLAG_ICHOR_NOON_PAN_WOKEN               (FLAG_ICHOR_GENERAL_START + 0x036) // Ichor: Arkadia: piped Pan awake at his grotto; he gave Pan's Crook
+#define FLAG_ICHOR_NOON_KID_FETCHED             (FLAG_ICHOR_GENERAL_START + 0x037) // Ichor: Arkadia: fetched the kid down off the crag (hides it)
+#define FLAG_ICHOR_NOON_GOT_KERAZAP             (FLAG_ICHOR_GENERAL_START + 0x038) // Ichor: Arkadia: Krotos gave the Kerazap
 #define FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x040) // Ichor: Route 5: the Super Potion in the pine clearing
 #define FLAG_ICHOR_ITEM_ROUTE5_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x041) // Ichor: Route 5: the Great Ball beside the rock seat
 #define FLAG_ICHOR_ITEM_ROUTE5_PP_UP            (FLAG_ICHOR_GENERAL_START + 0x042) // Ichor: Route 5: the PP Up at the watchtower (the Girdle, Act II)

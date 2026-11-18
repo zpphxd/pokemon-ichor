@@ -52,11 +52,6 @@ script Route13_HighlandRoad_EventScript_Herm {
     goto(EventScript_IchorGreatHerm)
 }
 
-script Route13_HighlandRoad_EventScript_Handholds {
-    msgbox(format("Old handholds climb the rock. They lead to a ledge up on the scarp.\pSomething glints up there, out of reach."), MSGBOX_SIGN)
-    end
-}
-
 script Route13_HighlandRoad_EventScript_Cell {
     msgbox(format("A hermit's stone. The name is worn away, but not the little carved bee."), MSGBOX_SIGN)
     end
