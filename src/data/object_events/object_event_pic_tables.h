@@ -2826,6 +2826,21 @@ static const struct SpriteFrameImage sPicTable_IchorGreatHerm[] = {
 static const struct SpriteFrameImage sPicTable_IchorHermPlaque[] = {
     obj_frame_tiles(gObjectEventPic_IchorHermPlaque),
 };
+static const struct SpriteFrameImage sPicTable_IchorRemainsBones[] = {
+    obj_frame_tiles(gObjectEventPic_IchorRemainsBones),
+};
+static const struct SpriteFrameImage sPicTable_IchorRemainsShield[] = {
+    obj_frame_tiles(gObjectEventPic_IchorRemainsShield),
+};
+static const struct SpriteFrameImage sPicTable_IchorRemainsSpear[] = {
+    obj_frame_tiles(gObjectEventPic_IchorRemainsSpear),
+};
+static const struct SpriteFrameImage sPicTable_IchorRemainsSatchel[] = {
+    obj_frame_tiles(gObjectEventPic_IchorRemainsSatchel),
+};
+static const struct SpriteFrameImage sPicTable_IchorKronos[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKronos, 2, 4),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

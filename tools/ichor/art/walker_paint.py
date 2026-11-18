@@ -158,7 +158,37 @@ FACE_MASK = {
 ...kkwwSSSss....
 """)),
 }
-FACES = {"round": FACE, "level": FACE_LEVEL, "stern": FACE_STERN, "mask": FACE_MASK}
+# Kronos's closed gold mask in place of a face: a smooth, calm gold face with
+# narrow eye slits, a ridge of nose and a shut mouth slot, lit from the top left
+# (W/w gold and its shade, Q the pale-gold shine, the slits in ink). Worn under
+# the hood, which hides everything round it.
+FACE_GOLD = {
+    "down": phases(T(13, """
+....WWWWWWWW....
+...WWWWWWWWWW...
+..WQQWWWWWWWWW..
+..WQWWWWWWWWWw..
+..WWWWWwWWWWWw..
+..WWWWWwWWWWww..
+...WkkWwWkkWw...
+...wWWWWWWWWw...
+....wwwkkwww....
+""")),
+    "up": FACE["up"],
+    "left": phases(T(13, """
+....WWWWWWW.....
+...WWWWWWWWW....
+..WQWWWWWWWWH...
+..WQWWWWWWWWH...
+..WWWWWWWWWWH...
+.WWWWWWWWWWWH...
+..WkkWWWWWWWh...
+..WWWWWWWWWwh...
+...kwwwwwwww....
+""")),
+}
+FACES = {"round": FACE, "level": FACE_LEVEL, "stern": FACE_STERN, "mask": FACE_MASK,
+         "goldmask": FACE_GOLD}
 
 # ── bodies ───────────────────────────────────────────────────────────────────
 _SHORT_DOWN = T(22, """
@@ -602,6 +632,10 @@ OVER = {
 """)),
     },
 }
+# The hood's cowl closed over the throat (Kronos), so no neck shows below a mask.
+OVER["cowl"] = {"down": phases(T(22, """
+......YYYY......
+"""))}
 
 CAPE = {  # drawn behind the body, except from behind
     "chlamys": {
@@ -991,6 +1025,14 @@ CHARACTERS = {
     # gold mask he no longer wears held at his side.
     "phaedon": C_("theoxenia", dict(H=13, h=2, G=12, C=11, c=10, W=11, w=10, A=6, M=6, m=5),
                   body="robe", hair="short", beard="jaw", over=["sash"], held=["mask"]),
+    # Kronos: Phaedon before the unmasking, the Titan lord. The same man and
+    # palette (so the reveal swaps nothing else on screen, and Rhea's cast
+    # palette stays untouched beside him), his face shut behind a closed gold
+    # mask, a dark cowl and long dark cloak over a gray-brown robe, the gold sash.
+    "kronos": C_("theoxenia", dict(W=5, w=4, Q=6, H=13, h=2, Y=13, y=13, X=13, x=2,
+                                   C=12, c=13, A=6),
+                 body="robe", face="goldmask", headwear=["hood"], over=["cowl", "sash"],
+                 cape="cloak_long"),
     # Hyperion: the big bronze-breasted Titan of light, bareheaded, his eyes
     # clouded white (the eye role mapped to pale linen).
     # Kleon after he breaks his own thread (III-10G): the same boy, redrawn on the

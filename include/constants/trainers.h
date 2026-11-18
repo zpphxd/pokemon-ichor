@@ -216,6 +216,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_GIGAS,
     TRAINER_PIC_HIEROPHANT_PHEMONOE,
     TRAINER_PIC_RHEA_PARTNER,          // Rhea beside you at the Omphalos: a back pic stand-in until hers is drawn
+    TRAINER_PIC_ICHOR_GIGAS,           // the giants of the Labyrinth (tools/ichor/art/portrait_gigas.py)
     TRAINER_PIC_COUNT,
 };
 
