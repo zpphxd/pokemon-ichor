@@ -1,0 +1,34 @@
+{
+ "0": [
+  "MAP_LABYRINTH_RING1",
+  9
+ ],
+ "1": [
+  "MAP_LABYRINTH_RING1",
+  10
+ ],
+ "2": [
+  "MAP_LABYRINTH_RING2",
+  9
+ ],
+ "3": [
+  "MAP_LABYRINTH_RING2",
+  10
+ ],
+ "4": [
+  "MAP_LABYRINTH_RING3",
+  10
+ ],
+ "5": [
+  "MAP_LABYRINTH_RING4",
+  9
+ ],
+ "6": [
+  "MAP_LABYRINTH_RING4",
+  12
+ ],
+ "7": [
+  "MAP_LABYRINTH_RING3",
+  13
+ ]
+}

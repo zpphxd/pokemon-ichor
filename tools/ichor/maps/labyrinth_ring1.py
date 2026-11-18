@@ -333,6 +333,18 @@ def build(render=True):
     starts = [hall_stand]
     m.forced_open = set(gap(*DOOR))
     m.stops |= set(gap(*DOOR))
+    import labyrinth_extras as X
+    X.block_gap(m, (6, 5), (6, 6), "rubble", "the gate room's only way in: a roof-fall across the arch")
+    X.obstacle(m, 36, 14, "roots", why="old roots hang across the cleft's side passage")
+    X.remains(m, 10, 21, P, "1", "Scratched in the plaster, a row of marks: days, counted.\\pThey stop at nine.")
+    X.remains(m, 2, 17, P, "2", "Cut small in the gypsum: SEVEN TURNED LEFT. I TURNED RIGHT.\\pThe hand is Athenian.")
+    X.remains(m, 36, 9, P, "3", "A torch, burned out and snapped in two, wedged in a crack in the rock.")
+    slots = X.free_dead_ends(m, mz)
+    if slots:
+        X.later_gate(m, slots[0], "chain", "FLAG_ICHOR_HIDE_R1_SEAL", P, "1", "Kolossette", 52, "FLAG_ICHOR_R1_STATIC",
+                     "ITEM_RELIC_GOLD", "FLAG_ICHOR_ITEM_R1_TREASURY",
+                     "a labrys-sealed treasury of the house's first stewards, opened on the way back up with the Labrys; a bronze guardian Daedalus forgot")
+    X.cellar_entries(m, mz, [0, 1], P)
     m.break_runs(starts)
     errs, reach = m.build("labyrinth_ring1", starts, views=VIEWS, render=render,
                           extra=set(gap(*DOOR)))

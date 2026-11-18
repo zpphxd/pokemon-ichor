@@ -383,4 +383,40 @@ script LabyrinthRing1_EventScript_BrazierG {
     releaseall
     end
 }
+
+script LabyrinthRing1_EventScript_Remains1 {
+    msgbox(format("Scratched in the plaster, a row of marks: days, counted.\pThey stop at nine."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing1_EventScript_Remains2 {
+    msgbox(format("Cut small in the gypsum: SEVEN TURNED LEFT. I TURNED RIGHT.\pThe hand is Athenian."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing1_EventScript_Remains3 {
+    msgbox(format("A torch, burned out and snapped in two, wedged in a crack in the rock."), MSGBOX_SIGN)
+}
+
+// Hook for later (Labrys): a labrys-sealed treasury of the house's first stewards, opened on the way back up with the Labrys; a bronze guardian Daedalus forgot
+script LabyrinthRing1_EventScript_Lair1 {
+    lockall
+    if (!flag(FLAG_ICHOR_R1_STATIC)) {
+        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)
+        closemessage
+        setwildbattle(SPECIES_KOLOSSETTE, 52)
+        dowildbattle
+        setflag(FLAG_ICHOR_R1_STATIC)
+    } else {
+        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+script LabyrinthRing1_EventScript_CellarHole1 {
+    lockall
+    msgbox(format("The floor here is only rubble over a hole. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_CELLARS, 3)
+    waitstate
+}
 // ---- END GENERATED ----

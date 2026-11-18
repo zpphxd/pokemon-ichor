@@ -2411,6 +2411,56 @@
 #define FLAG_ICHOR_ITEM_R2_ULTRA_BALL           (FLAG_ICHOR_GENERAL2_START + 0x45E) // Ichor: Labyrinth Ring II: an Ultra Ball in the grotto
 #define FLAG_ICHOR_HIDDEN_ITEM_R2_STARDUST      (FLAG_ICHOR_GENERAL2_START + 0x45F) // Ichor: Labyrinth Ring II: Stardust in the Moon Room
 #define FLAG_ICHOR_HIDDEN_ITEM_R2_OBOL          (FLAG_ICHOR_GENERAL2_START + 0x460) // Ichor: Labyrinth Ring II: a Bronze Obol in a dead end
+#define FLAG_ICHOR_HIDE_R3_WEB_1A               (FLAG_ICHOR_GENERAL2_START + 0x461) // Ichor: Labyrinth Ring III: web 1, west strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_1B               (FLAG_ICHOR_GENERAL2_START + 0x462) // Ichor: Labyrinth Ring III: web 1, east strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_2A               (FLAG_ICHOR_GENERAL2_START + 0x463) // Ichor: Labyrinth Ring III: web 2, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_2B               (FLAG_ICHOR_GENERAL2_START + 0x464) // Ichor: Labyrinth Ring III: web 2, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_3A               (FLAG_ICHOR_GENERAL2_START + 0x465) // Ichor: Labyrinth Ring III: web 3, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_3B               (FLAG_ICHOR_GENERAL2_START + 0x466) // Ichor: Labyrinth Ring III: web 3, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_4A               (FLAG_ICHOR_GENERAL2_START + 0x467) // Ichor: Labyrinth Ring III: the web pocket's web, a strand burned
+#define FLAG_ICHOR_HIDE_R3_WEB_4B               (FLAG_ICHOR_GENERAL2_START + 0x468) // Ichor: Labyrinth Ring III: the web pocket's web, a strand burned
+#define FLAG_ICHOR_ITEM_R3_MAX_ETHER            (FLAG_ICHOR_GENERAL2_START + 0x469) // Ichor: Labyrinth Ring III: the Max Ether behind the first web
+#define FLAG_ICHOR_ITEM_R3_RARE_BONE            (FLAG_ICHOR_GENERAL2_START + 0x46A) // Ichor: Labyrinth Ring III: the Rare Bone in the web pocket
+#define FLAG_ICHOR_ITEM_R3_TM                   (FLAG_ICHOR_GENERAL2_START + 0x46B) // Ichor: Labyrinth Ring III: Automaton No. 7's TM
+#define FLAG_ICHOR_ITEM_R3_STAR_PIECE           (FLAG_ICHOR_GENERAL2_START + 0x46C) // Ichor: Labyrinth Ring III: the Star Piece by the glow trail's spur
+#define FLAG_ICHOR_ITEM_R3_PEARL                (FLAG_ICHOR_GENERAL2_START + 0x46D) // Ichor: Labyrinth Ring III: a Big Pearl on the stream's islet
+#define FLAG_ICHOR_HIDDEN_ITEM_R3_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x46E) // Ichor: Labyrinth Ring III: a Revive in a dead end
+#define FLAG_ICHOR_MET_DAEDALUS                 (FLAG_ICHOR_GENERAL2_START + 0x46F) // Ichor: Labyrinth: scene D, Daedalus met in his workshop
+#define FLAG_ICHOR_DAEDALUS_LIFT                (FLAG_ICHOR_GENERAL2_START + 0x470) // Ichor: Labyrinth: Daedalus's lift runs between the workshop and the Grand Staircase
+#define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL2_START + 0x471) // Ichor: Labyrinth: Daedalus gave the Master Ball (scene D)
+#define FLAG_ICHOR_TITAN_DISGUISE               (FLAG_ICHOR_GENERAL2_START + 0x472) // Ichor: Labyrinth Ring IV: took a Titan helmet from the barracks locker (the disguise)
+#define FLAG_ICHOR_ENKELADOS_PASSED             (FLAG_ICHOR_GENERAL2_START + 0x473) // Ichor: Labyrinth Ring IV: past Enkelados's checkpoint, by catechism or by battle
+#define FLAG_ICHOR_ITEM_R4_MAX_REVIVE           (FLAG_ICHOR_GENERAL2_START + 0x474) // Ichor: Labyrinth Ring IV: the barracks' Max Revive
+#define FLAG_ICHOR_ITEM_R4_HYPER_POTION         (FLAG_ICHOR_GENERAL2_START + 0x475) // Ichor: Labyrinth Ring IV: the armory's Hyper Potion
+#define FLAG_ICHOR_ITEM_R4_IRON                 (FLAG_ICHOR_GENERAL2_START + 0x476) // Ichor: Labyrinth Ring IV: an Iron in the dig
+#define FLAG_ICHOR_GOT_HELM_SCENE               (FLAG_ICHOR_GENERAL2_START + 0x477) // Ichor: Minos's tomb: scene F, the Helm taken from the bier
+#define FLAG_ICHOR_ITEM_TOMB_GOLD_STATER        (FLAG_ICHOR_GENERAL2_START + 0x478) // Ichor: Minos's tomb: the Gold Stater among the grave goods
+#define FLAG_ICHOR_HIDDEN_ITEM_R4_ULTRA_BALL    (FLAG_ICHOR_GENERAL2_START + 0x479) // Ichor: Labyrinth Ring IV: an Ultra Ball under a bunk
+#define FLAG_ICHOR_HIDDEN_ITEM_R4_NUGGET        (FLAG_ICHOR_GENERAL2_START + 0x47A) // Ichor: Labyrinth Ring IV: a Nugget in the dig's spoil
+#define FLAG_ICHOR_HIDE_R1_SEAL                 (FLAG_ICHOR_GENERAL2_START + 0x47B) // Ichor: Labyrinth Ring I: the labrys seal on the treasury door, cut (return gate)
+#define FLAG_ICHOR_HIDE_R2_SEAL                 (FLAG_ICHOR_GENERAL2_START + 0x47C) // Ichor: Labyrinth Ring II: the labrys seal on the runners' shrine, cut (return gate)
+#define FLAG_ICHOR_HIDE_R3_THORNWEB             (FLAG_ICHOR_GENERAL2_START + 0x47D) // Ichor: Labyrinth Ring III: the thornweb over the spiders' nest, burned (post-game gate)
+#define FLAG_ICHOR_HIDE_R4_BOULDER              (FLAG_ICHOR_GENERAL2_START + 0x47E) // Ichor: Labyrinth Ring IV: the great boulder in the dig, broken (post-game gate)
+#define FLAG_ICHOR_R1_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x47F) // Ichor: Labyrinth Ring I: the treasury's guardian battled
+#define FLAG_ICHOR_R2_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x480) // Ichor: Labyrinth Ring II: the runners' shrine's Taurivet battled
+#define FLAG_ICHOR_R3_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x481) // Ichor: Labyrinth Ring III: the nest's Hyphantis battled
+#define FLAG_ICHOR_R4_STATIC                    (FLAG_ICHOR_GENERAL2_START + 0x482) // Ichor: Labyrinth Ring IV: the deep dig's Geogrip battled
+#define FLAG_ICHOR_ITEM_R1_TREASURY             (FLAG_ICHOR_GENERAL2_START + 0x483) // Ichor: Labyrinth Ring I: the treasury's reward
+#define FLAG_ICHOR_ITEM_R3_NEST                 (FLAG_ICHOR_GENERAL2_START + 0x484) // Ichor: Labyrinth Ring III: the nest's reward
+#define FLAG_ICHOR_ITEM_R4_DEEP                 (FLAG_ICHOR_GENERAL2_START + 0x485) // Ichor: Labyrinth Ring IV: the deep dig's reward
+#define FLAG_ICHOR_ITEM_R2_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x486) // Ichor: Labyrinth Ring II: the runners' shrine's reward (behind the labrys seal)
+#define FLAG_ICHOR_HIDDEN_ITEM_R3_ETHER         (FLAG_ICHOR_GENERAL2_START + 0x487) // Ichor: Labyrinth Ring III: an Ether by the stream
+#define FLAG_ICHOR_HIDDEN_ITEM_TOMB_PEARL       (FLAG_ICHOR_GENERAL2_START + 0x488) // Ichor: Minos's tomb: a Pearl in the dust by the bier
+#define FLAG_ICHOR_HIDDEN_ITEM_TOMB_OBOL        (FLAG_ICHOR_GENERAL2_START + 0x489) // Ichor: Minos's tomb: the ferryman's Obol in a jar
+#define FLAG_ICHOR_ITEM_CELLAR_1                (FLAG_ICHOR_GENERAL2_START + 0x48A) // Ichor: Labyrinth cellars: room 1's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_2                (FLAG_ICHOR_GENERAL2_START + 0x48B) // Ichor: Labyrinth cellars: room 2's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_3                (FLAG_ICHOR_GENERAL2_START + 0x48C) // Ichor: Labyrinth cellars: room 3's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_4                (FLAG_ICHOR_GENERAL2_START + 0x48D) // Ichor: Labyrinth cellars: room 4's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_5                (FLAG_ICHOR_GENERAL2_START + 0x48E) // Ichor: Labyrinth cellars: room 5's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_6                (FLAG_ICHOR_GENERAL2_START + 0x48F) // Ichor: Labyrinth cellars: room 6's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_7                (FLAG_ICHOR_GENERAL2_START + 0x490) // Ichor: Labyrinth cellars: room 7's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_8                (FLAG_ICHOR_GENERAL2_START + 0x491) // Ichor: Labyrinth cellars: room 8's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_9                (FLAG_ICHOR_GENERAL2_START + 0x492) // Ichor: Labyrinth cellars: room 9's treasure, two drops down
 #define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
 #define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
 #define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken

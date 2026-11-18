@@ -338,5 +338,127 @@ script LabyrinthRing2_EventScript_DrawState {
         setmetatile(23, 29, 0x320, FALSE)
         setmetatile(24, 29, 0x24D, TRUE)
     }
+    if (flag(FLAG_TEMP_4)) {
+        setmetatile(6, 20, 0x320, FALSE)
+        setmetatile(7, 20, 0x32B, FALSE)
+    } else {
+        setmetatile(6, 20, 0x3CB, TRUE)
+        setmetatile(7, 20, 0x3CB, TRUE)
+    }
+    if (flag(FLAG_TEMP_5)) {
+        setmetatile(26, 16, 0x320, FALSE)
+        setmetatile(27, 16, 0x32B, FALSE)
+    } else {
+        setmetatile(26, 16, 0x3CB, TRUE)
+        setmetatile(27, 16, 0x3CB, TRUE)
+    }
+}
+
+// Daedalus's floor seal Sun: the TM room's way on is grated until a drum sits on its plate (Ring II teaches the idea)
+script LabyrinthRing2_EventScript_PlatesSun {
+    if (flag(FLAG_TEMP_4)) {
+        end
+    }
+    setvar(VAR_TEMP_9, 0)
+    getobjectxy(LOCALID_LABYRINTHRING2_Sun_DRUM0, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 8 && var(VAR_0x8008) == 18) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_TEMP_9) == 1) {
+        lockall
+        setflag(FLAG_TEMP_4)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+        playse(SE_DOOR)
+        msgbox(format("Bronze clanks deep in the wall. Something has opened."), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing2_EventScript_LeverSun {
+    lockall
+    msgbox(format("A bronze lever with a double axe for a handle: Daedalus's reset.\pPull it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_CLICK)
+        warpsilent(MAP_LABYRINTH_RING2, 9, 15)
+        waitstate
+    }
+    releaseall
+}
+
+// Daedalus's floor seal Moon: the Moon Room's way on: two drums, two plates
+script LabyrinthRing2_EventScript_PlatesMoon {
+    if (flag(FLAG_TEMP_5)) {
+        end
+    }
+    setvar(VAR_TEMP_9, 0)
+    getobjectxy(LOCALID_LABYRINTHRING2_Moon_DRUM0, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 23 && var(VAR_0x8008) == 14) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 25 && var(VAR_0x8008) == 14) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    getobjectxy(LOCALID_LABYRINTHRING2_Moon_DRUM1, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 23 && var(VAR_0x8008) == 14) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 25 && var(VAR_0x8008) == 14) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_TEMP_9) == 2) {
+        lockall
+        setflag(FLAG_TEMP_5)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+        playse(SE_DOOR)
+        msgbox(format("Bronze clanks deep in the wall. Something has opened."), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing2_EventScript_LeverMoon {
+    lockall
+    msgbox(format("A bronze lever with a double axe for a handle: Daedalus's reset.\pPull it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_CLICK)
+        warpsilent(MAP_LABYRINTH_RING2, 24, 11)
+        waitstate
+    }
+    releaseall
+}
+
+script LabyrinthRing2_EventScript_Remains1 {
+    msgbox(format("A dropped sandal, the strap cut clean through, by the trickle."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing2_EventScript_Remains2 {
+    msgbox(format("Carved shallow in the Long Hall's wall: IT RAN AT THE FIRE, NOT AT US."), MSGBOX_SIGN)
+}
+
+// Hook for later (Labrys): the runners' shrine behind a labrys seal: a stray of the palace herd that found its way down
+script LabyrinthRing2_EventScript_Lair2 {
+    lockall
+    if (!flag(FLAG_ICHOR_R2_STATIC)) {
+        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)
+        closemessage
+        setwildbattle(SPECIES_TAURIVET, 52)
+        dowildbattle
+        setflag(FLAG_ICHOR_R2_STATIC)
+    } else {
+        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+script LabyrinthRing2_EventScript_CellarHole3 {
+    lockall
+    msgbox(format("The floor here is only rubble over a hole. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_CELLARS, 9)
+    waitstate
 }
 // ---- END GENERATED ----

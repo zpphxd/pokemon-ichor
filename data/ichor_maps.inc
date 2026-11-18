@@ -215,3 +215,4 @@
 	.include "data/maps/Delphoi_AstyranTreasury/scripts.inc"
 	.include "data/maps/Delphoi_SiphnianTreasury/scripts.inc"
 	.include "data/maps/Delphoi_Lesche/scripts.inc"
+	.include "data/maps/LabyrinthCellars/scripts.inc"

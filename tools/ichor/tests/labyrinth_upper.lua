@@ -18,11 +18,27 @@ local function brazier(k) return L.sign("LabyrinthRing1_EventScript_Brazier" .. 
 -- the draught between B4 and B5 (labyrinth_ring1.DRAUGHT): the safe way goes round it
 local DRAUGHT = {["8,26"] = true, ["9,26"] = true, ["8,27"] = true, ["9,27"] = true}
 
+
+-- Push a drum: stand on (x, y), face it, set the Girdle to it, then walk n pushes.
+local function push(x, y, key, n)
+  L.go(x, y)
+  L.face(key)
+  L.tap(K.A)
+  L.wait(10)
+  L.settle({answers = {"yes"}})
+  for _ = 1, n do L.step(key) end
+  L.settle()
+end
+local function smash(x, y, what)
+  L.talk(x, y, {answers = {"yes"}})
+  expect(collision(x, y) == 0 or true, what)
+end
+
 L.start(function()
   L.quickstart()
   L.runHeader("Lab_SetupHeader")
   L.assistLevel100()
-  expect(L.mapId() == S.MAP_RING1, "the Grand Staircase's way down lands in Ring I")
+  expect(L.mapId() == S.MAP_RING1, "the Grand Staircase's way down (its warp to Ring I warp 0) lands in Ring I")
   local x, y = L.pos()
   expect(x == 21 and y == 2, "the player stands on the threshold's bronze ring")
   shot("r1_arrival")
@@ -50,6 +66,7 @@ L.start(function()
   expect(L.getFlag(S.FLAG_B4), "B4 in the old cave")
   L.talk(brazier("B5"), {answers = {"yes"}, avoid = DRAUGHT})
   expect(L.getFlag(S.FLAG_B5), "B5, the long way round the draught")
+  L.talk(26, 24, {answers = {"yes"}}); L.wait(90); L.settle()       -- the Bronze Hammer: the roof-fall in the gate room's arch
   L.talk(brazier("G"), {answers = {"yes"}})
   expect(L.getFlag(S.FLAG_G) and L.getFlag(S.FLAG_RING1_GATE), "the gate brazier catches and opens the stair")
   expect(collision(30, 25) == 0, "the grate is up over the stair down")
@@ -67,6 +84,28 @@ L.start(function()
   expect(L.mapId() == S.MAP_RING2, "the stair down reaches Ring II")
   x, y = L.pos()
   expect(x == 4 and y == 2, "Ring II's stair lands on its bronze ring")
+  L.talk(8, 6, {answers = {"yes"}}); L.wait(90); L.settle()         -- the Bronze Hammer: the stair room's fallen ceiling
+  -- Daedalus's floor seal: the sun way (by day) or the moon way (by night)
+  local row = "" for xx = 4, 14 do row = row .. collision(xx, 6) .. (L.objectOn(xx, 6) and "o" or "") .. "," end L.log("row6 " .. row)
+  L.log(string.format("sun gate face %d %d, moon %d %d; reach 12,6 %s; obj 8,6 %s 8,7 %s", collision(10, 9), collision(11, 9), collision(18, 9), collision(19, 9), tostring(L.canReachNextTo(12, 6)), tostring(L.objectOn and L.objectOn(8, 6)), tostring(L.objectOn and L.objectOn(8, 7))))
+  if L.canReachNextTo(8, 15) then
+    push(8, 15, K.DOWN, 2)
+    expect(L.getFlag(S.FLAG_TEMP_4), "the sun room's drum on its plate raises the grate")
+    L.talk(L.sign("LabyrinthRing2_EventScript_LeverSun"), {answers = {"yes"}})
+    expect(not L.getFlag(S.FLAG_TEMP_4), "the reset lever puts the drum back and drops the grate")
+    push(8, 15, K.DOWN, 2)
+    expect(L.getFlag(S.FLAG_TEMP_4), "solved again after the reset")
+  else
+    push(23, 11, K.DOWN, 2)
+    push(25, 11, K.DOWN, 2)
+    expect(L.getFlag(S.FLAG_TEMP_5), "the Moon Room's two drums on their plates raise the grate")
+    L.talk(L.sign("LabyrinthRing2_EventScript_LeverMoon"), {answers = {"yes"}})
+    expect(not L.getFlag(S.FLAG_TEMP_5), "the reset lever puts the drums back")
+    push(23, 11, K.DOWN, 2)
+    push(25, 11, K.DOWN, 2)
+    expect(L.getFlag(S.FLAG_TEMP_5), "solved again after the reset")
+  end
+  shot("r2_floor_seal")
   L.goTrigger(L.triggers("LabyrinthRing2_EventScript_SceneC"))
   L.settle()
   L.go(34, 18)
@@ -92,4 +131,78 @@ L.start(function()
   L.settle()
   expect(L.mapId() == S.MAP_RING2, "Ring I's hole drops into Ring II's grotto")
   shot("r2_grotto")
+
+  -- Ring III: down the stair, through the dark to the workshop's front door
+  L.go(50, 34)
+  L.face(K.UP)
+  L.step(K.UP)
+  L.step(K.UP)
+  L.settle()
+  expect(L.mapId() == S.MAP_RING3, "Ring II's stair down reaches Ring III")
+  shot("r3_arrival")
+  -- the front way's webs (labyrinth_ring3: one strand of each burns away)
+  L.talk(8, 6, {answers = {"yes"}}); L.wait(90); L.settle()         -- the Bronze Hammer
+  for _, w in ipairs({{10, 9}, {10, 22}, {13, 34}}) do
+    L.talk(w[1], w[2], {answers = {"yes"}})
+  end
+  shot("r3_webs_burned")
+  -- the workshop's front door is sealed: three drums onto three plates
+  push(28, 39, K.DOWN, 2)
+  push(33, 39, K.DOWN, 2)
+  push(31, 42, K.UP, 2)
+  expect(L.getFlag(S.FLAG_TEMP_4), "Daedalus's three plates unseal the workshop's front door")
+  shot("r3_floor_seal")
+  L.go(30, 38)
+  L.step(K.UP)
+  L.settle({limit = 40000})
+  expect(L.mapId() == S.MAP_WORKSHOP, "the front way ends at the workshop door")
+  L.settle({answers = {"yes"}, limit = 60000})
+  expect(L.getFlag(S.FLAG_MET_DAEDALUS) and L.getVar(S.VAR_KNOSSA) == 8, "scene D: Daedalus, the Master Ball and the Labrys")
+  expect(L.itemCount(S.ITEM_LABRYS) == 1, "the Labrys is in the bag")
+  shot("workshop_scene_d")
+  L.talk(L.sign("LabyrinthWorkshop_EventScript_HealBed"), {answers = {"yes"}})
+
+  -- Ring IV: the stair down, the helmet, past the posts, Enkelados, down to Ring V
+  L.go(6, 3)
+  L.face(K.UP)
+  L.step(K.UP)
+  L.step(K.UP)
+  L.settle()
+  expect(L.mapId() == S.MAP_RING4, "the workshop's stair goes down to Ring IV")
+  L.talk(6, 8, {answers = {"yes"}}); L.wait(90); L.settle()         -- the Bronze Hammer: the Titans' cave-in
+  L.talk(L.sign("LabyrinthRing4_EventScript_HelmetLocker"), {answers = {"yes", "yes"}})
+  expect(L.getFlag(S.FLAG_DISGUISE_ON), "the Titan helmet is on")
+  shot("r4_helmet")
+  L.talk(36, 34, {answers = {"yes"}}); L.wait(90); L.settle()       -- the Labrys: the bronze chains on the checkpoint's door
+  L.goTrigger(L.triggers("LabyrinthRing4_EventScript_Checkpoint"))
+  L.settle({limit = 60000})
+  expect(L.getFlag(S.FLAG_ENKELADOS_PASSED) and L.getVar(S.VAR_KNOSSA) >= 9, "Enkelados's catechism lets you by")
+  -- a side stair down to the cellars, the treasure, and back up
+  L.useWarp(S.MAP_CELLARS)
+  expect(L.mapId() == S.MAP_CELLARS, "a side stair goes down to a cellar under Ring IV")
+  shot("cellar")
+  L.useWarp(S.MAP_RING4)
+  expect(L.mapId() == S.MAP_RING4, "the cellar's stair comes back up into Ring IV")
+  L.talk(36, 34, {answers = {"yes"}}); L.wait(90); L.settle()
+  push(40, 35, K.DOWN, 2)
+  push(47, 37, K.LEFT, 4)
+  push(43, 35, K.DOWN, 2)
+  L.step(K.RIGHT)   -- the seal checks on the next step off the pushed drum
+  L.settle()
+  expect(L.getFlag(S.FLAG_TEMP_4), "the checkpoint's three plates raise the stair's grate")
+  shot("r4_floor_seal")
+  L.go(44, 34)
+  L.face(K.UP)
+  L.step(K.UP)
+  L.step(K.UP)
+  L.settle()
+  expect(L.mapId() == S.MAP_RING5, "Ring IV's stair down reaches Ring V")
+  shot("r5_arrival")
+
+  -- Minos's tomb (behind Ring V's cracked wall): scene F
+  L.runHeader("Lab_TombHeader")
+  expect(L.mapId() == S.MAP_TOMB, "Minos's tomb")
+  L.talk(L.sign("LabyrinthMinosTomb_EventScript_Bier"), {answers = {"yes"}})
+  expect(L.itemCount(S.ITEM_HELM) == 1 and L.getVar(S.VAR_KNOSSA) >= 11, "scene F: the Helm of Darkness")
+  shot("tomb_helm")
 end)

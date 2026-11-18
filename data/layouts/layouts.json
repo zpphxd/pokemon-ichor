@@ -1874,8 +1874,8 @@
     {
       "id": "LAYOUT_LABYRINTH_RING3",
       "name": "LabyrinthRing3_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 54,
+      "height": 46,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthRing3/border.bin",
@@ -1885,8 +1885,8 @@
     {
       "id": "LAYOUT_LABYRINTH_RING4",
       "name": "LabyrinthRing4_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 50,
+      "height": 42,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthRing4/border.bin",
@@ -1896,8 +1896,8 @@
     {
       "id": "LAYOUT_LABYRINTH_MINOS_TOMB",
       "name": "LabyrinthMinosTomb_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 16,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthMinosTomb/border.bin",
@@ -1907,8 +1907,8 @@
     {
       "id": "LAYOUT_LABYRINTH_WORKSHOP",
       "name": "LabyrinthWorkshop_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 24,
+      "height": 18,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Daidaleion",
       "border_filepath": "data/layouts/LabyrinthWorkshop/border.bin",
@@ -2628,6 +2628,17 @@
       "secondary_tileset": "gTileset_OikiaDelphoi",
       "border_filepath": "data/layouts/Delphoi_Lesche/border.bin",
       "blockdata_filepath": "data/layouts/Delphoi_Lesche/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_CELLARS",
+      "name": "LabyrinthCellars_Layout",
+      "width": 28,
+      "height": 25,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthCellars/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthCellars/map.bin",
       "layout_version": "emerald"
     }
   ]

@@ -630,6 +630,10 @@ class LMap(Map):
                 return
             x, y, dx, dy = runs[0]
             cx, cy = x + dx * 5, y + dy * 5
+            people = {(o["x"], o["y"]) for o in self.objects}
+            if any((cx + a, cy + b) in people for a in (-1, 0, 1) for b in (-1, 0, 1, 2)):
+                self.features.add((cx, cy))
+                continue
             done = False
             if dx == 0 and self.at(cx, cy) == "." and self.at(cx, cy + 1) == ".":
                 # a red Minoan column on one lane of a north-south corridor

@@ -11367,6 +11367,36 @@
         {
           "map": "MAP_LABYRINTH_RING1",
           "base_label": "gLabyrinthRing1_Morning",
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KOLOSSETTE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_GEOGRIP"
+              }
+            ]
+          },
           "land_mons": {
             "encounter_rate": 8,
             "mons": [
@@ -11436,6 +11466,36 @@
         {
           "map": "MAP_LABYRINTH_RING2",
           "base_label": "gLabyrinthRing2_Morning",
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KOLOSSETTE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_GEOGRIP"
+              }
+            ]
+          },
           "land_mons": {
             "encounter_rate": 8,
             "mons": [
@@ -11590,6 +11650,36 @@
         {
           "map": "MAP_LABYRINTH_RING2",
           "base_label": "gLabyrinthRing2_Night",
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KOLOSSETTE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_GEOGRIP"
+              }
+            ]
+          },
           "land_mons": {
             "encounter_rate": 8,
             "mons": [
@@ -11744,6 +11834,36 @@
         {
           "map": "MAP_LABYRINTH_RING3",
           "base_label": "gLabyrinthRing3_Morning",
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KOLOSSETTE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_GEOGRIP"
+              }
+            ]
+          },
           "land_mons": {
             "encounter_rate": 10,
             "mons": [
@@ -11898,6 +12018,36 @@
         {
           "map": "MAP_LABYRINTH_RING4",
           "base_label": "gLabyrinthRing4_Morning",
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KOLOSSETTE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_GEOGRIP"
+              }
+            ]
+          },
           "land_mons": {
             "encounter_rate": 6,
             "mons": [
@@ -15675,6 +15825,144 @@
                 "min_level": 52,
                 "max_level": 52,
                 "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LABYRINTH_MINOS_TOMB",
+          "base_label": "gLabyrinthMinosTomb_Morning",
+          "land_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_KOLOSSARD"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LABYRINTH_CELLARS",
+          "base_label": "gLabyrinthCellars_Morning",
+          "land_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_KOLOSSARD"
               }
             ]
           }
