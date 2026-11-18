@@ -1,0 +1,402 @@
+// The Loom, under the Omphalos (design/phase4/SCRIPT.md beat III-9; STORY §7.6 is the
+// master text) and the Loom after the cut (III-10A). The map is the painted scene of
+// tools/ichor/art/loom_build.py; data/scripts/ichor_climax_tiles.pory swaps its states.
+//
+// The player comes down the Omphalos stair with VAR_ICHOR_ACT3 = 14 and the scene
+// plays at once. It ends with the chains cut, the world gray (Ichor_FrozenHourBegin),
+// VAR_ICHOR_ACT3 = 15 and FLAG_ICHOR_CUT_THE_CHAINS set.
+
+mapscripts TheLoom_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_CUT_THE_CHAINS)) {
+            call(TheLoom_Tiles_After)
+        }
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        // The Lord of Time and the Harpe stand only inside the scene (addobject).
+        setflag(FLAG_ICHOR_HIDE_FROZEN_ONLY)
+        // Delphoi's chapter held the night from III-7 on; the climax lets it go.
+        special(Ichor_ReleaseTimeOfDay)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ICHOR_ACT3, 14: TheLoom_EventScript_TheLoom
+    ]
+}
+
+// ---------------------------------------------------------------------------
+// III-9. The Loom
+// ---------------------------------------------------------------------------
+
+script TheLoom_EventScript_TheLoom {
+    lockall
+    // The stair's last steps: the cavern opens, and the camera crosses the whole Loom.
+    applymovement(OBJ_EVENT_ID_PLAYER, TheLoom_Movement_PlayerIn)
+    waitmovement(0)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraPanWest)
+    waitmovement(0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Loom. Every life in Aethos hangs here.\p"
+                  "Every thread ends on the same row. There's no cloth below it."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraPanEast)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("You came down. Of course you did.\p"
+                  "Your mother's up there. I can tell by your face."))
+    call(Climax_EventScript_HasTablet)
+    if (var(VAR_RESULT) == TRUE) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Show Phaedon the sealed tablet?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            setspeaker(Climax_Name_Phaedon)
+            msgbox(format("I told you at Knossa. I won't read it. Not now. Not here.\p"
+                          "If it says what Iapetos warned me it would, I'd stop.\p"
+                          "And then she dies. So no."))
+        }
+    }
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Look at them. That's all I'll ask. Look."))
+    closemessage
+    // The camera goes along the Loom to the three Fates.
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraToFates)
+    waitmovement(0)
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("…Someone's come."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Someone with nothing to measure."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("Someone I can't cut."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("Oh. Oh, it's you.\p"
+                  "You've grown. We never get to see them grow. Only the thread."))
+    call(TheLoom_EventScript_Honey)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("A thousand years. The first Archon chained them here.\p"
+                  "So no thread would ever change. So every oracle would come true.\p"
+                  "They tie the knots. They can't stop. They can't choose.\p"
+                  "I'm asking you to cut them free. That's all I've ever asked."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    // He opens the case: the Harpe on red cloth, gold and black.
+    playse(SE_CLICK)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("It doesn't like anyone with a thread. It'll like you."))
+    call(TheLoom_EventScript_TakeHarpe)
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Listen to us before you listen to him.\p"
+                  "Every thread on this Loom ends tonight. Every one.\p"
+                  "We've known for a year. The tides knew. The birds knew."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("His. Hers, at the top of the stair. The little girl's, in the city."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("We tied it so. We couldn't help it. The chains don't let us help it."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Cut us free, and he'll take what we are. The world will stop.\p"
+                  "Leave us, and it stops anyway. Tonight. In chains."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("The only thread that doesn't end tonight is yours.\p"
+                  "Because it isn't ours. We let it go."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("Cut us free. Then, after, come and find us. Wake us.\p"
+                  "You'll be the only one who can."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("Will it work? We don't know."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("We've never not known before."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("…It's horrible. I think I like it."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("We let you go once, little one. Will you let us go?"))
+    call(TheLoom_EventScript_Cut)
+    call(TheLoom_EventScript_TheHourStops)
+    releaseall
+}
+
+script TheLoom_EventScript_Honey {
+    call(Climax_EventScript_HasHoney)
+    if (var(VAR_RESULT) == FALSE) {
+        return
+    }
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Give them Melitta's Honey?"), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        msgbox(format("The honey jar is heavy in your bag."))
+        msgbox(format("Give them Melitta's Honey?"), MSGBOX_YESNO)
+    }
+    msgbox(format("You hold up the jar. The Spinner reaches as far as her chain allows."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("Thyme. Kalliste thyme."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Melitta's."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("She always brought too much. We never said."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("She says thank you? Tell her we're the ones who say that.\p"
+                  "Tell her it was worth it. Every day."))
+    call(Climax_EventScript_TakeHoney)
+    setflag(FLAG_ICHOR_GAVE_FATES_HONEY)
+    return
+}
+
+script TheLoom_EventScript_TakeHarpe {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Take the Harpe?"), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        setspeaker(Climax_Name_Phaedon)
+        msgbox(format("I know. I said no too, the first time."))
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Take the Harpe?"), MSGBOX_YESNO)
+    }
+    playse(SE_M_SWORDS_DANCE)
+    msgbox(format("{PLAYER} lifted the Harpe. It's light. It hums."))
+    return
+}
+
+script TheLoom_EventScript_Cut {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Cut the chains?"), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        setspeaker(Climax_Name_Spinner)
+        msgbox(format("…Take your time. We have until the end of the cloth."))
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("Cut the chains?"), MSGBOX_YESNO)
+    }
+    closemessage
+    // Three strokes. Each chain parts with a sound like a bell, and for the first
+    // time in a thousand years three pairs of hands stop moving.
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraToFates)
+    waitmovement(0)
+    call(TheLoom_EventScript_Stroke)
+    call(TheLoom_Tiles_Spinner)
+    setobjectmovementtype(LOCALID_LOOM_SPINNER, MOVEMENT_TYPE_FACE_DOWN)
+    turnobject(LOCALID_LOOM_SPINNER, DIR_SOUTH)
+    delay(20)
+    call(TheLoom_EventScript_Stroke)
+    call(TheLoom_Tiles_Measurer)
+    setobjectmovementtype(LOCALID_LOOM_MEASURER, MOVEMENT_TYPE_FACE_DOWN)
+    turnobject(LOCALID_LOOM_MEASURER, DIR_SOUTH)
+    delay(20)
+    call(TheLoom_EventScript_Stroke)
+    call(TheLoom_Tiles_Cutter)
+    setobjectmovementtype(LOCALID_LOOM_CUTTER, MOVEMENT_TYPE_FACE_DOWN)
+    turnobject(LOCALID_LOOM_CUTTER, DIR_SOUTH)
+    delay(30)
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("Oh. My hands."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("They're still."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("…"))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    setflag(FLAG_ICHOR_CUT_THE_CHAINS)
+    return
+}
+
+script TheLoom_EventScript_Stroke {
+    playse(SE_M_CUT)
+    fadescreenspeed(FADE_TO_WHITE, 1)
+    fadescreenspeed(FADE_FROM_WHITE, 1)
+    playse(SE_M_HEAL_BELL)
+    waitse
+    return
+}
+
+script TheLoom_EventScript_TheHourStops {
+    // Phaedon stands.
+    applymovement(LOCALID_LOOM_PHAEDON, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Thank you. I mean that. I'll always mean that."))
+    applymovement(LOCALID_LOOM_PHAEDON, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(format("Lord of Time. Your sickle's here."))
+    closemessage
+    // The Harpe tears itself out of the player's hands and flies down into the chasm.
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    addobject(LOCALID_LOOM_HARPE)
+    setobjectxy(LOCALID_LOOM_HARPE, VAR_0x8004, VAR_0x8005)
+    playse(SE_M_RAZOR_WIND)
+    applymovement(LOCALID_LOOM_HARPE, TheLoom_Movement_HarpeFalls)
+    waitmovement(0)
+    removeobject(LOCALID_LOOM_HARPE)
+    fadescreenspeed(FADE_TO_BLACK, 2)
+    playse(SE_M_EARTHQUAKE)
+    delay(30)
+    fadescreenspeed(FADE_FROM_BLACK, 2)
+    applymovement(LOCALID_LOOM_HYPERION, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Climax_Name_Hyperion)
+    msgbox(format("It's coming up! Back from the edge, Unwoven!"))
+    closemessage
+    // The Lord of Time rises out of the chasm, the Harpe in its grip.
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraToFates)
+    waitmovement(0)
+    addobject(LOCALID_LOOM_LORD)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 3)
+    setvar(VAR_0x8006, 16)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    playse(SE_M_EARTHQUAKE)
+    applymovement(LOCALID_LOOM_LORD, TheLoom_Movement_LordRises)
+    waitmovement(0)
+    waitstate
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Stop the cutting. Stop all of it. Let nothing end."))
+    closemessage
+    // It lays the Harpe across the warp. Color drains from the Loom outward.
+    setvar(VAR_0x8004, LOCALID_LOOM_PHAEDON)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_LOOM_HYPERION)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_LOOM_LORD)
+    special(Ichor_UnfreezeObject)
+    playse(SE_M_HAZE)
+    setvar(VAR_0x8004, 16)
+    setvar(VAR_0x8005, 8)
+    special(Ichor_FrozenHourBegin)
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("Go! Sisters, go!"))
+    closemessage
+    // Three sparks leap from the Fates and shoot up through the rock; they fade.
+    playse(SE_M_HEAL_BELL)
+    fadescreenspeed(FADE_TO_WHITE, 2)
+    removeobject(LOCALID_LOOM_SPINNER)
+    removeobject(LOCALID_LOOM_MEASURER)
+    removeobject(LOCALID_LOOM_CUTTER)
+    fadescreenspeed(FADE_FROM_WHITE, 2)
+    // The Lord of Time rises through the rock above; gray sky shows through, and a
+    // stair of pale stone unfolds at the west end.
+    applymovement(LOCALID_LOOM_LORD, TheLoom_Movement_LordLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_LOOM_LORD)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraToStair)
+    waitmovement(0)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    playse(SE_M_ROCK_THROW)
+    call(TheLoom_Tiles_Hole)
+    waitstate
+    delay(30)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraFromStair)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_CAMERA, TheLoom_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Come up when you're ready. I'll tell you all of it then."))
+    closemessage
+    applymovement(LOCALID_LOOM_HYPERION, TheLoom_Movement_HyperionClimbs)
+    applymovement(LOCALID_LOOM_PHAEDON, TheLoom_Movement_PhaedonClimbs)
+    waitmovement(LOCALID_LOOM_PHAEDON)
+    waitmovement(LOCALID_LOOM_HYPERION)
+    removeobject(LOCALID_LOOM_PHAEDON)
+    removeobject(LOCALID_LOOM_HYPERION)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Loom is still. Every thread hangs where it stopped.\p"
+                  "Somewhere very far off, a music box is ticking.\p"
+                  "You can move. You seem to be the only one."))
+    closemessage
+    setvar(VAR_ICHOR_ACT3, 15)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// III-10A. The Loom, after; and the night's objects
+// ---------------------------------------------------------------------------
+
+script TheLoom_EventScript_Phaedon {
+    msgbox(format("PHAEDON: Look at them. That's all I'll ask. Look."), MSGBOX_NPC)
+}
+
+script TheLoom_EventScript_Hyperion {
+    msgbox(format("HYPERION: Dark as a well down here. Is that you, Unwoven?"), MSGBOX_NPC)
+}
+
+script TheLoom_EventScript_Fate {
+    msgbox(format("Her hands never stop moving. Knot, and knot, and knot."), MSGBOX_SIGN)
+}
+
+script TheLoom_EventScript_Thread {
+    if (flag(FLAG_ICHOR_CUT_THE_CHAINS)) {
+        msgbox(format("White thread, and a red knot. Somebody's. It doesn't sway."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("White thread, and a red knot. Somebody's.\pIt sways a little, as if someone just breathed."), MSGBOX_SIGN)
+    }
+}
+
+script TheLoom_EventScript_LastRow {
+    if (flag(FLAG_ICHOR_CUT_THE_CHAINS)) {
+        msgbox(format("Every thread stopped mid-sway. Every knot on the same row.\p"
+                      "Except that there's no thread for you here. There never was."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Every thread stops here. Below it, nothing has been woven."), MSGBOX_SIGN)
+    }
+}
+
+script TheLoom_EventScript_Chasm {
+    if (flag(FLAG_ICHOR_CUT_THE_CHAINS)) {
+        msgbox(format("Dark all the way down. Something huge went up out of it."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Dark all the way down. Far below, something is breathing."), MSGBOX_SIGN)
+    }
+}
+
+script TheLoom_EventScript_PaleStair {
+    if (flag(FLAG_ICHOR_CUT_THE_CHAINS)) {
+        msgbox(format("A stair of pale stone, going up through the rock."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Raw rock, older than the temple above it."), MSGBOX_SIGN)
+    }
+}
+
+script TheLoom_EventScript_BrokenChain {
+    msgbox(format("Black adamant. Cut clean, three times."), MSGBOX_SIGN)
+}
+
+script TheLoom_EventScript_StairFoot {
+    if (!flag(FLAG_ICHOR_CUT_THE_CHAINS)) {
+        end
+    }
+    lockall
+    call(Climax_EventScript_ToStair)
+    applymovement(OBJ_EVENT_ID_PLAYER, TheLoom_Movement_StepBack)
+    waitmovement(0)
+    releaseall
+}
+
+script TheLoom_EventScript_LeaveUp {
+    if (var(VAR_ICHOR_ACT3) < 15) {
+        end
+    }
+    call(Climax_EventScript_LeaveLoom)
+}
+
+movement TheLoom_Movement_PlayerIn { walk_left face_left }
+movement TheLoom_Movement_CameraPanWest { walk_left * 16 delay_16 walk_left * 10 }
+movement TheLoom_Movement_CameraPanEast { walk_fast_right * 26 }
+movement TheLoom_Movement_CameraToFates { walk_fast_left * 15 walk_up * 2 }
+movement TheLoom_Movement_CameraBack { walk_down * 2 walk_fast_right * 15 }
+movement TheLoom_Movement_CameraToStair { walk_fast_left * 10 walk_up * 2 }
+movement TheLoom_Movement_CameraFromStair { walk_fast_down * 2 walk_fast_right * 10 }
+movement TheLoom_Movement_HarpeFalls { walk_faster_up walk_faster_left * 6 walk_faster_up walk_faster_left * 8 walk_faster_down }
+movement TheLoom_Movement_LordRises { walk_slow_up }
+movement TheLoom_Movement_LordLeaves { walk_slow_up * 3 walk_up * 6 }
+movement TheLoom_Movement_PhaedonClimbs { walk_left * 27 walk_up * 5 }
+movement TheLoom_Movement_HyperionClimbs { walk_down walk_left * 20 walk_up * 5 }
+movement TheLoom_Movement_StepBack { walk_down }

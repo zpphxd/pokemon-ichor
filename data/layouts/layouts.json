@@ -2640,6 +2640,28 @@
       "border_filepath": "data/layouts/LabyrinthCellars/border.bin",
       "blockdata_filepath": "data/layouts/LabyrinthCellars/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_THE_LOOM",
+      "name": "TheLoom_Layout",
+      "width": 34,
+      "height": 14,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Loom",
+      "border_filepath": "data/layouts/TheLoom/border.bin",
+      "blockdata_filepath": "data/layouts/TheLoom/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_STAIR_OF_HOURS",
+      "name": "StairOfHours_Layout",
+      "width": 24,
+      "height": 110,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_StairOfHours",
+      "border_filepath": "data/layouts/StairOfHours/border.bin",
+      "blockdata_filepath": "data/layouts/StairOfHours/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -17,7 +17,8 @@
     "gMapGroup_Knossa",
     "gMapGroup_Gulf",
     "gMapGroup_Lakonia",
-    "gMapGroup_Delphoi"
+    "gMapGroup_Delphoi",
+    "gMapGroup_Climax"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -295,5 +296,9 @@
     "Delphoi_AstyranTreasury",
     "Delphoi_SiphnianTreasury",
     "Delphoi_Lesche"
+  ],
+  "gMapGroup_Climax": [
+    "TheLoom",
+    "StairOfHours"
   ]
 }

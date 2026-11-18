@@ -300,6 +300,9 @@
 #define TRAINER_ICHOR_CHALKOS                 374
 #define TRAINER_ICHOR_PELOS                   375
 #define TRAINER_ICHOR_ENKELADOS               376
+// The climax (ids 445-459): the Stair of Hours.
+#define TRAINER_ICHOR_PHAEDON_STAIR           445
+#define TRAINER_ICHOR_HYPERION_STAIR          446
 // the Labyrinth's heart (the Labyrinth II build), ids 390-409
 #define TRAINER_ICHOR_ANTHRAKOS                  390
 #define TRAINER_ICHOR_PORINOS                    391

@@ -2437,6 +2437,41 @@
 #define FLAG_ICHOR_ITEM_PALACE_ELIXIR           (FLAG_ICHOR_GENERAL2_START + 0x43E) // Ichor: Knossa item ball: the palace, Elixir in the Theatral Area
 #define FLAG_ICHOR_ARIADNE_WOKE_YOU             (FLAG_ICHOR_GENERAL2_START + 0x43F) // Ichor: Knossa: III-3P, Ariadne at the Megaron's door before dawn (He wants you)
 #define FLAG_ICHOR_ALETHEA_DAWN_DONE            (FLAG_ICHOR_GENERAL2_START + 0x440) // Ichor: Knossa: III-3P, Alethea sent the gull at dawn and went down to the quay
+#define FLAG_ICHOR_GAVE_FATES_HONEY             (FLAG_ICHOR_GENERAL2_START + 0x590) // Ichor: gave the Fates Melitta's Honey at the Loom (III-9)
+#define FLAG_ICHOR_CUT_THE_CHAINS               (FLAG_ICHOR_GENERAL2_START + 0x591) // Ichor: cut the Fates' chains: the Frozen Hour begins (III-9); hides the Loom's night objects
+#define FLAG_ICHOR_ROUSED_CUTTER                (FLAG_ICHOR_GENERAL2_START + 0x592) // Ichor: roused the Cutter at Kaldera's forge (III-10C)
+#define FLAG_ICHOR_ROUSED_MEASURER              (FLAG_ICHOR_GENERAL2_START + 0x593) // Ichor: roused the Measurer at the Pool of Mnemosyne (III-10D)
+#define FLAG_ICHOR_ROUSED_SPINNER               (FLAG_ICHOR_GENERAL2_START + 0x594) // Ichor: roused the Spinner under Elaia's olive (III-10F)
+#define FLAG_ICHOR_PHAEDON_READ_TABLET          (FLAG_ICHOR_GENERAL2_START + 0x595) // Ichor: Phaedon read Elpis's true prophecy at her bedside (III-10E)
+#define FLAG_ICHOR_GOT_UNFINISHED_DECREE        (FLAG_ICHOR_GENERAL2_START + 0x596) // Ichor: took Lykophron's unfinished decree from the Stoa (III-10E, optional)
+#define FLAG_ICHOR_WORE_MELITTAS_CLOAK          (FLAG_ICHOR_GENERAL2_START + 0x597) // Ichor: put on Mom's traveling cloak (III-10F, cosmetic)
+#define FLAG_ICHOR_SAW_MEDON                    (FLAG_ICHOR_GENERAL2_START + 0x598) // Ichor: saw Medon chain the Fates in the Pool's memory (III-10D)
+#define FLAG_ICHOR_SAW_SHADOWLESS               (FLAG_ICHOR_GENERAL2_START + 0x599) // Ichor: saw the shadowless figure on Astyra's roofs (III-10E, optional)
+#define FLAG_ICHOR_KLEON_WOKE                   (FLAG_ICHOR_GENERAL2_START + 0x59A) // Ichor: Kleon broke his own thread at Delphoi's gate (III-10G)
+#define FLAG_ICHOR_STAIR_BATTLE_WON             (FLAG_ICHOR_GENERAL2_START + 0x59B) // Ichor: won the multi battle on the twelfth landing (III-11B)
+#define FLAG_ICHOR_STAIR_CRUMBLED               (FLAG_ICHOR_GENERAL2_START + 0x59C) // Ichor: the Stair fell away under the twelfth landing (III-11C)
+#define FLAG_ICHOR_CAUGHT_LORD_OF_TIME          (FLAG_ICHOR_GENERAL2_START + 0x59D) // Ichor: caught the Lord of Time (III-11D)
+#define FLAG_ICHOR_LORD_OF_TIME_FAINTED         (FLAG_ICHOR_GENERAL2_START + 0x59E) // Ichor: beat the Lord of Time without catching it (III-11D)
+#define FLAG_ICHOR_MOMENT_SEIZED                (FLAG_ICHOR_GENERAL2_START + 0x59F) // Ichor: seized the Moment by the forelock: time restarts (III-11E)
+#define FLAG_ICHOR_RHEA_SURRENDERED             (FLAG_ICHOR_GENERAL2_START + 0x5A0) // Ichor: Rhea held out her wrists at dawn (III-12A)
+#define FLAG_ICHOR_ELPIS_LINE                   (FLAG_ICHOR_GENERAL2_START + 0x5A1) // Ichor: Elpis woke: her thread isn't finished yet (III-12B)
+#define FLAG_ICHOR_HIDE_FROZEN_ONLY             (FLAG_ICHOR_GENERAL2_START + 0x5A2) // Ichor: hides every map's Frozen Hour objects outside the hour (set by ON_TRANSITION)
+#define FLAG_ICHOR_HIDE_FATE_CUTTER             (FLAG_ICHOR_GENERAL2_START + 0x5A3) // Ichor: hides the Cutter at Kaldera's forge
+#define FLAG_ICHOR_HIDE_FATE_MEASURER           (FLAG_ICHOR_GENERAL2_START + 0x5A4) // Ichor: hides the Measurer at Arkadia's pool
+#define FLAG_ICHOR_HIDE_FATE_SPINNER            (FLAG_ICHOR_GENERAL2_START + 0x5A5) // Ichor: hides the Spinner under Elaia's olive
+#define FLAG_ICHOR_HIDE_PHAEDON_BEDSIDE         (FLAG_ICHOR_GENERAL2_START + 0x5A6) // Ichor: hides Phaedon at Elpis's bedside in the hour
+#define FLAG_ICHOR_HIDE_STAIR_KLEON             (FLAG_ICHOR_GENERAL2_START + 0x5A7) // Ichor: hides Kleon on the Stair of Hours
+#define FLAG_ICHOR_HIDE_STAIR_RIVALS            (FLAG_ICHOR_GENERAL2_START + 0x5A8) // Ichor: hides Phaedon and Hyperion on the twelfth landing
+#define FLAG_ICHOR_HIDE_STAIR_LORD              (FLAG_ICHOR_GENERAL2_START + 0x5A9) // Ichor: hides the Lord of Time over the twelfth landing
+#define FLAG_ICHOR_HIDE_STAIR_FATES             (FLAG_ICHOR_GENERAL2_START + 0x5AA) // Ichor: hides the Fates and the Moment on the twelfth landing
+#define FLAG_ICHOR_HIDE_DAWN_CAST               (FLAG_ICHOR_GENERAL2_START + 0x5AB) // Ichor: hides the dawn resolution's people in Phaedon's house (III-12B)
+#define FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_1    (FLAG_ICHOR_GENERAL2_START + 0x5AC) // Ichor: Stair of Hours, landing 3: Full Restore
+#define FLAG_ICHOR_ITEM_STAIR_MAX_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x5AD) // Ichor: Stair of Hours, landing 7: Max Revive
+#define FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_2    (FLAG_ICHOR_GENERAL2_START + 0x5AE) // Ichor: Stair of Hours, landing 10: Full Restore
+#define FLAG_ICHOR_HIDE_STAIR_KLEON_TOP         (FLAG_ICHOR_GENERAL2_START + 0x5AF) // Ichor: hides Kleon beside you on the twelfth landing
+#define FLAG_ICHOR_HIDE_STAIR_HYPERION          (FLAG_ICHOR_GENERAL2_START + 0x5B0) // Ichor: hides Hyperion on the twelfth landing
+#define FLAG_ICHOR_HIDE_STAIR_SPARK             (FLAG_ICHOR_GENERAL2_START + 0x5B1) // Ichor: hides the twelfth landing's spark until the crumble
+#define FLAG_ICHOR_HIDE_KLEON_FROZEN            (FLAG_ICHOR_GENERAL2_START + 0x5B2) // Ichor: hides Kleon frozen mid-swing (the stand-in at the Stair's foot until Delphoi's court lands)
 #define FLAG_ICHOR_R2_LONG_HALL                 (FLAG_ICHOR_GENERAL2_START + 0x458) // Ichor: Labyrinth Ring II: scene C played, Asterion broke the Long Hall's cracked wall
 #define FLAG_ICHOR_ITEM_R2_TM                   (FLAG_ICHOR_GENERAL2_START + 0x459) // Ichor: Labyrinth Ring II: the sun room's TM
 #define FLAG_ICHOR_ITEM_R2_MOON_STONE           (FLAG_ICHOR_GENERAL2_START + 0x45A) // Ichor: Labyrinth Ring II: the Moon Room's Moon Stone
@@ -2651,6 +2686,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_5        (FLAG_ICHOR_GENERAL2_START + 0x4E3) // Ichor: Ring V: on the remains
 #define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_6        (FLAG_ICHOR_GENERAL2_START + 0x4E4) // Ichor: Ring VI: on the remains
 #define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_7        (FLAG_ICHOR_GENERAL2_START + 0x4E5) // Ichor: Ring VII: on the remains
+#define FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI      (FLAG_ICHOR_GENERAL2_START + 0x5B3) // Ichor: hides Kleon, awake and in color, at Delphoi's gate (III-10G)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

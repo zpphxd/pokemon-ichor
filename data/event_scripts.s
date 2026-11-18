@@ -799,6 +799,10 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_rites.inc" @ Ichor: rites
 	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
 	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
+	.include "data/scripts/ichor_climax.inc" @ Ichor: the climax (the Loom, the Frozen Hour, the Stair)
+	.include "data/scripts/ichor_climax_tiles.inc" @ Ichor: the climax maps' metatile swaps (tools/ichor/maps/climax.py)
+	.include "data/scripts/ichor_climax_world.inc" @ Ichor: the climax on the world's maps (the Frozen Hour's tour, Elpis's line)
+	.include "data/scripts/ichor_climax_delphoi.inc" @ Ichor: the climax at Delphoi's court (Kleon wakes, the dawn)
 	.include "data/scripts/ichor_frozen.inc" @ Ichor: the Frozen Hour
 	.include "data/scripts/ichor_dig.inc" @ Ichor: excavation
 	.include "data/scripts/ichor_deeds.inc"

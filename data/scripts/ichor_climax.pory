@@ -1,0 +1,138 @@
+// Ichor: the climax, beats III-9 to III-12 (design/phase4/SCRIPT.md): the Loom, the
+// Frozen Hour, the Stair of Hours and Elpis's line. The maps' own scenes are in
+// their scripts.pory; this file holds what several maps share: the speakers, the
+// travel between the Loom, the Stair and the surface, the roused-Fates count, the
+// herms' turned heads, and the story items the earlier chapters own.
+
+text Climax_Name_Phaedon { "PHAEDON" }
+text Climax_Name_Hyperion { "HYPERION" }
+text Climax_Name_Kleon { "KLEON" }
+text Climax_Name_Spinner { "SPINNER" }
+text Climax_Name_Measurer { "MEASURER" }
+text Climax_Name_Cutter { "CUTTER" }
+text Climax_Name_Medon { "MEDON" }
+text Climax_Name_Mom { "MOM" }
+text Climax_Name_Rhea { "RHEA" }
+text Climax_Name_Elpis { "ELPIS" }
+text Climax_Name_Daphne { "DAPHNE" }
+
+// ---------------------------------------------------------------------------
+// Travel
+// ---------------------------------------------------------------------------
+
+// Up from the Loom: back up the Omphalos stair (Delphoi's chapter's map).
+script Climax_EventScript_LeaveLoom {
+    lockall
+    playse(SE_EXIT)
+    warp(MAP_DELPHOI_OMPHALOS_STAIR, 9, 37)
+    waitstate
+    releaseall
+}
+
+// Onto the Stair of Hours, at its foot (the split Omphalos).
+script Climax_EventScript_ToStair {
+    call(Climax_EventScript_CountRoused)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("A stair of pale stone, going up through the rock.\pIts first step hangs out of reach."))
+        msgbox(format("The first step won't take your weight. The hour is holding its breath."))
+        closemessage
+        return
+    }
+    playse(SE_EXIT)
+    warp(MAP_STAIR_OF_HOURS, 6, 108)
+    waitstate
+}
+
+// VAR_RESULT: how many Fates are roused (0-3). Each opens four landings.
+script Climax_EventScript_CountRoused {
+    setvar(VAR_RESULT, 0)
+    if (flag(FLAG_ICHOR_ROUSED_CUTTER)) {
+        addvar(VAR_RESULT, 1)
+    }
+    if (flag(FLAG_ICHOR_ROUSED_MEASURER)) {
+        addvar(VAR_RESULT, 1)
+    }
+    if (flag(FLAG_ICHOR_ROUSED_SPINNER)) {
+        addvar(VAR_RESULT, 1)
+    }
+    return
+}
+
+// A Fate's hand taken: her spark flies to Delphoi and four more hours open.
+script Climax_EventScript_SparkFlies {
+    playse(SE_M_HEAL_BELL)
+    special(DrawWholeMapView)
+    fadescreenspeed(FADE_TO_WHITE, 4)
+    fadescreenspeed(FADE_FROM_WHITE, 4)
+    msgbox(format("Her spark flies up, toward Delphoi.\pFour more hours of the stair will take your weight."))
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The herms (E12): every anointed great herm has turned its head toward the
+// next place you need to go. EventScript_IchorAnointHerm calls this in the
+// hour, with the herm's state (1 anointed) in VAR_0x8004.
+// ---------------------------------------------------------------------------
+
+script Climax_EventScript_FrozenHerm {
+    if (var(VAR_0x8004) != 1) {
+        msgbox(format("A herm. Its stone face looks where it always has."), MSGBOX_DEFAULT)
+        return
+    }
+    if (!flag(FLAG_ICHOR_ROUSED_CUTTER)) {
+        msgbox(format("The herm's stone face has turned. It's looking toward Kaldera."), MSGBOX_DEFAULT)
+    } elif (!flag(FLAG_ICHOR_ROUSED_MEASURER)) {
+        msgbox(format("The herm's stone face has turned. It's looking toward Arkadia."), MSGBOX_DEFAULT)
+    } elif (!flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
+        msgbox(format("The herm's stone face has turned. It's looking toward Astyra."), MSGBOX_DEFAULT)
+    } elif (!flag(FLAG_ICHOR_ROUSED_SPINNER)) {
+        msgbox(format("The herm's stone face has turned. It's looking toward Kalliste."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("The herm's stone face has turned. It's looking toward Delphoi."), MSGBOX_DEFAULT)
+    }
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The earlier chapters' story items: Melitta's Honey (Delphoi, III-7) and Elpis's
+// sealed tablet (the Labyrinth's Ring VI archive).
+// ---------------------------------------------------------------------------
+
+// VAR_RESULT: TRUE if the player carries Melitta's Honey.
+script Climax_EventScript_HasHoney {
+    checkitem(ITEM_MELITTAS_HONEY)
+    return
+}
+
+script Climax_EventScript_TakeHoney {
+    removeitem(ITEM_MELITTAS_HONEY)
+    return
+}
+
+// VAR_RESULT: TRUE if the player carries Elpis's sealed tablet.
+script Climax_EventScript_HasTablet {
+    checkitem(ITEM_SEALED_TABLET)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// Frozen-only objects: every map with Frozen Hour people calls this from
+// ON_TRANSITION, so they stand only while the world is stopped.
+// ---------------------------------------------------------------------------
+
+script Climax_EventScript_FrozenOnlyObjects {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        clearflag(FLAG_ICHOR_HIDE_FROZEN_ONLY)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_FROZEN_ONLY)
+    }
+    return
+}
+
+// The end of the act: the League's L-1 opens in Astyra (design/LEAGUE.md).
+script Climax_EventScript_ActComplete {
+    setvar(VAR_ICHOR_ACT3, 19)
+    setflag(FLAG_ICHOR_ACT3_COMPLETE)
+    setrespawn(HEAL_LOCATION_ASTYRA)
+    return
+}

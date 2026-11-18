@@ -1,0 +1,660 @@
+// The Stair of Hours (design/phase4/SCRIPT.md beat III-11, Part 5; STORY §7.8 is the
+// master text). The map is the painted scene of tools/ichor/art/loom_build.py; its
+// states (the unformed flights, the crumble) are data/scripts/ichor_climax_tiles.pory.
+//
+// Each roused Fate opens four landings, in the order roused: flights 1, 5 and 9 stay
+// unformed until one, two and three Fates are roused. Kleon wakes once all three are
+// and Phaedon has read Elpis's tablet (VAR_ICHOR_ACT3 16); then the twelfth landing
+// holds the multi battle (17), the crumble, the Lord of Time and the Moment (18).
+//
+// TODO(music): MUS_ICHOR_FATES, _ELPIS_LULLABY_BOX_FATES, _KRONOS, _LORD_OF_TIME,
+// _FATES_FREE and _ELPIS_LULLABY_RESOLVED (SCRIPT.md Part 9) aren't written. Stand-ins:
+// the music box (628) for the climb, the default trainer and wild battle themes,
+// silence for the Moment (StopMapMusic), and Elpis's hum (627) for her line.
+
+mapscripts StairOfHours_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        call(Climax_EventScript_CountRoused)
+        if (var(VAR_RESULT) < 1) {
+            call(StairOfHours_Tiles_Ghost1)
+        }
+        if (var(VAR_RESULT) < 2) {
+            call(StairOfHours_Tiles_Ghost5)
+        }
+        if (var(VAR_RESULT) < 3) {
+            call(StairOfHours_Tiles_Ghost9)
+        }
+        if (flag(FLAG_ICHOR_STAIR_CRUMBLED)) {
+            call(StairOfHours_Tiles_Fallen)
+        }
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        call(StairOfHours_EventScript_SetObjects)
+        call(StairOfHours_EventScript_Unfreeze)
+        special(Ichor_FrozenScriptsHere)
+    }
+}
+
+// Who stands on the Stair, by the story so far.
+script StairOfHours_EventScript_SetObjects {
+    setflag(FLAG_ICHOR_HIDE_STAIR_KLEON)
+    setflag(FLAG_ICHOR_HIDE_STAIR_KLEON_TOP)
+    setflag(FLAG_ICHOR_HIDE_STAIR_FATES)
+    setflag(FLAG_ICHOR_HIDE_STAIR_SPARK)
+    setflag(FLAG_ICHOR_HIDE_STAIR_RIVALS)
+    setflag(FLAG_ICHOR_HIDE_STAIR_HYPERION)
+    setflag(FLAG_ICHOR_HIDE_STAIR_LORD)
+    if (var(VAR_ICHOR_ACT3) >= 18) {
+        return
+    }
+    if (var(VAR_ICHOR_ACT3) == 16) {
+        clearflag(FLAG_ICHOR_HIDE_STAIR_KLEON)
+    }
+    if (var(VAR_ICHOR_ACT3) == 17 && !flag(FLAG_ICHOR_STAIR_CRUMBLED)) {
+        clearflag(FLAG_ICHOR_HIDE_STAIR_KLEON_TOP)
+    }
+    if (flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
+        clearflag(FLAG_ICHOR_HIDE_STAIR_RIVALS)
+    }
+    if (!flag(FLAG_ICHOR_STAIR_CRUMBLED)) {
+        clearflag(FLAG_ICHOR_HIDE_STAIR_HYPERION)
+    } else {
+        clearflag(FLAG_ICHOR_HIDE_STAIR_SPARK)
+    }
+    if (!flag(FLAG_ICHOR_CAUGHT_LORD_OF_TIME) && !flag(FLAG_ICHOR_LORD_OF_TIME_FAINTED)) {
+        clearflag(FLAG_ICHOR_HIDE_STAIR_LORD)
+    }
+    return
+}
+
+// Phaedon, Hyperion, Kleon and the Lord of Time keep their color in the hour.
+script StairOfHours_EventScript_Unfreeze {
+    setvar(VAR_0x8004, LOCALID_STAIR_PHAEDON)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_STAIR_HYPERION)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_STAIR_LORD)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_STAIR_KLEON)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_STAIR_KLEON_CLIMB)
+    special(Ichor_UnfreezeObject)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// III-11A. The climb
+// ---------------------------------------------------------------------------
+
+script StairOfHours_EventScript_KleonLine {
+    if (var(VAR_TEMP_1) != 0) {
+        end
+    }
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    applymovement(LOCALID_STAIR_KLEON_CLIMB, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("They followed him up. He told them they'd live forever up here.\p"
+                  "Look at them."))
+    msgbox(format("Keep going. If I stop I'll start thinking."))
+    closemessage
+    applymovement(LOCALID_STAIR_KLEON_CLIMB, StairOfHours_Movement_KleonAhead)
+    waitmovement(0)
+    removeobject(LOCALID_STAIR_KLEON_CLIMB)
+    releaseall
+}
+
+script StairOfHours_EventScript_KleonClimb {
+    msgbox(format("KLEON: Keep going. If I stop I'll start thinking."), MSGBOX_NPC)
+}
+
+script StairOfHours_EventScript_Titanborn {
+    msgbox(format("Mid-step, one hand on the rock. Following."), MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_TitanbornShut {
+    msgbox(format("This one's eyes are shut tight, as if he's waiting for a blow."), MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_Petros {
+    msgbox(format("Petros, the digger from Kronion Hill. His helmet's pushed back.\p"
+                  "He looks like he's about to ask a question."), MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_Amathos {
+    msgbox(format("Amathos, with his hand on Petros's shoulder.\pSteadying him. Or being steadied."), MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_Spark {
+    lock
+    msgbox(format("One of the Fates' sparks, circling the sundial. It's warm."))
+    special(HealPlayerParty)
+    playse(SE_M_HEAL_BELL)
+    waitse
+    msgbox(format("Your Pokémon are rested."))
+    release
+}
+
+script StairOfHours_EventScript_HeldStep {
+    call(Climax_EventScript_CountRoused)
+    if (var(VAR_RESULT) < 3) {
+        msgbox(format("The next step won't take your weight. Not yet."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Pale steps, solid now. They held their breath for you."), MSGBOX_SIGN)
+    }
+}
+
+script StairOfHours_EventScript_Down {
+    lockall
+    if (var(VAR_ICHOR_ACT3) >= 17) {
+        releaseall
+        end
+    }
+    playse(SE_EXIT)
+    warp(MAP_DELPHOI, 21, 16)
+    waitstate
+    releaseall
+}
+
+text StairOfHours_Text_Dial { "A sundial cut into the stone.\nIts shadow stopped on the {STR_VAR_1} hour." }
+
+script StairOfHours_EventScript_DialText {
+    msgbox(StairOfHours_Text_Dial, MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_Dial1 { bufferstring(STR_VAR_1, StairOfHours_Text_First) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial2 { bufferstring(STR_VAR_1, StairOfHours_Text_Second) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial3 { bufferstring(STR_VAR_1, StairOfHours_Text_Third) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial4 { bufferstring(STR_VAR_1, StairOfHours_Text_Fourth) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial5 { bufferstring(STR_VAR_1, StairOfHours_Text_Fifth) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial6 { bufferstring(STR_VAR_1, StairOfHours_Text_Sixth) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial7 { bufferstring(STR_VAR_1, StairOfHours_Text_Seventh) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial8 { bufferstring(STR_VAR_1, StairOfHours_Text_Eighth) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial9 { bufferstring(STR_VAR_1, StairOfHours_Text_Ninth) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial10 { bufferstring(STR_VAR_1, StairOfHours_Text_Tenth) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial11 { bufferstring(STR_VAR_1, StairOfHours_Text_Eleventh) goto(StairOfHours_EventScript_DialText) }
+script StairOfHours_EventScript_Dial12 {
+    if (flag(FLAG_ICHOR_MOMENT_SEIZED)) {
+        msgbox(format("The big sundial. Its shadow has moved, one step past the hour."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The big sundial, ringed in gold. Its shadow stopped at the top of the hour."), MSGBOX_SIGN)
+    }
+}
+text StairOfHours_Text_First { "first" }
+text StairOfHours_Text_Second { "second" }
+text StairOfHours_Text_Third { "third" }
+text StairOfHours_Text_Fourth { "fourth" }
+text StairOfHours_Text_Fifth { "fifth" }
+text StairOfHours_Text_Sixth { "sixth" }
+text StairOfHours_Text_Seventh { "seventh" }
+text StairOfHours_Text_Eighth { "eighth" }
+text StairOfHours_Text_Ninth { "ninth" }
+text StairOfHours_Text_Tenth { "tenth" }
+text StairOfHours_Text_Eleventh { "eleventh" }
+
+// ---------------------------------------------------------------------------
+// III-11B. The twelfth landing
+// ---------------------------------------------------------------------------
+
+script StairOfHours_EventScript_Phaedon {
+    if (var(VAR_ICHOR_ACT3) >= 17) {
+        msgbox(format("He's watching the stair where they went down. He doesn't look at you."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("PHAEDON: I asked you not to come up."), MSGBOX_NPC)
+    }
+}
+
+script StairOfHours_EventScript_Hyperion {
+    msgbox(format("HYPERION: Is that them? I can't… it's all the same gray."), MSGBOX_NPC)
+}
+
+script StairOfHours_EventScript_KleonTop {
+    msgbox(format("KLEON: Up. Before I think about it."), MSGBOX_NPC)
+}
+
+script StairOfHours_EventScript_Lord {
+    msgbox(format("The Lord of Time fills the sky. The Harpe is in its grip."), MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_Fate {
+    msgbox(format("Her hands are still. She's watching the gray, waiting with you."), MSGBOX_SIGN)
+}
+
+script StairOfHours_EventScript_TwelfthLanding {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    // Kleon comes up the last steps beside you.
+    clearflag(FLAG_ICHOR_HIDE_STAIR_KLEON_TOP)
+    addobject(LOCALID_STAIR_KLEON)
+    setvar(VAR_0x8004, LOCALID_STAIR_KLEON)
+    special(Ichor_UnfreezeObject)
+    // The camera rises to the Lord of Time, filling the sky with the Harpe in its grip.
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, StairOfHours_Movement_CameraSky)
+    waitmovement(0)
+    delay(40)
+    applymovement(OBJ_EVENT_ID_CAMERA, StairOfHours_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    setspeaker(Climax_Name_Hyperion)
+    msgbox(format("Is that them? I can't… it's all the same gray.\p"
+                  "He said noon forever. He said I'd never lose the light.\p"
+                  "It's not noon. It's not anything."))
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("I asked you not to come up."))
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("Yeah. We're bad at that."))
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Kleon. You broke your own thread. I can see it. That must have hurt.\p"
+                  "You'd have made a fine healer. You never had patience for endings either.\p"
+                  "{PLAYER}. If you beat me, the world wakes. You know what that means for her.\p"
+                  "Please. Let me keep her. Like this."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("…You don't mean it. Kind people say yes first."))
+        setspeaker(Climax_Name_Kleon)
+        msgbox(format("Then they think. Sorry, healer."))
+    } else {
+        msgbox(format("No. I wouldn't either. Not for someone else's."))
+    }
+    goto(StairOfHours_EventScript_StairBattle)
+}
+
+script StairOfHours_EventScript_StairBattle {
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Hyperion. One more fight. Then you can rest."))
+    setspeaker(Climax_Name_Hyperion)
+    msgbox(format("Roast them, my lord?"))
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Gently."))
+    closemessage
+    setflag(FLAG_ICHOR_NO_WHITEOUT)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            setmultitrainerbattle(TRAINER_ICHOR_PHAEDON_STAIR, StairOfHours_Text_PhaedonDefeat, TRAINER_ICHOR_HYPERION_STAIR, StairOfHours_Text_HyperionDefeat, PARTNER_ICHOR_KLEON_STAIR_PYLAKYON)
+        case 1:
+            setmultitrainerbattle(TRAINER_ICHOR_PHAEDON_STAIR, StairOfHours_Text_PhaedonDefeat, TRAINER_ICHOR_HYPERION_STAIR, StairOfHours_Text_HyperionDefeat, PARTNER_ICHOR_KLEON_STAIR_SEISMARE)
+        default:
+            setmultitrainerbattle(TRAINER_ICHOR_PHAEDON_STAIR, StairOfHours_Text_PhaedonDefeat, TRAINER_ICHOR_HYPERION_STAIR, StairOfHours_Text_HyperionDefeat, PARTNER_ICHOR_KLEON_STAIR_DAPHNYAD)
+    }
+    setvar(VAR_0x8005, MULTI_BATTLE_2_VS_2)
+    callnative(BattleSetup_StartMultiBattle)
+    waitstate
+    clearflag(FLAG_ICHOR_NO_WHITEOUT)
+    if (var(VAR_RESULT) != B_OUTCOME_WON) {
+        // The sparks gather round you; the trigger runs again from the next step.
+        special(HealPlayerParty)
+        fadescreenspeed(FADE_TO_WHITE, 4)
+        fadescreenspeed(FADE_FROM_WHITE, 4)
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("The sparks gather round you. Warm. Your Pokémon get up."))
+        setspeaker(Climax_Name_Kleon)
+        msgbox(format("Again. They're tired too. I can tell."))
+        closemessage
+        applymovement(OBJ_EVENT_ID_PLAYER, StairOfHours_Movement_StepDown)
+        waitmovement(0)
+        removeobject(LOCALID_STAIR_KLEON)
+        setflag(FLAG_ICHOR_HIDE_STAIR_KLEON_TOP)
+        releaseall
+        end
+    }
+    setflag(FLAG_ICHOR_STAIR_BATTLE_WON)
+    setvar(VAR_ICHOR_ACT3, 17)
+    goto(StairOfHours_EventScript_Crumble)
+}
+
+text StairOfHours_Text_PhaedonDefeat { format("PHAEDON: There. Every hurt closes, if you let it.") }
+text StairOfHours_Text_HyperionDefeat { format("HYPERION: Hot… no. Not hot. Cold. Everything's cold.") }
+
+// ---------------------------------------------------------------------------
+// III-11C. The crumble
+// ---------------------------------------------------------------------------
+
+script StairOfHours_EventScript_Crumble {
+    // Hyperion sits down hard on the steps. Below, the stair begins to fall away.
+    applymovement(LOCALID_STAIR_HYPERION, StairOfHours_Movement_HyperionSits)
+    waitmovement(0)
+    call(StairOfHours_EventScript_Rumble)
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("The stair's going! Big man, it's going!"))
+    setspeaker(Climax_Name_Hyperion)
+    msgbox(format("Where's the edge? I can't find the edge.\p"
+                  "Go on, then. Leave me. I'd leave me."))
+    closemessage
+    // Kleon looks up at the Lord of Time. Then at the player. Then at Hyperion.
+    applymovement(LOCALID_STAIR_KLEON, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(20)
+    applymovement(LOCALID_STAIR_KLEON, Common_Movement_FaceLeft)
+    waitmovement(0)
+    delay(20)
+    applymovement(LOCALID_STAIR_KLEON, Common_Movement_FaceDown)
+    waitmovement(0)
+    delay(20)
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("That's where the song is. Up there. With you.\p"
+                  "Nobody's going to sing about this.\p"
+                  "…Good. Go on. I've got him."))
+    closemessage
+    // Kleon hauls Hyperion's arm over his shoulders and starts down.
+    applymovement(LOCALID_STAIR_KLEON, StairOfHours_Movement_KleonToHyperion)
+    waitmovement(0)
+    setspeaker(Climax_Name_Hyperion)
+    msgbox(format("Who's that? Who's got me?"))
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("Nobody. Walk."))
+    closemessage
+    applymovement(LOCALID_STAIR_KLEON, StairOfHours_Movement_KleonDown)
+    applymovement(LOCALID_STAIR_HYPERION, StairOfHours_Movement_HyperionDown)
+    waitmovement(LOCALID_STAIR_HYPERION)
+    waitmovement(LOCALID_STAIR_KLEON)
+    // The flights fall just behind them, row by row; the hour-stones stay, hanging.
+    call(StairOfHours_Tiles_Fall12)
+    removeobject(LOCALID_STAIR_KLEON)
+    removeobject(LOCALID_STAIR_HYPERION)
+    call(StairOfHours_Tiles_Fall11)
+    call(StairOfHours_Tiles_Fall10)
+    call(StairOfHours_Tiles_Fall9)
+    call(StairOfHours_Tiles_Fall8)
+    call(StairOfHours_Tiles_Fall7)
+    call(StairOfHours_Tiles_Fall6)
+    call(StairOfHours_Tiles_Fall5)
+    call(StairOfHours_Tiles_Fall4)
+    call(StairOfHours_Tiles_Fall3)
+    call(StairOfHours_Tiles_Fall2)
+    setflag(FLAG_ICHOR_STAIR_CRUMBLED)
+    setflag(FLAG_ICHOR_HIDE_STAIR_KLEON_TOP)
+    setflag(FLAG_ICHOR_HIDE_STAIR_HYPERION)
+    applymovement(LOCALID_STAIR_PHAEDON, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("I can't stop it now either. Did you know? It doesn't listen to me.\p"
+                  "It never did. It just wanted what I wanted. Nothing ending.\p"
+                  "Go. I won't stand in your way.\p"
+                  "I'll stand here and hope you lose."))
+    closemessage
+    // He steps aside, to the landing's left edge. The spark by the sundial now heals.
+    applymovement(LOCALID_STAIR_PHAEDON, StairOfHours_Movement_PhaedonAside)
+    waitmovement(0)
+    clearflag(FLAG_ICHOR_HIDE_STAIR_SPARK)
+    addobject(LOCALID_STAIR_SPARK_12)
+    playse(SE_M_HEAL_BELL)
+    releaseall
+}
+
+script StairOfHours_EventScript_Rumble {
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 8)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    playse(SE_M_ROCK_THROW)
+    waitstate
+    return
+}
+
+// ---------------------------------------------------------------------------
+// III-11D. The Lord of Time
+// ---------------------------------------------------------------------------
+
+script StairOfHours_EventScript_Shadow {
+    if (!flag(FLAG_ICHOR_STAIR_CRUMBLED) || flag(FLAG_ICHOR_MOMENT_SEIZED)) {
+        end
+    }
+    lockall
+    if (!flag(FLAG_ICHOR_CAUGHT_LORD_OF_TIME) && !flag(FLAG_ICHOR_LORD_OF_TIME_FAINTED)) {
+        call(StairOfHours_EventScript_LordBattle)
+        if (var(VAR_RESULT) == FALSE) {
+            releaseall
+            end
+        }
+    }
+    goto(StairOfHours_EventScript_TheMoment)
+}
+
+// VAR_RESULT: TRUE once the Lord of Time is caught or beaten.
+script StairOfHours_EventScript_LordBattle {
+    // The great shape lowers its head toward the player. The screen flashes once.
+    applymovement(LOCALID_STAIR_LORD, Common_Movement_WalkInPlaceDown)
+    waitmovement(0)
+    playse(SE_M_DETECT)
+    fadescreenspeed(FADE_TO_WHITE, 1)
+    fadescreenspeed(FADE_FROM_WHITE, 1)
+    setflag(FLAG_ICHOR_NO_WHITEOUT)
+    setflag(FLAG_ICHOR_NO_RUNNING)
+    setwildbattle(SPECIES_KRONOLITH, 60)
+    dowildbattle
+    clearflag(FLAG_ICHOR_NO_WHITEOUT)
+    clearflag(FLAG_ICHOR_NO_RUNNING)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_CAUGHT) {
+        setflag(FLAG_ICHOR_CAUGHT_LORD_OF_TIME)
+        removeobject(LOCALID_STAIR_LORD)
+        setflag(FLAG_ICHOR_HIDE_STAIR_LORD)
+    } elif (var(VAR_RESULT) == B_OUTCOME_WON) {
+        setflag(FLAG_ICHOR_LORD_OF_TIME_FAINTED)
+    } else {
+        special(HealPlayerParty)
+        fadescreenspeed(FADE_TO_WHITE, 4)
+        fadescreenspeed(FADE_FROM_WHITE, 4)
+        msgbox(format("The sparks gather round you. Warm.\pThe Lord of Time hasn't moved. It doesn't need to."))
+        closemessage
+        applymovement(OBJ_EVENT_ID_PLAYER, StairOfHours_Movement_StepDown)
+        waitmovement(0)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// III-11E. The Moment, and the twelve chimes
+// ---------------------------------------------------------------------------
+
+script StairOfHours_EventScript_TheMoment {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Lord of Time is still. The sky is still gray.\p"
+                  "Nothing moves. Far below, the music box ticks on."))
+    closemessage
+    // Three faint sparks settle on the landing: the Fates, their hands free.
+    clearflag(FLAG_ICHOR_HIDE_STAIR_FATES)
+    playse(SE_M_HEAL_BELL)
+    addobject(LOCALID_STAIR_SPINNER)
+    delay(10)
+    addobject(LOCALID_STAIR_MEASURER)
+    delay(10)
+    addobject(LOCALID_STAIR_CUTTER)
+    setvar(VAR_0x8004, LOCALID_STAIR_SPINNER)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_STAIR_MEASURER)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_0x8004, LOCALID_STAIR_CUTTER)
+    special(Ichor_UnfreezeObject)
+    delay(20)
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("It's beaten. It isn't over."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Stopped time won't start by itself. It needs a moment."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("Somebody has to choose one. We never have.\p"
+                  "Every moment we ever saw was already woven."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("Take one, and the world moves. We don't know what it brings."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Not for the girl in the city. Not for anyone."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("There. Look."))
+    closemessage
+    // The Harpe slips from the Lord of Time's grip and tips over the landing's edge.
+    // You stand at the painted line, facing east, where it will run.
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    switch (var(VAR_0x8004)) {
+        case 12: applymovement(OBJ_EVENT_ID_PLAYER, StairOfHours_Movement_ToTheLine12)
+        case 13: applymovement(OBJ_EVENT_ID_PLAYER, StairOfHours_Movement_ToTheLine13)
+        default: applymovement(OBJ_EVENT_ID_PLAYER, StairOfHours_Movement_ToTheLine14)
+    }
+    waitmovement(0)
+    addobject(LOCALID_STAIR_HARPE)
+    playse(SE_M_RAZOR_WIND)
+    applymovement(LOCALID_STAIR_HARPE, StairOfHours_Movement_HarpeFalls)
+    waitmovement(0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Something is running down the edge of the falling sickle.\p"
+                  "Long hair in front. Nothing behind."))
+    closemessage
+    addobject(LOCALID_STAIR_MOMENT)
+    setvar(VAR_0x8004, LOCALID_STAIR_MOMENT)
+    special(Ichor_UnfreezeObject)
+    setvar(VAR_TEMP_1, 0)
+    call(StairOfHours_EventScript_SeizeLoop)
+    goto(StairOfHours_EventScript_Chimes)
+}
+
+script StairOfHours_EventScript_SeizeLoop {
+    msgbox(format("Take the moment?"), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        msgbox(format("It's past you. Gone."))
+        closemessage
+        call(StairOfHours_EventScript_MomentComesRound)
+        msgbox(format("Take the moment?"), MSGBOX_YESNO)
+    }
+    closemessage
+    // Press A as the forelock crosses the painted line: the bull-leap's timing,
+    // the window growing by 2 frames a miss, up to double.
+    setvar(VAR_RESULT, ICHOR_LEAP_EARLY)
+    while (var(VAR_RESULT) != ICHOR_LEAP_CLEAN) {
+        call(StairOfHours_EventScript_MomentRuns)
+        if (var(VAR_RESULT) == ICHOR_LEAP_EARLY) {
+            msgbox(format("Too soon! It sidesteps you."))
+        } elif (var(VAR_RESULT) == ICHOR_LEAP_LATE) {
+            msgbox(format("Too late. It's past."))
+        }
+        if (var(VAR_RESULT) != ICHOR_LEAP_CLEAN) {
+            closemessage
+            addvar(VAR_TEMP_1, 1)
+            call(StairOfHours_EventScript_MomentComesRound)
+        }
+    }
+    return
+}
+
+// One run of the Moment along the blade toward the painted line.
+script StairOfHours_EventScript_MomentRuns {
+    setvar(VAR_0x8004, LOCALID_STAIR_MOMENT)
+    setvar(VAR_0x8005, ICHOR_TILE(13, 13))
+    // the window: 10 frames (Hero), 2 more a miss, never past double
+    setvar(VAR_0x8006, 10)
+    if (var(VAR_TEMP_1) >= 5) {
+        setvar(VAR_0x8006, 20)
+    } elif (var(VAR_TEMP_1) == 4) {
+        setvar(VAR_0x8006, 18)
+    } elif (var(VAR_TEMP_1) == 3) {
+        setvar(VAR_0x8006, 16)
+    } elif (var(VAR_TEMP_1) == 2) {
+        setvar(VAR_0x8006, 14)
+    } elif (var(VAR_TEMP_1) == 1) {
+        setvar(VAR_0x8006, 12)
+    }
+    setvar(VAR_0x8007, 6)
+    special(Ichor_BullLeap)
+    return
+}
+
+// After a miss or a NO it streaks off east, wheels round and comes back along the blade.
+script StairOfHours_EventScript_MomentComesRound {
+    applymovement(LOCALID_STAIR_MOMENT, StairOfHours_Movement_MomentAway)
+    waitmovement(0)
+    removeobject(LOCALID_STAIR_MOMENT)
+    delay(30)
+    setobjectxyperm(LOCALID_STAIR_MOMENT, 19, 13)
+    addobject(LOCALID_STAIR_MOMENT)
+    setvar(VAR_0x8004, LOCALID_STAIR_MOMENT)
+    special(Ichor_UnfreezeObject)
+    turnobject(LOCALID_STAIR_MOMENT, DIR_WEST)
+    return
+}
+
+script StairOfHours_EventScript_Chimes {
+    // One white frame. A breath drawn in. The music box stops: silence.
+    playse(SE_M_MORNING_SUN)
+    fadescreenspeed(FADE_TO_WHITE, 1)
+    fadescreenspeed(FADE_FROM_WHITE, 1)
+    special(StopMapMusic)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("You have it by the forelock."))
+    closemessage
+    applymovement(LOCALID_STAIR_MOMENT, StairOfHours_Movement_MomentAway)
+    waitmovement(0)
+    removeobject(LOCALID_STAIR_MOMENT)
+    setflag(FLAG_ICHOR_MOMENT_SEIZED)
+    setvar(VAR_ICHOR_ACT3, 18)
+    msgbox(format("There's nothing behind to hold. It's gone."))
+    closemessage
+    // The twelve chimes: the Harpe strikes each landing as it falls, and with each
+    // chime a twelfth of the color comes back. The camera follows it down.
+    special(SpawnCameraObject)
+    setvar(VAR_TEMP_2, 1)
+    while (var(VAR_TEMP_2) < 12) {
+        playse(SE_M_HEAL_BELL)
+        copyvar(VAR_0x8004, VAR_TEMP_2)
+        special(Ichor_ColorReturnStep)
+        applymovement(OBJ_EVENT_ID_CAMERA, StairOfHours_Movement_CameraDownAnHour)
+        waitmovement(0)
+        addvar(VAR_TEMP_2, 1)
+    }
+    applymovement(OBJ_EVENT_ID_CAMERA, StairOfHours_Movement_CameraUpAll)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    // The twelfth chime: the sundial's shadow moves. Wind. Birds. The sea.
+    playse(SE_M_HEAL_BELL)
+    setvar(VAR_0x8004, 12)
+    special(Ichor_ColorReturnStep)
+    playse(SE_M_GUST)
+    removeobject(LOCALID_STAIR_HARPE)
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("There. That's the end of the old cloth."))
+    setspeaker(Climax_Name_Measurer)
+    msgbox(format("Everything after this, nobody wove."))
+    setspeaker(Climax_Name_Spinner)
+    msgbox(format("Not us. Not anyone. It's all like yours now."))
+    setspeaker(Climax_Name_Cutter)
+    msgbox(format("The Harpe's in three pieces again, down on the Omphalos step.\p"
+                  "We'll keep those. One each. So no one ever holds it whole again."))
+    closemessage
+    if (flag(FLAG_ICHOR_LORD_OF_TIME_FAINTED)) {
+        // It sinks back down through the clouds, slowly, into the deep.
+        playse(SE_M_EARTHQUAKE)
+        applymovement(LOCALID_STAIR_LORD, StairOfHours_Movement_LordSinks)
+        waitmovement(0)
+        removeobject(LOCALID_STAIR_LORD)
+        setflag(FLAG_ICHOR_HIDE_STAIR_LORD)
+    }
+    applymovement(LOCALID_STAIR_PHAEDON, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Elpis."))
+    closemessage
+    fadescreenspeed(FADE_TO_WHITE, 8)
+    goto(Climax_EventScript_Dawn)
+}
+
+movement StairOfHours_Movement_KleonAhead { walk_up * 2 walk_right walk_up * 6 }
+movement StairOfHours_Movement_StepDown { walk_down }
+movement StairOfHours_Movement_CameraSky { walk_up * 4 }
+movement StairOfHours_Movement_CameraBack { walk_down * 4 }
+movement StairOfHours_Movement_HyperionSits { walk_in_place_slow_down face_down }
+movement StairOfHours_Movement_KleonToHyperion { walk_left walk_up face_up }
+movement StairOfHours_Movement_KleonDown { walk_down * 3 walk_left walk_down walk_left * 2 walk_down * 4 }
+movement StairOfHours_Movement_HyperionDown { delay_16 walk_down * 4 walk_left walk_down walk_left * 2 walk_down * 3 }
+movement StairOfHours_Movement_PhaedonAside { walk_down walk_left * 5 face_right }
+movement StairOfHours_Movement_ToTheLine12 { walk_down face_right }
+movement StairOfHours_Movement_ToTheLine13 { walk_left walk_down face_right }
+movement StairOfHours_Movement_ToTheLine14 { walk_left * 2 walk_down face_right }
+
+movement StairOfHours_Movement_HarpeFalls { walk_fast_down * 2 walk_fast_right * 2 walk_faster_down * 6 }
+movement StairOfHours_Movement_MomentAway { walk_faster_right * 3 }
+movement StairOfHours_Movement_CameraDownAnHour { walk_faster_down * 8 }
+movement StairOfHours_Movement_CameraUpAll { walk_faster_up * 88 }
+movement StairOfHours_Movement_LordSinks { walk_slow_down * 3 walk_down * 8 }

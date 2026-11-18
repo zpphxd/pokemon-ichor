@@ -41,7 +41,13 @@ mapscripts Delphoi_MapScripts {
         setflag(FLAG_ICHOR_VISITED_DELPHOI)
         setrespawn(HEAL_LOCATION_DELPHOI)
         call(Delphoi_EventScript_SetPeople)
+        // the climax: Kleon awake in the hour (III-10G)
+        call(Climax_EventScript_DelphoiPeople)
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        // the climax: dawn at the court, after the Moment (III-12A)
+        VAR_ICHOR_ACT3, 18: Climax_EventScript_DelphoiDawn
+    ]
     MAP_SCRIPT_ON_LOAD {
         call(Delphoi_EventScript_SetTiles)
     }
@@ -925,6 +931,9 @@ script Delphoi_EventScript_OmphalosOpens {
 }
 
 script Delphoi_EventScript_Stairhead {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR)) {
+        goto(Climax_EventScript_DelphoiStair)
+    }
     lockall
     setspeaker(SP_NAME_NONE)
     msgbox(format("Go down the stair?"), MSGBOX_YESNO)

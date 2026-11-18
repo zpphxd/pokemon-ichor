@@ -23,6 +23,12 @@ script EventScript_IchorGreatHerm {
 
 script EventScript_IchorAnointHerm {
     specialvar(VAR_RESULT, Ichor_GetHermState)
+    // Ichor: in the Frozen Hour an anointed herm's head has turned (the climax, E12).
+    if (flag(FLAG_ICHOR_FROZEN_HOUR) && var(VAR_RESULT) != 0) {
+        copyvar(VAR_0x8004, VAR_RESULT)
+        call(Climax_EventScript_FrozenHerm)
+        return
+    }
     if (var(VAR_RESULT) == 1) {
         msgbox(format("The great herm's face still shines with your oil. Hermes remembers you passed."), MSGBOX_DEFAULT)
         return

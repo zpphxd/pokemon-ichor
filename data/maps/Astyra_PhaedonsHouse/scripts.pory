@@ -1,5 +1,7 @@
 mapscripts Astyra_PhaedonsHouse_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        // the climax: Phaedon at the bedside in the Frozen Hour, and the dawn (III-10E, III-12B)
+        call(Astyra_PhaedonsHouse_EventScript_ClimaxObjects)
         if (flag(FLAG_ICHOR_MET_PHAEDON) && !flag(FLAG_ICHOR_PHAEDON_DAPHNE_VISIT)) {
             clearflag(FLAG_ICHOR_HIDE_PHAEDON_HOUSE)
             clearflag(FLAG_ICHOR_HIDE_DAPHNE_HOUSE)
@@ -15,6 +17,7 @@ mapscripts Astyra_PhaedonsHouse_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_1, 1: Astyra_PhaedonsHouse_EventScript_Visit
+        VAR_ICHOR_ACT3, 18: Astyra_PhaedonsHouse_EventScript_ElpisLine
     ]
 }
 script Astyra_PhaedonsHouse_EventScript_Visitor {
@@ -69,6 +72,9 @@ script Astyra_PhaedonsHouse_EventScript_Starry {
     end
 }
 script Astyra_PhaedonsHouse_EventScript_MusicBox {
+    if (flag(FLAG_ICHOR_FROZEN_HOUR) || var(VAR_ICHOR_ACT3) >= 18) {
+        goto(Astyra_PhaedonsHouse_EventScript_MusicBoxClimax)
+    }
     lockall
     playbgm(MUS_ICHOR_ELPIS_LULLABY_BOX, TRUE)
     msgbox(format("A music box. Its tune stops just before the last note.\pOn the bottom: From Papa's friend under the island."))

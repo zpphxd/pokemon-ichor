@@ -1,0 +1,178 @@
+// Ichor: the climax at Delphoi's Omphalos court (design/phase4/SCRIPT.md III-10B,
+// III-10G and III-12A). Delphoi's chapter leaves its tableau standing from
+// VAR_ICHOR_ACT3 14 to 18 (Mom and Alethea at the stairhead, Rhea in the court's
+// gate, Kleon mid-swing below the steps, the Gigas, the Archon, the muster); the
+// Frozen Hour freezes it as it stands. Delphoi's ON_TRANSITION calls
+// Climax_EventScript_DelphoiPeople, its stairhead calls Climax_EventScript_DelphoiStair
+// in the hour, and its ON_FRAME plays the dawn at VAR_ICHOR_ACT3 18.
+
+script Climax_EventScript_DelphoiPeople {
+    setflag(FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI)
+    // Rhea stands at the head of the gate's steps, a step aside, so the court
+    // stays open to anyone the Wings set down below it.
+    if (var(VAR_ICHOR_ACT3) >= 15 && var(VAR_ICHOR_ACT3) < 19) {
+        setobjectxyperm(LOCALID_DELPHOI_RHEA_GATE, 24, 16)
+    }
+    if (var(VAR_ICHOR_ACT3) == 16 || var(VAR_ICHOR_ACT3) == 17) {
+        // he's gone up the Stair with you
+        setflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE)
+    }
+    return
+}
+
+// III-10B. The split Omphalos in the hour: the Stair of Hours climbs out of it.
+script Climax_EventScript_DelphoiStair {
+    lockall
+    msgbox(format("The navel of the world, split in two.\pA pale stair climbs out of it into the sky."))
+    closemessage
+    call(Climax_EventScript_ToStair)
+    releaseall
+}
+
+// III-10G. Kleon wakes, as you pass him in the gate. It needs all three Fates
+// roused and Elpis's room seen.
+script Climax_EventScript_DelphoiKleonWakes {
+    if (!flag(FLAG_ICHOR_ROUSED_CUTTER) || !flag(FLAG_ICHOR_ROUSED_MEASURER)
+        || !flag(FLAG_ICHOR_ROUSED_SPINNER) || !flag(FLAG_ICHOR_PHAEDON_READ_TABLET)) {
+        end
+    }
+    lockall
+    // His eyes move. A crack, like ice: the first sound in the world that isn't your steps.
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) < 23) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    } elif (var(VAR_0x8004) > 23) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    } else {
+        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    }
+    waitmovement(0)
+    delay(30)
+    playse(SE_ICE_CRACK)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 4)
+    setvar(VAR_0x8007, 2)
+    special(ShakeCamera)
+    waitstate
+    // Color runs into him from his fist, then everywhere.
+    clearflag(FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI)
+    addobject(LOCALID_DELPHOI_KLEON_FREE)
+    setvar(VAR_0x8004, LOCALID_DELPHOI_KLEON_FREE)
+    special(Ichor_UnfreezeObject)
+    removeobject(LOCALID_DELPHOI_KLEON_GATE)
+    setflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE)
+    playse(SE_M_HEAL_BELL)
+    delay(20)
+    applymovement(LOCALID_DELPHOI_KLEON_FREE, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("-ow. OW. What-\p"
+                  "Why's everyone… why is everything gray?\p"
+                  "I heard you. Walking. Everything else stopped, and I could hear you walking.\p"
+                  "I had a thread. I could feel it. Like a leash. Stopped tight.\p"
+                  "I pulled. It hurt. I pulled anyway."))
+    closemessage
+    playse(SE_PIN)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("He opens his fist. A short gray thread lies across his palm, snapped."))
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("…I think I broke it.\p"
+                  "So I'm like you now. No prophecy. Nothing written.\p"
+                  "I'll die when I die. Huh.\p"
+                  "That's either the worst thing that's ever happened to me, or the best."))
+    closemessage
+    // He looks up the steps at Rhea, frozen with her arms spread in front of him.
+    applymovement(LOCALID_DELPHOI_KLEON_FREE, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(40)
+    msgbox(format("She was standing in front of me. When it stopped. Look at her.\p"
+                  "…Mother."))
+    closemessage
+    delay(30)
+    applymovement(LOCALID_DELPHOI_KLEON_FREE, Common_Movement_FaceDown)
+    waitmovement(0)
+    msgbox(format("Right. Where's the fight? Up there? Good. Let's go up."))
+    closemessage
+    // He runs up the steps to wait at the Stair's foot.
+    applymovement(LOCALID_DELPHOI_KLEON_FREE, Climax_Movement_KleonToStair)
+    waitmovement(0)
+    removeobject(LOCALID_DELPHOI_KLEON_FREE)
+    setflag(FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI)
+    setflag(FLAG_ICHOR_KLEON_WOKE)
+    setvar(VAR_ICHOR_ACT3, 16)
+    releaseall
+}
+
+script Climax_EventScript_DelphoiKleonTalk {
+    msgbox(format("KLEON: Up. Before I think about it."), MSGBOX_NPC)
+}
+
+movement Climax_Movement_KleonToStair { walk_fast_up * 2 walk_fast_left walk_fast_up }
+
+// III-12A. Delphoi at dawn. The player stands at the top of the Omphalos stair,
+// where Mom is. Color, and noise everywhere at once.
+script Climax_EventScript_DelphoiDawn {
+    lockall
+    setvar(VAR_0x8004, TIME_MORNING)
+    special(Ichor_HoldTimeOfDay)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    playse(SE_M_GUST)
+    delay(40)
+    applymovement(LOCALID_DELPHOI_MOM_STAIR, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Climax_Name_Mom)
+    msgbox(format("{PLAYER}!\pYou came back up."))
+    closemessage
+    // She holds the player.
+    applymovement(LOCALID_DELPHOI_MOM_STAIR, Common_Movement_WalkInPlaceRight)
+    waitmovement(0)
+    delay(60)
+    msgbox(format("Don't say anything. You'll ruin it."))
+    closemessage
+    // At the stair's foot Kleon sets Hyperion down on the Omphalos step. The sun
+    // comes up over the mountain, and Hyperion turns his face to it.
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_HYPERION)
+    addobject(LOCALID_DELPHOI_HYPERION)
+    applymovement(LOCALID_DELPHOI_HYPERION, Common_Movement_FaceRight)
+    waitmovement(0)
+    delay(40)
+    setspeaker(Climax_Name_Hyperion)
+    msgbox(format("…There it is."))
+    closemessage
+    // Rhea walks down to the Archon's guard and holds out her wrists.
+    applymovement(LOCALID_DELPHOI_RHEA_GATE, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Climax_Name_Rhea)
+    msgbox(format("Rhea. Lampito. Either name. I'm done."))
+    setspeaker(Climax_Name_Kleon)
+    msgbox(format("Mother-"))
+    setspeaker(Climax_Name_Rhea)
+    msgbox(format("Good fight. Eat something."))
+    closemessage
+    applymovement(LOCALID_DELPHOI_RHEA_GATE, Climax_Movement_RheaSurrenders)
+    waitmovement(0)
+    removeobject(LOCALID_DELPHOI_RHEA_GATE)
+    setflag(FLAG_ICHOR_RHEA_SURRENDERED)
+    // Phaedon comes down the last steps. He looks at no one.
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON)
+    addobject(LOCALID_DELPHOI_PHAEDON)
+    applymovement(LOCALID_DELPHOI_PHAEDON, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Climax_Name_Phaedon)
+    msgbox(format("Take me to her. Please. Before they take me anywhere else."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Far below at the gate, the Archon nods. Two guards start up the Sacred Way."))
+    closemessage
+    setflag(FLAG_ICHOR_HIDE_OMPHALOS_HYPERION)
+    setflag(FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON)
+    special(Ichor_ReleaseTimeOfDay)
+    fadescreen(FADE_TO_BLACK)
+    warp(MAP_ASTYRA_PHAEDONS_HOUSE, 9, 12)
+    waitstate
+    releaseall
+}
+
+movement Climax_Movement_RheaSurrenders { walk_left walk_down * 4 }

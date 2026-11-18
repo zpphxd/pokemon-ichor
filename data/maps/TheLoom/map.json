@@ -1,0 +1,215 @@
+{
+  "id": "MAP_THE_LOOM",
+  "name": "TheLoom",
+  "layout": "LAYOUT_THE_LOOM",
+  "music": "MUS_ICHOR_HOLLOW",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_DELPHOI",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_LOOM_PHAEDON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PHAEDON",
+      "x": 29,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TheLoom_EventScript_Phaedon",
+      "flag": "FLAG_ICHOR_CUT_THE_CHAINS"
+    },
+    {
+      "local_id": "LOCALID_LOOM_HYPERION",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HYPERION",
+      "x": 22,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TheLoom_EventScript_Hyperion",
+      "flag": "FLAG_ICHOR_CUT_THE_CHAINS"
+    },
+    {
+      "local_id": "LOCALID_LOOM_SPINNER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(NEMIRA)",
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TheLoom_EventScript_Fate",
+      "flag": "FLAG_ICHOR_CUT_THE_CHAINS"
+    },
+    {
+      "local_id": "LOCALID_LOOM_MEASURER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LOTIRA)",
+      "x": 16,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TheLoom_EventScript_Fate",
+      "flag": "FLAG_ICHOR_CUT_THE_CHAINS"
+    },
+    {
+      "local_id": "LOCALID_LOOM_CUTTER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(THANIRA)",
+      "x": 27,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TheLoom_EventScript_Fate",
+      "flag": "FLAG_ICHOR_CUT_THE_CHAINS"
+    },
+    {
+      "local_id": "LOCALID_LOOM_LORD",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KRONOLITH)",
+      "x": 16,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_FROZEN_ONLY",
+      "_floats": true
+    },
+    {
+      "local_id": "LOCALID_LOOM_HARPE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARPE",
+      "x": 30,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_FROZEN_ONLY"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 33,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_OMPHALOS_STAIR",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TheLoom_EventScript_LeaveUp"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TheLoom_EventScript_StairFoot"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "TheLoom_EventScript_StairFoot"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_Thread"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_Thread"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_Thread"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_LastRow"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_Chasm"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_Chasm"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TheLoom_EventScript_PaleStair"
+    }
+  ],
+  "ichor_kind": "interior"
+}

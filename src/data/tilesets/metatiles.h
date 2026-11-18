@@ -296,3 +296,11 @@ const u16 gMetatiles_PorytilesManaged_TempleApollo[] = INCBIN_U16("data/tilesets
 const u16 gMetatileAttributes_PorytilesManaged_TempleApollo[] = INCBIN_U16("data/tilesets/secondary/temple_apollo/porytiles_bin/metatile_attributes.bin");
 const u16 gMetatiles_PorytilesManaged_OikiaDelphoi[] = INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_OikiaDelphoi[] = INCBIN_U16("data/tilesets/secondary/oikia_delphoi/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: loom
+const u16 gMetatiles_PorytilesManaged_Loom[] = INCBIN_U16("data/tilesets/secondary/loom/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Loom[] = INCBIN_U16("data/tilesets/secondary/loom/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: stair_of_hours
+const u16 gMetatiles_PorytilesManaged_StairOfHours[] = INCBIN_U16("data/tilesets/secondary/stair_of_hours/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_StairOfHours[] = INCBIN_U16("data/tilesets/secondary/stair_of_hours/porytiles_bin/metatile_attributes.bin");
