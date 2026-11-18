@@ -41,6 +41,8 @@ The single source for levels across the whole game. Every script, encounter tabl
   starters out of the wild: Route 16 now has Sophowl and Ophidrop in their slots;
   Daphnyad stays in both roads' late trainer parties. These are implemented bands, not
   natural-level approval.
+  The Sacred Way rebuild (sacredway.py, 2026-11-18) adds nine trainers on the same
+  bands: Route 15's five at 35-37, Route 16's four at 37-38.
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,

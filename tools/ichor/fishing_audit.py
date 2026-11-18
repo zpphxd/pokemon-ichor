@@ -55,6 +55,10 @@ DECORATIVE = {
     "Olympus_SeatOfPoseidon": (None, "the Pantheon seat's ornamental basin around its model trireme"),
     "Nemea": ({0x0B0, 0x0B1, 0x0B2, 0x0B8, 0x0B9, 0x0BA, 0x0C0, 0x0C1, 0x0C2},
               "the Langia spring's stone basin, a fountain (a Horn of Achelous hook); the river pool is fished"),
+    "Route15_MysteryRoad": ({0x0B0, 0x0B1, 0x0B2, 0x0B8, 0x0B9, 0x0BA, 0x0C0, 0x0C1, 0x0C2},
+                            "the pilgrims' spring basin on the Aigaleo pass (a healer stands at it); the salt lakes are fished"),
+    "Daphni": ({0x0B0, 0x0B1, 0x0B2, 0x0B8, 0x0B9, 0x0BA, 0x0C0, 0x0C1, 0x0C2},
+               "the pilgrims' fountain, a stone basin in the square"),
     "AktiTown": ({0x2A7},"a water cell inside the moored boat's stamp; the quay faces open sea all round it"),
 }
 

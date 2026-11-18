@@ -1181,10 +1181,10 @@
     {
       "id": "LAYOUT_ROUTE15_MYSTERY_ROAD",
       "name": "Route15_MysteryRoad_Layout",
-      "width": 48,
-      "height": 24,
+      "width": 80,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route15_MysteryRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route15_MysteryRoad/map.bin",
       "layout_version": "emerald"
@@ -1192,10 +1192,10 @@
     {
       "id": "LAYOUT_DAPHNI",
       "name": "Daphni_Layout",
-      "width": 28,
-      "height": 32,
+      "width": 40,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Daphni/border.bin",
       "blockdata_filepath": "data/layouts/Daphni/map.bin",
       "layout_version": "emerald"
@@ -1203,10 +1203,10 @@
     {
       "id": "LAYOUT_ROUTE16_CAPITAL_PASS",
       "name": "Route16_CapitalPass_Layout",
-      "width": 48,
-      "height": 24,
+      "width": 72,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Skiron",
       "border_filepath": "data/layouts/Route16_CapitalPass/border.bin",
       "blockdata_filepath": "data/layouts/Route16_CapitalPass/map.bin",
       "layout_version": "emerald"
@@ -2837,6 +2837,39 @@
       "secondary_tileset": "gTileset_Nysa",
       "border_filepath": "data/layouts/Route7_NurseryOfNysa/border.bin",
       "blockdata_filepath": "data/layouts/Route7_NurseryOfNysa/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DAPHNI_SANCTUARY",
+      "name": "Daphni_Sanctuary_Layout",
+      "width": 14,
+      "height": 10,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Daphni_Sanctuary/border.bin",
+      "blockdata_filepath": "data/layouts/Daphni_Sanctuary/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DAPHNI_PILGRIMS_REST",
+      "name": "Daphni_PilgrimsRest_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Daphni_PilgrimsRest/border.bin",
+      "blockdata_filepath": "data/layouts/Daphni_PilgrimsRest/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_DAPHNI_LAUREL_HOUSE",
+      "name": "Daphni_LaurelHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Daphni_LaurelHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Daphni_LaurelHouse/map.bin",
       "layout_version": "emerald"
     }
   ]

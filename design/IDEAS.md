@@ -17,6 +17,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Relics and terrain (user, 2026-11-17):** use the relics (our HMs) much more, with gates the player can open now as well as ones for later, and vary the terrain so each route is a different place: marsh, scree, rivers and fords, terraces, forest, beaches, grottos.
 - **First up when it lands:** Route 7 (Kronia Grounds) and Routes 8–9 around Lebadeia, which the user asked about; then Routes 1, 4 and 5, and every route after.
 - **In progress (2026-11-17):** Routes 7, 8, 9, 11, 13 and 14, with the bare stops (Lebadeia, Kirrha, Aigion, Nemea) each getting a temple, shrine or outcamp that can carry a later quest. Routes 1, 4, 5 and the rest are still to come.
+- **Built (2026-11-18, `tools/ichor/maps/sacredway.py`):** Route 15 (the Rheitoi, the Aigaleo pass, the shrine court's drum seal), Daphni (the sanctuary of Apollo Daphnaios, the lookout, three rooms) and Route 16 (the Kephisos, the Kerameikos, the Akademia, the climb and the first sight of the Akropolis). Hooks: `design/maps/Route15_MysteryRoad.md`, `Daphni.md`, `Route16_CapitalPass.md`; the walk is `tools/ichor/tests/sacredway.sh`.
 
 ### The whole world: hidden parts and return gates
 - **Planned (2026-11-17):** `design/WORLD_EXPLORATION.md` plans every region's return gates, cave back sections and what pays behind them (story, stronger Pokémon, leads), proposes Pan's Crook as the climbing relic, and gives a build order.
