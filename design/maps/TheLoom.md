@@ -13,3 +13,7 @@ After the cut (`FLAG_ICHOR_CUT_THE_CHAINS`): the chains hang broken from the pos
 ## Critique passes
 
 Renders are in `design/phase4/img/maps/the_loom_*.png`, one set per pass.
+
+1. `the_loom_pass1_*`: the composition worked (cloth, warp, knots over the black), but the shelf floor read as a flat concrete slab, the chains were invisible thin gray lines, the spurs were stubby blocks and the east door was a smudge. Fixed: a darker bedrock floor lit near the chasm, heavy five-pixel links with cold glints, tapered tongues for the spurs, a real arch with steps going up.
+2. `the_loom_pass2_*`: the broken chains' stubs hid against the posts and the torn roof was a sliver. Fixed: stubs hang just inside the posts over the white warp; the hole is three cells wide over the Stair's foot; fallen rock and stalagmites break the shelf's long south edge.
+3. `the_loom_pass3_views.png` (15×10 screens, and the in-game shots in `build/test_climax/shots`): each screen holds one landmark: the cloth's pictures and the chain to a Fate, the Measurer's spur, the east door. Kept as is; the remaining audit notes are about height (a pit, not a ledge) and are deliberate.

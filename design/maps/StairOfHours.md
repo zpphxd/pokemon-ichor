@@ -13,3 +13,7 @@ Gates (P5): each roused Fate opens four landings in the order roused; a closed f
 ## Critique passes
 
 Renders are in `design/phase4/img/maps/stair_of_hours_*.png`, one set per pass.
+
+1. `stair_of_hours_pass1.png`: legible, but the kerbs were a checkerboard, the cloud sea a striped curtain, the dials tiny, the numerals invisible on the dark faces and the Omphalos two striped eggs. The first painting also cost 1,786 tiles; the second is ring-and-paving built and fits one secondary (417 of 504).
+2. `stair_of_hours_pass2.png`: plain stone kerbs, 2×2 sundials with gold quarter marks (the map's signature now reads from across a screen), gold-inlaid Greek numerals, a domed split Omphalos rising out of the cloud. Then: the cloud sea read as roof tiles, the undersides as combs, the puffs as smudges. Fixed: soft banks with a few long lit crests, rough tapered undersides, three-cell cloud puffs.
+3. `stair_of_hours_pass3_views.png` (15×10): the foot, a cyclopean hour, the open sky between alternating hours, a cut-limestone hour, and the twelfth landing with the Lord of Time's shadow. Kept; the empty-sky screens between landings are the point (hours hanging in nothing).

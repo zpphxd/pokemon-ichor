@@ -97,7 +97,11 @@ def write_tiles_pory():
         for row, x0 in rows:
             allcells |= {(x0 + i, row) for i in range(3)}
         # top row first: the stair falls away behind the two going down
-        body = [f"script StairOfHours_Tiles_Fall{k} {{"]
+        # each flight goes with a shudder through the whole stair
+        body = [f"script StairOfHours_Tiles_Fall{k} {{",
+                "    setvar(VAR_0x8004, 2)", "    setvar(VAR_0x8005, 3)",
+                "    setvar(VAR_0x8006, 6)", "    setvar(VAR_0x8007, 2)",
+                "    playse(SE_M_EARTHQUAKE)", "    special(ShakeCamera)", "    waitstate"]
         for row, x0 in reversed(rows):
             for x, y, mid, solid in delta(stair_of_hours_tiles, "stair", "stair_fallen",
                                           {(x0 + i, row) for i in range(3)}):

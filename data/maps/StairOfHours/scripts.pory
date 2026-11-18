@@ -6,6 +6,11 @@
 // unformed until one, two and three Fates are roused. Kleon wakes once all three are
 // and Phaedon has read Elpis's tablet (VAR_ICHOR_ACT3 16); then the twelfth landing
 // holds the multi battle (17), the crumble, the Lord of Time and the Moment (18).
+//
+// TODO(music): MUS_ICHOR_FATES, _ELPIS_LULLABY_BOX_FATES, _KRONOS, _LORD_OF_TIME,
+// _FATES_FREE and _ELPIS_LULLABY_RESOLVED (SCRIPT.md Part 9) aren't written. Stand-ins:
+// the music box (628) for the climb, the default trainer and wild battle themes,
+// silence for the Moment (StopMapMusic), and Elpis's hum (627) for her line.
 
 mapscripts StairOfHours_MapScripts {
     MAP_SCRIPT_ON_LOAD {
