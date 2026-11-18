@@ -163,3 +163,21 @@ The drops between rings are built too: Ring I's hole into Ring II's grotto and t
 ## New set piece
 
 **The dig cavern (Ring IV):** the Titans' tunnelling broke into a cave four nodes square, 16×16 cells, with the underground river running down it from its spring to the chute. It is the first open cave the player sees after three rings of corridors.
+
+## Labyrinth II (the heart)
+
+Rings V-VII, the Starry Chamber and the Icarus Shaft, with their relics, the floor seal, treasure stairs and holes and the remains: [LabyrinthHeart.md](LabyrinthHeart.md).
+
+| From | Cell | Goes to |
+|---|---|---|
+| Ring V warps 0/3 | the stair up (27-28,2) | Ring IV warp 6 |
+| Ring V warps 1/4 | the tomb stair (44-45,13), behind %1 | Minos's tomb warp 0 |
+| Ring V warp 2 | arrival in the lake (30,13) | Ring IV's chute lands here |
+| Ring V warps 5/6 | the south stair (27-28,40) | Ring VI warps 0/1 |
+| Ring V warp 7 | the rope up (4,2) | Ring IV warp 6 (Labyrinth I: give it an arrival of its own if you like) |
+| Ring V warp 8 / sinkhole (45,44) | rope down / hole | Ring VI warp 4 / Ring VI (45,44) |
+| Ring VI warps 2/3 | the landing's stair-house | Ring VII warps 0/1 |
+| Ring VII warp 2 | the dance's stair (16,18) | Starry Chamber warp 0 |
+| Workshop at dawn | Daedalus by the open grate | `call(LabyrinthIcarusShaft_EventScript_SceneL)` |
+
+Thread anchors 40-57 are the heart's. `VAR_ICHOR_LABYRINTH` bits 0-3 are Ring VI's dials (W1-W3, the teaching dial). The stream: Ring V's lake spills west into a pit; it falls past Ring VI's forge as the waterfall the Horn climbs.

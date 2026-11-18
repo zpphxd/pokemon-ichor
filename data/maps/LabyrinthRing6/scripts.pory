@@ -38,8 +38,8 @@ mapscripts LabyrinthRing6_MapScripts {
     setvar(VAR_0x8004, 0x258)
     setvar(VAR_0x8005, 0x259)
     special(Ichor_AddThreadFloor)
-    setvar(VAR_0x8004, 0x280)
-    setvar(VAR_0x8005, 0x281)
+    setvar(VAR_0x8004, 0x288)
+    setvar(VAR_0x8005, 0x289)
     special(Ichor_AddThreadFloor)
     setvar(VAR_0x8004, 23)
     setvar(VAR_0x8005, 4)
@@ -70,8 +70,8 @@ script LabyrinthRing6_EventScript_OnLoadExtra {
     call(LabyrinthRing6_EventScript_DrawBars)
     call(LabyrinthRing6_EventScript_DrawTeachWall)
     if (flag(FLAG_ICHOR_RING6_LANDING_OPEN)) {
-        setmetatile(23, 33, METATILE_Mychos_SlabR, FALSE)
-        setmetatile(24, 33, METATILE_Mychos_SlabL, FALSE)
+        setmetatile(23, 32, METATILE_Mychos_SlabR, FALSE)
+        setmetatile(24, 32, METATILE_Mychos_SlabL, FALSE)
     }
     if (flag(FLAG_ICHOR_RING6_ARCHIVE_BACK)) {
         setmetatile(42, 24, METATILE_Mychos_CaveFloor, FALSE)
@@ -517,7 +517,7 @@ script LabyrinthRing6_EventScript_SceneHBody {
 // ---------------------------------------------------------------------------
 
 script LabyrinthRing6_EventScript_SceneG {
-    setvar(VAR_TEMP_1, 1)
+    setvar(VAR_TEMP_8, 1)
     if (defeated(TRAINER_ICHOR_HYPERION_KNOSSA)) {
         end
     }
@@ -562,6 +562,9 @@ script LabyrinthRing6_EventScript_HyperionBattle {
     removeobject(LOCALID_RING6_HYPERION)
     setflag(FLAG_ICHOR_HIDE_HYPERION_KNOSSA)
     setflag(FLAG_ICHOR_RING6_LANDING_OPEN)
+    setmetatile(23, 32, METATILE_Mychos_SlabR, FALSE)
+    setmetatile(24, 32, METATILE_Mychos_SlabL, FALSE)
+    special(DrawWholeMapView)
     if (var(VAR_ICHOR_KNOSSA) < 14) {
         setvar(VAR_ICHOR_KNOSSA, 14)
     }
@@ -608,3 +611,28 @@ script LabyrinthRing6_EventScript_ShrinePriestess {
     }
     release
 }
+
+// ---- BEGIN GENERATED EXTRAS ----
+
+script LabyrinthRing6_EventScript_Hole2 {
+    lockall
+    msgbox(format("The floor is only a crust of flowstone over a hole. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_RING6, 11)
+    waitstate
+    releaseall
+}
+
+script LabyrinthRing6_EventScript_Remains1 {
+    msgbox(format("A smith's apron on the slag, Kaldera stitching. A note in the pocket:\pThey told us the collar was for a mule. No mule needs adamant."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing6_EventScript_Remains2 {
+    msgbox(format("A Titan bunk-roll and a letter, never sent: Ma, the boss says when the Loom\pstops nobody dies. Not even Gran. I'm doing it for Gran."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing6_EventScript_Remains3 {
+    msgbox(format("A bronze automaton lies on its face, a rope still knotted round one ankle.\pIts plinth, somewhere above, says: DO NOT UNTIE."), MSGBOX_SIGN)
+}
+// ---- END GENERATED EXTRAS ----

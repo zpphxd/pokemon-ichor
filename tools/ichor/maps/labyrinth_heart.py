@@ -24,6 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import heart_lib as H  # noqa: E402
+import heart_extras as X  # noqa: E402
 
 ROOT = H.ROOT
 DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
@@ -253,7 +254,8 @@ R5_STAIR_DOWN = (27, 40)     # to Ring VI
 R5_TOMB_STAIR = (44, 13)     # down into Minos's tomb (the Labyrinth I build's map)
 R5_CLIMB = (4, 2)            # the rope climb back up to Ring IV
 R5_HOLE = (45, 44)           # drops into Ring VI at the same cell
-R5_GRATE = (53, 33)          # the bronze grate that opens only from the south
+R5_GRATE = (53, 33)
+R5_SEAL = (44, 2)            # Daedalus's floor seal: the room's north-west corner (its wall row)          # the bronze grate that opens only from the south
 
 
 def map_exists(name):
@@ -264,7 +266,15 @@ def ring5(stem_suffix="", render=True):
     m = H.HeartMap("LabyrinthRing5", "mychos", 56, 48)
     x0, y0, x1, y1 = R5_LOOP
     # the lake: its north arm under the gallery, the basin inside the loop, an island
-    m.carve(15, 11, 40, 15, "~")
+    # the north arm under the gallery: three bays between spurs of rock
+    for (bx0, bx1, by0) in ((15, 22, 11), (24, 31, 12), (33, 40, 11)):
+        m.carve(bx0, by0, bx1, 15, "~")
+    m.carve(23, 14, 23, 15, "~")
+    m.carve(32, 14, 32, 15, "~")
+    for (x, y) in ((16, 11), (21, 11), (34, 11), (39, 11), (28, 12)):
+        m.cell(x, y, "R")
+    for (x, y) in ((27, 15), (28, 15), (38, 15)):   # strands of gravel where the road meets the water
+        m.cell(x, y, ".")
     m.carve(21, 17, 34, 30, "~")
     m.draw(["RRRR ", "R..RR", "RR.oR", " RRRR"], 26, 21)   # the island: a skylight on a ledge
     m.carve(14, 12, 14, 14, "~")
@@ -291,6 +301,8 @@ def ring5(stem_suffix="", render=True):
     m.carve(3, 3, 5, 5, ".")                # the rope grotto (the climb up to Ring IV)
     m.carve(43, 43, 46, 45, ".")            # the sinkhole grotto (the drop to Ring VI)
     m.carve(R5_GRATE[0], 30, R5_GRATE[0], 36, ".")   # the grate's tunnel
+    m.carve(R5_SEAL[0], R5_SEAL[1] + 1, R5_SEAL[0] + 4, R5_SEAL[1] + 4, ".")   # Daedalus's floor seal
+    m.no_dress = {(x, y) for x in range(R5_SEAL[0] - 1, R5_SEAL[0] + 7) for y in range(R5_SEAL[1], R5_SEAL[1] + 6)}
     for cells in R5_POOLS.values():
         for (x, y) in cells:
             m.cell(x, y, "o")
@@ -307,8 +319,9 @@ def ring5(stem_suffix="", render=True):
     # Only the loop's crossings, %2, the lake and the one-way grate join them.
     north = band(m, 1, 1, 54, 31, keep=keep_off) - {(x, y) for x in range(18, 38) for y in range(28, 32)}
     north -= {(R5_GRATE[0] + dx, y) for dx in (-1, 0, 1) for y in range(31, 36)}
+    north -= {(x, y) for x in range(R5_SEAL[0] + 5, R5_SEAL[0] + 8) for y in range(R5_SEAL[1], R5_SEAL[1] + 7)}
     south = band(m, 1, 36, 54, 45, keep=keep_off)
-    north_ports = [(18, 7), (37, 7), (19, 20), (19, 27), (36, 20), (36, 28), (43, 15), (12, 31),
+    north_ports = [(R5_SEAL[0] - 1, R5_SEAL[1] + 2), (18, 7), (37, 7), (19, 20), (19, 27), (36, 20), (36, 28), (43, 15), (12, 31),
                    (4, 6), (R5_GRATE[0], 29)]
     south_ports = [(24, 37), (31, 37), (36, 40), (23, 42), (32, 43), (44, 42), (R5_GRATE[0], 37)]
     maze(m, north, seed=55, step=4, origin=(2, 2), braid=0.5, widen=0.15, ports=north_ports)
@@ -425,9 +438,9 @@ def finish_ring5(m, stem_suffix, render):
           flag="FLAG_ICHOR_HIDE_KLEON_RING5")
     for x in (20, 21, 22):
         m.trigger(x, 10, "LabyrinthRing5_EventScript_SceneE", var="VAR_ICHOR_KNOSSA", value=9)
-    m.trigger(*R5_HOLE, "LabyrinthRing5_EventScript_Sinkhole", var="VAR_TEMP_0", value=0)
-    m.trigger(dx_, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_ICHOR_KNOSSA", value=11)
-    m.trigger(dx_ + 1, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_ICHOR_KNOSSA", value=11)
+    m.trigger(*R5_HOLE, "LabyrinthRing5_EventScript_Sinkhole", var="VAR_TEMP_E", value=0)
+    m.trigger(dx_, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_TEMP_E", value=0)
+    m.trigger(dx_ + 1, dy_ + 2, "LabyrinthRing5_EventScript_SouthStair", var="VAR_TEMP_E", value=0)
     # signs: the Titans' notice, the bell, the fresco, the spill, the grate, the island
     m.sign(25, 10, "LabyrinthRing5_EventScript_Notice")
     m.sign(18, 22, "LabyrinthRing5_EventScript_Bell")
@@ -453,6 +466,7 @@ def finish_ring5(m, stem_suffix, render):
         for c in cells:
             m.notes[c] = "pool"
     m.gen += ["call(LabyrinthRing5_EventScript_OnLoadExtra)"]
+    extras_ring5(m)
     if render:
         H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_HOLLOW")
         m.build("labyrinth_ring5" + stem_suffix, starts=[(27, 3)],
@@ -460,7 +474,137 @@ def finish_ring5(m, stem_suffix, render):
                 extra={(43, 16), (35, 38), (13, 31), R5_GRATE},
                 views=[(27, 6), (21, 14), (40, 16), (18, 24), (35, 34), (27, 42), (8, 31), (50, 8), (10, 40)])
         m.write_generated()
+        X.write_extras(m, ROOT)
+        X.report(m, ROOT)
     return m
+
+
+# --------------------------------------------------------------------------
+# The extras: relics the player must use, Daedalus's floor seal, stairs and holes down to
+# treasure, the remains of the lost, an awe moment (design/maps/Labyrinth_System.md)
+# --------------------------------------------------------------------------
+
+def free_spots(m, n, avoid=(), far_from=None):
+    """Dead ends (then wall-side cells) with nothing on them, for the remains."""
+    b = X.busy(m) | set(avoid)
+    start = (m.warps[0]["x"], m.warps[0]["y"] + 1)
+    m.lay()
+    reach = m.reach([start])
+    ends = [c for c in dead_ends(m) if m.T(*c) in ".," and c not in b and c in reach]
+    if far_from:
+        ends.sort(key=lambda c: -(abs(c[0] - far_from[0]) + abs(c[1] - far_from[1])))
+    if len(ends) < n:
+        more = [(x, y) for y in range(2, m.h - 2) for x in range(2, m.w - 2)
+                if m.T(x, y) == "." and (x, y) not in b and (x, y) not in ends and (x, y) in reach
+                and sum(m.walkable_t(x + dx, y + dy) for dx, dy in DIRS) == 2
+                and kit_hash(x, y) % 7 == 0]
+        ends += more
+    return ends[:n]
+
+
+def place_remains(m, prefix, texts, items, avoid=(), far_from=None):
+    spots = free_spots(m, len(texts), avoid, far_from)
+    for i, ((x, y), text) in enumerate(zip(spots, texts)):
+        it = items.get(i)
+        X.remains(m, x, y, prefix, f"{i + 1}", text, *(it if it else (None, None)))
+
+
+R5_REMAINS = [
+    "Bones in a torn tunic of Attic weave. A clay token on a cord: SEVEN OF FOURTEEN.",
+    "A Titan spear, its point blackened in a fire. Bull hair is caked to the haft.\\p"
+    "Someone used this to drive him, not to fight him.",
+    "A bent bronze goad by a cold brazier. Scratched in the wall above:\\p"
+    "HE WON'T RUN TILL HE HURTS. KEEP HIM HURTING. -H.",
+    "A wax tablet in a rotted pack: Day nine. It walks the lake road and weeps.\\p"
+    "I think it weeps. Tomorrow I try the bell.",
+]
+R6_REMAINS = [
+    "A smith's apron on the slag, Kaldera stitching. A note in the pocket:\\p"
+    "They told us the collar was for a mule. No mule needs adamant.",
+    "A Titan bunk-roll and a letter, never sent: Ma, the boss says when the Loom\\p"
+    "stops nobody dies. Not even Gran. I'm doing it for Gran.",
+    "A bronze automaton lies on its face, a rope still knotted round one ankle.\\p"
+    "Its plinth, somewhere above, says: DO NOT UNTIE.",
+]
+R7_REMAINS = [
+    "A girl's sandal, very small, and a string of clay beads.\\p"
+    "Fourteen came down each year, the old songs say. This one danced.",
+    "A name half-cut in the rock: THESE-. The rest is a gouge, as if the cutter was pulled away.",
+    "A Titan's lantern and a scrawl: The priestess's floor won't light.\\p"
+    "Kronos says leave it. The stars do the work below.",
+]
+
+
+def extras_ring5(m):
+    p = "LabyrinthRing5_EventScript_"
+    # Labrys: the Titans chained every way down from their gallery ("Do not go down")
+    for (x, y) in ((18, 7), (37, 7), (20, 11)):
+        X.obstacle(m, x, y, "chain", why="the Titans chained the gallery's ways down")
+    # Bronze Hammer: the loop's two crossings to the dark south are choked with fallen ashlar
+    for (x, y) in ((24, 33), (31, 33)):
+        X.obstacle(m, x, y, "rubble", why="the only ways to the south stair but %2")
+    # Surf + Hammer: the island's skylight ledge, behind a fallen block
+    X.obstacle(m, 27, 22, "rubble", why="the island, reached by Surf across the lake")
+    X.log(m, "Poseidon's Conch: Surf on the lake (Ring IV's chute lands in it; the island)")
+    X.log(m, "Helm of Darkness: stealth past Asterion through the dark south (LABYRINTH §5.4)")
+    X.log(m, "Combination: lure Asterion's charge from a sunlit pool through %1, %2 or %3")
+    X.floor_seal(m, p, "A", "FLAG_TEMP_A", "ITEM_TM_EARTHQUAKE", "FLAG_ICHOR_RING6_SEAL_ITEM",
+                 "the tribute's last cache, sealed by Daedalus against the Titans", at=R5_SEAL)
+    start = (27, 3)
+    X.treasure_stair(m, p, "1", "ITEM_TM_SHADOW_BALL", "FLAG_ICHOR_RING5_POCKET_1",
+                     "a Titan cache the tribute never reached", far_from=start)
+    X.treasure_hole(m, p, "2", "ITEM_RELIC_GOLD", "FLAG_ICHOR_RING5_POCKET_2",
+                    "a sump where old offerings washed down", far_from=start)
+    place_remains(m, p, R5_REMAINS, {3: ("ITEM_FULL_RESTORE", "FLAG_ICHOR_HIDDEN_ITEM_REMAINS_5")}, far_from=start)
+    # the awe: the lake cavern, the first time from the gallery
+    for x in (25, 26, 27, 28, 29, 30):
+        m.trigger(x, 7, p + "Awe", var="VAR_TEMP_4", value=0)
+    m.extra_scripts = getattr(m, "extra_scripts", []) + [
+        "", f"script {p}Awe {{", "    setvar(VAR_TEMP_4, 1)", "    if (var(VAR_ICHOR_KNOSSA) != 9) {", "        end", "    }",
+        "    lockall",
+        '    msgbox(format("The gallery ends at a bronze grate, and beyond it the floor of the world drops away.\\p"'
+        ' "A lake, black and still, fills a cavern older than the palace.\\p"'
+        ' "Shafts of daylight fall through the roof in four places and lie on the water like coins.\\p"'
+        ' "Round the lake runs a paved road. Something heavy is walking it."), MSGBOX_DEFAULT)',
+        "    releaseall", "}"]
+    m.lay()
+
+
+def extras_ring6(m):
+    p = "LabyrinthRing6_EventScript_"
+    X.log(m, "Labrys: the three dials of the Hall of Dials (a combination lock: forge B A B, archive A B A, vault B B A)")
+    X.log(m, "Labrys: the teaching dial opens the hall")
+    X.obstacle(m, 7, 26, "web", why="Hecate's Torch burns the web across the forge corridor")
+    X.obstacle(m, 7, 27, "web", why="a second web behind it")
+    X.log(m, "Horn of Achelous: Waterfall up the falls past the forge, to the ledge (PP Up)")
+    start = (23, 3)
+    X.treasure_stair(m, p, "1", "ITEM_RELIC_CROWN", "FLAG_ICHOR_RING6_POCKET_1",
+                     "the Titans' paymaster hid his share", far_from=start)
+    X.treasure_hole(m, p, "2", "ITEM_PP_MAX", "FLAG_ICHOR_RING6_POCKET_2",
+                    "a cooling pit for bronze, forgotten", far_from=start)
+    rubble_spots = free_spots(m, 2, far_from=(40, 40))
+    for (x, y) in rubble_spots:
+        X.obstacle(m, x, y, "rubble", why="optional: slag fallen across an east cave")
+    place_remains(m, p, R6_REMAINS, {0: ("ITEM_HYPER_POTION", "FLAG_ICHOR_HIDDEN_ITEM_REMAINS_6")}, far_from=start)
+    X.log(m, "Awe: the forge cavern, a magma lake under the falls (Scene G)")
+    m.lay()
+
+
+def extras_ring7(m):
+    p = "LabyrinthRing7_EventScript_"
+    for x in (15, 16):
+        X.obstacle(m, x, 6, "chain", why="the Titans chained the stair down to the dome")
+        X.obstacle(m, x, 8, "web", why="old webs across the way in; Hecate's Torch")
+    X.obstacle(m, 12, 6, "drum", why="a column drum blocks the fresco corridor; the Girdle shifts it")
+    X.log(m, "Combination: three mirrors carry one beam to the crystal (E9), then the crane dance")
+    start = (15, 2)
+    X.treasure_stair(m, p, "1", "ITEM_RELIC_STATUE", "FLAG_ICHOR_RING7_POCKET_1",
+                     "a dancer's shrine, its offerings untouched", far_from=start)
+    X.treasure_hole(m, p, "2", "ITEM_TM_PSYCHIC", "FLAG_ICHOR_RING7_POCKET_2",
+                    "a star-fall pocket under the dome", far_from=start)
+    place_remains(m, p, R7_REMAINS, {0: ("ITEM_MOON_STONE", "FLAG_ICHOR_HIDDEN_ITEM_REMAINS_7")}, far_from=start)
+    X.log(m, "Awe: the dancing floor under the starred dome (Scene I)")
+    m.lay()
 
 
 def lay_dressing(m, seed):
@@ -469,7 +613,7 @@ def lay_dressing(m, seed):
     rng = random.Random(seed)
     for y in range(2, m.h - 2):
         for x in range(2, m.w - 2):
-            if m.T(x, y) != "." or (x, y) in m.deco:
+            if m.T(x, y) != "." or (x, y) in m.deco or (x, y) in getattr(m, "no_dress", ()):
                 continue
             open8 = sum(m.walkable_t(x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)
                         if (dx, dy) != (0, 0))
@@ -775,7 +919,7 @@ def finish_ring6(m, stem_suffix, render):
           local_id="LOCALID_RING6_PRIESTESS")
     # triggers: Scene H at the archive's door, Scene G at the cavern's mouth
     m.trigger(38, 18, "LabyrinthRing6_EventScript_SceneH", var="VAR_TEMP_1", value=0)
-    m.trigger(7, 29, "LabyrinthRing6_EventScript_SceneG", var="VAR_TEMP_1", value=0)
+    m.trigger(7, 29, "LabyrinthRing6_EventScript_SceneG", var="VAR_TEMP_8", value=0)
     # signs and dials
     for bit, (x, y) in R6_DIALS.items():
         m.sign(x, y, f"LabyrinthRing6_EventScript_Dial{bit + 1}")
@@ -806,6 +950,7 @@ def finish_ring6(m, stem_suffix, render):
                                        "THREAD_ANCHOR_RING6_DEEP"],
                          skip={(15, 24), (14, 24), (16, 24), (14, 25), (16, 25), (2, 31)})
     m.gen += ["call(LabyrinthRing6_EventScript_OnLoadExtra)"]
+    extras_ring6(m)
     if render:
         H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_TITAN")
         extra = {(x, y) for bars in R6_BARS.values() for (x, y, _, _) in bars} | set(R6_TEACH_WALL) \
@@ -816,6 +961,8 @@ def finish_ring6(m, stem_suffix, render):
                 extra=extra, blockers=[],
                 views=[(23, 7), (23, 18), (8, 20), (8, 34), (41, 17), (41, 6), (23, 29), (23, 39), (40, 36)])
         m.write_generated()
+        X.write_extras(m, ROOT)
+        X.report(m, ROOT)
         write_bar_script(m)
     return m
 
@@ -886,6 +1033,8 @@ def ring7(stem_suffix="", render=True):
     m.carve(x1_, y1_, x2_, y2_, ".")
     m.carve(x2_, y2_, x3_, y3_, ".")
     m.carve(x3_, R7_CRYSTAL[1], x3_, y3_, ".")
+    m.no_dress = {(x1_, y) for y in range(y1_, y2_ + 1)} | {(x, y2_) for x in range(x2_, x3_ + 1)} \
+        | {(x3_, y) for y in range(R7_CRYSTAL[1], y3_ + 1)}
     # the teaching antechamber (north-east) and the fresco corridor (north-west)
     m.carve(23, 3, 28, 8, "m")
     m.carve(R7_FRESCO[0], 6, R7_FRESCO[0] + 8, 6, "m")
@@ -975,7 +1124,7 @@ def finish_ring7(m, stem_suffix, render):
           flag="FLAG_ICHOR_HIDE_GIGAS_RING7")
     m.obj("ICHOR_TITAN_GRUNT", fx + 3, fy + 2, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_RING7_GIGAS2",
           flag="FLAG_ICHOR_HIDE_GIGAS_RING7")
-    m.obj("ICHOR_PRIESTESS", 13, 11, "LabyrinthRing7_EventScript_Ariadne", move="MOVEMENT_TYPE_FACE_DOWN",
+    m.obj("ICHOR_ARIADNE", 13, 11, "LabyrinthRing7_EventScript_Ariadne", move="MOVEMENT_TYPE_FACE_DOWN",
           local_id="LOCALID_RING7_ARIADNE", flag="FLAG_ICHOR_HIDE_ARIADNE_RING7")
     for x in (15, 16):
         m.trigger(x, 9, "LabyrinthRing7_EventScript_SceneI", var="VAR_ICHOR_KNOSSA", value=14)
@@ -994,13 +1143,128 @@ def finish_ring7(m, stem_suffix, render):
                           ("ITEM_MAX_ETHER", "FLAG_ICHOR_HIDDEN_ITEM_RING7_B")],
                          anchor_names=["THREAD_ANCHOR_RING7_DEEP"])
     m.gen += ["call(LabyrinthRing7_EventScript_OnLoadExtra)"]
+    extras_ring7(m)
     if render:
         H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_HOLLOW")
         m.build("labyrinth_ring7" + stem_suffix, starts=[(15, 2)],
                 must_reach=[(fx + 2, fy + 5, "the dancing floor's south edge"), (12, 19, "the crystal")],
                 views=[(15, 5), (16, 18), (7, 18), (25, 6), (6, 6), (16, 26)])
         m.write_generated()
+        X.write_extras(m, ROOT)
+        X.report(m, ROOT)
         write_dance_script(m)
+    return m
+
+
+# --------------------------------------------------------------------------
+# The Starry Chamber (LABYRINTH §6 the heart, Scene J) and the Icarus Shaft (Scene L)
+# --------------------------------------------------------------------------
+
+def starry(stem_suffix="", render=True):
+    m = H.HeartMap("LabyrinthStarryChamber", "astra", 20, 20)
+    # a round cave, its rock set with crystal stars; a marble floor round the black basin
+    m.draw(["      ........      ",
+            "    ............    ",
+            "   ..............   ",
+            "  ................  ",
+            "  ................  ",
+            " .................. ",
+            " .................. ",
+            " .................. ",
+            " .................. ",
+            " .................. ",
+            " .................. ",
+            "  ................  ",
+            "  ................  ",
+            "   ..............   ",
+            "    ............    ",
+            "      ........      ",
+            "        ....        "], 0, 2)
+    m.carve(4, 5, 15, 14, "m")
+    m.carve(9, 1, 10, 1, ".")                  # Phaedon's hidden stair, north
+    m.carve(9, 18, 10, 18, ".")
+    m.place(9, 1, "stairs", "up_l", solid=False); m.cell(9, 1, "M")
+    m.place(10, 1, "stairs", "up_r", solid=False); m.cell(10, 1, "M")
+    m.place(9, 19, "stairs", "up_l", solid=False); m.cell(9, 19, "M")
+    m.place(10, 19, "stairs", "up_r", solid=False); m.cell(10, 19, "M")
+    # the basin (6 x 3 water of stars) inside the star-clock's ring
+    bx, by = 7, 8
+    P = m.P["basin"]
+    for j in range(3):
+        for i in range(6):
+            part = ("nw" if i == 0 else "ne" if i == 5 else "n") if j == 0 else \
+                   ("sw" if i == 0 else "se" if i == 5 else "s") if j == 2 else \
+                   ("w" if i == 0 else "e" if i == 5 else ["water", "water_b", "water_c", "water_d"][i % 4])
+            m.place(bx + i, by + j, "basin", part, solid=True)
+    for i in range(-1, 7):
+        for j in (-1, 3):
+            part = ("nw" if i == -1 else "ne" if i == 6 else ("h_star" if i % 2 else "h")) if j == -1 else \
+                   ("sw" if i == -1 else "se" if i == 6 else ("h_star" if i % 2 else "h"))
+            m.place(bx + i, by + j, "clock", part, solid=False)
+    for j in range(0, 3):
+        m.place(bx - 1, by + j, "clock", "v_star" if j % 2 else "v", solid=False)
+        m.place(bx + 6, by + j, "clock", "v" if j % 2 else "v_star", solid=False)
+    m.place_block(9, 4, "horns")                 # the pillar Asterion is chained to (9,4)-(9,5)
+    m.place(11, 12, "star_anvil", "l"); m.place(12, 12, "star_anvil", "r")
+    for (x, y) in ((3, 7), (16, 7), (4, 14), (15, 14)):
+        m.place(x, y, "formations", "crystal_a" if x < 10 else "crystal_b", solid=True)
+    m.lay()
+    for y in range(m.h):
+        for x in range(m.w):
+            if m.T(x, y) == "R" and (x, y) not in m.deco and int(m.mid[y, x]) == m.catalog["kit"].get("T|...", -1) \
+                    and kit_hash(x, y) % 3 == 0:
+                m.set(x, y, m.pid("stars", "abcd"[kit_hash(x, y) % 4]), True)
+    m.warp(9, 19, "MAP_LABYRINTH_RING7", 2)       # 0: back up the dance's stair
+    m.warp(10, 19, "MAP_LABYRINTH_RING7", 2)      # 1
+    m.warp(9, 1, "MAP_LABYRINTH_STARRY_CHAMBER", 0)   # 2: Phaedon's stair (sealed behind him)
+    m.warps[-1].update({"_scripted": True})
+    m.header.update({"music": "MUS_ICHOR_REVELATION", "map_type": "MAP_TYPE_UNDERGROUND",
+                     "region_map_section": "MAPSEC_WATER_LABYRINTH", "allow_escaping": False})
+    m.obj("ICHOR_MASK", 11, 11, "0", move="MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_STARRY_KRONOS",
+          flag="FLAG_ICHOR_HIDE_STARRY_CAST")
+    m.obj("ICHOR_WOMAN", 8, 5, "0", move="MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_STARRY_RHEA",
+          flag="FLAG_ICHOR_HIDE_STARRY_CAST")
+    m.obj("SPECIES(ASTERLORN)", 10, 5, "LabyrinthStarryChamber_EventScript_Asterion", move="MOVEMENT_TYPE_FACE_DOWN",
+          local_id="LOCALID_STARRY_ASTERION", flag="FLAG_ICHOR_HIDE_STARRY_CAST")
+    m.objects[-1]["graphics_id"] = "OBJ_EVENT_GFX_SPECIES(ASTERLORN)"
+    m.obj("ICHOR_KLEON", 9, 17, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_STARRY_KLEON",
+          flag="FLAG_ICHOR_HIDE_KLEON_RING5")
+    m.obj("ICHOR_ARIADNE", 10, 17, "0", move="MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_STARRY_ARIADNE",
+          flag="FLAG_ICHOR_HIDE_ARIADNE_RING7")
+    for x in (9, 10):
+        m.trigger(x, 15, "LabyrinthStarryChamber_EventScript_SceneJ", var="VAR_ICHOR_KNOSSA", value=16)
+    m.sign(12, 12, "LabyrinthStarryChamber_EventScript_Anvil")
+    m.sign(9, 8, "LabyrinthStarryChamber_EventScript_Basin")
+    if render:
+        H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_REVELATION")
+        m.build("labyrinth_starry" + stem_suffix, starts=[(9, 18)], views=[(9, 9)])
+    return m
+
+
+def icarus(stem_suffix="", render=True):
+    """A natural chimney straight up to the sky: cave rock either side of a two-cell
+    climb, the light growing toward the top (Scene L is scripted)."""
+    m = H.HeartMap("LabyrinthIcarusShaft", "astra", 10, 40)
+    m.carve(4, 3, 5, 38, ".")
+    for y in range(5, 38, 3):                  # footholds Daedalus cut in the chimney's floor
+        m.carve(4, y, 5, y, "m")
+    for y in range(6, 38, 5):
+        m.carve(3, y, 6, y + 1, ".")            # ledges where the rock steps out
+        m.place(3 if y % 2 else 6, y, "formations", "crystal_a" if y < 20 else "mite_a", solid=True)
+    m.lay()
+    for y in range(0, 4):
+        for x in range(10):
+            m.set(x, y, m.pid("sky", f"s{min(3, y)}"), True)
+    m.set(4, 3, m.pid("sky", "s3"), False)
+    m.set(5, 3, m.pid("sky", "s3"), False)
+    m.warp(4, 38, "MAP_LABYRINTH_ICARUS_SHAFT", 0)
+    m.warps[-1].update({"_scripted": True})
+    m.header.update({"music": "MUS_ICHOR_ROUTE1", "map_type": "MAP_TYPE_UNDERGROUND",
+                     "region_map_section": "MAPSEC_WATER_LABYRINTH", "allow_escaping": False})
+    m.trigger(4, 37, "LabyrinthIcarusShaft_EventScript_Fly", var="VAR_TEMP_0", value=0)
+    if render:
+        H.ensure_map(m.name, m.w, m.h, m.ts, "MUS_ICHOR_ROUTE1")
+        m.build("labyrinth_icarus" + stem_suffix, starts=[(4, 37)], views=[(5, 33), (5, 5)])
     return m
 
 
@@ -1054,7 +1318,7 @@ def kit_hash(x, y):
     return H.kit.h("star", x, y)
 
 
-BUILDERS = {"ring5": ring5, "ring6": ring6, "ring7": ring7}
+BUILDERS = {"ring5": ring5, "ring6": ring6, "ring7": ring7, "starry": starry, "icarus": icarus}
 
 
 def main():

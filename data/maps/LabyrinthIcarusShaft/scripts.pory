@@ -1,1 +1,57 @@
-mapscripts LabyrinthIcarusShaft_MapScripts {}
+// The Icarus Shaft (design/LABYRINTH.md §7, §8 Scene L; SCRIPT.md beat III-3P). Layout:
+// tools/ichor/maps/labyrinth_heart.py (10 x 40, astra): a natural chimney from the workshop
+// to the sky. Scene L's first half (Daedalus at the grate) belongs to the workshop:
+// it calls LabyrinthIcarusShaft_EventScript_SceneL, which plays his lines and warps here.
+// Warp 0: the shaft's foot (arrival).
+
+mapscripts LabyrinthIcarusShaft_MapScripts {
+}
+
+text LabyrinthIcarusShaft_Text_NameDaedalus { "DAEDALUS" }
+
+// The workshop's half of Scene L (LABYRINTH §8 Scene L, word for word).
+script LabyrinthIcarusShaft_EventScript_SceneL {
+    lockall
+    setspeaker(LabyrinthIcarusShaft_Text_NameDaedalus)
+    msgbox(format("The Titan woman left the shaft open too. I don't know why."))
+    msgbox(format("I haven't looked up it in twelve years."))
+    msgbox(format("Would you… I'd like to see someone go up it."))
+    msgbox(format("And come down."), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        msgbox(format("Take your time. I've had twelve years."))
+        msgbox(format("Would you go up it?"), MSGBOX_YESNO)
+    }
+    msgbox(format("Not too high."))
+    msgbox(format("Not too low."))
+    setspeaker(SP_NAME_NONE)
+    warp(MAP_LABYRINTH_ICARUS_SHAFT, 0)
+    waitstate
+    releaseall
+}
+
+// The flight: the camera rises, the light grows, open sky; then the court at dawn.
+script LabyrinthIcarusShaft_EventScript_Fly {
+    lockall
+    setvar(VAR_TEMP_0, 1)
+    setvar(VAR_0x8004, ITEM_DAEDALUS_WINGS)
+    call(EventScript_IchorRelicPose)
+    applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthIcarusShaft_Movement_Rise)
+    waitmovement(0)
+    msgbox(format("The light grows. The rock falls away below you. Open sky."))
+    setspeaker(LabyrinthIcarusShaft_Text_NameDaedalus)
+    msgbox(format("…Good."))
+    msgbox(format("Good."))
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_ICARUS_FLIGHT)
+    setvar(VAR_ICHOR_KNOSSA, 19)
+    setvar(VAR_ICHOR_ACT3, 6)
+    fadescreen(FADE_TO_WHITE)
+    warp(MAP_KNOSSA_PALACE, 31, 23)
+    waitstate
+    releaseall
+}
+
+movement LabyrinthIcarusShaft_Movement_Rise {
+    walk_faster_up * 16
+    walk_faster_up * 16
+}

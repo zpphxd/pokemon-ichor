@@ -31,8 +31,8 @@ mapscripts LabyrinthRing5_MapScripts {
     setvar(VAR_0x8004, 0x258)
     setvar(VAR_0x8005, 0x259)
     special(Ichor_AddThreadFloor)
-    setvar(VAR_0x8004, 0x280)
-    setvar(VAR_0x8005, 0x281)
+    setvar(VAR_0x8004, 0x288)
+    setvar(VAR_0x8005, 0x289)
     special(Ichor_AddThreadFloor)
     setvar(VAR_0x8004, 27)
     setvar(VAR_0x8005, 4)
@@ -50,17 +50,25 @@ mapscripts LabyrinthRing5_MapScripts {
     setvar(VAR_0x8005, 42)
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_SOUTH)
     special(Ichor_AddThreadAnchor)
-    setvar(VAR_0x8004, 16)
-    setvar(VAR_0x8005, 30)
+    setvar(VAR_0x8004, 40)
+    setvar(VAR_0x8005, 17)
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_WEST)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 16)
-    setvar(VAR_0x8005, 32)
+    setvar(VAR_0x8005, 30)
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_EAST)
     special(Ichor_AddThreadAnchor)
-    setvar(VAR_0x8004, 35)
-    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8004, 16)
+    setvar(VAR_0x8005, 32)
     setvar(VAR_0x8006, THREAD_ANCHOR_RING5_DEEP)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 38)
+    setvar(VAR_0x8005, 15)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 22)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
     special(Ichor_AddThreadAnchor)
     setvar(VAR_0x8004, 27)
     setvar(VAR_0x8005, 22)
@@ -85,6 +93,11 @@ mapscripts LabyrinthRing5_MapScripts {
     special(Ichor_AddCrackedWall)
     if (flag(FLAG_ICHOR_RING5_WALL_TREASURE)) { setmetatile(13, 31, 0x258, FALSE) }
     call(LabyrinthRing5_EventScript_OnLoadExtra)
+    if (flag(FLAG_TEMP_A)) {
+        setmetatile(49, 5, METATILE_Mychos_CaveFloor, FALSE)
+    } else {
+        setmetatile(49, 5, METATILE_Mychos_Grate, TRUE)
+    }
     // ---- END GENERATED ----
     }
 }
@@ -295,3 +308,85 @@ script LabyrinthRing5_EventScript_Sinkhole {
 movement LabyrinthRing5_Movement_Vanish {
     set_invisible
 }
+
+// ---- BEGIN GENERATED EXTRAS ----
+
+// Daedalus's floor seal A: the tribute's last cache, sealed by Daedalus against the Titans
+script LabyrinthRing5_EventScript_PlatesA {
+    if (flag(FLAG_TEMP_A)) {
+        end
+    }
+    setvar(VAR_TEMP_9, 0)
+    getobjectxy(LOCALID_LABYRINTHRING5_A_DRUM0, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 45 && var(VAR_0x8008) == 5) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 47 && var(VAR_0x8008) == 5) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    getobjectxy(LOCALID_LABYRINTHRING5_A_DRUM1, CURRENT_POSITION, VAR_0x8007, VAR_0x8008)
+    if (var(VAR_0x8007) == 45 && var(VAR_0x8008) == 5) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_0x8007) == 47 && var(VAR_0x8008) == 5) {
+        addvar(VAR_TEMP_9, 1)
+    }
+    if (var(VAR_TEMP_9) == 2) {
+        lockall
+        setflag(FLAG_TEMP_A)
+        setmetatile(49, 5, METATILE_Mychos_CaveFloor, FALSE)
+        special(DrawWholeMapView)
+        playse(SE_DOOR)
+        msgbox(format("Both plates sink. Bronze clanks deep in the wall, and the grate swings up."), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing5_EventScript_LeverA {
+    lockall
+    msgbox(format("A bronze lever with a double axe for a handle: Daedalus's reset.\pPull it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_CLICK)
+        warpsilent(MAP_LABYRINTH_RING5, 46, 3)
+        waitstate
+    }
+    releaseall
+}
+
+script LabyrinthRing5_EventScript_Hole2 {
+    lockall
+    msgbox(format("The floor is only a crust of flowstone over a hole. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_RING5, 15)
+    waitstate
+    releaseall
+}
+
+script LabyrinthRing5_EventScript_Remains1 {
+    msgbox(format("Bones in a torn tunic of Attic weave. A clay token on a cord: SEVEN OF FOURTEEN."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing5_EventScript_Remains2 {
+    msgbox(format("A Titan spear, its point blackened in a fire. Bull hair is caked to the haft.\pSomeone used this to drive him, not to fight him."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing5_EventScript_Remains3 {
+    msgbox(format("A bent bronze goad by a cold brazier. Scratched in the wall above:\pHE WON'T RUN TILL HE HURTS. KEEP HIM HURTING. -H."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing5_EventScript_Remains4 {
+    msgbox(format("A wax tablet in a rotted pack: Day nine. It walks the lake road and weeps.\pI think it weeps. Tomorrow I try the bell."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing5_EventScript_Awe {
+    setvar(VAR_TEMP_4, 1)
+    if (var(VAR_ICHOR_KNOSSA) != 9) {
+        end
+    }
+    lockall
+    msgbox(format("The gallery ends at a bronze grate, and beyond it the floor of the world drops away.\p" "A lake, black and still, fills a cavern older than the palace.\p" "Shafts of daylight fall through the roof in four places and lie on the water like coins.\p" "Round the lake runs a paved road. Something heavy is walking it."), MSGBOX_DEFAULT)
+    releaseall
+}
+// ---- END GENERATED EXTRAS ----

@@ -4,7 +4,7 @@
   "layout": "LAYOUT_LABYRINTH_STARRY_CHAMBER",
   "music": "MUS_ICHOR_REVELATION",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_PALACE_OF_MINOS",
+  "region_map_section": "MAPSEC_WATER_LABYRINTH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
@@ -14,8 +14,137 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "object_events": [
+    {
+      "local_id": "LOCALID_STARRY_KRONOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MASK",
+      "x": 11,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_STARRY_CAST"
+    },
+    {
+      "local_id": "LOCALID_STARRY_RHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_STARRY_CAST"
+    },
+    {
+      "local_id": "LOCALID_STARRY_ASTERION",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ASTERLORN)",
+      "x": 10,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LabyrinthStarryChamber_EventScript_Asterion",
+      "flag": "FLAG_ICHOR_HIDE_STARRY_CAST"
+    },
+    {
+      "local_id": "LOCALID_STARRY_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 9,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_RING5"
+    },
+    {
+      "local_id": "LOCALID_STARRY_ARIADNE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ARIADNE",
+      "x": 10,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_ICHOR_HIDE_ARIADNE_RING7"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING7",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 10,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING7",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_STARRY_CHAMBER",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 15,
+      "elevation": 3,
+      "var": "VAR_ICHOR_KNOSSA",
+      "var_value": "16",
+      "script": "LabyrinthStarryChamber_EventScript_SceneJ"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 15,
+      "elevation": 3,
+      "var": "VAR_ICHOR_KNOSSA",
+      "var_value": "16",
+      "script": "LabyrinthStarryChamber_EventScript_SceneJ"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthStarryChamber_EventScript_Anvil"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthStarryChamber_EventScript_Basin"
+    }
+  ]
 }

@@ -672,6 +672,18 @@ def common_new(floor_cell):
     f.walk[1] = "X.XX.XXX"
     f.walk[0] = "XXXXXXXX"
     out.append(f)
+    # Daedalus's floor seal: a bronze plate let into the cave floor (a drum pushed onto it
+    # presses it down), walkable
+    pl = Canvas()
+    pl.rect(2, 3, 12, 10, "bk")
+    pl.rect(3, 4, 10, 8, "bz2")
+    pl.rect(3, 4, 10, 1, "bz3")
+    pl.rect(3, 11, 10, 1, "bz1")
+    pl.blit(["3.3", "333", "3.3"], {"3": "bz4"}, 7, 6)   # the labrys stamped on it
+    plate = Piece("plate", 1, 1, ["."], "formations", {"plate": (0, 0)})
+    plate.put(0, 0, {"bottom": floor_cell, "middle": pl.a})
+    plate.behaviors[(0, 0)] = "MB_NORMAL"
+    out.append(plate)
     return out
 
 
