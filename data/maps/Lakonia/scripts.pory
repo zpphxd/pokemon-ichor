@@ -87,7 +87,7 @@ script Lakonia_EventScript_SetUpTown {
                 setobjectmovementtype(LOCALID_LAKONIA_KLEON, MOVEMENT_TYPE_FACE_RIGHT)
                 if (flag(FLAG_ICHOR_ALETHEA_READ_TABLET)) {
                     getplayerxy(VAR_0x8004, VAR_0x8005)
-                    if (var(VAR_0x8004) == 11 && var(VAR_0x8005) == 29) {
+                    if (var(VAR_0x8004) == 11 && var(VAR_0x8005) <= 29) {
                         setvar(VAR_TEMP_0, 2)
                     }
                 }
@@ -510,6 +510,12 @@ script Lakonia_EventScript_RingGap {
     removeobject(LOCALID_LAKONIA_RING_CADET_3)
     removeobject(LOCALID_LAKONIA_RING_CADET_4)
     removeobject(LOCALID_LAKONIA_RING_CADET_5)
+    // the three go to wait by the north road (III-5J)
+    removeobject(LOCALID_LAKONIA_RHEA)
+    call(Lakonia_EventScript_SetUpTown)
+    addobject(LOCALID_LAKONIA_RHEA)
+    addobject(LOCALID_LAKONIA_KLEON)
+    addobject(LOCALID_LAKONIA_ALETHEA)
     setspeaker(SP_NAME_NONE)
     releaseall
 }
