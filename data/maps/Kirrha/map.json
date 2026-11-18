@@ -20,9 +20,9 @@
       "offset": 0
     },
     {
+      "direction": "right",
       "map": "MAP_ROUTE28_SACRED_OLIVES",
-      "offset": -6,
-      "direction": "right"
+      "offset": -6
     }
   ],
   "object_events": [

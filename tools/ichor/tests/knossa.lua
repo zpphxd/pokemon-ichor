@@ -124,6 +124,10 @@ L.start(function()
     L.settle({answers = {"yes"}})
     flag(S.FLAG_LETTER, "Daphne's letter is read on the quay")
     flag(S.FLAG_GYTHEION, "the chapter ends boarding for Gytheion")
-    L.expect(L.mapId() == S.MAP_DECK and knossa() == 20, "the Euploia's deck, VAR_ICHOR_KNOSSA 20")
-    L.shot("aboard_for_gytheion")
+    L.expect(knossa() == 20, "boarding sets VAR_ICHOR_KNOSSA 20")
+    -- the seam into Lakonia: the Euploia's deck plays III-5A and lands at Gytheion
+    L.settle()
+    L.expect(L.mapId() == S.MAP_GYTHEION and L.getFlag(S.FLAG_ARRIVED_GYTHEION),
+        "the Euploia's deck carries on to Gytheion (Lakonia's III-5A)")
+    L.shot("landed_at_gytheion")
 end)
