@@ -324,10 +324,9 @@ script KytheraSkandeia_EventScript_NausiklesCall {
     fadescreen(FADE_TO_BLACK)
     removeobject(LOCALID_SKANDEIA_ALETHEA_CALL)
     setflag(FLAG_ICHOR_HIDE_ALETHEA_CALL)
-    // TODO(act3, Lakonia): hand off to the Lakonia writer's crossing (Route 24)
-    // and Gytheion's arrival, which sets VAR_ICHOR_ACT3 = 7:
-    //   warpsilent(MAP_TRIREME_EUPLOIA_DECK_SOUTH or Route 24's deck scene, ...)
-    fadescreen(FADE_FROM_BLACK)
+    // the Lakonia chapter's crossing: round Malea to Gytheion (beat III-5A, on the deck)
+    warpsilent(MAP_TRIREME_EUPLOIA_DECK, 13, 5)
+    waitstate
     release
 }
 

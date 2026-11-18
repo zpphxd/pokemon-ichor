@@ -2255,6 +2255,204 @@
       "border_filepath": "data/layouts/Nemea_MolorchosHouse/border.bin",
       "blockdata_filepath": "data/layouts/Nemea_MolorchosHouse/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYTHEION",
+      "name": "Gytheion_Layout",
+      "width": 34,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Gytheion",
+      "border_filepath": "data/layouts/Gytheion/border.bin",
+      "blockdata_filepath": "data/layouts/Gytheion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE25_EUROTAS",
+      "name": "Route25_Eurotas_Layout",
+      "width": 28,
+      "height": 50,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Eurotas",
+      "border_filepath": "data/layouts/Route25_Eurotas/border.bin",
+      "blockdata_filepath": "data/layouts/Route25_Eurotas/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA",
+      "name": "Lakonia_Layout",
+      "width": 52,
+      "height": 42,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Lakonia",
+      "border_filepath": "data/layouts/Lakonia/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYTHEION_ASCLEPEION",
+      "name": "Gytheion_Asclepeion_Layout",
+      "width": 16,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaGytheion",
+      "border_filepath": "data/layouts/Gytheion_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/Gytheion_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYTHEION_DYEWORKS",
+      "name": "Gytheion_Dyeworks_Layout",
+      "width": 13,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaGytheion",
+      "border_filepath": "data/layouts/Gytheion_Dyeworks/border.bin",
+      "blockdata_filepath": "data/layouts/Gytheion_Dyeworks/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYTHEION_LYSANDROS_HOUSE",
+      "name": "Gytheion_LysandrosHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaGytheion",
+      "border_filepath": "data/layouts/Gytheion_LysandrosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Gytheion_LysandrosHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYTHEION_TIMAIA_HOUSE",
+      "name": "Gytheion_TimaiaHouse_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaGytheion",
+      "border_filepath": "data/layouts/Gytheion_TimaiaHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Gytheion_TimaiaHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYTHEION_KRANAI_SHRINE",
+      "name": "Gytheion_KranaiShrine_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaGytheion",
+      "border_filepath": "data/layouts/Gytheion_KranaiShrine/border.bin",
+      "blockdata_filepath": "data/layouts/Gytheion_KranaiShrine/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_ASCLEPEION",
+      "name": "Lakonia_Asclepeion_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_CivicLakonia",
+      "border_filepath": "data/layouts/Lakonia_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_AGORA",
+      "name": "Lakonia_Agora_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_CivicLakonia",
+      "border_filepath": "data/layouts/Lakonia_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_LAMPITOS_HOUSE",
+      "name": "Lakonia_LampitosHouse_Layout",
+      "width": 11,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaLakonia",
+      "border_filepath": "data/layouts/Lakonia_LampitosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_LampitosHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_GYLIPPOS_HOUSE",
+      "name": "Lakonia_GylipposHouse_Layout",
+      "width": 7,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaLakonia",
+      "border_filepath": "data/layouts/Lakonia_GylipposHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_GylipposHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_SYSSITION",
+      "name": "Lakonia_Syssition_Layout",
+      "width": 15,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaLakonia",
+      "border_filepath": "data/layouts/Lakonia_Syssition/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_Syssition/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_AGOGE",
+      "name": "Lakonia_Agoge_Layout",
+      "width": 16,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_CivicLakonia",
+      "border_filepath": "data/layouts/Lakonia_Agoge/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_Agoge/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_PALAESTRA",
+      "name": "Lakonia_Palaestra_Layout",
+      "width": 13,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_CivicLakonia",
+      "border_filepath": "data/layouts/Lakonia_Palaestra/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_Palaestra/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_ORTHIA",
+      "name": "Lakonia_Orthia_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_CivicLakonia",
+      "border_filepath": "data/layouts/Lakonia_Orthia/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_Orthia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_CHILON_HOUSE",
+      "name": "Lakonia_ChilonHouse_Layout",
+      "width": 8,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaLakonia",
+      "border_filepath": "data/layouts/Lakonia_ChilonHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_ChilonHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKONIA_LICHAS_HOUSE",
+      "name": "Lakonia_LichasHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_OikiaLakonia",
+      "border_filepath": "data/layouts/Lakonia_LichasHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lakonia_LichasHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

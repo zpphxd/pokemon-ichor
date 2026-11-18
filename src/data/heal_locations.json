@@ -135,6 +135,12 @@
       "y": 8
     },
     {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_25",
+      "map": "MAP_ROUTE25_EUROTAS",
+      "x": 13,
+      "y": 14
+    },
+    {
       "id": "HEAL_LOCATION_DAPHNI",
       "map": "MAP_DAPHNI",
       "x": 18,
@@ -221,6 +227,26 @@
       "map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
       "x": 5,
       "y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_GYTHEION",
+      "map": "MAP_GYTHEION",
+      "x": 7,
+      "y": 13,
+      "respawn_map": "MAP_GYTHEION_ASCLEPEION",
+      "respawn_npc": "LOCALID_GYTHEION_HEALER",
+      "respawn_x": 7,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_LAKONIA",
+      "map": "MAP_LAKONIA",
+      "x": 29,
+      "y": 37,
+      "respawn_map": "MAP_LAKONIA_ASCLEPEION",
+      "respawn_npc": "LOCALID_LAKONIA_HEALER",
+      "respawn_x": 4,
+      "respawn_y": 4
     }
   ]
 }

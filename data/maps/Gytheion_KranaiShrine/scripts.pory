@@ -1,0 +1,77 @@
+// The shrine on Kranai, Gytheion (design/phase4/SCRIPT.md, Part 2): Klymene
+// keeps the islet's little shrine of Aphrodite-of-the-Union. One whitewashed
+// room: two clay doves in the niche, a hundred votive sandals on strings, and a
+// bench under the window that faces Kythera.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (3..4, 6), warps 0 and 1
+// to MAP_GYTHEION warp 4.
+//
+// After the climax (VAR_ICHOR_ACT3 >= 19) she asks her question and gives a
+// Shiny Stone, FLAG_ICHOR_GOT_SHINY_STONE_KRANAI.
+
+mapscripts Gytheion_KranaiShrine_MapScripts {}
+
+text Gytheion_KranaiShrine_Name_Klymene { "KLYMENE" }
+text Gytheion_KranaiShrine_Text_Safe { "A long, safe one" }
+text Gytheion_KranaiShrine_Text_Want { "The one I want" }
+text Gytheion_KranaiShrine_Text_DontKnow { "I don't know yet" }
+
+script Gytheion_KranaiShrine_EventScript_Klymene {
+    lock
+    faceplayer
+    setspeaker(Gytheion_KranaiShrine_Name_Klymene)
+    if (flag(FLAG_ICHOR_GOT_SHINY_STONE_KRANAI)) {
+        msgbox(format("Nobody's fated now, they say. So everyone's a Helen.\p"
+                      "Mind how you choose. Choosing's the whole of it."))
+        release
+        end
+    }
+    msgbox(format("Paris and Helen stopped here. Their first night. Everybody knows that.\p"
+                  "Everybody tells it like she was carried off. Like a sack of barley.\p"
+                  "She chose. Nobody ever tells it that way.\p"
+                  "She chose, and a war came of it."))
+    if (var(VAR_ICHOR_ACT3) < 19) {
+        msgbox(format("Come back when you've chosen something big. I'll have something for you."))
+        release
+        end
+    }
+    msgbox(format("Oh, you have. Look at your face. Something big.\p"
+                  "Nobody's fated now, they say. So everyone's a Helen.\p"
+                  "A question, then.\p"
+                  "Would you rather a long, safe life, or the one you want?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Gytheion_KranaiShrine_Text_Safe,
+                   Gytheion_KranaiShrine_Text_Want, Gytheion_KranaiShrine_Text_DontKnow)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("Sensible. Helen would've hated you. Here."))
+        case 1:
+            msgbox(format("Ha! There she is. Here."))
+        default:
+            msgbox(format("That's the only honest answer anyone's ever given me. Here."))
+    }
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_SHINY_STONE)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(Gytheion_KranaiShrine_Name_Klymene)
+        msgbox(format("Your bag's full. Choose what to leave behind. Then come back."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_SHINY_STONE_KRANAI)
+    setspeaker(Gytheion_KranaiShrine_Name_Klymene)
+    msgbox(format("The acolytes on Kythera use those.\p"
+                  "It makes a foam-born thing grow up."))
+    release
+}
+
+script Gytheion_KranaiShrine_EventScript_Doves {
+    msgbox(format("Two clay doves in the niche, side by side, facing the same way."), MSGBOX_SIGN)
+}
+
+script Gytheion_KranaiShrine_EventScript_Sandals {
+    msgbox(format("A hundred tiny votive sandals hang on strings from the ceiling.\p"
+                  "Couples leave them here when they run away together. They turn in the draft."), MSGBOX_SIGN)
+}
+
+script Gytheion_KranaiShrine_EventScript_Bench {
+    msgbox(format("A bench under the window. From here you can see Kythera, low on the sea."), MSGBOX_SIGN)
+}

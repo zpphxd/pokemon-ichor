@@ -1046,3 +1046,36 @@ const struct Tileset gTileset_Daidaleion =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_OikiaGytheion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaGytheion,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaGytheion,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaGytheion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaGytheion,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaLakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaLakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaLakonia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaLakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaLakonia,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_CivicLakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CivicLakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_CivicLakonia,
+    .metatiles = gMetatiles_PorytilesManaged_CivicLakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicLakonia,
+    .callback = NULL,
+};

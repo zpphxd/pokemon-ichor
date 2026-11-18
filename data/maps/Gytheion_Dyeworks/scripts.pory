@@ -1,0 +1,82 @@
+// The dye-works, Gytheion (design/phase4/SCRIPT.md, Part 2): a stone shed open
+// to the sea at one end, lead vats steaming over low fires, crushed murex in the
+// corner, skeins hanging from the rafters, and one finished hank of true purple
+// on a stool under a cloth.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (5..6, 7), warps 0 and 1
+// to MAP_GYTHEION warp 1.
+//
+// Porphyris's quest: bring her three Shoal Shells (four are hidden around
+// Gytheion's bay) for a King's Rock, FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION. The
+// three shells leave the bag.
+
+mapscripts Gytheion_Dyeworks_MapScripts {}
+
+text Gytheion_Dyeworks_Name_Porphyris { "PORPHYRIS" }
+
+script Gytheion_Dyeworks_EventScript_Porphyris {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Dyeworks_Name_Porphyris)
+    if (flag(FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION)) {
+        msgbox(format("Wear something purple and people step aside.\p"
+                      "Try it. It's very funny."))
+        release
+        end
+    }
+    msgbox(format("Come in, come in. Breathe through your mouth. Everyone does.\p"
+                  "Ten thousand snails for one king's cloak.\p"
+                  "And the Titans took my boats."))
+    checkitem(ITEM_SHOAL_SHELL, 3)
+    if (var(VAR_RESULT) == FALSE) {
+        checkitem(ITEM_SHOAL_SHELL, 1)
+        if (var(VAR_RESULT) == TRUE) {
+            checkitem(ITEM_SHOAL_SHELL, 2)
+            if (var(VAR_RESULT) == TRUE) {
+                msgbox(format("That's two. I said three. I'm a dyer, not a poet. I count."))
+            } else {
+                msgbox(format("That's one. I said three. I'm a dyer, not a poet. I count."))
+            }
+        } else {
+            msgbox(format("Bring me shells. Three good ones.\p"
+                          "The beach has them. Kranai has them. The gulf has plenty."))
+        }
+        release
+        end
+    }
+    msgbox(format("Oh, look at those. Look at that spiral.\p"
+                  "Purple's for kings. I've never met one. They send their servants.\p"
+                  "Here. This is the nearest thing to a crown I've got."))
+    checkitemspace(ITEM_KINGS_ROCK)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Your bag's full, love. Make room, and I'll still be here. I'm always here."))
+        release
+        end
+    }
+    removeitem(ITEM_SHOAL_SHELL, 3)
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_KINGS_ROCK)
+    setflag(FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION)
+    setspeaker(Gytheion_Dyeworks_Name_Porphyris)
+    msgbox(format("Wear something purple and people step aside.\p"
+                  "Try it. It's very funny."))
+    release
+}
+
+script Gytheion_Dyeworks_EventScript_Vat {
+    msgbox(format("A lead vat steaming over a low fire, purple to the brim.\p"
+                  "It smells like the whole sea went off at once."), MSGBOX_SIGN)
+}
+
+script Gytheion_Dyeworks_EventScript_Shells {
+    msgbox(format("A heap of crushed murex shells, gray and white, stained purple at the edges.\p"
+                  "Behind the shed there are heaps more, like snow that never melts."), MSGBOX_SIGN)
+}
+
+script Gytheion_Dyeworks_EventScript_Hank {
+    msgbox(format("A stool, and on it a cloth over something.\p"
+                  "Under the cloth: one hank of wool, true purple. It's worth more than the shed."), MSGBOX_SIGN)
+}
+
+script Gytheion_Dyeworks_EventScript_Skeins {
+    msgbox(format("Skeins of wool hang from the rafters: pink, rose, plum, and one so dark it's nearly black."), MSGBOX_SIGN)
+}

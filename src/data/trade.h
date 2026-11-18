@@ -1399,6 +1399,23 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_GALENYON,
     },
+    // Lysandros's Kynoketos, bored of the harbor (Gytheion, Lysandros's house)
+    [INGAME_TRADE_ICHOR_MALEA] =
+    {
+        .nickname = _("MALEA"),
+        .species = SPECIES_KYNOKETOS,
+        .ivs = {24, 26, 20, 18, 20, 28},
+        .abilityNum = 2,
+        .otId = 41207,
+        .conditions = {30, 5, 5, 20, 5},
+        .personality = 0x91,
+        .heldItem = ITEM_WIDE_LENS,
+        .mailNum = -1,
+        .otName = _("LYSAND"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_KARKITOX,
+    },
     // Ichor: Amnisos (SCRIPT.md Part 2, Polypos's hut). The script casts a second
     // Telkanvil, but Skandeia already trades one, so Polypos's sea-smith is a crab.
     [INGAME_TRADE_ICHOR_TELCHIS] =

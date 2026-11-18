@@ -1,0 +1,804 @@
+// Lakonia (design/phase4/SCRIPT.md, beats III-5D, III-5F, III-5H, III-5I and
+// III-5J; Part 2, "Lakonia"). The map is tools/ichor/maps/lakonia_town.py.
+//
+// Who stands where, by VAR_ICHOR_ACT3 (ON_TRANSITION):
+//   7, before Gylippos: Gylippos and Alethea at the bridge's west end; the
+//      triggers at x 36 run III-5D (VAR_TEMP_1 0)
+//   7, after: Gylippos at the Lesche, Alethea in the agora
+//   8: III-5F, the lane outside Lampito's yard (runs on the frame)
+//   9: Rhea and Kleon in the yard by the well; once Kleon has the Kourodin,
+//      he waits in the ring with the cadets and Brasidas (the gap, VAR_TEMP_2 0)
+//   10: Rhea, Kleon and Alethea by the north road (VAR_TEMP_3 0 runs III-5J);
+//      before that, Alethea at the graves
+// FLAG_TEMP_11..15: the Voice and his helmets in the lane (III-5F only).
+// FLAG_TEMP_16, 17: Kachlex and Plinthos on the stoa's steps, after III-5F.
+// FLAG_TEMP_18..1C: the cadets on the ring's wall (III-5I only).
+
+mapscripts Lakonia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Lakonia_EventScript_SetUpTown)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 1: Lakonia_EventScript_EveryDraft
+        VAR_TEMP_0, 2: Lakonia_EventScript_ItHidYouOnce
+    ]
+}
+
+script Lakonia_EventScript_SetUpTown {
+    setflag(FLAG_ICHOR_VISITED_LAKONIA)
+    setvar(VAR_TEMP_1, 1)
+    setvar(VAR_TEMP_2, 1)
+    setvar(VAR_TEMP_3, 1)
+    setflag(FLAG_TEMP_11)
+    setflag(FLAG_TEMP_12)
+    setflag(FLAG_TEMP_13)
+    setflag(FLAG_TEMP_14)
+    setflag(FLAG_TEMP_15)
+    setflag(FLAG_TEMP_16)
+    setflag(FLAG_TEMP_17)
+    setflag(FLAG_TEMP_18)
+    setflag(FLAG_TEMP_19)
+    setflag(FLAG_TEMP_1A)
+    setflag(FLAG_TEMP_1B)
+    setflag(FLAG_TEMP_1C)
+    setflag(FLAG_ICHOR_HIDE_RHEA_LAKONIA)
+    setflag(FLAG_ICHOR_HIDE_KLEON_LAKONIA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_LAKONIA)
+    setflag(FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA)
+    if (flag(FLAG_ICHOR_LAKONIA_PARTED) || var(VAR_ICHOR_ACT3) < 7) {
+        return
+    }
+    if (flag(FLAG_ICHOR_IAPETOS_LAKONIA_DONE) && var(VAR_ICHOR_ACT3) < 19) {
+        clearflag(FLAG_TEMP_16)
+        clearflag(FLAG_TEMP_17)
+    }
+    switch (var(VAR_ICHOR_ACT3)) {
+        case 7:
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_LAKONIA)
+            if (!flag(FLAG_ICHOR_LAKONIA_ARRIVED)) {
+                setobjectxyperm(LOCALID_LAKONIA_GYLIPPOS, 34, 37)
+                setobjectmovementtype(LOCALID_LAKONIA_GYLIPPOS, MOVEMENT_TYPE_FACE_RIGHT)
+                setobjectxyperm(LOCALID_LAKONIA_ALETHEA, 34, 38)
+                setobjectmovementtype(LOCALID_LAKONIA_ALETHEA, MOVEMENT_TYPE_FACE_RIGHT)
+                setvar(VAR_TEMP_1, 0)
+            }
+        case 8:
+            // III-5F: the Voice in the lane; Rhea, Kleon and Alethea come out with you
+            clearflag(FLAG_TEMP_11)
+            clearflag(FLAG_TEMP_12)
+            clearflag(FLAG_TEMP_13)
+            clearflag(FLAG_TEMP_14)
+            clearflag(FLAG_TEMP_15)
+            clearflag(FLAG_ICHOR_HIDE_RHEA_LAKONIA)
+            clearflag(FLAG_ICHOR_HIDE_KLEON_LAKONIA)
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_LAKONIA)
+            setobjectxyperm(LOCALID_LAKONIA_RHEA, 12, 31)
+            setobjectmovementtype(LOCALID_LAKONIA_RHEA, MOVEMENT_TYPE_FACE_DOWN)
+            setobjectxyperm(LOCALID_LAKONIA_KLEON, 10, 31)
+            setobjectmovementtype(LOCALID_LAKONIA_KLEON, MOVEMENT_TYPE_FACE_DOWN)
+            setobjectxyperm(LOCALID_LAKONIA_ALETHEA, 12, 30)
+            setobjectmovementtype(LOCALID_LAKONIA_ALETHEA, MOVEMENT_TYPE_FACE_DOWN)
+            setvar(VAR_TEMP_0, 1)
+        case 9:
+            clearflag(FLAG_ICHOR_HIDE_RHEA_LAKONIA)
+            clearflag(FLAG_ICHOR_HIDE_KLEON_LAKONIA)
+            if (!flag(FLAG_ICHOR_KLEON_GOT_KOURODIN)) {
+                setobjectxyperm(LOCALID_LAKONIA_KLEON, 12, 31)
+                setobjectmovementtype(LOCALID_LAKONIA_KLEON, MOVEMENT_TYPE_FACE_RIGHT)
+                if (flag(FLAG_ICHOR_ALETHEA_READ_TABLET)) {
+                    getplayerxy(VAR_0x8004, VAR_0x8005)
+                    if (var(VAR_0x8004) == 11 && var(VAR_0x8005) <= 29) {
+                        setvar(VAR_TEMP_0, 2)
+                    }
+                }
+            } else {
+                // III-5I: Kleon waits in the ring, the school on its wall
+                setobjectxyperm(LOCALID_LAKONIA_KLEON, 16, 11)
+                setobjectmovementtype(LOCALID_LAKONIA_KLEON, MOVEMENT_TYPE_FACE_DOWN)
+                clearflag(FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA)
+                clearflag(FLAG_TEMP_18)
+                clearflag(FLAG_TEMP_19)
+                clearflag(FLAG_TEMP_1A)
+                clearflag(FLAG_TEMP_1B)
+                clearflag(FLAG_TEMP_1C)
+                setvar(VAR_TEMP_2, 0)
+            }
+        case 10:
+            // the north road: they wait for you by the herm
+            clearflag(FLAG_ICHOR_HIDE_RHEA_LAKONIA)
+            clearflag(FLAG_ICHOR_HIDE_KLEON_LAKONIA)
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_LAKONIA)
+            setobjectxyperm(LOCALID_LAKONIA_RHEA, 23, 5)
+            setobjectmovementtype(LOCALID_LAKONIA_RHEA, MOVEMENT_TYPE_FACE_RIGHT)
+            setobjectxyperm(LOCALID_LAKONIA_KLEON, 22, 6)
+            setobjectmovementtype(LOCALID_LAKONIA_KLEON, MOVEMENT_TYPE_FACE_RIGHT)
+            setobjectxyperm(LOCALID_LAKONIA_ALETHEA, 23, 7)
+            setobjectmovementtype(LOCALID_LAKONIA_ALETHEA, MOVEMENT_TYPE_FACE_RIGHT)
+            setvar(VAR_TEMP_3, 0)
+    }
+    return
+}
+
+text Lakonia_Text_NameGylippos { "GYLIPPOS" }
+text Lakonia_Text_NameAlethea { "ALETHEA" }
+text Lakonia_Text_NameRhea { "RHEA" }
+text Lakonia_Text_NameKleon { "KLEON" }
+text Lakonia_Text_NameIapetos { "IAPETOS" }
+text Lakonia_Text_NameGration { "GRATION" }
+text Lakonia_Text_NameKachlex { "KACHLEX" }
+text Lakonia_Text_NamePlinthos { "PLINTHOS" }
+text Lakonia_Text_NameBrasidas { "BRASIDAS" }
+text Lakonia_Text_NameCadet { "CADET" }
+text Lakonia_Text_NameElder { "ELDER" }
+text Lakonia_Text_NameMother { "MOTHER" }
+text Lakonia_Text_NameAugur { "AUGUR" }
+text Lakonia_Text_NameHoplite { "HOPLITE" }
+
+text Lakonia_Text_GrationDefeat { format("Fine! Fine. I'm only the doorway.") }
+text Lakonia_Text_IapetosDefeat { format("Hm. That isn't how I'd have written it.") }
+text Lakonia_Text_KleonDefeat { format("…Huh. I lost. And nothing happened. The sky's still there.") }
+text Lakonia_Text_KachlexIntro { format("The Voice ran. We stayed. I don't know why.\pBattle me, so I know I'm doing something.") }
+text Lakonia_Text_KachlexDefeat { format("Yeah. That's about right.") }
+text Lakonia_Text_PlinthosIntro { format("In the golden age, do we still get to eat?\pYou don't know either. Nobody does.") }
+text Lakonia_Text_PlinthosDefeat { format("I'm going to find some bread. Whatever age it is.") }
+
+// ---------------------------------------------------------------------------
+// III-5D. Lakonia: no walls
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    applymovement(LOCALID_LAKONIA_GYLIPPOS, Common_Movement_FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameGylippos)
+    msgbox(format("Kalliste.\p"
+                  "No walls. You noticed. Visitors always notice.\p"
+                  "“Our walls are our men.” Lykourgos said it. We've been saying it since.\p"
+                  "Fewer words. The boy's home.\p"
+                  "West end. His mother's house. The door with the shield over it.\p"
+                  "Three days. He sits. He doesn't eat."))
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("He told the Titans at the port he was here. He wants Iapetos to come.\p"
+                  "Truthfully, I don't think Iapetos goes anywhere himself. He sends people."))
+    setspeaker(Lakonia_Text_NameGylippos)
+    msgbox(format("His mother will come.\pLampito always comes home when it's bad."))
+    closemessage
+    delay(30)
+    msgbox(format("…\pLakonians speak little. Lampito speaks less."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_GYLIPPOS, Lakonia_Movement_GylipposToLesche)
+    waitmovement(0)
+    removeobject(LOCALID_LAKONIA_GYLIPPOS)
+    setobjectxyperm(LOCALID_LAKONIA_GYLIPPOS, 17, 21)
+    setobjectmovementtype(LOCALID_LAKONIA_GYLIPPOS, MOVEMENT_TYPE_FACE_DOWN)
+    addobject(LOCALID_LAKONIA_GYLIPPOS)
+    setflag(FLAG_ICHOR_LAKONIA_ARRIVED)
+    setflag(FLAG_ICHOR_VISITED_LAKONIA)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+movement Lakonia_Movement_GylipposToLesche { walk_left * 6 }
+
+// ---------------------------------------------------------------------------
+// III-5F. Every draft has a next draft
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_EveryDraft {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    playbgm(MUS_ICHOR_TITAN, FALSE)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameIapetos)
+    msgbox(format("There you are. And without your face on. How brave.\p"
+                  "You left the threshold open at Knossa. The master noticed.\p"
+                  "I noticed first. Noticing is most of my work.\p"
+                  "Deserting is a story, Lampito. I've written you a better one.\p"
+                  "You came home to fetch your boy for the muster. Loyal to the end.\p"
+                  "Come to Delphoi, and that's what happened. I'll write it down myself."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("No."))
+    setspeaker(Lakonia_Text_NameIapetos)
+    msgbox(format("And Kleon. Here's a better thread."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("He holds out a fresh wax tablet."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("I just melted the last one. In my mother's fire.\pIt went hiss. It was great."))
+    setspeaker(Lakonia_Text_NameIapetos)
+    msgbox(format("Pity. That was some of my best work."))
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("Keeper Lykophron. You can take the mask off. We know your hand."))
+    setspeaker(Lakonia_Text_NameIapetos)
+    msgbox(format("May I tell you something true?\pI don't wear it for you. I wear it for them."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_IAPETOS, Common_Movement_FaceLeft)
+    waitmovement(0)
+    msgbox(format("They like a face that doesn't change. Most people do.\p"
+                  "Gigas. Bring the deserter. Leave the children."))
+    applymovement(LOCALID_LAKONIA_IAPETOS, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Leave the boy."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("…Who asked you?"))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("His mother."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("Yeah. Fair."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("I'll take the big one. Kleon, the small ones.\pKalliste. The mask."))
+    closemessage
+    // Pallas and the two grunts go for Rhea and Kleon at the gate
+    applymovement(LOCALID_LAKONIA_RHEA, Lakonia_Movement_RheaToGate)
+    applymovement(LOCALID_LAKONIA_KLEON, Lakonia_Movement_KleonToGate)
+    waitmovement(0)
+    playse(SE_M_SAND_ATTACK)
+    removeobject(LOCALID_LAKONIA_RHEA)
+    removeobject(LOCALID_LAKONIA_KLEON)
+    removeobject(LOCALID_LAKONIA_PALLAS)
+    removeobject(LOCALID_LAKONIA_KACHLEX_GATE)
+    removeobject(LOCALID_LAKONIA_PLINTHOS_GATE)
+    waitse
+    applymovement(LOCALID_LAKONIA_GRATION, Lakonia_Movement_GrationSteps)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameGration)
+    msgbox(format("The Voice wants the deserter. You're in the way. That's all you are."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    trainerbattle_no_intro(TRAINER_ICHOR_GIGAS_GRATION, Lakonia_Text_GrationDefeat)
+    applymovement(LOCALID_LAKONIA_GRATION, Lakonia_Movement_GrationAside)
+    waitmovement(0)
+    applymovement(LOCALID_LAKONIA_ALETHEA, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("Hold still. Truthfully, this is every Hyper Potion I own."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_USE_ITEM)
+    special(HealPlayerParty)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Lakonia_Text_NameIapetos)
+    msgbox(format("Well. If nobody else will, I suppose I'll take a turn."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    playbgm(MUS_ICHOR_BATTLE_ADMIN, FALSE)
+    trainerbattle_no_intro(TRAINER_ICHOR_IAPETOS_LAKONIA, Lakonia_Text_IapetosDefeat)
+    setspeaker(Lakonia_Text_NameIapetos)
+    msgbox(format("Beautifully done. I'll write it so you lose, of course. Later.\p"
+                  "Nobody reads the first draft.\p"
+                  "Every draft has a next draft."))
+    closemessage
+    // His Kerdovix flicks its tail across the lane: dust, and he's gone
+    playse(SE_M_SAND_ATTACK)
+    setweather(WEATHER_SANDSTORM)
+    doweather
+    delay(40)
+    removeobject(LOCALID_LAKONIA_IAPETOS)
+    removeobject(LOCALID_LAKONIA_GRATION)
+    resetweather
+    doweather
+    delay(30)
+    fadedefaultbgm
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("He's gone. Of course he is. Nobody's ever caught him.\p"
+                  "Truthfully, I'd like to be the first."))
+    closemessage
+    // Rhea and Kleon come back from the gate; the two Titanborn sit in the dust
+    setobjectxyperm(LOCALID_LAKONIA_RHEA, 12, 33)
+    setobjectxyperm(LOCALID_LAKONIA_KLEON, 11, 33)
+    addobject(LOCALID_LAKONIA_RHEA)
+    addobject(LOCALID_LAKONIA_KLEON)
+    clearflag(FLAG_TEMP_14)
+    clearflag(FLAG_TEMP_15)
+    addobject(LOCALID_LAKONIA_KACHLEX_GATE)
+    addobject(LOCALID_LAKONIA_PLINTHOS_GATE)
+    applymovement(LOCALID_LAKONIA_RHEA, Common_Movement_FaceUp)
+    applymovement(LOCALID_LAKONIA_KLEON, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameKachlex)
+    msgbox(format("The Voice ran. He always runs. We walk."))
+    setspeaker(Lakonia_Text_NamePlinthos)
+    msgbox(format("In the golden age, do we still get to eat? I asked him. Again."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Go home. Both of you."))
+    setspeaker(Lakonia_Text_NamePlinthos)
+    msgbox(format("…Is that an order, Lady Rhea?"))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Advice. From a deserter."))
+    closemessage
+    removeobject(LOCALID_LAKONIA_KACHLEX_GATE)
+    removeobject(LOCALID_LAKONIA_PLINTHOS_GATE)
+    setvar(VAR_ICHOR_ACT3, 9)
+    setflag(FLAG_ICHOR_IAPETOS_LAKONIA_DONE)
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("Come inside a moment. There's something I want to look at by the fire."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_ALETHEA, Lakonia_Movement_AletheaInside)
+    waitmovement(0)
+    removeobject(LOCALID_LAKONIA_ALETHEA)
+    applymovement(LOCALID_LAKONIA_RHEA, Lakonia_Movement_RheaToWell)
+    applymovement(LOCALID_LAKONIA_KLEON, Lakonia_Movement_KleonToWell)
+    waitmovement(0)
+    clearflag(FLAG_TEMP_16)
+    clearflag(FLAG_TEMP_17)
+    addobject(LOCALID_LAKONIA_KACHLEX)
+    addobject(LOCALID_LAKONIA_PLINTHOS)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+movement Lakonia_Movement_RheaToGate { walk_fast_down * 2 }
+movement Lakonia_Movement_KleonToGate { walk_fast_down * 2 }
+movement Lakonia_Movement_GrationSteps { walk_up * 2 face_up }
+movement Lakonia_Movement_GrationAside { walk_left face_right }
+movement Lakonia_Movement_AletheaInside { walk_left walk_up }
+movement Lakonia_Movement_RheaToWell { walk_up walk_up walk_right face_up }
+movement Lakonia_Movement_KleonToWell { walk_up walk_up walk_right face_right }
+
+// ---------------------------------------------------------------------------
+// III-5H. It hid you once
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_ItHidYouOnce {
+    lockall
+    if (var(VAR_TEMP_0) == 2) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Lakonia_Movement_PlayerToWell)
+        waitmovement(0)
+    }
+    setvar(VAR_TEMP_0, 0)
+    applymovement(LOCALID_LAKONIA_RHEA, Common_Movement_FaceLeft)
+    applymovement(LOCALID_LAKONIA_KLEON, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Kleon."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("She holds out a Poké Ball."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Take it."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("That's your Kourodin."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("It hid you once.\pNow it can stand in front of you. In the open."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("…\pFewer words. Right.\p…Thanks, Mother."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_KLEON, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(format("{PLAYER}. Before anything else. Before Delphoi.\p"
+                  "One fight. You and me. The ring at the school.\p"
+                  "No prophecy. No better thread. Nothing written either way.\p"
+                  "I've never had a fight like that. Not once. Not since I was born.\p"
+                  "I'll be at the ring. Come when you're ready."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_KLEON, Lakonia_Movement_KleonRunsToRing)
+    waitmovement(0)
+    removeobject(LOCALID_LAKONIA_KLEON)
+    setflag(FLAG_ICHOR_KLEON_GOT_KOURODIN)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+script Lakonia_EventScript_Rhea {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameRhea)
+    if (var(VAR_ICHOR_ACT3) == 9 && flag(FLAG_ICHOR_ALETHEA_READ_TABLET) && !flag(FLAG_ICHOR_KLEON_GOT_KOURODIN)) {
+        release
+        goto(Lakonia_EventScript_ItHidYouOnce)
+    } elif (var(VAR_ICHOR_ACT3) == 9 && flag(FLAG_ICHOR_KLEON_GOT_KOURODIN)) {
+        msgbox(format("Go on. He's never waited for anything in his life."))
+    } elif (var(VAR_ICHOR_ACT3) == 9) {
+        msgbox(format("Alethea wants you inside. She's got that look.\pHer mother had it. Go on."))
+    } else {
+        msgbox(format("When you're ready."))
+    }
+    release
+}
+
+script Lakonia_EventScript_Kleon {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameKleon)
+    if (var(VAR_ICHOR_ACT3) == 9 && flag(FLAG_ICHOR_ALETHEA_READ_TABLET) && !flag(FLAG_ICHOR_KLEON_GOT_KOURODIN)) {
+        release
+        goto(Lakonia_EventScript_ItHidYouOnce)
+    } elif (var(VAR_ICHOR_ACT3) == 9 && flag(FLAG_ICHOR_KLEON_GOT_KOURODIN)) {
+        msgbox(format("Walk in through the gap. Like a proper challenger. They're all watching."))
+    } elif (var(VAR_ICHOR_ACT3) == 9) {
+        msgbox(format("She's talking. Actual sentences. I keep counting them."))
+    } else {
+        msgbox(format("Ready when you are. Mostly ready."))
+    }
+    release
+}
+
+movement Lakonia_Movement_PlayerToWell { walk_down * 2 face_right }
+movement Lakonia_Movement_KleonRunsToRing { walk_fast_up * 2 walk_fast_left * 3 walk_fast_up * 2 }
+
+// ---------------------------------------------------------------------------
+// III-5I. The ring
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_RingGap {
+    lockall
+    setvar(VAR_TEMP_2, 1)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameCadet)
+    msgbox(format("That's Kleon! The one who ran off with the Titans!"))
+    msgbox(format("He came back! Nobody comes back!"))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Lakonia_Movement_IntoRing)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("You came.\p"
+                  "Look at them. Every boy in the school's here.\p"
+                  "The last time I fought in this ring, I knew how I'd end. Glorious, and dead.\p"
+                  "Now I don't know anything.\p"
+                  "If I lose, I lose. If I win, I win. That's all it is.\p"
+                  "…That's terrifying. Come on."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_NO_WHITEOUT)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_LAKONIA_KYNDER, Lakonia_Text_KleonDefeat)
+        case 1:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_LAKONIA_HIPLING, Lakonia_Text_KleonDefeat)
+        default:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_LAKONIA_NEBREL, Lakonia_Text_KleonDefeat)
+    }
+    clearflag(FLAG_ICHOR_NO_WHITEOUT)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    setspeaker(Lakonia_Text_NameKleon)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        msgbox(format("You know what that was?\p"
+                      "The first fight I've ever had where I didn't know the end.\p"
+                      "I thought it'd feel like falling. It feels like running."))
+    } else {
+        special(HealPlayerParty)
+        msgbox(format("I won! I won. And it doesn't mean anything. Isn't that great?\p"
+                      "Don't look like that. It wasn't written. Next time it might go your way.\p"
+                      "That's the best part. Nobody knows."))
+    }
+    closemessage
+    // Brasidas steps over the wall into the ring; the cadets go silent
+    applymovement(LOCALID_LAKONIA_BRASIDAS, Lakonia_Movement_BrasidasIn)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameBrasidas)
+    msgbox(format("Kleon."))
+    applymovement(LOCALID_LAKONIA_KLEON, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("Polemarch! Sir. You… you saw that?"))
+    setspeaker(Lakonia_Text_NameBrasidas)
+    msgbox(format("Lakonians never asked how long. Only how well.\pWell. Both of you."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_BRASIDAS, Common_Movement_FaceDown)
+    waitmovement(0)
+    msgbox(format("The mountain, Kalliste. When you climb it, I'll be there."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_BRASIDAS, Lakonia_Movement_BrasidasOut)
+    waitmovement(0)
+    removeobject(LOCALID_LAKONIA_BRASIDAS)
+    setflag(FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA)
+    applymovement(LOCALID_LAKONIA_KLEON, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("Brasidas talked to me. He said “well.”\p"
+                  "He said “both of you.” But he looked at me first.\p"
+                  "…Did he look at me first?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("I knew it. I KNEW it."))
+    } else {
+        msgbox(format("You're a terrible friend. Truthfully, as Alethea would say."))
+    }
+    closemessage
+    setvar(VAR_ICHOR_ACT3, 10)
+    setflag(FLAG_ICHOR_KLEON_LAKONIA_DONE)
+    applymovement(LOCALID_LAKONIA_KLEON, Lakonia_Movement_KleonLeavesRing)
+    waitmovement(0)
+    removeobject(LOCALID_LAKONIA_KLEON)
+    removeobject(LOCALID_LAKONIA_RING_CADET_1)
+    removeobject(LOCALID_LAKONIA_RING_CADET_2)
+    removeobject(LOCALID_LAKONIA_RING_CADET_3)
+    removeobject(LOCALID_LAKONIA_RING_CADET_4)
+    removeobject(LOCALID_LAKONIA_RING_CADET_5)
+    // the three go to wait by the north road (III-5J)
+    removeobject(LOCALID_LAKONIA_RHEA)
+    call(Lakonia_EventScript_SetUpTown)
+    addobject(LOCALID_LAKONIA_RHEA)
+    addobject(LOCALID_LAKONIA_KLEON)
+    addobject(LOCALID_LAKONIA_ALETHEA)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+movement Lakonia_Movement_IntoRing { walk_up * 3 face_up }
+movement Lakonia_Movement_BrasidasIn { walk_left * 3 face_left }
+movement Lakonia_Movement_BrasidasOut { walk_right * 3 }
+movement Lakonia_Movement_KleonLeavesRing { walk_left walk_down * 3 }
+
+script Lakonia_EventScript_Brasidas {
+    lock
+    setspeaker(Lakonia_Text_NameBrasidas)
+    msgbox(format("…"))
+    release
+}
+
+script Lakonia_EventScript_RingCadet {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameCadet)
+    msgbox(format("Go on, then! Get in the ring! We've been waiting all morning!"))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// III-5J. The goat paths
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_GoatPaths {
+    lockall
+    setvar(VAR_TEMP_3, 1)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Delphoi.\p"
+                  "Every Titan in Aethos is there. Tents in the laurels. The last muster.\p"
+                  "The master goes down to the Loom when he's ready. He's nearly ready.\p"
+                  "He needs you there. To carry it."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("Then we don't go. Simple. He can't do it without you."))
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("It isn't simple. The cloth runs out anyway. Every thread. The same day.\p"
+                  "If we stay away, it ends in chains. If we go, it ends… some other way."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("He'll wait for you. He's patient. He's a healer.\p"
+                  "The Voice sent helmets to Kalliste. For your mother.\p"
+                  "Leverage. So you'd come down to the Loom for her.\p"
+                  "They came back with nothing. She's cleverer than him."))
+    closemessage
+    delay(30)
+    msgbox(format("We go over Taygetos, by the goat paths. They'll watch the roads for me.\p"
+                  "Not for you. Take the road. Make noise."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("Make noise. That's my best thing.\p"
+                  "…That's your best thing too, now. Go on. Be loud."))
+    setspeaker(Lakonia_Text_NameAlethea)
+    msgbox(format("I'm going with them.\p"
+                  "Someone should write down what a Titan admin does when she changes sides.\p"
+                  "Truthfully, I expect it's mostly walking."))
+    setspeaker(Lakonia_Text_NameRhea)
+    msgbox(format("Kalliste.\pAt Knossa. You were in the hole I didn't seal.\p…Good."))
+    setspeaker(Lakonia_Text_NameKleon)
+    msgbox(format("See you at Delphoi. Don't get there first. I mean it."))
+    closemessage
+    applymovement(LOCALID_LAKONIA_RHEA, Lakonia_Movement_GoatPath)
+    applymovement(LOCALID_LAKONIA_KLEON, Lakonia_Movement_GoatPath)
+    applymovement(LOCALID_LAKONIA_ALETHEA, Lakonia_Movement_GoatPath)
+    waitmovement(0)
+    removeobject(LOCALID_LAKONIA_RHEA)
+    removeobject(LOCALID_LAKONIA_KLEON)
+    removeobject(LOCALID_LAKONIA_ALETHEA)
+    setflag(FLAG_ICHOR_LAKONIA_PARTED)
+    setflag(FLAG_ICHOR_HIDE_RHEA_LAKONIA)
+    setflag(FLAG_ICHOR_HIDE_KLEON_LAKONIA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_LAKONIA)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+movement Lakonia_Movement_GoatPath { walk_left * 4 walk_up * 2 }
+
+script Lakonia_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameAlethea)
+    if (var(VAR_ICHOR_ACT3) == 10) {
+        msgbox(format("We're ready when you are. Rhea says the goats won't wait. I don't think goats wait for anyone."))
+    } elif (flag(FLAG_ICHOR_LAKONIA_ARRIVED)) {
+        msgbox(format("West end. The door with the shield. I'll come in after you.\p"
+                      "Truthfully, I'd rather not be first through that door."))
+    } else {
+        msgbox(format("Truthfully, I walked fast."))
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The doubters, on the stoa's steps (optional, after III-5F)
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_Kachlex {
+    trainerbattle_single(TRAINER_ICHOR_TITANBORN_KACHLEX, Lakonia_Text_KachlexIntro, Lakonia_Text_KachlexDefeat)
+    setspeaker(Lakonia_Text_NameKachlex)
+    msgbox(format("He said in the golden age nobody gets old.\pI asked, do the old stay old? He didn't answer that either."), MSGBOX_AUTOCLOSE)
+}
+
+script Lakonia_EventScript_Plinthos {
+    trainerbattle_single(TRAINER_ICHOR_TITANBORN_PLINTHOS, Lakonia_Text_PlinthosIntro, Lakonia_Text_PlinthosDefeat)
+    setspeaker(Lakonia_Text_NamePlinthos)
+    msgbox(format("Lady Rhea told us to go home. She said it was advice.\pLakonian advice is an order with manners."), MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// Townsfolk
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_Gylippos {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameGylippos)
+    if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+        msgbox(format("Lampito's home. Bare-headed.\p…Hm. Good."))
+    } else {
+        msgbox(format("West end. The shield over the door. Fewer questions."))
+    }
+    release
+}
+
+script Lakonia_EventScript_CountingElder {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameElder)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Sixteen. Two came back. Thin, and very quiet. Sixteen."))
+    } else {
+        msgbox(format("Twelve. Thirteen. Fourteen. …Fourteen.\p"
+                      "There were sixteen in that herd yesterday. Two went north in the night.\p"
+                      "To Delphoi. To the Titans. To live forever.\p"
+                      "We count them every morning now. Lakonia never used to count."))
+    }
+    release
+}
+
+script Lakonia_EventScript_Mother {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameMother)
+    if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+        msgbox(format("Lampito's home. With no helmet. The whole street's pretending not to look."))
+    } else {
+        msgbox(format("My son writes two words. My daughter writes four. She's the talker."))
+    }
+    release
+}
+
+script Lakonia_EventScript_Augur {
+    lock
+    setspeaker(Lakonia_Text_NameAugur)
+    msgbox(format("Birds over Taygetos. Going north, all of them.\pEven the ones that never go north."))
+    release
+}
+
+script Lakonia_EventScript_Cadet {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameCadet)
+    msgbox(format("Can't stop. Running. You can't catch me. Nobody can. Except the eiren."))
+    release
+}
+
+script Lakonia_EventScript_CadetYard {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameCadet)
+    msgbox(format("Girls train too. Ours win. Everybody else's girls stay home. Theirs lose."))
+    release
+}
+
+script Lakonia_EventScript_CadetField {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameCadet)
+    msgbox(format("The Sown Field. Things come up in it. With teeth.\pThe eiren says it's beetles. It isn't beetles."))
+    release
+}
+
+script Lakonia_EventScript_NorthGuard {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameCadet)
+    msgbox(format("The training grounds. North, past the moat. Closed to foreigners.\p"
+                  "Orders. The Polemarch's. If you've got wings, use those."))
+    release
+}
+
+script Lakonia_EventScript_Wrestler {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Text_NameHoplite)
+    msgbox(format("Old Hipposthenes says nobody's thrown him in sixty years.\pThat's because he won't wrestle anybody. Smart man."))
+    release
+}
+
+script Lakonia_EventScript_Nothing {
+    end
+}
+
+// ---------------------------------------------------------------------------
+// Signs and things
+// ---------------------------------------------------------------------------
+
+script Lakonia_EventScript_Enyalios {
+    msgbox(format("A bronze war god, his ankles bound in bronze fetters.\p"
+                  "The plaque: “So that War will never leave Lakonia.”\p"
+                  "Someone has hung a fresh garland on the chain."), MSGBOX_SIGN)
+}
+
+script Lakonia_EventScript_PersianStoa {
+    msgbox(format("The roof is held up by carved men in trousers and tall hats. Persians.\p"
+                  "Lakonia beat them, and made them hold up its porch forever."), MSGBOX_SIGN)
+}
+
+script Lakonia_EventScript_ManiRoad {
+    msgbox(format("THE MANI ROAD. South, to the cape. Closed by order of the elders.\p"
+                  "“Nobody needs to go south.”"), MSGBOX_SIGN)
+}
+
+script Lakonia_EventScript_Menelaion {
+    msgbox(format("A bronze tripod on the ridge, for Helen and Menelaos.\p"
+                  "From up here the town looks like five villages that forgot to build a wall."), MSGBOX_SIGN)
+}
+
+script Lakonia_EventScript_Well {
+    msgbox(format("A well in Lampito's yard. The bucket rope is new."), MSGBOX_SIGN)
+}
+
+// The burial plot beside Lampito's house: prophecy fragment 8 (fixed dig 0x30)
+script Lakonia_EventScript_BurialPlot {
+    lockall
+    if (!flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+        msgbox(format("A little burial plot, kerbed with stones. Two small stelai, and field stones in a row."))
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, 0x30)
+    setvar(VAR_0x8005, ICHOR_FIND_PROPHECY(8))
+    call(EventScript_IchorDigFixed)
+    if (var(VAR_RESULT) == TRUE) {
+        if (!flag(FLAG_ICHOR_LAKONIA_PARTED) && var(VAR_ICHOR_ACT3) >= 9) {
+            setspeaker(Lakonia_Text_NameAlethea)
+            msgbox(format("A question tablet. Somebody asked the Oracle something and kept the answer.\p"
+                          "“Will my last child live long?” That's the question. Scratched in by hand.\p"
+                          "And the answer, cut neat: “Your last child will be glorious young.”\p"
+                          "No hook. No scraping. Nobody's touched it.\p"
+                          "Nobody scraped this one. She just read it wrong."))
+            if (var(VAR_ICHOR_ACT3) == 9) {
+                setspeaker(Lakonia_Text_NameRhea)
+                msgbox(format("Put it back.\p…No. Keep it. I've stopped hiding things in the ground."))
+            }
+        }
+    }
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+// The town's great herm at its main entrance: fast travel between herms
+// (the travel system hooks EventScript_IchorAnointHerm in on merge)
+script Lakonia_EventScript_TownHerm {
+    lockall
+    msgbox(format("The herm of Lakonia. Touch it to travel between herms."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+script Lakonia_EventScript_Leonidas {
+    msgbox(format("A plain stone for a king who never came home.\p"
+                  "LEONIDAS. THE THREE HUNDRED.\p"
+                  "Under it, cut smaller: “Stranger, tell Lakonia we lie here, as she asked.”\p"
+                  "Someone has left a cadet's red cloak folded on top."), MSGBOX_SIGN)
+}
+
+script Lakonia_EventScript_Kaiadas {
+    msgbox(format("Taygetos goes straight up, dark as a storm, a mile over the roofs.\p"
+                  "Somewhere up there is the Kaiadas, the pit. Nobody here says the word.\p"
+                  "The goat paths start where the rock looks most like a wall."), MSGBOX_SIGN)
+}

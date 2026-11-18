@@ -1314,6 +1314,22 @@
 #define METATILE_Stymphalia_HammerRock_Broken        0x366
 // end gTileset_Stymphalia
 
+// Lakonia's rooms (Ichor), written by tools/ichor/maps/lakonia_rooms.py
+#define METATILE_OikiaLakonia_Hearth_Cold_TL         0x225
+#define METATILE_OikiaLakonia_Hearth_Cold_TR         0x226
+#define METATILE_OikiaLakonia_Hearth_Cold_BL         0x22B
+#define METATILE_OikiaLakonia_Hearth_Cold_BR         0x22C
+#define METATILE_OikiaLakonia_Hearth_Lit_TL          0x263
+#define METATILE_OikiaLakonia_Hearth_Lit_TR          0x24D
+#define METATILE_OikiaLakonia_Hearth_Lit_BL          0x264
+#define METATILE_OikiaLakonia_Hearth_Lit_BR          0x251
+#define METATILE_CivicLakonia_Altar_West             0x26A
+#define METATILE_CivicLakonia_Altar_Middle           0x25E
+#define METATILE_CivicLakonia_Altar_East             0x26B
+#define METATILE_CivicLakonia_Altar_Cheese_West      0x25D
+#define METATILE_CivicLakonia_Altar_Cheese_Middle    0x25F
+#define METATILE_CivicLakonia_Altar_Cheese_East      0x260
+// end Lakonia's rooms
 // gTileset_Mychos (Ichor: the Labyrinth's heart), written by tools/ichor/art/mychos_build.py
 #define METATILE_Mychos_CaveFloor            0x258
 #define METATILE_Mychos_SunFloor             0x280

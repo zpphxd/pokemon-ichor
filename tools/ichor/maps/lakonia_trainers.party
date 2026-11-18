@@ -1,0 +1,249 @@
+/* Ichor: Lakonia (ids 410-424; design/phase4/SCRIPT.md Part 3, "Conventions for Lakonia").
+   Pics are placeholders until the class sprites arrive. Cadets use the Lakonian
+   class; Gration, a Giant, fights as Titanborn until a Gigas class exists. */
+
+=== TRAINER_ICHOR_AGIATIS ===
+Name: AGIATIS
+Class: Lakonian
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Hoplomex
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerazap
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TELEKLOS ===
+Name: TELEKLOS
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ISADAS ===
+Name: ISADAS
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHOIBIDAS ===
+Name: PHOIBIDAS
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplektor
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ALPHEIOS ===
+Name: ALPHEIOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_THEODORA ===
+Name: THEODORA
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kalyptor
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ARIMNESTOS ===
+Name: ARIMNESTOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Laolith
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kourodin
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplektor
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_EUTHYMIA ===
+Name: EUTHYMIA
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Gelasable
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaplet
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Stachypter
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GIGAS_GRATION ===
+Name: GRATION
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Belornis
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_IAPETOS_LAKONIA ===
+Name: IAPETOS
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Prosomime
+Level: 52
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Nasty Plot
+- Psychic
+- Sludge Bomb
+- Shadow Ball
+
+Hyphantis
+Level: 52
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sticky Web
+- Throat Chop
+- Sucker Punch
+- Lunge
+
+Pithound
+Level: 53
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Foul Play
+- Psychic
+- Light Screen
+- Yawn
+
+Enigmaw
+Level: 53
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Psychic
+- Future Sight
+- Calm Mind
+
+Kerdovix @ Sitrus Berry
+Level: 54
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Foul Play
+- Parting Shot
+- Detect
+
+=== TRAINER_ICHOR_TITANBORN_KACHLEX ===
+Name: KACHLEX
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TITANBORN_PLINTHOS ===
+Name: PLINTHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Laolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe

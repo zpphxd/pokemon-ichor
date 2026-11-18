@@ -15,7 +15,8 @@
     "gMapGroup_League",
     "gMapGroup_Labyrinth",
     "gMapGroup_Knossa",
-    "gMapGroup_Gulf"
+    "gMapGroup_Gulf",
+    "gMapGroup_Lakonia"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -254,5 +255,25 @@
     "Kirrha_PilgrimsHostel",
     "Aigion_Homarion",
     "Route9_KorykianCave"
+  ],
+  "gMapGroup_Lakonia": [
+    "Gytheion",
+    "Route25_Eurotas",
+    "Lakonia",
+    "Gytheion_Asclepeion",
+    "Gytheion_Dyeworks",
+    "Gytheion_LysandrosHouse",
+    "Gytheion_TimaiaHouse",
+    "Gytheion_KranaiShrine",
+    "Lakonia_Asclepeion",
+    "Lakonia_Agora",
+    "Lakonia_LampitosHouse",
+    "Lakonia_GylipposHouse",
+    "Lakonia_Syssition",
+    "Lakonia_Agoge",
+    "Lakonia_Palaestra",
+    "Lakonia_Orthia",
+    "Lakonia_ChilonHouse",
+    "Lakonia_LichasHouse"
   ]
 }

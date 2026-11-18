@@ -1,0 +1,182 @@
+// The sanctuary of Artemis Orthia, Lakonia (design/phase4/SCRIPT.md, Part 2): a
+// small temple court on the marshy river bank, willows growing up to the steps,
+// the goddess's wooden image bound upright in willow, and the long stone altar
+// set with round cheeses. Kleta keeps it.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (7..8, 10), warps 0 and 1
+// to MAP_LAKONIA warp 7.
+//
+// The cheese game (SYSTEMS §12's sight rule, as coord triggers): Kleta starts it
+// (VAR_TEMP_1 = 1). Two cadets watch the court: the west one, at (2,4), looks
+// east along the front of the altar (row 4, x 3..10); the east one, at (12,6),
+// looks west across the court (row 6, x 4..11). Step on a watched tile and
+// you're walked back to the gate, and the cheeses go back on the altar (a warp
+// clears the temp state). The way in is behind the watchers: round the west one
+// (x 1, behind his back) or the east one (x 13), and take the cheeses from
+// behind the altar (row 2). Three cheeses (FLAG_TEMP_1..3, VAR_TEMP_2 counts):
+// a Scope Lens, FLAG_ICHOR_GOT_SCOPE_LENS.
+
+mapscripts Lakonia_Orthia_MapScripts {}
+
+text LakoniaOrthia_Name_Kleta { "KLETA" }
+text LakoniaOrthia_Name_Cadet { "CADET" }
+
+script LakoniaOrthia_EventScript_Kleta {
+    lock
+    faceplayer
+    setspeaker(LakoniaOrthia_Name_Kleta)
+    if (flag(FLAG_ICHOR_GOT_SCOPE_LENS)) {
+        msgbox(format("Artemis was pleased. She's a hunter. She likes a quiet foot.\p"
+                      "Leave the cheeses. The boys need something to guard."))
+        release
+        end
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        if (var(VAR_TEMP_2) >= 3) {
+            msgbox(format("Three! And not one of them saw you. Artemis is pleased. She's a hunter.\p"
+                          "Take this. For seeing what's there before it sees you."))
+            setspeaker(SP_NAME_NONE)
+            giveitem(ITEM_SCOPE_LENS)
+            if (var(VAR_RESULT) == FALSE) {
+                setspeaker(LakoniaOrthia_Name_Kleta)
+                msgbox(format("Your bag's full. Go and empty it. The goddess can wait. She's good at it."))
+                release
+                end
+            }
+            setflag(FLAG_ICHOR_GOT_SCOPE_LENS)
+            setvar(VAR_TEMP_1, 0)
+            release
+            end
+        }
+        msgbox(format("Go on, then. Three cheeses. Don't be seen."))
+        release
+        end
+    }
+    msgbox(format("The goddess likes boys to be quick and girls to be quicker. Want to try?\p"
+                  "Three cheeses on the altar. Two cadets watching. Don't be seen.\p"
+                  "In my grandmother's day they used whips. We use looking. It's worse."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("No? Sensible. The cheeses are very old."))
+        release
+        end
+    }
+    setvar(VAR_TEMP_1, 1)
+    setvar(VAR_TEMP_2, 0)
+    msgbox(format("Go. The goddess is watching too. She doesn't count."))
+    release
+}
+
+script LakoniaOrthia_EventScript_WatcherWest {
+    lock
+    setspeaker(LakoniaOrthia_Name_Cadet)
+    msgbox(format("I'm watching the altar. Don't distract me. Hey. You're distracting me."))
+    release
+}
+
+script LakoniaOrthia_EventScript_WatcherEast {
+    lock
+    setspeaker(LakoniaOrthia_Name_Cadet)
+    msgbox(format("Nobody gets past me. Except the last six. They were very quiet."))
+    release
+}
+
+script LakoniaOrthia_EventScript_Image {
+    msgbox(format("Orthia: the goddess's wooden image, small and dark, bound upright in willow withies.\p"
+                  "It was found in a willow thicket, standing. That's what Orthia means: upright."), MSGBOX_SIGN)
+}
+
+script LakoniaOrthia_EventScript_CheeseWest {
+    if (flag(FLAG_TEMP_1)) {
+        msgbox(format("The altar's bare here now."), MSGBOX_SIGN)
+        end
+    }
+    if (var(VAR_TEMP_1) != 1) {
+        msgbox(format("A round cheese on the long altar, an offering to Artemis. Hands off."), MSGBOX_SIGN)
+        end
+    }
+    lockall
+    setflag(FLAG_TEMP_1)
+    setmetatile(5, 3, METATILE_CivicLakonia_Altar_West, TRUE)
+    goto(LakoniaOrthia_EventScript_TookCheese)
+}
+
+script LakoniaOrthia_EventScript_CheeseMiddle {
+    if (flag(FLAG_TEMP_2)) {
+        msgbox(format("The altar's bare here now."), MSGBOX_SIGN)
+        end
+    }
+    if (var(VAR_TEMP_1) != 1) {
+        msgbox(format("A round cheese on the long altar, an offering to Artemis. Hands off."), MSGBOX_SIGN)
+        end
+    }
+    lockall
+    setflag(FLAG_TEMP_2)
+    setmetatile(7, 3, METATILE_CivicLakonia_Altar_Middle, TRUE)
+    goto(LakoniaOrthia_EventScript_TookCheese)
+}
+
+script LakoniaOrthia_EventScript_CheeseEast {
+    if (flag(FLAG_TEMP_3)) {
+        msgbox(format("The altar's bare here now."), MSGBOX_SIGN)
+        end
+    }
+    if (var(VAR_TEMP_1) != 1) {
+        msgbox(format("A round cheese on the long altar, an offering to Artemis. Hands off."), MSGBOX_SIGN)
+        end
+    }
+    lockall
+    setflag(FLAG_TEMP_3)
+    setmetatile(9, 3, METATILE_CivicLakonia_Altar_East, TRUE)
+    goto(LakoniaOrthia_EventScript_TookCheese)
+}
+
+script LakoniaOrthia_EventScript_TookCheese {
+    special(DrawWholeMapView)
+    playse(SE_RG_BAG_POCKET)
+    addvar(VAR_TEMP_2, 1)
+    if (var(VAR_TEMP_2) >= 3) {
+        msgbox(format("{PLAYER} lifted the last cheese. It's heavier than it looks.\p"
+                      "Back to Kleta. Quietly."))
+    } else {
+        msgbox(format("{PLAYER} lifted a cheese off the altar, very quietly."))
+    }
+    releaseall
+    end
+}
+
+script LakoniaOrthia_EventScript_SeenWest {
+    lockall
+    applymovement(LOCALID_ORTHIA_WATCHER_W, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    goto(LakoniaOrthia_EventScript_Seen)
+}
+
+script LakoniaOrthia_EventScript_SeenEast {
+    lockall
+    applymovement(LOCALID_ORTHIA_WATCHER_E, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    goto(LakoniaOrthia_EventScript_Seen)
+}
+
+script LakoniaOrthia_EventScript_Seen {
+    setspeaker(LakoniaOrthia_Name_Cadet)
+    msgbox(format("Seen! Back to the steps. Cheeses on the altar."))
+    setspeaker(SP_NAME_NONE)
+    closemessage
+    warpsilent(MAP_LAKONIA_ORTHIA, 7, 9)
+    waitstate
+    releaseall
+    end
+}
+
+// civic_lakonia_build: begin generated
+
+// Written by tools/ichor/art/civic_lakonia_build.py; don't edit by hand.
+
+script LakoniaOrthia_EventScript_AltarBare {
+    setmetatile(5, 3, 0x26A, TRUE)
+    setmetatile(7, 3, 0x25E, TRUE)
+    setmetatile(9, 3, 0x26B, TRUE)
+    return
+}
+
+// civic_lakonia_build: end generated
