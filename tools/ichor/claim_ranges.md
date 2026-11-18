@@ -183,5 +183,12 @@ by the director. Trainer ids 300–327 are the director's reserve.
 
 Lakonia (2026-11-17): bank flags used 0x9F0-0xA1A and 0xA20-0xA33 (the
 rooms' households 0xA20-0xA2A); trainer ids 410-424 all used; fixed dig
-index 0x30 is fragment 8 in Lampito's burial plot. Route 26, Lake Stymphalia
-and Route 27 are unbuilt and need their own range.
+index 0x30 is fragment 8 in Lampito's burial plot.
+
+The road north from Lakonia (2026-11-18, `tools/ichor/maps/stymphalia.py`:
+Route 26, Lake Stymphalia, Route 27 and the Skiritai cave) claims from
+world-act3's own blocks: bankflag offsets 0x640-0x67F (0x640-0x670 used; the
+generator claims each flag it names with `claim.py --range 0x640-0x6BF`, so
+reruns are no-ops), trainer ids 1404-1443 (1404-1434 used; `TRAINERS_END_ACT3`
+follows the highest), brazier `FLAG_ICHOR_BRAZIERS_START + 0x60` (the cave),
+and travel herm 24 (`TOWN_HERM_STYMPHALIA`, the old `FLAG_ICHOR_TOWN_HERM_SPARE_24`).

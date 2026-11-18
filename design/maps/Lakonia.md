@@ -16,7 +16,7 @@ Doors (the rooms' contract): 0 Asclepeion, 1 Agora, 2 Lampito, 3 Gylippos, 4 sys
 
 **Gates and hooks:**
 - The Mani road south (Route 31 to Cape Tainaron): roped, post-game (UNDERWORLD).
-- The north road (Route 26, Lake Stymphalia, Route 27 to Arkadia): roped with a cadet on guard until those maps exist; Route 26 is not built. The north strip is not yet aethos-only; whoever builds Route 26 agrees it.
+- The north road (Route 26, Lake Stymphalia, Route 27 to Arkadia; `design/maps/Route26_Skiritis.md`): two cypress gateposts and a cadet in the gap until III-5J; once `FLAG_ICHOR_LAKONIA_PARTED` is set he steps aside to (26, 2) and the road is Route 26 (connection up, offset 9). The top six rows keep to aethos over x 15-35, the camera's reach from Route 26's seam (`NORTH_STRIP` in `lakonia_town.py`): the north woods now run west to the agoge's spur, the spur ends at x 14, and the Sown Field sits a row lower.
 - The Menelaion across the river (Conch): a Rare Candy and a hidden Star Piece.
 - The cleft behind the agoge's yard (Bronze Hammer): a Focus Band.
 - Prophecy fragment 8 in the burial plot (fixed dig index 0x30, from III-5E on).

@@ -45,6 +45,12 @@ script Lakonia_EventScript_SetUpTown {
     setflag(FLAG_ICHOR_HIDE_KLEON_LAKONIA)
     setflag(FLAG_ICHOR_HIDE_ALETHEA_LAKONIA)
     setflag(FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA)
+    if (flag(FLAG_ICHOR_LAKONIA_PARTED)) {
+        // III-5J is done: the cadet steps out of the north gap, and the road
+        // north is Route 26 (tools/ichor/maps/stymphalia.py)
+        setobjectxyperm(LOCALID_LAKONIA_NORTH_GUARD, 26, 2)
+        setobjectmovementtype(LOCALID_LAKONIA_NORTH_GUARD, MOVEMENT_TYPE_FACE_LEFT)
+    }
     if (flag(FLAG_ICHOR_LAKONIA_PARTED) || var(VAR_ICHOR_ACT3) < 7) {
         return
     }
@@ -706,6 +712,12 @@ script Lakonia_EventScript_NorthGuard {
     lock
     faceplayer
     setspeaker(Lakonia_Text_NameCadet)
+    if (flag(FLAG_ICHOR_LAKONIA_PARTED)) {
+        msgbox(format("The Polemarch says you're to have the road. Route 26.\p"
+                      "Past the training grounds, over the Skiritis, then Stymphalia. Mind the birds."))
+        release
+        end
+    }
     msgbox(format("The training grounds. North, past the moat. Closed to foreigners.\p"
                   "Orders. The Polemarch's. If you've got wings, use those."))
     release

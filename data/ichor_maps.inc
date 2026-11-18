@@ -222,3 +222,7 @@
 	.include "data/maps/Ascent_IcefallDeep/scripts.inc"
 	.include "data/maps/Ascent_CrystalVault/scripts.inc"
 	.include "data/maps/Ascent_Glacier/scripts.inc"
+	.include "data/maps/Route26_Skiritis/scripts.inc"
+	.include "data/maps/LakeStymphalia/scripts.inc"
+	.include "data/maps/Route27_ArkadianHills/scripts.inc"
+	.include "data/maps/Route27_SkiritaiCave/scripts.inc"

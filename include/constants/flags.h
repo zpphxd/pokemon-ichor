@@ -2015,7 +2015,7 @@
 #define FLAG_ICHOR_TOWN_HERM_SACRED_OLIVES      (FLAG_ICHOR_GENERAL_START + 0x4B5) // Ichor: the Sacred Olives (Route 28)'s travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_SACRED_OLIVES)
 #define FLAG_ICHOR_TOWN_HERM_DELPHOI            (FLAG_ICHOR_GENERAL_START + 0x4B6) // Ichor: Delphoi's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_DELPHOI)
 #define FLAG_ICHOR_TOWN_HERM_ASCENT             (FLAG_ICHOR_GENERAL_START + 0x4B7) // Ichor: the Ascent camp's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_ASCENT)
-#define FLAG_ICHOR_TOWN_HERM_SPARE_24           (FLAG_ICHOR_GENERAL_START + 0x4B8) // Ichor: travel herm 24, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_STYMPHALIA        (FLAG_ICHOR_GENERAL_START + 0x4B8) // Ichor: Lake Stymphalia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_STYMPHALIA)
 #define FLAG_ICHOR_TOWN_HERM_SPARE_25           (FLAG_ICHOR_GENERAL_START + 0x4B9) // Ichor: travel herm 25, kept for the next town: rename it (engine, SYSTEMS §4)
 #define FLAG_ICHOR_TOWN_HERM_SPARE_26           (FLAG_ICHOR_GENERAL_START + 0x4BA) // Ichor: travel herm 26, kept for the next town: rename it (engine, SYSTEMS §4)
 #define FLAG_ICHOR_TOWN_HERM_SPARE_27           (FLAG_ICHOR_GENERAL_START + 0x4BB) // Ichor: travel herm 27, kept for the next town: rename it (engine, SYSTEMS §4)
@@ -2286,6 +2286,56 @@
 #define FLAG_ICHOR_TRETOS_RUBBLE                (FLAG_ICHOR_GENERAL2_START + 0x138) // Ichor: Tretos rubble broken (Hammer)
 #define FLAG_ICHOR_R13_RUBBLE                   (FLAG_ICHOR_GENERAL2_START + 0x139) // Ichor: Route 13 hermit's cell rubble broken
 #define FLAG_ICHOR_R14_RUBBLE                   (FLAG_ICHOR_GENERAL2_START + 0x13A) // Ichor: Route 14 gully rubble broken
+#define FLAG_ICHOR_HIDE_R26_PHOIBAION_ROCK      (FLAG_ICHOR_GENERAL2_START + 0x140) // Ichor: Stymphalia road: the Phoibaion's rock broken
+#define FLAG_ICHOR_HIDE_R26_THICKET             (FLAG_ICHOR_GENERAL2_START + 0x141) // Ichor: Stymphalia road: the terrace thicket cut
+#define FLAG_ICHOR_ITEM_R26_PHOIBAION           (FLAG_ICHOR_GENERAL2_START + 0x142) // Ichor: Stymphalia road: the honey on the Phoibaion's step
+#define FLAG_ICHOR_ITEM_R26_THICKET             (FLAG_ICHOR_GENERAL2_START + 0x143) // Ichor: Stymphalia road: behind the terrace thicket
+#define FLAG_ICHOR_ITEM_R26_MOAT                (FLAG_ICHOR_GENERAL2_START + 0x144) // Ichor: Stymphalia road: the moat's islet (the Conch)
+#define FLAG_ICHOR_ITEM_R26_MEADOW              (FLAG_ICHOR_GENERAL2_START + 0x145) // Ichor: Stymphalia road: the scouts' meadow
+#define FLAG_ICHOR_ITEM_R26_TERRACE             (FLAG_ICHOR_GENERAL2_START + 0x146) // Ichor: Stymphalia road: the terrace's foot
+#define FLAG_ICHOR_HIDDEN_ITEM_R26_PLANE        (FLAG_ICHOR_GENERAL2_START + 0x147) // Ichor: Stymphalia road: under the island's biggest plane
+#define FLAG_ICHOR_HIDDEN_ITEM_R26_BROOK        (FLAG_ICHOR_GENERAL2_START + 0x148) // Ichor: Stymphalia road: the brook below the Phoibaion
+#define FLAG_ICHOR_HIDDEN_ITEM_R26_SILL         (FLAG_ICHOR_GENERAL2_START + 0x149) // Ichor: Stymphalia road: the track's starting sill
+#define FLAG_ICHOR_HIDDEN_ITEM_R26_NICHE        (FLAG_ICHOR_GENERAL2_START + 0x14A) // Ichor: Stymphalia road: Dienekes's rock
+#define FLAG_ICHOR_HIDDEN_ITEM_R26_HERM         (FLAG_ICHOR_GENERAL2_START + 0x14B) // Ichor: Stymphalia road: behind the herm
+#define FLAG_ICHOR_HEARD_LERNIP_RUMOR           (FLAG_ICHOR_GENERAL2_START + 0x14C) // Ichor: Stymphalia road: Akanthis told the deep reeds' rumor (SCRIPT Part 4)
+#define FLAG_ICHOR_STYMPHALIA_FLOCK_ROSE        (FLAG_ICHOR_GENERAL2_START + 0x14D) // Ichor: Stymphalia road: the bronze flock rose over the causeway
+#define FLAG_ICHOR_HIDE_STYM_NEST_REEDS         (FLAG_ICHOR_GENERAL2_START + 0x14E) // Ichor: Stymphalia road: the nests' choking reeds cut
+#define FLAG_ICHOR_ITEM_STYM_ISLET              (FLAG_ICHOR_GENERAL2_START + 0x14F) // Ichor: Stymphalia road: islet one's reeds
+#define FLAG_ICHOR_ITEM_STYM_FAR_ROCK           (FLAG_ICHOR_GENERAL2_START + 0x150) // Ichor: Stymphalia road: the far rock (the Conch)
+#define FLAG_ICHOR_ITEM_STYM_NESTS              (FLAG_ICHOR_GENERAL2_START + 0x151) // Ichor: Stymphalia road: in the reed-bed nests (the Sickle)
+#define FLAG_ICHOR_ITEM_STYM_WEST_SHORE         (FLAG_ICHOR_GENERAL2_START + 0x152) // Ichor: Stymphalia road: the west shore's corner
+#define FLAG_ICHOR_ITEM_STYM_DEEP_REEDS         (FLAG_ICHOR_GENERAL2_START + 0x153) // Ichor: Stymphalia road: the deep reeds' islet
+#define FLAG_ICHOR_HIDDEN_ITEM_STYM_HUT         (FLAG_ICHOR_GENERAL2_START + 0x154) // Ichor: Stymphalia road: under Akanthis's stilt hut
+#define FLAG_ICHOR_HIDDEN_ITEM_STYM_DEEP_END    (FLAG_ICHOR_GENERAL2_START + 0x155) // Ichor: Stymphalia road: the deep reeds' end
+#define FLAG_ICHOR_HIDDEN_ITEM_STYM_ROOST       (FLAG_ICHOR_GENERAL2_START + 0x156) // Ichor: Stymphalia road: a bronze feather at the roost's foot
+#define FLAG_ICHOR_HIDDEN_ITEM_STYM_NEST_EGG    (FLAG_ICHOR_GENERAL2_START + 0x157) // Ichor: Stymphalia road: an old egg in the nests
+#define FLAG_ICHOR_HIDDEN_ITEM_STYM_CAUSEWAY    (FLAG_ICHOR_GENERAL2_START + 0x158) // Ichor: Stymphalia road: the causeway's foot
+#define FLAG_ICHOR_R27_LOOKOUT_PLANK            (FLAG_ICHOR_GENERAL2_START + 0x159) // Ichor: Stymphalia road: the lookout's drums sat on both sills; the plank is down
+#define FLAG_ICHOR_ITEM_R27_TM_STONE_EDGE       (FLAG_ICHOR_GENERAL2_START + 0x15A) // Ichor: Stymphalia road: the watchtower's parapet (the Girdle)
+#define FLAG_ICHOR_ITEM_R27_EYRIE               (FLAG_ICHOR_GENERAL2_START + 0x15B) // Ichor: Stymphalia road: the pinnacle's nest (the Wings)
+#define FLAG_ICHOR_ITEM_R27_BASIN               (FLAG_ICHOR_GENERAL2_START + 0x15C) // Ichor: Stymphalia road: the basin above the cascade (the Horn)
+#define FLAG_ICHOR_ITEM_R27_CRACK               (FLAG_ICHOR_GENERAL2_START + 0x15D) // Ichor: Stymphalia road: the ledge in the ravine (the Thread)
+#define FLAG_ICHOR_ITEM_R27_HIGH_LEDGE          (FLAG_ICHOR_GENERAL2_START + 0x15E) // Ichor: Stymphalia road: the high ledge up the cut stair
+#define FLAG_ICHOR_ITEM_R27_CACHE               (FLAG_ICHOR_GENERAL2_START + 0x15F) // Ichor: Stymphalia road: the Titans' cache (the Helm)
+#define FLAG_ICHOR_ITEM_R27_TERRACE             (FLAG_ICHOR_GENERAL2_START + 0x160) // Ichor: Stymphalia road: the scouts' terrace
+#define FLAG_ICHOR_ITEM_R27_MEADOW              (FLAG_ICHOR_GENERAL2_START + 0x161) // Ichor: Stymphalia road: the west meadow's corner
+#define FLAG_ICHOR_HIDDEN_ITEM_R27_TOWER_FOOT   (FLAG_ICHOR_GENERAL2_START + 0x162) // Ichor: Stymphalia road: the watchtower's foot
+#define FLAG_ICHOR_HIDDEN_ITEM_R27_WALNUT       (FLAG_ICHOR_GENERAL2_START + 0x163) // Ichor: Stymphalia road: under the walnut nearest the spring
+#define FLAG_ICHOR_HIDDEN_ITEM_R27_CACHE        (FLAG_ICHOR_GENERAL2_START + 0x164) // Ichor: Stymphalia road: the cache's back wall
+#define FLAG_ICHOR_HIDDEN_ITEM_R27_TERRACE      (FLAG_ICHOR_GENERAL2_START + 0x165) // Ichor: Stymphalia road: the terrace's corner
+#define FLAG_ICHOR_HIDDEN_ITEM_R27_PINES        (FLAG_ICHOR_GENERAL2_START + 0x166) // Ichor: Stymphalia road: the pines at the top of the pass
+#define FLAG_ICHOR_HIDE_SKIRITAI_RUBBLE         (FLAG_ICHOR_GENERAL2_START + 0x167) // Ichor: Stymphalia road: the cave's gallery rubble broken
+#define FLAG_ICHOR_HIDE_SKIRITAI_CHAINS         (FLAG_ICHOR_GENERAL2_START + 0x168) // Ichor: Stymphalia road: the scouts' store's chains cleaved (the Labrys)
+#define FLAG_ICHOR_ITEM_SKIRITAI_STORE          (FLAG_ICHOR_GENERAL2_START + 0x169) // Ichor: Stymphalia road: the scouts' store (the Labrys)
+#define FLAG_ICHOR_ITEM_SKIRITAI_GALLERY        (FLAG_ICHOR_GENERAL2_START + 0x16A) // Ichor: Stymphalia road: the gallery (the Hammer)
+#define FLAG_ICHOR_ITEM_SKIRITAI_CRAWL          (FLAG_ICHOR_GENERAL2_START + 0x16B) // Ichor: Stymphalia road: the crawl
+#define FLAG_ICHOR_ITEM_SKIRITAI_PASSAGE        (FLAG_ICHOR_GENERAL2_START + 0x16C) // Ichor: Stymphalia road: the east passage
+#define FLAG_ICHOR_HIDDEN_ITEM_SKIRITAI_STORE   (FLAG_ICHOR_GENERAL2_START + 0x16D) // Ichor: Stymphalia road: the store's back corner
+#define FLAG_ICHOR_HIDDEN_ITEM_SKIRITAI_BONES   (FLAG_ICHOR_GENERAL2_START + 0x16E) // Ichor: Stymphalia road: beside the bones
+#define FLAG_ICHOR_HIDDEN_ITEM_SKIRITAI_MOUTH   (FLAG_ICHOR_GENERAL2_START + 0x16F) // Ichor: Stymphalia road: inside the low mouth
+#define FLAG_ICHOR_ITEM_R27_TM_STEEL_WING       (FLAG_ICHOR_GENERAL2_START + 0x170) // Ichor: Stymphalia road: the watchtower's parapet (the Girdle)
+#define FLAG_ICHOR_GOT_R26_WRESTLERS_BAND       (FLAG_ICHOR_GENERAL2_START + 0x171) // Ichor: Stymphalia road: the island's wrestler gave her headband
 #define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
 #define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
 #define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted

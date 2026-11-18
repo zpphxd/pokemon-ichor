@@ -2706,6 +2706,50 @@
       "border_filepath": "data/layouts/Ascent_Glacier/border.bin",
       "blockdata_filepath": "data/layouts/Ascent_Glacier/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE26_SKIRITIS",
+      "name": "Route26_Skiritis_Layout",
+      "width": 32,
+      "height": 48,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Stymphalia",
+      "border_filepath": "data/layouts/Route26_Skiritis/border.bin",
+      "blockdata_filepath": "data/layouts/Route26_Skiritis/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAKE_STYMPHALIA",
+      "name": "LakeStymphalia_Layout",
+      "width": 42,
+      "height": 36,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Stymphalia",
+      "border_filepath": "data/layouts/LakeStymphalia/border.bin",
+      "blockdata_filepath": "data/layouts/LakeStymphalia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE27_ARKADIAN_HILLS",
+      "name": "Route27_ArkadianHills_Layout",
+      "width": 44,
+      "height": 36,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Stymphalia",
+      "border_filepath": "data/layouts/Route27_ArkadianHills/border.bin",
+      "blockdata_filepath": "data/layouts/Route27_ArkadianHills/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE27_SKIRITAI_CAVE",
+      "name": "Route27_SkiritaiCave_Layout",
+      "width": 30,
+      "height": 20,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/Route27_SkiritaiCave/border.bin",
+      "blockdata_filepath": "data/layouts/Route27_SkiritaiCave/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

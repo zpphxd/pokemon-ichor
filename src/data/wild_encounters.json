@@ -17161,6 +17161,2342 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE26_SKIRITIS",
+          "base_label": "gRoute26_Skiritis_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_DORYDRAKE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_HOPLEKTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE26_SKIRITIS",
+          "base_label": "gRoute26_Skiritis_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_DORYDRAKE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_HOPLEKTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE26_SKIRITIS",
+          "base_label": "gRoute26_Skiritis_Evening",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_DORYDRAKE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_DORYDRAKE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_HOPLEKTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE26_SKIRITIS",
+          "base_label": "gRoute26_Skiritis_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_DORYDRAKE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_HOPLOMEX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_DORYDRAKE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LAKE_STYMPHALIA",
+          "base_label": "gLakeStymphalia_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_CHALKIP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_CHALKIP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LAKE_STYMPHALIA",
+          "base_label": "gLakeStymphalia_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LAKE_STYMPHALIA",
+          "base_label": "gLakeStymphalia_Evening",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_CHALKIP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_CHALKIP"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 46,
+                "species": "SPECIES_CHALKIP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_BELORNIS"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LAKE_STYMPHALIA",
+          "base_label": "gLakeStymphalia_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_BELORNIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE27_ARKADIAN_HILLS",
+          "base_label": "gRoute27_ArkadianHills_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_CHELYRA"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE27_ARKADIAN_HILLS",
+          "base_label": "gRoute27_ArkadianHills_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_CHELYRA"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_CHELYRA"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE27_ARKADIAN_HILLS",
+          "base_label": "gRoute27_ArkadianHills_Evening",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KAPRODON"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KAPRODON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE27_ARKADIAN_HILLS",
+          "base_label": "gRoute27_ArkadianHills_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KAPRODON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KAPRODON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE27_SKIRITAI_CAVE",
+          "base_label": "gRoute27_SkiritaiCave_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE27_SKIRITAI_CAVE",
+          "base_label": "gRoute27_SkiritaiCave_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_ENIGMAW"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 34,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
+          }
         }
       ]
     },

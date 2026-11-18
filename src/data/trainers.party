@@ -2117,6 +2117,525 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 /* Ichor: Lakonia end */
 
+/* Ichor: the road north from Lakonia begin (tools/ichor/maps/stymphalia.py) */
+=== TRAINER_ICHOR_ANAXILAS ===
+Name: ANAXILAS
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gelasable
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R26_DROMAS ===
+Name: DROMAS
+Class: Lakonian
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpelle
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerazap
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ANAXANDROS ===
+Name: ANAXANDROS
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplektor
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R26_PALAISTES ===
+Name: PALAISTES
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R26_ARGEIOS ===
+Name: ARGEIOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kolossard
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R26_PHRYNON ===
+Name: PHRYNON
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Sophowl
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Belornis
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R26_KRYPTIS ===
+Name: KRYPTIS
+Class: Lakonian
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Nemeleon
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gelasable
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_DIENEKES ===
+Name: DIENEKES
+Class: Lakonian
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R26_AIPOLOS ===
+Name: AIPOLOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kerazap
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelonet
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KYKNOS ===
+Name: KYKNOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_STYM_HALIA ===
+Name: HALIA
+Class: Fisher
+Pic: Fisherman
+Gender: Female
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelonet
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TITANBORN_BORBOROS ===
+Name: BORBOROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Kolossard
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_STYM_TENAGOS ===
+Name: TENAGOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Laolith
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kalyptor
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MELAMPOUS ===
+Name: MELAMPOUS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Belornis
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_DONAX ===
+Name: DONAX
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelonet
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_STYM_ORNITHE ===
+Name: ORNITHE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Hiker
+AI: Basic Trainer
+
+Belornis
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Karkitox
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_STYM_SKIRITES ===
+Name: SKIRITES
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerazap
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_STYM_LIMNAIA ===
+Name: LIMNAIA
+Class: Lakonian
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Gelasable
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_TITYOS ===
+Name: TITYOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Kerazap
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_KORE ===
+Name: KORE
+Class: Goatherd
+Pic: Goatherd
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kerazap
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_LOCHAGOS ===
+Name: LOCHAGOS
+Class: Lakonian
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplektor
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_OTHRYADES ===
+Name: OTHRYADES
+Class: Lakonian
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lykanax
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hyphantis
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_AGRIA ===
+Name: AGRIA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Hyphantis
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_KARYATIS ===
+Name: KARYATIS
+Class: Pilgrim
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Chelyra
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_PHOROS ===
+Name: PHOROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Gigantomb
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_SKOPOS ===
+Name: SKOPOS
+Class: Lakonian
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Enigmaw
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_ANABATES ===
+Name: ANABATES
+Class: Lakonian
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpelle
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_STHENELAIDAS ===
+Name: STHENELAS
+Class: Lakonian
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Enigmaw
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Lykanax
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_R27_KYNEGOS ===
+Name: KYNEGOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Lykanax
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SKIRITAI_KRYPTE ===
+Name: KRYPTE
+Class: Lakonian
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kalyptor
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hyphantis
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SKIRITAI_ARKTOS ===
+Name: ARKTOS
+Class: Lakonian
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Plouteras
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Dorydrake
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+/* Ichor: the road north from Lakonia end */
+
 /*
 Knossa above ground (ids 345-358), from design/phase4/SCRIPT.md Part 3, "The Bull Road,
 levels 44-47". Kerinthe, Euphemos, Phaistia, Iphitos, Propolis and Glauke are

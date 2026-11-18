@@ -99,7 +99,8 @@
 #define TOWN_HERM_SACRED_OLIVES     21  // Route 28's rest stop, by Hieron's hut
 #define TOWN_HERM_DELPHOI           22
 #define TOWN_HERM_ASCENT            23  // the Ascent's camp on the cloud ledges, the climb's midway rest
-#define TOWN_HERM_COUNT             24  // new towns take the next ids
+#define TOWN_HERM_STYMPHALIA        24  // Lake Stymphalia's rest stop, by Akanthis's hut
+#define TOWN_HERM_COUNT             25  // new towns take the next ids
 #define TOWN_HERM_MAX               32  // FLAG_ICHOR_TOWN_HERMS_START's range
 #define TOWN_HERM_STAY              0xFE // the travel menu's "Stay here"
 

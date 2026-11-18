@@ -23,6 +23,11 @@
       "direction": "right",
       "map": "MAP_ROUTE13_HIGHLAND_ROAD",
       "offset": 12
+    },
+    {
+      "direction": "down",
+      "map": "MAP_ROUTE27_ARKADIAN_HILLS",
+      "offset": 7
     }
   ],
   "object_events": [
@@ -226,7 +231,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arkadia_EventScript_Hoplite",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_LAKONIA_PARTED"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
