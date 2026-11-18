@@ -7,5 +7,5 @@ ROM=pokeemerald.gba
 . tools/ichor/tests/engine_build.sh
 OUT=build/save_herms
 engine_prepare SAVEHERMS "$OUT" tools/ichor/save/save_herms_consts.c tools/ichor/save/save_herms_setup.s
-SAVE_IN="$1" HERMS="${HERMS:-}" engine_run SAVEHERMS "$OUT" tools/ichor/save/save_herms.lua 20000 300
-grep -E "BEFORE|SET|AFTER" "$OUT/run.log"
+SAVE_IN="$1" HERMS="${HERMS:-}" FLAGS="${FLAGS:-}" engine_run SAVEHERMS "$OUT" tools/ichor/save/save_herms.lua 20000 300
+grep -E "BEFORE|SET|SETFLAG|AFTER" "$OUT/run.log"

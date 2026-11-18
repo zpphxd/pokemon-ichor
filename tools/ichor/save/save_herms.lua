@@ -2,6 +2,7 @@
 -- Laurels and which travel herms are registered. Run by tools/ichor/save/save_herms.sh.
 --   SAVE_IN   the .sav to load (a copy; never OpenEmu's own file)
 --   HERMS     comma-separated TOWN_HERM ids to register, then save in game (empty: read only)
+--   FLAGS     comma-separated flag names from save_herms_consts.c to set (e.g. scenes already seen)
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
 local log = L.log
@@ -27,8 +28,14 @@ L.start(function()
   L.shot("continued")
   report("BEFORE")
   local want = os.getenv("HERMS") or ""
-  if want ~= "" then
+  local flags = os.getenv("FLAGS") or ""
+  if want ~= "" or flags ~= "" then
     for t in want:gmatch("%d+") do L.setFlag(S.FLAG_ICHOR_TOWN_HERMS_START + tonumber(t), true) end
+    for name in flags:gmatch("[%w_]+") do
+      L.expect(S[name] ~= nil, "known flag " .. name)
+      L.setFlag(S[name], true)
+      log("SETFLAG " .. name .. " " .. tostring(L.getFlag(S[name])))
+    end
     report("SET")
     L.runHeader("SaveHerms_SaveHeader")
     L.wait(300)
