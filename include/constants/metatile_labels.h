@@ -1374,4 +1374,11 @@
 #define METATILE_Astra_FrescoFaded          0x2F0
 // end gTileset_Astra
 
+// gTileset_Chion (Ichor: the snows of Olympus), written by tools/ichor/art/chion_build.py
+#define METATILE_Chion_Plate                            0x36C
+#define METATILE_Chion_Plate_Down                       0x36D
+#define METATILE_Chion_Grate                            0x36E
+#define METATILE_Chion_Grate_Up                         0x36F
+// end gTileset_Chion
+
 #endif // GUARD_METATILE_LABELS_H

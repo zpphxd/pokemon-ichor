@@ -10721,650 +10721,6 @@
           }
         },
         {
-          "map": "MAP_ASCENT_1F",
-          "base_label": "gAscent_1F_Morning",
-          "land_mons": {
-            "encounter_rate": 12,
-            "mons": [
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LYKANAX"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_NEMELEON"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_BASILOPS"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_HOPLEKTOR"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_KERASTORM"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LYKANAX"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_NEMELEON"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_BASILOPS"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_HOPLEKTOR"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_KERASTORM"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 51,
-                "max_level": 53,
-                "species": "SPECIES_KYNOKETOS"
-              },
-              {
-                "min_level": 51,
-                "max_level": 53,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 53,
-                "max_level": 55,
-                "species": "SPECIES_KYNOKETOS"
-              },
-              {
-                "min_level": 53,
-                "max_level": 55,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 53,
-                "max_level": 55,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 57,
-                "species": "SPECIES_KYNOKETOS"
-              },
-              {
-                "min_level": 55,
-                "max_level": 57,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 55,
-                "max_level": 57,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 56,
-                "max_level": 57,
-                "species": "SPECIES_DAKROCK"
-              },
-              {
-                "min_level": 57,
-                "max_level": 57,
-                "species": "SPECIES_DAKROCK"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ASCENT_1F",
-          "base_label": "gAscent_1F_Night",
-          "land_mons": {
-            "encounter_rate": 12,
-            "mons": [
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LYKANAX"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_HARPELLE"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_STARKOS"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_KAPRODON"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_NEMELEON"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LYKANAX"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_HARPELLE"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_STARKOS"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_KAPRODON"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 52,
-                "max_level": 56,
-                "species": "SPECIES_NEMELEON"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ASCENT_2F",
-          "base_label": "gAscent_2F_Morning",
-          "land_mons": {
-            "encounter_rate": 12,
-            "mons": [
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_HOPLEKTOR"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_HOPLEKTOR"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              }
-            ]
-          },
-          "fishing_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 53,
-                "max_level": 55,
-                "species": "SPECIES_KYNOKETOS"
-              },
-              {
-                "min_level": 53,
-                "max_level": 55,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 55,
-                "max_level": 57,
-                "species": "SPECIES_KYNOKETOS"
-              },
-              {
-                "min_level": 55,
-                "max_level": 57,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 55,
-                "max_level": 57,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 57,
-                "max_level": 59,
-                "species": "SPECIES_KYNOKETOS"
-              },
-              {
-                "min_level": 57,
-                "max_level": 59,
-                "species": "SPECIES_GALENYON"
-              },
-              {
-                "min_level": 57,
-                "max_level": 59,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 58,
-                "max_level": 59,
-                "species": "SPECIES_DAKROCK"
-              },
-              {
-                "min_level": 59,
-                "max_level": 59,
-                "species": "SPECIES_DAKROCK"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ASCENT_2F",
-          "base_label": "gAscent_2F_Night",
-          "land_mons": {
-            "encounter_rate": 12,
-            "mons": [
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_HARPELLE"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_STARKOS"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_HARPELLE"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_STARKOS"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 54,
-                "max_level": 57,
-                "species": "SPECIES_KOLOSSARD"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ASCENT_3F",
-          "base_label": "gAscent_3F_Morning",
-          "land_mons": {
-            "encounter_rate": 12,
-            "mons": [
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KERASTORM"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_HOPLEKTOR"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KERASTORM"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_HOPLEKTOR"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_LAOLITH"
-              }
-            ]
-          }
-        },
-        {
-          "map": "MAP_ASCENT_3F",
-          "base_label": "gAscent_3F_Night",
-          "land_mons": {
-            "encounter_rate": 12,
-            "mons": [
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_HARPELLE"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_STARKOS"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_STYGIAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_HARPELLE"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_STARKOS"
-              }
-            ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_LAOLITH"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_GEOGRIP"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_KOLOSSARD"
-              },
-              {
-                "min_level": 55,
-                "max_level": 58,
-                "species": "SPECIES_LAOLITH"
-              }
-            ]
-          }
-        },
-        {
           "map": "MAP_LABYRINTH_RING1",
           "base_label": "gLabyrinthRing1_Morning",
           "rock_smash_mons": {
@@ -16351,6 +15707,1457 @@
                 "min_level": 47,
                 "max_level": 47,
                 "species": "SPECIES_GEOGRIP"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_1F",
+          "base_label": "gAscent_1F_Morning",
+          "land_mons": {
+            "encounter_rate": 12,
+            "mons": [
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_BASILOPS"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_KERASTORM"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_BASILOPS"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_KERASTORM"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 56,
+                "max_level": 57,
+                "species": "SPECIES_DAKROCK"
+              },
+              {
+                "min_level": 57,
+                "max_level": 57,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_1F",
+          "base_label": "gAscent_1F_Night",
+          "land_mons": {
+            "encounter_rate": 12,
+            "mons": [
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_STARKOS"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_KAPRODON"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_NEMELEON"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_STARKOS"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_KAPRODON"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 54,
+                "max_level": 58,
+                "species": "SPECIES_NEMELEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_2F",
+          "base_label": "gAscent_2F_Morning",
+          "land_mons": {
+            "encounter_rate": 12,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_NIFLAKE"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 59,
+                "species": "SPECIES_DAKROCK"
+              },
+              {
+                "min_level": 59,
+                "max_level": 59,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_2F",
+          "base_label": "gAscent_2F_Night",
+          "land_mons": {
+            "encounter_rate": 12,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_STARKOS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KRYOPUFF"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 55,
+                "max_level": 59,
+                "species": "SPECIES_KOLOSSARD"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_ICEFALL",
+          "base_label": "gAscent_Icefall_Morning",
+          "land_mons": {
+            "encounter_rate": 7,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYOPUFF"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_PAGOSHARD"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 60,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 55,
+                "max_level": 57,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_DAKROCK"
+              },
+              {
+                "min_level": 61,
+                "max_level": 61,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_ICEFALL",
+          "base_label": "gAscent_Icefall_Night",
+          "land_mons": {
+            "encounter_rate": 7,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYOPUFF"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 57,
+                "max_level": 61,
+                "species": "SPECIES_PAGOSHARD"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_ICEFALL_DEEP",
+          "base_label": "gAscent_IcefallDeep_Morning",
+          "land_mons": {
+            "encounter_rate": 8,
+            "mons": [
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 57,
+                "max_level": 59,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_DAKROCK"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_ICEFALL_DEEP",
+          "base_label": "gAscent_IcefallDeep_Night",
+          "land_mons": {
+            "encounter_rate": 8,
+            "mons": [
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 59,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_CRYSTAL_VAULT",
+          "base_label": "gAscent_CrystalVault_Morning",
+          "land_mons": {
+            "encounter_rate": 5,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_CRYSTAL_VAULT",
+          "base_label": "gAscent_CrystalVault_Night",
+          "land_mons": {
+            "encounter_rate": 5,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 60,
+                "max_level": 63,
+                "species": "SPECIES_NIFLAKE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_GLACIER",
+          "base_label": "gAscent_Glacier_Morning",
+          "land_mons": {
+            "encounter_rate": 8,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KERASTORM"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KRYOPUFF"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_NIFLAKE"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 59,
+                "max_level": 61,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 56,
+                "max_level": 58,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 56,
+                "max_level": 58,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 58,
+                "max_level": 60,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_DAKROCK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_DAKROCK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_GLACIER",
+          "base_label": "gAscent_Glacier_Night",
+          "land_mons": {
+            "encounter_rate": 8,
+            "mons": [
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KOLOSSARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_NIFLAKE"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_PAGOSHARD"
+              },
+              {
+                "min_level": 58,
+                "max_level": 62,
+                "species": "SPECIES_KRYOPUFF"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_3F",
+          "base_label": "gAscent_3F_Morning",
+          "land_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KERASTORM"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_HOPLEKTOR"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_AETARCH"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_CHIONYAD"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASCENT_3F",
+          "base_label": "gAscent_3F_Night",
+          "land_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_STYGIAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_CHIONYAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_STARKOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_KRYSTOLOS"
+              },
+              {
+                "min_level": 60,
+                "max_level": 64,
+                "species": "SPECIES_STYGIAD"
               }
             ]
           }

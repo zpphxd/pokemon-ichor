@@ -16,6 +16,9 @@ script Ascent_2F_EventScript_Cook {
     fadescreen(FADE_FROM_BLACK)
     setspeaker(Ichor_League_Text_NameCook)
     msgbox(format("There. Barley and goat. Same as the Titans fed us, without the speeches."))
+    // the camp is a rest stop: its herm at the landing goes live (MAP_DESIGN §2)
+    setvar(VAR_0x8004, TOWN_HERM_ASCENT)
+    special(Ichor_RegisterTownHerm)
     if (!flag(FLAG_ICHOR_GOT_ASCENT_LEFTOVERS)) {
         msgbox(format("Take this for your Pokémon. A heel of bread that never seems to run out.\pI stole it from the master's own table. He never noticed. He was busy with fate."))
         giveitem(ITEM_LEFTOVERS)
@@ -72,4 +75,18 @@ script Ascent_2F_EventScript_LedgeSign {
 
 script Ascent_2F_EventScript_Cookfire {
     msgbox(format("A cookfire of pine. A pot of barley mush hangs over it, bubbling.\pIt smells better than it looks."), MSGBOX_SIGN)
+}
+
+script Ascent_2F_EventScript_Lysandra {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_LYSANDRA,
+        format("Agathe has the near end of the ledge, and I have the far one.\pThere's no third end."),
+        format("There's a third end. It's you."))
+    msgbox(format("I came up with the pilgrims and stayed with the Titans' people.\pThey cook better. Don't tell the pilgrims."), MSGBOX_AUTOCLOSE)
+}
+
+script Ascent_2F_EventScript_Shrine {
+    msgbox(format("A stele by the camp, its hearth-fire carved in red. Fragment II of the Olympian hymn:\p"
+                  "“Ten years the Titans held Othrys and the young gods held Olympus.\p"
+                  "The war ended when the Hundred-Handed came out of the dark, and threw mountains.”\p"
+                  "Someone has scratched underneath: AND US? WHAT HAPPENS TO US?"), MSGBOX_SIGN)
 }

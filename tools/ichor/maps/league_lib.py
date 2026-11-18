@@ -588,7 +588,8 @@ def _sprite(gfx, facing):
         sheet, fw = Image.open(p), None
         fw = sheet.height
     elif gfx == "OBJ_EVENT_GFX_ITEM_BALL":
-        sheet, fw = Image.open(ROOT / "graphics/object_events/pics/misc/item_ball.png"), 16
+        jar = ROOT / "graphics/object_events/pics/misc/ichor_item_jar.png"
+        sheet, fw = Image.open(jar if jar.exists() else ROOT / "graphics/object_events/pics/misc/item_ball.png"), 16
     elif gfx in ("OBJ_EVENT_GFX_PUSHABLE_BOULDER", "OBJ_EVENT_GFX_BREAKABLE_ROCK"):
         sheet = Image.open(ROOT / f"graphics/object_events/pics/misc/{gfx[len('OBJ_EVENT_GFX_'):].lower()}.png")
         fw, facing = 16, "DOWN"

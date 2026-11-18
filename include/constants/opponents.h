@@ -358,7 +358,20 @@
 #define TRAINER_ICHOR_HYPATIA                473
 #define TRAINER_ICHOR_OLYMPIAS               474
 #define TRAINER_ICHOR_ARISTEIDES             475
-#define TRAINERS_END_LEAGUE                  476
+#define TRAINER_ICHOR_ASCENT_KLYTOS          476
+#define TRAINER_ICHOR_ASCENT_LYSANDRA        477
+#define TRAINER_ICHOR_ICEFALL_CHIONE         478
+#define TRAINER_ICHOR_ICEFALL_ARKTOS         479
+#define TRAINER_ICHOR_ICEFALL_BOREADES       480
+#define TRAINER_ICHOR_DEEP_HESYCHIOS         481
+#define TRAINER_ICHOR_GLACIER_NIPHON         482
+#define TRAINER_ICHOR_GLACIER_PHOLOE         483
+#define TRAINER_ICHOR_GLACIER_NEPHELE        484
+#define TRAINER_ICHOR_ASCENT_HIPPIAS         485
+#define TRAINER_ICHOR_ASCENT_KORINNA         486
+#define TRAINER_ICHOR_ASCENT_POLYDAMAS       487
+#define TRAINER_ICHOR_VAULT_ARGYROS          488
+#define TRAINERS_END_LEAGUE                  489
 
 // The post-game, ids 500-679 and 1024-1223: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0

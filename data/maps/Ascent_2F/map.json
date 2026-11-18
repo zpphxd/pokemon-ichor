@@ -18,11 +18,6 @@
       "map": "MAP_ASCENT_1F",
       "offset": 0,
       "direction": "down"
-    },
-    {
-      "map": "MAP_ASCENT_3F",
-      "offset": 0,
-      "direction": "up"
     }
   ],
   "object_events": [
@@ -38,6 +33,20 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Ascent_2F_EventScript_Agathe",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ASCENT_2F_LYSANDRA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 27,
+      "y": 36,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Ascent_2F_EventScript_Lysandra",
       "flag": "0"
     },
     {
@@ -163,11 +172,53 @@
       "trainer_sight_or_berry_tree_id": "ITEM_PP_MAX",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_ASCENT2_PP_MAX"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GREAT_HERM",
+      "x": 3,
+      "y": 41,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorTownHerm",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE",
+      "x": 3,
+      "y": 42,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorTownHermSign",
+      "flag": "0"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 31,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_ASCENT_ICEFALL",
+      "dest_warp_id": "1"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 27,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_2F_EventScript_Shrine"
+    },
     {
       "type": "hidden_item",
       "x": 5,

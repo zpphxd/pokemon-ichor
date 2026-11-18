@@ -3,7 +3,7 @@
 
   Ascent_1F  the Pierian slopes: three terraces over the sea, the beacon knoll
   Ascent_2F  the cloud ledges: cliff traverses in the fog, the ex-Titanborn camp
-  Ascent_3F  the snowline: walled terraces and the processional stair
+  (Ascent_3F and the floors between it and 2F are on gTileset_Chion: ascent_snow.py)
 
 All three are aethos + gTileset_Skiron (design/phase2/TILES_skiron.md), built
 with tools/ichor/maps/league_lib.py, and connected top to bottom (they share a
@@ -184,7 +184,12 @@ def build_1f():
     ground(g, thyme=10)
 
     # --- events ---------------------------------------------------------------
-    g.person("PHILON", "TITAN_GRUNT", 35, 26, "Philon", facing="DOWN", sight=3)
+    # the coast road's pair: Philon and Klytos face each other across the road at x 35
+    g.person("PHILON", "TITAN_GRUNT", 35, 25, "Philon", facing="DOWN", sight=4)
+    g.person("KLYTOS", "TITAN_GRUNT", 35, 28, "Klytos", facing="UP", sight=3)
+    # a thorn thicket (Demeter's Sickle) closes the pocket east of the goatherd's fold
+    g.person("THICKET", "OBJ_EVENT_GFX_CUTTABLE_TREE", 44, 8, "EventScript_CutTree", movement="MOVEMENT_TYPE_NONE")
+    g.item("ITEM_SHINY_STONE", 44, 6, "FLAG_ICHOR_ITEM_ASCENT1_SHINY_STONE")
     g.person("LAMPON", "HOPLITE", 20, 18, "Lampon", facing="DOWN", sight=3)
     g.person("THEANO", "AUGUR", 41, 15, "Theano", facing="LEFT", sight=4)
     g.person("KALLIAS", "TITAN_GRUNT", 9, 7, "Kallias", facing="LEFT", sight=4)
@@ -270,8 +275,11 @@ def build_2f():
     g.fill("path", 29, 7, 31, 13)
     # --- ledge 4: the light through the cloud, the way to 3F ----------------------
     g.fill("dry", 14, 2, 36, 7)
-    g.fill("road", 30, 0, 32, 6)
+    g.fill("road", 30, 4, 32, 6)
     g.fill("path", 18, 5, 31, 6)
+    g.fill("mass", 27, 0, 35, 3)                     # the cliff the Icefall's tunnel goes into
+    g.set(31, 3, 0x09F, True, "mouth")               # aethos's cave mouth: the way into the Icefall
+    g.set(31, 4, 0x0A7, False, "mouth")
     g.rows("crag", 14, 2, ["####......", "##........", "#.........", "##........", "###......."])
     g.rows("crag", 34, 2, ["###", "##.", "#..", "##.", "###", "###"])
     g.rows("tall", 20, 2, [".###", "####"])
@@ -312,11 +320,20 @@ def build_2f():
     massif(g)
     rockland(g)
     ground(g, thyme=0)
-    g.solid |= g.water
-    g.water[:] = False
+    for y in range(g.H):                              # the sea far below is out of reach
+        for x in range(g.W):
+            if g.water[y, x] and y >= 37:
+                g.solid[y, x] = True
+                g.water[y, x] = False
 
     # --- events ------------------------------------------------------------------
+    # ledge 1's pair: one wide ledge, two of them on it
     g.person("AGATHE", "TITAN_GRUNT", 25, 35, "Agathe", facing="DOWN", sight=1)
+    g.person("LYSANDRA", "ACOLYTE_F", 27, 36, "Lysandra", facing="UP", sight=1)
+    # the camp is the climb's midway rest: the hearth stele (fragment II), the cook
+    g.piece("stele_palmette", 16, 26)
+    g.sign(16, 27, PX2 + "Shrine")
+    g.warp(31, 4, "Ascent_Icefall", 1)
     g.person("NIKIAS", "PILGRIM", 30, 27, "Nikias", facing="LEFT", sight=3)
     g.person("EIRENE", "ACOLYTE_F", 22, 13, "Eirene", facing="DOWN", sight=2)
     g.person("DEXIOS", "TITAN_GRUNT", 28, 5, "Dexios", facing="DOWN", sight=1)
@@ -333,9 +350,8 @@ def build_2f():
     g.sign(8, 25, PX2 + "Cookfire")
     g.save(rock_border(g), dict(map_type="MAP_TYPE_ROUTE", weather="WEATHER_FOG_HORIZONTAL", show_map_name=False,
                                 allow_cycling=False, music="MUS_VICTORY_ROAD", ichor_kind="dungeon"),
-           connections=[dict(map="MAP_ASCENT_1F", offset=0, direction="down"),
-                        dict(map="MAP_ASCENT_3F", offset=0, direction="up")])
-    must = [("entry", (5, 43)), ("exit", (31, 0)), ("max revive", (37, 35)), ("pp max", (19, 10)),
+           connections=[dict(map="MAP_ASCENT_1F", offset=0, direction="down")])
+    must = [("entry", (5, 43)), ("exit", (31, 5)), ("max revive", (37, 35)), ("pp max", (19, 10)),
             ("cook", (9, 26)), ("hidden", (5, 35)), ("nikias", (30, 27))]
     seen = g.check((5, 43), must, blocked=[(20, 12)])
     return g, seen, [("01_landing", 5, 39), ("02_ledge1", 18, 35), ("03_gully", 34, 32),
@@ -343,133 +359,14 @@ def build_2f():
                      ("07_rubble", 21, 11), ("08_top", 26, 4)]
 
 
-# ---------------------------------------------------------------------------
-# 3F: the snowline and the processional stair
-# ---------------------------------------------------------------------------
-W3, H3 = 36, 40
-
-
-def stair(g, x0, x1, y0, y1):
-    """Marble steps cut through a bank: walkable, the bank's ends on either side."""
-    for y in range(y0, y1 + 1):
-        for x in range(x0, x1 + 1):
-            g.set(x, y, A_STEPS[(y - y0) % 2], False, "steps")
-
-
-def build_3f():
-    g = Grid("Ascent_3F", W3, H3)
-    g.fill("mass", 0, 0, W3 - 1, H3 - 1)
-    # --- the entry from the cloud ledges -----------------------------------------
-    g.fill("scree", 27, 33, 34, 39)
-    g.fill("road", 30, 34, 32, 39)
-    g.rows("crag", 27, 34, ["##.....#", "#......#", "##....##", "##....##", "###...##", "###...##"])
-    # --- terrace 1 (rows 26-33) ---------------------------------------------------
-    g.fill("dry", 2, 26, 34, 33)
-    g.fill("path", 6, 29, 32, 30)
-    g.fill("path", 30, 29, 32, 33)
-    g.rows("tall", 17, 26, [".####.", "######", "######", "######", "######", "######", ".####.", "..##.."])
-    g.rows("scree", 22, 26, ["..####..", ".#######", "..#####.", "...###.."])
-    g.rows("scree", 3, 26, ["....####", "...######", "..#######"])
-    g.rows("scree", 9, 31, ["######", "..####"])
-    g.rows("crag", 2, 31, ["###.......", "####....##", "#####..###"])
-    g.rows("crag", 24, 31, ["...##.", "..####"])
-    g.fill("path", 6, 26, 8, 28)
-    # --- terrace 2 (rows 18-22) ---------------------------------------------------
-    g.fill("dry", 1, 18, 34, 22)
-    g.fill("path", 6, 19, 29, 20)
-    g.fill("path", 27, 18, 29, 19)
-    g.rows("tall", 11, 18, ["...####...", ".#######..", "#########.", "..########", "....####.."])
-    g.rows("scree", 6, 21, ["#####", ".###."])
-    g.rows("scree", 21, 21, ["#####...", ".######."])
-    g.rows("crag", 31, 18, ["####", "###.", "##..", "###.", "####"])
-    g.fill("mass", 5, 18, 5, 18)
-    # the pocket behind the drum and the rubble (x 1-3)
-    g.rows("mass", 1, 18, ["####", "#.##", "....", "####", "####"])
-    # --- terrace 3, the processional terrace (rows 11-14) ------------------------
-    g.fill("dry", 1, 11, 34, 14)
-    g.fill("road", 13, 11, 22, 14)
-    g.fill("path", 23, 12, 29, 14)
-    g.rows("crag", 30, 11, ["#####", "##..#", "#...#", "##.##"])
-    g.rows("scree", 2, 11, [".#####..", "########", ".####..."])
-    # --- the platform before the propylaia (rows 2-7) ----------------------------
-    g.fill("dry", 9, 4, 26, 7)
-    g.fill("road", 12, 6, 23, 7)
-    g.rows("crag", 9, 4, ["###.......#####.###", "##..........#....##", "#..................", "##.................."])
-    # --- banks and stairs ----------------------------------------------------------
-    bank_run(g, 0, 5, 23, ends=(False, True), tall=False)
-    bank_run(g, 9, 29, 23, ends=(True, True))
-    bank_run(g, 33, 35, 23, ends=(True, False))
-    for x in range(30, 33):                                    # a terrace lip: the quick way down
-        for y in (23, 24):
-            g.g[y][x] = "dry"
-        g.named("lip", "W" if x == 30 else "E" if x == 32 else "run", x, 25)
-    stair(g, 6, 8, 23, 25)
-    bank_run(g, 0, 26, 15, ends=(False, True))
-    bank_run(g, 30, 35, 15, ends=(True, False))
-    stair(g, 27, 29, 15, 17)
-    bank_run(g, 0, 14, 8, ends=(False, True), tall=False)
-    bank_run(g, 21, 35, 8, ends=(True, False))
-    stair(g, 15, 20, 8, 10)
-    # the propylaia: the palaestra's colonnade, the Pantheon's gatehouse
-    g.stamp(15, 2, A_PALAESTRA)
-    px, py = 15 + A_PALAESTRA_DOOR[0], 2 + A_PALAESTRA_DOOR[1]
-    g.solid[py, px] = False
-    for x in (13, 22):
-        g.set(x, 5, A_TRIPOD_TOP, False, "tripod")
-        g.set(x, 6, A_TRIPOD_BASE, True, "tripod")
-    for x in (14, 21):
-        g.set(x, 11, A_TRIPOD_TOP, False, "tripod")
-        g.set(x, 12, A_TRIPOD_BASE, True, "tripod")
-    g.set(12, 13, A_HERM, True, "herm")
-    g.set(23, 13, A_HERM, True, "herm")
-    # cairns of the snowline
-    g.piece("boulders", 33, 26)
-    g.piece("rock", 2, 12)
-    g.piece("pine_young", 10, 26)
-    g.piece("pine_young", 25, 18)
-    g.piece("pine_tall", 3, 26)
-    for x, y in ((14, 26), (27, 26), (10, 18), (21, 18), (8, 11), (28, 14), (16, 33), (24, 22),
-                 (5, 14), (10, 14), (25, 14), (12, 22), (18, 22), (20, 26)):
-        g.piece("rock", x, y)                                  # cairns along the terraces
-    massif(g)
-    rockland(g)
-    ground(g, thyme=0)
-
-    # --- events ------------------------------------------------------------------
-    g.person("STHENELOS", "HOPLITE", 5, 27, "Sthenelos", facing="RIGHT", sight=3)
-    g.person("GORGO", "TITAN_GRUNT", 26, 18, "Gorgo", facing="RIGHT", sight=3)
-    g.person("MELITE", "ACOLYTE_F", 24, 12, "Melite", facing="LEFT", sight=3)
-    g.obstacle("DRUM", "drum", 2, 20)
-    g.obstacle("RUBBLE", "rubble", 4, 20)
-    g.item("ITEM_RARE_CANDY", 2, 19, "FLAG_ICHOR_ITEM_ASCENT3_RARE_CANDY")
-    g.item("ITEM_FULL_HEAL", 3, 13, "FLAG_ICHOR_ITEM_ASCENT3_FULL_HEAL")
-    g.hidden("ITEM_COMET_SHARD", 32, 27, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD")
-    g.hidden("ITEM_STAR_PIECE", 25, 5, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE")
-    g.warp(px, py, "Olympus_Propylaia", 0)
-    g.set(26, 33, A_SIGN, True, "sign")
-    g.sign(26, 33, PX3 + "SnowSign")
-    g.sign(12, 13, PX3 + "Herm")
-    g.sign(23, 13, PX3 + "Herm")
-    g.set(19, 7, A_SIGN, True, "sign") if False else None
-    g.save(rock_border(g), dict(map_type="MAP_TYPE_ROUTE", weather="WEATHER_SNOW", show_map_name=False,
-                                allow_cycling=False, music="MUS_VICTORY_ROAD", ichor_kind="dungeon"),
-           connections=[dict(map="MAP_ASCENT_2F", offset=0, direction="down")])
-    must = [("entry", (31, 39)), ("door", (px, py + 1)), ("full heal", (3, 13)), ("comet", (32, 27)),
-            ("melite", (24, 12))]
-    seen = g.check((31, 39), must)
-    return g, seen, [("01_entry", 30, 34), ("02_terrace1", 18, 29), ("03_stair1", 7, 26),
-                     ("04_terrace2", 16, 20), ("05_pocket", 5, 20), ("06_stair2", 27, 16),
-                     ("07_procession", 18, 13), ("08_propylaia", 18, 5)]
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--render", help="write review renders to this directory")
     ap.add_argument("--walk", action="store_true")
     ap.add_argument("--tag", default="")
-    ap.add_argument("--only", default="1F,2F,3F")
+    ap.add_argument("--only", default="1F,2F")
     args = ap.parse_args()
-    builders = {"1F": build_1f, "2F": build_2f, "3F": build_3f}
+    builders = {"1F": build_1f, "2F": build_2f}
     for key in args.only.split(","):
         if key not in builders:
             continue

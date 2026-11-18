@@ -1,0 +1,1020 @@
+{
+ "tileset": "gTileset_Chion",
+ "primary": "gTileset_Aethos",
+ "tiles_used": 403,
+ "pieces": [
+  {
+   "key": "crystal_s",
+   "title": "A crystal cluster",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     832
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crystal_tall",
+   "title": "A tall crystal prism",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     833
+    ],
+    [
+     841
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crystal_l",
+   "title": "A great crystal geode",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     834,
+     835
+    ],
+    [
+     842,
+     843
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "ice_rock",
+   "title": "An ice-glazed rock",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     836
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crystal_s_ice",
+   "title": "A crystal cluster grown up through the ice",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     837
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "ice_rock_ice",
+   "title": "A rock frozen into the ice",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     838
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "ice_boulders",
+   "title": "Snow-capped ice boulders",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     848,
+     849
+    ],
+    [
+     856,
+     857
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "frozen_giant",
+   "title": "A giant of the Gigantomachy, frozen in the glacier",
+   "section": "props",
+   "w": 3,
+   "h": 3,
+   "ids": [
+    [
+     850,
+     851,
+     852
+    ],
+    [
+     858,
+     859,
+     860
+    ],
+    [
+     866,
+     867,
+     868
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX",
+    "XXX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "frozen_fall",
+   "title": "A waterfall frozen in mid-pour",
+   "section": "props",
+   "w": 2,
+   "h": 3,
+   "ids": [
+    [
+     853,
+     854
+    ],
+    [
+     861,
+     862
+    ],
+    [
+     869,
+     870
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX",
+    "XX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "pine_snow",
+   "title": "A snow-laden fir",
+   "section": "props",
+   "w": 2,
+   "h": 3,
+   "ids": [
+    [
+     872,
+     873
+    ],
+    [
+     880,
+     881
+    ],
+    [
+     888,
+     889
+    ]
+   ],
+   "walk": [
+    "TT",
+    "TT",
+    "XX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "pine_snow_s",
+   "title": "A young snow fir",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     874
+    ],
+    [
+     882
+    ]
+   ],
+   "walk": [
+    "T",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "handholds",
+   "title": "Pan's Crook's handholds up an ice face",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     875
+    ],
+    [
+     883
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {
+    "top": [
+     0,
+     0
+    ],
+    "foot": [
+     0,
+     1
+    ]
+   },
+   "behaviors": {}
+  },
+  {
+   "key": "plate",
+   "title": "A bronze pressure plate (the Girdle's seals)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     876
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "plate_down",
+   "title": "A pressure plate, pressed",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     877
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "grate",
+   "title": "A bronze grate across a passage",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     878
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "grate_up",
+   "title": "A grate, raised",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     879
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "shrine",
+   "title": "A floor's shrine: a stele of one of the Twelve",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     896
+    ],
+    [
+     904
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "brazier",
+   "title": "A bronze brazier burning on the snow",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     897
+    ],
+    [
+     905
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "tripod",
+   "title": "A bronze tripod on its plinth",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     898
+    ],
+    [
+     906
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "herm",
+   "title": "A herm of Hermes",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     899
+    ],
+    [
+     907
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "ladder_down",
+   "title": "A shaft with a ladder down",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     900
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_LADDER"
+   }
+  },
+  {
+   "key": "ladder_up",
+   "title": "A ladder up into daylight",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     901
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_LADDER"
+   }
+  },
+  {
+   "key": "mouth",
+   "title": "A cave mouth in the ice",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     902,
+     903
+    ],
+    [
+     910,
+     911
+    ]
+   ],
+   "walk": [
+    "XX",
+    ".."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,1": "MB_NON_ANIMATED_DOOR",
+    "1,1": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "exit_n",
+   "title": "Daylight at a mouth: the way out north",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     912
+    ]
+   ],
+   "walk": [
+    "^"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "exit_s",
+   "title": "Daylight at a mouth: the way out south",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     913
+    ]
+   ],
+   "walk": [
+    "v"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_SOUTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "paving",
+   "title": "Snowy marble paving",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     914
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "paving_b",
+   "title": "Snowy marble paving, offset",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     915
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "propylaia",
+   "title": "The propylaia of the Pantheon",
+   "section": "props",
+   "w": 7,
+   "h": 5,
+   "ids": [
+    [
+     920,
+     921,
+     922,
+     923,
+     924,
+     925,
+     926
+    ],
+    [
+     928,
+     929,
+     930,
+     931,
+     932,
+     933,
+     934
+    ],
+    [
+     936,
+     937,
+     938,
+     939,
+     940,
+     941,
+     942
+    ],
+    [
+     944,
+     945,
+     946,
+     947,
+     948,
+     949,
+     950
+    ],
+    [
+     952,
+     953,
+     954,
+     955,
+     956,
+     957,
+     958
+    ]
+   ],
+   "walk": [
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXX.XXX"
+   ],
+   "notes": "",
+   "names": {
+    "door": [
+     3,
+     4
+    ]
+   },
+   "behaviors": {
+    "3,4": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "cloud",
+   "title": "The cloud sea below the mountain",
+   "section": "props",
+   "w": 4,
+   "h": 2,
+   "ids": [
+    [
+     960,
+     961,
+     962,
+     963
+    ],
+    [
+     968,
+     969,
+     970,
+     971
+    ]
+   ],
+   "walk": [
+    "XXXX",
+    "XXXX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_edge",
+   "title": "The snow's edge over the cloud sea",
+   "section": "props",
+   "w": 4,
+   "h": 2,
+   "ids": [
+    [
+     964,
+     965,
+     966,
+     967
+    ],
+    [
+     972,
+     973,
+     974,
+     975
+    ]
+   ],
+   "walk": [
+    "XXXX",
+    "XXXX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "snow_tracks",
+   "title": "Snow: tracks",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     976
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "snow_ripples",
+   "title": "Snow: ripples",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     977
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "snow_stone",
+   "title": "Snow: stone",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     978
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "snow_glitter",
+   "title": "Snow: glitter",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     979
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  }
+ ],
+ "kit": {
+  "T|...": 512,
+  "T|...|ne": 513,
+  "T|...|ne,nw": 514,
+  "T|...|ne,se": 515,
+  "T|...|ne,sw": 516,
+  "T|...|nw": 517,
+  "T|...|nw,se": 518,
+  "T|...|nw,sw": 519,
+  "T|...|se": 520,
+  "T|...|se,sw": 521,
+  "T|...|sw": 522,
+  "T|..E": 523,
+  "T|..E|nw": 524,
+  "T|..E|nw,sw": 525,
+  "T|..E|sw": 526,
+  "T|.W.": 527,
+  "T|.W.|ne": 528,
+  "T|.W.|ne,se": 529,
+  "T|.W.|se": 530,
+  "T|.WE": 531,
+  "T|N..": 532,
+  "T|N..|se": 533,
+  "T|N..|se,sw": 534,
+  "T|N..|sw": 535,
+  "T|N.E": 536,
+  "T|N.E|sw": 537,
+  "T|NW.": 538,
+  "T|NW.|se": 539,
+  "T|NWE": 540,
+  "ft|A|A": 541,
+  "ft|A|B": 542,
+  "ft|A|C": 543,
+  "ft|A|D": 544,
+  "ft|A|end": 545,
+  "ft|A|inner": 546,
+  "ft|B|A": 547,
+  "ft|B|B": 548,
+  "ft|B|C": 549,
+  "ft|B|D": 550,
+  "ft|B|end": 551,
+  "ft|B|inner": 552,
+  "ft|C|A": 553,
+  "ft|C|B": 554,
+  "ft|C|C": 555,
+  "ft|C|D": 556,
+  "ft|C|end": 557,
+  "ft|C|inner": 558,
+  "ft|D|A": 559,
+  "ft|D|B": 560,
+  "ft|D|C": 561,
+  "ft|D|D": 562,
+  "ft|D|end": 563,
+  "ft|D|inner": 564,
+  "ft|end|A": 565,
+  "ft|end|B": 566,
+  "ft|end|C": 567,
+  "ft|end|D": 568,
+  "ft|end|end": 569,
+  "ft|end|inner": 570,
+  "ft|inner|A": 571,
+  "ft|inner|B": 572,
+  "ft|inner|C": 573,
+  "ft|inner|D": 574,
+  "ft|inner|end": 575,
+  "ft|inner|inner": 576,
+  "fb|A|A": 577,
+  "fb|A|B": 578,
+  "fb|A|C": 579,
+  "fb|A|D": 580,
+  "fb|A|end": 581,
+  "fb|A|inner": 582,
+  "fb|B|A": 583,
+  "fb|B|B": 584,
+  "fb|B|C": 585,
+  "fb|B|D": 586,
+  "fb|B|end": 587,
+  "fb|B|inner": 588,
+  "fb|C|A": 589,
+  "fb|C|B": 590,
+  "fb|C|C": 591,
+  "fb|C|D": 592,
+  "fb|C|end": 593,
+  "fb|C|inner": 594,
+  "fb|D|A": 595,
+  "fb|D|B": 596,
+  "fb|D|C": 597,
+  "fb|D|D": 598,
+  "fb|D|end": 599,
+  "fb|D|inner": 600,
+  "fb|end|A": 601,
+  "fb|end|B": 602,
+  "fb|end|C": 603,
+  "fb|end|D": 604,
+  "fb|end|end": 605,
+  "fb|end|inner": 606,
+  "fb|inner|A": 607,
+  "fb|inner|B": 608,
+  "fb|inner|C": 609,
+  "fb|inner|D": 610,
+  "fb|inner|end": 611,
+  "fb|inner|inner": 612,
+  "floor|..": 613,
+  "floor|..|nw": 614,
+  "floor|..|v2": 615,
+  "floor|.W": 616,
+  "floor|N.": 617,
+  "floor|NW": 618,
+  "lit|....": 619,
+  "lit|....|ne": 620,
+  "lit|....|ne,nw": 621,
+  "lit|....|ne,se": 622,
+  "lit|....|ne,sw": 623,
+  "lit|....|nw": 624,
+  "lit|....|nw,se": 625,
+  "lit|....|nw,sw": 626,
+  "lit|....|se": 627,
+  "lit|....|se,sw": 628,
+  "lit|....|sw": 629,
+  "lit|...E": 630,
+  "lit|...E|nw": 631,
+  "lit|...E|nw,sw": 632,
+  "lit|...E|sw": 633,
+  "lit|..W.": 634,
+  "lit|..W.|ne": 635,
+  "lit|..W.|ne,se": 636,
+  "lit|..W.|se": 637,
+  "lit|..WE": 638,
+  "lit|.S..": 639,
+  "lit|.S..|ne": 640,
+  "lit|.S..|ne,nw": 641,
+  "lit|.S..|nw": 642,
+  "lit|.S.E": 643,
+  "lit|.S.E|nw": 644,
+  "lit|.SW.": 645,
+  "lit|.SW.|ne": 646,
+  "lit|.SWE": 647,
+  "lit|N...": 648,
+  "lit|N...|se": 649,
+  "lit|N...|se,sw": 650,
+  "lit|N...|sw": 651,
+  "lit|N..E": 652,
+  "lit|N..E|sw": 653,
+  "lit|N.W.": 654,
+  "lit|N.W.|se": 655,
+  "lit|N.WE": 656,
+  "lit|NS..": 657,
+  "lit|NS.E": 658,
+  "lit|NSW.": 659,
+  "lit|NSWE": 660,
+  "water|....": 661,
+  "water|....|ne": 662,
+  "water|....|ne,nw": 663,
+  "water|....|ne,se": 664,
+  "water|....|ne,sw": 665,
+  "water|....|nw": 666,
+  "water|....|nw,se": 667,
+  "water|....|nw,sw": 668,
+  "water|....|se": 669,
+  "water|....|se,sw": 670,
+  "water|....|sw": 671,
+  "water|...E": 672,
+  "water|...E|nw": 673,
+  "water|...E|nw,sw": 674,
+  "water|...E|sw": 675,
+  "water|..W.": 676,
+  "water|..W.|ne": 677,
+  "water|..W.|ne,se": 678,
+  "water|..W.|se": 679,
+  "water|..WE": 680,
+  "water|.S..": 681,
+  "water|.S..|ne": 682,
+  "water|.S..|ne,nw": 683,
+  "water|.S..|nw": 684,
+  "water|.S.E": 685,
+  "water|.S.E|nw": 686,
+  "water|.SW.": 687,
+  "water|.SW.|ne": 688,
+  "water|.SWE": 689,
+  "water|N...": 690,
+  "water|N...|se": 691,
+  "water|N...|se,sw": 692,
+  "water|N...|sw": 693,
+  "water|N..E": 694,
+  "water|N..E|sw": 695,
+  "water|N.W.": 696,
+  "water|N.W.|se": 697,
+  "water|N.WE": 698,
+  "water|NS..": 699,
+  "water|NS.E": 700,
+  "water|NSW.": 701,
+  "water|NSWE": 702
+ },
+ "styles": {
+  "glacier": {
+   "T|...": 704,
+   "T|...|ne": 705,
+   "T|...|ne,nw": 706,
+   "T|...|ne,se": 707,
+   "T|...|ne,sw": 708,
+   "T|...|nw": 709,
+   "T|...|nw,se": 710,
+   "T|...|nw,sw": 711,
+   "T|...|se": 712,
+   "T|...|se,sw": 713,
+   "T|...|sw": 714,
+   "T|..E": 715,
+   "T|..E|nw": 716,
+   "T|..E|nw,sw": 717,
+   "T|..E|sw": 718,
+   "T|.W.": 719,
+   "T|.W.|ne": 720,
+   "T|.W.|ne,se": 721,
+   "T|.W.|se": 722,
+   "T|.WE": 723,
+   "T|N..": 724,
+   "T|N..|se": 725,
+   "T|N..|se,sw": 726,
+   "T|N..|sw": 727,
+   "T|N.E": 728,
+   "T|N.E|sw": 729,
+   "T|NW.": 730,
+   "T|NW.|se": 731,
+   "T|NWE": 732
+  }
+ }
+}

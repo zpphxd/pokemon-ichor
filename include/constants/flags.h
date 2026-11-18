@@ -2014,7 +2014,7 @@
 #define FLAG_ICHOR_TOWN_HERM_LAKONIA            (FLAG_ICHOR_GENERAL_START + 0x4B4) // Ichor: Lakonia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_LAKONIA)
 #define FLAG_ICHOR_TOWN_HERM_SACRED_OLIVES      (FLAG_ICHOR_GENERAL_START + 0x4B5) // Ichor: the Sacred Olives (Route 28)'s travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_SACRED_OLIVES)
 #define FLAG_ICHOR_TOWN_HERM_DELPHOI            (FLAG_ICHOR_GENERAL_START + 0x4B6) // Ichor: Delphoi's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_DELPHOI)
-#define FLAG_ICHOR_TOWN_HERM_SPARE_23           (FLAG_ICHOR_GENERAL_START + 0x4B7) // Ichor: travel herm 23, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_ASCENT             (FLAG_ICHOR_GENERAL_START + 0x4B7) // Ichor: the Ascent camp's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_ASCENT)
 #define FLAG_ICHOR_TOWN_HERM_SPARE_24           (FLAG_ICHOR_GENERAL_START + 0x4B8) // Ichor: travel herm 24, kept for the next town: rename it (engine, SYSTEMS §4)
 #define FLAG_ICHOR_TOWN_HERM_SPARE_25           (FLAG_ICHOR_GENERAL_START + 0x4B9) // Ichor: travel herm 25, kept for the next town: rename it (engine, SYSTEMS §4)
 #define FLAG_ICHOR_TOWN_HERM_SPARE_26           (FLAG_ICHOR_GENERAL_START + 0x4BA) // Ichor: travel herm 26, kept for the next town: rename it (engine, SYSTEMS §4)
@@ -2310,6 +2310,34 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1D5) // Ichor: Ascent 3F: in the snow by the last cairn
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_ELIXIR   (FLAG_ICHOR_GENERAL2_START + 0x1D6) // Ichor: Ascent 2F: behind the camp's second tent
 #define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1D7) // Ichor: Ascent 3F: on the summit shoulder above the stair
+#define FLAG_ICHOR_ITEM_ASCENT1_SHINY_STONE     (FLAG_ICHOR_GENERAL2_START + 0x1D8) // Ichor: Ascent 1F: Shiny Stone behind the thorn thicket (Sickle)
+#define FLAG_ICHOR_ITEM_ICEFALL_TM_BLIZZARD     (FLAG_ICHOR_GENERAL2_START + 0x1D9) // Ichor: the Icefall: TM Blizzard in the crystal garden
+#define FLAG_ICHOR_ITEM_ICEFALL_NEVER_MELT_ICE  (FLAG_ICHOR_GENERAL2_START + 0x1DA) // Ichor: the Icefall: Never-Melt Ice at the slide's far wall
+#define FLAG_ICHOR_ITEM_ICEFALL_MAX_ELIXIR      (FLAG_ICHOR_GENERAL2_START + 0x1DB) // Ichor: the Icefall: Max Elixir past the grate
+#define FLAG_ICHOR_ITEM_DEEP_TM_HYPER_BEAM      (FLAG_ICHOR_GENERAL2_START + 0x1DC) // Ichor: the Icefall's deep: TM Hyper Beam on the tarn's island (Conch)
+#define FLAG_ICHOR_ITEM_DEEP_SPELL_TAG          (FLAG_ICHOR_GENERAL2_START + 0x1DD) // Ichor: the Icefall's deep: Spell Tag by the drowned shrine
+#define FLAG_ICHOR_ITEM_VAULT_LIFE_ORB          (FLAG_ICHOR_GENERAL2_START + 0x1DE) // Ichor: the Crystal Vault: Life Orb
+#define FLAG_ICHOR_ITEM_VAULT_ICY_ROCK          (FLAG_ICHOR_GENERAL2_START + 0x1DF) // Ichor: the Crystal Vault: Icy Rock
+#define FLAG_ICHOR_ITEM_VAULT_ICE_STONE         (FLAG_ICHOR_GENERAL2_START + 0x1E0) // Ichor: the Crystal Vault: Ice Stone
+#define FLAG_ICHOR_ITEM_GLACIER_TM_ICE_BEAM     (FLAG_ICHOR_GENERAL2_START + 0x1E1) // Ichor: the Glacier: TM Ice Beam past the ice field
+#define FLAG_ICHOR_ITEM_GLACIER_FOCUS_SASH      (FLAG_ICHOR_GENERAL2_START + 0x1E2) // Ichor: the Glacier: Focus Sash by the frozen giant
+#define FLAG_ICHOR_ITEM_GLACIER_MAX_REVIVE      (FLAG_ICHOR_GENERAL2_START + 0x1E3) // Ichor: the Glacier: Max Revive in the drum court
+#define FLAG_ICHOR_ITEM_ASCENT3_PP_UP           (FLAG_ICHOR_GENERAL2_START + 0x1E4) // Ichor: Ascent 3F: PP Up on the cloud terrace
+#define FLAG_ICHOR_ICEFALL_GRATE_OPEN           (FLAG_ICHOR_GENERAL2_START + 0x1E5) // Ichor: the Icefall: the drum sits on its plate, the grate is up
+#define FLAG_ICHOR_GLACIER_GATE_OPEN            (FLAG_ICHOR_GENERAL2_START + 0x1E6) // Ichor: the Glacier: three drums on three plates, the Gate of the Winds is open
+#define FLAG_ICHOR_HIDE_VAULT_CHAIN             (FLAG_ICHOR_GENERAL2_START + 0x1E7) // Ichor: the Icefall: the Labrys cut the Crystal Vault's chain
+#define FLAG_ICHOR_VAULT_KRYSTOLOS              (FLAG_ICHOR_GENERAL2_START + 0x1E8) // Ichor: the Crystal Vault: the crystal giant woke (fought or caught)
+#define FLAG_ICHOR_SEEN_CLOUD_BREAK             (FLAG_ICHOR_GENERAL2_START + 0x1E9) // Ichor: Ascent 3F: broke through the cloud line (awe scene)
+#define FLAG_ICHOR_SEEN_PANTHEON                (FLAG_ICHOR_GENERAL2_START + 0x1EA) // Ichor: Ascent 3F: first sight of the Pantheon's propylaia (awe scene)
+#define FLAG_ICHOR_SEEN_SUMMIT_VIEW             (FLAG_ICHOR_GENERAL2_START + 0x1EB) // Ichor: Olympus summit: the view from the top (awe scene)
+#define FLAG_ICHOR_HIDDEN_ITEM_ICEFALL_ICE_STONE (FLAG_ICHOR_GENERAL2_START + 0x1EC) // Ichor: the Icefall: under the frozen pool's rim
+#define FLAG_ICHOR_HIDDEN_ITEM_ICEFALL_NUGGET   (FLAG_ICHOR_GENERAL2_START + 0x1ED) // Ichor: the Icefall: in the crystal garden's corner
+#define FLAG_ICHOR_HIDDEN_ITEM_DEEP_PEARL_STRING (FLAG_ICHOR_GENERAL2_START + 0x1EE) // Ichor: the Icefall's deep: on the tarn's far shore
+#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_BIG_NUGGET (FLAG_ICHOR_GENERAL2_START + 0x1EF) // Ichor: the Glacier: at the frozen giant's feet
+#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1F0) // Ichor: the Glacier: on the crevasse lip
+#define FLAG_ICHOR_HIDDEN_ITEM_VAULT_NEVER_MELT_ICE (FLAG_ICHOR_GENERAL2_START + 0x1F1) // Ichor: the Crystal Vault: in the cracked geode
+#define FLAG_ICHOR_HIDDEN_ITEM_VAULT_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1F2) // Ichor: the Crystal Vault: under the crack in the roof
+#define FLAG_ICHOR_HIDDEN_ITEM_DEEP_BIG_PEARL   (FLAG_ICHOR_GENERAL2_START + 0x1F3) // Ichor: the Icefall's deep: in the drowned shrine's bowl
 #define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion
 #define FLAG_ICHOR_VISITED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F1) // Ichor: Lakonia: Gytheion visited (fly target)
 #define FLAG_ICHOR_GYTHEION_DUSK                (FLAG_ICHOR_GENERAL2_START + 0x4F2) // Ichor: Lakonia: III-5B, the fisherman and Kleon's helmet

@@ -39,6 +39,14 @@ script Olympus_SeatOfAres_EventScript_SetClosed {
 
 script Olympus_SeatOfAres_EventScript_SetOpen {
     setmetatile(9, 2, 0x21C, FALSE)
+    setmetatile(6, 3, 0x33D, TRUE)
+    setmetatile(7, 3, 0x33E, TRUE)
+    setmetatile(6, 4, 0x345, TRUE)
+    setmetatile(7, 4, 0x346, TRUE)
+    setmetatile(11, 3, 0x33D, TRUE)
+    setmetatile(12, 3, 0x33E, TRUE)
+    setmetatile(11, 4, 0x345, TRUE)
+    setmetatile(12, 4, 0x346, TRUE)
     return
 }
 
@@ -54,6 +62,46 @@ script Olympus_SeatOfAres_EventScript_Brasidas {
         end
     }
     playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Brasidas raises his spear. Fire catches in the braziers at his side."), MSGBOX_DEFAULT)
+    closemessage
+    setmetatile(6, 3, 0x33D, TRUE)
+    setmetatile(7, 3, 0x33E, TRUE)
+    setmetatile(6, 4, 0x345, TRUE)
+    setmetatile(7, 4, 0x346, TRUE)
+    setmetatile(11, 3, 0x33D, TRUE)
+    setmetatile(12, 3, 0x33E, TRUE)
+    setmetatile(11, 4, 0x345, TRUE)
+    setmetatile(12, 4, 0x346, TRUE)
+    special(DrawWholeMapView)
+    playse(SE_M_FLAMETHROWER)
+    delay(20)
+    playse(SE_M_STRENGTH)
+    setvar(VAR_0x8004, 0)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 3)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    waitstate
+    delay(10)
+    playse(SE_M_STRENGTH)
+    setvar(VAR_0x8004, 0)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 3)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    waitstate
+    delay(10)
+    playse(SE_M_STRENGTH)
+    setvar(VAR_0x8004, 0)
+    setvar(VAR_0x8005, 3)
+    setvar(VAR_0x8006, 4)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    waitstate
+    msgbox(format("Spear on shield, three times, from every rack in the hall: the Lakonian salute."), MSGBOX_DEFAULT)
+    closemessage
+    setspeaker(Ichor_League_Text_NameBrasidas)
     msgbox(format("Lakonians never asked how long. Only how well.\pI've held Ares's seat for twenty winters. Kleon wrote to me once. He was nine. He asked how to be glorious.\pI wrote back: stand where you're put, and don't look at the end of the line.\pShow me well."))
     trainerbattle_no_intro(TRAINER_ICHOR_BRASIDAS, Olympus_SeatOfAres_Text_Defeat)
     setflag(FLAG_ICHOR_BEAT_BRASIDAS)

@@ -535,6 +535,22 @@ const struct Tileset gTileset_CaveDark =
     .callback = InitTilesetAnim_PorytilesManaged_CaveDark,
 };
 
+// Ichor: chion, the snows of Olympus (design/LEAGUE.md). Porytiles-managed, built
+// by tools/ichor/art/chion_build.py: cave_dark's kit recolored into ice and snow
+// (slick ice is MB_ICE), the glacier's snow-topped walls, the cloud sea, crystals
+// and the propylaia. It uses only its own tiles and palettes 6-12, so it works on
+// any primary; the Ascent pairs it with aethos.
+const struct Tileset gTileset_Chion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Chion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Chion,
+    .metatiles = gMetatiles_PorytilesManaged_Chion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Chion,
+    .callback = NULL,
+};
+
 // Ichor: labyrinth, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
 // built by tools/ichor/art/labyrinth_build.py: the house's masonry, the karst cave it
 // was cut into, Rings I-IV and Minos's tomb (LABYRINTH_MAZE.md). It uses only

@@ -1858,6 +1858,11 @@ static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *player, stru
         ObjectEventClearHeldMovementIfFinished(boulder);
         HandleBoulderFallThroughHole(boulder);
         HandleBoulderActivateVictoryRoadSwitch(boulder->currentCoords.x, boulder->currentCoords.y);
+        // Ichor: a pushed column drum keeps its place when it scrolls out of view and
+        // respawns (the Ascent's drum courts are wider than a screen). Templates reload
+        // with the map, so leaving or a seal's reset lever still sets every drum back.
+        SetObjEventTemplateCoords(boulder->localId, boulder->currentCoords.x - MAP_OFFSET,
+                                  boulder->currentCoords.y - MAP_OFFSET);
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();
         DestroyTask(FindTaskIdByFunc(Task_PushBoulder));

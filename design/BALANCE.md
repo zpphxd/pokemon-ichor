@@ -21,7 +21,7 @@ The single source for levels across the whole game. Every script, encounter tabl
 | **Lakonia** | 46–50 | 49–53 | Rhea 52–54 | |
 | **Delphoi** (Laurel 8) | 48–52 | 52–56 | Phemonoe 55–57 | |
 | **The Loom, the Frozen Hour, the Stair of Hours** | — | 55–58 | Kronos 58–60, the Lord of Time 60 | The climax |
-| **The Ascent and the Pantheon** | 52–58 | 56–62 | Pantheon 60–64, the Archon 65–67 | The League |
+| **The Ascent and the Pantheon** | 54–64 | 59–69 | Pantheon 66–72, the Archon 71–75 | The League; raised for team-wide EXP (2026-11-17) |
 | **Aethos post-game**: the Labors, Katabasis, the Olympiad, Atlantis | 55–70 | 65–75 | 70–80 | Rematches scale here |
 | **The Oikoumene**, the second map | 60–80 | 70–85 | Legendaries 70–80; the strongest up to 90–100 | Every non-Aethos National Dex Pokémon lives here |
 

@@ -219,7 +219,11 @@
     "Olympus_SeatOfAthena",
     "Olympus_SeatOfHera",
     "Olympus_Summit",
-    "Olympus_HallOfHeroes"
+    "Olympus_HallOfHeroes",
+    "Ascent_Icefall",
+    "Ascent_IcefallDeep",
+    "Ascent_CrystalVault",
+    "Ascent_Glacier"
   ],
   "gMapGroup_Labyrinth": [
     "LabyrinthRing1",

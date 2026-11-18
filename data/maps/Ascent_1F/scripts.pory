@@ -83,7 +83,17 @@ script Ascent_1F_EventScript_Stelai {
 }
 
 script Ascent_1F_EventScript_Niches {
-    msgbox(format("Votive niches cut in the rock over the spring. Nine small figures:\pthe Muses of Pieria, who were born on this slope."), MSGBOX_SIGN)
+    msgbox(format("Votive niches cut in the rock over the spring. Nine small figures:\pthe Muses of Pieria, who were born on this slope.\p"
+                  "Under them, Fragment I of the Olympian hymn, the one the Muses sang first:\p"
+                  "“First came Chaos, then broad-breasted Earth, and Sky to cover her.\p"
+                  "Their children were the Titans. Their grandchildren climbed this mountain and threw them down.”"), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_Klytos {
+    trainerbattle_single(TRAINER_ICHOR_ASCENT_KLYTOS,
+        format("Philon takes the top of the road and I take the bottom.\pThe Titans taught us that much. Hold both ends."),
+        format("…They never taught us what to do after."))
+    msgbox(format("We were supposed to have a whole new world by now. Instead we've got a road.\pIt's a good road, I suppose."), MSGBOX_AUTOCLOSE)
 }
 
 script Ascent_1F_EventScript_Herm {

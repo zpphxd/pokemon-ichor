@@ -1764,10 +1764,10 @@
     {
       "id": "LAYOUT_ASCENT_3F",
       "name": "Ascent_3F_Layout",
-      "width": 36,
-      "height": 40,
+      "width": 44,
+      "height": 46,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Skiron",
+      "secondary_tileset": "gTileset_Chion",
       "border_filepath": "data/layouts/Ascent_3F/border.bin",
       "blockdata_filepath": "data/layouts/Ascent_3F/map.bin",
       "layout_version": "emerald"
@@ -2661,6 +2661,50 @@
       "secondary_tileset": "gTileset_StairOfHours",
       "border_filepath": "data/layouts/StairOfHours/border.bin",
       "blockdata_filepath": "data/layouts/StairOfHours/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASCENT_ICEFALL",
+      "name": "Ascent_Icefall_Layout",
+      "width": 42,
+      "height": 46,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Chion",
+      "border_filepath": "data/layouts/Ascent_Icefall/border.bin",
+      "blockdata_filepath": "data/layouts/Ascent_Icefall/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASCENT_ICEFALL_DEEP",
+      "name": "Ascent_IcefallDeep_Layout",
+      "width": 34,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Chion",
+      "border_filepath": "data/layouts/Ascent_IcefallDeep/border.bin",
+      "blockdata_filepath": "data/layouts/Ascent_IcefallDeep/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASCENT_CRYSTAL_VAULT",
+      "name": "Ascent_CrystalVault_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Chion",
+      "border_filepath": "data/layouts/Ascent_CrystalVault/border.bin",
+      "blockdata_filepath": "data/layouts/Ascent_CrystalVault/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASCENT_GLACIER",
+      "name": "Ascent_Glacier_Layout",
+      "width": 44,
+      "height": 58,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Chion",
+      "border_filepath": "data/layouts/Ascent_Glacier/border.bin",
+      "blockdata_filepath": "data/layouts/Ascent_Glacier/map.bin",
       "layout_version": "emerald"
     }
   ]

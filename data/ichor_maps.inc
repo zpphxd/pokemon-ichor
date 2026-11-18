@@ -218,3 +218,7 @@
 	.include "data/maps/Delphoi_SiphnianTreasury/scripts.inc"
 	.include "data/maps/Delphoi_Lesche/scripts.inc"
 	.include "data/maps/LabyrinthCellars/scripts.inc"
+	.include "data/maps/Ascent_Icefall/scripts.inc"
+	.include "data/maps/Ascent_IcefallDeep/scripts.inc"
+	.include "data/maps/Ascent_CrystalVault/scripts.inc"
+	.include "data/maps/Ascent_Glacier/scripts.inc"

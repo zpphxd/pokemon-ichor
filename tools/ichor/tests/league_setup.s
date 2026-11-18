@@ -10,6 +10,7 @@
 #include "constants/pokemon.h"
 #include "constants/species.h"
 #include "constants/vars.h"
+#include "constants/opponents.h"
 #include "constants/rtc.h"
     .include "asm/macros.inc"
     .include "asm/macros/event.inc"
@@ -48,6 +49,17 @@ League_SetupScript:
     setflag FLAG_BADGE08_GET
     setflag FLAG_ICHOR_ACT1_COMPLETE
     setvar VAR_REPEL_STEP_COUNT, 999
+    @ the climb's trainers are tools/ichor/tests/ascent.sh's to fight; here the road is clear
+    settrainerflag TRAINER_ICHOR_ASCENT_PHILON
+    settrainerflag TRAINER_ICHOR_ASCENT_KLYTOS
+    settrainerflag TRAINER_ICHOR_ASCENT_LAMPON
+    settrainerflag TRAINER_ICHOR_ASCENT_THEANO
+    settrainerflag TRAINER_ICHOR_ASCENT_KALLIAS
+    settrainerflag TRAINER_ICHOR_ASCENT_AGATHE
+    settrainerflag TRAINER_ICHOR_ASCENT_LYSANDRA
+    settrainerflag TRAINER_ICHOR_ASCENT_NIKIAS
+    settrainerflag TRAINER_ICHOR_ASCENT_EIRENE
+    settrainerflag TRAINER_ICHOR_ASCENT_DEXIOS
     warp MAP_ASTYRA, 42, 33
     waitstate
     releaseall
@@ -68,5 +80,19 @@ League_SaveScript:
     lockall
     setvar VAR_TEMP_F, 1
     special SaveGame
+    releaseall
+    end
+
+@ Above the cloud: the climb between the camp and 3F is ascent.sh's. The
+@ gatekeeper is beaten and the awe scenes seen, so the walk to the doors is free.
+    test_header League_AboveCloudHeader, League_AboveCloudScript
+League_AboveCloudScript:
+    lockall
+    setvar VAR_TEMP_F, 1
+    settrainerflag TRAINER_ICHOR_ASCENT_POLYDAMAS
+    setflag FLAG_ICHOR_SEEN_CLOUD_BREAK
+    setflag FLAG_ICHOR_SEEN_PANTHEON
+    warp MAP_ASCENT_3F, 21, 9
+    waitstate
     releaseall
     end

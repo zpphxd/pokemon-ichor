@@ -55,6 +55,21 @@ script Olympus_SeatOfPoseidon_EventScript_Themistokles {
         end
     }
     playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Themistokles raps his staff on the trireme's bronze ram."), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_M_SURF)
+    setvar(VAR_0x8004, 3)
+    setvar(VAR_0x8005, 0)
+    setvar(VAR_0x8006, 6)
+    setvar(VAR_0x8007, 5)
+    special(ShakeCamera)
+    waitstate
+    playse(SE_M_WATERFALL)
+    delay(30)
+    msgbox(format("The basin heaves. A wave rolls under the hull, and every oar along its side lifts at once."), MSGBOX_DEFAULT)
+    closemessage
+    setspeaker(Ichor_League_Text_NameThemistokles)
     msgbox(format("The oracle told Astyra to trust its wooden wall. Everyone read walls.\pI read ships. We won at Salamis, and I keep that ship here so nobody forgets an oracle can be read two ways.\pI had Aristeides exiled once. Best thing I ever did for him. Nobody's too good to be wrong.\pLet's see which way you read me."))
     trainerbattle_no_intro(TRAINER_ICHOR_THEMISTOKLES, Olympus_SeatOfPoseidon_Text_Defeat)
     setflag(FLAG_ICHOR_BEAT_THEMISTOKLES)

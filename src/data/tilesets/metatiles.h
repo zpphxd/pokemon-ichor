@@ -304,3 +304,8 @@ const u16 gMetatileAttributes_PorytilesManaged_Loom[] = INCBIN_U16("data/tileset
 // Ichor: stair_of_hours
 const u16 gMetatiles_PorytilesManaged_StairOfHours[] = INCBIN_U16("data/tilesets/secondary/stair_of_hours/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_StairOfHours[] = INCBIN_U16("data/tilesets/secondary/stair_of_hours/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: chion
+const u16 gMetatiles_PorytilesManaged_Chion[] = INCBIN_U16("data/tilesets/secondary/chion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Chion[] = INCBIN_U16("data/tilesets/secondary/chion/porytiles_bin/metatile_attributes.bin");
+

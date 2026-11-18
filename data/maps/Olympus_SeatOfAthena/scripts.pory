@@ -53,6 +53,28 @@ script Olympus_SeatOfAthena_EventScript_Hypatia {
         end
     }
     playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Hypatia rolls up the scroll she was reading. Somewhere above, an owl wakes."), MSGBOX_DEFAULT)
+    closemessage
+    playmoncry(SPECIES_SOPHOWL, CRY_MODE_NORMAL)
+    waitmoncry
+    fadescreenspeed(FADE_TO_WHITE, 2)
+    fadescreenspeed(FADE_FROM_WHITE, 2)
+    msgbox(format("Every lamp in the library brightens at once, as if the room were listening."), MSGBOX_DEFAULT)
+    closemessage
+    setspeaker(Ichor_League_Text_NameHypatia)
+    message(format("A question first. The only one I ever ask. Who are you?"))
+    waitmessage
+    dynmultichoice(15, 6, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Olympus_SeatOfAthena_Text_MyName, Olympus_SeatOfAthena_Text_WhatIDid, Olympus_SeatOfAthena_Text_DontKnow)
+    setspeaker(Ichor_League_Text_NameHypatia)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("That's what they call you. I asked who you are."))
+    } elif (var(VAR_RESULT) == 1) {
+        msgbox(format("Hm. A better answer than most. Deeds can be argued with, though."))
+    } else {
+        msgbox(format("The only honest answer anyone has ever given me. Let's find out together."))
+    }
+    setspeaker(Ichor_League_Text_NameHypatia)
     msgbox(format("Every scroll in this room was written about someone. Every one of them has an ending.\pNot yours. No one wrote you.\pSo who are you? Answer in battle. It's quicker."))
     trainerbattle_no_intro(TRAINER_ICHOR_HYPATIA, Olympus_SeatOfAthena_Text_Defeat)
     setflag(FLAG_ICHOR_BEAT_HYPATIA)
@@ -76,3 +98,7 @@ script Olympus_SeatOfAthena_EventScript_ExitGate {
     waitstate
     releaseall
 }
+
+text Olympus_SeatOfAthena_Text_MyName { "MY NAME." }
+text Olympus_SeatOfAthena_Text_WhatIDid { "WHAT I'VE DONE." }
+text Olympus_SeatOfAthena_Text_DontKnow { "I DON'T KNOW YET." }

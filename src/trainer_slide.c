@@ -62,6 +62,33 @@ static bool32 IsSlideInitalizedOrPlayed(enum BattlerId battler, enum TrainerSlid
 // [TRAINER_X] = { ... }; partner trainers as TRAINER_PARTNER(PARTNER_XXXX).
 static const u8* const sTrainerSlides[TRAINER_PARTNER(PARTNER_COUNT)][TRAINER_SLIDE_COUNT] =
 {
+    // Ichor: the League's last stand (design/LEAGUE.md, the endgame upgrade)
+    [TRAINER_ICHOR_ASCENT_POLYDAMAS] =
+    {
+        [TRAINER_SLIDE_SELF_LAST_SWITCHIN] = COMPOUND_STRING("I held up a cave roof once.\nI can hold up you.{PAUSE_UNTIL_PRESS}"),
+    },
+    [TRAINER_ICHOR_BRASIDAS] =
+    {
+        [TRAINER_SLIDE_SELF_LAST_SWITCHIN] = COMPOUND_STRING("Last in the line.\nA Lakonian line doesn't step back.{PAUSE_UNTIL_PRESS}"),
+    },
+    [TRAINER_ICHOR_THEMISTOKLES] =
+    {
+        [TRAINER_SLIDE_SELF_LAST_SWITCHIN] = COMPOUND_STRING("Up from the deep, Hexylla!\nThe wooden wall holds!{PAUSE_UNTIL_PRESS}"),
+    },
+    [TRAINER_ICHOR_HYPATIA] =
+    {
+        [TRAINER_SLIDE_SELF_LAST_LOW_HP] = COMPOUND_STRING("Ah. So that's your answer.\nI'll write it down.{PAUSE_UNTIL_PRESS}"),
+    },
+    [TRAINER_ICHOR_OLYMPIAS] =
+    {
+        [TRAINER_SLIDE_SELF_LAST_SWITCHIN] = COMPOUND_STRING("Hera's own child. Cut off one\nhead, and see what grows back.{PAUSE_UNTIL_PRESS}"),
+    },
+    [TRAINER_ICHOR_ARISTEIDES] =
+    {
+        [TRAINER_SLIDE_BEFORE_FIRST_TURN] = COMPOUND_STRING("Twenty years I kept the box.\nLet's see what else I kept.{PAUSE_UNTIL_PRESS}"),
+        [TRAINER_SLIDE_SELF_LAST_SWITCHIN] = COMPOUND_STRING("Aetarch. The eagle that carries\nhis thunder. My last word.{PAUSE_UNTIL_PRESS}"),
+        [TRAINER_SLIDE_SELF_LAST_LOW_HP] = COMPOUND_STRING("…So this is what it feels like.\nNot knowing.{PAUSE_UNTIL_PRESS}"),
+    },
 };
 
 static const u8* const sFrontierTrainerSlides[FRONTIER_TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =

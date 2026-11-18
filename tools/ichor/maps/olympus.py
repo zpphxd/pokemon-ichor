@@ -198,24 +198,36 @@ def seat_of_ares():
         g.set(x, H - 1, lab("floor", "void"), True)
     g.set(9, H - 1, lab("edge", "sill_l"), False, "sill")
     g.set(10, H - 1, lab("edge", "sill_r"), False, "sill")
-    # the crimson runner up the middle
-    run = LAB["runner"]
-    for y in range(4, H - 1):
-        r = 0 if y == 4 else 2 if y == H - 2 else 1
-        g.set(9, y, run["ids"][r][0], False, "runner")
-        g.set(10, y, run["ids"][r][1], False, "runner")
-    # two files of bronze hoplites, eyes front: the phalanx
-    for y in (6, 9, 12, 15):
-        for x in (3, 6, 13, 16):
-            key = "auto_kouros" if (x + y) % 3 else "auto_kore"
-            g.set(x, y, lab(key, "top"), True, "bronze")
-            g.set(x, y + 1, lab(key, "base"), True, "bronze")
-    for x in (7, 12):
-        g.set(x, 4, lab("auto_lamp", "top"), True)
-        g.set(x, 5, lab("auto_lamp", "base"), True)
-    for x in (1, 17):
-        g.set(x, 16, lab("auto_hound", "top"), True)
-        g.set(x, 17, lab("auto_hound", "base"), True)
+    # (Rebuilt 2026-11-17 on the Labyrinth's current kit: the old runner and
+    # bronze-kouros pieces were cut from the tileset and drew as void.)
+    def quad(key, x, y, names=("tl", "tr", "bl", "br")):
+        for (dx, dy), n in zip(((0, 0), (1, 0), (0, 1), (1, 1)), names):
+            g.set(x + dx, y + dy, lab(key, n), True, key)
+
+    # the bronze way up the middle: plates laid end to end from the door to the dais
+    for y in range(5, H - 1):
+        g.set(9, y, lab("plate", "plate_cap_n" if y == 5 else "plate_cap_s" if y == H - 2 else "plate_v"),
+              False, "bronze way")
+    # the polemarch's dais: two braziers burning either side of him
+    quad("brazier", 6, 3, ("cold_tl", "cold_tr", "cold_bl", "cold_br"))
+    quad("brazier", 11, 3, ("cold_tl", "cold_tr", "cold_bl", "cold_br"))
+    # the phalanx: two files of arms racks, shields and helmets, eyes front, the way a
+    # Lakonian line stands; you walk the file to reach him
+    for i, y in enumerate((7, 10, 13)):
+        for x in (3, 13):
+            quad("armory" if (i + (x > 9)) % 2 == 0 else "helmets", x, y)
+        for x in (6, 11):
+            g.set(x, y, LAB["column"]["ids"][0][0], True, "column")
+            g.set(x, y + 1, LAB["column"]["ids"][1][0], True, "column")
+    # the mess where the seat's hoplites eat together (the syssitia), by the way in
+    for x0 in (2, 14):
+        tab = LAB["mess_table"]
+        for j in range(2):
+            for i in range(3):
+                g.set(x0 + i, 16 + j, tab["ids"][j][i], True, "mess")
+    for x in (7, 11):
+        g.set(x, 16, lab("lamp_stand", "top"), True)
+        g.set(x, 17, lab("lamp_stand", "base"), True)
     # the door is shut until Brasidas falls (the scripts open it)
     g.solid[ARES_DOOR[1], ARES_DOOR[0]] = True
     g.person("BRASIDAS", "HOPLITE", 9, 4, "Brasidas", facing="DOWN")
@@ -420,15 +432,16 @@ def seat_of_hera():
     th = dem("throne", None)
     g.set(9, 2, th[0][0], True, "throne")
     g.set(9, 3, th[1][0], True, "throne")
+    # Hera's fire waits cold until Olympias rises (league_seats.py lights it, torch by torch)
     for x in (5, 13):
-        g.set(x, 3, dem("braziers", "top_lit"), True)
-        g.set(x, 4, dem("braziers", "summer_lit"), True)
+        g.set(x, 3, dem("braziers", "top_cold"), True)
+        g.set(x, 4, dem("braziers", "summer_cold"), True)
     # a forest of dark columns, torches on the aisle
     for y in (6, 10, 14):
         for x in (2, 5, 13, 16):
             lit = x in (5, 13)
-            g.set(x, y, dem("columns", "torch_lit" if lit else "top"), True)
-            g.set(x, y + 1, dem("columns", "bottom_lit" if lit else ("bottom_b" if y == 10 else "bottom")), True)
+            g.set(x, y, dem("columns", "torch_cold" if lit else "top"), True)
+            g.set(x, y + 1, dem("columns", "bottom" if lit else ("bottom_b" if y == 10 else "bottom")), True)
     # the serpent pits between them: sunken dens with a lit lip and side walls
     # (temple_demeter_art.serpent_pits), a coiled serpent showing in some
     snakes = {(7, 10): "bot_s_snake", (6, 14): "bot_l_snake", (15, 17): "one_m_snake",

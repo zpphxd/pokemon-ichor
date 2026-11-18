@@ -18,11 +18,30 @@ script Olympus_Summit_EventScript_FaceNorth {
 }
 
 movement Olympus_Summit_Movement_ToAltar { walk_up * 11 }
+movement Olympus_Summit_Movement_ViewWest { walk_slow_left * 5 delay_16 delay_16 }
+movement Olympus_Summit_Movement_ViewEast { walk_right * 10 delay_16 delay_16 }
+movement Olympus_Summit_Movement_ViewBack { walk_left * 5 }
 movement Olympus_Summit_Movement_ThreadSouth { walk_in_place_slow_down }
 
 script Olympus_Summit_EventScript_Arrive {
     lockall
     setvar(VAR_ELITE_4_STATE, 9)
+    // the summit view (awe, once): the whole of Aethos under the cloud
+    if (!flag(FLAG_ICHOR_SEEN_SUMMIT_VIEW)) {
+        setflag(FLAG_ICHOR_SEEN_SUMMIT_VIEW)
+        special(SpawnCameraObject)
+        applymovement(OBJ_EVENT_ID_CAMERA, Olympus_Summit_Movement_ViewWest)
+        waitmovement(0)
+        msgbox(format("The top of the world. The cloud runs out to every edge of it.\p"
+                      "Somewhere under it is Kalliste, and Elaia, and a hive of bees on a hill.\p"
+                      "Every road you took to get here is down there. None of them goes any higher."), MSGBOX_DEFAULT)
+        closemessage
+        applymovement(OBJ_EVENT_ID_CAMERA, Olympus_Summit_Movement_ViewEast)
+        waitmovement(0)
+        applymovement(OBJ_EVENT_ID_CAMERA, Olympus_Summit_Movement_ViewBack)
+        waitmovement(0)
+        special(RemoveCameraObject)
+    }
     applymovement(LOCALID_PLAYER, Olympus_Summit_Movement_ToAltar)
     waitmovement(0)
     if (flag(FLAG_ICHOR_HIDE_ARCHON_SUMMIT)) {
@@ -84,6 +103,24 @@ script Olympus_Summit_EventScript_Archon {
     msgbox(format("He closes the box."))
     setspeaker(Ichor_League_Text_NameAristeides)
     msgbox(format("The law of Olympus is simple. Whoever beats the Archon keeps the box.\pIf I win, I carry this to Delphoi and tie it at the new moon.\pIf you win… it's yours. And so is the fear.\pI won't go easy. A just man doesn't."))
+    closemessage
+    // the peak of the story: the sky over the altar answers him
+    setspeaker(SP_NAME_NONE)
+    playse(SE_THUNDER)
+    fadescreenspeed(FADE_TO_WHITE, 1)
+    fadescreenspeed(FADE_FROM_WHITE, 1)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    msgbox(format("Thunder out of a clear sky. The cloud below the summit lights up from inside, all the way to the sea."), MSGBOX_DEFAULT)
+    closemessage
+    setspeaker(Ichor_League_Text_NameAristeides)
+    msgbox(format("He's watching. He always comes to watch this part.\pDon't look up. Look at me."))
+    closemessage
+    playbgm(MUS_VS_CHAMPION, FALSE)
     trainerbattle_no_intro(TRAINER_ICHOR_ARISTEIDES, Olympus_Summit_Text_ArchonDefeat)
     setflag(FLAG_ICHOR_ARCHON_DEFEATED)
     goto(Olympus_Summit_EventScript_Knot)

@@ -285,3 +285,7 @@ data/maps/Delphoi_AstyranTreasury/scripts.inc
 data/maps/Delphoi_SiphnianTreasury/scripts.inc
 data/maps/Delphoi_Lesche/scripts.inc
 data/maps/LabyrinthCellars/scripts.inc
+data/maps/Ascent_Icefall/scripts.inc
+data/maps/Ascent_IcefallDeep/scripts.inc
+data/maps/Ascent_CrystalVault/scripts.inc
+data/maps/Ascent_Glacier/scripts.inc

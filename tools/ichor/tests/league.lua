@@ -62,11 +62,13 @@ L.start(function()
     L.talk(L.npc("Ascent_2F_EventScript_Cook"))
     L.expect(L.itemCount(S.ITEM_LEFTOVERS) == 1, "the Leftovers cannot be duplicated")
     L.shot("ascent_2f_camp")
-    L.leaveEdge("up", S.MAP_ASCENT_3F)
-    arrive(S.MAP_ASCENT_3F, "the ledges climb out of the cloud to the snowline")
-    L.shot("ascent_3f_snowline")
+    -- the Icefall, the Glacier and their seals are tools/ichor/tests/ascent.sh's;
+    -- this check carries on above the cloud, past the beaten gatekeeper
+    L.runHeader("League_AboveCloudHeader")
+    arrive(S.MAP_ASCENT_3F, "above the cloud, at the top of the processional stair")
+    L.shot("ascent_3f_processional_way")
 
-    -- 3F: the processional stair to the propylaia
+    -- 3F: the last stair to the propylaia
     L.useWarp(S.MAP_PROPYLAIA)
     arrive(S.MAP_PROPYLAIA, "the stair ends at the Pantheon's propylaia")
     L.shot("propylaia")
