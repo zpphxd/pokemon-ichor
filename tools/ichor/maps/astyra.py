@@ -273,13 +273,13 @@ def eleusa_connection():
 
 
 if __name__ == "__main__":
-    roads(ROADS)
-    daphni()
+    roads(ROADS)         # a no-op for Routes 15-16 now: tools/ichor/maps/sacredway.py builds them
+    # daphni() and roadside_cast() are excluded: sacredway.py builds Daphni and writes
+    # Route 16's roadside Alethea and its map scripts (keep them off, or they undo it).
     city()
     rooms()
     stoa()
     akropolis()
-    roadside_cast()
     eleusa_connection()
-    encounters_and_teams(ROADS, "Astyra approach")
+    encounters_and_teams(ROADS, "Astyra approach")   # the twelve road parties; no wild tables
     raid_teams()

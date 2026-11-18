@@ -425,6 +425,93 @@ These are the real-world models the design bible names, and the features each ma
 | Lakonia | Sparta | Unwalled villages, the reedy Eurotas river, the wall of Taygetos behind, and the sanctuary of Artemis Orthia: austere, not grand |
 | Delphoi | Delphi | A terraced sanctuary on a steep slope: the Sacred Way zigzagging up past treasuries, the temple on its terrace, the theater above, the stadium at the top, the Castalian spring in the ravine, the shining Phaedriades cliffs, and the olive sea far below |
 
+### 4.8 Architecture: Gen 3 craft and Greek forms
+
+The user asked for buildings that feel amazing: Gen 3's craft, drawn in Greek forms. This section is what we learned from studying Emerald's own cities, rendered from this repo (Lilycove, Slateport, Mauville, Rustboro, Fortree, Sootopolis, Ever Grande and the League), and what to get right about Greek building. It ends in rules in tiles and pixels. We study the techniques, then draw Ichor's own tiles. We never copy Nintendo's.
+
+![Reference sheet: Ichor's column kit, statue and building proportions](art/architecture_reference.png)
+
+*The reference sheet (`tools/ichor/art/architecture_sheet.py`). The full column kit is `design/art/columns_kit.png`; the statue bar is `design/art/refs/statue_zeus_reference.png`.*
+
+#### 4.8.1 What Gen 3 does to sell scale and depth
+
+| Technique | What Emerald does | Rule for Ichor |
+|---|---|---|
+| **The 3/4 view** | Every building shows its roof from above and its front wall at once. A roof slope fills the top half; the wall is the bottom half. Sides are never drawn. | Draw the south face and the roof only. A building faces the camera; a temple's pediment faces south (we accept this over "the temple faces east"). |
+| **Roof to wall** | A house is 4 wide: 2 rows of roof over 1.5–2 rows of wall. A Center is 4×4: roof 2, wall 2. The roof is always at least as tall as the wall. | House: roof 2 rows over wall 1 (one storey) or 2 (two storeys). Civic building: pediment or roof 2, entablature and columns 2–3, steps 1. |
+| **Height in rows** | Small buildings span 3–4 rows. Lilycove's department store is 9 × 7. The League is 10 × 6 with a portico in front. | A house is 3–4 rows. A civic building is 5. A great temple is 7–8. Nothing grand is under 5 rows. |
+| **The landmark** | A landmark covers 2–3× a house's footprint: the department store, the League, Sootopolis's gym. | Landmark ≥ 2.5× the town's house: a house is 4×3 = 12 cells; the Stoa is 18×5, the Library 7×5, the Parthenon 14×8. |
+| **Doors** | The door is inset: a dark recess one tile wide, a frame lighter than the wall, a shadow line under the lintel. | A door is a dark (`cd0`) opening 8–12 px wide in a 1-px frame, with a lintel 2 px brighter above it. It is the only dark thing low on a facade. |
+| **Shadow lines** | A 1–2 px dark line runs under every eave, cornice and step. Buildings cast a short shadow down and to the right. | Every horizontal member ends in a 1-px shadow row. Every building, column and statue casts a 2–4 px shadow on the ground, down and right, dithered at its far edge. |
+| **Window rhythm** | Windows repeat at an even pitch, always in pairs or rows, never one alone in a wide wall. | Openings sit on a 16 px pitch (one per cell) or 32 px. Greek houses show high, small grilled windows (4×4 px) or none. |
+| **Cliffs and terraces** | Height is stacked: a cliff face 1–2 rows, a ledge, another face (Ever Grande, Sootopolis). Each face has a lit lip and a dark foot. | Height you can feel is 2+ rows of face. A rock face: a lit lip row, 2–3 rows of faceted face, a foot row with a crevice and a cast shadow. Step its foot back or forward every ≤ 6 cells. |
+| **Plazas framed** | Open ground is framed by buildings on 2–3 sides (Lilycove's square, Slateport's market). | An agora is framed by stoas on 2 sides; keep its middle open. |
+| **Palettes** | Each building uses 4–5 values of 1–2 hues, plus an outline. Roof and wall contrast strongly in value (a dark roof over a light wall, or the reverse). | Per material: a 5-step ramp (outline, shadow, mid, light, highlight). Neighboring materials differ by at least 2 steps in value. |
+| **Outlines** | A 1-px outline in the material's own darkest shade, never pure black. Inner lines are a step lighter than the outline. | Outline in the ramp's darkest (`cm0` for marble, `bz0` for bronze, `ink` for tile roofs). Inner edges one step lighter. |
+| **Highlight and shadow** | Light from the upper left. Top and left edges get the highlight; bottom and right get the shadow. | Same. A column is lit on its left third and shadowed on its right third. A cylinder's brightest stripe sits 1–2 px in from its left edge. |
+
+#### 4.8.2 Greek forms to get right
+
+- **The orders.**
+  - **Doric:** sturdy; no base; a cushion-shaped echinus under a square abacus; 20 sharp flutes; a frieze of triglyphs (three bars) and metopes (panels) above a plain architrave. Mainland, old, the Parthenon.
+  - **Ionic:** slender; an Attic base (torus, scotia, torus); two volutes (scrolls) on the capital; flutes separated by fillets; a three-banded architrave and a continuous frieze. Islands, the east, the Erechtheion.
+  - **Corinthian:** Ionic's proportions with a tall bell of acanthus leaves and four corner helices under a concave abacus. Late and rare: **one showpiece per city at most** (Astyra's Library).
+- **The platform.** A temple stands on a **krepidoma** of three steps; the top step is the **stylobate** the columns stand on. The steps are each a lit tread, a riser and a shadow line. Lesser buildings get one step.
+- **Column rhythm and entasis.** Columns repeat at an even pitch; the corner columns sit a little closer in real temples, but at our scale an even pitch reads better. Entasis is a slight swell: our shafts taper by 1 px on the shadow side over their top fifth. Fronts have an **even number of columns** (4, 6, 8), so a gap, never a column, sits on the axis and the door.
+- **Entablature.** Architrave, frieze, cornice, in that order from the capitals up. On a Doric frieze a triglyph sits over every column and every gap. Shields or garlands may hang on the architrave.
+- **Pediment.** The triangular gable over the front, with sculpture in its tympanum: a central contest under the apex, smaller figures toward the corners. **Akroteria** (gilded palmettes or figures) stand on the apex and corners.
+- **Polychromy.** Temples were painted. Keep the marble bright and the paint on the details: blue tympanum and triglyphs, red bands (taenia, mouldings, geison), gold on akroteria, shields and capitals. Never paint a whole wall.
+- **The sanctuary's parts.** A walled precinct (**temenos**) entered by a gateway (**propylon**, or the great **Propylaia**); the altar outside, in front of the temple; long colonnaded halls (**stoas**), one side open, framing the **agora**; a **theater** cut into a hillside facing a view.
+- **Roofs.** Houses and stoas: terracotta pan-and-cover tiles with antefixes along the eave. Great temples: marble tiles; we show their roof only as the pediment and its raking cornice.
+
+#### 4.8.3 Rules at 16×16
+
+**Columns.** Use the shared kit, `tools/ichor/art/columns.py` (API in its header; `design/art/columns_kit.png`). Never hand-draw a column.
+- Shaft widths: Doric 10 px, Ionic and Corinthian 8 px, inside a 16 px slot. A capital fills the slot (16 px abacus).
+- Capitals: Doric 9 rows (abacus 3, echinus 3, annulets 2, necking 1); Ionic 9 (abacus 2, volutes 5, astragal 1); Corinthian 14 (abacus 2, two tiers of leaves, helices). Attic base 7 rows.
+- Flutes are vertical stripes: highlight, light, mid alternating, then the shadow side, then the outline. Stripes, not noise: shafts must tile vertically.
+- **Pitch.** 16 px (one column per cell, the cheapest dense colonnade: a stoa) or 32 px (**intercolumniation of 1 tile**, a walkable gap between columns: the Propylaia, a free colonnade). The Parthenon's octastyle uses a 28 px pitch; any pitch whose pattern repeats in 56 px or less is affordable.
+- **Tall columns** are 2–4 metatiles of column (5–6 for a colossal order). A free column's capital and shaft go on the **top layer** (walk code `T`): the player walks behind it. Only the base collides.
+- **Shadow.** Every free column casts a 3-row shadow down and right of its foot (`cast_shadow`).
+- **Variants:** `marble` (living), `poly` (painted), `bronze` (bronze capitals), `moss` (weathered: ruins), `snow` (Olympus). Each has its own palette group in `CK.GROUPS`.
+- **Ruins** come from `CK.ruins()`: a broken shaft, a toppled drum, fallen capitals, a plinth with only the feet. Ruins are never as bright as a working temple.
+
+**Buildings.**
+- Every facade is composed as one picture on a canvas (`astyra_art.canvas`), then cut into cells (`astyra_art.cut`). Keep every texture periodic in 16 px (or 8) so repeated cells share tiles.
+- Pediments rise **1 px in 4** (`astyra_art.pediment`): the rake's tiles then repeat every 32 px. A 14-wide front rises 28 px.
+- Each 8×8 tile draws from one palette group. Put a seam between materials on a tile boundary (a roof's eave at a cell's edge, the colonnade below it).
+- Draw building art on the middle layer over **borrowed aethos ground**; it costs no ground tiles and the edges sit on the real grass or path.
+
+**Palettes.** Marble `cm0`–`cm5`, the dark behind colonnades `cd0` `cd1`, paint `pr1` `pb0` `pb1` `pg1` `pg2`, a shadow on path `ps`, on grass `gd` (`columns.py`); the rock `ar0`–`ar5`, roofs `tc0`–`tc3`, plaster `hw1`–`hw3` (`astyra_art.py`). Reuse these names; add a group only for a new material.
+
+**Do:**
+- frame an open space with long buildings on 2 sides
+- raise every sacred building on steps; put its altar in front
+- give every screen one landmark, and every landmark a cast shadow
+- break a straight front every ≤ 6 cells with a step, a herm, a statue or a notch
+- let the skyline show what is higher up (Promachos's spear and the Parthenon's pediment over the Akropolis wall)
+
+**Don't:**
+- no odd number of columns on a front, no column on the axis
+- no arches, vaults or domes (except the island-shrine domes STYLE §4.5 allows)
+- no pure-black outlines, no single-pixel noise on walls
+- no Corinthian in a Doric town's everyday buildings
+- no building lit from the right
+
+#### 4.8.4 Statues
+
+The bar is **`design/art/refs/statue_zeus_reference.png`** (the user's reference): Zeus painted as a statue, bearded, a thunderbolt in one hand and an eagle on the other arm, a draped chiton in folds, warm bronze and skin tones, crisp dark outlines and soft cast shading, on a teal-green hexagonal plinth on a flagstone floor. Every statue in Ichor matches it.
+
+- **Anatomy that reads.** Heroic proportions of about 6 heads, not 8: the head must read at 1×. At 64 px wide the head is 16–18 px with brows, eyes, nose and mouth; at 32 px (a 2×3 statue) it is 6–8 px with a lit side and a dark side.
+- **An attribute in the hands.** Every statue says who it is: Athena's spear and owl shield, Zeus's thunderbolt and eagle, Hermes's caduceus, Kairos's razor and balance. The attribute gets the brightest value (gold or a highlight).
+- **Drapery in value steps.** Folds are bands of 4–5 values from crease to crest (`astyra_statues.FOLD`), lit on the left. An overfold or a sash breaks the column of folds. A relaxed knee pushes the cloth forward and catches the light.
+- **Outlines.** 1 px in the material's darkest (`bz0` for bronze) round the silhouette, and inner outlines wherever an arm, a shield or an attribute crosses the body.
+- **A proper plinth.** Seen in 3/4: a lit top face, a moulded cornice, a front with a worn inscription, the east side in shadow, a base course (`astyra_statues.plinth_3q`). A plinth is solid; the figure above it is on the top layer, walkable behind.
+- **A cast shadow.** Down and to the right on the floor, from the plinth and the figure, dithered at its far end.
+- **Colossi scale the same approach up.** Promachos (4×9) is this recipe at 64×144; Zeus enthroned (10×11) and the bronze man of Kaldera (6×10) follow it.
+- **Check.** `tools/ichor/art/astyra_statue_crops.py` writes 1× and 3× crops of every statue beside each other (`design/awe/img/statues_*.png`). Judge the head and the attribute at 1×.
+
+
 ---
 
 ## 5. Order of work

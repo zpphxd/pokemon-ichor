@@ -174,7 +174,10 @@
     "Route14_Tretos",
     "Nemea_Palaestra",
     "Nemea_MolorchosHouse",
-    "Route7_NurseryOfNysa"
+    "Route7_NurseryOfNysa",
+    "Daphni_Sanctuary",
+    "Daphni_PilgrimsRest",
+    "Daphni_LaurelHouse"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",

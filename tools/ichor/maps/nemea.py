@@ -93,8 +93,9 @@ NEMEA_EAST_ROWS = range(17, 19)    # = Route 14's west rows (offset 0)
 GATE_ROW = 13                      # Route 14's exit row; Emporion's one-tile Nemea Gate is its y 41
 EMPORION_OFFSET = GATE_ROW - 41
 
-# The old placeholder builder (kept for astyra.py, which builds Routes 15 and 16
-# with it): roads() and encounters_and_teams() below.
+# The old placeholder builder, roads() and encounters_and_teams() below. Routes 15
+# and 16 left it for tools/ichor/maps/sacredway.py (2026-11-18); astyra.py still
+# calls both, and both now skip those two roads (only their parties stay here).
 ROADS = [
     ("Route13_HighlandRoad", "R13", 30,
      ["POLYDOROS", "ANTHE", "LYKON", "THEANO", "KALLIAS", "AGLAON"]),
@@ -1521,14 +1522,20 @@ def emporion_connection():
 
 
 # ---------------------------------------------------------------------------
-# The old placeholder road builder, still used by astyra.py for Routes 15-16
+# The old placeholder road builder. astyra.py still calls it with Routes 15-16,
+# which tools/ichor/maps/sacredway.py now owns, so it skips them.
 # ---------------------------------------------------------------------------
+SACRED_WAY = ("R15", "R16")    # built by sacredway.py: layouts, events, scripts and wild tables
+
+
 def roads(records=ROADS):
     links = {"R15": ("EleusaVillage", "Daphni", -14, 0),
              "R16": ("Daphni", "Astyra", 0, -22)}
     for name, tag, base, names in records:
         if tag in ("R13", "R14"):
             continue        # built above, by plan_r13 / plan_r14
+        if tag in SACRED_WAY:
+            continue        # excluded: sacredway.py builds Routes 15 and 16 (and Daphni between them)
         m = Map(name, 48, 24)
         m.json["music"] = "MUS_ICHOR_ROAD"
         if tag == "R16":
@@ -1594,7 +1601,8 @@ def encounters_and_teams(records=ROADS, chapter="Nemea return"):
     wild = read("src/data/wild_encounters.json")
     group = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
     records = list(records)
-    road_records = [r for r in records if r[1] not in ("R13", "R14")]
+    # Routes 15-16's wild tables are sacredway.py's; only their parties are written here
+    road_records = [r for r in records if r[1] not in ("R13", "R14") + SACRED_WAY]
     ids = {"MAP_" + const(r[0]) for r in road_records}
     group["encounters"] = [e for e in group["encounters"] if e.get("map") not in ids]
     for name, tag, level, _ in road_records:
@@ -1610,7 +1618,6 @@ def encounters_and_teams(records=ROADS, chapter="Nemea return"):
                 base_label=f"g{name}_{time}", land_mons=dict(encounter_rate=15,
                     mons=[dict(min_level=level, max_level=level + 2,
                                species="SPECIES_" + species[i % 6]) for i in range(12)])))
-    water_tables.apply(group["encounters"], {"MAP_ROUTE15_MYSTERY_ROAD"})
     plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"

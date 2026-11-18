@@ -1,7 +1,7 @@
 mapscripts Astyra_Akropolis_MapScripts {
     MAP_SCRIPT_ON_LOAD {
         if (flag(FLAG_ICHOR_SALT_WELL_OPEN)) {
-            setmetatile(25, 6, 0x1DB, FALSE)
+            setmetatile(22, 5, METATILE_Akropolis_WellOpen, FALSE)
         }
         if (flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {
             call(Akropolis_EventScript_FallenOlive)
@@ -19,7 +19,7 @@ mapscripts Astyra_Akropolis_MapScripts {
             special(Ichor_ReleaseTimeOfDay)
         }
         if (flag(FLAG_ICHOR_AKROPOLIS_GATE)) {
-            setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, 18, 46)
+            setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, 23, 50)
         } else {
             setvar(VAR_TEMP_1, 1)
         }
@@ -73,7 +73,7 @@ script Astyra_Akropolis_EventScript_Gate {
     closemessage
     applymovement(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, Akropolis_Movement_Aside)
     waitmovement(0)
-    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, 18, 46)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_CAPTAIN, 23, 50)
     setflag(FLAG_ICHOR_AKROPOLIS_GATE)
     setspeaker(SP_NAME_NONE)
     releaseall
@@ -99,7 +99,7 @@ script Astyra_Akropolis_EventScript_PairOne {
         end
     }
     removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
-    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 44)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 13, 48)
     clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
     addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
     setspeaker(Astyra_Text_NameAlethea)
@@ -129,7 +129,7 @@ script Astyra_Akropolis_EventScript_PairTwo {
         end
     }
     removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
-    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 32)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 28, 43)
     clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
     addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
     setspeaker(Akropolis_Text_Titan)
@@ -157,7 +157,7 @@ script Astyra_Akropolis_EventScript_Kleon {
         end
     }
     removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
-    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 20)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 18, 26)
     clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
     addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
     setspeaker(Akropolis_Text_Kleon)
@@ -196,7 +196,7 @@ script Astyra_Akropolis_EventScript_Rhea {
         end
     }
     removeobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
-    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 20, 10)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_ALETHEA, 21, 10)
     clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKROPOLIS)
     addobject(LOCALID_ASTYRA_AKROPOLIS_ALETHEA)
     if (!flag(FLAG_ICHOR_AKROPOLIS_OLIVE_FELL)) {
@@ -230,7 +230,7 @@ script Astyra_Akropolis_EventScript_Rhea {
     msgbox(format("Strong. Doesn't matter. The piece goes."))
     closemessage
     clearflag(FLAG_ICHOR_KLEON_AKROPOLIS)
-    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_KLEON, 20, 7)
+    setobjectxyperm(LOCALID_ASTYRA_AKROPOLIS_KLEON, 20, 8)
     addobject(LOCALID_ASTYRA_AKROPOLIS_KLEON)
     setspeaker(Akropolis_Text_Titan)
     msgbox(format("Move it, Lakonian!"))
@@ -250,7 +250,7 @@ script Astyra_Akropolis_EventScript_Rhea {
     removeobject(LOCALID_ASTYRA_AKROPOLIS_RHEA)
     playse(SE_M_EARTHQUAKE)
     call(EleusaVillage_TempleOfDemeter_EventScript_Rumble)
-    setmetatile(21, 6, 0x0E1, TRUE)
+    setmetatile(20, 4, METATILE_Akropolis_Rubble, TRUE)
     special(DrawWholeMapView)
     fadeoutbgm(1)
     callnative(StopMapMusic)
@@ -269,12 +269,15 @@ script Astyra_Akropolis_EventScript_Rhea {
     end
 }
 script Akropolis_EventScript_FallenOlive {
+    // the olive (2 x 2 at 16,6, its crown's tip in row 5) is gone: grass
     setmetatile(16, 5, 0x001, FALSE)
     setmetatile(17, 5, 0x001, FALSE)
     setmetatile(16, 6, 0x001, FALSE)
     setmetatile(17, 6, 0x001, FALSE)
+    setmetatile(16, 7, 0x001, FALSE)
+    setmetatile(17, 7, 0x001, FALSE)
     if (flag(FLAG_ICHOR_AKROPOLIS_RAID_DONE)) {
-        setmetatile(21, 6, 0x0E1, TRUE)
+        setmetatile(20, 4, METATILE_Akropolis_Rubble, TRUE)
     }
     return
 }
@@ -297,7 +300,7 @@ script Astyra_Akropolis_EventScript_Caretaker {
             closemessage
             playse(SE_DOOR)
             setflag(FLAG_ICHOR_SALT_WELL_OPEN)
-            setmetatile(25, 6, 0x1DB, FALSE)
+            setmetatile(22, 5, METATILE_Akropolis_WellOpen, FALSE)
             special(DrawWholeMapView)
         }
         release
@@ -330,5 +333,40 @@ movement Akropolis_Movement_Approach { walk_up * 2 }
 movement Akropolis_Movement_Aside { walk_right face_down }
 movement Akropolis_Movement_KleonLeaves { walk_fast_up * 2 walk_fast_right * 4 }
 movement Akropolis_Movement_KleonEscapes { walk_right walk_up }
-movement Akropolis_Movement_RheaEscapes { walk_right * 2 walk_up }
-movement Akropolis_Movement_ToStump { walk_left * 2 walk_up * 2 face_left }
+movement Akropolis_Movement_RheaEscapes { walk_right * 4 walk_up * 3 }
+movement Akropolis_Movement_ToStump { walk_left * 3 walk_up * 3 face_left }
+
+// ---------------------------------------------------------------------------
+// The awe pass: through the Propylaia, Promachos and the Parthenon
+// ---------------------------------------------------------------------------
+script Astyra_Akropolis_EventScript_Reveal {
+    if (flag(FLAG_ICHOR_AKROPOLIS_REVEAL)) {
+        end
+    }
+    lockall
+    setflag(FLAG_ICHOR_AKROPOLIS_REVEAL)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Akropolis_Movement_CameraPromachos)
+    waitmovement(0)
+    delay(40)
+    msgbox(format("Athena Promachos. Athena who fights in front.\pBronze, three men tall, the spear's gold tip catching what light there is."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, Akropolis_Movement_CameraParthenon)
+    waitmovement(0)
+    delay(40)
+    msgbox(format("And the Parthenon, the Maiden's house, on its three great steps."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, Akropolis_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    releaseall
+}
+movement Akropolis_Movement_CameraPromachos { walk_slow_up * 8 }
+movement Akropolis_Movement_CameraParthenon { walk_right * 13 walk_up * 9 }
+movement Akropolis_Movement_CameraBack { walk_fast_down * 17 walk_fast_left * 13 }
+script Astyra_Akropolis_EventScript_Promachos {
+    msgbox(format("ATHENA PROMACHOS\pMade from the bronze of the beaten fleet.\pSailors rounding the cape steer by her spear."), MSGBOX_SIGN)
+}
+script Astyra_Akropolis_EventScript_Altar {
+    msgbox(format("THE GREAT ALTAR\pThe rites happen here, outside, where the goddess can see them."), MSGBOX_SIGN)
+}

@@ -109,6 +109,7 @@ TABLES = {
     "MAP_AIGION": ("gAigion_Morning", sea(28)),
     "MAP_ROUTE12_CYPRESS_ROAD": ("gRoute12_CypressRoad_Morning", pond(30)),
     "MAP_ROUTE15_MYSTERY_ROAD": ("gRoute15_MysteryRoad_Morning", sea(33)),
+    "MAP_ROUTE16_CAPITAL_PASS": ("gRoute16_CapitalPass_Morning", pond(35)),   # the Kephisos (sacredway.py)
     "MAP_KALDERA_TELCHINES_FORGE": ("gKaldera_TelchinesForge_Morning", forge(37)),
     "MAP_KYTHERA_NERAIDA_FALLS": ("gKytheraNeraidaFalls_Morning", falls(42)),
     "MAP_ASCENT_1F": ("gAscent_1F_Morning", spring(53)),

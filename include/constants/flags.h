@@ -2233,6 +2233,40 @@
 #define FLAG_ICHOR_TOLD_ELEUSA_ROAD             (FLAG_ICHOR_GENERAL2_START + 0x08A) // Ichor: a runner met the player at Emporion after the Moon Laurel: Astyra's road runs through Eleusa
 #define FLAG_ICHOR_HIDE_EMPORION_HERM_RUNNER    (FLAG_ICHOR_GENERAL2_START + 0x08B) // Ichor: Dromokleia's runner waiting at Emporion's herm (Moon Laurel to Astyra)
 #define FLAG_ICHOR_HIDE_ELEUSA_WATCH_ASIDE      (FLAG_ICHOR_GENERAL2_START + 0x08C) // Ichor: Eleusa's east watch, stood aside by the open road after the Moon Laurel
+#define FLAG_ICHOR_ITEM_R15_ISLET               (FLAG_ICHOR_GENERAL2_START + 0x090) // Ichor: Sacred Way: Route 15: the jester's islet jar (the Conch)
+#define FLAG_ICHOR_ITEM_R15_QUARRY              (FLAG_ICHOR_GENERAL2_START + 0x091) // Ichor: Sacred Way: Route 15: the Aigaleo quarry jar (Pan's Crook)
+#define FLAG_ICHOR_ITEM_R15_HOLLOW              (FLAG_ICHOR_GENERAL2_START + 0x092) // Ichor: Sacred Way: Route 15: Kore's hollow jar, under the shrine court's stair
+#define FLAG_ICHOR_ITEM_R15_ALTAR               (FLAG_ICHOR_GENERAL2_START + 0x093) // Ichor: Sacred Way: Route 15: Demeter's wayside altar jar (the Sickle)
+#define FLAG_ICHOR_HIDDEN_ITEM_R15_NICHES       (FLAG_ICHOR_GENERAL2_START + 0x094) // Ichor: Sacred Way: Route 15: in Aphrodite's rock niches
+#define FLAG_ICHOR_HIDDEN_ITEM_R15_QUARRY       (FLAG_ICHOR_GENERAL2_START + 0x095) // Ichor: Sacred Way: Route 15: in the quarry's spoil
+#define FLAG_ICHOR_R15_PRIEST_GIFT              (FLAG_ICHOR_GENERAL2_START + 0x096) // Ichor: Sacred Way: Route 15: the Rheitoi priest-fisher's gift
+#define FLAG_ICHOR_R15_SHRINE_STAIR             (FLAG_ICHOR_GENERAL2_START + 0x097) // Ichor: Sacred Way: Route 15: both drums on the shrine court's plates; the stair down is open
+#define FLAG_ICHOR_R15_IAKCHOS_LIT              (FLAG_ICHOR_GENERAL2_START + 0x098) // Ichor: Sacred Way: Route 15: Iakchos's torch-stand lit with Hecate's Torch
+#define FLAG_ICHOR_R15_IAKCHOS_GIFT             (FLAG_ICHOR_GENERAL2_START + 0x099) // Ichor: Sacred Way: Route 15: the torchbearer's thanks for the lit stand
+#define FLAG_ICHOR_DAPHNI_CORD_CUT              (FLAG_ICHOR_GENERAL2_START + 0x09A) // Ichor: Sacred Way: Daphni: the cord cut from the prayer laurel (the Sickle)
+#define FLAG_ICHOR_DAPHNI_PRIESTESS_GIFT        (FLAG_ICHOR_GENERAL2_START + 0x09B) // Ichor: Sacred Way: Daphni: the priestess's laurel crown
+#define FLAG_ICHOR_DAPHNI_KYKEON_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x09C) // Ichor: Sacred Way: Daphni: Iambe's kykeon at the pilgrims' rest
+#define FLAG_ICHOR_DAPHNI_HONEY_TRADE           (FLAG_ICHOR_GENERAL2_START + 0x09D) // Ichor: Sacred Way: Daphni: the initiate's berries for a Honey
+#define FLAG_ICHOR_DAPHNI_WEAVER_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x09E) // Ichor: Sacred Way: Daphni: the laurel-cutter's gift, after the capital
+#define FLAG_ICHOR_ITEM_DAPHNI_LOOKOUT          (FLAG_ICHOR_GENERAL2_START + 0x09F) // Ichor: Sacred Way: Daphni: the Aigaleo lookout's jar (Pan's Crook)
+#define FLAG_ICHOR_HIDDEN_ITEM_DAPHNI_LAUREL    (FLAG_ICHOR_GENERAL2_START + 0x0A0) // Ichor: Sacred Way: Daphni: among the laurel roots
+#define FLAG_ICHOR_HIDDEN_ITEM_DAPHNI_REST      (FLAG_ICHOR_GENERAL2_START + 0x0A1) // Ichor: Sacred Way: Daphni: behind the pilgrims' rest
+#define FLAG_ICHOR_HIDDEN_ITEM_DAPHNI_SEAT      (FLAG_ICHOR_GENERAL2_START + 0x0A2) // Ichor: Sacred Way: Daphni: under the stone seat on the lookout
+#define FLAG_ICHOR_DAPHNI_TRAVELER_TOLD         (FLAG_ICHOR_GENERAL2_START + 0x0A3) // Ichor: Sacred Way: Daphni: the traveler from the east told of the Troad
+#define FLAG_ICHOR_ITEM_R16_ISLET               (FLAG_ICHOR_GENERAL2_START + 0x0A4) // Ichor: Sacred Way: Route 16: the Kephisos islet jar (the Conch)
+#define FLAG_ICHOR_ITEM_R16_TOMB                (FLAG_ICHOR_GENERAL2_START + 0x0A5) // Ichor: Sacred Way: Route 16: the sealed tomb's jar (the Labrys)
+#define FLAG_ICHOR_ITEM_R16_SPAN                (FLAG_ICHOR_GENERAL2_START + 0x0A6) // Ichor: Sacred Way: Route 16: the fallen span's pier jar (Daedalus's Wings)
+#define FLAG_ICHOR_ITEM_R16_GROVE               (FLAG_ICHOR_GENERAL2_START + 0x0A7) // Ichor: Sacred Way: Route 16: the Akademia grove's jar (the Sickle)
+#define FLAG_ICHOR_HIDDEN_ITEM_R16_PLOT         (FLAG_ICHOR_GENERAL2_START + 0x0A8) // Ichor: Sacred Way: Route 16: in the rubble-filled grave plot (the Hammer)
+#define FLAG_ICHOR_HIDDEN_ITEM_R16_DRUM         (FLAG_ICHOR_GENERAL2_START + 0x0A9) // Ichor: Sacred Way: Route 16: in the plot behind the fallen drum (the Girdle)
+#define FLAG_ICHOR_HIDDEN_ITEM_R16_SHRINE       (FLAG_ICHOR_GENERAL2_START + 0x0AA) // Ichor: Sacred Way: Route 16: at the Nymphs' shrine (Pan's Crook)
+#define FLAG_ICHOR_R16_AKROPOLIS_SEEN           (FLAG_ICHOR_GENERAL2_START + 0x0AB) // Ichor: Sacred Way: Route 16: the first sight of the Akropolis from the lookout
+#define FLAG_ICHOR_R16_AKADEMIA_GIFT            (FLAG_ICHOR_GENERAL2_START + 0x0AC) // Ichor: Sacred Way: Route 16: Aristokles's gift in the Akademia's grove
+#define FLAG_ICHOR_ASTYRA_REVEAL                (FLAG_ICHOR_GENERAL2_START + 0x0C0) // Ichor: the first sight of Astyra, the camera up the Panathenaic Way to Promachos's spear
+#define FLAG_ICHOR_AKROPOLIS_REVEAL             (FLAG_ICHOR_GENERAL2_START + 0x0C1) // Ichor: the first sight of the Akropolis plateau through the Propylaia
+#define FLAG_ICHOR_HIDDEN_ASTYRA_AGORA          (FLAG_ICHOR_GENERAL2_START + 0x0C2) // Ichor: Astyra: hidden under the fountain house's basin
+#define FLAG_ICHOR_HIDDEN_ASTYRA_PNYX           (FLAG_ICHOR_GENERAL2_START + 0x0C3) // Ichor: Astyra: hidden behind the speaker's platform on the Pnyx
+#define FLAG_ICHOR_ITEM_ASTYRA_KERAMEIKOS       (FLAG_ICHOR_GENERAL2_START + 0x0C4) // Ichor: Astyra: the jar among the Kerameikos graves
 #define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
 #define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
 #define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)

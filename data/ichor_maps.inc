@@ -234,3 +234,6 @@
 	.include "data/maps/ErymanthosPreserve_River/scripts.inc"
 	.include "data/maps/ErymanthosPreserve_Thicket/scripts.inc"
 	.include "data/maps/ErymanthosPreserve_Cave/scripts.inc"
+	.include "data/maps/Daphni_Sanctuary/scripts.inc"
+	.include "data/maps/Daphni_PilgrimsRest/scripts.inc"
+	.include "data/maps/Daphni_LaurelHouse/scripts.inc"

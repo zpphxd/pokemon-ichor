@@ -17,6 +17,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Relics and terrain (user, 2026-11-17):** use the relics (our HMs) much more, with gates the player can open now as well as ones for later, and vary the terrain so each route is a different place: marsh, scree, rivers and fords, terraces, forest, beaches, grottos.
 - **First up when it lands:** Route 7 (Kronia Grounds) and Routes 8–9 around Lebadeia, which the user asked about; then Routes 1, 4 and 5, and every route after.
 - **In progress (2026-11-17):** Routes 7, 8, 9, 11, 13 and 14, with the bare stops (Lebadeia, Kirrha, Aigion, Nemea) each getting a temple, shrine or outcamp that can carry a later quest. Routes 1, 4, 5 and the rest are still to come.
+- **Built (2026-11-18, `tools/ichor/maps/sacredway.py`):** Route 15 (the Rheitoi, the Aigaleo pass, the shrine court's drum seal), Daphni (the sanctuary of Apollo Daphnaios, the lookout, three rooms) and Route 16 (the Kephisos, the Kerameikos, the Akademia, the climb and the first sight of the Akropolis). Hooks: `design/maps/Route15_MysteryRoad.md`, `Daphni.md`, `Route16_CapitalPass.md`; the walk is `tools/ichor/tests/sacredway.sh`.
 
 ### The whole world: hidden parts and return gates
 - **Planned (2026-11-17):** `design/WORLD_EXPLORATION.md` plans every region's return gates, cave back sections and what pays behind them (story, stronger Pokémon, leads), proposes Pan's Crook as the climbing relic, and gives a build order.
@@ -40,6 +41,15 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Built with:** the Elite Four (Pantheon) and Archon upgrade: new halls, teams rebalanced for team-wide EXP, a short scene before each battle.
 - **Then:** the user plays the whole game themselves (user, 2026-11-18) and reports where it's too easy or slow; balance changes come from their notes.
 - **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
+
+## Queued next (user, 2026-11-18)
+
+### Labyrinth identity pass
+- Rings I–IV read as the same grey brick with red markers. Give each ring its own colour and fresco motif per LABYRINTH_MAZE §2 (bulls, dolphins, lilies, griffins, octopus and argonauts, double axes, stars), with floor and wall variants and one big landmark per screen.
+- The treasure cellars are plain boxes; make each a small treasure room worth the climb (Minoan pithoi, gilded frescoes, an altar, a fallen explorer's cache).
+
+### The awe pass
+- Build from design/AWE_PASS.md's top 10 (colossi, grand temples, city improvements, the ruins kit) once the user picks.
 
 ## Done
 
@@ -70,3 +80,9 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
 - Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere.
 - **Built (2026-11-17):** 19 towns' entrance herms and plaques (tools/ichor/maps/town_herms.py), healer and touch registration, the travel menu from any herm (SYSTEMS §4, ENGINE_API §4), the rule in MAP_DESIGN §2 and its audit (tools/ichor/herm_audit.py), and tools/ichor/tests/town_herms.sh.
+
+### Promachos's spear tip is the Harpe fragment (director-approved proposal, awe pass 2026-11-18)
+- The idea: the second fragment was hidden in plain sight, as the gold tip of Athena Promachos's spear, the gleam sailors saw from Sounion. The Titans' grunts climb her, and the gleam goes out; afterwards the spear stays dark over the city.
+- **Not woven in yet.** The raid script finds the second piece in the roots of Athena's olive (Rhea's diggers uproot it, Alethea tells the Persian-fire story at the stump). Moving the fragment to the spear would rewrite that beat, so it waits for the director.
+- To build it: swap the olive dig for a climb (a grunt on Promachos's plinth, `setmetatile` the tip cells to a dark, unanimated copy), keep the olive falling as the Titans' vandalism, and after `FLAG_ICHOR_AKROPOLIS_RAID_DONE` show the dark tip in Astyra's skyline too (the `glint` cells in both gTileset_Akropolis and gTileset_Astyra; a dark copy costs about 6 tiles in each, both are at 489-494 of 504).
+

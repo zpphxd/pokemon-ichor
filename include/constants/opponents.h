@@ -225,7 +225,18 @@
 #define TRAINER_ICHOR_R14_DORKON            297
 #define TRAINER_ICHOR_TRETOS_LYSANDRA       298
 #define TRAINER_ICHOR_NEMEA_KLEITOMACHOS    299
-#define TRAINERS_END_ACT2                   850 // the highest Act II id is Gulf's 849
+// The Sacred Way (tools/ichor/maps/sacredway.py): world-act2's 1344-1352.
+#define TRAINER_ICHOR_R15_KERKOPS              1344
+#define TRAINER_ICHOR_R15_SIMMIAS              1345
+#define TRAINER_ICHOR_R15_THEOXENOS            1346
+#define TRAINER_ICHOR_R15_LAMPON               1347
+#define TRAINER_ICHOR_R15_KALLIDIKE            1348
+#define TRAINER_ICHOR_R16_EXEKIAS              1349
+#define TRAINER_ICHOR_R16_SPEUSIPPOS           1350
+#define TRAINER_ICHOR_R16_MENEXENOS            1351
+#define TRAINER_ICHOR_R16_STRATON              1352
+// End the Sacred Way.
+#define TRAINERS_END_ACT2                   1353 // the highest Act II id is the Sacred Way's 1352
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINER_ICHOR_MOLYBDOS                328
