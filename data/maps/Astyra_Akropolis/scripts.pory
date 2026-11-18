@@ -43,7 +43,7 @@ script Astyra_Akropolis_EventScript_Gate {
     lockall
     setvar(VAR_TEMP_1, 0)
     if (!flag(FLAG_ICHOR_ALETHEA_CONFESSED)) {
-        msgbox(format("The Akropolis is sealed tonight.\pAlethea was last seen outside the western wall."))
+        msgbox(format("The Akropolis is sealed tonight.\pAlethea was last seen on the road west of the city, just outside the walls."))
         closemessage
         warp(MAP_ASTYRA, 4)
         waitstate
