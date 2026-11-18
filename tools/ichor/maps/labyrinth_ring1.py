@@ -346,6 +346,8 @@ def build(render=True):
                      "a labrys-sealed treasury of the house's first stewards, opened on the way back up with the Labrys; a bronze guardian Daedalus forgot")
     X.cellar_entries(m, mz, [0, 1], P)
     m.break_runs(starts)
+    import labyrinth_turning as TURN
+    TURN.lmap(m, (30, 26), (21, 1))   # the Turning: up from Ring II to the stair to the Grand Staircase
     errs, reach = m.build("labyrinth_ring1", starts, views=VIEWS, render=render,
                           extra=set(gap(*DOOR)))
     return m, mz, hops

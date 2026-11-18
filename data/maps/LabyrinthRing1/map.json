@@ -316,6 +316,78 @@
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "LabyrinthRing1_EventScript_CellarHole1"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_D",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak0"
+    },
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_D",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak0"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 22,
+      "elevation": 3,
+      "var": "VAR_TEMP_D",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak0"
+    },
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 22,
+      "elevation": 3,
+      "var": "VAR_TEMP_D",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak0"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak1"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak1"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 14,
+      "elevation": 3,
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak1"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 14,
+      "elevation": 3,
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_TurningBreak1"
     }
   ],
   "bg_events": [

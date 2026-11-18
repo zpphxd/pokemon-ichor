@@ -69,6 +69,20 @@ script EventScript_IchorThreadWindIn {
     end
 }
 
+// The Turning's pulse (LABYRINTH §7): every 16 steps the house shakes and the stone grinds.
+script EventScript_IchorTurningPulse {
+    lockall
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 6)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    playse(SE_M_ROCK_THROW)
+    releaseall
+    end
+}
+
 script EventScript_IchorThreadLow {
     lockall
     msgbox(format("The spool is nearly empty."), MSGBOX_DEFAULT)

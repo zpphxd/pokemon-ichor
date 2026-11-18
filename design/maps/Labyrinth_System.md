@@ -136,7 +136,36 @@ Read as signs; darker as you go down. Some hint that the Titans goaded Asterion 
 | IV | (30,13) | chalked by the barracks: "DRIVE IT WITH THE TORCHES. IT HATES THE TORCHES." |
 | IV | (20,37) | bones, an Astyran owl shield and a pack |
 
-No new art: the remains are read from walls and floor (the tileset has no bones piece; see the report).
+The remains you can see are drawn as object sprites (`OBJ_EVENT_GFX_ICHOR_REMAINS_BONES`, `_SHIELD`, `_SPEAR`, `_SATCHEL`,
+tools/ichor/art/sprites_objects.py), placed by `labyrinth_extras.remains()` on the floor where the text says they lie,
+so the labyrinth tileset (3 of 504 tiles free) needed no repack. Remains that carry a hidden item, and the ones written
+on walls, stay signs.
+
+## The Turning (LABYRINTH §7)
+
+After Scene J (`VAR_ICHOR_KNOSSA` 17, `FLAG_ICHOR_TURNING_QUIET`: no wild Pokémon, no trainer sight) every ring from VII
+up to I draws a turned layout in its ON_LOAD, planned by `tools/ichor/maps/labyrinth_turning.py` from each ring builder:
+
+- **Sealed halls:** autotiled wall plugs across the mouths of dead-end pockets (nothing any route needs lies behind them).
+- **Breakthroughs:** plugs across the escape's own way, ringed with triggers; the first step beside one plays Asterion
+  smashing it open (`VAR_TEMP_D`-`F` remember it until you leave).
+- Committed thread forces any plug tile it crosses back to floor (`Ichor_DrawThread` runs last), and every 16 steps
+  the house shakes (`EventScript_IchorTurningPulse`, src/ichor_labyrinth.c).
+- The workshop: Daedalus waves you through. The Grand Staircase is the threshold: `FLAG_ICHOR_TURNING_DONE`,
+  `VAR_ICHOR_KNOSSA` 18, out to the palace court at night (Scene K).
+
+| Ring | Sealed halls | Breakthroughs |
+|---|---|---|
+| VII | 1 | 0 |
+| VI | 3 | 1 |
+| V | 5 | 1 |
+| IV | 0 | 2 |
+| III | 4 | 2 |
+| II | 0 | 2 |
+| I | 2 | 2 |
+
+At dawn (`VAR_ICHOR_KNOSSA` 18, `FLAG_ICHOR_ARIADNE_WOKE_YOU`), the lift down lands in the workshop and Daedalus plays
+Scene L (`LabyrinthIcarusShaft_EventScript_SceneL`).
 
 ## Awe moments
 
@@ -177,7 +206,8 @@ Rings V-VII, the Starry Chamber and the Icarus Shaft, with their relics, the flo
 | Ring V warp 7 | the rope up (4,2) | Ring IV warp 6 (Labyrinth I: give it an arrival of its own if you like) |
 | Ring V warp 8 / sinkhole (45,44) | rope down / hole | Ring VI warp 4 / Ring VI (45,44) |
 | Ring VI warps 2/3 | the landing's stair-house | Ring VII warps 0/1 |
-| Ring VII warp 2 | the dance's stair (16,18) | Starry Chamber warp 0 |
+| Ring VII warp 2 | the dance's stair (16,18) | Starry Chamber warp 3 (the landing at the stair's foot) |
+| Starry Chamber (9-10,19) | a trigger on the south stair | Ring VII warp 12 (16,19) |
 | Workshop at dawn | Daedalus by the open grate | `call(LabyrinthIcarusShaft_EventScript_SceneL)` |
 
 Thread anchors 40-57 are the heart's. `VAR_ICHOR_LABYRINTH` bits 0-3 are Ring VI's dials (W1-W3, the teaching dial). The stream: Ring V's lake spills west into a pit; it falls past Ring VI's forge as the waterfall the Horn climbs.

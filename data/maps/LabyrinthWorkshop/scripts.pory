@@ -4,10 +4,44 @@
 // Layout from tools/ichor/maps/labyrinth_workshop.py.
 
 mapscripts LabyrinthWorkshop_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // VAR_TEMP_1: 1 the Turning, Daedalus waves you through (LABYRINTH §7);
+        // 2 dawn after the raid, down by the lift: Scene L at the open grate.
+        setvar(VAR_TEMP_1, 0)
+        if (var(VAR_ICHOR_KNOSSA) == 17) {
+            setvar(VAR_TEMP_1, 1)
+        } elif (var(VAR_ICHOR_KNOSSA) == 18 && flag(FLAG_ICHOR_ARIADNE_WOKE_YOU) && !flag(FLAG_ICHOR_ICARUS_FLIGHT)) {
+            setvar(VAR_TEMP_1, 2)
+        }
+    }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ICHOR_KNOSSA, 6: LabyrinthWorkshop_EventScript_SceneD
         VAR_ICHOR_KNOSSA, 7: LabyrinthWorkshop_EventScript_SceneD
+        VAR_TEMP_1, 1: LabyrinthWorkshop_EventScript_TurningWave
+        VAR_TEMP_1, 2: LabyrinthWorkshop_EventScript_Dawn
     ]
+}
+
+// --- The Turning and the dawn (LABYRINTH §7, §8 Scene L) ------------------------------------
+
+script LabyrinthWorkshop_EventScript_TurningWave {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    playse(SE_M_EARTHQUAKE)
+    setspeaker(LabyrinthWorkshop_Name_Daedalus)
+    msgbox(format("Go! I built this place to survive itself."))
+    msgbox(format("I didn't build it to survive you lot."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+script LabyrinthWorkshop_EventScript_Dawn {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    msgbox(format("Grey dawn light falls down the Icarus Shaft. The grate stands open."))
+    closemessage
+    call(LabyrinthIcarusShaft_EventScript_SceneL)
 }
 
 text LabyrinthWorkshop_Name_Daedalus { "DAEDALUS" }

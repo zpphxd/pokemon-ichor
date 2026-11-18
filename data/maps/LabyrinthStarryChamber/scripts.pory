@@ -4,11 +4,12 @@
 // star-clock and the black lustral basin; the pillar of horns where Asterion is chained;
 // Kronos's anvil at the basin's edge. Warps: 0-1 up the dance's stair to Ring VII,
 // 2 Phaedon's hidden stair (sealed behind him).
-// Stand-ins: OBJ_EVENT_GFX_ICHOR_MASK for Kronos/Phaedon, ICHOR_WOMAN for Rhea, until their
-// walkers are drawn.
+// Kronos is OBJ_EVENT_GFX_ICHOR_KRONOS (Phaedon in the gold mask) until the unmasking swaps in
+// LOCALID_STARRY_PHAEDON; Rhea is OBJ_EVENT_GFX_ICHOR_RHEA.
 
 mapscripts LabyrinthStarryChamber_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_TEMP_1)
         if (var(VAR_ICHOR_KNOSSA) >= 17) {
             setflag(FLAG_ICHOR_HIDE_STARRY_CAST)
             setflag(FLAG_ICHOR_HIDE_KLEON_RING5)
@@ -33,6 +34,15 @@ text LabyrinthStarryChamber_Text_NameRhea { "RHEA" }
 text LabyrinthStarryChamber_Text_NameKleon { "KLEON" }
 text LabyrinthStarryChamber_Text_NameAriadne { "ARIADNE" }
 
+// Up the dance's stair, back to Ring VII (the stair is in the chamber's south wall).
+script LabyrinthStarryChamber_EventScript_StairUp {
+    lockall
+    playse(SE_EXIT)
+    warp(MAP_LABYRINTH_RING7, 12)
+    waitstate
+    releaseall
+}
+
 script LabyrinthStarryChamber_EventScript_Basin {
     msgbox(format("The black water holds the ceiling's stars. They turn, very slowly."), MSGBOX_SIGN)
 }
@@ -55,6 +65,15 @@ script LabyrinthStarryChamber_EventScript_Asterion {
 
 script LabyrinthStarryChamber_EventScript_SceneJ {
     lockall
+    // up to the anvil's row, where the whole cast is in view (objects more than seven rows
+    // off are despawned, so Rhea and the bull at the pillar need the player within reach)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 10) {
+        applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthStarryChamber_Movement_ApproachRight)
+    } else {
+        applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthStarryChamber_Movement_Approach)
+    }
+    waitmovement(0)
     setspeaker(LabyrinthStarryChamber_Text_NameKronos)
     msgbox(format("You came the long way. Everyone does. It's a labyrinth."))
     msgbox(format("Stand by the water. Watch the stars. They're nearly in place."))
@@ -100,17 +119,21 @@ script LabyrinthStarryChamber_EventScript_SceneJ {
 }
 
 // The bull-leap, three clean times (LABYRINTH §3's rules, E7's special). A miss knocks you
-// back; the window widens by 2 frames each miss, up to double.
+// back; the window widens by 2 frames each miss, up to double. He charges east along the
+// marble below the basin's rail, from (4,12) to the line at (8,12); you stand at (9,12).
+// (He used to start at (9,7), eight rows off: out of the object window, so the special
+// found no bull and every leap was "late".)
 script LabyrinthStarryChamber_EventScript_Leaps {
     setvar(VAR_TEMP_4, 0)
     setvar(VAR_TEMP_5, 10)
     while (var(VAR_TEMP_4) < 3) {
-        setobjectxy(LOCALID_STARRY_ASTERION, 9, 7)
-        turnobject(LOCALID_STARRY_ASTERION, DIR_SOUTH)
+        setobjectxy(LOCALID_STARRY_ASTERION, 4, 12)
+        turnobject(LOCALID_STARRY_ASTERION, DIR_EAST)
+        turnobject(OBJ_EVENT_ID_PLAYER, DIR_WEST)
         msgbox(format("Asterion lowers his horns at you."))
         closemessage
         setvar(VAR_0x8004, LOCALID_STARRY_ASTERION)
-        setvar(VAR_0x8005, ICHOR_TILE(9, 14))
+        setvar(VAR_0x8005, ICHOR_TILE(8, 12))
         copyvar(VAR_0x8006, VAR_TEMP_5)
         setvar(VAR_0x8007, 6)
         special(Ichor_BullLeap)
@@ -128,8 +151,8 @@ script LabyrinthStarryChamber_EventScript_Leaps {
                 addvar(VAR_TEMP_5, 2)
             }
         }
-        setobjectxy(OBJ_EVENT_ID_PLAYER, 9, 15)
-        turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+        setobjectxy(OBJ_EVENT_ID_PLAYER, 9, 12)
+        turnobject(OBJ_EVENT_ID_PLAYER, DIR_WEST)
     }
 }
 
@@ -187,6 +210,9 @@ script LabyrinthStarryChamber_EventScript_Unmasking {
     msgbox(format("I'm sorry. I'd rather you saw my face for this part."))
     setspeaker(SP_NAME_NONE)
     msgbox(format("He lifts off the gold mask. It is Phaedon."))
+    removeobject(LOCALID_STARRY_KRONOS)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_STARRY_PHAEDON)
     msgbox(format("A clay bull hangs from his belt. You've seen its twin."))
     setflag(FLAG_ICHOR_PHAEDON_UNMASKED)
     setspeaker(LabyrinthStarryChamber_Text_NamePhaedon)
@@ -227,9 +253,9 @@ script LabyrinthStarryChamber_EventScript_Unmasking {
     setspeaker(LabyrinthStarryChamber_Text_NamePhaedon)
     msgbox(format("Rhea. Turn the house."))
     setspeaker(SP_NAME_NONE)
-    applymovement(LOCALID_STARRY_KRONOS, LabyrinthStarryChamber_Movement_PhaedonLeaves)
+    applymovement(LOCALID_STARRY_PHAEDON, LabyrinthStarryChamber_Movement_PhaedonLeaves)
     waitmovement(0)
-    removeobject(LOCALID_STARRY_KRONOS)
+    removeobject(LOCALID_STARRY_PHAEDON)
     playse(SE_M_EARTHQUAKE)
     msgbox(format("A hidden stair opens in the north wall, and seals behind him."))
 }
@@ -256,6 +282,7 @@ script LabyrinthStarryChamber_EventScript_Rhea {
     setflag(FLAG_ICHOR_RHEA_MERCY)
     setflag(FLAG_ICHOR_THREAD_NO_RETURN)
     setvar(VAR_ICHOR_KNOSSA, 17)
+    setflag(FLAG_ICHOR_TURNING_QUIET)   // no wild Pokémon, no trainers: the Titans fled (LABYRINTH §7)
     setspeaker(LabyrinthStarryChamber_Text_NameAriadne)
     msgbox(format("She's turned the house. It'll seal every hall that isn't held."))
     msgbox(format("Your thread. Where it lies, the house can't close."))
@@ -274,9 +301,18 @@ movement LabyrinthStarryChamber_Movement_Notice {
 }
 
 movement LabyrinthStarryChamber_Movement_Vault {
-    jump_in_place_up
-    face_down
-    face_up
+    jump_in_place_left
+    face_right
+    face_left
+}
+
+movement LabyrinthStarryChamber_Movement_Approach {
+    walk_up * 3
+}
+
+movement LabyrinthStarryChamber_Movement_ApproachRight {
+    walk_up * 3
+    walk_left
 }
 
 movement LabyrinthStarryChamber_Movement_KleonBursts {

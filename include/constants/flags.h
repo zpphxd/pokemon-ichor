@@ -2346,6 +2346,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_VAULT_BOTTLE_CAP (FLAG_ICHOR_GENERAL2_START + 0x1F9) // Ichor: Ichor: the Crystal Vault: a Pythian Laurel on the crack ledge (Ariadne Thread)
 #define FLAG_ICHOR_ITEM_ASCENT3_CHOICE_BAND     (FLAG_ICHOR_GENERAL2_START + 0x1FA) // Ichor: Ichor: Ascent 3F: Choice Band in the watch-post stores (the Helm of Darkness)
 #define FLAG_ICHOR_ITEM_ASCENT3_WEAKNESS_POLICY (FLAG_ICHOR_GENERAL2_START + 0x1FB) // Ichor: Ichor: Ascent 3F: Weakness Policy in the watch-post stores (the Helm of Darkness)
+#define FLAG_ICHOR_TURNING_QUIET                (FLAG_ICHOR_GENERAL2_START + 0x4E6) // Ichor: The Turning: no wild encounters and no trainer sight while the house turns (WE_FLAG_NO_ENCOUNTER, OW_FLAG_NO_TRAINER_SEE)
 #define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion
 #define FLAG_ICHOR_VISITED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F1) // Ichor: Lakonia: Gytheion visited (fly target)
 #define FLAG_ICHOR_GYTHEION_DUSK                (FLAG_ICHOR_GENERAL2_START + 0x4F2) // Ichor: Lakonia: III-5B, the fisherman and Kleon's helmet

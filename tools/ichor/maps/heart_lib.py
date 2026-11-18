@@ -310,6 +310,7 @@ class HeartMap(KM.Map):
                       "    special(Ichor_AddCrackedWall)",
                       f"    if (flag({flag})) {{ setmetatile({x}, {y}, 0x{cave:03X}, FALSE) }}"]
         lines += ["    " + g for g in self.gen]
+        lines.append("    special(Ichor_DrawThread)")   # the thread over everything, the Turning's walls too
         lines.append("    " + GEN_END)
         return "\n".join(lines)
 
@@ -321,6 +322,12 @@ class HeartMap(KM.Map):
             text = re.sub(re.escape(GEN_BEGIN) + r".*?" + re.escape(GEN_END), block.strip(), text, flags=re.S)
         else:
             raise SystemExit(f"{p}: put the GENERATED markers in its ON_LOAD script first")
+        t0, t1 = "// ---- BEGIN GENERATED TURNING ----", "// ---- END GENERATED TURNING ----"
+        body = "\n".join(getattr(self, "turning_scripts", []))
+        if t0 in text:
+            text = text[:text.index(t0) + len(t0)] + body + "\n" + text[text.index(t1):]
+        elif body:
+            text = text.rstrip("\n") + f"\n\n{t0}{body}\n{t1}\n"
         p.write_text(text)
 
     # --- LABYRINTH_MAZE.md §2: measuring the maze ------------------------------------------------

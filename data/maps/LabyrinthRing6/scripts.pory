@@ -58,6 +58,12 @@ mapscripts LabyrinthRing6_MapScripts {
     setvar(VAR_0x8006, THREAD_ANCHOR_RING6_SHRINE)
     special(Ichor_AddThreadAnchor)
     call(LabyrinthRing6_EventScript_OnLoadExtra)
+    if (var(VAR_ICHOR_KNOSSA) == 17) {
+        call(LabyrinthRing6_EventScript_TurningWalls)
+    } else {
+        setvar(VAR_TEMP_D, 1)
+    }
+    special(Ichor_DrawThread)
     // ---- END GENERATED ----
     }
 }
@@ -636,3 +642,73 @@ script LabyrinthRing6_EventScript_Remains3 {
     msgbox(format("A bronze automaton lies on its face, a rope still knotted round one ankle.\pIts plinth, somewhere above, says: DO NOT UNTIE."), MSGBOX_SIGN)
 }
 // ---- END GENERATED EXTRAS ----
+
+// ---- BEGIN GENERATED TURNING ----
+// The Turning (LABYRINTH §7): the turned layout, from tools/ichor/maps/labyrinth_turning.py.
+script LabyrinthRing6_EventScript_TurningWalls {
+    setmetatile(14, 5, 0x33E, TRUE)
+    setmetatile(13, 6, 0x364, TRUE)
+    setmetatile(14, 6, 0x343, TRUE)
+    setmetatile(13, 7, 0x354, TRUE)
+    setmetatile(14, 7, 0x343, TRUE)
+    setmetatile(15, 7, 0x218, TRUE)
+    setmetatile(14, 8, 0x343, TRUE)
+    setmetatile(15, 8, 0x218, TRUE)
+    setmetatile(14, 9, 0x339, TRUE)
+    setmetatile(15, 9, 0x218, TRUE)
+    setmetatile(36, 10, 0x20A, TRUE)
+    setmetatile(37, 10, 0x221, TRUE)
+    setmetatile(38, 10, 0x221, TRUE)
+    setmetatile(36, 11, 0x210, TRUE)
+    setmetatile(37, 11, 0x232, TRUE)
+    setmetatile(38, 11, 0x20C, TRUE)
+    setmetatile(8, 19, 0x22C, TRUE)
+    setmetatile(9, 19, 0x222, TRUE)
+    setmetatile(10, 19, 0x223, TRUE)
+    setmetatile(11, 19, 0x232, TRUE)
+    setmetatile(9, 20, 0x343, TRUE)
+    setmetatile(10, 20, 0x33F, TRUE)
+    setmetatile(9, 21, 0x33B, TRUE)
+    setmetatile(10, 21, 0x33F, TRUE)
+    setmetatile(29, 37, 0x221, TRUE)
+    setmetatile(30, 37, 0x221, TRUE)
+    setmetatile(31, 37, 0x209, TRUE)
+    setmetatile(29, 38, 0x210, TRUE)
+    setmetatile(30, 38, 0x232, TRUE)
+    setmetatile(31, 38, 0x20C, TRUE)
+    if (var(VAR_TEMP_D) != 0) {
+        setmetatile(29, 37, 0x225, TRUE)
+        setmetatile(30, 37, 0x24B, FALSE)
+        setmetatile(31, 37, 0x21C, TRUE)
+        setmetatile(29, 38, 0x218, TRUE)
+        setmetatile(30, 38, 0x240, FALSE)
+        setmetatile(31, 38, 0x21C, TRUE)
+    }
+}
+
+script LabyrinthRing6_EventScript_TurningBreak0 {
+    lockall
+    setvar(VAR_TEMP_D, 1)
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("The wall ahead grinds shut across the passage."), MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    playse(SE_M_MEGA_KICK)
+    setmetatile(29, 37, 0x225, TRUE)
+    setmetatile(30, 37, 0x24B, FALSE)
+    setmetatile(31, 37, 0x21C, TRUE)
+    setmetatile(29, 38, 0x218, TRUE)
+    setmetatile(30, 38, 0x240, FALSE)
+    setmetatile(31, 38, 0x21C, TRUE)
+    special(Ichor_DrawThread)
+    special(DrawWholeMapView)
+    msgbox(format("Then it bursts. Horns, a tail, a cloud of dust, and Asterion is gone ahead.\pHe's clearing the way."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+}
+// ---- END GENERATED TURNING ----

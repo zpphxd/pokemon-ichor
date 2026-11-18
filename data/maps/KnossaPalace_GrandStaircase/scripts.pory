@@ -9,6 +9,9 @@
 // stair's foot takes you to the workshop (the Labyrinth chapters' Scene L).
 
 mapscripts KnossaPalace_GrandStaircase_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ICHOR_KNOSSA, 17: KnossaPalace_GrandStaircase_EventScript_Threshold
+    ]
     MAP_SCRIPT_ON_TRANSITION {
         if (flag(FLAG_ICHOR_MET_ARIADNE) && var(VAR_ICHOR_KNOSSA) < 6) {
             clearflag(FLAG_ICHOR_HIDE_ARIADNE_STAIR)
@@ -98,6 +101,23 @@ script KnossaPalace_GrandStaircase_EventScript_ToWorkshop {
     playse(SE_ELEVATOR)
     fadescreen(FADE_TO_BLACK)
     warpsilent(MAP_LABYRINTH_WORKSHOP, 5)  // the lift's landing (Labyrinth_System.md)
+    waitstate
+    releaseall
+}
+
+// The threshold, out of the turning house (LABYRINTH §7): Rhea left it open. The Turning ends
+// here; Kleon waits in the palace court under the stars for Scene K.
+script KnossaPalace_GrandStaircase_EventScript_Threshold {
+    lockall
+    setflag(FLAG_ICHOR_TURNING_DONE)
+    clearflag(FLAG_ICHOR_TURNING_QUIET)
+    setvar(VAR_ICHOR_KNOSSA, 18)
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("Below you, the house grinds one last turn and goes still.\p"
+                  "Above, the threshold stands open. Rhea kept her word."))
+    closemessage
+    playse(SE_EXIT)
+    warp(MAP_KNOSSA_PALACE, 29, 16)
     waitstate
     releaseall
 }

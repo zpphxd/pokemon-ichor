@@ -508,6 +508,13 @@ enum
     // A town's travel herm and its plaque (tools/ichor/art/sprites_objects.py, SYSTEMS §4)
     OBJ_EVENT_GFX_ICHOR_GREAT_HERM,
     OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE,
+    // The lost in the Labyrinth (tools/ichor/art/sprites_objects.py)
+    OBJ_EVENT_GFX_ICHOR_REMAINS_BONES,
+    OBJ_EVENT_GFX_ICHOR_REMAINS_SHIELD,
+    OBJ_EVENT_GFX_ICHOR_REMAINS_SPEAR,
+    OBJ_EVENT_GFX_ICHOR_REMAINS_SATCHEL,
+    // Kronos: Phaedon in the gold mask and dark cloak (walker_paint.py "kronos")
+    OBJ_EVENT_GFX_ICHOR_KRONOS,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

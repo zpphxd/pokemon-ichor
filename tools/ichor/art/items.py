@@ -1183,6 +1183,82 @@ def _star_chart():
     return ic
 
 
+# Act III's two tablets from the Labyrinth's archive (LABYRINTH.md Scene H).
+# Kleon's Draft: a wax tablet in a wooden frame, lines scratched in the dark
+# wax, one passage scraped smooth and written over, signed at the foot with
+# the little hook; the bronze stylus lies beside it, its flat end up for
+# scraping. The Sealed Tablet: a clay tablet tied shut both ways with cord,
+# a blob of red wax at the crossing pressed with the same hook.
+@icon("kleons_draft", {
+    "kleons_draft": pal(ramp_roles("f", [C["wd_d"], C["wd_m"], C["wd_l"]]),
+                        x1=(56, 40, 40), x2=(96, 72, 56), n=C["lp_m"], h=C["ln_l"],
+                        s1=C["br_m"], s2=C["sg_l"]),
+}, labels={"kleons_draft": "Kleon's Draft"})
+def _kleons_draft():
+    ic = Icon("K f1 f2 f3 x1 x2 n h s1 s2")
+    ic.art([
+        "........................",
+        "...................KKKK.",
+        "...................KSsK.",
+        "KKKKKKKKKKKKKKKKKK.KKKK.",
+        "KFFFFFFFFFFFFFFFFK..KSK.",
+        "KFKKKKKKKKKKKKKKdK..KSK.",
+        "KFKxxxxxxxxxxxxKdK..KSK.",
+        "KFKxnnxnnnxnnxxKdK..KSK.",
+        "KFKxxxxxxxxxxxxKdK..KSK.",
+        "KFKxnnnxnnxnnnxKdK..KSK.",
+        "KFKxxxxxxxxxxxxKdK..KSK.",
+        "KFKXXXXXXXXXxxxKdK..KSK.",
+        "KFKXnnXnnnXXxxxKdK..KSK.",
+        "KFKXXXXXXXXXxxxKdK..KSK.",
+        "KFKxnnxnnnnxxxxKdK..KsK.",
+        "KFKxxxxxxxxxxhxKdK..KsK.",
+        "KFKxxxxxxxxxxhxKdK..KsK.",
+        "KFKxxxxxxxhxxhxKdK..KsK.",
+        "KFKxxxxxxxxhhxxKdK..KsK.",
+        "KFKKKKKKKKKKKKKKdK...K..",
+        "KfddddddddddddddddK.....",
+        "KKKKKKKKKKKKKKKKKKK.....",
+        "........................",
+        "........................",
+    ], {"K": "K", "F": "f3", "f": "f2", "d": "f1", "x": "x1", "X": "x2", "n": "n", "h": "h",
+        "s": "s1", "S": "s2"})
+    return ic
+
+
+@icon("sealed_tablet", {
+    "sealed_tablet": pal(ramp_roles("c", [C["tc_d"], C["tc_m"], C["tc_l"], C["tc_p"]]),
+                         r1=(160, 128, 80), r2=C["lp_l"],
+                         w1=(112, 24, 32), w2=(176, 40, 40), w3=(232, 96, 72)),
+}, labels={"sealed_tablet": "Sealed Tablet"})
+def _sealed_tablet():
+    ic = Icon("K c1 c2 c3 c4 r1 r2 w1 w2 w3")
+    face = ic.poly([(2, 4), (20, 3), (21, 17), (3, 18)])
+    side = ic.poly([(3, 18), (21, 17), (21, 19), (3, 20)]) & ~face
+    ic.fill(face, "c3")
+    ic.fill(face & ic.poly([(3, 5), (20, 4), (20, 5), (4, 6), (4, 17), (3, 17)]), "c4")
+    ic.line(19, 5, 20, 16, "c2")
+    ic.line(5, 17, 19, 16, "c2")
+    ic.fill(side, "c1")
+    ic.outline(face | side)
+    # the cord, round both ways, lit on its upper side
+    for y, role in ((10, "r2"), (11, "r1")):
+        ic.line(3, y, 20, y - 1, role)
+    for x, role in ((11, "r2"), (12, "r1")):
+        ic.line(x, 4, x, 20, role)
+    # the wax seal over the crossing, pressed with the hook
+    seal = ic.ellipse(12, 10.5, 3.9, 3.6)
+    ic.fill(seal, "w2")
+    ic.fill(seal & ~ic.ellipse(12.8, 11.3, 3.6, 3.4), "w3")
+    ic.fill(seal & ~ic.ellipse(11.2, 9.8, 3.7, 3.5), "w1")
+    ic.outline(seal)
+    ic.patch(11, 8, ["..w", "..w", "w.w", ".ww"], {"w": "K"})
+    # its loose ends, hanging over the near edge
+    ic.patch(14, 14, ["r.", "Kr", ".r", ".K"], {"r": "r2"})
+    ic.patch(8, 14, [".r", "rK", "r.", "K."], {"r": "r1"})
+    return ic
+
+
 @icon("ichor_codex", {
     "ichor_codex": pal(ramp_roles("w", [C["wd_d"], C["wd_m"], C["wd_l"]]),
                        x1=(40, 32, 24), x2=(88, 72, 48), c=C["tc_m"], g=C["sg_l"], ln=C["lp_l"]),

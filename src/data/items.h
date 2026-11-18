@@ -7678,8 +7678,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_OldSeaMap,
-        .iconPalette = gItemIconPalette_OldSeaMap,
+        .iconPic = gItemIcon_KleonsDraft,
+        .iconPalette = gItemIconPalette_KleonsDraft,
     },
     [ITEM_SEALED_TABLET] =
     {
@@ -7693,8 +7693,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_Letter,
-        .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+        .iconPic = gItemIcon_SealedTablet,
+        .iconPalette = gItemIconPalette_SealedTablet,
     },
 
     [ITEM_MELITTAS_HONEY] =

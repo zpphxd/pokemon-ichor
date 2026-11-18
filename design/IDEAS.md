@@ -26,13 +26,6 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 
 ## Queued (user, 2026-11-17): start when the Act III helpers free up
 
-### Labyrinth hookups (small, before the end-to-end test)
-- The Turning: the escape after Scene J (shifting walls, encounters off) isn't built; FLAG_ICHOR_TURNING_DONE is waiting for the threshold above ground.
-- Daedalus's Workshop must call LabyrinthIcarusShaft_EventScript_SceneL at dawn.
-- Ring VII should field Klytios instead of Enkelados if the player beat Enkelados in Ring IV.
-- Scene J's bull-leaps are untested headlessly.
-- Art: walkers for Kronos/Phaedon, Rhea, Hyperion and the Gigas; a Gigas trainer class; tablet icons; drawn bones and shields (needs a labyrinth tileset repack); (Music stays as it is for now: user, 2026-11-18.)
-
 ### The road north from Lakonia: Route 26, Lake Stymphalia, Route 27
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
 
@@ -61,6 +54,11 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
 
 ## Done
+
+### Labyrinth hookups (built 2026-11-18)
+- The Turning (tools/ichor/maps/labyrinth_turning.py, design/maps/Labyrinth_System.md), Scene L at dawn in the workshop,
+  Klytios in Ring VII after a Ring IV fight, Scene J's bull-leaps (fixed and tested), the remains, Kronos, Gigas and
+  tablet art. Still open: Labyrinth music cues (LABYRINTH §11).
 
 ### Herm fast travel, made clear and early (user, 2026-11-17)
 - A great herm stands right at each town's entrance, easy to spot, with a sign that names it a travel stop.

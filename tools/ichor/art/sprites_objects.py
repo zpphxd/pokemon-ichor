@@ -1,8 +1,10 @@
 """Small field objects for Ichor (16x16, one frame), drawn in the cast palette.
 
 Usage:
-    python3 tools/ichor/art/sprites_objects.py [--write] [--preview DIR]
+    python3 tools/ichor/art/sprites_objects.py [NAME ...] [--write] [--preview DIR]
 
+NAME       limits the run to those objects (the tablet has since been refined
+           by hand in place, so name what you mean to rewrite)
 --write    writes graphics/object_events/pics/misc/ichor/<name>.png (16x16,
            4bpp indexed, the ichor_cast palette embedded)
 --preview  writes DIR/sprites_objects.png (each object at 4x on the summit's
@@ -115,10 +117,106 @@ HERM_PLAQUE = [
     "................",
 ]
 
+# The lost in the Labyrinth: what is left of those who went in before the
+# player, lying on the rings' floor (LABYRINTH.md). Seen from above at the
+# Gen 3 three-quarter angle, lit from the top left, outlined in ink so they
+# read on the pale gypsum slabs and on the dark cave earth alike.
+
+# A skull with its sockets and teeth, a thighbone, and a long bone across the
+# front. Bone in linen_l, shaded with linen_d; slate deepens the hollows.
+REMAINS_BONES = [
+    "................",
+    "............kk..",
+    "...........kLLk.",
+    "..........kLLlk.",
+    "..kkkkk...kLlk..",
+    ".kLLLLLk.kLlk...",
+    "kLLLLLLlkkLlk...",
+    "kLkkLkklkLlk....",
+    "kLkkLkklkLlk....",
+    "klLLkLllkLLk....",
+    ".klLlLlkkLLlk...",
+    "..kkkkk.kkkk....",
+    "..kk........kk..",
+    ".kLLkkkkkkkkLLk.",
+    ".kLllllllllllLk.",
+    "..kk.kkkkkkk.kk.",
+]
+
+# A hoplite's round bronze shield, split: a wedge broken out of its rim lies
+# beside it. On it, his crested helmet, dented in the crown. Bronze in o/O,
+# the rim and shade in umber, the crest crimson over red_d.
+REMAINS_SHIELD = [
+    "...........kkk..",
+    "..........kcrrk.",
+    ".........kccrrk.",
+    ".........kkkkkkk",
+    "........kOOuuouk",
+    "........kOoooouk",
+    "........kokkokuk",
+    "........kokkkkuk",
+    "..kkkkkkkkk..kk.",
+    ".kOOOOOOOkk.....",
+    "kOOuuuuuuuOuk...",
+    "kOuoocooookk....",
+    "kOuococoook..kk.",
+    "kuoOOOOOouk.kOuk",
+    ".kuuuuuuuk..kuk.",
+    "..kkkkkkk....k..",
+]
+
+# A spear snapped in two: the bronze leaf head with a stub of shaft, and the
+# rest of the ash shaft with its bronze butt-spike, both ends splintered pale.
+# Shaft lit in umber over brown; the raw wood of the break in linen_d.
+REMAINS_SPEAR = [
+    "................",
+    ".kk.............",
+    "kOOk............",
+    "kOOok...........",
+    ".kOoouk.........",
+    "..kooouk........",
+    "...kuuukk.......",
+    "....kkkubk......",
+    "......kubk......",
+    ".......kubk.....",
+    "........klbk....",
+    ".........klk....",
+    "..k.k.....k.....",
+    ".klklkkkkkkkkkk.",
+    "..kllbuuuuuuuook",
+    "...kkkkkkkkkkkk.",
+]
+
+# A dropped leather satchel, its strap still looped, the flap held by a bronze
+# buckle; a map on parchment has slid out of it, the way through drawn in
+# red_d. Leather lit with skin_d on the top left, umber, then brown in shade.
+REMAINS_SATCHEL = [
+    "................",
+    "..kkkk..........",
+    ".kb..bk.........",
+    "kb....bk........",
+    "kkkkkkkkk.......",
+    "ksssuuuuk.kkk...",
+    "ksuuuuuubkLLLk..",
+    "kuuuoOuubkLrLLk.",
+    "kbbbkokbbkrLLLLk",
+    "kuuuuuuubkLrLLlk",
+    "ksuuuuuubkLrrLlk",
+    "kuuuuuubbkLLLLlk",
+    ".kbbbbbbkLLLLllk",
+    "..kkkkkkkkkkkllk",
+    ".............kk.",
+    "................",
+]
+
 OBJECTS = {
     "tablet": TABLET,
     "great_herm": GREAT_HERM,
     "herm_plaque": HERM_PLAQUE,
+    "remains_bones": REMAINS_BONES,
+    "remains_shield": REMAINS_SHIELD,
+    "remains_spear": REMAINS_SPEAR,
+    "remains_satchel": REMAINS_SATCHEL,
 }
 
 
@@ -153,7 +251,8 @@ def preview(arrs, k=4):
 def main():
     args = sys.argv[1:]
     pv = args[args.index("--preview") + 1] if "--preview" in args else None
-    arrs = {name: build(rows) for name, rows in OBJECTS.items()}
+    names = [a for a in args if a in OBJECTS] or list(OBJECTS)
+    arrs = {name: build(OBJECTS[name]) for name in names}
     if "--write" in args:
         for name, arr in arrs.items():
             save_indexed(arr, CAST_PAL, os.path.join(OUT_DIR, name + ".png"))

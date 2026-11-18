@@ -479,6 +479,11 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAriadn
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSarpedon;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGreatHerm;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHermPlaque;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRemainsBones;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRemainsShield;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRemainsSpear;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRemainsSatchel;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKronos;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -951,6 +956,11 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_ARIADNE] = &gObjectEventGraphicsInfo_IchorAriadne,
     [OBJ_EVENT_GFX_ICHOR_GREAT_HERM] = &gObjectEventGraphicsInfo_IchorGreatHerm,
     [OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE] = &gObjectEventGraphicsInfo_IchorHermPlaque,
+    [OBJ_EVENT_GFX_ICHOR_REMAINS_BONES] = &gObjectEventGraphicsInfo_IchorRemainsBones,
+    [OBJ_EVENT_GFX_ICHOR_REMAINS_SHIELD] = &gObjectEventGraphicsInfo_IchorRemainsShield,
+    [OBJ_EVENT_GFX_ICHOR_REMAINS_SPEAR] = &gObjectEventGraphicsInfo_IchorRemainsSpear,
+    [OBJ_EVENT_GFX_ICHOR_REMAINS_SATCHEL] = &gObjectEventGraphicsInfo_IchorRemainsSatchel,
+    [OBJ_EVENT_GFX_ICHOR_KRONOS] = &gObjectEventGraphicsInfo_IchorKronos,
     // End of Ichor object events
 };
 

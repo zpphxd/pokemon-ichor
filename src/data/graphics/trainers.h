@@ -517,6 +517,9 @@ const u16 gTrainerPalette_Pilgrim[] = INCGFX_U16("graphics/trainers/front_pics/p
 const u32 gTrainerFrontPic_IchorSailor[] = INCGFX_U32("graphics/trainers/front_pics/ichor_sailor.png", ".4bpp.smol");
 const u16 gTrainerPalette_IchorSailor[] = INCGFX_U16("graphics/trainers/front_pics/ichor_sailor.png", ".gbapal");
 
+const u32 gTrainerFrontPic_IchorGigas[] = INCGFX_U32("graphics/trainers/front_pics/ichor_gigas.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorGigas[] = INCGFX_U16("graphics/trainers/front_pics/ichor_gigas.png", ".gbapal");
+
 const u32 gTrainerFrontPic_HierophantKerykos[] = INCGFX_U32("graphics/trainers/front_pics/hierophant_kerykos.png", ".4bpp.smol");
 const u16 gTrainerPalette_HierophantKerykos[] = INCGFX_U16("graphics/trainers/front_pics/hierophant_kerykos.png", ".gbapal");
 
@@ -1424,6 +1427,15 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_RHEA_PARTNER] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_TitanGrunt, gTrainerPalette_TitanGrunt),
+        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_May, gTrainerPalette_May, sBackAnims_Hoenn),
+    },
+    [TRAINER_PIC_ICHOR_GIGAS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorGigas, gTrainerPalette_IchorGigas),
+    },
+    [TRAINER_PIC_ARIADNE_PARTNER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
         .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_May, gTrainerPalette_May, sBackAnims_Hoenn),
     },
 };

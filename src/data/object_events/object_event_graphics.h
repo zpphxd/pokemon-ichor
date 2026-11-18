@@ -718,6 +718,11 @@ const u32 gObjectEventPic_IchorMirror[] = INCGFX_U32("graphics/object_events/pic
 const u32 gObjectEventPic_IchorMirrorMark[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mirror_mark.png", ".4bpp");
 const u32 gObjectEventPic_IchorGreatHerm[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/great_herm.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorHermPlaque[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/herm_plaque.png", ".4bpp");
+const u32 gObjectEventPic_IchorRemainsBones[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/remains_bones.png", ".4bpp");
+const u32 gObjectEventPic_IchorRemainsShield[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/remains_shield.png", ".4bpp");
+const u32 gObjectEventPic_IchorRemainsSpear[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/remains_spear.png", ".4bpp");
+const u32 gObjectEventPic_IchorRemainsSatchel[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/remains_satchel.png", ".4bpp");
+const u32 gObjectEventPic_IchorKronos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kronos.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)

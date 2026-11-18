@@ -267,6 +267,8 @@ def finish(m, mz, front, back, render=True):
     X.cellar_entries(m, mz, [4, 7], P)
     m.break_runs(starts)
     water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
+    import labyrinth_turning as TURN
+    TURN.lmap(m, (30, 38), (4, 1))   # the Turning: from the workshop's front door to the stair to Ring II
     errs, reach = m.build("labyrinth_ring3", starts, views=VIEWS, render=render, extra=water)
     return errs
 

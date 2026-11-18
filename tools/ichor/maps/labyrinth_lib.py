@@ -688,6 +688,7 @@ class LMap(Map):
                   f"    setvar(VAR_0x8006, {flag})", f"    setvar(VAR_0x8007, 0x{fl:03X})",
                   "    special(Ichor_AddCrackedWall)",
                   f"    if (flag({flag})) {{", f"        setmetatile({x}, {y}, 0x{fl:03X}, FALSE)", "    }"]
+        L += ["    " + s for s in getattr(self, "register_extra", [])]   # the Turning (labyrinth_turning.py)
         L.append("}")
         L += ["", "// The ring's state, drawn on load and after every change: lit braziers, opened",
               "// doors and gates. Ichor_DrawThread goes after it.",

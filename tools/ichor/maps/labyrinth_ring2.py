@@ -325,6 +325,8 @@ def finish(m, mz, dead, render=True):
                      "the runners' shrine behind a labrys seal: a stray of the palace herd that found its way down")
     X.cellar_entries(m, mz, [2, 3], P)
     m.break_runs(starts)
+    import labyrinth_turning as TURN
+    TURN.lmap(m, (50, 34), (4, 1))   # the Turning: up from Ring III to the stair to Ring I
     errs, reach = m.build("labyrinth_ring2", starts, views=VIEWS, render=render)
     return errs
 
