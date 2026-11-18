@@ -30,6 +30,10 @@ fi
 /usr/bin/python3 tools/ichor/fishing_audit.py \
   || { echo "SMOKE FAIL: unfishable water (tools/ichor/fishing_audit.py)"; exit 1; }
 
+# Every town with a healer has a travel herm by its entrance (design/MAP_DESIGN.md §7).
+/usr/bin/python3 tools/ichor/herm_audit.py \
+  || { echo "SMOKE FAIL: a town without its travel herm (tools/ichor/herm_audit.py)"; exit 1; }
+
 # Addresses and constants the Lua reads the game's state with.
 tools/ichor/tests/elaia_symbols.sh "${ROM%.gba}.elf" build/smoke/symbols.lua \
   || { echo "SMOKE FAIL: could not read symbols from ${ROM%.gba}.elf"; exit 1; }

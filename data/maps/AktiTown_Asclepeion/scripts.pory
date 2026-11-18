@@ -45,6 +45,7 @@ script Ichor_EventScript_AsclepeionHealer {
         if (var(VAR_RESULT) == TRUE) {
             message(gText_PokerusExplanation)
             setflag(FLAG_POKERUS_EXPLAINED)
+            special(Ichor_RegisterHealerTownHerm)
             return
         }
     }
@@ -52,8 +53,21 @@ script Ichor_EventScript_AsclepeionHealer {
     waitmessage
     applymovement(VAR_0x800B, Movement_PkmnCenterNurse_Bow)
     waitmovement(0)
+    // The first rest here registers the town's travel herm (SYSTEMS §4).
+    specialvar(VAR_RESULT, Ichor_RegisterHealerTownHerm)
+    if (var(VAR_RESULT) == TRUE) {
+        message(Ichor_Text_AsclepeionHermKnown)
+        return
+    }
     message(Ichor_Text_AsclepeionGoInHealth)
     return
+}
+
+text Ichor_Text_AsclepeionHermKnown {
+    "Go in health.\p"
+    "Our town's great herm knows you now.\n"
+    "Touch any herm, and Hermes will bring\l"
+    "you back to us."
 }
 
 text Ichor_Text_AsclepeionWelcome {
