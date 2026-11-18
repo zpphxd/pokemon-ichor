@@ -70,6 +70,39 @@
 #define HERM_OIKOUMENE_FIRST        32
 #define HERM_MAX                    64
 
+// Travel herms (SYSTEMS §4): one at every town's main entrance, registered by
+// the town's Asclepeion or healer or a touch, and flagged in
+// FLAG_ICHOR_TOWN_HERMS_START's range. Any herm carries the player to any
+// registered one. Ids follow the story, and the travel menu lists them in this
+// order. Rows: src/data/ichor_town_herms.h; objects: tools/ichor/maps/town_herms.py.
+#define TOWN_HERM_ELAIA             0
+#define TOWN_HERM_AKTI              1
+#define TOWN_HERM_AIGINA            2
+#define TOWN_HERM_EMPORION          3
+#define TOWN_HERM_ELEUSA            4
+#define TOWN_HERM_THYRSA            5
+#define TOWN_HERM_LEBADEIA          6
+#define TOWN_HERM_KIRRHA            7
+#define TOWN_HERM_AIGION            8
+#define TOWN_HERM_STYX_FALLS        9
+#define TOWN_HERM_ARKADIA           10
+#define TOWN_HERM_NEMEA             11
+#define TOWN_HERM_DAPHNI            12
+#define TOWN_HERM_ASTYRA            13
+#define TOWN_HERM_KALDERA           14
+#define TOWN_HERM_SKANDEIA          15
+#define TOWN_HERM_PAPHIA            16
+#define TOWN_HERM_AMNISOS           17
+#define TOWN_HERM_OLYMPUS           18  // the Propylaia, the Pantheon's gatehouse
+#define TOWN_HERM_COUNT             19  // new towns (Lakonia, Delphoi, Knossa...) take the next ids
+#define TOWN_HERM_MAX               32  // FLAG_ICHOR_TOWN_HERMS_START's range
+#define TOWN_HERM_STAY              0xFE // the travel menu's "Stay here"
+
+// Ichor_TouchTownHerm's results
+#define TOWN_HERM_TOUCH_NONE        0   // no travel herm on this map
+#define TOWN_HERM_TOUCH_NEW         1   // registered just now
+#define TOWN_HERM_TOUCH_KNOWN       2
+
 // --- Relics (SYSTEMS §1) ----------------------------------------------------
 // IchorSave.options bits
 #define ICHOR_OPTION_RELIC_AUTO  (1 << 0)  // "Relic prompts": clear = ASK (the default), set = AUTO

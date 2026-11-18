@@ -29,7 +29,7 @@ gStringVar1 gStringVar2 gStringVar3 gPlayerPartyCount gFieldEffectArguments gSav
 gWeather CB2_FlyMap CB2_Bag Task_ShowStartMenu sFlyMap gSprites SpriteCB_FlyDestIcon sCarriedFlame sDig
 sBowedAt UpdateShadowFieldEffect gScanlineEffect gScanlineEffectRegBuffers sGlowForTest
 gTimeUpdateCounter gTimeOfDay
-gPlttBufferUnfaded gPlttBufferFaded"
+gPlttBufferUnfaded gPlttBufferFaded gMultiuseListMenuTemplate"
 
 engine_prepare() {
   local tag="$1" out="$2" consts="$3" asm="$4"

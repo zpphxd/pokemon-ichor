@@ -26,11 +26,6 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 
 ## Queued (user, 2026-11-17): start when the Act III helpers free up
 
-### First: herm fast travel, made clear and early (user, 2026-11-17)
-- A great herm stands right at each town's entrance, easy to spot, with a sign that names it a travel stop.
-- A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
-- Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere (SYSTEMS §4 and §1 need updating).
-
 ### The road north from Lakonia: Route 26, Lake Stymphalia, Route 27
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
 
@@ -58,3 +53,9 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
 
 ## Done
+
+### Herm fast travel, made clear and early (user, 2026-11-17)
+- A great herm stands right at each town's entrance, easy to spot, with a sign that names it a travel stop.
+- A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
+- Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere.
+- **Built (2026-11-17):** 19 towns' entrance herms and plaques (tools/ichor/maps/town_herms.py), healer and touch registration, the travel menu from any herm (SYSTEMS §4, ENGINE_API §4), the rule in MAP_DESIGN §2 and its audit (tools/ichor/herm_audit.py), and tools/ichor/tests/town_herms.sh.
