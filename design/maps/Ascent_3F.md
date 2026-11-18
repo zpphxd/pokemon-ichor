@@ -46,3 +46,13 @@ Rebuilt as snow terraces above the cloud, stepped by real cliffs with stairs cut
 - **Seams:** 3F is joined to Boreas's ridge (gTileset_Oros) by a connection; the two tilesets share their common terrain's metatile ids and the seam rows use only those (`seam_check`).
 - **Herm and heal:** the herm stands by the processional way below the doors (19,16), its landing (20,16); `HEAL_LOCATION_OLYMPUS_PROPYLAIA` lands at (20,17).
 - Renders: before `img/ascent_3f_before.png` (the walled terraces on Chion), after `img/ascent_3f_after.png`, screens `img/ascent_3f_after_screens.png`. Pass 1: a 21-wide facade with fat columns read as a hall; the user asked for the whole width, so pass 2 drew it wall to wall with taller columns; pass 3 rebuilt the colonnade on the shared kit at its standard pitch, moved the statues to objects (the reference's quality, no tiles), and lined the stairs with braziers.
+
+## Second pass (2026-11-18): a mountaintop, not snow rectangles
+
+- The terraces' outlines are roughened twice against the cloud (gaps in the rim show the cloud sea), and rock outcrops rise a step out of each terrace as little crags with their own faces.
+- Boulders and drifts, exposed rock (`rx`) and dry grass along the edges, frost-burnt grass (`fg`) at every stair's foot and round the braziers.
+- The processional way is laid in marble flags (`pave`), not packed snow; its last rows stay common terrain for the seam with Boreas's ridge.
+- Two far peaks of the range show through the cloud on either side.
+- Every trainer, the sockets, the cloud bank, the watch-post and the warps are where they were; the tests are unchanged.
+- Renders: before `img/ascent_3f_v1.png`, after `img/ascent_3f_after.png` (screens `img/ascent_3f_after_screens.png`).
+- **The statues, second pass:** every god has a pose and silhouette of their own (Zeus's raised bolt and the eagle on his arm, Poseidon striding with the trident, Athena's spear and shield and helm, Artemis drawing her bow, Apollo's lyre, a broad Hephaestus with the hammer over his shoulder, Hermes mid-step in the winged cap, Ares braced behind his shield under a crest, Aphrodite in contrapposto, Demeter with the sheaf, Hera enthroned, Dionysus with thyrsus and cup) and a face in a few values (brow, eyes, nose, mouth, beards where they belong) in five marble steps lit from the upper left. Before and after at 3x: `img/olympus_statues_before_after_3x.png`.

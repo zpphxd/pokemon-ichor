@@ -601,8 +601,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 31,
-      "y": 52,
+      "x": 26,
+      "y": 53,
       "elevation": 3,
       "item": "ITEM_COMET_SHARD",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD",

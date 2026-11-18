@@ -35,11 +35,13 @@ TABLES = {
         Night=["BORAPTERYX", "STYGIAD", "HARPELLE", "KOLOSSARD", "GEOGRIP", "STARKOS",
                "BORAPTERYX", "STYGIAD", "HARPELLE", "KOLOSSARD", "NIFLAKE", "KRYOPUFF"],
         rock=["LAOLITH", "KOLOSSARD", "GEOGRIP", "LAOLITH", "KOLOSSARD"]),
-    # the Leuke snowfield (2026-11-18): the deep snow between the ledges and the Icefall
+    # the Leuke snowfield (2026-11-18): its alpine meadow's tall grass and its deep snow
+    # share one table, the meadow's Pokémon (Nemeleon, Kerastorm, Korantha, Laolith) in
+    # the commoner slots and the cold ones (Chionyad, Borapteryx, the rare firsts) above
     "MAP_ASCENT_SNOWFIELD": dict(label="gAscent_Snowfield", band=(56, 60), rate=12,
-        Morning=["CHIONYAD", "BORAPTERYX", "KOLOSSARD", "CHIONYAD", "BORAPTERYX", "KERASTORM",
-                 "LAOLITH", "NEMELEON", "KRYOPUFF", "NIFLAKE", "KRYOPUFF", "NIFLAKE"],
-        Night=["CHIONYAD", "HARPELLE", "BORAPTERYX", "STARKOS", "KOLOSSARD", "CHIONYAD",
+        Morning=["NEMELEON", "CHIONYAD", "KERASTORM", "BORAPTERYX", "LAOLITH", "KORANTHA",
+                 "KOLOSSARD", "NEMELEON", "KRYOPUFF", "NIFLAKE", "KRYOPUFF", "NIFLAKE"],
+        Night=["CHIONYAD", "HARPELLE", "NEMELEON", "STARKOS", "KOLOSSARD", "BORAPTERYX",
                "LAOLITH", "STARKOS", "NIFLAKE", "KRYOPUFF", "NIFLAKE", "KRYOPUFF"]),
     "MAP_ASCENT_ICEFALL": dict(label="gAscent_Icefall", band=(57, 61), rate=7,
         Morning=["BORAPTERYX", "CHIONYAD", "KOLOSSARD", "CHIONYAD", "BORAPTERYX", "LAOLITH",

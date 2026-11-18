@@ -70,8 +70,8 @@ def main():
         y += rh[r]
     out = ROOT / "design/maps/img/mount_olympus_full.png"
     sheet.save(out)
-    (ROOT / "playtest").mkdir(exist_ok=True)
-    shutil.copy2(out, ROOT / "playtest/mount_olympus_full.png")
+
+    # (the user's playtest/ copy is theirs to make: not written here)
     print(out, sheet.size)
 
 

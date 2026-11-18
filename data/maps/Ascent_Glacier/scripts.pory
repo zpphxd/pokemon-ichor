@@ -8,10 +8,10 @@ mapscripts Ascent_Glacier_MapScripts {
 
 script Ascent_Glacier_EventScript_DrawState {
     if (flag(FLAG_ICHOR_GLACIER_GATE_OPEN)) {
-        setmetatile(22, 17, 0x28B, FALSE)
-        setmetatile(18, 22, 0x289, FALSE)
-        setmetatile(22, 22, 0x289, FALSE)
-        setmetatile(26, 22, 0x289, FALSE)
+        setmetatile(22, 17, 0x29F, FALSE)
+        setmetatile(18, 22, 0x29D, FALSE)
+        setmetatile(22, 22, 0x29D, FALSE)
+        setmetatile(26, 22, 0x29D, FALSE)
         setobjectxyperm(LOCALID_ASCENT_GLACIER_DRUM0, 18, 22)
         setobjectxyperm(LOCALID_ASCENT_GLACIER_DRUM1, 22, 22)
         setobjectxyperm(LOCALID_ASCENT_GLACIER_DRUM2, 26, 22)
@@ -57,14 +57,14 @@ script Ascent_Glacier_EventScript_Plates {
     if (var(VAR_TEMP_9) == 3) {
         lockall
         setflag(FLAG_ICHOR_GLACIER_GATE_OPEN)
-        setmetatile(18, 22, 0x289, FALSE)
-        setmetatile(22, 22, 0x289, FALSE)
-        setmetatile(26, 22, 0x289, FALSE)
+        setmetatile(18, 22, 0x29D, FALSE)
+        setmetatile(22, 22, 0x29D, FALSE)
+        setmetatile(26, 22, 0x29D, FALSE)
         playse(SE_DOOR)
         special(DrawWholeMapView)
         delay(30)
         playse(SE_M_GUST)
-        setmetatile(22, 17, 0x28B, FALSE)
+        setmetatile(22, 17, 0x29F, FALSE)
         special(DrawWholeMapView)
         msgbox(format("All three plates sink. Wind comes howling down the stair as the bar lifts:\p"
                       "the Gate of the Winds is open."), MSGBOX_DEFAULT)

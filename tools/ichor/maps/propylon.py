@@ -20,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ascent_lib as A  # noqa: E402
 from ascent_glacier import sign_script, trainer_script, write_scripts  # noqa: E402
-from oros_lib import Oros, roughen, seam_check  # noqa: E402
+from oros_lib import Oros, near_edge, roughen, seam_check  # noqa: E402
 from oros_maps import area, lv_plan, rows_of  # noqa: E402
 
 TW, TH = 44, 62
@@ -51,8 +51,13 @@ def levels():
 def build_3f():
     a = levels()
     # the terraces' edges break against the cloud: no straight runs
-    keep = {(x, y) for x in range(0, 44) for y in range(0, 23)} | {(x, y) for x in range(16, 28) for y in range(23, 62)} | {(x, y) for x in range(4, 13) for y in range(35, 47)} | {(x, y) for x in range(33, 41) for y in range(39, 47)}
-    roughen(a, -1, 65, rate=38, keep=keep)
+    keep = {(x, y) for x in range(0, 44) for y in range(0, 23)} | {(x, y) for x in range(16, 28) for y in range(23, 62)} | {(x, y) for x in range(4, 13) for y in range(35, 47)} | {(x, y) for x in range(33, 41) for y in range(39, 47)} | {(x, y) for x in range(7, 15) for y in range(26, 35)}
+    roughen(a, -1, 65, rate=50, keep=keep)
+    roughen(a, -1, 66, rate=30, keep=keep)
+    # rock outcrops breaking the terraces' snow: each a little crag a step up
+    for (x0, y0, x1, y1, lv) in ((31, 28, 33, 29, 5), (28, 43, 30, 44, 3),
+                                 (12, 39, 13, 40, 3), (29, 51, 31, 52, 1), (13, 51, 14, 51, 1)):
+        area(a, lv, x0, y0, x1, y1)
     g = Oros("Ascent_3F", rows_of(a), tileset="gTileset_Propylon")
     P = "Ascent_3F_EventScript_"
     for top in STAIRS.values():                     # broad marble steps, four wide
@@ -60,7 +65,20 @@ def build_3f():
     g.stairs({(7, y) for y in range(40, 44)})
     way = {(x, y) for x in range(20, 24) for y in list(range(16, 23)) + list(range(27, 35)) + list(range(39, 47))
            + list(range(51, TH))}
-    g.path(way)
+    seam_way = {c for c in way if c[1] >= TH - 8}
+    g.path(seam_way)
+    g.pave(way - seam_way)                          # the processional way in marble flags
+    g.paint()
+    # ground showing through the snow: frost-burnt grass at the stairs' feet and round
+    # the braziers, rock and dry grass along the terraces' edges
+    frost = set()
+    for top in STAIRS.values():
+        for x in list(range(15, 20)) + list(range(24, 29)):
+            for y in (top + 4, top + 5, top - 1, top - 2):
+                if (x + y) % 3 and 0 <= y < TH - 8:
+                    frost.add((x, y))
+    g.frost(frost - way)
+    g.tufts({c for c in near_edge(g) if 23 <= c[1] < TH - 8} - way)
     g.paint()
     # the grand entrance
     g.put("facade", 0, 0)
@@ -118,11 +136,15 @@ def build_3f():
     g.item("ITEM_PP_UP", 33, 40, "FLAG_ICHOR_ITEM_ASCENT3_PP_UP")
     g.item("ITEM_FULL_HEAL", 12, 51, "FLAG_ICHOR_ITEM_ASCENT3_FULL_HEAL")
     g.item("ITEM_RARE_CANDY", 34, 27, "FLAG_ICHOR_ITEM_ASCENT3_RARE_CANDY")
-    g.hidden("ITEM_COMET_SHARD", 31, 52, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD")
+    g.hidden("ITEM_COMET_SHARD", 26, 53, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD")
     g.hidden("ITEM_STAR_PIECE", 30, 33, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE")
-    for (key, x, y) in (("rock", 13, 40), ("rock", 28, 45), ("rock_b", 31, 28), ("rock_b", 15, 45),
-                        ("rock", 11, 52), ("rock", 26, 40), ("rock_b", 33, 32)):
+    for (key, x, y) in (("boulder", 15, 44), ("drift", 31, 45), ("rock_b", 33, 32), ("drift", 9, 33),
+                        ("rock", 11, 52), ("boulder", 25, 39), ("drift", 27, 27), ("rock", 34, 41),
+                        ("drift", 17, 52), ("boulder", 6, 39)):
         g.put(key, x, y)
+    # far peaks of the range rising out of the cloud on either side
+    g.put("far_peak_s", 1, 27)
+    g.put("far_peak_s", 38, 49)
     # the trainers: a pair at the first stair's foot, Gorgo on terrace 2, a pair on
     # the processional way, then the gatekeeper at the foot of the last stair
     g.person("STHENELOS", "HOPLITE", 19, 52, "Sthenelos", facing="RIGHT", sight=4)

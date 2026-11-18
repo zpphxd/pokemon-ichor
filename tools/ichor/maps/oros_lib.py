@@ -59,6 +59,7 @@ class Oros(A.Snow):
         self.path_c = set()
         self.marble_c = set()
         self.alpine_c = set()
+        self.grass_c, self.pave_c, self.frost_c, self.tuft_c = set(), set(), set(), set()
         self.face = {}
         self.painted = False
 
@@ -83,6 +84,26 @@ class Oros(A.Snow):
     def path(self, cells):
         """A path of packed snow (its fringe follows its shape)."""
         self.path_c |= self._cells(cells)
+
+    def grass(self, cells):
+        """Tall alpine grass (MB_TALL_GRASS: wild Pokémon, you walk through it)."""
+        self.grass_c |= self._cells(cells)
+
+    def pave(self, cells):
+        """Marble flags (Propylon: the processional way)."""
+        self.pave_c |= self._cells(cells)
+
+    def frost(self, cells):
+        """Frost-burnt grass where the snow has thinned (Propylon)."""
+        self.frost_c |= self._cells(cells)
+
+    def tufts(self, cells):
+        """Grass tufts and rock showing through the snow, scattered by noise."""
+        self.tuft_c |= self._cells(cells)
+
+    def creep(self, y):
+        """Chance (0..100) that an alpine cell is half under snow, by row."""
+        return getattr(self, "creep_fn", lambda y: 25)(y)
 
     def alpine(self, cells):
         """Alpine grass through patchy snow (low on the climb)."""
@@ -132,6 +153,10 @@ class Oros(A.Snow):
             return "ledge_m" if left and right else "ledge_r" if left else "ledge_l" if right else "ledge_m"
         if (x, y) in self.deep_c:
             return "deep%d" % (noise(x, y, 31) % 3)
+        if (x, y) in self.grass_c:
+            return "tg%d" % (noise(x, y, 43) % 2)
+        if (x, y) in self.pave_c:
+            return "pave%d" % ((x + y) % 2)
         if (x, y) in self.path_c:
             Pc = self.path_c
             bits = ((x, y - 1) not in Pc) << 3 | ((x, y + 1) not in Pc) << 2 | ((x + 1, y) not in Pc) << 1 | \
@@ -139,8 +164,17 @@ class Oros(A.Snow):
             return f"path_{bits}"
         if self.face.get((x, y - 1)):
             return "gs"
+        if (x, y) in self.frost_c:
+            return "fg%d" % (noise(x, y, 45) % 2)
+        if (x, y) in self.tuft_c:
+            r = noise(x, y, 47)
+            if r < 22:
+                return "ag2" if "ag2" in self.P else ("fg%d" % (r % 2))
+            if r < 32:
+                return "rx%d" % (r % 2)
         if (x, y) in self.alpine_c:
-            return "ag%d" % (noise(x, y, 41) % 3)
+            # the snow creeps in over the grass where the snow line is near
+            return "ag2" if noise(x, y, 41) < self.creep(y) else "ag%d" % (noise(x, y, 42) % 2)
         if (x, y) in self.scour_c:
             return "gw%d" % (noise(x, y, 33) % 2)
         r = noise(x, y, 35)
@@ -201,7 +235,7 @@ class Oros(A.Snow):
                     if cloud:
                         l, r = ("n" if l == "i" else l), ("n" if r == "i" else r)
                         key = f"face_{row}_{l}_{r}_c"
-                    elif l == "n" and r == "n" and noise(x, y, 39) < 20:
+                    elif l == "n" and r == "n" and False:
                         key = f"face_{row}_n_n_v"
                     else:
                         key = f"face_{row}_{l}_{r}"
@@ -308,3 +342,23 @@ def roughen(a, edge_to, salt, rate=30, keep=(), levels=None):
     for x, y in flip:
         a[y, x] = edge_to
     return a
+
+
+def near_edge(g, dist=2):
+    """Walkable ground cells within `dist` of a rim, a face or the cloud (for tufts)."""
+    out = set()
+    H, W = g.H, g.W
+    for y in range(H):
+        for x in range(W):
+            if g.lv[y, x] < 0 or (x, y) in g.face:
+                continue
+            for dy in range(-dist, dist + 1):
+                for dx in range(-dist, dist + 1):
+                    X, Y = x + dx, y + dy
+                    if 0 <= X < W and 0 <= Y < H and (g.lv[Y, X] != g.lv[y, x] or (X, Y) in g.face):
+                        out.add((x, y))
+                        break
+                else:
+                    continue
+                break
+    return out

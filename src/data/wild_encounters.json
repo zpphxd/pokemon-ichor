@@ -19921,27 +19921,12 @@
               {
                 "min_level": 56,
                 "max_level": 60,
-                "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 56,
-                "max_level": 60,
-                "species": "SPECIES_BORAPTERYX"
-              },
-              {
-                "min_level": 56,
-                "max_level": 60,
-                "species": "SPECIES_KOLOSSARD"
+                "species": "SPECIES_NEMELEON"
               },
               {
                 "min_level": 56,
                 "max_level": 60,
                 "species": "SPECIES_CHIONYAD"
-              },
-              {
-                "min_level": 56,
-                "max_level": 60,
-                "species": "SPECIES_BORAPTERYX"
               },
               {
                 "min_level": 56,
@@ -19951,7 +19936,22 @@
               {
                 "min_level": 56,
                 "max_level": 60,
+                "species": "SPECIES_BORAPTERYX"
+              },
+              {
+                "min_level": 56,
+                "max_level": 60,
                 "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 56,
+                "max_level": 60,
+                "species": "SPECIES_KORANTHA"
+              },
+              {
+                "min_level": 56,
+                "max_level": 60,
+                "species": "SPECIES_KOLOSSARD"
               },
               {
                 "min_level": 56,
@@ -20000,7 +20000,7 @@
               {
                 "min_level": 56,
                 "max_level": 60,
-                "species": "SPECIES_BORAPTERYX"
+                "species": "SPECIES_NEMELEON"
               },
               {
                 "min_level": 56,
@@ -20015,7 +20015,7 @@
               {
                 "min_level": 56,
                 "max_level": 60,
-                "species": "SPECIES_CHIONYAD"
+                "species": "SPECIES_BORAPTERYX"
               },
               {
                 "min_level": 56,

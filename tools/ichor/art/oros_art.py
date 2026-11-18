@@ -303,25 +303,96 @@ def ground_cv(key="g0"):
 
 
 def alpine_cv(variant):
-    """Alpine grass showing through patchy snow, low on the climb: tufts of green,
-    a few wildflowers (poppies, gold), the snow lying in drifts between."""
-    cv = Cv(16, 16, "sn3")
-    tufts = [[(2, 3), (9, 2), (13, 8), (5, 10), (10, 13)], [(4, 1), (12, 4), (1, 8), (8, 9), (13, 13), (4, 14)],
-             [(7, 3), (2, 7), (11, 9), (6, 13)]][variant]
-    for (tx, ty) in tufts:
-        for (dx, dy, c) in ((0, 0, "gr1"), (1, 0, "gr2"), (-1, 1, "gr1"), (0, 1, "gr2"), (1, 1, "gr1"), (2, 1, "pn2"),
-                            (0, 2, "pn2"), (1, 2, "gr1")):
+    """Alpine meadow low on the climb. ag0 and ag1 are short mountain grass with
+    wildflowers; ag2 is the same grass with the snow lying over half of it, for
+    where the snow creeps in."""
+    cv = Cv(16, 16, "gr1")
+    for y in range(16):
+        for x in range(16):
+            r = (x * 7 + y * 13 + variant * 5) % 17
+            if r < 3:
+                cv.px(x, y, "gr2")
+            elif r < 5:
+                cv.px(x, y, "pn2")
+    for (tx, ty) in ([(3, 2), (11, 5), (6, 10), (13, 12)], [(1, 6), (8, 2), (12, 9), (5, 13)], [(4, 3), (10, 11)])[variant]:
+        for (dx, dy, c) in ((0, 0, "gr2"), (1, 0, "gr2"), (0, 1, "gr1"), (-1, 1, "pn2"), (2, 1, "pn2")):
             cv.px((tx + dx) % 16, (ty + dy) % 16, c)
-    if variant == 1:
-        for (fx, fy, c) in ((6, 6, "pp"), (14, 11, "au2"), (3, 12, "pp")):
-            cv.px(fx, fy, c)
+    flowers = ([(6, 6, "pp"), (14, 3, "au2")], [(3, 11, "au2"), (10, 7, "pp"), (14, 14, "sn4")], [(12, 4, "pp")])[variant]
+    for (fx, fy, c) in flowers:
+        cv.px(fx, fy, c)
     if variant == 2:
-        for (fx, fy, c) in ((10, 5, "au2"), (4, 9, "pp")):
-            cv.px(fx, fy, c)
-    for (x, y) in ((11, 1), (12, 1), (6, 15), (7, 15), (15, 6)):
+        # snow lying over the upper left of the grass, a soft edge of sn2 under it
+        for y in range(16):
+            for x in range(16):
+                e = x + y + 2 * math.sin(x * 0.9) + 1.5 * math.sin(y * 1.3)
+                if e < 13:
+                    cv.px(x, y, "sn4" if e < 6 else "sn3")
+                elif e < 14.5:
+                    cv.px(x, y, "sn2")
+    return cv
+
+
+def meadow_grass_cv(variant):
+    """Tall alpine grass you walk through (wild Pokémon), drawn the Gen 3 way: dark
+    stems, light blade tips in clumps, the front clumps on the top layer so the
+    player wades in it."""
+    bot, top = Cv(16, 16, "pn2"), Cv(16, 16)
+    clumps = [(3, 3), (11, 2), (7, 8), (14, 9), (2, 12), (10, 14)] if variant == 0 else \
+             [(6, 2), (13, 5), (2, 7), (9, 10), (14, 13), (4, 14)]
+    for (bx, by) in clumps:
+        tgt_rows = []
+        for (dx, dy, c) in ((0, 0, "gr2"), (2, -1, "gr2"), (-2, 0, "gr2"), (1, 1, "gr1"), (-1, 1, "gr1"),
+                            (0, 2, "gr1"), (2, 1, "gr1"), (-2, 2, "pn2"), (1, 3, "rk1"), (-1, 3, "rk1")):
+            x, y = (bx + dx) % 16, (by + dy) % 16
+            (top if y > 9 else bot).px(x, y, c)
+            if y > 9:
+                bot.px(x, y, c)
+        bot.px(bx % 16, (by - 1) % 16, "au2" if (bx + variant) % 4 == 0 else "gr2")
+    return bot, top
+
+
+def frost_grass_cv(variant):
+    """Frost-burnt grass where the snow has thinned: dry tufts, brown and gold."""
+    cv = Cv(16, 16, "sn3")
+    for (tx, ty) in ([(2, 3), (9, 1), (12, 8), (4, 10), (10, 13)], [(5, 2), (13, 4), (1, 9), (8, 8), (12, 13)])[variant]:
+        for (dx, dy, c) in ((0, 0, "au2"), (1, 0, "bk1"), (-1, 1, "bk1"), (0, 1, "au1"), (1, 1, "bk1"),
+                            (2, 1, "au1"), (0, 2, "bk1"), (1, 2, "rk1")):
+            cv.px((tx + dx) % 16, (ty + dy) % 16, c)
+    for (x, y) in ((7, 6), (8, 6), (14, 1)):
         cv.px(x, y, "sn4")
-    for (x, y) in ((3, 5), (4, 5), (12, 12)):
-        cv.px(x, y, "sn2")
+    return cv
+
+
+def bare_rock_cv(variant):
+    """Rock showing through the snow: a flat outcrop flush with the ground (walkable)."""
+    cv = ground_cv("g1" if variant else "g0")
+    rock = rock_cell(31 + variant, snowy=0.6)
+    cx, cy, rx, ry = (8, 8, 6.5, 4.5) if variant == 0 else (7, 9, 5.5, 5)
+    for y in range(16):
+        for x in range(16):
+            d = ((x + 0.5 - cx) / rx) ** 2 + ((y + 0.5 - cy) / ry) ** 2 + 0.15 * math.sin(x * 1.7 + y)
+            if d < 1:
+                cv.px(x, y, rock.p[y, x])
+            elif d < 1.25:
+                cv.px(x, y, "sn4" if y < cy else "sn2")
+    return cv
+
+
+def marble_pave_cv(variant):
+    """The processional way: marble flags, snow swept into their joints."""
+    cv = Cv(16, 16)
+    for y in range(16):
+        for x in range(16):
+            jx = x % 8 == 0 if (y // 8 + variant) % 2 == 0 else (x + 4) % 8 == 0
+            if y % 8 == 0 or jx:
+                c = "sn4" if (x + y) % 3 else "mb2"
+            elif y % 8 == 1 or (x % 8 == 1 and (y // 8 + variant) % 2 == 0):
+                c = "mb5"
+            elif y % 8 == 7:
+                c = "mb2"
+            else:
+                c = "mb4" if ((x // 8 + y // 8 + variant) % 2) else "mb3"
+            cv.px(x, y, c)
     return cv
 
 
@@ -1604,7 +1675,6 @@ def terrain(which="oros"):
         for left in ("o", "i", "n"):
             for right in ("o", "i", "n"):
                 one_cv(out, f"face_{row}_{left}_{right}", "cliff face", "terrain", face_cv(row, left, right), walk="X")
-        one_cv(out, f"face_{row}_n_n_v", "cliff face", "terrain", face_cv(row, "n", "n", variant=1), walk="X")
         for left in ("o", "n"):
             for right in ("o", "n"):
                 one_cv(out, f"face_{row}_{left}_{right}_c", "cliff over the cloud", "terrain",
@@ -1615,9 +1685,14 @@ def terrain(which="oros"):
     for i in range(4):
         one_cv(out, f"cloud_{i}", "the sea of cloud", "terrain", sheet.crop((i % 2) * 16, (i // 2) * 16, 16, 16), walk="X")
     COMMON.update(s.key for s in out)
+    for v in (0, 1):
+        one_cv(out, f"rx{v}", "rock showing through the snow", "terrain", bare_rock_cv(v), mb="MB_NORMAL")
     if not full:
         for row in ("t", "m", "b"):
             one_cv(out, f"mstair_{row}", "the processional way's marble steps", "terrain", marble_stair_cv(row))
+        for v in (0, 1):
+            one_cv(out, f"fg{v}", "frost-burnt grass", "terrain", frost_grass_cv(v), mb="MB_SAND")
+            one_cv(out, f"pave{v}", "the processional way's marble flags", "terrain", marble_pave_cv(v))
     if full:
         for k in ("gw0", "gw1"):
             one_cv(out, k, "wind-scoured snow", "terrain", ground_cv(k), mb="MB_SAND")
@@ -1632,6 +1707,9 @@ def terrain(which="oros"):
         one_cv(out, "exit_s", "the road down (a south arrow warp)", "terrain", path_cv(0, 0, 1, 1), walk="v")
         for v in range(3):
             one_cv(out, f"ag{v}", "alpine grass through the snow", "terrain", alpine_cv(v), mb="MB_SAND")
+        for v in (0, 1):
+            b, t = meadow_grass_cv(v)
+            one_cv(out, f"tg{v}", "tall alpine grass (wild Pokémon)", "terrain", b, walk="T", mb="MB_TALL_GRASS", top=t)
     return out
 
 
@@ -1652,11 +1730,21 @@ def props(which="oros"):
                 ["TT", "XX", "XX"], floor=g0, top_rows=1)
         small = fir(16, 32, [(1, 8, 3), (6, 9, 5), (12, 10, 7), (19, 8, 7)], 4)
         grid_to(small, out, "fir_s", "a young fir", "props", 1, 2, ["T", "X"], floor=g0, top_rows=1)
+        # the same firs and rocks standing in the alpine meadow: their art's tiles are the
+        # snow versions', their floor's are the meadow's, so they cost no new tiles
+        mg = alpine_cv(0)
+        grid_to(pine, out, "fir_g", "a fir in the meadow", "props", 2, 3, ["TT", "XX", "XX"], floor=mg, top_rows=1)
+        grid_to(pine2, out, "fir_b_g", "a wind-bent fir in the meadow", "props", 2, 3, ["TT", "XX", "XX"], floor=mg,
+                top_rows=1)
+        grid_to(small, out, "fir_s_g", "a young fir in the meadow", "props", 1, 2, ["T", "X"], floor=mg, top_rows=1)
+        grid_to(rock_cv(16, 16, 1), out, "rock_g", "a rock in the meadow", "props", 1, 1, ["X"], floor=mg)
+        grid_to(rock_cv(32, 32, 3), out, "boulder_g", "a boulder in the meadow", "props", 2, 2, ["XX", "XX"], floor=mg)
     grid_to(rock_cv(16, 16, 1), out, "rock", "a rock through the snow", "props", 1, 1, ["X"], floor=g0)
     grid_to(rock_cv(16, 16, 5), out, "rock_b", "a rock through the snow", "props", 1, 1, ["X"], floor=ground_cv("g1"))
-    if which == "oros":
-        grid_to(rock_cv(32, 32, 3), out, "boulder", "a snow-capped boulder", "props", 2, 2, ["XX", "XX"], floor=g0)
-        grid_to(drift_cv(32, 16), out, "drift", "a snowdrift", "props", 2, 1, ["XX"], floor=g0)
+    grid_to(rock_cv(32, 32, 3), out, "boulder", "a snow-capped boulder", "props", 2, 2, ["XX", "XX"], floor=g0)
+    grid_to(drift_cv(32, 16), out, "drift", "a snowdrift", "props", 2, 1, ["XX"], floor=g0)
+    if which == "propylon":
+        grid_to(far_peak_cv(48, 32), out, "far_peak_s", "a far peak through the cloud", "props", 3, 2, ["XXX"] * 2)
     if which == "oros":
         wine = drift_cv(32, 16, wine=True)
         grid_to(flatten(wine, g0).recolor({}), out, "drift_wine", "a drift stained purple (Dionysus)", "props", 2, 1,

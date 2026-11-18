@@ -336,6 +336,442 @@ def statue(god):
     return cv.a
 
 
+# ---------------------------------------------------------------------------
+# v2 (2026-11-18, second pass): a pose for every god, a face on every head
+# ---------------------------------------------------------------------------
+MARBLE = [M0, M1, M2, M3, M4]       # deep shade .. highlight
+
+
+def ramp_x(u, steps=MARBLE):
+    """Marble across a rounded form lit from the upper left, u 0 (left) .. 1 (right)."""
+    i = 4 if u < 0.14 else 3 if u < 0.4 else 2 if u < 0.68 else 1 if u < 0.88 else 0
+    return steps[i]
+
+
+def fill_poly(cv, pts, shade=True, color=None, lit=0.0):
+    from PIL import Image as _I, ImageDraw as _D
+    m = _I.new("1", (W, H), 0)
+    _D.Draw(m).polygon(pts, fill=1)
+    a = np.array(m)
+    ys, xs = np.nonzero(a)
+    if not len(xs):
+        return a
+    for y in set(ys.tolist()):
+        row = xs[ys == y]
+        x0, x1 = row.min(), row.max()
+        for x in row:
+            if color is not None:
+                c = color
+            else:
+                u = (x + 0.5 - x0) / max(1, x1 - x0 + 1) - lit
+                c = ramp_x(max(0.0, min(1.0, u)))
+            cv.px(x, y, c)
+    return a
+
+
+def limb(cv, x0, y0, x1, y1, w=2, tone=None):
+    """An arm or a leg: a thick stroke lit on its upper-left edge."""
+    n = int(max(abs(x1 - x0), abs(y1 - y0), 1) * 2)
+    for i in range(n + 1):
+        t = i / n
+        x = x0 + (x1 - x0) * t
+        y = y0 + (y1 - y0) * t
+        for k in range(w):
+            c = tone or (M3 if k == 0 else M2 if k < w - 1 else M1)
+            cv.px(round(x + k - (w - 1) / 2), round(y), c)
+
+
+def head(cv, cx, cy, beard=False, hair="short", veil=False, helm=None, cap=None, wreath=None):
+    """A head about 7 px wide lit from the upper left: a mass of hair, the face set
+    into it, brow, eyes, nose and mouth in a few values, the neck, a beard."""
+    # the neck first, so the head sits on it
+    cv.rect(cx - 1, cy + 3, cx + 1, cy + 7, M2)
+    cv.rect(cx - 1, cy + 3, cx - 1, cy + 7, M3)
+    cv.rect(cx + 1, cy + 3, cx + 1, cy + 7, M1)
+    # the hair: a rounded mass, lit on its upper left
+    cv.ellipse(cx, cy - 1.2, 3.9, 3.5, lambda dx, dy, d: M2 if (dx < -0.5 and dy < 0) else M1 if d < 0.8 else M0)
+    if hair == "long":
+        for y in range(int(cy), int(cy + 6)):
+            cv.px(cx - 4, y, M1)
+            cv.px(cx - 3, y, M2)
+            cv.px(cx + 3, y, M0)
+            cv.px(cx + 4, y, M0)
+    # the face, set into the hair
+    cv.ellipse(cx, cy + 0.8, 2.8, 3.0, lambda dx, dy, d: M4 if dx < -0.8 else M3 if dx < 0.9 else M2)
+    # brow, eyes in soft shadow under it, the nose's lit ridge and its shadow, the mouth
+    cv.px(cx - 2, cy - 0.5, M2)
+    cv.px(cx - 1, cy - 0.5, M2)
+    cv.px(cx + 1, cy - 0.5, M1)
+    cv.px(cx + 2, cy - 0.5, M1)
+    cv.px(cx - 1.5, cy + 0.5, M0)
+    cv.px(cx + 1.5, cy + 0.5, M0)
+    cv.px(cx, cy + 0.5, M4)
+    cv.px(cx, cy + 1.5, M3)
+    cv.px(cx + 1, cy + 1.5, M1)
+    cv.px(cx, cy + 3, M1)
+    if beard:
+        cv.ellipse(cx, cy + 3.8, 3.4, 2.7, lambda dx, dy, d: M3 if dx < -1.2 else M2 if dx < 1.2 else M1)
+        for x in (cx - 2, cx, cx + 2):
+            cv.px(x, cy + 5, M1 if x <= cx else M0)
+        cv.px(cx - 1, cy + 3, M0)
+        cv.px(cx, cy + 3, M0)
+        cv.px(cx + 1, cy + 3, M0)
+    if veil:
+        for y in range(int(cy - 4), int(cy + 7)):
+            cv.px(cx - 4, y, M3)
+            cv.px(cx + 4, y, M1)
+        for x in range(int(cx - 3), int(cx + 4)):
+            cv.px(x, cy - 4, M3 if x < cx else M2)
+            cv.px(x, cy - 5, M2)
+    if helm == "corinthian":
+        cv.ellipse(cx, cy - 1.5, 3.8, 3.4, lambda dx, dy, d: G2 if dx < -1 else G1)
+        cv.rect(cx - 1, cy - 1, cx + 1, cy + 1, M3)
+        cv.px(cx - 1.5, cy, K)
+        cv.px(cx + 1.5, cy, K)
+        for i, x in enumerate(range(int(cx - 4), int(cx + 5))):
+            top = cy - 6 - (2 if 1 < i < 7 else 1)
+            for y in range(int(top), int(cy - 4)):
+                cv.px(x, y, R)
+            cv.px(x, top, R if x > cx else G2)
+    if helm == "athena":
+        cv.ellipse(cx, cy - 2, 3.8, 2.6, lambda dx, dy, d: G2 if dx < -1 else G1)
+        for x in range(int(cx - 3), int(cx + 4)):
+            cv.px(x, cy - 6, R)
+            cv.px(x, cy - 5, R)
+        cv.px(cx - 4, cy - 1, G1)
+    if cap == "petasos":
+        cv.rect(cx - 4, cy - 4, cx + 4, cy - 4, G1)
+        cv.rect(cx - 3, cy - 5, cx + 3, cy - 5, G2)
+        for i in range(3):
+            cv.px(cx - 5 - i, cy - 5 - i, M4)
+            cv.px(cx + 5 + i, cy - 5 - i, M4)
+            cv.px(cx - 5 - i, cy - 4 - i, M3)
+            cv.px(cx + 5 + i, cy - 4 - i, M3)
+    if cap == "pilos":
+        fill_poly(cv, [(cx - 4, cy - 3), (cx, cy - 8), (cx, cy - 3)], color=G1)
+        fill_poly(cv, [(cx, cy - 8), (cx + 4, cy - 3), (cx, cy - 3)], color=BR)
+    if cap == "polos":
+        cv.rect(cx - 3, cy - 7, cx + 3, cy - 4, G1)
+        cv.rect(cx - 3, cy - 7, cx + 3, cy - 7, G2)
+        cv.px(cx, cy - 6, B)
+    if wreath:
+        for x in range(int(cx - 4), int(cx + 5)):
+            if (x + int(cx)) % 2:
+                cv.px(x, cy - 3, wreath)
+        cv.px(cx - 4, cy - 2, wreath)
+        cv.px(cx + 4, cy - 2, wreath)
+
+
+def robe(cv, cx, top, bottom, w_top, w_hem, sway=0.0, folds=True, short=False):
+    """A long chiton from the shoulders down: wider at the hem, folds in value bands."""
+    pts = [(cx - w_top, top), (cx + w_top, top), (cx + w_hem + sway, bottom), (cx - w_hem + sway, bottom)]
+    fill_poly(cv, pts)
+    if folds:
+        for y in range(int(top + 6), int(bottom)):
+            t = (y - top) / max(1, bottom - top)
+            hw = w_top + (w_hem - w_top) * t
+            x0 = cx - hw + sway * t
+            for k in range(1, 5):
+                x = int(x0 + k * (2 * hw) / 5)
+                cv.px(x, y, M1 if k > 2 else M2)
+                if k <= 2:
+                    cv.px(x - 1, y, M4 if k == 1 else M3)
+
+
+def drape(cv, x0, y0, x1, y1, w=3):
+    """A himation or a sash crossing the body: its lit edge, its folds, its shadow."""
+    n = max(abs(x1 - x0), abs(y1 - y0))
+    for i in range(int(n) + 1):
+        x = x0 + (x1 - x0) * i / n
+        y = y0 + (y1 - y0) * i / n
+        for k in range(w):
+            cv.px(round(x) + k, round(y), M4 if k == 0 else M3 if k < w - 1 else M1)
+        cv.px(round(x) + w, round(y), M0)
+
+
+def torso(cv, cx, top, waist, w_sh, w_waist, bare=False):
+    fill_poly(cv, [(cx - w_sh, top), (cx + w_sh, top), (cx + w_waist, waist), (cx - w_waist, waist)])
+    if bare:
+        cv.px(cx - 2, top + 3, M2)
+        cv.px(cx + 1, top + 3, M1)
+        cv.px(cx, top + 5, M1)
+        cv.px(cx, top + 7, M1)
+
+
+def legs(cv, cx, top, bottom, stride=0, w=3):
+    """Two legs, close together and solid (no gap at the thigh), feet at the bottom."""
+    limb(cv, cx - 1.2, top, cx - 1.5 - stride, bottom, w + 1)
+    limb(cv, cx + 1.2, top, cx + 1.5 + stride, bottom, w)
+    cv.rect(cx - 2.5 - stride, bottom, cx - 0.5 - stride, bottom, M2)
+    cv.rect(cx + 1.0 + stride, bottom, cx + 3 + stride, bottom, M1)
+
+
+POSES = {}
+
+
+def pose(name):
+    def deco(fn):
+        POSES[name] = fn
+        return fn
+    return deco
+
+
+@pose("zeus")
+def _zeus(cv):
+    cx = 15.5
+    robe(cv, cx + 0.5, 27, 50, 5, 8)
+    torso(cv, cx, 16, 27, 6.5, 5, bare=True)
+    drape(cv, cx - 6, 17, cx + 3, 29, 3)
+    limb(cv, cx - 6, 17, cx - 10, 9, 3)                 # the right arm raised
+    limb(cv, cx - 10, 9, cx - 10, 5, 2)
+    cv.line(cx - 9, 0, cx - 12, 4, G2, 2)                 # the thunderbolt
+    cv.line(cx - 12, 4, cx - 8, 5, G2, 2)
+    cv.line(cx - 8, 5, cx - 11, 11, G1, 2)
+    limb(cv, cx + 6, 17, cx + 10, 23, 3)                 # the left arm out, the eagle on it
+    fill_poly(cv, [(cx + 9, 19), (cx + 12, 12), (cx + 16, 9), (cx + 14, 19)], color=BR)   # the raised wing
+    cv.line(cx + 11, 13, cx + 15, 10, G1)
+    fill_poly(cv, [(cx + 8, 20), (cx + 13, 18), (cx + 13, 23), (cx + 9, 23)], color=BR)    # the body
+    cv.line(cx + 9, 21, cx + 12, 19, G1)
+    cv.ellipse(cx + 12.5, 17, 1.8, 1.6, lambda dx, dy, d: M4 if dx < 0.5 else M3)         # the white head
+    cv.px(cx + 14, 17, G2)
+    cv.px(cx + 12, 16.5, K)
+    head(cv, cx, 9, beard=True, hair="long")
+
+
+@pose("poseidon")
+def _poseidon(cv):
+    cx = 15.5
+    legs(cv, cx, 34, 49, stride=3, w=3)
+    fill_poly(cv, [(cx - 5, 26), (cx + 5, 26), (cx + 7, 37), (cx - 7, 37)])   # a drape round the hips
+    torso(cv, cx, 16, 27, 6.5, 5, bare=True)
+    limb(cv, cx - 6, 17, cx - 9, 25, 3)
+    cv.line(cx - 9, 1, cx - 9, 50, G1, 1)                 # the trident
+    cv.line(cx - 10, 1, cx - 10, 50, G2, 1)
+    for dx in (-3, 0, 3):
+        cv.line(cx - 9 + dx, 0, cx - 9 + dx, 4, G2)
+    cv.line(cx - 12, 4, cx - 6, 4, G2)
+    limb(cv, cx + 6, 17, cx + 11, 21, 3)                 # the left arm flung out, striding
+    head(cv, cx + 0.5, 9, beard=True, hair="long")
+
+
+@pose("athena")
+def _athena(cv):
+    cx = 15.5
+    robe(cv, cx, 22, 50, 5.5, 8.5)
+    torso(cv, cx, 16, 23, 6, 5.5)
+    fill_poly(cv, [(cx - 5, 17), (cx + 5, 17), (cx + 4, 22), (cx - 4, 22)], color=G1)   # the aegis
+    cv.px(cx, 19, R)
+    limb(cv, cx - 6, 17, cx - 10, 12, 3)                 # the spear arm, raised
+    cv.line(cx - 10, 0, cx - 10, 50, BR)
+    cv.line(cx - 11, 1, cx - 9, 1, M4)
+    cv.px(cx - 10, 0, M4)
+    cv.ellipse(cx + 9, 30, 5.5, 7, lambda dx, dy, d: G2 if d > 0.78 and dx < 0 else G1 if d > 0.72 else
+               B if d > 0.2 else R)                       # the shield, held out
+    head(cv, cx, 9, helm="athena", hair="long")
+    cv.ellipse(cx + 7, 13, 1.8, 2.2, lambda dx, dy, d: M2 if dx < 0 else M1)   # the owl on her shoulder
+    cv.px(cx + 6.5, 12.5, G2)
+    cv.px(cx + 7.5, 12.5, G2)
+
+
+@pose("artemis")
+def _artemis(cv):
+    cx = 15.5
+    legs(cv, cx, 35, 49, stride=2)
+    fill_poly(cv, [(cx - 5, 22), (cx + 5, 22), (cx + 6, 36), (cx - 6, 36)])  # the short chiton
+    for y in range(26, 36, 3):
+        cv.px(cx - 2, y, M4)
+        cv.px(cx + 2, y, M1)
+    torso(cv, cx, 16, 23, 5.5, 5)
+    cv.rect(cx + 3, 13, cx + 5, 24, BR)                    # the quiver on her back
+    cv.px(cx + 4, 12, M4)
+    cv.px(cx + 3, 12, R)
+    limb(cv, cx - 5, 17, cx - 11, 17, 2)                 # the bow arm, straight out
+    for y in range(9, 26):
+        t = (y - 17) / 8.5
+        cv.px(cx - 13 + int(2.5 * t * t), y, G1)
+        cv.px(cx - 12 + int(2.5 * t * t), y, G2 if abs(t) < 0.6 else G1)
+    cv.line(cx - 13, 9, cx - 2, 17, M4)                   # the string, drawn back
+    cv.line(cx - 13, 25, cx - 2, 17, M4)
+    limb(cv, cx + 4, 17, cx - 2, 17, 2)                  # the drawing arm
+    cv.line(cx - 14, 16, cx - 2, 16, BR)                 # the arrow
+    cv.px(cx - 15, 16, M4)
+    head(cv, cx, 9, hair="long")
+    cv.ellipse(cx, 4.5, 2.6, 1.2, lambda dx, dy, d: G2)    # the crescent
+    cv.px(cx, 4.5, M3)
+
+
+@pose("apollo")
+def _apollo(cv):
+    cx = 15.5
+    legs(cv, cx, 33, 49, stride=1, w=3)
+    drape(cv, cx - 6, 18, cx + 4, 34, 3)
+    torso(cv, cx, 16, 30, 6.5, 4.5, bare=True)
+    fill_poly(cv, [(cx - 5, 30), (cx + 5, 30), (cx + 6, 35), (cx - 6, 35)])
+    limb(cv, cx + 6, 17, cx + 2, 23, 3)
+    fill_poly(cv, [(cx - 6, 17), (cx - 2, 17), (cx - 1, 27), (cx - 7, 27)], color=G1)   # the lyre
+    cv.line(cx - 7, 16, cx - 8, 13, G2, 1)
+    cv.line(cx - 1, 16, cx, 13, G2, 1)
+    for x in range(int(cx - 6), int(cx - 1)):
+        cv.line(x, 18, x, 25, M4)
+    limb(cv, cx - 6, 17, cx - 6, 24, 2)
+    head(cv, cx, 9, hair="long", wreath=G2)
+
+
+@pose("hephaestus")
+def _hephaestus(cv):
+    cx = 15.5
+    legs(cv, cx, 33, 49, stride=2, w=4)
+    fill_poly(cv, [(cx - 7, 24), (cx + 7, 24), (cx + 8, 35), (cx - 8, 35)])   # the exomis
+    torso(cv, cx, 16, 25, 8, 7, bare=True)
+    drape(cv, cx + 4, 16, cx - 6, 25, 2)
+    limb(cv, cx + 8, 17, cx + 10, 10, 4)                 # the hammer over his shoulder
+    cv.line(cx + 10, 10, cx + 3, 3, BR, 2)
+    cv.rect(cx, 0, cx + 5, 4, M1)
+    cv.rect(cx, 0, cx + 5, 0, M3)
+    cv.rect(cx, 1, cx, 4, M2)
+    limb(cv, cx - 8, 17, cx - 10, 27, 4)                 # the other fist, the tongs
+    cv.line(cx - 10, 27, cx - 12, 33, BR)
+    head(cv, cx, 9, beard=True, cap="pilos")
+
+
+@pose("hermes")
+def _hermes(cv):
+    cx = 15.5
+    limb(cv, cx - 1, 33, cx - 5, 49, 4)                  # mid-step: one leg forward, one back
+    limb(cv, cx + 2, 33, cx + 5, 46, 4)
+    limb(cv, cx + 5, 46, cx + 7, 49, 3)
+    for (x, y) in ((cx - 7, 47), (cx - 8, 46), (cx + 8, 47), (cx + 9, 46)):
+        cv.px(x, y, M4)                                   # the winged sandals
+    fill_poly(cv, [(cx - 5, 26), (cx + 5, 26), (cx + 5, 34), (cx - 5, 34)])
+    torso(cv, cx, 16, 27, 6, 4.5, bare=True)
+    fill_poly(cv, [(cx + 2, 15), (cx + 7, 15), (cx + 9, 30), (cx + 4, 28)])  # the chlamys from his shoulder
+    limb(cv, cx - 6, 17, cx - 9, 24, 2)
+    cv.line(cx - 10, 6, cx - 10, 40, G1)                  # the caduceus
+    cv.ellipse(cx - 10, 6, 1.8, 1.8, lambda dx, dy, d: G2)
+    for y in range(10, 24, 4):
+        cv.px(cx - 11, y, G2)
+        cv.px(cx - 9, y + 2, G2)
+    cv.px(cx - 12, 8, M4)
+    cv.px(cx - 8, 8, M4)
+    limb(cv, cx + 6, 17, cx + 9, 12, 2)
+    head(cv, cx, 9, cap="petasos")
+
+
+@pose("ares")
+def _ares(cv):
+    cx = 15.5
+    legs(cv, cx, 34, 49, stride=2, w=3)
+    fill_poly(cv, [(cx - 5, 26), (cx + 5, 26), (cx + 6, 35), (cx - 6, 35)])
+    for y in range(28, 35, 2):
+        cv.px(cx - 3, y, BR)
+        cv.px(cx + 3, y, BR)
+    torso(cv, cx, 16, 27, 7, 5.5)
+    fill_poly(cv, [(cx - 6, 16), (cx + 6, 16), (cx + 5, 26), (cx - 5, 26)], color=G1)    # the cuirass
+    cv.line(cx, 17, cx, 25, BR)
+    limb(cv, cx - 7, 17, cx - 10, 22, 3)
+    cv.line(cx - 10, 0, cx - 10, 50, BR)                 # the spear
+    cv.line(cx - 11, 1, cx - 9, 1, M4)
+    cv.px(cx - 10, 0, M4)
+    cv.ellipse(cx + 5, 29, 6, 7.5, lambda dx, dy, d: G2 if d > 0.8 and dx < 0 else G1 if d > 0.7 else
+               R if d > 0.22 else G2)                    # the shield braced in front
+    head(cv, cx, 9, helm="corinthian")
+
+
+@pose("aphrodite")
+def _aphrodite(cv):
+    cx = 15.5
+    robe(cv, cx + 1, 28, 50, 5, 7.5, sway=-1.5)          # the drape low round her hips, the hip shifted
+    fill_poly(cv, [(cx - 5, 16), (cx + 5, 16), (cx + 6, 29), (cx - 3, 29)])   # contrapposto: the hip out
+    drape(cv, cx - 5, 20, cx + 5, 22, 2)
+    limb(cv, cx - 5, 17, cx - 6, 10, 2)                  # a hand raised to her hair
+    limb(cv, cx + 5, 17, cx + 8, 27, 2)
+    head(cv, cx - 0.5, 9, hair="long")
+    cv.ellipse(cx + 1, 49, 4.5, 2.4, lambda dx, dy, d: R if int(dx + 6) % 2 else M4)   # the scallop shell
+
+
+@pose("demeter")
+def _demeter(cv):
+    cx = 15.5
+    robe(cv, cx, 16, 50, 6, 8.5)
+    drape(cv, cx - 6, 18, cx + 5, 30, 3)
+    limb(cv, cx - 6, 18, cx, 25, 3)                      # cradling the sheaf
+    for i in range(7):
+        x = cx - 7 + i
+        cv.line(x, 28, x - 3 + i * 0.5, 13, G1)
+        cv.px(x - 3 + i * 0.5, 13, G2)
+        cv.px(x - 3 + i * 0.5, 14, G2)
+    cv.rect(cx - 6, 24, cx, 25, BR)
+    limb(cv, cx + 6, 18, cx + 8, 28, 2)
+    head(cv, cx + 0.5, 9, veil=True, cap="polos")
+
+
+@pose("hera")
+def _hera(cv):
+    cx = 15.5
+    fill_poly(cv, [(cx - 9, 10), (cx + 9, 10), (cx + 9, 48), (cx - 9, 48)], color=B)   # the throne's back
+    fill_poly(cv, [(cx - 9, 10), (cx + 9, 10), (cx + 9, 11), (cx - 9, 11)], color=G2)
+    for y in range(13, 46, 4):
+        cv.px(cx - 8, y, G1)
+        cv.px(cx + 8, y, G1)
+    fill_poly(cv, [(cx - 6, 28), (cx + 7, 28), (cx + 7, 37), (cx - 6, 37)])   # her lap, seated
+    limb(cv, cx - 3, 37, cx - 3, 49, 3)
+    limb(cv, cx + 3, 37, cx + 3, 49, 3)
+    fill_poly(cv, [(cx - 5, 16), (cx + 5, 16), (cx + 5, 29), (cx - 5, 29)])
+    drape(cv, cx - 5, 17, cx + 4, 28, 2)
+    limb(cv, cx - 5, 17, cx - 7, 26, 2)
+    cv.line(cx - 8, 4, cx - 8, 48, G1)                    # the sceptre, a cuckoo on it
+    cv.ellipse(cx - 8, 4, 1.6, 1.6, lambda dx, dy, d: B)
+    cv.px(cx - 7, 3, G2)
+    limb(cv, cx + 5, 17, cx + 6, 27, 2)
+    cv.ellipse(cx + 8, 33, 1.6, 1.6, lambda dx, dy, d: T1 if d > 0.4 else B)   # a peacock's eye on the arm
+    head(cv, cx, 10, veil=True, cap="polos")
+
+
+@pose("dionysus")
+def _dionysus(cv):
+    cx = 15.5
+    robe(cv, cx, 24, 50, 5, 7.5)
+    torso(cv, cx, 16, 25, 6, 5, bare=True)
+    drape(cv, cx + 5, 16, cx - 5, 27, 3)
+    limb(cv, cx + 6, 17, cx + 9, 24, 3)
+    cv.line(cx + 10, 4, cx + 10, 48, BR)                 # the thyrsus, a pine cone on it
+    cv.ellipse(cx + 10, 3.5, 2, 2.8, lambda dx, dy, d: G1 if dx > 0 else G2)
+    limb(cv, cx - 6, 17, cx - 10, 11, 2)                 # the cup raised
+    cv.ellipse(cx - 11, 9, 3, 1.8, lambda dx, dy, d: G2 if dy < 0 else G1)
+    cv.px(cx - 11, 8, R)
+    cv.px(cx - 12, 8, R)
+    head(cv, cx, 9, hair="long", wreath=B)
+
+
+@pose("hestia")
+def _hestia(cv):
+    cx = 15.5
+    robe(cv, cx, 16, 50, 6, 8)
+    drape(cv, cx - 6, 18, cx + 5, 32, 3)
+    limb(cv, cx - 6, 18, cx - 2, 24, 3)
+    limb(cv, cx + 6, 18, cx + 2, 24, 3)
+    cv.ellipse(cx, 24.5, 4.5, 1.8, lambda dx, dy, d: G1 if dy > 0 else G2)   # the hearth-bowl
+    for (dx, hh) in ((-2, 4), (0, 6), (2, 4)):
+        for y in range(int(23 - hh), 24):
+            cv.px(cx + dx, y, R if y > 23 - hh + 1 else G2)
+        cv.px(cx + dx + 1, 22, BR)
+    head(cv, cx, 9, veil=True)
+
+
+def statue_v2(god):
+    cv = Cv()
+    plinth(cv)
+    fig = Cv()
+    POSES[god](fig)
+    fig.outline(K)
+    m = fig.a > 0
+    cv.a[m] = fig.a[m]
+    return cv.a
+
+
+statue = statue_v2
+
+
 GODS = ["hestia", "hermes", "demeter", "dionysus", "artemis", "hephaestus",
         "aphrodite", "apollo", "ares", "poseidon", "athena", "hera", "zeus"]
 

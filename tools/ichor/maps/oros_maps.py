@@ -27,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ascent_lib as A  # noqa: E402
 from ascent_lib import push_plan  # noqa: E402
 from league_lib import ROOT, noise  # noqa: E402
-from oros_lib import Oros, roughen, seam_check  # noqa: E402
+from oros_lib import Oros, near_edge, roughen, seam_check  # noqa: E402
 from ascent_glacier import sign_script, trainer_script, write_scripts  # noqa: E402
 
 PLANS = {}
@@ -51,6 +51,17 @@ def area(a, v, x0, y0, x1, y1, salt=0, wob=0):
                     if dx and dy:
                         continue
             a[y, x] = v
+
+
+def meadow_key(g, key, x, y):
+    """A fir or a rock standing in the alpine meadow takes its grass-floored twin."""
+    twin = key + "_g"
+    if twin not in g.P:
+        return key
+    h = g.P[key]["h"]
+    w = g.P[key]["w"]
+    cells = [(x + i, y + j) for j in range(h) for i in range(w)]
+    return twin if all(c in g.alpine_c or c in g.grass_c for c in cells) else key
 
 
 def rows_of(a):
@@ -202,16 +213,23 @@ def build_snowfield():
     g.stairs({(x, y) for x in S_STAIR for y in range(29, 33)})
     lx0, lx1, ly = S_LEDGE
     g.ledge({(x, ly) for x in range(lx0, lx1 + 1)})
-    deep = {(x, y) for y in range(35, 39) for x in range(10, 31)}
+    deep = {(x, y) for y in range(35, 39) for x in range(10, 31)}       # the snow line: a forced band
     deep |= {(x, y) for y in range(28, 29) for x in range(9, 16)}
-    deep |= {(x, y) for y in range(42, 45) for x in range(22, 27)}
     g.deep(deep)
-    road = {(x, y) for y in range(39, 46) for x in range(18, 21)} | {(x, 39) for x in range(18, 24)}
+    # the meadow's lower third is alpine: a forced band of tall grass below the snow
+    # line, grass and wildflowers everywhere under patchy snow that thickens upward
+    tall = {(x, y) for y in range(40, 43) for x in range(5, 33)}
+    tall |= {(x, 39) for x in range(5, 33) if noise(x, 39, 81) < 45}
+    tall |= {(x, 43) for x in range(5, 33) if noise(x, 43, 82) < 40 and x not in (18, 19, 20)}
+    g.grass(tall)
+    g.creep_fn = lambda y: 100 if y < 39 else 70 if y == 39 else 25 if y == 40 else 0
+    road = {(x, y) for y in range(43, 46) for x in range(18, 21)} | {(x, 39) for x in range(18, 24)}
     road |= {(x, y) for y in (33, 34) for x in range(21, 28)} | {(x, 28) for x in range(20, 27)}
     road |= {(x, y) for y in (13, 14) for x in range(18, 21)} | {(x, 13) for x in range(21, 34)}
-    g.path(road - deep)
-    g.alpine({(x, y) for y in range(39, SH) for x in range(4, 34)
-              if (x, y) not in deep and (x, y) not in road and noise(x, y, 77) < 18 + (y - 39) * 9})
+    g.path(road - deep - tall)
+    g.alpine({(x, y) for y in range(33, SH) for x in range(4, 34)
+              if (x, y) not in deep and (x, y) not in road and (x, y) not in tall
+              and noise(x, y, 77) < (40 if y < 39 else 101)})
     g.fixed[:] = False
     g.paint()
     # the Icefall's mouth at the cliff's foot; the road arrives from below
@@ -244,22 +262,24 @@ def build_snowfield():
     # firs: masses on the high ground and the meadow's edges, a few young ones out front
     for (key, x, y) in (("fir", 4, 43), ("fir_b", 10, 42), ("fir", 8, 43), ("fir_s", 12, 44),
                         ("fir", 29, 41), ("fir_b", 31, 39), ("fir", 31, 42), ("fir_s", 28, 44),
-                        ("fir_arrow", 27, 39), ("fir_s", 16, 40), ("fir_s", 9, 39),
+                        ("fir_arrow", 31, 35), ("fir_s", 16, 40), ("fir_s", 9, 39),
                         ("fir", 1, 10), ("fir_b", 0, 14), ("fir", 2, 18), ("fir", 0, 22), ("fir_b", 2, 26),
                         ("fir", 0, 30), ("fir", 2, 34), ("fir_b", 0, 38), ("fir", 2, 42), ("fir", 3, 0),
                         ("fir_b", 7, 1), ("fir", 12, 0), ("fir", 25, 1), ("fir_b", 29, 0), ("fir", 34, 2),
                         ("fir", 37, 4), ("fir_s", 15, 4), ("fir_s", 21, 5), ("fir", 6, 5), ("fir_b", 10, 6),
                         ("fir", 31, 5), ("fir", 18, 1), ("fir_s", 4, 10), ("fir", 9, 9), ("fir_s", 13, 10)):
-        g.put(key, x, y)
+        g.put(meadow_key(g, key, x, y), x, y)
     for (key, x, y) in (("boulder", 14, 41), ("rock", 22, 40), ("rock_b", 18, 34), ("drift", 22, 33),
                         ("drift", 8, 33), ("rock", 32, 34), ("drift_wine", 14, 33), ("rock", 23, 6),
-                        ("boulder", 27, 6), ("rock_b", 36, 7), ("drift", 12, 3)):
-        g.put(key, x, y)
+                        ("boulder", 27, 6), ("rock_b", 36, 7), ("drift", 12, 3), ("boulder_g", 24, 44),
+                        ("rock_g", 7, 39), ("rock_g", 30, 44)):
+        g.put(meadow_key(g, key, x, y), x, y)
     g.put("far_peak", 35, 38)
     g.put("poppy", 11, 41)
     g.sign(11, 41, P + "Poppy")
-    g.sign(28, 41, P + "Arrow", facing="NORTH")
-    g.hidden("ITEM_SCOPE_LENS", 28, 42, "FLAG_ICHOR_HIDDEN_ITEM_SNOWFIELD_SCOPE_LENS")
+    g.sign(31, 37, P + "Arrow", facing="NORTH")
+    g.sign(32, 37, P + "Arrow", facing="NORTH")
+    g.hidden("ITEM_SCOPE_LENS", 33, 37, "FLAG_ICHOR_HIDDEN_ITEM_SNOWFIELD_SCOPE_LENS")
     g.sign(16, 33, P + "Wine", facing="WEST")
     g.put("sign", 21, 43)
     g.sign(21, 43, P + "Sign")
@@ -279,7 +299,7 @@ def build_snowfield():
                             music="MUS_VICTORY_ROAD", ichor_kind="dungeon"))
     entry = (19, SH - 2)
     must = [("stair", (25, 28)), ("shore", S_SHORE), ("knoll sign", (6, 43)), ("door sign", (12, 34)),
-            ("ball", (32, 20)), ("poppy", (11, 42)), ("arrow", (28, 42)), ("sisyphus", (16, 44))]
+            ("ball", (32, 20)), ("poppy", (11, 42)), ("arrow", (31, 38)), ("sisyphus", (16, 44))]
     seen = g.check(entry, must)
     assert S_LANDING not in g.reach(entry, blocked=sorted(g.ice_c)), "the mouth must need the tarn"
     g.check(S_LANDING, [("mouth", (18, 12)), ("elixir", (16, 13)), ("cornice", (32, 14))])
@@ -430,6 +450,7 @@ def build_glacier():
     g.deep({(x, y) for y in range(54, 58) for x in range(8, 22)} | {(x, y) for y in range(22, 27) for x in range(30, 37)}
            | {(x, y) for y in range(8, 12) for x in range(22, 33)})
     g.scour({(x, y) for y in range(0, 8) for x in range(14, 30)})
+    g.tufts(near_edge(g) - g.ice_c)
     g.path({(x, y) for y in (52, 53) for x in range(12, 26)} | {(x, y) for x in (24, 25) for y in range(52, 55)}
            | {(x, y) for x in (21, 22) for y in (28, 29)} | {(x, y) for y in range(0, 3) for x in range(19, 24)})
     g.fixed[:] = False
@@ -784,6 +805,8 @@ def build_windridge():
     g.deep({(x, y) for y in range(38, 43) for x in range(15, 21)} | {(x, y) for y in range(38, 43) for x in range(25, 32)}
            | {(x, y) for y in range(10, 14) for x in range(24, 31)})
     g.path({(x, y) for x in (21, 22) for y in range(36, 46)} | {(x, y) for x in (21, 22) for y in range(0, R_SEAM)})
+    g.paint()
+    g.tufts({c for c in near_edge(g) if c[1] >= R_SEAM} - {(x, y) for y in range(18, 32) for x in range(14, 31)})
     g.paint()
     # the puzzle: rubble over the drums, two plates, the bar, the reset lever
     for (x, y) in R_PLATES:

@@ -37,3 +37,10 @@ New on 2026-11-18: the climb's first outdoor snow floor, between the cloud ledge
 
 - `img/ascent_snowfield_after.png`, 15x10 screens `img/ascent_snowfield_after_screens.png`. New map, no before.
 - Pass 1: the cliffs read as fences (regular vertical strata) and the deep snow as cobbles; the faces were redrawn as craggy masses lit from the upper left and the deep snow as soft white heaps. Pass 2: one-level drops looked like walls, so every cliff became a two-level, four-row face; the tarn's north shore was closed with rocks so a straight slide can't solve it. Pass 3: packed-snow paths with soft fringes, alpine grass at the foot, the cloud edges roughened so no edge runs straight.
+
+## Second pass (2026-11-18): an alpine meadow below the snow line
+
+- The meadow's lower third is now alpine meadow: short mountain grass with poppies and gold flowers (`ag0`/`ag1`), a forced band of tall grass you walk through (`tg`, MB_TALL_GRASS, the same land table as the deep snow), firs and boulders standing in the grass on grass-floored twins that cost no new tiles, and the snow creeping in over the grass (`ag2`) toward the snow line, where the deep snow band begins.
+- The wild table leads with the meadow's Pokémon (Nemeleon, Kerastorm, Korantha, Laolith) and keeps the cold ones above them.
+- Artemis's fir moved up beside the snow line (31,35); its arrow and the Scope Lens with it.
+- Renders: before `img/ascent_snowfield_v1.png`, after `img/ascent_snowfield_after.png` (screens `img/ascent_snowfield_after_screens.png`). Pass 1 laid a tall-grass band on plain tufted snow, which read as a green carpet on white; pass 2 made the meadow's own ground grass (snow over it only near the snow line) and gave the firs and rocks grass floors.
