@@ -33,6 +33,7 @@
 12. The Twelve Labors, one by one
 13. The full Odyssey
 14. The additions in the build order and the budget (and proposals P-12 to P-19)
+15. The legendary register: all 136 legends, a third in Aethos and two thirds in the Oikoumene, with their quests (and P-20)
 
 ---
 
@@ -761,7 +762,7 @@ SYSTEMS §10's guest-gifts are 18 starter lines from Gens 1–5 and 8 (54 specie
 
 **Pokémon.**
 - **Signature:** Hippowdon, Krookodile and Skeledirge (Moeris's crocodiles), Sigilyph, Cofagrigus, Unown, Rabsca (the scarab), Persian and Purugly (Bubastis's cats).
-- **Rare behind gates:** Lucario and Mabosstiff in the Pyramid (Augur's Eye); Houndstone in the Valley (Augur's Eye); Espeon on the pyramid's upper floor (Augur's Eye); flood-month islands (Whiscash, Barboach); Ho-Oh, Reshiram, Uxie and the others (LEGENDS).
+- **Rare behind gates:** Lucario and Mabosstiff in the Pyramid (Augur's Eye); Houndstone in the Valley (Augur's Eye); Espeon on the pyramid's upper floor (Augur's Eye); flood-month islands (Whiscash, Barboach); Ho-Oh, Reshiram, Zygarde, Buzzwole and Kartana (§15; Uxie moves to Lebadeia under P-20).
 - **Homeland lines (§2.7):** Enigmaw at the Sphinx (static, Lv 66) and wild on the Pyramid Field; Ophidrop and Panacoil, the uraeus cobras, in the Valley of Tombs at night.
 - **Gaps:** **the sacred ibis** of Thoth. No species is an ibis; the herms carry the bird. A new species is optional (§8, P-11); nothing waits on it.
 
@@ -831,7 +832,7 @@ SYSTEMS §10's guest-gifts are 18 starter lines from Gens 1–5 and 8 (54 specie
 
 **Mount Nysa** (36×80, a climb). Dionysus's nursery mountain: ivy walls (Dionysus's Thyrsus if the player has it, SYSTEMS §3; otherwise the Sickle), vine-wrapped switchbacks, the nymphs' hut outcamp, Oinopard in the trees, and the cave mouth.
 
-**The Cave of Nysa** (2 floors; the land's dungeon). *Where the nymphs hid the infant Dionysus.* Floor 1: a wine spring that flows when you set three amphorae (drums in the land's skin, §5.1) on their plates by the press; the spring fills a basin you can surf to a ledge. Floor 2: the cradle grotto, ivy curtains, a Crook face up to Diancie's crystal niche (LEGENDS). Rest: a spring of water on floor 1. Payoff: a TM and a Thyrsivy static (Lv 75).
+**The Cave of Nysa** (2 floors; the land's dungeon). *Where the nymphs hid the infant Dionysus.* Floor 1: a wine spring that flows when you set three amphorae (drums in the land's skin, §5.1) on their plates by the press; the spring fills a basin you can surf to a ledge. Floor 2: the cradle grotto, ivy curtains, a Crook face up to a crystal niche where Diancie's crown-stone was found, now empty: a note says it went home to Ariadne (Diancie moves to Kalliste, P-20; the niche holds a Shiny Stone). Rest: a spring of water on floor 1. Payoff: a TM and a Thyrsivy static (Lv 75).
 
 **The Mountains of the Moon** (96×44). Jungle, rain every day (Sliggoo evolves here), vine bridges, a waterfall with a cave behind (the Horn), the Nile's sources ("between two mountains," a priest's tall tale, Herodotus 2.28), and at the east end the Pygmy Marshes and their village, where the cranes' battle (★) plays.
 
@@ -839,7 +840,7 @@ SYSTEMS §10's guest-gifts are 18 starter lines from Gens 1–5 and 8 (54 specie
 
 **Pokémon.**
 - **Signature:** Zebstrika, Girafarig, Tropius, Toucannon, Passimian and Oranguru, Chansey and Audino (the long-lived), Flamigo and Bombirdier (the cranes), Volcarona.
-- **Rare behind gates:** Kecleon and Sliggoo in the jungle (Augur's Eye); Flareon at the Gate (Augur's Eye); Kangaskhan at the Table by night; the Ketos (a static); Solgaleo, Diancie, Zarude and the others (LEGENDS).
+- **Rare behind gates:** Kecleon and Sliggoo in the jungle (Augur's Eye); Flareon at the Gate (Augur's Eye); Kangaskhan at the Table by night; the Ketos (a static); Solgaleo, Genesect, Zarude, Landorus, Virizion, Ting-Lu, Guzzlord and Pheromosa (§15).
 - **Homeland lines (§2.7):** Kynoketos at Andromeda's rock; Oinopard and Thyrsivy on Nysa; Elektear at the Gate of Dawn.
 - **Gaps:** none.
 
@@ -1666,3 +1667,349 @@ With §6.3's ~4.1 MiB, the whole post-game at 1.0 is about **4.7 MiB of the 9.0 
 | P-17 | **Ithaca:** keep the approved homecoming at Elaia (Kalliste plays Ithaca, Mom plays Penelope), and add Ithaka as an optional visit after the voyage | Nothing approved; adds one map on Route 33 | Yes |
 | P-18 | **Three new biomes** so every type has a crown: the Garden of Hecate (Poison), the Isle of Ares moved to 1.0 (Flying), Gargaros's storm summit (Electric) | OIKOUMENE §13's stretch list (the Isle of Ares); COVERAGE gains E10 | Yes |
 | P-19 | **Shared places with the Labors:** Labor 6's Stymphalian Reeds are Lake Stymphalia's marsh on Routes 26–27 (IDEAS), and Labor 4's slopes open the Erymanthian Preserve's high meadow | LABORS's maps 6, 7 and 10 (for its designer) | Yes |
+
+---
+
+## 15. The legendary register
+
+**The direction (user, 2026-11-17):** "post-game needs all the legendaries, and small quests for each," with "some in the original region, others in the new."
+
+**What this is.** One table of every legendary and mythical in Ichor: the 125 National Dex legends, mythicals, Ultra Beasts and Paradox Pokémon, and the Aethos dex's own 11. Each row gives its region, where it lives (for Aethos, the WORLD_EXPLORATION return gate that leads to it), its quest, its level, what it needs, and the legends it links to.
+
+**Where the quests live.** `design/LEGENDS.md` already gives most legends a quest of three to six steps: someone who asks, a clue trail, a task or puzzle, a trigger, and a staged encounter, with no two quests built the same way (LEGENDS §0). Those rows point to it. Some legends had no quest of their own (the epics' Primordials and Titans, the story's own legends), and this guide moves or extends a few. Those get their quests in §15.2.
+
+**The split (user: "some in the original region, others in the new"):**
+
+| Region | Legends | Share |
+|---|---:|---:|
+| **Aethos**, behind the return gates and in the Aethos epics (the Katabasis, Atlantis, Olympia, Olympus, the Labors) | **53** | 39% |
+| **The Oikoumene**, in the ten lands and the Odyssey's sea | **83** | 61% |
+| **All** | **136** | |
+
+That's roughly the third and two thirds the user asked for. Going home pays: Aethos's return gates now lead to the Primordials, the Titans, the colossi, Pegaunos, Ichorin, Heatran, the Golden Paradox Pokémon, Uxie under Lebadeia and Diancie on Kalliste.
+
+**Every land has legends** (Oikoumene rows by land): Troad 9, Black Sea 9, Egypt 9, North 8, Aithiopia 8, Libya 8, Lydia 6, Western Sea 4 with Tornadus, Far West 2, and Okeanos 16. The wanderers, Latios and the evolutions cross land lines.
+
+**The headline legend for each big set piece:**
+
+| Set piece | Headline | With it |
+|---|---|---|
+| **Etna** (§10) | Volcanion, in Typhon's chamber | Gaia's lead (Groudon) |
+| **The Underworld** | Giratina, in the Chasm | The five Titans and Regigigas; Cresselia and Darkrai |
+| **The Selvage** | Palkia | The Ultra Beasts; the Iron Paradox Pokémon |
+| **Hyperborea** | Calyrex, at the round temple | Kyurem and Glastrier in the Cave of Boreas |
+| **Atlantis** | Lugia, in the abyss | Kyogre at the world's edge; Manaphy |
+| **Olympus's summit** | Arceus | Rayquaza, Pegaunos, Olympanax |
+| **The Gates of the Sun** | Dialga | — |
+| **The Isles of the Blessed** | Koraidon | The Tapus, Shaymin, Keldeo |
+| **Heliopolis** | Ho-Oh | The three Golden beasts |
+| **The Gate of Dawn** | Solgaleo | Genesect, Pheromosa |
+| **The Atlas Range** | Jirachi | Moltres |
+| **Leuke** | Zacian and Zamazenta | Achilles |
+
+**The user's examples, checked against what's approved:**
+- *Groudon or Kyogre in Okeanos's world-river:* Kyogre is Oceanus, at the edge of the world below Atlantis (POSTGAME §3.3), the same river seen from the Aethos side of the disc (OIKOUMENE §1). Kept.
+- *Heatran in Etna's crater, or "Etna-class fire under Kaldera":* the second, the user's later example, is already LEGENDS's (S2). Heatran stays under Kaldera, and Etna's headline is Volcanion (P-15).
+- *The Regis as Daedalus's or Talos's automata:* the user settled the Regis as Tartarus's freed Titans (UNDERWORLD, K3), so they stay. The automata roles go to Type: Null (Daedalus's statue that runs away), Magearna (Hephaestus's golden handmaid) and Genesect (Tithonus in his armor).
+- *Ho-Oh as the phoenix at Heliopolis:* kept (LEGENDS §3.2).
+- *Lugia in the Clashing Rocks' deep:* Lugia stays in Atlantis (PITCH §6, POSTGAME §3.2). A **sighting** is added: in the Clashing Rocks' side channel (§3.3), a white shape passes under the boat, and Phineus says it's going west. It's the first clue in Lugia's quest (§15.2).
+- *The Swords of Justice with the Argonauts:* LEGENDS casts them as the Hours (Good Order, Justice, Peace) and Keldeo as Astraea. Kept. The Argo's Road (P-8) passes two of their homes, and each mooring stone's rubbing names the Hour of that land.
+
+### 15.1 The register
+
+Grouped into chains: trios, pairs and families come together, and each row says which legends it links to. **Bold** gate ids are this guide's moves (P-20).
+
+#### The Primordials and the Prime Mover
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 383 | Groudon | **Aethos** | D8, the Korykian cave's inner grotto | §15.2 *Gaia's Navel* | 88 | The Katabasis | The Primordials; Arceus; Typhon's lead at Etna (§10) |
+| 382 | Kyogre | **Aethos** | Atlantis (P2), below the abyss | §15.2 *The River That Runs in a Circle* | 88 | Atlantis | The Primordials; Lugia; Arceus |
+| 384 | Rayquaza | **Aethos** | D11, above the cloud meadows | §15.2 *The One Who Held the Sickle* | 88 | The Kotinos | The Primordials; Pegaunos; Arceus |
+| 493 | Arceus | **Aethos** | Olympus's true summit (§4.6) | §15.2 *Stand Still* | 95 | The four keys, the three Primordials | All three Primordials; the four epics' keys |
+
+#### The sea of Atlantis
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 249 | Lugia | **Aethos** | Atlantis (P2), the abyss; first seen in ODYSSEY's storm | §15.2 *The White Bird* | 80 | Atlantis | Kyogre; Manaphy |
+| 490 | Manaphy | **Aethos** | Atlantis's coral nursery (P2) | §15.2 *The Prince's Egg* | — | Atlantis | Phione; Lugia |
+| 489 | Phione | **Aethos** | Breed Manaphy with the Ditto of Pharos (§3.5) | §15.2 (by breeding) | — | — | Manaphy |
+
+#### The Underworld (headline: Giratina)
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 487 | Giratina | **Aethos** | The Chasm, below Tartarus | §15.2 *Upside Down* | 80 | The Katabasis | Dialga and Palkia; Arceus |
+| 377 | Regirock | **Aethos** | P5 Tainaron or I13 Eleusa's Ploutonion; Tartarus's five cells | §15.2 *The Relics' Exam* | 75 | The Katabasis | The five Titans; Regigigas |
+| 378 | Regice | **Aethos** | P5 Tainaron or I13 Eleusa's Ploutonion; Tartarus's five cells | §15.2 *The Relics' Exam* | 75 | The Katabasis | The five Titans; Regigigas |
+| 379 | Registeel | **Aethos** | P5 Tainaron or I13 Eleusa's Ploutonion; Tartarus's five cells | §15.2 *The Relics' Exam* | 75 | The Katabasis | The five Titans; Regigigas |
+| 894 | Regieleki | **Aethos** | P5 Tainaron or I13 Eleusa's Ploutonion; Tartarus's five cells | §15.2 *The Relics' Exam* | 75 | The Katabasis | The five Titans; Regigigas |
+| 895 | Regidrago | **Aethos** | P5 Tainaron or I13 Eleusa's Ploutonion; Tartarus's five cells | §15.2 *The Relics' Exam* | 75 | The Katabasis | The five Titans; Regigigas |
+| 486 | Regigigas | **Aethos** | Tartarus's inner gate | §15.2 *The Keeper of the Gate* | 80 | All five Titans | All five Titans; Briareus |
+| 488 | Cresselia | **Aethos** | The House of Night (PG-26) | §15.2 *Horn and Ivory* | 78 | The Katabasis | Each other; the Land of Dreams (§3.10) |
+| 491 | Darkrai | **Aethos** | The House of Night (PG-26) | §15.2 *Horn and Ivory* | 78 | The Katabasis | Each other; the Land of Dreams (§3.10) |
+
+#### Olympia, Olympus and the story's own
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 494 | Victini | **Aethos** | Olympia, the Nike's pillar | §15.2 *Nike Comes Down* | 80 | All five Olympiad gold symbols | Kairazor |
+| 147 | Kairazor | **Aethos** | Olympia's altar of Kairos | §15.2 *Try Twice* | 78 | — | Kronolith; Celebi |
+| 148 | Pegaunos | **Aethos** | D11, above the Ascent's clouds | §15.2 *The Bridle* | 80 | — | Bellerophon's chain (I2, I3, T9, D11); Rayquaza |
+| 149 | Olympanax | **Aethos** | D12, the Ascent's storm terrace | §15.2 *The Three Lots* | 80 | — | Pontanax, Nekranax: the three lots |
+| 150 | Pontanax | **Aethos** | K6, G1, A5, G2, then Atlantis's temple | §15.2 *The Three Lots* | 80 | — | The three lots; Kyogre |
+| 151 | Nekranax | **Aethos** | I13, then the vault beneath Hades's hall | §15.2 *The Three Lots* | 80 | — | The three lots; Giratina |
+| 152 | Ichorin | **Aethos** | G12, the Pool of Mnemosyne's floor | §15.2 *The First Myth* | 70 | — | Uxie (memory); the Katabasis |
+| 146 | Kronolith | **Aethos** | The deep under the Omphalos | §15.2 *Give It Back* | 60 | — | Kairazor; Dialga; the three lots |
+| 143–145 | Nemira, Lotira, Thanira | **Aethos** | The three Fates' sanctuaries | §15.2 *Three Sanctuaries* | 60 | — | Kronolith; the Cutter guides the Katabasis |
+| 98 | Asterlorn | **Aethos** | Knossa, after Ariadne's gold symbol | LABYRINTH §10 | 60 | — | Type: Null; Labor 7's bull |
+| 716 | Xerneas | **Aethos** | All Aethos, ending at the Ladon ford, Arkadia | LABORS Labor 3 (§12) | 72 | The Labors | Yveltal; Zygarde |
+
+#### The Eagles of the Edges
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 144 | Articuno | Oikoumene | North: the Feather Wastes | LEGENDS §3.1 | 75 | Ship | Zapdos, Moltres |
+| 145 | Zapdos | Oikoumene | Troad: Gargaros's storm crown (§9) | LEGENDS §3.1 | 75 | Ship | Articuno, Moltres |
+| 146 | Moltres | Oikoumene | Far West: the Atlas Range at sunset | LEGENDS §3.1 | 75 | Labor 10, or the Odyssey | Articuno, Zapdos |
+
+#### The Three Shares and the Phoenix
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 243 | Raikou | Oikoumene | Egypt, Libya, Aithiopia (omens) | LEGENDS §3.2 | 72 | Ship | Entei, Suicune, then Ho-Oh; Raging Bolt |
+| 244 | Entei | Oikoumene | Troad, Lydia, Black Sea (omens) | LEGENDS §3.2 | 72 | Ship | Raikou, Suicune, then Ho-Oh; Gouging Fire |
+| 245 | Suicune | Oikoumene | Thrace, the North, the West (omens) | LEGENDS §3.2 | 72 | Ship | Raikou, Entei, then Ho-Oh; Walking Wake |
+| 250 | Ho-Oh | Oikoumene | Egypt: Heliopolis | LEGENDS §3.2 | 78 | The three wanderers | The three wanderers; the Golden beasts |
+
+#### The Charioteer, then Time and Room
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 480 | Uxie | **Aethos** | **T7**, Lebadeia's oracle descent (moved, P-20) | §15.2 *Lethe, Then Mnemosyne* | 70 | Ship | Mesprit, Azelf; Ichorin; Dialga, Palkia |
+| 481 | Mesprit | Oikoumene | Libya: Lake Tritonis | LEGENDS §3.3 | 70 | Ship | Uxie, Azelf |
+| 482 | Azelf | Oikoumene | North: Lake Maeotis (at 1.0, the Steppe Road's marsh end) | LEGENDS §3.3 | 70 | Ship | Uxie, Mesprit |
+| 483 | Dialga | Oikoumene | Okeanos: the Gates of the Sun | LEGENDS §3.5 | 80 | The Charioteer | Palkia; Giratina; Kronolith |
+| 484 | Palkia | Oikoumene | Okeanos: the Selvage (its headline) | LEGENDS §3.5 | 80 | The Charioteer | Dialga; Giratina; the Ultra Beasts |
+
+#### The Twin Lights
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 380 | Latias | **Aethos** | D1, Lakonia's Kranai islet; then the sea lanes, even days | LEGENDS §3.4 | 72 | Ship | Latios; Gemini |
+| 381 | Latios | Oikoumene | The Oikoumene's sea lanes, odd days | LEGENDS §3.4 | 72 | Ship | Latias; Gemini |
+
+#### The Hours of Justice
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 638 | Cobalion | Oikoumene | Lydia: Sardis, with Solon | LEGENDS §3.7 | 74 | Ship | Terrakion, Virizion, then Keldeo; Iron Crown |
+| 639 | Terrakion | Oikoumene | Libya: Ammonion | LEGENDS §3.7 | 74 | Ship | Cobalion, Virizion, then Keldeo; Iron Boulder |
+| 640 | Virizion | Oikoumene | Aithiopia: Meroë | LEGENDS §3.7 | 74 | Ship | Cobalion, Terrakion, then Keldeo; Iron Leaves |
+| 647 | Keldeo | Oikoumene | Okeanos: the Isles of the Blessed | LEGENDS §3.7 | 75 | The three Hours | The three Hours |
+
+#### Life, death and the first clay
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 717 | Yveltal | Oikoumene | Black Sea: the Isle of Ares (1.0 under P-18) | LEGENDS §3.8 | 80 | `LABORS.md` Labors 6 and 9 | Xerneas; Zygarde |
+| 151 | Mew | Oikoumene | Black Sea: the Caucasus (at 1.0, a cave room off LABORS's crag) | LEGENDS §3.8 | 75 | `LABORS.md` Labor 11 (Prometheus freed) | Mewtwo; Prometheus (Labor 11) |
+| 150 | Mewtwo | Oikoumene | Okeanos: the Gorgons' Isle | LEGENDS §4.2 | 90 | The Cave of the Graiai; ODYSSEY's Mirror of Truth | Mew; the Graiai; the Mirror of Truth |
+| 718 | Zygarde | Oikoumene | Egypt: Abydos (Memphis at 1.0); cells in every land | LEGENDS §4.9 | 78 | Ship | Xerneas, Yveltal |
+
+#### What came out of the Bag
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 641 | Tornadus | Oikoumene | The wine-dark sea (ODYSSEY) | ODYSSEY §6.4 (§13) | 75 | The Odyssey | Thundurus, Landorus, Enamorus |
+| 642 | Thundurus | Oikoumene | Libya: the Sand Sea's storms | LEGENDS §3.9 | 76 | The Odyssey (Aiolia) | Tornadus, then Landorus, then Enamorus |
+| 645 | Landorus | Oikoumene | Aithiopia: the Table of the Sun | LEGENDS §3.9 | 76 | Thundurus | Thundurus, then Enamorus |
+| 905 | Enamorus | **Aethos** | S10, Kythera's spring of Kallirhoe | LEGENDS §3.9 | 76 | Landorus | Landorus; Kythera's sea caves (S7, S21) |
+
+#### The Truth and the Glory
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 643 | Reshiram | Oikoumene | Egypt: Memphis, with Alethea | LEGENDS §3.10 | 80 | Ship; Alethea | Zekrom; Kyurem |
+| 644 | Zekrom | Oikoumene | Troad: the Skaian Gate, with Kleon | LEGENDS §3.10 | 80 | Ship; Kleon | Reshiram; Kyurem |
+| 646 | Kyurem | Oikoumene | North: the Cave of Boreas (Hyperborea's headline, with Calyrex) | LEGENDS §3.10 | 82 | Reshiram or Zekrom | Reshiram or Zekrom |
+
+#### The Keepers of the Isles
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 785 | Tapu Koko | Oikoumene | Okeanos: the Isles of the Blessed | LEGENDS §3.11 | 76 | The Isles | The four Tapus; Shaymin |
+| 786 | Tapu Lele | Oikoumene | Okeanos: the Isles of the Blessed | LEGENDS §3.11 | 76 | The Isles | The four Tapus; Shaymin |
+| 787 | Tapu Bulu | Oikoumene | Okeanos: the Isles of the Blessed | LEGENDS §3.11 | 76 | The Isles | The four Tapus; Shaymin |
+| 788 | Tapu Fini | Oikoumene | Okeanos: the Isles of the Blessed | LEGENDS §3.11 | 76 | The Isles | The four Tapus; Shaymin |
+
+#### Hyperion's children
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 789 | Cosmog | **Aethos** | Kaldera, from Hyperion (by S2) | LEGENDS §3.12 | 42 (gift) | League | Solgaleo, Lunala, Necrozma |
+| 790 | Cosmoem | **Aethos** | Evolve Cosmog | LEGENDS §3.12 | — | — | — |
+| 791 | Solgaleo | Oikoumene | Aithiopia: the Gate of Dawn (its headline) | LEGENDS §3.12 | 80 | Cosmog | Lunala; Necrozma |
+| 792 | Lunala | Oikoumene | Lydia: Mount Latmos (at 1.0, Tmolus's summit by night) | LEGENDS §3.12 | 80 | Cosmog | Solgaleo; Necrozma |
+| 800 | Necrozma | Oikoumene | Lydia: the Halys ford | LEGENDS §3.12 | 85 | Solgaleo and Lunala | Solgaleo and Lunala |
+
+#### The Shield With the World on It
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 888 | Zacian | Oikoumene | Black Sea: Leuke, with Achilles | LEGENDS §3.13 | 85 | Ship; Achilles | Each other; Achilles's choice |
+| 889 | Zamazenta | Oikoumene | Black Sea: Leuke, with Achilles | LEGENDS §3.13 | 85 | Ship; Achilles | Each other; Achilles's choice |
+
+#### The Straw Offerings (Hyperborea's headline)
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 898 | Calyrex | Oikoumene | North: the round temple, Hyperborea | LEGENDS §3.14 | 80 | Ship | Glastrier, Spectrier |
+| 896 | Glastrier | Oikoumene | North: the Cave of Boreas | LEGENDS §3.14 | 78 | Calyrex's quest | Calyrex |
+| 897 | Spectrier | Oikoumene | Okeanos: the Cimmerian Shore | LEGENDS §3.14 | 78 | Calyrex's quest | Calyrex |
+
+#### What Stayed in the Jar
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 1001 | Wo-Chien | Oikoumene | North: the Steppe Road | LEGENDS §3.15 | 78 | Ship; Elpis | The four Treasures; Elpis |
+| 1002 | Chien-Pao | Oikoumene | Lydia: Sardis's treasury | LEGENDS §3.15 | 78 | Ship; Elpis | The four Treasures; Elpis |
+| 1003 | Ting-Lu | Oikoumene | Aithiopia: the Fountain of the Long-Lived | LEGENDS §3.15 | 78 | Ship; Elpis | The four Treasures; Elpis |
+| 1004 | Chi-Yu | Oikoumene | Troad: Ilion | LEGENDS §3.15 | 78 | Ship; Elpis | The four Treasures; Elpis |
+
+#### The Satyr Play Nobody Wrote
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 1017 | Ogerpon | **Aethos** | T2, Thyrsa: Silenos's cellar and the vineyards | LEGENDS §7.6 | 76 | League | The Thyrsa five |
+| 1014 | Okidogi | **Aethos** | T2, Thyrsa: Silenos's cellar and the vineyards | LEGENDS §7.6 | 74 | League; the Anthesteria | The Thyrsa five |
+| 1015 | Munkidori | **Aethos** | T2, Thyrsa: Silenos's cellar and the vineyards | LEGENDS §7.6 | 74 | League | The Thyrsa five |
+| 1016 | Fezandipiti | **Aethos** | T2, Thyrsa: Silenos's cellar and the vineyards | LEGENDS §7.6 | 74 | League | The Thyrsa five |
+| 1025 | Pecharunt | **Aethos** | T2, Thyrsa: Silenos's cellar and the vineyards | LEGENDS §7.6 | 78 | League; the Anthesteria | The Thyrsa five |
+
+#### Fire, forges and makers
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 485 | Heatran | **Aethos** | **S2**, Kaldera's vent boulder: the fire under the forge | LEGENDS §7.2 | 72 | League | Volcanion (Etna); Magearna |
+| 721 | Volcanion | Oikoumene | Western Sea: **Etna's** Typhon chamber (moved, P-15; the Fire crown's headline) | LEGENDS §4.12, moved (§10) | 80 | Odyssey | Heatran; Groudon (Gaia, Typhon's mother) |
+| 801 | Magearna | **Aethos** | Kaldera's forge (S2), with a Lemnos lead (S14) | LEGENDS §7.4 | 75 | Hephaestus Favor 100 | Heatran; Hephaestus Favor |
+| 772 | Type: Null | **Aethos** | Knossa, Daedalus's workshop; its memories in the Minoan vaults (C1, C3, C6, S1, S6, D3, A13) | LEGENDS §7.3 | 70 (gift) | League | Silvally; Asterlorn |
+| 773 | Silvally | **Aethos** | Evolve Type: Null | LEGENDS §7.3 | — | — | Type: Null |
+| 808 | Meltan | Oikoumene | Black Sea: the Chalybes' forges | LEGENDS §4.14 | 70 | Ship | Melmetal; Miraidon |
+| 809 | Melmetal | Oikoumene | Black Sea: the great furnace | LEGENDS §4.14 | 80 | 40 Meltan's iron | Meltan |
+| 649 | Genesect | Oikoumene | Aithiopia: Eos's palace | LEGENDS §4.8 | 75 | Ship | Solgaleo; Memnon |
+| 807 | Zeraora | Oikoumene | Lydia: Miletos (at 1.0, Thales lodges at Sardis) | LEGENDS §4.13 | 75 | Ship | Necrozma (the eclipse) |
+
+#### Sky, stars and fallen things
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 385 | Jirachi | Oikoumene | Far West: the Atlas Range's summit | LEGENDS §4.3 | 75 | All 24 constellations (SYSTEMS §8) | All 24 constellations |
+| 386 | Deoxys | Oikoumene | Troad: Ilion's temple of Athena | LEGENDS §4.4 | 78 | Ship | The Palladion; the Tomb of Ilos (§3.1) |
+| 719 | Diancie | **Aethos** | **K9**, Ariadne's door on Kalliste (moved, P-20): Naxos is where Dionysus crowned her | §15.2 *The Crown's Last Stone*, moved | 74 | Corona Borealis (LABYRINTH) | Corona Borealis; Asterlorn |
+| 890 | Eternatus | Oikoumene | Libya: the Glass Crater | LEGENDS §4.15 | 92 | Eight Periodos panels | Eight Periodos panels |
+| 720 | Hoopa | Oikoumene | Lydia: the Chasm of Gyges | LEGENDS §4.11 | 76 | Ship | The Mirror of Truth (§3.2) |
+
+#### Singles of the lands
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 492 | Shaymin | Oikoumene | Okeanos: the Isles, at the Pyanopsia | LEGENDS §4.5 | 70 | The Isles | The Tapus |
+| 648 | Meloetta | Oikoumene | Troad: the Hebros's mouth (the Elaious shore at 1.0); its lead starts at Arkadia's G8 | LEGENDS §4.7 | 72 | Orpheus amphora (SYSTEMS §5); Lyre of Apollo | Orpheus (UNDERWORLD) |
+| 802 | Marshadow | **Aethos** | Elaia, then **G11**, Lykaion's shadowless precinct (P-20) | LEGENDS §7.5, extended (§15.2) | 75 | The theoxenia finale | The theoxenia finale |
+| 251 | Celebi | **Aethos** | Akti, the fractures, then **T6**, the Kopais mist (P-20) | LEGENDS §7.1, extended (§15.2) | 70 | Five fractures visited | Kairazor; the Time Fractures |
+| 891 | Kubfu | Oikoumene | Western Sea: Kroton, from Milo | LEGENDS §4.16 | 70 (gift) | Odyssey | Urshifu |
+| 892 | Urshifu | Oikoumene | Evolve Kubfu | LEGENDS §4.16 | — | — | Kubfu |
+| 893 | Zarude | Oikoumene | Aithiopia: the Mountains of the Moon | LEGENDS §4.17 | 76 | Ship | Dionysus (Nysa) |
+| 1024 | Terapagos | Oikoumene | Western Sea: Elea | LEGENDS §4.18 | 90 | Odyssey | Achilles |
+
+#### The Time Fractures
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 984 | Great Tusk | **Aethos** | K1, Kronion Hill: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 989 | Sandy Shocks | **Aethos** | K1, Kronion Hill: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 985 | Scream Tail | **Aethos** | I12, Eleusa: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 986 | Brute Bonnet | **Aethos** | I12, Eleusa: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 987 | Flutter Mane | **Aethos** | D7, Delphoi: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 988 | Slither Wing | **Aethos** | S3, Kaldera's burnt islet: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 1005 | Roaring Moon | **Aethos** | D3, Lakonia on Taygetos: its fracture | LEGENDS §5 | 66–70 | League | The Golden Age; Koraidon |
+| 1009 | Walking Wake | Oikoumene | Egypt: Heliopolis's fracture | LEGENDS §5 | 74–78 | Ho-Oh | Its wanderer; Ho-Oh; Koraidon |
+| 1020 | Gouging Fire | Oikoumene | Egypt: Heliopolis's fracture | LEGENDS §5 | 74–78 | Ho-Oh | Its wanderer; Ho-Oh; Koraidon |
+| 1021 | Raging Bolt | Oikoumene | Egypt: Heliopolis's fracture | LEGENDS §5 | 74–78 | Ho-Oh | Its wanderer; Ho-Oh; Koraidon |
+| 990 | Iron Treads | Oikoumene | Black Sea: the Chalybes: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 992 | Iron Hands | Oikoumene | Black Sea: the Chalybes: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 991 | Iron Bundle | Oikoumene | North: the Cave of Boreas: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 993 | Iron Jugulis | Oikoumene | Libya: the Glass Crater: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 994 | Iron Moth | Oikoumene | Libya: the Glass Crater: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 995 | Iron Thorns | Oikoumene | Troad: the Walls of Laomedon: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 1006 | Iron Valiant | Oikoumene | Troad: the Walls of Laomedon: its fracture | LEGENDS §5 | 74–78 | Ship | The Iron Age; Miraidon |
+| 1010 | Iron Leaves | Oikoumene | Okeanos: the Selvage: its fracture | LEGENDS §5 | 74–78 | Keldeo | The Iron Age; Miraidon |
+| 1022 | Iron Boulder | Oikoumene | Okeanos: the Selvage: its fracture | LEGENDS §5 | 74–78 | Keldeo | The Iron Age; Miraidon |
+| 1023 | Iron Crown | Oikoumene | Okeanos: the Selvage: its fracture | LEGENDS §5 | 74–78 | Keldeo | The Iron Age; Miraidon |
+| 1007 | Koraidon | Oikoumene | Okeanos: the Isles of the Blessed | LEGENDS §5 | 85 | All eleven fractures | All eleven fractures; Miraidon |
+| 1008 | Miraidon | Oikoumene | Black Sea: the great furnace | LEGENDS §5 | 85 | All eleven fractures | All eleven fractures; Koraidon |
+
+#### Beyond the Selvage
+
+| # | Pokémon | Region | Where (for Aethos, the return gate) | Quest | Lv | Needs | Links |
+|---:|---|---|---|---|---|---|---|
+| 793 | Nihilego | Oikoumene | Okeanos: the Selvage, north | LEGENDS §6 | 74 | Lotira | The Peratai; Palkia; Lotira |
+| 794 | Buzzwole | Oikoumene | Egypt: the Delta Reeds | LEGENDS §6 | 74 | Lotira | The Peratai; Palkia; Lotira |
+| 795 | Pheromosa | Oikoumene | Aithiopia: the Gate of Dawn | LEGENDS §6 | 74 | Lotira | The Peratai; Palkia; Lotira |
+| 796 | Xurkitree | Oikoumene | Libya: the Sand Sea | LEGENDS §6 | 74 | Lotira | The Peratai; Palkia; Lotira |
+| 797 | Celesteela | Oikoumene | North: the Hyperborean Meadow | LEGENDS §6 | 76 | Lotira | The Peratai; Palkia; Lotira |
+| 798 | Kartana | Oikoumene | Egypt: the Great Pyramid (Y8 at 1.0) | LEGENDS §6 | 74 | Lotira | The Peratai; Palkia; Lotira |
+| 799 | Guzzlord | Oikoumene | Aithiopia: the Table of the Sun | LEGENDS §6 | 78 | Lotira | The Peratai; Palkia; Lotira |
+| 803 | Poipole | Oikoumene | Okeanos: the Selvage | LEGENDS §6 | 70 (gift) | Lotira | The Peratai; Palkia; Lotira |
+| 804 | Naganadel | Oikoumene | Evolve Poipole | LEGENDS §6 | — | — | The Peratai; Palkia; Lotira |
+| 805 | Stakataka | Oikoumene | Troad: the Walls of Laomedon | LEGENDS §6 | 76 | Lotira | The Peratai; Palkia; Lotira |
+| 806 | Blacephalon | Oikoumene | Libya: the salt ridge | LEGENDS §6 | 76 | Lotira | The Peratai; Palkia; Lotira |
+
+### 15.2 The quests this guide adds
+
+Each follows LEGENDS §0: a clue trail, a person, an omen or a relic, and a payoff scene. Encounters follow the epic doc where one owns the map. Where an epic already stages the battle, the quest wraps it in steps without changing it.
+
+**The Primordials and the Prime Mover**
+- **Groudon, *Gaia's Navel*** (D8; Lv 88; after the Katabasis). 1. After Tartarus is emptied, the Pythia's tripod at Delphoi starts to sweat. "The ground's warm. It hasn't been warm since Apollo came." 2. Pan's caves quest's last cave (D8, the Korykian cave) has an inner grotto behind a Crook face that was cold before; now it steams. 3. Descend three rooms where the floor's heat rises a step at a time (the Etna kit's rising-heat state, §10). 4. At the bottom, the first oracle's stone, Gaia's before Apollo's. The sun comes out underground, and Groudon rises.
+- **Kyogre, *The River That Runs in a Circle*** (Atlantis; Lv 88; after Atlantis). 1. After Pontanax, Daphne notices the current in the abyss runs one way, round. 2. Follow it with the Pearl past three markers that the Nereids left. 3. Rain falls from nowhere, under the sea. 4. Oceanus, the world-river, rises at the edge.
+- **Rayquaza, *The One Who Held the Sickle*** (D11 and above; Lv 88; the Kotinos). 1. With the Kotinos, the Ascent's cloud bank (D11) parts onto Pegaunos's meadows. 2. A thunder-horse herder there has seen a long green shape in the storm above, "looking for someone." 3. Carry the Harpe's empty sheath (a story item kept since the climax) to the meadow's highest stone. 4. Ouranos comes down to look at the one who held the blade that first cut Earth from Sky (POSTGAME §3.3's scene).
+- **Arceus, *Stand Still*** (the summit; Lv 95; the four keys and the three Primordials). 1. Set the four keys into their plates at the summit's foot (§4.6). 2. The last herm. 3. The summit, where walking takes you back (POSTGAME §3.3). 4. Stop, and the summit brings you.
+
+**The sea of Atlantis**
+- **Lugia, *The White Bird*** (Atlantis's abyss; Lv 80). 1. A white shape under the Clashing Rocks (§3.3): "Going west," says Phineus. 2. In ODYSSEY's storm a white bird drops a veil (the Leukothea cameo, and Calypso's raft, §13). 3. Daphne connects the two: "The same bird. Ino became a sea-goddess." 4. In Atlantis's abyss, follow the veil's glow down. Leukothea waits at the bottom.
+- **Manaphy, *The Prince's Egg*** (Atlantis's nursery; an egg). 1. A Nereid asks you to find the coral garden's missing egg. 2. Three sea-currents lead three ways; only one carries warm water (follow the bubbles). 3. The egg, in a ring of Luvdisc. Daphne hatches it on the *Euploia*. **Phione** comes from breeding Manaphy with Pharos's Ditto (§3.5).
+
+**The Underworld**
+- **The five Titans, *The Relics' Exam*** (Tartarus; Lv 75; after the Katabasis's descent). UNDERWORLD §4.10's five cells are each a relic test: Krios's cell needs the Hammer, Koios's the Torch, Iapetos's the Labrys, Hyperion's the Girdle, Menoitios's the Thread. Free each Titan and its Regi joins the fight (Regirock, Regice, Registeel, Regieleki, Regidrago). The new clue trail: in the Meadows, Tiresias names "five who never got a trial", and the five cells' names are cut into the Bronze Gates.
+- **Regigigas, *The Keeper of the Gate*** (Tartarus's inner gate; Lv 80; all five Titans). 1. With five cells open, the inner gate's five locks glow. 2. Briareus, the hundred-handed gaoler, asks if his work is done. 3. Battle him, or answer that it is. 4. The keeper of the gate wakes, slowly, as the Regis' king.
+- **Giratina, *Upside Down*** (the Chasm; Lv 80). 1. Below the inner gate, the Chasm's floor is its ceiling (UNDERWORLD §4.11). 2. The Cutter tells you to walk where you can't. 3. Three gravity flips, each opened by a Titan you freed, who holds the rock while you cross. 4. Tartaros, the first pit, upside down.
+- **Cresselia and Darkrai, *Horn and Ivory*** (the House of Night; Lv 78; PG-26). 1. On the Cimmerian Shore (§3.10), the Land of Dreams' gates of horn and ivory are shut. 2. A dreamer in the Cave of Sleep says the dreams have gone to Night's house, below. 3. In the Katabasis, the House of Night's door opens only to someone asleep: rest at the Asphodel cypress, then walk in. 4. Two dreams: the true one (horn) and the false one (ivory). Choose which to battle first; the other waits a night.
+
+**Olympia, Olympus and the story's own**
+- **Victini, *Nike Comes Down*** (Olympia; Lv 80; the five gold symbols). POSTGAME §3.1's catch, with a trail: each gold symbol makes the Nike on her pillar turn one notch toward the stadium, and Paionios notices. On the fifth, she steps down.
+- **Kairazor, *Try Twice*** (Olympia's altar of Kairos; Lv 78). POSTGAME §3.1's timing catch. The trail: the altar's priest hands you the forelock's single hair from the Stair of Hours, which you've carried since the climax.
+- **Pegaunos, *The Bridle*** (D11; Lv 80). Bellerophon's chain, WORLD_EXPLORATION §7: Peirene's spring (I2), Akrokorinthos (I3), Hippokrene (T9) and the cloud meadows (D11). Each spring gives a piece of Athena's golden bridle; the whole bridle calms the thunder-horse.
+- **The colossi, *The Three Lots*** (Olympanax D12, Pontanax K6 to G2 to Atlantis, Nekranax I13 to Hades's vault; Lv 80). 1. Bring Kronolith to the Omphalos; it gives back three bronze lots (POSTGAME §3.4). 2. Phidias's empty throne: "It stood up and walked to Olympus." 3. Each lot opens its seal: thunderbolt on Olympus's storm terrace, trident in Atlantis's temple, bident under Hades's hall. 4. Each colossus wakes when its lot is set.
+- **Ichorin, *The First Myth*** (G12; Lv 70). 1. In the Katabasis, fill a hoof cup (G6's quest) at the Lake of Mnemosyne. 2. Pour it into the Pool of Mnemosyne in Arkadia. 3. The pool's floor shows stars by day (G12); dive with the Pearl. 4. Ichorin, the first story, at the bottom.
+- **Kronolith, *Give It Back*** (the deep under the Omphalos; Lv 60, rematch scaling). 1. The Pythia asks you to bring back what the Lord of Time swallowed. 2. The deep under the Omphalos, a dial of twelve hours. 3. Set the dial to the hour you seized the Moment. 4. Kronolith gives back the three lots, then fights or joins.
+- **The Fates, *Three Sanctuaries*** (Lv 60). Each Fate waits at her sanctuary after the climax (STORY §2). The trail: Halia's spindle-whorl (K3's old grove) spins toward the nearest one. Nemira asks for wool, Lotira for a measure (a Nilometer reading from Elephantine, §3.5), Thanira for nothing. Thanira also guides the Katabasis.
+
+**Moved or extended by this guide (P-20)**
+- **Uxie, *Lethe, Then Mnemosyne*** (T7, Lebadeia's Trophoneion; Lv 70). 1. Lebadeia's oracle descent opens with the Thread (T7). 2. Drink from Lethe, then Mnemosyne, the springs beside the temple (`design/maps/Lebadeia.md`): the screen blanks, then remembers. 3. Go down feet first. At the bottom, the votive tablets of everyone who came back changed. 4. Uxie, Reason, the charioteer of Plato's soul, sits among them. The Charioteer quest (LEGENDS §3.3) begins here, then sends you to Mesprit at Lake Tritonis and Azelf at Lake Maeotis. It used to start at Lake Moeris, which keeps its crocodiles.
+- **Diancie, *The Crown's Last Stone*** (K9, Ariadne's door on Kalliste; Lv 74; the Corona Borealis). LEGENDS §4.10's quest, moved from Mount Nysa: Naxos (Kalliste) is where Dionysus gave Ariadne her crown. 1. Ariadne visits Kalliste after Knossa (WORLD_EXPLORATION Q3). 2. The crown is missing one stone. 3. The Labrys opens the door under the Portara. 4. Diancie, the last stone, in the room behind it.
+- **Marshadow, *The Shadow Hermes Left*** (Elaia, then G11; Lv 75). LEGENDS §7.5, with one step added: the shadow left at Elaia after the theoxenia finale runs. Follow it across Aethos by its omens (a shadow with no one to cast it) to Lykaion's shadowless precinct (G11, the Helm), where no one casts a shadow. It's there, being one.
+- **Celebi, *The Thirteenth Hour*** (Akti, the fractures, then T6; Lv 70). LEGENDS §7.1, with its last step moved to the Kopais marsh's fog bank (T6, the Bag), "where the reed people live outside time."
+- **Volcanion, *Steam and Stone*** (Etna; Lv 80). LEGENDS §4.12's quest, moved to Etna's Typhon chamber (§10).
+
+### 15.3 What it costs and when it's built
+
+- **Build:** each legend is built with the map that hosts it. A land's builder does its legends, and an epic's builder does the epic's. The Aethos ones go in with WORLD_EXPLORATION §8's return packs (Kalliste, Lebadeia, Arkadia, the Ascent).
+- **ROM:** LEGENDS's estimate (~0.3 MiB) covers its quests; §15.2's added and moved quests are scripts and a few objects, about 40 KiB. The post-game total stays about 4.7 MiB of 9.0 free.
+- **The 100%:** LEGENDS §10's checklist stands; this register is its index.
+
+| # | Proposal | Changes | Recommendation |
+|---|---|---|---|
+| P-20 | **Legends behind Aethos's return gates:** Uxie moves to Lebadeia's oracle descent (T7); Diancie to Ariadne's door on Kalliste (K9); Marshadow's quest ends at Lykaion (G11); Celebi's at the Kopais fog (T6). At 1.0, the stretch homes of Mew, Lunala, Zeraora, Azelf, Zygarde and Meloetta ride on 1.0 maps (each row says where). The Aethos/Oikoumene split becomes 53/83 | LEGENDS §3.3, §4.10, §7.1, §7.5 (places only) | Yes, as the user directed |
