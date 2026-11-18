@@ -1030,45 +1030,6 @@ const struct Tileset gTileset_Stymphalia =
     .callback = InitTilesetAnim_PorytilesManaged_Stymphalia,
 };
 
-// Ichor: oikia_gytheion, Gytheion's five rooms: the Asclepeion in the theater's stage-building, the dye-works, Lysandros's and Timaia's houses, and the shrine on Kranai (Act III).
-// Like limen, it uses only its own tiles and palettes 6-12. Built by
-// tools/ichor/maps/lakonia_rooms.py.
-const struct Tileset gTileset_OikiaGytheion =
-{
-    .isCompressed = TRUE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_PorytilesManaged_OikiaGytheion,
-    .palettes = gTilesetPalettes_PorytilesManaged_OikiaGytheion,
-    .metatiles = gMetatiles_PorytilesManaged_OikiaGytheion,
-    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaGytheion,
-    .callback = NULL,
-};
-
-// Ichor: oikia_lakonia, Lakonia's homes: Lampito's kitchen, Gylippos's, Chilon's and Lichas's houses, and the syssition (Act III).
-// Like limen, it uses only its own tiles and palettes 6-12. Built by
-// tools/ichor/maps/lakonia_rooms.py.
-const struct Tileset gTileset_OikiaLakonia =
-{
-    .isCompressed = TRUE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_PorytilesManaged_OikiaLakonia,
-    .palettes = gTilesetPalettes_PorytilesManaged_OikiaLakonia,
-    .metatiles = gMetatiles_PorytilesManaged_OikiaLakonia,
-    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaLakonia,
-    .callback = NULL,
-};
-
-// Ichor: civic_lakonia, Lakonia's public rooms: the Asclepeion, the Agora, the agoge's barracks, the palaestra and the sanctuary of Artemis Orthia (Act III).
-// Like limen, it uses only its own tiles and palettes 6-12. Built by
-// tools/ichor/maps/lakonia_rooms.py.
-const struct Tileset gTileset_CivicLakonia =
-{
-    .isCompressed = TRUE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_PorytilesManaged_CivicLakonia,
-    .palettes = gTilesetPalettes_PorytilesManaged_CivicLakonia,
-    .metatiles = gMetatiles_PorytilesManaged_CivicLakonia,
-    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicLakonia,
 // Ichor: daidaleion, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
 // built by tools/ichor/art/labyrinth_build.py: the house's masonry, Daedalus's workshop
 // and the Icarus Shaft. It uses only
@@ -1083,5 +1044,38 @@ const struct Tileset gTileset_Daidaleion =
     .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
     .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaGytheion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaGytheion,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaGytheion,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaGytheion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaGytheion,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaLakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaLakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaLakonia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaLakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaLakonia,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_CivicLakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CivicLakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_CivicLakonia,
+    .metatiles = gMetatiles_PorytilesManaged_CivicLakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicLakonia,
     .callback = NULL,
 };

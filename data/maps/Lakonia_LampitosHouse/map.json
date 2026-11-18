@@ -27,7 +27,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LakoniaLampito_EventScript_Kleon",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1"
     },
     {
       "local_id": "LOCALID_LAMPITO_RHEA",
@@ -41,7 +41,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LakoniaLampito_EventScript_Rhea",
-      "flag": "0"
+      "flag": "FLAG_TEMP_2"
     },
     {
       "local_id": "LOCALID_LAMPITO_ALETHEA",
@@ -55,7 +55,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LakoniaLampito_EventScript_Alethea",
-      "flag": "0"
+      "flag": "FLAG_TEMP_3"
     },
     {
       "local_id": "LOCALID_LAMPITO_HELMET",
@@ -69,7 +69,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LakoniaLampito_EventScript_Helmet",
-      "flag": "0"
+      "flag": "FLAG_TEMP_4"
     },
     {
       "local_id": "LOCALID_LAMPITO_TABLET",
@@ -83,7 +83,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LakoniaLampito_EventScript_Tablet",
-      "flag": "0"
+      "flag": "FLAG_TEMP_5"
     }
   ],
   "warp_events": [

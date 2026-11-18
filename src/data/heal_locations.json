@@ -135,6 +135,12 @@
       "y": 8
     },
     {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_25",
+      "map": "MAP_ROUTE25_EUROTAS",
+      "x": 13,
+      "y": 14
+    },
+    {
       "id": "HEAL_LOCATION_DAPHNI",
       "map": "MAP_DAPHNI",
       "x": 18,
@@ -225,7 +231,7 @@
     {
       "id": "HEAL_LOCATION_GYTHEION",
       "map": "MAP_GYTHEION",
-      "x": 10,
+      "x": 7,
       "y": 13,
       "respawn_map": "MAP_GYTHEION_ASCLEPEION",
       "respawn_npc": "LOCALID_GYTHEION_HEALER",
@@ -235,8 +241,8 @@
     {
       "id": "HEAL_LOCATION_LAKONIA",
       "map": "MAP_LAKONIA",
-      "x": 44,
-      "y": 22,
+      "x": 29,
+      "y": 37,
       "respawn_map": "MAP_LAKONIA_ASCLEPEION",
       "respawn_npc": "LOCALID_LAKONIA_HEALER",
       "respawn_x": 4,

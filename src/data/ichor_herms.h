@@ -33,6 +33,11 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_AETHOS_ROUTE_13,
         .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_13,
     },
+    [HERM_AETHOS_ROUTE_25] = {
+        .map = MAP_ROUTE25_EUROTAS,
+        .mapsec = MAPSEC_AETHOS_ROUTE_25,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_25,   // Amyklai's gate, (13,13); land at (13,14)
+    },
     [HERM_AETHOS_ROUTE_14] = {
         .map = MAP_ROUTE14_NEMEA_ROAD,
         .mapsec = MAPSEC_AETHOS_ROUTE_14,

@@ -271,18 +271,18 @@ const u16 gMetatileAttributes_PorytilesManaged_Eurotas[] = INCBIN_U16("data/tile
 // Ichor: stymphalia
 const u16 gMetatiles_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/metatile_attributes.bin");
-
-// Ichor: oikia_gytheion
-const u16 gMetatiles_PorytilesManaged_OikiaGytheion[] = INCBIN_U16("data/tilesets/secondary/oikia_gytheion/porytiles_bin/metatiles.bin");
-const u16 gMetatileAttributes_PorytilesManaged_OikiaGytheion[] = INCBIN_U16("data/tilesets/secondary/oikia_gytheion/porytiles_bin/metatile_attributes.bin");
-
-// Ichor: oikia_lakonia
-const u16 gMetatiles_PorytilesManaged_OikiaLakonia[] = INCBIN_U16("data/tilesets/secondary/oikia_lakonia/porytiles_bin/metatiles.bin");
-const u16 gMetatileAttributes_PorytilesManaged_OikiaLakonia[] = INCBIN_U16("data/tilesets/secondary/oikia_lakonia/porytiles_bin/metatile_attributes.bin");
-
-// Ichor: civic_lakonia
-const u16 gMetatiles_PorytilesManaged_CivicLakonia[] = INCBIN_U16("data/tilesets/secondary/civic_lakonia/porytiles_bin/metatiles.bin");
-const u16 gMetatileAttributes_PorytilesManaged_CivicLakonia[] = INCBIN_U16("data/tilesets/secondary/civic_lakonia/porytiles_bin/metatile_attributes.bin");
 // Ichor: daidaleion
 const u16 gMetatiles_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Daidaleion[] = INCBIN_U16("data/tilesets/secondary/daidaleion/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_OikiaGytheion[] = INCBIN_U16("data/tilesets/secondary/oikia_gytheion/porytiles_bin/metatiles.bin");
+
+const u16 gMetatileAttributes_PorytilesManaged_OikiaGytheion[] = INCBIN_U16("data/tilesets/secondary/oikia_gytheion/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_OikiaLakonia[] = INCBIN_U16("data/tilesets/secondary/oikia_lakonia/porytiles_bin/metatiles.bin");
+
+const u16 gMetatileAttributes_PorytilesManaged_OikiaLakonia[] = INCBIN_U16("data/tilesets/secondary/oikia_lakonia/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_CivicLakonia[] = INCBIN_U16("data/tilesets/secondary/civic_lakonia/porytiles_bin/metatiles.bin");
+
+const u16 gMetatileAttributes_PorytilesManaged_CivicLakonia[] = INCBIN_U16("data/tilesets/secondary/civic_lakonia/porytiles_bin/metatile_attributes.bin");

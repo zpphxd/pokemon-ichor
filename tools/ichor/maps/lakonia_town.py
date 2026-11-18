@@ -158,6 +158,8 @@ def build():
     for x in range(20, 23):                          # the Mani road's rope
         m.piece("rope", "post_L" if x == 20 else ("post_R" if x == 22 else "rope"), x, 40)
     m.set(19, 40, A.STELE, True)
+    for x in range(24, 27):                          # the north road, roped until Route 26 opens
+        m.piece("rope", "post_L" if x == 24 else ("post_R" if x == 26 else "rope"), x, 1)
     # ---- across the river: the Menelaion on its ridge, and olive groves ------------------
     for x in range(45, 51):
         m.piece("taygetos", "lip_b" if x % 2 else "lip", x, 12)
@@ -220,7 +222,7 @@ def build():
     o("ICHOR_CADET", 26, 30, S + "Cadet", "MOVEMENT_TYPE_WALK_UP_AND_DOWN", ry=3)
     o("ICHOR_CADET_F", 10, 10, S + "CadetYard", "MOVEMENT_TYPE_WANDER_AROUND", rx=3, ry=2)
     o("ICHOR_CADET", 33, 8, S + "CadetField", "MOVEMENT_TYPE_WANDER_AROUND", rx=2, ry=1)
-    o("ICHOR_CADET", 25, 3, S + "NorthGuard", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_LAKONIA_NORTH_GUARD")
+    o("ICHOR_CADET", 27, 2, S + "NorthGuard", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_LAKONIA_NORTH_GUARD")
     o("ICHOR_HOPLITE", 31, 13, S + "Wrestler", "MOVEMENT_TYPE_FACE_LEFT")
     m.item_ball(49, 9, "ITEM_RARE_CANDY", "FLAG_ICHOR_ITEM_LAKONIA_MENELAION")
     m.hidden(46, 9, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_MENELAION")
@@ -237,7 +239,7 @@ def build():
         m.trigger(36, y, S + "Arrival", "VAR_TEMP_1", 0)
     m.trigger(16, 15, S + "RingGap", "VAR_TEMP_2", 0)
     for x in range(24, 27):
-        m.trigger(x, 2, S + "GoatPaths", "VAR_TEMP_3", 0)
+        m.trigger(x, 4, S + "GoatPaths", "VAR_TEMP_3", 0)
     m.connect("right", ENTRY_ROW - 3, "MAP_ROUTE25_EUROTAS")
     starts = [(W - 1, ENTRY_ROW)]
     must = [(24, 22, "the agora"), (16, 13, "the ring"), (11, 29, "Lampito's step")]

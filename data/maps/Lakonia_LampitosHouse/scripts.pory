@@ -1,19 +1,18 @@
 // Lampito's house, Lakonia (design/phase4/SCRIPT.md, beats III-5E to III-5H).
-// Room: tools/ichor/maps/lakonia_rooms.py (design/phase4/ROOMS_lakonia.md has the
-// coordinates). The story scripts are the Lakonia chapter builder's: the
-// scripts below are the room's object texts (SCRIPT.md's "Interacting with the
-// room" table) and placeholder people, for the chapter builder to replace.
+// Room: tools/ichor/maps/lakonia_rooms.py (design/phase4/ROOMS_lakonia.md).
 //
-//   table (6..7, 5); stools (5,5) and (8,5), walkable (whoever stands there sits)
-//   hearth (4..5, 2..3), cold; LakoniaLampito_EventScript_SetHearthLit lights it
-//     (METATILE_OikiaLakonia_Hearth_Lit_*); read from (4,4)
-//   loom (0..1, 0..2), read from (2,2); chest (0..1, 3..4), read from (2,4)
-//   stelai (7,1) AGIS and (9,1) the swallow, read from (7,2) and (9,2)
+//   table (6..7, 5); stools (5,5) and (8,5); hearth (4..5, 2..3), read from (4,4)
+//   loom (0..1, 0..2); chest (0..1, 3..4); stelai (7,1) AGIS and (9,1) the swallow
 //   mat (5..6, 8): warps 0 and 1, to MAP_LAKONIA warp 2
-//   LOCALID_LAMPITO_KLEON (5,5) on the west stool, facing east
-//   LOCALID_LAMPITO_RHEA (5,7) just inside the door (gfx VAR_1)
-//   LOCALID_LAMPITO_ALETHEA (8,7); LOCALID_LAMPITO_HELMET (6,5) and
-//   LOCALID_LAMPITO_TABLET (7,5) on the table (placeholder gfx)
+//
+// Who is here, by beat (ON_TRANSITION):
+//   VAR_ICHOR_ACT3 7, Gylippos met: Kleon at the table, Alethea follows you in,
+//     Rhea comes in during III-5E (VAR_TEMP_0 1 runs the scene on the frame)
+//   8 (the helmet is off, the Voice in the lane): nobody; Lakonia runs III-5F
+//   9: Alethea at the table, the sealed tablet (III-5G)
+//   10, before the goat paths: Rhea at the hearth, Kleon at the table
+//   after III-5J: the helmet on the table, the hearth banked
+// FLAG_TEMP_1 Kleon, _2 Rhea, _3 Alethea, _4 the helmet, _5 the lead tablet.
 
 mapscripts Lakonia_LampitosHouse_MapScripts {
     MAP_SCRIPT_ON_LOAD {
@@ -21,29 +20,388 @@ mapscripts Lakonia_LampitosHouse_MapScripts {
             call(LakoniaLampito_EventScript_SetHearthLit)
         }
     }
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_TEMP_1)
+        setflag(FLAG_TEMP_2)
+        setflag(FLAG_TEMP_3)
+        setflag(FLAG_TEMP_4)
+        setflag(FLAG_TEMP_5)
+        setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_RHEA_UNMASKED)
+        if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+            clearflag(FLAG_TEMP_4)
+            if (!flag(FLAG_ICHOR_LAKONIA_PARTED)) {
+                clearflag(FLAG_TEMP_5)
+            }
+        }
+        if (var(VAR_ICHOR_ACT3) == 7 && flag(FLAG_ICHOR_LAKONIA_ARRIVED) && !flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_RHEA)
+            clearflag(FLAG_TEMP_1)
+            clearflag(FLAG_TEMP_3)
+            setobjectxyperm(LOCALID_LAMPITO_ALETHEA, 6, 7)
+            setobjectxyperm(LOCALID_LAMPITO_RHEA, 5, 8)
+            setvar(VAR_TEMP_0, 1)
+        } elif (var(VAR_ICHOR_ACT3) == 9) {
+            clearflag(FLAG_TEMP_3)
+            setobjectxyperm(LOCALID_LAMPITO_ALETHEA, 8, 5)
+            setobjectmovementtype(LOCALID_LAMPITO_ALETHEA, MOVEMENT_TYPE_FACE_LEFT)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 1: LakoniaLampito_EventScript_HelmetComesOff
+    ]
 }
 
 text LakoniaLampito_Text_NameKleon { "KLEON" }
+text LakoniaLampito_Text_NameRhea { "RHEA" }
+text LakoniaLampito_Text_NameAlethea { "ALETHEA" }
+text LakoniaLampito_Text_NameIapetos { "IAPETOS" }
+
+// ---------------------------------------------------------------------------
+// III-5E. The helmet comes off
+// ---------------------------------------------------------------------------
+
+script LakoniaLampito_EventScript_HelmetComesOff {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    fadeoutbgm(2)
+    applymovement(OBJ_EVENT_ID_PLAYER, LakoniaLampito_Movement_PlayerToTable)
+    applymovement(LOCALID_LAMPITO_ALETHEA, LakoniaLampito_Movement_AletheaIn)
+    waitmovement(0)
+    applymovement(LOCALID_LAMPITO_KLEON, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("Oh. It's you.\p"
+                  "Course it's you. Who else would walk all the way up here.\p"
+                  "Sit, if you want. There's nothing to eat. My mother's away.\p"
+                  "She's always away. She writes. Two lines a week.\p"
+                  "This one was waiting when I got in."))
+    msgbox(format("He holds up a scrap of papyrus."), MSGBOX_DEFAULT)
+    msgbox(format("“Eat. Stop running at things.”\p"
+                  "…She's got a point. Don't tell her.\p"
+                  "I sent word to the Titans at the port. Told them to tell the Voice.\p"
+                  "“Kleon's at home. Come and explain your handwriting.”"))
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    msgbox(format("He won't come himself. He sends people."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("Then I'll explain it to them."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // the door opens: a closed bronze helmet in it, a chain round one arm
+    playse(SE_DOOR)
+    clearflag(FLAG_TEMP_2)
+    addobject(LOCALID_LAMPITO_RHEA)
+    applymovement(LOCALID_LAMPITO_RHEA, LakoniaLampito_Movement_RheaInDoor)
+    waitmovement(0)
+    applymovement(LOCALID_LAMPITO_KLEON, LakoniaLampito_Movement_KleonStands)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    applymovement(LOCALID_LAMPITO_ALETHEA, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("You.\p"
+                  "From the Akropolis. From the bull. The one with the chain.\p"
+                  "Did he send you? Where is he?"))
+    closemessage
+    // she walks past him to the hearth and lights it, the way you light your own
+    applymovement(LOCALID_LAMPITO_RHEA, LakoniaLampito_Movement_RheaToHearth)
+    waitmovement(0)
+    delay(30)
+    playse(SE_M_EMBER)
+    call(LakoniaLampito_EventScript_SetHearthLit)
+    special(DrawWholeMapView)
+    waitse
+    delay(20)
+    applymovement(LOCALID_LAMPITO_KLEON, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("…Who said you could touch that?"))
+    applymovement(LOCALID_LAMPITO_RHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("No one sent me.\pI came home."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("This isn't your home. This is my mother's house."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("Yes."))
+    closemessage
+    // the chain on the table; then both hands to the helmet
+    applymovement(LOCALID_LAMPITO_RHEA, LakoniaLampito_Movement_RheaToTable)
+    waitmovement(0)
+    playse(SE_M_HARDEN)
+    delay(30)
+    setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_RHEA_UNMASKED)
+    setobjectxyperm(LOCALID_LAMPITO_RHEA, 6, 4)
+    removeobject(LOCALID_LAMPITO_RHEA)
+    addobject(LOCALID_LAMPITO_RHEA)
+    applymovement(LOCALID_LAMPITO_RHEA, Common_Movement_FaceLeft)
+    clearflag(FLAG_TEMP_4)
+    addobject(LOCALID_LAMPITO_HELMET)
+    waitmovement(0)
+    delay(120)
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("…Mother."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("Sit down, Kleon.\pSit."))
+    closemessage
+    applymovement(LOCALID_LAMPITO_KLEON, LakoniaLampito_Movement_KleonSits)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    msgbox(format("I'll wait outside. This isn't mine to write down."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("No. Stay. Both of you.\pI'm not hearing this on my own."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("You were born early. Small. You coughed.\p"
+                  "The elders come to look at every baby. You know what they do."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("…The mountain. Yeah."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("I had my Kourodin dance in the yard. Shields. All night.\pNobody heard you cough."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("The shield-dancers. From the story. The baby they hid from Kronos.\pThat was… me?"))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("You."))
+    closemessage
+    applymovement(LOCALID_LAMPITO_RHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(format("Before you there were two.\p"
+                  "The Oracle read them at birth. Both would go before their mother.\p"
+                  "Both did.\p"
+                  "A prophecy took my children. I let it. I stood still and let it."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("You said that. At Knossa. By the lever.\pI didn't know it was about me."))
+    applymovement(LOCALID_LAMPITO_RHEA, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("Then you. The Oracle's verse came for you. I read it.\p"
+                  "I heard death in it.\p"
+                  "So I stopped standing still.\p"
+                  "At Delphoi a priest told me he knew a man who'd stop the cutting."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("Iapetos."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("Iapetos."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("The Titans. The tunnels. The chain. You did all of it for me."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("For you."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("And then he wrote me a better thread. And I took it. And you…"))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("He pointed my son at a monster. I watched you run at it.\p"
+                  "That's when I started hating him."))
+    closemessage
+    // the chest under the loom: a small plain lead tablet
+    applymovement(LOCALID_LAMPITO_RHEA, LakoniaLampito_Movement_RheaToChest)
+    waitmovement(0)
+    playse(SE_M_SCRATCH)
+    delay(30)
+    applymovement(LOCALID_LAMPITO_RHEA, LakoniaLampito_Movement_RheaBackFromChest)
+    waitmovement(0)
+    clearflag(FLAG_TEMP_5)
+    addobject(LOCALID_LAMPITO_TABLET)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Scratched lead, worn soft at the corners. No hook anywhere on it."))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("Yours. From Delphoi. The day you were born.\p"
+                  "Lead. Nobody's touched it. Not him. Not anyone.\p"
+                  "Read it. Out loud. I never could."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("“Kleon, son of Lampito.”\p“Glorious while young…”\p“…and his glory will not die.”"))
+    closemessage
+    delay(60)
+    msgbox(format("That's it?\p"
+                  "That's all of it? Where's the dying?\p"
+                  "I've been running at it since I was seven. Where is it?"))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("I read it wrong.\pI'd buried two. I heard what I was afraid of."))
+    closemessage
+    applymovement(LOCALID_LAMPITO_KLEON, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("And this one. The better thread.\p"
+                  "“Kleon of Lakonia shall slay the starry bull.” Lovely handwriting.\p"
+                  "“He'll run straight at it.” That's what he wrote about me. In the draft.\p"
+                  "I did. Didn't I. Straight at it."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Kleon holds the wax tablet over the hearth. The wax softens and runs."))
+    closemessage
+    playse(SE_M_FLAME_WHEEL)
+    waitse
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("There."))
+    closemessage
+    applymovement(LOCALID_LAMPITO_KLEON, Common_Movement_FaceRight)
+    waitmovement(0)
+    msgbox(format("Keep it. I don't need it. You do."))
+    closemessage
+    delay(40)
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("…Hm."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("Hm? Thirteen years, and you've got “hm”?"))
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    msgbox(format("We're Lakonian."))
+    setspeaker(LakoniaLampito_Text_NameKleon)
+    msgbox(format("Fewer words. Yeah. I know.\p…I know."))
+    closemessage
+    setvar(VAR_ICHOR_ACT3, 8)
+    setflag(FLAG_ICHOR_RHEA_UNMASKED)
+    goto(LakoniaLampito_EventScript_FootstepsOutside)
+}
+
+// III-5F opens here: footsteps in the yard, the Voice at the gate
+script LakoniaLampito_EventScript_FootstepsOutside {
+    delay(30)
+    playse(SE_M_SAND_ATTACK)
+    waitse
+    applymovement(LOCALID_LAMPITO_ALETHEA, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    msgbox(format("There are helmets in the yard. A lot of helmets."))
+    setspeaker(LakoniaLampito_Text_NameIapetos)
+    msgbox(format("Lampito? May I tell you something true?"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Rhea sets the lead tablet on the table. She looks at the helmet beside it.\p"
+                  "She leaves it there, and goes out bare-headed."))
+    closemessage
+    fadedefaultbgm
+    fadescreen(FADE_TO_BLACK)
+    warpsilent(MAP_LAKONIA, 11, 29)
+    waitstate
+    releaseall
+}
+
+movement LakoniaLampito_Movement_PlayerToTable { walk_up * 2 face_up }
+movement LakoniaLampito_Movement_AletheaIn { delay_16 walk_right * 2 walk_up face_up }
+movement LakoniaLampito_Movement_RheaInDoor { walk_up face_up }
+movement LakoniaLampito_Movement_KleonStands { jump_in_place_down face_down }
+movement LakoniaLampito_Movement_RheaToHearth { walk_slow_left walk_slow_up * 3 face_up }
+movement LakoniaLampito_Movement_RheaToTable { walk_right walk_right face_down }
+movement LakoniaLampito_Movement_KleonSits { walk_in_place_right face_right }
+movement LakoniaLampito_Movement_RheaToChest { walk_left * 4 face_left }
+movement LakoniaLampito_Movement_RheaBackFromChest { walk_right * 4 face_down }
+
+// ---------------------------------------------------------------------------
+// People, by beat
+// ---------------------------------------------------------------------------
 
 script LakoniaLampito_EventScript_Kleon {
     lock
     faceplayer
     setspeaker(LakoniaLampito_Text_NameKleon)
-    msgbox(format("Oh. It's you."))
+    if (var(VAR_ICHOR_ACT3) == 10) {
+        msgbox(format("She made me eat. Twice. I think it's a punishment.\p"
+                      "When you're ready, we're going. Find us on the north road."))
+    } else {
+        msgbox(format("Sit, if you want. There's nothing to eat."))
+    }
     release
 }
 
 script LakoniaLampito_EventScript_Rhea {
     lock
     faceplayer
+    setspeaker(LakoniaLampito_Text_NameRhea)
+    if (var(VAR_ICHOR_ACT3) == 10) {
+        msgbox(format("The fire stays in. Somebody banks it, somebody keeps it.\pThat's all a house is."))
+    } else {
+        msgbox(format("Hm."))
+    }
     release
 }
+
+// ---------------------------------------------------------------------------
+// III-5G. What the Pythia said
+// ---------------------------------------------------------------------------
 
 script LakoniaLampito_EventScript_Alethea {
     lock
     faceplayer
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    if (var(VAR_ICHOR_ACT3) != 9) {
+        msgbox(format("Truthfully, I don't know where to stand in here."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_ALETHEA_READ_TABLET)) {
+        msgbox(format("Make him read it. That's all. Truthfully.\p"
+                      "Rhea and Kleon are out by the well. Go on."))
+        release
+        end
+    }
+    msgbox(format("Lead. The Pythia's words go on lead. Cut in, so they last.\p"
+                  "Wax is for drafts. You write on it, you smooth it, you write again.\p"
+                  "{PLAYER}. The sealed tablet. From the archive. Can I see it?"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A wax-faced tablet, closed. A blob of wax over the clasp, pressed with a little hook.\p"
+                  "“ELPIS, DAUGHTER OF PHAEDON. Revised.” scratched on the outside."))
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    msgbox(format("It's heavy. Too heavy for wax and wood.\p"
+                  "There's lead under the wax. He poured wax over a lead tablet and wrote on top.\p"
+                  "I don't want to break his seal. It isn't addressed to us.\p"
+                  "…Truthfully, I've wanted to since Knossa."))
+    msgbox(format("Let Alethea break the seal?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("No. You're right. It's his.\pAsk me again before we leave. I'll still want to."))
+        release
+        end
+    }
+    closemessage
+    playse(SE_M_SCRATCH)
+    waitse
+    msgbox(format("“ELPIS, DAUGHTER OF PHAEDON. Revised.”\p"
+                  "“Short is her thread. The shears are near.”\p"
+                  "That's his hand. The hook on the end of every line."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Alethea takes a trowel from her belt and scrapes back the wax along the bottom edge, very gently."))
+    closemessage
+    playse(SE_M_SCRATCH)
+    waitse
+    playse(SE_M_SCRATCH)
+    waitse
+    playse(SE_M_SCRATCH)
+    waitse
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    msgbox(format("There. Cut in the lead, under all of it. Older. Plainer.\p"
+                  "The prophetes who took it down wrote what she said. Then he covered it.\p"
+                  "“Her thread ends the day the hours stop.”"))
+    closemessage
+    delay(60)
+    msgbox(format("That's what the Pythia said. That's all of it.\p"
+                  "The day the hours stop. Hours don't stop.\p"
+                  "So it's good news. Isn't it? It's a long way off. It's never.\p"
+                  "Then why would anybody scrape it off?\p"
+                  "…\p"
+                  "I don't know why that frightens me. It ought to be the best news in the world."))
+    closemessage
+    playse(SE_M_SCRATCH)
+    waitse
+    msgbox(format("I'm writing it underneath. Where he'll see it. In my own hand.\p"
+                  "Then he can say I'm wrong. He can't say I hid it."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Under the forgery, in a different hand:\p"
+                  "“Scraped from the wax. The Pythia's words, as she spoke them:”\p"
+                  "“Her thread ends the day the hours stop.”\p"
+                  "“Truthfully. Alethea.”"))
+    msgbox(format("She warms a new blob of wax at the hearth, presses it over the clasp, and stamps it with the tip of her trowel."))
+    setspeaker(LakoniaLampito_Text_NameAlethea)
+    msgbox(format("There. A trowel, not a hook. He'll know the difference.\p"
+                  "It's his to open. Somebody should let him choose.\p"
+                  "You'll see him before I do. Everybody does, in the end. He heals everyone.\p"
+                  "Make him read it, {PLAYER}. Truthfully. Make him."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("{PLAYER} put the sealed tablet away."))
+    setflag(FLAG_ICHOR_ALETHEA_READ_TABLET)
     release
 }
+
+// ---------------------------------------------------------------------------
+// The room
+// ---------------------------------------------------------------------------
 
 script LakoniaLampito_EventScript_Helmet {
     msgbox(format("Rhea's helmet. Closed, bronze, the sickle on its cheek-pieces.\p"
@@ -51,14 +409,24 @@ script LakoniaLampito_EventScript_Helmet {
 }
 
 script LakoniaLampito_EventScript_Tablet {
-    msgbox(format("A small, plain lead tablet. Worn soft at the corners."), MSGBOX_SIGN)
+    msgbox(format("A small, plain lead tablet. Worn soft at the corners.\p"
+                  "“Kleon, son of Lampito. Glorious while young, and his glory will not die.”"), MSGBOX_SIGN)
 }
 
 script LakoniaLampito_EventScript_Stelai {
-    msgbox(format("Two grave-stelai, painted on the plaster.\p"
-                  "One says AGIS. IN WAR.\p"
-                  "The other has no name. Only a swallow, painted small.\p"
-                  "In Lakonia, only the war dead get their names on a stone."), MSGBOX_SIGN)
+    lockall
+    if (!flag(FLAG_TEMP_1)) {
+        setspeaker(LakoniaLampito_Text_NameKleon)
+        msgbox(format("My brother and sister. Before me. I never met them.\p"
+                      "She never says their names.\p"
+                      "Half the boys in Lakonia are called Agis. She hates it."))
+    } else {
+        msgbox(format("Two grave-stelai, painted on the plaster.\p"
+                      "One says AGIS. IN WAR.\p"
+                      "The other has no name. Only a swallow, painted small.\p"
+                      "In Lakonia, only the war dead get their names on a stone."))
+    }
+    releaseall
 }
 
 script LakoniaLampito_EventScript_Loom {
@@ -66,7 +434,9 @@ script LakoniaLampito_EventScript_Loom {
 }
 
 script LakoniaLampito_EventScript_Hearth {
-    if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+    if (flag(FLAG_ICHOR_LAKONIA_PARTED)) {
+        msgbox(format("The hearth's still warm. Somebody banked it before they left."), MSGBOX_SIGN)
+    } elif (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
         msgbox(format("The fire's going. Someone's home."), MSGBOX_SIGN)
     } else {
         msgbox(format("Cold. Nobody's lit it in a long time."), MSGBOX_SIGN)

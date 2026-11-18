@@ -150,8 +150,8 @@ def build():
     m.put("spring", 9, 10)                  # the spring (9..10, 10..11)
     m.piece("altar", "fire_L", 6, 10)       # Amyklai's fire, before the god
     m.piece("altar", "fire_R", 7, 10)
-    m.set(12, 12, A.HERM, True)             # the great herm at the hill's gate
-    m.path({(x, y) for x in range(8, 14) for y in range(11, 13) if (x, y) != (12, 12)}
+    m.set(13, 13, A.HERM, True)             # the great herm at the hill's gate (land at (13,14))
+    m.path({(x, y) for x in range(8, 14) for y in range(11, 13)}
            | {(11, 10), (12, 10), (13, 10), (12, 11), (13, 11)},
            context={(14, 10), (14, 11), (14, 12)})
     # ---- the farm and Hestia's herm-shrines -----------------------------------------
@@ -231,7 +231,7 @@ def build():
     m.hidden(13, 41, "ITEM_HYPER_POTION", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_TERRACE")
     m.hidden(4, 34, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_SCREE")
     m.sign(13, 42, S + "SignSouth")
-    m.sign(12, 12, S + "Herm")
+    m.sign(13, 13, S + "Herm")
     m.sign(17, 2, S + "SignLakonia") if False else m.sign(13, 1, S + "SignLakonia")
     m.sign(3, 11, S + "Throne")
     m.sign(9, 11, S + "Spring")

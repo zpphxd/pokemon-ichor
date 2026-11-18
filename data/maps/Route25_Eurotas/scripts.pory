@@ -1,1 +1,383 @@
-mapscripts Route25_Eurotas_MapScripts {}
+// Route 25, up the Eurotas (design/phase4/SCRIPT.md, beat III-5C; Part 2,
+// "Route 25"; Part 3, the route's trainers). The map is
+// tools/ichor/maps/lakonia_route25.py.
+//
+// VAR_TEMP_1 0 arms the town-in-view triggers (III-5C) until FLAG_ICHOR_SAW_LAKONIA.
+// Hestia's visit (SYSTEMS §10, E2): carry Amyklai's fire (Hecate's Torch,
+// FLAME_HEARTH, 20 steps) to the roofless farmhouse's hearth; the lit herm-
+// shrines along the way relight it.
+
+mapscripts Route25_Eurotas_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_SAW_LAKONIA)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (flag(FLAG_ICHOR_THEOXENIA_HESTIA)) {
+            setflag(FLAG_ICHOR_HIDE_ROUTE25_HESTIA)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_ROUTE25_HESTIA)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_THEOXENIA_HESTIA)) {
+            setmetatile(5, 25, METATILE_Eurotas_Hearth_Lit_L, TRUE)
+            setmetatile(6, 25, METATILE_Eurotas_Hearth_Lit_R, TRUE)
+        }
+    }
+}
+
+text Route25_Text_NameTeleklos { "TELEKLOS" }
+text Route25_Text_NameCadet { "CADET" }
+text Route25_Text_NamePolyboia { "POLYBOIA" }
+text Route25_Text_NameWoman { "WOMAN" }
+text Route25_Text_NameHestia { "HESTIA" }
+text Route25_Text_NameAgiatis { "AGIATIS" }
+text Route25_Text_NameIsadas { "ISADAS" }
+text Route25_Text_NamePhoibidas { "PHOIBIDAS" }
+text Route25_Text_NameAlpheios { "ALPHEIOS" }
+text Route25_Text_NameTheodora { "THEODORA" }
+text Route25_Text_NameArimnestos { "ARIMNESTOS" }
+text Route25_Text_NameEuthymia { "EUTHYMIA" }
+
+// ---------------------------------------------------------------------------
+// The road's trainers (SCRIPT.md Part 3, "Route 25")
+// ---------------------------------------------------------------------------
+
+text Route25_Text_AgiatisIntro { format("Out of the way! Training run! …Or battle me. That's training too.") }
+text Route25_Text_AgiatisDefeat { format("I'll run it off. I'll run everything off.") }
+text Route25_Text_TeleklosIntro { format("My hands hurt. I'm going to take it out on you.") }
+text Route25_Text_TeleklosDefeat { format("…My hands hurt more now.") }
+text Route25_Text_IsadasIntro { format("You have to cross the ford. We have to stop you. That's the drill.") }
+text Route25_Text_IsadasDefeat { format("Drill failed. I'll be running laps till the moon's up.") }
+text Route25_Text_PhoibidasIntro { format("Isadas let you past? Typical. Not me.") }
+text Route25_Text_PhoibidasDefeat { format("Oh. I let you past. Don't tell Isadas.") }
+text Route25_Text_AlpheiosIntro { format("Eels. The Eurotas has eels. And now, you.") }
+text Route25_Text_AlpheiosDefeat { format("Slippery. Like the eels.") }
+text Route25_Text_TheodoraIntro { format("I came to mourn Hyakinthos. I'm early. Let's battle while I wait.") }
+text Route25_Text_TheodoraDefeat { format("Now I've something to mourn.") }
+text Route25_Text_ArimnestosIntro { format("Lakonians don't step back. Not for generals. Not for you.") }
+text Route25_Text_ArimnestosDefeat { format("…Fine. I'm stepping sideways. That's different.") }
+text Route25_Text_EuthymiaIntro { format("Barley's high and so am I. On sunshine. Battle!") }
+text Route25_Text_EuthymiaDefeat { format("Cut down. Like the barley. Fair's fair.") }
+
+script Route25_EventScript_Agiatis {
+    trainerbattle_single(TRAINER_ICHOR_AGIATIS, Route25_Text_AgiatisIntro, Route25_Text_AgiatisDefeat)
+    setspeaker(Route25_Text_NameAgiatis)
+    msgbox(format("Girls run in Lakonia. Everybody else's girls stay home. Theirs lose."), MSGBOX_AUTOCLOSE)
+}
+
+script Route25_EventScript_Teleklos {
+    trainerbattle_single(TRAINER_ICHOR_TELEKLOS, Route25_Text_TeleklosIntro, Route25_Text_TeleklosDefeat)
+    lock
+    faceplayer
+    setspeaker(Route25_Text_NameTeleklos)
+    if (flag(FLAG_ICHOR_CARRYING_FIG_CAKE) && !flag(FLAG_ICHOR_DELIVERED_FIG_CAKE)) {
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} held out the fig cake."))
+        setspeaker(Route25_Text_NameTeleklos)
+        msgbox(format("That's… is that from Gytheion? Is that hers?\p"
+                      "We're not allowed. Food from home. It makes you soft.\p…"))
+        closemessage
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("He looks up and down the river. The other cadets are bent over the reeds.\p"
+                      "He takes it and eats it in four bites."))
+        setspeaker(Route25_Text_NameTeleklos)
+        msgbox(format("Tell her it was fine.\pFewer words. Tell her it was fine."))
+        clearflag(FLAG_ICHOR_CARRYING_FIG_CAKE)
+        setflag(FLAG_ICHOR_DELIVERED_FIG_CAKE)
+    } else {
+        msgbox(format("Reeds. For our beds. We cut them by hand.\p"
+                      "No knives. That's the rule. If you're soft, you sleep on the floor.\p"
+                      "My hands are fine. Don't look at my hands."))
+    }
+    release
+}
+
+script Route25_EventScript_Isadas {
+    trainerbattle_single(TRAINER_ICHOR_ISADAS, Route25_Text_IsadasIntro, Route25_Text_IsadasDefeat)
+    setspeaker(Route25_Text_NameIsadas)
+    msgbox(format("Phoibidas will get you. He never lets anyone past. He's very annoying."), MSGBOX_AUTOCLOSE)
+}
+
+script Route25_EventScript_Phoibidas {
+    trainerbattle_single(TRAINER_ICHOR_PHOIBIDAS, Route25_Text_PhoibidasIntro, Route25_Text_PhoibidasDefeat)
+    setspeaker(Route25_Text_NamePhoibidas)
+    msgbox(format("The grass is full past here. I'd go round. You can't go round. Ha."), MSGBOX_AUTOCLOSE)
+}
+
+script Route25_EventScript_Alpheios {
+    trainerbattle_single(TRAINER_ICHOR_ALPHEIOS, Route25_Text_AlpheiosIntro, Route25_Text_AlpheiosDefeat)
+    setspeaker(Route25_Text_NameAlpheios)
+    msgbox(format("The cadets steal my eels.\pThey're not allowed food from home. Eels aren't from home."), MSGBOX_AUTOCLOSE)
+}
+
+script Route25_EventScript_Theodora {
+    trainerbattle_single(TRAINER_ICHOR_THEODORA, Route25_Text_TheodoraIntro, Route25_Text_TheodoraDefeat)
+    setspeaker(Route25_Text_NameTheodora)
+    msgbox(format("Three days of grief, then a feast. I'm here for the feast, honestly."), MSGBOX_AUTOCLOSE)
+}
+
+script Route25_EventScript_Arimnestos {
+    trainerbattle_single(TRAINER_ICHOR_ARIMNESTOS, Route25_Text_ArimnestosIntro, Route25_Text_ArimnestosDefeat)
+    setspeaker(Route25_Text_NameArimnestos)
+    msgbox(format("At Plataea a Persian general rode a white horse.\p"
+                  "My grandfather's grandfather knocked him off it with a stone.\p"
+                  "We kept the stone. Lakonians keep everything but words."), MSGBOX_AUTOCLOSE)
+}
+
+script Route25_EventScript_Euthymia {
+    trainerbattle_single(TRAINER_ICHOR_EUTHYMIA, Route25_Text_EuthymiaIntro, Route25_Text_EuthymiaDefeat)
+    setspeaker(Route25_Text_NameEuthymia)
+    msgbox(format("Helots cut the barley. I'm not a helot. I just like barley."), MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// The road's people
+// ---------------------------------------------------------------------------
+
+script Route25_EventScript_ReedCadet {
+    lock
+    faceplayer
+    setspeaker(Route25_Text_NameCadet)
+    msgbox(format("In the battle school you get one cloak a year. One. You make it last.\p"
+                  "If you see a red cloak in the reeds, it's mine. Don't tell the eiren."))
+    release
+}
+
+script Route25_EventScript_ReedCadet2 {
+    lock
+    faceplayer
+    setspeaker(Route25_Text_NameCadet)
+    msgbox(format("Teleklos's mother sends him cakes. He eats them on the bank when he thinks we're not looking.\p"
+                  "We're always looking. We just don't say."))
+    release
+}
+
+script Route25_EventScript_Runner {
+    lock
+    faceplayer
+    setspeaker(Route25_Text_NameCadet)
+    msgbox(format("Running to Gytheion and back. Before noon.\p"
+                  "…It's after noon? Don't tell anyone. I'm going to keep running."))
+    release
+}
+
+// Polyboia, Amyklai's priestess: the Heat Rock once the Sun Laurel is won
+script Route25_EventScript_Polyboia {
+    lock
+    faceplayer
+    setspeaker(Route25_Text_NamePolyboia)
+    if (flag(FLAG_BADGE08_GET) && !flag(FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI)) {
+        msgbox(format("You've been to Delphoi. You've got his light on you.\p"
+                      "Take this. He'd want it carried somewhere bright."))
+        giveitem(ITEM_HEAT_ROCK)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI)
+        }
+        release
+        end
+    }
+    msgbox(format("Apollo of Amyklai. He sits on a grave.\p"
+                  "Not his brother's. His friend's.\p"
+                  "Hyakinthos. They threw the discus in a meadow. The wind turned it.\p"
+                  "It struck the boy, and he died in the god's arms.\p"
+                  "A god. Who sees everything coming. He didn't see that.\p"
+                  "Every summer, three days of mourning. No garlands. No songs.\p"
+                  "Then a great feast. Songs all night. The mourning makes room for it."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// III-5C. The town in view
+// ---------------------------------------------------------------------------
+
+script Route25_EventScript_TownInView {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    if (flag(FLAG_ICHOR_SAW_LAKONIA)) {
+        releaseall
+        end
+    }
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    msgbox(format("The plane trees open. The town at the top of the valley has no walls at all.\p"
+                  "Behind it, the mountain does the job instead."))
+    setflag(FLAG_ICHOR_SAW_LAKONIA)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Amyklai: the throne, the spring, the altar's fire, the hyacinths
+// ---------------------------------------------------------------------------
+
+script Route25_EventScript_Throne {
+    msgbox(format("A bronze god sits on a throne the size of a house.\p"
+                  "Under his feet, they say, is a grave. He has sat on it a very long time."), MSGBOX_SIGN)
+}
+
+script Route25_EventScript_Hyacinths {
+    msgbox(format("Dark flowers, with marks on the petals like letters. AI AI.\p"
+                  "Grief, written on a flower, so it comes back every spring."), MSGBOX_SIGN)
+}
+
+script Route25_EventScript_Spring {
+    lockall
+    msgbox(format("A spring welling into a stone basin beside the throne.\pYou drink. Your Pokémon drink."))
+    special(HealPlayerParty)
+    playse(SE_USE_ITEM)
+    waitse
+    msgbox(format("Everyone feels refreshed."))
+    releaseall
+}
+
+// Amyklai's fire: Hestia's test takes its flame here (with Hecate's Torch)
+script Route25_EventScript_Altar {
+    lockall
+    msgbox(format("Apollo's altar at Amyklai. The fire on it never goes out."))
+    if (!flag(FLAG_ICHOR_THEOXENIA_HESTIA) && checkitem(ITEM_HECATES_TORCH)) {
+        msgbox(format("Take a flame from the altar on Hecate's Torch?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            setvar(VAR_0x8004, FLAME_HEARTH)
+            setvar(VAR_0x8005, 20)
+            special(Ichor_TakeFlame)
+            if (var(VAR_RESULT) == TRUE) {
+                playse(SE_M_EMBER)
+                msgbox(format("The torch takes the god's fire. It won't last long in the open."))
+            } else {
+                msgbox(format("The torch is doused. Light it first."))
+            }
+        }
+    }
+    releaseall
+}
+
+// A roadside herm-shrine: its little lamp relights a carried hearth fire
+script Route25_EventScript_HermShrine {
+    lockall
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) == FLAME_HEARTH) {
+        setvar(VAR_0x8004, FLAME_HEARTH)
+        setvar(VAR_0x8005, 20)
+        special(Ichor_TakeFlame)
+        playse(SE_M_EMBER)
+        msgbox(format("A herm-shrine with a little lamp in its niche.\pThe carried fire leans to the lamp, and burns up bright again."))
+    } else {
+        msgbox(format("A herm-shrine with a little lamp in its niche. Someone keeps it lit for travelers."))
+    }
+    releaseall
+}
+
+script Route25_EventScript_Vapheio {
+    lockall
+    msgbox(format("A round tomb in the hillside, shaped like a beehive. Old. Older than Lakonia.\p"
+                  "The bronze door has no handle. Only a hollow shaped like a double axe."))
+    if (checkitem(ITEM_LABRYS)) {
+        msgbox(format("The Labrys fits the hollow. Something inside still holds the door shut.\p"
+                      "Like the Labyrinth's dials, before they were turned.\p"
+                      "It isn't ready yet."))
+    }
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Hestia's theoxenia (E2): the roofless farmhouse
+// ---------------------------------------------------------------------------
+
+script Route25_EventScript_HearthWoman {
+    lock
+    faceplayer
+    setspeaker(Route25_Text_NameWoman)
+    msgbox(format("Oh. A visitor. Mind the floor. It's mostly puddle.\p"
+                  "The roof went to the Titans. The beams, I mean. For somebody's palisade.\p"
+                  "The hearth went out with it. First time in my life.\p"
+                  "I don't know what to do with my hands.\p"
+                  "There's fire at the god's altar up the road. At Amyklai.\p"
+                  "It's a long way. A flame doesn't last."))
+    msgbox(format("Carry fire for her?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("No. Of course. I'd stay in too, if I had an in."))
+    } else {
+        msgbox(format("Light your torch at the altar. Mind the road. It eats a flame.\p"
+                      "The little shrines along the road will lend you more. They always have."))
+    }
+    release
+}
+
+script Route25_EventScript_Hearth {
+    lockall
+    if (flag(FLAG_ICHOR_THEOXENIA_HESTIA)) {
+        if (var(VAR_ICHOR_ACT3) >= 19) {
+            msgbox(format("The fire in the open hearth burns steadily. Someone's rebuilding the roof."))
+        } else {
+            msgbox(format("The fire in the open hearth burns steadily. Rain never seems to reach it."))
+        }
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_HEARTH) {
+        msgbox(format("The hearth's cold. Someone lived here, not long ago."))
+        releaseall
+        end
+    }
+    msgbox(format("Light the hearth?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    special(Ichor_PutOutFlame)
+    playse(SE_M_EMBER)
+    setmetatile(5, 25, METATILE_Eurotas_Hearth_Lit_L, TRUE)
+    setmetatile(6, 25, METATILE_Eurotas_Hearth_Lit_R, TRUE)
+    special(DrawWholeMapView)
+    waitse
+    setspeaker(Route25_Text_NameWoman)
+    msgbox(format("There. Oh, that's better.\p"
+                  "You carried it all that way. With your own two hands.\p"
+                  "Most people bring me a blanket. A blanket's kind. It isn't a fire."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("She stands. There is no shadow under her."))
+    setspeaker(Route25_Text_NameHestia)
+    msgbox(format("Look at my feet, if you like. My nephew taught you that.\p"
+                  "I'm the one nobody paints. First offering, last thought. I don't mind.\p"
+                  "A house without a fire is only walls. Ione taught you that. She's mine.\p"
+                  "This one carries its own fire. If its tail goes out, so does it.\p"
+                  "Don't let it go out."))
+    givemon(SPECIES_CHARMANDER, 45, ITEM_CHARCOAL)
+    if (var(VAR_RESULT) == MON_CANT_GIVE) {
+        msgbox(format("Make room in your party, and I'll still be here. Hearths are patient."))
+        releaseall
+        end
+    }
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} received a Charmander from Hestia!"))
+    waitfanfare
+    msgbox(format("Keep it warm. And go home now and then. That's all a hearth ever asks."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_ROUTE25_HESTIA)
+    setflag(FLAG_ICHOR_THEOXENIA_HESTIA)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Signs
+// ---------------------------------------------------------------------------
+
+script Route25_EventScript_SignSouth {
+    msgbox(format("ROUTE 25. Up the Eurotas to Lakonia.\pThe boys have right of way."), MSGBOX_SIGN)
+}
+
+script Route25_EventScript_SignLakonia {
+    msgbox(format("LAKONIA. No walls. Mind the boys."), MSGBOX_SIGN)
+}
+
+script Route25_EventScript_Herm {
+    lockall
+    msgbox(format("SOUTH: GYTHEION. NORTH: LAKONIA.\pApollo of Amyklai, on the hill."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}

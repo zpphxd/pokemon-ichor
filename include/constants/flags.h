@@ -2471,6 +2471,8 @@
 #define FLAG_ICHOR_RING7_DISC                   (FLAG_ICHOR_GENERAL2_START + 0x4D9) // Ichor: Ring VII: the teaching mirror lit the disc
 #define FLAG_ICHOR_HIDDEN_ITEM_RING7_A          (FLAG_ICHOR_GENERAL2_START + 0x4DA) // Ichor: Ring VII: hidden
 #define FLAG_ICHOR_HIDDEN_ITEM_RING7_B          (FLAG_ICHOR_GENERAL2_START + 0x4DB) // Ichor: Ring VII: hidden
+#define FLAG_ICHOR_THEOXENIA_HESTIA             (FLAG_ICHOR_GENERAL2_START + 0x52B) // Ichor: Lakonia: Hestia's visit at the roofless farmhouse (E2) done
+#define FLAG_ICHOR_HIDE_LAKONIA_GEOGRIP         (FLAG_ICHOR_GENERAL2_START + 0x52C) // Ichor: Lakonia: the wrestling sands' Geogrip caught or beaten
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the
