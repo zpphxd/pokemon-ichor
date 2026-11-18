@@ -101,14 +101,14 @@ The art: `tools/ichor/art/balls.py` draws the battle sprites (`graphics/balls/`,
 | Fast Ball | **Atalanta Ball** | 60 | The fastest runner: good on fast Pokémon. |
 | Heavy Ball | **Atlas Ball** | 45 | He bears the sky: good on heavy Pokémon. |
 | Dream Ball | **Hypnos Ball** | 51 | Sleep: good on sleeping Pokémon. |
-| Safari Ball | **Pan Ball** | 36 | The god of the wild. A cut system's ball (Safari Zone). |
+| Safari Ball | **Pan Ball** | 36 | The god of the wild. The Erymanthian Preserve's ball (the Safari Zone). |
 | Sport Ball | **Agon Ball** | 41 | The contest. A cut system's ball (Bug-Catching Contest). |
 | Park Ball | **Elysium Ball** | 54 | The blessed meadow. A transfer ball, never found in Aethos. |
 | Beast Ball | **Typhon Ball** | 51 | The father of monsters: for beasts from beyond, poor on the rest. |
 | Cherish Ball | **Charis Ball** | 50 | Grace and gift: the event ball. |
 | Strange Ball | **Aion Ball** | 40 | Eternity: the ball that "wandered through all time". |
 
-None of the names touches the Lazarus avoid-list (`research/LAZARUS.md`). The Premier Ball's throw-in line now reads "Take a Xenia Ball too, as a guest-gift." The Safari Zone's own strings ("SAFARI BALLS", the announcer) belong to a cut system and keep their Hoenn words.
+None of the names touches the Lazarus avoid-list (`research/LAZARUS.md`). The Premier Ball's throw-in line now reads "Take a Xenia Ball too, as a guest-gift." The Safari Zone is back as the Erymanthian Preserve (design/maps/ErymanthosPreserve.md): its strings now say Pan Balls, the keeper's bell, barley and a stone.
 
 ## The eight Laurels
 
@@ -146,6 +146,6 @@ The Oikoumene's prizes, one per hall of the Periodos (`oikoumene/PERIODOS.md`). 
 
 ## What this pass left alone
 
-- **Systems being cut** (contests, secret bases, the Battle Frontier, Pokéblocks, the PokéNav, Mystery Gift, Safari Zone, the minigames, link play): their text keeps its Hoenn words until the code goes.
+- **Systems being cut** (contests, secret bases, the Battle Frontier, Pokéblocks, the PokéNav, Mystery Gift, the minigames, link play): their text keeps its Hoenn words until the code goes.
 - **Hoenn map scripts and trainer dialogue** (`data/maps/*/scripts.inc`, `data/text/trainers.inc`): they go with the maps.
 - **Item, move, species and trainer-class names**: other passes own them.

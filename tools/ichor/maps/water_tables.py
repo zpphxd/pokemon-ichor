@@ -14,6 +14,7 @@ map's land band (BALANCE.md), the Old Rod a little under it.
 """
 import json
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 PATH = ROOT / "src/data/wild_encounters.json"
@@ -131,6 +132,7 @@ def main():
     data = json.loads(PATH.read_text())
     group = next(g for g in data["wild_encounter_groups"] if g.get("for_maps"))
     apply(group["encounters"])
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
 

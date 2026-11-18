@@ -300,7 +300,10 @@ static void SafariHandleChooseAction(enum BattlerId battler)
     s32 i;
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(IS_FRLG ? gText_SafariZoneMenuFrlg : gText_SafariZoneMenu, B_WIN_ACTION_MENU);
+    // Ichor: the Preserve's menu (Ball, Barley, Stone, Run; include/config/ichor.h)
+    BattlePutTextOnWindow(IS_FRLG ? gText_SafariZoneMenuFrlg
+                          : ICHOR_SAFARI_BAIT_ROCK ? gText_SafariZoneMenuIchor : gText_SafariZoneMenu,
+                          B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);

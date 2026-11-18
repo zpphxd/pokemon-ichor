@@ -7,6 +7,7 @@ training fields. Rerunning replaces the entries it owns.
 """
 import json
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 PATH = ROOT / "src/data/wild_encounters.json"
@@ -66,6 +67,7 @@ def main():
     group = data["wild_encounter_groups"][0]
     labels = {e["base_label"] for e in ENTRIES}
     group["encounters"] = [e for e in group["encounters"] if e["base_label"] not in labels] + ENTRIES
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     print(f"wrote {len(ENTRIES)} tables")
 

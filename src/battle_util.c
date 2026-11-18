@@ -811,7 +811,7 @@ void HandleAction_WatchesCarefully(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    if (IS_FRLG)
+    if (ICHOR_SAFARI_BAIT_ROCK) // Ichor: the Preserve's barley and stones (include/config/ichor.h)
     {
         if (gBattleStruct->safariRockThrowCounter != 0)
         {
@@ -890,7 +890,7 @@ void HandleAction_ThrowPokeblock(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
 
-    if (IS_FRLG)
+    if (ICHOR_SAFARI_BAIT_ROCK) // Ichor: barley (include/config/ichor.h)
     {
         // throw bait
         gBattleStruct->safariBaitThrowCounter += Random() % 5 + 2;
@@ -940,7 +940,7 @@ void HandleAction_GoNear(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
 
-    if (IS_FRLG)
+    if (ICHOR_SAFARI_BAIT_ROCK) // Ichor: a stone (include/config/ichor.h)
     {
         // throw rock
         gBattleStruct->safariRockThrowCounter += Random() % 5 + 2;

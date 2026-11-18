@@ -8,6 +8,7 @@ src/data/wild_encounters.json, replacing any earlier copy of the same maps.
 """
 import json
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -73,6 +74,7 @@ def main():
     for (mp, label, times) in ENTRIES:
         for t, fields in times.items():
             g["encounters"].append({"map": mp, "base_label": f"{label}_{t}", **fields})
+    plan_hook.apply(g["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     p.write_text(json.dumps(w, indent=2, ensure_ascii=False) + "\n")
     print("wrote", sum(len(t) for (_, _, t) in ENTRIES), "tables")
 

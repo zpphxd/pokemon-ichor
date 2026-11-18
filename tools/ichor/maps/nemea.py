@@ -59,6 +59,7 @@ import kithairon as K  # noqa: E402  (the Skiron grid, painters and checks)
 import route5 as R5  # noqa: E402
 import water_tables  # noqa: E402
 from thyrsa import Map, const, obj, read, write  # noqa: E402,F401
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 GFX = "OBJ_EVENT_GFX_ICHOR_"
 SIGN, GRASS, TALL, BOULDER = R5.SIGN, R5.GRASS, R5.TALL, R5.BOULDER
@@ -1456,6 +1457,7 @@ def write_wild():
                         {"min_level": lo, "max_level": hi, "species": "SPECIES_" + sp} for sp in ROCK[name]]}
             new.append(e)
     group["encounters"] = before + new + after
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     path.write_text(json.dumps(data, indent=2) + "\n")
 
 
@@ -1606,6 +1608,7 @@ def encounters_and_teams(records=ROADS, chapter="Nemea return"):
                     mons=[dict(min_level=level, max_level=level + 2,
                                species="SPECIES_" + species[i % 6]) for i in range(12)])))
     water_tables.apply(group["encounters"], {"MAP_ROUTE15_MYSTERY_ROAD"})
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"
     start, end = f"/* {chapter} teams. */", f"/* End {chapter} teams. */"

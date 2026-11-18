@@ -30,15 +30,8 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
 - **Built (2026-11-18, `tools/ichor/maps/stymphalia.py`):** Route 26, Lake Stymphalia, Route 27 and the Skiritai cave, opened by III-5J as the story's road to Arkadia (the Wings still work). 31 trainers, Akanthis's rest and the lake's travel herm, two route herms, the bronze flock's first-crossing scene, and nine relics in use. Finds and hooks: `design/maps/Route26_Skiritis.md`, `LakeStymphalia.md`, `Route27_ArkadianHills.md`; the walk is `tools/ichor/tests/stymphalia.sh`. Still open: the deep reeds' rainy Lernip roll, Ares's gully (theoxenia E4), the scytale reading, the Karyai berry trees.
 
-### Wild Pokémon distribution pass
-- **Problem found:** Act II adds only 10 new species; Galenyon, Cairnolith, Pebblith, Kerazap, Gelasable and Galekit fill 40–57 maps each; about 18 regular lines can't be caught wild in the story (Chalkip, Elegull, Elektear, Erosie, Hymnet, Kalliglyph, Kerdovix, Skylaps, Sepidart, Sporadon, Ophidrop, Pagoshard, Lebetron, Bouldyphus, Enigmaw, Aetling and more); Nebrel, a starter, is wild on Routes 7–9.
-- **Plan:** a species-by-area table first, then apply it: one or two signature species per area, Act II gets its own new species, each evolution line gets a catch point before its evolution level, the filler thins out, starters leave the wild, rares go to night, fishing, rock smash and hidden spots.
-
 ### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
 - The nymphs of Nysa raised Dionysus. A standard day care (levels, eggs); Hera's blessing already doubles egg finding (SYSTEMS).
-
-### Safari Zone: the Erymanthian Preserve (beside Arkadia)
-- Artemis's hunting park on Mount Erymanthos. Entry fee, Pan Balls (the renamed Safari Ball), a step count, rare and missing species by time of day; ties to the boar Labor in the post-game. Pairs with the distribution pass.
 
 ### Grand bazaar: the Great Deigma (Emporion)
 - A covered market of many stalls: foreign traders (Phoenician, Egyptian, Scythian), stones, TMs, berries, a daily rare stall and a coin exchange for Obols and Staters. A reason to sail back.
@@ -55,6 +48,15 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
 
 ## Done
+
+### Wild Pokémon distribution pass
+- **Problem found:** Act II adds only 10 new species; Galenyon, Cairnolith, Pebblith, Kerazap, Gelasable and Galekit fill 40–57 maps each; about 18 regular lines can't be caught wild in the story (Chalkip, Elegull, Elektear, Erosie, Hymnet, Kalliglyph, Kerdovix, Skylaps, Sepidart, Sporadon, Ophidrop, Pagoshard, Lebetron, Bouldyphus, Enigmaw, Aetling and more); Nebrel, a starter, is wild on Routes 7–9.
+- **Plan:** a species-by-area table first, then apply it: one or two signature species per area, Act II gets its own new species, each evolution line gets a catch point before its evolution level, the filler thins out, starters leave the wild, rares go to night, fishing, rock smash and hidden spots.
+- **Built (2026-11-18):** design/DISTRIBUTION.md, applied by tools/ichor/wild_plan.py through every builder (tools/ichor/maps/plan_hook.py) and checked by tools/ichor/distribution.py in the smoke test. Act II now introduces 26 lines (12 before); no starter is wild; all 17 missing or late lines have a catch point before the League.
+
+### Safari Zone: the Erymanthian Preserve (beside Arkadia)
+- Artemis's hunting park on Mount Erymanthos. Entry fee, Pan Balls (the renamed Safari Ball), a step count, rare and missing species by time of day; ties to the boar Labor in the post-game. Pairs with the distribution pass.
+- **Built (2026-11-18):** tools/ichor/maps/erymanthos.py: the keeper's lodge on Arkadia's west road, the Oakwood, the High Meadow, the River, the Cold Cave and the post-game Boar's Thicket (FLAG_ICHOR_ERYMANTHIAN_BOAR, for Labor 4 to set). ¥500, 30 Pan Balls, 500 steps, barley and stones (include/config/ichor.h); design/maps/ErymanthosPreserve.md; tools/ichor/tests/preserve.sh.
 
 ### Labyrinth hookups (built 2026-11-18)
 - The Turning (tools/ichor/maps/labyrinth_turning.py, design/maps/Labyrinth_System.md), Scene L at dawn in the workshop,

@@ -34,6 +34,13 @@ fi
 /usr/bin/python3 tools/ichor/herm_audit.py \
   || { echo "SMOKE FAIL: a town without its travel herm (tools/ichor/herm_audit.py)"; exit 1; }
 
+# No starter in the wild, every regular line catchable before the League, the tables as
+# planned (design/DISTRIBUTION.md).
+/usr/bin/python3 tools/ichor/distribution.py \
+  || { echo "SMOKE FAIL: the wild distribution (tools/ichor/distribution.py)"; exit 1; }
+/usr/bin/python3 tools/ichor/wild_plan.py --check \
+  || { echo "SMOKE FAIL: wild_encounters.json strays from tools/ichor/wild_plan.py"; exit 1; }
+
 # Addresses and constants the Lua reads the game's state with.
 tools/ichor/tests/elaia_symbols.sh "${ROM%.gba}.elf" build/smoke/symbols.lua \
   || { echo "SMOKE FAIL: could not read symbols from ${ROM%.gba}.elf"; exit 1; }

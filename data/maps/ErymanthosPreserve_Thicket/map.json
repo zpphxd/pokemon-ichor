@@ -1,0 +1,92 @@
+{
+  "id": "MAP_ERYMANTHOS_PRESERVE_THICKET",
+  "name": "ErymanthosPreserve_Thicket",
+  "layout": "LAYOUT_ERYMANTHOS_PRESERVE_THICKET",
+  "music": "MUS_ICHOR_ROAD_NIGHT",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ARKADIA",
+  "requires_flash": false,
+  "weather": "WEATHER_SHADE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "down",
+      "map": "MAP_ERYMANTHOS_PRESERVE_MEADOW",
+      "offset": 0
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 20,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_BIG_ROOT",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ERYMANTHOS_THICKET_ROOTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 9,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SITRUS_BERRY",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ERYMANTHOS_THICKET_GAP"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ErymanthosPreserve_Thicket_EventScript_Cairn"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 18,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ErymanthosPreserve_Thicket_EventScript_Sign"
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 8,
+      "elevation": 3,
+      "item": "ITEM_RARE_CANDY",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_THICKET_WALLOW",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 20,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_THICKET_CAIRN",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ],
+  "ichor_kind": "safari"
+}

@@ -8,6 +8,7 @@ parties (trainers()) and builds Route 7.
 import json
 import struct
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 OPEN_WATER = {0x170}  # aethos's sea
@@ -601,6 +602,7 @@ def main():
                 land_mons=dict(encounter_rate=15, mons=[
                     dict(min_level=level, max_level=level + 3, species="SPECIES_" + species[i % 6])
                     for i in range(12)])))
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     write("src/data/wild_encounters.json", wild)
     trainers()
 

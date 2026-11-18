@@ -65,6 +65,7 @@ sys.path.insert(0, str(ROOT / "tools/ichor/art"))
 import route5 as R5  # noqa: E402
 import kopais as KP  # noqa: E402  (the Stymphalia painter, Spec, Walked, renders)
 import lakonia_tiles as LT  # noqa: E402
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 noise = R5.noise
 GFX = "OBJ_EVENT_GFX_ICHOR_"
@@ -1601,43 +1602,47 @@ def write_trainers():
 # Wild tables (SCRIPT.md Part 4's, at BALANCE.md's Lakonia band, 46-50; every
 # land table split into the four times of day). Slots run 20 20 10 10 10 10 5 5
 # 4 4 1 1. Evolved forms only past their evolution level; the lake's Chalkip,
-# the dex's rare dawn-and-dusk bird, comes at 46 rather than its own low spot.
+# the dex's rare dawn-and-dusk bird, comes at 46 (its first catch is Lake Kopais's).
+# The distribution pass (design/DISTRIBUTION.md) gave each map its own: Sparta's
+# frontier its hoplites and wheat, the lake its bronze birds and swans, Kyllene's
+# hills Hermes's lyre-tortoise and Kallisto's bears, the cave its stone folk; the
+# mainland weasels, goats and Cairnolith are gone from these tables.
 # ---------------------------------------------------------------------------
 LAND = {
     R26: (47, 49, {
-        "Morning": ["HOPLOMEX", "CAIRNOLITH", "KERAZAP", "DORYDRAKE", "GELASABLE", "CHELONET",
-                    "HOPLOMEX", "CAIRNOLITH", "HOPLEKTOR", "KERAZAP", "NEMELEON", "HOPLEKTOR"],
-        "Day": ["HOPLOMEX", "CAIRNOLITH", "KERAZAP", "HARPELLE", "GELASABLE", "CHELONET",
-                "HOPLOMEX", "DORYDRAKE", "HOPLEKTOR", "KERAZAP", "HARPELLE", "HOPLEKTOR"],
-        "Evening": ["GELASABLE", "HOPLOMEX", "DORYDRAKE", "KERAZAP", "CAIRNOLITH", "NEMELEON",
+        "Morning": ["HOPLOMEX", "LAOLITH", "NEMELEON", "DORYDRAKE", "STACHYPTER", "CHELONET",
+                    "HOPLOMEX", "LAOLITH", "HOPLEKTOR", "NEMELEON", "NEMELEON", "HOPLEKTOR"],
+        "Day": ["HOPLOMEX", "LAOLITH", "NEMELEON", "HARPELLE", "STACHYPTER", "CHELONET",
+                "HOPLOMEX", "DORYDRAKE", "HOPLEKTOR", "NEMELEON", "HARPELLE", "HOPLEKTOR"],
+        "Evening": ["STACHYPTER", "HOPLOMEX", "DORYDRAKE", "NEMELEON", "LAOLITH", "NEMELEON",
                     "CHELONET", "HOPLEKTOR", "NEMELEON", "DORYDRAKE", "NEMELEON", "HOPLEKTOR"],
-        "Night": ["GELASABLE", "CAIRNOLITH", "DORYDRAKE", "KERAZAP", "HOPLOMEX", "GELASABLE",
-                  "CHELONET", "CAIRNOLITH", "DORYDRAKE", "KALYPTOR", "NEMELEON", "KALYPTOR"],
+        "Night": ["STACHYPTER", "LAOLITH", "DORYDRAKE", "NEMELEON", "HOPLOMEX", "STACHYPTER",
+                  "CHELONET", "LAOLITH", "DORYDRAKE", "KALYPTOR", "NEMELEON", "KALYPTOR"],
     }),
     LAKE: (46, 50, {
-        "Morning": ["GALENYON", "GELASABLE", "BELORNIS", "CHELONET", "KERAZAP", "BELORNIS",
-                    "KARKITOX", "CHALKIP", "BELORNIS", "GELASABLE", "CHALKIP", "GALENYON"],
-        "Day": ["GALENYON", "GELASABLE", "BELORNIS", "CHELONET", "KERAZAP", "BELORNIS",
-                "KARKITOX", "HARPELLE", "BELORNIS", "GELASABLE", "BELORNIS", "GALENYON"],
-        "Evening": ["BELORNIS", "GALENYON", "KARKITOX", "CHELONET", "GELASABLE", "BELORNIS",
-                    "CHALKIP", "KERAZAP", "CHALKIP", "KARKITOX", "CHALKIP", "BELORNIS"],
-        "Night": ["KARKITOX", "GELASABLE", "KARKITOX", "CAIRNOLITH", "CHELONET", "GELASABLE",
-                  "SOPHOWL", "KALYPTOR", "CAIRNOLITH", "SOPHOWL", "BELORNIS", "KALYPTOR"],
+        "Morning": ["GALENYON", "HYMNARIA", "BELORNIS", "CHELONET", "HYMNARIA", "BELORNIS",
+                    "KARKITOX", "CHALKIP", "BELORNIS", "HYMNARIA", "CHALKIP", "GALENYON"],
+        "Day": ["GALENYON", "HYMNARIA", "BELORNIS", "CHELONET", "HYMNARIA", "BELORNIS",
+                "KARKITOX", "HARPELLE", "BELORNIS", "HYMNARIA", "BELORNIS", "GALENYON"],
+        "Evening": ["BELORNIS", "GALENYON", "KARKITOX", "CHELONET", "HYMNARIA", "BELORNIS",
+                    "CHALKIP", "HYMNARIA", "CHALKIP", "KARKITOX", "CHALKIP", "BELORNIS"],
+        "Night": ["KARKITOX", "HYMNARIA", "KARKITOX", "KALYPTOR", "CHELONET", "HYMNARIA",
+                  "SOPHOWL", "KALYPTOR", "KALYPTOR", "SOPHOWL", "BELORNIS", "KALYPTOR"],
     }),
     R27: (48, 50, {
-        "Morning": ["CAIRNOLITH", "KERAZAP", "CHELONET", "HYPHANTIS", "GELASABLE", "HYPHANTIS",
+        "Morning": ["LAOLITH", "CHELYRA", "CHELONET", "HYPHANTIS", "STARKOS", "HYPHANTIS",
                     "NEMELEON", "HARPELLE", "CHELYRA", "ENIGMAW", "NEMELEON", "ENIGMAW"],
-        "Day": ["KERAZAP", "CAIRNOLITH", "HARPELLE", "HYPHANTIS", "CHELONET", "GELASABLE",
+        "Day": ["CHELYRA", "LAOLITH", "HARPELLE", "HYPHANTIS", "CHELONET", "STARKOS",
                 "CHELYRA", "HARPELLE", "ENIGMAW", "NEMELEON", "CHELYRA", "ENIGMAW"],
-        "Evening": ["GELASABLE", "LYKANAX", "CAIRNOLITH", "HYPHANTIS", "KERAZAP", "NEMELEON",
+        "Evening": ["STARKOS", "LYKANAX", "LAOLITH", "HYPHANTIS", "CHELYRA", "NEMELEON",
                     "LYKANAX", "ENIGMAW", "CHELONET", "KAPRODON", "NEMELEON", "KAPRODON"],
-        "Night": ["GELASABLE", "LYKANAX", "CAIRNOLITH", "HYPHANTIS", "KERAZAP", "KAPRODON",
-                  "LYKANAX", "GELASABLE", "CHELONET", "CAIRNOLITH", "NEMELEON", "KAPRODON"],
+        "Night": ["STARKOS", "LYKANAX", "LAOLITH", "HYPHANTIS", "CHELYRA", "KAPRODON",
+                  "LYKANAX", "STARKOS", "CHELONET", "LAOLITH", "NEMELEON", "KAPRODON"],
     }),
     CAVE: (48, 50, {
-        "Morning": ["CAIRNOLITH", "PLOUTERAS", "HYPHANTIS", "CHELONET", "CAIRNOLITH", "KALYPTOR",
+        "Morning": ["LAOLITH", "PLOUTERAS", "HYPHANTIS", "CHELONET", "LAOLITH", "KALYPTOR",
                     "PLOUTERAS", "ENIGMAW", "HYPHANTIS", "SOPHOWL", "ENIGMAW", "KALYPTOR"],
-        "Night": ["KALYPTOR", "PLOUTERAS", "HYPHANTIS", "CAIRNOLITH", "SOPHOWL", "KALYPTOR",
+        "Night": ["KALYPTOR", "PLOUTERAS", "HYPHANTIS", "LAOLITH", "SOPHOWL", "KALYPTOR",
                   "PLOUTERAS", "ENIGMAW", "CHELONET", "SOPHOWL", "ENIGMAW", "KALYPTOR"],
     }),
 }
@@ -1686,6 +1691,7 @@ def write_wild():
                     ("PLOUTERAS", 48, 50), ("LAOLITH", 50, 50)])}
             new.append(e)
     group["encounters"] = keep + new
+    plan_hook.apply(group["encounters"])
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
 

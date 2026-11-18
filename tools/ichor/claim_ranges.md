@@ -192,3 +192,5 @@ generator claims each flag it names with `claim.py --range 0x640-0x6BF`, so
 reruns are no-ops), trainer ids 1404-1443 (1404-1434 used; `TRAINERS_END_ACT3`
 follows the highest), brazier `FLAG_ICHOR_BRAZIERS_START + 0x60` (the cave),
 and travel herm 24 (`TOWN_HERM_STYMPHALIA`, the old `FLAG_ICHOR_TOWN_HERM_SPARE_24`).
+
+The Erymanthian Preserve (2026-11-18, `tools/ichor/maps/erymanthos.py`) claims its items' and hidden items' flags from world-act2's bankflag offsets with `claim.py --range 0x500-0x63F` (0x577-0x58A), and the Labor 4 hook `FLAG_ICHOR_ERYMANTHIAN_BOAR` from the post-game's 0x700-0x7FF (0x700). Reruns are no-ops.

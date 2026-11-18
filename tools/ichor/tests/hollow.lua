@@ -273,7 +273,7 @@ local function wild()
   L.go(30, 36)
   quiet(false)
   local table_ = {}
-  for _, n in ipairs({ "PEBBLITH", "SPALUNK", "GALEKIT", "GELASABLE", "ERGANT", "CHELONET" }) do
+  for _, n in ipairs({ "PEBBLITH", "SPALUNK", "GALEKIT", "GELASABLE", "ERGANT", "CHELONET", "OBOLORN" }) do
     table_[S["SPECIES_" .. n]] = n
   end
   local met

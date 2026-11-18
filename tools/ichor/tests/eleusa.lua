@@ -234,7 +234,7 @@ local function wheat()
   L.setVar(S.VAR_REPEL_STEP_COUNT, 0)
   local table_ = {}
   for _, n in ipairs({ "STACHYSS", "MELIBEE", "KAPLET", "SPALUNK", "ELALEAF", "LOPHOPS", "EPOPOI",
-                       "GELASABLE", "GALEKIT", "KERAZAP", "ONOTIS", "RHOARIL" }) do
+                       "GELASABLE", "GALEKIT", "KERAZAP", "ONOTIS", "RHOARIL", "ALEKROW" }) do
     table_[S["SPECIES_" .. n]] = n
   end
   local met

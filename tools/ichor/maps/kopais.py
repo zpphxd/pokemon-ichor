@@ -73,6 +73,7 @@ import route5 as R5  # noqa: E402  (aethos ids, noise, behaviors, sprites)
 import kithairon as K  # noqa: E402  (the Skiron painter, for Route 7)
 import lakonia_tiles as LT  # noqa: E402  (Stymphalia's pieces)
 import water_tables as WT  # noqa: E402
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 noise = R5.noise
 GFX = "OBJ_EVENT_GFX_ICHOR_"
@@ -1849,6 +1850,7 @@ def write_wild():
     leb.update(json.loads(json.dumps(WT.pond(28))))
     new.append(leb)
     group["encounters"] = before + new + after
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
 

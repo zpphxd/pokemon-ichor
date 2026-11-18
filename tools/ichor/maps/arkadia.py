@@ -2,6 +2,7 @@
 """Build the approved Kopais--Gulf--Styx approach to Arkadia."""
 import water_tables
 from thyrsa import Map, bg, const, obj, read, warp, write, ROOT
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROUTES = [
     ("Route8_KopaisRoad", "R8", 26, ["PANOS", "AMPELIS", "KEPHALOS", "MEDA", "MELAS", "THYONE"]),
@@ -241,6 +242,7 @@ def encounters_and_teams():
                 land_mons=dict(encounter_rate=15, mons=[dict(min_level=level, max_level=level + 2,
                     species="SPECIES_" + species[i % 6]) for i in range(12)])))
     water_tables.apply(g["encounters"], {"MAP_ROUTE8_KOPAIS_ROAD", "MAP_ROUTE12_CYPRESS_ROAD"})
+    plan_hook.apply(g["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"
     start, end = "/* Arkadia approach teams. */", "/* End Arkadia approach teams. */"

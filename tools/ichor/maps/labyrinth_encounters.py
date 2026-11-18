@@ -9,6 +9,7 @@ earlier entry for the same map and label.
 """
 import json
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 J = ROOT / "src/data/wild_encounters.json"
@@ -94,6 +95,7 @@ def main(maps=None):
         label = f"g{name}_{when}"
         enc[:] = [e for e in enc if e.get("base_label") != label]
         enc.append({"map": mp, "base_label": label, **t})
+    plan_hook.apply(enc)  # the distribution pass has the last word (design/DISTRIBUTION.md)
     J.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
 
 

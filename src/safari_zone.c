@@ -57,9 +57,11 @@ void EnterSafariMode(void)
     IncrementGameStat(GAME_STAT_ENTERED_SAFARI_ZONE);
     SetSafariZoneFlag();
     ClearAllPokeblockFeeders();
-    gNumSafariBalls = 30;
+    gNumSafariBalls = ICHOR_SAFARI_PRESERVE ? ICHOR_SAFARI_BALLS : 30;
     if (IS_FRLG)
         gSafariZoneStepCounter = 600;
+    else if (ICHOR_SAFARI_PRESERVE) // Ichor: the Erymanthian Preserve's count (include/config/ichor.h)
+        gSafariZoneStepCounter = ICHOR_SAFARI_STEPS;
     else
         gSafariZoneStepCounter = 500;
     sSafariZoneCaughtMons = 0;

@@ -18,7 +18,8 @@
     "gMapGroup_Gulf",
     "gMapGroup_Lakonia",
     "gMapGroup_Delphoi",
-    "gMapGroup_Climax"
+    "gMapGroup_Climax",
+    "gMapGroup_Erymanthos"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -308,5 +309,13 @@
   "gMapGroup_Climax": [
     "TheLoom",
     "StairOfHours"
+  ],
+  "gMapGroup_Erymanthos": [
+    "ErymanthosPreserve_Lodge",
+    "ErymanthosPreserve_Oakwood",
+    "ErymanthosPreserve_Meadow",
+    "ErymanthosPreserve_River",
+    "ErymanthosPreserve_Thicket",
+    "ErymanthosPreserve_Cave"
   ]
 }

@@ -9,6 +9,7 @@ replacing any earlier copy.
 """
 import json
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 P = ROOT / "src/data/wild_encounters.json"
@@ -99,6 +100,7 @@ def main():
     group = next(g for g in d["wild_encounter_groups"] if g.get("for_maps"))
     mine = {"MAP_ROUTE28_SACRED_OLIVES", "MAP_ROUTE28_KASTALIAN_GORGE", "MAP_DELPHOI"}
     group["encounters"] = [e for e in group["encounters"] if e.get("map") not in mine] + entries()
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     P.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
 
 

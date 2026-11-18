@@ -18,6 +18,7 @@ import json
 from pathlib import Path
 
 import water_tables as W
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 PATH = ROOT / "src/data/wild_encounters.json"
@@ -99,6 +100,7 @@ def main():
             enc.append(e)
     W.apply(enc, {"MAP_ASCENT_1F", "MAP_ASCENT_2F"})  # the springs
     group["encounters"] = enc
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
 

@@ -64,6 +64,7 @@ sys.path.insert(0, str(ROOT / "tools/ichor/art"))
 import kithairon as K  # noqa: E402  (the grid, bands, trees, olives, ground, walk checks)
 import route5 as R5  # noqa: E402  (aethos ids, noise, behaviors, sprites)
 import water_tables as WT  # noqa: E402
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 noise, behavior = R5.noise, R5.behavior
 GFX = "OBJ_EVENT_GFX_ICHOR_"
@@ -1093,6 +1094,7 @@ def write_wild():
     before = [e for e in old[:at] if e.get("map") not in ids]
     group["encounters"] = before + new + keep[len(before):]
     WT.apply(group["encounters"], maps={"MAP_KIRRHA", "MAP_AIGION", "MAP_GULF_TRIREME"})
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
 

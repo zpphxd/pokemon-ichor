@@ -7,6 +7,7 @@ from thyrsa import ROOT, Map, bg, const, obj, read, warp, write
 
 sys.path.insert(0, str(ROOT / "tools/ichor/art"))
 import cave_dark_kit as kit
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 CAT = read("data/tilesets/secondary/cave_dark/catalog.json")
 PIECES = {p["key"]: p["ids"] for p in CAT["pieces"]}
@@ -133,6 +134,7 @@ def encounters_and_teams():
                 mons=[dict(min_level=level, max_level=min(39, level + 2),
                            species="SPECIES_" + species[i % 4]) for i in range(count)])
         group["encounters"].append(entry)
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"
     start, end = "/* Salt Well teams. */", "/* End Salt Well teams. */"

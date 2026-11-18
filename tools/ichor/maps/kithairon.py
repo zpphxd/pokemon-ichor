@@ -58,6 +58,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "tools/ichor"))
 sys.path.insert(0, str(ROOT / "tools/ichor/maps"))
 import route5 as R5  # noqa: E402  (aethos ids, noise, behaviors, sprites)
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 CAT = ROOT / "build/skiron/catalog.json"
 GFX = "OBJ_EVENT_GFX_ICHOR_"
@@ -927,6 +928,7 @@ def write_wild():
                         "land_mons": {"encounter_rate": 25, "mons": mons}})
     before = [e for e in group["encounters"][:at] if e.get("map") not in ids.values()]
     group["encounters"] = before + new + keep[len(before):]
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     path.write_text(json.dumps(data, indent=2) + "\n")
 
 

@@ -12,7 +12,7 @@
   tools/ichor/map_audit.py --benchmark                 Emerald's numbers (MAP_DESIGN.md's Appendix A),
                                                        from upstream's merge-base
 
-Each map is classed as a route, town, interior or dungeon: by an "ichor_kind"
+Each map is classed as a route, town, interior, dungeon or safari: by an "ichor_kind"
 key in its map.json if it has one, otherwise by its map type (see classify()).
 It then gets its numbers and one line per shortfall:
 
@@ -80,7 +80,8 @@ STAGES = [  # (stage, band, route numbers, place prefixes)
     ("Eleusa", "early", (4, 5), ("HecatesHollow", "Eleusa")),
     ("Thyrsa", "middle", (6, 7), ("MtKithairon", "Kithairon", "Eleutherai", "Thyrsa", "Kronia")),
     ("Arkadia", "middle", (8, 9, 10, 11, 12),
-     ("Lebadeia", "Trophonios", "Kopais", "Kirrha", "GulfFerry", "Aigion", "StyxFalls", "Arkadia",
+     ("ErymanthosPreserve_Lodge", "ErymanthosPreserve_Oakwood", "ErymanthosPreserve_Meadow",
+      "ErymanthosPreserve_River", "ErymanthosPreserve_Cave", "Lebadeia", "Trophonios", "Kopais", "Kirrha", "GulfFerry", "Aigion", "StyxFalls", "Arkadia",
       "PoolOfMnemosyne")),
     ("Astyra", "middle", (13, 14, 15, 16, 17, 18),
      ("Nemea", "Daphni", "Astyra", "Marathon", "CapeSounion", "Sounion",
@@ -93,7 +94,7 @@ STAGES = [  # (stage, band, route numbers, place prefixes)
     ("Lakonia", "late", (24, 25, 26, 27), ("Gytheion", "Lakonia", "Stymphalia", "LakeStymphalia")),
     ("Delphoi", "late", (28,), ("Delphoi",)),
     ("Ascent", "late", (29, 30), ("Thermopylai", "Tempe", "Ascent", "Olympus", "Pantheon")),
-    ("post-game", "late", (31, 32, 33, 34), ("Tainaron", "Olympia", "Atlantis", "Rhodos", "Ithaka", "Kerkyra")),
+    ("post-game", "late", (31, 32, 33, 34), ("ErymanthosPreserve_Thicket", "Tainaron", "Olympia", "Atlantis", "Rhodos", "Ithaka", "Kerkyra")),
 ]
 
 
@@ -409,7 +410,9 @@ def judge(ms, bands, by_name):
         judge_town(ms, need, by_name)
     elif ms.kind == "dungeon":
         judge_dungeon(ms, need)
-    for size, deep, end, mouth in ms.dead_ends() if ms.kind in ("route", "town", "dungeon") else []:
+    elif ms.kind == "safari":
+        judge_safari(ms, need)
+    for size, deep, end, mouth in ms.dead_ends() if ms.kind in ("route", "town", "dungeon", "safari") else []:
         out.append(("WARN", f"dead end: {size} cells, {deep} deep, ending at {end}, entered at {mouth}, "
                             "holds nothing"))
     judge_wild(ms, bands, need)
@@ -484,6 +487,20 @@ def judge_town(ms, need, by_name):
              f"every house a home: nothing found happening in {dname} (no gift, trade, battle, heal or item)")
 
 
+def judge_safari(ms, need):
+    """A Safari Zone area (the Erymanthian Preserve, "ichor_kind": "safari"): a hunt, not a
+    road. No trainers (a Safari battle can't fight one) and no forced grass, but a route's
+    grass, its items and hidden items, and a sign at each end."""
+    b = ms.band
+    gps, want_g = ms.grass / ms.screens, LAND_ROUTE["grass_per_screen"][b]
+    if ms.grass or not ms.other_enc:
+        need(gps >= want_g, "FAIL", f"grass: {gps:.0f} cells per screen < {want_g} (a Safari area)")
+    need(len(ms.items) >= 1, "FAIL", f"item balls: {len(ms.items)} < 1")
+    need(len(ms.hidden) >= 1, "FAIL", f"hidden items: {len(ms.hidden)} < 1")
+    ends = ms.unsigned_ends()
+    need(not ends, "FAIL", f"signs: no sign within {SIGN_REACH} cells of the {', '.join(ends)} end")
+
+
 def judge_dungeon(ms, need):
     n = len(ms.items) + len(ms.hidden)
     need(n >= DUNGEON["items_per_floor"], "FAIL",
@@ -514,10 +531,10 @@ def judge_wild(ms, bands, need):
         need("Morning" in land, "FAIL", f"wild: {ms.grass} grass cells but no land table (_Morning or unsuffixed)")
         need("Night" in land, "FAIL", "wild: no _Night land table")
         need("Day" in land, "NOTE", "wild: no _Day land table (day falls back to morning)")
-    elif ms.other_enc and ms.kind in ("route", "dungeon"):
+    elif ms.other_enc and ms.kind in ("route", "dungeon", "safari"):
         need("Morning" in land, "FAIL", f"wild: {ms.other_enc} cave or sand cells but no land table")
         need("Night" in land or not land, "NOTE", "wild: no _Night land table")
-    if ms.reach_water >= WATER_TABLE_CELLS and ms.kind in ("route", "town", "dungeon"):
+    if ms.reach_water >= WATER_TABLE_CELLS and ms.kind in ("route", "town", "dungeon", "safari"):
         for area, what in (("water_mons", "surf"), ("fishing_mons", "fishing")):
             have = ms.tables(area)
             need("Morning" in have, "FAIL", f"wild: {ms.reach_water} reachable water cells but no {what} table")
@@ -595,7 +612,7 @@ def select(repo, args):
     return out
 
 
-def audit(repo, names, show_kinds=("route", "town", "dungeon", "interior")):
+def audit(repo, names, show_kinds=("route", "town", "dungeon", "interior", "safari")):
     """Measure and judge. Returns [(Measure, [(level, msg)])] and the dungeon groups' results."""
     bands = balance_bands(repo.root)
     ms = {n: Measure(repo, n) for n in names}
@@ -834,7 +851,7 @@ def main():
     ap.add_argument("--markdown", action="store_true", help="print tables for design/MAP_AUDIT.md")
     ap.add_argument("--benchmark", action="store_true",
                     help="measure Emerald's routes at the upstream merge-base (or at --root)")
-    ap.add_argument("--kinds", default="route,town,dungeon,interior", help="classes to report (comma-separated)")
+    ap.add_argument("--kinds", default="route,town,dungeon,interior,safari", help="classes to report (comma-separated)")
     args = ap.parse_args()
     if not args.benchmark and not args.maps and not args.all_ichor:
         ap.error("name some maps or prefixes, or pass --all-ichor")

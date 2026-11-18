@@ -7,6 +7,9 @@ SafariZone_EventScript_OutOfBallsMidBattle::
 	special ExitSafariMode
 #if IS_FRLG
 	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 1
+#elif ICHOR_SAFARI_PRESERVE
+	@ Ichor: the hunt ends in the Erymanthian Preserve's lodge
+	setwarp MAP_ERYMANTHOS_PRESERVE_LODGE, 5, 5
 #else
 	setwarp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
 #endif
@@ -21,6 +24,9 @@ SafariZone_EventScript_Exit::
 	special ExitSafariMode
 #if IS_FRLG
 	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 1
+#elif ICHOR_SAFARI_PRESERVE
+	@ Ichor: the hunt ends in the Erymanthian Preserve's lodge
+	warp MAP_ERYMANTHOS_PRESERVE_LODGE, 5, 5
 #else
 	warp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
 #endif
@@ -91,17 +97,18 @@ SafariZone_EventScript_PokeblockPresent::
 	releaseall
 	end
 
+@ Ichor: the Erymanthian Preserve's words (include/config/ichor.h, ICHOR_SAFARI_PRESERVE)
 SafariZone_Text_WouldYouLikeToExit:
-	.string "Would you like to exit the SAFARI\n"
-	.string "ZONE right now?$"
+	.string "Leave the Preserve and end\n"
+	.string "the hunt now?$"
 
 SafariZone_Text_TimesUp:
-	.string "Ding-dong! Time's up!\n"
-	.string "Your SAFARI Game is over.$"
+	.string "Ding-dong! The keeper's bell.\n"
+	.string "Your steps are spent: the hunt is over.$"
 
 SafariZone_Text_OutOfBalls:
-	.string "You've run out of SAFARI BALLS.\n"
-	.string "Your SAFARI Game is over.$"
+	.string "That was your last Pan Ball.\n"
+	.string "The hunt is over.$"
 
 SafariZone_Text_PlacePokeblockOnFeeder:
 	.string "Would you like to place a {POKEBLOCK}\n"

@@ -10,6 +10,7 @@ from salt_well import hidden, item
 
 sys.path.insert(0, str(ROOT / "tools/ichor/art"))
 import cave_dark_kit as kit
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 CAT = read("data/tilesets/secondary/cave_dark/catalog.json")
 PIECES = {p["key"]: p["ids"] for p in CAT["pieces"]}
@@ -233,6 +234,7 @@ def encounters_and_teams():
                         for i in range(count)])
             group["encounters"].append(entry)
     water_tables.apply(group["encounters"], {"MAP_KALDERA_TELCHINES_FORGE"})
+    plan_hook.apply(group["encounters"])  # the distribution pass has the last word (design/DISTRIBUTION.md)
     write("src/data/wild_encounters.json", wild)
     teams = [
         ("SMITH_ONE", "ALKIMOS", [("Taurivet", 38), ("Karkitox", 38)]),

@@ -2205,6 +2205,25 @@
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Neraida falls item ball: Max Potion on the plunge pool's west bank
 #define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Neraida falls item ball: Elixir on the upper shelf
 #define FLAG_ICHOR_NERAIDA_BERRIES_PLANTED (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: initialized the falls' first-fruits trees once
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_OAK_GLADE    (FLAG_ICHOR_GENERAL2_START + 0x077) // Ichor: Erymanthian Preserve: the Oakwood's south-east glade
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_OAK_POCKET   (FLAG_ICHOR_GENERAL2_START + 0x078) // Ichor: Erymanthian Preserve: the long glade's west pocket
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_OAK_SPRING (FLAG_ICHOR_GENERAL2_START + 0x079) // Ichor: Erymanthian Preserve: beside Artemis's spring
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_OAK_NE (FLAG_ICHOR_GENERAL2_START + 0x07A) // Ichor: Erymanthian Preserve: the north-east glade
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_MEADOW_SCREE (FLAG_ICHOR_GENERAL2_START + 0x07B) // Ichor: Erymanthian Preserve: the high meadow's east scree
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_MEADOW_LOW   (FLAG_ICHOR_GENERAL2_START + 0x07C) // Ichor: Erymanthian Preserve: the lower meadow's west corner
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_MEADOW_LEDGE (FLAG_ICHOR_GENERAL2_START + 0x07D) // Ichor: Erymanthian Preserve: the ledge over the band
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_MEADOW_SCREE_W (FLAG_ICHOR_GENERAL2_START + 0x07E) // Ichor: Erymanthian Preserve: the west scree
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_RIVER_NE     (FLAG_ICHOR_GENERAL2_START + 0x07F) // Ichor: Erymanthian Preserve: the far bank's north corner
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_RIVER_SANDBAR (FLAG_ICHOR_GENERAL2_START + 0x080) // Ichor: Erymanthian Preserve: the river's sand bar
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_RIVER_SW (FLAG_ICHOR_GENERAL2_START + 0x081) // Ichor: Erymanthian Preserve: the west bank's south end
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_CAVE_EAST    (FLAG_ICHOR_GENERAL2_START + 0x082) // Ichor: Erymanthian Preserve: the cold cave's east side
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_CAVE_FROST (FLAG_ICHOR_GENERAL2_START + 0x083) // Ichor: Erymanthian Preserve: under the frost hall's crack
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_CAVE_PILE (FLAG_ICHOR_GENERAL2_START + 0x084) // Ichor: Erymanthian Preserve: behind the rock pile
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_THICKET_ROOTS (FLAG_ICHOR_GENERAL2_START + 0x085) // Ichor: Erymanthian Preserve: the thicket's torn-up roots
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_THICKET_WALLOW (FLAG_ICHOR_GENERAL2_START + 0x086) // Ichor: Erymanthian Preserve: in the boar's wallow
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_RIVER_WEST   (FLAG_ICHOR_GENERAL2_START + 0x087) // Ichor: Erymanthian Preserve: the west bank, past the ford road
+#define FLAG_ICHOR_ITEM_ERYMANTHOS_THICKET_GAP  (FLAG_ICHOR_GENERAL2_START + 0x088) // Ichor: Erymanthian Preserve: by the thicket's gap
+#define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_THICKET_CAIRN (FLAG_ICHOR_GENERAL2_START + 0x089) // Ichor: Erymanthian Preserve: behind Atalanta's cairn
 #define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
 #define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
 #define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)
@@ -2396,6 +2415,7 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_VAULT_BOTTLE_CAP (FLAG_ICHOR_GENERAL2_START + 0x1F9) // Ichor: Ichor: the Crystal Vault: a Pythian Laurel on the crack ledge (Ariadne Thread)
 #define FLAG_ICHOR_ITEM_ASCENT3_CHOICE_BAND     (FLAG_ICHOR_GENERAL2_START + 0x1FA) // Ichor: Ichor: Ascent 3F: Choice Band in the watch-post stores (the Helm of Darkness)
 #define FLAG_ICHOR_ITEM_ASCENT3_WEAKNESS_POLICY (FLAG_ICHOR_GENERAL2_START + 0x1FB) // Ichor: Ichor: Ascent 3F: Weakness Policy in the watch-post stores (the Helm of Darkness)
+#define FLAG_ICHOR_ERYMANTHIAN_BOAR             (FLAG_ICHOR_GENERAL2_START + 0x200) // Ichor: Erymanthian Preserve: the Erymanthian Boar caught (Labor 4, LABORS.md); opens the Preserve's thicket
 #define FLAG_ICHOR_TURNING_QUIET                (FLAG_ICHOR_GENERAL2_START + 0x4E6) // Ichor: The Turning: no wild encounters and no trainer sight while the house turns (WE_FLAG_NO_ENCOUNTER, OW_FLAG_NO_TRAINER_SEE)
 #define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion
 #define FLAG_ICHOR_VISITED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F1) // Ichor: Lakonia: Gytheion visited (fly target)

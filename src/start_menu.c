@@ -490,6 +490,13 @@ static void ShowSafariBallsWindow(void)
         StringExpandPlaceholders(gStringVar4, gText_MenuSafariStats);
         AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 4, 3, 0xFF, NULL);
     }
+    else if (ICHOR_SAFARI_PRESERVE) // Ichor: the Preserve's steps and Pan Balls
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, gNumSafariBalls, STR_CONV_MODE_LEFT_ALIGN, 2);
+        StringExpandPlaceholders(gStringVar4, gText_IchorPreserveStock);
+        AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    }
     else
     {
         ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);

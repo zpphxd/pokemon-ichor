@@ -395,6 +395,13 @@
       "elevation": 0,
       "dest_map": "MAP_ARKADIA_CYPRESS_WOOD",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 35,
+      "elevation": 0,
+      "dest_map": "MAP_ERYMANTHOS_PRESERVE_LODGE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

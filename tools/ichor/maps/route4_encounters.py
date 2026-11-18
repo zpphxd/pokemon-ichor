@@ -18,6 +18,7 @@ Usage: /usr/bin/python3 tools/ichor/maps/route4_encounters.py   (idempotent)
 """
 import json
 from pathlib import Path
+import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
 ROOT = Path(__file__).resolve().parents[3]
 JSON = ROOT / "src/data/wild_encounters.json"
@@ -64,6 +65,7 @@ def main():
                                   if enc[i].get("map", "").startswith("MAP_ELEUSA")), len(enc))
     enc[:] = [e for e in enc if e.get("map") != MAP]
     enc[at:at] = entries()
+    plan_hook.apply(enc)  # the distribution pass has the last word (design/DISTRIBUTION.md)
     JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     print(f"{JSON}: {MAP} morning, day and night land tables, and rock smash")
 

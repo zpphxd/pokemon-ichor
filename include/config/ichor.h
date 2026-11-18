@@ -19,6 +19,18 @@
 #define ICHOR_CUT_MAUVILLE_MAN  1    // The Mauville Old Man: the bard's Easy Chat songs (165 KB of phonemes), the storyteller,
                                      // the hipster, the trader, Giddy. Not on INVENTORY's approved list, but its maps are gone.
 
+// Ichor: the Erymanthian Preserve (design/DISTRIBUTION.md, data/maps/ErymanthosPreserve_*), Artemis's
+// hunting park beside Arkadia, runs on the Safari Zone engine. Its Hoenn maps were cut with the rest of
+// Hoenn; the engine stayed. These switches bring it back for Ichor:
+//   - The Preserve's game ends at its lodge, not at Route 121's entrance (data/scripts/safari_zone.inc).
+//   - Bait and stone, FRLG's battle actions, stand in for the cut Pokéblocks: barley makes the quarry
+//     slow to flee and harder to catch; a stone the other way. The game's other FRLG switches stay off.
+//   - The start menu's Preserve window shows the steps left as well as the Pan Balls.
+#define ICHOR_SAFARI_PRESERVE         1    // 0 leaves the engine as upstream's Emerald (and unreachable)
+#define ICHOR_SAFARI_BAIT_ROCK        (IS_FRLG || ICHOR_SAFARI_PRESERVE)
+#define ICHOR_SAFARI_STEPS            500  // the Preserve's step count (EnterSafariMode)
+#define ICHOR_SAFARI_BALLS            30   // Pan Balls handed over at the lodge
+
 // Ichor: the catch mash (src/ichor_catch.c, design/ENGINE_API.md §12). When the player throws
 // a ball, a short "Tap A!" beat opens before the odds are rolled, and each A press raises the
 // modified catch rate a little. The odds are still rolled once, after the beat, so the shakes

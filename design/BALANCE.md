@@ -37,9 +37,10 @@ The single source for levels across the whole game. Every script, encounter tabl
   after the Moon Laurel. Their evolved encounters respect evolution timing;
   assisted native travel is not natural-level balance approval.
 - **Implemented capital approach:** Route 15 uses wild 32–34 and trainers 35–37;
-  Route 16 uses wild 34–36 and trainers 36–38. Daphnyad replaces Kladoe in
-  Route 16's daytime encounters and both roads' late trainer parties.
-  These are implemented bands, not natural-level approval.
+  Route 16 uses wild 34–36 and trainers 36–38. The distribution pass (design/DISTRIBUTION.md, 2026-11-18) took the
+  starters out of the wild: Route 16 now has Sophowl and Ophidrop in their slots;
+  Daphnyad stays in both roads' late trainer parties. These are implemented bands, not
+  natural-level approval.
 - **Spartan difficulty:** the level cap at each stage is that stage's boss ace. Bosses use competitive sets.
 - **Mortal difficulty:** bosses at −3 levels.
 - **Current connected implementation:** Mortal variants cover Ione, Kerykos,
@@ -73,7 +74,9 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **Salt Well quest band:** its two floors use Water-type encounters at
   36–39 (SYSTEMS §1), following the raid rather than the earlier capital road.
   The stranded Glaukos has one 36; optional grotto trainers use 37–38.
-- **Implemented Kaldera:** harbor encounters are 34–37 and forge encounters
+- **Implemented Kaldera:** harbor encounters are 32–36 (the distribution pass, 2026-11-18:
+  rare young Kaminoo at 32 and Pyrapod at 32–33, BALANCE's lower-level spots, so both
+  lines are caught before they evolve) and forge encounters
   36–39. Three smiths use 38–40; three Titanborn use 40–42. Talos has
   41/41/42/43 and eruption Hyperion has 41/42/43/44, matching STORY's
   approximately level-44 ace. Both bosses have explicit four-move sets and
@@ -91,4 +94,8 @@ The single source for levels across the whole game. Every script, encounter tabl
   fields (dusk). These are the scripted return prizes from Phase 2, not
   additions to Kalliste's early wild band. Cairnolith and Persenyx are deliberate
   early-evolved static exceptions, like the fields' existing augury rewards.
+- **The Erymanthian Preserve** (the Safari Zone beside Arkadia, design/maps/ErymanthosPreserve.md):
+  wild 28–32 in its four story areas, Arkadia's stage; the post-game Boar's Thicket 58–62.
+  Lernip's catch point is its river's 1% surf and Super Rod slot at 29 (the "about level
+  30" above) until Lake Stymphalia's rain hunt is built; the lake itself sits at 46–50.
 - **Rematches** (the Olympiad's Arena, the Hierophants) scale to the Aethos post-game row.
