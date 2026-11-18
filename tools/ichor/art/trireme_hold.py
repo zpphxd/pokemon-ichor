@@ -319,6 +319,7 @@ def walkability(s: Scene):
         for x in range(3, 16):
             s.walk[y][x] = "."
     s.walk[6][MAST] = "X"
+    s.walk[6][16] = "."      # the gangway's last plank, under the pithos
     s.set_walk(*LADDER, "w", "MB_LADDER")
     s.piece("hold_wall", "The starboard hull from inside", 1, 0, 2, 2,
             "Deck beams, strakes, frames every 32 px, two rows of oar ports with the daylight "

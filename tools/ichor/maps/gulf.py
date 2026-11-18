@@ -75,6 +75,7 @@ CAVE_TOP, CAVE_DOOR = 0x09F, 0x0A7
 DOOR = 0x021
 TRIPOD_TOP, TRIPOD_BASE = 0x130, 0x131
 HERM = 0x01B
+STELE, BOULDER, BOULDER_SAND = 0x003, 0x0E0, 0x0E2
 FARMHOUSE = [[0x008, 0x009, 0x00A], [0x010, 0x011, 0x012], [0x018, 0x019, 0x01A], [0x020, 0x021, 0x022]]
 INN = R5.INN                                    # 5x4, its door at (2, 3)
 PALAESTRA = [[0x1AA, 0x1AB, 0x1AB, 0x1AB, 0x1AB, 0x1AC],
@@ -103,8 +104,8 @@ def const(name):
 #   h  under a building (solid; its door is set open by the stamp)
 
 class Grid(K.Grid):
-    def __init__(self, name, w, h, rows, strip_top=False, strip_bottom=False):
-        super().__init__(name, w, h, strip_top, strip_bottom)
+    def __init__(self, name, w, h, rows, strip_top=False, strip_bottom=False, strip_cols=(), seam_ok=()):
+        super().__init__(name, w, h, strip_top, strip_bottom, strip_cols, seam_ok)
         assert len(rows) == h, f"{name}: {len(rows)} rows, want {h}"
         for y, r in enumerate(rows):
             assert len(r) == w, f"{name} row {y} is {len(r)} wide, want {w}: {r!r}"
@@ -482,7 +483,16 @@ def props_kirrha(g):
     g.stamp(19, 5, INN, door=(2, 3))                   # the pilgrims' hostel
     g.set(11, 11, HERM, True, "herm")
     g.piece("amphorae", 11, 13)
-    g.piece("niches", 21, 11)                          # Apollo Delphinios's rock shrine
+    # Apollo Delphinios's rock shrine and the headland stand in Route 28's seam
+    # columns (x20-27), so they are aethos: a cairn round two offering stones, and
+    # boulders down the point to the surf
+    for j, row in enumerate(((BOULDER, BOULDER, BOULDER), (BOULDER, STELE, BOULDER), (BOULDER, STELE, BOULDER))):
+        for i, mid in enumerate(row):
+            g.set(21 + i, 11 + j, mid, True, "shrine")
+    for x in range(25, 28):
+        g.set(x, 15, BOULDER, True, "headland")
+        g.set(x, 16, BOULDER_SAND, True, "headland")
+        g.set(x, 17, BOULDER_SAND, True, "headland")
     g.set(22, 14, TRIPOD_TOP, True, "altar")
     g.set(22, 15, TRIPOD_BASE, True, "altar")
     # Delphoi's chapter: the road east onto Route 28, the Sacred Olives (rows 9-11
@@ -515,7 +525,7 @@ def spec_kirrha():
     s.person("BoatR", "UPTURNED_BOAT_R", 4, 17, "DOWN", script="0x0")
     s.item("ITEM_ELIXIR", 2, 7, "FLAG_ICHOR_ITEM_KIRRHA")                 # under the falls
     s.item("ITEM_BIG_PEARL", 3, 23, "FLAG_ICHOR_ITEM_KIRRHA_ISLET")      # the islet (the Conch)
-    s.hidden("ITEM_STARDUST", 23, 13, "FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_SHRINE")      # among the doves' niches
+    s.hidden("ITEM_STARDUST", 23, 13, "FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_SHRINE")      # among the shrine's stones
     s.hidden("ITEM_HEART_SCALE", 25, 17, "FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_HEADLAND")  # under the headland
     s.warp(*KIRRHA_DOOR, "MAP_KIRRHA_PILGRIMS_HOSTEL", 0)
     s.sign(9, 1, "Stair", "The Sacred Way's stair climbs into the falls and is gone.\\p"
@@ -1384,12 +1394,22 @@ STEM = {R9: "route9", KIRRHA: "kirrha", AIGION: "aigion", R11: "route11", CAVE: 
 # ---------------------------------------------------------------------------
 
 def outdoor(name, rows, w, h, props, specf, border, strip_top=False, strip_bottom=False, town=False,
-            banks=False):
-    g = build_grid(Grid(name, w, h, rows, strip_top, strip_bottom), props, town=town, banks=banks)
+            banks=False, strip_cols=(), seam_ok=()):
+    g = build_grid(Grid(name, w, h, rows, strip_top, strip_bottom, strip_cols, seam_ok), props, town=town,
+                   banks=banks)
     spec = specf()
     blocks = write_layout(g, border)
     write_events(spec)
     return g, spec, blocks
+
+
+def shared(ours, theirs):
+    """Secondary metatiles that draw the same under the neighbour's secondary."""
+    sys.path.insert(0, str(ROOT / "tools/ichor"))
+    import seam_audit
+    look = lambda ts, mid: seam_audit.render("gTileset_Aethos", ts, mid)  # noqa: E731
+    return {mid for mid in range(0x200, 0x400)
+            if look(ours, mid) == look(theirs, mid) and look(ours, mid) != ("missing metatile",)}
 
 
 def pine_border(g):
@@ -1414,7 +1434,10 @@ def main():
     s._edges = [("up", R9_NORTH), ("down", R9_SOUTH)]
     built.append((g, s, b, {"Lebadeia": [(x, 0) for x in R9_NORTH], "Kirrha": [(x, g.h - 1) for x in R9_SOUTH],
                             "the cave": [CAVE_DOOR_R9]}, 8))
-    g, s, b = outdoor(KIRRHA, P.KIRRHA, 28, 32, props_kirrha, spec_kirrha, sea, town=True)
+    # Route 28, the Sacred Olives (Parnassos), joins Kirrha's east edge: its last 8
+    # columns draw from aethos, or from Skiron metatiles Parnassos draws the same
+    g, s, b = outdoor(KIRRHA, P.KIRRHA, 28, 32, props_kirrha, spec_kirrha, sea, town=True,
+                      strip_cols=range(28 - K.SEAM_COLS, 28), seam_ok=shared("gTileset_Skiron", "gTileset_Parnassos"))
     s._edges = [("up", R9_SOUTH)]
     built.append((g, s, b, {"Route 9": [(x, 0) for x in R9_SOUTH], "the quay": [KIRRHA_LANDING],
                             "the hostel": [(KIRRHA_DOOR[0], KIRRHA_DOOR[1] + 1)],

@@ -91,9 +91,9 @@ KIRRHA = [
     "^^oooopp.." + "...." + "pppp" + "...kkk.^^^",                # 12
     "^^oooopp.." + ".k.." + "pppp" + "...kkk..^^",                # 13 the merchant's jars (11,13)
     "^^....pp.." + "...." + "pppp" + "....k...^^",                # 14 the dolphin altar (22, 14..15)
-    "^^....pp.." + "...." + "pppp" + "....k..bbb",                # 15 the headland
-    "^ddddddddd" + "dddd" + "dqqd" + "ddddddd" + "uuu",           # 16 the beach; the quay (15-16)
-    "^ddddddddd" + "dddd" + "dqqd" + "ddddddd" + "FFF",           # 17
+    "^^....pp.." + "...." + "pppp" + "....k..kkk",                # 15 the headland's boulders (aethos: Route 28's seam)
+    "^ddddddddd" + "dddd" + "dqqd" + "ddddddd" + "kkk",           # 16 the beach; the quay (15-16)
+    "^ddddddddd" + "dddd" + "dqqd" + "ddddddd" + "kkk",           # 17
     "^~~ddddddd" + "dddd" + "dqqd" + "dddd~~~" + "~~~",           # 18
     "^~~~~ddddd" + "dddd" + "~qq~" + "~~~~~~~" + "~~~",           # 19
     "^" + "~" * 14 + "qq" + "~" * 11,                              # 20

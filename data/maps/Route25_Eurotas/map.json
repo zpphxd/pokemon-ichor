@@ -99,7 +99,7 @@
     {
       "local_id": "LOCALID_ROUTE25_THEODORA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
-      "x": 8,
+      "x": 4,
       "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -180,10 +180,10 @@
     {
       "local_id": "LOCALID_ROUTE25_POLYBOIA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
-      "x": 6,
-      "y": 11,
+      "x": 5,
+      "y": 10,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -351,7 +351,7 @@
     },
     {
       "type": "hidden_item",
-      "x": 3,
+      "x": 9,
       "y": 12,
       "elevation": 3,
       "item": "ITEM_NUGGET",
@@ -415,7 +415,7 @@
     },
     {
       "type": "sign",
-      "x": 3,
+      "x": 9,
       "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -423,8 +423,8 @@
     },
     {
       "type": "sign",
-      "x": 9,
-      "y": 11,
+      "x": 3,
+      "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route25_EventScript_Spring"
@@ -439,8 +439,8 @@
     },
     {
       "type": "sign",
-      "x": 6,
-      "y": 10,
+      "x": 5,
+      "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route25_EventScript_Altar"

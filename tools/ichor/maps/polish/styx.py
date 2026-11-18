@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from mapedit import Layout  # noqa: E402
 from paint import tufts  # noqa: E402
 from autopath import lay, learn  # noqa: E402
+from seams import styx_north  # noqa: E402
 
 rnd = random.Random(7)
 m = Layout("StyxFalls")
@@ -86,5 +87,6 @@ m.put(19, 23, 0x29D, solid=True)          # a boulder rolled against the wall na
 
 # worn ground and pebbles across the bowl floor
 tufts(m, (1, 13, 30, 23), variants=(0x002, 0x29B, 0x29C), share=0.12, seed=9)
+styx_north(m)                       # the seam strip, Aethos only (seams.py)
 m.save()
 print("styx: done")
