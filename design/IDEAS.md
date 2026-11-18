@@ -21,4 +21,19 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 ### The whole world: hidden parts and return gates
 - **Planned (2026-11-17):** `design/WORLD_EXPLORATION.md` plans every region's return gates, cave back sections and what pays behind them (story, stronger Pokémon, leads), proposes Pan's Crook as the climbing relic, and gives a build order.
 
+## Queued (user, 2026-11-17): start when the Act III helpers free up
+
+### Wild Pokémon distribution pass
+- **Problem found:** Act II adds only 10 new species; Galenyon, Cairnolith, Pebblith, Kerazap, Gelasable and Galekit fill 40–57 maps each; about 18 regular lines can't be caught wild in the story (Chalkip, Elegull, Elektear, Erosie, Hymnet, Kalliglyph, Kerdovix, Skylaps, Sepidart, Sporadon, Ophidrop, Pagoshard, Lebetron, Bouldyphus, Enigmaw, Aetling and more); Nebrel, a starter, is wild on Routes 7–9.
+- **Plan:** a species-by-area table first, then apply it: one or two signature species per area, Act II gets its own new species, each evolution line gets a catch point before its evolution level, the filler thins out, starters leave the wild, rares go to night, fishing, rock smash and hidden spots.
+
+### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
+- The nymphs of Nysa raised Dionysus. A standard day care (levels, eggs); Hera's blessing already doubles egg finding (SYSTEMS).
+
+### Safari Zone: the Erymanthian Preserve (beside Arkadia)
+- Artemis's hunting park on Mount Erymanthos. Entry fee, Pan Balls (the renamed Safari Ball), a step count, rare and missing species by time of day; ties to the boar Labor in the post-game. Pairs with the distribution pass.
+
+### Grand bazaar: the Great Deigma (Emporion)
+- A covered market of many stalls: foreign traders (Phoenician, Egyptian, Scythian), stones, TMs, berries, a daily rare stall and a coin exchange for Obols and Staters. A reason to sail back.
+
 ## Done
