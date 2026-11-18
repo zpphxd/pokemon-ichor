@@ -2374,6 +2374,15 @@
 #define FLAG_ICHOR_MET_DAEDALUS                 (FLAG_ICHOR_GENERAL2_START + 0x46F) // Ichor: Labyrinth: scene D, Daedalus met in his workshop
 #define FLAG_ICHOR_DAEDALUS_LIFT                (FLAG_ICHOR_GENERAL2_START + 0x470) // Ichor: Labyrinth: Daedalus's lift runs between the workshop and the Grand Staircase
 #define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL2_START + 0x471) // Ichor: Labyrinth: Daedalus gave the Master Ball (scene D)
+#define FLAG_ICHOR_TITAN_DISGUISE               (FLAG_ICHOR_GENERAL2_START + 0x472) // Ichor: Labyrinth Ring IV: took a Titan helmet from the barracks locker (the disguise)
+#define FLAG_ICHOR_ENKELADOS_PASSED             (FLAG_ICHOR_GENERAL2_START + 0x473) // Ichor: Labyrinth Ring IV: past Enkelados's checkpoint, by catechism or by battle
+#define FLAG_ICHOR_ITEM_R4_MAX_REVIVE           (FLAG_ICHOR_GENERAL2_START + 0x474) // Ichor: Labyrinth Ring IV: the barracks' Max Revive
+#define FLAG_ICHOR_ITEM_R4_HYPER_POTION         (FLAG_ICHOR_GENERAL2_START + 0x475) // Ichor: Labyrinth Ring IV: the armory's Hyper Potion
+#define FLAG_ICHOR_ITEM_R4_IRON                 (FLAG_ICHOR_GENERAL2_START + 0x476) // Ichor: Labyrinth Ring IV: an Iron in the dig
+#define FLAG_ICHOR_GOT_HELM_SCENE               (FLAG_ICHOR_GENERAL2_START + 0x477) // Ichor: Minos's tomb: scene F, the Helm taken from the bier
+#define FLAG_ICHOR_ITEM_TOMB_GOLD_STATER        (FLAG_ICHOR_GENERAL2_START + 0x478) // Ichor: Minos's tomb: the Gold Stater among the grave goods
+#define FLAG_ICHOR_HIDDEN_ITEM_R4_ULTRA_BALL    (FLAG_ICHOR_GENERAL2_START + 0x479) // Ichor: Labyrinth Ring IV: an Ultra Ball under a bunk
+#define FLAG_ICHOR_HIDDEN_ITEM_R4_NUGGET        (FLAG_ICHOR_GENERAL2_START + 0x47A) // Ichor: Labyrinth Ring IV: a Nugget in the dig's spoil
 #define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
 #define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
 #define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken

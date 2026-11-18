@@ -1885,8 +1885,8 @@
     {
       "id": "LAYOUT_LABYRINTH_RING4",
       "name": "LabyrinthRing4_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 50,
+      "height": 42,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthRing4/border.bin",
@@ -1896,8 +1896,8 @@
     {
       "id": "LAYOUT_LABYRINTH_MINOS_TOMB",
       "name": "LabyrinthMinosTomb_Layout",
-      "width": 21,
-      "height": 36,
+      "width": 16,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Labyrinth",
       "border_filepath": "data/layouts/LabyrinthMinosTomb/border.bin",

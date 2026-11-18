@@ -1,1 +1,274 @@
-mapscripts LabyrinthRing4_MapScripts {}
+// Ring IV, the Masks (design/LABYRINTH.md §6 Ring IV; SCRIPT.md beat III-3I;
+// design/maps/LabyrinthRing4.md). Dionysus's verb, masks and roles: a Titan helmet from
+// the barracks locker passes the four sentry posts (TRAINER_TYPE_ICHOR_SENTRY and
+// FLAG_ICHOR_DISGUISE_ON, ENGINE_API §6); the mess hall lets the passwords slip;
+// Enkelados asks three questions at the stair down. A wrong answer costs one battle,
+// never the way on. The layout and generated block come from labyrinth_ring4.py.
+
+mapscripts LabyrinthRing4_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        call(LabyrinthRing4_EventScript_Register)
+        call(LabyrinthRing4_EventScript_DrawState)
+        special(Ichor_DrawThread)
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_FOLLOWERS_DISABLED)
+        if (flag(FLAG_ICHOR_ENKELADOS_PASSED)) {
+            setvar(VAR_TEMP_2, 1)
+        }
+    }
+}
+
+text LabyrinthRing4_Name_Enkelados { "ENKELADOS" }
+text LabyrinthRing4_Name_Titanborn { "TITANBORN" }
+
+// --- The disguise --------------------------------------------------------------------------
+
+script LabyrinthRing4_EventScript_HelmetLocker {
+    lockall
+    if (!flag(FLAG_ICHOR_TITAN_DISGUISE)) {
+        msgbox(format("A locker of bronze helmets, crested, each with a sickle stamped on the brow.\p"
+                      "One is your size. Nobody's counting."), MSGBOX_DEFAULT)
+        setflag(FLAG_ICHOR_TITAN_DISGUISE)
+    }
+    if (flag(FLAG_ICHOR_DISGUISE_ON)) {
+        msgbox(format("Take the Titan helmet off?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            clearflag(FLAG_ICHOR_DISGUISE_ON)
+            msgbox(format("You hang the helmet back on its peg. Your own face again."), MSGBOX_DEFAULT)
+        }
+    } else {
+        msgbox(format("Put on the Titan helmet?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            setflag(FLAG_ICHOR_DISGUISE_ON)
+            msgbox(format("It smells of somebody else's hair. You're a recruit now.\p"
+                          "Walk like one. Recruits don't run."), MSGBOX_DEFAULT)
+        }
+    }
+    releaseall
+}
+
+// --- The mess hall: the passwords ----------------------------------------------------------
+
+script LabyrinthRing4_EventScript_Talker1 {
+    lock
+    faceplayer
+    setspeaker(LabyrinthRing4_Name_Titanborn)
+    if (flag(FLAG_ICHOR_DISGUISE_ON)) {
+        msgbox(format("Golden age soon, recruit. No more clocks."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("Eat your barley and leave me alone. Whoever you are."), MSGBOX_DEFAULT)
+    }
+    release
+}
+
+script LabyrinthRing4_EventScript_Talker2 {
+    lock
+    faceplayer
+    setspeaker(LabyrinthRing4_Name_Titanborn)
+    if (flag(FLAG_ICHOR_DISGUISE_ON)) {
+        msgbox(format("What does the sickle reap, recruit? The hours. Say it."), MSGBOX_DEFAULT)
+        msgbox(format("And who stands at the heart? Not the bull. The master. Always the master."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("No helmet? Then you didn't hear anything at this table."), MSGBOX_DEFAULT)
+    }
+    release
+}
+
+script LabyrinthRing4_EventScript_Talker3 {
+    lock
+    faceplayer
+    setspeaker(LabyrinthRing4_Name_Titanborn)
+    if (flag(FLAG_ICHOR_DISGUISE_ON)) {
+        msgbox(format("My tide's been running backward all month. Good sign, they say.\p"
+                      "Backward. That's the way we turn."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("The tide in my village runs backward now. Don't ask me why. Ask the master."),
+               MSGBOX_DEFAULT)
+    }
+    release
+}
+
+script LabyrinthRing4_EventScript_FrescoDance {
+    msgbox(format("A fresco of dancers, three in a row. Each holds up a sign:\p"
+                  "a double axe, a wave, a lily."), MSGBOX_SIGN)
+}
+
+// --- The checkpoint ------------------------------------------------------------------------
+
+text LabyrinthRing4_Text_Hours { "THE HOURS" }
+text LabyrinthRing4_Text_Wheat { "THE WHEAT" }
+text LabyrinthRing4_Text_Fates { "THE FATES" }
+text LabyrinthRing4_Text_Bull { "THE BULL" }
+text LabyrinthRing4_Text_Master { "THE MASTER" }
+text LabyrinthRing4_Text_Forward { "FORWARD" }
+text LabyrinthRing4_Text_Backward { "BACKWARD" }
+text LabyrinthRing4_Text_Nowhere { "NOWHERE" }
+
+script LabyrinthRing4_EventScript_Checkpoint {
+    lockall
+    setvar(VAR_TEMP_2, 1)
+    applymovement(LOCALID_R4_ENKELADOS, Common_Movement_FaceLeft)
+    waitmovement(0)
+    call(LabyrinthRing4_EventScript_Catechism)
+    releaseall
+}
+
+script LabyrinthRing4_EventScript_Enkelados {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_ENKELADOS_PASSED)) {
+        setspeaker(LabyrinthRing4_Name_Enkelados)
+        msgbox(format("Go on, then. I'm not paid to fight twice."), MSGBOX_DEFAULT)
+        release
+        end
+    }
+    call(LabyrinthRing4_EventScript_Catechism)
+    release
+}
+
+script LabyrinthRing4_EventScript_Catechism {
+    setvar(VAR_TEMP_3, 0)
+    setspeaker(LabyrinthRing4_Name_Enkelados)
+    msgbox(format("Halt. Helmet on, so you're ours. Questions, so I know it."))
+    if (!flag(FLAG_ICHOR_DISGUISE_ON)) {
+        msgbox(format("…No helmet. Brave or stupid. Questions anyway."))
+    }
+    msgbox(format("What does the sickle reap?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, LabyrinthRing4_Text_Hours,
+                   LabyrinthRing4_Text_Wheat, LabyrinthRing4_Text_Fates)
+    if (var(VAR_RESULT) != 0) {
+        setvar(VAR_TEMP_3, 1)
+    }
+    setspeaker(LabyrinthRing4_Name_Enkelados)
+    msgbox(format("Who stands at the heart?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, LabyrinthRing4_Text_Bull,
+                   LabyrinthRing4_Text_Master, LabyrinthRing4_Text_Fates)
+    if (var(VAR_RESULT) != 1) {
+        setvar(VAR_TEMP_3, 1)
+    }
+    setspeaker(LabyrinthRing4_Name_Enkelados)
+    msgbox(format("Which way do we turn?"))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, LabyrinthRing4_Text_Forward,
+                   LabyrinthRing4_Text_Backward, LabyrinthRing4_Text_Nowhere)
+    if (var(VAR_RESULT) != 1) {
+        setvar(VAR_TEMP_3, 1)
+    }
+    setspeaker(LabyrinthRing4_Name_Enkelados)
+    if (var(VAR_TEMP_3) == 0) {
+        msgbox(format("Good. Down you go, recruit. Mind the bull. Nobody minds the bull."))
+        closemessage
+    } else {
+        msgbox(format("…That's not the catechism. Helmet off."))
+        closemessage
+        trainerbattle_no_intro(TRAINER_ICHOR_ENKELADOS, LabyrinthRing4_Text_EnkeladosDefeat)
+        setspeaker(LabyrinthRing4_Name_Enkelados)
+        msgbox(format("Go on, then. I'm not paid to fight twice."))
+        closemessage
+    }
+    setflag(FLAG_ICHOR_ENKELADOS_PASSED)
+    if (var(VAR_ICHOR_KNOSSA) < 9) {
+        setvar(VAR_ICHOR_KNOSSA, 9)
+    }
+}
+
+text LabyrinthRing4_Text_EnkeladosDefeat {
+    format("Buried again. Story of my life.")
+}
+
+// --- The four posts and the armory guard --------------------------------------------------------
+
+script LabyrinthRing4_EventScript_Lithos {
+    trainerbattle_single(TRAINER_ICHOR_LITHOS, LabyrinthRing4_Text_LithosIntro, LabyrinthRing4_Text_LithosDefeat)
+    msgbox(format("The disguise's in the barracks locker. I didn't tell you that."), MSGBOX_AUTOCLOSE)
+}
+text LabyrinthRing4_Text_LithosIntro { format("No helmet? No pass. That's the whole rule.") }
+text LabyrinthRing4_Text_LithosDefeat { format("The quarry closed. Then this. I'm not lucky with rock.") }
+
+script LabyrinthRing4_EventScript_Koniortos {
+    trainerbattle_single(TRAINER_ICHOR_KONIORTOS, LabyrinthRing4_Text_KoniortosIntro, LabyrinthRing4_Text_KoniortosDefeat)
+    msgbox(format("When the master's done, nobody will be dust. Not ever."), MSGBOX_AUTOCLOSE)
+}
+text LabyrinthRing4_Text_KoniortosIntro { format("The earth remembers the golden age. So do I. Nearly.") }
+text LabyrinthRing4_Text_KoniortosDefeat { format("Dust to dust. I'm the dust.") }
+
+script LabyrinthRing4_EventScript_Sideros {
+    trainerbattle_single(TRAINER_ICHOR_SIDEROS, LabyrinthRing4_Text_SiderosIntro, LabyrinthRing4_Text_SiderosDefeat)
+    msgbox(format("…Is this a war? It feels like a war."), MSGBOX_AUTOCLOSE)
+}
+text LabyrinthRing4_Text_SiderosIntro { format("The seer said I'd die in a war. Titans don't go to wars.") }
+text LabyrinthRing4_Text_SiderosDefeat { format("Titans stop them. That's the idea. It's a good idea.") }
+
+script LabyrinthRing4_EventScript_Chalkos {
+    trainerbattle_single(TRAINER_ICHOR_CHALKOS, LabyrinthRing4_Text_ChalkosIntro, LabyrinthRing4_Text_ChalkosDefeat)
+    msgbox(format("The mess hall's that way. They talk too much in there."), MSGBOX_AUTOCLOSE)
+}
+text LabyrinthRing4_Text_ChalkosIntro { format("At the Kronia my master poured my wine. One day a year.") }
+text LabyrinthRing4_Text_ChalkosDefeat { format("Kronos says every day. I'd settle for one more.") }
+
+script LabyrinthRing4_EventScript_Pelos {
+    trainerbattle_single(TRAINER_ICHOR_PELOS, LabyrinthRing4_Text_PelosIntro, LabyrinthRing4_Text_PelosDefeat)
+    msgbox(format("Take the potion. It's not mine. Nothing down here is mine."), MSGBOX_AUTOCLOSE)
+}
+text LabyrinthRing4_Text_PelosIntro { format("The rich get readings at Delphoi. I got told I'd be poor.") }
+text LabyrinthRing4_Text_PelosDefeat { format("I'd like a turn being surprised. That wasn't the surprise I meant.") }
+
+// --- The dig: the spring and the chute -----------------------------------------------------------
+
+script LabyrinthRing4_EventScript_Spring {
+    msgbox(format("Water comes out of the rock here, cold, from somewhere above.\p"
+                  "The Titans dug to it and stopped. Downstream, it roars."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing4_EventScript_Chute {
+    lockall
+    msgbox(format("The stream pours over a lip into the dark. The current has you!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_M_WATERFALL)
+    warp(MAP_LABYRINTH_RING5, 2)
+    waitstate
+}
+
+// ---- BEGIN GENERATED by tools/ichor/maps/labyrinth_lib.py: do not edit ----
+script LabyrinthRing4_EventScript_Register {
+    // the floors that take Ariadne's thread, each with its first twin
+    setvar(VAR_0x8004, 0x320)
+    setvar(VAR_0x8005, 0x321)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x32B)
+    setvar(VAR_0x8005, 0x32C)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x2E8)
+    setvar(VAR_0x8005, 0x2E9)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x2F3)
+    setvar(VAR_0x8005, 0x2F4)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 4)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R4_ENTRANCE)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 44)
+    setvar(VAR_0x8005, 34)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R4_CHECKPOINT)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 40)
+    setvar(VAR_0x8005, 38)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 18)
+    setvar(VAR_0x8005, 12)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R4_BARRACKS)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 6)
+    setvar(VAR_0x8005, 22)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R4_DIG)
+    special(Ichor_AddThreadAnchor)
+}
+
+// The ring's state, drawn on load and after every change: lit braziers, opened
+// doors and gates. Ichor_DrawThread goes after it.
+script LabyrinthRing4_EventScript_DrawState {
+    end
+}
+// ---- END GENERATED ----
