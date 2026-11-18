@@ -38,9 +38,10 @@ NAME = "delphoi"
 
 NEW = {
     # the Phaedriades: limestone that shines rose and gold
-    "ph0": (88, 64, 64), "ph1": (136, 104, 96), "ph2": (176, 144, 120),
-    "ph3": (208, 176, 144), "ph4": (232, 208, 176), "ph5": (248, 240, 216),
-    "phr": (200, 136, 104),
+    # (warmed for the arrival: the "shining ones" catch the sun gold)
+    "ph0": (96, 64, 56), "ph1": (152, 104, 80), "ph2": (192, 144, 104),
+    "ph3": (224, 184, 136), "ph4": (240, 216, 160), "ph5": (248, 248, 216),
+    "phr": (224, 144, 96),
     # a shadow on aethos's grass
     "gsh": (120, 128, 64),
     # hide tents
@@ -124,6 +125,8 @@ def rock_face(L, x0, y0, w, h, seed=0, ox=0, oy=0, mask=None):
     # Acrocorinth's), each lit on its upper left and shadowed lower right, dark
     # crevices between; a faint upright joint every 16 px makes the cliff read
     # as the Phaedriades' columns rather than a heap.
+    if seed >= 0:
+        return phaedriades_face(L, x0, y0, w, h, ox=ox, oy=oy, mask=mask)
     sites = SITES[seed % 4]
     for y in range(y0, y0 + h):
         for x in range(x0, x0 + w):
@@ -148,6 +151,66 @@ def rock_face(L, x0, y0, w, h, seed=0, ox=0, oy=0, mask=None):
                 c = ("ph5" if lit > 3.8 else "ph4" if lit > 1.0 else "ph3" if lit > -1.4
                      else "ph2")
                 if c == "ph2" and int(X) % 6 == 2:
+                    c = "phr"
+            L.px(x, y, c)
+
+
+def _joint(Y, base, jog_y, jog):
+    """A slab's joint x at row Y: it steps sideways where a bedding crack crosses."""
+    return base + (jog if Y >= jog_y else 0)
+
+
+def phaedriades_face(L, x0, y0, w, h, ox=0, oy=0, mask=None):
+    """The Phaedriades, "the shining ones": sheer limestone slabs blazing
+    gold-white on their sunlit west faces and falling to warm ochre in the
+    shade, faintly fluted where the rain runs, split by dark joints that jog
+    at the bedding cracks, small ledges catching scrub, rose iron stains
+    running down. Tiles on a 32 x 32 repeat."""
+    rnd = random.Random(7)
+    flutes = {(rnd.randrange(32), rnd.randrange(32)): rnd.randrange(5, 11) for _ in range(14)}
+    flute = set()
+    for (fx, fy), n in flutes.items():
+        for k in range(n):
+            flute.add((fx, (fy + k) % 32))
+    for y in range(y0, y0 + h):
+        for x in range(x0, x0 + w):
+            if mask is not None and not mask(x - x0, y - y0):
+                continue
+            X, Y = (x - ox) % 32, (y - oy) % 32
+            # one broad slab per repeat; its joint jogs at each bedding crack
+            j = 0 if Y < 9 else 2 if Y < 22 else -1
+            u, wdt = (X - j) % 32, 32
+            crack = 9 if u < 21 else 22
+            f = u / max(1, wdt - 1)
+            # low contrast across the slab, so a whole cliff of them reads as
+            # one shining wall, not stripes; the light varies with the rows too
+            band = (Y // 4 + (X // 8) * 3) % 5
+            if u == 0:
+                c = "ph1" if Y % 5 else "ph0"
+            elif u == 1:
+                c = "ph4" if Y % 3 else "ph5"
+            elif f < 0.35:
+                c = "ph5" if (X * 5 + Y * 3 + band) % 6 else "ph4"
+            elif f < 0.7:
+                c = "ph4" if (X * 3 + Y * 7 + band) % 7 else ("ph5" if band < 2 else "ph3")
+            elif f < 0.88:
+                c = "ph3" if (X + Y + band) % 3 else "ph4"
+            else:
+                c = "ph2" if (X + Y) % 4 else "ph3"
+            if (X, Y) in flute and u > 1:
+                c = {"ph5": "ph4", "ph4": "ph3", "ph3": "ph2", "ph2": "ph1"}.get(c, c)
+            # the bedding crack across the slab, a lit ledge under it
+            if Y == crack and u > 0:
+                c = "ph1" if u < 3 or u > 28 else "ph2"
+            elif Y == (crack + 1) % 32 and u > 1:
+                c = "ph5" if f < 0.8 else "ph4"
+            # a tuft of scrub on one ledge
+            if Y == crack and crack == 9 and 13 <= u <= 15:
+                c = "ov1" if u != 14 else "ov2"
+            # rose iron stains running down from the cracks
+            for (sx, sy, n) in ((7, 10, 11), (26, 23, 7)):
+                d = (Y - sy) % 32
+                if X == sx and d < n and d % 3 != 2:
                     c = "phr"
             L.px(x, y, c)
 

@@ -2,7 +2,7 @@
 
 `gTileset_Parnassos` is Route 28: the Sacred Olives and the Kastalian Gorge, on the `aethos` primary. **Generated** by `tools/ichor/art/delphoi_build.py parnassos`; the art is `tools/ichor/art/delphoi_art.py`.
 
-Built: **306** tiles of 504.
+Built: **305** tiles of 504.
 
 ![pieces](img/parnassos_pieces.png)
 

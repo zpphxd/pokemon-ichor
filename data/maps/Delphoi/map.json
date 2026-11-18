@@ -22,6 +22,19 @@
   ],
   "object_events": [
     {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 4,
+      "y": 38,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_LookoutBoy",
+      "flag": "0"
+    },
+    {
       "local_id": "LOCALID_DELPHOI_PYTHIA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
       "x": 41,
@@ -691,6 +704,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Delphoi_EventScript_GreatLaurel"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 39,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_Lookout"
     },
     {
       "type": "sign",

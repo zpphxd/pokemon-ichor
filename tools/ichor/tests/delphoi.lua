@@ -101,7 +101,11 @@ L.start(function()
     L.leaveEdge("up", S.MAP_DELPHOI)
     L.expect(L.mapId() == S.MAP_DELPHOI, "the top of the falls is Delphoi")
 
-    -- III-6C: the Pythia passes
+    -- III-6C: the first sight (the camera climbs the Sacred Way to the temple
+    -- under the Phaedriades), then the Pythia passes
+    if L.goTrigger(L.triggers("Delphoi_EventScript_Arrival")) then L.wait(1) end
+    L.wait(560)
+    L.shot("delphoi_arrival_pan")
     scene("Delphoi_EventScript_Arrival", S.FLAG_ARRIVED)
     act(11, "Delphoi is reached")
     L.shot("delphoi_arrival")

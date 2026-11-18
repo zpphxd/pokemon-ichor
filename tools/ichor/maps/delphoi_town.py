@@ -64,6 +64,9 @@ def plan():
     P.box(18, 11, 18, 16, "v")
     P.box(14, 11, 17, 12, "v")
     P.box(34, 11, 35, 16, "v")
+    # a spur of the Phaedriades straight behind the temple, so the terrace
+    # stands under the shining cliffs (the arrival's pan stops on it)
+    P.box(19, 4, 33, 7, "#")
     # the god's laurel grove, east of the temple
     P.box(34, 2, 42, 10, "L")
     P.box(35, 3, 41, 9, "G")
@@ -96,6 +99,10 @@ def plan():
     P.box(43, 32, 43, 37, "v")        # the walk beside them
     P.box(49, 28, 51, 39, "#")
     P.box(43, 28, 48, 28, "#")
+    # the lookout: a paved belvedere at the lane's west end, its parapet over
+    # the olive sea that runs down to Kirrha and the gulf
+    P.box(2, 37, 8, 38, "v")
+    P.box(2, 39, 7, 39, "W")
     # the way down to the gorge (aethos only from row 40)
     P.box(0, 40, 51, 45, "T")
     P.road([(38, 39), (38, 45)], width=3, salt=21, bulge=False)
@@ -213,6 +220,10 @@ def events(m):
     m.sign(ALTAR[0] + 1, ALTAR[1] + 1, S + "AltarChians")
     m.sign(KASTALIA[0], KASTALIA[1] + 2, S + "Spring")
     m.sign(38, 6, S + "GreatLaurel")
+    # the lookout: a stele at the parapet's end, a boy who comes every evening
+    m.set(8, 39, A.STELE, True)
+    m.sign(8, 39, S + "Lookout")
+    npc(m, "ICHOR_YOUTH_M", 4, 38, S + "LookoutBoy", face="down")
     # III-6C: arrival and the Pythia's procession
     for x in (38, 39, 40):
         m.trigger(x, 39, S + "Arrival", "VAR_TEMP_1", 1)

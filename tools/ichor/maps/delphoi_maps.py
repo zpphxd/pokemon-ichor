@@ -133,6 +133,9 @@ class DMap(Map):
             name = row + col
             if name not in self.s("phaedriades")["names"]:
                 name = row + ("" if col in ("", "2") else col)
+            if (name == "face" and x % 2 == 0 and y % 2 == 0 and _hash(x, y, 29) < 140):
+                self.piece("scree", "face_scrub", x, y, solid=True)   # scrub on a ledge: breaks the repeat
+                continue
             self.piece("phaedriades", name, x, y, solid=True)
 
     def ledge(self, cells, key="pezoula"):

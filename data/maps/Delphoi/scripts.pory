@@ -162,6 +162,22 @@ script Delphoi_EventScript_LightAllTorches {
 // III-6C: the Pythia passes
 // ---------------------------------------------------------------------------
 
+// The arrival's look up: from the gate (x 38-40, y 39) up the Sacred Way to the
+// temple terrace under the Phaedriades (13 left, 31 up), and back.
+movement Delphoi_Movement_CameraUpTheWay {
+    walk_slow_up * 2
+    walk_up * 6
+    walk_fast_up * 23
+    walk_left * 13
+    step_end
+}
+
+movement Delphoi_Movement_CameraBack {
+    walk_faster_right * 13
+    walk_faster_down * 31
+    step_end
+}
+
 movement Delphoi_Movement_PythiaDown {
     walk_slow_down * 7
     walk_slow_left * 2
@@ -213,6 +229,18 @@ movement Delphoi_Movement_AletheaBack {
 script Delphoi_EventScript_Arrival {
     lockall
     setvar(VAR_ICHOR_ACT3, 11)
+    // the first sight of it: up the Sacred Way to the temple under the shining cliffs
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Delphoi_Movement_CameraUpTheWay)
+    waitmovement(0)
+    delay(90)
+    msgbox(format("The Phaedriades. The Shining Ones. The cliffs go up gold, and the temple stands under them.\p"
+                  "Delphoi. The navel of the world."))
+    closemessage
+    delay(20)
+    applymovement(OBJ_EVENT_ID_CAMERA, Delphoi_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
     applymovement(LOCALID_DELPHOI_PYTHIA, Delphoi_Movement_PythiaDown)
     applymovement(LOCALID_DELPHOI_MELISSA_1, Delphoi_Movement_MelissaDown)
     applymovement(LOCALID_DELPHOI_MELISSA_2, Delphoi_Movement_MelissaDown)
@@ -460,6 +488,19 @@ script Delphoi_EventScript_AltarChians {
 script Delphoi_EventScript_GreatLaurel {
     msgbox(format("The god's great laurel. Its leaves are darker than any tree's on the mountain.\p"
                   "A red ribbon is tied to a low branch."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_Lookout {
+    msgbox(format("Below the parapet the olives run all the way down the valley, a grey-green sea.\p"
+                  "Past them, Kirrha. Past Kirrha, the gulf, shining, and the blue mountains beyond.\p"
+                  "Behind you the cliffs blaze. Everyone who climbs here turns round at this wall."),
+           MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_LookoutBoy {
+    msgbox(format("See the shine past the olives? That's the gulf.\p"
+                  "When the sun goes down behind it, the cliffs up there go red. Every evening.\p"
+                  "I've watched it four hundred times. It's never the same red."), MSGBOX_NPC)
 }
 
 script Delphoi_EventScript_Spring {
