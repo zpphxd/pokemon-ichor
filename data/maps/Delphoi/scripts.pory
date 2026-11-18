@@ -1,0 +1,988 @@
+// delphoi_town: begin generated (tools/ichor/maps/delphoi_town.py; don't edit)
+const METATILE_DELPHOI_TORCH_COLD = 0x388
+const METATILE_DELPHOI_TORCH_LIT = 0x389
+const METATILE_DELPHOI_OMPHALOS_WHOLE_TL = 0x343
+const METATILE_DELPHOI_OMPHALOS_WHOLE_TR = 0x344
+const METATILE_DELPHOI_OMPHALOS_WHOLE_BL = 0x34B
+const METATILE_DELPHOI_OMPHALOS_WHOLE_BR = 0x34C
+const METATILE_DELPHOI_OMPHALOS_BURNING_TL = 0x345
+const METATILE_DELPHOI_OMPHALOS_BURNING_TR = 0x346
+const METATILE_DELPHOI_OMPHALOS_BURNING_BL = 0x34D
+const METATILE_DELPHOI_OMPHALOS_BURNING_BR = 0x34E
+const METATILE_DELPHOI_OMPHALOS_OPEN_TL = 0x350
+const METATILE_DELPHOI_OMPHALOS_OPEN_TR = 0x351
+const METATILE_DELPHOI_OMPHALOS_OPEN_BL = 0x358
+const METATILE_DELPHOI_OMPHALOS_OPEN_BR = 0x359
+// delphoi_town: end generated
+
+// Delphoi (design/phase4/SCRIPT.md III-6C, III-7, III-8 and Part 2). The layout
+// and every event's place are tools/ichor/maps/delphoi_town.py's; the metatile
+// ids it swaps are spliced in above by that script.
+//
+// VAR_ICHOR_ACT3 here: 10 on arrival (Lakonia's goat paths), 11 after the Pythia
+// passes (III-6C), 12 with the Sun Laurel (the temple, III-6D), 13 after Mom at
+// the spring (III-7), 14 when the Omphalos opens (III-8). From the Pythia's one
+// sentence the tint is held at evening; from III-7 on, at night (ENGINE_API §7,
+// Ichor_HoldTimeOfDay). The climax chapter (III-9 on) releases it.
+//
+// The tableau the Frozen Hour freezes (SCRIPT.md III-8): from 14 to 18 Mom and
+// Alethea stand at the stairhead, Rhea inside the court's gate, Kleon in it, the
+// two Gigas sit by the west wall, the Archon stands at the sanctuary's gate and
+// the Titanborn climb the switchbacks; every torch on the Sacred Way burns and
+// the Omphalos stands open.
+//
+// TODO(music): MUS_ICHOR_DELPHOI, MUS_ICHOR_ELAIA_SPRING and MUS_ICHOR_OMPHALOS_NIGHT
+// aren't written; Eleusa's sacred theme and silence stand in.
+// TODO(art): Rhea, Hyperion, Phaedon, the Gigas, the Archon, the melissai and the
+// Pythia use stand-in walkers (Lakonia's and Knossa's chapters draw some of them).
+
+mapscripts Delphoi_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_DELPHOI)
+        setrespawn(HEAL_LOCATION_DELPHOI)
+        call(Delphoi_EventScript_SetPeople)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(Delphoi_EventScript_SetTiles)
+    }
+}
+
+text Delphoi_Text_NamePythia { "PYTHIA" }
+text Delphoi_Text_NamePilgrim { "PILGRIM" }
+text Delphoi_Text_NameOldPilgrim { "OLD PILGRIM" }
+text Delphoi_Text_NameAlethea { "ALETHEA" }
+text Delphoi_Text_NameKleon { "KLEON" }
+text Delphoi_Text_NameRhea { "RHEA" }
+text Delphoi_Text_NameMom { "MOM" }
+text Delphoi_Text_NameGuard { "GUARD" }
+text Delphoi_Text_NameMelissa { "MELISSA" }
+text Delphoi_Text_NameOldMan { "OLD MAN" }
+text Delphoi_Text_NameIamos { "IAMOS" }
+text Delphoi_Text_NameOrsippos { "ORSIPPOS" }
+text Delphoi_Text_NameEphialtes { "EPHIALTES" }
+text Delphoi_Text_NameThoas { "THOAS" }
+text Delphoi_Text_NameHyperion { "HYPERION" }
+text Delphoi_Text_NamePhaedon { "PHAEDON" }
+text Delphoi_Text_NameCaptain { "GUARD CAPTAIN" }
+text Delphoi_Text_NameAristeides { "ARISTEIDES" }
+text Delphoi_Text_NameTitanborn { "TITANBORN" }
+
+// ---------------------------------------------------------------------------
+// Who is where, and the tiles that follow the story
+// ---------------------------------------------------------------------------
+
+script Delphoi_EventScript_SetPeople {
+    setvar(VAR_TEMP_1, 0)
+    setvar(VAR_TEMP_2, 0)
+    setvar(VAR_TEMP_3, 0)
+    setvar(VAR_TEMP_4, 0)
+    // III-6C: the Pythia's procession, and Alethea coming down to meet you
+    if (!flag(FLAG_ICHOR_DELPHOI_ARRIVED) && var(VAR_ICHOR_ACT3) >= 10) {
+        clearflag(FLAG_ICHOR_HIDE_PYTHIA_PROCESSION)
+        clearflag(FLAG_ICHOR_HIDE_ALETHEA_DELPHOI_STEPS)
+        setvar(VAR_TEMP_1, 1)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_PYTHIA_PROCESSION)
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_DELPHOI_STEPS)
+    }
+    // Kleon and Rhea at the stadium (11-12), then at the court's gate (13 on)
+    setflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_STADIUM)
+    setflag(FLAG_ICHOR_HIDE_RHEA_DELPHOI_STADIUM)
+    setflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE)
+    setflag(FLAG_ICHOR_HIDE_RHEA_DELPHOI_GATE)
+    if (var(VAR_ICHOR_ACT3) == 11 || var(VAR_ICHOR_ACT3) == 12) {
+        clearflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_STADIUM)
+        clearflag(FLAG_ICHOR_HIDE_RHEA_DELPHOI_STADIUM)
+        if (!flag(FLAG_ICHOR_DELPHOI_STADIUM_SCENE)) {
+            setvar(VAR_TEMP_2, 1)
+        }
+    }
+    if (var(VAR_ICHOR_ACT3) >= 13 && var(VAR_ICHOR_ACT3) < 19) {
+        clearflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE)
+        clearflag(FLAG_ICHOR_HIDE_RHEA_DELPHOI_GATE)
+    }
+    // Mom at the spring: from the Pythia's sentence, through the night
+    if ((flag(FLAG_ICHOR_PYTHIA_SPOKE) && var(VAR_ICHOR_ACT3) == 12) || var(VAR_ICHOR_ACT3) == 13) {
+        clearflag(FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING)
+        if (!flag(FLAG_ICHOR_MOM_SPRING)) {
+            setvar(VAR_TEMP_3, 1)
+        }
+    } else {
+        setflag(FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING)
+    }
+    // III-8, and the tableau it leaves behind
+    setflag(FLAG_ICHOR_HIDE_OMPHALOS_HYPERION)
+    setflag(FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON)
+    if (var(VAR_ICHOR_ACT3) == 13 && !flag(FLAG_ICHOR_OMPHALOS_OPEN)) {
+        setvar(VAR_TEMP_4, 1)
+    }
+    if (var(VAR_ICHOR_ACT3) >= 14 && var(VAR_ICHOR_ACT3) < 19) {
+        clearflag(FLAG_ICHOR_HIDE_OMPHALOS_GIGAS)
+        clearflag(FLAG_ICHOR_HIDE_OMPHALOS_ARCHON)
+        clearflag(FLAG_ICHOR_HIDE_MOM_STAIRHEAD)
+        clearflag(FLAG_ICHOR_HIDE_OMPHALOS_MUSTER)
+        setobjectxyperm(LOCALID_DELPHOI_KLEON_GATE, 23, 18)
+        setobjectmovementtype(LOCALID_DELPHOI_KLEON_GATE, MOVEMENT_TYPE_FACE_DOWN)
+        setobjectxyperm(LOCALID_DELPHOI_RHEA_GATE, 23, 16)
+        setobjectmovementtype(LOCALID_DELPHOI_RHEA_GATE, MOVEMENT_TYPE_FACE_DOWN)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_OMPHALOS_GIGAS)
+        setflag(FLAG_ICHOR_HIDE_OMPHALOS_ARCHON)
+        setflag(FLAG_ICHOR_HIDE_MOM_STAIRHEAD)
+        setflag(FLAG_ICHOR_HIDE_OMPHALOS_MUSTER)
+    }
+    return
+}
+
+script Delphoi_EventScript_SetTiles {
+    if (var(VAR_ICHOR_ACT3) >= 14 && var(VAR_ICHOR_ACT3) < 19) {
+        call(Delphoi_EventScript_LightAllTorches)
+    }
+    if (flag(FLAG_ICHOR_OMPHALOS_OPEN)) {
+        setmetatile(22, 14, METATILE_DELPHOI_OMPHALOS_OPEN_TL, TRUE)
+        setmetatile(23, 14, METATILE_DELPHOI_OMPHALOS_OPEN_TR, TRUE)
+        setmetatile(22, 15, METATILE_DELPHOI_OMPHALOS_OPEN_BL, TRUE)
+        setmetatile(23, 15, METATILE_DELPHOI_OMPHALOS_OPEN_BR, TRUE)
+    }
+    return
+}
+
+script Delphoi_EventScript_LightAllTorches {
+    setmetatile(22, 19, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(28, 19, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(32, 24, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(20, 25, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(11, 26, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(16, 30, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(24, 30, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// III-6C: the Pythia passes
+// ---------------------------------------------------------------------------
+
+// The arrival's look up: from the gate (x 38-40, y 39) up the Sacred Way to the
+// temple terrace under the Phaedriades (13 left, 31 up), and back.
+movement Delphoi_Movement_CameraUpTheWay {
+    walk_slow_up * 2
+    walk_up * 6
+    walk_fast_up * 23
+    walk_left * 13
+    step_end
+}
+
+movement Delphoi_Movement_CameraBack {
+    walk_faster_right * 13
+    walk_faster_down * 31
+    step_end
+}
+
+movement Delphoi_Movement_PythiaDown {
+    walk_slow_down * 7
+    walk_slow_left * 2
+    step_end
+}
+
+movement Delphoi_Movement_PythiaOn {
+    walk_slow_left * 10
+    walk_slow_up * 8
+    step_end
+}
+
+movement Delphoi_Movement_MelissaDown {
+    walk_slow_down * 6
+    walk_slow_left
+    step_end
+}
+
+movement Delphoi_Movement_MelissaOn {
+    walk_slow_down
+    walk_slow_left * 11
+    walk_slow_up * 8
+    step_end
+}
+
+movement Delphoi_Movement_LookBack {
+    face_right
+    delay_16
+    face_left
+    delay_16
+    face_right
+    delay_16
+    face_left
+    step_end
+}
+
+movement Delphoi_Movement_AletheaRuns {
+    walk_fast_down * 7
+    walk_fast_right * 9
+    step_end
+}
+
+movement Delphoi_Movement_AletheaBack {
+    walk_left * 9
+    walk_up * 7
+    step_end
+}
+
+script Delphoi_EventScript_Arrival {
+    lockall
+    setvar(VAR_ICHOR_ACT3, 11)
+    // the first sight of it: up the Sacred Way to the temple under the shining cliffs
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Delphoi_Movement_CameraUpTheWay)
+    waitmovement(0)
+    delay(90)
+    msgbox(format("The Phaedriades. The Shining Ones. The cliffs go up gold, and the temple stands under them.\p"
+                  "Delphoi. The navel of the world."))
+    closemessage
+    delay(20)
+    applymovement(OBJ_EVENT_ID_CAMERA, Delphoi_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    applymovement(LOCALID_DELPHOI_PYTHIA, Delphoi_Movement_PythiaDown)
+    applymovement(LOCALID_DELPHOI_MELISSA_1, Delphoi_Movement_MelissaDown)
+    applymovement(LOCALID_DELPHOI_MELISSA_2, Delphoi_Movement_MelissaDown)
+    waitmovement(0)
+    turnobject(LOCALID_DELPHOI_PYTHIA, DIR_SOUTH)
+    delay(60)
+    setspeaker(Delphoi_Text_NamePythia)
+    msgbox(format("…"))
+    msgbox(format("I can't see you."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_DELPHOI_MELISSA_2, Delphoi_Movement_LookBack)
+    applymovement(LOCALID_DELPHOI_PYTHIA, Delphoi_Movement_PythiaOn)
+    applymovement(LOCALID_DELPHOI_MELISSA_1, Delphoi_Movement_MelissaOn)
+    waitmovement(LOCALID_DELPHOI_MELISSA_2)
+    applymovement(LOCALID_DELPHOI_MELISSA_2, Delphoi_Movement_MelissaOn)
+    waitmovement(0)
+    removeobject(LOCALID_DELPHOI_PYTHIA)
+    removeobject(LOCALID_DELPHOI_MELISSA_1)
+    removeobject(LOCALID_DELPHOI_MELISSA_2)
+    setflag(FLAG_ICHOR_HIDE_PYTHIA_PROCESSION)
+    setspeaker(Delphoi_Text_NamePilgrim)
+    msgbox(format("Four words. She said four words!"))
+    setspeaker(Delphoi_Text_NameOldPilgrim)
+    msgbox(format("To a child in a hat!"))
+    setspeaker(Delphoi_Text_NamePilgrim)
+    msgbox(format("I've been here since the spring before last. I got “soon.”"))
+    setspeaker(Delphoi_Text_NameOldPilgrim)
+    msgbox(format("I got “no.” I hadn't asked anything yet."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_DELPHOI_ALETHEA, Delphoi_Movement_AletheaRuns)
+    waitmovement(0)
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_WEST)
+    setspeaker(Delphoi_Text_NameAlethea)
+    msgbox(format("{PLAYER}! You made it! You came the long way. Everyone did.\p"
+                  "Kleon and his mother came over the mountain. On goat paths. At night.\p"
+                  "She knows every path in Aethos. She used them to move Titans."))
+    msgbox(format("You saw the camp? Every Titan there is, waiting.\p"
+                  "I wrote to the Archon. Truthfully. A letter from an exile.\p"
+                  "He'll read it eventually. He'll come eventually. He's very… eventual."))
+    msgbox(format("The Pythia's the eighth Hierophant. Did you know she battles?\p"
+                  "Truthfully, I didn't. I thought she just sat on the tripod and sighed."))
+    msgbox(format("Go and win. I'll be in Astyra's treasury, copying the walls.\p"
+                  "Every city brags on its walls in this place. I'm copying the brags."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_DELPHOI_ALETHEA, Delphoi_Movement_AletheaBack)
+    waitmovement(0)
+    removeobject(LOCALID_DELPHOI_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_DELPHOI_STEPS)
+    setflag(FLAG_ICHOR_DELPHOI_ARRIVED)
+    setvar(VAR_TEMP_1, 0)
+    releaseall
+}
+
+script Delphoi_EventScript_Pythia {
+    setspeaker(Delphoi_Text_NamePythia)
+    msgbox(format("…"), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Melissa {
+    setspeaker(Delphoi_Text_NameMelissa)
+    msgbox(format("Hush. She's going to the god."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_AletheaArrival {
+    setspeaker(Delphoi_Text_NameAlethea)
+    msgbox(format("Go and win. I'll be in Astyra's treasury."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// The town's people
+// ---------------------------------------------------------------------------
+
+script Delphoi_EventScript_Pilgrim1 {
+    setspeaker(Delphoi_Text_NamePilgrim)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("She laughed! The Pythia laughed. Right in my face. It was lovely."), MSGBOX_NPC)
+    } else {
+        msgbox(format("I've been in this queue since the barley was green. Twice."), MSGBOX_NPC)
+    }
+}
+
+script Delphoi_EventScript_Pilgrim2 {
+    setspeaker(Delphoi_Text_NamePilgrim)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("I asked if I should marry. She said “Do you want to?”\p"
+                      "I said yes. She said, “Then that's your oracle.” I'm going home."), MSGBOX_NPC)
+    } else {
+        msgbox(format("I asked if I should marry. She said “soon.” Soon what?"), MSGBOX_NPC)
+    }
+}
+
+script Delphoi_EventScript_Pilgrim3 {
+    setspeaker(Delphoi_Text_NameOldPilgrim)
+    msgbox(format("I asked when I'd die. She looked at me a long time and said “same.”\p"
+                  "Same as what? Same as who? I've been here a year asking."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Pilgrim4 {
+    setspeaker(Delphoi_Text_NamePilgrim)
+    msgbox(format("Don't push. There's an order. It's by who's most desperate."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_MelissaHives {
+    setspeaker(Delphoi_Text_NameMelissa)
+    if (var(VAR_ICHOR_ACT3) == 13) {
+        msgbox(format("The bees went quiet at sunset. All of them at once.\p"
+                      "Bees know things. Don't ask me how. I've never asked them."), MSGBOX_NPC)
+    } else {
+        msgbox(format("Mind the bees. They're the god's, and they know it.\p"
+                      "The Pythia used to be called the Delphic Bee.\pBefore she stopped talking."),
+               MSGBOX_NPC)
+    }
+}
+
+script Delphoi_EventScript_DozingPilgrim {
+    setspeaker(Delphoi_Text_NameOldMan)
+    msgbox(format("Wash your hair in the spring. That's what the Pythia does.\p"
+                  "I did. Didn't help. I've had a cold for a week."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_GateGuard {
+    setspeaker(Delphoi_Text_NameGuard)
+    msgbox(format("The road north, over Parnassos. Thermopylai, then Thessaly.\p"
+                  "You can go up as far as Pan's cave. Past that, the pass is shut.\p"
+                  "While that camp sits in the gorge, nobody goes over. Nobody comes down.\p"
+                  "The Archon's men will want it shut too. Whenever they get here."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Iamos {
+    setspeaker(Delphoi_Text_NameIamos)
+    if (var(VAR_ICHOR_ACT3) == 13) {
+        msgbox(format("The stars are wrong tonight. All of them. A hand's width off.\p"
+                      "I've watched the sky over Parnassos for thirty years.\pI've never seen it lean."),
+               MSGBOX_NPC)
+    } else {
+        msgbox(format("The birds over Parnassos are all flying west.\p"
+                      "The birds won't land on the temple roof. They circle it."), MSGBOX_NPC)
+    }
+}
+
+script Delphoi_EventScript_Orsippos {
+    setspeaker(Delphoi_Text_NameOrsippos)
+    msgbox(format("Six hundred feet! Apollo paced it out.\p"
+                  "That Lakonian boy runs here every morning. His mother shouts."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Optional: Kleon and Rhea at the stadium
+// ---------------------------------------------------------------------------
+
+script Delphoi_EventScript_StadiumScene {
+    lockall
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Faster."))
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("I'm… going… as fast as I-"))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Then that's fast enough. Again."))
+    turnobject(LOCALID_DELPHOI_KLEON_STADIUM, DIR_WEST)
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("{PLAYER}! You came by the road. We came over the top.\p"
+                  "Mother knows every goat path in Aethos."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("I used them to move Titans. Now I use them to move one boy."))
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("I'm not a- …Fine.\p"
+                  "The camp in the gorge. Every helmet left in Aethos. Waiting for dark."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Tonight or tomorrow. Not later.\pWin your laurel. Eat something. Sleep if you can."))
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("She says that to everyone now. “Eat something.” It's very strange."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("…Eat something."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_DELPHOI_STADIUM_SCENE)
+    setvar(VAR_TEMP_2, 0)
+    releaseall
+}
+
+script Delphoi_EventScript_KleonStadium {
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("The stadium's six hundred feet. Apollo measured it with his own feet.\p"
+                  "He had big feet. I've checked."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_RheaStadium {
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("He runs like his father did. Too fast at the start.\pDon't tell him."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Signs and monuments
+// ---------------------------------------------------------------------------
+
+script Delphoi_EventScript_SignTown {
+    msgbox(format("DELPHOI\nThe navel of the world.\pThe Kastalian spring, east. The Sacred Way, up."),
+           MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_SignNorthWest {
+    msgbox(format("North-west: the Korykian path, over Parnassos.\pPan's cave. Bring a gift."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_Inscription {
+    msgbox(format("Carved over the door: KNOW THYSELF.\pUnder it, smaller: NOTHING TOO MUCH.\p"
+                  "Under that, one letter on its own: E.\p"
+                  "Nobody knows what the E means. People have written books about it."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_KleobisBiton {
+    msgbox(format("Two marble brothers, side by side, fists at their sides.\p"
+                  "A plaque: KLEOBIS AND BITON OF ARGOS.\p"
+                  "They pulled their mother's cart to Hera's temple.\p"
+                  "She asked the goddess for the best thing a mortal could have.\p"
+                  "That night they lay down in the temple and didn't wake up.\p"
+                  "Under it someone has scratched: COUNT NO ONE HAPPY TILL THEY'RE DEAD.\p"
+                  "Under that, newer, in a careful hand: I DON'T LIKE THIS STORY. -A."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_SibylRock {
+    msgbox(format("A crag where the first prophetess stood, before there was a temple. Herophile.\p"
+                  "They say she sang her prophecies, and none of them were cheerful."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_OldestAltar {
+    msgbox(format("A rough stone with a hollow worn in its top.\pNo god's name. It's older than names.\p"
+                  "The ashes in the hollow are warm, though nobody's lit it."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_Sphinx {
+    msgbox(format("A sphinx on a tall column, the gift of the Naxians.\p"
+                  "She looks down the Sacred Way at everyone who comes up it.\p"
+                  "She's heard every riddle. She isn't impressed by any of them."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_AltarChians {
+    msgbox(format("The great altar of the Chians, before the temple. Black marble, white cornice.\p"
+                  "The ash on it is old. Nobody's sacrificed here in a year."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_GreatLaurel {
+    msgbox(format("The god's great laurel. Its leaves are darker than any tree's on the mountain.\p"
+                  "A red ribbon is tied to a low branch."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_Lookout {
+    msgbox(format("Below the parapet the olives run all the way down the valley, a grey-green sea.\p"
+                  "Past them, Kirrha. Past Kirrha, the gulf, shining, and the blue mountains beyond.\p"
+                  "Behind you the cliffs blaze. Everyone who climbs here turns round at this wall."),
+           MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_LookoutBoy {
+    msgbox(format("See the shine past the olives? That's the gulf.\p"
+                  "When the sun goes down behind it, the cliffs up there go red. Every evening.\p"
+                  "I've watched it four hundred times. It's never the same red."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Spring {
+    if (var(VAR_ICHOR_ACT3) == 13) {
+        msgbox(format("The water falls from the lion heads into the basin. Mom's bee hums over it."),
+               MSGBOX_SIGN)
+        end
+    }
+    msgbox(format("The Kastalian spring. Water runs from three bronze lion heads into a long basin.\p"
+                  "The Pythia washes her hair here before the god speaks."), MSGBOX_SIGN)
+}
+
+script Delphoi_EventScript_Omphalos {
+    lockall
+    if (flag(FLAG_ICHOR_OMPHALOS_OPEN)) {
+        goto(Delphoi_EventScript_Stairhead)
+    }
+    if (var(VAR_ICHOR_ACT3) == 13) {
+        msgbox(format("The stone in its net of wool. It's warm.\p"
+                      "You put your ear to it. Something under it is ticking."))
+        releaseall
+        end
+    }
+    msgbox(format("An egg-shaped stone in a net of knotted wool. The navel of the world.\p"
+                  "Zeus let two eagles fly from the ends of the earth. They met here.\p"
+                  "A worn plaque: THE STONE THAT KRONOS SWALLOWED. Set here by Zeus.\p"
+                  "The stone is warm, like Kronion Hill's altar was. It hums, very low."))
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// III-7: Mom at the Kastalian spring (STORY §7.5 is the master text)
+// ---------------------------------------------------------------------------
+
+text Delphoi_Text_WhyDidntYou { "WHY DIDN'T YOU TELL ME?" }
+text Delphoi_Text_IKnow { "I KNOW." }
+
+movement Delphoi_Movement_MomStraighten {
+    walk_down
+    delay_16
+    walk_up
+    face_down
+    step_end
+}
+
+movement Delphoi_Movement_PlayerToMom {
+    walk_up * 2
+    walk_right
+    face_up
+    step_end
+}
+
+script Delphoi_EventScript_MomScene {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Delphoi_Movement_PlayerToMom)
+    waitmovement(0)
+    turnobject(LOCALID_DELPHOI_MOM, DIR_SOUTH)
+    setspeaker(Delphoi_Text_NameMom)
+    msgbox(format("There you are. You look thin. Have you been eating?\p"
+                  "…Don't look at me like that. I know. I know.\p"
+                  "Sit. My knees aren't what they were when I lived here."))
+    msgbox(format("I said a pilgrim told me about the blind hour.\pThere wasn't any pilgrim.\p"
+                  "I was here. I was a bee, once. A melissa."))
+    msgbox(format("We carried honey down to the Loom. For the three of them.\p"
+                  "Nobody else would. A thousand years in chains, and nobody fed them."))
+    msgbox(format("When I was carrying you, I took the honey down like always.\p"
+                  "The middle one measured your thread. She didn't mean to. It's what her hands do.\p"
+                  "One hour. You'd have had one hour."))
+    closemessage
+    delay(90)
+    msgbox(format("I begged. I'm not proud of it. I begged three old women in chains.\p"
+                  "The Spinner said she couldn't change what she'd spun.\p"
+                  "But she could take it back. Unspin it. As if it had never been."))
+    msgbox(format("No thread. No hour. No knot. No promise of anything, ever.\p"
+                  "Nobody would see what you'd be. Not the Pythia. Not even them.\p"
+                  "I said yes before she'd finished asking."))
+    msgbox(format("I ran that same night. As far as a boat would go. To Daphne.\p"
+                  "And one night, under the old olive in the square, you came.\p"
+                  "Kydippe heard me. She came out in her nightdress and knelt in the dirt."))
+    msgbox(format("Far away, the Spinner held her hands still for an hour.\pAnd the Oracle went blind."))
+    msgbox(format("You didn't cry. You looked around like you'd lost something.\p"
+                  "You had. An hour. I traded it for everything else.\p"
+                  "So that's what you are. You're the thing I chose.\p"
+                  "I'm sorry I lied. I'm not sorry I did it."))
+    closemessage
+    dynmultichoice(15, 6, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, Delphoi_Text_WhyDidntYou, Delphoi_Text_IKnow)
+    setspeaker(Delphoi_Text_NameMom)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("Because you'd have wondered every day if it was worth it.\p"
+                      "I wanted you to just live. Not prove anything."))
+    } else {
+        msgbox(format("…Of course you do. You've got Daphne's nose for things. And my chin."))
+    }
+    msgbox(format("The helmets came to Elaia. My bee hummed it the day before.\p"
+                  "I'd packed by supper. Where do you hide a runaway bee?\p"
+                  "In the hive. Phemonoe took me in. She always was the brave one."))
+    msgbox(format("Oh. And one more thing, while I'm confessing.\p"
+                  "The knucklebones. I cheated. The bee hums the throws.\p"
+                  "All two hundred and twelve.\p…Well. You had to find out sometime."))
+    msgbox(format("Here. You can have it now."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_MELITTAS_HONEY)
+    msgbox(format("The label still says “NOT FOR {PLAYER}.”"))
+    setspeaker(Delphoi_Text_NameMom)
+    msgbox(format("It was never for you. It was for them. The last of the Delphoi honey.\p"
+                  "You're going down there tonight, aren't you."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Stubborn. You get that from me."))
+    } else {
+        msgbox(format("Liar. Good. You'll need that."))
+    }
+    msgbox(format("Then take it to them. Tell them Melitta says thank you.\p"
+                  "Tell them it was worth it. Every day."))
+    closemessage
+    applymovement(LOCALID_DELPHOI_MOM, Delphoi_Movement_MomStraighten)
+    waitmovement(0)
+    msgbox(format("And come back up. You hear me? That's all I'll ask.\pEvery time. Come back up."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    turnobject(LOCALID_DELPHOI_MOM, DIR_NORTH)
+    setflag(FLAG_ICHOR_MOM_SPRING)
+    setvar(VAR_ICHOR_ACT3, 13)
+    setvar(VAR_TEMP_3, 0)
+    // Night falls at once, and holds until the climax.
+    setvar(VAR_0x8004, TIME_NIGHT)
+    special(Ichor_HoldTimeOfDay)
+    fadescreen(FADE_TO_BLACK)
+    // in the dark, Kleon and Rhea take up their watch at the court's gate
+    clearflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE)
+    clearflag(FLAG_ICHOR_HIDE_RHEA_DELPHOI_GATE)
+    addobject(LOCALID_DELPHOI_KLEON_GATE)
+    addobject(LOCALID_DELPHOI_RHEA_GATE)
+    setvar(VAR_TEMP_4, 1)
+    fadescreen(FADE_FROM_BLACK)
+    releaseall
+}
+
+script Delphoi_EventScript_Mom {
+    setspeaker(Delphoi_Text_NameMom)
+    if (flag(FLAG_ICHOR_MOM_SPRING)) {
+        msgbox(format("I'm not going anywhere. Not tonight.\p"
+                      "Go and see to your Pokémon. Eat something. Then go up."), MSGBOX_NPC)
+    } else {
+        msgbox(format("There you are."), MSGBOX_NPC)
+    }
+}
+
+// ---------------------------------------------------------------------------
+// III-8: the Omphalos at night
+// ---------------------------------------------------------------------------
+
+movement Delphoi_Movement_PlayerIntoCourt {
+    walk_up * 2
+    walk_right
+    face_up
+    step_end
+}
+
+movement Delphoi_Movement_PlayerBack {
+    walk_down
+    step_end
+}
+
+movement Delphoi_Movement_KleonToGate {
+    walk_right
+    face_down
+    step_end
+}
+
+movement Delphoi_Movement_RheaBeside {
+    walk_left
+    walk_up * 2
+    face_right
+    step_end
+}
+
+movement Delphoi_Movement_FaceDown {
+    face_down
+    step_end
+}
+
+movement Delphoi_Movement_HyperionToStone {
+    face_up
+    step_end
+}
+
+movement Delphoi_Movement_GoDownStone {
+    walk_slow_up
+    set_invisible
+    step_end
+}
+
+script Delphoi_EventScript_KleonGate {
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("Tonight. Mother says tonight. The bees went quiet at sunset."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_RheaGate {
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Bees know."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_OmphalosNight {
+    lockall
+    msgbox(format("The court is very quiet. Go in?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        applymovement(OBJ_EVENT_ID_PLAYER, Delphoi_Movement_PlayerBack)
+        waitmovement(0)
+        releaseall
+        end
+    }
+    closemessage
+    fadedefaultbgm
+    applymovement(OBJ_EVENT_ID_PLAYER, Delphoi_Movement_PlayerIntoCourt)
+    waitmovement(0)
+    delay(30)
+    playse(SE_M_HORN_ATTACK)
+    delay(40)
+    playse(SE_M_HORN_ATTACK)
+    delay(30)
+    playse(SE_M_HORN_ATTACK)
+    waitse
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("That's them. That's all of them."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 8)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    waitstate
+    // the torches light up the Sacred Way, one by one, climbing
+    setmetatile(24, 30, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(16, 30, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    special(DrawWholeMapView)
+    delay(15)
+    setmetatile(11, 26, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(20, 25, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    special(DrawWholeMapView)
+    delay(15)
+    setmetatile(32, 24, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(28, 19, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    setmetatile(22, 19, METATILE_DELPHOI_TORCH_LIT, TRUE)
+    special(DrawWholeMapView)
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_MUSTER)
+    addobject(LOCALID_DELPHOI_MUSTER_1)
+    addobject(LOCALID_DELPHOI_MUSTER_2)
+    addobject(LOCALID_DELPHOI_MUSTER_3)
+    addobject(LOCALID_DELPHOI_MUSTER_4)
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("Every helmet in Aethos. Coming up the Sacred Way."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Hold the gate."))
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("Holding!"))
+    closemessage
+    applymovement(LOCALID_DELPHOI_RHEA_GATE, Delphoi_Movement_RheaBeside)
+    waitmovement(0)
+    applymovement(LOCALID_DELPHOI_KLEON_GATE, Delphoi_Movement_KleonToGate)
+    waitmovement(0)
+    playse(SE_M_STRENGTH)
+    delay(10)
+    playse(SE_M_STRENGTH)
+    setspeaker(Delphoi_Text_NameKleon)
+    msgbox(format("Come on, then! One at a time, or all at once. I'm not fussy!"))
+    closemessage
+    // two Gigas vault the court's side wall
+    setspeaker(SP_NAME_NONE)
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_GIGAS)
+    addobject(LOCALID_DELPHOI_GIGAS_1)
+    addobject(LOCALID_DELPHOI_GIGAS_2)
+    setobjectxy(LOCALID_DELPHOI_GIGAS_1, 24, 15)
+    setobjectxy(LOCALID_DELPHOI_GIGAS_2, 25, 15)
+    playse(SE_M_STRENGTH)
+    applymovement(LOCALID_DELPHOI_GIGAS_1, Delphoi_Movement_FaceDown)
+    applymovement(LOCALID_DELPHOI_GIGAS_2, Delphoi_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Delphoi_Text_NameEphialtes)
+    msgbox(format("The stone. Clear the stone."))
+    setspeaker(Delphoi_Text_NameThoas)
+    msgbox(format("That's the deserter. And the child."))
+    setspeaker(Delphoi_Text_NameEphialtes)
+    msgbox(format("The child's not to be touched. The deserter is."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Two of them. Two of us.\pBeside me.\p"
+                  "I've never fought on the right side. I'd like to see what it's like."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setmultitrainerbattle(TRAINER_ICHOR_GIGAS_EPHIALTES, Delphoi_Text_EphialtesDefeat, TRAINER_ICHOR_GIGAS_THOAS, Delphoi_Text_ThoasDefeat, PARTNER_ICHOR_RHEA_DELPHOI)
+    setvar(VAR_0x8005, MULTI_BATTLE_2_VS_2)
+    callnative(BattleSetup_StartMultiBattle)
+    waitstate
+    if (var(VAR_RESULT) != B_OUTCOME_WON) {
+        releaseall
+        end
+    }
+    settrainerflag(TRAINER_ICHOR_GIGAS_EPHIALTES)
+    settrainerflag(TRAINER_ICHOR_GIGAS_THOAS)
+    goto(Delphoi_EventScript_OmphalosOpens)
+}
+
+text Delphoi_Text_EphialtesDefeat { format("Doesn't matter. He's here.") }
+text Delphoi_Text_ThoasDefeat { format("Two of us. Two of you. It should've been even.") }
+
+script Delphoi_EventScript_OmphalosOpens {
+    lockall
+    fadescreen(FADE_TO_BLACK)
+    setobjectxy(LOCALID_DELPHOI_GIGAS_1, 19, 15)
+    setobjectxy(LOCALID_DELPHOI_GIGAS_2, 19, 16)
+    turnobject(LOCALID_DELPHOI_GIGAS_1, DIR_EAST)
+    turnobject(LOCALID_DELPHOI_GIGAS_2, DIR_EAST)
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_HYPERION)
+    addobject(LOCALID_DELPHOI_HYPERION)
+    turnobject(LOCALID_DELPHOI_HYPERION, DIR_EAST)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Delphoi_Text_NameEphialtes)
+    msgbox(format("Doesn't matter. Doesn't matter now. He's here."))
+    setspeaker(Delphoi_Text_NameHyperion)
+    msgbox(format("Unwoven! Is that you? It's dark as a well up here.\pLampito! Thought you'd gone home."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("I did."))
+    setspeaker(Delphoi_Text_NameHyperion)
+    msgbox(format("Huh. Good for you. Stand back, the pair of you."))
+    closemessage
+    applymovement(LOCALID_DELPHOI_HYPERION, Delphoi_Movement_HyperionToStone)
+    waitmovement(0)
+    // the wool catches; fire runs along every knot
+    setspeaker(SP_NAME_NONE)
+    playse(SE_M_FLAME_WHEEL)
+    setmetatile(22, 14, METATILE_DELPHOI_OMPHALOS_BURNING_TL, TRUE)
+    setmetatile(23, 14, METATILE_DELPHOI_OMPHALOS_BURNING_TR, TRUE)
+    setmetatile(22, 15, METATILE_DELPHOI_OMPHALOS_BURNING_BL, TRUE)
+    setmetatile(23, 15, METATILE_DELPHOI_OMPHALOS_BURNING_BR, TRUE)
+    special(DrawWholeMapView)
+    delay(30)
+    setspeaker(Delphoi_Text_NameHyperion)
+    msgbox(format("Old wool. Goes up like a dry year."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    playse(SE_THUNDER)
+    setvar(VAR_0x8004, 3)
+    setvar(VAR_0x8005, 3)
+    setvar(VAR_0x8006, 12)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    setmetatile(22, 14, METATILE_DELPHOI_OMPHALOS_OPEN_TL, TRUE)
+    setmetatile(23, 14, METATILE_DELPHOI_OMPHALOS_OPEN_TR, TRUE)
+    setmetatile(22, 15, METATILE_DELPHOI_OMPHALOS_OPEN_BL, TRUE)
+    setmetatile(23, 15, METATILE_DELPHOI_OMPHALOS_OPEN_BR, TRUE)
+    special(DrawWholeMapView)
+    setflag(FLAG_ICHOR_OMPHALOS_OPEN)
+    setvar(VAR_ICHOR_ACT3, 14)
+    playse(SE_CLICK)
+    delay(60)
+    playse(SE_CLICK)
+    setspeaker(Delphoi_Text_NameHyperion)
+    msgbox(format("There. Told you I'd get it open, my lord."))
+    closemessage
+    // Phaedon walks up through the Titanborn
+    setspeaker(SP_NAME_NONE)
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON)
+    addobject(LOCALID_DELPHOI_PHAEDON)
+    turnobject(LOCALID_DELPHOI_PHAEDON, DIR_EAST)
+    delay(30)
+    setspeaker(Delphoi_Text_NamePhaedon)
+    msgbox(format("Lampito."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("Phaedon."))
+    setspeaker(Delphoi_Text_NamePhaedon)
+    msgbox(format("You left the threshold open. At Knossa. I'm glad you did.\p"
+                  "I think I'd have done the same."))
+    setspeaker(Delphoi_Text_NameRhea)
+    msgbox(format("No. You'd have sealed it. And been sorry."))
+    setspeaker(Delphoi_Text_NamePhaedon)
+    msgbox(format("…Yes. Probably."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    turnobject(LOCALID_DELPHOI_PHAEDON, DIR_SOUTH)
+    delay(60)
+    applymovement(LOCALID_DELPHOI_PHAEDON, Delphoi_Movement_GoDownStone)
+    waitmovement(0)
+    removeobject(LOCALID_DELPHOI_PHAEDON)
+    setflag(FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON)
+    setspeaker(Delphoi_Text_NameHyperion)
+    msgbox(format("Mind the steps, my lord. Mind the-\pI can't see the steps. Hold on. I'm coming."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_DELPHOI_HYPERION, Delphoi_Movement_GoDownStone)
+    waitmovement(0)
+    removeobject(LOCALID_DELPHOI_HYPERION)
+    setflag(FLAG_ICHOR_HIDE_OMPHALOS_HYPERION)
+    // far below, at the sanctuary's gate: the Archon's guard
+    clearflag(FLAG_ICHOR_HIDE_OMPHALOS_ARCHON)
+    addobject(LOCALID_DELPHOI_ARCHON)
+    setspeaker(Delphoi_Text_NameCaptain)
+    msgbox(format("In the Archon's name! Lay down your-\pHold them! Hold the gate!"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    delay(90)
+    setspeaker(Delphoi_Text_NameAristeides)
+    msgbox(format("…Hm."))
+    closemessage
+    // Mom and Alethea come up the east steps from the spring path
+    setspeaker(SP_NAME_NONE)
+    clearflag(FLAG_ICHOR_HIDE_MOM_STAIRHEAD)
+    addobject(LOCALID_DELPHOI_MOM_STAIR)
+    addobject(LOCALID_DELPHOI_ALETHEA_STAIR)
+    setflag(FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING)
+    setspeaker(Delphoi_Text_NameMom)
+    msgbox(format("There you are."))
+    setspeaker(Delphoi_Text_NameAlethea)
+    msgbox(format("We heard the horn. Truthfully, everyone in Phokis heard the horn.\p"
+                  "Take the lamp- no. You'll want both hands. I'll hold it here."))
+    setspeaker(Delphoi_Text_NameMom)
+    msgbox(format("Go on, then. I'll be right here. At the top.\p"
+                  "I've done my waiting at the bottom of things. I'll wait up here this time.\p"
+                  "Up's this way. Remember that."))
+    goto(Delphoi_EventScript_Stairhead)
+}
+
+script Delphoi_EventScript_Stairhead {
+    lockall
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Go down the stair?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Delphoi_Text_NameMom)
+        msgbox(format("Take a breath first. Then go. They won't wait, and nor should you."))
+        closemessage
+        setspeaker(SP_NAME_NONE)
+        releaseall
+        end
+    }
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_OMPHALOS_NIGHT)
+    setvar(VAR_TEMP_4, 0)
+    warp(MAP_DELPHOI_OMPHALOS_STAIR, 3, 2)
+    waitstate
+    releaseall
+}
+
+script Delphoi_EventScript_Gigas {
+    msgbox(format("A Gigas, sitting hard against the wall. He doesn't look up."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Hyperion {
+    msgbox(format("…"), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Phaedon {
+    msgbox(format("…"), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Aristeides {
+    setspeaker(Delphoi_Text_NameAristeides)
+    msgbox(format("…Hm."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_MomStair {
+    setspeaker(Delphoi_Text_NameMom)
+    msgbox(format("Up's this way. Remember that."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_AletheaStair {
+    setspeaker(Delphoi_Text_NameAlethea)
+    msgbox(format("I'll hold the lamp here. Go on."), MSGBOX_NPC)
+}
+
+script Delphoi_EventScript_Titanborn {
+    setspeaker(Delphoi_Text_NameTitanborn)
+    msgbox(format("The master's gone down! The cloth runs out tonight!"), MSGBOX_NPC)
+}
+
+// The entrance herm (the user's rule: every town and rest stop has one at its
+// way in). Touching it registers the herm for travel; the herm-travel system
+// hooks EventScript_IchorGreatHerm on merge.
+script Delphoi_EventScript_EntranceHerm {
+    lockall
+    msgbox(format("The herm of Delphoi. Touch it to travel between herms."))
+    call(EventScript_IchorGreatHerm)
+    releaseall
+}

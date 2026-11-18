@@ -2480,6 +2480,82 @@
 #define FLAG_ICHOR_ITEM_GYTHEION_ISLET          (FLAG_ICHOR_GENERAL2_START + 0x531) // Ichor: Lakonia: the Proteus islet's item off Gytheion (Conch)
 #define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_ISLET    (FLAG_ICHOR_GENERAL2_START + 0x532) // Ichor: Lakonia: Route 25's reed islet (Conch)
 #define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_ISLET   (FLAG_ICHOR_GENERAL2_START + 0x533) // Ichor: Lakonia: the Proteus islet off Gytheion (Conch)
+#define FLAG_ICHOR_SACRED_OLIVES_COLUMN         (FLAG_ICHOR_GENERAL2_START + 0x540) // Ichor: Delphoi: III-6A, the Titans' column has passed on the Sacred Olives
+#define FLAG_ICHOR_HIDE_TITAN_COLUMN_OLIVES     (FLAG_ICHOR_GENERAL2_START + 0x541) // Ichor: Delphoi: hide the Titans' column on the Sacred Olives
+#define FLAG_ICHOR_HIDE_HIERON_ROAD             (FLAG_ICHOR_GENERAL2_START + 0x542) // Ichor: Delphoi: hide Hieron at the roadside (he's in his hut)
+#define FLAG_ICHOR_GOT_HIERON_OIL               (FLAG_ICHOR_GENERAL2_START + 0x543) // Ichor: Delphoi: Hieron gave 3 Olive Oil
+#define FLAG_ICHOR_GOT_HIERON_BIG_ROOT          (FLAG_ICHOR_GENERAL2_START + 0x544) // Ichor: Delphoi: Hieron gave a Big Root after the climax
+#define FLAG_ICHOR_GORGE_SENTRIES               (FLAG_ICHOR_GENERAL2_START + 0x545) // Ichor: Delphoi: III-6B, the gorge's sentries let you through
+#define FLAG_ICHOR_GORGE_BOULDER                (FLAG_ICHOR_GENERAL2_START + 0x546) // Ichor: Delphoi: the gorge's cracked boulder (hide flag of the rock object)
+#define FLAG_ICHOR_HIDE_OCHTHOS_GORGE           (FLAG_ICHOR_GENERAL2_START + 0x547) // Ichor: Delphoi: Ochthos has left the gorge (after the climax)
+#define FLAG_ICHOR_VISITED_DELPHOI              (FLAG_ICHOR_GENERAL2_START + 0x548) // Ichor: Delphoi: visited (the fly flag)
+#define FLAG_ICHOR_DELPHOI_ARRIVED              (FLAG_ICHOR_GENERAL2_START + 0x549) // Ichor: Delphoi: III-6C played (the Pythia passed, Alethea met)
+#define FLAG_ICHOR_HIDE_PYTHIA_PROCESSION       (FLAG_ICHOR_GENERAL2_START + 0x54A) // Ichor: Delphoi: hide the Pythia's procession
+#define FLAG_ICHOR_HIDE_ALETHEA_DELPHOI_STEPS   (FLAG_ICHOR_GENERAL2_START + 0x54B) // Ichor: Delphoi: hide Alethea on the Sacred Way
+#define FLAG_ICHOR_DELPHOI_STADIUM_SCENE        (FLAG_ICHOR_GENERAL2_START + 0x54C) // Ichor: Delphoi: Kleon and Rhea at the stadium, seen
+#define FLAG_ICHOR_HIDE_KLEON_DELPHOI_STADIUM   (FLAG_ICHOR_GENERAL2_START + 0x54D) // Ichor: Delphoi: hide Kleon at the stadium
+#define FLAG_ICHOR_HIDE_RHEA_DELPHOI_STADIUM    (FLAG_ICHOR_GENERAL2_START + 0x54E) // Ichor: Delphoi: hide Rhea at the stadium
+#define FLAG_ICHOR_APOLLO_DISC_0                (FLAG_ICHOR_GENERAL2_START + 0x54F) // Ichor: Temple of Apollo: the pronaos's disc lit
+#define FLAG_ICHOR_APOLLO_DISC_1                (FLAG_ICHOR_GENERAL2_START + 0x550) // Ichor: Temple of Apollo: chamber 1's disc lit
+#define FLAG_ICHOR_APOLLO_DISC_2                (FLAG_ICHOR_GENERAL2_START + 0x551) // Ichor: Temple of Apollo: chamber 2's disc lit
+#define FLAG_ICHOR_APOLLO_DISC_3                (FLAG_ICHOR_GENERAL2_START + 0x552) // Ichor: Temple of Apollo: chamber 3's disc lit
+#define FLAG_ICHOR_APOLLO_DISC_4                (FLAG_ICHOR_GENERAL2_START + 0x553) // Ichor: Temple of Apollo: chamber 4's disc lit
+#define FLAG_ICHOR_APOLLO_BRAZIER               (FLAG_ICHOR_GENERAL2_START + 0x554) // Ichor: Temple of Apollo: the adyton's brazier lit from the beam
+#define FLAG_ICHOR_PYTHIAN_LIGHT_DONE           (FLAG_ICHOR_GENERAL2_START + 0x555) // Ichor: Temple of Apollo: the tripod lit
+#define FLAG_ICHOR_HIDE_PHEMONOE_TRIPOD         (FLAG_ICHOR_GENERAL2_START + 0x556) // Ichor: Temple of Apollo: hide the Pythia on the tripod until it's lit
+#define FLAG_ICHOR_GOT_TM_MYSTICAL_FIRE         (FLAG_ICHOR_GENERAL2_START + 0x557) // Ichor: Temple of Apollo: the Pythia gave TM Mystical Fire
+#define FLAG_ICHOR_PYTHIA_SPOKE                 (FLAG_ICHOR_GENERAL2_START + 0x558) // Ichor: Delphoi: the Pythia said Melitta (after the Sun Laurel)
+#define FLAG_ICHOR_MOM_SPRING                   (FLAG_ICHOR_GENERAL2_START + 0x559) // Ichor: Delphoi: III-7, Mom at the Kastalian spring
+#define FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING      (FLAG_ICHOR_GENERAL2_START + 0x55A) // Ichor: Delphoi: hide Mom at the spring
+#define FLAG_ICHOR_OMPHALOS_NIGHT               (FLAG_ICHOR_GENERAL2_START + 0x55B) // Ichor: Delphoi: III-8 done, you went down the Omphalos stair
+#define FLAG_ICHOR_OMPHALOS_OPEN                (FLAG_ICHOR_GENERAL2_START + 0x55C) // Ichor: Delphoi: the Omphalos is split open (III-8 on)
+#define FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE      (FLAG_ICHOR_GENERAL2_START + 0x55D) // Ichor: Delphoi: hide Kleon at the Omphalos court's gate
+#define FLAG_ICHOR_HIDE_RHEA_DELPHOI_GATE       (FLAG_ICHOR_GENERAL2_START + 0x55E) // Ichor: Delphoi: hide Rhea at the Omphalos court's gate
+#define FLAG_ICHOR_HIDE_OMPHALOS_GIGAS          (FLAG_ICHOR_GENERAL2_START + 0x55F) // Ichor: Delphoi: hide Ephialtes and Thoas
+#define FLAG_ICHOR_HIDE_OMPHALOS_HYPERION       (FLAG_ICHOR_GENERAL2_START + 0x560) // Ichor: Delphoi: hide Hyperion at the Omphalos
+#define FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON        (FLAG_ICHOR_GENERAL2_START + 0x561) // Ichor: Delphoi: hide Phaedon at the Omphalos
+#define FLAG_ICHOR_HIDE_OMPHALOS_ARCHON         (FLAG_ICHOR_GENERAL2_START + 0x562) // Ichor: Delphoi: hide the Archon at the lower gate
+#define FLAG_ICHOR_HIDE_MOM_STAIRHEAD           (FLAG_ICHOR_GENERAL2_START + 0x563) // Ichor: Delphoi: hide Mom and Alethea at the stairhead
+#define FLAG_ICHOR_HIDE_OMPHALOS_MUSTER         (FLAG_ICHOR_GENERAL2_START + 0x564) // Ichor: Delphoi: hide the Titanborn on the Sacred Way
+#define FLAG_ICHOR_GOT_THEOKLES_STYLUS          (FLAG_ICHOR_GENERAL2_START + 0x565) // Ichor: Delphoi: Theokles gave the bent stylus (Twisted Spoon)
+#define FLAG_ICHOR_KITHARODE_QUIZ               (FLAG_ICHOR_GENERAL2_START + 0x566) // Ichor: Delphoi: Chrysothemis's nome quiz won (TM Hyper Voice)
+#define FLAG_ICHOR_SIPHNIAN_TITHE               (FLAG_ICHOR_GENERAL2_START + 0x567) // Ichor: Delphoi: paid the Siphnians' tithe (Choice Specs)
+#define FLAG_ICHOR_GOT_POLEMON_SPELL_TAG        (FLAG_ICHOR_GENERAL2_START + 0x568) // Ichor: Delphoi: Polemon gave a Spell Tag
+#define FLAG_ICHOR_TRADED_KERAZAP_DELPHOI       (FLAG_ICHOR_GENERAL2_START + 0x569) // Ichor: Delphoi: traded a Melibee for Prophet the Kerazap
+#define FLAG_ICHOR_GOT_PHILAGROS_BELL           (FLAG_ICHOR_GENERAL2_START + 0x56A) // Ichor: Delphoi: Philagros gave a Soothe Bell (after the climax)
+#define FLAG_ICHOR_GOT_MELISSAI_HONEY           (FLAG_ICHOR_GENERAL2_START + 0x56B) // Ichor: Delphoi: Hagne gave honey (after the climax)
+#define FLAG_ICHOR_GOT_DELPHOI_OSTRAKON         (FLAG_ICHOR_GENERAL2_START + 0x56C) // Ichor: Delphoi: Aristion gave his ostrakon
+#define FLAG_ICHOR_HIDE_ALETHEA_TREASURY        (FLAG_ICHOR_GENERAL2_START + 0x56D) // Ichor: Delphoi: hide Alethea in Astyra's treasury
+#define FLAG_ICHOR_HIDE_MOM_MELISSAI            (FLAG_ICHOR_GENERAL2_START + 0x56E) // Ichor: Delphoi: hide Mom in the melissai's inner room
+#define FLAG_ICHOR_ITEM_OLIVES_MAX_REPEL        (FLAG_ICHOR_GENERAL2_START + 0x56F) // Ichor: Delphoi: the item ball (olives_max_repel)
+#define FLAG_ICHOR_ITEM_OLIVES_ULTRA_BALL       (FLAG_ICHOR_GENERAL2_START + 0x570) // Ichor: Delphoi: the item ball (olives_ultra_ball)
+#define FLAG_ICHOR_ITEM_OLIVES_HYPER_POTION     (FLAG_ICHOR_GENERAL2_START + 0x571) // Ichor: Delphoi: the item ball (olives_hyper_potion)
+#define FLAG_ICHOR_ITEM_OLIVES_FULL_HEAL        (FLAG_ICHOR_GENERAL2_START + 0x572) // Ichor: Delphoi: the item ball (olives_full_heal)
+#define FLAG_ICHOR_ITEM_OLIVES_PP_UP            (FLAG_ICHOR_GENERAL2_START + 0x573) // Ichor: Delphoi: the item ball (olives_pp_up)
+#define FLAG_ICHOR_ITEM_GORGE_MAX_ETHER         (FLAG_ICHOR_GENERAL2_START + 0x574) // Ichor: Delphoi: the item ball (gorge_max_ether)
+#define FLAG_ICHOR_ITEM_GORGE_ETHER             (FLAG_ICHOR_GENERAL2_START + 0x575) // Ichor: Delphoi: the item ball (gorge_ether)
+#define FLAG_ICHOR_ITEM_GORGE_REVIVE            (FLAG_ICHOR_GENERAL2_START + 0x576) // Ichor: Delphoi: the item ball (gorge_revive)
+#define FLAG_ICHOR_ITEM_GORGE_FULL_HEAL         (FLAG_ICHOR_GENERAL2_START + 0x577) // Ichor: Delphoi: the item ball (gorge_full_heal)
+#define FLAG_ICHOR_ITEM_GORGE_ULTRA_BALL        (FLAG_ICHOR_GENERAL2_START + 0x578) // Ichor: Delphoi: the item ball (gorge_ultra_ball)
+#define FLAG_ICHOR_ITEM_DELPHOI_ULTRA_BALL      (FLAG_ICHOR_GENERAL2_START + 0x579) // Ichor: Delphoi: the item ball (delphoi_ultra_ball)
+#define FLAG_ICHOR_ITEM_APOLLO_FULL_RESTORE     (FLAG_ICHOR_GENERAL2_START + 0x57A) // Ichor: Delphoi: the item ball (apollo_full_restore)
+#define FLAG_ICHOR_HIDDEN_ITEM_OLIVES_LEAF_STONE (FLAG_ICHOR_GENERAL2_START + 0x57B) // Ichor: Delphoi: hidden item (olives_leaf_stone)
+#define FLAG_ICHOR_HIDDEN_ITEM_OLIVES_REVIVE    (FLAG_ICHOR_GENERAL2_START + 0x57C) // Ichor: Delphoi: hidden item (olives_revive)
+#define FLAG_ICHOR_HIDDEN_ITEM_OLIVES_BIG_MUSHROOM (FLAG_ICHOR_GENERAL2_START + 0x57D) // Ichor: Delphoi: hidden item (olives_big_mushroom)
+#define FLAG_ICHOR_HIDDEN_ITEM_OLIVES_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x57E) // Ichor: Delphoi: hidden item (olives_star_piece)
+#define FLAG_ICHOR_HIDDEN_ITEM_GORGE_FULL_RESTORE (FLAG_ICHOR_GENERAL2_START + 0x57F) // Ichor: Delphoi: hidden item (gorge_full_restore)
+#define FLAG_ICHOR_HIDDEN_ITEM_GORGE_MYSTIC_WATER (FLAG_ICHOR_GENERAL2_START + 0x580) // Ichor: Delphoi: hidden item (gorge_mystic_water)
+#define FLAG_ICHOR_HIDDEN_ITEM_GORGE_PEARL      (FLAG_ICHOR_GENERAL2_START + 0x581) // Ichor: Delphoi: hidden item (gorge_pearl)
+#define FLAG_ICHOR_HIDDEN_ITEM_GORGE_NUGGET     (FLAG_ICHOR_GENERAL2_START + 0x582) // Ichor: Delphoi: hidden item (gorge_nugget)
+#define FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_PEARL    (FLAG_ICHOR_GENERAL2_START + 0x583) // Ichor: Delphoi: hidden item (delphoi_pearl)
+#define FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x584) // Ichor: Delphoi: hidden item (delphoi_stardust)
+#define FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_BRONZE_OBOL (FLAG_ICHOR_GENERAL2_START + 0x585) // Ichor: Delphoi: hidden item (delphoi_bronze_obol)
+#define FLAG_ICHOR_HIDDEN_ITEM_APOLLO_HEAL_POWDER (FLAG_ICHOR_GENERAL2_START + 0x586) // Ichor: Delphoi: hidden item (apollo_heal_powder)
+#define FLAG_ICHOR_HIDE_OCHTHOS_DELPHOI         (FLAG_ICHOR_GENERAL2_START + 0x587) // Ichor: Delphoi: hide Ochthos and his mother in the Asclepeion (until the climax)
+#define FLAG_ICHOR_HIDDEN_ITEM_APOLLO_STARDUST  (FLAG_ICHOR_GENERAL2_START + 0x588) // Ichor: Temple of Apollo: hidden Stardust by the lyre
+#define FLAG_ICHOR_HIDDEN_ITEM_OMPHALOS_STAIR_1 (FLAG_ICHOR_GENERAL2_START + 0x589) // Ichor: Omphalos stair: hidden item in the first niche
+#define FLAG_ICHOR_HIDDEN_ITEM_OMPHALOS_STAIR_2 (FLAG_ICHOR_GENERAL2_START + 0x58A) // Ichor: Omphalos stair: hidden item on the lower landing
+#define FLAG_ICHOR_ITEM_OMPHALOS_STAIR          (FLAG_ICHOR_GENERAL2_START + 0x58B) // Ichor: Omphalos stair: Hyperion's dropped pack
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

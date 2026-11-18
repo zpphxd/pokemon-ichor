@@ -1,0 +1,750 @@
+{
+  "id": "MAP_DELPHOI",
+  "name": "Delphoi",
+  "layout": "LAYOUT_DELPHOI",
+  "music": "MUS_ICHOR_ELEUSA",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_DELPHOI",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE28_KASTALIAN_GORGE",
+      "offset": 26,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 4,
+      "y": 38,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_LookoutBoy",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_PYTHIA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "x": 41,
+      "y": 30,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Pythia",
+      "flag": "FLAG_ICHOR_HIDE_PYTHIA_PROCESSION"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MELISSA_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 41,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Melissa",
+      "flag": "FLAG_ICHOR_HIDE_PYTHIA_PROCESSION"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MELISSA_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 41,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Melissa",
+      "flag": "FLAG_ICHOR_HIDE_PYTHIA_PROCESSION"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 28,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_AletheaArrival",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_DELPHOI_STEPS"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_PILGRIM_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 19,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Pilgrim1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 20,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Pilgrim2",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_OLD_PILGRIM",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 21,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Pilgrim3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 22,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Pilgrim4",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 5,
+      "y": 37,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_MelissaHives",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 41,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_DozingPilgrim",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 0,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_GateGuard",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
+      "x": 9,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Iamos",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 18,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Orsippos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_KLEON_STADIUM",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 24,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_KleonStadium",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_DELPHOI_STADIUM"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_RHEA_STADIUM",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 26,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_RheaStadium",
+      "flag": "FLAG_ICHOR_HIDE_RHEA_DELPHOI_STADIUM"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MOM",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MOM",
+      "x": 43,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Mom",
+      "flag": "FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_KLEON_GATE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 22,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_KleonGate",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_RHEA_GATE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 24,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_RheaGate",
+      "flag": "FLAG_ICHOR_HIDE_RHEA_DELPHOI_GATE"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_GIGAS_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 19,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Gigas",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_GIGAS"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_GIGAS_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 19,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Gigas",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_GIGAS"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_HYPERION",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 22,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Hyperion",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_HYPERION"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_PHAEDON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
+      "x": 21,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Phaedon",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_PHAEDON"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_ARCHON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 28,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Aristeides",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_ARCHON"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MOM_STAIR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MOM",
+      "x": 21,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_MomStair",
+      "flag": "FLAG_ICHOR_HIDE_MOM_STAIRHEAD"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_ALETHEA_STAIR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 24,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_AletheaStair",
+      "flag": "FLAG_ICHOR_HIDE_MOM_STAIRHEAD"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MUSTER_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 22,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Titanborn",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_MUSTER"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MUSTER_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 24,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Titanborn",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_MUSTER"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MUSTER_3",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 34,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Titanborn",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_MUSTER"
+    },
+    {
+      "local_id": "LOCALID_DELPHOI_MUSTER_4",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 12,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Delphoi_EventScript_Titanborn",
+      "flag": "FLAG_ICHOR_HIDE_OMPHALOS_MUSTER"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 2,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_DELPHOI_ULTRA_BALL"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 23,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_TEMPLE_OF_APOLLO",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 31,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_SIPHNIAN_TREASURY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 13,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_ASTYRAN_TREASURY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 39,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_LESCHE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 32,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_ASCLEPEION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 37,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_AGORA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_HOUSE_OF_THE_MELISSAI",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_PILGRIMS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_KORETAS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 21,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_THEOKLES_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 27,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_DELPHOI_KITHARODE_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 38,
+      "y": 39,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_Arrival"
+    },
+    {
+      "type": "trigger",
+      "x": 39,
+      "y": 39,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_Arrival"
+    },
+    {
+      "type": "trigger",
+      "x": 40,
+      "y": 39,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_Arrival"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_StadiumScene"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_StadiumScene"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 35,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_MomScene"
+    },
+    {
+      "type": "trigger",
+      "x": 42,
+      "y": 35,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_MomScene"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "1",
+      "script": "Delphoi_EventScript_OmphalosNight"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 36,
+      "y": 39,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_SignTown"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_SignNorthWest"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Delphoi_EventScript_Inscription"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_Omphalos"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_Omphalos"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 29,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_KleobisBiton"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 29,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_KleobisBiton"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_SibylRock"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_OldestAltar"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_Sphinx"
+    },
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_AltarChians"
+    },
+    {
+      "type": "sign",
+      "x": 43,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 38,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_GreatLaurel"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 39,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_Lookout"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 41,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_EntranceHerm"
+    },
+    {
+      "type": "hidden_item",
+      "x": 44,
+      "y": 31,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_PEARL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 4,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_STARDUST"
+    },
+    {
+      "type": "hidden_item",
+      "x": 22,
+      "y": 21,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_BRONZE_OBOL"
+    }
+  ],
+  "ichor_kind": "town"
+}

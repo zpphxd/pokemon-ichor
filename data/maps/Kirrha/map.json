@@ -18,6 +18,11 @@
       "direction": "up",
       "map": "MAP_ROUTE9_PARNASSOS_CROSSROADS",
       "offset": 0
+    },
+    {
+      "map": "MAP_ROUTE28_SACRED_OLIVES",
+      "offset": -6,
+      "direction": "right"
     }
   ],
   "object_events": [

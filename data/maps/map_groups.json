@@ -16,7 +16,8 @@
     "gMapGroup_Labyrinth",
     "gMapGroup_Knossa",
     "gMapGroup_Gulf",
-    "gMapGroup_Lakonia"
+    "gMapGroup_Lakonia",
+    "gMapGroup_Delphoi"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -275,5 +276,23 @@
     "Lakonia_Orthia",
     "Lakonia_ChilonHouse",
     "Lakonia_LichasHouse"
+  ],
+  "gMapGroup_Delphoi": [
+    "Route28_SacredOlives",
+    "Route28_KastalianGorge",
+    "Delphoi",
+    "Delphoi_TempleOfApollo",
+    "Delphoi_OmphalosStair",
+    "Route28_SacredOlives_WardensHut",
+    "Delphoi_Asclepeion",
+    "Delphoi_Agora",
+    "Delphoi_HouseOfTheMelissai",
+    "Delphoi_TheoklesHouse",
+    "Delphoi_PilgrimsHouse",
+    "Delphoi_KoretasHouse",
+    "Delphoi_KitharodeHouse",
+    "Delphoi_AstyranTreasury",
+    "Delphoi_SiphnianTreasury",
+    "Delphoi_Lesche"
   ]
 }

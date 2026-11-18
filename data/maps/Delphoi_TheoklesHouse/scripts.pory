@@ -1,0 +1,58 @@
+// Theokles's house, Delphoi (design/phase4/SCRIPT.md Part 2): an old prophetes's
+// study, wax tablets everywhere. He sat beside Iapetos (Lykophron here) for twenty
+// years. Once you've reached Delphoi he tells you about the night the Oracle went
+// blind and gives you the stylus Lykophron bent (a Twisted Spoon). The room is
+// delphoi_rooms.py's.
+
+mapscripts Delphoi_TheoklesHouse_MapScripts {}
+
+text Theokles_Text_Name { "THEOKLES" }
+
+script Delphoi_TheoklesHouse_EventScript_Theokles {
+    lock
+    faceplayer
+    setspeaker(Theokles_Text_Name)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("No more prophecies. So I've taken up the weather. Clouds don't lie.\p"
+                      "Well. They exaggerate."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_THEOKLES_STYLUS)) {
+        msgbox(format("Three words. Forty lines.\pI've thought about the difference every day since."))
+        release
+        end
+    }
+    if (!flag(FLAG_TEMP_1)) {
+        setflag(FLAG_TEMP_1)
+        msgbox(format("The Pythia speaks. Then someone like me writes it up properly.\p"
+                      "Hexameters. Gods prefer hexameters. Six feet a line.\p"
+                      "She hasn't given me anything to write up in a year. One word a day.\p"
+                      "You can't make a hexameter out of “soon.” I've tried."))
+        release
+        end
+    }
+    msgbox(format("That stool. Lykophron sat there. Twenty years.\pI hear he's gone up in the world.\p"
+                  "Keeper of Records, to the Archon. Good for him. Bad for the records."))
+    msgbox(format("He had beautiful handwriting. Too beautiful.\p"
+                  "You'd read what he wrote, and you'd believe it, and you'd want to."))
+    msgbox(format("He was on duty the night she went blind. Thirteen years ago.\p"
+                  "She said three words, that night. “I can't see.”\pHe wrote forty lines."))
+    msgbox(format("Everyone said it was the finest thing he'd ever done.\p"
+                  "A child with no thread, carrying a sickle to the Loom. Lovely verse.\p"
+                  "I copied it out myself. I wish I hadn't. People read my copy."))
+    msgbox(format("He bent that stylus the day he left.\pTemper. He had a temper about drafts.\p"
+                  "Take it. I don't want it on my rack."))
+    giveitem(ITEM_TWISTED_SPOON)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_THEOKLES_STYLUS)
+        setspeaker(Theokles_Text_Name)
+        msgbox(format("Bent bronze. It's good for thinking crooked. He'd know."))
+    }
+    release
+}
+
+// the two stools
+script Delphoi_TheoklesHouse_EventScript_Thing1 {
+    msgbox(format("Two stools at one desk. The second one is dusty."), MSGBOX_SIGN)
+}

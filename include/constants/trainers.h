@@ -209,6 +209,13 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_BULL_LEAPER,
     TRAINER_PIC_BULL_LEAPER_F,
     TRAINER_PIC_MINOAN_PRIESTESS,
+    // Ichor: Delphoi's portraits; Hoenn stand-ins until drawn (phase4 SCRIPT.md Part 3)
+    TRAINER_PIC_MELISSA,
+    TRAINER_PIC_KITHARODE,
+    TRAINER_PIC_PROPHETES,
+    TRAINER_PIC_GIGAS,
+    TRAINER_PIC_HIEROPHANT_PHEMONOE,
+    TRAINER_PIC_RHEA_PARTNER,          // Rhea beside you at the Omphalos: a back pic stand-in until hers is drawn
     TRAINER_PIC_COUNT,
 };
 
@@ -581,6 +588,11 @@ enum TrainerClassID
     // Ichor: Knossa's (LABYRINTH.md §9); the Labyrinth's priestesses use MINOAN_PRIEST too
     TRAINER_CLASS_BULL_LEAPER,
     TRAINER_CLASS_MINOAN_PRIEST,
+    // Ichor: Delphoi's classes (phase4 SCRIPT.md Part 3)
+    TRAINER_CLASS_MELISSA,
+    TRAINER_CLASS_KITHARODE,
+    TRAINER_CLASS_PROPHETES,
+    TRAINER_CLASS_GIGAS,
 
     TRAINER_CLASS_COUNT,
 };

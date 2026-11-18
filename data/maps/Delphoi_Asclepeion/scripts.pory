@@ -1,0 +1,50 @@
+// The Asclepeion, Delphoi (design/phase4/SCRIPT.md Part 2): cut back into the
+// rock, a thread of the Kastalian running from a crack into the basin behind the
+// counter; clay votive limbs on the walls. Epione heals; after the climax Ochthos
+// sits by the basin with his mother. The room is tools/ichor/maps/delphoi_rooms.py's.
+
+mapscripts Delphoi_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_DELPHOI)
+        if (var(VAR_ICHOR_ACT3) >= 19) {
+            clearflag(FLAG_ICHOR_HIDE_OCHTHOS_DELPHOI)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_OCHTHOS_DELPHOI)
+        }
+    }
+}
+
+text DelphoiAsclepeion_Text_NameEpione { "EPIONE" }
+text DelphoiAsclepeion_Text_NameOchthos { "OCHTHOS" }
+
+script Delphoi_Asclepeion_EventScript_Healer {
+    lock
+    faceplayer
+    setspeaker(DelphoiAsclepeion_Text_NameEpione)
+    if (var(VAR_ICHOR_ACT3) == 13) {
+        msgbox(format("I've made up every bed. Every one. Don't ask me why.\p…I know why. So do you."))
+    } else {
+        msgbox(format("Hands in the water first. The god likes clean hands. So do I."))
+    }
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x800B, LOCALID_DELPHOI_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    setspeaker(DelphoiAsclepeion_Text_NameEpione)
+    msgbox(format("There. Every one of them, mended.\pMind the stairs. Everyone falls on the stairs."))
+    release
+}
+
+script Delphoi_Asclepeion_EventScript_Ochthos {
+    setspeaker(DelphoiAsclepeion_Text_NameOchthos)
+    msgbox(format("This is her. My mother. The healer's looking after her.\p"
+                  "She's still sick. She might get better. She might not.\p"
+                  "Nobody knows. Nobody's ever not known before.\p"
+                  "…It's better. I don't know why it's better. It is."), MSGBOX_NPC)
+}
+
+script Delphoi_Asclepeion_EventScript_Thing1 {
+    msgbox(format("Little clay arms, legs, ears and eyes, hung on pegs.\p"
+                  "Each one says thank you. Some say it more than once."), MSGBOX_SIGN)
+}

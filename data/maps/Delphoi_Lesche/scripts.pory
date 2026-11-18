@@ -1,0 +1,67 @@
+// The Lesche of the Knidians, Delphoi (design/phase4/SCRIPT.md Part 2): a long
+// clubhouse hall under two great paintings, a city falling and the land of the
+// dead. Polemon will describe them (it takes four hours) and gives a Spell Tag.
+// In the post-game he points to Cape Tainaron's door to the Underworld
+// (design/WORLD_EXPLORATION.md, UNDERWORLD.md). The room is delphoi_rooms.py's.
+
+mapscripts Delphoi_Lesche_MapScripts {}
+
+text Lesche_Text_NamePolemon { "POLEMON" }
+
+script Delphoi_Lesche_EventScript_Polemon {
+    lock
+    faceplayer
+    setspeaker(Lesche_Text_NamePolemon)
+    if (var(VAR_ICHOR_ACT3) >= 26) {
+        msgbox(format("The painter put a door in the Underworld picture. Look. Bottom corner.\p"
+                      "There's a real one. Cape Tainaron, at the tip of Lakonia. People go in.\p"
+                      "They mostly don't come out. I'd like a full description, if you go."))
+        release
+        end
+    }
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("I went down to the Loom. With a lamp. Everyone's been.\p"
+                      "I've started describing it. Every thread. It'll take me a lifetime.\p"
+                      "Isn't that grand? A lifetime. Nobody knows how long that is anymore."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_POLEMON_SPELL_TAG)) {
+        msgbox(format("The dead do one thing, over and over. I find that restful."))
+        release
+        end
+    }
+    msgbox(format("The Lesche! Where the men of Knidos came to talk. Look at the walls.\p"
+                  "Left: a city falling. Right: the land of the dead. Cheerful, isn't it?\p"
+                  "I've described them both. Every figure. It took me nine years.\p"
+                  "Would you like to hear it? It's only four hours."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Everyone says no. Then they come back. The dead are very interesting."))
+        release
+        end
+    }
+    msgbox(format("Wonderful! Here, the ferryman. Here, a man plaiting a rope.\p"
+                  "Behind him, a donkey eating the rope as fast as he plaits it.\p"
+                  "Here, a man pushing a stone uphill. It always rolls back. Always.\p"
+                  "Here, girls carrying water in broken jars. Forever. They never fill."))
+    msgbox(format("…You see the theme. The dead do one thing, over and over.\p"
+                  "Nothing ever ends down there. Nothing ever finishes, either.\p"
+                  "Take this. It fell off the painting. Don't tell the Knidians."))
+    giveitem(ITEM_SPELL_TAG)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_POLEMON_SPELL_TAG)
+    }
+    release
+}
+
+// the rope-plaiter
+script Delphoi_Lesche_EventScript_Thing1 {
+    msgbox(format("A man plaits a rope. Behind him a donkey eats the other end.\p"
+                  "The rope is exactly as long as it's always been."), MSGBOX_SIGN)
+}
+
+// the city falling
+script Delphoi_Lesche_EventScript_Thing2 {
+    msgbox(format("A city falling. Soldiers on the walls, women at the gates, a wooden horse.\p"
+                  "Nobody in the picture looks surprised."), MSGBOX_SIGN)
+}

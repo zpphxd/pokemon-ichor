@@ -445,6 +445,11 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     // the class name, so the priestesses show as PRIESTESS.
     [TRAINER_CLASS_BULL_LEAPER] = { _("BULL-LEAPER"), 6 },
     [TRAINER_CLASS_MINOAN_PRIEST] = { _("PRIESTESS"), 8 },
+    // Ichor: Delphoi's classes (phase4 SCRIPT.md Part 3, "Conventions for Delphoi")
+    [TRAINER_CLASS_MELISSA] = { _("MELISSA"), 6 },
+    [TRAINER_CLASS_KITHARODE] = { _("KITHARODE"), 8 },
+    [TRAINER_CLASS_PROPHETES] = { _("PROPHETES"), 8 },
+    [TRAINER_CLASS_GIGAS] = { _("GIGAS"), 10 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

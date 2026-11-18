@@ -314,6 +314,27 @@
 #define TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON      400
 #define TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE      401
 #define TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD      402
+// Delphoi and Laurel 8 (ids 425-444): Route 28, the Temple of Apollo, the Omphalos.
+#define TRAINER_ICHOR_EUANGELOS               425
+#define TRAINER_ICHOR_PSAMMOS                 426
+#define TRAINER_ICHOR_PHAYLLOS                427
+#define TRAINER_ICHOR_PLINTHIS                428
+#define TRAINER_ICHOR_ARISTA_AND_KLEO         429
+#define TRAINER_ICHOR_MELAMPOUS_AND_POLYIDOS  430
+#define TRAINER_ICHOR_KISSERIS                431
+#define TRAINER_ICHOR_CHOMAS                  432
+#define TRAINER_ICHOR_GIGAS_AGRIOS            433
+#define TRAINER_ICHOR_ASBOLOS                 434
+#define TRAINER_ICHOR_CHRYSIS                 435
+#define TRAINER_ICHOR_SKAPHE                  436
+#define TRAINER_ICHOR_DORYX_AND_DOROS         437
+#define TRAINER_ICHOR_ONOMAKRITOS             438
+#define TRAINER_ICHOR_PHERENIKE               439
+#define TRAINER_ICHOR_BREMOUSA                440
+#define TRAINER_ICHOR_PHEMONOE                441
+#define TRAINER_ICHOR_GIGAS_EPHIALTES         442
+#define TRAINER_ICHOR_GIGAS_THOAS             443
+#define TRAINER_ICHOR_CHRYSOTHEMIS            444
 #define TRAINERS_END_ACT3 499
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's

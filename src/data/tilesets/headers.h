@@ -1079,3 +1079,49 @@ const struct Tileset gTileset_CivicLakonia =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicLakonia,
     .callback = NULL,
 };
+
+// Ichor: Act III, Delphoi (tools/ichor/art/delphoi_build.py, tools/ichor/maps/delphoi_rooms.py).
+const struct Tileset gTileset_Delphoi =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Delphoi,
+    .palettes = gTilesetPalettes_PorytilesManaged_Delphoi,
+    .metatiles = gMetatiles_PorytilesManaged_Delphoi,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Delphoi,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Parnassos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Parnassos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Parnassos,
+    .metatiles = gMetatiles_PorytilesManaged_Parnassos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Parnassos,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_TempleApollo =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleApollo,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleApollo,
+    .metatiles = gMetatiles_PorytilesManaged_TempleApollo,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleApollo,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_OikiaDelphoi =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaDelphoi,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaDelphoi,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaDelphoi,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaDelphoi,
+    .callback = NULL,
+};
+
