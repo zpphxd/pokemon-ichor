@@ -31,6 +31,35 @@ script Arkadia_GoatherdHouse_EventScript_Krotos {
     lock
     faceplayer
     setspeaker(Arkadia_GoatherdHouse_Name_Krotos)
+    // "Noon in Arkadia" (WORLD_EXPLORATION §2), after Laurel 5
+    if (flag(FLAG_ICHOR_NOON_KID_FETCHED) && !flag(FLAG_ICHOR_NOON_GOT_KERAZAP)) {
+        msgbox(format("You brought her down off the crag! With Pan's own crook, I hear. He likes you.\p"
+                      "Here. Her brother. He climbs like her and kicks like Pan. Take him."))
+        givemon(SPECIES_KERAZAP, 34)
+        if (var(VAR_RESULT) == MON_CANT_GIVE) {
+            setspeaker(Arkadia_GoatherdHouse_Name_Krotos)
+            msgbox(format("No room? Make some. He'll wait. Goats are patient. No, they aren't."))
+            release
+            end
+        }
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(format("{PLAYER} received a Kerazap!"))
+        waitfanfare
+        setflag(FLAG_ICHOR_NOON_GOT_KERAZAP)
+        release
+        end
+    }
+    if (flag(FLAG_BADGE05_GET) && !flag(FLAG_ICHOR_NOON_KID_FETCHED)) {
+        setflag(FLAG_ICHOR_NOON_HEARD)
+        if (flag(FLAG_ICHOR_NOON_PAN_WOKEN)) {
+            msgbox(format("He's awake? And he gave you his crook? Then go! She's on the crag by the grotto."))
+        } else {
+            msgbox(format("My best kid's up on the crag over Pan's grotto. Frozen. She won't come down.\p"
+                          "Nobody's piped since noon yesterday. Nobody dares. He's asleep in there.\p"
+                          "Wake him and he'd fetch her in a blink. If you don't mind the panic."))
+        }
+        setspeaker(Arkadia_GoatherdHouse_Name_Krotos)
+    }
     if (flag(FLAG_ICHOR_GOT_LUCKY_EGG)) {
         msgbox(format("Pan's our god up here. Half goat. Plays the pipes. Frightens everyone.\p"
                       "He's never once frightened a goat. They know him. They're his."))

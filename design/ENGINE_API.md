@@ -550,13 +550,16 @@ Relics are key items. **No Pokémon ever needs a field move:** the party menu of
 | `ITEM_HELM_OF_DARKNESS` | Helm of Darkness | On or off; unseen in the dark, by trainers and Asterion (§6) | Relic Ring |
 | `ITEM_NEREID_PEARL` | Nereid Pearl | Dive | A on deep water |
 | `ITEM_AEOLUS_BAG` | Aeolus's Bag | Defog | From the bag |
+| `ITEM_PANS_CROOK` | Pan's Crook | Rock Climb: handhold faces (`MB_ROCK_CLIMB`), up or down | A on the face, or from the bag facing it |
 
 **Giving a relic.** Use `giveitem(ITEM_BRONZE_HAMMER)`. The engine sets the relic's flag whenever the item enters the bag (`AddBagItem`), so scripts can check either. The icons are in `graphics/items/icons/`, drawn by `tools/ichor/art/items_relics.py`; Ariadne's Thread is the Escape Rope's coil in red.
 
 **Check:** `tools/ichor/tests/ichor_relics.sh`.
 
 **Relic flags** (bank, in `FLAG_ICHOR_RELICS_START`'s range):
-- `FLAG_ICHOR_GOT_<RELIC>` for each relic above: `_BRONZE_HAMMER`, `_HECATES_TORCH`, `_DEMETERS_SICKLE`, `_GIRDLE_OF_HERAKLES`, `_POSEIDONS_CONCH`, `_DAEDALUS_WINGS`, `_HORN_OF_ACHELOUS`, `_ARIADNES_THREAD`, `_LABRYS`, `_HELM_OF_DARKNESS`, `_NEREID_PEARL`, `_AEOLUS_BAG`.
+- `FLAG_ICHOR_GOT_<RELIC>` for each relic above: `_BRONZE_HAMMER`, `_HECATES_TORCH`, `_DEMETERS_SICKLE`, `_GIRDLE_OF_HERAKLES`, `_POSEIDONS_CONCH`, `_DAEDALUS_WINGS`, `_HORN_OF_ACHELOUS`, `_ARIADNES_THREAD`, `_LABRYS`, `_HELM_OF_DARKNESS`, `_NEREID_PEARL`, `_AEOLUS_BAG`, `_PANS_CROOK`. `ITEM_PANS_CROOK` (900) sits after the relic block, so `Ichor_GetRelicFlag` maps it by name.
+- **Climbable faces** are metatiles, not events: `MB_ROCK_CLIMB` cells, impassable, with walkable ground at both ends. Facing one runs `EventScript_IchorCrookClimb` (`data/scripts/ichor_relics.pory`). The art: Skiron's `crook` and `crook_path` pieces (`brink`, `face_u`, `face_l`, `foot`; `tools/ichor/art/skiron_rock.py`), and for ported tilesets `tools/ichor/art/crook_faces.py` (Arkadia's crag, 0x310-0x312). Every face shares `tools/ichor/art/crook_marks.py`'s look. Don't put a bg sign on a face: it would answer the A press first.
+- `OW_ROCK_CLIMB_FIELD_MOVE` is TRUE; `src/field_move.c` keeps Rock Climb out of the party menu. With the Crook the player climbs on foot (no blob, no bob: `src/field_effect.c`). **Check:** `tools/ichor/tests/crook_climb.sh`.
 - **`FLAG_ICHOR_GOT_TALARIA` is an alias of `FLAG_SYS_B_DASH`,** so the slice's Talaria keeps working unchanged.
 - Upgrades, which the rites' gift II sets: `FLAG_ICHOR_WINGED_TALARIA`, `FLAG_ICHOR_THREE_FLAMED_TORCH`, `FLAG_ICHOR_HEPHAESTUS_HAMMER`, `FLAG_ICHOR_TRITON_CONCH`, `FLAG_ICHOR_HELM_OF_HADES`.
 - State: `FLAG_ICHOR_TORCH_DOUSED` and `FLAG_ICHOR_HELM_ON`.

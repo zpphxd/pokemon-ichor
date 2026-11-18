@@ -392,6 +392,12 @@ def props_route9(g):
     g.piece("tent", 20, 24)                            # the shepherds' camp
     g.piece("tent_b", 28, 24)
     g.piece("cookfire", 24, 24)
+    # Pan's Crook's face down tier 2's cliff (WORLD_EXPLORATION §2): from the tier 3
+    # traverse straight up to the scree pocket under the camp, a shortcut either way
+    g.named("crook", "brink", 27, 31)
+    g.named("crook", "face_u", 27, 32)
+    g.named("crook", "foot", 27, 33)
+    g.set(27, 34, 0x001, False, "grass")               # a clear step at its foot
 
 
 def spec_route9():

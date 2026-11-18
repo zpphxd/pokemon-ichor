@@ -1072,6 +1072,8 @@ extern const u32 gItemIcon_NereidPearl[];
 extern const u16 gItemIconPalette_NereidPearl[];
 extern const u32 gItemIcon_AeolusBag[];
 extern const u16 gItemIconPalette_AeolusBag[];
+extern const u32 gItemIcon_PansCrook[];
+extern const u16 gItemIconPalette_PansCrook[];
 
 // Gems
 extern const u32 gItemIcon_TypeGem[];

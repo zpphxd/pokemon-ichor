@@ -4407,13 +4407,17 @@ static bool8 RockClimb_JumpOnRockClimbBlob(struct Task *task, struct ObjectEvent
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         objectEvent->noShadow = TRUE; // hide shadow
-        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        // Ichor: with Pan's Crook the player climbs on foot; no Pokémon carries them
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(
+            Ichor_IsRelicShowArg((u16)task->tMonId) ? PLAYER_AVATAR_STATE_NORMAL : PLAYER_AVATAR_STATE_SURFING));
         ObjectEventClearHeldMovementIfFinished(objectEvent);
         ObjectEventSetHeldMovement(objectEvent, GetJumpSpecialMovementAction(objectEvent->movementDirection));
         gFieldEffectArguments[0] = task->tDestX;
         gFieldEffectArguments[1] = task->tDestY;
         gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
         objectEvent->fieldEffectSpriteId = CreateRockClimbBlob();
+        if (Ichor_IsRelicShowArg((u16)task->tMonId) && objectEvent->fieldEffectSpriteId != MAX_SPRITES)
+            gSprites[objectEvent->fieldEffectSpriteId].invisible = TRUE;
         task->tState++;
     }
 
@@ -4424,7 +4428,8 @@ static bool8 RockClimb_WaitJumpOnRockClimbBlob(struct Task *task, struct ObjectE
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_PLAYER_AND_MON);
+        // Ichor: a climber on foot doesn't bob
+        SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, Ichor_IsRelicShowArg((u16)task->tMonId) ? BOB_NONE : BOB_PLAYER_AND_MON);
         switch (objectEvent->facingDirection)
         {
         case DIR_EAST:
@@ -4541,6 +4546,9 @@ static bool8 RockClimb_WaitStopRockClimb(struct Task *task, struct ObjectEvent *
         DestroySprite(&gSprites[objectEvent->fieldEffectSpriteId]);
         FieldEffectActiveListRemove(FLDEFF_USE_ROCK_CLIMB);
         objectEvent->triggerGroundEffectsOnMove = TRUE; // e.g. if dismount on grass
+        // Ichor: Pan's Crook climbs from EventScript_IchorCrookClimb, which waits on this
+        if (Ichor_IsRelicShowArg((u16)task->tMonId))
+            ScriptContext_Enable();
         DestroyTask(FindTaskIdByFunc(Task_UseRockClimb));
     }
 

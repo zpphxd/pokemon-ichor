@@ -381,26 +381,37 @@ script EventScript_IchorSurface {
     releaseall
 }
 
-// Ivy walls: Dionysus's thyrsus (his gift II) climbs them with the
-// expansion's Rock Climb. Always asks, like water.
-script EventScript_IchorIvyClimb {
+// A climbable face (WORLD_EXPLORATION §2): paired handholds up a cliff, ivy
+// over the top, a hoof votive at the foot (MB_ROCK_CLIMB). Pan's Crook climbs it
+// with the expansion's Rock Climb, up or down, and no Pokémon is needed. Like the
+// Hammer it asks, or under AUTO just climbs.
+script EventScript_IchorCrookClimb {
     lockall
-    if (!flag(FLAG_ICHOR_THYRSUS)) {
-        msgbox(format("Thick ivy covers the wall. It would hold a climber who had the god's own staff."), MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, ITEM_PANS_CROOK)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("Handholds are cut up the rock in pairs, worn smooth, under a fringe of ivy.\p"
+                      "A good crook would hold you to it."), MSGBOX_DEFAULT)
         releaseall
         end
     }
-    if (flag(FLAG_ICHOR_NO_RELICS)) {
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
         goto(EventScript_IchorForbidden)
     }
-    msgbox(format("Thick ivy covers the wall.\pClimb it with the thyrsus?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        closemessage
-        releaseall
-        end
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} climbed with Pan's Crook."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("Handholds, cut in pairs up the rock.\pClimb with Pan's Crook?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
     }
     closemessage
-    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC)
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC | ITEM_PANS_CROOK)
     dofieldeffect(FLDEFF_USE_ROCK_CLIMB)
     waitstate
     releaseall

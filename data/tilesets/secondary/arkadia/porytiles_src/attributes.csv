@@ -10,3 +10,6 @@ id,behavior
 228,MB_NON_ANIMATED_DOOR
 270,MB_NON_ANIMATED_DOOR
 55,MB_JUMP_SOUTH
+272,MB_ROCK_CLIMB  # crook_faces.py 0x310 tiles 488
+273,MB_ROCK_CLIMB  # crook_faces.py
+274,MB_ROCK_CLIMB  # crook_faces.py

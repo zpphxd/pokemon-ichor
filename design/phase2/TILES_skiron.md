@@ -145,7 +145,7 @@ Each pass: render all four scenes at 2×, look at them and at the 15×10 screen 
 
 <!-- catalog -->
 
-**Tile budget.** 489 of 504 tiles are used (tiles 504-511 belong to the door animations). The build fails past 504.
+**Tile budget.** 497 of 504 tiles are used (tiles 504-511 belong to the door animations). The build fails past 504.
 
 ## Ground (from 0x200)
 
@@ -526,6 +526,32 @@ ids           walk
 0x2CE 0x2CF   X X
 0x2D6 0x2D7   X X
 ```
+
+### Pan's Crook's face: handholds up the cliff
+
+`crook`, 4 wide by 1 tall. A climbable column for the cliff and the cut bank: `brink` (ivy over the lip), `face_u` and `face_l` (stack as many as the drop needs), then `foot` (the bank's foot, with the goat-hoof votive). Every cell is MB_ROCK_CLIMB and impassable: face it and press A to climb with Pan's Crook, up or down. Put walkable ground at both ends. `crook_path` borrows the path above the brink and below the foot instead of grass. Cells on borrowed aethos ground: grass (0,0, 3,0).
+
+```text
+ids                       walk
+0x2D8 0x2D9 0x2DA 0x2DB   X X X X
+```
+
+Behaviors: 0x2D8 `MB_ROCK_CLIMB`, 0x2D9 `MB_ROCK_CLIMB`, 0x2DA `MB_ROCK_CLIMB`, 0x2DB `MB_ROCK_CLIMB`.
+
+Pieces: `brink` 0x2D8, `face_u` 0x2D9, `face_l` 0x2DA, `foot` 0x2DB.
+
+### Pan's Crook's face, on the path
+
+`crook_path`, 4 wide by 1 tall. A climbable column for the cliff and the cut bank: `brink` (ivy over the lip), `face_u` and `face_l` (stack as many as the drop needs), then `foot` (the bank's foot, with the goat-hoof votive). Every cell is MB_ROCK_CLIMB and impassable: face it and press A to climb with Pan's Crook, up or down. Put walkable ground at both ends. `crook_path` borrows the path above the brink and below the foot instead of grass. Cells on borrowed aethos ground: path (0,0, 3,0).
+
+```text
+ids                       walk
+0x2DC 0x2DD 0x2DE 0x2DF   X X X X
+```
+
+Behaviors: 0x2DC `MB_ROCK_CLIMB`, 0x2DD `MB_ROCK_CLIMB`, 0x2DE `MB_ROCK_CLIMB`, 0x2DF `MB_ROCK_CLIMB`.
+
+Pieces: `brink` 0x2DC, `face_u` 0x2DD, `face_l` 0x2DE, `foot` 0x2DF.
 
 ## Pines and scrub (from 0x300)
 

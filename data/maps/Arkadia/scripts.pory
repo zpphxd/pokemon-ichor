@@ -350,12 +350,67 @@ script Arkadia_EventScript_SignAlpheios {
     msgbox(format("The Alpheios is in flood. The road to the west coast is under water."), MSGBOX_SIGN)
 }
 
+// "Noon in Arkadia" (WORLD_EXPLORATION §2): after Laurel 5 Pan is asleep in here,
+// his goats panicked onto the crag. New reeds from the falls pool make a pipe;
+// piping wakes him, and he gives Pan's Crook. The crag's face is the first climb.
 script Arkadia_EventScript_PansGrotto {
     lockall
-    msgbox(format("A shallow grotto with a syrinx carved over the mouth. Pan's.\p"
-                  "The reeds of the syrinx were a nymph once. She ran from him.\p"
-                  "Now she sings for him."))
+    if (flag(FLAG_ICHOR_NOON_PAN_WOKEN)) {
+        msgbox(format("A hoof print in the dust at the mouth, fresh.\p"
+                      "Somewhere inside, someone is pretending to be asleep."))
+        releaseall
+        end
+    }
+    if (!flag(FLAG_BADGE05_GET)) {
+        msgbox(format("A shallow grotto with a syrinx carved over the mouth. Pan's.\p"
+                      "The reeds of the syrinx were a nymph once. She ran from him.\p"
+                      "Now she sings for him."))
+        closemessage
+        call(Arkadia_EventScript_Panic)
+        msgbox(format("Something rustles inside, and you feel a sudden, total panic. Then it's gone."))
+        releaseall
+        end
+    }
+    msgbox(format("Behind a curtain of dead reeds, something snores. Deep, slow, goatish.\p"
+                  "The syrinx carved over the mouth is cracked through."))
+    if (!flag(FLAG_ICHOR_NOON_REEDS)) {
+        msgbox(format("Shepherds pipe to wake a god. Nobody dares at noon.\p"
+                      "Fresh reeds would make a new pipe. Reeds grow by the falls pool."))
+        releaseall
+        end
+    }
+    msgbox(format("Pipe the new reeds at the grotto mouth?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
     closemessage
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+    call(Arkadia_EventScript_Panic)
+    msgbox(format("The snoring stops. Then the whole hillside screams.\p"
+                  "A boar bursts out of the reeds in a blind panic!"))
+    closemessage
+    setwildbattle(SPECIES_KAPRODON, 36)
+    playmoncry(SPECIES_KAPRODON, CRY_MODE_ENCOUNTER)
+    waitmoncry
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    lockall
+    setflag(FLAG_ICHOR_NOON_PAN_WOKEN)
+    msgbox(format("VOICE: Who pipes at noon?"))
+    msgbox(format("VOICE: …Not badly. Not badly at all."))
+    msgbox(format("VOICE: My goats are on the cliff. Fetch them down. Here. Goats don't fall."))
+    giveitem(ITEM_PANS_CROOK)
+    msgbox(format("A hoof print in the dust where the voice was. Nothing else."))
+    msgbox(format("Handholds are cut up the crag beside the grotto.\p"
+                  "Face them and climb with Pan's Crook, up or down."))
+    releaseall
+}
+
+script Arkadia_EventScript_Panic {
     playse(SE_M_SCREECH)
     setvar(VAR_0x8004, 1)
     setvar(VAR_0x8005, 3)
@@ -363,8 +418,55 @@ script Arkadia_EventScript_PansGrotto {
     setvar(VAR_0x8007, 4)
     special(ShakeCamera)
     waitstate
-    msgbox(format("Something rustles inside, and you feel a sudden, total panic. Then it's gone."))
+    return
+}
+
+// The reed bed where the falls run off toward the Ladon: Syrinx's reeds.
+script Arkadia_EventScript_LadonReeds {
+    lockall
+    if (!flag(FLAG_BADGE05_GET)) {
+        msgbox(format("Tall reeds where the falls run off toward the Ladon. They hiss in the wind."))
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, ITEM_DEMETERS_SICKLE)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) != ICHOR_RELIC_OK) {
+        msgbox(format("Tall reeds, green and hollow. A good blade would cut a few."))
+        releaseall
+        end
+    }
+    msgbox(format("Tall reeds, green and hollow. The kind a pipe is made from.\p"
+                  "Cut some with Demeter's Sickle?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_DEMETERS_SICKLE)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_CUT)
+    removeobject(LOCALID_ARKADIA_LADON_REEDS)
+    setflag(FLAG_ICHOR_NOON_REEDS)
+    msgbox(format("{PLAYER} cut three fresh reeds, the length of a pipe."))
     releaseall
+}
+
+// Krotos's kid, stuck on the crag since the panic.
+script Arkadia_EventScript_CragKid {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("A Kerazap kid, stuck on the ledge, trembling. It sees the crook and bleats.\p"
+                  "It skips down the handholds after you and runs for home."))
+    waitmoncry
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_ARKADIA_CRAG_KID)
+    setflag(FLAG_ICHOR_NOON_KID_FETCHED)
+    fadescreen(FADE_FROM_BLACK)
+    release
 }
 
 script Arkadia_EventScript_Waterfall {

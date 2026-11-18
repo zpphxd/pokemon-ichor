@@ -1090,6 +1090,9 @@ enum __attribute__((packed)) Item
     ITEM_SEALED_TABLET = 898,
     // Ichor: Mom's jar, labelled NOT FOR {PLAYER} (phase4 SCRIPT.md III-7); used up at the Loom
     ITEM_MELITTAS_HONEY = 899,
+    // Ichor: the climbing relic (WORLD_EXPLORATION §2), given by Pan in Arkadia. It
+    // came after the relic block was full, so it sits here; Ichor_GetRelicFlag maps it.
+    ITEM_PANS_CROOK = 900,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
