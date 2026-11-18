@@ -611,6 +611,8 @@ OBJECTS = [
     # a swineherd, optional: he watches the threshing floor (SCRIPT.md Part 3)
     ("EUBOULEUS", GFX + "GOATHERD", 14, 28, "RIGHT", "Eubouleus", "0", 3),
     ("HOPLITE", GFX + "HOPLITE", 48, 25, "LEFT", "Hoplite", "FLAG_ICHOR_ELEUSA_CAPITAL_OPEN"),
+    # after the Moon Laurel the watch stands aside, off the open road, and says where it goes
+    ("WATCH_ASIDE", GFX + "HOPLITE", 47, 23, "DOWN", "WatchAside", "FLAG_ICHOR_HIDE_ELEUSA_WATCH_ASIDE"),
     # beat 20: Kleon in the square, waiting for the procession (gone once the Mysteries begin)
     ("KLEON", GFX + "KLEON", 24, 23, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELEUSA"),
     # beat 22: the procession, in the sanctuary's court and the square. Alethea comes up to

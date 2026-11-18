@@ -908,6 +908,9 @@ SCRIPTED_PATHS = {
     "Player": [(x, 16) for x in range(21, 26)] + [(x, 4) for x in range(7, 10)],
     # Number Nine steps off his plinth (34,23): north past the tavern, or east
     "Number Nine": [(34, y) for y in range(16, 23)] + [(x, 23) for x in range(35, W)],
+    # after the Moon Laurel: Dromokleia's runner meets the player on the Nemea road (2,41)
+    # and walks them east along it to the travel herm, the runner ending at (20,41)
+    "Runner (Moon Laurel)": [(x, NEMEA_ROW) for x in range(2, 21)],
 }
 
 

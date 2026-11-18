@@ -2230,6 +2230,9 @@
 #define FLAG_ICHOR_ITEM_ERYMANTHOS_RIVER_WEST   (FLAG_ICHOR_GENERAL2_START + 0x087) // Ichor: Erymanthian Preserve: the west bank, past the ford road
 #define FLAG_ICHOR_ITEM_ERYMANTHOS_THICKET_GAP  (FLAG_ICHOR_GENERAL2_START + 0x088) // Ichor: Erymanthian Preserve: by the thicket's gap
 #define FLAG_ICHOR_HIDDEN_ITEM_ERYMANTHOS_THICKET_CAIRN (FLAG_ICHOR_GENERAL2_START + 0x089) // Ichor: Erymanthian Preserve: behind Atalanta's cairn
+#define FLAG_ICHOR_TOLD_ELEUSA_ROAD             (FLAG_ICHOR_GENERAL2_START + 0x08A) // Ichor: a runner met the player at Emporion after the Moon Laurel: Astyra's road runs through Eleusa
+#define FLAG_ICHOR_HIDE_EMPORION_HERM_RUNNER    (FLAG_ICHOR_GENERAL2_START + 0x08B) // Ichor: Dromokleia's runner waiting at Emporion's herm (Moon Laurel to Astyra)
+#define FLAG_ICHOR_HIDE_ELEUSA_WATCH_ASIDE      (FLAG_ICHOR_GENERAL2_START + 0x08C) // Ichor: Eleusa's east watch, stood aside by the open road after the Moon Laurel
 #define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
 #define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
 #define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)

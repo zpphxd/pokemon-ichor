@@ -16,7 +16,10 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[3]
 MAPS = {"MAP_CITY": "EmporionCity", "MAP_HARBOR": "EmporionHarbor"}
 MOVING = ("MOVEMENT_TYPE_WANDER_AROUND", "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT")
-TRANSIENT = ("KLEON", "ALETHEA", "KERYKOS", "NUMBER_NINE", "HARPECK")
+# (the herm runner is out only from the Moon Laurel to Astyra; this walk is Act I)
+TRANSIENT = ("KLEON", "ALETHEA", "KERYKOS", "NUMBER_NINE", "HARPECK", "HERM_RUNNER")
+# triggers armed only after Act I, which the walk crosses like any road
+LATER = ("EmporionCity_EventScript_HermRunnerNemeaRoad",)
 
 
 def grid(name):
@@ -35,7 +38,8 @@ def grid(name):
             open_[o["y"], o["x"]] = False
     # coord triggers are stepped on on purpose, never on the way somewhere else
     for t in ev["coord_events"]:
-        open_[t["y"], t["x"]] = False
+        if t["script"] not in LATER:
+            open_[t["y"], t["x"]] = False
     return open_
 
 

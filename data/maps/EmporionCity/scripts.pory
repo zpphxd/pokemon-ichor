@@ -15,6 +15,8 @@
 //                    before the Herald Laurel, Kleon's battle after it
 //   VAR_TEMP_3 == 0  always: the Deigma's door (32,36). The stoa's door bay isn't
 //                    MB_NON_ANIMATED_DOOR in the tileset, so a trigger does the warp.
+//   VAR_TEMP_4 == 1  the runner's trigger on the Nemea road, (2,41), after the Moon Laurel
+//   VAR_TEMP_5 == 1  the same scene's ON_FRAME check, for a player landing at the herm
 //
 // Remaining presentation stub: ICHOR_STUB_SPRITE (Number Nine, map.json).
 
@@ -37,7 +39,21 @@ mapscripts EmporionCity_MapScripts {
         if (!flag(FLAG_ICHOR_KLEON_BATTLE_2_DONE)) {
             setvar(VAR_TEMP_2, 1)
         }
+        // After the Moon Laurel, one of Dromokleia's runners waits at the travel
+        // herm until the player reaches Astyra; see "The road to Astyra" below.
+        if (flag(FLAG_BADGE05_GET) && !flag(FLAG_ICHOR_VISITED_ASTYRA)) {
+            clearflag(FLAG_ICHOR_HIDE_EMPORION_HERM_RUNNER)
+            if (!flag(FLAG_ICHOR_TOLD_ELEUSA_ROAD)) {
+                setvar(VAR_TEMP_4, 1)
+                setvar(VAR_TEMP_5, 1)
+            }
+        } else {
+            setflag(FLAG_ICHOR_HIDE_EMPORION_HERM_RUNNER)
+        }
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_5, 1: EmporionCity_EventScript_HermRunnerLanding
+    ]
 }
 
 text EmporionCity_Text_NameKleon { "KLEON" }
@@ -631,6 +647,138 @@ script EmporionCity_EventScript_Runner {
     msgbox(format("Dromokleia runs the letters. I run the ones she's too busy for.\p"
                   "That's most of them. She's very busy."), MSGBOX_NPC)
 }
+
+// ---------------------------------------------------------------------------
+// The road to Astyra: after the Moon Laurel, the way on is Eleusa's east gate,
+// a long way back the way the player came. One of Dromokleia's runners waits
+// at the travel herm (20,41) from the Moon Laurel until the player reaches
+// Astyra (ON_TRANSITION). The first time the player comes in by the Nemea road
+// she runs to meet them at (2,41) and walks them to the herm; a player who
+// lands at the herm instead hears it there (ON_FRAME), and anyone can ask her.
+// The scene never blocks: NO leaves her at the herm, and the walk, the herm and
+// the Wings all still work. FLAG_ICHOR_TOLD_ELEUSA_ROAD plays it once.
+// ---------------------------------------------------------------------------
+
+text EmporionCity_Text_NameRunner { "RUNNER" }
+
+script EmporionCity_EventScript_HermRunnerNemeaRoad {
+    lockall
+    setvar(VAR_TEMP_4, 0)
+    setvar(VAR_TEMP_5, 0)
+    setspeaker(EmporionCity_Text_NameRunner)
+    msgbox(format("Hey! Laurel-holder! Wait up!"))
+    closemessage
+    // she comes from the herm, out of sight: start her just off the screen
+    removeobject(LOCALID_EMPORION_HERM_RUNNER)
+    setobjectxyperm(LOCALID_EMPORION_HERM_RUNNER, 11, 41)
+    clearflag(FLAG_ICHOR_HIDE_EMPORION_HERM_RUNNER)
+    addobject(LOCALID_EMPORION_HERM_RUNNER)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    applymovement(LOCALID_EMPORION_HERM_RUNNER, EmporionCity_Movement_RunnerToTheGate)
+    waitmovement(0)
+    setspeaker(EmporionCity_Text_NameRunner)
+    msgbox(format("Dromokleia's had me watching the Nemea road for you. Two days!"))
+    call(EmporionCity_EventScript_HermRunnerNews)
+    msgbox(format("It's a long walk back. But the herm can carry you. Come on!"))
+    closemessage
+    // east along the Nemea road together, the player to the herm's landing (19,41)
+    applymovement(LOCALID_EMPORION_HERM_RUNNER, EmporionCity_Movement_RunnerToTheHerm)
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_PlayerToTheHerm)
+    waitmovement(LOCALID_EMPORION_HERM_RUNNER)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    call(EmporionCity_EventScript_HermRunnerOffer)
+    releaseall
+}
+
+// Coming in by the herm: she's at the player's elbow.
+script EmporionCity_EventScript_HermRunnerLanding {
+    setvar(VAR_TEMP_5, 0)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) != 19 || var(VAR_0x8005) != 41) {
+        end
+    }
+    lockall
+    setvar(VAR_TEMP_4, 0)
+    applymovement(LOCALID_EMPORION_HERM_RUNNER, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(EmporionCity_Text_NameRunner)
+    msgbox(format("There you are! Dromokleia sent me to wait at the herm for you."))
+    call(EmporionCity_EventScript_HermRunnerNews)
+    call(EmporionCity_EventScript_HermRunnerOffer)
+    releaseall
+}
+
+script EmporionCity_EventScript_HermRunner {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Text_NameRunner)
+    if (!flag(FLAG_ICHOR_TOLD_ELEUSA_ROAD)) {
+        setvar(VAR_TEMP_4, 0)
+        msgbox(format("There you are! Dromokleia sent me to wait at the herm for you."))
+        call(EmporionCity_EventScript_HermRunnerNews)
+        call(EmporionCity_EventScript_HermRunnerDirections)
+    } else {
+        msgbox(format("Ready? Touch the herm and choose Eleusa. Then the east gate."))
+    }
+    call(EmporionCity_EventScript_HermRunnerAsk)
+    release
+}
+
+script EmporionCity_EventScript_HermRunnerDirections {
+    msgbox(format("Here. Touch the herm and choose Eleusa.\p"
+                  "Then out the east gate. Daphni first, then Astyra."))
+}
+
+script EmporionCity_EventScript_HermRunnerNews {
+    msgbox(format("That's the Moon Laurel, isn't it? Then this is for you.\p"
+                  "The Archon's opened Astyra's road to Laurel-holders.\p"
+                  "The way in is Eleusa's east gate. The watch there has stood down."))
+    setflag(FLAG_ICHOR_TOLD_ELEUSA_ROAD)
+}
+
+// At the herm, the player on its landing (19,41) and the runner beside it.
+script EmporionCity_EventScript_HermRunnerOffer {
+    applymovement(LOCALID_EMPORION_HERM_RUNNER, Common_Movement_FaceLeft)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(EmporionCity_Text_NameRunner)
+    call(EmporionCity_EventScript_HermRunnerDirections)
+    call(EmporionCity_EventScript_HermRunnerAsk)
+}
+
+// YES: the herm carries the player straight to Eleusa's, as its travel map
+// would. Eleusa's herm is registered by touching it or resting there; a player
+// who has been to Eleusa has it registered here, in case they did neither.
+script EmporionCity_EventScript_HermRunnerAsk {
+    msgbox(format("Go to Eleusa now?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Suit yourself. I'll be at the herm whenever you're ready."))
+        return
+    }
+    if (flag(FLAG_ICHOR_VISITED_ELEUSA)) {
+        setvar(VAR_0x8004, TOWN_HERM_ELEUSA)
+        special(Ichor_RegisterTownHerm)
+    }
+    msgbox(format("Mind the salt streams. Run like a goat's after you!"))
+    closemessage
+    setvar(VAR_0x8004, TOWN_HERM_ELEUSA)
+    specialvar(VAR_RESULT, Ichor_TravelToTownHerm)
+    if (var(VAR_RESULT) == TRUE) {
+        playse(SE_WARP_IN)
+        waitstate
+        return
+    }
+    msgbox(format("Huh. The herm doesn't know you at Eleusa yet.\p"
+                  "Take the Isthmus Gate north, then. Eleusa's at the end of the road."))
+}
+
+// From (11,41), just off the screen, to the player's side at (3,41).
+movement EmporionCity_Movement_RunnerToTheGate { walk_fast_left * 8 }
+// From (3,41) to beside the herm (20,41); the player follows a step behind, to (19,41).
+movement EmporionCity_Movement_RunnerToTheHerm { walk_right * 17 face_left }
+movement EmporionCity_Movement_PlayerToTheHerm { walk_right * 17 face_down }
 
 // ---------------------------------------------------------------------------
 // Signs, the herm, the relic gate and the garden

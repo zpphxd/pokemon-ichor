@@ -340,6 +340,20 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_EMPORION_HERM_RUNNER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
+      "x": 20,
+      "y": 41,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionCity_EventScript_HermRunner",
+      "flag": "FLAG_ICHOR_HIDE_EMPORION_HERM_RUNNER"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
       "y": 22,
@@ -577,6 +591,15 @@
       "var": "VAR_TEMP_1",
       "var_value": "1",
       "script": "EmporionCity_EventScript_KleonStepsDoor"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 41,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "1",
+      "script": "EmporionCity_EventScript_HermRunnerNemeaRoad"
     }
   ],
   "bg_events": [
