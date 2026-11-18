@@ -82,26 +82,17 @@ script EventScript_IchorTownHermSign {
     msgbox(Ichor_Text_TownHermSign, MSGBOX_SIGN)
 }
 
+// YES opens the travel map: the region map, the registered herms lit on it.
+// A choice there warps straight from the map (this script never resumes);
+// B comes back here, the player where they stood.
 script EventScript_IchorHermTravelMenu {
     msgbox(Ichor_Text_TownHermAskTravel, MSGBOX_YESNO)
     if (var(VAR_RESULT) == NO) {
         return
     }
-    message(Ichor_Text_TownHermWhere)
-    waitmessage
-    special(Ichor_BuildTravelMenu)
-    dynmultistack(20, 1, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
-    if (var(VAR_RESULT) == TOWN_HERM_STAY || var(VAR_RESULT) == MULTI_B_PRESSED) {
-        closemessage
-        return
-    }
     closemessage
-    copyvar(VAR_0x8004, VAR_RESULT)
-    playse(SE_WARP_IN)
-    specialvar(VAR_RESULT, Ichor_TravelToTownHerm)
-    if (var(VAR_RESULT) == TRUE) {
-        waitstate
-    }
+    special(Ichor_OpenHermTravelMap)
+    waitstate
     return
 }
 
@@ -124,10 +115,6 @@ text Ichor_Text_TownHermAlone {
 
 text Ichor_Text_TownHermAskTravel {
     "Travel to another herm?"
-}
-
-text Ichor_Text_TownHermWhere {
-    "Where shall Hermes carry you?"
 }
 
 text Ichor_Text_TownHermSign {

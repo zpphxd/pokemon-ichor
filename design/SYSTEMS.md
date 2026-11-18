@@ -666,7 +666,7 @@ Touch any town's herm and it offers to carry you:
 The great herm of Emporion.
 Travel to another herm?
 ```
-?? YES/NO, then a list of every town whose herm knows you, in story order, and "Stay here". Pick one and the screen flashes white: you stand beside that town's herm. No Olive Oil and no relic are needed. Daedalus's Wings, at Laurel 6, add flying from anywhere through the Fly map.
+?? YES/NO. YES opens the map of Aethos, the same screen the Wings fly from, headed "Travel to which herm?". Every town whose herm knows you is lit; the rest, and the town you stand in, are dim. The cursor jumps from lit herm to lit herm with the d-pad, and the box in the corner names the town. A picks it and the screen flashes white: you stand beside that town's herm. B closes the map and you stay where you were. No Olive Oil and no relic are needed. Daedalus's Wings, at Laurel 6, add flying from anywhere through the Fly map.
 
 **Route herms.** Every route has one great herm too: a garlanded pillar with Hermes's head, darker than the others where hands have touched it. Talk to it while you carry oil:
 
@@ -687,9 +687,10 @@ From Act I you can anoint herms, and Kerykos tells you why: Hermes remembers eve
 ### Rules
 
 - **Travel herms.**
-  - One per town, hamlet and major rest stop, at the main entrance (MAP_DESIGN §2), with its plaque. 19 in the current build, from Elaia to Olympus's Propylaia.
+  - One per town, hamlet and major rest stop, at the main entrance (MAP_DESIGN §2), with its plaque. 25 in the current build, from Elaia to Olympus's Propylaia.
   - Registered by the town's first heal (Asclepeion, healer, Mom at home, or the inn in Aigina and Styx Falls) or by touching the herm. Registering costs nothing and gives no Favor.
-  - Every travel herm offers TRAVEL once another town is registered. The list shows registered towns only, never the one you stand in. Route herms stay with anointing: the Wings fly from them, and from anywhere.
+  - Every travel herm offers TRAVEL once another town is registered. The travel map lights registered towns only, never the one you stand in, and the cursor can stop only on a lit herm. Route herms stay with anointing: the Wings fly from them, and from anywhere.
+  - Each herm has its own cell on the region map (AETHOS_MAP.md), inside its town's map section. Kythera has two, Skandeia and Paphia below it; Olympus's herm is marked on Mt. Olympus, the Ascent's camp on the Ascent; Route 28's Sacred Olives on Route 28.
   - You land on the tile beside the town's herm, on the main path.
   - Travel herms are not anointed. Emporion keeps its anointing herm at the crossroads beside its new gate herm.
 - **Route herms.** There is one great herm per route map section; about 22 in 1.0.
@@ -717,7 +718,7 @@ From Act I you can anoint herms, and Kerykos tells you why: Hermes remembers eve
 
 ### Engine
 
-- **Travel herms** (built; ENGINE_API §4). The herm and plaque are object events (`OBJ_EVENT_GFX_ICHOR_GREAT_HERM`, `_HERM_PLAQUE`), so they look the same on every tileset and need no new metatiles. `tools/ichor/maps/town_herms.py` places them; `src/data/ichor_town_herms.h` holds each town's landing tile, healer and name; the travel menu is a `dynmultistack` list; the trip is `SetWarpDestination` plus the white-flash warp.
+- **Travel herms** (built; ENGINE_API §4). The herm and plaque are object events (`OBJ_EVENT_GFX_ICHOR_GREAT_HERM`, `_HERM_PLAQUE`), so they look the same on every tileset and need no new metatiles. `tools/ichor/maps/town_herms.py` places them; `src/data/ichor_town_herms.h` holds each town's landing tile, healer, name and region map cell; the travel map is the Fly map in a herm mode of its own (`CB2_OpenHermTravelMap`); the trip is `SetWarpDestination` plus a white flash and a warp from the map.
 - **Route herms** (built). Fly works per map section. `GetMapsecType` in `src/region_map.c` returns the can-fly type for a route whose herm is anointed, the fly map draws a dot for it, and each route herm has a heal location at its landing tile.
 
 ### Cost

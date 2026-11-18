@@ -13,15 +13,21 @@
 #include "ichor_relics.h"
 #include "ichor_rites.h"
 #include "item.h"
-#include "list_menu.h"
-#include "malloc.h"
+#include "main.h"
 #include "overworld.h"
-#include "script_menu.h"
+#include "palette.h"
+#include "region_map.h"
+#include "script.h"
+#include "sound.h"
 #include "string_util.h"
+#include "task.h"
+#include "constants/characters.h"
 #include "constants/heal_locations.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
 
 #include "data/ichor_herms.h"
 #include "data/ichor_town_herms.h"
@@ -148,7 +154,8 @@ u32 Ichor_GetAnointedHermMapsec(u32 herm)
 // Travel herms (SYSTEMS §4). Every town's entrance herm is registered the first
 // time the player uses the town's Asclepeion or healer, or touches the herm.
 // From then on any herm offers TRAVEL to every registered town, from the start
-// of the game: no Olive Oil, no Wings. Registration lives in the Ichor flag
+// of the game: no Olive Oil, no Wings. TRAVEL opens the region map, and the
+// player picks a lit herm on it. Registration lives in the Ichor flag
 // bank (FLAG_ICHOR_TOWN_HERMS_START + id), not in the engine's FLAG_VISITED_*
 // flags, because those are set on entering a town, not on using its healer,
 // and only a few of Aethos's towns have one.
@@ -158,7 +165,8 @@ u32 Ichor_GetAnointedHermMapsec(u32 herm)
 
 static bool32 IsTownPlaced(u32 townHerm)
 {
-    return townHerm < TOWN_HERM_MAX && gIchorTownHerms[townHerm].map != 0;
+    // by its name: Elaia's map is MAP_ELAIA_VILLAGE, which is 0
+    return townHerm < TOWN_HERM_MAX && gIchorTownHerms[townHerm].name != NULL;
 }
 
 bool32 Ichor_IsTownHermRegistered(u32 townHerm)
@@ -251,28 +259,73 @@ u16 Ichor_CountTravelHerms(void)
     return count;
 }
 
-static void PushTravelEntry(const u8 *text, u16 id)
+// Ichor_GetTownHermHere: this map's TOWN_HERM_*, or 0xFF; the travel map dims it.
+u32 Ichor_GetTownHermHere(void)
 {
-    struct ListMenuItem item;
-    u8 *name = Alloc(24); // freed by the menu
-    StringCopy(name, text);
-    item.name = name;
-    item.id = id;
-    MultichoiceDynamic_PushElement(item);
+    return GetTownHermOnThisMap();
 }
 
-// special Ichor_BuildTravelMenu: every registered town but this one, in story
-// order, each with its TOWN_HERM_* id, then "Stay here" (TOWN_HERM_STAY), for
-// dynmultistack.
-void Ichor_BuildTravelMenu(void)
+// The travel map's cursor (region_map.c): the travel herm (registered, not
+// this map's) nearest region map cell (x, y), or with a direction (dx, dy) the
+// nearest one ahead of it, a step sideways counting as two. 0xFF if none.
+u32 Ichor_FindTravelHerm(s32 x, s32 y, s32 dx, s32 dy)
 {
-    u32 i, here = GetTownHermOnThisMap();
+    u32 i, here = GetTownHermOnThisMap(), found = TOWN_HERM_NONE, best = 0xFFFF;
+
     for (i = 0; i < TOWN_HERM_MAX; i++)
     {
-        if (i != here && Ichor_IsTownHermRegistered(i))
-            PushTravelEntry(gIchorTownHerms[i].name, i);
+        s32 ox = gIchorTownHerms[i].mapX - x, oy = gIchorTownHerms[i].mapY - y;
+        s32 ahead = ox * dx + oy * dy, aside = abs(ox * dy) + abs(oy * dx);
+        u32 cost = (dx == 0 && dy == 0) ? abs(ox) + abs(oy) : ahead + 2 * aside;
+        if (i == here || !Ichor_IsTownHermRegistered(i) || ((dx != 0 || dy != 0) && ahead <= 0))
+            continue;
+        if (cost < best)
+        {
+            best = cost;
+            found = i;
+        }
     }
-    PushTravelEntry(COMPOUND_STRING("Stay here"), TOWN_HERM_STAY);
+    return found;
+}
+
+static void Task_OpenHermTravelMap(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenHermTravelMap);
+        DestroyTask(taskId);
+    }
+}
+
+// special Ichor_OpenHermTravelMap: the travel map, the Fly map of Aethos with
+// only the registered herms to pick (region_map.c). The script waitstates.
+// A choice warps from the map, so the script never resumes; B comes back to
+// the field and the script with VAR_RESULT = TOWN_HERM_STAY.
+void Ichor_OpenHermTravelMap(void)
+{
+    LockPlayerFieldControls();
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_OpenHermTravelMap, 10);
+}
+
+// The travel map's A: set the warp to the herm's landing tile, start the
+// music's fade and Hermes's chime while the map flashes white.
+void Ichor_StartHermMapTravel(u32 townHerm)
+{
+    const struct IchorTownHerm *dest = &gIchorTownHerms[townHerm];
+    SetWarpDestination(dest->map >> 8, dest->map & 0xFF, WARP_ID_NONE, dest->x, dest->y);
+    TryFadeOutOldMapMusic();
+    PlaySE(SE_WARP_IN);
+}
+
+// ... and once the flash is white: land there, fading in from white.
+void Ichor_FinishHermMapTravel(void)
+{
+    WarpIntoMap();
+    ResetInitialPlayerAvatarState();
+    gFieldCallback = FieldCB_WarpExitFadeFromWhite;
+    SetMainCallback2(CB2_LoadMap);
 }
 
 // specialvar Ichor_TravelToTownHerm: Hermes carries the player to TOWN_HERM_*

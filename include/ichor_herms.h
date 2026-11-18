@@ -20,15 +20,21 @@ extern const struct IchorHerm gIchorHerms[HERM_MAX];
 // touch; any herm then carries the player to its landing tile.
 struct IchorTownHerm
 {
-    u16 map;           // MAP_* the herm stands on; 0 = no town here yet
+    u16 map;           // MAP_* the herm stands on; MAP_ELAIA_VILLAGE is 0, so an unused row is the one with no name
     u8 x, y;           // the landing tile, beside the herm on the main path
     u16 healLocation;  // the town's healer's HEAL_LOCATION_* (registers it), or HEAL_LOCATION_NONE
     const u8 *name;
+    u16 mapsec;        // MAPSEC_* the travel map marks it in
+    u8 mapX, mapY;     // its own cell of that section on the region map
 };
 
 extern const struct IchorTownHerm gIchorTownHerms[TOWN_HERM_MAX];
 
 bool32 Ichor_IsTownHermRegistered(u32 townHerm);
+u32 Ichor_GetTownHermHere(void);                           // region_map.c, the herm travel map
+u32 Ichor_FindTravelHerm(s32 x, s32 y, s32 dx, s32 dy);    // region_map.c: its cursor's next herm
+void Ichor_StartHermMapTravel(u32 townHerm);               // region_map.c: A on a destination
+void Ichor_FinishHermMapTravel(void);                     // region_map.c: once the map has faded
 
 u16 Ichor_GetHermFlag(u32 herm);
 

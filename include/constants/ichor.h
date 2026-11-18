@@ -102,7 +102,7 @@
 #define TOWN_HERM_STYMPHALIA        24  // Lake Stymphalia's rest stop, by Akanthis's hut
 #define TOWN_HERM_COUNT             25  // new towns take the next ids
 #define TOWN_HERM_MAX               32  // FLAG_ICHOR_TOWN_HERMS_START's range
-#define TOWN_HERM_STAY              0xFE // the travel menu's "Stay here"
+#define TOWN_HERM_STAY              0xFE // VAR_RESULT when the travel map is closed with B
 
 // Ichor_TouchTownHerm's results
 #define TOWN_HERM_TOUCH_NONE        0   // no travel herm on this map

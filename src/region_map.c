@@ -80,9 +80,21 @@ static EWRAM_DATA struct {
     u8 tileBuffer[0x1c0];
     u8 nameBuffer[0x26]; // never read
     bool8 choseFlyLocation;
+    u8 hermDest; // Ichor: the herm travel map's chosen TOWN_HERM_*, or HERM_DEST_NONE
 } *sFlyMap = NULL;
 
 static bool32 sDrawFlyDestTextWindow;
+
+// Ichor: the herm travel map (SYSTEMS §4; ENGINE_API §4). A town herm opens
+// this Fly map with sHermTravelMap set: the only targets are the registered
+// town herms, the cursor jumps from one to the next, and A carries the player
+// to that herm's landing tile through a white flash. The Wings and Fly never
+// set it, so their map is unchanged.
+#define HERM_DEST_NONE 0xFF
+static EWRAM_DATA bool8 sHermTravelMap = FALSE;
+static u8 ProcessRegionMapInput_Herm(void);
+static void SetHermDest(u32 townHerm);
+static void CreateHermDestIcons(void);
 
 static u8 ProcessRegionMapInput_Full(void);
 static u8 MoveRegionMapCursor_Full(void);
@@ -2019,6 +2031,13 @@ bool32 IsEventIslandMapSecId(mapsec_u8_t mapSecId)
     return FALSE;
 }
 
+// Ichor: the herms' travel map is this Fly map with sHermTravelMap set
+void CB2_OpenHermTravelMap(void)
+{
+    sHermTravelMap = TRUE;
+    SetMainCallback2(CB2_OpenFlyMap);
+}
+
 void CB2_OpenFlyMap(void)
 {
     switch (gMain.state)
@@ -2037,7 +2056,16 @@ void CB2_OpenFlyMap(void)
         sFlyMap = Alloc(sizeof(*sFlyMap));
         if (sFlyMap == NULL)
         {
-            SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+            if (sHermTravelMap) // Ichor: back to the herm's script, staying put
+            {
+                sHermTravelMap = FALSE;
+                gSpecialVar_Result = TOWN_HERM_STAY;
+                SetMainCallback2(CB2_ReturnToFieldContinueScript);
+            }
+            else
+            {
+                SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+            }
         }
         else
         {
@@ -2069,6 +2097,12 @@ void CB2_OpenFlyMap(void)
         CreateRegionMapPlayerIcon(TAG_PLAYER_ICON, TAG_PLAYER_ICON);
         sFlyMap->mapSecId = sFlyMap->regionMap.mapSecId;
         StringFill(sFlyMap->nameBuffer, CHAR_SPACE, MAP_NAME_LENGTH);
+        sFlyMap->hermDest = HERM_DEST_NONE;
+        if (sHermTravelMap) // Ichor: the cursor starts on the registered herm nearest the player
+        {
+            sFlyMap->regionMap.inputCallback = ProcessRegionMapInput_Herm;
+            SetHermDest(HERM_DEST_NONE);
+        }
         sDrawFlyDestTextWindow = TRUE;
         DrawFlyDestTextWindow();
         gMain.state++;
@@ -2085,7 +2119,7 @@ void CB2_OpenFlyMap(void)
         LoadPalette(sRegionMapFramePal, BG_PLTT_ID(1), sizeof(sRegionMapFramePal));
         PutWindowTilemap(WIN_FLY_TO_WHERE);
         FillWindowPixelBuffer(WIN_FLY_TO_WHERE, PIXEL_FILL(0));
-        AddTextPrinterParameterized(WIN_FLY_TO_WHERE, FONT_NORMAL, gText_FlyToWhere, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_FLY_TO_WHERE, FONT_NORMAL, sHermTravelMap ? COMPOUND_STRING("Travel to which herm?") : gText_FlyToWhere, 0, 1, 0, NULL);
         ScheduleBgCopyTilemapToVram(0);
         gMain.state++;
         break;
@@ -2138,6 +2172,22 @@ static void DrawFlyDestTextWindow(void)
     bool32 namePrinted;
     const u8 *name;
 
+    if (sHermTravelMap) // Ichor: the herm's own name, which tells Kythera's two towns apart
+    {
+        u8 hermName[24];
+        if (sDrawFlyDestTextWindow == TRUE)
+            DrawStdFrameWithCustomTileAndPalette(WIN_MAPSEC_NAME, FALSE, 101, 13);
+        FillWindowPixelBuffer(WIN_MAPSEC_NAME, PIXEL_FILL(1));
+        if (sFlyMap->hermDest != HERM_DEST_NONE)
+        {
+            StringCopyUppercase(hermName, gIchorTownHerms[sFlyMap->hermDest].name);
+            AddTextPrinterParameterized(WIN_MAPSEC_NAME, FONT_NORMAL, hermName, 0, 1, 0, NULL);
+        }
+        CopyWindowToVram(WIN_MAPSEC_NAME, COPYWIN_GFX);
+        ScheduleBgCopyTilemapToVram(0);
+        sDrawFlyDestTextWindow = FALSE;
+        return;
+    }
     if (sFlyMap->regionMap.mapSecType > MAPSECTYPE_NONE && sFlyMap->regionMap.mapSecType < NUM_MAPSEC_TYPES)
     {
         namePrinted = FALSE;
@@ -2203,6 +2253,11 @@ static void LoadFlyDestIcons(void)
     sheet.tag = TAG_FLY_ICON;
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&sFlyTargetIconsSpritePalette);
+    if (sHermTravelMap) // Ichor: only the town herms' dots
+    {
+        CreateHermDestIcons();
+        return;
+    }
     CreateFlyDestIcons();
     TryCreateRedOutlineFlyDestIcons();
 }
@@ -2418,6 +2473,7 @@ static const struct FlyLocation sFlyLocations[] =
 // Sprite data for SpriteCB_FlyDestIcon
 #define sIconMapSec   data[0]
 #define sFlickerTimer data[1]
+#define sIconHerm     data[2] // Ichor: the herm travel map's TOWN_HERM_*
 
 static void CreateFlyDestIcons(void)
 {
@@ -2479,6 +2535,37 @@ static void CreateFlyDestIcons(void)
     }
 }
 
+// Ichor: a dot on every town herm's cell, lit where the player can travel
+// (registered, and not this town), dim elsewhere.
+static void CreateHermDestIcons(void)
+{
+    u32 i, here = Ichor_GetTownHermHere();
+    u8 spriteId;
+
+    for (i = 0; i < TOWN_HERM_MAX; i++)
+    {
+        const struct IchorTownHerm *herm = &gIchorTownHerms[i];
+        if (herm->name == NULL)
+            continue;
+        spriteId = CreateSpriteUnchecked(&sFlyDestIconSpriteTemplate, (herm->mapX + MAPCURSOR_X_MIN) * 8 + 4,
+                                         (herm->mapY + MAPCURSOR_Y_MIN) * 8 + 4, 10);
+        if (spriteId == MAX_SPRITES)
+            continue;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(8x8);
+        gSprites[spriteId].sIconMapSec = herm->mapsec;
+        gSprites[spriteId].sIconHerm = i;
+        if (i != here && Ichor_IsTownHermRegistered(i))
+        {
+            gSprites[spriteId].callback = SpriteCB_FlyDestIcon;
+            StartSpriteAnim(&gSprites[spriteId], SPRITE_SHAPE(8x8));
+        }
+        else
+        {
+            StartSpriteAnim(&gSprites[spriteId], SPRITE_SHAPE(8x8) + 3);
+        }
+    }
+}
+
 // Draw a red outline box on the mapsec if its corresponding flag has been set
 // Only used for Battle Frontier, but set up to handle more
 static void TryCreateRedOutlineFlyDestIcons(void)
@@ -2514,7 +2601,7 @@ static void TryCreateRedOutlineFlyDestIcons(void)
 // Flickers fly destination icon color (by hiding the fly icon sprite) if the cursor is currently on it
 static void SpriteCB_FlyDestIcon(struct Sprite *sprite)
 {
-    if (sFlyMap->regionMap.mapSecId == sprite->sIconMapSec)
+    if (sHermTravelMap ? sprite->sIconHerm == sFlyMap->hermDest : sFlyMap->regionMap.mapSecId == sprite->sIconMapSec)
     {
         if (++sprite->sFlickerTimer > 16)
         {
@@ -2531,6 +2618,59 @@ static void SpriteCB_FlyDestIcon(struct Sprite *sprite)
 
 #undef sIconMapSec
 #undef sFlickerTimer
+#undef sIconHerm
+
+// Ichor: the herm travel map's cursor. With HERM_DEST_NONE it starts on the
+// travel herm nearest the player; otherwise it sits on that herm's own cell.
+static void SetHermDest(u32 townHerm)
+{
+    struct RegionMap *map = &sFlyMap->regionMap;
+
+    if (townHerm == HERM_DEST_NONE)
+        townHerm = Ichor_FindTravelHerm(map->cursorPosX - MAPCURSOR_X_MIN, map->cursorPosY - MAPCURSOR_Y_MIN, 0, 0);
+    if (townHerm == HERM_DEST_NONE)
+        return;
+    sFlyMap->hermDest = townHerm;
+    map->cursorPosX = gIchorTownHerms[townHerm].mapX + MAPCURSOR_X_MIN;
+    map->cursorPosY = gIchorTownHerms[townHerm].mapY + MAPCURSOR_Y_MIN;
+    map->cursorMovementFrameCounter = 0;
+    map->mapSecId = gIchorTownHerms[townHerm].mapsec;
+    map->mapSecType = MAPSECTYPE_CITY_CANFLY;
+    GetMapName(map->mapSecName, map->mapSecId, MAP_NAME_LENGTH);
+    if (map->cursorSprite != NULL)
+    {
+        map->cursorSprite->x = 8 * map->cursorPosX + 4;
+        map->cursorSprite->y = 8 * map->cursorPosY + 4;
+    }
+}
+
+static u8 ProcessRegionMapInput_Herm(void)
+{
+    s32 dx = 0, dy = 0;
+    u32 next;
+
+    if (JOY_NEW(A_BUTTON))
+        return MAP_INPUT_A_BUTTON;
+    if (JOY_NEW(B_BUTTON))
+        return MAP_INPUT_B_BUTTON;
+    if (sFlyMap->hermDest == HERM_DEST_NONE)
+        return MAP_INPUT_NONE;
+    if (JOY_REPEAT(DPAD_UP))
+        dy = -1;
+    else if (JOY_REPEAT(DPAD_DOWN))
+        dy = 1;
+    else if (JOY_REPEAT(DPAD_LEFT))
+        dx = -1;
+    else if (JOY_REPEAT(DPAD_RIGHT))
+        dx = 1;
+    else
+        return MAP_INPUT_NONE;
+    next = Ichor_FindTravelHerm(gIchorTownHerms[sFlyMap->hermDest].mapX, gIchorTownHerms[sFlyMap->hermDest].mapY, dx, dy);
+    if (next == HERM_DEST_NONE)
+        return MAP_INPUT_NONE;
+    SetHermDest(next);
+    return MAP_INPUT_MOVE_END;
+}
 
 static void CB_FadeInFlyMap(void)
 {
@@ -2563,7 +2703,16 @@ static void CB_HandleFlyMapInput(void)
             DrawFlyDestTextWindow();
             break;
         case MAP_INPUT_A_BUTTON:
-            if (sFlyMap->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY || sFlyMap->regionMap.mapSecType == MAPSECTYPE_BATTLE_FRONTIER)
+            if (sHermTravelMap) // Ichor: Hermes carries the player to the chosen herm
+            {
+                if (sFlyMap->hermDest != HERM_DEST_NONE)
+                {
+                    Ichor_StartHermMapTravel(sFlyMap->hermDest);
+                    sFlyMap->choseFlyLocation = TRUE;
+                    SetFlyMapCallback(CB_ExitFlyMap);
+                }
+            }
+            else if (sFlyMap->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY || sFlyMap->regionMap.mapSecType == MAPSECTYPE_BATTLE_FRONTIER)
             {
                 m4aSongNumStart(SE_SELECT);
                 sFlyMap->choseFlyLocation = TRUE;
@@ -2584,14 +2733,31 @@ static void CB_ExitFlyMap(void)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        // Ichor: herm travel leaves the map through a white flash
+        if (sHermTravelMap && sFlyMap->choseFlyLocation)
+            BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_WHITE);
+        else
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sFlyMap->state++;
         break;
     case 1:
-        if (!UpdatePaletteFade())
+        if (!UpdatePaletteFade() && (!sHermTravelMap || BGMusicStopped())) // Ichor: herm travel also waits for the music
         {
             FreeRegionMapIconResources();
-            if (sFlyMap->choseFlyLocation)
+            if (sHermTravelMap) // Ichor: to the herm's landing tile, or back to its script
+            {
+                sHermTravelMap = FALSE;
+                if (sFlyMap->choseFlyLocation)
+                {
+                    Ichor_FinishHermMapTravel();
+                }
+                else
+                {
+                    gSpecialVar_Result = TOWN_HERM_STAY;
+                    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+                }
+            }
+            else if (sFlyMap->choseFlyLocation)
             {
                 struct RegionMap* tempRegionMap = &sFlyMap->regionMap;
 

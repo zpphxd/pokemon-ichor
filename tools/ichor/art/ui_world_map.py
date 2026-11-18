@@ -154,7 +154,7 @@ SECTIONS = [
     (*route(22), SEA, [(22, 11), (21, 11), (20, 11), (19, 11), (18, 11), (17, 11), (16, 11),
                        (15, 11), (14, 11), (13, 11), (12, 11), (12, 12)]),
     ("MAPSEC_MELOS", "MELOS", ISLE, [(18, 10)]),
-    ("MAPSEC_KYTHERA_ISLE", "KYTHERA ISLE", TOWN, [(12, 13)]),
+    ("MAPSEC_KYTHERA_ISLE", "KYTHERA ISLE", TOWN, [(12, 13), (12, 14)]),   # Skandeia, then Paphia
     (*route(23), SEA, [(13, 13), (13, 12), (14, 12), (15, 12), (16, 12), (17, 12), (18, 12),
                        (19, 12), (20, 12), (21, 12)]),
     ("MAPSEC_AMNISOS", "AMNISOS", TOWN, [(21, 13)]),
@@ -318,6 +318,7 @@ ISLETS = {
     (20, 1): ["        ", " ## ### ", " ###### ", "  ####  ", "  ##    ", "        ", "        ", "        "],    # Lemnos
     (22, 0): ["        ", "  ####  ", " ###### ", " ###### ", "  ####  ", "        ", "        ", "        "],    # Samothrake
     (12, 13): ["        ", "  ####  ", " ###### ", " ###### ", "  ####  ", "   ##   ", "        ", "        "],   # Kythera
+    (12, 14): ["   ##   ", "  ####  ", " ###### ", " ###### ", " ###### ", "  ####  ", "        ", "        "],   # Kythera's south, Paphia
     (23, 11): ["        ", "  ####  ", " ##  ## ", " #   ## ", "     ## ", " ##  ## ", "  ####  ", "        "],   # Thera's ring, open to the west
 }
 # Post-game islands: painted faint, a shade under the sea, until they open.
@@ -480,6 +481,16 @@ SHELL = [           # Kythera: Aphrodite's scallop, born of the foam
     " #'w'w# ",
     "  #ww#  ",
     "   ##   ",
+]
+PAPHIA = [          # Kythera's south: Aphrodite's gold-roofed shrine at Paphia
+    "        ",
+    "        ",
+    "   ##   ",
+    "  #gg#  ",
+    " #gGGg# ",
+    "  w  w  ",
+    "        ",
+    "        ",
 ]
 LABYRINTH = [       # the Palace of Minos: the Labyrinth, as on Knossian coins
     "########",
@@ -751,7 +762,7 @@ GLYPHS = {
     "MAPSEC_ASTYRA": [PARTHENON, CITY],
     "MAPSEC_MARATHON": [MOUND],
     "MAPSEC_CAPE_SOUNION": [SOUNION],
-    "MAPSEC_KYTHERA_ISLE": [SHELL],
+    "MAPSEC_KYTHERA_ISLE": [SHELL, PAPHIA],
     "MAPSEC_AMNISOS": [BEEHIVE],
     "MAPSEC_PALACE_OF_MINOS": [LABYRINTH],
     "MAPSEC_MT_IDA": [SNOW_PEAK, MOUNTAIN],

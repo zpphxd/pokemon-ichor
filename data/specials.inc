@@ -1081,7 +1081,7 @@ gSpecials::
 	def_special Ichor_RegisterHealerTownHerm
 	def_special Ichor_RegisterTownHerm
 	def_special Ichor_CountTravelHerms
-	def_special Ichor_BuildTravelMenu
+	def_special Ichor_OpenHermTravelMap
 	def_special Ichor_TravelToTownHerm
 	@ Ichor: the Frozen Hour (src/ichor_frozen.c)
 	def_special Ichor_FrozenHourBegin, waitstate=1

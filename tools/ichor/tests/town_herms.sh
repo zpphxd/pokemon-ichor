@@ -4,9 +4,13 @@
 #   tools/ichor/tests/town_herms.sh [rom]     (default: pokeemerald.gba; run make first)
 #
 # Rests at Akti's Asclepeion (registers Akti), touches Emporion's entrance herm
-# (registers Emporion), travels Emporion -> Akti and Akti -> Emporion through
-# the herms' travel menu, and checks that a town never registered is neither
-# offered nor reachable. Output in build/test_town_herms/.
+# (registers Emporion), and marks Elaia and Eleusa known. Then, on the herms'
+# travel map (the region map): only registered herms other than this town's are
+# lit, and the cursor snaps between those and no others. It steers to Akti and
+# travels there, landing on Akti's herm tile; B on Akti's map stays put; and it
+# travels back to Emporion. A town never registered (Thyrsa) is neither lit,
+# reachable, nor accepted by Ichor_TravelToTownHerm. Screenshots of the map are
+# in build/test_town_herms/shots/.
 set -u
 cd "$(dirname "$0")/../../.."
 ROM="${1:-pokeemerald.gba}"

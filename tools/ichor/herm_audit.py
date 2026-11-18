@@ -17,6 +17,8 @@ Checks, from the data the game builds:
   * The herm is near an entrance: the landing tile is at most MAX_STEPS steps
     from where the player arrives (a connected edge, a door from another map, or
     a scripted arrival such as a ferry's warp).
+  * Every row's travel map cell lies in its map section on the region map, and
+    no two rows share a cell.
 
 smoke_test.sh runs it. Python 3 stdlib only.
 """
@@ -32,6 +34,7 @@ MAX_STEPS = 16  # a screen's width: the herm is in view as the town opens up
 HERM_GFX = "OBJ_EVENT_GFX_ICHOR_GREAT_HERM"
 PLAQUE_GFX = "OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE"
 ROW = re.compile(r"\[(TOWN_HERM_\w+)\]\s*=\s*\{\s*(MAP_\w+),\s*(\d+),\s*(\d+),\s*(HEAL_LOCATION_\w+),")
+CELL = re.compile(r"\[(TOWN_HERM_\w+)\][^\n]*COMPOUND_STRING\([^)]*\),\s*(MAPSEC_\w+),\s*(\d+),\s*(\d+)\s*\}")
 ARRIVAL = re.compile(r"\bwarp\w*\s*\(?\s*(MAP_\w+)\s*,\s*(\d+)\s*,\s*(\d+)")
 
 
@@ -51,6 +54,21 @@ def main():
     heals = json.loads((REPO / "src/data/heal_locations.json").read_text())["heal_locations"]
     arrivals = scripted_arrivals(REPO)
     fails = []
+
+    # The travel map: every row marks its own cell, in its map section, on the
+    # region map (src/data/region_map/region_map_layout.h, from ui_world_map.py).
+    layout = (REPO / "src/data/region_map/region_map_layout.h").read_text().split("=", 1)[1]
+    grid = [[c.strip() for c in r.split(",") if c.strip()] for r in re.findall(r"\{([^{}]*)\}", layout)]
+    cells = {}
+    for town, sec, cx, cy in CELL.findall((REPO / "src/data/ichor_town_herms.h").read_text()):
+        cx, cy = int(cx), int(cy)
+        if cy >= len(grid) or cx >= len(grid[cy]) or grid[cy][cx] != sec:
+            fails.append(f"{town}: its travel map cell ({cx},{cy}) is not in {sec} on the region map")
+        if (cx, cy) in cells:
+            fails.append(f"{town}: its travel map cell ({cx},{cy}) is {cells[(cx, cy)]}'s too")
+        cells[(cx, cy)] = town
+    if len(cells) != len(rows):
+        fails.append(f"{len(rows)} rows but {len(cells)} travel map cells in src/data/ichor_town_herms.h")
 
     covered = {heal for _, _, _, _, heal in rows}
     for h in heals:

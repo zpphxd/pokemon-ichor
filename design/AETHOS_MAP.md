@@ -69,7 +69,7 @@ Each place has its own glyph:
 | Marathon | the burial mound and a spear |
 | Cape Sounion | Poseidon's white temple |
 | Kaldera | Thera's ring, open to the west, with the forge burning inside |
-| Kythera | Aphrodite's scallop, which is the island itself |
+| Kythera | Aphrodite's scallop, which is the island itself (Skandeia); below it, Paphia's gold-roofed shrine |
 | Amnisos | a beehive |
 | Palace of Minos | the Labyrinth, as on Knossian coins |
 | Mt. Ida | a snow-capped peak |
@@ -196,7 +196,7 @@ A town has an Asclepeion and becomes a fly target once its maps land.
 | Arkadia | `MAPSEC_ARKADIA` | (7, 10), (7, 11) | central Peloponnese | II | the Girdle (Route 11) | Moonlit cypresses, the Pool of Mnemosyne, Kallisto (Laurel 5) |
 | Astyra | `MAPSEC_ASTYRA` | (18, 6), (18, 7) | Athens | II | story: Route 15 opens | The capital: Akropolis, Stoa, Asclepeion, and the salt well (the Conch) |
 | Kaldera | `MAPSEC_KALDERA` | (23, 11) | Thera | II | the story trireme, or the Conch | Talos's forge (Laurel 6); the Wings; a door in the ash cliff for the Labrys |
-| Kythera Isle | `MAPSEC_KYTHERA_ISLE` | (12, 13) | Kythera | III | the story trireme | Aphrodite's foam (Laurel 7); the Horn of Achelous |
+| Kythera Isle | `MAPSEC_KYTHERA_ISLE` | (12, 13), (12, 14) | Kythera: Skandeia, the harbor, then Paphia to the south | III | the story trireme | Aphrodite's foam (Laurel 7); the Horn of Achelous |
 | Amnisos | `MAPSEC_AMNISOS` | (21, 13) | Amnisos, on Crete | III | the story trireme | Knossa's harbor town: bees on every roof, and the Cave of Eileithyia |
 | Lakonia | `MAPSEC_LAKONIA` | (9, 12) | Sparta | III | the story trireme to Gytheion | Kleon's home and the battle school; "the helmet comes off" |
 | Delphoi | `MAPSEC_DELPHOI` | (7, 3) | Delphi | III | the Horn (Route 28) | The Pythia (Laurel 8), the Omphalos and the Loom |
