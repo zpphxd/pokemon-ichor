@@ -2473,6 +2473,13 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_RING7_B          (FLAG_ICHOR_GENERAL2_START + 0x4DB) // Ichor: Ring VII: hidden
 #define FLAG_ICHOR_THEOXENIA_HESTIA             (FLAG_ICHOR_GENERAL2_START + 0x52B) // Ichor: Lakonia: Hestia's visit at the roofless farmhouse (E2) done
 #define FLAG_ICHOR_HIDE_LAKONIA_GEOGRIP         (FLAG_ICHOR_GENERAL2_START + 0x52C) // Ichor: Lakonia: the wrestling sands' Geogrip caught or beaten
+#define FLAG_ICHOR_ITEM_ROUTE25_CLEFT           (FLAG_ICHOR_GENERAL2_START + 0x52D) // Ichor: Lakonia: the item in Taygetos's cleft on Route 25 (behind the Hammer's rubble)
+#define FLAG_ICHOR_HIDE_ROUTE25_RUBBLE          (FLAG_ICHOR_GENERAL2_START + 0x52E) // Ichor: Lakonia: Route 25's cleft rubble broken
+#define FLAG_ICHOR_HIDE_LAKONIA_RUBBLE          (FLAG_ICHOR_GENERAL2_START + 0x52F) // Ichor: Lakonia: the rubble in the Taygetos cleft behind the agoge broken
+#define FLAG_ICHOR_ITEM_LAKONIA_CLEFT           (FLAG_ICHOR_GENERAL2_START + 0x530) // Ichor: Lakonia: the item in the cleft behind the agoge
+#define FLAG_ICHOR_ITEM_GYTHEION_ISLET          (FLAG_ICHOR_GENERAL2_START + 0x531) // Ichor: Lakonia: the Proteus islet's item off Gytheion (Conch)
+#define FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_ISLET    (FLAG_ICHOR_GENERAL2_START + 0x532) // Ichor: Lakonia: Route 25's reed islet (Conch)
+#define FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_ISLET   (FLAG_ICHOR_GENERAL2_START + 0x533) // Ichor: Lakonia: the Proteus islet off Gytheion (Conch)
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

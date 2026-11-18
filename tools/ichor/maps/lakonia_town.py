@@ -82,8 +82,14 @@ def build():
     m.piece("taygetos", "side_E_foot", 3, 3)
     for (x, y) in ((4, 12), (4, 29), (5, 19), (4, 38), (22, 4)):
         m.piece("taygetos", "scree", x, y)
-    for (x, y) in ((4, 16), (4, 40), (4, 25)):
+    for (x, y) in ((4, 16), (4, 40), (4, 25), (4, 33), (4, 6)):
         m.piece("taygetos", "boulder", x, y)
+    # a cleft in the rock behind the agoge's yard, choked with rubble (the Bronze Hammer)
+    for (x, y) in ((1, 9), (2, 9), (2, 10), (3, 10)):
+        m.piece("taygetos", "scree", x, y)
+    # the agoge stands a terrace above the village: its yard drops to the lanes
+    m.ledge_run(5, 9, 17)
+    m.ledge_run(13, 19, 17)
     m.woods(m.cells("T"), salt=3, aethos_only=lambda x, y: x >= 44 and y in EAST_SEAM_ROWS)
     # ---- the agoge: barracks, the great yard, the ring ----------------------------------
     yard = {(x, y) for x in range(5, 23) for y in range(7, 17)}
@@ -121,8 +127,8 @@ def build():
     m.put("stoa", 27, 20)                            # the Persian Stoa (27..33, 20..25)
     m.put("enyalios", 24, 23)                        # the chained war god (24, 23..24)
     m.plane(16, 25)
-    for (x, y) in ((21, 21), (22, 21), (21, 26), (20, 26), (28, 27), (29, 27)):
-        m.set(x, y, A.GRASS, False)
+    m.cypress(15, 27)
+    m.cypress(34, 18) if False else None
     # ---- the civic buildings by the way in ---------------------------------------------
     m.aethos_building(A.ASCLEPEION, 28, 33)          # door (29,36)
     m.aethos_building(A.AGORA, 32, 33)               # door (33,36)
@@ -169,8 +175,25 @@ def build():
     m.set(47, 9, A.TRIPOD, True)
     for (x, y) in ((45, 7), (50, 7), (45, 10), (50, 10)):
         m.cypress(x, y)
-    for (x, y) in ((44, 17), (47, 17), (49, 20), (45, 23), (48, 26), (45, 29), (45, 40), (48, 40), (50, 33)):
-        m.olive(x, y)
+    # the far bank's olive groves, with a lane down to the river
+    groves = {(x, y) for x in range(44, W) for y in range(15, H)
+              if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and not m.solid[y, x]
+              and not (ENTRY_ROW - 1 <= y <= ENTRY_ROW + 1) and x != (47 if y < 25 else 49)
+              and not (y == 25 and 47 <= x <= 49) and (x, y) not in ((44, 20), (44, 27), (44, 32), (45, 27))}
+    m.woods(groves, salt=17, aethos_only=lambda x, y: x >= 44 and y in EAST_SEAM_ROWS)
+    # the village south of the agora: a yard round its well, olives, a plane
+    syard = {(x, y) for x in range(19, 24) for y in range(30, 35)} - {(19, 30), (19, 34)}
+    m.soft("yard", syard, syard | m.cells("p"), edge_in=False)
+    m.piece("well", "well", 21, 32)
+    m.plane(28, 28) if False else None
+    m.woods({(x, y) for x in range(28, 31) for y in range(28, 32)}, salt=23, aethos_only=lambda x, y: False)
+    # the south-west village: a garden of olives between Chilon's and the Mani road
+    m.woods({(x, y) for x in range(10, 18) for y in range(37, 39)
+             if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and not m.solid[y, x]}, salt=29,
+            aethos_only=lambda x, y: False)
+    m.woods({(x, y) for x in range(5, 9) for y in range(30, 34)
+             if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and not m.solid[y, x] and (x, y) != (7, 29)},
+            salt=31, aethos_only=lambda x, y: False)
     m.border = [A.GRASS, A.GRASS, A.GRASS, A.GRASS]
     # no up seam yet: Route 26 is not built (its builder agrees the north strip)
 
@@ -225,10 +248,18 @@ def build():
     o("ICHOR_CADET", 27, 2, S + "NorthGuard", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_LAKONIA_NORTH_GUARD")
     o("ICHOR_HOPLITE", 31, 13, S + "Wrestler", "MOVEMENT_TYPE_FACE_LEFT")
     m.item_ball(49, 9, "ITEM_RARE_CANDY", "FLAG_ICHOR_ITEM_LAKONIA_MENELAION")
+    o("BREAKABLE_ROCK", 3, 10, "EventScript_RockSmash", "MOVEMENT_TYPE_NONE", flag="FLAG_ICHOR_HIDE_LAKONIA_RUBBLE")
+    m.item_ball(1, 9, "ITEM_FOCUS_BAND", "FLAG_ICHOR_ITEM_LAKONIA_CLEFT")
+    m.forced_open.add((3, 10))
     m.hidden(46, 9, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_MENELAION")
     m.hidden(5, 12, "ITEM_ELIXIR", "FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_AGOGE")
     m.hidden(34, 39, "ITEM_FULL_RESTORE", "FLAG_ICHOR_HIDDEN_ITEM_LAKONIA_BRIDGE")
     m.sign(19, 40, S + "ManiRoad")
+    m.set(27, 29, A.STELE, True)                 # Leonidas's cenotaph, on the road up from the bridge
+    m.sign(27, 29, S + "Leonidas")
+    m.sign(3, 24, S + "Kaiadas")                 # the mountain's face over the west village
+    m.set(37, ENTRY_ROW - 2, A.HERM, True)      # the town's great herm, at the bridge's west end
+    m.sign(37, ENTRY_ROW - 2, S + "TownHerm")
     m.sign(24, 24, S + "Enyalios")
     m.sign(30, 25, S + "PersianStoa")
     m.sign(6, 28, S + "BurialPlot")

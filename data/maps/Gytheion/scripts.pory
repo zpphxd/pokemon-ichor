@@ -207,3 +207,24 @@ script Gytheion_EventScript_Cape {
     msgbox(format("Past the headland, the strait runs east to Cape Malea.\p"
                   "Sailors say rounding it makes you forget your home."), MSGBOX_SIGN)
 }
+
+// The islet off the headland (by Surf): a hook to the Oikoumene's Proteus lead
+script Gytheion_EventScript_Proteus {
+    msgbox(format("A ruined shrine, the size of a fisher's hut. A carved seal-herd on the lintel.\p"
+                  "“The Old Man of the Sea told Menelaos: she never reached Troy.\p"
+                  "Ask in Egypt. Ask at Pharos.”"), MSGBOX_SIGN)
+}
+
+// The town's great herm at its main entrance: fast travel between herms
+// (the travel system hooks EventScript_IchorAnointHerm in on merge)
+script Gytheion_EventScript_TownHerm {
+    lockall
+    msgbox(format("The herm of Gytheion. Touch it to travel between herms."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+script Gytheion_EventScript_TheaterView {
+    msgbox(format("A painted panel by the door, the view from the theater's top row: the whole gulf, purple at the edges where the dyers rinse.\p"
+                  "Kranai in the bay. Malea's cliffs to the east. Behind, the valley climbs to the mountains."), MSGBOX_SIGN)
+}

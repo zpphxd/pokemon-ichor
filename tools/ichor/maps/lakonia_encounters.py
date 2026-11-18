@@ -41,6 +41,9 @@ LAK_NIGHT = [("Gelasable", 47, 49), ("Dorydrake", 47, 49), ("Hoplomex", 47, 49),
              ("Gelasable", 48, 50), ("Dorydrake", 48, 50), ("Kerazap", 48, 50), ("Cairnolith", 48, 50),
              ("Hoplomex", 49, 50), ("Gelasable", 49, 50), ("Nemeleon", 50, 50), ("Dorydrake", 50, 50)]
 
+ROCK = [("Cairnolith", 44, 47), ("Laolith", 44, 47), ("Cairnolith", 46, 48), ("Geogrip", 46, 49),
+        ("Laolith", 48, 50)]
+
 ENTRIES = []
 for tod in ("Morning", "Night"):
     ENTRIES.append({"map": "MAP_GYTHEION", "base_label": f"gGytheion_{tod}",
@@ -49,11 +52,13 @@ for tod in ("Morning", "Night"):
     ENTRIES.append({"map": "MAP_ROUTE25_EUROTAS", "base_label": f"gRoute25_Eurotas_{tod}",
                     "land_mons": {"encounter_rate": 20, "mons": mons(R25_MORNING if tod == "Morning" else R25_NIGHT)},
                     "water_mons": {"encounter_rate": 4, "mons": mons(RIVER_SURF)},
-                    "fishing_mons": {"encounter_rate": 30, "mons": mons(RIVER_FISH)}})
+                    "fishing_mons": {"encounter_rate": 30, "mons": mons(RIVER_FISH)},
+                    "rock_smash_mons": {"encounter_rate": 20, "mons": mons(ROCK)}})
     ENTRIES.append({"map": "MAP_LAKONIA", "base_label": f"gLakonia_{tod}",
                     "land_mons": {"encounter_rate": 15, "mons": mons(LAK_MORNING if tod == "Morning" else LAK_NIGHT)},
                     "water_mons": {"encounter_rate": 4, "mons": mons(RIVER_SURF)},
-                    "fishing_mons": {"encounter_rate": 30, "mons": mons(RIVER_FISH)}})
+                    "fishing_mons": {"encounter_rate": 30, "mons": mons(RIVER_FISH)},
+                    "rock_smash_mons": {"encounter_rate": 20, "mons": mons(ROCK)}})
 
 
 def main():

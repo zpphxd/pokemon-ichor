@@ -381,3 +381,13 @@ script Route25_EventScript_Herm {
     call(EventScript_IchorAnointHerm)
     releaseall
 }
+
+script Route25_EventScript_Taygetos {
+    msgbox(format("Taygetos. The rock goes up and up until it turns blue, then white.\p"
+                  "Snow on the peaks in summer. The valley lives in its shadow by afternoon."), MSGBOX_SIGN)
+}
+
+script Route25_EventScript_ReedBeds {
+    msgbox(format("The reeds stand taller than a boy. Half of them are cut off at the waterline,\p"
+                  "torn, not sliced. Every cadet in Lakonia sleeps on this river."), MSGBOX_SIGN)
+}

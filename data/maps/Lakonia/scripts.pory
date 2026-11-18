@@ -780,3 +780,25 @@ script Lakonia_EventScript_BurialPlot {
     setspeaker(SP_NAME_NONE)
     releaseall
 }
+
+// The town's great herm at its main entrance: fast travel between herms
+// (the travel system hooks EventScript_IchorAnointHerm in on merge)
+script Lakonia_EventScript_TownHerm {
+    lockall
+    msgbox(format("The herm of Lakonia. Touch it to travel between herms."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+script Lakonia_EventScript_Leonidas {
+    msgbox(format("A plain stone for a king who never came home.\p"
+                  "LEONIDAS. THE THREE HUNDRED.\p"
+                  "Under it, cut smaller: “Stranger, tell Lakonia we lie here, as she asked.”\p"
+                  "Someone has left a cadet's red cloak folded on top."), MSGBOX_SIGN)
+}
+
+script Lakonia_EventScript_Kaiadas {
+    msgbox(format("Taygetos goes straight up, dark as a storm, a mile over the roofs.\p"
+                  "Somewhere up there is the Kaiadas, the pit. Nobody here says the word.\p"
+                  "The goat paths start where the rock looks most like a wall."), MSGBOX_SIGN)
+}

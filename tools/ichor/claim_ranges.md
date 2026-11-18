@@ -180,3 +180,8 @@ only inside its own bank-flag and trainer-ID range, from the reserve:
 Shared state: `VAR_ICHOR_ACT3` (bankvar 0xC) with the values SCRIPT.md fixes,
 and Knossa's `VAR_ICHOR_KNOSSA` (0xD) and `VAR_ICHOR_LABYRINTH` (0xE), claimed
 by the director. Trainer ids 300–327 are the director's reserve.
+
+Lakonia (2026-11-17): bank flags used 0x9F0-0xA1A and 0xA20-0xA33 (the
+rooms' households 0xA20-0xA2A); trainer ids 410-424 all used; fixed dig
+index 0x30 is fragment 8 in Lampito's burial plot. Route 26, Lake Stymphalia
+and Route 27 are unbuilt and need their own range.

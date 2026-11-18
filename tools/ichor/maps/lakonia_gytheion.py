@@ -46,6 +46,9 @@ def land():
     for y, (a, b) in zip(range(20, 29), ((25, 28), (24, 29), (23, 30), (23, 30), (22, 30),
                                           (23, 30), (23, 29), (24, 29), (25, 27))):
         fill(a, y, b, y, "s")
+    # the Old Man of the Sea's islet off the headland (by Surf)
+    for (x, y) in ((31, 11), (32, 11), (30, 12), (31, 12), (32, 12), (31, 13)):
+        g[y][x] = "s"
     # the road down from the gap to the quay
     fill(14, 6, 16, 9, "p")
     fill(13, 10, 15, 12, "p")
@@ -73,7 +76,7 @@ def build():
         m.piece("taygetos", "lip" + b, x, 7) if False else m.piece("taygetos", "face" + b, x, 7)
         m.piece("taygetos", "foot_sea" + b, x, 8)
     m.piece("taygetos", "side_E", 26, 6) if False else None
-    m.piece("taygetos", "stack", 31, 11)
+    # the Old Man of the Sea's islet: a ruined shrine off the headland, by Surf
     m.piece("taygetos", "stack", 29, 26)
     # --- the theater cut into the hill, and its stage-building, the Asclepeion -------
     m.put("theater", 3, 7)
@@ -107,8 +110,9 @@ def build():
     m.olive(0, 16)
     m.olive(10, 16)
     m.cypress(2, 16)
-    for (x, y) in ((3, 16), (4, 16), (4, 17), (5, 17), (9, 17)):
+    for (x, y) in ((3, 16), (4, 16), (9, 17)):
         m.set(x, y, A.ANEMONE, False)
+    m.ledge_run(3, 5, 17)                       # the bank drops to the beach
     # --- the quay -------------------------------------------------------------------
     for x in range(13, 26):
         name = "ring_S" if x in (15, 22) else ("S_b" if x == 20 else "S")
@@ -165,6 +169,7 @@ def build():
     for x in range(12, 23):
         m.piece("kranai_way", "H_W" if x == 12 else ("H_E" if x == 22 else ("H_b" if x % 3 == 0 else "H")), x, 24)
     m.put("kranai_shrine", 26, 22)              # door (27,23)
+    m.set(32, 11, A.STELE, True)                # the islet's ruined shrine
     m.cypress(24, 22)
     m.cypress(29, 22)
     # --- the land's last touches ------------------------------------------------------
@@ -190,17 +195,23 @@ def build():
     o("ICHOR_KID_M", 6, 22, S + "DyersBoy", "MOVEMENT_TYPE_WANDER_AROUND", rx=2, ry=1)
     o("ICHOR_ELDER_F", 17, 24, S + "OldWoman", "MOVEMENT_TYPE_FACE_RIGHT")
     o("ICHOR_MAN", 15, 3, S + "Lakonian", "MOVEMENT_TYPE_FACE_DOWN")
-    o("ICHOR_HEALER", 5, 9, S + "Patient", "MOVEMENT_TYPE_FACE_DOWN")
+    o("ICHOR_HEALER", 5, 14, S + "Patient", "MOVEMENT_TYPE_FACE_UP")
     m.item_ball(1, 27, "ITEM_NET_BALL", "FLAG_ICHOR_ITEM_GYTHEION_NET_BALL")
+    m.item_ball(30, 12, "ITEM_MYSTIC_WATER", "FLAG_ICHOR_ITEM_GYTHEION_ISLET")
+    m.hidden(31, 13, "ITEM_PEARL_STRING", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_ISLET")
+    m.sign(32, 11, S + "Proteus")
     m.sign(13, 7, S + "TownSign")
     m.sign(3, 15, S + "Herm")
     m.sign(26, 12, S + "Cape")
+    m.sign(5, 12, S + "TheaterView")
+    m.set(23, 13, A.HERM, True)                 # the town's great herm, by the Euploia's berth
+    m.sign(23, 13, S + "TownHerm")
     # the Shoal Shells for Porphyris (four, so one can be missed), and the town's own
     m.hidden(0, 29, "ITEM_SHOAL_SHELL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_1")
     m.hidden(30, 27, "ITEM_SHOAL_SHELL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_2")
     m.hidden(11, 28, "ITEM_SHOAL_SHELL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_3")
     m.hidden(25, 17, "ITEM_SHOAL_SHELL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_SHELL_4")
-    m.hidden(9, 9, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_THEATER")
+    m.hidden(12, 13, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_THEATER")
     m.hidden(24, 28, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_GYTHEION_KRANAI")
     m.connect("up", 0, "MAP_ROUTE25_EUROTAS")
     m.header.update({"weather": "WEATHER_SUNNY"})

@@ -78,6 +78,8 @@ def land():
     fill(17, 5, west_bank(5) - 1, 9, "T")
     # ---- the road ---------------------------------------------------------------------
     fill(14, 42, 16, H - 1, "p")
+    fill(0, 45, 12, H - 1, "T")
+    fill(18, 45, W - 1, H - 1, "T")
     fill(14, 32, 16, 41, "p")
     fill(14, 24, 16, 31, "p")             # the bank past the reeds
     fill(15, 18, 16, 21, "p")
@@ -117,8 +119,12 @@ def build():
     for (x, y) in ((3, 33), (3, 18), (3, 27)):
         m.piece("taygetos", "scree", x, y)
     m.piece("taygetos", "boulder", 3, 35)
+    # a cleft in Taygetos's foot, choked with rubble (the Bronze Hammer)
+    for (x, y) in ((0, 32), (1, 32), (0, 33), (1, 33), (2, 33)):
+        m.set(x, y, A.SHADE, False)
+    m.piece("taygetos", "scree", 3, 33)
     # ---- woods ------------------------------------------------------------------------
-    m.woods(m.cells("T"), salt=4, aethos_only=lambda x, y: x < 8 or y < 6)
+    m.woods(m.cells("T"), salt=4, aethos_only=lambda x, y: x < 8 or y < 6 or y >= H - 6)
     for (x, y) in ((8, 0), (17, 0)) if False else ():
         pass
     m.plane(8, 5)            # the plane trees framing the cutting and band 3
@@ -139,11 +145,13 @@ def build():
         m.piece("taygetos", "face" + b, x, 14)
         m.piece("taygetos", "foot" + b, x, 15)
     m.put("vapheio", 4, 13, cells={(i, j) for i in range(4) for j in range(3)})   # door (5..6,15)
-    for y in range(10, 13):                 # the hilltop
+    for y in range(8, 13):                  # the hilltop
         for x in range(1, 13):
             m.set(x, y, A.GRASS, False)
-    m.woods({(x, y) for x in range(0, 12) for y in range(8, 10)} | {(0, y) for y in range(10, 13)},
+    m.woods({(x, y) for x in (0, 1, 10, 11) for y in range(8, 10)} | {(0, y) for y in range(10, 13)},
             salt=9, aethos_only=lambda x, y: x < 8)
+    for (x, y) in ((6, 8), (7, 8), (8, 8), (9, 8)):
+        m.set(x, y, A.SHADE, False)
     m.put("throne", 2, 8)                   # Apollo on his throne (2..4, 8..11); top row over the woods
     m.piece("flowers", "hyacinths", 1, 11)
     m.piece("flowers", "hyacinths_b", 5, 11)
@@ -174,11 +182,15 @@ def build():
     # ---- the terraces and groves of the lower valley --------------------------------
     m.ledge_run(0, 13, 36) if False else None
     m.ledge_run(4, 13, 37)
-    m.ledge_run(17, 22, 42)
     for (x, y) in ((1, 43), (4, 43), (7, 43), (10, 43), (2, 46), (5, 46), (8, 46), (11, 46)):
         m.olive(x, y)
-    for (x, y) in ((18, 44), (21, 44), (24, 44), (19, 47), (22, 47), (25, 47)):
-        m.olive(x, y)
+    # the lower valley's groves: olives between the road and the river's bend,
+    # and along the barley's south edge
+    grove = {(x, y) for x in range(17, 23) for y in range(37, 45)
+             if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and not m.solid[y, x]}
+    grove |= {(x, y) for x in range(0, 13) for y in range(42, 45)
+              if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and (x, y) != (13, 42)}
+    m.woods(grove, salt=21, aethos_only=lambda x, y: x < 8 or y >= H - 6)
     m.cypress(12, 39)
     m.cypress(17, 39)
     for (x, y) in ((18, 37), (19, 34), (17, 19)):
@@ -210,17 +222,20 @@ def build():
     t("ICHOR_CADET", 17, 24, "Isadas", "LEFT", 2)
     t("ICHOR_CADET", 14, 21, "Phoibidas", "RIGHT", 2)
     t("ICHOR_FISHER", 17, 32, "Alpheios", "RIGHT", 1)
-    t("ICHOR_PILGRIM", 8, 12, "Theodora", "UP", 2)
+    t("ICHOR_PILGRIM", 8, 9, "Theodora", "DOWN", 2)
     t("ICHOR_HOPLITE", 14, 8, "Arimnestos", "RIGHT", 2)
     t("ICHOR_HARVESTER", 7, 41, "Euthymia", "UP", 3)
     o("ICHOR_CADET", 19, 28, S + "ReedCadet", "MOVEMENT_TYPE_FACE_UP")
     o("ICHOR_CADET", 20, 30, S + "ReedCadet2", "MOVEMENT_TYPE_FACE_LEFT")
     o("ICHOR_CADET", 16, 15, S + "Runner", "MOVEMENT_TYPE_WALK_UP_AND_DOWN", ry=2)
-    o("ICHOR_PRIESTESS", 7, 11, S + "Polyboia", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_ROUTE25_POLYBOIA")
+    o("ICHOR_PRIESTESS", 6, 11, S + "Polyboia", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_ROUTE25_POLYBOIA")
     o("CUTTABLE_TREE", 19, 13, "EventScript_CutTree", "MOVEMENT_TYPE_NONE")
     o("ICHOR_ELDER_F", 6, 25, S + "HearthWoman", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE25_HESTIA",
       local_id="LOCALID_ROUTE25_HESTIA")
     m.item_ball(26, 15, "ITEM_MIRACLE_SEED", "FLAG_ICHOR_ITEM_ROUTE25_MEADOW")
+    o("BREAKABLE_ROCK", 2, 33, "EventScript_RockSmash", "MOVEMENT_TYPE_NONE", flag="FLAG_ICHOR_HIDE_ROUTE25_RUBBLE")
+    m.item_ball(0, 32, "ITEM_HARD_STONE", "FLAG_ICHOR_ITEM_ROUTE25_CLEFT")
+    m.hidden(25, 11, "ITEM_BIG_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_ISLET")
     m.item_ball(3, 31, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_ROUTE25_FARM")
     m.item_ball(1, 3, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_ROUTE25_WEST")
     m.item_ball(2, 40, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_ROUTE25_FIELD")
@@ -241,6 +256,8 @@ def build():
     m.sign(6, 25, S + "Farmhouse") if False else None
     m.sign(6, 25, S + "Hearth") if False else m.sign(5, 25, S + "Hearth")
     m.sign(9, 34, S + "HermShrine")
+    m.sign(2, 27, S + "Taygetos")
+    m.sign(17, 32, S + "ReedBeds")
     for y in range(2, 5):
         m.trigger(7, y, S + "TownInView", "VAR_TEMP_1", 0)
     m.connect("down", 0, "MAP_GYTHEION")
@@ -250,6 +267,7 @@ def build():
     must = [(0, 3, "the exit to Lakonia"), (5, 27, "the farmhouse door"), (8, 11, "Amyklai's spring"),
             (26, 14, "the meadow"), (5, 16, "the Vapheio door")]
     m.forced_open.add((19, 13))             # the reed thicket the Sickle cuts
+    m.forced_open.add((2, 33))              # the cleft's rubble the Hammer breaks
     views = [(15, 45), (15, 37), (15, 29), (15, 22), (7, 12), (22, 15), (14, 7), (6, 3), (5, 30)]
     errs = m.build("route25_eurotas", starts, must, views)
     for y in LEFT_SEAM_ROWS:

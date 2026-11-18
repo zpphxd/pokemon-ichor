@@ -100,9 +100,9 @@
       "local_id": "LOCALID_ROUTE25_THEODORA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
       "x": 8,
-      "y": 12,
+      "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -180,7 +180,7 @@
     {
       "local_id": "LOCALID_ROUTE25_POLYBOIA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
-      "x": 7,
+      "x": 6,
       "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -230,6 +230,32 @@
       "trainer_sight_or_berry_tree_id": "ITEM_MIRACLE_SEED",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_ROUTE25_MEADOW"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 2,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_ICHOR_HIDE_ROUTE25_RUBBLE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 0,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HARD_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ROUTE25_CLEFT"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -315,6 +341,14 @@
     }
   ],
   "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 25,
+      "y": 11,
+      "elevation": 3,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_ISLET"
+    },
     {
       "type": "hidden_item",
       "x": 3,
@@ -434,6 +468,22 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route25_EventScript_HermShrine"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 27,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route25_EventScript_Taygetos"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route25_EventScript_ReedBeds"
     }
   ]
 }

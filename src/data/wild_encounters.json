@@ -13378,6 +13378,36 @@
                 "species": "SPECIES_KARKITOX"
               }
             ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
           }
         },
         {
@@ -13530,6 +13560,36 @@
                 "min_level": 49,
                 "max_level": 49,
                 "species": "SPECIES_KARKITOX"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
               }
             ]
           }
@@ -13775,6 +13835,36 @@
                 "species": "SPECIES_KARKITOX"
               }
             ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
+              }
+            ]
           }
         },
         {
@@ -13927,6 +14017,36 @@
                 "min_level": 49,
                 "max_level": 49,
                 "species": "SPECIES_KARKITOX"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 44,
+                "max_level": 47,
+                "species": "SPECIES_LAOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 46,
+                "max_level": 49,
+                "species": "SPECIES_GEOGRIP"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_LAOLITH"
               }
             ]
           }
