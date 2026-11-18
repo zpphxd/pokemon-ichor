@@ -201,3 +201,7 @@ three rooms, Route 16) claims from world-act2's own blocks: bankflag offsets
 `claim.py --range 0x590-0x5AF`, so reruns are no-ops) and trainer ids 1344-1363
 (1344-1352 used; `TRAINERS_END_ACT2` follows the highest). The old road's item,
 hidden-item and trainer flags (FLAG_ICHOR_ITEM_R15_*, R16_*, ids 223-234) are kept.
+
+The awe pass, items 1-2 (2026-11-18, `tools/ichor/maps/astyra_capital.py`: Astyra, its
+harbor and the Akropolis) claims bankflag offsets 0x5C0-0x5CF (0x5C0-0x5C4 used: the two
+reveals, the agora and Pnyx hidden items, the Kerameikos jar).

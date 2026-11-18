@@ -84,3 +84,9 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
 - Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere.
 - **Built (2026-11-17):** 19 towns' entrance herms and plaques (tools/ichor/maps/town_herms.py), healer and touch registration, the travel menu from any herm (SYSTEMS §4, ENGINE_API §4), the rule in MAP_DESIGN §2 and its audit (tools/ichor/herm_audit.py), and tools/ichor/tests/town_herms.sh.
+
+### Promachos's spear tip is the Harpe fragment (director-approved proposal, awe pass 2026-11-18)
+- The idea: the second fragment was hidden in plain sight, as the gold tip of Athena Promachos's spear, the gleam sailors saw from Sounion. The Titans' grunts climb her, and the gleam goes out; afterwards the spear stays dark over the city.
+- **Not woven in yet.** The raid script finds the second piece in the roots of Athena's olive (Rhea's diggers uproot it, Alethea tells the Persian-fire story at the stump). Moving the fragment to the spear would rewrite that beat, so it waits for the director.
+- To build it: swap the olive dig for a climb (a grunt on Promachos's plinth, `setmetatile` the tip cells to a dark, unanimated copy), keep the olive falling as the Titans' vandalism, and after `FLAG_ICHOR_AKROPOLIS_RAID_DONE` show the dark tip in Astyra's skyline too (the `glint` cells in both gTileset_Akropolis and gTileset_Astyra; a dark copy costs about 6 tiles in each, both are at 489-494 of 504).
+

@@ -4,7 +4,7 @@ An art-director review of every great city, temple and ruin, written as a plan
 that can be built. It was written on 2026-11-18 against zach-main `3b3c0aca7f`.
 The north star is the user's: *grand and amazing, a new world never explored.*
 
-Nothing here has been built yet. Every map and tileset named below is as it
+**Status (2026-11-18):** items 1 and 2 are built (Astyra, its harbor and the Akropolis on the new gTileset_Astyra and gTileset_Akropolis; `tools/ichor/maps/astyra_capital.py`, renders in `design/awe/img/`), with the column kit (`tools/ichor/art/columns.py`) and STYLE.md §4.8. The ruins kit (item 6) is still to come; the Old Temple uses the column kit's ruins. The rest of this plan was written before any of it was built. Every map and tileset named below is as it
 stands today. The mockups in `design/art/awe_pass/` are blocking sketches,
 painted to scale over the current renders, that show where things go and how
 big they are. They are not tile art. To regenerate them, render each map with

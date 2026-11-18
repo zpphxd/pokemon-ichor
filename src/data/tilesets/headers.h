@@ -1272,3 +1272,33 @@ const struct Tileset gTileset_Kaldera =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kaldera,
     .callback = InitTilesetAnim_PorytilesManaged_Kaldera,
 };
+
+// Ichor: akropolis, the Akropolis of Astyra (Act II, the awe pass). Porytiles-managed, built by
+// tools/ichor/art/astyra_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Akropolis =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Akropolis,
+    .palettes = gTilesetPalettes_PorytilesManaged_Akropolis,
+    .metatiles = gMetatiles_PorytilesManaged_Akropolis,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Akropolis,
+    .callback = InitTilesetAnim_PorytilesManaged_Akropolis,
+};
+
+// Ichor: astyra, Astyra, the capital (Act II, the awe pass). Porytiles-managed, built by
+// tools/ichor/art/astyra_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Astyra =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Astyra,
+    .palettes = gTilesetPalettes_PorytilesManaged_Astyra,
+    .metatiles = gMetatiles_PorytilesManaged_Astyra,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Astyra,
+    .callback = InitTilesetAnim_PorytilesManaged_Astyra,
+};

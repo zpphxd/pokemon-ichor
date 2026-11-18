@@ -1217,7 +1217,7 @@
       "width": 48,
       "height": 48,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Astyra",
       "border_filepath": "data/layouts/Astyra/border.bin",
       "blockdata_filepath": "data/layouts/Astyra/map.bin",
       "layout_version": "emerald"
@@ -1269,10 +1269,10 @@
     {
       "id": "LAYOUT_ASTYRA_AKROPOLIS",
       "name": "Astyra_Akropolis_Layout",
-      "width": 34,
-      "height": 52,
+      "width": 44,
+      "height": 54,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Akropolis",
       "border_filepath": "data/layouts/Astyra_Akropolis/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Akropolis/map.bin",
       "layout_version": "emerald"
@@ -1305,7 +1305,7 @@
       "width": 32,
       "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Astyra",
       "border_filepath": "data/layouts/Astyra_Harbor/border.bin",
       "blockdata_filepath": "data/layouts/Astyra_Harbor/map.bin",
       "layout_version": "emerald"
