@@ -112,7 +112,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 2,
-      "y": 31,
+      "y": 30,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -121,6 +121,151 @@
       "trainer_sight_or_berry_tree_id": "ITEM_NUGGET",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_RING5_ITEM_3"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 18,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorLabrysSeal",
+      "flag": "FLAG_TEMP_10"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 37,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorLabrysSeal",
+      "flag": "FLAG_TEMP_11"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 20,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorLabrysSeal",
+      "flag": "FLAG_TEMP_12"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 24,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_13"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 31,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_14"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 27,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_15"
+    },
+    {
+      "local_id": "LOCALID_LABYRINTHRING5_A_DRUM0",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "x": 45,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_StrengthBoulder",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LABYRINTHRING5_A_DRUM1",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "x": 47,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_StrengthBoulder",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 50,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_EARTHQUAKE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_RING6_SEAL_ITEM"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_SHADOW_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_RING5_POCKET_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 44,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_RELIC_GOLD",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_RING5_POCKET_2"
     }
   ],
   "warp_events": [
@@ -186,6 +331,69 @@
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING6",
       "dest_warp_id": "4"
+    },
+    {
+      "x": 3,
+      "y": 44,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "11"
+    },
+    {
+      "x": 4,
+      "y": 44,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "11"
+    },
+    {
+      "x": 2,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 2,
+      "y": 32,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "14"
+    },
+    {
+      "x": 3,
+      "y": 32,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "14"
+    },
+    {
+      "x": 3,
+      "y": 45,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 43,
+      "y": 34,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 43,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "17"
+    },
+    {
+      "x": 53,
+      "y": 45,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING5",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -242,6 +450,186 @@
       "var": "VAR_ICHOR_KNOSSA",
       "var_value": "11",
       "script": "LabyrinthRing5_EventScript_SouthStair"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 45,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 45,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 46,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 46,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 46,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 47,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 47,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 48,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 48,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 48,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_PlatesA"
+    },
+    {
+      "type": "trigger",
+      "x": 54,
+      "y": 45,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Hole2"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Awe"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Awe"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Awe"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Awe"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Awe"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "LabyrinthRing5_EventScript_Awe"
     }
   ],
   "bg_events": [
@@ -289,8 +677,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 36,
-      "y": 24,
+      "x": 54,
+      "y": 2,
       "elevation": 3,
       "item": "ITEM_HYPER_POTION",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_RING5_A",
@@ -299,8 +687,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 27,
-      "y": 32,
+      "x": 36,
+      "y": 24,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_RING5_B",
@@ -309,13 +697,61 @@
     },
     {
       "type": "hidden_item",
-      "x": 40,
-      "y": 17,
+      "x": 27,
+      "y": 32,
       "elevation": 3,
       "item": "ITEM_ULTRA_BALL",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_RING5_C",
       "quantity": 1,
       "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 46,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthRing5_EventScript_LeverA"
+    },
+    {
+      "type": "sign",
+      "x": 35,
+      "y": 37,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthRing5_EventScript_Remains1"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthRing5_EventScript_Remains2"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthRing5_EventScript_Remains3"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LabyrinthRing5_EventScript_Remains4"
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_FULL_RESTORE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_REMAINS_5"
     }
   ]
 }

@@ -2467,6 +2467,16 @@
 #define FLAG_ICHOR_RING7_DISC                   (FLAG_ICHOR_GENERAL2_START + 0x4D9) // Ichor: Ring VII: the teaching mirror lit the disc
 #define FLAG_ICHOR_HIDDEN_ITEM_RING7_A          (FLAG_ICHOR_GENERAL2_START + 0x4DA) // Ichor: Ring VII: hidden
 #define FLAG_ICHOR_HIDDEN_ITEM_RING7_B          (FLAG_ICHOR_GENERAL2_START + 0x4DB) // Ichor: Ring VII: hidden
+#define FLAG_ICHOR_RING5_POCKET_1               (FLAG_ICHOR_GENERAL2_START + 0x4DC) // Ichor: Ring V: treasure down the stair
+#define FLAG_ICHOR_RING5_POCKET_2               (FLAG_ICHOR_GENERAL2_START + 0x4DD) // Ichor: Ring V: treasure down the hole
+#define FLAG_ICHOR_RING6_POCKET_1               (FLAG_ICHOR_GENERAL2_START + 0x4DE) // Ichor: Ring VI: treasure down the stair
+#define FLAG_ICHOR_RING6_POCKET_2               (FLAG_ICHOR_GENERAL2_START + 0x4DF) // Ichor: Ring VI: treasure down the hole
+#define FLAG_ICHOR_RING7_POCKET_1               (FLAG_ICHOR_GENERAL2_START + 0x4E0) // Ichor: Ring VII: treasure down the stair
+#define FLAG_ICHOR_RING7_POCKET_2               (FLAG_ICHOR_GENERAL2_START + 0x4E1) // Ichor: Ring VII: treasure down the hole
+#define FLAG_ICHOR_RING6_SEAL_ITEM              (FLAG_ICHOR_GENERAL2_START + 0x4E2) // Ichor: Ring VI: the floor seal's alcove
+#define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_5        (FLAG_ICHOR_GENERAL2_START + 0x4E3) // Ichor: Ring V: on the remains
+#define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_6        (FLAG_ICHOR_GENERAL2_START + 0x4E4) // Ichor: Ring VI: on the remains
+#define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_7        (FLAG_ICHOR_GENERAL2_START + 0x4E5) // Ichor: Ring VII: on the remains
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

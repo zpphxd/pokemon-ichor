@@ -1,1 +1,295 @@
-mapscripts LabyrinthStarryChamber_MapScripts {}
+// The Starry Chamber (design/LABYRINTH.md §6 the heart, §8 Scene J; LABYRINTH_MAZE.md §1;
+// design/phase4/SCRIPT.md beat III-3M). Layout: tools/ichor/maps/labyrinth_heart.py (20 x 20,
+// astra). A round cave whose rock is set with crystal stars; a marble floor round Daedalus's
+// star-clock and the black lustral basin; the pillar of horns where Asterion is chained;
+// Kronos's anvil at the basin's edge. Warps: 0-1 up the dance's stair to Ring VII,
+// 2 Phaedon's hidden stair (sealed behind him).
+// Stand-ins: OBJ_EVENT_GFX_ICHOR_MASK for Kronos/Phaedon, ICHOR_WOMAN for Rhea, until their
+// walkers are drawn.
+
+mapscripts LabyrinthStarryChamber_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (var(VAR_ICHOR_KNOSSA) >= 17) {
+            setflag(FLAG_ICHOR_HIDE_STARRY_CAST)
+            setflag(FLAG_ICHOR_HIDE_KLEON_RING5)
+            setflag(FLAG_ICHOR_HIDE_ARIADNE_RING7)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_STARRY_CAST)
+            setflag(FLAG_ICHOR_HIDE_KLEON_RING5)
+            setflag(FLAG_ICHOR_HIDE_ARIADNE_RING7)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_PHAEDON_UNMASKED)) {
+            setmetatile(11, 12, METATILE_Astra_AnvilEmptyL, TRUE)
+            setmetatile(12, 12, METATILE_Astra_AnvilEmptyR, TRUE)
+        }
+    }
+}
+
+text LabyrinthStarryChamber_Text_NameKronos { "KRONOS" }
+text LabyrinthStarryChamber_Text_NamePhaedon { "PHAEDON" }
+text LabyrinthStarryChamber_Text_NameRhea { "RHEA" }
+text LabyrinthStarryChamber_Text_NameKleon { "KLEON" }
+text LabyrinthStarryChamber_Text_NameAriadne { "ARIADNE" }
+
+script LabyrinthStarryChamber_EventScript_Basin {
+    msgbox(format("The black water holds the ceiling's stars. They turn, very slowly."), MSGBOX_SIGN)
+}
+
+script LabyrinthStarryChamber_EventScript_Anvil {
+    if (flag(FLAG_ICHOR_PHAEDON_UNMASKED)) {
+        msgbox(format("An empty anvil, still warm. Three scorch marks where the pieces lay."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("An anvil at the water's edge. Three dark fragments, a bronze collar joining them."), MSGBOX_SIGN)
+    }
+}
+
+script LabyrinthStarryChamber_EventScript_Asterion {
+    msgbox(format("The bull's sides heave. The chain runs from his collar to the pillar."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// Scene J (LABYRINTH §8 Scene J, word for word)
+// ---------------------------------------------------------------------------
+
+script LabyrinthStarryChamber_EventScript_SceneJ {
+    lockall
+    setspeaker(LabyrinthStarryChamber_Text_NameKronos)
+    msgbox(format("You came the long way. Everyone does. It's a labyrinth."))
+    msgbox(format("Stand by the water. Watch the stars. They're nearly in place."))
+    msgbox(format("Daedalus measured this hour for me. The hour my namesake fell."))
+    msgbox(format("The Fates cut him down at this hour. Now it cuts for us."))
+    setspeaker(SP_NAME_NONE)
+    playse(SE_M_HEAL_BELL)
+    msgbox(format("The stars align. A beam of starlight falls on the anvil."))
+    playse(SE_M_STRENGTH)
+    delay(20)
+    playse(SE_M_STRENGTH)
+    delay(20)
+    playse(SE_M_STRENGTH)
+    setmetatile(11, 12, METATILE_Astra_AnvilEmptyL, TRUE)
+    setmetatile(12, 12, METATILE_Astra_AnvilEmptyR, TRUE)
+    special(DrawWholeMapView)
+    setspeaker(LabyrinthStarryChamber_Text_NameKronos)
+    msgbox(format("There. Whole."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Kronos lifts it with long bronze tongs into a lined case. He never touches the blade."))
+    setspeaker(LabyrinthStarryChamber_Text_NameKronos)
+    msgbox(format("It doesn't like me. It doesn't like anyone with a thread."))
+    setspeaker(LabyrinthStarryChamber_Text_NameRhea)
+    msgbox(format("My lord. The bull. He won't hold."))
+    setspeaker(SP_NAME_NONE)
+    playse(SE_M_TAKE_DOWN)
+    applymovement(LOCALID_STARRY_ASTERION, LabyrinthStarryChamber_Movement_BullBreaks)
+    waitmovement(0)
+    setspeaker(LabyrinthStarryChamber_Text_NameKronos)
+    msgbox(format("Easy, Starry. Easy. Nobody's going to hurt you now."))
+    setspeaker(SP_NAME_NONE)
+    applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthStarryChamber_Movement_Notice)
+    waitmovement(0)
+    msgbox(format("Starry.\pWhere have you heard that name?"))
+    call(LabyrinthStarryChamber_EventScript_Leaps)
+    msgbox(format("The bull stops, sides heaving. He looks at you, then at the bronze collar on his neck."))
+    msgbox(format("From the stair, someone is humming. Axe, wave, lily... His ears turn toward it."))
+    call(LabyrinthStarryChamber_EventScript_Collar)
+    call(LabyrinthStarryChamber_EventScript_Kleon)
+    call(LabyrinthStarryChamber_EventScript_Unmasking)
+    call(LabyrinthStarryChamber_EventScript_Rhea)
+    releaseall
+}
+
+// The bull-leap, three clean times (LABYRINTH §3's rules, E7's special). A miss knocks you
+// back; the window widens by 2 frames each miss, up to double.
+script LabyrinthStarryChamber_EventScript_Leaps {
+    setvar(VAR_TEMP_4, 0)
+    setvar(VAR_TEMP_5, 10)
+    while (var(VAR_TEMP_4) < 3) {
+        setobjectxy(LOCALID_STARRY_ASTERION, 9, 7)
+        turnobject(LOCALID_STARRY_ASTERION, DIR_SOUTH)
+        msgbox(format("Asterion lowers his horns at you."))
+        closemessage
+        setvar(VAR_0x8004, LOCALID_STARRY_ASTERION)
+        setvar(VAR_0x8005, ICHOR_TILE(9, 14))
+        copyvar(VAR_0x8006, VAR_TEMP_5)
+        setvar(VAR_0x8007, 6)
+        special(Ichor_BullLeap)
+        if (var(VAR_RESULT) == ICHOR_LEAP_CLEAN) {
+            applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthStarryChamber_Movement_Vault)
+            waitmovement(0)
+            addvar(VAR_TEMP_4, 1)
+            if (var(VAR_TEMP_4) < 3) {
+                msgbox(format("You grip the horns and somersault over him. He wheels."))
+            }
+        } else {
+            playse(SE_M_HEADBUTT)
+            msgbox(format("Ooof. He bowls you across the floor, and wheels to come again."))
+            if (var(VAR_TEMP_5) < 20) {
+                addvar(VAR_TEMP_5, 2)
+            }
+        }
+        setobjectxy(OBJ_EVENT_ID_PLAYER, 9, 15)
+        turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+    }
+}
+
+script LabyrinthStarryChamber_EventScript_Collar {
+    msgbox(format("Cut the collar with the Labrys?"), MSGBOX_YESNO)
+    while (var(VAR_RESULT) == NO) {
+        msgbox(format("Asterion waits. He doesn't understand why you're waiting."))
+        msgbox(format("Cut the collar with the Labrys?"), MSGBOX_YESNO)
+    }
+    setvar(VAR_0x8004, ITEM_LABRYS)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_STRENGTH)
+    msgbox(format("The collar splits and falls into the pool.\pAsterion backs away, shakes his head, and lies down at the foot of the stair."))
+    setflag(FLAG_ICHOR_ASTERION_FREED)
+    setvar(VAR_0x8004, 6)    // Taurus
+    specialvar(VAR_RESULT, Ichor_PlaceConstellation)
+    clearflag(FLAG_ICHOR_HIDE_ARIADNE_RING7)
+    addobject(LOCALID_STARRY_ARIADNE)
+    msgbox(format("Ariadne comes down the stair, kneels, and puts her forehead to his."))
+}
+
+script LabyrinthStarryChamber_EventScript_Kleon {
+    clearflag(FLAG_ICHOR_HIDE_KLEON_RING5)
+    addobject(LOCALID_STARRY_KLEON)
+    applymovement(LOCALID_STARRY_KLEON, LabyrinthStarryChamber_Movement_KleonBursts)
+    waitmovement(0)
+    setspeaker(LabyrinthStarryChamber_Text_NameKleon)
+    msgbox(format("Don't. Move. That's MY bull."))
+    msgbox(format("Out of the way. It's my prophecy!"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON, LabyrinthStarryChamber_Text_KleonDefeat)
+        case 1:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE, LabyrinthStarryChamber_Text_KleonDefeat)
+        default:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD, LabyrinthStarryChamber_Text_KleonDefeat)
+    }
+    setspeaker(LabyrinthStarryChamber_Text_NameKleon)
+    msgbox(format("The prophecy said I'd slay the starry bull."))
+    setspeaker(LabyrinthStarryChamber_Text_NameKronos)
+    msgbox(format("Did it? Iapetos does write beautifully."))
+    setspeaker(LabyrinthStarryChamber_Text_NameKleon)
+    msgbox(format("…What's that supposed to mean?"))
+    setspeaker(SP_NAME_NONE)
+}
+
+text LabyrinthStarryChamber_Text_KleonDefeat { format("KLEON: …No. No, that's not how it goes.") }
+
+script LabyrinthStarryChamber_EventScript_Unmasking {
+    applymovement(LOCALID_STARRY_KRONOS, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(LabyrinthStarryChamber_Text_NameKronos)
+    msgbox(format("I'm sorry. I'd rather you saw my face for this part."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("He lifts off the gold mask. It is Phaedon."))
+    msgbox(format("A clay bull hangs from his belt. You've seen its twin."))
+    setflag(FLAG_ICHOR_PHAEDON_UNMASKED)
+    setspeaker(LabyrinthStarryChamber_Text_NamePhaedon)
+    msgbox(format("Hello again. How are your Pokémon?"))
+    msgbox(format("The last time, their wounds were healing beautifully."))
+    delay(90)
+    msgbox(format("You're wondering why. It isn't a hard story."))
+    msgbox(format("My daughter will die young. The Oracle said so the day she was born."))
+    msgbox(format("Every healer I know read the same thing in her. So did I."))
+    msgbox(format("I can close any wound in Aethos. Not that one. Not a thread."))
+    msgbox(format("So I'll stop the Loom. No more cutting. Not hers. Not anyone's."))
+    msgbox(format("Daedalus understood. He buried a son."))
+    msgbox(format("Daphne's book told me where the pieces lay. She sent it to me herself."))
+    msgbox(format("She thought she was helping a friend with a sick child. She was."))
+    msgbox(format("You have no thread. You're the only one who can carry this."))
+    msgbox(format("At the Loom I'll ask you to. You'll say no."))
+    msgbox(format("Then you'll see them. Three old women, in chains."))
+    msgbox(format("And you won't be able to walk away. You're kind. I've watched you."))
+    msgbox(format("Will you carry it for me?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("…No. You don't mean it yet. Your thread's your own, remember?"))
+    } else {
+        msgbox(format("Of course not. I said no too, the first time I asked myself."))
+    }
+    setspeaker(SP_NAME_NONE)
+    if (flag(FLAG_ICHOR_GOT_ELPIS_TABLET)) {
+        msgbox(format("Show Phaedon the sealed tablet?"), MSGBOX_YESNO)
+        setspeaker(LabyrinthStarryChamber_Text_NamePhaedon)
+        if (var(VAR_RESULT) == YES) {
+            setflag(FLAG_ICHOR_SHOWED_PHAEDON_TABLET)
+            msgbox(format("Iapetos said you'd bring me something. A tablet."))
+            msgbox(format("He said Daphne's girl would forge one. To stop me."))
+            msgbox(format("I'm not going to read it. I'm sorry. I can't afford to."))
+        } else {
+            msgbox(format("Whatever's in your bag, keep it. I've made up my mind."))
+        }
+    }
+    setspeaker(LabyrinthStarryChamber_Text_NamePhaedon)
+    msgbox(format("Rhea. Turn the house."))
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_STARRY_KRONOS, LabyrinthStarryChamber_Movement_PhaedonLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_STARRY_KRONOS)
+    playse(SE_M_EARTHQUAKE)
+    msgbox(format("A hidden stair opens in the north wall, and seals behind him."))
+}
+
+script LabyrinthStarryChamber_EventScript_Rhea {
+    applymovement(LOCALID_STARRY_RHEA, Common_Movement_FaceDown)
+    waitmovement(0)
+    delay(90)
+    applymovement(LOCALID_STARRY_RHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    delay(30)
+    setspeaker(LabyrinthStarryChamber_Text_NameRhea)
+    msgbox(format("I'm ordered to seal the threshold. Every door. Everyone inside."))
+    msgbox(format("A prophecy took my children. I let it. I stood still and let it."))
+    msgbox(format("I won't stand still and seal someone else's in a hole."))
+    msgbox(format("The threshold stays open. Go. Before I remember my orders."))
+    setspeaker(SP_NAME_NONE)
+    playse(SE_M_EARTHQUAKE)
+    setvar(VAR_0x8004, 0)
+    applymovement(LOCALID_STARRY_RHEA, LabyrinthStarryChamber_Movement_RheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_STARRY_RHEA)
+    msgbox(format("She pulls a great lever and is gone up Phaedon's stair. The floor lurches."))
+    setflag(FLAG_ICHOR_RHEA_MERCY)
+    setflag(FLAG_ICHOR_THREAD_NO_RETURN)
+    setvar(VAR_ICHOR_KNOSSA, 17)
+    setspeaker(LabyrinthStarryChamber_Text_NameAriadne)
+    msgbox(format("She's turned the house. It'll seal every hall that isn't held."))
+    msgbox(format("Your thread. Where it lies, the house can't close."))
+    msgbox(format("Follow it home. He'll clear the rest."))
+    setspeaker(SP_NAME_NONE)
+}
+
+movement LabyrinthStarryChamber_Movement_BullBreaks {
+    emote_exclamation_mark
+    jump_in_place_down
+    walk_down * 2
+}
+
+movement LabyrinthStarryChamber_Movement_Notice {
+    emote_exclamation_mark
+}
+
+movement LabyrinthStarryChamber_Movement_Vault {
+    jump_in_place_up
+    face_down
+    face_up
+}
+
+movement LabyrinthStarryChamber_Movement_KleonBursts {
+    walk_fast_up * 2
+}
+
+movement LabyrinthStarryChamber_Movement_PhaedonLeaves {
+    walk_up * 2
+    walk_left * 2
+    walk_up * 6
+}
+
+movement LabyrinthStarryChamber_Movement_RheaLeaves {
+    walk_right
+    walk_up * 4
+}

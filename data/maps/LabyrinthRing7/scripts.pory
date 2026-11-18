@@ -663,32 +663,57 @@ script LabyrinthRing7_EventScript_LightDance {
 }
 
 script LabyrinthRing7_EventScript_Bays {
-    setmetatile(3, 3, 0x303, TRUE)
-    setmetatile(4, 3, 0x304, TRUE)
-    setmetatile(5, 3, 0x305, TRUE)
-    setmetatile(3, 4, 0x30B, TRUE)
-    setmetatile(4, 4, 0x30C, TRUE)
-    setmetatile(5, 4, 0x30D, TRUE)
-    setmetatile(3, 5, 0x313, TRUE)
-    setmetatile(4, 5, 0x314, TRUE)
-    setmetatile(5, 5, 0x315, TRUE)
-    setmetatile(6, 3, 0x2EB, TRUE)
-    setmetatile(7, 3, 0x2EC, TRUE)
-    setmetatile(8, 3, 0x2ED, TRUE)
-    setmetatile(6, 4, 0x2F3, TRUE)
-    setmetatile(7, 4, 0x2F4, TRUE)
-    setmetatile(8, 4, 0x2F5, TRUE)
-    setmetatile(6, 5, 0x2FB, TRUE)
-    setmetatile(7, 5, 0x2FC, TRUE)
-    setmetatile(8, 5, 0x2FD, TRUE)
-    setmetatile(9, 3, 0x300, TRUE)
-    setmetatile(10, 3, 0x301, TRUE)
-    setmetatile(11, 3, 0x302, TRUE)
-    setmetatile(9, 4, 0x308, TRUE)
-    setmetatile(10, 4, 0x309, TRUE)
-    setmetatile(11, 4, 0x30A, TRUE)
-    setmetatile(9, 5, 0x310, TRUE)
-    setmetatile(10, 5, 0x311, TRUE)
-    setmetatile(11, 5, 0x312, TRUE)
+    setmetatile(3, 3, 0x30B, TRUE)
+    setmetatile(4, 3, 0x30C, TRUE)
+    setmetatile(5, 3, 0x30D, TRUE)
+    setmetatile(3, 4, 0x313, TRUE)
+    setmetatile(4, 4, 0x314, TRUE)
+    setmetatile(5, 4, 0x315, TRUE)
+    setmetatile(3, 5, 0x31B, TRUE)
+    setmetatile(4, 5, 0x31C, TRUE)
+    setmetatile(5, 5, 0x31D, TRUE)
+    setmetatile(6, 3, 0x2F3, TRUE)
+    setmetatile(7, 3, 0x2F4, TRUE)
+    setmetatile(8, 3, 0x2F5, TRUE)
+    setmetatile(6, 4, 0x2FB, TRUE)
+    setmetatile(7, 4, 0x2FC, TRUE)
+    setmetatile(8, 4, 0x2FD, TRUE)
+    setmetatile(6, 5, 0x303, TRUE)
+    setmetatile(7, 5, 0x304, TRUE)
+    setmetatile(8, 5, 0x305, TRUE)
+    setmetatile(9, 3, 0x308, TRUE)
+    setmetatile(10, 3, 0x309, TRUE)
+    setmetatile(11, 3, 0x30A, TRUE)
+    setmetatile(9, 4, 0x310, TRUE)
+    setmetatile(10, 4, 0x311, TRUE)
+    setmetatile(11, 4, 0x312, TRUE)
+    setmetatile(9, 5, 0x318, TRUE)
+    setmetatile(10, 5, 0x319, TRUE)
+    setmetatile(11, 5, 0x31A, TRUE)
 }
 // ---- END GENERATED DANCE ----
+
+// ---- BEGIN GENERATED EXTRAS ----
+
+script LabyrinthRing7_EventScript_Hole2 {
+    lockall
+    msgbox(format("The floor is only a crust of flowstone over a hole. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_RING7, 9)
+    waitstate
+    releaseall
+}
+
+script LabyrinthRing7_EventScript_Remains1 {
+    msgbox(format("A girl's sandal, very small, and a string of clay beads.\pFourteen came down each year, the old songs say. This one danced."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing7_EventScript_Remains2 {
+    msgbox(format("A name half-cut in the rock: THESE-. The rest is a gouge, as if the cutter was pulled away."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing7_EventScript_Remains3 {
+    msgbox(format("A Titan's lantern and a scrawl: The priestess's floor won't light.\pKronos says leave it. The stars do the work below."), MSGBOX_SIGN)
+}
+// ---- END GENERATED EXTRAS ----
