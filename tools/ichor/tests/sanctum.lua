@@ -554,13 +554,26 @@ local function revelation()
   L.settle()
   expect(L.getFlag(S.FLAG_LEFT_WITH_ALETHEA) and not L.objectAt(S.LOCALID_VILLAGE_ALETHEA),
          "passing the cleared vines hides Alethea and saves her departure")
+  -- The north road is shut until Act I is complete (SCRIPT.md beat 25: after the
+  -- revelation Alethea waits by the vines and the road north opens). Check both
+  -- sides of the gate on each column: with the flag held back the herald turns
+  -- the player round; with Act I complete the player walks on to row 6.
   for _, x in ipairs({ 45, 46 }) do
+    L.setFlag(S.FLAG_ACT1_COMPLETE, false)
     L.go(x, 7)
     L.step(K.UP)
     L.settle({ every = true })
     local px, py = L.pos()
     expect(L.mapId() == S.MAP_ELEUSA and px == x and py == 7,
-           "the herald turns back the north-road column " .. x)
+           "before Act I is complete the herald turns back the north-road column " .. x)
+    L.setFlag(S.FLAG_ACT1_COMPLETE, true)
+    L.step(K.UP)
+    L.settle({ every = true })
+    px, py = L.pos()
+    expect(L.mapId() == S.MAP_ELEUSA and px == x and py == 6,
+           "after Act I the north-road column " .. x .. " is open")
+    L.step(K.DOWN)
+    L.settle({ every = true })
   end
   L.useWarp(S.MAP_TELESTERION)
   L.settle()
