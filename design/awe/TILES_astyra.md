@@ -4,7 +4,7 @@
 
 **Generated** by `tools/ichor/art/astyra_build.py astyra`; the art is `tools/ichor/art/astyra_art.py` and `astyra_city_art.py`, every column from the shared kit `tools/ichor/art/columns.py` (STYLE.md, "Architecture: Gen 3 craft and Greek forms").
 
-**Budget:** 489 of 504 tiles, 344 metatiles. Palettes (secondary slots 6-12): marble, bronze, ruin, rock, roof, green, water.
+**Budget:** 497 of 504 tiles, 344 metatiles. Palettes (secondary slots 6-12): marble, bronze, ruin, rock, roof, green, water.
 
 Images: `design/phase4/img/astyra_pieces.png` (every piece on its ground) and `design/phase4/img/astyra_sheet.png` (the numbered sheet).
 
@@ -78,13 +78,13 @@ The fountain house (3 x 3): a Doric porch and a pediment, the bronze lion's head
 
 ### `kodros` (2 x 3): Kodros, the last king
 
-Kodros, the last king (2 x 3): bronze on a 3/4 marble plinth, its cast shadow on the floor. Rows 0-1 over the player, the plinth solid; the bg event is on the plinth.
+Kodros, the last king (2 x 3): bronze on a hexagonal 3/4 marble plinth, its cast shadow on the floor. Rows 0-1 over the player, the plinth solid; the bg event is on the plinth.
 
 `TL` 0x27E, `TR` 0x27F, `ML` 0x286, `MR` 0x287, `BL` 0x28E, `BR` 0x28F
 
 ### `kairos` (2 x 3): Kairos, the Moment
 
-Kairos, the Moment (2 x 3): bronze on a 3/4 marble plinth, its cast shadow on the floor. Rows 0-1 over the player, the plinth solid; the bg event is on the plinth.
+Kairos, the Moment (2 x 3): bronze on a hexagonal 3/4 marble plinth, its cast shadow on the floor. Rows 0-1 over the player, the plinth solid; the bg event is on the plinth.
 
 `TL` 0x2E6, `TR` 0x2E7, `ML` 0x2EE, `MR` 0x2EF, `BL` 0x2F6, `BR` 0x2F7
 

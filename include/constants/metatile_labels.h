@@ -1382,10 +1382,10 @@
 // end gTileset_Chion
 
 // gTileset_Akropolis (Ichor: the Akropolis of Astyra), written by tools/ichor/art/astyra_build.py
-#define METATILE_Akropolis_WellShut                 0x3A9
-#define METATILE_Akropolis_WellOpen                 0x3AA
-#define METATILE_Akropolis_Cleft                    0x3AB
-#define METATILE_Akropolis_Rubble                   0x3AC
+#define METATILE_Akropolis_WellShut                 0x3A1
+#define METATILE_Akropolis_WellOpen                 0x3A2
+#define METATILE_Akropolis_Cleft                    0x3A3
+#define METATILE_Akropolis_Rubble                   0x3A4
 // end gTileset_Akropolis
 
 #endif // GUARD_METATILE_LABELS_H
