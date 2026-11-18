@@ -1681,6 +1681,9 @@
 #define FLAG_ICHOR_XENIA_START                  (ICHOR_FLAGS_START + 0x2E0) // 32: hosts and token-chain links (§10)
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
+// The travel herms' 32 registration flags (§4), claimed by name below as
+// FLAG_ICHOR_TOWN_HERM_<TOWN> in the engine's offsets 0x4A0-0x4BF, one per TOWN_HERM_* id.
+#define FLAG_ICHOR_TOWN_HERMS_START             (FLAG_ICHOR_GENERAL_START + 0x4A0)
 
 // The second bank (IchorSave.flags2, version 4), past the daily bank.
 // claim.py bankflag's offsets 0x500-0xADF land in its general range.
@@ -1988,6 +1991,38 @@
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
 #define FLAG_ICHOR_MOM_CONFESSED                (FLAG_ICHOR_GENERAL_START + 0x483) // Ichor: Mom confessed the bee at the Kastalian spring: her knucklebones play fair (engine, ENGINE_API §7; set by world-act3 at III-7)
 #define FLAG_ICHOR_PITHOS_EXPLAINED             (FLAG_ICHOR_GENERAL_START + 0x484) // Ichor: first lid lifted on a Pithos: what it is for was explained
+#define FLAG_ICHOR_TOWN_HERM_ELAIA              (FLAG_ICHOR_GENERAL_START + 0x4A0) // Ichor: Elaia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_ELAIA)
+#define FLAG_ICHOR_TOWN_HERM_AKTI               (FLAG_ICHOR_GENERAL_START + 0x4A1) // Ichor: Akti's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_AKTI)
+#define FLAG_ICHOR_TOWN_HERM_AIGINA             (FLAG_ICHOR_GENERAL_START + 0x4A2) // Ichor: Aigina's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_AIGINA)
+#define FLAG_ICHOR_TOWN_HERM_EMPORION           (FLAG_ICHOR_GENERAL_START + 0x4A3) // Ichor: Emporion's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_EMPORION)
+#define FLAG_ICHOR_TOWN_HERM_ELEUSA             (FLAG_ICHOR_GENERAL_START + 0x4A4) // Ichor: Eleusa's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_ELEUSA)
+#define FLAG_ICHOR_TOWN_HERM_THYRSA             (FLAG_ICHOR_GENERAL_START + 0x4A5) // Ichor: Thyrsa's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_THYRSA)
+#define FLAG_ICHOR_TOWN_HERM_LEBADEIA           (FLAG_ICHOR_GENERAL_START + 0x4A6) // Ichor: Lebadeia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_LEBADEIA)
+#define FLAG_ICHOR_TOWN_HERM_KIRRHA             (FLAG_ICHOR_GENERAL_START + 0x4A7) // Ichor: Kirrha's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_KIRRHA)
+#define FLAG_ICHOR_TOWN_HERM_AIGION             (FLAG_ICHOR_GENERAL_START + 0x4A8) // Ichor: Aigion's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_AIGION)
+#define FLAG_ICHOR_TOWN_HERM_STYX_FALLS         (FLAG_ICHOR_GENERAL_START + 0x4A9) // Ichor: Styx Falls's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_STYX_FALLS)
+#define FLAG_ICHOR_TOWN_HERM_ARKADIA            (FLAG_ICHOR_GENERAL_START + 0x4AA) // Ichor: Arkadia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_ARKADIA)
+#define FLAG_ICHOR_TOWN_HERM_NEMEA              (FLAG_ICHOR_GENERAL_START + 0x4AB) // Ichor: Nemea's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_NEMEA)
+#define FLAG_ICHOR_TOWN_HERM_DAPHNI             (FLAG_ICHOR_GENERAL_START + 0x4AC) // Ichor: Daphni's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_DAPHNI)
+#define FLAG_ICHOR_TOWN_HERM_ASTYRA             (FLAG_ICHOR_GENERAL_START + 0x4AD) // Ichor: Astyra's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_ASTYRA)
+#define FLAG_ICHOR_TOWN_HERM_KALDERA            (FLAG_ICHOR_GENERAL_START + 0x4AE) // Ichor: Kaldera's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_KALDERA)
+#define FLAG_ICHOR_TOWN_HERM_SKANDEIA           (FLAG_ICHOR_GENERAL_START + 0x4AF) // Ichor: Skandeia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_SKANDEIA)
+#define FLAG_ICHOR_TOWN_HERM_PAPHIA             (FLAG_ICHOR_GENERAL_START + 0x4B0) // Ichor: Paphia's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_PAPHIA)
+#define FLAG_ICHOR_TOWN_HERM_AMNISOS            (FLAG_ICHOR_GENERAL_START + 0x4B1) // Ichor: Amnisos's travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_AMNISOS)
+#define FLAG_ICHOR_TOWN_HERM_OLYMPUS            (FLAG_ICHOR_GENERAL_START + 0x4B2) // Ichor: Olympus (the Propylaia)'s travel herm is registered (engine, SYSTEMS §4; FLAG_ICHOR_TOWN_HERMS_START + TOWN_HERM_OLYMPUS)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_19           (FLAG_ICHOR_GENERAL_START + 0x4B3) // Ichor: travel herm 19, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_20           (FLAG_ICHOR_GENERAL_START + 0x4B4) // Ichor: travel herm 20, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_21           (FLAG_ICHOR_GENERAL_START + 0x4B5) // Ichor: travel herm 21, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_22           (FLAG_ICHOR_GENERAL_START + 0x4B6) // Ichor: travel herm 22, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_23           (FLAG_ICHOR_GENERAL_START + 0x4B7) // Ichor: travel herm 23, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_24           (FLAG_ICHOR_GENERAL_START + 0x4B8) // Ichor: travel herm 24, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_25           (FLAG_ICHOR_GENERAL_START + 0x4B9) // Ichor: travel herm 25, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_26           (FLAG_ICHOR_GENERAL_START + 0x4BA) // Ichor: travel herm 26, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_27           (FLAG_ICHOR_GENERAL_START + 0x4BB) // Ichor: travel herm 27, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_28           (FLAG_ICHOR_GENERAL_START + 0x4BC) // Ichor: travel herm 28, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_29           (FLAG_ICHOR_GENERAL_START + 0x4BD) // Ichor: travel herm 29, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_30           (FLAG_ICHOR_GENERAL_START + 0x4BE) // Ichor: travel herm 30, kept for the next town: rename it (engine, SYSTEMS §4)
+#define FLAG_ICHOR_TOWN_HERM_SPARE_31           (FLAG_ICHOR_GENERAL_START + 0x4BF) // Ichor: travel herm 31, kept for the next town: rename it (engine, SYSTEMS §4)
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x000) // Ichor: Eleutherai shrine honey
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x001) // Ichor: Eleutherai terrace Revive
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x002) // Ichor: Eleutherai verge Repel

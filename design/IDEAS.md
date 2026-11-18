@@ -21,12 +21,10 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 ### The whole world: hidden parts and return gates
 - **Planned (2026-11-17):** `design/WORLD_EXPLORATION.md` plans every region's return gates, cave back sections and what pays behind them (story, stronger Pokémon, leads), proposes Pan's Crook as the climbing relic, and gives a build order.
 
-## Queued (user, 2026-11-17): start when the Act III helpers free up
+### The Oikoumene and the post-game epics, at the new bar
+- **Planned (2026-11-17):** `design/OIKOUMENE_GUIDE.md` is the build-ready guide for the ten lands and the epics: the bar every land passes, where every other generation lives, each land's maps, stops, roads, puzzles, gates, species and story, the art and ROM, a build order (the Troad first), and proposals P-1 to P-11 for the user.
 
-### First: herm fast travel, made clear and early (user, 2026-11-17)
-- A great herm stands right at each town's entrance, easy to spot, with a sign that names it a travel stop.
-- A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
-- Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere (SYSTEMS §4 and §1 need updating).
+## Queued (user, 2026-11-17): start when the Act III helpers free up
 
 ### The road north from Lakonia: Route 26, Lake Stymphalia, Route 27
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
@@ -49,8 +47,15 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Somewhat difficult:** strong trainer pairs on narrow paths you can't avoid, tougher wilds, puzzles that use every relic held, limited healing with one midpoint shrine, and a gatekeeper battle before the Pantheon.
 - **Lots to find:** rare items, TMs, evolution stones, top held items, artifacts and amphora sherds, and an Olympian story fragment at each floor's shrine.
 - **Post-game hooks everywhere:** sealed doors, boulders, falls and Pan's Crook cliffs toward the post-game peaks (Pegaunos above the clouds, the Moment's shrine), and side paths you can see but can't reach until after the credits.
+- **Ice Pokémon as you climb (user):** the wild tables turn colder floor by floor. Niflake and Kryopuff in the snowline caves, Chionyad (the snow nymph) and Borapteryx (Boreas's wind) on the ice band, Krystolos in the crystal caves, Pagoshard (no wild home yet) on the glacier, and Stygiad in the coldest dark. Their evolved forms near the peak, with an Ice trainer or two among the gatekeepers.
 - **Puzzles (user):** boulder-on-switch Strength puzzles (Girdle drums onto pressure plates, plates that must all be covered, drums as stepping stones), with a safe reset, as in the Labyrinth.
 - **Built with:** the Elite Four (Pantheon) and Archon upgrade: new halls, teams rebalanced for team-wide EXP, a short scene before each battle.
 - **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
 
 ## Done
+
+### Herm fast travel, made clear and early (user, 2026-11-17)
+- A great herm stands right at each town's entrance, easy to spot, with a sign that names it a travel stop.
+- A town's herm registers the first time you use its Asclepeion or touch the herm. No Olive Oil needed (anointing can stay as a Favor rite).
+- Travel works from the start: touch any herm and pick a registered town. Daedalus's Wings later let you fly from anywhere.
+- **Built (2026-11-17):** 19 towns' entrance herms and plaques (tools/ichor/maps/town_herms.py), healer and touch registration, the travel menu from any herm (SYSTEMS §4, ENGINE_API §4), the rule in MAP_DESIGN §2 and its audit (tools/ichor/herm_audit.py), and tools/ichor/tests/town_herms.sh.

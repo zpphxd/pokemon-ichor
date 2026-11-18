@@ -499,6 +499,9 @@ enum
     OBJ_EVENT_GFX_ICHOR_BRASIDAS,
     OBJ_EVENT_GFX_ICHOR_ARIADNE,
     OBJ_EVENT_GFX_ICHOR_SARPEDON,
+    // A town's travel herm and its plaque (tools/ichor/art/sprites_objects.py, SYSTEMS §4)
+    OBJ_EVENT_GFX_ICHOR_GREAT_HERM,
+    OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

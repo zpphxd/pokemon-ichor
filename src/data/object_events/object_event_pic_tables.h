@@ -2800,6 +2800,12 @@ static const struct SpriteFrameImage sPicTable_IchorMirror[] = {
 static const struct SpriteFrameImage sPicTable_IchorMirrorMark[] = {
     obj_frame_tiles(gObjectEventPic_IchorMirrorMark),
 };
+static const struct SpriteFrameImage sPicTable_IchorGreatHerm[] = {
+    obj_frame_tiles(gObjectEventPic_IchorGreatHerm),
+};
+static const struct SpriteFrameImage sPicTable_IchorHermPlaque[] = {
+    obj_frame_tiles(gObjectEventPic_IchorHermPlaque),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

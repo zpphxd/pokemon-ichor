@@ -24,6 +24,9 @@ script StyxFalls_Inn_EventScript_Aroanios {
     special(HealPlayerParty)
     playfanfare(MUS_HEAL)
     waitfanfare
+    // The inn is Styx Falls's healer: a rest registers its travel herm (SYSTEMS §4).
+    setvar(VAR_0x8004, TOWN_HERM_STYX_FALLS)
+    special(Ichor_RegisterTownHerm)
     goto(StyxFalls_Inn_EventScript_Rest)
 }
 

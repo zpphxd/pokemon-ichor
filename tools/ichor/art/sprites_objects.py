@@ -52,13 +52,79 @@ TABLET = [
     "................",
 ]
 
+# A town's travel herm (design/SYSTEMS.md §4), 16x32, stood by every town's
+# main entrance. It has to read at a glance as "not a signpost": Hermes's
+# winged cap in bright bronze on top, a bearded marble head, a laurel garland
+# with a crimson ribbon, and a bronze caduceus down the pillar's face, on a
+# plinth. Lit from the top left like the cast (linen_l lit, linen_d and slate
+# in shade).
+GREAT_HERM = [
+    "................",
+    "......kkkk......",
+    ".kk..kOOOOk..kk.",
+    "kLLk.kOOOOk.kLLk",
+    ".kLlkkoooookLlk.",
+    "..kkkkoooookkk..",
+    "...kkkkkkkkkk...",
+    "....kLLLLLLk....",
+    "....kLkLLkLk....",
+    "....kLLLLLlk....",
+    "....kLlkklLk....",
+    "....kllllllk....",
+    "....ktlllltk....",
+    "...kgkklllkgk...",
+    "..kggcgkkkgcggk.",
+    "...kgggLLLgggk..",
+    "....kLgggggLk...",
+    "....kLLLcLLlk...",
+    "....kLLLcLLlk...",
+    "....kLLoOoLlk...",
+    "....kLLLoLLlk...",
+    "....kLLoLoLlk...",
+    "....kLLLoLLlk...",
+    "....kLLoLoLlk...",
+    "....kLLLoLLlk...",
+    "....kLLLLLLtk...",
+    "....kLLLLLltk...",
+    "...kkkkkkkkkkk..",
+    "...kLLLLLLLLtk..",
+    "...kllllllllttk.",
+    "....kkkkkkkkkk..",
+    "................",
+]
+
+# The herm's little plaque: a marble board in a bronze frame on a wooden post,
+# with three lines of lettering. Its sign names the herm a travel
+# stop (data/scripts/ichor_herms.pory).
+HERM_PLAQUE = [
+    "................",
+    "................",
+    "...kkkkkkkkkk...",
+    "...koOOOOOOok...",
+    "...kLLLLLLLLk...",
+    "...kLtLttLtLk...",
+    "...kLLLLLLLLk...",
+    "...kLttLtttLk...",
+    "...kLLLLLLLLk...",
+    "...kLtttLttlk...",
+    "...kllllllllk...",
+    "...kkkkkkkkkk...",
+    "......kbbk......",
+    "......kbbk......",
+    ".....kkbbkk.....",
+    "................",
+]
+
 OBJECTS = {
     "tablet": TABLET,
+    "great_herm": GREAT_HERM,
+    "herm_plaque": HERM_PLAQUE,
 }
 
 
 def build(rows):
-    assert len(rows) == H, f"{len(rows)} rows"
+    H = len(rows)
+    assert H in (16, 32), f"{len(rows)} rows"
     arr = np.zeros((H, W), np.int32)
     for y, row in enumerate(rows):
         assert len(row) == W, f"row {y} is {len(row)} px: {row!r}"
@@ -71,11 +137,12 @@ def build(rows):
 def preview(arrs, k=4):
     """Each object on the summit's grass and on a pale slab, upscaled."""
     grounds = [(144, 152, 72), (216, 200, 160)]
-    out = Image.new("RGBA", (len(arrs) * W * len(grounds) + 4, H), (232, 224, 200, 255))
+    tall = max(a.shape[0] for a in arrs.values())
+    out = Image.new("RGBA", (len(arrs) * (W * len(grounds) + 4), tall), (232, 224, 200, 255))
     x = 0
     for arr in arrs.values():
         for g in grounds:
-            tile = Image.new("RGBA", (W, H), g + (255,))
+            tile = Image.new("RGBA", (W, arr.shape[0]), g + (255,))
             tile.alpha_composite(to_rgba(arr, CAST_PAL))
             out.alpha_composite(tile, (x, 0))
             x += W

@@ -49,6 +49,11 @@ script Astyra_Asclepeion_EventScript_Phaedon {
     }
     msgbox(format("There. Every hurt closes, if you let it."))
     setflag(FLAG_ICHOR_MET_PHAEDON)
+    // The first rest here registers Astyra's travel herm (SYSTEMS §4).
+    specialvar(VAR_RESULT, Ichor_RegisterHealerTownHerm)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("And the great herm by the west gate knows you now. Touch any herm, and Hermes will bring you back."))
+    }
     release
 }
 script Astyra_Asclepeion_EventScript_AfterWhiteOut {
@@ -58,6 +63,7 @@ script Astyra_Asclepeion_EventScript_AfterWhiteOut {
     call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
     msgbox(format("There. Every hurt closes, if you let it."))
     setflag(FLAG_ICHOR_MET_PHAEDON)
+    special(Ichor_RegisterHealerTownHerm)  // Astyra's travel herm (SYSTEMS §4)
     fadedefaultbgm
     releaseall
     end

@@ -138,6 +138,9 @@ script AeginaTown_Inn_EventScript_Night {
     playfanfare(MUS_HEAL)
     waitfanfare
     special(HealPlayerParty)
+    // The inn is Aigina's healer: the night's rest registers its travel herm (SYSTEMS §4).
+    setvar(VAR_0x8004, TOWN_HERM_AIGINA)
+    special(Ichor_RegisterTownHerm)
     setflag(FLAG_ICHOR_AEGINA_NIGHT)
     setvar(VAR_0x8004, 0)
     special(Ichor_SetHoursOverride)
