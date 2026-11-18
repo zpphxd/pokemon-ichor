@@ -151,6 +151,7 @@ def events(m):
         m.sign(x, y, S + "Gate")
     m.item_ball(17, 3, "ITEM_FULL_RESTORE", "FLAG_ICHOR_ITEM_APOLLO_FULL_RESTORE")
     m.hidden(1, 10, "ITEM_HEAL_POWDER", "FLAG_ICHOR_HIDDEN_ITEM_APOLLO_HEAL_POWDER")
+    m.hidden(17, 25, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_ITEM_APOLLO_STARDUST")
 
 
 # ==========================================================================
@@ -164,40 +165,78 @@ LOOM = ("MAP_DELPHOI_OMPHALOS_STAIR", 0)     # -> ("MAP_THE_LOOM", 0) once III-9
 def build_stair():
     w, h = 14, 40
     m = DMap(STAIR, "temple_apollo", w, h, fill=0, primary="oikos")
+    import random
+    rnd = random.Random(28)
     for y in range(h):
         for x in range(w):
-            m.piece("stair", "rock", x, y, True)
-    # down the west side, a landing, back down the east side
-    for y in range(1, 22):
-        for x in (3, 4):
-            m.piece("stair", "steps", x, y, False)
-    for x in range(3, 11):
-        for y in (22, 23):
-            m.piece("stair", "landing", x, y, False)
-    for y in range(24, 39):
-        for x in (9, 10):
-            m.piece("stair", "steps", x, y, False)
-    m.piece("stair", "torch", 4, 12, False)
+            r = rnd.random()
+            m.piece("stair", "rock_crack" if r < 0.06 else "roots" if r < 0.10 else "rock", x, y, True)
+    # It switchbacks: five flights and four landings, each landing a little
+    # wider than the last, the way cut more roughly as it goes down.
+    flights = [((3, 4), 1, 7), ((8, 9), 10, 15), ((3, 4), 18, 21), ((9, 10), 25, 30), ((9, 10), 33, 38)]
+    landings = [(3, 9, 8, 9), (3, 9, 16, 17), (3, 11, 22, 24), (5, 11, 31, 32)]
+    for (xs, y0, y1) in flights:
+        for y in range(y0, y1 + 1):
+            for x in xs:
+                worn = (y + x) % 5 == 0 and y > 9
+                m.piece("stair", "steps_worn" if worn else "steps", x, y, False)
+    for (x0, x1, y0, y1) in landings:
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                m.piece("stair", "landing", x, y, False)
+    # the rock's lip over every landing, so the walls read as walls
+    for (x0, x1, y0, y1) in landings:
+        for x in range(x0, x1 + 1):
+            if m.solid[y0 - 1, x]:
+                m.piece("stair", "rock_lip", x, y0 - 1, True)
+    # side niches: a lamp niche on each landing, offering pots, old bones
+    m.piece("stair", "niche", 6, 7, True)
+    m.piece("stair", "pots", 10, 15, True)
+    m.piece("stair", "niche", 5, 21, True)
+    m.piece("stair", "pots", 11, 21, True)
+    m.piece("stair", "niche", 8, 30, True)
+    m.piece("stair", "bones", 3, 24, False)
+    m.piece("stair", "bones", 6, 32, False)
+    # the gold thread, picked up on the second landing, runs down to the bottom
+    for (x, y) in ((8, 16), (8, 17)):
+        m.piece("stair", "thread", x, y, False)
+    for y in range(18, 22):
+        m.piece("stair", "thread", 4, y, False)
+    for y in range(25, 31):
+        m.piece("stair", "thread", 10, y, False)
+    for y in range(33, 38):
+        m.piece("stair", "thread", 10, y, False)
+    m.piece("stair", "torch", 8, 12, False)
     m.piece("stair", "knot", 9, 28, False)
     m.piece("stair", "carving", 11, 36, True)
     for x in (3, 4):
         m.piece("stair", "way_up", x, 1, False)
-        m.warp(x, 1, "MAP_DELPHOI", 1)
+        m.warp(x, 1, "MAP_DELPHOI", 0)   # back up: out by the temple door, over the court
     # The Loom is the climax chapter's map (III-9). Until it lands, the bottom
     # step is a dark way down that brings you back up (LOOM below).
     for x in (9, 10):
         m.piece("stair", "way_down", x, 38, False)
         m.warp(x, 38, LOOM[0], LOOM[1])
-    for y in range(4, 22, 3):
-        for x in (3, 4):
+    # the music box's tick: every third step near the top, every second lower down
+    ticks = [(x, y) for (xs, y0, y1) in flights[:3] for y in range(y0 + 2, y1 + 1, 3) for x in xs]
+    ticks += [(x, y) for (xs, y0, y1) in flights[3:] for y in range(y0, y1, 2) for x in xs]
+    for (x, y) in ticks:
+        if (x, y) not in ((8, 12), (9, 28)):
             m.trigger(x, y, STAIR + "_EventScript_Tick", "VAR_TEMP_0", 0)
-    for y in range(25, 38, 2):
-        for x in (9, 10):
-            m.trigger(x, y, STAIR + "_EventScript_Tick", "VAR_TEMP_0", 0)
-    m.sign(4, 12, STAIR + "_EventScript_Torch")
+    m.sign(8, 12, STAIR + "_EventScript_Torch")
     m.sign(9, 28, STAIR + "_EventScript_Knot")
     m.sign(11, 36, STAIR + "_EventScript_Carving")
+    m.sign(5, 21, STAIR + "_EventScript_Niche")
+    m.sign(10, 15, STAIR + "_EventScript_Pots")
+    # what pilgrims and Hyperion left on the way down
+    m.item_ball(9, 8, "ITEM_MAX_ETHER", "FLAG_ICHOR_ITEM_OMPHALOS_STAIR")
+    m.hidden(3, 8, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_ITEM_OMPHALOS_STAIR_1")
+    m.hidden(5, 32, "ITEM_HYPER_POTION", "FLAG_ICHOR_HIDDEN_ITEM_OMPHALOS_STAIR_2")
     m.border = [0, 0, 0, 0]
+    # A scripted descent with no encounters and no fights (the Gigas are
+    # beaten at the top): measured as a passage, not a dungeon floor. The
+    # Loom below it is the dungeon (the climax chapter's).
+    m.header = {"ichor_kind": "interior"}
     return m
 
 

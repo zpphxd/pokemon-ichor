@@ -14,3 +14,10 @@ village lies below the temenos.
 - **Settlement logic:** pilgrims arrive by the falls at the south-east, so the Asclepeion and Agora stand on the little square at the top of the falls path, with the lower town's lane of houses running west along the bottom terrace. The sanctuary's wall, with its gate at the foot of the Sacred Way, separates town from temenos. Inside, every terrace holds what a city dedicated: treasuries on the switchbacks, the Sibyl's rock with the oldest altar, the lesche in the north-east. The temple faces south on the highest built terrace with its altar outside in front of it; the theatre is cut into the slope above it; the stadium takes the only long flat at the top.
 - **Reveal:** at the last switchback the temple's whole facade fills the screen above the Omphalos court, framed by the polygonal wall.
 - **Signature:** the zigzag Sacred Way with its treasuries, and the Omphalos in its net of knotted wool in its own court.
+
+## Passes and hooks
+
+- **Pass 1** (`design/maps/img/delphoi_pass1.png`): a stray warp at (23,16); the pilgrims' queue blocked the Sacred Way.
+- **Pass 2** (`..._pass2.png`): warp removed, pilgrims moved to the lane's side (19-22,31), the entrance herm at (37,41) by the arrival from the falls.
+- **Critique still open:** the Phaedriades on the east read as plain rock. They need a blazing-cliff face (sunlit tier, rockfall scree) for the arrival's awe. The theatre and stadium tiers are good; a gulf-view lookout at the south edge would finish the "gulf below".
+- **Hooks:** the stadium is the post-game Pythian games venue; the Kitharode's house quiz carries on there.

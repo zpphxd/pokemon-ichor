@@ -359,6 +359,14 @@
       "script": "Route28_KastalianGorge_EventScript_SignTop"
     },
     {
+      "type": "sign",
+      "x": 17,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route28_KastalianGorge_EventScript_Hyampeia"
+    },
+    {
       "type": "hidden_item",
       "x": 23,
       "y": 28,

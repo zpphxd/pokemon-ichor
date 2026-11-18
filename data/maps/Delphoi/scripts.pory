@@ -587,6 +587,12 @@ script Delphoi_EventScript_MomScene {
     setvar(VAR_0x8004, TIME_NIGHT)
     special(Ichor_HoldTimeOfDay)
     fadescreen(FADE_TO_BLACK)
+    // in the dark, Kleon and Rhea take up their watch at the court's gate
+    clearflag(FLAG_ICHOR_HIDE_KLEON_DELPHOI_GATE)
+    clearflag(FLAG_ICHOR_HIDE_RHEA_DELPHOI_GATE)
+    addobject(LOCALID_DELPHOI_KLEON_GATE)
+    addobject(LOCALID_DELPHOI_RHEA_GATE)
+    setvar(VAR_TEMP_4, 1)
     fadescreen(FADE_FROM_BLACK)
     releaseall
 }
@@ -928,4 +934,14 @@ script Delphoi_EventScript_AletheaStair {
 script Delphoi_EventScript_Titanborn {
     setspeaker(Delphoi_Text_NameTitanborn)
     msgbox(format("The master's gone down! The cloth runs out tonight!"), MSGBOX_NPC)
+}
+
+// The entrance herm (the user's rule: every town and rest stop has one at its
+// way in). Touching it registers the herm for travel; the herm-travel system
+// hooks EventScript_IchorGreatHerm on merge.
+script Delphoi_EventScript_EntranceHerm {
+    lockall
+    msgbox(format("The herm of Delphoi. Touch it to travel between herms."))
+    call(EventScript_IchorGreatHerm)
+    releaseall
 }

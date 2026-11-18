@@ -23,6 +23,10 @@ mapscripts Delphoi_TempleOfApollo_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setvar(VAR_TEMP_0, 0)
         setvar(VAR_TEMP_A, 0)
+        // the Pythia sits in shadow, unseen, until the carried fire lights the tripod
+        if (!flag(FLAG_ICHOR_PYTHIAN_LIGHT_DONE)) {
+            setflag(FLAG_ICHOR_HIDE_PHEMONOE_TRIPOD)
+        }
         if (flag(FLAG_BADGE08_GET)) {
             call(Delphoi_TempleOfApollo_EventScript_SolvedFacings)
         } else {

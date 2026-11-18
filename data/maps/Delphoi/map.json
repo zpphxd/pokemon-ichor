@@ -80,7 +80,7 @@
     {
       "local_id": "LOCALID_DELPHOI_PILGRIM_1",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
-      "x": 21,
+      "x": 19,
       "y": 31,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -93,7 +93,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
-      "x": 22,
+      "x": 20,
       "y": 31,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -107,7 +107,7 @@
     {
       "local_id": "LOCALID_DELPHOI_OLD_PILGRIM",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
-      "x": 23,
+      "x": 21,
       "y": 31,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -120,10 +120,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
-      "x": 25,
+      "x": 22,
       "y": 31,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -511,14 +511,6 @@
       "elevation": 0,
       "dest_map": "MAP_DELPHOI_KITHARODE_HOUSE",
       "dest_warp_id": "0"
-    },
-    {
-      "x": 23,
-      "y": 16,
-      "elevation": 0,
-      "dest_map": "MAP_DELPHOI_OMPHALOS_STAIR",
-      "dest_warp_id": "0",
-      "unreached_ok": true
     }
   ],
   "coord_events": [
@@ -699,6 +691,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Delphoi_EventScript_GreatLaurel"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 41,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Delphoi_EventScript_EntranceHerm"
     },
     {
       "type": "hidden_item",

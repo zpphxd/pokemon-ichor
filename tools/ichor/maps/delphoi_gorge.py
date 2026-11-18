@@ -167,6 +167,9 @@ def events(m):
     m.sign(10, 16, S + "Herm")
     m.set(17, 2, A.STELE, True)
     m.sign(17, 2, S + "SignTop")
+    # the Hyampeia face (WORLD_EXPLORATION D6): handholds up the Phaedriades
+    # from the falls road, for Pan's Crook once that relic lands
+    m.sign(17, 17, S + "Hyampeia")
     # III-6B: the sentries
     for x in (13, 14, 15):
         m.trigger(x, 44, S + "Sentries", "VAR_TEMP_1", 1)

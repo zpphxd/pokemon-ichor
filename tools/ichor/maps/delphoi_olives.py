@@ -137,6 +137,9 @@ def events(m):
     # the altar, the hut, the oldest olive
     m.sign(21, 11, S + "Altar")
     m.warp(32, 3, "MAP_ROUTE28_SACRED_OLIVES_WARDENS_HUT", 0)
+    # the rest stop's herm, at the clearing's mouth by Hieron's hut (fast travel)
+    m.set(27, 4, A.HERM, True)
+    m.sign(27, 4, S + "EntranceHerm")
     m.sign(28, 3, S + "OldestOlive")
     # items: every dead end pays
     m.item_ball(40, 1, "ITEM_MAX_REPEL", "FLAG_ICHOR_ITEM_OLIVES_MAX_REPEL")

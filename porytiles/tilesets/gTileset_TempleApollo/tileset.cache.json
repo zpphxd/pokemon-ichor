@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/temple_apollo/porytiles_bin/metatile_attributes.bin": "2b3e16196b9cc28f1d90194fea951415",
-  "data/tilesets/secondary/temple_apollo/porytiles_bin/metatiles.bin": "8fb9454cbd02435f1829f862ff98ba4e",
+  "data/tilesets/secondary/temple_apollo/porytiles_bin/metatile_attributes.bin": "1cac0658a40486e79051ea10671a7b0b",
+  "data/tilesets/secondary/temple_apollo/porytiles_bin/metatiles.bin": "78e2051a9a2c395b0ba8efe5781bc347",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -10,16 +10,16 @@
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/06.pal": "e54432e667ff80171634960fdda6cb70",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/07.pal": "946e285ec9739ec2b2d89c52e18bbb32",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/08.pal": "b4242c725dc93d4b3cebaacdfa671f34",
-  "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/09.pal": "f61ce756b108fedbed700c2002b860cc",
-  "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/10.pal": "226b2025e810b6ab3b82c4d56d40fd7c",
+  "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/09.pal": "de9419b2c9b3a9f622ad09312b478e16",
+  "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/10.pal": "f61ce756b108fedbed700c2002b860cc",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/11.pal": "6c900f32ea0cfedb99a6f4babc735ceb",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/12.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/temple_apollo/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/temple_apollo/porytiles_bin/tiles.png": "eb6fec81fd0d3309b38888a09796abd0",
+  "data/tilesets/secondary/temple_apollo/porytiles_bin/tiles.png": "98692d09b6e03b7854fe735dcbdd1b38",
   "data/tilesets/secondary/temple_apollo/porytiles_src/attributes.csv": "017f327c431b6f7ff9b0b0eedf1d4802",
-  "data/tilesets/secondary/temple_apollo/porytiles_src/bottom.png": "0898e4ef2f291021af35f2b77b65a78f",
-  "data/tilesets/secondary/temple_apollo/porytiles_src/middle.png": "12040e754a01471dfb454a080bb63cb1",
-  "data/tilesets/secondary/temple_apollo/porytiles_src/top.png": "138f569e0dc44430da43d11efcb3645a"
+  "data/tilesets/secondary/temple_apollo/porytiles_src/bottom.png": "7186f14bc1ce32e802d618e7bb74f45f",
+  "data/tilesets/secondary/temple_apollo/porytiles_src/middle.png": "264a4331789e64db12090520b38bf238",
+  "data/tilesets/secondary/temple_apollo/porytiles_src/top.png": "c975fc171cd91927bfd8aadbf7f2ead8"
 }

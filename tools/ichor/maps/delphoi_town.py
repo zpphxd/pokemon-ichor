@@ -225,10 +225,10 @@ def events(m):
     npc(m, "ICHOR_ALETHEA", 28, 31, S + "AletheaArrival", face="down", flag="FLAG_ICHOR_HIDE_ALETHEA_DELPHOI_STEPS",
         local_id="LOCALID_DELPHOI_ALETHEA")
     # the queue of pilgrims on the first switchback
-    npc(m, "ICHOR_PILGRIM", 21, 31, S + "Pilgrim1", face="up", local_id="LOCALID_DELPHOI_PILGRIM_1")
-    npc(m, "ICHOR_WOMAN", 22, 31, S + "Pilgrim2", face="up")
-    npc(m, "ICHOR_ELDER_M", 23, 31, S + "Pilgrim3", face="up", local_id="LOCALID_DELPHOI_OLD_PILGRIM")
-    npc(m, "ICHOR_MAN", 25, 31, S + "Pilgrim4", face="left")
+    npc(m, "ICHOR_PILGRIM", 19, 31, S + "Pilgrim1", face="up", local_id="LOCALID_DELPHOI_PILGRIM_1")
+    npc(m, "ICHOR_WOMAN", 20, 31, S + "Pilgrim2", face="up")
+    npc(m, "ICHOR_ELDER_M", 21, 31, S + "Pilgrim3", face="up", local_id="LOCALID_DELPHOI_OLD_PILGRIM")
+    npc(m, "ICHOR_MAN", 22, 31, S + "Pilgrim4", face="up")
     # the town's people
     npc(m, "ICHOR_ACOLYTE_F", 5, 37, S + "MelissaHives", face="up")
     npc(m, "ICHOR_ELDER_M", 41, 33, S + "DozingPilgrim", face="right")
@@ -269,9 +269,9 @@ def events(m):
     for i, (x, y) in enumerate(((22, 20), (24, 21), (34, 22), (12, 25))):
         npc(m, "ICHOR_TITAN_GRUNT", x, y, S + "Titanborn", face="up", flag="FLAG_ICHOR_HIDE_OMPHALOS_MUSTER",
             local_id=f"LOCALID_DELPHOI_MUSTER_{i + 1}")
-    # the stair's top: the Omphalos stair comes back up here (warp 11)
-    m.warps.append({"x": 23, "y": 16, "elevation": 0, "dest_map": "MAP_DELPHOI_OMPHALOS_STAIR",
-                     "dest_warp_id": "0", "unreached_ok": True})
+    # the entrance herm, beside the arrival from the falls (fast travel)
+    m.set(37, 41, A.HERM, True)
+    m.sign(37, 41, S + "EntranceHerm")
     # items
     m.item_ball(2, 18, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_DELPHOI_ULTRA_BALL")
     m.hidden(KASTALIA[0] + 1, KASTALIA[1] + 2, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_DELPHOI_PEARL")

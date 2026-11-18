@@ -53,7 +53,8 @@ GROUPS = {
     "moon": ["ink", "fd0", "fd1", "fd2", "fd3", "sv0", "sv1", "sv2", "w0"],
     "bronze": ["ink", "fd0", "fd1", "fd2", "fd3", "bz0", "bz1", "bz2", "g0", "g1", "gl2", "fl",
                "fc", "w0", "rd"],
-    "rock": ["ink", "rk0", "rk1", "rk2", "rk3", "rk4", "stm", "w0", "m3", "fd1", "fd2", "fd0"],
+    "rock": ["ink", "rk0", "rk1", "rk2", "rk3", "rk4", "stm", "w0", "m3", "fd1", "fd2", "fd0", "gl1",
+             "gl2"],
     "laurel": ["ink", "c1", "c2", "c3", "ov3", "tc0", "tc1", "tc2", "fd0", "fd1", "fd2", "fd3",
                "rd"],
     "lyre": ["ink", "iv", "bz0", "bz1", "bz2", "g1", "fd0", "fd1", "fd2", "fd3", "w0", "wd0",
@@ -376,10 +377,15 @@ def adyton():
 def stair():
     """The Omphalos stair: pale steps cut in old rock, the rock walls, a burnt
     torch, a charred knot, the carving of three women and a loom."""
-    s = S("stair", "The Omphalos stair: steps, rock, the torch, the knot, the carving, the way up and down", 8, 1,
-          walk=["..X..X.."], names={"steps": (0, 0), "landing": (1, 0), "rock": (2, 0),
-                                    "torch": (3, 0), "knot": (4, 0), "carving": (5, 0),
-                                    "way_up": (6, 0), "way_down": (7, 0)})
+    s = S("stair", "The Omphalos stair: steps, rock, the torch, the knot, the carving, the way up and down; "
+          "cracked rock, the rock's lip, the gold thread, a lamp niche, offering pots, old bones, worn steps, roots",
+          8, 2,
+          walk=["..X..X..", "XX.XX..X"],
+          names={"steps": (0, 0), "landing": (1, 0), "rock": (2, 0),
+                 "torch": (3, 0), "knot": (4, 0), "carving": (5, 0),
+                 "way_up": (6, 0), "way_down": (7, 0),
+                 "rock_crack": (0, 1), "rock_lip": (1, 1), "thread": (2, 1), "niche": (3, 1),
+                 "pots": (4, 1), "bones": (5, 1), "steps_worn": (6, 1), "roots": (7, 1)})
     s.behaviors[(6, 0)] = "MB_NORTH_ARROW_WARP"
     s.behaviors[(7, 0)] = "MB_SOUTH_ARROW_WARP"
     B = s.B
@@ -410,6 +416,67 @@ def stair():
     B.hline(81, 94, 13, "rk4")
     for x in range(81, 95, 2):
         B.px(x, 14, "rk3")
+    # --- row 2 (y 16-31) ---
+    def rock(ox):
+        for y in range(16, 32):
+            for x in range(16):
+                B.px(ox + x, y, "rk1" if (x * 7 + y * 3) % 5 else "rk0")
+    def steps(ox, worn=False):
+        for y in range(16, 32):
+            for x in range(16):
+                t = y % 4
+                c = "rk4" if t == 0 else "rk3" if t < 3 else "rk1"
+                if worn and 4 <= x <= 11 and t != 3:
+                    c = "rk2" if t else "rk3"
+                B.px(ox + x, y, c)
+    # cracked rock: a split running down, a lit edge on it
+    rock(0)
+    B.line(5, 16, 9, 23, "ink")
+    B.line(9, 23, 6, 31, "ink")
+    B.line(6, 16, 10, 23, "rk2")
+    B.line(10, 24, 7, 31, "rk2")
+    # the rock's lip: rock above, a pale worn edge where the steps meet it
+    rock(16)
+    for x in range(16):
+        B.px(16 + x, 29, "rk2")
+        B.px(16 + x, 30, "rk3")
+        B.px(16 + x, 31, "rk0")
+    # the gold thread, lying across the steps (walkable): it leads down
+    steps(32)
+    for y in range(16, 32):
+        x = 39 + ((y // 3) % 3) - 1
+        B.px(32 + (x - 32), y, "gl1")
+        B.px(33 + (x - 32), y, "gl2" if y % 4 == 0 else "gl1")
+    # a lamp niche cut in the rock, the lamp long cold
+    rock(48)
+    B.rect(52, 19, 8, 10, "ink")
+    B.rect(53, 20, 6, 9, "rk0")
+    B.ellipse(54, 25, 58, 28, "rk2")
+    B.px(58, 25, "rk3")
+    B.hline(51, 60, 29, "rk3")
+    # offering pots against the wall
+    rock(64)
+    for px0, h in ((65, 9), (71, 12), (76, 8)):
+        B.ellipse(px0, 31 - h, px0 + 5, 30, "rk2")
+        B.ellipse(px0 + 1, 31 - h + 1, px0 + 3, 31 - h + 3, "rk3")
+        B.hline(px0 + 1, px0 + 4, 31 - h, "ink")
+    # old bones on the landing (walkable)
+    for y in range(16, 32):
+        for x in range(16):
+            B.px(80 + x, y, "rk3" if (x * 3 + y * 7) % 9 else "rk2")
+    B.line(83, 21, 89, 24, "stm")
+    B.ellipse(88, 23, 91, 26, "stm")
+    B.line(84, 27, 92, 28, "stm")
+    B.px(85, 22, "rk4")
+    # steps worn hollow in the middle
+    steps(96, worn=True)
+    # roots through the rock from the olive far above
+    rock(112)
+    B.line(114, 16, 118, 24, "rk3")
+    B.line(118, 24, 116, 31, "rk3")
+    B.line(122, 16, 121, 22, "rk2")
+    B.line(121, 22, 126, 30, "rk2")
+    B.line(115, 16, 119, 24, "rk2")
     return finish(s)
 
 

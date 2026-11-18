@@ -262,3 +262,11 @@ script Route28_KastalianGorge_EventScript_Twins {
     msgbox(format("We joined the same day. We'll leave the same day.\p"
                   "Mother said so. She says a lot of things the same day."), MSGBOX_AUTOCLOSE)
 }
+
+// The Hyampeia face (design/WORLD_EXPLORATION.md D6): the post-game climb up
+// the Phaedriades to the fox, the fables and Kerdovix. Pan's Crook will open it;
+// until that relic lands, the face only shows its handholds.
+script Route28_KastalianGorge_EventScript_Hyampeia {
+    msgbox(format("Handholds are cut up the cliff here, worn smooth, and ivy hangs over the edge far above.\p"
+                  "Somebody used to climb this. You'd need something to climb with."), MSGBOX_SIGN)
+}

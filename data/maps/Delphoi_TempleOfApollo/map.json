@@ -623,6 +623,14 @@
       "elevation": 3,
       "item": "ITEM_HEAL_POWDER",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_APOLLO_HEAL_POWDER"
+    },
+    {
+      "type": "hidden_item",
+      "x": 17,
+      "y": 25,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_APOLLO_STARDUST"
     }
   ],
   "ichor_kind": "dungeon"
