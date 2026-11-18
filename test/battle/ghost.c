@@ -81,7 +81,7 @@ GHOST_BATTLE_TEST("Ghost battle: player cannot capture ghost (no Silph Scope)")
     } SCENE {
         MESSAGE("You used Poké Ball!");
         MESSAGE("It dodged your thrown Poké Ball! This Pokémon can't be caught!");
-        MESSAGE("You used Master Ball!");
+        MESSAGE("You used Daedalus Ball!");
         MESSAGE("It dodged your thrown Poké Ball! This Pokémon can't be caught!");
     }
 }
@@ -101,7 +101,7 @@ GHOST_BATTLE_TEST("Ghost battle: player cannot capture ghost (Marowak)")
     } SCENE {
         MESSAGE("You used Poké Ball!");
         MESSAGE("It dodged your thrown Poké Ball! This Pokémon can't be caught!");
-        MESSAGE("You used Master Ball!");
+        MESSAGE("You used Daedalus Ball!");
         MESSAGE("It dodged your thrown Poké Ball! This Pokémon can't be caught!");
     }
 }

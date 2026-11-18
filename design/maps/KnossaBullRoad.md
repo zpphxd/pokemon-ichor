@@ -19,6 +19,9 @@ Rhythm (MAP_DESIGN §1): sign, calm terraces and Kerinthe (easy, in plain view),
 | 1 | `design/phase4/img/maps/knossa_bull_road_pass1_1x.png` | The rhythm laid out: groves, three bands, the cutting, the meadow, the hut, the approach. Critique: rectangular grass, long straight lips on the cutting, a bare east terrace. |
 | 2 | `knossa_bull_road_pass2_1x.png`, `_views.png` | Vine patches on the east terrace, Milon's line as a sign, the fossil-free brow on the Heel; a dead end found. |
 | 3 | `knossa_bull_road_pass3.png`, `_1x`, `_events`, `_views` | The Ultra Ball moved to the east terrace's dead end; the Max Ether under the grove's edge where you can face it; audit clean of FAILs. |
+| 4 | `knossa_bull_road_pass4_1x.png`, `_views` | Design round 2: the road rebuilt to bend with the valley; a soft-edged tall-grass kit (`meadow`, drawn into bull_road by `tools/ichor/art/knossa_road.py`) for every band and the herd's two pastures; terraces with olives, outcrops, scrub; a wayside shrine (tripod between cypresses). |
+| 5 | `knossa_bull_road_pass5_1x.png`, `_views` | Grass stems drawn darker so the patches read as tall grass; the cutting's lips stepped in runs instead of per-column notches; the path to the vineyard jogs. |
+| 6 | `knossa_bull_road_pass6.png`, `_1x`, `_events`, `_views` | Sage and burnet scrub between the grove trunks instead of flat shade squares; the Bronze Heel's beach grass soft-edged too; the east terrace's stair opened. Final (also `knossa_vineyard_pass6*`, `knossa_bronze_heel_pass6*`). |
 
 ## The vineyard terraces brief
 

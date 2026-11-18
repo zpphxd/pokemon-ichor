@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_catch.h"
 #include "ichor_oath.h"
 #include "ichor_rites.h"
 #include "battle.h"
@@ -8168,6 +8169,7 @@ static void SetBallThrowShakes(void)
     gBallToDisplay = gLastThrownBall = gLastUsedItem;
 
     u32 odds = ComputeCaptureOdds(gBattlerTarget, gBattlerAttacker);
+    odds = Ichor_TakeCatchMash(odds); // Ichor: the catch mash's presses, if a window just ran
     if (gTestRunnerEnabled)
         TestRunner_Battle_RecordCatchChance(odds);
 
@@ -8231,6 +8233,13 @@ static void SetBallThrowShakes(void)
     gBattlescriptCurrInstr = BattleScript_ShakeBallThrow;
 }
 
+// Ichor: the catch mash's window is for throws that roll shakes (see SetBallThrowShakes).
+static bool32 IchorCatchMashEligible(void)
+{
+    u32 odds = ComputeCaptureOdds(gBattlerTarget, gBattlerAttacker);
+    return odds != CAPTURE_GUARANTEED && odds <= ICHOR_CATCH_MASH_ODDS_CEILING && !IsVictoryCatchGuaranteed();
+}
+
 static void Cmd_handleballthrow(void)
 {
     CMD_ARGS();
@@ -8264,6 +8273,11 @@ static void Cmd_handleballthrow(void)
     }
     else
     {
+        // Ichor: the catch mash (src/ichor_catch.c). A short "Tap A!" window opens
+        // before the odds are rolled, so the shakes shown already include its bonus.
+        // Odds are checked once, as it opens: no window for a sure catch.
+        if (Ichor_CatchMashWait(Ichor_CatchMashIsOpen() || IchorCatchMashEligible()))
+            return;
         SetBallThrowShakes();
     }
 }

@@ -1314,4 +1314,48 @@
 #define METATILE_Stymphalia_HammerRock_Broken        0x366
 // end gTileset_Stymphalia
 
+// gTileset_Mychos (Ichor: the Labyrinth's heart), written by tools/ichor/art/mychos_build.py
+#define METATILE_Mychos_CaveFloor            0x258
+#define METATILE_Mychos_SunFloor             0x280
+#define METATILE_Mychos_Grate                0x2CB
+#define METATILE_Mychos_Cracked              0x273
+#define METATILE_Mychos_DialA                0x2C0
+#define METATILE_Mychos_DialB                0x2C1
+#define METATILE_Mychos_DialPivot            0x2C2
+#define METATILE_Mychos_DialTopSeg           0x2C5
+#define METATILE_Mychos_DialFaceSeg          0x2C3
+#define METATILE_Mychos_DialTopEnd           0x2C6
+#define METATILE_Mychos_DialFaceEnd          0x2C4
+#define METATILE_Mychos_Lever                0x2C7
+#define METATILE_Mychos_Seal                 0x2CA
+#define METATILE_Mychos_SlabL                0x240
+#define METATILE_Mychos_SlabR                0x24B
+// end gTileset_Mychos
+
+// gTileset_Astra (Ichor: the Labyrinth's heart), written by tools/ichor/art/mychos_build.py
+#define METATILE_Astra_CaveFloor            0x268
+#define METATILE_Astra_Marble               0x258
+#define METATILE_Astra_DanceBlank           0x2D8
+#define METATILE_Astra_DanceX               0x2D9
+#define METATILE_Astra_DanceW               0x2DA
+#define METATILE_Astra_DanceL               0x2DB
+#define METATILE_Astra_DanceR               0x2DC
+#define METATILE_Astra_DanceS               0x2DD
+#define METATILE_Astra_DanceXLit            0x2E1
+#define METATILE_Astra_DanceWLit            0x2E2
+#define METATILE_Astra_DanceLLit            0x2E3
+#define METATILE_Astra_DanceRLit            0x2E4
+#define METATILE_Astra_DanceSLit            0x2E5
+#define METATILE_Astra_DanceStair           0x2E0
+#define METATILE_Astra_BeamSunEW            0x2C8
+#define METATILE_Astra_BeamStarEW           0x2D0
+#define METATILE_Astra_AnvilEmptyL          0x2C2
+#define METATILE_Astra_AnvilEmptyR          0x2C3
+#define METATILE_Astra_FrescoIV_l0          0x303
+#define METATILE_Astra_FrescoIv             0x303
+#define METATILE_Astra_FrescoV              0x2EB
+#define METATILE_Astra_FrescoVi             0x300
+#define METATILE_Astra_FrescoFaded          0x2E8
+// end gTileset_Astra
+
 #endif // GUARD_METATILE_LABELS_H

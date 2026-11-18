@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Build the approved Kopais--Gulf--Styx approach to Arkadia."""
+import water_tables
 from thyrsa import Map, bg, const, obj, read, warp, write, ROOT
 
 ROUTES = [
@@ -9,10 +10,17 @@ ROUTES = [
     ("Route12_CypressRoad", "R12", 29, ["STHENON", "BRISEIS", "OPHION", "DAMO", "PHANES", "KALLIN"]),
 ]
 HEALERS = ("Lebadeia", "Kirrha", "Aigion", "Arkadia")
+# Route 8 and Lebadeia are built by kopais.py (layouts, events, scripts, wild tables);
+# this script still writes Route 8's trainer parties.
+KOPAIS_MAPS = ("Route8_KopaisRoad", "Lebadeia")
+# Owned by tools/ichor/maps/gulf.py (layouts, events, scripts, wild tables): skipped here.
+GULF = {"Route9_ParnassosCrossroads", "Kirrha", "Aigion", "Route11_DrumPass"}
 
 
 def routes():
     for name, tag, base, names in ROUTES:
+        if name in KOPAIS_MAPS or name in GULF:  # kopais.py / gulf.py build it
+            continue
         horizontal = tag == "R8"
         m = Map(name, 48 if horizontal else 24, 24 if horizontal else 40)
         if horizontal:
@@ -115,6 +123,8 @@ def hubs():
              "StyxFalls": [("up", "Route11_DrumPass"), ("down", "Route12_CypressRoad")],
              "Arkadia": [("up", "Route12_CypressRoad"), ("right", "Route13_HighlandRoad")]}
     for name, connections in links.items():
+        if name in KOPAIS_MAPS or name in GULF:  # kopais.py / gulf.py build it
+            continue
         m = Map(name, 28, 32)
         m.rect(2, 2, 25, 29, 0x001)
         m.rect(10, 2, 13, 29, 0x1D9)
@@ -218,9 +228,11 @@ def ferry():
 def encounters_and_teams():
     wild = read("src/data/wild_encounters.json")
     g = next(g for g in wild["wild_encounter_groups"] if g.get("for_maps"))
-    ids = {"MAP_" + const(r[0]) for r in ROUTES}
+    ids = {"MAP_" + const(r[0]) for r in ROUTES if r[0] not in KOPAIS_MAPS and r[0] not in GULF}
     g["encounters"] = [e for e in g["encounters"] if e.get("map") not in ids]
     for name, tag, level, _ in ROUTES:
+        if name in KOPAIS_MAPS or name in GULF:
+            continue
         for time in ("Morning", "Day", "Evening", "Night"):
             species = ["NEBREL", "AMPELIX", "ERIPIP", "GALEKIT", "PEBBLITH", "MELIBEE"]
             if time == "Night":
@@ -228,6 +240,7 @@ def encounters_and_teams():
             g["encounters"].append(dict(map="MAP_" + const(name), base_label=f"g{name}_{time}",
                 land_mons=dict(encounter_rate=15, mons=[dict(min_level=level, max_level=level + 2,
                     species="SPECIES_" + species[i % 6]) for i in range(12)])))
+    water_tables.apply(g["encounters"], {"MAP_ROUTE8_KOPAIS_ROAD", "MAP_ROUTE12_CYPRESS_ROAD"})
     write("src/data/wild_encounters.json", wild)
     path = ROOT / "src/data/trainers.party"
     start, end = "/* Arkadia approach teams. */", "/* End Arkadia approach teams. */"

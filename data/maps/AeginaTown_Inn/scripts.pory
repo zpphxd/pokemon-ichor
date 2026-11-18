@@ -1,18 +1,14 @@
 // The inn on Aigina's waterfront (design/phase2/SCRIPT.md, beat 10B and Part 2).
 // Room: tools/ichor/maps/aegina_homes.py ("inn"). The street door is the mat at
-// (11..12, 11), warp 0. Endeis (5,6) keeps the inn; Kleon (3,2) and Alethea
-// (4,4) sit by the common room's hearth on the voyage night only (their objects
-// hide on FLAG_ICHOR_AEGINA_NIGHT).
+// (11..12, 11), warps 0 and 1, both to Aigina's warp 1, the inn's door at
+// (15,16). Endeis (5,6) keeps the inn; Kleon (3,2) and Alethea (4,4) sit by the
+// common room's hearth on the voyage night only (their objects hide on
+// FLAG_ICHOR_AEGINA_NIGHT).
 //
 // The voyage night (FLAG_ICHOR_ARRIVED_AEGINA set, FLAG_ICHOR_AEGINA_NIGHT
 // clear): Endeis asks "Ready for bed?", and YES plays the night by the fire,
-// heals, ends the night and warps to the deck for beat 10C. Every later visit,
-// Endeis heals the party.
-//
-// Placeholders the world-act1 session fixes at merge:
-//   - the mat's warps point at MAP_AEGINA_TOWN warp 0 (map.json), until the
-//     Aegina agent's door warp ids are known;
-//   - the deck tile in AeginaTown_Inn_EventScript_Night (the trireme agent's).
+// heals, ends the night and warps to the deck's starboard rail for beat 10C.
+// Every later visit, Endeis heals the party.
 
 mapscripts AeginaTown_Inn_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -145,9 +141,11 @@ script AeginaTown_Inn_EventScript_Night {
     setflag(FLAG_ICHOR_AEGINA_NIGHT)
     setvar(VAR_0x8004, 0)
     special(Ichor_SetHoursOverride)
-    // Beat 10C plays on deck. Placeholder tile until the trireme agent records
-    // the deck's arrival tile in BUILD.md.
-    warp(MAP_TRIREME_EUPLOIA_DECK, 0)   // the deck's boarding tile (13,4), BUILD.md
+    // Beat 10C plays on deck. The morning finds the player already at the
+    // starboard rail (8,4), beside Alethea, with the coast in view; the deck's
+    // warp-into script turns them to face it before the screen fades in.
+    // (Warp 0, the boarding port at (13,4), is for boarding from a quay.)
+    warp(MAP_TRIREME_EUPLOIA_DECK, 8, 4)
     waitstate
 }
 

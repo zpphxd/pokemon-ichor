@@ -53,8 +53,12 @@ def road(m, spine, salt=0):
 
 
 def grove(m, cells, salt=0):
-    """An olive and cypress wood over cells (aethos), walked round, never into."""
-    return m.woods(cells, salt=salt, aethos_only=lambda x, y: True, singles=[])
+    """An olive and cypress wood over cells, walked round, never into. The odd cells
+    left between trunks get scrub (sage, burnet) except in the seam strips, which
+    keep to aethos's shade."""
+    seam = lambda x, y: y < 6 or y >= m.h - 6 or m.ts != "bull_road"  # noqa: E731
+    return m.woods(cells, salt=salt, aethos_only=seam,
+                   singles=[("phrygana", "sage"), ("phrygana", "burnet")])
 
 
 def brow(m, x0, x1, y, stairs=()):
@@ -88,78 +92,100 @@ def herb(m, cells, salt=0):
 # the Bull Road, 30 x 50
 # --------------------------------------------------------------------------------------------
 def bull_road(stem):
+    """Design round 2 (2026-11-17): the road bends with the valley; soft-edged
+    grass; terraces, outcrops, scrub, a wayside shrine and the herd's pasture,
+    so every 15x10 screen has its landmark."""
     name, P = "KnossaBullRoad", "KnossaBullRoad_EventScript_"
     W, H = 30, 50
     ensure_map(name, W, H, "bull_road", "MAP_TYPE_ROUTE", "MAPSEC_BULL_ROAD", "MUS_ICHOR_ROAD")
     m = Map(name, "bull_road", W, H, fill=A.GRASS)
     m.border = [A.OLIVE_TOP[0], A.OLIVE_TOP[1], A.OLIVE_BOT[0], A.OLIVE_BOT[1]]
 
-    spine = ([(y, 14, 17) for y in range(0, 6)] + [(y, 13, 16) for y in range(6, 13)]
-             + [(y, 12, 15) for y in range(13, 18)] + [(y, 12, 14) for y in range(18, 25)]
-             + [(25, 12, 15), (26, 13, 16), (27, 13, 17), (28, 14, 17), (29, 14, 17), (30, 14, 17),
-                (31, 15, 18), (32, 15, 18), (33, 15, 18)] + [(y, 15, 17) for y in range(34, 41)]
-             + [(y, 14, 16) for y in range(41, 50)])
-    # the fork: east to the Bronze Heel, along the ridge
-    fork = [(14, 16, 29), (15, 16, 29), (16, 18, 29)]
+    # the road's spine: (y, x0, x1), bending with the valley
+    spine = ([(0, 13, 16), (1, 13, 16), (2, 13, 16), (3, 14, 17), (4, 14, 17), (5, 15, 18), (6, 15, 18),
+              (7, 14, 17), (8, 13, 16), (9, 12, 15), (10, 12, 15), (11, 12, 15), (12, 11, 14), (13, 11, 14),
+              (14, 11, 14), (15, 11, 15), (16, 11, 15), (17, 12, 14)]
+             + [(y, 12, 14) for y in range(18, 25)]
+             + [(25, 12, 15), (26, 13, 16), (27, 14, 17), (28, 14, 17), (29, 15, 17), (30, 15, 17),
+                (31, 15, 17), (32, 15, 18), (33, 16, 19), (34, 16, 19), (35, 16, 19), (36, 15, 18),
+                (37, 15, 18), (38, 14, 17), (39, 14, 17), (40, 14, 17), (41, 14, 16), (42, 14, 16),
+                (43, 14, 16)] + [(y, 14, 16) for y in range(44, 50)])
+    fork = [(14, 16, 18), (15, 16, 21), (16, 19, 25), (15, 23, 29), (14, 26, 29), (16, 26, 29)]
+    to_vineyard = [(33, 0, 4), (34, 0, 7), (33, 5, 9), (34, 8, 15), (33, 10, 15)]
 
-    # ---- the north end: olive country out of Amnisos (aethos only, the seam) ----
-    grove(m, {(x, y) for x in range(0, 11) for y in range(0, 6)} - {(5, 2), (6, 2), (5, 3), (6, 3)}, salt=1)
-    grove(m, {(x, y) for x in range(21, 30) for y in range(0, 6)} - {(24, 3), (25, 3)}, salt=2)
-
-    # ---- the first terraces: brows step down northward, Kerinthe's skeps ----
-    brow(m, 0, 12, 6)
-    brow(m, 17, 29, 6)
-    herb(m, {(x, y) for x in range(18, 28) for y in range(7, 9) if KM._hash(x, y, 3) < 300}, salt=3)
-    herb(m, {(x, y) for x in range(1, 12) for y in range(7, 9) if KM._hash(x, y, 4) < 220}, salt=4)
-    # band 1: three deep between olive woods
-    grove(m, {(x, y) for x in range(0, 9) for y in range(9, 14)}, salt=5)
-    grove(m, {(x, y) for x in range(21, 30) for y in range(9, 13)}, salt=6)
-    band1 = {(x, y) for x in range(9, 21) for y in range(10, 13)}
-    # ---- the fork and the great herm ----
-    brow(m, 0, 11, 17)
-    brow(m, 17, 29, 17)
-    # ---- the cutting: limestone both sides, the road squeezed to three ----
-    rock(m, {(x, y) for x in range(0, 11) for y in range(18, 24)})
-    rock(m, {(x, y) for x in range(16, 30) for y in range(18, 23)})
+    # ---- screen 1: olive country out of Amnisos (aethos only, the seam) ----
+    grove(m, {(x, y) for x in range(0, 11) for y in range(0, 6)} - {(9, 4), (10, 4), (9, 5), (10, 5), (5, 3), (6, 3)}
+          - {(x, y) for x in range(0, 4) for y in range(4, 6)}, salt=1)
+    grove(m, {(x, y) for x in range(20, 30) for y in range(0, 6)} - {(20, 4), (21, 4), (20, 5), (21, 5)}
+          - {(x, 5) for x in range(26, 30)}, salt=2)
+    # ---- screen 2: the beekeepers' terraces ----
+    brow(m, 0, 13, 7, stairs=(3, 4))
+    brow(m, 19, 29, 7, stairs=(26,))
+    for (x, y) in ((1, 8), (5, 8), (22, 8), (27, 8)):
+        m.olive(x, y)
+    herb(m, {(x, y) for x in range(18, 29) for y in range(8, 10) if KM._hash(x, y, 3) < 420}, salt=3)
+    herb(m, {(x, y) for x in range(0, 11) for y in range(9, 10)}, salt=4)
+    grove(m, {(x, y) for x in range(0, 7) for y in range(10, 14)} | {(7, 10), (8, 10)}, salt=5)
+    grove(m, {(x, y) for x in range(21, 30) for y in range(10, 13)} | {(20, 12)}, salt=6)
+    band1 = ({(x, y) for x in range(7, 20) for y in range(10, 13)} - {(7, 10), (8, 10), (19, 10), (20, 12)}
+             | {(9, 9), (10, 9), (16, 9), (17, 9)})
+    # ---- screen 3: the fork and the great herm, an outcrop over the shore path ----
+    for (x, y) in ((4, 15), (7, 14), (1, 16)):
+        m.olive(x, y)
+    m.cypress(9, 14)
+    for (x, y) in ((17, 12), (18, 12), (22, 13), (24, 17), (27, 13)):
+        m.set(x, y, A.BOULDER_GRASS, True)
+    herb(m, {(x, y) for x in range(16, 30) for y in range(13, 18) if KM._hash(x, y, 7) < 260}, salt=7)
+    brow(m, 0, 10, 17, stairs=(5,))
+    brow(m, 16, 29, 18, stairs=(20,))
+    # ---- screen 4: the cutting, its lips ragged ----
+    west = {(x, y) for x in range(0, 11) for y in range(18, (24, 24, 24, 24, 25, 25, 25, 25, 23, 23, 23)[x])}
+    west -= {(x, 18) for x in range(0, 4)}
+    east = {(x, y) for x in range(16, 30) for y in range(19, 24 if x < 25 else 23)}
+    east -= {(x, 19) for x in range(25, 30)}
+    rock(m, west)
+    rock(m, east)
     band2 = {(x, y) for x in range(11, 16) for y in range(20, 24)}
-    # ---- the meadow: the herd crosses; terraces west and east ----
-    brow(m, 0, 9, 28)
-    brow(m, 21, 29, 28)
-    herb(m, {(x, y) for x in range(0, 30) for y in range(25, 35) if KM._hash(x, y, 7) < 90}, salt=7)
-    meadow_w = {(x, y) for x in range(1, 9) for y in range(30, 35) if KM._hash(x // 2, y, 8) < 820}
-    meadow_e = {(x, y) for x in range(22, 29) for y in range(24, 28)}
-    # ---- the olive grove of band 3 and the hut ----
-    grove(m, {(x, y) for x in range(0, 11) for y in range(36, 44)} - {(4, 40), (5, 40), (4, 41), (5, 41)}, salt=9)
-    grove(m, {(x, y) for x in range(24, 30) for y in range(36, 44)} - {(24, 39), (25, 39), (26, 39), (24, 40), (25, 40)}, salt=10)
-    band3 = {(x, y) for x in range(11, 24) for y in range(37, 40)}
+    # ---- screen 5: the herd's pasture, the wayside shrine ----
+    brow(m, 0, 9, 26, stairs=(4,))
+    brow(m, 21, 29, 30, stairs=(25,))
+    pasture_w = {(x, y) for x in range(1, 10) for y in range(28, 33)
+                 if not ((x < 3 or x > 7) and (y in (28, 32)))} - {(8, 29), (9, 29), (4, 30)}
+    pasture_e = {(x, y) for x in range(21, 29) for y in range(25, 29) if not (x > 26 and y == 25)}
+    m.set(25, 32, A.TRIPOD_TOP, False)
+    m.set(25, 33, A.TRIPOD, True)
+    m.cypress(24, 31)
+    m.cypress(26, 31)
+    for (x, y) in ((11, 27), (11, 28), (19, 27), (22, 34), (2, 34)):
+        m.set(x, y, A.BOULDER_GRASS, True)
+    herb(m, {(x, y) for x in range(0, 30) for y in range(25, 37) if KM._hash(x, y, 8) < 110}, salt=8)
+    m.olive(27, 34)
     m.put("mitato", 20, 33)
-    # the narrow approach to the palace
+    # ---- screen 6: the old olive grove (band 3) and the narrow approach ----
+    grove(m, {(x, y) for x in range(0, 11) for y in range(36, 44)} - {(x, y) for x in range(0, 11) for y in (33, 34, 35)}
+          - {(9, 36), (10, 36)}, salt=9)
+    grove(m, {(x, y) for x in range(23, 30) for y in range(36, 44)} - {(23, 36), (24, 36), (23, 39), (24, 39), (25, 39),
+                                                                       (24, 40), (25, 40), (26, 39)}, salt=10)
+    band3 = {(x, y) for x in range(11, 23) for y in range(37, 40)} - {(11, 37), (22, 39)}
     grove(m, {(x, y) for x in range(0, 13) for y in range(44, 50)}, salt=11)
     grove(m, {(x, y) for x in range(18, 30) for y in range(44, 50)}, salt=12)
-    grove(m, {(x, y) for x in range(10, 13) for y in range(41, 44)} | {(x, y) for x in range(18, 24)
-                                                                         for y in range(40, 44)}, salt=13)
+    grove(m, {(x, y) for x in range(10, 13) for y in range(41, 44)}
+          | {(x, y) for x in range(18, 23) for y in range(40, 44)}, salt=13)
 
     road(m, spine)
     road(m, fork)
-    m.path({(x, 36) for x in (20, 21, 22)} | {(21, 35)} - {(21, 35)} | {(19, 34), (19, 35), (19, 36)},
-           context={(21, 35)})
-    for c in band1 | band2 | band3 | meadow_w | meadow_e:
-        x, y = c
-        if not m.solid[y, x] and int(m.mid[y, x]) not in (m.id("brow", "stair"),):
-            m.set(x, y, TALL, False)
-    # vine rows on the east terrace (optional grass, the vineyard's cousins)
-    vine_patch(m, 22, 30, 4, 3)
+    m.path({(x, y) for (y, x0, x1) in to_vineyard for x in range(x0, x1 + 1)} - {(x, y) for x in range(15, 20)
+                                                                                for y in (33, 34)},
+           context={(x, y) for (y, x0, x1) in spine for x in range(x0, x1 + 1)})
+    m.path({(19, 36), (20, 36), (21, 36), (22, 36)}, context={(21, 35)})
+    m.meadow(band1 | band2 | band3)
+    m.meadow(pasture_w, walls_in=False)
+    m.meadow(pasture_e, walls_in=False)
     m.put("herm", 11, 14)
     for (x, n) in ((19, "top_L"), (20, "top"), (21, "top_R")):
-        m.piece("labrys_door", n, x, 22)
-    for (x, n) in ((19, "foot_L"), (20, "door"), (21, "foot_R")):
         m.piece("labrys_door", n, x, 23)
-    for (x, y) in ((3, 25), (26, 25), (7, 34), (27, 34)):
-        m.olive(x, y)
-    m.cypress(10, 25)
-    m.cypress(18, 25)
-    for (x, y) in ((0, 33), (29, 30)):
-        m.set(x, y, A.BOULDER_GRASS, True)
+    for (x, n) in ((19, "foot_L"), (20, "door"), (21, "foot_R")):
+        m.piece("labrys_door", n, x, 24)
     m.seam("up")
     m.seam("down")
 
@@ -168,49 +194,52 @@ def bull_road(stem):
     m.connect("up", -5, "MAP_KNOSSA_AMNISOS")
     m.connect("down", -14, "MAP_KNOSSA_PALACE")
     m.connect("right", 11, "MAP_KNOSSA_BRONZE_HEEL")
-    m.connect("left", 23, "MAP_KNOSSA_BULL_ROAD_VINEYARD")
+    m.connect("left", 21, "MAP_KNOSSA_BULL_ROAD_VINEYARD")
     T = lambda g, x, y, s, mv, sight, tid: m.obj(g, x, y, P + s, mv, trainer=True, sight=sight,  # noqa: E731
                                                  local_id=f"LOCALID_BULL_ROAD_{tid}")
-    T("ICHOR_WOMAN", 19, 7, "Kerinthe", "MOVEMENT_TYPE_FACE_LEFT", 3, "KERINTHE")
-    T("ICHOR_AUGUR", 10, 15, "Telemos", "MOVEMENT_TYPE_FACE_RIGHT", 3, "TELEMOS")
+    T("ICHOR_WOMAN", 19, 8, "Kerinthe", "MOVEMENT_TYPE_FACE_LEFT", 3, "KERINTHE")
+    T("ICHOR_AUGUR", 10, 16, "Telemos", "MOVEMENT_TYPE_FACE_RIGHT", 3, "TELEMOS")
     T("ICHOR_YOUTH_M", 11, 19, "Euphemos", "MOVEMENT_TYPE_FACE_RIGHT", 3, "EUPHEMOS")
-    T("ICHOR_SHEPHERD", 9, 26, "Boukolion", "MOVEMENT_TYPE_FACE_RIGHT", 4, "BOUKOLION")
-    T("ICHOR_YOUTH_F", 20, 29, "Kybiste", "MOVEMENT_TYPE_FACE_LEFT", 3, "KYBISTE")
-    T("ICHOR_HARVESTER", 4, 31, "Krokale", "MOVEMENT_TYPE_FACE_RIGHT", 3, "KROKALE")
-    T("ICHOR_PILGRIM", 25, 26, "Theoris", "MOVEMENT_TYPE_FACE_DOWN", 2, "THEORIS")
-    T("ICHOR_HARVESTER", 23, 38, "Elais", "MOVEMENT_TYPE_FACE_LEFT", 4, "ELAIS")
+    T("ICHOR_SHEPHERD", 10, 27, "Boukolion", "MOVEMENT_TYPE_FACE_RIGHT", 4, "BOUKOLION")
+    T("ICHOR_YOUTH_F", 19, 29, "Kybiste", "MOVEMENT_TYPE_FACE_LEFT", 3, "KYBISTE")
+    T("ICHOR_HARVESTER", 5, 30, "Krokale", "MOVEMENT_TYPE_FACE_DOWN", 2, "KROKALE")
+    T("ICHOR_PILGRIM", 23, 32, "Theoris", "MOVEMENT_TYPE_FACE_LEFT", 3, "THEORIS")
+    T("ICHOR_HARVESTER", 22, 38, "Elais", "MOVEMENT_TYPE_FACE_LEFT", 4, "ELAIS")
     T("ICHOR_PRIESTESS", 13, 42, "Phaistia", "MOVEMENT_TYPE_FACE_RIGHT", 3, "PHAISTIA")
     m.obj("ICHOR_SHEPHERD", 8, 29, P + "Milon", "MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_BULL_ROAD_MILON")
-    for i, (x, y) in enumerate(((11, 29), (17, 26), (20, 31))):
+    for i, (x, y) in enumerate(((11, 30), (18, 26), (24, 27))):
         m.obj("SPECIES(TAURIVET)", x, y, P + "Herd", "MOVEMENT_TYPE_WANDER_AROUND",
               local_id=f"LOCALID_BULL_ROAD_HERD_{i + 1}", rx=2, ry=1)
     m.obj("ICHOR_TITAN_GRUNT", 13, 46, P + "SouthGrunt", "MOVEMENT_TYPE_FACE_RIGHT",
           flag="FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS", local_id="LOCALID_BULL_ROAD_GRUNT_1")
     m.obj("ICHOR_TITAN_GRUNT", 17, 46, P + "SouthGrunt", "MOVEMENT_TYPE_FACE_LEFT",
           flag="FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS", local_id="LOCALID_BULL_ROAD_GRUNT_2")
-    m.item_ball(28, 8, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_BULL_ROAD_ULTRA_BALL")
-    m.item_ball(2, 26, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_BULL_ROAD_FULL_HEAL")
+    m.set(25, 9, A.GRASS, False)
+    m.set(25, 8, A.GRASS, False)
+    m.set(26, 8, A.GRASS, False)
+    m.set(1, 25, A.GRASS, False)
+    m.item_ball(25, 9, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_BULL_ROAD_ULTRA_BALL")
+    m.item_ball(1, 25, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_BULL_ROAD_FULL_HEAL")
     m.item_ball(24, 34, "ITEM_MAX_POTION", "FLAG_ICHOR_ITEM_BULL_ROAD_MAX_POTION")
     m.item_ball(2, 32, "ITEM_HP_UP", "FLAG_ICHOR_ITEM_BULL_ROAD_HP_UP")
-    m.item_ball(25, 39, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_BULL_ROAD_REVIVE")
+    m.item_ball(25, 40, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_BULL_ROAD_REVIVE")
     m.hidden(11, 13, "ITEM_OLIVE_OIL", "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_OLIVE_OIL")
     m.hidden(10, 22, "ITEM_RELIC_SILVER", "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_SILVER_OWL")
     m.hidden(23, 35, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_STAR_PIECE")
     m.hidden(10, 38, "ITEM_MAX_ETHER", "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_MAX_ETHER")
-    m.set(13, 2, A.STELE, True)
-    m.sign(13, 2, P + "NorthSign")
+    m.set(12, 2, A.STELE, True)
+    m.sign(12, 2, P + "NorthSign")
     m.sign(11, 15, P + "Herm")
     m.sign(15, 31, P + "MilonsLine", facing="BG_EVENT_PLAYER_FACING_NORTH")
-    m.sign(20, 23, P + "LabrysDoor")
+    m.sign(20, 24, P + "LabrysDoor")
+    m.sign(25, 33, P + "Shrine")
     m.set(18, 41, A.STELE, True)
     m.sign(18, 41, P + "SouthSign")
-    starts = [(15, 0)]
-    m.build(stem, starts=starts,
-            must_reach=[(15, 49, "the palace"), (29, 15, "the Heel fork"), (0, 31, "the vineyard gap"),
-                        (2, 33, "the HP Up"), (25, 40, "the Revive")],
-            views=[(15, 5), (14, 12), (14, 20), (14, 30), (18, 37), (15, 45)],
-            blockers=[])
-    print("forced grass north->south:", m.min_grass([(x, 0) for x in range(14, 18)],
+    m.build(stem, starts=[(14, 0)],
+            must_reach=[(15, 49, "the palace"), (29, 15, "the Heel fork"), (0, 33, "the vineyard gap"),
+                        (2, 33, "the HP Up"), (25, 40, "the Revive"), (15, 32, "Milon's line")],
+            views=[(14, 4), (14, 11), (18, 15), (14, 21), (15, 30), (18, 38), (15, 45)])
+    print("forced grass north->south:", m.min_grass([(x, 0) for x in range(13, 17)],
                                                     [(x, 49) for x in range(14, 17)]))
     return m
 
@@ -251,7 +280,7 @@ def vineyard(stem):
     brow(m, 2, 9, 13, stairs=(4, 5))
     m.set(9, 6, A.BOULDER_GRASS, True)
     m.set(12, 11, A.BOULDER_GRASS, True)
-    m.connect("right", -23, "MAP_KNOSSA_BULL_ROAD")
+    m.connect("right", -21, "MAP_KNOSSA_BULL_ROAD")
     T = lambda g, x, y, s, mv, sight, tid: m.obj(g, x, y, P + s, mv, trainer=True, sight=sight,  # noqa: E731
                                                  local_id=f"LOCALID_VINEYARD_{tid}")
     T("ICHOR_YOUTH_M", 14, 8, "Iphitos", "MOVEMENT_TYPE_FACE_LEFT", 3, "IPHITOS")
@@ -306,10 +335,8 @@ def bronze_heel(stem):
     m.piece("rocks", "rocks_sand", 3, 13)
     for (x, y, d) in ((5, 12, "shells"), (9, 14, "wrack"), (18, 13, "lace"), (23, 14, "footprints")):
         m.piece("sand_decor", d, x, y)
-    for c in beach_grass:
-        x, y = c
-        if not m.solid[y, x] and int(m.mid[y, x]) == A.GRASS:
-            m.set(x, y, TALL, False)
+    m.meadow({(x, y) for (x, y) in beach_grass if not m.solid[y, x] and int(m.mid[y, x]) == A.GRASS},
+             walls_in=False)
     herb(m, {(x, y) for x in range(0, 24) for y in range(2, 8) if KM._hash(x, y, 34) < 120}, salt=34)
     brow(m, 9, 21, 6, stairs=(15, 16))
     for x in (13, 19, 23):

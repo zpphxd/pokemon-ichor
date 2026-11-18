@@ -581,7 +581,7 @@ local function hiringHall()
   walkTo({ { 8, 6 }, { 9, 6 }, { 9, 5 } })
   face(K.UP)
   tap(K.A); wait(10)
-  playThrough("hall_02_crew_boss", nil, 30000)
+  playThrough("hall_02_crew_boss", nil, 60000)  -- room for a sleep turn or two
   expect(getFlag(S.TRAINER_FLAGS_START + S.TRAINER_CREW_BOSS), "the crew boss is beaten")
   expect(getFlag(S.FLAG_HIRING_HALL), "he gives his Rocky Helmet (FLAG_ICHOR_HIRING_HALL)")
   -- After Act I: the hall is empty, the ledger left open.

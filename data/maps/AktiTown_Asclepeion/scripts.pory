@@ -84,8 +84,19 @@ script Ichor_EventScript_Pithos {
     lockall
     setvar(VAR_0x8004, PC_LOCATION_OTHER)
     msgbox(Ichor_Text_PithosLook)
-    msgbox(Ichor_Text_PithosLift)
+    call(Ichor_EventScript_PithosLiftLid)
     goto(Ichor_EventScript_PithosMenu)
+}
+
+// Every Asclepeion's Pithos calls this to lift the lid. The first time, it says
+// plainly what the jar is for: storing Pokémon and moving them around.
+script Ichor_EventScript_PithosLiftLid {
+    msgbox(Ichor_Text_PithosLift)
+    if (!flag(FLAG_ICHOR_PITHOS_EXPLAINED)) {
+        msgbox(Ichor_Text_PithosFirstUse)
+        setflag(FLAG_ICHOR_PITHOS_EXPLAINED)
+    }
+    return
 }
 
 script Ichor_EventScript_PithosMenu {
@@ -110,18 +121,25 @@ script Ichor_EventScript_PithosMenu {
 }
 
 text Ichor_Text_PithosLook {
-    format("A great clay pithos, taller than you. Its wax seal glows faintly.")
+    format("The Pithos, the great jar that keeps your Pokémon. Its wax seal glows.")
 }
 
 text Ichor_Text_PithosLift {
     format("{PLAYER} lifted the lid of the Pithos.")
 }
 
+text Ichor_Text_PithosFirstUse {
+    format("Six Pokémon can travel with you. The Pithos keeps all the rest.\p"
+           "Any you catch past six are sent here, into its jars.\p"
+           "Choose “Store & move Pokémon” to swap them with your party.\p"
+           "Every Asclepeion's Pithos opens onto the same jars.")
+}
+
 text Ichor_Text_PithosReach {
     format("What will you reach for?")
 }
 
-text Ichor_Text_PithosOptionPokemon { "Pokémon" }
+text Ichor_Text_PithosOptionPokemon { "Store & move Pokémon" }
 text Ichor_Text_PithosOptionThings { "Your things" }
 text Ichor_Text_PithosOptionClose { "Close the lid" }
 
@@ -130,7 +148,7 @@ text Ichor_Text_PithosOpened {
 }
 
 text Ichor_Text_PithosPokemonRest {
-    format("Pokémon rest safely inside the jar.")
+    format("Your Pokémon wait in its jars. Take them out, put them in, or move them around.")
 }
 
 text Ichor_Text_PithosThings {
@@ -156,7 +174,8 @@ script AktiTown_Asclepeion_EventScript_BandagedFisher {
 
 script AktiTown_Asclepeion_EventScript_PithosWoman {
     msgbox(format("Go on, open it. Everyone flinches the first time.\p"
-                  "Old stories. A jar, a girl, all the evils of the world. This one's just Pokémon."),
+                  "Old stories. A jar, a girl, all the evils of the world. This one's just Pokémon.\p"
+                  "Six ride with you. The rest wait in the Pithos, and you swap them here."),
            MSGBOX_NPC)
 }
 

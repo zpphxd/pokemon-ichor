@@ -42,6 +42,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arkadia_CharcoalHut_EventScript_Arkas",
       "flag": "FLAG_ICHOR_TRADED_ARKOBY"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_GELASABLE",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(GELASABLE)",
+      "x": 2,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CharcoalHut_EventScript_Gelasable",
+      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [

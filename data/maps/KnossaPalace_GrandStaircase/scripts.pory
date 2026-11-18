@@ -79,6 +79,12 @@ script KnossaPalace_GrandStaircase_EventScript_LightWell {
            MSGBOX_SIGN)
 }
 
+script KnossaPalace_GrandStaircase_EventScript_Breach {
+    msgbox(format("The plaster and the gypsum slabs have fallen away here.\p"
+                  "Behind them is no wall at all: raw grey rock, wet, and a hollow going on into the dark.\p"
+                  "The palace was built on top of something older."), MSGBOX_SIGN)
+}
+
 // The ways down: Ring I (MAP_LABYRINTH_RING1, arriving on its warp 0, the stair up)
 // and, before dawn after the raid, the lift to MAP_LABYRINTH_WORKSHOP (Scene L).
 script KnossaPalace_GrandStaircase_EventScript_ToRing1 {

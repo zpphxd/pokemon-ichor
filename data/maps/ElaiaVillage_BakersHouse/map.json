@@ -42,6 +42,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ElaiaVillage_BakersHouse_EventScript_Kimon",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BAKERS_HOUSE_ARION",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(HALCYLING)",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ElaiaVillage_BakersHouse_EventScript_Arion",
+      "flag": "FLAG_ICHOR_DID_KIMON_TRADE"
+    },
+    {
+      "local_id": "LOCALID_BAKERS_HOUSE_GALEKIT",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(GALEKIT)",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ElaiaVillage_BakersHouse_EventScript_Galekit",
+      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [

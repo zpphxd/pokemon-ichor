@@ -17,6 +17,9 @@ Built by `tools/ichor/maps/knossa_palace.py` (`gTileset_PalaceMinos`, aethos pri
 | 1 | `design/phase4/img/maps/knossa_palace_pass1_1x.png` | Wings, court, lane, pen, magazines, West Court, Theatral Area, South Propylon. Critique: wings eight rows deep read as stacked shelves; endless uniform paving; 38-cell straight edges down both flanks; no height. |
 | 2 | `knossa_palace_pass2.png`, `_1x`, `_events`, `_views` | Wings rebuilt as two stepped storeys of three-to-four rows; light wells between them; grass through the ruin with paving edges; cypress and rubble along the flanks; the south face stepped; porticoes of columns down both sides of the court; the hill top raised a level (ramps join it). |
 | 3 | `knossa_palace_pass3*` | The lane's line as a sign facing north (the leap's start), final audit. |
+| 4 | `knossa_palace_pass4_1x.png`, `_views` | Design round 2: the Central Court as the open heart: clean paving, red colonnades down both long sides and a south portico with horns, the north portico; the West Court as a lower lawn crossed by raised paved walkways with steps, three kouloures; the magazines' pithoi in a row; the Theatral Area's second, north–south flight; stairs cut into the hill's south face down to the lower terrace. |
+| 5 | `knossa_palace_pass5_1x.png`, `_views` | Rooflines varied: every wing's parapet over a mass of rubble-filled masonry with fallen patches and horns, not stacked wall tops; a light well right by the Grand Staircase's door; more grass through the ruin's edges. |
+| 6 | `knossa_palace_pass6.png`, `_1x`, `_events`, `_views` | The court's altar, horns of consecration and drains. Final. The Grand Staircase gains the breach (`breach`, drawn into palace_rooms): `knossa_room_grand_staircase_pass4_1x.png`. |
 
 ## Hand-offs (for the Labyrinth chapters)
 

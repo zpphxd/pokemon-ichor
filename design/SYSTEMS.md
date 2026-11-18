@@ -1621,13 +1621,17 @@ Every trial also has:
 - **Acolytes:** three *mystai*; one **optional**, beside a side seed.
 - **Chloe** waits in the anaktoron. Her reveal is a single reaped ear of grain.
 
-**4. Dionysus: the Three-Act Play.**
-- **The stage** has three doors (comedy, tragedy, satyr) and a rack of masks. A program scroll says who enters by which door in each act. Acolytes in your mask let you pass, and the rest battle you.
-- **Teach** (Act I): one door, one mask. The program says plainly: "Enter the Comic, by the left door."
-- **Test** (Act II): three doors and cues instead of names ("Enter the one who weeps").
-- **Master** (Act III): the program leaves out the last entrance. The answer is the mask "the play forgot", the satyr play that always followed a tragedy.
-- **Acolytes:** one actor per act; Act II's is **optional**.
-- **Thespis** waits on the stage-building's roof, where the god-machine sets gods down.
+**4. Dionysus: the Three-Act Play.** Built: `data/maps/ThyrsaCity_TempleOfDionysus/scripts.pory`, map from `tools/ichor/maps/thyrsa.py`.
+- **The play** is *The Vintner's Gift*. Three painted scenery walls stand between the green room (backstage, by the entrance) and the stage-building's roof, one wall per act, each with a left, middle and right door. Each act is one entrance: the right door in the right mask walks you onto the next stage, and that door stays open.
+- **The rules**, chalked in the green room: come on through the door painted with where you've just been; wear the face your part would wear; miss your cue and the floor will find you. The doors are painted with vines on a hillside (left), a house's lit gate (middle) and a ship with ivy up its mast (right). Masks hang on a rack in the green room only, so you dress before you go up.
+- **Teach** (Act I): the script says the stranger steps off a ship, laughing. Comedy, right door. The prompter catches a wrong try for free.
+- **Test** (Act II): "Enter the one they blame." The vintner poured, then went in to bed: he comes from the house (middle). His mask takes two clues: the comic acolyte says nobody laughs in Act II, and a fresco says the goat-men always come last. Tragedy, middle door.
+- **Master** (Act III): the page is torn off. A tragedy is followed by the satyr play (the fresco, the chorus leader), and the goat-men follow their god in by his door (a second fresco, the tragic acolyte). The comic acolyte lets slip that the stranger is the god, so the god's door is the ship's. Satyr, right door. Myth-savvy players spot Dionysus in the ivy-masted ship.
+- **Costs:** in Acts II and III a wrong door is a trapdoor back to the green room, and the right door in the wrong mask is a battle with the chorus (`TRAINER_ICHOR_THYRSA_CHORUS`, fought again every time).
+- **Acolytes:** the comic actor guards the one gap in Act I's footlights; the tragic actor on Act II's stage is **optional** and gives a clue; the satyr actor guards the crane.
+- **Safety valve:** the prompter in the green room gives a nudge for the act you're on.
+- **Thespis** waits on the stage-building's roof. The mechane (crane) lifts you there once Act III is played, and lowers you again.
+- **The Dionysia** reuses the painted doors. Thespis's cues name no doors ("a fool drunk in the vineyards", "someone from the king's own house", "the goat-men, the way they come in"), and a wrong cue undoes the entrances made so far.
 
 **5. Artemis: the Hunt for the Hind.**
 - **The grove** is a temple garden under endless night. A hound that sees you sends you back to the start of the current stage, not the whole trial.
