@@ -36,16 +36,16 @@ WEST = [
     "OOOOOOOO",
     "OOOOOOOO",
     "OOOOOOOO",
-    ",,OO,;c,",
-    ",;,,,,c,",  # 20
-    ",,c,..ff",
-    ",,c,...f",
+    "..OO.:c,",
+    ".:....c,",  # 20
+    "..c...ff",
+    "..c....f",
     "========",
     "========",
     "OO,c....",  # 25
     "OO,c:..f",
-    "OOOO,,c,",
-    "OOOO,,c,",
+    "OOOO..c,",
+    "OOOO..c,",
     "OOOOOO,,",
     "PPOOOO,,",  # 30
     "PPOOOO;,",
@@ -128,10 +128,10 @@ SOUTH = [a + b + "====" + c + d for a, b, c, d in [
     ("OO", "......c.:....f..", "..f.....c....:..", "OO"),  # 41
     ("OO", "..:...c.ff.cs...", "...sc...c...c...", "OO"),  # 42
     ("OO", "......f..:.cf...", "...fc.:.f...c...", "OO"),  # 43
-    ("OO", "OOOO,,OO,;,,c,cs", "ch,;OOOO,,OOOO,,", "OO"),  # 44
-    ("OO", "OOOO,cOOOO,,c,cF", "cs,,OOOO,cOOOOOO", "OO"),  # 45
-    ("OO", "OOOO,cOOOOOO,;ns", "nF,;OOOO,cOOOOOO", "OO"),  # 46
-    ("OO", "OOOO,;OOOOOO,FF,", "s,F,OOOO,;OOOOOO", "OO"),  # 47
+    ("OO", "OOOO..OO.:..c,cs", "ch.;OOOO..OOOO..", "OO"),  # 44
+    ("OO", "OOOO.cOOOO..c,cF", "cs..OOOO.cOOOOOO", "OO"),  # 45
+    ("OO", "OOOO.cOOOOOO,;ns", "nf.;OOOO.cOOOOOO", "OO"),  # 46
+    ("OO", "OOOO.;OOOOOO,FF,", "s.f.OOOO.:OOOOOO", "OO"),  # 47
 ]]
 
 paint(m, 0, 0, WEST, seed=11)

@@ -39,7 +39,7 @@ L.start(function()
     L.expect(L.mapId() == S.MAP_ROUTE25, "Gytheion's north gap opens on Route 25")
     L.shot("route25_south")
     L.go(14, 12)
-    L.talk(9, 11)
+    L.talk(3, 12)                         -- Amyklai's spring
     L.shot("route25_amyklai")
     L.go(3, 3)
     flag(S.FLAG_SAW_LAKONIA, "III-5C: the town without walls comes into view")

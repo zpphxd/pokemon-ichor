@@ -16,6 +16,9 @@ LAKONIA_ENTRY_ROW = 37       # ...into Lakonia's east road on its rows 36..38
 OFFSET_LAKONIA = EXIT_ROW - LAKONIA_ENTRY_ROW
 # Lakonia overlaps our west edge on rows OFFSET..OFFSET+41: keep aethos there
 LEFT_SEAM_ROWS = range(0, OFFSET_LAKONIA + 42)
+# Past Lakonia's south-east corner the camera on its east road (rows 36..38) shows
+# our x 0..7 down to row 10 as well (tools/ichor/seam_audit.py): aethos there too
+CORNER_ROWS = range(OFFSET_LAKONIA + 42, OFFSET_LAKONIA + 45)
 
 
 def west_bank(y):
@@ -148,19 +151,21 @@ def build():
     for y in range(8, 13):                  # the hilltop
         for x in range(1, 13):
             m.set(x, y, A.GRASS, False)
-    m.woods({(x, y) for x in (0, 1, 10, 11) for y in range(8, 10)} | {(0, y) for y in range(10, 13)},
+    # The hilltop's west half, rows 8..10 at x < 8, is in Lakonia's corner view:
+    # an open lawn of aethos grass; the god, the spring and the fire stand east of
+    # it or below row 10.
+    m.woods({(x, y) for x in (0, 1) for y in range(8, 10)} | {(11, 8), (11, 9)} | {(0, y) for y in range(10, 13)},
             salt=9, aethos_only=lambda x, y: x < 8)
-    for (x, y) in ((6, 8), (7, 8), (8, 8), (9, 8)):
+    for (x, y) in ((5, 8), (6, 8), (7, 8)):
         m.set(x, y, A.SHADE, False)
-    m.put("throne", 2, 8)                   # Apollo on his throne (2..4, 8..11); top row over the woods
+    m.put("throne", 8, 8)                   # Apollo on his throne (8..10, 8..11); top row over the woods
     m.piece("flowers", "hyacinths", 1, 11)
-    m.piece("flowers", "hyacinths_b", 5, 11)
-    m.put("spring", 9, 10)                  # the spring (9..10, 10..11)
-    m.piece("altar", "fire_L", 6, 10)       # Amyklai's fire, before the god
-    m.piece("altar", "fire_R", 7, 10)
+    m.piece("flowers", "hyacinths_b", 7, 11)
+    m.put("spring", 2, 11)                  # the spring (2..3, 11..12)
+    m.piece("altar", "fire_L", 5, 11)       # Amyklai's fire, before the god
+    m.piece("altar", "fire_R", 6, 11)
     m.set(13, 13, A.HERM, True)             # the great herm at the hill's gate (land at (13,14))
-    m.path({(x, y) for x in range(8, 14) for y in range(11, 13)}
-           | {(11, 10), (12, 10), (13, 10), (12, 11), (13, 11)},
+    m.path({(x, 12) for x in range(4, 14)} | {(x, y) for x in range(11, 14) for y in (10, 11)},
            context={(14, 10), (14, 11), (14, 12)})
     # ---- the farm and Hestia's herm-shrines -----------------------------------------
     m.put("farmhouse", 4, 24, cells={(i, j) for i in range(4) for j in range(3)})   # door (5,26)
@@ -222,13 +227,13 @@ def build():
     t("ICHOR_CADET", 17, 24, "Isadas", "LEFT", 2)
     t("ICHOR_CADET", 14, 21, "Phoibidas", "RIGHT", 2)
     t("ICHOR_FISHER", 17, 32, "Alpheios", "RIGHT", 1)
-    t("ICHOR_PILGRIM", 8, 9, "Theodora", "DOWN", 2)
+    t("ICHOR_PILGRIM", 4, 9, "Theodora", "DOWN", 2)
     t("ICHOR_HOPLITE", 14, 8, "Arimnestos", "RIGHT", 2)
     t("ICHOR_HARVESTER", 7, 41, "Euthymia", "UP", 3)
     o("ICHOR_CADET", 19, 28, S + "ReedCadet", "MOVEMENT_TYPE_FACE_UP")
     o("ICHOR_CADET", 20, 30, S + "ReedCadet2", "MOVEMENT_TYPE_FACE_LEFT")
     o("ICHOR_CADET", 16, 15, S + "Runner", "MOVEMENT_TYPE_WALK_UP_AND_DOWN", ry=2)
-    o("ICHOR_PRIESTESS", 6, 11, S + "Polyboia", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_ROUTE25_POLYBOIA")
+    o("ICHOR_PRIESTESS", 5, 10, S + "Polyboia", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_ROUTE25_POLYBOIA")
     o("CUTTABLE_TREE", 19, 13, "EventScript_CutTree", "MOVEMENT_TYPE_NONE")
     o("ICHOR_ELDER_F", 6, 25, S + "HearthWoman", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE25_HESTIA",
       local_id="LOCALID_ROUTE25_HESTIA")
@@ -240,7 +245,7 @@ def build():
     m.item_ball(1, 3, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_ROUTE25_WEST")
     m.item_ball(2, 40, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_ROUTE25_FIELD")
     m.item_ball(1, 12, "ITEM_ETHER", "FLAG_ICHOR_ITEM_ROUTE25_AMYKLAI")
-    m.hidden(3, 12, "ITEM_NUGGET", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_THRONE")
+    m.hidden(9, 12, "ITEM_NUGGET", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_THRONE")
     m.hidden(14, 24, "ITEM_BIG_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_FORD")
     m.hidden(27, 17, "ITEM_PP_UP", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_MEADOW")
     m.hidden(13, 41, "ITEM_HYPER_POTION", "FLAG_ICHOR_HIDDEN_ITEM_ROUTE25_TERRACE")
@@ -248,10 +253,10 @@ def build():
     m.sign(13, 42, S + "SignSouth")
     m.sign(13, 13, S + "Herm")
     m.sign(17, 2, S + "SignLakonia") if False else m.sign(13, 1, S + "SignLakonia")
-    m.sign(3, 11, S + "Throne")
-    m.sign(9, 11, S + "Spring")
+    m.sign(9, 11, S + "Throne")
+    m.sign(3, 12, S + "Spring")
     m.sign(1, 11, S + "Hyacinths")
-    m.sign(6, 10, S + "Altar")
+    m.sign(5, 11, S + "Altar")
     m.sign(5, 15, S + "Vapheio")
     m.sign(6, 25, S + "Farmhouse") if False else None
     m.sign(6, 25, S + "Hearth") if False else m.sign(5, 25, S + "Hearth")
@@ -264,13 +269,13 @@ def build():
     m.connect("left", OFFSET_LAKONIA, "MAP_LAKONIA")
     starts = [(15, H - 1)]
     blockers = [(e["x"], e["y"]) for e in m.objects if e["trainer_type"] != "TRAINER_TYPE_NONE"]
-    must = [(0, 3, "the exit to Lakonia"), (5, 27, "the farmhouse door"), (8, 11, "Amyklai's spring"),
+    must = [(0, 3, "the exit to Lakonia"), (5, 27, "the farmhouse door"), (4, 12, "Amyklai's spring"),
             (26, 14, "the meadow"), (5, 16, "the Vapheio door")]
     m.forced_open.add((19, 13))             # the reed thicket the Sickle cuts
     m.forced_open.add((2, 33))              # the cleft's rubble the Hammer breaks
     views = [(15, 45), (15, 37), (15, 29), (15, 22), (7, 12), (22, 15), (14, 7), (6, 3), (5, 30)]
     errs = m.build("route25_eurotas", starts, must, views)
-    for y in LEFT_SEAM_ROWS:
+    for y in list(LEFT_SEAM_ROWS) + list(CORNER_ROWS):
         for x in range(8):
             if 0 <= y < H and int(m.mid[y, x]) >= 0x200:
                 print(f"Route25_Eurotas CHECK: ({x},{y}) holds eurotas 0x{int(m.mid[y, x]):03X} in Lakonia's seam strip")

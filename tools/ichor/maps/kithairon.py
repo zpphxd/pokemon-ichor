@@ -68,6 +68,7 @@ TRIPOD_TOP, TRIPOD_BASE = 0x130, 0x131
 STONE_PINE, CYPRESS_TOP, CYPRESS_BOT = R5.STONE_PINE, R5.CYPRESS_TOP, R5.CYPRESS_BOT
 FACE = {"LEFT": (-1, 0), "RIGHT": (1, 0), "UP": (0, -1), "DOWN": (0, 1)}
 SEAM_ROWS = 6       # rows nearest an up/down seam to a non-Skiron map: aethos only
+SEAM_COLS = 8       # columns nearest a left/right seam (MAP_DESIGN.md §5)
 
 
 # ---------------------------------------------------------------------------
@@ -84,7 +85,11 @@ WALKABLE_KINDS = set(".,ps")
 
 
 class Grid:
-    def __init__(self, name, w, h, strip_top=False, strip_bottom=False):
+    def __init__(self, name, w, h, strip_top=False, strip_bottom=False, strip_cols=(), seam_ok=()):
+        """strip_top/strip_bottom: the SEAM_ROWS rows on an up/down seam; strip_cols:
+        the columns on a left/right seam. Strip cells draw from aethos only, or from
+        seam_ok, the secondary metatiles that look the same under the neighbour's
+        tileset (tools/ichor/seam_audit.py's test)."""
         self.name, self.w, self.h = name, w, h
         self.cat = {s["key"]: s for s in json.loads(CAT.read_text())}
         self.g = [["#"] * w for _ in range(h)]
@@ -98,6 +103,12 @@ class Grid:
             self.strip |= set(range(SEAM_ROWS))
         if strip_bottom:
             self.strip |= set(range(h - SEAM_ROWS, h))
+        self.strip_x = set(strip_cols)
+        self.seam_ok = set(seam_ok)
+
+    def seam(self, x, y):
+        """Whether (x, y) is in a seam strip."""
+        return y in self.strip or x in self.strip_x
 
     # --- the plan -----------------------------------------------------------------
     def rect(self, k, x0, y0, x1, y1):
@@ -115,7 +126,7 @@ class Grid:
     # --- cells and pieces ----------------------------------------------------------
     def set(self, x, y, mid, solid, kind=""):
         if 0 <= x < self.w and 0 <= y < self.h:
-            if y in self.strip and mid >= 0x200:
+            if self.seam(x, y) and mid >= 0x200 and mid not in self.seam_ok:
                 raise ValueError(f"{self.name}: Skiron metatile 0x{mid:03X} at ({x},{y}) in a seam strip")
             self.mt[y, x], self.solid[y, x], self.fixed[y, x], self.kind[y, x] = mid, solid, True, kind
 
@@ -140,7 +151,7 @@ class Grid:
                     return False
                 if self.g[cy][cx] not in kinds or self.fixed[cy, cx]:
                     return False
-                if cy in self.strip and not strip_ok:
+                if self.seam(cx, cy) and not strip_ok:
                     return False
         return True
 
@@ -170,7 +181,7 @@ def notch(g, every=6, fill=","):
     walk = set(".,ps")
 
     def bay(x, y, fx, fy):
-        if g.at(x, y) not in ("#", "^") or y in g.strip:
+        if g.at(x, y) not in ("#", "^") or g.seam(x, y):
             return False
         for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
             if (nx, ny) != (fx, fy) and g.at(nx, ny) in walk | set("v<>sk"):
@@ -265,9 +276,9 @@ def trees(g):
                 continue
             n = noise(x, y, 21 + len(g.name))
             here = g.at(x, max(y, 0))
-            if y in g.strip and here in "#^":
+            if g.seam(x, y) and here in "#^":
                 # seam rows: cypress stands, a few stone pines
-                if y + 1 in g.strip and n < 22 and g.room(x, y, 2, 2, ("#", "^"), strip_ok=True):
+                if g.seam(x, y + 1) and g.seam(x + 1, y) and n < 22 and g.room(x, y, 2, 2, ("#", "^"), strip_ok=True):
                     for j in range(2):
                         for i in range(2):
                             g.set(x + i, y + j, STONE_PINE[j][i], True, "woods")
@@ -300,7 +311,7 @@ def trees(g):
         for x in range(g.w):
             if g.fixed[y, x] or g.g[y][x] not in "#^":
                 continue
-            if y in g.strip:
+            if g.seam(x, y):
                 if g.room(x, y, 1, 2, ("#", "^"), strip_ok=True) and noise(x, y, 23) < 85:
                     g.set(x, y, CYPRESS_TOP, True, "woods")
                     g.set(x, y + 1, CYPRESS_BOT, True, "woods")
@@ -378,7 +389,7 @@ def ground(g, decorate=True):
                     X, Y = min(max(x + dx, 0), g.w - 1), min(max(y + dy, 0), g.h - 1)
                     nb.append("1" if tallm[Y, X] else "0")
                 key = R5.canon("1", nb)
-                if key == R5.FULL or y in g.strip:
+                if key == R5.FULL or g.seam(x, y):
                     mid = TALL
                 elif key in tall["names"]:
                     cx, cy = tall["names"][key]
@@ -391,7 +402,7 @@ def ground(g, decorate=True):
             elif k in ".k":
                 g.set(x, y, GRASS, False, "grass")
                 g.fixed[y, x] = False
-                if decorate and y not in g.strip and k == ".":
+                if decorate and not g.seam(x, y) and k == ".":
                     r = noise(x, y, 41 + len(g.name))
                     if r < 6:
                         g.piece("thyme", x, y)

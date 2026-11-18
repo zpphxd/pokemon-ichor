@@ -26,6 +26,15 @@ fi
 /usr/bin/python3 tools/ichor/maps/elaia.py --verify >/dev/null \
   || { echo "SMOKE FAIL: Elaia's seam rows (tools/ichor/maps/elaia.py --verify)"; exit 1; }
 
+# A connected neighbour draws with the current map's tilesets: every seam cell the
+# camera shows across a connection must look the same under both (MAP_DESIGN.md §5).
+/usr/bin/python3 tools/ichor/seam_audit.py \
+  || { echo "SMOKE FAIL: seam cells that draw wrong across a connection (tools/ichor/seam_audit.py)"; exit 1; }
+
+# No blocked cell that looks like the open ground beside it, no object without graphics.
+/usr/bin/python3 tools/ichor/wall_audit.py \
+  || { echo "SMOKE FAIL: invisible walls (tools/ichor/wall_audit.py)"; exit 1; }
+
 # Open water beside reachable land must take a rod, and a map with it needs a fishing table.
 /usr/bin/python3 tools/ichor/fishing_audit.py \
   || { echo "SMOKE FAIL: unfishable water (tools/ichor/fishing_audit.py)"; exit 1; }

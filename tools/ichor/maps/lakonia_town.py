@@ -20,7 +20,7 @@ from lakonia_maps import A, LMap
 
 W, H = 52, 42
 ENTRY_ROW = 37               # Route 25 comes in on rows 36..38 at the east edge
-EAST_SEAM_ROWS = range(ENTRY_ROW - 3, H)   # rows Route 25 overlaps (aethos only, x >= 44)
+EAST_SEAM_ROWS = range(ENTRY_ROW - 6, H)   # rows Route 25's road sees (aethos only, x >= 44)
 # Route 26 (gTileset_Stymphalia) joins the north road at offset 9 (tools/ichor/maps/
 # stymphalia.py). Its walkable seam rows sit over our x 23-27, so the camera there
 # sees our x 15-35 of the top six rows: those keep to aethos (MAP_DESIGN §5).
@@ -186,10 +186,12 @@ def build():
     m.set(47, 9, A.TRIPOD, True)
     for (x, y) in ((45, 7), (50, 7), (45, 10), (50, 10)):
         m.cypress(x, y)
-    # the far bank's olive groves, with a lane down to the river
+    # the far bank's olive groves, with a lane down to the river (none south of the
+    # road: from there the camera would see past the map's corner into Route 25)
     groves = {(x, y) for x in range(44, W) for y in range(15, H)
               if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and not m.solid[y, x]
-              and not (ENTRY_ROW - 1 <= y <= ENTRY_ROW + 1) and x != (47 if y < 25 else 49)
+              and not (ENTRY_ROW - 1 <= y <= ENTRY_ROW + 1)
+              and (x != (47 if y < 25 else 49) or y > ENTRY_ROW + 1)
               and not (y == 25 and 47 <= x <= 49) and (x, y) not in ((44, 20), (44, 27), (44, 32), (45, 27))}
     m.woods(groves, salt=17, aethos_only=lambda x, y: x >= 44 and y in EAST_SEAM_ROWS)
     # the village south of the agora: a yard round its well, olives, a plane

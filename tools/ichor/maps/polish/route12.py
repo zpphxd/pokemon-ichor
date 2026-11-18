@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from mapedit import Layout  # noqa: E402
 from paint import paint  # noqa: E402
 from autopath import lay, learn  # noqa: E402
+from seams import route12_north  # noqa: E402
 
 m = Layout("Route12_CypressRoad")
 PATH_IDS = set(range(0x200, 0x220))
@@ -115,21 +116,21 @@ lay(m, path, table, 0x200)
 # --- the southern groves (rows 30/31-35, Aethos only) ---------------------
 # x0-25 rows 30-35, x26-27 and x32-41 rows 31-35, x42-55 rows 30-35.
 WEST = [
-    "PPOOOOc,OOOOPPOOOOc,OO,,,,",  # 30
-    "PPOOOOc;OOOOPPOOOOc,OO,.,.",  # 31
-    "OOOOOO,,OOOOOOOOOO,,OO:..f",  # 32
-    "OOOOOOPPOOOOOOOO,,c,,,..,.",  # 33
-    "OOOOOOPPOOOOOOOOOOc,OO,,c,",  # 34
-    "OOOOOOOOOOOOOOOOOOOOOO,,c,",  # 35
+    "PPOOOOc,OOOOPPOOOOc.OO..,,",  # 30
+    "PPOOOOc;OOOOPPOOOOc.OO....",  # 31
+    "OOOOOO,,OOOOOOOOOO..OO:..f",  # 32
+    "OOOOOOPPOOOOOOOO,,c.......",  # 33
+    "OOOOOOPPOOOOOOOOOOc.OO..c.",  # 34
+    "OOOOOOOOOOOOOOOOOOOOOO..c.",  # 35
 ]
 paint(m, 0, 30, WEST, seed=31)
 MID = [
     # x26-27 | road x28-31 | x32-41
     "..====..:...c.,.",  # 31
-    "f.====.....,c,OO",  # 32
-    ",.====.f..,,OOOO",  # 33
-    "c.====..OO,,OOOO",  # 34
-    "c,====,,OO,,OOOO",  # 35
+    "f.====......c,OO",  # 32
+    "..====.f....OOOO",  # 33
+    "c.====..OO..OOOO",  # 34
+    "c.====..OO..OOOO",  # 35
 ]
 paint(m, 26, 31, MID, seed=32)
 EAST = [
@@ -151,5 +152,6 @@ for x in (39, 40, 43, 48):
 # a stone pine where the stream slips in under the west wood
 for (x, y), mid in {(24, 29): 0x01E, (25, 29): 0x01F, (24, 30): 0x026, (25, 30): 0x027}.items():
     m.put(x, y, mid, solid=True)
+route12_north(m)                       # the seam strip, Aethos only (seams.py)
 m.save()
 print("route12: done")
