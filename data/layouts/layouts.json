@@ -1437,7 +1437,7 @@
       "width": 40,
       "height": 40,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Kaldera",
       "border_filepath": "data/layouts/Kaldera/border.bin",
       "blockdata_filepath": "data/layouts/Kaldera/map.bin",
       "layout_version": "emerald"

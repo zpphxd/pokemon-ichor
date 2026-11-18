@@ -2803,6 +2803,10 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_6        (FLAG_ICHOR_GENERAL2_START + 0x4E4) // Ichor: Ring VI: on the remains
 #define FLAG_ICHOR_HIDDEN_ITEM_REMAINS_7        (FLAG_ICHOR_GENERAL2_START + 0x4E5) // Ichor: Ring VII: on the remains
 #define FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI      (FLAG_ICHOR_GENERAL2_START + 0x5B3) // Ichor: hides Kleon, awake and in color, at Delphoi's gate (III-10G)
+#define FLAG_ICHOR_HIDE_KALDERA_LABRYS_SEAL     (FLAG_ICHOR_GENERAL2_START + 0x5D0) // Ichor: Kaldera: the Labrys cleaved the seal on Akrotiri's buried door
+#define FLAG_ICHOR_ITEM_KALDERA_AKROTIRI        (FLAG_ICHOR_GENERAL2_START + 0x5D1) // Ichor: Kaldera: the votive in Akrotiri's buried doorway
+#define FLAG_ICHOR_KALDERA_REVEAL               (FLAG_ICHOR_GENERAL2_START + 0x5D2) // Ichor: Kaldera: the camera pan over the caldera to the bronze man, on first arrival
+#define FLAG_ICHOR_HIDDEN_ITEM_KALDERA_VINES    (FLAG_ICHOR_GENERAL2_START + 0x5D3) // Ichor: Kaldera: among the koulouri in the rim's northeast corner
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

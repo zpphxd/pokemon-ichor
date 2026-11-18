@@ -1257,3 +1257,18 @@ const struct Tileset gTileset_SeatHera =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_SeatHera,
     .callback = NULL,
 };
+
+// Ichor: kaldera, Thera's caldera, the white town and the bronze man (Act II). Porytiles-managed, built by
+// tools/ichor/art/kaldera_build.py for the aethos primary: the map is painted
+// whole and sliced into cells; cells over the sea borrow aethos's sea, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_Kaldera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kaldera,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kaldera,
+    .metatiles = gMetatiles_PorytilesManaged_Kaldera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kaldera,
+    .callback = InitTilesetAnim_PorytilesManaged_Kaldera,
+};

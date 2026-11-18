@@ -9,6 +9,7 @@ from astyra import CLINIC, HOUSE, LIBRARY
 from salt_well import hidden, item
 
 sys.path.insert(0, str(ROOT / "tools/ichor/art"))
+sys.path.insert(0, str(ROOT / "tools/ichor/maps"))
 import cave_dark_kit as kit
 import plan_hook  # noqa: E402  (tools/ichor/wild_plan.py)
 
@@ -17,64 +18,67 @@ PIECES = {p["key"]: p["ids"] for p in CAT["pieces"]}
 
 
 def town():
-    m = Map("Kaldera", 40, 40)
-    m.cells = [0x1170] * (m.w * m.h)
-    land = set()
-    for y in range(2, 38):
-        for x in range(4, 39):
-            outer = ((x - 22) / 17) ** 2 + ((y - 20) / 18) ** 2 < 1
-            inner = ((x - 12) / 15) ** 2 + ((y - 20) / 10) ** 2 < 1
-            if outer and not inner:
-                land.add((x, y))
-    for x0, y0, x1, y1 in ((26, 3, 36, 12), (26, 13, 37, 28),
-                           (18, 29, 33, 36)):
-        land.update((x, y) for y in range(y0, y1 + 1) for x in range(x0, x1 + 1))
-    for x, y in land:
-        n, s = (x, y - 1) not in land, (x, y + 1) not in land
-        w, e = (x - 1, y) not in land, (x + 1, y) not in land
-        row, col = (0 if n else 2 if s else 1), (0 if w else 2 if e else 1)
-        m.put(x, y, ((0x11B, 0x11C, 0x11D), (0x123, 0x124, 0x125),
-                     (0x12B, 0x12C, 0x12D))[row][col])
-        if not (n or s or w or e) and (x + 2 * y) % 11 < 2:
-            m.put(x, y, 0x109)
-    m.rect(29, 9, 32, 30, 0x1D9)
-    m.rect(20, 32, 31, 35, 0x1D9)
-    m.rect(28, 19, 35, 21, 0x1D9)
-    m.rect(28, 26, 35, 28, 0x1D9)
-    m.rect(27, 9, 36, 9, 0x08F)
-    m.rect(30, 9, 31, 10, 0x0CF)
-    m.stamp(28, 3, LIBRARY)
-    m.put(31, 7, 0x1CD)
-    m.stamp(26, 14, CLINIC)
-    m.put(27, 17, 0x061)
-    m.stamp(33, 21, HOUSE)
-    m.put(34, 24, 0x041)
-    m.stamp(23, 29, [[0x008, 0x009, 0x00A], [0x010, 0x011, 0x012],
-                     [0x018, 0x019, 0x01A], [0x020, 0x021, 0x022]])
-    m.put(24, 32, 0x021)
-    m.rect(26, 12, 29, 13, 0x1D9)
-    m.put(26, 12, 0x1DB)
+    """Thera's caldera on gTileset_Kaldera, painted whole by tools/ichor/art/kaldera_art.py
+    (design/AWE_PASS.md item 3). The grid comes from kaldera_tiles.py; run
+    tools/ichor/art/kaldera_build.py first after any change to the art."""
+    import importlib
+    import kaldera_tiles as KT
+    importlib.reload(KT)
+    import kaldera_art as KA
+    old = read("data/maps/Kaldera/map.json")
+    herms = [o for o in old["object_events"]
+             if o.get("graphics_id") in ("OBJ_EVENT_GFX_ICHOR_GREAT_HERM", "OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE")]
+    m = Map("Kaldera", KA.W, KA.H, secondary=KT.SYMBOL)
+    for y in range(m.h):
+        for x in range(m.w):
+            tile, code = KT.GRID[y][x], KT.WALK[y][x]
+            if tile in (0x170,):
+                m.put(x, y, tile)
+            elif code == "W":
+                # foam over borrowed sea: open water at elevation 1, as the sea is
+                m.cells[y * m.w + x] = 0x1000 | tile
+            else:
+                m.put(x, y, tile, code == "X")
     m.json["warp_events"] = [
-        warp(27, 17, "Kaldera_Asclepeion", 0),
-        warp(34, 24, "Kaldera_Agora", 0),
-        warp(24, 32, "Kaldera_SmithsHouse", 0),
-        warp(31, 7, "Kaldera_TempleOfHephaestus", 0),
-        warp(26, 12, "Kaldera_TelchinesForge", 0)]
+        warp(*KA.door_cell("Asclepeion"), "Kaldera_Asclepeion", 0),
+        warp(*KA.door_cell("Agora"), "Kaldera_Agora", 0),
+        warp(*KA.door_cell("SmithsHouse"), "Kaldera_SmithsHouse", 0),
+        warp(KA.TEMPLE_AT[0] + 3, KA.TEMPLE_AT[1] + 4, "Kaldera_TempleOfHephaestus", 0),
+        warp(*KA.FORGE_DOOR, "Kaldera_TelchinesForge", 0)]
     m.person("Nausikles", 19, 33, gfx="PILGRIM")
     m.person("Daphne", 22, 34, gfx="PROFESSOR_DAPHNE")
-    m.person("HarborGuide", 28, 28, gfx="PILGRIM")
-    m.person("AshWorker", 34, 13, gfx="KEDALION")
-    m.sign("Sign", 21, 33)
-    m.sign("ForgeSign", 25, 13)
-    m.sign("TempleSign", 34, 9, tile=0x130)
+    m.person("HarborGuide", 25, 32, gfx="PILGRIM")
+    m.person("AshWorker", 22, 31, gfx="KEDALION")
+    for name, (x, y) in KA.SIGNS.items():
+        m.json["bg_events"].append(bg(x, y, m.prefix + name))
+    m.json["bg_events"].append(bg(23, 29, m.prefix + "Fresco"))
     item(m, 30, 35, "ULTRA_BALL", "ITEM_KALDERA_BALL")
+    # Akrotiri's buried door: a Labrys seal (Knossa, Act III) over a votive in the doorway
+    dx, dy = KA.AKROTIRI_DOOR
+    m.json["object_events"].append(dict(
+        graphics_id="OBJ_EVENT_GFX_ICHOR_TABLET", x=dx, y=dy, elevation=3,
+        movement_type="MOVEMENT_TYPE_FACE_DOWN", movement_range_x=0, movement_range_y=0,
+        trainer_type="TRAINER_TYPE_NONE", trainer_sight_or_berry_tree_id="0",
+        script="EventScript_IchorLabrysSeal", flag="FLAG_ICHOR_HIDE_KALDERA_LABRYS_SEAL"))
+    item(m, dx, dy - 1, "STAR_PIECE", "ITEM_KALDERA_AKROTIRI")
     hidden(m, 36, 27, "SHOAL_SALT", "HIDDEN_ITEM_KALDERA_SALT")
     hidden(m, 26, 34, "HEART_SCALE", "HIDDEN_ITEM_KALDERA_SCALE")
+    hidden(m, 38, 1, "MIRACLE_SEED", "HIDDEN_ITEM_KALDERA_VINES")
     m.json["coord_events"] = [dict(type="trigger", x=x, y=34, elevation=0,
         var="VAR_TEMP_1", var_value="0", script=m.prefix + "Letter") for x in (19, 20)]
+    m.json["object_events"] += herms     # last, so no other local id shifts
     m.json["allow_cycling"] = False
     m.save()
     (ROOT / "data/layouts/Kaldera/border.bin").write_bytes(struct.pack("<4H", *([0x1170] * 4)))
+    path = ROOT / "data/maps/Kaldera/scripts.pory"
+    start, end = "// Generated: the bronze man's eyes.", "// End the bronze man's eyes."
+    before, _, rest = path.read_text().partition(start)
+    after = rest.partition(end)[2]
+    body = "".join(f"    setmetatile({x}, {y}, 0x{mt:03X}, TRUE)\n" for x, y, mt in KT.EYES)
+    path.write_text(before.rstrip() + "\n\n" + start + "\n"
+                    "// After Laurel 6 his eyes are lit (tools/ichor/maps/kaldera.py writes this).\n"
+                    "script Kaldera_EventScript_LightEyes {\n" + body + "}\n" + end + after
+                    + ("" if after else "\n"))
 
 
 def rooms():
@@ -286,8 +290,13 @@ def encounters_and_teams():
 
 
 if __name__ == "__main__":
-    town()
-    rooms()
-    temple()
-    forge()
-    encounters_and_teams()
+    # `kaldera.py town` rebuilds the exterior alone, leaving the rooms (and the
+    # objects later passes add to them, such as climax_world.py's) as they are.
+    if sys.argv[1:] == ["town"]:
+        town()
+    else:
+        town()
+        rooms()
+        temple()
+        forge()
+        encounters_and_teams()
