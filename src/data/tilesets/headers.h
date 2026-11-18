@@ -1258,6 +1258,36 @@ const struct Tileset gTileset_SeatHera =
     .callback = NULL,
 };
 
+// Ichor: oros, the outdoor snows of Olympus: snow you wade through, tarns, firs, cliffs with stairs cut in them, the cloud sea (design/maps/Ascent_*.md).
+// Porytiles-managed, built by tools/ichor/art/oros_build.py. It uses only its own
+// tiles and palettes 6-12, with opaque floors, so it works on any primary; the maps
+// pair it with aethos.
+const struct Tileset gTileset_Oros =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Oros,
+    .palettes = gTilesetPalettes_PorytilesManaged_Oros,
+    .metatiles = gMetatiles_PorytilesManaged_Oros,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Oros,
+    .callback = NULL,
+};
+
+// Ichor: propylon, Ascent 3F above the cloud and the Propylaia's full-width facade: columns, pediment, the Twelve (design/maps/Ascent_3F.md).
+// Porytiles-managed, built by tools/ichor/art/oros_build.py. It uses only its own
+// tiles and palettes 6-12, with opaque floors, so it works on any primary; the maps
+// pair it with aethos.
+const struct Tileset gTileset_Propylon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Propylon,
+    .palettes = gTilesetPalettes_PorytilesManaged_Propylon,
+    .metatiles = gMetatiles_PorytilesManaged_Propylon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Propylon,
+    .callback = NULL,
+};
+
 // Ichor: akropolis, the Akropolis of Astyra (Act II, the awe pass). Porytiles-managed, built by
 // tools/ichor/art/astyra_build.py for the aethos primary: its ground cells
 // borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild

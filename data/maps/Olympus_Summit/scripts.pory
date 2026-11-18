@@ -222,3 +222,16 @@ script Olympus_Summit_EventScript_Stelai {
         msgbox(format("The stelai of the Archons, a name for every one since Medon.\pAristeides's name is the last one cut. The stone after it is still blank."), MSGBOX_SIGN)
     }
 }
+
+// --- the gods' easter eggs (tools/ichor/maps/ascent_eggs.py) ---
+script Olympus_Summit_EventScript_EggCup {
+    msgbox(format("A gold cup has been left on the altar's step, still half full.\pGanymede poured for the gods up here. Of what, you'd rather not ask."), MSGBOX_SIGN)
+}
+
+script Olympus_Summit_EventScript_EggFeather {
+    msgbox(format("An eagle's feather, long as your arm, caught in the crag's foot.\pGold at the quill. Something up the cone keeps shedding them."), MSGBOX_SIGN)
+}
+
+script Olympus_Summit_EventScript_StatueZeus {
+    msgbox(format("ZEUS, FATHER OF GODS AND MEN. Painted marble: the thunderbolt raised, the eagle on his arm.\pWhoever carved him gave him the Archon's eyes. Or the other way round."), MSGBOX_SIGN)
+}

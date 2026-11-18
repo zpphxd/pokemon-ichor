@@ -48,8 +48,17 @@ script Ascent_CrystalVault_EventScript_ThreadUp {
         closemessage
         playse(SE_M_BIND)
         fadescreen(FADE_TO_BLACK)
-        warpsilent(MAP_ASCENT_GLACIER, 13, 11)
+        warpsilent(MAP_ASCENT_GLACIER, 14, 12)
         waitstate
     }
     releaseall
+}
+
+// --- the gods' easter eggs (tools/ichor/maps/ascent_eggs.py) ---
+script Ascent_CrystalVault_EventScript_EggApple {
+    msgbox(format("Something gold is wedged between two crystals: an apple, scratched FOR THE FAIREST.\pEris threw one of these once and started a war. Best not to toss it to anyone."), MSGBOX_SIGN)
+}
+
+script Ascent_CrystalVault_EventScript_EggWheel {
+    msgbox(format("Deep inside one crystal, a gold wheel turns, very slowly.\pThe crystal hasn't moved in an age. The wheel has never stopped."), MSGBOX_SIGN)
 }

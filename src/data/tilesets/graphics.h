@@ -2083,6 +2083,52 @@ const u16 gTilesetPalettes_PorytilesManaged_SeatHera[][16] =
     INCBIN_U16("data/tilesets/secondary/seat_hera/porytiles_bin/palettes/15.gbapal")
 };
 
+// Ichor: oros, the outdoor snows of Olympus: snow you wade through, tarns, firs, cliffs with stairs cut in them, the cloud sea (design/maps/Ascent_*.md) (tools/ichor/art/oros_build.py)
+const u32 gTilesetTiles_PorytilesManaged_Oros[] = INCBIN_U32("data/tilesets/secondary/oros/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Oros[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oros/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: propylon, Ascent 3F above the cloud and the Propylaia's full-width facade: columns, pediment, the Twelve (design/maps/Ascent_3F.md) (tools/ichor/art/oros_build.py)
+const u32 gTilesetTiles_PorytilesManaged_Propylon[] = INCBIN_U32("data/tilesets/secondary/propylon/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Propylon[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/propylon/porytiles_bin/palettes/15.gbapal")
+};
+
 // Ichor: akropolis (the Akropolis of Astyra), written by tools/ichor/art/astyra_build.py
 const u32 gTilesetTiles_PorytilesManaged_Akropolis[] = INCBIN_U32("data/tilesets/secondary/akropolis/porytiles_bin/tiles.4bpp.lz");
 

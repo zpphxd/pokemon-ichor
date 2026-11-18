@@ -1765,9 +1765,9 @@
       "id": "LAYOUT_ASCENT_3F",
       "name": "Ascent_3F_Layout",
       "width": 44,
-      "height": 46,
+      "height": 62,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Chion",
+      "secondary_tileset": "gTileset_Propylon",
       "border_filepath": "data/layouts/Ascent_3F/border.bin",
       "blockdata_filepath": "data/layouts/Ascent_3F/map.bin",
       "layout_version": "emerald"
@@ -1775,10 +1775,10 @@
     {
       "id": "LAYOUT_OLYMPUS_PROPYLAIA",
       "name": "Olympus_Propylaia_Layout",
-      "width": 17,
-      "height": 16,
+      "width": 27,
+      "height": 17,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_TempleHestia",
+      "secondary_tileset": "gTileset_Civic",
       "border_filepath": "data/layouts/Olympus_Propylaia/border.bin",
       "blockdata_filepath": "data/layouts/Olympus_Propylaia/map.bin",
       "layout_version": "emerald"
@@ -2700,9 +2700,9 @@
       "id": "LAYOUT_ASCENT_GLACIER",
       "name": "Ascent_Glacier_Layout",
       "width": 44,
-      "height": 58,
+      "height": 62,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Chion",
+      "secondary_tileset": "gTileset_Oros",
       "border_filepath": "data/layouts/Ascent_Glacier/border.bin",
       "blockdata_filepath": "data/layouts/Ascent_Glacier/map.bin",
       "layout_version": "emerald"
@@ -2837,6 +2837,28 @@
       "secondary_tileset": "gTileset_Nysa",
       "border_filepath": "data/layouts/Route7_NurseryOfNysa/border.bin",
       "blockdata_filepath": "data/layouts/Route7_NurseryOfNysa/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASCENT_SNOWFIELD",
+      "name": "Ascent_Snowfield_Layout",
+      "width": 40,
+      "height": 46,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Oros",
+      "border_filepath": "data/layouts/Ascent_Snowfield/border.bin",
+      "blockdata_filepath": "data/layouts/Ascent_Snowfield/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ASCENT_WIND_RIDGE",
+      "name": "Ascent_WindRidge_Layout",
+      "width": 44,
+      "height": 46,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Oros",
+      "border_filepath": "data/layouts/Ascent_WindRidge/border.bin",
+      "blockdata_filepath": "data/layouts/Ascent_WindRidge/map.bin",
       "layout_version": "emerald"
     },
     {

@@ -1,0 +1,2516 @@
+{
+ "tileset": "gTileset_Oros",
+ "primary": "gTileset_Aethos",
+ "tiles_used": 483,
+ "metatiles": 201,
+ "pieces": [
+  {
+   "key": "g0",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     512
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "g1",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     513
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "g2",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     514
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "g3",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     515
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "gs",
+   "title": "snow in a cliff's shadow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     516
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_0",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     517
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_1",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     518
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_2",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     519
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_3",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     520
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_4",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     521
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_5",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     522
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_6",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     523
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_7",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     524
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_8",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     525
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_9",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     526
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_10",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     527
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_11",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     528
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_12",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     529
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_13",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     530
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_14",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     531
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_15",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     532
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_b",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     533
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_a",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     534
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_ab",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     535
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_E",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     536
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_Ea",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     537
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_W",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     538
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_Wb",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     539
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_WE",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     540
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_N",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     541
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_NE",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     542
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_NW",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     543
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_NWE",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     544
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     545
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     546
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     547
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_i_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     548
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_i_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     549
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_i_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     550
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     551
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     552
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     553
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_n_v",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     554
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     555
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     556
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     557
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     558
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     559
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     560
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     561
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_i_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     562
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_i_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     563
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_i_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     564
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     565
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     566
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     567
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_n_v",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     568
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     569
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     570
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     571
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     572
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     573
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     574
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     575
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_i_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     576
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_i_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     577
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_i_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     578
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     579
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     580
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     581
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_n_v",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     582
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     583
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     584
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     585
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     586
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stair_t",
+   "title": "steps cut in the cliff",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     587
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stair_m",
+   "title": "steps cut in the cliff",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     588
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stair_b",
+   "title": "steps cut in the cliff",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     589
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_0",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     590
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_1",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     591
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_2",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     592
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_3",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     593
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "gw0",
+   "title": "wind-scoured snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     594
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "gw1",
+   "title": "wind-scoured snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     595
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "deep0",
+   "title": "deep snow (wild Pok\u00e9mon)",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     596
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "behaviors": {
+    "0,0": "MB_DEEP_SAND"
+   }
+  },
+  {
+   "key": "deep1",
+   "title": "deep snow (wild Pok\u00e9mon)",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     597
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "behaviors": {
+    "0,0": "MB_DEEP_SAND"
+   }
+  },
+  {
+   "key": "deep2",
+   "title": "deep snow (wild Pok\u00e9mon)",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     598
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "behaviors": {
+    "0,0": "MB_DEEP_SAND"
+   }
+  },
+  {
+   "key": "ice_c2",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     599
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_c",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     600
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_n",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     601
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_s",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     602
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_e",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     603
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_w",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     604
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_nw",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     605
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_ne",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     606
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_sw",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     607
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_se",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     608
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_inw",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     609
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_ine",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     610
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_isw",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     611
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ice_ise",
+   "title": "frozen tarn",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     612
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_ICE"
+   }
+  },
+  {
+   "key": "ledge_l",
+   "title": "snow cornice: jump down",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     613
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "ledge_m",
+   "title": "snow cornice: jump down",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     614
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "ledge_r",
+   "title": "snow cornice: jump down",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     615
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "exit_s",
+   "title": "the road down (a south arrow warp)",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     616
+    ]
+   ],
+   "walk": [
+    "v"
+   ],
+   "behaviors": {
+    "0,0": "MB_SOUTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "ag0",
+   "title": "alpine grass through the snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     617
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "ag1",
+   "title": "alpine grass through the snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     618
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "ag2",
+   "title": "alpine grass through the snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     619
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "fir",
+   "title": "a snow-laden fir",
+   "section": "props",
+   "w": 2,
+   "h": 3,
+   "ids": [
+    [
+     620,
+     621
+    ],
+    [
+     622,
+     623
+    ],
+    [
+     624,
+     625
+    ]
+   ],
+   "walk": [
+    "TT",
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "fir_b",
+   "title": "a wind-bent fir",
+   "section": "props",
+   "w": 2,
+   "h": 3,
+   "ids": [
+    [
+     626,
+     627
+    ],
+    [
+     628,
+     629
+    ],
+    [
+     630,
+     631
+    ]
+   ],
+   "walk": [
+    "TT",
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "fir_arrow",
+   "title": "a fir with a silver arrow in it (Artemis)",
+   "section": "props",
+   "w": 2,
+   "h": 3,
+   "ids": [
+    [
+     620,
+     621
+    ],
+    [
+     622,
+     623
+    ],
+    [
+     632,
+     633
+    ]
+   ],
+   "walk": [
+    "TT",
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "fir_s",
+   "title": "a young fir",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     634
+    ],
+    [
+     635
+    ]
+   ],
+   "walk": [
+    "T",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rock",
+   "title": "a rock through the snow",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     636
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rock_b",
+   "title": "a rock through the snow",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     637
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "boulder",
+   "title": "a snow-capped boulder",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     638,
+     639
+    ],
+    [
+     640,
+     641
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "drift",
+   "title": "a snowdrift",
+   "section": "props",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     642,
+     643
+    ]
+   ],
+   "walk": [
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "drift_wine",
+   "title": "a drift stained purple (Dionysus)",
+   "section": "props",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     644,
+     645
+    ]
+   ],
+   "walk": [
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "ice_rock",
+   "title": "an ice boulder in the tarn",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     646
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "ice_rock_b",
+   "title": "an ice boulder in the tarn",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     647
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "plate",
+   "title": "a bronze plate",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     648
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "plate_down",
+   "title": "a pressed plate",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     649
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "grate",
+   "title": "a bronze bar over a stair",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     650
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "grate_up",
+   "title": "the stair, the bar lifted",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     651
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stele",
+   "title": "a stele with an inscription",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     652
+    ],
+    [
+     653
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "herm",
+   "title": "a herm (the travel herm)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     654
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "sign",
+   "title": "a signpost",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     655
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "lever",
+   "title": "the seal's reset lever",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     656
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "mouth",
+   "title": "a cave mouth in the cliff",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     657,
+     658
+    ],
+    [
+     659,
+     660
+    ]
+   ],
+   "walk": [
+    "XX",
+    ".."
+   ],
+   "behaviors": {
+    "0,1": "MB_NON_ANIMATED_DOOR",
+    "1,1": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "mouth_roped",
+   "title": "a roped-off cave (closed by the Archon)",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     657,
+     658
+    ],
+    [
+     661,
+     662
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "bronze_door",
+   "title": "a bronze door with the Twelve's marks",
+   "section": "props",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     663,
+     664
+    ],
+    [
+     665,
+     666
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "giant",
+   "title": "a Giant frozen in the ice",
+   "section": "props",
+   "w": 3,
+   "h": 3,
+   "ids": [
+    [
+     667,
+     668,
+     669
+    ],
+    [
+     670,
+     671,
+     672
+    ],
+    [
+     673,
+     674,
+     675
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX",
+    "XXX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "giant_r",
+   "title": "a Giant frozen in the ice",
+   "section": "props",
+   "w": 3,
+   "h": 3,
+   "ids": [
+    [
+     676,
+     677,
+     678
+    ],
+    [
+     679,
+     680,
+     681
+    ],
+    [
+     682,
+     683,
+     684
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX",
+    "XXX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "frozen_fall",
+   "title": "a frozen waterfall",
+   "section": "props",
+   "w": 2,
+   "h": 4,
+   "ids": [
+    [
+     685,
+     686
+    ],
+    [
+     687,
+     688
+    ],
+    [
+     689,
+     690
+    ],
+    [
+     691,
+     692
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX",
+    "XX",
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "handholds",
+   "title": "handholds cut too far apart",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     693
+    ],
+    [
+     694
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "crevasse",
+   "title": "a crevasse",
+   "section": "props",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     695,
+     696
+    ]
+   ],
+   "walk": [
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "shield",
+   "title": "a broken shield half-buried (Ares)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     697
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "poppy",
+   "title": "a poppy in the snow (Demeter)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     698
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "trident_rock",
+   "title": "a rock split by three prongs (Poseidon)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     699
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "lyre_rock",
+   "title": "a split rock that hums (Apollo)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     700
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_bridge_0",
+   "title": "a span of cloud (it won't hold yet)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     701
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_bridge_1",
+   "title": "a span of cloud (it won't hold yet)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     702
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "far_peak",
+   "title": "the summit cone of Olympus, far off",
+   "section": "props",
+   "w": 4,
+   "h": 3,
+   "ids": [
+    [
+     590,
+     703,
+     704,
+     591
+    ],
+    [
+     705,
+     706,
+     707,
+     708
+    ],
+    [
+     709,
+     710,
+     711,
+     712
+    ]
+   ],
+   "walk": [
+    "XXXX",
+    "XXXX",
+    "XXXX"
+   ],
+   "behaviors": {}
+  }
+ ]
+}

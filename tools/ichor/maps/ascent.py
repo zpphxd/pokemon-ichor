@@ -333,7 +333,7 @@ def build_2f():
     # the camp is the climb's midway rest: the hearth stele (fragment II), the cook
     g.piece("stele_palmette", 16, 26)
     g.sign(16, 27, PX2 + "Shrine")
-    g.warp(31, 4, "Ascent_Icefall", 1)
+    g.warp(31, 4, "Ascent_Snowfield", 3)
     g.person("NIKIAS", "PILGRIM", 30, 27, "Nikias", facing="LEFT", sight=3)
     g.person("EIRENE", "ACOLYTE_F", 22, 13, "Eirene", facing="DOWN", sight=2)
     g.person("DEXIOS", "TITAN_GRUNT", 28, 5, "Dexios", facing="DOWN", sight=1)

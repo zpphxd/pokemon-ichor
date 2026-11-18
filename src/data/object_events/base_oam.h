@@ -51,3 +51,10 @@ const struct OamData gObjectEventBaseOam_64x64 = {
     .size = SPRITE_SIZE(64x64),
     .priority = 2
 };
+
+// Ichor: the statues of the Twelve (32x64, tall and narrow)
+const struct OamData gObjectEventBaseOam_32x64 = {
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
+    .priority = 2
+};

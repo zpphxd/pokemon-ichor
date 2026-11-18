@@ -23,3 +23,9 @@ Builder: `tools/ichor/maps/ascent_glacier.py` (`build_deep`, gTileset_Chion, 34Ã
 
 - Before: `img/ascent_icefalldeep_before.png` (the WIP's state). After: `img/ascent_icefalldeep_after.png`.
 - Pass 1 cut the channel and the fall into the north wall without breaking the corridor's loop round the tarn (the south ring still joins the ladder to the shrine). Pass 2 moved the fall's sign onto the wall so it's read facing the water. Pass 3 checked the screen at the ladder: the fall reads as the room's one moving thing.
+
+## Plan (2026-11-18 rework)
+
+- **Puzzle:** Hecate's Torch, Poseidon's Conch and the Horn of Achelous, as before.
+- **Easter eggs:** **Athena's owl** on a ledge over the tarn: its eyes are all you see in the Torch's light ("it has watched everything you did in the dark, and it isn't telling"); **Charon's obol** on the tarn's shore, a coin left for a ferryman who never comes this far (a hidden Relic Copper).
+- **Post-game gate:** none; the fall's ledge is the floor's secret.

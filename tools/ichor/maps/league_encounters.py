@@ -35,6 +35,12 @@ TABLES = {
         Night=["BORAPTERYX", "STYGIAD", "HARPELLE", "KOLOSSARD", "GEOGRIP", "STARKOS",
                "BORAPTERYX", "STYGIAD", "HARPELLE", "KOLOSSARD", "NIFLAKE", "KRYOPUFF"],
         rock=["LAOLITH", "KOLOSSARD", "GEOGRIP", "LAOLITH", "KOLOSSARD"]),
+    # the Leuke snowfield (2026-11-18): the deep snow between the ledges and the Icefall
+    "MAP_ASCENT_SNOWFIELD": dict(label="gAscent_Snowfield", band=(56, 60), rate=12,
+        Morning=["CHIONYAD", "BORAPTERYX", "KOLOSSARD", "CHIONYAD", "BORAPTERYX", "KERASTORM",
+                 "LAOLITH", "NEMELEON", "KRYOPUFF", "NIFLAKE", "KRYOPUFF", "NIFLAKE"],
+        Night=["CHIONYAD", "HARPELLE", "BORAPTERYX", "STARKOS", "KOLOSSARD", "CHIONYAD",
+               "LAOLITH", "STARKOS", "NIFLAKE", "KRYOPUFF", "NIFLAKE", "KRYOPUFF"]),
     "MAP_ASCENT_ICEFALL": dict(label="gAscent_Icefall", band=(57, 61), rate=7,
         Morning=["BORAPTERYX", "CHIONYAD", "KOLOSSARD", "CHIONYAD", "BORAPTERYX", "LAOLITH",
                  "KRYSTOLOS", "GEOGRIP", "NIFLAKE", "KRYOPUFF", "NIFLAKE", "KRYOPUFF"],
@@ -56,6 +62,13 @@ TABLES = {
                  "KERASTORM", "KOLOSSARD", "PAGOSHARD", "KRYOPUFF", "PAGOSHARD", "NIFLAKE"],
         Night=["STYGIAD", "BORAPTERYX", "CHIONYAD", "KRYSTOLOS", "PAGOSHARD", "STYGIAD",
                "HARPELLE", "KOLOSSARD", "PAGOSHARD", "NIFLAKE", "PAGOSHARD", "KRYOPUFF"]),
+    # Boreas's ridge (2026-11-18): the wind-scoured spine between the Glacier and 3F
+    "MAP_ASCENT_WIND_RIDGE": dict(label="gAscent_WindRidge", band=(59, 63), rate=10,
+        Morning=["BORAPTERYX", "KERASTORM", "BORAPTERYX", "CHIONYAD", "KRYSTOLOS", "BASILOPS",
+                 "PAGOSHARD", "KOLOSSARD", "BORAPTERYX", "PAGOSHARD", "AETARCH", "NIFLAKE"],
+        Night=["BORAPTERYX", "HARPELLE", "STARKOS", "CHIONYAD", "KRYSTOLOS", "HARPELLE",
+               "PAGOSHARD", "KOLOSSARD", "BORAPTERYX", "PAGOSHARD", "STARKOS", "KRYOPUFF"],
+        rock=["PAGOSHARD", "KRYSTOLOS", "LAOLITH", "GEOGRIP", "PAGOSHARD"]),
     "MAP_ASCENT_3F": dict(label="gAscent_3F", band=(60, 64), rate=6,
         Morning=["KRYSTOLOS", "BORAPTERYX", "CHIONYAD", "KERASTORM", "HOPLEKTOR", "BORAPTERYX",
                  "KRYSTOLOS", "CHIONYAD", "BORAPTERYX", "KRYSTOLOS", "AETARCH", "CHIONYAD"],
@@ -76,8 +89,8 @@ def glacial(L):
          ("DAKROCK", L + 3, L + 4), ("DAKROCK", L + 4, L + 4)], fish_rate=20)
 
 
-WATER = {"MAP_ASCENT_ICEFALL": glacial(57), "MAP_ASCENT_ICEFALL_DEEP": glacial(59),
-         "MAP_ASCENT_GLACIER": glacial(58)}
+# The Glacier's melt pool froze over in the 2026-11-18 rebuild (its tarns are ice now).
+WATER = {"MAP_ASCENT_ICEFALL": glacial(57), "MAP_ASCENT_ICEFALL_DEEP": glacial(59)}
 
 
 def mons(species, band):

@@ -90,3 +90,12 @@ script Ascent_Icefall_EventScript_VaultDoor {
 script Ascent_Icefall_EventScript_Ichor {
     msgbox(format("The crystals here are full of light, gold at the heart.\pOld climbers said the gods bled here in the war with the Giants,\pand the blood froze where it fell."), MSGBOX_SIGN)
 }
+
+// --- the gods' easter eggs (tools/ichor/maps/ascent_eggs.py) ---
+script Ascent_Icefall_EventScript_EggHammer {
+    msgbox(format("A smith's hammer is frozen into the ice here, haft up.\pThe haft is warm. It shouldn't be. Hephaestus never could keep track of his tools."), MSGBOX_SIGN)
+}
+
+script Ascent_Icefall_EventScript_EggBoreas {
+    msgbox(format("The frost on the wall has made a face: cheeks puffed out, mid-blow.\pThe north wind came through here once and left his likeness behind."), MSGBOX_SIGN)
+}

@@ -103,3 +103,12 @@ script Ascent_1F_EventScript_Herm {
 script Ascent_1F_EventScript_CloudSign {
     msgbox(format("The road climbs into the cloud from here.\pKeep to the path. The ledges are narrow."), MSGBOX_SIGN)
 }
+
+// --- the gods' easter eggs (tools/ichor/maps/ascent_eggs.py) ---
+script Ascent_1F_EventScript_EggPanPipes {
+    msgbox(format("A set of reed pipes left on the guard's seat, seven reeds bound with wax.\pThe wind plays the eighth. Pan never could sit still for long."), MSGBOX_SIGN)
+}
+
+script Ascent_1F_EventScript_EggHermWreath {
+    msgbox(format("Someone keeps a fresh wreath on this herm, even this far up.\pThe god of travellers is owed that much by anyone climbing."), MSGBOX_SIGN)
+}

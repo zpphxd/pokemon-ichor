@@ -229,7 +229,9 @@
     "Ascent_Icefall",
     "Ascent_IcefallDeep",
     "Ascent_CrystalVault",
-    "Ascent_Glacier"
+    "Ascent_Glacier",
+    "Ascent_Snowfield",
+    "Ascent_WindRidge"
   ],
   "gMapGroup_Labyrinth": [
     "LabyrinthRing1",

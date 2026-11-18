@@ -62,6 +62,29 @@ Ascent_SetupScript:
     releaseall
     end
 
+@ A quick start for working on the upper climb (ASCENT_FROM=ridge): the floors below
+@ are already climbed and their seals open.
+    test_header Ascent_RidgeHeader, Ascent_RidgeScript
+Ascent_RidgeScript:
+    lockall
+    setvar VAR_TEMP_F, 1
+    setflag FLAG_ICHOR_GLACIER_GATE_OPEN
+    setflag FLAG_ICHOR_ICEFALL_GRATE_OPEN
+    warp MAP_ASCENT_WIND_RIDGE, 22, 44
+    waitstate
+    releaseall
+    end
+
+    test_header Ascent_TopHeader, Ascent_TopScript
+Ascent_TopScript:
+    lockall
+    setvar VAR_TEMP_F, 1
+    setflag FLAG_ICHOR_WINDRIDGE_BAR_UP
+    warp MAP_ASCENT_3F, 22, 60
+    waitstate
+    releaseall
+    end
+
 @ Daylight for the review screenshots (Astyra releases any held hour on arrival).
     test_header Ascent_DayHeader, Ascent_DayScript
 Ascent_DayScript:

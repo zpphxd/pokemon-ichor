@@ -22,3 +22,9 @@ Builder: `tools/ichor/maps/ascent.py` (aethos + Skiron, 48×40). The brief and t
 ## Renders
 
 The 2026-11-18 pass made no changes to this floor (its passes are LEAGUE.md's); its render is `img/ascent_1f_after.png`.
+
+## Plan (2026-11-18 rework)
+
+- **Puzzle (the first, gentle):** the Girdle's drum on the bend and Demeter's Sickle at the thicket, as before: one relic each, readable at a glance.
+- **Easter eggs:** Sisyphus's boulder is upstairs on the snowfield; here, **the stele of Hermes at the road end** (a herm with a fresh wreath: "someone keeps the god of travellers in flowers, even this far up") and **Pan's pipes** left on the guard's seat over the gulf (a hidden Soothe Bell: "seven reeds, and the wind plays the eighth").
+- **Post-game gate:** the rockfall on the Tempe road (east edge), as before.

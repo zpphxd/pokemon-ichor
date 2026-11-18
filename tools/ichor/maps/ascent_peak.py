@@ -130,6 +130,9 @@ def build_summit(PLANS=None):
     g.accents(salt=84, rate=7)
     g.person("ARISTEIDES", "ELDER_M", ARCHON[0], ARCHON[1], "Aristeides", facing="DOWN",
              flag="FLAG_ICHOR_HIDE_ARCHON_SUMMIT")
+    # Zeus himself in painted marble beside his altar: the thunderbolt, the eagle
+    # (tools/ichor/art/statues.py, to the user's reference)
+    g.person("STATUE_ZEUS", "OBJ_EVENT_GFX_ICHOR_STATUE_ZEUS", 17, 13, "StatueZeus", movement="MOVEMENT_TYPE_NONE")
     cl = cloud["ids"]
     g.save([cl[0][0] | (1 << 10), cl[0][1] | (1 << 10), cl[1][0] | (1 << 10), cl[1][1] | (1 << 10)],
            dict(map_type="MAP_TYPE_ROUTE", weather="WEATHER_SUNNY", show_map_name=True, allow_cycling=False,

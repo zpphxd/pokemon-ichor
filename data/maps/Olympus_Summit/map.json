@@ -28,6 +28,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Olympus_Summit_EventScript_Aristeides",
       "flag": "FLAG_ICHOR_HIDE_ARCHON_SUMMIT"
+    },
+    {
+      "local_id": "LOCALID_OLYMPUS_SUMMIT_STATUE_ZEUS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_STATUE_ZEUS",
+      "x": 17,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Olympus_Summit_EventScript_StatueZeus",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -97,6 +111,22 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "Olympus_Summit_EventScript_Stelai"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Summit_EventScript_EggCup"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Olympus_Summit_EventScript_EggFeather"
     }
   ],
   "ichor_kind": "interior"

@@ -3009,3 +3009,62 @@ static const struct SubspriteTable sOamTables_48x48[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass2), // long grass
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass1) // long grass priority 1
 };
+// Ichor: the statues of the Twelve (32x64)
+static const struct Subsprite sOamTable_32x64_0[] = {
+    {
+        .x = -16,
+        .y = -32,
+        SUBSPRITE_SHAPE(32, 64),
+        .tileOffset = 0,
+        .priority = 2
+    }
+};
+
+static const struct Subsprite sOamTable_32x64_1[] = {
+    {
+        .x = -16,
+        .y = -32,
+        SUBSPRITE_SHAPE(32, 64),
+        .tileOffset = 0,
+        .priority = 1
+    }
+};
+
+static const struct Subsprite sOamTable_32x64_2[] = {
+    {
+        .x = -16,
+        .y = -32,
+        SUBSPRITE_SHAPE(32, 64),
+        .tileOffset = 0,
+        .priority = 2
+    }
+};
+
+static const struct Subsprite sOamTable_32x64_3[] = {
+    {
+        .x = -16,
+        .y = -32,
+        SUBSPRITE_SHAPE(32, 64),
+        .tileOffset = 0,
+        .priority = 2
+    }
+};
+
+static const struct Subsprite sOamTable_32x64_4[] = {
+    {
+        .x = -16,
+        .y = -32,
+        SUBSPRITE_SHAPE(32, 64),
+        .tileOffset = 0,
+        .priority = 1
+    }
+};
+
+static const struct SubspriteTable sOamTables_32x64[] = {
+    {},
+    {ARRAY_COUNT(sOamTable_32x64_0), sOamTable_32x64_0},
+    {ARRAY_COUNT(sOamTable_32x64_1), sOamTable_32x64_1},
+    {ARRAY_COUNT(sOamTable_32x64_2), sOamTable_32x64_2},
+    {ARRAY_COUNT(sOamTable_32x64_3), sOamTable_32x64_3},
+    {ARRAY_COUNT(sOamTable_32x64_4), sOamTable_32x64_4}
+};

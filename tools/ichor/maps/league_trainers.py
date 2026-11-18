@@ -63,6 +63,14 @@ ASCENT = [
         ("Kaprodon", 62, None, ["Crunch", "Earthquake", "Head Smash", "Stone Edge"]),
         ("Kolossard", 63, None, ["Iron Head", "Earthquake", "Rock Slide", "Iron Defense"])]),
     # the Icefall: the Ice band begins
+    # the Leuke snowfield (2026-11-18): Leukippos and Theonoe hold the cut stair together
+    ("SNOWFIELD_LEUKIPPOS", "LEUKIPPOS", "Hoplite", "Hoplite", "Male", "Male", BASIC, [
+        ("Hoplomex", 62, None, ["X-Scissor", "Brick Break", "Swords Dance", "Rock Slide"]),
+        ("Borapteryx", 62, None, ["Blizzard", "Hurricane", "Ice Shard", "Roost"]),
+        ("Kourodin", 63, None, ["Iron Head", "Drain Punch", "Bullet Punch", "Ice Punch"])]),
+    ("SNOWFIELD_THEONOE", "THEONOE", "Acolyte", "Acolyte F", "Female", "Female", BASIC, [
+        ("Chionyad", 62, None, ["Ice Beam", "Moonblast", "Calm Mind", "Aurora Veil"]),
+        ("Himerow", 63, None, ["Moonblast", "Air Slash", "Roost", "Calm Mind"])]),
     ("ICEFALL_CHIONE", "CHIONE", "Acolyte", "Acolyte F", "Female", "Female", SMART, [
         ("Chionyad", 63, "Never-Melt Ice", ["Freeze-Dry", "Moonblast", "Aurora Veil", "Calm Mind"]),
         ("Borapteryx", 63, None, ["Blizzard", "Hurricane", "Ice Shard", "Roost"]),
@@ -91,6 +99,14 @@ ASCENT = [
         ("Borapteryx", 65, "Sharp Beak", ["Blizzard", "Hurricane", "Ice Shard", "Roost"]),
         ("Chionyad", 65, "Light Clay", ["Freeze-Dry", "Moonblast", "Aurora Veil", "Calm Mind"]),
         ("Krystolos", 66, "Never-Melt Ice", ["Icicle Crash", "Stone Edge", "Earthquake", "Stealth Rock"])]),
+    # Boreas's ridge (2026-11-18): Oreithyia and Kalais on the narrow spine
+    ("WINDRIDGE_OREITHYIA", "OREITHYIA", "Augur", "Augur", "Female", "Female", SMART, [
+        ("Borapteryx", 65, "Sharp Beak", ["Blizzard", "Hurricane", "Ice Shard", "Tailwind"]),
+        ("Chionyad", 65, "Leftovers", ["Freeze-Dry", "Moonblast", "Aurora Veil", "Calm Mind"]),
+        ("Sophowl", 66, None, ["Psychic", "Hurricane", "Calm Mind", "Roost"])]),
+    ("WINDRIDGE_KALAIS", "KALAIS", "Hoplite", "Hoplite", "Male", "Male", SMART, [
+        ("Kerastorm", 65, "Magnet", ["Thunderbolt", "Moonblast", "Thunder Wave", "Charge Beam"]),
+        ("Krystolos", 66, "Sitrus Berry", ["Icicle Crash", "Stone Edge", "Earthquake", "Stealth Rock"])]),
     # 3F, above the cloud: a pair at each stair
     ("ASCENT_STHENELOS", "STHENELOS", "Hoplite", "Hoplite", "Male", "Male", SMART, [
         ("Dorydrake", 65, "Lum Berry", ["Dragon Claw", "Close Combat", "Dragon Dance", "Iron Head"]),

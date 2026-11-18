@@ -205,8 +205,8 @@
       "x": 31,
       "y": 4,
       "elevation": 0,
-      "dest_map": "MAP_ASCENT_ICEFALL",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_ASCENT_SNOWFIELD",
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],
@@ -254,6 +254,32 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Ascent_2F_EventScript_Cookfire"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_2F_EventScript_EggFennel"
+    },
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 27,
+      "elevation": 3,
+      "item": "ITEM_CHARCOAL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_CHARCOAL",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Ascent_2F_EventScript_EggJar"
     }
   ],
   "ichor_kind": "dungeon"

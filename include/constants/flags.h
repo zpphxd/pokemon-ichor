@@ -2398,6 +2398,23 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_SKIRITAI_MOUTH   (FLAG_ICHOR_GENERAL2_START + 0x16F) // Ichor: Stymphalia road: inside the low mouth
 #define FLAG_ICHOR_ITEM_R27_TM_STEEL_WING       (FLAG_ICHOR_GENERAL2_START + 0x170) // Ichor: Stymphalia road: the watchtower's parapet (the Girdle)
 #define FLAG_ICHOR_GOT_R26_WRESTLERS_BAND       (FLAG_ICHOR_GENERAL2_START + 0x171) // Ichor: Stymphalia road: the island's wrestler gave her headband
+#define FLAG_ICHOR_ITEM_SNOWFIELD_MAX_ELIXIR    (FLAG_ICHOR_GENERAL2_START + 0x172) // Ichor: the Leuke snowfield: Max Elixir on the mouth's path
+#define FLAG_ICHOR_ITEM_SNOWFIELD_ULTRA_BALL    (FLAG_ICHOR_GENERAL2_START + 0x173) // Ichor: the Leuke snowfield: Herakles Ball in the east corridor
+#define FLAG_ICHOR_ITEM_WINDRIDGE_QUICK_CLAW    (FLAG_ICHOR_GENERAL2_START + 0x174) // Ichor: Boreas's ridge: Hermes's sandals (Quick Claw)
+#define FLAG_ICHOR_ITEM_WINDRIDGE_FULL_RESTORE  (FLAG_ICHOR_GENERAL2_START + 0x175) // Ichor: Boreas's ridge: Full Restore past the bar
+#define FLAG_ICHOR_WINDRIDGE_BAR_UP             (FLAG_ICHOR_GENERAL2_START + 0x176) // Ichor: Boreas's ridge: two drums on two plates, the bar is off the last stair
+#define FLAG_ICHOR_HIDDEN_ITEM_SNOWFIELD_SCOPE_LENS (FLAG_ICHOR_GENERAL2_START + 0x177) // Ichor: the snowfield: at the foot of Artemis's fir
+#define FLAG_ICHOR_HIDDEN_ITEM_SNOWFIELD_NEVER_MELT_ICE (FLAG_ICHOR_GENERAL2_START + 0x178) // Ichor: the snowfield: under the Icefall's mouth
+#define FLAG_ICHOR_HIDDEN_ITEM_WINDRIDGE_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x179) // Ichor: Boreas's ridge: by the lyre rock
+#define FLAG_ICHOR_HIDDEN_ITEM_WINDRIDGE_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x17A) // Ichor: Boreas's ridge: the eagle's crag
+#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_PRETTY_FEATHER (FLAG_ICHOR_GENERAL2_START + 0x17B) // Ichor: the Glacier: Hera's peacock feather
+#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_HARD_STONE (FLAG_ICHOR_GENERAL2_START + 0x17C) // Ichor: the Glacier: under Ares's shield
+#define FLAG_ICHOR_HIDDEN_ITEM_ICEFALL_HARD_STONE (FLAG_ICHOR_GENERAL2_START + 0x17D) // Ichor: the Icefall: Hephaestus's hammer in the ice
+#define FLAG_ICHOR_HIDDEN_ITEM_DEEP_RELIC_COPPER (FLAG_ICHOR_GENERAL2_START + 0x17E) // Ichor: the Deep: Charon's obol
+#define FLAG_ICHOR_HIDDEN_ITEM_VAULT_SWEET_APPLE (FLAG_ICHOR_GENERAL2_START + 0x17F) // Ichor: the Crystal Vault: Eris's golden apple
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT2_CHARCOAL (FLAG_ICHOR_GENERAL2_START + 0x180) // Ichor: Ascent 2F: Prometheus's fennel stalk
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT1_SOOTHE_BELL (FLAG_ICHOR_GENERAL2_START + 0x181) // Ichor: Ascent 1F: Pan's pipes
+#define FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_LAUREL_SPRIG (FLAG_ICHOR_GENERAL2_START + 0x182) // Ichor: Ascent 3F: the laurel on Hestia's plinth
 #define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
 #define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
 #define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted
@@ -2450,14 +2467,14 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_VAULT_NEVER_MELT_ICE (FLAG_ICHOR_GENERAL2_START + 0x1F1) // Ichor: the Crystal Vault: in the cracked geode
 #define FLAG_ICHOR_HIDDEN_ITEM_VAULT_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1F2) // Ichor: the Crystal Vault: under the crack in the roof
 #define FLAG_ICHOR_HIDDEN_ITEM_DEEP_BIG_PEARL   (FLAG_ICHOR_GENERAL2_START + 0x1F3) // Ichor: the Icefall's deep: in the drowned shrine's bowl
-#define FLAG_ICHOR_ITEM_DEEP_ASSAULT_VEST       (FLAG_ICHOR_GENERAL2_START + 0x1F4) // Ichor: Ichor: the Icefall deep: Assault Vest on the meltwater ledge (the Horn of Achelous)
-#define FLAG_ICHOR_HIDDEN_ITEM_DEEP_RELIC_GOLD  (FLAG_ICHOR_GENERAL2_START + 0x1F5) // Ichor: Ichor: the Icefall deep: a Gold Stater in the meltwater ledge snow (the Horn)
-#define FLAG_ICHOR_ITEM_GLACIER_CHOICE_SCARF    (FLAG_ICHOR_GENERAL2_START + 0x1F6) // Ichor: Ichor: the Glacier: Choice Scarf in the eyrie (Daedalus Wings)
-#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1F7) // Ichor: Ichor: the Glacier: Comet Shard in the eyrie nest (Daedalus Wings)
-#define FLAG_ICHOR_ITEM_VAULT_CHOICE_SPECS      (FLAG_ICHOR_GENERAL2_START + 0x1F8) // Ichor: Ichor: the Crystal Vault: Choice Specs on the crack ledge (Ariadne Thread from the Glacier)
-#define FLAG_ICHOR_HIDDEN_ITEM_VAULT_BOTTLE_CAP (FLAG_ICHOR_GENERAL2_START + 0x1F9) // Ichor: Ichor: the Crystal Vault: a Pythian Laurel on the crack ledge (Ariadne Thread)
-#define FLAG_ICHOR_ITEM_ASCENT3_CHOICE_BAND     (FLAG_ICHOR_GENERAL2_START + 0x1FA) // Ichor: Ichor: Ascent 3F: Choice Band in the watch-post stores (the Helm of Darkness)
-#define FLAG_ICHOR_ITEM_ASCENT3_WEAKNESS_POLICY (FLAG_ICHOR_GENERAL2_START + 0x1FB) // Ichor: Ichor: Ascent 3F: Weakness Policy in the watch-post stores (the Helm of Darkness)
+#define FLAG_ICHOR_ITEM_DEEP_ASSAULT_VEST       (FLAG_ICHOR_GENERAL2_START + 0x1F4) // Ichor: the Icefall deep: Assault Vest on the meltwater ledge (the Horn of Achelous)
+#define FLAG_ICHOR_HIDDEN_ITEM_DEEP_RELIC_GOLD  (FLAG_ICHOR_GENERAL2_START + 0x1F5) // Ichor: the Icefall deep: a Gold Stater in the meltwater ledge snow (the Horn)
+#define FLAG_ICHOR_ITEM_GLACIER_CHOICE_SCARF    (FLAG_ICHOR_GENERAL2_START + 0x1F6) // Ichor: the Glacier: Choice Scarf in the eyrie (Daedalus Wings)
+#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1F7) // Ichor: the Glacier: Comet Shard in the eyrie nest (Daedalus Wings)
+#define FLAG_ICHOR_ITEM_VAULT_CHOICE_SPECS      (FLAG_ICHOR_GENERAL2_START + 0x1F8) // Ichor: the Crystal Vault: Choice Specs on the crack ledge (Ariadne Thread from the Glacier)
+#define FLAG_ICHOR_HIDDEN_ITEM_VAULT_BOTTLE_CAP (FLAG_ICHOR_GENERAL2_START + 0x1F9) // Ichor: the Crystal Vault: a Pythian Laurel on the crack ledge (Ariadne Thread)
+#define FLAG_ICHOR_ITEM_ASCENT3_CHOICE_BAND     (FLAG_ICHOR_GENERAL2_START + 0x1FA) // Ichor: Ascent 3F: Choice Band in the watch-post stores (the Helm of Darkness)
+#define FLAG_ICHOR_ITEM_ASCENT3_WEAKNESS_POLICY (FLAG_ICHOR_GENERAL2_START + 0x1FB) // Ichor: Ascent 3F: Weakness Policy in the watch-post stores (the Helm of Darkness)
 #define FLAG_ICHOR_ERYMANTHIAN_BOAR             (FLAG_ICHOR_GENERAL2_START + 0x200) // Ichor: Erymanthian Preserve: the Erymanthian Boar caught (Labor 4, LABORS.md); opens the Preserve's thicket
 #define FLAG_ICHOR_TURNING_QUIET                (FLAG_ICHOR_GENERAL2_START + 0x4E6) // Ichor: The Turning: no wild encounters and no trainer sight while the house turns (WE_FLAG_NO_ENCOUNTER, OW_FLAG_NO_TRAINER_SEE)
 #define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion

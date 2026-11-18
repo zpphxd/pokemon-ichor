@@ -44,3 +44,17 @@ The passes (`img/olympus_seat_<god>_pass1.png`, `_pass2.png`):
 - **Hera.** Pass 1: the floor read as brick and the fan was small. Pass 2: a plum checker with gold
   studs, a purple-and-gold dais. Pass 3: the fan widened to seven cells behind the throne, urns along
   the walls to break the long straight edge.
+
+## Plan (2026-11-18 rework): the grand Propylaia
+
+The Propylaia is the League's lobby, the calm before the Pantheon: grand but welcoming, like the Pokémon League's lobby with its Center and Mart before the Elite Four.
+
+- **Bigger:** a wide columned hall on gTileset_Civic, with colonnades down both sides, statues in the side aisles, braziers either side of the inner door and the great mosaic in the floor.
+- **The healer:** the standard Asclepeion station (`civic_rooms.station_cells`) with the Pithos beside it (`pithos_cells`). She sets the respawn here (`HEAL_LOCATION_OLYMPUS_PROPYLAIA`).
+- **The merchant:** the Agora's stall, with the endgame stock: Full Restore, Max Potion, Hyper Potion, Revive, Max Revive, Full Heal, Max Repel, and the Herakles and Theseus Balls (BALANCE's League row, 66–75).
+- **The herm:** outside by the door on 3F, as before.
+
+## Built (2026-11-18)
+
+- `Olympus_Propylaia` is a 27x17 hall on gTileset_Civic: the Asclepeion station and the Pithos (west), the merchant's stall (east) with the League stock (Herakles, Hermes, Chronos and Nyx Balls; Full Restore, Max and Hyper Potions, Revive, Max Revive, Full Heal, Max Repel), two colonnades, the heroes' statues, Hestia's hearth between braziers, a pilgrim resting by it, the guards at the inner door. Render `img/olympus_propylaia_after.png`.
+- The Twelve's statues outside (`tools/ichor/art/statues.py`) and Zeus at the summit share one object palette (`OBJ_EVENT_PAL_TAG_ICHOR_STATUE`).

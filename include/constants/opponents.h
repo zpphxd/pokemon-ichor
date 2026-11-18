@@ -383,7 +383,13 @@
 #define TRAINER_ICHOR_SKIRITAI_KRYPTE              1433
 #define TRAINER_ICHOR_SKIRITAI_ARKTOS              1434
 // Ichor: the road north from Lakonia end
-#define TRAINERS_END_ACT3 1435 // the road north from Lakonia's 1434 is Act III's highest
+// The Ascent's outdoor snow floors (2026-11-18): the League's 460-499 were full, so
+// they take the next of world-act3's 1404-1503.
+#define TRAINER_ICHOR_SNOWFIELD_LEUKIPPOS          1435
+#define TRAINER_ICHOR_SNOWFIELD_THEONOE            1436
+#define TRAINER_ICHOR_WINDRIDGE_OREITHYIA          1437
+#define TRAINER_ICHOR_WINDRIDGE_KALAIS             1438
+#define TRAINERS_END_ACT3 1439 // the Ascent's snow floors' 1438 is Act III's highest
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's
 // claims from 320 up (tools/ichor/claim_ranges.md): the Ascent, the Pantheon, the Archon.

@@ -1,12 +1,14 @@
-// The Propylaia: the Pantheon's gatehouse, built round Hestia's hearth
-// (design/LEAGUE.md). The League's healer and merchant, and the Archon's guard
-// at the inner door (Emerald's EverGrandeCity_PokemonLeague_1F, adapted).
+// The Propylaia: the Pantheon's gatehouse behind the facade on the cliff top
+// (design/maps/Olympus_Pantheon.md). The League's lobby, the calm before the
+// Pantheon: the standard Asclepeion healer and the Pithos, the merchant's stall,
+// Hestia's hearth, and the Archon's guard at the inner door (Emerald's
+// EverGrandeCity_PokemonLeague_1F, adapted).
 
 mapscripts Olympus_Propylaia_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_OLYMPUS_PROPYLAIA)
         if (flag(FLAG_ICHOR_PANTHEON_ENTERED)) {
-            setobjectxyperm(LOCALID_OLYMPUS_PROPYLAIA_GUARD, 7, 3)
+            setobjectxyperm(LOCALID_OLYMPUS_PROPYLAIA_GUARD, 12, 2)
         }
     }
 }
@@ -22,19 +24,26 @@ script Olympus_Propylaia_EventScript_Healer {
 script Olympus_Propylaia_EventScript_Merchant {
     lock
     faceplayer
-    message(format("Last stall before the gods. Prices are high. So is the altitude."))
+    message(format("Last stall before the gods. Everything a challenger needs, and nothing they don't.\p"
+                   "Prices are high. So is the altitude."))
     waitmessage
     pokemart(Olympus_Propylaia_Stock)
     release
 }
 
+// The League's stock (BALANCE: the Pantheon 66-72, the Archon 71-75): the best
+// healing, Max Revives, and the best balls money buys.
 mart Olympus_Propylaia_Stock {
     ITEM_ULTRA_BALL
-    ITEM_HYPER_POTION
-    ITEM_MAX_POTION
+    ITEM_QUICK_BALL
+    ITEM_TIMER_BALL
+    ITEM_DUSK_BALL
     ITEM_FULL_RESTORE
-    ITEM_FULL_HEAL
+    ITEM_MAX_POTION
+    ITEM_HYPER_POTION
     ITEM_REVIVE
+    ITEM_MAX_REVIVE
+    ITEM_FULL_HEAL
     ITEM_MAX_REPEL
 }
 
@@ -97,4 +106,9 @@ script Olympus_Propylaia_EventScript_Stele {
 
 script Olympus_Propylaia_EventScript_Hearth {
     msgbox(format("Hestia's hearth. A hearth isn't the fire. It's what you come back to."), MSGBOX_SIGN)
+}
+
+script Olympus_Propylaia_EventScript_Pilgrim {
+    msgbox(format("I climbed all that way just to sit by Hestia's fire.\p"
+                  "Everybody else goes through that door. I'm happy here."), MSGBOX_NPC)
 }

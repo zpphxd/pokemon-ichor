@@ -301,6 +301,8 @@ data/maps/ErymanthosPreserve_Meadow/scripts.inc
 data/maps/ErymanthosPreserve_River/scripts.inc
 data/maps/ErymanthosPreserve_Thicket/scripts.inc
 data/maps/ErymanthosPreserve_Cave/scripts.inc
+data/maps/Ascent_Snowfield/scripts.inc
+data/maps/Ascent_WindRidge/scripts.inc
 data/maps/Daphni_Sanctuary/scripts.inc
 data/maps/Daphni_PilgrimsRest/scripts.inc
 data/maps/Daphni_LaurelHouse/scripts.inc
