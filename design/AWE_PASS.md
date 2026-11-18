@@ -464,13 +464,13 @@ Major sanctuaries beyond the Laurels:
 
 ---
 
-## 4. Ruins style guide (proposed STYLE.md §4.8)
+## 4. Ruins style guide (proposed STYLE.md §4.9)
 
 > Ichor's ruins are **an older world lying down in a living one**. They're
 > what makes Aethos feel ancient and unexplored. A ruin is mostly horizontal,
 > partly buried and overgrown, and always tells you what it used to be.
 
-### 4.8.1 How Ichor ruins look
+### 4.9.1 How Ichor ruins look
 - **Fallen beats standing, about 3 to 1.**
   - Columns lie as **separated drums** (3–4 discs in a line, slightly
     offset), not as whole shafts.
@@ -508,7 +508,7 @@ Major sanctuaries beyond the Laurels:
     Make it the dungeon's teaching mechanic for darkness or pushing, where it
     fits.
 
-### 4.8.2 The kit
+### 4.9.2 The kit
 Draw it once as a Porytiles source sheet, about 36 metatiles and 80–110
 tiles, in `tools/ichor/art/ruins_kit/`. Copy only the subset each map uses
 into its secondary.
@@ -531,7 +531,7 @@ seam-safe pieces usable on every exterior:
 
 Then any route can scatter a ruin without touching its secondary.
 
-### 4.8.3 Where to apply it
+### 4.9.3 Where to apply it
 | Place | Use |
 |---|---|
 | **Kronion Hill's shrine** | The shrine around C5's dig: a stylobate outline and a plinth-with-feet where the Kronos statue stood |
@@ -565,7 +565,7 @@ standing usage rule).
 | 3 | **Kaldera rebuild and the bronze man (C2):** a new `kaldera` secondary; ring cliffs, rim town, stair, islet and giant, the ash-cliff door | `data/tilesets/secondary/kaldera/`, `data/layouts/Kaldera/`, `data/maps/Kaldera/` | A |
 | 4 | **Hermes Empolaios on the mole (C3),** plus the Emporion temple podium and the Long Walls | `data/tilesets/secondary/isthmos/`, `emporion/`; `EmporionHarbor`, `EmporionCity` layouts and maps | B |
 | 5 | **Zeus enthroned at the Summit (C4):** a new `olympus_summit` set; the map extended 12 rows | `olympus_summit/` set, the `Olympus_Summit` layout and map, `tools/ichor/maps/ascent_summit.py` | **After the Ascent helper lands** |
-| 6 | **The ruins kit:** the source sheet, the 4-piece primary micro-kit, and STYLE.md §4.8 from §4 above | `tools/ichor/art/ruins_kit/`, `data/tilesets/primary/aethos/` (only the 20 free tiles), `design/STYLE.md` | B |
+| 6 | **The ruins kit:** the source sheet, the 4-piece primary micro-kit, and STYLE.md §4.9 from §4 above (§4.8 is now the architecture section) | `tools/ichor/art/ruins_kit/`, `data/tilesets/primary/aethos/` (only the 20 free tiles), `design/STYLE.md` | B |
 | 7 | **Delphoi grandeur:** the polygonal wall and a wider temple, the Naxian Sphinx, the Charioteer, distinct treasuries; the Temple of Apollo interior rebuilt around the adyton | `delphoi/`, `temple_apollo/`, the `Delphoi` and `Delphoi_TempleOfApollo` layouts and maps | B |
 | 8 | **Kaldera's interiors:** a new `temple_hephaestus` set and the forge-temple (Laurel 6 puzzle kept); the Telchines Forge as a forge cave with anvils and lava channels | `temple_hephaestus/`, `Kaldera_TempleOfHephaestus`, `Kaldera_TelchinesForge` | C (after 3, for a matching look) |
 | 9 | **The Lord of Time's hall (C6):** the summit platform, 12 Horai, the clepsydra that stops | `stair_of_hours/` (or a new `stair_summit/`), `StairOfHours` | C |

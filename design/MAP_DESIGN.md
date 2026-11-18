@@ -2,6 +2,8 @@
 
 Every Ichor map follows these rules. They come from how Game Freak builds Gen 3 maps, tuned for Aethos. A map that looks beautiful but breaks them plays badly. A map that follows them but looks flat isn't done either; see the "great" checklist at the end.
 
+**Architecture and statues.** Every building, temple, colonnade and statue on a map follows `design/STYLE.md` §4.8: Gen 3 scale rules (roof height, landmark footprint, shadows, cliffs), correct Greek forms (orders, krepidoma, pediments, temenos and propylon, stoas framing the agora), the 16×16 rules, and the statue standard set by `design/art/refs/statue_zeus_reference.png`. Draw columns and entablatures with `tools/ichor/art/columns.py` and plinths with `astyra_statues.plinth_3q`; `tools/ichor/maps/astyra_capital.py` and `design/awe/img/` are the worked example.
+
 ## 1. Routes
 
 ### Grass is the route's heartbeat
