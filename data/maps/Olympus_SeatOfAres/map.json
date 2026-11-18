@@ -47,5 +47,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "ichor_kind": "interior"
 }

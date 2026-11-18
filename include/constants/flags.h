@@ -2338,6 +2338,14 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_VAULT_NEVER_MELT_ICE (FLAG_ICHOR_GENERAL2_START + 0x1F1) // Ichor: the Crystal Vault: in the cracked geode
 #define FLAG_ICHOR_HIDDEN_ITEM_VAULT_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x1F2) // Ichor: the Crystal Vault: under the crack in the roof
 #define FLAG_ICHOR_HIDDEN_ITEM_DEEP_BIG_PEARL   (FLAG_ICHOR_GENERAL2_START + 0x1F3) // Ichor: the Icefall's deep: in the drowned shrine's bowl
+#define FLAG_ICHOR_ITEM_DEEP_ASSAULT_VEST       (FLAG_ICHOR_GENERAL2_START + 0x1F4) // Ichor: Ichor: the Icefall deep: Assault Vest on the meltwater ledge (the Horn of Achelous)
+#define FLAG_ICHOR_HIDDEN_ITEM_DEEP_RELIC_GOLD  (FLAG_ICHOR_GENERAL2_START + 0x1F5) // Ichor: Ichor: the Icefall deep: a Gold Stater in the meltwater ledge snow (the Horn)
+#define FLAG_ICHOR_ITEM_GLACIER_CHOICE_SCARF    (FLAG_ICHOR_GENERAL2_START + 0x1F6) // Ichor: Ichor: the Glacier: Choice Scarf in the eyrie (Daedalus Wings)
+#define FLAG_ICHOR_HIDDEN_ITEM_GLACIER_COMET_SHARD (FLAG_ICHOR_GENERAL2_START + 0x1F7) // Ichor: Ichor: the Glacier: Comet Shard in the eyrie nest (Daedalus Wings)
+#define FLAG_ICHOR_ITEM_VAULT_CHOICE_SPECS      (FLAG_ICHOR_GENERAL2_START + 0x1F8) // Ichor: Ichor: the Crystal Vault: Choice Specs on the crack ledge (Ariadne Thread from the Glacier)
+#define FLAG_ICHOR_HIDDEN_ITEM_VAULT_BOTTLE_CAP (FLAG_ICHOR_GENERAL2_START + 0x1F9) // Ichor: Ichor: the Crystal Vault: a Pythian Laurel on the crack ledge (Ariadne Thread)
+#define FLAG_ICHOR_ITEM_ASCENT3_CHOICE_BAND     (FLAG_ICHOR_GENERAL2_START + 0x1FA) // Ichor: Ichor: Ascent 3F: Choice Band in the watch-post stores (the Helm of Darkness)
+#define FLAG_ICHOR_ITEM_ASCENT3_WEAKNESS_POLICY (FLAG_ICHOR_GENERAL2_START + 0x1FB) // Ichor: Ichor: Ascent 3F: Weakness Policy in the watch-post stores (the Helm of Darkness)
 #define FLAG_ICHOR_ARRIVED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F0) // Ichor: Lakonia: III-5A, landed at Gytheion
 #define FLAG_ICHOR_VISITED_GYTHEION             (FLAG_ICHOR_GENERAL2_START + 0x4F1) // Ichor: Lakonia: Gytheion visited (fly target)
 #define FLAG_ICHOR_GYTHEION_DUSK                (FLAG_ICHOR_GENERAL2_START + 0x4F2) // Ichor: Lakonia: III-5B, the fisherman and Kleon's helmet

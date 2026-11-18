@@ -1,8 +1,143 @@
 {
  "tileset": "gTileset_Chion",
  "primary": "gTileset_Aethos",
- "tiles_used": 403,
+ "tiles_used": 493,
  "pieces": [
+  {
+   "key": "altar_zeus",
+   "title": "The great ash altar of Zeus, the bronze box on it",
+   "section": "summit",
+   "w": 4,
+   "h": 2,
+   "ids": [
+    [
+     736,
+     737,
+     738,
+     739
+    ],
+    [
+     744,
+     745,
+     746,
+     747
+    ]
+   ],
+   "walk": [
+    "XXXX",
+    "XXXX"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "temple_twelve",
+   "title": "The temple of the Twelve on the summit",
+   "section": "summit",
+   "w": 7,
+   "h": 5,
+   "ids": [
+    [
+     752,
+     753,
+     754,
+     755,
+     756,
+     757,
+     758
+    ],
+    [
+     760,
+     761,
+     762,
+     763,
+     764,
+     765,
+     766
+    ],
+    [
+     768,
+     769,
+     770,
+     771,
+     772,
+     773,
+     774
+    ],
+    [
+     776,
+     777,
+     778,
+     779,
+     780,
+     781,
+     782
+    ],
+    [
+     784,
+     785,
+     786,
+     787,
+     788,
+     789,
+     790
+    ]
+   ],
+   "walk": [
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXXXXXX",
+    "XXX.XXX"
+   ],
+   "notes": "",
+   "names": {
+    "door": [
+     3,
+     4
+    ]
+   },
+   "behaviors": {
+    "3,4": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "meltfall",
+   "title": "Meltwater pouring down an ice face (the Horn of Achelous climbs it)",
+   "section": "summit",
+   "w": 2,
+   "h": 3,
+   "ids": [
+    [
+     792,
+     793
+    ],
+    [
+     800,
+     801
+    ],
+    [
+     808,
+     809
+    ]
+   ],
+   "walk": [
+    "..",
+    "..",
+    ".."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_WATERFALL",
+    "0,1": "MB_WATERFALL",
+    "0,2": "MB_WATERFALL",
+    "1,0": "MB_WATERFALL",
+    "1,1": "MB_WATERFALL",
+    "1,2": "MB_WATERFALL"
+   }
+  },
   {
    "key": "crystal_s",
    "title": "A crystal cluster",

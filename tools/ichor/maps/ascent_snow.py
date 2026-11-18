@@ -11,6 +11,8 @@ design/maps/Ascent_*.md):
                        field, the Gate of the Winds (three drums, three plates)
   Ascent_3F            above the cloud line: the processional stair, the
                        gatekeeper and the Pantheon's propylaia
+  Olympus_Summit       the altar of Zeus above the cloud, the temple of the
+                       Twelve (ascent_peak.py; its scripts are hand-written)
 
 Each map writes its layout, map.json and scripts.pory. Usage:
   /usr/bin/python3 tools/ichor/maps/ascent_snow.py [--render DIR] [--tag T] [--only A,B] [--walk]
@@ -319,9 +321,11 @@ def CHION_WALL():
 
 import ascent_glacier as AG  # noqa: E402
 import ascent_summit as AS  # noqa: E402
+import ascent_peak as AP  # noqa: E402
 
 BUILDERS = {"icefall": build_icefall, "deep": lambda: AG.build_deep(PLANS), "vault": lambda: AG.build_vault(PLANS),
-            "glacier": lambda: AG.build_glacier(PLANS), "3f": lambda: AS.build_3f(PLANS)}
+            "glacier": lambda: AG.build_glacier(PLANS), "3f": lambda: AS.build_3f(PLANS),
+            "summit": lambda: AP.build_summit(PLANS)}
 
 
 def main():

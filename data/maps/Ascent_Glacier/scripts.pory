@@ -135,6 +135,59 @@ script Ascent_Glacier_EventScript_FrozenFall {
     msgbox(format("A waterfall frozen solid down the glacier's lip. A ledge above it is out of reach.\pClimbers say it runs again once the mountain has a new master."), MSGBOX_SIGN)
 }
 
+script Ascent_Glacier_EventScript_Updraft {
+    lockall
+    if (!flag(FLAG_ICHOR_GOT_DAEDALUS_WINGS)) {
+        msgbox(format("Wind roars straight up the cliff here, out of a gap in the ice.\p"
+                      "Across it, on a ledge, something has built a nest. Only wings would get you there."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("Wind roars straight up out of the gap, strong enough to lean on.\p"
+                  "Spread Daedalus's Wings and ride it across to the ledge?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_M_FLY)
+        fadescreen(FADE_TO_WHITE)
+        warpsilent(MAP_ASCENT_GLACIER, 5, 10)
+        waitstate
+    }
+    releaseall
+}
+
+script Ascent_Glacier_EventScript_UpdraftBack {
+    lockall
+    msgbox(format("The updraft howls up the gap. Ride it back across?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_M_FLY)
+        fadescreen(FADE_TO_WHITE)
+        warpsilent(MAP_ASCENT_GLACIER, 8, 10)
+        waitstate
+    }
+    releaseall
+}
+
+script Ascent_Glacier_EventScript_Crevasse {
+    lockall
+    if (!flag(FLAG_ICHOR_GOT_ARIADNES_THREAD)) {
+        msgbox(format("A crevasse goes down into the glacier, blue and then black.\p"
+                      "Gold light glints far below. With a line to tie off, you could climb down."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("A crevasse goes down into the glacier, with gold light far below.\p"
+                  "Tie off Ariadne's Thread and climb down it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_M_BIND)
+        fadescreen(FADE_TO_BLACK)
+        warpsilent(MAP_ASCENT_CRYSTAL_VAULT, 4, 2)
+        waitstate
+    }
+    releaseall
+}
+
 script Ascent_Glacier_EventScript_CloudSign {
     msgbox(format("ABOVE: THE CLOUD\nWalk on. The Pantheon is above the white."), MSGBOX_SIGN)
 }

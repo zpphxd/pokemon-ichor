@@ -12,7 +12,8 @@ local function arrive(map, what)
     L.expect(L.mapId() == map, what)
 end
 
--- The flow is under test, not the balance: the level-100 lead's stats are
+-- The flow is under test, not the balance (the Regice lead with Flash Cannon,
+-- which no Calm Mind Chionyad walls the way it walls Ice Beam): the level-100 lead's stats are
 -- raised past anything the Ascent can answer, and HP and PP come back between
 -- legs (the climb's own healing is checked at the camp).
 local function assist()
@@ -170,6 +171,26 @@ L.start(function()
     L.expect(L.getFlag(S.FLAG_GATE), "three drums on three plates open the Gate of the Winds")
     L.shot("glacier_gate_open")
     heal()
+
+    -- the upper glacier's relic puzzles: the Wings' updraft out to the eyrie and
+    -- back, then Ariadne's Thread down the crevasse to the Vault's crack ledge
+    L.talk(7, 10, { answers = { "yes" } })
+    L.settle()
+    local ex, ey = L.pos()
+    L.expect(ex == 5 and ey == 10, string.format("Daedalus's Wings ride the updraft to the eyrie (at %d,%d)", ex, ey))
+    L.shot("glacier_eyrie")
+    L.talk(6, 10, { answers = { "yes" } })
+    L.settle()
+    ex, ey = L.pos()
+    L.expect(ex == 8 and ey == 10, "the updraft carries the player back across")
+    L.talk(13, 10, { answers = { "yes" } })
+    arrive(S.MAP_VAULT, "Ariadne's Thread lowers the player down the crevasse into the Crystal Vault")
+    ex, ey = L.pos()
+    L.expect(ex == 4 and ey == 2, string.format("the Thread lands on the crack's ledge (at %d,%d)", ex, ey))
+    L.shot("vault_crack_ledge")
+    L.talk(3, 1, { answers = { "yes" } })
+    arrive(S.MAP_GLACIER, "the Thread climbs back up to the Glacier")
+    keepOffIce()
     L.leaveEdge("up", S.MAP_ASCENT_3F, true)
     L.waitUntil(function() return L.mapId() == S.MAP_ASCENT_3F end, 600, "above the cloud")
     L.settle()
@@ -204,6 +225,19 @@ L.start(function()
     local kx, ky = L.objectAt(S.LOCAL_KEEPER)
     L.expect(kx == 20, string.format("the gatekeeper steps aside off the stair's axis (at %s,%s)", kx, ky))
     L.shot("3f_gatekeeper_aside")
+    -- the watch-post: seen, the player is sent back; under the Helm, let by
+    L.go(14, 12)
+    L.step(K.LEFT)
+    L.settle()
+    local hx, hy = L.pos()
+    L.expect(hx == 14 and hy == 12, string.format("the watchman sends a seen climber back (at %d,%d)", hx, hy))
+    L.setFlag(S.FLAG_HELM_ON, true)
+    L.go(12, 12)
+    hx, hy = L.pos()
+    L.expect(hx == 12 and hy == 12, "under the Helm of Darkness the watchman lets the climber by")
+    L.shot("3f_watch_post")
+    L.go(14, 12)
+    L.setFlag(S.FLAG_HELM_ON, false)
     L.useWarp(S.MAP_PROPYLAIA)
     arrive(S.MAP_PROPYLAIA, "the processional stair ends at the Propylaia")
     L.talk(L.npc("Olympus_Propylaia_EventScript_Guard"))

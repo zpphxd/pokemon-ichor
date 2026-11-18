@@ -1833,7 +1833,7 @@
       "width": 28,
       "height": 26,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Aegina",
+      "secondary_tileset": "gTileset_Chion",
       "border_filepath": "data/layouts/Olympus_Summit/border.bin",
       "blockdata_filepath": "data/layouts/Olympus_Summit/map.bin",
       "layout_version": "emerald"

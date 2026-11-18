@@ -8,11 +8,13 @@ is the Hall of Heroes. Levels come from BALANCE.md's League row.
 ## The route through it
 
 ```
-(Tempe, not built) ··> Ascent_1F ──> Ascent_2F ──> Ascent_3F ──> Olympus_Propylaia
-   placeholder: the                cloud ledges    the snowline     the hearth, the
-   muleteer in Astyra              (the camp rest)  and the stair    healer, the door
-                                                                          │
-   Olympus_HallOfHeroes <── Olympus_Summit <── SeatOfHera <── SeatOfAthena <── SeatOfPoseidon <── SeatOfAres
+(Tempe, not built) ··> Ascent_1F ──> Ascent_2F ──> Ascent_Icefall ──> Ascent_Glacier ──> Ascent_3F ──> Olympus_Propylaia
+   placeholder: the     the slopes   cloud ledges   ice caves, the     the Giants, the     above the     the hearth, the
+   muleteer in Astyra                (camp, herm)   slide hall, seal   Gate of the Winds   cloud, keeper  healer, the door
+                                                     │      │                                                  │
+                                       IcefallDeep ──┘      └── CrystalVault (Labrys; Thread from the Glacier)  │
+                                       (Torch, Conch, Horn)                                                     │
+   Olympus_HallOfHeroes <── Olympus_Summit <── SeatOfHera <── SeatOfAthena <── SeatOfPoseidon <── SeatOfAres <──┘
    (the temple's cella)     (the altar, the Archon)
 ```
 
@@ -143,8 +145,12 @@ is the Hall of Heroes. Levels come from BALANCE.md's League row.
 
 | Map | Builder | Tilesets | Size |
 |---|---|---|---|
-| Ascent_1F, 2F, 3F | `tools/ichor/maps/ascent.py` | aethos + Skiron | 48×40, 40×44, 36×40 |
-| Olympus_* (seven) | `tools/ichor/maps/olympus.py` | Hestia, Labyrinth, Aegina, Hermes, Demeter, Aegina, Civic | 17×16 to 28×26 |
+| Ascent_1F, 2F | `tools/ichor/maps/ascent.py` | aethos + Skiron | 48×40, 40×44 |
+| Ascent_Icefall, IcefallDeep, CrystalVault, Glacier, 3F; Olympus_Summit | `tools/ichor/maps/ascent_snow.py` (with `ascent_glacier.py`, `ascent_summit.py`, `ascent_peak.py`) | aethos + Chion | 42×46, 34×28, 24×20, 44×58, 44×46, 28×26 |
+| Olympus_* (the other six) | `tools/ichor/maps/olympus.py` | Hestia, Labyrinth, Aegina, Hermes, Demeter, Civic | 15×18 to 20×21 |
+
+Each map has its own brief, finds and **Hooks for later** in `design/maps/<Map>.md` (2026-11-18).
+After running a builder that rewrites a herm map (2F, 3F), run `tools/ichor/maps/town_herms.py`.
 
 Both import `tools/ichor/maps/league_lib.py`: a plan of ground kinds, structures placed by catalog key
 and part name, stepped Skiron banks, sea cliffs, woods and `massif()` (bare rock as one wall of
@@ -178,17 +184,23 @@ Levels from BALANCE.md's League row. Every boss has Mortal (−3 levels) and Spa
 natures, smart AI) variants. Battle names are 10 characters at most (`TRAINER_NAME_LENGTH`), so
 Themistokles fights as THEMISTOK.; his dialogue uses his full name.
 
-| Seat | Team |
-|---|---|
-| **Brasidas** (Fighting) | Laolith 60 @Focus Sash, Hoplomex 60 @Life Orb, Geogrip 61 @Leftovers, Kourodin 61 @Shell Bell, Dorydrake 62 @Black Belt, **Hoplektor 63** @Sitrus Berry (Guts) |
-| **Themistokles** (Water) | Dakrock 60 @Damp Rock (Drizzle), Narkeray 60 @Expert Belt, Galenyon 61 @Sharp Beak, Telkanvil 61 @Leftovers, Trybdis 62 @Rocky Helmet, **Hexylla 63** @Mystic Water |
-| **Hypatia** (Psychic) | Enigmaw 60 @Expert Belt, Mantipod 60 @Wise Glasses, Melisseer 61 @Sitrus Berry, Pithound 61 @Leftovers (Unaware), Amnoze 62 @Lum Berry, **Sophowl 63** @Twisted Spoon |
-| **Olympias** (Dragon) | Pythoros 61 @Leftovers, Stachypter 61 @Miracle Seed, Persenyx 61 @Sitrus Berry (Hera's pomegranate), Kynoketos 62 @Dragon Fang, Melodrakon 62 @Rocky Helmet, **Lernathan 64** @Life Orb |
-| **Aristeides** (the Archon) | Lebetron 65 @Magnet, Krystolos 65 @Never-Melt Ice, Elektear 65 @Leftovers, Kerastorm 66 @Sitrus Berry, Sepivolt 66 @Expert Belt, **Aetarch 67** @Life Orb |
+Raised 2026-11-17 for always-on team-wide EXP (BALANCE.md's League row). Hero lists below;
+Mortal is the same at −3 with no items, Spartan the same with 31 IVs and full spreads.
 
-The Ascent's eleven (56–62): Philon, Agathe, Dexios and Kallias (ex-Titanborn), Gorgo (an ex-Titan
-admin), Lampon and Sthenelos (the Archon's guard), Theano (an augur with no omens), Nikias (a
-pilgrim), Eirene and Melite (acolytes).
+| Boss | Team |
+|---|---|
+| **Polydamas** (the gatekeeper, 3F) | Nemeleon 67 @Sitrus Berry, Taurivet 67 @Charcoal, Kaprodon 68 @Life Orb, Geogrip 68 @Leftovers, **Hoplektor 69** @Flame Orb (Guts) |
+| **Brasidas** (Fighting) | Laolith 66 @Focus Sash, Hoplomex 66 @Life Orb, Geogrip 67 @Leftovers, Kourodin 67 @Shell Bell, Dorydrake 68 @Lum Berry (Moxie), **Hoplektor 69** @Flame Orb (Guts) |
+| **Themistokles** (Water) | Dakrock 67 @Damp Rock (Drizzle), Narkeray 67 @Expert Belt, Galenyon 68 @Sharp Beak, Telkanvil 68 @Leftovers, Trybdis 69 @Rocky Helmet, **Hexylla 70** @Mystic Water |
+| **Hypatia** (Psychic, Psychic Terrain) | Enigmaw 68 @Expert Belt, Mantipod 68 @Wise Glasses, Melisseer 69 @Sitrus Berry, Pithound 69 @Leftovers (Unaware), Amnoze 70 @Lum Berry, **Sophowl 71** @Twisted Spoon |
+| **Olympias** (Dragon) | Pythoros 69 @Leftovers, Stachypter 69 @Miracle Seed, Persenyx 70 @Sitrus Berry, Kynoketos 70 @Dragon Fang, Melodrakon 71 @Rocky Helmet, **Lernathan 72** @Life Orb (Regenerator) |
+| **Aristeides** (the Archon, Electric Terrain) | Lebetron 71 @Magnet, Krystolos 72 @Never-Melt Ice, Elektear 72 @Leftovers, Kerastorm 73 @Sitrus Berry, Sepivolt 73 @Expert Belt, **Aetarch 75** @Life Orb |
+
+The Ascent's 23 trainers (59–67, `tools/ichor/maps/league_trainers.py`): the slopes' and ledges'
+Titanborn, hoplites, augurs, acolytes and pilgrims (59–63, no items); the Icefall's Chione and
+Arktos (the gut's pair) and Boreades, the Deep's Hesychios, the Vault's Argyros, the Glacier's
+Niphon and Pholoe (the narrows' pair) and Nephele, and 3F's Sthenelos and Hippias, Gorgo, Melite
+and Korinna (63–67, held items, smart AI, an Ice Pokémon on most teams).
 
 ## Flags, vars and trainers
 

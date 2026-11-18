@@ -50,5 +50,6 @@
       "script": "Olympus_SeatOfAthena_EventScript_ExitGate"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "ichor_kind": "interior"
 }

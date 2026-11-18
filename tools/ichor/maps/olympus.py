@@ -35,7 +35,7 @@ GFX = "OBJ_EVENT_GFX_ICHOR_"
 
 def seat_fields(music="MUS_NONE"):
     return dict(map_type="MAP_TYPE_INDOOR", weather="WEATHER_NONE", show_map_name=False,
-                allow_cycling=False, allow_escaping=False, music=music)
+                allow_cycling=False, allow_escaping=False, music=music, ichor_kind="interior")
 
 
 # ---------------------------------------------------------------------------
@@ -610,7 +610,9 @@ def hall_of_heroes():
 
 
 BUILDERS = {"Propylaia": propylaia, "Ares": seat_of_ares, "Poseidon": seat_of_poseidon,
-            "Athena": seat_of_athena, "Hera": seat_of_hera, "Summit": summit, "Hall": hall_of_heroes}
+            "Athena": seat_of_athena, "Hera": seat_of_hera, "Hall": hall_of_heroes}
+# The summit moved to gTileset_Chion on 2026-11-18 (tools/ichor/maps/ascent_peak.py);
+# summit() below is the old Aegina build, kept for reference and no longer run.
 
 
 def main():

@@ -68,5 +68,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Olympus_SeatOfPoseidon_EventScript_WoodenWall"
     }
-  ]
+  ],
+  "ichor_kind": "interior"
 }

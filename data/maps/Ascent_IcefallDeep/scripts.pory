@@ -14,3 +14,7 @@ script Ascent_IcefallDeep_EventScript_Hesychios {
 script Ascent_IcefallDeep_EventScript_Styx {
     msgbox(format("A drowned shrine to Styx, the river the gods swore their oaths on.\pWords half under the ice:\p“Whoever breaks an oath sworn on my water lies a year without breath,\pand nine more without a seat at the feast.”"), MSGBOX_SIGN)
 }
+
+script Ascent_IcefallDeep_EventScript_Meltfall {
+    msgbox(format("Meltwater pours down the ice here, loud in the dark: a spring from under the cone\pthat the cold never stopped. Something glints at the top.\pA river god's horn could climb water like this."), MSGBOX_SIGN)
+}

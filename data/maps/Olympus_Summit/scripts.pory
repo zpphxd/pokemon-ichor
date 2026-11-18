@@ -205,3 +205,20 @@ script Olympus_Summit_EventScript_Altar {
     }
     releaseall
 }
+
+// Post-game hooks (design/maps/Olympus_Summit.md): seen from the summit, not reached.
+script Olympus_Summit_EventScript_Crag {
+    msgbox(format("The last crag of the cone, the true top of Olympus. Snow blows off it like smoke.\pSomeone cut handholds up the face, too far apart for hands. A goat could do it. Or a crook.\pAt the top, against the sky, a stone shaped like a throne."), MSGBOX_SIGN)
+}
+
+script Olympus_Summit_EventScript_Meadow {
+    msgbox(format("Across a strait of cloud, a meadow floats on the white, with one fir on it.\pSomething with wings is grazing there. It lifts its head, looks at you, and goes back to grazing.\pNo stair reaches it. Not yet."), MSGBOX_SIGN)
+}
+
+script Olympus_Summit_EventScript_Stelai {
+    if (flag(FLAG_ICHOR_ARCHON_DEFEATED)) {
+        msgbox(format("The stelai of the Archons, a name for every one since Medon.\pAristeides's name is the last one cut. The stone after it is still blank.\pIt's waiting for yours."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The stelai of the Archons, a name for every one since Medon.\pAristeides's name is the last one cut. The stone after it is still blank."), MSGBOX_SIGN)
+    }
+}

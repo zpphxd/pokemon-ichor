@@ -45,16 +45,18 @@ SHEET = ROOT / "design/maps/img/chion_sheet.png"
 TILE_LIMIT = 504          # CLAUDE.md: tiles 504-511 of a secondary are the door animations'
 
 # First metatile row of each section (8 metatiles a row; id = 0x200 + row*8 + col).
-SECTION_ROWS = {"kit": 0, "styles": 24, "props": 40}
+SECTION_ROWS = {"kit": 0, "styles": 24, "summit": 28, "props": 40}
 SECTION_TITLES = {
     "kit": "The kit: ice walls, snow floor, slick ice (MB_ICE), the tarn",
     "styles": "The glacier's snow-topped walls; the cloud sea",
+    "summit": "The summit (2026-11-18): the temple of the Twelve, Zeus's altar, the meltwater fall",
     "props": "Crystals, pines, the frozen giant, the seals, shrines, ladders, the propylaia",
 }
 
 
 def sections():
-    return [("kit", props.kit_structs()), ("styles", props.style_structs()), ("props", props.props())]
+    return [("kit", props.kit_structs()), ("styles", props.style_structs()), ("summit", props.summit_props()),
+            ("props", props.props())]
 
 
 def porytiles():

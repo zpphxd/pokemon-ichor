@@ -60,11 +60,16 @@ The single source for levels across the whole game. Every script, encounter tabl
   starter-counter variants use 38, 38, 39, 40; Rhea uses 38, 39, 40.
   These parties and their difficulty variants are implemented, not
   natural-level pacing approval.
-- **Implemented League** (design/LEAGUE.md): the Ascent's wild bands are 52–56,
-  54–57 and 55–58 by floor (final forms only); its eleven trainers 56–62. The
-  Pantheon's aces are 63, 63, 63 and 64 over teams from 60; the Archon has
-  65/65/65/66/66/67. All five bosses have Mortal and Spartan variants. These are
-  implemented parties, not natural-level balance approval.
+- **Implemented League** (design/LEAGUE.md, the endgame upgrade of 2026-11-17/18,
+  raised for always-on team-wide EXP): the Ascent's wild bands climb with the
+  mountain, 54–58 (1F), 55–59 (2F), 57–61 (the Icefall), 58–62 (the Glacier),
+  59–63 (the Deep), 60–63 (the Crystal Vault) and 60–64 (3F); its 23 trainers run
+  59–67 (held items and the smart AI from the Icefall up), the gatekeeper
+  Polydamas 67–69. The Pantheon's teams run 66–72 (aces 69, 70, 71, 72); the
+  Archon has 71/72/72/73/73/75. All six bosses (with the gatekeeper) have Mortal
+  (−3, no items) and Spartan (full spreads, natures, smart AI) variants, and Hero
+  bosses carry natures, held items and lighter spreads. These are implemented
+  parties, not natural-level balance approval.
 - **Salt Well quest band:** its two floors use Water-type encounters at
   36–39 (SYSTEMS §1), following the raid rather than the earlier capital road.
   The stranded Glaukos has one 36; optional grotto trainers use 37–38.

@@ -120,6 +120,33 @@ script Ascent_3F_EventScript_Korinna {
     msgbox(format("The tripods are offerings from every Archon there's been. Count them. One is missing.\pNobody knows whose."), MSGBOX_AUTOCLOSE)
 }
 
+// The watch-post: seen, you're sent back; under the Helm of Darkness, his eyes slide past.
+script Ascent_3F_EventScript_WatchPost {
+    if (flag(FLAG_ICHOR_HELM_ON)) {
+        end
+    }
+    lockall
+    playse(SE_PIN)
+    msgbox(format("WATCHMAN: Halt. These are the Archon's stores.\p"
+                  "Nobody comes in here that I can see. Back to the stair."), MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkRight)
+    waitmovement(0)
+    releaseall
+}
+
+script Ascent_3F_EventScript_WatchMan {
+    lock
+    if (flag(FLAG_ICHOR_HELM_ON)) {
+        msgbox(format("The watchman stares straight through you, at the stair.\p"
+                      "“…Wind,” he mutters. “Only the wind.”"), MSGBOX_DEFAULT)
+    } else {
+        faceplayer
+        msgbox(format("Twenty winters on this post. I've never once let in anyone I could see."), MSGBOX_DEFAULT)
+    }
+    release
+}
+
 script Ascent_3F_EventScript_Shrine {
     msgbox(format("A stele of Zeus Ombrios, the rain-giver. Fragment V of the Olympian hymn:\p“From this height he saw every field below the cloud,\pand gave rain to the just and the unjust, since from up here he couldn't tell them apart.”"), MSGBOX_SIGN)
 }

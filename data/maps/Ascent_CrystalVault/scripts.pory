@@ -39,3 +39,17 @@ script Ascent_CrystalVault_EventScript_Crack {
 script Ascent_CrystalVault_EventScript_Inscription {
     msgbox(format("Letters cut in the ice by a careful hand:\p“Here the Giants struck Zeus's shield, and what ran out was not blood but ichor,\pgold and cold. It would not soak into the mountain. It stood up.”"), MSGBOX_SIGN)
 }
+
+script Ascent_CrystalVault_EventScript_ThreadUp {
+    lockall
+    msgbox(format("Ariadne's Thread hangs down the crack, tied off far above on the Glacier.\p"
+                  "Climb back up it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_M_BIND)
+        fadescreen(FADE_TO_BLACK)
+        warpsilent(MAP_ASCENT_GLACIER, 13, 11)
+        waitstate
+    }
+    releaseall
+}

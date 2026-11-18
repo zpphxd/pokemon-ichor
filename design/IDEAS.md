@@ -58,6 +58,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Puzzles (user):** boulder-on-switch Strength puzzles (Girdle drums onto pressure plates, plates that must all be covered, drums as stepping stones), with a safe reset, as in the Labyrinth.
 - **Built with:** the Elite Four (Pantheon) and Archon upgrade: new halls, teams rebalanced for team-wide EXP, a short scene before each battle.
 - **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
+- **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
 
 ## Done
 

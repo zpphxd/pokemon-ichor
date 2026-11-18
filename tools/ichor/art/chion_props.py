@@ -749,6 +749,151 @@ def props():
     return P
 
 
+def summit_props():
+    P = []
+    # 2026-11-18, the endgame upgrade: the summit moves onto Chion (above the cloud),
+    # and the Deep gets a living fall for the Horn of Achelous. They pack into the empty
+    # rows between the styles and the props (chion_build.SECTION_ROWS), so no
+    # earlier metatile moves.
+    P.append(prop("altar_zeus", "The great ash altar of Zeus, the bronze box on it", 4, 2,
+                  ["XXXX", "XXXX"], altar_zeus))
+    P.append(prop("temple_twelve", "The temple of the Twelve on the summit", 7, 5,
+                  ["XXXXXXX", "XXXXXXX", "XXXXXXX", "XXXXXXX", "XXX.XXX"],
+                  temple_twelve, names={"door": (3, 4)}, behaviors={(3, 4): "MB_NON_ANIMATED_DOOR"}))
+    P.append(prop("meltfall", "Meltwater pouring down an ice face (the Horn of Achelous climbs it)", 2, 3,
+                  ["..", "..", ".."], meltfall, floor=False,
+                  behaviors={(x, y): "MB_WATERFALL" for x in (0, 1) for y in (0, 1, 2)}))
+    return P
+
+
+def altar_zeus(s):
+    """The great altar of Zeus, 4x2: a stepped marble platform with horned
+    corners, grey ash heaped on it from every rite, the little bronze box
+    (Medon's Knot) in the middle."""
+    L = s.M
+    W = 64
+    # the steps, front and sides
+    L.rect(0, 22, W, 10, "m2")
+    L.hline(0, W - 1, 22, "m4")
+    L.hline(0, W - 1, 26, "m3")
+    L.hline(0, W - 1, 31, "m0")
+    L.rect(4, 8, W - 8, 15, "m3")
+    L.hline(4, W - 5, 8, "m4")
+    L.vline(4, 8, 22, "m4")
+    L.vline(W - 5, 8, 22, "m1")
+    # the frieze on the altar's face: a blue band with gold rosettes
+    L.rect(6, 14, W - 12, 5, "bl")
+    for x in range(10, W - 8, 8):
+        L.px(x, 16, "au")
+        L.px(x - 1, 16, "au2")
+        L.px(x + 1, 16, "au2")
+    L.hline(6, W - 7, 19, "m1")
+    # the horned corners (acroteria)
+    for x in (3, W - 8):
+        L.rect(x, 3, 5, 6, "m4")
+        L.px(x + 1, 2, "m4")
+        L.px(x + 3, 2, "m3")
+        L.vline(x + 4, 3, 8, "m1")
+    # the ash of every rite, and the box in the middle
+    L.rect(9, 5, W - 18, 4, "m1")
+    L.hline(10, W - 11, 4, "m2")
+    for x in range(11, W - 11, 5):
+        L.px(x, 6, "m0")
+    bx = W // 2 - 6
+    L.rect(bx, 0, 12, 8, "b1")
+    L.rect(bx + 1, 1, 10, 3, "b2")
+    L.hline(bx, bx + 11, 4, "au")
+    L.px(bx + 5, 6, "au")
+    L.px(bx + 6, 6, "au")
+    L.hline(bx, bx + 11, 8, "b0")
+
+
+def temple_twelve(s):
+    """The temple of the Twelve, 7x5, facing east over the altar: an Ionic porch
+    (gilded volutes, snow on every capital), a red frieze of the twelve seated
+    Olympians in gold, an eagle with the thunderbolt in the pediment, gold
+    acroteria. The Pantheon's propylaia is Doric and plain; this is the house."""
+    L = s.M
+    W = 7 * 16
+    L.rect(0, 30, W, 50, "m1")
+    L.rect(0, 30, W, 3, "m0")
+    dx = 3 * 16
+    L.rect(dx, 36, 16, 44, "m2")
+    L.rect(dx + 2, 40, 12, 40, "dk")
+    L.rect(dx + 4, 44, 8, 36, "fl1")
+    L.rect(dx + 6, 50, 4, 30, "fl2")           # the fire inside the cella
+    L.hline(dx + 1, dx + 14, 38, "au")
+    for c in (0, 1, 2, 4, 5, 6):
+        x0 = c * 16
+        L.rect(x0 + 4, 34, 8, 40, "m3")
+        L.vline(x0 + 4, 34, 73, "m4")
+        L.vline(x0 + 7, 36, 73, "m2")
+        L.vline(x0 + 11, 34, 73, "m1")
+        # the Ionic capital: a cushion with two gilded volutes, snow on top
+        L.rect(x0 + 1, 30, 14, 4, "m3")
+        L.hline(x0 + 1, x0 + 14, 29, "m4")
+        L.px(x0 + 2, 32, "au")
+        L.px(x0 + 13, 32, "au")
+        L.px(x0 + 2, 33, "au2")
+        L.px(x0 + 13, 33, "au2")
+        L.rect(x0 + 3, 73, 10, 1, "m2")       # the base's torus
+    L.rect(0, 74, W, 6, "m2")
+    L.hline(0, W - 1, 74, "m4")
+    L.hline(0, W - 1, 77, "m3")
+    L.hline(0, W - 1, 79, "m1")
+    L.rect(dx + 1, 74, 14, 6, "m3")
+    # the frieze: the Twelve enthroned, gold on red, one to each 9 px
+    L.rect(0, 16, W, 12, "m3")
+    L.hline(0, W - 1, 16, "m4")
+    L.rect(0, 19, W, 7, "rd")
+    for i in range(12):
+        x = 3 + i * 9
+        L.rect(x + 1, 20, 2, 2, "au")         # a head
+        L.rect(x, 22, 4, 2, "au")             # the seated body
+        L.vline(x + 4, 21, 25, "au2")         # the throne's back
+        L.px(x, 25, "au2")
+    L.hline(0, W - 1, 26, "m1")
+    L.hline(0, W - 1, 27, "m0")
+    # the pediment: an eagle with spread wings and the thunderbolt
+    zx = W // 2
+    L.poly([(0, 16), (zx, 1), (W - 1, 16)], "m4")
+    L.poly([(9, 15), (zx, 5), (W - 10, 15)], "bl")
+    L.line(zx - 16, 13, zx - 2, 8, "au")
+    L.line(zx - 14, 14, zx - 2, 10, "au2")
+    L.line(zx + 16, 13, zx + 2, 8, "au")
+    L.line(zx + 14, 14, zx + 2, 10, "au2")
+    L.rect(zx - 2, 7, 5, 6, "au")
+    L.px(zx, 6, "au")
+    L.line(zx - 1, 13, zx - 4, 15, "fl2")
+    L.line(zx + 1, 13, zx + 4, 15, "fl2")
+    L.line(0, 16, zx, 1, "m3")
+    L.line(1, 15, zx, 0, "m4")
+    L.line(zx, 1, W - 1, 16, "m2")
+    for x0 in (zx - 2, 0, W - 4):
+        L.rect(x0, 0 if x0 == zx - 2 else 13, 4, 3, "au")
+
+
+def meltfall(s):
+    """Meltwater pouring down an ice face, 2x3: the one fall on the mountain the
+    cold hasn't stopped (a spring from under the cone). Its cells are
+    MB_WATERFALL: the Horn of Achelous climbs it from the tarn."""
+    L = s.B
+    L.rect(0, 0, 32, 48, "w2")
+    for x in range(32):
+        hgt = h("melt", x) % 7
+        c = ("w3", "w4", "w5", "w3", "w4", "s4", "w3")[hgt]
+        L.vline(x, 0, 47, c)
+        for y in range((h("meltg", x) % 9), 48, 9):
+            L.px(x, y, "s5")
+            L.px(x, min(47, y + 1), "w5")
+    L.vline(0, 0, 47, "w1")
+    L.vline(31, 0, 47, "w1")
+    for y in range(42, 48):
+        for x in range(32):
+            if (x + y) % 3:
+                L.px(x, y, "s5" if (x * 7 + y) % 5 else "ic2")
+
+
 def fill_face(s):
     """A two-cell ice face (top with its rim, then the base) behind a piece."""
     cells = kit_cells()

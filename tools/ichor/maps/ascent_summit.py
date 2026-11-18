@@ -54,6 +54,11 @@ def plan_3f():
             r[top][x] = "#"
             r[top + 1][x] = "#"
     carve(r, ".", 11, 21, 13, 23)                # the sealed stair's foot (Arceus's hook)
+    # the Archon's watch-post (2026-11-18): a walled store off terrace 3 with one way
+    # in, kept by a watchman nobody gets past seen (the Helm of Darkness)
+    carve(r, ".", 11, 10, 12, 14)
+    for y in (10, 11, 13, 14):
+        r[y][13] = "#"
     for y in range(TH):
         for x in range(TW):
             if not summit_mask(x, y):
@@ -115,8 +120,13 @@ def build_3f(PLANS):
     g.hidden("ITEM_COMET_SHARD", 30, 38, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_COMET_SHARD")
     g.hidden("ITEM_STAR_PIECE", 28, 12, "FLAG_ICHOR_HIDDEN_ITEM_ASCENT3_STAR_PIECE")
     for key, x, y in (("ice_boulders", 12, 38), ("ice_rock", 25, 40), ("crystal_s", 30, 33), ("ice_rock", 27, 28),
-                      ("ice_boulders", 29, 21), ("crystal_tall", 13, 13), ("ice_rock", 29, 15)):
+                      ("ice_boulders", 29, 21), ("crystal_tall", 14, 15), ("ice_rock", 29, 15)):
         g.put(key, x, y)
+    # the watch-post: its watchman faces the one way in; the stores behind him
+    g.person("WATCHMAN", "HOPLITE", 11, 12, "WatchMan", facing="RIGHT")
+    g.item("ITEM_CHOICE_BAND", 11, 14, "FLAG_ICHOR_ITEM_ASCENT3_CHOICE_BAND")
+    g.item("ITEM_WEAKNESS_POLICY", 12, 10, "FLAG_ICHOR_ITEM_ASCENT3_WEAKNESS_POLICY")
+    g.trigger(13, 12, "WatchPost")
     # the trainers: a pair at each stair's foot, then the gatekeeper in the last
     g.person("STHENELOS", "HOPLITE", 18, 33, "Sthenelos", facing="RIGHT", sight=4)
     g.person("HIPPIAS", "HOPLITE", 24, 33, "Hippias", facing="LEFT", sight=4)
@@ -258,6 +268,34 @@ script Ascent_3F_EventScript_PolydamasAside {{
                         "Paid in full.",
                         "The tripods are offerings from every Archon there's been. Count them. One is missing.\\p"
                         "Nobody knows whose.")
+    s += """
+// The watch-post: seen, you're sent back; under the Helm of Darkness, his eyes slide past.
+script Ascent_3F_EventScript_WatchPost {
+    if (flag(FLAG_ICHOR_HELM_ON)) {
+        end
+    }
+    lockall
+    playse(SE_PIN)
+    msgbox(format("WATCHMAN: Halt. These are the Archon's stores.\\p"
+                  "Nobody comes in here that I can see. Back to the stair."), MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkRight)
+    waitmovement(0)
+    releaseall
+}
+
+script Ascent_3F_EventScript_WatchMan {
+    lock
+    if (flag(FLAG_ICHOR_HELM_ON)) {
+        msgbox(format("The watchman stares straight through you, at the stair.\\p"
+                      "“…Wind,” he mutters. “Only the wind.”"), MSGBOX_DEFAULT)
+    } else {
+        faceplayer
+        msgbox(format("Twenty winters on this post. I've never once let in anyone I could see."), MSGBOX_DEFAULT)
+    }
+    release
+}
+"""
     s += sign_script(P, "Shrine",
                      "A stele of Zeus Ombrios, the rain-giver. Fragment V of the Olympian hymn:\\p"
                      "“From this height he saw every field below the cloud,\\p"
