@@ -46,6 +46,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Somewhat difficult:** strong trainer pairs on narrow paths you can't avoid, tougher wilds, puzzles that use every relic held, limited healing with one midpoint shrine, and a gatekeeper battle before the Pantheon.
 - **Lots to find:** rare items, TMs, evolution stones, top held items, artifacts and amphora sherds, and an Olympian story fragment at each floor's shrine.
 - **Post-game hooks everywhere:** sealed doors, boulders, falls and Pan's Crook cliffs toward the post-game peaks (Pegaunos above the clouds, the Moment's shrine), and side paths you can see but can't reach until after the credits.
+- **Puzzles (user):** boulder-on-switch Strength puzzles (Girdle drums onto pressure plates, plates that must all be covered, drums as stepping stones), with a safe reset, as in the Labyrinth.
 - **Built with:** the Elite Four (Pantheon) and Archon upgrade: new halls, teams rebalanced for team-wide EXP, a short scene before each battle.
 - **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
 
