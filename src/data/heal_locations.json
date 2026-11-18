@@ -169,8 +169,8 @@
     {
       "id": "HEAL_LOCATION_KALDERA",
       "map": "MAP_KALDERA",
-      "x": 27,
-      "y": 18,
+      "x": 36,
+      "y": 11,
       "respawn_map": "MAP_KALDERA_ASCLEPEION",
       "respawn_npc": "LOCALID_KALDERA_ASCLEPEION_HEALER",
       "respawn_x": 8,

@@ -44,6 +44,7 @@ Kythera_Setup:
     setflag FLAG_ICHOR_AKROPOLIS_RECOVERED
     setflag FLAG_ICHOR_KALDERA_FRAGMENT_LOST
     setflag FLAG_ICHOR_MOM_MISSING
+    setflag FLAG_ICHOR_KALDERA_REVEAL
     setvar VAR_REPEL_STEP_COUNT, 999
     warp MAP_KALDERA, 25, 30
     waitstate

@@ -2,8 +2,16 @@ text Kaldera_Text_NameTalos { "TALOS" }
 text Kaldera_Text_NameHyperion { "HYPERION" }
 text Kaldera_Text_NameDaphne { "DAPHNE" }
 mapscripts Kaldera_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_BADGE06_GET)) {
+            call(Kaldera_EventScript_LightEyes)
+        }
+    }
     MAP_SCRIPT_ON_TRANSITION {
         special(Ichor_ReleaseTimeOfDay)
+        if (!flag(FLAG_ICHOR_KALDERA_REVEAL)) {
+            setvar(VAR_TEMP_2, 1)
+        }
         setflag(FLAG_ICHOR_ARRIVED_KALDERA)
         setrespawn(HEAL_LOCATION_KALDERA)
         if (flag(FLAG_ICHOR_KALDERA_FRAGMENT_LOST) && !flag(FLAG_ICHOR_MOM_MISSING)) {
@@ -11,8 +19,42 @@ mapscripts Kaldera_MapScripts {
         }
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_2, 1: Kaldera_EventScript_Reveal
         VAR_TEMP_1, 1: Kaldera_EventScript_Letter
     ]
+}
+
+// The first sight of the caldera: from the landing up the still water to the
+// bronze man on Nea Kameni (8 left, 24 up), and back.
+movement Kaldera_Movement_CameraToGiant {
+    walk_slow_up * 2
+    walk_up * 6
+    walk_fast_up * 16
+    walk_left * 8
+    step_end
+}
+
+movement Kaldera_Movement_CameraBack {
+    walk_faster_right * 8
+    walk_faster_down * 24
+    step_end
+}
+
+script Kaldera_EventScript_Reveal {
+    lockall
+    setvar(VAR_TEMP_2, 2)
+    setflag(FLAG_ICHOR_KALDERA_REVEAL)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Kaldera_Movement_CameraToGiant)
+    waitmovement(0)
+    delay(60)
+    msgbox(format("Inside the ring the sea lies still. On the black islet a bronze man stands over the water, taller than a house, and unfinished."))
+    closemessage
+    delay(20)
+    applymovement(OBJ_EVENT_ID_CAMERA, Kaldera_Movement_CameraBack)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    releaseall
 }
 script Kaldera_EventScript_Nausikles {
     setvar(VAR_0x8004, 4)
@@ -30,13 +72,19 @@ script Kaldera_EventScript_Daphne {
     release
 }
 script Kaldera_EventScript_HarborGuide {
-    msgbox(format("The Asclepeion is up the steps. The Agora's on the next terrace.\pTalos works at the temple above both. Follow the hammering."), MSGBOX_NPC)
+    msgbox(format("Up the donkey stair to the rim. The Asclepeion and the Agora are on the main street.\pTalos works at the temple on the top terrace. Follow the hammering."), MSGBOX_NPC)
 }
 script Kaldera_EventScript_AshWorker {
     msgbox(format("Hyperion grew up here. Used to carry two sacks when the rest of us took one.\pNow he won't go below the forge unless every lamp's lit."), MSGBOX_NPC)
 }
 script Kaldera_EventScript_Sign {
     msgbox(format("KALDERA\nThe fire beneath the sea."), MSGBOX_SIGN)
+}
+script Kaldera_EventScript_Plinth {
+    msgbox(format("A bronze man cast in pieces and never finished. His left heel is missing.\pScratched into the plinth: I took your name. Stand when I'm done. -- T."), MSGBOX_SIGN)
+}
+script Kaldera_EventScript_Fresco {
+    msgbox(format("A painted wall shows through the ash: swallows over red lilies.\pIt is older than the temple on the rim."), MSGBOX_SIGN)
 }
 script Kaldera_EventScript_ForgeSign {
     msgbox(format("THE TELCHINES' FORGE\nThe inner work belongs to the Forge Laurel."), MSGBOX_SIGN)
@@ -65,3 +113,11 @@ script Kaldera_EventScript_Letter {
     setflag(FLAG_ICHOR_MOM_MISSING)
     releaseall
 }
+
+// Generated: the bronze man's eyes.
+// After Laurel 6 his eyes are lit (tools/ichor/maps/kaldera.py writes this).
+script Kaldera_EventScript_LightEyes {
+    setmetatile(10, 3, 0x338, TRUE)
+    setmetatile(11, 3, 0x339, TRUE)
+}
+// End the bronze man's eyes.
