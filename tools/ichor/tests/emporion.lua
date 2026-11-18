@@ -961,11 +961,20 @@ local function city2()
     emu:write16(slot, S.ITEM_POTION)
     emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, S.MAX_BAG_ITEM_CAPACITY ~ encryptionKey)
   end
+  -- A full Bag's find goes to the Pithos (src/item.c), so fill that too.
+  local pithos, pithosSaved = sb1() + S.OFF_SB1_PC_ITEMS, {}
+  for i = 0, S.PC_ITEMS_COUNT - 1 do
+    pithosSaved[i] = emu:read32(pithos + i * S.ITEM_SLOT_SIZE)
+    emu:write16(pithos + i * S.ITEM_SLOT_SIZE, S.ITEM_POTION)
+    emu:write16(pithos + i * S.ITEM_SLOT_SIZE + S.OFF_ITEM_SLOT_QUANTITY, 999)
+  end
   talk({ { 1, 9 } }, K.LEFT, "c_dig_garden_full_bag")
   local gardenFind = emu:read16(S.sDig + S.OFF_DIG_FIND)
   local gardenQuantity = emu:read8(S.sDig + S.OFF_DIG_QUANTITY)
   expect(gardenFind < S.ITEMS_COUNT, "the garden's full-Bag fixture rolls an actual item")
-  expect(not getFlag(S.FLAG_DAILY_HEPHAISTEION), "a full Bag leaves the garden's find buried for retry")
+  expect(not getFlag(S.FLAG_DAILY_HEPHAISTEION), "a full Bag and Pithos leave the garden's find buried for retry")
+  pithos = sb1() + S.OFF_SB1_PC_ITEMS
+  for i = 0, S.PC_ITEMS_COUNT - 1 do emu:write32(pithos + i * S.ITEM_SLOT_SIZE, pithosSaved[i]) end
   restoreBag()
   local gardenCount = itemCount(gardenFind)
   talk({ { 1, 9 } }, K.LEFT, "c_dig_garden")

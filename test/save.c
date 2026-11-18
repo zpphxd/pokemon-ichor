@@ -4,7 +4,10 @@
 
 // If you would like to ensure save compatibility, update the values below with those for your hack. You can find these through the debug menu.
 // Please note that this simple check is not 100% foolproof, but should be able to catch most unintended shifts.
-#define T_SAVEBLOCK1_SIZE 15688 // Ichor: 1,536 trainer flags (MAX_TRAINERS_COUNT_EMERALD, +84) and dexSeen/dexCaught for the 152 Aethos national dex numbers (+36) over upstream's 15568
+// Ichor SaveBlock1: 1,536 trainer flags (MAX_TRAINERS_COUNT_EMERALD, +84) and dexSeen/dexCaught for the 152 Aethos national
+// dex numbers (+36) over upstream's 15568 made 15688; the big Bag at the end and its layout marker (+144, after freeing Mystery
+// Gift, the Enigma Berry and the Mystery Event script) make 15832. Old saves migrate: Ichor_MigrateBagLayout in src/item.c.
+#define T_SAVEBLOCK1_SIZE 15832
 #define T_SAVEBLOCK2_SIZE 3884
 #define T_SAVEBLOCK3_SIZE 1476 // Ichor: IchorSave (1,472 bytes since version 4, include/ichor_save.h) plus dexNavChain
 #define T_POKEMONSTORAGE_SIZE 34144

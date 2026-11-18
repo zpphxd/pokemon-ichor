@@ -622,7 +622,7 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
-    gSpecialVar_Result = AddBagItem(itemId, quantity);
+    gSpecialVar_Result = Ichor_AddBagOrPithosItem(itemId, quantity); // Ichor: overflows to the Pithos
     return FALSE;
 }
 
@@ -644,7 +644,7 @@ bool8 ScrCmd_checkitemspace(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    gSpecialVar_Result = CheckBagHasSpace(itemId, quantity);
+    gSpecialVar_Result = Ichor_CheckBagOrPithosHasSpace(itemId, quantity); // Ichor: the Pithos counts
     return FALSE;
 }
 

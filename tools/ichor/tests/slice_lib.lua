@@ -122,6 +122,24 @@ function L.mapMusic() return emu:read16(S.sCurrentMapMusic) end
 function L.money()
   return emu:read32(L.sb1() + S.OFF_SB1_MONEY) ~ emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY)
 end
+-- Fill the Pithos's stored things with Honey, as a full Bag's tests need: an
+-- item that doesn't fit the Bag goes there instead (src/item.c), so a script's
+-- "no room" branch runs only when both are full. Returns a function that puts
+-- the Pithos back.
+function L.fillPithos()
+  local saved = {}
+  local base = L.sb1() + S.OFF_SB1_PC_ITEMS
+  for i = 0, S.PC_ITEMS_COUNT - 1 do
+    local slot = base + i * S.ITEM_SLOT_SIZE
+    saved[i] = emu:read32(slot)
+    emu:write16(slot, S.ITEM_HONEY_FOR_PITHOS)
+    emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, 999)
+  end
+  return function()
+    local live = L.sb1() + S.OFF_SB1_PC_ITEMS   -- the save blocks can move on a map change
+    for i = 0, S.PC_ITEMS_COUNT - 1 do emu:write32(live + i * S.ITEM_SLOT_SIZE, saved[i]) end
+  end
+end
 -- How many of an item the bag holds, across all pockets.
 function L.itemCount(item)
   local bag, key = L.sb1() + S.OFF_SB1_BAG, emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF

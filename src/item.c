@@ -493,6 +493,104 @@ static void NONNULL BagPocket_CompactItems(struct BagPocket *pocket)
     }
 }
 
+// Ichor: the Bag is never full. An item that doesn't fit goes to the Pithos's
+// stored things instead, and gIchorItemWentToPithos tells the caller to say so.
+// Key items always go in the Bag (relic flags and quest checks look there; the
+// pocket holds every key item the game has), and so does the Battle Pyramid's bag.
+EWRAM_DATA bool8 gIchorItemWentToPithos = FALSE;
+
+static bool32 Ichor_CanGoToPithos(enum Item itemId)
+{
+    enum Pocket pocket = GetItemPocket(itemId);
+
+    return pocket < POCKETS_COUNT && pocket != POCKET_KEY_ITEMS
+        && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE
+        && FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) != TRUE;
+}
+
+bool32 Ichor_CheckBagOrPithosHasSpace(enum Item itemId, u16 count)
+{
+    struct BagPocket dummyPocket = DUMMY_PC_BAG_POCKET;
+
+    if (CheckBagHasSpace(itemId, count))
+        return TRUE;
+    return Ichor_CanGoToPithos(itemId) && BagPocket_GetFreeSpaceForItem(&dummyPocket, itemId) >= count;
+}
+
+bool32 Ichor_AddBagOrPithosItem(enum Item itemId, u16 count)
+{
+    gIchorItemWentToPithos = FALSE;
+    if (AddBagItem(itemId, count))
+        return TRUE;
+    if (!Ichor_CanGoToPithos(SanitizeBagItemId(itemId)) || !AddPCItem(SanitizeBagItemId(itemId), count))
+        return FALSE;
+    gIchorItemWentToPithos = TRUE;
+    return TRUE;
+}
+
+// For the obtain and find scripts: "tucked it into the pocket", or the Pithos line
+// when the last additem overflowed. Expects STR_VAR_2 and STR_VAR_3 buffered.
+void Ichor_BufferPutAwayText(void)
+{
+    StringExpandPlaceholders(gStringVar4, gIchorItemWentToPithos ? gText_IchorItemWentToPithos : gText_PutItemInPocket);
+}
+
+// Ichor: saves without ichorBagLayout set have the old SaveBlock1 layout:
+// 50 PC slots at 0x498, a 186-slot Bag at 0x560, and Mystery Gift, the Enigma
+// Berry and the Mystery Event script still in place. These are that layout's
+// offsets, measured from the last build before the move (819cc41c2b); the
+// asserts pin the new side.
+#define V6_BAG_OFFSET          0x560
+#define V6_DEX_SEEN_OFFSET     13804
+#define V6_RECORD_MIX_OFFSET   15120
+#define V6_SIZE                15688
+#define V6_PC_ITEMS_COUNT      50
+#define V6_BAG_SLOTS           (30 + 30 + 16 + 64 + 46)
+
+STATIC_ASSERT(offsetof(struct SaveBlock1, pcItems) == 0x498 && offsetof(struct SaveBlock1, pokeblocks) == 0x848, IchorPithosFillsTheOldBag);
+STATIC_ASSERT(offsetof(struct SaveBlock1, dexSeen) == 12876, IchorDexSeenOffset);
+STATIC_ASSERT(offsetof(struct SaveBlock1, recordMixingGift) - offsetof(struct SaveBlock1, dexSeen) == 14116 - V6_DEX_SEEN_OFFSET, IchorDexBlockSize);
+STATIC_ASSERT(offsetof(struct SaveBlock1, bag) - offsetof(struct SaveBlock1, recordMixingGift) == V6_SIZE - V6_RECORD_MIX_OFFSET, IchorTailBlockSize);
+STATIC_ASSERT(offsetof(struct SaveBlock1, ichorBagLayout) >= V6_SIZE, IchorBagMarkerPastTheOldEnd);
+
+// Called as a save loads (Ichor_OnSaveLoaded). Does nothing to a save that
+// already has the new layout.
+void Ichor_MigrateBagLayout(void)
+{
+    // In struct Bag's order, which is not enum Pocket's.
+    static const u8 sV6PocketSlots[POCKETS_COUNT] = {30, 30, 16, 64, 46};
+    struct ItemSlot *newPockets[POCKETS_COUNT] = {
+        gSaveBlock1Ptr->bag.items,
+        gSaveBlock1Ptr->bag.keyItems,
+        gSaveBlock1Ptr->bag.pokeBalls,
+        gSaveBlock1Ptr->bag.TMsHMs,
+        gSaveBlock1Ptr->bag.berries,
+    };
+    struct ItemSlot oldBag[V6_BAG_SLOTS];
+    u8 *sb1 = (u8 *)gSaveBlock1Ptr;
+    u32 pocket, slot = 0;
+
+    if (gSaveBlock1Ptr->ichorBagLayout == ICHOR_BAG_LAYOUT_MAGIC)
+        return;
+    // The old Bag sits where the Pithos grows, so take it out first.
+    memcpy(oldBag, sb1 + V6_BAG_OFFSET, sizeof(oldBag));
+    // Close up the freed blocks: the dex flags and trainer-hill times, then the
+    // record-mixing gift through Walda's phrase.
+    memmove(&gSaveBlock1Ptr->dexSeen, sb1 + V6_DEX_SEEN_OFFSET, offsetof(struct SaveBlock1, recordMixingGift) - offsetof(struct SaveBlock1, dexSeen));
+    memmove(&gSaveBlock1Ptr->recordMixingGift, sb1 + V6_RECORD_MIX_OFFSET, V6_SIZE - V6_RECORD_MIX_OFFSET);
+    // The Bag's new home held the old tail; clear it and copy the pockets in.
+    // Quantities stay encrypted with the same key.
+    memset(&gSaveBlock1Ptr->bag, 0, sizeof(gSaveBlock1Ptr->bag));
+    for (pocket = 0; pocket < POCKETS_COUNT; pocket++)
+    {
+        memcpy(newPockets[pocket], &oldBag[slot], sV6PocketSlots[pocket] * sizeof(struct ItemSlot));
+        slot += sV6PocketSlots[pocket];
+    }
+    // The old 50 PC slots keep their place; the rest of the Pithos starts empty.
+    memset(&gSaveBlock1Ptr->pcItems[V6_PC_ITEMS_COUNT], 0, (PC_ITEMS_COUNT - V6_PC_ITEMS_COUNT) * sizeof(struct ItemSlot));
+    gSaveBlock1Ptr->ichorBagLayout = ICHOR_BAG_LAYOUT_MAGIC;
+}
+
 void RemovePCItem(u8 index, u16 count)
 {
     struct BagPocket dummyPocket = DUMMY_PC_BAG_POCKET;
@@ -565,7 +663,7 @@ void MoveItemSlotInPC(struct ItemSlot *itemSlots, u32 from, u32 to)
 
 void ClearBag(void)
 {
-    CpuFastFill(0, &gSaveBlock1Ptr->bag, sizeof(struct Bag));
+    memset(&gSaveBlock1Ptr->bag, 0, sizeof(struct Bag)); // Ichor: CpuFastFill rounds up to 32 bytes, past the Bag into its layout marker
 }
 
 static inline u16 NONNULL BagPocket_CountTotalItemQuantity(struct BagPocket *pocket, enum Item itemId)

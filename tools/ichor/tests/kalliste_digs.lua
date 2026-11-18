@@ -66,7 +66,9 @@ local function fillItemPocket()
     emu:write16(slot, S.ITEM_HONEY)
     emu:write16(slot + 2, S.MAX_BAG_ITEM_CAPACITY ~ key)
   end
+  local restorePithos = L.fillPithos()   -- or the find would go to the Pithos
   return function()
+    restorePithos()
     pocket = L.sb1() + S.OFF_SB1_BAG
     key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
     for i = 0, S.BAG_ITEMS_COUNT - 1 do
@@ -129,7 +131,7 @@ L.start(function()
   withFind(sites[2], S.ICHOR_FIND_KIND_ITEM, S.ITEM_STARDUST, function()
     local restore = fillItemPocket()
     dig(sites[2])
-    L.expect(not L.getFlag(S.FLAG_DIG_START + sites[2].index), "a full Bag leaves the terrace find in the ground")
+    L.expect(not L.getFlag(S.FLAG_DIG_START + sites[2].index), "a full Bag and Pithos leave the terrace find in the ground")
     saveAndContinue()
     L.expect(not L.getFlag(S.FLAG_DIG_START + sites[2].index) and sherds() == 4,
              "the refused find and all four sherds survive CONTINUE")

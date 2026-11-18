@@ -97,7 +97,7 @@ enum Language
 #define MAIL_COUNT (10 + PARTY_SIZE)
 #define SECRET_BASES_COUNT 20
 #define POKE_NEWS_COUNT 16
-#define PC_ITEMS_COUNT 50
+#define PC_ITEMS_COUNT 236 // Ichor: was 50. The old PC slots plus the old Bag's (SaveBlock1 0x498-0x848)
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12
@@ -111,11 +111,14 @@ enum Language
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
 
 // Bag constants
-#define BAG_ITEMS_COUNT 30
-#define BAG_KEYITEMS_COUNT 30
-#define BAG_POKEBALLS_COUNT 16
+// Ichor: raised from 30/30/16/64/46. A pocket holds at most 254 slots (the bag
+// menu counts them in a u8), and the Bag fills SaveBlock1's tail (src/save.c
+// asserts it fits). What still doesn't fit goes to the Pithos (src/item.c).
+#define BAG_ITEMS_COUNT 254
+#define BAG_KEYITEMS_COUNT 80
+#define BAG_POKEBALLS_COUNT 40
 #define BAG_TMHM_COUNT 64
-#define BAG_BERRIES_COUNT 46
+#define BAG_BERRIES_COUNT 80
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

@@ -251,6 +251,14 @@ void RemoveBagItemFromSlot(struct BagPocket *pocket, u16 slotId, u16 count);
 u8 CountUsedPCItemSlots(void);
 bool32 CheckPCHasItem(enum Item itemId, u16 count);
 bool32 AddPCItem(enum Item itemId, u16 count);
+// Ichor: SaveBlock1.ichorBagLayout on saves with the big Bag at the block's end.
+#define ICHOR_BAG_LAYOUT_MAGIC 0x42414731 // "BAG1"
+// Ichor: the Bag is never full. What doesn't fit goes to the Pithos's stored things.
+extern bool8 gIchorItemWentToPithos;
+bool32 Ichor_CheckBagOrPithosHasSpace(enum Item itemId, u16 count);
+bool32 Ichor_AddBagOrPithosItem(enum Item itemId, u16 count);
+void Ichor_BufferPutAwayText(void);
+void Ichor_MigrateBagLayout(void);
 void RemovePCItem(u8 index, u16 count);
 void CompactPCItems(void);
 void SwapRegisteredBike(void);
