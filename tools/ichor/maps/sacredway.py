@@ -935,7 +935,7 @@ def spec_r16():
     s.thickets += [("GroveThicket", 35, 20, "0")]
     s.gate("PlotRubble", "BREAKABLE_ROCK", 40, 5, "EventScript_RockSmash", "0")
     s.gate("PlotDrum", "PUSHABLE_BOULDER", 33, 5, "EventScript_StrengthBoulder")
-    s.gate("TombSeal", "BREAKABLE_ROCK", 29, 5, "EventScript_IchorLabrysSeal")
+    s.gate("TombSeal", "ICHOR_LABRYS_SEAL", 29, 5, "EventScript_IchorLabrysSeal")
     item(s, "HYPER_POTION", 5, 23, "ITEM_R16_HEAL")
     item(s, "ULTRA_BALL", 12, 5, "ITEM_R16_BALL")
     item(s, "ETHER", 49, 3, "ITEM_R16_ETHER")

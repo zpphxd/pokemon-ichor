@@ -205,3 +205,6 @@ hidden-item and trainer flags (FLAG_ICHOR_ITEM_R15_*, R16_*, ids 223-234) are ke
 The awe pass, items 1-2 (2026-11-18, `tools/ichor/maps/astyra_capital.py`: Astyra, its
 harbor and the Akropolis) claims bankflag offsets 0x5C0-0x5CF (0x5C0-0x5C4 used: the two
 reveals, the agora and Pnyx hidden items, the Kerameikos jar).
+
+Gate flags (2026-11-18, `tools/ichor/maps/gate_flags.py`) take bankflag offsets 0x5D0-0x5FF: one
+`FLAG_ICHOR_CLEARED_<MAP>_<KIND>_<X>_<Y>` per cut tree, rubble pile or seal that a generator left flagless.

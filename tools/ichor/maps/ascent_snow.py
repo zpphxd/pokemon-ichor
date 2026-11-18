@@ -183,7 +183,7 @@ def build_icefall():
     g.put("mouth", 33, 3)
     g.warp(34, 4, "Ascent_CrystalVault", 0)
     g.solid[4, 33] = True
-    g.person("CHAIN", "OBJ_EVENT_GFX_BREAKABLE_ROCK", 34, 4, "EventScript_IchorLabrysSeal",
+    g.person("CHAIN", "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL", 34, 4, "EventScript_IchorLabrysSeal",
              movement="MOVEMENT_TYPE_NONE", flag="FLAG_ICHOR_HIDE_VAULT_CHAIN")
     g.sign(35, 5, P + "VaultDoor")
     g.sign(32, 13, P + "Ichor")

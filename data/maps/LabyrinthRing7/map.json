@@ -174,7 +174,7 @@
       "flag": "FLAG_ICHOR_RING7_ITEM_2"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL",
       "x": 15,
       "y": 6,
       "elevation": 3,
@@ -200,7 +200,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL",
       "x": 16,
       "y": 6,
       "elevation": 3,

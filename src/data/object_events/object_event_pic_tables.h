@@ -2618,6 +2618,9 @@ static const struct SpriteFrameImage sPicTable_IchorAcolyteF[] = {
 static const struct SpriteFrameImage sPicTable_IchorTablet[] = {
     obj_frame_tiles(gObjectEventPic_IchorTablet),
 };
+static const struct SpriteFrameImage sPicTable_IchorLabrysSeal[] = {
+    obj_frame_tiles(gObjectEventPic_IchorLabrysSeal),
+};
 
 static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatL[] = {
     obj_frame_tiles(gObjectEventPic_IchorUpturnedBoatL),

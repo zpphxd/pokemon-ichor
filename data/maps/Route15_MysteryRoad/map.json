@@ -220,7 +220,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_CLEARED_ROUTE15MYSTERYROAD_TREE_58_19"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -325,7 +325,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_CLEARED_ROUTE15MYSTERYROAD_RUBBLE_62_14"
     },
     {
       "local_id": "LOCALID_ROUTE15_MYSTERY_ROAD_DRUM1",

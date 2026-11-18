@@ -210,7 +210,7 @@ L.start(function()
       upgrade = S.FLAG_ICHOR_THREE_FLAMED_TORCH },
     { name = "great_boulder", gfx = S.GFX_PUSHABLE_BOULDER, script = "EventScript_IchorGreatBoulder", relic = S.ITEM_BRONZE_HAMMER,
       upgrade = S.FLAG_ICHOR_HEPHAESTUS_HAMMER },
-    { name = "labrys_seal", gfx = S.GFX_BREAKABLE_ROCK, script = "EventScript_IchorLabrysSeal", relic = S.ITEM_LABRYS },
+    { name = "labrys_seal", gfx = S.GFX_ICHOR_LABRYS_SEAL, script = "EventScript_IchorLabrysSeal", relic = S.ITEM_LABRYS },
   }
   for _, o in ipairs(obstacles) do
     spawn(o.gfx, sym(o.script))

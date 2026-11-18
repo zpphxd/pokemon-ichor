@@ -268,7 +268,7 @@ script EventScript_IchorLabrysSeal {
     setvar(VAR_0x8005, 0)
     specialvar(VAR_RESULT, Ichor_CanUseRelic)
     if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
-        msgbox(format("A bronze seal stamped with a double axe. Only that axe could cleave it."), MSGBOX_DEFAULT)
+        msgbox(format("A bronze seal stamped with Knossa's double axe, the Labrys. Only that axe could cleave it."), MSGBOX_DEFAULT)
         releaseall
         end
     }

@@ -2267,6 +2267,19 @@
 #define FLAG_ICHOR_HIDDEN_ASTYRA_AGORA          (FLAG_ICHOR_GENERAL2_START + 0x0C2) // Ichor: Astyra: hidden under the fountain house's basin
 #define FLAG_ICHOR_HIDDEN_ASTYRA_PNYX           (FLAG_ICHOR_GENERAL2_START + 0x0C3) // Ichor: Astyra: hidden behind the speaker's platform on the Pnyx
 #define FLAG_ICHOR_ITEM_ASTYRA_KERAMEIKOS       (FLAG_ICHOR_GENERAL2_START + 0x0C4) // Ichor: Astyra: the jar among the Kerameikos graves
+#define FLAG_ICHOR_CLEARED_ASCENT1F_TREE_44_8   (FLAG_ICHOR_GENERAL2_START + 0x0F3) // Ichor: Ascent_1F: the EventScript_CutTree gate at (44,8) stays cleared
+#define FLAG_ICHOR_CLEARED_ASCENT2F_RUBBLE_20_12 (FLAG_ICHOR_GENERAL2_START + 0x0F4) // Ichor: Ascent_2F: the EventScript_RockSmash gate at (20,12) stays cleared
+#define FLAG_ICHOR_CLEARED_ASCENTICEFALL_RUBBLE_12_4 (FLAG_ICHOR_GENERAL2_START + 0x0F5) // Ichor: Ascent_Icefall: the EventScript_RockSmash gate at (12,4) stays cleared
+#define FLAG_ICHOR_CLEARED_KOPAISKATAVOTHRES_RUBBLE_20_13 (FLAG_ICHOR_GENERAL2_START + 0x0F6) // Ichor: KopaisKatavothres: the EventScript_RockSmash gate at (20,13) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE13HIGHLANDROAD_TREE_46_5 (FLAG_ICHOR_GENERAL2_START + 0x0F7) // Ichor: Route13_HighlandRoad: the EventScript_CutTree gate at (46,5) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE14NEMEAROAD_TREE_64_15 (FLAG_ICHOR_GENERAL2_START + 0x0F8) // Ichor: Route14_NemeaRoad: the EventScript_CutTree gate at (64,15) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE15MYSTERYROAD_TREE_58_19 (FLAG_ICHOR_GENERAL2_START + 0x0F9) // Ichor: Route15_MysteryRoad: the EventScript_CutTree gate at (58,19) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE15MYSTERYROAD_RUBBLE_62_14 (FLAG_ICHOR_GENERAL2_START + 0x0FA) // Ichor: Route15_MysteryRoad: the EventScript_RockSmash gate at (62,14) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE16CAPITALPASS_TREE_35_20 (FLAG_ICHOR_GENERAL2_START + 0x0FB) // Ichor: Route16_CapitalPass: the EventScript_CutTree gate at (35,20) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE16CAPITALPASS_RUBBLE_40_5 (FLAG_ICHOR_GENERAL2_START + 0x0FC) // Ichor: Route16_CapitalPass: the EventScript_RockSmash gate at (40,5) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE16CAPITALPASS_SEAL_29_5 (FLAG_ICHOR_GENERAL2_START + 0x0FD) // Ichor: Route16_CapitalPass: the EventScript_IchorLabrysSeal gate at (29,5) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE25EUROTAS_TREE_19_13 (FLAG_ICHOR_GENERAL2_START + 0x0FE) // Ichor: Route25_Eurotas: the EventScript_CutTree gate at (19,13) stays cleared
+#define FLAG_ICHOR_CLEARED_ROUTE7KRONIAGROUNDS_RUBBLE_7_13 (FLAG_ICHOR_GENERAL2_START + 0x0FF) // Ichor: Route7_KroniaGrounds: the EventScript_RockSmash gate at (7,13) stays cleared
 #define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
 #define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
 #define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)

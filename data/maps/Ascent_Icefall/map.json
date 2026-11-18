@@ -109,7 +109,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_CLEARED_ASCENTICEFALL_RUBBLE_12_4"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -126,7 +126,7 @@
     },
     {
       "local_id": "LOCALID_ASCENT_ICEFALL_CHAIN",
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL",
       "x": 34,
       "y": 4,
       "elevation": 3,

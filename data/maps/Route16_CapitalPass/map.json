@@ -192,7 +192,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_CLEARED_ROUTE16CAPITALPASS_TREE_35_20"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -311,7 +311,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_CLEARED_ROUTE16CAPITALPASS_RUBBLE_40_5"
     },
     {
       "local_id": "LOCALID_ROUTE16_CAPITAL_PASS_PLOTDRUM",
@@ -329,7 +329,7 @@
     },
     {
       "local_id": "LOCALID_ROUTE16_CAPITAL_PASS_TOMBSEAL",
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL",
       "x": 29,
       "y": 5,
       "elevation": 3,
@@ -339,7 +339,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_IchorLabrysSeal",
-      "flag": "0"
+      "flag": "FLAG_ICHOR_CLEARED_ROUTE16CAPITALPASS_SEAL_29_5"
     }
   ],
   "warp_events": [],

@@ -23,7 +23,7 @@ KINDS = {
     "rubble": ("BREAKABLE_ROCK", "EventScript_RockSmash", "Bronze Hammer"),
     "roots": ("CUTTABLE_TREE", "EventScript_CutTree", "Demeter's Sickle"),
     "drum": ("PUSHABLE_BOULDER", "EventScript_StrengthBoulder", "Girdle of Herakles"),
-    "chain": ("BREAKABLE_ROCK", "EventScript_IchorLabrysSeal", "Labrys"),
+    "chain": ("ICHOR_LABRYS_SEAL", "EventScript_IchorLabrysSeal", "Labrys"),
     "web": ("CUTTABLE_TREE", "EventScript_IchorCobweb", "Hecate's Torch"),
     "thornweb": ("CUTTABLE_TREE", "EventScript_IchorThornweb", "the Three-Flamed Torch (post-game)"),
     "boulder": ("PUSHABLE_BOULDER", "EventScript_IchorGreatBoulder", "Hephaestus's Hammer (post-game)"),

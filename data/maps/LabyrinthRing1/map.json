@@ -135,7 +135,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL",
       "x": 8,
       "y": 10,
       "elevation": 3,
@@ -148,7 +148,7 @@
       "flag": "FLAG_ICHOR_HIDE_R1_SEAL"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL",
       "x": 8,
       "y": 11,
       "elevation": 3,

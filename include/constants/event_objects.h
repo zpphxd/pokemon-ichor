@@ -447,6 +447,8 @@ enum
     OBJ_EVENT_GFX_ICHOR_ACOLYTE_F,
     // Field objects (16x16, tools/ichor/art/sprites_objects.py)
     OBJ_EVENT_GFX_ICHOR_TABLET,
+    // The Labrys seal: a bronze double-axe disc on every gate the Labrys opens (tools/ichor/art/labrys_seal.py)
+    OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL,
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,

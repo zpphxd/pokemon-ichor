@@ -1479,7 +1479,7 @@ def build_cave():
               "Out the high mouth there's a terrace over the valley. Drop off its wall and you're home.")
     team("SKIRITAI_ARKTOS", "ARKTOS", "Lakonian", "Hoplite", "Male", [("Plouteras", 52), ("Dorydrake", 53)])
     s.gate("Rubble", "rubble", 14, 10, flag("FLAG_ICHOR_HIDE_SKIRITAI_RUBBLE", "the cave's gallery rubble broken"))
-    s.person("Chains", "OBJ_EVENT_GFX_BREAKABLE_ROCK", 6, 5, "DOWN",
+    s.person("Chains", "OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL", 6, 5, "DOWN",
              flag("FLAG_ICHOR_HIDE_SKIRITAI_CHAINS", "the scouts' store's chains cleaved (the Labrys)"))
     s.scripts.append(f"script {s.px}Chains {{\n    goto(EventScript_IchorLabrysSeal)\n}}")
     s.item("ITEM_TM_REST", 1, 5, item_flag("SKIRITAI", "STORE", "the scouts' store (the Labrys)"))

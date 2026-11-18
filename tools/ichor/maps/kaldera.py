@@ -56,7 +56,7 @@ def town():
     # Akrotiri's buried door: a Labrys seal (Knossa, Act III) over a votive in the doorway
     dx, dy = KA.AKROTIRI_DOOR
     m.json["object_events"].append(dict(
-        graphics_id="OBJ_EVENT_GFX_ICHOR_TABLET", x=dx, y=dy, elevation=3,
+        graphics_id="OBJ_EVENT_GFX_ICHOR_LABRYS_SEAL", x=dx, y=dy, elevation=3,
         movement_type="MOVEMENT_TYPE_FACE_DOWN", movement_range_x=0, movement_range_y=0,
         trainer_type="TRAINER_TYPE_NONE", trainer_sight_or_berry_tree_id="0",
         script="EventScript_IchorLabrysSeal", flag="FLAG_ICHOR_HIDE_KALDERA_LABRYS_SEAL"))

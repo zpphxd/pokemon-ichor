@@ -47,6 +47,11 @@ fi
 /usr/bin/python3 tools/ichor/object_audit.py \
   || { echo "SMOKE FAIL: an object inside solid ground or under top-layer art (tools/ichor/object_audit.py)"; exit 1; }
 
+# Every cut tree, rubble pile and seal keeps a saved flag, or it respawns a few steps after it is cleared.
+/usr/bin/python3 tools/ichor/maps/gate_flags.py --check | tail -1 \
+  && /usr/bin/python3 tools/ichor/maps/gate_flags.py --check >/dev/null \
+  || { echo "SMOKE FAIL: a field gate has no flag (run tools/ichor/maps/gate_flags.py)"; exit 1; }
+
 # No starter in the wild, every regular line catchable before the League, the tables as
 # planned (design/DISTRIBUTION.md).
 /usr/bin/python3 tools/ichor/distribution.py \
