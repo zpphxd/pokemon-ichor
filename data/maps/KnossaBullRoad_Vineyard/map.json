@@ -16,7 +16,7 @@
   "connections": [
     {
       "map": "MAP_KNOSSA_BULL_ROAD",
-      "offset": -23,
+      "offset": -21,
       "direction": "right"
     }
   ],

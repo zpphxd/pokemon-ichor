@@ -1,0 +1,81 @@
+// Chrysothemis's house, Delphoi (design/phase4/SCRIPT.md Part 2): a kitharode who
+// has trained for the Pythian games for eleven years. The nome quiz (three rounds:
+// what comes next in Apollo's fight with the Python) gives TM Hyper Voice; then he
+// battles while he warms up. The room is delphoi_rooms.py's.
+
+mapscripts Delphoi_KitharodeHouse_MapScripts {}
+
+text Kitharode_Text_Name { "CHRYSOTHEMIS" }
+text Kitharode_Text_Challenge { "THE CHALLENGE" }
+text Kitharode_Text_Hiss { "THE HISS" }
+text Kitharode_Text_Victory { "THE VICTORY" }
+text Kitharode_Text_Nap { "A NAP" }
+text Kitharode_Text_SerpentsHiss { "THE SERPENT'S HISS" }
+text Kitharode_Text_Encore { "AN ENCORE" }
+
+script Delphoi_KitharodeHouse_EventScript_Chrysothemis {
+    lock
+    faceplayer
+    setspeaker(Kitharode_Text_Name)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("They're holding the games again! Nobody knows who'll win!\p"
+                      "Nobody knows! For the first time ever! I might win!\pI won't. But I might."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_KITHARODE_QUIZ)) {
+        trainerbattle_single(TRAINER_ICHOR_CHRYSOTHEMIS,
+            format("Battle me while I warm up. Music is a battle, really."),
+            format("A flat ending! On the last note!"))
+        setspeaker(Kitharode_Text_Name)
+        msgbox(format("Come back. I'll have practiced. I'm always practicing."))
+        release
+        end
+    }
+    msgbox(format("The Pythian nome! Five movements!\pApollo kills the Python, in music.\p"
+                  "First, he looks the ground over. Then he challenges it.\p"
+                  "Then the fight. Then the victory. Then the serpent's last hiss.\p"
+                  "I'll play you four. You tell me what comes next. Yes?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    msgbox(format("He looks the ground over. Then?"))
+    dynmultichoice(16, 4, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Kitharode_Text_Challenge, Kitharode_Text_Hiss, Kitharode_Text_Victory)
+    if (var(VAR_RESULT) != 0) {
+        goto(Delphoi_KitharodeHouse_EventScript_Wrong)
+    }
+    setspeaker(Kitharode_Text_Name)
+    msgbox(format("The fight. Then?"))
+    dynmultichoice(16, 4, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Kitharode_Text_Victory, Kitharode_Text_Challenge, Kitharode_Text_Nap)
+    if (var(VAR_RESULT) != 0) {
+        goto(Delphoi_KitharodeHouse_EventScript_Wrong)
+    }
+    setspeaker(Kitharode_Text_Name)
+    msgbox(format("The victory. And last?"))
+    dynmultichoice(16, 4, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Kitharode_Text_SerpentsHiss, Kitharode_Text_Encore, Kitharode_Text_Challenge)
+    if (var(VAR_RESULT) != 0) {
+        goto(Delphoi_KitharodeHouse_EventScript_Wrong)
+    }
+    setspeaker(Kitharode_Text_Name)
+    msgbox(format("Yes! You've an ear. A whole ear. Most people have half.\p"
+                  "Take this. My teacher gave it me. I've never been able to use it."))
+    giveitem(ITEM_TM_HYPER_VOICE)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_KITHARODE_QUIZ)
+    }
+    release
+}
+
+script Delphoi_KitharodeHouse_EventScript_Wrong {
+    setspeaker(Kitharode_Text_Name)
+    msgbox(format("No, no. Listen again."))
+    release
+    end
+}
+
+// the kitharas on pegs
+script Delphoi_KitharodeHouse_EventScript_Thing1 {
+    msgbox(format("Kitharas on pegs, from small to enormous.\p"
+                  "A winner's laurel crown hangs on a nail among them. It's his teacher's."), MSGBOX_SIGN)
+}

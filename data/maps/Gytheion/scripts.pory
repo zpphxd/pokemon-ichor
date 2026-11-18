@@ -1,0 +1,221 @@
+// Gytheion, Lakonia's harbor (design/phase4/SCRIPT.md, beat III-5B; Part 2,
+// "Gytheion"). The map is tools/ichor/maps/lakonia_gytheion.py.
+//
+// The Euploia lands you on the east quay at (25,15) (beat III-5A, the deck's).
+// While FLAG_ICHOR_GYTHEION_DUSK is unset the evening holds and the fisherman's
+// scene runs on the frame (VAR_TEMP_0 1).
+
+mapscripts Gytheion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_GYTHEION)
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_GYTHEION)
+        if (var(VAR_ICHOR_ACT3) >= 7 && !flag(FLAG_ICHOR_GYTHEION_DUSK)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_GYTHEION)
+            setvar(VAR_0x8004, TIME_EVENING)
+            special(Ichor_HoldTimeOfDay)
+            setvar(VAR_TEMP_0, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 1: Gytheion_EventScript_Dusk
+    ]
+}
+
+text Gytheion_Text_NameFisherman { "FISHERMAN" }
+text Gytheion_Text_NameAlethea { "ALETHEA" }
+text Gytheion_Text_NameNausikles { "NAUSIKLES" }
+text Gytheion_Text_NameStallkeeper { "STALLKEEPER" }
+text Gytheion_Text_NameDyersBoy { "DYER'S BOY" }
+text Gytheion_Text_NameOldWoman { "OLD WOMAN" }
+text Gytheion_Text_NameLakonian { "LAKONIAN" }
+text Gytheion_Text_NamePatient { "PATIENT" }
+
+// ---------------------------------------------------------------------------
+// III-5B. Gytheion at dusk
+// ---------------------------------------------------------------------------
+
+script Gytheion_EventScript_Dusk {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Gytheion_Movement_ToSteps)
+    applymovement(LOCALID_GYTHEION_ALETHEA, Gytheion_Movement_AletheaToSteps)
+    waitmovement(0)
+    applymovement(LOCALID_GYTHEION_FISHERMAN, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Gytheion_Text_NameFisherman)
+    msgbox(format("Evening. Don't mind the smell. That's money, that is. Purple.\p"
+                  "Bought this off a boy last night. Holds water. Mostly."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    playse(SE_M_BUBBLE)
+    msgbox(format("He tips the helmet over the side. The sickle on its cheek-piece catches the last light."))
+    waitse
+    setspeaker(Gytheion_Text_NameAlethea)
+    msgbox(format("That's Kleon's."))
+    setspeaker(Gytheion_Text_NameFisherman)
+    msgbox(format("Couldn't say. Loud boy. Red cloak. Ate my bread.\p"
+                  "Told me he was going home to ask somebody something.\p"
+                  "Lakonians. They walk twenty miles to ask one question.\p"
+                  "Then they don't listen to the answer."))
+    closemessage
+    applymovement(LOCALID_GYTHEION_ALETHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(30)
+    applymovement(LOCALID_GYTHEION_ALETHEA, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Gytheion_Text_NameAlethea)
+    msgbox(format("I'm walking ahead. You'll want to battle everyone on the road.\p"
+                  "I want to get there before dark.\p"
+                  "Truthfully, I want to get there before Kleon does anything.\p"
+                  "The town's at the top of the valley. You can't miss it. It hasn't got any walls."))
+    closemessage
+    applymovement(LOCALID_GYTHEION_ALETHEA, Gytheion_Movement_AletheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_GYTHEION_ALETHEA)
+    setflag(FLAG_ICHOR_GYTHEION_DUSK)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_GYTHEION)
+    special(Ichor_ReleaseTimeOfDay)
+    setspeaker(SP_NAME_NONE)
+    releaseall
+}
+
+movement Gytheion_Movement_ToSteps { walk_left * 8 walk_down face_down }
+movement Gytheion_Movement_AletheaToSteps { delay_16 walk_left * 6 face_down }
+movement Gytheion_Movement_AletheaLeaves { walk_up * 4 walk_left * 3 walk_up * 6 walk_left walk_up * 6 }
+
+// ---------------------------------------------------------------------------
+// The quay
+// ---------------------------------------------------------------------------
+
+script Gytheion_EventScript_Fisherman {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameFisherman)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("People keep offering to buy my bucket. Ex-Titans. They want to melt it.\p"
+                      "I said no. It holds water."))
+    } else {
+        msgbox(format("Best bucket I ever owned. Bronze doesn't rot.\p"
+                      "Got a little sickle on the side. Very fancy. Don't know what it's for."))
+    }
+    release
+}
+
+script Gytheion_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameAlethea)
+    msgbox(format("Truthfully, I can smell the purple from here."))
+    release
+}
+
+// The ferry, from III-5A on: Skandeia or Amnisos, or stay
+script Gytheion_EventScript_Nausikles {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameNausikles)
+    msgbox(format("The Euploia's yours, while the wind holds.\pSkandeia, on Kythera?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Round Malea, then. Hold on to your hat."))
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        warp(MAP_KYTHERA_SKANDEIA, 26, 11)
+        waitstate
+    }
+    msgbox(format("Amnisos, then? Crete's a long pull."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Knossa it is. Bring a cloak. The bull's moods are worse than the sea's."))
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        warp(MAP_KNOSSA_AMNISOS, 16, 7)
+        waitstate
+    }
+    msgbox(format("Suits me. I've got a Lakonian trying to teach me to row. Lakonian-style.\p"
+                  "It's the same as normal rowing, but nobody talks."))
+    release
+}
+
+script Gytheion_EventScript_Stallkeeper {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameStallkeeper)
+    message(format("Everything's purple. Don't ask. It's the water."))
+    waitmessage
+    pokemart(Gytheion_Mart)
+    msgbox(format("Mind your sleeves on the way out."))
+    release
+}
+
+mart Gytheion_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_NET_BALL
+    ITEM_DIVE_BALL
+    ITEM_HYPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_SUPER_REPEL
+    ITEM_MAX_REPEL
+}
+
+script Gytheion_EventScript_DyersBoy {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameDyersBoy)
+    msgbox(format("You can smell us from Kythera. Ma says that's how you know we're working.\p"
+                  "Ten thousand shells for one cloak. I've counted. Twice."))
+    release
+}
+
+script Gytheion_EventScript_OldWoman {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameOldWoman)
+    msgbox(format("That's Kranai. Paris and Helen's first night, after Sparta.\p"
+                  "Everyone tells it like she was stolen. Ask Klymene how she tells it."))
+    release
+}
+
+script Gytheion_EventScript_Lakonian {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NameLakonian)
+    msgbox(format("Lakonia's up the valley. All day's walk."))
+    closemessage
+    delay(30)
+    msgbox(format("…\pThat's all I've got."))
+    release
+}
+
+script Gytheion_EventScript_Patient {
+    lock
+    faceplayer
+    setspeaker(Gytheion_Text_NamePatient)
+    msgbox(format("Front row. Best seat for getting better, she says.\p"
+                  "I've been getting better for three days. It's very restful."))
+    release
+}
+
+script Gytheion_EventScript_TownSign {
+    msgbox(format("GYTHEION\pLakonia's harbor. NORTH: Route 25, up the Eurotas."), MSGBOX_SIGN)
+}
+
+script Gytheion_EventScript_Herm {
+    msgbox(format("A harbor herm, its beard stained purple to the chin."), MSGBOX_SIGN)
+}
+
+script Gytheion_EventScript_Cape {
+    msgbox(format("Past the headland, the strait runs east to Cape Malea.\p"
+                  "Sailors say rounding it makes you forget your home."), MSGBOX_SIGN)
+}
+
+// The islet off the headland (by Surf): a hook to the Oikoumene's Proteus lead
+script Gytheion_EventScript_Proteus {
+    msgbox(format("A ruined shrine, the size of a fisher's hut. A carved seal-herd on the lintel.\p"
+                  "“The Old Man of the Sea told Menelaos: she never reached Troy.\p"
+                  "Ask in Egypt. Ask at Pharos.”"), MSGBOX_SIGN)
+}
+
+script Gytheion_EventScript_TheaterView {
+    msgbox(format("A painted panel by the door, the view from the theater's top row: the whole gulf, purple at the edges where the dyers rinse.\p"
+                  "Kranai in the bay. Malea's cliffs to the east. Behind, the valley climbs to the mountains."), MSGBOX_SIGN)
+}

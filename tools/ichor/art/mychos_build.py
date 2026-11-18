@@ -111,8 +111,8 @@ for _role, _set in (("stone", S), ("night", N), ("fire", F), ("bronze", B), ("ti
         assert _c in PALS[_role], (_role, _nm, _c)
 
 # The cave kit's colors (cave_dark_lib.C names) mapped into the Labyrinth's.
-ROCK_MAP = {"k0": "lk", "k1": "ls1", "k2": "ls2", "k3": "ls3", "k4": "ls3", "k5": "ls4",
-            "k6": "ls5", "k7": "ls6", "k8": "ld1", "tl1": "ls2", "tl2": "ld0", "ch1": "ls3",
+ROCK_MAP = {"k0": "lk", "k1": "ls1", "k2": "ls2", "k3": "ls2", "k4": "ls3", "k5": "ls3",
+            "k6": "ls4", "k7": "ls5", "k8": "ls6", "tl1": "ls2", "tl2": "ld0", "ch1": "ls3",
             "ch2": "ls5", "wh": "ld1", "f3": "ls3"}
 FLOOR_MAP = {"k0": "lk", "f0": "lk", "f1": "ls1", "f2": "ls2", "f3": "ls3", "f4": "lj",
              "f5": "ls5", "f6": "ls6", "pd1": "ls2", "pd2": "ld0", "mn1": "ld0", "mn2": "ld1",
@@ -260,7 +260,7 @@ def base_piece(key):
 
 
 def base_floor_void():
-    p = Piece("void", 1, 1, ["X"], "house")
+    p = Piece("void", 1, 1, ["X"], "house", {"void": (0, 0)})
     p.put(0, 0, base_cell(0x200))
     return p
 
@@ -991,6 +991,52 @@ def write_catalog_module(cats):
         '"""\nimport json\n\nCATALOG = json.loads(r\'\'\'' + body + "''')\n")
 
 
+LABELS = {   # the metatiles scripts swap in: METATILE_<Set>_<Name>
+    "mychos": [("CaveFloor", "cave", "cave"), ("SunFloor", "sun", "sun"), ("Grate", "doorways", "grate"),
+               ("Cracked", "formations", "cracked"), ("DialA", "dials", "dial_a"), ("DialB", "dials", "dial_b"),
+               ("DialPivot", "dials", "pivot"), ("DialTopSeg", "dials", "top_seg"),
+               ("DialFaceSeg", "dials", "face_seg"), ("DialTopEnd", "dials", "top_end"),
+               ("DialFaceEnd", "dials", "face_end"), ("Lever", "dials", "lever"), ("Seal", "doorways", "seal"),
+               ("SlabL", "thread", "dark_l"), ("SlabR", "thread", "dark_r")],
+    "astra": [("CaveFloor", "cave", "cave"), ("Marble", "marble", "marble"), ("DanceBlank", "dance", "blank"),
+              ("DanceX", "dance", "x"), ("DanceW", "dance", "w"), ("DanceL", "dance", "l"),
+              ("DanceR", "dance", "r"), ("DanceS", "dance", "s"), ("DanceXLit", "dance", "x_lit"),
+              ("DanceWLit", "dance", "w_lit"), ("DanceLLit", "dance", "l_lit"), ("DanceRLit", "dance", "r_lit"),
+              ("DanceSLit", "dance", "s_lit"), ("DanceStair", "dance", "stair"),
+              ("BeamSunEW", "beam", "sun_ew"), ("BeamStarEW", "beam", "star_ew"),
+              ("AnvilEmptyL", "star_anvil", "empty_l"), ("AnvilEmptyR", "star_anvil", "empty_r"),
+              ("FrescoIV_l0", "fresco_iv", "l0")],
+}
+
+
+def write_labels(cats):
+    path = ROOT / "include/constants/metatile_labels.h"
+    text = path.read_text()
+    for name, rows in LABELS.items():
+        cap = name.capitalize()
+        begin = f"// gTileset_{cap} (Ichor: the Labyrinth's heart), written by tools/ichor/art/mychos_build.py"
+        end = f"// end gTileset_{cap}"
+        lines = [begin]
+        P = cats[name]["pieces"]
+        for label, key, part in rows:
+            p = P[key]
+            cx, cy = p["names"][part]
+            lines.append(f"#define METATILE_{cap}_{label:<20s} 0x{p['ids'][cy][cx]:03X}")
+        if name == "astra":   # the fresco reveal swaps whole 3x3 blocks: their first ids
+            for k in ("fresco_iv", "fresco_v", "fresco_vi", "fresco_faded"):
+                lines.append(f"#define METATILE_{cap}_{k.title().replace('_', ''):<20s} 0x{P[k]['ids'][0][0]:03X}")
+        lines.append(end)
+        block = "\n".join(lines)
+        if begin in text:
+            a = text.index(begin)
+            b = text.index(end, a) + len(end)
+            text = text[:a] + block + text[b:]
+        else:
+            i = text.rindex("#endif")
+            text = text[:i] + block + "\n\n" + text[i:]
+    path.write_text(text)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-compile", action="store_true")
@@ -1018,6 +1064,7 @@ def main():
         if not args.no_compile:
             compile_tileset(name, sym, src)
     write_catalog_module(cats)
+    write_labels(cats)
 
 
 if __name__ == "__main__":

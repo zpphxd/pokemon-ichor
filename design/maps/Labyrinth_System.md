@@ -44,8 +44,8 @@ Warp ids are each map's `warp_events` index. "Arrival" warps sit on a floor or a
 
 | From | Cell | Goes to | Status |
 |---|---|---|---|
-| Grand Staircase (Knossa builder) | its way down | Ring I warp 0 (arrival on the threshold ring, (21,2)) | **Knossa builder:** please aim it here |
-| Ring I warps 1-2 | the stair up (21-22,1) | `MAP_KNOSSA_PALACE_GRAND_STAIRCASE` warp 0 | falls back to Ring I warp 0 until the palace lands (`labyrinth_lib.dest`) |
+| Grand Staircase | its stair-foot trigger | Ring I warp 0 (arrival on the threshold ring, (21,2)) | built |
+| Ring I warps 1-2 | the stair up (21-22,1) | `MAP_KNOSSA_PALACE_GRAND_STAIRCASE` warp 1 (its dark doorway) | built |
 | Ring I warp 3 | arrival on the gate ring (30,26) | — | Ring II's stair up lands here |
 | Ring I warps 4-5 | the stair down (30-31,25), grated until G burns | Ring II warp 0 | |
 | Ring I warp 6 | arrival on the cleft ring (38,6) | — | Ring II's flowstone climb lands here |
@@ -60,17 +60,18 @@ Warp ids are each map's `warp_events` index. "Arrival" warps sit on a floor or a
 | Ring III warp 0 | arrival on its entrance ring | — | |
 | Ring III warps 1-2 | the stair up | Ring II warp 6 | |
 | Ring III warp 3 | arrival in the sealed web pocket | — | burn out from inside |
-| Ring III front door / back door | warps | Workshop warps 0 / 1 | |
-| Ring III warps (arrivals) | outside each door | — | the workshop's doors land here |
+| Ring III warps 4 / 5 | the front door (30,37) / the back door (50,13) | Workshop warps 0 / 1 | the front door is sealed until its three floor plates are covered |
+| Ring III warps 6 / 7 | arrivals outside each door | — | the workshop's doors land here |
 | Ring III hole | coord event in the webs | Ring IV warp 3 (the Titans' dig) | one way |
 | Workshop warps 0 / 1 | front door / back door | Ring III's arrivals | |
 | Workshop warps 2-3 | the stair down | Ring IV warp 0 | |
-| Workshop lift | script, after scene D | Grand Staircase (Knossa builder: a landing warp by its stair) | falls back as above |
-| Ring IV warps 4-5 | the stair down at Enkelados's checkpoint | **Ring V warp 0** (Labyrinth II: arrival on the gallery) | Labyrinth II to provide |
-| Ring IV warp 6 | arrival by its stair down | — | **Ring V's stair up should land here** |
-| Ring IV stream chute | coord event on the water | **Ring V warp 2** (Labyrinth II: arrival in the lake) | Labyrinth II to provide |
-| Ring V's %1 breach (Labyrinth II) | warp | Minos's tomb warp 0 | Labyrinth II |
-| Minos's tomb warp 0 | the door back | **Ring V warp 1** (arrival outside %1) | Labyrinth II to provide |
+| Workshop lift (20,2) | script, after scene D | Grand Staircase warp 1 | built; the staircase's lift down lands on workshop warp 5 (20,3) |
+| Workshop warp 4 | arrival below the stair (6,3) | — | Ring IV's stair up lands here |
+| Ring IV warps 4-5 | the stair down at Enkelados's checkpoint | Ring V warp 0 | built |
+| Ring IV warp 6 | arrival by its stair down | — | Ring V's warps 0, 3 and 7 land here |
+| Ring IV stream chute | coord event on the water | Ring V warp 2 | built |
+| Ring V warps 1, 4 (Labyrinth II) | the stair into the tomb (44-45,13) | Minos's tomb warp 0 | built |
+| Minos's tomb warps 0-1 | the threshold (7-8,10) | Ring V warp 1 | built (the tomb is Labyrinth I's) |
 
 ## Shared ids
 
@@ -84,3 +85,81 @@ Warp ids are each map's `warp_events` index. "Arrival" warps sit on a floor or a
 ## The stream
 
 A trickle in Ring II's cleft, a surfable stream across Ring III, a channel through Ring IV's dig that ends in a chute down to Ring V's lake, then falls past Ring VI's forge. Downstream is always a way deeper. The upper rings' water tables are in `tools/ichor/maps/labyrinth_encounters.py`.
+
+## Relics in every ring (LABYRINTH_MAZE.md, the user's "HM stuff")
+
+"Must" means on the only way on (a bridge of the ring's maze graph, or the only door); the rest sit on side loops and dead ends. Field obstacles hide on temp flags, so they come back when the map reloads, as in Emerald.
+
+| Ring | Must use | Optional | Combination |
+|---|---|---|---|
+| I | **Hecate's Torch** (the dark; carry the hearth fire to six braziers), **Ariadne's Thread** (the tie lesson at A1), **Bronze Hammer** (the roof-fall across the gate room's only arch) | Demeter's Sickle (roots in the cleft's side passage); the Labrys on the way back up (the stewards' treasury seal) | the fire relay: carry the Torch's fire past the draught, and the fresco door that only B1's light shows |
+| II | **Torch** (the dark), **Thread**, **Bronze Hammer** (the stair room's fallen ceiling), **Girdle of Herakles** (Daedalus's floor seal on whichever gate the hour opens: one drum by day, two by night) | Sickle (roots choking the grotto), the Labrys on the way back (the runners' shrine) | the herald plates and the floor seal: the grate only rises with the drum in place, then you run |
+| III | **Torch** (pitch dark; burn the webs on the front way), **Girdle** (three drums onto three plates unseal the workshop's front door), **Bronze Hammer** (the stair room's way out); the back way needs **Poseidon's Conch** | Conch (the Big Pearl's islet), the glow trail with the Torch doused | the back way: douse the Torch to read Daedalus's glow-marks, then Surf the stream to the back door |
+| Workshop | — (the hub) | the lift (after scene D) | — |
+| IV | **the Labrys** (bronze chains across the checkpoint's only door), **Girdle** (three drums onto three plates raise the stair's grate; the third drum must cross the second's path first), **Bronze Hammer** (the Titans' cave-in by the stair) | the Titan helmet (the disguise), Sickle (dig roots), Conch (the stream to the chute, the way down to Ring V's lake) | the checkpoint: cut the chains, answer or fight Enkelados, then the floor seal |
+| V-VII | Labyrinth II's (the Helm, the dials, the Horn at the forge falls) | — | — |
+
+**Hooks for later** (post-game relics; each guards a stronger Pokémon and an item):
+- Ring I: a labrys seal (open on the return from Ring III) on the stewards' treasury: a forgotten bronze Kolossette Lv 52, a Gold Stater.
+- Ring II: a labrys seal on the runners' shrine: a Taurivet of the palace herd Lv 52, a Silver Owl.
+- Ring III: a Three-Flamed Torch thornweb over the spiders' mother-nest: Hyphantis Lv 55, TM Toxic.
+- Ring IV: a Hephaestus's Hammer great boulder sealing the Titans' deepest dig: Geogrip Lv 56, a Nugget.
+- **Pan's Crook:** the relic isn't built yet (no item or climb behavior). The cave flowstone faces in Ring II's grotto and Ring IV's dig are where its handholds go; Ring II's grotto already climbs to Ring I by script.
+
+## Daedalus's floor seals (Strength puzzles)
+
+Column drums (the expansion's Strength boulder) onto bronze plates (the herald plate's metatile). The check runs from coord events on the room's cells after a push (one step after the last push); FLAG_TEMP_4/5 hold the open state, so leaving the map puts the drums back and shuts the way; each room has a reset lever (a double-axe handle on the wall) that does the same at once.
+
+| Ring | Seal | Difficulty |
+|---|---|---|
+| II | the sun room: 1 drum, 1 plate; the Moon Room: 2 drums, 2 plates | teaches the idea |
+| III | the workshop's front door: 3 drums, 3 plates, pushed down, down and up | a short plan |
+| IV | the checkpoint's stair: 3 drums, 3 plates; the long push crosses another drum's lane, so the order matters | order matters |
+
+Not built: plates that reset when stepped off, pits filled with blocks, drums pushed into the stream as stepping stones (Gen 3 boulders can't enter water without engine work).
+
+## The lost (the tribute, and explorers since)
+
+Read as signs; darker as you go down. Some hint that the Titans goaded Asterion (LABYRINTH §8: a frightened bull driven into a monster).
+
+| Ring | Where | What |
+|---|---|---|
+| I | (10,21) | a tally of days scratched in the plaster, stopping at nine |
+| I | (2,17) | "SEVEN TURNED LEFT. I TURNED RIGHT." in an Athenian hand |
+| I | (36,9) | a burned-out torch snapped in two |
+| II | (44,9) | a sandal by the trickle, its strap cut |
+| II | (22,21) | in the Long Hall: "IT RAN AT THE FIRE, NOT AT US." |
+| III | (6,5) | bones under old web, a girl's bronze pin |
+| III | (20,25) | "THE BRONZE MEN DROVE IT AT US WITH FIRE. IT DID NOT WANT TO." |
+| III | (40,30) | an explorer's satchel, every line of the map crossed out |
+| IV | (5,30) | a snapped Titan spear and claw marks |
+| IV | (30,13) | chalked by the barracks: "DRIVE IT WITH THE TORCHES. IT HATES THE TORCHES." |
+| IV | (20,37) | bones, an Astyran owl shield and a pack |
+
+No new art: the remains are read from walls and floor (the tileset has no bones piece; see the report).
+
+## Awe moments
+
+- **Ring I:** the threshold hall, the house's oldest fire under the stair from the palace.
+- **Ring II:** the Long Hall, where the dark at the far end lifts its head and the wall beside you bursts.
+- **Ring III:** the stream canyon down the east side, two screens of black water in a raw cave cut, crossed only by Surf.
+- **Workshop:** Daedalus's vaulted hall of bronze automata under the grey light of the Icarus Shaft.
+- **Ring IV:** the Titans' mess hall under sickle banners, and the dig where the stream roars over the lip into Ring V.
+
+## Vertical treasure: the cellars
+
+`MAP_LABYRINTH_CELLARS` (`tools/ichor/maps/labyrinth_cellars.py`): nine sealed rooms under the upper rings, two per ring, each reached by a side stair down from a dead end (or a hole in a dead end's floor where no wall was free), each with treasure. Room r's warps: 3r the arrival, 3r+1 and 3r+2 its stair back up; the ring arrivals are in `tools/ichor/maps/labyrinth_cellars.json`, written by the ring builders (build the rings first).
+
+| Room | From | Treasure | Note |
+|---|---|---|---|
+| 0, 1 | Ring I (a stair; a hole) | PP Up; Gold Stater | |
+| 2, 3 | Ring II (a stair; a hole) | Rare Candy; TM Psychic | |
+| 4, 7 | Ring III (stairs) | Comet Shard; Star Piece | room 7's floor gives into room 8 |
+| 8 | room 7, two drops down | TM Earthquake | **its stair comes up in Ring IV's dig**, not in Ring III |
+| 5, 6 | Ring IV (stairs) | TM Flamethrower; PP Max | |
+
+The drops between rings are built too: Ring I's hole into Ring II's grotto and the flowstone climb back; Ring II's sunken floor into Ring III's web pocket; Ring III's hole into Ring IV's dig; Ring IV's chute into Ring V's lake.
+
+## New set piece
+
+**The dig cavern (Ring IV):** the Titans' tunnelling broke into a cave four nodes square, 16×16 cells, with the underground river running down it from its spring to the chute. It is the first open cave the player sees after three rings of corridors.

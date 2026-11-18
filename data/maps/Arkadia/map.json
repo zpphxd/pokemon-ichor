@@ -294,6 +294,32 @@
       "flag": "FLAG_ICHOR_ITEM_ARKADIA_MAX_REPEL"
     },
     {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GREAT_HERM",
+      "x": 21,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorTownHerm",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE",
+      "x": 20,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorTownHermSign",
+      "flag": "0"
+    },
+    {
       "local_id": "LOCALID_ARKADIA_MEASURER",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LOTIRA)",
       "x": 28,

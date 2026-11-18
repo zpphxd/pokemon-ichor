@@ -41,7 +41,7 @@ Three conventions hold throughout.
 4. **Every system feeds another.**
    - Rites upgrade relics.
    - Digging fills amphorae, which point to rare Pokémon and place constellations.
-   - Herms you anoint in Act I become fast-travel points in Act II.
+   - Every town's herm carries you between towns from the start; herms you anoint on the routes join the Wings' fly map in Act II.
    - Daedalus's pages, found across Acts I–III, unlock the Labyrinth's secrets.
 5. **Myth as rule, not lecture.** Hestia takes a share of every offering, because she took the first and last of every feast. Demeter refuses pomegranates. Nobody explains either.
 6. **One blessing at a time, counted in steps,** like a Repel.
@@ -58,7 +58,7 @@ Three conventions hold throughout.
 | 1 | Relics | 13 relics replace every HM and add four new verbs | 1.0 (2 are post-game) |
 | 2 | Fire and light | Hecate's Torch, darkness, braziers you light for good, carried flames | 1.0 (halos stretch) |
 | 3 | Rites | Pray or offer at about 60 altars; Favor with 15 gods; timed blessings; 3 gifts per god | 1.0 (tier III stretch) |
-| 4 | Herm waystones | Anoint one herm per route; they become Wings landing points | 1.0 |
+| 4 | Herm waystones | A travel herm at every town's gate, registered by its Asclepeion or a touch; route herms anointed for Hermes become Wings landing points | 1.0 |
 | 5 | Excavation | Alethea's Trowel: coins, fossils, ostraka, 12 amphorae of myth, prophecy fragments, Daedalus's pages | 1.0 (paintings stretch) |
 | 6 | Omens | One augury a day: a swarm, a rare visitor, the weather or a lucky sign | 1.0 |
 | 7 | Festival calendar | 11 festivals on a 36-day Aethos year | 4 in 1.0, rest stretch |
@@ -90,7 +90,7 @@ Main-path relics are in bold.
 | 4 | **Demeter's Sickle** | Cut (thickets, vines, reeds) | End of Act I, after Laurel 3 | Eleusa, Chloe, after the theft | The vine-choked road to Thyrsa | — |
 | 5 | **Girdle of Herakles** | Strength (column drums) | Act II, after Laurel 4 | Thyrsa, Silenos the old actor | The drum-blocked pass to Arkadia | — |
 | 6 | **Poseidon's Conch** | Surf, riding a dolphin | Act II, after the Akropolis battle | Astyra, the salt well under the Akropolis | Open sea; your own route to Thera | Triton's Conch, at Poseidon Favor 60: calm whirlpools (post-game Odyssey) |
-| 7 | **Daedalus's Wings** | Fly | End of Act II, after Laurel 6 | Kaldera, Talos the Bronzesmith | Fast travel. Every herm you anointed goes live. | — |
+| 7 | **Daedalus's Wings** | Fly | End of Act II, after Laurel 6 | Kaldera, Talos the Bronzesmith | Fly from anywhere, not only from a herm (herm travel between towns works from the start, §4). Every route herm you anointed goes live on the fly map. | — |
 | 8 | **Horn of Achelous** | Waterfall | Act III, after Laurel 7 | Kythera, the Naiads of the Neraida falls | The Kastalian falls up to Delphoi, then the Ascent | — |
 | 9 | **Ariadne's Thread** | Marks your path; ties anchors; escape | Act III, Knossa | Ariadne, at the Grand Staircase | The Labyrinth | Post-game: a longer spool |
 | 10 | **Labrys** | Turns Daedalus's dials; cleaves labrys seals and bronze chains | Act III, Labyrinth Ring III | Daedalus | Labyrinth Rings IV–VII, then Minoan vaults | — |
@@ -633,7 +633,33 @@ Using berries as first fruits also settles the berry question that INVENTORY §1
 
 ### Play
 
-Every route has one **great herm**: a garlanded pillar with Hermes's head, darker than the others where hands have touched it. Talk to it while you carry oil:
+Herms do two jobs: **travel** between towns from the very start, and **anointing**, a Favor rite for Hermes on the routes.
+
+**Travel herms** (user, 2026-11-17). Every town, hamlet and major rest stop has a great herm right at its main entrance, a step or two from where you arrive: Hermes's head in a bright winged cap, a laurel garland, a bronze caduceus down the pillar. A small plaque beside it reads:
+
+```text
+The herm of Akti.
+Touch it to travel between herms.
+```
+
+The town's herm becomes a destination the first time you rest at its Asclepeion (or its healer, or the inn where there is no Asclepeion), or touch the herm. The healer says so the first time:
+
+```text
+Go in health.
+
+Our town's great herm knows you now.
+Touch any herm, and Hermes will bring you back to us.
+```
+
+Touch any town's herm and it offers to carry you:
+
+```text
+The great herm of Emporion.
+Travel to another herm?
+```
+?? YES/NO, then a list of every town whose herm knows you, in story order, and "Stay here". Pick one and the screen flashes white: you stand beside that town's herm. No Olive Oil and no relic are needed. Daedalus's Wings, at Laurel 6, add flying from anywhere through the Fly map.
+
+**Route herms.** Every route has one great herm too: a garlanded pillar with Hermes's head, darker than the others where hands have touched it. Talk to it while you carry oil:
 
 ```text
 A great herm, hung with old garlands. Hermes's face, worn smooth.
@@ -647,11 +673,17 @@ The oil runs down the old stone face.
 Somewhere, Hermes makes a note.
 ```
 
-From Act I you can anoint herms, and Kerykos tells you why: travelers swear Hermes carries them back to any herm he remembers. You collect them on faith. At Laurel 6 you get Daedalus's Wings, and every herm you anointed appears on the Fly map at once. The faith pays off a whole act later.
+From Act I you can anoint herms, and Kerykos tells you why: Hermes remembers every traveler who honors his stones. Each anointing is Favor for Hermes. At Laurel 6 you get Daedalus's Wings, and every route herm you anointed appears on the Fly map at once, so you can land in the middle of a route as well as in a town.
 
 ### Rules
 
-- There is one great herm per route map section; about 22 in 1.0.
+- **Travel herms.**
+  - One per town, hamlet and major rest stop, at the main entrance (MAP_DESIGN §2), with its plaque. 19 in the current build, from Elaia to Olympus's Propylaia.
+  - Registered by the town's first heal (Asclepeion, healer, Mom at home, or the inn in Aigina and Styx Falls) or by touching the herm. Registering costs nothing and gives no Favor.
+  - Every travel herm offers TRAVEL once another town is registered. The list shows registered towns only, never the one you stand in. Route herms stay with anointing: the Wings fly from them, and from anywhere.
+  - You land on the tile beside the town's herm, on the main path.
+  - Travel herms are not anointed. Emporion keeps its anointing herm at the crossroads beside its new gate herm.
+- **Route herms.** There is one great herm per route map section; about 22 in 1.0.
   - Other herms stay signposts, like the slice's three on Route 1.
   - Route 1's spur-fork herm becomes Kalliste's great herm.
 - Anointing costs 1 Olive Oil and gives Hermes +1 Favor, once per herm.
@@ -670,27 +702,25 @@ From Act I you can anoint herms, and Kerykos tells you why: travelers swear Herm
 
 ### Where
 
+- Herm travel between towns from Elaia onward: the first trip is possible once a second town is registered (Akti).
 - Anointing from Act I (Emporion) onward.
-- Flying to herms from Act II's end.
+- Flying to anointed route herms, and from anywhere, from Act II's end.
 
 ### Engine
 
-- Fly works per map section. `GetMapsecType` in `src/region_map.c` (around line 1423) returns a route type for routes. `sMapHealLocations` (around line 383) gives each route `HEAL_LOCATION_NONE`.
-- **The change:**
-  - Give each route a heal location at its herm.
-  - Have `GetMapsecType` return the can-fly type for a route whose `FLAG_ICHOR_HERM_<ROUTE>` is set.
-  - Extend the fly-destination icon loop to draw route dots.
-- The Aethos region map is new art anyway (INVENTORY §5). **Medium–Low.** The risk is the fly map's cursor logic for route sections.
+- **Travel herms** (built; ENGINE_API §4). The herm and plaque are object events (`OBJ_EVENT_GFX_ICHOR_GREAT_HERM`, `_HERM_PLAQUE`), so they look the same on every tileset and need no new metatiles. `tools/ichor/maps/town_herms.py` places them; `src/data/ichor_town_herms.h` holds each town's landing tile, healer and name; the travel menu is a `dynmultistack` list; the trip is `SetWarpDestination` plus the white-flash warp.
+- **Route herms** (built). Fly works per map section. `GetMapsecType` in `src/region_map.c` returns the can-fly type for a route whose herm is anointed, the fly map draws a dot for it, and each route herm has a heal location at its landing tile.
 
 ### Cost
 
-- A herm-dot icon on the fly map.
-- 22 heal locations.
-- Text: ~1 KiB.
+- Two field objects (a 16x32 herm, a 16x16 plaque) in the cast palette: under 1 KiB.
+- A herm-dot icon on the fly map; one heal location per route herm.
+- Text: ~2 KiB.
 
 ### Flags and vars
 
-- 22 flags, `FLAG_ICHOR_HERM_<ROUTE>`.
+- 32 flags, `FLAG_ICHOR_TOWN_HERM_<TOWN>` (`FLAG_ICHOR_TOWN_HERMS_START` + `TOWN_HERM_*`; 13 spares for new towns).
+- 32 flags for route herms, `FLAG_ICHOR_HERMS_START` + `HERM_*`.
 - No vars.
 
 ---
@@ -1621,13 +1651,17 @@ Every trial also has:
 - **Acolytes:** three *mystai*; one **optional**, beside a side seed.
 - **Chloe** waits in the anaktoron. Her reveal is a single reaped ear of grain.
 
-**4. Dionysus: the Three-Act Play.**
-- **The stage** has three doors (comedy, tragedy, satyr) and a rack of masks. A program scroll says who enters by which door in each act. Acolytes in your mask let you pass, and the rest battle you.
-- **Teach** (Act I): one door, one mask. The program says plainly: "Enter the Comic, by the left door."
-- **Test** (Act II): three doors and cues instead of names ("Enter the one who weeps").
-- **Master** (Act III): the program leaves out the last entrance. The answer is the mask "the play forgot", the satyr play that always followed a tragedy.
-- **Acolytes:** one actor per act; Act II's is **optional**.
-- **Thespis** waits on the stage-building's roof, where the god-machine sets gods down.
+**4. Dionysus: the Three-Act Play.** Built: `data/maps/ThyrsaCity_TempleOfDionysus/scripts.pory`, map from `tools/ichor/maps/thyrsa.py`.
+- **The play** is *The Vintner's Gift*. Three painted scenery walls stand between the green room (backstage, by the entrance) and the stage-building's roof, one wall per act, each with a left, middle and right door. Each act is one entrance: the right door in the right mask walks you onto the next stage, and that door stays open.
+- **The rules**, chalked in the green room: come on through the door painted with where you've just been; wear the face your part would wear; miss your cue and the floor will find you. The doors are painted with vines on a hillside (left), a house's lit gate (middle) and a ship with ivy up its mast (right). Masks hang on a rack in the green room only, so you dress before you go up.
+- **Teach** (Act I): the script says the stranger steps off a ship, laughing. Comedy, right door. The prompter catches a wrong try for free.
+- **Test** (Act II): "Enter the one they blame." The vintner poured, then went in to bed: he comes from the house (middle). His mask takes two clues: the comic acolyte says nobody laughs in Act II, and a fresco says the goat-men always come last. Tragedy, middle door.
+- **Master** (Act III): the page is torn off. A tragedy is followed by the satyr play (the fresco, the chorus leader), and the goat-men follow their god in by his door (a second fresco, the tragic acolyte). The comic acolyte lets slip that the stranger is the god, so the god's door is the ship's. Satyr, right door. Myth-savvy players spot Dionysus in the ivy-masted ship.
+- **Costs:** in Acts II and III a wrong door is a trapdoor back to the green room, and the right door in the wrong mask is a battle with the chorus (`TRAINER_ICHOR_THYRSA_CHORUS`, fought again every time).
+- **Acolytes:** the comic actor guards the one gap in Act I's footlights; the tragic actor on Act II's stage is **optional** and gives a clue; the satyr actor guards the crane.
+- **Safety valve:** the prompter in the green room gives a nudge for the act you're on.
+- **Thespis** waits on the stage-building's roof. The mechane (crane) lifts you there once Act III is played, and lowers you again.
+- **The Dionysia** reuses the painted doors. Thespis's cues name no doors ("a fool drunk in the vineyards", "someone from the king's own house", "the goat-men, the way they come in"), and a wrong cue undoes the entrances made so far.
 
 **5. Artemis: the Hunt for the Hind.**
 - **The grove** is a temple garden under endless night. A hound that sees you sends you back to the start of the current stage, not the whole trial.

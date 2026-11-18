@@ -28,13 +28,13 @@ DOORS = {"ThroneRoom": (14, 23), "WestMagazines": (7, 33), "QueensMegaron": (47,
          "GrandStaircase": (45, 23)}
 
 
-def pave(m, cells, seed=0):
+def pave(m, cells, seed=0, clean=False):
     for (x, y) in cells:
         k = KM._hash(x, y, seed) % 23
         n = "ABCD"[(x + 2 * y + (k > 11)) % 4]
-        if k == 0:
+        if k == 0 and not clean:
             n = "cracked"
-        elif k in (7, 15):
+        elif k in (7, 15) and not clean:
             n = "weeds"
         m.piece("paving", n, x, y)
 
@@ -66,10 +66,15 @@ def wing(m, x0, x1, y0, y1, faces=(), tops=(), shadow=False):
     for y in range(y0, y1 - 1):
         for x in range(x0, x1 + 1):
             n = "top_L" if x == x0 else ("top_R" if x == x1 else "top")
-            if y == y0 and x0 < x < x1 and (x * 5 + y) % 6 == 0:
+            if y > y0 and x0 < x < x1:
+                # the roof behind the parapet: rubble-filled masonry, a fallen patch here and there
+                n = "block" if KM._hash(x, y, 43) % 7 else "rubble"
+            elif y == y0 and x0 < x < x1 and (x * 5 + y) % 6 == 0:
                 n = "top_horns"
-            elif x0 < x < x1 and KM._hash(x, y, 41) % 17 == 0:
+            elif x0 < x < x1 and KM._hash(x, y, 41) % 9 == 0:
                 n = "top_broken"
+            elif y > y0:
+                n = "side"
             m.piece("walls", tops.get((x, y), n), x, y)
     for y in (y1 - 1, y1):
         for x in range(x0, x1 + 1):
@@ -141,6 +146,7 @@ def build(stem):
                 ("face_R" if (x == W - 1 or (stepR and lipy[x + 1] > y)) else ("face_b" if x % 4 == 1 else "face")), x, y + 1)
     for x in range(1, W - 1, 3):
         m.piece("cliff", "foot_grass", x, 48)
+    m.part("court_works", "stair_L", 28, 45, 2, 2)
     for (x, y) in ((2, 48), (9, 48), (16, 48), (36, 48), (44, 48), (52, 48)):
         m.olive(x, y)
 
@@ -149,7 +155,8 @@ def build(stem):
                                       if KM._hash(x // 2, y // 2, s) < 760 or (x0 < x < x1 and y0 < y < y1)}
     zones = (blob(1, 13, 7, 16, 61) | blob(2, 41, 8, 44, 62) | blob(14, 43, 20, 44, 63) | blob(56, 8, 58, 14, 64)
              | blob(53, 24, 58, 27, 65) | blob(41, 38, 50, 44, 66) | blob(52, 38, 58, 43, 67) | blob(1, 23, 5, 25, 68)
-             | blob(17, 26, 20, 31, 69))
+             | blob(17, 26, 20, 31, 69) | blob(55, 28, 58, 34, 70) | blob(40, 24, 44, 27, 71)
+             | blob(1, 7, 4, 9, 72) | blob(43, 7, 50, 9, 73))
     ruin(m, zones)
     # the hill's flanks: cypress and broken masonry along the edge, so it never runs straight
     for y in range(9, 44, 7):
@@ -172,6 +179,10 @@ def build(stem):
     for y in (10, 11, 12):
         for x in range(6, 16):
             m.piece("paving", "dance" if (x + y) % 2 else "dance_b", x, y)
+    # its second flight, running north-south along the dance floor's east side
+    for y in range(8, 13):
+        m.piece("court_works", "steps_corner" if y == 8 else "steps_V", 16, y)
+        m.piece("court_works", "steps_V", 17, y) if y > 8 else m.piece("court_works", "steps_R", 17, y)
 
     # ---- the north wing and the North Entrance passage ----
     wing(m, 18, 26, 7, 11, faces={(22, 10): "face_frieze", (23, 10): "face_frieze", (18, 10): "face_window"})
@@ -194,17 +205,28 @@ def build(stem):
     m.part("court_works", "well_TL", 6, 17, 2, 2)
     wing(m, 4, 13, 27, 29)
     wing(m, 2, 15, 30, 33, faces={(7, 33): "door", (3, 32): "face_window", (12, 32): "face_window"})
-    m.part("court_works", "pit_TL", 4, 38, 2, 2)
-    m.part("court_works", "pit_TL", 9, 40, 2, 2)
-    m.part("court_works", "pit_TL", 14, 37, 2, 2)
-    for (x, y) in ((3, 35), (17, 35), (2, 43), (18, 42)):
-        column(m, x, y, broken=(x + y) % 3 == 0)
+    for x in range(3, 15, 2):
+        m.piece("columns", "pithos_top", x, 25)
+        m.piece("columns", "pithos", x, 26)
+    # the West Court: a lower lawn crossed by raised paved walkways, three kouloures
+    west_court = {(x, y) for x in range(1, 21) for y in range(35, 45)}
+    walks = ({(x, 34) for x in range(2, 21)} | {(16, y) for y in range(34, 45)} | {(x, 40) for x in range(1, 16)}
+             | {(x, 44) for x in range(16, 21)})
+    ruin(m, west_court - walks)
+    pave(m, walks - {(16, 34)}, seed=12, clean=True)
+    m.part("court_works", "pit_TL", 4, 37, 2, 2)
+    m.part("court_works", "pit_TL", 9, 42, 2, 2)
+    m.part("court_works", "pit_TL", 12, 36, 2, 2)
+    for (x, y) in ((3, 41), (12, 39), (17, 38)):
+        m.piece("court_works", "steps_V", x, y)
+    for (x, y) in ((19, 41), (2, 42)):
+        column(m, x, y, broken=True)
     m.piece("walls", "rubble", 6, 43)
-    m.piece("walls", "rubble", 12, 44)
+    m.piece("walls", "rubble", 14, 43)
 
     # ---- the Central Court: the lane, the pen, the porticoes ----
     court = {(x, y) for x in range(22, 39) for y in range(14, 34)}
-    pave(m, court, seed=3)
+    pave(m, court, seed=3, clean=True)
     m.piece("paving", "lane_N", LANE_X, LANE_N)
     for y in range(LANE_N + 1, LANE_S):
         m.piece("paving", "lane_line" if y == LANE_S - 1 else "lane", LANE_X, y)
@@ -220,18 +242,27 @@ def build(stem):
     m.piece("court_works", "fence", 35, 31)
     m.piece("court_works", "fence", 36, 31)
     m.piece("court_works", "fence_R", 37, 31)
-    for y in (15, 18, 21, 24, 27, 30):
-        column(m, 22, y, broken=(y == 24))
-        column(m, 38, y, broken=(y == 18))
+    for y in (14, 16, 18, 20, 26, 28, 30):
+        column(m, 22, y, broken=(y == 18))
+    for y in (14, 16, 18, 24, 26, 28, 30):
+        column(m, 38, y, broken=(y == 28))
+    columns(m, 23, 37, 33, every=2, horns=(26, 30, 34))
     m.piece("walls", "horns", 25, 32)
     m.piece("court_works", "drain", 30, 30)
     m.piece("court_works", "plinth", 27, 15)
+    # the court's altar and horns of consecration, and its drains, the open heart
+    m.piece("court_works", "plinth", 34, 16)
+    m.piece("walls", "horns", 26, 24)
+    m.piece("walls", "horns", 35, 24)
+    m.piece("court_works", "drain", 26, 30)
+    m.piece("court_works", "drain", 33, 19)
 
     # ---- the east: the Grand Staircase wing, the Queen's Megaron ----
     wing(m, 43, 52, 15, 19, tops={(47, 15): "top_horns"})
     wing(m, 40, 55, 20, 23, faces={(45, 23): "door", (42, 22): "face_frieze", (43, 22): "face_frieze",
                                    (50, 22): "face_window"}, tops={(41, 20): "top_horns"})
     m.part("court_works", "well_TL", 55, 16, 2, 2)
+    m.part("court_works", "well_TL", 48, 20, 2, 2)
     wing(m, 45, 54, 28, 32)
     wing(m, 42, 56, 33, 36, faces={(47, 36): "door", (44, 35): "face_frieze", (45, 35): "face_frieze",
                                    (52, 35): "face_window"}, tops={(43, 33): "top_horns"})
@@ -248,7 +279,13 @@ def build(stem):
     # ---- height: the hill top stands a level above the road; the ramps meet both ----
     top = {(x, y) for x in range(1, W - 1) for y in range(7, 47) if not m.solid[y, x]}
     m.raise_ground(top, 4, joins={(x, y) for x in range(27, 32) for y in (6, 7)}
-                   | {(x, y) for x in range(10, 13) for y in (6, 7)})
+                   | {(x, y) for x in range(10, 13) for y in (6, 7)} | {(28, 45), (29, 45), (28, 46), (29, 46)})
+    # the West Court's lawn lies a level below its walkways; their steps join the two
+    for c in west_court - walks:
+        if not m.solid[c[1], c[0]]:
+            m.elev[c] = 3
+    for c in ((3, 41), (12, 39), (17, 38)):
+        m.elev[c] = 0
 
     # ---- events ----
     for k, (x, y) in DOORS.items():

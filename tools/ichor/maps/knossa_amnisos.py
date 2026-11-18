@@ -17,7 +17,7 @@ P = "KnossaAmnisos_EventScript_"
 # doors: (x, y) on this map -> interior
 DOORS = {
     "Asclepeion": (10, 13), "Agora": (16, 13), "Tavern": (26, 13), "FishersHut": (34, 12),
-    "XeniaHouse": (11, 19), "LeapersHouse": (17, 19), "KydonsHouse": (24, 19),
+    "XeniaHouse": (8, 18), "LeapersHouse": (16, 20), "KydonsHouse": (26, 18),
 }
 GAP = range(18, 22)          # the south gap in the town wall, onto the Bull Road
 
@@ -103,47 +103,69 @@ def build(stem):
     for (x, y) in ((7, 15), (7, 16), (24, 16), (25, 16), (12, 16), (19, 16), (26, 16), (27, 16)):
         if int(m.mid[y, x]) == A.GRASS:
             m.set(x, y, A.ANEMONE, False)
-    wall_run(m, 8, 27, 17, solid_top=False, gaps=(14, 15, 20, 21))
-    for x in range(8, 28):
-        if x not in (14, 15, 20, 21):
-            m.solid[16, x] = True       # the coping is the wall's own top, not a walk
-    m.front("xenia_house", 9, 17)
-    m.front("leaper_house", 16, 17)
-    m.front("honey_house", 22, 17)
-    # the leaper house's flat roof: up the ladder, a walk along the roof
-    for x in (16, 17):
-        m.solid[17, x] = False
-    lanes = {(x, y) for x in range(6, 31) for y in (20, 21)} | {(x, y) for x in (14, 15, 20, 21)
-                                                                  for y in (16, 17, 18, 19)}
-    m.path(lanes | {(x, 22) for x in GAP} | {(x, 23) for x in GAP}, context=doorcells)
-    # the cave path's foot, and the west end of town
+    # ---- the upper town (design round 2): houses stepped in clusters behind the street,
+    # lanes winding between their courtyard walls, a fountain square, a hive wall,
+    # the headland rising as a second cliff tier on the west ----
+    from knossa_bull_road import rock
+    m.rect(0, 16, W - 1, 23, A.GRASS, False)
+    rock(m, {(x, y) for x in range(0, 5) for y in range(15, 20)} | {(5, 16), (5, 17), (5, 18), (5, 19)})
+    m.olive(1, 15)
+    m.cypress(3, 16)
+    # courtyard and garden walls (the coping is part of the wall, never a walk)
+    def low_wall(x0, x1, y, gaps=()):
+        wall_run(m, x0, x1, y, solid_top=True, gaps=gaps)
+    low_wall(13, 19, 17, gaps=(14,))
+    low_wall(20, 23, 18)
+    m.piece("wall", "spout", 21, 18)
+    m.piece("wall", "top_spout", 21, 17)
+    low_wall(29, 35, 18)
+    for (x, n) in ((29, "R_hive_L"), (30, "R_skep"), (31, "R_hive"), (32, "R_skep"), (33, "R_hive"),
+                   (34, "R_skep"), (35, "R_hive_R")):
+        m.piece("house", n, x, 17)
+    m.front("xenia_house", 6, 16)
+    m.front("leaper_house", 15, 18)
+    m.front("honey_house", 24, 16)
+    for x in (15, 16):
+        m.solid[18, x] = False      # the leaper house's flat roof, up its ladder
+    # lanes: down from the street, round the courtyards, to the doors and the gate
+    lanes = ({(x, 19) for x in range(5, 15)} | {(x, y) for x in (11, 12) for y in range(16, 19)}
+             | {(x, y) for x in (13, 14) for y in (18, 20)} | {(14, 21), (13, 21)}
+             | {(x, 21) for x in range(14, 22)} | {(x, y) for x in (22, 23) for y in range(16, 18)}
+             | {(x, 19) for x in range(24, 29)} | {(28, y) for y in range(16, 19)}
+             | {(x, 20) for x in range(24, 29)} | {(x, y) for x in GAP for y in (22, 23)})
+    square = {(x, y) for x in range(19, 24) for y in (19, 20)}
+    m.path(lanes - square, context=doorcells | square | plaza)
+    pave(m, square, salt=6)
+    # the east gardens: a terrace brow (a ledge you hop down south), steps through it
+    for x in range(29, 39):
+        m.set(x, 20, A.STEPS if x == 33 else A.LEDGE["S"], False)
+    for (x, y) in ((36, 16), (32, 22), (37, 21)):
+        m.olive(x, y)
+    for (x, y) in ((24, 21), (25, 21), (5, 20), (6, 20), (9, 20), (10, 20), (30, 19), (36, 19)):
+        if int(m.mid[y, x]) == A.GRASS:
+            m.set(x, y, A.ANEMONE, False)
     m.cypress(1, 12)
     m.cypress(7, 12)
     m.path({(5, 12), (5, 13), (4, 14), (5, 14), (6, 14)})
-    m.olive(0, 15)
-    m.olive(2, 18)
-    m.grass_mix(0, 12, 8, 21, salt=5)
-    # the hive garden in the east: olives over the beach road
-    for (x, y) in ((31, 16), (35, 17), (33, 19), (37, 15), (29, 18)):
-        m.olive(x, y)
-    m.grass_mix(28, 16, 39, 21, salt=7)
+    m.grass_mix(0, 12, 39, 23, salt=5)
 
-    # ---- the town wall and the south gap; the olive country beyond (aethos only) ----
-    wall_run(m, 0, W - 1, 23, solid_top=True, gaps=tuple(GAP))
+    # ---- the town wall, following the slope's contour; the gate; olive country beyond ----
+    for (x0, x1, y) in ((0, 5, 22), (5, 11, 21), (11, 17, 23), (22, 28, 23), (28, 33, 22), (33, 39, 21)):
+        wall_run(m, x0, x1, y, solid_top=True)
     m.set(22, 21, A.STELE, True)
     m.rect(0, 24, W - 1, H - 1, A.GRASS, False)
-    road = {(x, y) for x in GAP for y in range(22, H)}
+    road = ({(x, y) for x in GAP for y in (24, 25, 28, 29)} | {(x, y) for x in range(17, 21) for y in (26, 27)})
     m.path(road)
-    for (x, y) in ((1, 25), (5, 24), (9, 26), (13, 24), (15, 27), (2, 28), (24, 25), (28, 24), (32, 26),
-                   (36, 24), (25, 28), (34, 28), (11, 28), (38, 27)):
+    # olive groves in staggered clumps either side of the road, never in rows
+    for (x, y) in ((0, 24), (3, 24), (2, 26), (7, 25), (0, 28), (5, 28), (9, 27), (11, 25), (13, 28),
+                   (25, 25), (24, 28), (27, 27), (29, 24), (31, 26), (30, 28), (33, 28), (34, 24),
+                   (36, 26), (38, 24), (38, 28)):
         m.olive(x, y)
-    m.cypress(17, 25)
+    for (x, y) in ((5, 24), (15, 25), (23, 26), (33, 25)):
+        m.cypress(x, y)
+    m.cypress(16, 24)
     m.cypress(22, 25)
     m.grass_mix(0, 24, W - 1, H - 1, salt=9)
-    for (x, y) in ((3, 21), (35, 21), (8, 21), (30, 20)):
-        m.set(x, y, A.BOULDER_GRASS, True)
-    for (x, y) in ((29, 14), (33, 15), (38, 14)):
-        m.set(x, y, A.ANEMONE, False)
     m.seam("down")
 
     # ---- events --------------------------------------------------------------------------
@@ -159,17 +181,17 @@ def build(stem):
     m.obj("ICHOR_TITAN_GRUNT", 27, 4, P + "Veteran", "MOVEMENT_TYPE_FACE_UP",
           flag="FLAG_ICHOR_HIDE_AMNISOS_VETERAN", local_id="LOCALID_AMNISOS_VETERAN")
     m.obj("ICHOR_FISHER", 19, 9, P + "Sailor", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_AMNISOS_SAILOR")
-    m.obj("ICHOR_KID_F", 18, 20, P + "Girl", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_AMNISOS_GIRL")
-    m.obj("SPECIES(MELIBEE)", 19, 20, P + "Bombos", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_AMNISOS_BOMBOS")
+    m.obj("ICHOR_KID_F", 18, 21, P + "Girl", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_AMNISOS_GIRL")
+    m.obj("SPECIES(MELIBEE)", 19, 21, P + "Bombos", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_AMNISOS_BOMBOS")
     m.obj("ICHOR_ELDER_F", 6, 13, P + "OldWoman", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_AMNISOS_OLD_WOMAN")
     m.obj("ICHOR_HEALER", 3, 11, P + "Gennaia", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_AMNISOS_GENNAIA")
-    m.obj("ICHOR_KID_M", 33, 18, P + "Kid", "MOVEMENT_TYPE_WANDER_AROUND", local_id="LOCALID_AMNISOS_KID",
+    m.obj("ICHOR_KID_M", 33, 19, P + "Kid", "MOVEMENT_TYPE_WANDER_AROUND", local_id="LOCALID_AMNISOS_KID",
           rx=2, ry=1)
     m.obj("ICHOR_FISHER", 32, 12, P + "NetMender", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_AMNISOS_NETMENDER")
     m.obj("ICHOR_WOMAN", 27, 15, P + "SaffronGirl", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
           local_id="LOCALID_AMNISOS_SAFFRON", rx=3)
     m.item_ball(6, 4, "ITEM_MAX_REPEL", "FLAG_ICHOR_ITEM_AMNISOS_MAX_REPEL")
-    m.item_ball(16, 17, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_AMNISOS_HYPER_POTION")
+    m.item_ball(15, 18, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_AMNISOS_HYPER_POTION")
     m.hidden(14, 2, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_PEARL")
     m.hidden(15, 8, "ITEM_RELIC_COPPER", "FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_OBOL")
     m.sign(16, 9, P + "Shrine")
@@ -181,7 +203,7 @@ def build(stem):
 
     m.build(stem, starts=[(16, 7)],
             must_reach=[(14, 2, "the jetty's end"), (6, 5, "the cave path's top")],
-            views=[(15, 7), (30, 6), (5, 8), (16, 15), (30, 16), (19, 25)],
+            views=[(15, 7), (30, 6), (5, 8), (9, 18), (20, 18), (31, 18), (19, 25)],
             blockers=[(3, 11)])
     return m
 

@@ -82,6 +82,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | `FLAG_ICHOR_THEOXENIA_START` | `0x22A0` | 64 | Theoxenia visits, hides and decoys |
 | `FLAG_ICHOR_XENIA_START` | `0x22E0` | 32 | Xenia hosts and token-chain links |
 | `FLAG_ICHOR_GENERAL_START` | `0x2300` | 1,280 | Claimed by name: `claim.py` bankflag offsets 0x000–0x4FF |
+| `FLAG_ICHOR_TOWN_HERMS_START` | `0x27A0` | 32 | Travel herms registered, one per `TOWN_HERM_*` (§4). Inside the general range, claimed by name as `FLAG_ICHOR_TOWN_HERM_<TOWN>` and `_SPARE_<n>` (offsets 0x4A0–0x4BF) |
 | `FLAG_ICHOR_GENERAL2_START` | `0x2900` | 1,504 | The second bank, claimed by name: `claim.py` bankflag offsets 0x500–0xADF |
 | `FLAG_ICHOR_WAYSTONES_START` | `0x2EE0` | 32 | The Oikoumene's waystones (herms beyond Aethos, §4) |
 | `FLAG_DAILY_ICHOR_PRAYED_START` | `0x2800` | 16 | Prayed to god *g* today |
@@ -765,7 +766,23 @@ Laurel battle's one-time +15 Favor.
 
 ## 4. Herm waystones (SYSTEMS §4)
 
-Built in `src/ichor_herms.c`, `src/data/ichor_herms.h` and `data/scripts/ichor_herms.pory`. Tested by `tools/ichor/tests/ichor_herms.sh`.
+Built in `src/ichor_herms.c`, `src/data/ichor_herms.h`, `src/data/ichor_town_herms.h` and `data/scripts/ichor_herms.pory`. Tested by `tools/ichor/tests/ichor_herms.sh` (route herms, anointing, the Wings) and `tools/ichor/tests/town_herms.sh` (travel herms).
+
+### Travel herms
+
+- **One per town, hamlet or major rest stop,** at its main entrance (MAP_DESIGN §2). It is two object events: the herm (`OBJ_EVENT_GFX_ICHOR_GREAT_HERM`, script `EventScript_IchorTownHerm`) and its plaque (`OBJ_EVENT_GFX_ICHOR_HERM_PLAQUE`, script `EventScript_IchorTownHermSign`). `tools/ichor/maps/town_herms.py` writes both into the town's map.json and renders a preview with `--preview DIR`. The art is in `tools/ichor/art/sprites_objects.py`.
+- **Ids** are `TOWN_HERM_*` in `include/constants/ichor.h`, in story order: `TOWN_HERM_ELAIA` (0) … `TOWN_HERM_OLYMPUS` (18, the Propylaia on `MAP_ASCENT_3F`). `TOWN_HERM_COUNT` is 19; room is left for 32. The travel menu lists towns in id order.
+- **Each town's row** in `src/data/ichor_town_herms.h`: `{ map, landing x, landing y, healer's HEAL_LOCATION_* (or HEAL_LOCATION_NONE), name }`. The landing tile is beside the herm on the main path.
+- **Registration** sets `FLAG_ICHOR_TOWN_HERM_<TOWN>`, which is `FLAG_ICHOR_TOWN_HERMS_START + id` (bank flags 0x4A0–0x4BF in the engine's range; spares are `FLAG_ICHOR_TOWN_HERM_SPARE_<n>`). These are Ichor bank flags rather than the engine's `FLAG_VISITED_*` flags, which are set on entering a town (not on using its healer) and exist for only a few Aethos towns. Registration happens:
+  - when `Ichor_EventScript_AsclepeionHealer` heals: `specialvar(VAR_RESULT, Ichor_RegisterHealerTownHerm)` finds the town by `lastHealLocation` (every healer's map runs `setrespawn`), returns TRUE the first time and puts the town in `STR_VAR_1`. The healer then says "Our town's great herm knows you now." Astyra's Phaedon and Mom at home call the same special.
+  - from an inn that heals in place of an Asclepeion: `setvar(VAR_0x8004, TOWN_HERM_STYX_FALLS)` then `special(Ichor_RegisterTownHerm)` (VAR_RESULT TRUE if new). Aigina's and Styx Falls's inns do this.
+  - when the herm is touched (`Ichor_TouchTownHerm`).
+- **Travel.** `EventScript_IchorTownHerm` names the herm, then offers "Travel to another herm?" when `Ichor_CountTravelHerms` (registered towns other than this map's) is above 0. YES builds the list with `Ichor_BuildTravelMenu` (registered towns, then "Stay here" = `TOWN_HERM_STAY`) for `dynmultistack`. A choice puts its id in `VAR_0x8004`; `specialvar(VAR_RESULT, Ichor_TravelToTownHerm)` sets the warp to its landing tile and starts the white-flash warp, returning TRUE, and the script `waitstate`s. An unregistered id returns FALSE and goes nowhere.
+- **Route herms don't offer travel.** `EventScript_IchorAnointHerm` stays the anointing rite only, so a route herm never warps a player who meant to oil it; the Wings cover flying from routes.
+- **Audit.** `tools/ichor/herm_audit.py` (run by `smoke_test.sh`) fails when a heal location with a `respawn_map` has no row, a row's map lacks its herm or plaque, the landing tile isn't beside the herm and reachable, or the landing is more than 16 steps from an entrance (an edge, a door from another map, or a scripted arrival).
+- **Adding a town:** rename a spare flag to `FLAG_ICHOR_TOWN_HERM_<TOWN>`, add `TOWN_HERM_<TOWN>` (the next id) and bump `TOWN_HERM_COUNT`, add the row to `src/data/ichor_town_herms.h` and to `TOWNS` in `tools/ichor/maps/town_herms.py`, run `town_herms.py`, and run `herm_audit.py`.
+
+### Route herms
 
 - **One great herm per route.** Its bg event runs `EventScript_IchorGreatHerm` directly. A herm that is already a sign with its own line calls `EventScript_IchorAnointHerm` after it, between `lockall` and `releaseall`. The engine knows which herm it is from the map; on a map with no herm row, both scripts do nothing.
 - **Herm ids** (`include/constants/ichor.h`) follow AETHOS_MAP's land routes and their map sections: `HERM_KALLISTE_ROUTE_1`, `HERM_AETHOS_ROUTE_4` … `_18`, `HERM_BULL_ROAD`, `HERM_AETHOS_ROUTE_25` … `_30` and `HERM_THE_ASCENT`. That is 23 before the post-game (`HERM_COUNT`). The post-game's `HERM_AETHOS_ROUTE_31` and `_32` come after them and don't count toward the bonus. Sea routes have no herm. Room is left for 32.
@@ -1706,3 +1723,28 @@ three difficulties, old-save and post-starter refusal, once-only persistence
 of either answer, and the complete native water-clock-to-Oath handoff through
 save/reset/CONTINUE. These demonstrate the core rules, not human balance
 approval or completed later-chapter memorial scenes.
+
+## 12. The catch mash
+
+Tap A as you throw a ball and it is a little likelier to hold. **It is a secret**
+(the user's call, 2026-11-17): no prompt, sound or NPC hints at it. `src/ichor_catch.c`;
+the numbers are in `include/config/ichor.h` (`ICHOR_CATCH_MASH_*`).
+
+- **When.** The expansion rolls a throw's shakes in `Cmd_handleballthrow` before the
+  animation plays. The window opens first: after "{PLAYER} used Poké Ball!" prints,
+  the message silently holds while A presses are counted. It closes after 1.3 s, or a
+  beat after the tenth press, and only then are the odds rolled.
+  The shakes the player then watches are that one roll, so they always match.
+- **The bonus.** The modified catch rate is multiplied by 1 + 0.03 per press, to
+  x1.3 at ten presses (`Ichor_ApplyCatchMash`). Catch chance follows that rate almost
+  linearly, so an 18% throw becomes about 23%. The boosted rate stops at 254, one
+  short of the auto-catch line, so mashing never makes a catch certain.
+- **No window** for throws that can't miss (Master Ball, rates of 255 and over, the
+  victory catch), trainer battles, the catch tutorial, ghost dodges, Oath-refused
+  battles, link and recorded battles, and the expansion's test runner.
+- **State.** `gIchorCatchMash` holds the open flag, the presses and the last throw's
+  rate before and after the bonus. `Ichor_TakeCatchMash` spends the presses on the
+  throw that follows, so no later throw inherits them.
+- **No hint.** Keep it out of dialogue, signs and descriptions.
+- **Tests.** `test/battle/ichor_catch_mash.c` (the math, and a vanilla throw);
+  `tools/ichor/tests/catch_mash.sh` (a mashed, an untouched and a Master Ball throw).

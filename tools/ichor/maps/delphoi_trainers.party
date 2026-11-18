@@ -1,0 +1,519 @@
+
+/* Delphoi and Laurel 8 (ids 425-444; phase4 SCRIPT.md Part 3, "The Sacred Olives"
+ * to "The Omphalos at night"). Kept in tools/ichor/maps/delphoi_trainers.party and
+ * spliced here by tools/ichor/maps/delphoi_trainers.py. Route trainers IVs 14,
+ * Gigas and acolytes 20, the Hierophant 24 with her ace 31. The pilgrim sisters,
+ * the augurs, Skaphe and the corral twins are this build's (the route standard's
+ * trainer counts); the rest are the script's. */
+
+=== TRAINER_ICHOR_EUANGELOS ===
+Name: EUANGELOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Sophowl
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PSAMMOS ===
+Name: PSAMMOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHAYLLOS ===
+Name: PHAYLLOS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Harpelle
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Basilops
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PLINTHIS ===
+Name: PLINTHIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ARISTA_AND_KLEO ===
+Name: ARIS&KLEO
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Girl
+Double Battle: Yes
+AI: Basic Trainer
+
+Melisseer
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Elektear
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MELAMPOUS_AND_POLYIDOS ===
+Name: MELAM&POLY
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+Double Battle: Yes
+AI: Basic Trainer
+
+Sophowl
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Basilops
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KISSERIS ===
+Name: KISSERIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Hoplomex
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_CHOMAS ===
+Name: CHOMAS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Midonos
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_GIGAS_AGRIOS ===
+Name: AGRIOS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Kaprodon
+Level: 54
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 54
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_ASBOLOS ===
+Name: ASBOLOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Kaprodon
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_CHRYSIS ===
+Name: CHRYSIS
+Class: Melissa
+Pic: Melissa
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Melisseer
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hymnaria
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SKAPHE ===
+Name: SKAPHE
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Gigantomb
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_DORYX_AND_DOROS ===
+Name: DOROI
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Double Battle: Yes
+AI: Basic Trainer
+
+Taurivet
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ONOMAKRITOS ===
+Name: ONOMAKRITO
+Class: Prophetes
+Pic: Prophetes
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Enigmaw
+Level: 54
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Mantipod
+Level: 54
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_PHERENIKE ===
+Name: PHERENIKE
+Class: Melissa
+Pic: Melissa
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Melisseer
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hymnaria
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_BREMOUSA ===
+Name: BREMOUSA
+Class: Melissa
+Pic: Melissa
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Hymnaria
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Mantipod
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_PHEMONOE ===
+Difficulty: Easy
+Name: PHEMONOE
+Class: Hierophant
+Pic: Hierophant Phemonoe
+Gender: Female
+Music: Female
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Melisseer
+Level: 53
+Ability: Forewarn
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sunny Day
+- Quiver Dance
+- Bug Buzz
+- Psychic
+
+Hymnaria
+Level: 52
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Mystical Fire
+- Air Slash
+- Roost
+- Hyper Voice
+
+Taurivet
+Level: 52
+Ability: Flash Fire
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Iron Head
+- Shift Gear
+- Earthquake
+
+Promethex
+Level: 53
+Ability: Chlorophyll
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Solar Beam
+- Heat Wave
+- Strength Sap
+- Weather Ball
+
+Mantipod @ Sitrus Berry
+Level: 54
+Ability: Magic Bounce
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heat Wave
+- Psychic
+- Future Sight
+- Calm Mind
+
+=== TRAINER_ICHOR_PHEMONOE ===
+Name: PHEMONOE
+Class: Hierophant
+Pic: Hierophant Phemonoe
+Gender: Female
+Music: Female
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Melisseer
+Level: 56
+Ability: Forewarn
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sunny Day
+- Quiver Dance
+- Bug Buzz
+- Psychic
+
+Hymnaria
+Level: 55
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Mystical Fire
+- Air Slash
+- Roost
+- Hyper Voice
+
+Taurivet
+Level: 55
+Ability: Flash Fire
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Iron Head
+- Shift Gear
+- Earthquake
+
+Promethex
+Level: 56
+Ability: Chlorophyll
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Solar Beam
+- Heat Wave
+- Strength Sap
+- Weather Ball
+
+Mantipod @ Sitrus Berry
+Level: 57
+Ability: Magic Bounce
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heat Wave
+- Psychic
+- Future Sight
+- Calm Mind
+
+=== TRAINER_ICHOR_PHEMONOE ===
+Difficulty: Hard
+Name: PHEMONOE
+Class: Hierophant
+Pic: Hierophant Phemonoe
+Gender: Female
+Music: Female
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move / Try To Faint
+
+Melisseer @ Heat Rock
+Level: 56
+Ability: Forewarn
+Nature: Timid
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+- Sunny Day
+- Quiver Dance
+- Bug Buzz
+- Psychic
+
+Hymnaria @ Charcoal
+Level: 56
+Ability: Flame Body
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+- Mystical Fire
+- Air Slash
+- Roost
+- Hyper Voice
+
+Taurivet @ Life Orb
+Level: 56
+Ability: Flash Fire
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+- Flare Blitz
+- Iron Head
+- Shift Gear
+- Earthquake
+
+Promethex @ Miracle Seed
+Level: 56
+Ability: Chlorophyll
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+- Solar Beam
+- Heat Wave
+- Strength Sap
+- Weather Ball
+
+Mantipod @ Sitrus Berry
+Level: 57
+Ability: Magic Bounce
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 SpA / 4 SpD
+- Heat Wave
+- Psychic
+- Future Sight
+- Calm Mind
+
+=== TRAINER_ICHOR_GIGAS_EPHIALTES ===
+Name: EPHIALTES
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Polyphant
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Double-Edge
+- Stone Edge
+- Milk Drink
+
+Pythoros
+Level: 57
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Earthquake
+- Crunch
+- Dragon Rush
+- Coil
+
+=== TRAINER_ICHOR_GIGAS_THOAS ===
+Name: THOAS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Midonos
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Krystolos
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_CHRYSOTHEMIS ===
+Name: CHRYSOTHEM
+Class: Kitharode
+Pic: Kitharode
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Chelyra
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hymnaria
+Level: 55
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+/* End Delphoi teams. */

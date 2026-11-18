@@ -10,7 +10,7 @@ OUT=build/test_labyrinth_upper
 engine_prepare LABUPPER "$OUT" tools/ichor/tests/labyrinth_upper_consts.c tools/ichor/tests/labyrinth_upper_setup.s
 {
     echo "return {"
-    arm-none-eabi-nm "$ELF" | awk '$3 ~ /^Labyrinth.*EventScript_/ { print "  " $3 " = 0x" $1 "," }'
+    arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(Labyrinth|KnossaPalace_GrandStaircase).*EventScript_/ { print "  " $3 " = 0x" $1 "," }'
     echo "}"
 } > "$OUT/labyrinth_scripts.lua"
 engine_run LABUPPER "$OUT" tools/ichor/tests/labyrinth_upper.lua 180000 1200

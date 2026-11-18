@@ -1,0 +1,232 @@
+// Route 28, the Sacred Olives (design/phase4/SCRIPT.md III-6A and Part 2). The
+// layout and every event's place are tools/ichor/maps/delphoi_olives.py's.
+//
+// III-6A plays once, while VAR_ICHOR_ACT3 = 10 (Lakonia's goat paths are behind
+// you): a column of Titanborn marches east chanting, and Hieron, the plain's
+// warden, turns from the grove's edge. Then he lives in his hut by the oldest
+// olive (Route28_SacredOlives_WardensHut).
+//
+// The desecrated altar at the narrow point is Apollo's (altar index 20); Psammos
+// guards it, and once he's beaten it can be cleansed (ENGINE_API §3).
+// TODO(music): MUS_ICHOR_DELPHOI isn't written; the road theme stands in.
+
+const DELPHOI_ALTAR_SACRED_OLIVES = 20
+
+mapscripts Route28_SacredOlives_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_1, 0)
+        if (var(VAR_ICHOR_ACT3) == 10 && !flag(FLAG_ICHOR_SACRED_OLIVES_COLUMN)) {
+            clearflag(FLAG_ICHOR_HIDE_TITAN_COLUMN_OLIVES)
+            clearflag(FLAG_ICHOR_HIDE_HIERON_ROAD)
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_TITAN_COLUMN_OLIVES)
+            setflag(FLAG_ICHOR_HIDE_HIERON_ROAD)
+        }
+    }
+}
+
+text Route28_Text_NameHieron { "HIERON" }
+text Route28_Text_NameTitanborn { "TITANBORN" }
+text Route28_Text_NameFather { "FATHER" }
+text Route28_Text_NameGirl { "GIRL" }
+text Route28_Text_NameBoy { "BOY" }
+
+movement Route28_Movement_ColumnMarch {
+    walk_right * 7
+    step_end
+}
+
+movement Route28_Movement_HieronHome {
+    walk_down
+    walk_right * 6
+    step_end
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-6A: the Titans' road
+// ---------------------------------------------------------------------------
+
+script Route28_SacredOlives_EventScript_ColumnScene {
+    lockall
+    setspeaker(Route28_Text_NameTitanborn)
+    msgbox(format("What does the sickle reap?"))
+    msgbox(format("THE HOURS!"))
+    msgbox(format("Who stands at the heart?"))
+    msgbox(format("THE MASTER!"))
+    closemessage
+    applymovement(LOCALID_OLIVES_COLUMN_1, Route28_Movement_ColumnMarch)
+    applymovement(LOCALID_OLIVES_COLUMN_2, Route28_Movement_ColumnMarch)
+    applymovement(LOCALID_OLIVES_COLUMN_3, Route28_Movement_ColumnMarch)
+    applymovement(LOCALID_OLIVES_COLUMN_4, Route28_Movement_ColumnMarch)
+    waitmovement(0)
+    removeobject(LOCALID_OLIVES_COLUMN_1)
+    removeobject(LOCALID_OLIVES_COLUMN_2)
+    removeobject(LOCALID_OLIVES_COLUMN_3)
+    removeobject(LOCALID_OLIVES_COLUMN_4)
+    setflag(FLAG_ICHOR_HIDE_TITAN_COLUMN_OLIVES)
+    turnobject(LOCALID_OLIVES_HIERON, DIR_WEST)
+    setspeaker(Route28_Text_NameHieron)
+    msgbox(format("Third column today. They don't cut. They don't pick.\p"
+                  "They don't even step off the road. Very respectful of my olives.\p"
+                  "Funny, for a band of thieves."))
+    msgbox(format("This plain is the god's. Nobody ploughs it. Nobody's allowed.\p"
+                  "Kirrha tried, once. Long ago. The god sent every city in Hellas.\p"
+                  "Now there's no Kirrha to speak of. Just a harbor and me."))
+    msgbox(format("I'm the warden. I watch the olives grow. It's slower than it sounds.\p"
+                  "You're going up? To Delphoi?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Everyone is. Pilgrims, Titans, goats. Nobody's coming down."))
+    } else {
+        msgbox(format("Hm. You've got the walk of someone going up."))
+    }
+    msgbox(format("The Oracle's said one word a day for a year. Lately not even that.\p"
+                  "Mind the rows. The god doesn't like his grass trampled.\p"
+                  "He puts things in it.\p"
+                  "My hut's halfway along. There's a spring. Drink if you're tired."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_OLIVES_HIERON, Route28_Movement_HieronHome)
+    waitmovement(0)
+    removeobject(LOCALID_OLIVES_HIERON)
+    setflag(FLAG_ICHOR_HIDE_HIERON_ROAD)
+    setflag(FLAG_ICHOR_SACRED_OLIVES_COLUMN)
+    setvar(VAR_TEMP_1, 0)
+    releaseall
+}
+
+script Route28_SacredOlives_EventScript_Column {
+    msgbox(format("A Titanborn marching in step. The helmet doesn't turn."), MSGBOX_NPC)
+}
+
+script Route28_SacredOlives_EventScript_HieronRoad {
+    setspeaker(Route28_Text_NameHieron)
+    msgbox(format("My hut's halfway along. There's a spring."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Signs, the altar, the oldest olive
+// ---------------------------------------------------------------------------
+
+script Route28_SacredOlives_EventScript_SignWest {
+    msgbox(format("THE SACRED PLAIN\pThe god's olives. Do not cut, plough or pick.\p"
+                  "East: the Kastalian falls, and Delphoi above them."), MSGBOX_SIGN)
+}
+
+script Route28_SacredOlives_EventScript_SignEast {
+    msgbox(format("THE KASTALIAN GORGE\nDelphoi above.\pThe falls are the god's stair."), MSGBOX_SIGN)
+}
+
+script Route28_SacredOlives_EventScript_Altar {
+    lockall
+    setvar(VAR_0x8004, ICHOR_GOD_APOLLO)
+    setvar(VAR_0x8005, DELPHOI_ALTAR_SACRED_OLIVES)
+    specialvar(VAR_RESULT, Ichor_CheckAltarCleansed)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("A roadside altar of Apollo. A sickle has been scratched across the god's name.\p"
+                      "Someone has left a fresh olive branch on it anyway."))
+        if (!defeated(TRAINER_ICHOR_PSAMMOS)) {
+            releaseall
+            end
+        }
+    }
+    setvar(VAR_0x8004, ICHOR_GOD_APOLLO)
+    setvar(VAR_0x8005, DELPHOI_ALTAR_SACRED_OLIVES)
+    goto(EventScript_IchorDesecratedAltar)
+}
+
+script Route28_SacredOlives_EventScript_OldestOlive {
+    msgbox(format("The oldest olive on the plain. Its trunk has split into a hollow you could stand in.\p"
+                  "Someone has hung a little clay bee on the lowest branch."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// People
+// ---------------------------------------------------------------------------
+
+script Route28_SacredOlives_EventScript_Father {
+    setspeaker(Route28_Text_NameFather)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("She didn't answer. She laughed. Then she said, “Plant it and see.”\p"
+                      "I could have thought of that. I've decided to be pleased."), MSGBOX_NPC)
+    } else {
+        msgbox(format("We walked from Thyrsa. Three weeks. To ask one question.\p"
+                      "Will the harvest come in. That's all. Will it come in."), MSGBOX_NPC)
+    }
+}
+
+script Route28_SacredOlives_EventScript_Girl {
+    setspeaker(Route28_Text_NameGirl)
+    msgbox(format("Papa says she'll say one word. I hope it's “yes.” It's short."), MSGBOX_NPC)
+}
+
+script Route28_SacredOlives_EventScript_Boy {
+    setspeaker(Route28_Text_NameBoy)
+    msgbox(format("I hope it's “figs.”"), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Trainers (SCRIPT.md Part 3, "The Sacred Olives"; the sisters and the augurs
+// are this build's, for the route standard's trainer count)
+// ---------------------------------------------------------------------------
+
+text Route28_Text_NameEuangelos { "EUANGELOS" }
+text Route28_Text_NamePsammos { "PSAMMOS" }
+text Route28_Text_NamePhayllos { "PHAYLLOS" }
+text Route28_Text_NamePlinthis { "PLINTHIS" }
+text Route28_Text_NameSisters { "ARISTA" }
+text Route28_Text_NameAugurs { "MELAMPOUS" }
+
+script Route28_SacredOlives_EventScript_Euangelos {
+    trainerbattle_single(TRAINER_ICHOR_EUANGELOS,
+        format("I've walked a month to hear good news. I'd settle for a battle."),
+        format("Not the news I wanted. News, though."))
+    setspeaker(Route28_Text_NameEuangelos)
+    msgbox(format("My name means good news. My mother was an optimist."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_SacredOlives_EventScript_Psammos {
+    trainerbattle_single(TRAINER_ICHOR_PSAMMOS,
+        format("Orders are, nobody touches the Unwoven. Nobody said nobody battles."),
+        format("Fair. That's fair. Don't tell the Gigas I asked."))
+    setspeaker(Route28_Text_NamePsammos)
+    msgbox(format("I scratched the altar. Hyperion said to. I'd rather I hadn't."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_SacredOlives_EventScript_Phayllos {
+    trainerbattle_single(TRAINER_ICHOR_PHAYLLOS,
+        format("Training for the Pythian games! Race you to a battle!"),
+        format("Outrun! On my own track!"))
+    setspeaker(Route28_Text_NamePhayllos)
+    msgbox(format("The games are every four years. I keep being two years early."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_SacredOlives_EventScript_Plinthis {
+    trainerbattle_single(TRAINER_ICHOR_PLINTHIS,
+        format("The rich get readings and plan around them. I got told I'd be poor."),
+        format("Poor and beaten. The reading's holding up."))
+    setspeaker(Route28_Text_NamePlinthis)
+    msgbox(format("I'd like a turn being surprised. Just once. Tonight, maybe."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_SacredOlives_EventScript_Sisters {
+    trainerbattle_double(TRAINER_ICHOR_ARISTA_AND_KLEO,
+        format("ARISTA: We walked from Thyrsa together.\pKLEO: We battle together too. Two of us!"),
+        format("ARISTA: Beaten together.\pKLEO: That's still together."),
+        format("ARISTA: Just the one Pokémon? We'd feel mean. Come back with two."))
+    setspeaker(Route28_Text_NameSisters)
+    msgbox(format("We're asking the Pythia which of us gets the farm.\p"
+                  "If she says one word, we'll have to share it."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_SacredOlives_EventScript_Augurs {
+    trainerbattle_double(TRAINER_ICHOR_MELAMPOUS_AND_POLYIDOS,
+        format("MELAMPOUS: The birds over the plain are all flying east.\p"
+               "POLYIDOS: Uphill. Toward the god. Let's read you instead."),
+        format("MELAMPOUS: A bird we didn't see coming.\pPOLYIDOS: Write that down."),
+        format("MELAMPOUS: Two of us, one of you. The omens say come back with a second."))
+    setspeaker(Route28_Text_NameAugurs)
+    msgbox(format("Every bird in Phokis is flying to Delphoi. They never do that.\p"
+                  "Not since the year the Oracle went blind."), MSGBOX_AUTOCLOSE)
+}
+

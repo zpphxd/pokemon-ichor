@@ -203,9 +203,12 @@ local function poets()
   L.tap(K.A); L.wait(40)
   L.waitUntil(function() return not L.on("CB2_PokeStorage") end, 1200, "the storage screen to close")
   L.waitUntil(function() return not L.inOverworld() end, 600, "the trade scene")
-  local t0 = L.now()
+  local t0, step = L.now(), 0
   while not L.inOverworld() do
     L.tap(K.A); L.wait(9)
+    -- a shot every 54 frames: both Pokemon's pics, from the farewell to CRITIC's arrival
+    step = step + 1
+    if step % 6 == 0 then L.shot(string.format("poets_trade_%02d", step // 6)) end
     if L.now() - t0 > 12000 then L.fail("the trade scene never ended") end
   end
   L.settle({ every = true })

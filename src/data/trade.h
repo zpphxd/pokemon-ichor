@@ -1399,6 +1399,23 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_GALENYON,
     },
+    // Lysandros's Kynoketos, bored of the harbor (Gytheion, Lysandros's house)
+    [INGAME_TRADE_ICHOR_MALEA] =
+    {
+        .nickname = _("MALEA"),
+        .species = SPECIES_KYNOKETOS,
+        .ivs = {24, 26, 20, 18, 20, 28},
+        .abilityNum = 2,
+        .otId = 41207,
+        .conditions = {30, 5, 5, 20, 5},
+        .personality = 0x91,
+        .heldItem = ITEM_WIDE_LENS,
+        .mailNum = -1,
+        .otName = _("LYSAND"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_KARKITOX,
+    },
     // Ichor: Amnisos (SCRIPT.md Part 2, Polypos's hut). The script casts a second
     // Telkanvil, but Skandeia already trades one, so Polypos's sea-smith is a crab.
     [INGAME_TRADE_ICHOR_TELCHIS] =
@@ -1416,6 +1433,25 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_APHRELL,
+    },
+    // Ichor: Koretas's goat bleats in verse and has never once been right. Aix
+    // wants a bee for the thyme meadow (phase4 SCRIPT.md Part 2, Koretas's house).
+    [INGAME_TRADE_ICHOR_PROPHET] =
+    {
+        .nickname = _("PROPHET"),
+        .species = SPECIES_KERAZAP,
+        .ivs = {20, 22, 18, 16, 18, 24},
+        .abilityNum = 2,
+        .otId = 51770,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x7A31,
+        .heldItem = ITEM_THUNDER_STONE,
+        .mailNum = -1,
+        .otName = _("AIX"),
+        .otGender = FEMALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_MELIBEE,
+        .level = 50,
     },
 };
 

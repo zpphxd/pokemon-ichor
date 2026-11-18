@@ -15,6 +15,9 @@
     "gMapGroup_League",
     "gMapGroup_Labyrinth",
     "gMapGroup_Knossa",
+    "gMapGroup_Gulf",
+    "gMapGroup_Lakonia",
+    "gMapGroup_Delphoi",
     "gMapGroup_Climax"
   ],
   "gMapGroup_TownsAndRoutes": [
@@ -163,12 +166,18 @@
     "ThyrsaCity_MantoHouse",
     "ThyrsaCity_PindarosHouse",
     "ThyrsaCity_SownHouse",
-    "ThyrsaCity_VintnerHouse"
+    "ThyrsaCity_VintnerHouse",
+    "Lebadeia_Trophoneion",
+    "Lebadeia_HoneyHouse",
+    "Route14_Tretos",
+    "Nemea_Palaestra",
+    "Nemea_MolorchosHouse"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",
     "SaltWell_B2F",
-    "Kaldera_TelchinesForge"
+    "Kaldera_TelchinesForge",
+    "KopaisKatavothres"
   ],
   "gMapGroup_IndoorKaldera": [
     "Kaldera_Asclepeion",
@@ -218,7 +227,13 @@
     "LabyrinthRing3",
     "LabyrinthRing4",
     "LabyrinthMinosTomb",
-    "LabyrinthWorkshop"
+    "LabyrinthWorkshop",
+    "LabyrinthRing6",
+    "LabyrinthRing5",
+    "LabyrinthRing7",
+    "LabyrinthStarryChamber",
+    "LabyrinthIcarusShaft",
+    "LabyrinthCellars"
   ],
   "gMapGroup_Knossa": [
     "KnossaAmnisos",
@@ -238,6 +253,49 @@
     "KnossaPalace_QueensMegaron",
     "KnossaPalace_ThroneRoom",
     "KnossaPalace_WestMagazines"
+  ],
+  "gMapGroup_Gulf": [
+    "Kirrha_PilgrimsHostel",
+    "Aigion_Homarion",
+    "Route9_KorykianCave"
+  ],
+  "gMapGroup_Lakonia": [
+    "Gytheion",
+    "Route25_Eurotas",
+    "Lakonia",
+    "Gytheion_Asclepeion",
+    "Gytheion_Dyeworks",
+    "Gytheion_LysandrosHouse",
+    "Gytheion_TimaiaHouse",
+    "Gytheion_KranaiShrine",
+    "Lakonia_Asclepeion",
+    "Lakonia_Agora",
+    "Lakonia_LampitosHouse",
+    "Lakonia_GylipposHouse",
+    "Lakonia_Syssition",
+    "Lakonia_Agoge",
+    "Lakonia_Palaestra",
+    "Lakonia_Orthia",
+    "Lakonia_ChilonHouse",
+    "Lakonia_LichasHouse"
+  ],
+  "gMapGroup_Delphoi": [
+    "Route28_SacredOlives",
+    "Route28_KastalianGorge",
+    "Delphoi",
+    "Delphoi_TempleOfApollo",
+    "Delphoi_OmphalosStair",
+    "Route28_SacredOlives_WardensHut",
+    "Delphoi_Asclepeion",
+    "Delphoi_Agora",
+    "Delphoi_HouseOfTheMelissai",
+    "Delphoi_TheoklesHouse",
+    "Delphoi_PilgrimsHouse",
+    "Delphoi_KoretasHouse",
+    "Delphoi_KitharodeHouse",
+    "Delphoi_AstyranTreasury",
+    "Delphoi_SiphnianTreasury",
+    "Delphoi_Lesche"
   ],
   "gMapGroup_Climax": [
     "TheLoom",

@@ -1,1 +1,159 @@
-mapscripts LabyrinthWorkshop_MapScripts {}
+// Daedalus's workshop (design/LABYRINTH.md §6 Ring III and §8 scene D; SCRIPT.md beat
+// III-3H; design/maps/LabyrinthWorkshop.md). The hub: heal bed, the Pithos, the lift
+// up to the Grand Staircase once scene D is done, the stair down to Ring IV.
+// Layout from tools/ichor/maps/labyrinth_workshop.py.
+
+mapscripts LabyrinthWorkshop_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ICHOR_KNOSSA, 6: LabyrinthWorkshop_EventScript_SceneD
+        VAR_ICHOR_KNOSSA, 7: LabyrinthWorkshop_EventScript_SceneD
+    ]
+}
+
+text LabyrinthWorkshop_Name_Daedalus { "DAEDALUS" }
+
+// --- Scene D -------------------------------------------------------------------------------
+
+script LabyrinthWorkshop_EventScript_SceneD {
+    lockall
+    setspeaker(LabyrinthWorkshop_Name_Daedalus)
+    msgbox(format("Don't touch Number Four. She bites."))
+    msgbox(format("You came in the back. I put that door there for me, not you."))
+    if (flag(FLAG_ICHOR_GOT_DAEDALUS_WINGS)) {
+        msgbox(format("…What's that on your back?"))
+        closemessage
+        setvar(VAR_0x8004, ITEM_DAEDALUS_WINGS)
+        call(EventScript_IchorRelicPose)
+        delay(60)
+        setspeaker(LabyrinthWorkshop_Name_Daedalus)
+        msgbox(format("Talos. Of course. He always did go into the fire after things."))
+        msgbox(format("I threw those in his forge. He was meant to let them burn."))
+        msgbox(format("Did you fly on them?"), MSGBOX_YESNO)
+        setspeaker(LabyrinthWorkshop_Name_Daedalus)
+        if (var(VAR_RESULT) == YES) {
+            msgbox(format("Not too high?"))
+            msgbox(format("Not too low?"))
+            msgbox(format("…Good. Good."))
+        } else {
+            msgbox(format("Liar. The straps are worn through. You flew. Good."))
+        }
+        msgbox(format("My son flew on the other pair."))
+        msgbox(format("Not too high, I told him. The sun takes the wax."))
+        msgbox(format("Not too low. The sea takes the feathers."))
+        msgbox(format("He was fourteen. He heard “fly.”"))
+        closemessage
+        playse(SE_CLICK)
+        delay(60)
+        setspeaker(LabyrinthWorkshop_Name_Daedalus)
+    }
+    msgbox(format("So. You've come about the bull, or the sickle?"))
+    msgbox(format("A man in a gold mask came to me two winters ago. He spoke kindly."))
+    msgbox(format("He said no father would ever bury a child again."))
+    msgbox(format("I'd have built him anything for that. I very nearly did."))
+    msgbox(format("That collar binds the sickle's pieces. I made it."))
+    msgbox(format("I timed him an hour by my stars. The hour to finish it."))
+    msgbox(format("Healer's hands, that one. Steady. Never shook once."))
+    msgbox(format("Then I watched his people drive the bull through my halls with fire."))
+    msgbox(format("Build a cage for a monster and you call it engineering."))
+    msgbox(format("Build one for a frightened animal and you know what it is."))
+    msgbox(format("He asked me for one more cage. Small enough to carry."))
+    msgbox(format("Strong enough that nothing inside could ever get out."))
+    msgbox(format("For something he calls his Lord."))
+    msgbox(format("I made it. I never gave it to him."))
+    msgbox(format("Here. You decide what it holds."))
+    if (!flag(FLAG_ICHOR_GOT_MASTER_BALL)) {
+        giveitem(ITEM_MASTER_BALL)
+        setflag(FLAG_ICHOR_GOT_MASTER_BALL)
+    }
+    setspeaker(LabyrinthWorkshop_Name_Daedalus)
+    msgbox(format("And this."))
+    giveitem(ITEM_LABRYS)
+    setspeaker(LabyrinthWorkshop_Name_Daedalus)
+    msgbox(format("My key. Every lock in this house has its shape."))
+    msgbox(format("The dials. The seals. The chains."))
+    msgbox(format("Especially the chains."))
+    if (flag(FLAG_ICHOR_NUMBER_NINE_UNTIED)) {
+        msgbox(format("Oh. You found Number Nine. He's been gone a year. Did he behave?"))
+    }
+    msgbox(format("The bed's yours if you need it. The lift goes up to the palace stair.\p"
+                  "The stair down goes to the Titans. Try not to come back on a stretcher."))
+    closemessage
+    setflag(FLAG_ICHOR_MET_DAEDALUS)
+    setflag(FLAG_ICHOR_DAEDALUS_LIFT)
+    setvar(VAR_ICHOR_KNOSSA, 8)
+    releaseall
+}
+
+script LabyrinthWorkshop_EventScript_Daedalus {
+    lock
+    faceplayer
+    setspeaker(LabyrinthWorkshop_Name_Daedalus)
+    msgbox(format("Rest, if you need to. Then go and see what they've done to him."), MSGBOX_DEFAULT)
+    release
+}
+
+// --- The room -------------------------------------------------------------------------------
+
+script LabyrinthWorkshop_EventScript_HealBed {
+    lockall
+    msgbox(format("Daedalus's own bed. A fleece at its foot, a blue blanket.\pRest here?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        special(HealPlayerParty)
+        playfanfare(MUS_HEAL)
+        waitfanfare
+        fadescreen(FADE_FROM_BLACK)
+        msgbox(format("Your Pokémon are rested. The music box is still ticking."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+script LabyrinthWorkshop_EventScript_MusicBox {
+    lockall
+    msgbox(format("A little bronze music box. Its tune never quite reaches the end."), MSGBOX_DEFAULT)
+    if (flag(FLAG_ICHOR_MET_DAEDALUS)) {
+        setspeaker(LabyrinthWorkshop_Name_Daedalus)
+        msgbox(format("The first one I made. I made a better one for a friend's little girl."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+script LabyrinthWorkshop_EventScript_NumberFour {
+    msgbox(format("A bronze hound on her plinth, IIII cut in the stone. One amber eye follows you."),
+           MSGBOX_SIGN)
+}
+
+script LabyrinthWorkshop_EventScript_Shaft {
+    msgbox(format("A shaft of grey light, barred with a bronze grate. It goes up and up.\p"
+                  "Someone has scratched a little bird on the lowest bar."), MSGBOX_SIGN)
+}
+
+script LabyrinthWorkshop_EventScript_WingsPlan {
+    msgbox(format("A plan of wings: wax, feathers, a frame of willow. Two pairs drawn side by side.\p"
+                  "One pair is crossed out."), MSGBOX_SIGN)
+}
+
+script LabyrinthWorkshop_EventScript_LabyrinthPlan {
+    msgbox(format("The house's plan: seven rings round a star, in red and charcoal.\p"
+                  "Every ring is a maze. Every maze has a thread drawn through it in a careful hand."),
+           MSGBOX_SIGN)
+}
+
+script LabyrinthWorkshop_EventScript_Lift {
+    lockall
+    if (!flag(FLAG_ICHOR_DAEDALUS_LIFT)) {
+        msgbox(format("A counterweighted platform hangs in a shaft. It won't move for you."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("Daedalus's lift. Ride it up to the palace stair?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        playse(SE_ELEVATOR)
+        fadescreen(FADE_TO_BLACK)
+        warpsilent(MAP_KNOSSA_PALACE_GRAND_STAIRCASE, 1)
+        waitstate
+    }
+    releaseall
+}

@@ -39,7 +39,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_... "commen
 | **world-act3, the League** (the Ascent, Olympus, L-1 to L-10; `design/LEAGUE.md`) | 0x6C0–0x6FF (24 used: 0x6C0–0x6D7) | — | — |
 | **the post-game** | 0x300–0x3BF, and 0x700–0x7FF | 0x64–0x6F | 18–23 |
 | **the Oikoumene** | 0x3C0–0x47F, and 0x800–0x8FF | — | 24–27 |
-| **ichor-engine** | 0x480–0x4BF | 0x00–0x3F | 28–31 |
+| **ichor-engine** | 0x480–0x4BF (0x4A0–0x4BF are the travel herms, `FLAG_ICHOR_TOWN_HERM_*`: rename a spare for a new town) | 0x00–0x3F | 28–31 |
 | Reserve | 0x900–0xADF (480); ask the director. The second bank's last 32 flags sit outside these offsets as `FLAG_ICHOR_WAYSTONES_START`, for the Oikoumene's herm run | — | — |
 
 Hidden items can take these bank flags too (`claim.py hiddenitem`; see `asm/macros/map.inc`), so the vanilla range is no longer the limit on them.
@@ -180,3 +180,8 @@ only inside its own bank-flag and trainer-ID range, from the reserve:
 Shared state: `VAR_ICHOR_ACT3` (bankvar 0xC) with the values SCRIPT.md fixes,
 and Knossa's `VAR_ICHOR_KNOSSA` (0xD) and `VAR_ICHOR_LABYRINTH` (0xE), claimed
 by the director. Trainer ids 300–327 are the director's reserve.
+
+Lakonia (2026-11-17): bank flags used 0x9F0-0xA1A and 0xA20-0xA33 (the
+rooms' households 0xA20-0xA2A); trainer ids 410-424 all used; fixed dig
+index 0x30 is fragment 8 in Lampito's burial plot. Route 26, Lake Stymphalia
+and Route 27 are unbuilt and need their own range.

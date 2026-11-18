@@ -1,0 +1,164 @@
+{
+  "id": "MAP_LAKONIA_LAMPITOS_HOUSE",
+  "name": "Lakonia_LampitosHouse",
+  "layout": "LAYOUT_LAKONIA_LAMPITOS_HOUSE",
+  "music": "MUS_ICHOR_ELEUSA",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_LAKONIA",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_LAMPITO_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LakoniaLampito_EventScript_Kleon",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_LAMPITO_RHEA",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+      "x": 5,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LakoniaLampito_EventScript_Rhea",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_LAMPITO_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 8,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LakoniaLampito_EventScript_Alethea",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_LAMPITO_HELMET",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TABLET",
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LakoniaLampito_EventScript_Helmet",
+      "flag": "FLAG_TEMP_4"
+    },
+    {
+      "local_id": "LOCALID_LAMPITO_TABLET",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TABLET",
+      "x": 7,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LakoniaLampito_EventScript_Tablet",
+      "flag": "FLAG_TEMP_5"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_LAKONIA",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_LAKONIA",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Stelai"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Stelai"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Loom"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Chest"
+    },
+    {
+      "type": "sign",
+      "x": 0,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Chest"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Hearth"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LakoniaLampito_EventScript_Hearth"
+    }
+  ]
+}

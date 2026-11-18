@@ -11,9 +11,14 @@
 #define PARTNER_ICHOR_KLEON_ELEUSA_NEBREL 4
 #define PARTNER_ICHOR_ALETHEA_AKROPOLIS 5
 // Ichor: Kleon beside you on the Stair of Hours (the climax), one team per starter.
-#define PARTNER_ICHOR_KLEON_STAIR_PYLAKYON 6
-#define PARTNER_ICHOR_KLEON_STAIR_SEISMARE 7
-#define PARTNER_ICHOR_KLEON_STAIR_DAPHNYAD 8
-#define PARTNER_COUNT 9
+// Ichor: Ariadne beside you on the dancing floor (LABYRINTH.md Scene I)
+#define PARTNER_ICHOR_ARIADNE 6
+// Ichor: Rhea beside you on the night of the Omphalos (phase4 SCRIPT.md III-8).
+#define PARTNER_ICHOR_RHEA_DELPHOI 7
+// Ichor: Kleon beside you on the Stair of Hours (the climax), one team per starter.
+#define PARTNER_ICHOR_KLEON_STAIR_PYLAKYON 8
+#define PARTNER_ICHOR_KLEON_STAIR_SEISMARE 9
+#define PARTNER_ICHOR_KLEON_STAIR_DAPHNYAD 10
+#define PARTNER_COUNT 11
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H

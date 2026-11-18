@@ -1112,12 +1112,14 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 #define tMonitorY        data[5]
 #define tBallSpriteId    data[6]
 #define tMonitorSpriteId data[7]
+#define tShowMachine     data[8]  // Ichor: FALSE for a healer standing outdoors
 #define tStartHofFlash   data[15]
 
 // Sprite data for SpriteCB_PokeballGlowEffect
 #define sState      data[0]
 #define sTimer      data[1]
 #define sCounter    data[2]
+#define sHideBalls  data[4]  // Ichor: the balls glow unseen (no machine here)
 #define sPlayHealSe data[5]
 #define sNumMons    data[6]
 #define sSpriteId   data[7]
@@ -1137,6 +1139,11 @@ bool8 FldEff_PokecenterHeal(void)
     task->tFirstBallY = 36;
     task->tMonitorX = 124;
     task->tMonitorY = 24;
+    // Ichor: the balls and the rod relief's glow sit on the Asclepeion's
+    // healing station (tools/ichor/art/civic_rooms.py, station_cells), at
+    // fixed offsets from the player. A healer outdoors has no station for
+    // them to sit on, so they would float over the grass: only the jingle plays.
+    task->tShowMachine = (gMapHeader.mapType == MAP_TYPE_INDOOR);
     return FALSE;
 }
 
@@ -1151,14 +1158,17 @@ static void PokecenterHealEffect_Init(struct Task *task)
 {
     task->tState++;
     task->tBallSpriteId = CreateGlowingPokeballsEffect(task->tNumMons, task->tFirstBallX, task->tFirstBallY, TRUE);
-    task->tMonitorSpriteId = CreatePokecenterMonitorSprite(task->tMonitorX, task->tMonitorY);
+    gSprites[task->tBallSpriteId].sHideBalls = !task->tShowMachine; // Ichor
+    if (task->tShowMachine)
+        task->tMonitorSpriteId = CreatePokecenterMonitorSprite(task->tMonitorX, task->tMonitorY);
 }
 
 static void PokecenterHealEffect_WaitForBallPlacement(struct Task *task)
 {
     if (gSprites[task->tBallSpriteId].sState > 1)
     {
-        gSprites[task->tMonitorSpriteId].data[0]++;
+        if (task->tShowMachine) // Ichor
+            gSprites[task->tMonitorSpriteId].data[0]++;
         task->tState++;
     }
 }
@@ -1276,6 +1286,7 @@ static void PokeballGlowEffect_PlaceBalls(struct Sprite *sprite)
         sprite->sTimer = 25;
         spriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokeballGlow, sPokeballCoordOffsets[sprite->sCounter].x + sprite->x2, sPokeballCoordOffsets[sprite->sCounter].y + sprite->y2, 0);
         gSprites[spriteId].oam.priority = 2;
+        gSprites[spriteId].invisible = sprite->sHideBalls; // Ichor
         gSprites[spriteId].sEffectSpriteId = sprite->sSpriteId;
         sprite->sCounter++;
         sprite->sNumMons--;

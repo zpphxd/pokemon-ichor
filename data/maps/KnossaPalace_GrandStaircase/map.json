@@ -37,6 +37,13 @@
       "elevation": 0,
       "dest_map": "MAP_KNOSSA_PALACE",
       "dest_warp_id": "3"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING1",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -58,6 +65,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KnossaPalace_GrandStaircase_EventScript_LightWell"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_GrandStaircase_EventScript_Breach"
     },
     {
       "type": "sign",

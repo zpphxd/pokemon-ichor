@@ -31,7 +31,9 @@ enum InGameTradeID
     INGAME_TRADE_ICHOR_ARKAS, // Hippothoos's Arkoby, for a Gelasable (Arkadia, the charcoal hut)
     INGAME_TRADE_ICHOR_ANKYRA, // Bathykleia's Telkanvil, for a Glyphlet (Skandeia)
     INGAME_TRADE_ICHOR_POTHOS, // Lysis's Himerow, for a Galenyon (Paphia)
+    INGAME_TRADE_ICHOR_MALEA, // Lysandros's Kynoketos, for a Karkitox (Gytheion)
     INGAME_TRADE_ICHOR_TELCHIS, // Polypos's Karkitox, for an Aphrell (Amnisos, the fisher's hut)
+    INGAME_TRADE_ICHOR_PROPHET, // Koretas's Kerazap, for a Melibee (Delphoi, Koretas's house)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

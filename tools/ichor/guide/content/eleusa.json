@@ -1,0 +1,760 @@
+{
+ "areas": [
+  {
+   "id": "route-4",
+   "maps": [
+    "Route4_Isthmus"
+   ],
+   "title": "Route 4, the Isthmus Road",
+   "kind": "route",
+   "blurb": "The Sacred Way out of Emporion's north gate, past potters' kilns and old tombs to a rockslide and the mouth of Hecate's Hollow.",
+   "walkthrough": [
+    "Leave Emporion City by its north gate. Exekias the potter watches the road from the start and battles you as you pass. The kiln workers and the grave plots on this stretch are worth a look, and a clearing in the woods to the west is choked with marble rubble. Break it with the Bronze Hammer you brought from Emporion.",
+    "At the fork, a hill path climbs north past Menalkas and his goats. Off it, a Titanborn named Laas has scratched a sickle into the great herm. Beat him and he runs off. Then pray at the herm to cleanse it, and it works like any great herm from then on.",
+    "Follow the road east to the pilgrims' camp. Alethea is sitting with the procession of initiates, and a rockslide blocks the pass. The camp's healer will patch up your team for free as often as you like while the procession is here.",
+    "Three heaps of marble rubble block the road. Break all three with the Bronze Hammer. Under the last one you find TM39 Rock Tomb, and Eudemos, the procession's leader, thanks you with two Barley Cakes. The cave mouth just past the slide is Hecate's Hollow: go in.",
+    "You'll pass a thicket in front of a hillside orchard and a big boulder by the lower road. You can't move either yet. Come back later with Demeter's Sickle for the thicket and the Girdle of Herakles for the boulder."
+   ],
+   "key_npcs": [
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_Alethea",
+     "label": "Alethea",
+     "note": "Talk to her, or walk up to the slide, to start the rockslide scene. She stays at the camp until the road is clear."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_Healer",
+     "label": "Procession healer",
+     "note": "Heals your party free, any number of times. Gone once the procession leaves (the next time you come back after clearing the slide)."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_Heap",
+     "label": "Rockslide heaps",
+     "note": "Three heaps of rubble. Each breaks with the Bronze Hammer. The third yields TM39 Rock Tomb."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_Eudemos",
+     "label": "Eudemos",
+     "note": "Gives 2 Barley Cakes when the last heap breaks."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_Laas",
+     "label": "Titanborn Laas",
+     "note": "Guards the great herm. Beat him to free it."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_GreatHerm",
+     "label": "Great herm",
+     "note": "Once Laas is gone, pray to cleanse it for Hermes's Favor. After that you can anoint it with Olive Oil and use its altar."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_DigTomb",
+     "label": "Tomb dig",
+     "note": "A one-time excavation with Alethea's Trowel: an Arachne amphora sherd."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_DigKilns",
+     "label": "Kiln yard dig",
+     "note": "A daily dig spot (Alethea's Trowel). It can turn up Arachne amphora sherds and refills each night."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_DigSpur",
+     "label": "Hill spur dig",
+     "note": "A second daily dig spot, also with Arachne sherds."
+    },
+    {
+     "map": "Route4_Isthmus",
+     "script": "Route4_Isthmus_EventScript_OmenNemecub",
+     "label": "Golden cub (omen)",
+     "note": "A wild Nemecub, Lv 18, on the hill. It only appears after the rockslide is cleared, and only on days when the omen names it."
+    }
+   ],
+   "shops": [],
+   "statics": [
+    {
+     "species": "SPECIES_NEMECUB",
+     "level": 18,
+     "where": "The scrub at the top of the hill spur",
+     "condition": "Omen visitor: after the rockslide is cleared, on days the omen names it. If you run, it stays for the rest of the day. Once you catch or defeat it, it's gone."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "The procession's healer is free and has no limit. Grind on the road's tall grass, then walk back to the camp to heal, before you clear the slide."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "On days when the omen names Kerazap, after the slide is cleared, half of this road's wild encounters are Kerazap at Lv 18."
+    },
+    {
+     "kind": "Lore",
+     "text": "The crossroads shrine in the woods is Hecate's. People left her a supper where roads met and walked away without looking back. Someone here still does."
+    }
+   ],
+   "puzzles": [],
+   "spoilers": [],
+   "hierophant": null
+  },
+  {
+   "id": "hecates-hollow",
+   "maps": [
+    "HecatesHollow"
+   ],
+   "title": "Hecate's Hollow",
+   "kind": "dungeon",
+   "blurb": "A pitch-dark cave under the pass, where three roads meet at Hecate's three-faced pillar.",
+   "walkthrough": [
+    "The east mouth is in daylight, but the road into the mountain is pitch dark and you can see only a tile or so ahead. Talk to the old woman by the entrance for a hint. The dark road splits three times on the way north, and dead ends hide items and a pilgrim lost in the dark.",
+    "At the top of the dark road is the Hekataion, a round chamber faintly lit from above. Hecate's three-faced pillar stands there. Its altar is the key to the cave, and water running down its sides heals your team whenever you touch it.",
+    "With Hecate's Torch in hand, the cave changes. Your light spreads wider, and the Torch burns away the thick cobwebs that block the Hekataion's west and east roads.",
+    "Take the west road. Hekabe stands beside a cold brazier, and her line of sight covers the only way west, so you have to battle her. Afterward she gives you a Barley Cake. Light the brazier with the Torch and the whole hall stays lit for good. A second web off this hall hides a side chamber.",
+    "Head down to the second hall and light its brazier too. Initiate Kallias sits in a dark side pocket, and Battos the goatherd minds the west mouth. Leave by the west mouth for Route 5.",
+    "The east web opens a long shortcut tunnel down to the east mouth, with a one-way ledge at the end. Once both braziers burn, you can cross the cave through lit halls and never touch the dark forks again."
+   ],
+   "key_npcs": [
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_OldWoman",
+     "label": "Old woman",
+     "note": "Tells you to follow the dog's bark through the dark. She has new lines once you have the Torch."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Hekataion",
+     "label": "The Hekataion (Hecate's altar)",
+     "note": "Leave Hecate her supper (answer YES) to receive Hecate's Torch and Hecate's Favor. After that it is a full altar: pray, offer, check Favor, learn, rest."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Spring",
+     "label": "The pillar's spring",
+     "note": "Heals your party. Use it as often as you like."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Hekabe",
+     "label": "Hekabe",
+     "note": "A trainer you have to fight. After the battle she gives you a Barley Cake."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Web",
+     "label": "Cobwebs",
+     "note": "Three webs (west road, side chamber, east shortcut). Each burns with Hecate's Torch and stays gone."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Brazier1",
+     "label": "First brazier",
+     "note": "Light it with Hecate's Torch and Hekabe's hall stays lit."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Brazier2",
+     "label": "Second brazier",
+     "note": "Light it with Hecate's Torch and the second hall stays lit."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Hound",
+     "label": "Black hound",
+     "note": "From 20:00 to 4:00, three black hounds sit at the pillar. Two fade into the rock and one stays: a wild Lykopup, Lv 20."
+    },
+    {
+     "map": "HecatesHollow",
+     "script": "HecatesHollow_EventScript_Raknit",
+     "label": "Spider in the web chamber",
+     "note": "A wild Raknit, Lv 20, with its hidden ability. It appears only once you have restored the Arachne amphora."
+    }
+   ],
+   "shops": [],
+   "statics": [
+    {
+     "species": "SPECIES_LYKOPUP",
+     "level": 20,
+     "where": "The Hekataion, at the foot of the pillar",
+     "condition": "Night only (20:00 to 4:00). Only one: once you catch or defeat it, it's gone. If you run, it waits for another night."
+    },
+    {
+     "species": "SPECIES_RAKNIT",
+     "level": 20,
+     "where": "The web chamber off Hekabe's hall",
+     "condition": "Once the Arachne amphora is restored. It has its hidden ability. Only one."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "You don't need a Barley Cake of your own for Hecate's offering. One is already sitting on the altar ledge."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Before you have the Torch, stepping from a lit spot back into the dark makes the darkness close in again. Don't panic: just keep walking the route."
+    },
+    {
+     "kind": "Hot Tip",
+     "text": "Lykopup is a Dark type that learns Bite early. If you plan to challenge Chloe at night, its Dark moves hit her night ace for super-effective damage."
+    },
+    {
+     "kind": "Lore",
+     "text": "Battos is the goatherd from the myth who saw Hermes steal the cattle, promised to keep quiet, and talked anyway. Hermes turned him to stone. He still says he saw nothing."
+    }
+   ],
+   "puzzles": [
+    {
+     "title": "The dark road",
+     "hint": "The old woman told you what to listen for. Each time the road splits, a sound comes from somewhere ahead.",
+     "solution": "At each fork a dog barks once, and that is the way. Fork 1: go left (right is a loop around a pillar). Fork 2: go right (left is a dead end with the Bronze Obol and Pilgrim Phaino). Fork 3: go straight ahead (its left and right are loops that bring you back). The road ends in the Hekataion."
+    },
+    {
+     "title": "Hecate's supper",
+     "hint": "The pillar is an altar, and the old woman leaves something at crossroads every new moon.",
+     "solution": "Check the pillar's front and answer YES to leave Hecate her supper. The three torches light, and the middle one comes away in your hand: Hecate's Torch. If you answer NO, nothing happens, so just try again."
+    }
+   ],
+   "spoilers": [],
+   "hierophant": null
+  },
+  {
+   "id": "route-5",
+   "maps": [
+    "Route5_SkironianCliffs",
+    "Route5_RestHouse"
+   ],
+   "title": "Route 5, the Skironian Cliffs",
+   "kind": "route",
+   "blurb": "The Sacred Way switchbacks down the sea cliffs from Hecate's Hollow to the inn and Eleusa's plain.",
+   "walkthrough": [
+    "You come out of Hecate's Hollow onto the cliff road high above the bay. Walk east through the pine clearing. At the rock seat the road narrows to one tile, and Kynegeiros guards it, so you have to battle him. Melanthios and his goat kid watch the cleft up to the knoll.",
+    "Where the cliff road ends, a sign points to the thyme meadow and its beehives. It's optional, but Aristaios battles there among his hives. Then take the cutting down to the terrace.",
+    "On the terrace, the long grass to the east hides Daphnis the shepherd. To the west, a rock face is cut with Aphrodite's niches; her altar is there, and Myrto faces the rock. At the terrace's west end a rockfall closes the lookout. Its middle is rubble, so break it with the Bronze Hammer for the item behind it.",
+    "Go down the cleft stair to the shore road. Mopsos the augur stands at the foot of the stair, and you have to battle him. On the beach, old Aigialeus gives you the Good Rod. Kerdon the salt seller battles you on the sand.",
+    "The Inn of the Plain stands near the east end. Xenokles heals your team every time you talk to him, and he wants to trade. A great herm stands outside. Then the road widens into olive groves and runs east into Eleusa Village.",
+    "A thorn thicket in front of a pine hollow needs Demeter's Sickle. A column drum in front of the watchtower needs the Girdle of Herakles. Both have items behind them, so come back for them later."
+   ],
+   "key_npcs": [
+    {
+     "map": "Route5_SkironianCliffs",
+     "script": "Route5_SkironianCliffs_EventScript_Aigialeus",
+     "label": "Aigialeus",
+     "note": "Gives the Good Rod on your first visit, whether or not you have the Old Rod."
+    },
+    {
+     "map": "Route5_SkironianCliffs",
+     "script": "EventScript_IchorAltar_Aphrodite",
+     "label": "Aphrodite's altar",
+     "note": "An altar among the niches: pray, offer, check Favor, learn, rest."
+    },
+    {
+     "map": "Route5_SkironianCliffs",
+     "script": "EventScript_IchorGreatHerm",
+     "label": "Great herm",
+     "note": "Anoint it with Olive Oil for Hermes. Eleusa's Agora sells the oil."
+    },
+    {
+     "map": "Route5_RestHouse",
+     "script": "Route5_RestHouse_EventScript_Xenokles",
+     "label": "Xenokles",
+     "note": "Heals your party on every visit. He also trades his Gelasable GALANTHIS (Lv 19, holding a Leppa Berry) for an Onotis."
+    }
+   ],
+   "shops": [],
+   "statics": [
+    {
+     "species": "SPECIES_GELASABLE",
+     "level": 19,
+     "where": "The Inn of the Plain (Xenokles)",
+     "condition": "In-game trade for an Onotis. Nicknamed GALANTHIS. It has its hidden ability and holds a Leppa Berry."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Onotis lives in the tall grass on this route at all hours. Catch one here and trade it to Xenokles at the inn."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "The Inn of the Plain heals for free and sits a short walk from Eleusa. Use it as your base for training on the cliffs."
+    },
+    {
+     "kind": "Lore",
+     "text": "The rock seat is where a Persian king sat to watch his fleet win at Salamis. It didn't."
+    }
+   ],
+   "puzzles": [],
+   "spoilers": [],
+   "hierophant": null
+  },
+  {
+   "id": "eleusa-village",
+   "maps": [
+    "EleusaVillage",
+    "EleusaVillage_Agora",
+    "EleusaVillage_Asclepeion",
+    "EleusaVillage_Farmhouse",
+    "EleusaVillage_GranaryHouse",
+    "EleusaVillage_HouseOfKeleos",
+    "EleusaVillage_PoetsHouse"
+   ],
+   "title": "Eleusa Village",
+   "kind": "town",
+   "blurb": "The farming village of the Mysteries, home to the Temple of Demeter and the oldest grain field in Aethos.",
+   "walkthrough": [
+    "A woman named Krokis sits on a stool where the road comes in from Route 5. She ties a saffron thread on every pilgrim's wrist, and she ties one on yours. Inside the village, the Asclepeion is just past her (it becomes your respawn point) and the Agora is next door.",
+    "Your rival Kleon is waiting in the square. He wants to be initiated tonight, and he insists it's for educational reasons. The Temple of Demeter, called the Telesterion, stands at the north end of the square. That's your next stop.",
+    "There's plenty to do in the houses first. Theano in the farmhouse gives you TM09 Bullet Seed. Metaneira in the House of Keleos feeds you (a full heal) and lets you sleep by her hearth. Euphorion the playwright will trade his Pithound for a Melibee.",
+    "Three roads are closed for now. A hoplite turns you back from the road east, toward Route 15, until you hold the fifth Laurel. A herald turns you back from the north road, toward Route 6, until Act I is over. The Ploutonion's bronze gate stays shut until the night of the Mysteries.",
+    "Once you hold the Harvest Laurel, the procession reaches Eleusa and fills the square. The Agora adds Revive and Full Heal, and Metaneira has a gift for you."
+   ],
+   "key_npcs": [
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_Krokis",
+     "label": "Krokis",
+     "note": "Ties the saffron thread on your wrist on your first way in. If you came in another way, talk to her for the scene."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_Kleon",
+     "label": "Kleon",
+     "note": "Your rival, waiting in the square until the Mysteries begin."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_Kerykos",
+     "label": "Kerykos",
+     "note": "After the Harvest Laurel he waits on the Telesterion's steps. Answer YES to close the doors and start the night of the Mysteries."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_Alethea",
+     "label": "Alethea",
+     "note": "Arrives with the procession after the Harvest Laurel. After Act I she waits by the north road to travel with you."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_NorthHerald",
+     "label": "North road herald",
+     "note": "Points the way to Thyrsa. After Act I he also sends your letter home to Mom."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_Hoplite",
+     "label": "Hoplite",
+     "note": "Blocks the road of the Mysteries to the east until you have the fifth Laurel."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_FieldShrine",
+     "label": "Field shrine of Demeter",
+     "note": "A Demeter altar: pray, offer, check Favor, learn, rest."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_Kopros",
+     "label": "Kopros the Kaplet",
+     "note": "Stares into the Maiden's Well. Search the well."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_DigSpotWest",
+     "label": "West dig spot",
+     "note": "A daily dig spot (Alethea's Trowel) with Persephone amphora sherds."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_DigSpotEast",
+     "label": "East dig spot",
+     "note": "A second daily dig spot with Persephone amphora sherds."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_OmenKorantha",
+     "label": "Flower-crowned Pokémon (omen)",
+     "note": "A wild Korantha, Lv 22, in the wheat on days the omen names it."
+    },
+    {
+     "map": "EleusaVillage",
+     "script": "EleusaVillage_EventScript_AmphoraPersenyx",
+     "label": "Shadow in the poppies",
+     "note": "A wild Persenyx, Lv 22. It appears in the evening only, once the Persephone amphora is restored."
+    },
+    {
+     "map": "EleusaVillage_Agora",
+     "script": "EleusaVillage_Agora_EventScript_Stallkeeper",
+     "label": "Stallkeeper",
+     "note": "Eleusa's Agora stall. More stock after the Harvest Laurel."
+    },
+    {
+     "map": "EleusaVillage_Asclepeion",
+     "script": "EleusaVillage_Asclepeion_EventScript_Healer",
+     "label": "Healer",
+     "note": "Heals your party. Entering sets Eleusa as your respawn point."
+    },
+    {
+     "map": "EleusaVillage_Asclepeion",
+     "script": "EleusaVillage_Asclepeion_EventScript_Pithos",
+     "label": "The Pithos",
+     "note": "The great storage jar. 'Store & move Pokémon' opens your jars (the first time, it explains how they work); 'Your things' opens your stored items."
+    },
+    {
+     "map": "EleusaVillage_Farmhouse",
+     "script": "EleusaVillage_Farmhouse_EventScript_Theano",
+     "label": "Theano",
+     "note": "Gives TM09 Bullet Seed."
+    },
+    {
+     "map": "EleusaVillage_HouseOfKeleos",
+     "script": "EleusaVillage_HouseOfKeleos_EventScript_Metaneira",
+     "label": "Metaneira",
+     "note": "Feeds you (a full heal) every visit, then offers a rest by the hearth that moves the clock forward. Once, after the Harvest Laurel, she gives 2 Fresh Water and 2 Barley Cakes (the kykeon makings)."
+    },
+    {
+     "map": "EleusaVillage_GranaryHouse",
+     "script": "EleusaVillage_GranaryHouse_EventScript_Sitokles",
+     "label": "Sitokles",
+     "note": "Gives an Amulet Coin after the events under the Telesterion."
+    },
+    {
+     "map": "EleusaVillage_PoetsHouse",
+     "script": "EleusaVillage_PoetsHouse_EventScript_Euphorion",
+     "label": "Euphorion",
+     "note": "Trades his Pithound CRITIC (Lv 21, hidden ability, holding a Twisted Spoon) for a Melibee."
+    }
+   ],
+   "shops": [
+    {
+     "where": "Eleusa Agora",
+     "when": "Before the Harvest Laurel",
+     "items": [
+      "ITEM_GREAT_BALL",
+      "ITEM_SUPER_POTION",
+      "ITEM_ANTIDOTE",
+      "ITEM_PARALYZE_HEAL",
+      "ITEM_AWAKENING",
+      "ITEM_REPEL",
+      "ITEM_OLIVE_OIL",
+      "ITEM_BARLEY_CAKE",
+      "ITEM_HONEY"
+     ]
+    },
+    {
+     "where": "Eleusa Agora",
+     "when": "After the Harvest Laurel",
+     "items": [
+      "ITEM_GREAT_BALL",
+      "ITEM_SUPER_POTION",
+      "ITEM_ANTIDOTE",
+      "ITEM_PARALYZE_HEAL",
+      "ITEM_AWAKENING",
+      "ITEM_REPEL",
+      "ITEM_OLIVE_OIL",
+      "ITEM_BARLEY_CAKE",
+      "ITEM_HONEY",
+      "ITEM_REVIVE",
+      "ITEM_FULL_HEAL"
+     ]
+    }
+   ],
+   "statics": [
+    {
+     "species": "SPECIES_KORANTHA",
+     "level": 22,
+     "where": "The wheat by the field shrine",
+     "condition": "Omen visitor: only on days the omen names it. If you run, it stays for the rest of the day. Once you catch or defeat it, it's gone."
+    },
+    {
+     "species": "SPECIES_PERSENYX",
+     "level": 22,
+     "where": "The poppies in the east of the village",
+     "condition": "Evening only, once the Persephone amphora is restored. Only one."
+    },
+    {
+     "species": "SPECIES_PITHOUND",
+     "level": 21,
+     "where": "Euphorion's house",
+     "condition": "In-game trade for a Melibee. Nicknamed CRITIC. It has its hidden ability and holds a Twisted Spoon."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Chloe's team is all Grass, and her Stachyss knows Glare. Stock up on Paralyze Heals at the Agora before you go into the Telesterion."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Melibee swarms over Eleusa on some days. Catch one then and trade it to Euphorion."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Metaneira's rest moves the clock forward. Use it to reach the evening for the shadow in the poppies, or the night for Chloe's night team."
+    },
+    {
+     "kind": "Lore",
+     "text": "Metaneira's family once took in an old woman as a nurse without knowing she was Demeter. They have fed every stranger since, just in case."
+    }
+   ],
+   "puzzles": [],
+   "spoilers": [
+    {
+     "title": "The saffron thread",
+     "text": "Krokis ties the thread three times, and three times it slides off your wrist into the dust. She blames the damp. It isn't the damp: Daphne explains why at the end of Act I."
+    }
+   ],
+   "hierophant": null
+  },
+  {
+   "id": "temple-of-demeter",
+   "maps": [
+    "EleusaVillage_TempleOfDemeter"
+   ],
+   "title": "Temple of Demeter (the Telesterion)",
+   "kind": "temple",
+   "blurb": "A great dark hall in a forest of columns, where you follow the Kore's trail by torchlight to find the Mystagogue.",
+   "walkthrough": [
+    "The Telesterion is pitch dark, and only Hecate's Torch lets you see. Old Doso sits on the step inside the door. Talk to her: she explains the rite, and she has hints if you get lost.",
+    "A cold bronze brazier stands in each corner of the hall, and each has a season on its plaque. Find them in the right order and light each one with the Torch. A lit corner stays lit for good, even if you leave the temple.",
+    "Acolyte Kallidike stands at the first brazier and Eumolpos stands on the way to the second; you have to get past both of them. Melissa stands on the tiers facing the wall and battles only if you talk to her. The last corner is floored with grain pits. A fall won't hurt you, but it drops you down on the far tiers.",
+    "When the fourth brazier catches, light runs to the Anaktoron's door in the middle of the hall, and you see who has been standing there all along. Walk back across the hall to face Chloe for the Harvest Laurel.",
+    "With the Laurel in hand, step outside. The procession has arrived. Heal up, then talk to Kerykos on the steps. Once the doors close, you can't leave until the night is over. You'll fight a double battle and then go straight underground, so make sure your team is ready."
+   ],
+   "key_npcs": [
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_Doso",
+     "label": "Doso",
+     "note": "Explains the rite on your first visit. After that she gives hints, and a special one after you fall into a grain pit."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierAutumn",
+     "label": "Autumn brazier",
+     "note": "Front left, plaque with a falling leaf. Light it first."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter",
+     "label": "Winter brazier",
+     "note": "Back left, plaque with a bare branch. Second."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring",
+     "label": "Spring brazier",
+     "note": "Back right, up on the tiers, plaque with a sprout. Third."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer",
+     "label": "Summer brazier",
+     "note": "Front right, past the grain pits, plaque with a sheaf. Last. Lighting it reveals Chloe."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_Chloe",
+     "label": "Chloe, the Mystagogue",
+     "note": "Hierophant of Demeter. After the battle she gives the Harvest Laurel, TM19 Giga Drain and a Barley Cake (Demeter's rite). Later, at 30 Demeter Favor, she gives her god's gift (a move lesson)."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_GreatAltar",
+     "label": "Great altar of Demeter",
+     "note": "The temple altar: pray, offer, check Favor, learn, rest."
+    },
+    {
+     "map": "EleusaVillage_TempleOfDemeter",
+     "script": "EleusaVillage_TempleOfDemeter_EventScript_Daphne",
+     "label": "Professor Daphne",
+     "note": "After the sanctum and Kleon's goodbye, walk into the Telesterion with a free Bag slot. She gives you the Star Chart, and this scene ends Act I."
+    }
+   ],
+   "shops": [],
+   "statics": [],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Lighting a brazier out of order does nothing bad: the brazier just won't catch, and you lose no progress."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Once you have the Laurel, all three acolytes count as beaten and the pits are boarded over, so the hall is easy to cross on later visits."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Chloe's ace depends on the time of day you challenge her. Korantha (Grass/Fairy) by day, Persenyx (Grass/Ghost) at night. Pick the one your team handles better."
+    },
+    {
+     "kind": "Lore",
+     "text": "Every brazier tells part of the Kore's year: she goes down into the dark in autumn and comes back up with the harvest. Chloe's one secret is that what's reaped grows again."
+    }
+   ],
+   "puzzles": [
+    {
+     "title": "The Kore's trail",
+     "hint": "Doso says to put your light out to see the trail, and light it again to see the walls. Each plaque shows a season.",
+     "solution": "Douse the Torch (from the Relic Ring, or use it from the Bag). One red pomegranate seed glows in the dark. Relight the Torch, walk toward the seed, and light the brazier beside it. The order is Autumn (front left, by the entrance), Winter (back left, across the columns), Spring (back right, up on the tiers by the hall's far end), and Summer (front right, past the grain pits). Only the next brazier's seed ever glows."
+    },
+    {
+     "title": "The grain pits",
+     "hint": "Doso mentions Hecate's chalk, which only shows in the dark.",
+     "solution": "In the Summer quarter, douse the Torch: Hecate's chalk lights up the safe stones between the pits. Walk the chalk while doused, relighting now and then to check your position. A step into a pit drops you onto the tiers by the Spring brazier, so you just walk back around."
+    }
+   ],
+   "spoilers": [
+    {
+     "title": "The Mystagogue in the doorway",
+     "text": "Chloe stood unseen in the Anaktoron's doorway the whole time you lit the braziers. The fourth one reveals her."
+    },
+    {
+     "title": "The night of the Mysteries",
+     "text": "When Chloe uncovers the sacred basket, the floor rumbles and two Titanborn climb up through the Anaktoron. They expected an empty granary. Kleon vaults down beside you for a double battle against them. Even if you lose, the story goes on and your team is healed. The grunts flee back down the hole, Kleon stays to guard the door, and Chloe leads you and Alethea down the secret stair under the Anaktoron."
+    }
+   ],
+   "hierophant": {
+    "trainer": "TRAINER_ICHOR_CHLOE_1_DAY",
+    "name": "Chloe",
+    "title": "the Mystagogue",
+    "type": "Grass",
+    "laurel": "Harvest Laurel",
+    "rewards": [
+     "ITEM_TM19",
+     "ITEM_BARLEY_CAKE"
+    ],
+    "unlocks": "The procession arrives, and Kerykos can start the night of the Mysteries. The Agora adds Revive and Full Heal, and Metaneira gives you the kykeon makings. Demeter Favor +15.",
+    "before": "Light the four season braziers in order (Autumn, Winter, Spring, Summer) by following the glowing seeds. Beat Acolytes Kallidike and Eumolpos on the way. Melissa is optional.",
+    "strategy": [
+     "Chloe's team on standard difficulty is Rhoaril Lv 24, Stachyss Lv 24, Elapling Lv 25 and her ace at Lv 26. All four are Grass types, and almost all of them carry Leech Seed. She also has two Super Potions. Fire, Flying, Ice, Poison and Bug moves hit the whole team hard.",
+     "Stachyss is the dangerous support: Glare paralyzes, Coil boosts it, and Synthesis heals it. Knock it out fast or bring Paralyze Heals. Elapling holds a Miracle Seed for its Bullet Seed and also knows Rock Smash and Worry Seed. Rhoaril chips away with Magical Leaf, Mega Drain and Astonish.",
+     "By day her ace is Korantha (Grass/Fairy, Sitrus Berry): Petal Dance, Giga Drain, Fairy Wind and Leech Seed. Poison moves do four times damage to it. At night it is Persenyx (Grass/Ghost, Sitrus Berry): Hex, Giga Drain, Leech Seed and Magical Leaf. Normal and Fighting moves can't touch Persenyx, and Hex hits twice as hard after Glare has paralyzed you. Dark and Ghost moves work well against it, so Hecate's hound from the Hollow is a good pick at night. Flying types such as Epopoi and Harpeck from Route 5 handle either ace.",
+     "On Mortal, her Pokémon are 3 levels lower (21 to 23) with the same moves. On Spartan they keep their standard levels, but they have trained natures and EVs, a Sitrus Berry on everyone but Elapling, no Super Potions, and smarter AI."
+    ]
+   }
+  },
+  {
+   "id": "mystery-sanctum",
+   "maps": [
+    "EleusaSanctum_B1F",
+    "EleusaSanctum_B2F",
+    "EleusaSanctum_B3F"
+   ],
+   "title": "The Mystery Sanctum",
+   "kind": "dungeon",
+   "blurb": "Three dark floors of granaries and holy halls under the Telesterion, where no one but the Hierophant goes.",
+   "walkthrough": [
+    "B1F, the granaries. You arrive on the Anaktoron's stair with Chloe and Alethea. Chloe holds the stair and heals your team every time you talk to her. A Titanborn with a lamp comes out of the dark, and Alethea takes him on. Light the four braziers with the Torch to light each stretch for good. Krokalos guards the narrow way to the apse in the south-east, so you have to battle him. Bolos guards a side pit with a Hyper Potion and is optional. The steps down are in the apse.",
+    "In the north-east corner of B1F, a stair climbs to the Ploutonion's gate in the village. It's open now, so it makes a quick way back to the Asclepeion if you need one.",
+    "B2F, the Hall of the Kore. A long frescoed hall with a chasm down the middle and four painted panels of the Kore's story. As you start up the hall, a loud voice echoes down from the far stair. The near half is a field of grain pits, and only one safe way runs across it.",
+    "Past the pits, a bridge leads west to an iron-tasting spring that heals your team. Konis holds the doorway in the low wall before the far stair, so you have to battle her. Gaios waits in the fresco alcove to the west with a TM, and he is optional. Heal at the spring, then take the far stair down.",
+    "B3F, the deepest granary. Five steps from the great chest, a scene begins, and the crew's boss battles you. If you lose, you wake at Eleusa's Asclepeion and can come straight back; the battle picks up where it left off. After the battle, Chloe gives you Demeter's Sickle. It cuts thickets that grow across a path.",
+    "You come up on the Telesterion's steps, where Kleon is waiting to say goodbye. The next morning, make room in your Bag and walk into the Telesterion: Professor Daphne is there, and that scene ends Act I. Then go north through the village, cut the vines across the north road with Demeter's Sickle, and the herald lets you through to Route 6 and Thyrsa."
+   ],
+   "key_npcs": [
+    {
+     "map": "EleusaSanctum_B1F",
+     "script": "EleusaSanctum_B1F_EventScript_Chloe",
+     "label": "Chloe",
+     "note": "Holds the stair and heals your party on request, until she gives you the Sickle."
+    },
+    {
+     "map": "EleusaSanctum_B1F",
+     "script": "EleusaSanctum_B1F_EventScript_Brazier0",
+     "label": "Stair hall brazier",
+     "note": "Light it with the Torch and the stair hall stays lit. Three more braziers light the bays, the Ploutonion's landing and the apse."
+    },
+    {
+     "map": "EleusaSanctum_B1F",
+     "script": "EleusaSanctum_B1F_EventScript_DigSpot",
+     "label": "Bay dig",
+     "note": "A one-time excavation behind the great jar: a Persephone amphora sherd."
+    },
+    {
+     "map": "EleusaSanctum_B1F",
+     "script": "EleusaSanctum_B1F_EventScript_Krokalos",
+     "label": "Titanborn Krokalos",
+     "note": "A trainer you have to fight. He watches the narrow way to the apse and the steps down."
+    },
+    {
+     "map": "EleusaSanctum_B2F",
+     "script": "EleusaSanctum_B2F_EventScript_Spring",
+     "label": "Iron spring",
+     "note": "Heals your party. Use it as often as you like."
+    },
+    {
+     "map": "EleusaSanctum_B2F",
+     "script": "EleusaSanctum_B2F_EventScript_Konis",
+     "label": "Titanborn Konis",
+     "note": "A trainer you have to fight. She holds the doorway before the far stair."
+    },
+    {
+     "map": "EleusaSanctum_B3F",
+     "script": "EleusaSanctum_B3F_EventScript_Hyperion",
+     "label": "The crew's boss",
+     "note": "The chapter's boss battle. A loss sends you to Eleusa's Asclepeion, and the battle waits for you."
+    },
+    {
+     "map": "EleusaSanctum_B3F",
+     "script": "EleusaSanctum_B3F_EventScript_Sickle",
+     "label": "Bronze sickle",
+     "note": "Chloe gives it to you after the boss: Demeter's Sickle and Demeter Favor +10. If your Bag was full, check the sickle again."
+    },
+    {
+     "map": "EleusaSanctum_B3F",
+     "script": "EleusaSanctum_B3F_EventScript_DigSpot",
+     "label": "Foundation dig",
+     "note": "After the tunnel caves in, a one-time excavation in the bared foundations: Daedalus's page II."
+    }
+   ],
+   "shops": [],
+   "statics": [],
+   "tips": [
+    {
+     "kind": "Pro Tip",
+     "text": "The boss on B3F leads with two Fire types and closes with a Rock/Ground Pebblith that has Sturdy and a Sitrus Berry. Water and Ground moves handle the Fire types. Water and Grass take Pebblith down, but break Sturdy with a weak hit first or use a multi-hit move."
+    },
+    {
+     "kind": "Hot Tip",
+     "text": "Every floor down here sets Eleusa's Asclepeion as your respawn point. With Chloe's free heals on B1F and the spring on B2F, you can fight the whole dungeon without going back to town."
+    },
+    {
+     "kind": "Lore",
+     "text": "The four frescoes on B2F tell the Kore's story from south to north. She is taken below, her mother searches by torchlight with Hecate beside her, and she comes back up the stair into the light."
+    }
+   ],
+   "puzzles": [
+    {
+     "title": "The pit field on B2F",
+     "hint": "This works like the Telesterion's Summer quarter, and the Titans had to cross it too.",
+     "solution": "The safe way runs across the east side of the chasm. Douse the Torch to see Hecate's chalk on the safe stones. With the Torch lit, the Titans' bootprints mark the same path. A wrong step drops you back in the court at the bottom of the stair."
+    }
+   ],
+   "spoilers": [
+    {
+     "title": "Hyperion and the theft",
+     "text": "The voice and the boss belong to Hyperion, a Titan admin who runs the digging crews. When you arrive, his men Petros and Amathos lever a cold shard out of the great chest and carry it up their tunnel: the first fragment of the Harpe, the sickle the Titan Kronos once wielded. Hyperion can barely see in the dark. He fights with Kapnub (Lv 23), Kaminoo (Lv 23) and Pebblith (Lv 24, Sitrus Berry), and he has two Super Potions. Once he's beaten he backs up the tunnel, and it caves in behind him. The fragment is gone."
+    },
+    {
+     "title": "The second sickle",
+     "text": "The Titans threw a bronze sickle aside as worthless. Chloe explains that two blades were kept here: a piece of the old sickle that cut a father down, and Demeter's own, which taught the world to reap. She gives you Demeter's."
+    },
+    {
+     "title": "Kleon leaves for Thyrsa",
+     "text": "Back on the steps, Kleon admits the night shook him, says he fought well beside you, and runs off north to the Dionysia at Thyrsa, ignoring the vines across the road."
+    },
+    {
+     "title": "Daphne's revelation",
+     "text": "Daphne crossed the sea for the first time in thirteen years to tell you this. Under Delphoi there is a Loom where the Fates spin, measure and cut every life in Aethos. Everyone is a thread on it except you. Halia the seer found no thread at all when she read your hand. Why is your mother's story to tell. Daphne also wrote the book the Titans are following: where the Harpe broke and where its pieces fell. On the back of the Titans' tablet, scratches read: \"At the Klotheia, watch the threads. Bring word of the Unwoven.\" Unwoven is their word for you. The Titans came to Kalliste for you, not for the hill. She gives you the Star Chart and sets off for the Library at Astyra. Alethea comes with you, and Act I ends."
+    }
+   ],
+   "hierophant": null
+  }
+ ]
+}

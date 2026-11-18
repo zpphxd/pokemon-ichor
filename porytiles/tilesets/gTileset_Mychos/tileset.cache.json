@@ -23,7 +23,7 @@
   "data/tilesets/secondary/mychos/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/mychos/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/mychos/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/mychos/porytiles_bin/tiles.png": "a528364f25f832eebd47d95afcb4ec17",
+  "data/tilesets/secondary/mychos/porytiles_bin/tiles.png": "4cd1b622b327e2b29f199549aed2f259",
   "data/tilesets/secondary/mychos/porytiles_src/anim/anim.json": "e28362d26a34825d0e6f6ee91e71a79e",
   "data/tilesets/secondary/mychos/porytiles_src/anim/flame/0.png": "afc510e29559d63f1dcb19fc1ba1523d",
   "data/tilesets/secondary/mychos/porytiles_src/anim/flame/1.png": "3defdbb2dadb6d3a7de50bf2b0c1ba9e",
@@ -34,7 +34,7 @@
   "data/tilesets/secondary/mychos/porytiles_src/anim/forge/2.png": "266e9f8a3a9c2a0cc4b846b5ff4cd817",
   "data/tilesets/secondary/mychos/porytiles_src/anim/forge/key.png": "0746ed37cb3a8dbcfb7f71c81f7c7295",
   "data/tilesets/secondary/mychos/porytiles_src/attributes.csv": "f8de2b6a0bec9902301ac028436dc021",
-  "data/tilesets/secondary/mychos/porytiles_src/bottom.png": "4ab86ed29a8f6aa0f12a18f99c87edce",
+  "data/tilesets/secondary/mychos/porytiles_src/bottom.png": "27d99ac26747a5ee29f00408ccc6ff2d",
   "data/tilesets/secondary/mychos/porytiles_src/middle.png": "0c75a56c79440dc48ca6b3f56df2c7b4",
   "data/tilesets/secondary/mychos/porytiles_src/top.png": "5834336b61f97b8aaf693640e81b461f",
   "include/porytiles_generated/tilesets/mychos/generated_anim_code.h": "a4ecf2699d7adce60fbe5c2421a1a243"

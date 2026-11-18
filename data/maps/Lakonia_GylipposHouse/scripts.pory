@@ -1,0 +1,68 @@
+// Gylippos's house, Lakonia (design/phase4/SCRIPT.md, Part 2): the elder from
+// the slice. Almost empty: a sleeping mat, a stool, a water jar, and a dozen
+// scytale staffs of exactly the same thickness, each with a name burned in.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (3..4, 6), warps 0 and 1
+// to MAP_LAKONIA warp 3.
+//
+// The scytale: he hands you a strap (FLAG_ICHOR_GOT_SCYTALE_STRAP) whose twin
+// staff is with the scout Othryades on Route 27. Reading it there sets
+// FLAG_ICHOR_READ_SCYTALE ("THIRD PLANE TREE. DIG." - the Life Orb under the
+// third plane tree north of the agora).
+
+mapscripts Lakonia_GylipposHouse_MapScripts {}
+
+text Lakonia_GylipposHouse_Name_Gylippos { "GYLIPPOS" }
+
+script Lakonia_GylipposHouse_EventScript_Gylippos {
+    lock
+    faceplayer
+    setspeaker(Lakonia_GylipposHouse_Name_Gylippos)
+    if (flag(FLAG_ICHOR_READ_SCYTALE)) {
+        msgbox(format("You read it? Good. Did you dig?\p"
+                      "…Hm. I put that there forty years ago. Glad somebody did."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_SCYTALE_STRAP)) {
+        msgbox(format("Othryades. Past the lake, in the hills. Go and read it.\p"
+                      "Fewer questions."))
+        release
+        end
+    }
+    msgbox(format("Kalliste. Sit. On the floor. The stool's mine.\p"
+                  "…"))
+    if (flag(FLAG_ICHOR_RHEA_UNMASKED)) {
+        msgbox(format("Kleon was a small baby. I was there, that day. I saw the shields.\p"
+                      "I said nothing. For thirteen years.\p"
+                      "Lakonians are good at that."))
+    } else {
+        msgbox(format("Lakonians are good at sitting. It's most of what elders do."))
+    }
+    msgbox(format("Here.\p"
+                  "A message. Wound on a staff. Only the twin staff reads it.\p"
+                  "The twin is with Othryades. A scout. Past the lake, in the hills.\p"
+                  "Go and read it. Fewer questions."))
+    setflag(FLAG_ICHOR_GOT_SCYTALE_STRAP)
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received a leather strap!\p"
+                   "Letters run along it in a line. They don't spell anything."))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Lakonia_GylipposHouse_EventScript_Staffs {
+    msgbox(format("A dozen wooden staffs on pegs, all exactly as thick as each other.\p"
+                  "Each has a name burned into it. One peg is empty: OTHRYADES."), MSGBOX_SIGN)
+}
+
+script Lakonia_GylipposHouse_EventScript_Stool {
+    if (flag(FLAG_ICHOR_GOT_SCYTALE_STRAP)) {
+        msgbox(format("Gylippos's stool. It's his."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Gylippos's stool, a leather strap coiled on it.\p"
+                      "It's his. He said so."), MSGBOX_SIGN)
+    }
+}

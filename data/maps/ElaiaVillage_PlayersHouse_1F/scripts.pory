@@ -102,6 +102,7 @@ script ElaiaVillage_PlayersHouse_1F_EventScript_Mom {
         if (var(VAR_RESULT) == YES) {
             closemessage
             call(Common_EventScript_OutOfCenterPartyHeal)
+            special(Ichor_RegisterHealerTownHerm)  // Elaia's travel herm (SYSTEMS §4)
             setspeaker(SP_NAME_MOM)
             msgbox(format("Bread, honey, and a nap. Works on Pokémon and children both."))
         } else {
@@ -121,6 +122,7 @@ script ElaiaVillage_PlayersHouse_1F_EventScript_AfterWhiteOut {
     setspeaker(SP_NAME_MOM)
     msgbox(format("{PLAYER}! You're home. Sit down, sit down."))
     call(Common_EventScript_OutOfCenterPartyHeal)
+    special(Ichor_RegisterHealerTownHerm)  // Elaia's travel herm (SYSTEMS §4)
     setspeaker(SP_NAME_MOM)
     msgbox(format("Bread, honey, and a nap. Works on Pokémon and children both."))
     fadedefaultbgm

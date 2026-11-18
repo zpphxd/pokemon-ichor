@@ -10,7 +10,14 @@
 // Lysis trades Pothos for a Galenyon (INGAME_TRADE_ICHOR_POTHOS).
 //
 
-mapscripts KytheraPaphia_PottersHouse_MapScripts {}
+mapscripts KytheraPaphia_PottersHouse_MapScripts {
+    // The Pokémon the player traded in shows only after the trade.
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_HIMEROW)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
 
 text KytheraPaphia_PottersHouse_Name_Lysis { "LYSIS" }
 
@@ -51,6 +58,8 @@ script KytheraPaphia_PottersHouse_EventScript_Lysis {
     waitstate
     setflag(FLAG_ICHOR_TRADED_HIMEROW)
     removeobject(LOCALID_PAPHIA_POTHOS)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_PAPHIA_GALENYON)
     setspeaker(KytheraPaphia_PottersHouse_Name_Lysis)
     msgbox(format("It's fishing. It isn't looking at me. That's… that's lovely, thank you.\p"
                   "Pothos already likes you. It likes everyone. That was the problem."))
@@ -84,4 +93,14 @@ script KytheraPaphia_PottersHouse_EventScript_Ladder {
 
 script KytheraPaphia_PottersHouse_EventScript_Kiln {
     msgbox(format("The kiln, still warm. Pots crowd every bit of floor around it."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_PottersHouse_EventScript_Galenyon {
+    lock
+    faceplayer
+    playmoncry(SPECIES_GALENYON, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Galenyon is watching the water jars for fish. It isn't looking at anybody."))
+    waitmoncry
+    release
 }

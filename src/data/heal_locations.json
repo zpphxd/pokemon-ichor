@@ -75,32 +75,32 @@
     {
       "id": "HEAL_LOCATION_LEBADEIA",
       "map": "MAP_LEBADEIA",
-      "x": 18,
-      "y": 12,
-      "respawn_map": "MAP_LEBADEIA",
-      "respawn_npc": "LOCALID_LEBADEIA_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "x": 15,
+      "y": 15,
+      "respawn_map": "MAP_LEBADEIA_TROPHONEION",
+      "respawn_npc": "LOCALID_LEBADEIA_TROPHONEION_HEALER",
+      "respawn_x": 10,
+      "respawn_y": 5
     },
     {
       "id": "HEAL_LOCATION_KIRRHA",
       "map": "MAP_KIRRHA",
-      "x": 18,
+      "x": 12,
       "y": 12,
       "respawn_map": "MAP_KIRRHA",
       "respawn_npc": "LOCALID_KIRRHA_HEALER",
-      "respawn_x": 18,
+      "respawn_x": 12,
       "respawn_y": 12
     },
     {
       "id": "HEAL_LOCATION_AIGION",
       "map": "MAP_AIGION",
-      "x": 18,
-      "y": 12,
+      "x": 19,
+      "y": 15,
       "respawn_map": "MAP_AIGION",
       "respawn_npc": "LOCALID_AIGION_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "respawn_x": 19,
+      "respawn_y": 15
     },
     {
       "id": "HEAL_LOCATION_ARKADIA",
@@ -115,24 +115,24 @@
     {
       "id": "HEAL_LOCATION_NEMEA",
       "map": "MAP_NEMEA",
-      "x": 18,
-      "y": 12,
+      "x": 12,
+      "y": 16,
       "respawn_map": "MAP_NEMEA",
       "respawn_npc": "LOCALID_NEMEA_HEALER",
-      "respawn_x": 18,
-      "respawn_y": 12
+      "respawn_x": 12,
+      "respawn_y": 16
     },
     {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_13",
       "map": "MAP_ROUTE13_HIGHLAND_ROAD",
-      "x": 27,
-      "y": 9
+      "x": 25,
+      "y": 10
     },
     {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_14",
       "map": "MAP_ROUTE14_NEMEA_ROAD",
-      "x": 27,
-      "y": 9
+      "x": 23,
+      "y": 8
     },
     {
       "id": "HEAL_LOCATION_DAPHNI",
@@ -221,6 +221,48 @@
       "map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
       "x": 5,
       "y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_DELPHOI",
+      "map": "MAP_DELPHOI",
+      "x": 32,
+      "y": 37,
+      "respawn_map": "MAP_DELPHOI_ASCLEPEION",
+      "respawn_npc": "LOCALID_DELPHOI_HEALER",
+      "respawn_x": 5,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_28",
+      "map": "MAP_ROUTE28_KASTALIAN_GORGE",
+      "x": 11,
+      "y": 16
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_25",
+      "map": "MAP_ROUTE25_EUROTAS",
+      "x": 13,
+      "y": 14
+    },
+    {
+      "id": "HEAL_LOCATION_GYTHEION",
+      "map": "MAP_GYTHEION",
+      "x": 7,
+      "y": 13,
+      "respawn_map": "MAP_GYTHEION_ASCLEPEION",
+      "respawn_npc": "LOCALID_GYTHEION_HEALER",
+      "respawn_x": 7,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_LAKONIA",
+      "map": "MAP_LAKONIA",
+      "x": 29,
+      "y": 37,
+      "respawn_map": "MAP_LAKONIA_ASCLEPEION",
+      "respawn_npc": "LOCALID_LAKONIA_HEALER",
+      "respawn_x": 4,
+      "respawn_y": 4
     }
   ]
 }

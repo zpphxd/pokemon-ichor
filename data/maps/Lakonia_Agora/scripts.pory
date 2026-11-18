@@ -1,0 +1,45 @@
+// The Agora, Lakonia (design/phase4/SCRIPT.md, Part 2): a stall with a set of
+// great scales, because Lakonia pays in iron bars, and a pile of them stacked by
+// the door like firewood. The stallkeeper weighs everything.
+// Room: tools/ichor/maps/lakonia_rooms.py. The stallkeeper stands at (3,2)
+// behind the counter; the player talks from (3,4). The mat is (3..4, 6), warps
+// 0 and 1 to MAP_LAKONIA warp 1. Stock: SCRIPT.md Part 6, Shops.
+
+mapscripts Lakonia_Agora_MapScripts {}
+
+text Lakonia_Agora_Name_Clerk { "STALLKEEPER" }
+
+script Lakonia_Agora_EventScript_Clerk {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Agora_Name_Clerk)
+    message(format("You pay in coin? Hm. Foreigners. Fine. Put it on the scale."))
+    waitmessage
+    pokemart(Lakonia_Agora_Mart)
+    setspeaker(Lakonia_Agora_Name_Clerk)
+    msgbox(format("Iron's honest. You can't hide a bar of iron up your sleeve."))
+    release
+}
+
+mart Lakonia_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_X_ATTACK
+    ITEM_X_DEFENSE
+    ITEM_GUARD_SPEC
+    ITEM_DIRE_HIT
+}
+
+script Lakonia_Agora_EventScript_Scales {
+    msgbox(format("A great set of bronze scales. Everything here gets weighed.\p"
+                  "Including, you suspect, you."), MSGBOX_SIGN)
+}
+
+script Lakonia_Agora_EventScript_Bars {
+    msgbox(format("Iron bars, stacked by the door like firewood. Lakonian money.\p"
+                  "One bar would buy a sandal. You'd need a cart to buy a house."), MSGBOX_SIGN)
+}

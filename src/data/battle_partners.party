@@ -144,6 +144,80 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Quick Attack
 - Taunt
 
+=== PARTNER_ICHOR_ARIADNE ===
+Name: ARIADNE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melisseer
+Level: 50
+Ability: Forewarn
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Pollen Puff
+- Psychic
+- Defend Order
+- Quiver Dance
+
+Panacoil
+Level: 49
+Ability: Hospitality
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Wish
+- Dazzling Gleam
+- Sludge Bomb
+- Helping Hand
+
+Korantha
+Level: 49
+Ability: Natural Cure
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Moonblast
+- Energy Ball
+- Grassy Terrain
+- Synthesis
+
+/* Delphoi: Rhea beside you at the Omphalos (phase4 SCRIPT.md Part 3). She
+ * never uses a move that hits her partner. */
+=== PARTNER_ICHOR_RHEA_DELPHOI ===
+Name: RHEA
+Class: Titan Admin
+Pic: Rhea Partner
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Laolith
+Level: 57
+Ability: Iron Fist
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Hammer Arm
+- Rock Slide
+- Stealth Rock
+
+Geogrip
+Level: 57
+Ability: Earth Eater
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- High Horsepower
+- Superpower
+- Circle Throw
+- Bulk Up
+
+Plouteras
+Level: 57
+Ability: Thick Fat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- High Horsepower
+- Wish
+- Body Slam
+- Helping Hand
+
+/* End Delphoi partner. */
+
 /* Ichor: Kleon beside you on the Stair of Hours (design/phase4/SCRIPT.md III-11B):
  * his starter's final stage by VAR_STARTER_MON (0 Nebrel: Pylakyon, 1 Kynder: Seismare,
  * 2 Hipling: Daphnyad), the hoplite cockerel and his mother's Kourodin. */

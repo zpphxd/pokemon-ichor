@@ -1,0 +1,14 @@
+#include "engine_consts.h"
+#include "item_menu.h"
+#include "constants/battle.h"
+#include "constants/items.h"
+K(POCKETS_COUNT, POCKETS_COUNT)
+K(POCKET_POKE_BALLS, POCKET_POKE_BALLS)
+K(OFF_BAG_POSITION_POCKET, offsetof(struct BagPosition, pocket))
+K(ITEM_DIVE_BALL, ITEM_DIVE_BALL)
+K(ITEM_MASTER_BALL, ITEM_MASTER_BALL)
+K(ITEM_GREAT_BALL, ITEM_GREAT_BALL)
+K(ITEM_DUSK_BALL, ITEM_DUSK_BALL)
+K(ITEM_POKE_BALL, ITEM_POKE_BALL)
+K(OFF_BAG_BALLS, offsetof(struct Bag, pokeBalls))
+K(BAG_POKEBALLS_COUNT, BAG_POKEBALLS_COUNT)

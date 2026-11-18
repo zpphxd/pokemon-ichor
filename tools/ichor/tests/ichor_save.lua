@@ -22,9 +22,15 @@ local log, expect, wait, shot = L.log, L.expect, L.wait, L.shot
 
 local function ichor8(off) return emu:read8(L.ichor() + off) end
 local function ichor16(off) return emu:read16(L.ichor() + off) end
+-- A new game sets one bank flag on purpose: FLAG_ICHOR_OATH_CHOICE_PENDING (the
+-- starting Oath is offered until it's answered). allZero ignores that bit.
 local function allZero(off, n)
+  local bit = S.FLAG_OATH_CHOICE_PENDING - S.ICHOR_FLAGS_START
+  local pendingWord = S.OFF_ICHOR_FLAGS + (bit >> 5) * 4
   for i = 0, n - 1, 4 do
-    if emu:read32(L.ichor() + off + i) ~= 0 then return false end
+    local v = emu:read32(L.ichor() + off + i)
+    if off + i == pendingWord then v = v & ~(1 << (bit & 31)) end
+    if v ~= 0 then return false end
   end
   return true
 end

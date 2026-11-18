@@ -1,0 +1,88 @@
+// The agoge, Lakonia (design/phase4/SCRIPT.md, Part 2): the barracks of one
+// herd of boys. Thirty reed mats in rows, a rack of practice spears, red cloaks
+// on pegs, and at the far end Archidamos's stool under the herd's names. Some
+// names are struck through: gone north.
+// Room: tools/ichor/maps/lakonia_rooms.py. The mat is (7..8, 9), warps 0 and 1
+// to MAP_LAKONIA warp 5.
+//
+// SCRIPT.md's gauntlet (three cadets, then Archidamos) needs four trainer ids
+// the chapter's range doesn't have, so until it gets them Archidamos gives the
+// Focus Sash once he has seen you in the ring with Kleon (III-5I,
+// FLAG_ICHOR_KLEON_LAKONIA_DONE): FLAG_ICHOR_GOT_FOCUS_SASH.
+
+mapscripts Lakonia_Agoge_MapScripts {}
+
+text Lakonia_Agoge_Name_Archidamos { "ARCHIDAMOS" }
+text Lakonia_Agoge_Name_Cadet { "CADET" }
+
+script Lakonia_Agoge_EventScript_Archidamos {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Agoge_Name_Archidamos)
+    if (flag(FLAG_ICHOR_GOT_FOCUS_SASH)) {
+        msgbox(format("Not soft. Hm. Not soft at all.\p"
+                      "Out. The boys need the floor."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_KLEON_LAKONIA_DONE)) {
+        msgbox(format("You. From the ring.\p"
+                      "The boys saw you. Every one of them was on that wall.\p"
+                      "Not soft. Hm. Not soft at all.\p"
+                      "Take this. A Lakonian stays up on one leg. This does it for your Pokémon."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_FOCUS_SASH)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(Lakonia_Agoge_Name_Archidamos)
+            msgbox(format("Your bag's full. A Lakonian carries less. Come back."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_FOCUS_SASH)
+        release
+        end
+    }
+    msgbox(format("A foreigner in my barracks. Good. The boys need someone to lose to.\p"
+                  "Not today. Today they cut reeds.\p"
+                  "Lakonians don't fall to one blow. Show me in the ring, if you're staying."))
+    release
+}
+
+script Lakonia_Agoge_EventScript_Cadet {
+    lock
+    faceplayer
+    setspeaker(Lakonia_Agoge_Name_Cadet)
+    if (flag(FLAG_ICHOR_KLEON_LAKONIA_DONE)) {
+        msgbox(format("I saw you fight Kleon! From the wall!\p"
+                      "Nobody knew who'd win. Nobody! Isn't that strange?"))
+    } else {
+        msgbox(format("One cloak a year. One. You make it last.\p"
+                      "If you see a red cloak in the reeds, it's mine. Don't tell the eiren."))
+    }
+    release
+}
+
+script Lakonia_Agoge_EventScript_CadetSleeping {
+    lock
+    msgbox(format("A cadet asleep on his mat, one hand on his practice spear.\p"
+                  "He's smiling. Lakonian boys aren't supposed to."))
+    release
+}
+
+script Lakonia_Agoge_EventScript_Names {
+    msgbox(format("The herd's names, painted on the plaster. Some are struck through with a straight line."), MSGBOX_SIGN)
+    lockall
+    setspeaker(Lakonia_Agoge_Name_Archidamos)
+    msgbox(format("Gone north. To Delphoi. I'll cross them back in when they come home.\p"
+                  "If."))
+    releaseall
+}
+
+script Lakonia_Agoge_EventScript_Spears {
+    msgbox(format("A rack of wooden practice spears, the points blunted with leather."), MSGBOX_SIGN)
+}
+
+script Lakonia_Agoge_EventScript_Cloaks {
+    msgbox(format("Red cloaks on pegs, one for every boy in the herd. Thirty pegs.\p"
+                  "A few pegs are empty."), MSGBOX_SIGN)
+}

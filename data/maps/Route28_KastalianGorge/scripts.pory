@@ -1,0 +1,272 @@
+// Route 28, the Kastalian Gorge (design/phase4/SCRIPT.md III-6B and Part 2): the
+// Titans' last muster camped in the god's ravine. The layout and every event's
+// place are tools/ichor/maps/delphoi_gorge.py's.
+//
+// III-6B: the two sentries at the south tents know the Unwoven and step aside
+// (once, FLAG_ICHOR_GORGE_SENTRIES). Gigas Agrios holds the cutting: he battles
+// you, then steps up onto the rock. The great herm at the foot of the falls has
+// a sickle scratched across its face: cleansing it is the desecrated-altar rite
+// (Hermes, altar index 21), then it can be anointed (HERM_AETHOS_ROUTE_28).
+// The falls need the Horn of Achelous (engine: MB_WATERFALL).
+
+const DELPHOI_ALTAR_GORGE_HERM = 21
+
+mapscripts Route28_KastalianGorge_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_1, 0)
+        if (flag(FLAG_ICHOR_GORGE_SENTRIES)) {
+            setobjectxyperm(LOCALID_GORGE_SENTRY_1, 12, 42)
+            setobjectxyperm(LOCALID_GORGE_SENTRY_2, 16, 42)
+        } else {
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (defeated(TRAINER_ICHOR_GIGAS_AGRIOS)) {
+            setobjectxyperm(LOCALID_GORGE_AGRIOS, 14, 23)
+        }
+        if (var(VAR_ICHOR_ACT3) >= 19) {
+            setflag(FLAG_ICHOR_HIDE_OCHTHOS_GORGE)
+        }
+    }
+}
+
+text Gorge_Text_NameSentry { "SENTRY" }
+text Gorge_Text_NameSentry2 { "SENTRY 2" }
+text Gorge_Text_NameAgrios { "AGRIOS" }
+text Gorge_Text_NameCook { "COOK" }
+text Gorge_Text_NameOchthos { "OCHTHOS" }
+text Gorge_Text_NameKid { "KID" }
+text Gorge_Text_NameMother { "MOTHER" }
+text Gorge_Text_NameKisseris { "KISSERIS" }
+text Gorge_Text_NameChomas { "CHOMAS" }
+text Gorge_Text_NameAsbolos { "ASBOLOS" }
+text Gorge_Text_NameChrysis { "CHRYSIS" }
+text Gorge_Text_NameSkaphe { "SKAPHE" }
+text Gorge_Text_NameTwins { "DORYX" }
+
+movement Gorge_Movement_StepLeft {
+    walk_left
+    face_down
+    step_end
+}
+
+movement Gorge_Movement_StepRight {
+    walk_right
+    face_down
+    step_end
+}
+
+movement Gorge_Movement_AgriosAside {
+    walk_right
+    face_left
+    step_end
+}
+
+// ---------------------------------------------------------------------------
+// III-6B: the sentries
+// ---------------------------------------------------------------------------
+
+script Route28_KastalianGorge_EventScript_Sentries {
+    lockall
+    setspeaker(Gorge_Text_NameSentry)
+    msgbox(format("Halt! Who goes- state your crew and your-"))
+    setspeaker(Gorge_Text_NameSentry2)
+    msgbox(format("Look at the hat. Look at the cloak.\pThat's the one."))
+    setspeaker(Gorge_Text_NameSentry)
+    msgbox(format("…The Unwoven? Here?"))
+    setspeaker(Gorge_Text_NameSentry2)
+    msgbox(format("Orders. Nobody touches the Unwoven. Let them through."))
+    setspeaker(Gorge_Text_NameSentry)
+    msgbox(format("Through to where?"))
+    setspeaker(Gorge_Text_NameSentry2)
+    msgbox(format("Wherever they like. The master says they'll come down on their own."))
+    setspeaker(Gorge_Text_NameSentry)
+    msgbox(format("Down where?"))
+    setspeaker(Gorge_Text_NameSentry2)
+    msgbox(format("Don't know. Didn't ask. You don't ask a Gigas things. Move."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_GORGE_SENTRY_1, Gorge_Movement_StepLeft)
+    applymovement(LOCALID_GORGE_SENTRY_2, Gorge_Movement_StepRight)
+    waitmovement(0)
+    setobjectxyperm(LOCALID_GORGE_SENTRY_1, 12, 42)
+    setobjectxyperm(LOCALID_GORGE_SENTRY_2, 16, 42)
+    setflag(FLAG_ICHOR_GORGE_SENTRIES)
+    setvar(VAR_TEMP_1, 0)
+    releaseall
+}
+
+script Route28_KastalianGorge_EventScript_Sentry1 {
+    setspeaker(Gorge_Text_NameSentry)
+    msgbox(format("We're not to touch you. Some of the others might, though.\p"
+                  "The doubters. They battle anyone. Gives them something to do."), MSGBOX_NPC)
+}
+
+script Route28_KastalianGorge_EventScript_Sentry2 {
+    setspeaker(Gorge_Text_NameSentry2)
+    msgbox(format("May your thread never be cut.\p…You're meant to say “Nor yours.” Never mind."),
+           MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// The camp's people (STORY §5's archetypes 6, 11, 8 and 3)
+// ---------------------------------------------------------------------------
+
+script Route28_KastalianGorge_EventScript_Cook {
+    setspeaker(Gorge_Text_NameCook)
+    if (var(VAR_ICHOR_ACT3) == 13) {
+        msgbox(format("Look up. The stars over Parnassos. They've all slid. A hand's width.\p"
+                      "I've baked under those stars since I was a boy. I know where they go.\p"
+                      "They don't go there."), MSGBOX_NPC)
+        end
+    }
+    msgbox(format("Bread? It's free. Everything's free in the camp. That's the point.\p"
+                  "At the Kronia my master poured my wine. One day a year.\p"
+                  "The master says every day, soon. Every day a feast.\p"
+                  "I asked who'd bake the bread, if every day's a feast.\p"
+                  "Nobody answered. So I'm still baking it."), MSGBOX_NPC)
+}
+
+script Route28_KastalianGorge_EventScript_Ochthos {
+    lock
+    faceplayer
+    setspeaker(Gorge_Text_NameOchthos)
+    if (flag(FLAG_TEMP_1)) {
+        msgbox(format("I don't know who to ask. You don't look like you know either."))
+    } else {
+        msgbox(format("…\pI came for my mother. She's sick.\p…If it works, is she sick forever?"))
+        setflag(FLAG_TEMP_1)
+    }
+    release
+}
+
+script Route28_KastalianGorge_EventScript_Kid {
+    setspeaker(Gorge_Text_NameKid)
+    msgbox(format("My friends joined. The helmets are cool.\p…Is that not a reason?\p"
+                  "It's a bit heavy, actually."), MSGBOX_NPC)
+}
+
+script Route28_KastalianGorge_EventScript_Mother {
+    setspeaker(Gorge_Text_NameMother)
+    msgbox(format("My thread ends on the same day as my baby's. Every seer says so.\p"
+                  "Either we all die that day, or nobody ever dies again.\p"
+                  "I know which one I'm betting on."), MSGBOX_NPC)
+}
+
+script Route28_KastalianGorge_EventScript_Corral {
+    msgbox(format("A herder minds the Taurivet in their rope corral.\p"
+                  "“Hyperion's bulls. He can't see them anymore. I tell him they're well.”"), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Signs and the great herm
+// ---------------------------------------------------------------------------
+
+script Route28_KastalianGorge_EventScript_SignFoot {
+    msgbox(format("THE KASTALIAN GORGE\nDelphoi above."), MSGBOX_SIGN)
+}
+
+script Route28_KastalianGorge_EventScript_SignTop {
+    msgbox(format("DELPHOI\nThe Kastalian spring, and the god's house above it."), MSGBOX_SIGN)
+}
+
+script Route28_KastalianGorge_EventScript_Herm {
+    lockall
+    setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+    setvar(VAR_0x8005, DELPHOI_ALTAR_GORGE_HERM)
+    specialvar(VAR_RESULT, Ichor_CheckAltarCleansed)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("A great herm of Hermes, at the foot of the falls.\p"
+                      "Someone has scratched a sickle across his face. It's fresh.\p"
+                      "Here the road ends and the water begins."))
+        setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+        setvar(VAR_0x8005, DELPHOI_ALTAR_GORGE_HERM)
+        goto(EventScript_IchorDesecratedAltar)
+    }
+    msgbox(format("A great herm of Hermes. Here the road ends and the water begins."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Trainers (SCRIPT.md Part 3, "The Kastalian Gorge"; Skaphe and the twins are
+// this build's, for the route standard's trainer count)
+// ---------------------------------------------------------------------------
+
+script Route28_KastalianGorge_EventScript_Kisseris {
+    trainerbattle_single(TRAINER_ICHOR_KISSERIS,
+        format("Seer said I'd die in a war. Titans don't go to wars. Titans stop them."),
+        format("…So what's all this, then? A camp. Helmets. Gigas. Tonight."))
+    setspeaker(Gorge_Text_NameKisseris)
+    msgbox(format("It's a war. Isn't it. I joined to get out of one, and it's a war."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_KastalianGorge_EventScript_Chomas {
+    trainerbattle_single(TRAINER_ICHOR_CHOMAS,
+        format("In the golden age, do we still get to eat? I've asked three times."),
+        format("Nobody answers. Not even you. You just win."))
+    setspeaker(Gorge_Text_NameChomas)
+    msgbox(format("If nothing ever ends, does dinner? Does it never end, or never come?"), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_KastalianGorge_EventScript_Agrios {
+    trainerbattle_single(TRAINER_ICHOR_GIGAS_AGRIOS,
+        format("The orders say let you through.\pThe orders don't say untested."),
+        format("Tested. Fine. Go on up."),
+        Route28_KastalianGorge_EventScript_AgriosAside)
+    setspeaker(Gorge_Text_NameAgrios)
+    msgbox(format("Go on up. Everything goes up tonight."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_KastalianGorge_EventScript_AgriosAside {
+    setspeaker(Gorge_Text_NameAgrios)
+    msgbox(format("Go on up. Everything goes up tonight."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_GORGE_AGRIOS, Gorge_Movement_AgriosAside)
+    waitmovement(0)
+    setobjectxyperm(LOCALID_GORGE_AGRIOS, 14, 23)
+    releaseall
+}
+
+script Route28_KastalianGorge_EventScript_Asbolos {
+    trainerbattle_single(TRAINER_ICHOR_ASBOLOS,
+        format("They read me my true thread. Free! It said I'd be a hero tonight."),
+        format("Tonight's not over. I can still be a hero later. Right?"))
+    setspeaker(Gorge_Text_NameAsbolos)
+    msgbox(format("Maybe the hero part means something else. Readings are like that."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_KastalianGorge_EventScript_Chrysis {
+    trainerbattle_single(TRAINER_ICHOR_CHRYSIS,
+        format("The melissai fetch the god's water. Today I'll fetch a battle."),
+        format("Spilled every jar. Ah well. There's plenty more falling."))
+    setspeaker(Gorge_Text_NameChrysis)
+    msgbox(format("The Pythia hasn't slept in a month. Don't tell anyone I told you."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_KastalianGorge_EventScript_Skaphe {
+    trainerbattle_single(TRAINER_ICHOR_SKAPHE,
+        format("I dig for Hyperion. Barrows, tombs, the old giants. Tonight I'm digging you."),
+        format("Buried. Fair enough."))
+    setspeaker(Gorge_Text_NameSkaphe)
+    msgbox(format("He can't see a thing now, Hyperion. He still points at where to dig.\p"
+                  "He's always right. That's the frightening part."), MSGBOX_AUTOCLOSE)
+}
+
+script Route28_KastalianGorge_EventScript_Twins {
+    trainerbattle_double(TRAINER_ICHOR_DORYX_AND_DOROS,
+        format("DORYX: Two helmets!\pDOROS: Two of us! The shovels are ours. Want to see?"),
+        format("DORYX: Two helmets, both beaten.\pDOROS: We'll polish them."),
+        format("DORYX: One Pokémon? We'd be cheating.\pDOROS: Come back with two."))
+    setspeaker(Gorge_Text_NameTwins)
+    msgbox(format("We joined the same day. We'll leave the same day.\p"
+                  "Mother said so. She says a lot of things the same day."), MSGBOX_AUTOCLOSE)
+}
+
+// The Hyampeia face (design/WORLD_EXPLORATION.md D6): the post-game climb up
+// the Phaedriades to the fox, the fables and Kerdovix. Pan's Crook will open it;
+// until that relic lands, the face only shows its handholds.
+script Route28_KastalianGorge_EventScript_Hyampeia {
+    msgbox(format("Handholds are cut up the cliff here, worn smooth, and ivy hangs over the edge far above.\p"
+                  "Somebody used to climb this. You'd need something to climb with."), MSGBOX_SIGN)
+}

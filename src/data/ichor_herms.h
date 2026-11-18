@@ -23,6 +23,11 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_AETHOS_ROUTE_5,
         .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_5,    // by the inn, (58,20); land at (58,21)
     },
+    [HERM_AETHOS_ROUTE_28] = {
+        .map = MAP_ROUTE28_KASTALIAN_GORGE,
+        .mapsec = MAPSEC_AETHOS_ROUTE_28,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_28,   // at the foot of the lower fall, (10,16); land at (11,16)
+    },
     [HERM_EMPORION_CITY] = {
         .map = MAP_EMPORION_CITY,
         .mapsec = MAPSEC_EMPORION_CITY,
@@ -32,6 +37,11 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .map = MAP_ROUTE13_HIGHLAND_ROAD,
         .mapsec = MAPSEC_AETHOS_ROUTE_13,
         .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_13,
+    },
+    [HERM_AETHOS_ROUTE_25] = {
+        .map = MAP_ROUTE25_EUROTAS,
+        .mapsec = MAPSEC_AETHOS_ROUTE_25,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_25,   // Amyklai's gate, (13,13); land at (13,14)
     },
     [HERM_AETHOS_ROUTE_14] = {
         .map = MAP_ROUTE14_NEMEA_ROAD,

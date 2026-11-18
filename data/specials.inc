@@ -1076,6 +1076,13 @@ gSpecials::
 	def_special Ichor_CountHerms
 	def_special Ichor_GetHermState
 	def_special Ichor_AnointHerm
+	def_special Ichor_TouchTownHerm
+	def_special Ichor_BufferTownHermName
+	def_special Ichor_RegisterHealerTownHerm
+	def_special Ichor_RegisterTownHerm
+	def_special Ichor_CountTravelHerms
+	def_special Ichor_BuildTravelMenu
+	def_special Ichor_TravelToTownHerm
 	@ Ichor: the Frozen Hour (src/ichor_frozen.c)
 	def_special Ichor_FrozenHourBegin, waitstate=1
 	def_special Ichor_UnfreezeObject
@@ -1151,3 +1158,5 @@ gSpecials::
 	def_special Ichor_TakeFirstFruits
 	@ Ichor: Act III engine (design/phase4/ENGINE_ACT3.md E7)
 	def_special Ichor_BullLeap
+	// Ichor: the beam trace (E9), ported from world-act3 for the Pythian Light
+	def_special Ichor_TraceBeam

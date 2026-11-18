@@ -1,9 +1,19 @@
 // Ichor: herm waystones (design/SYSTEMS.md §4; design/ENGINE_API.md §4).
 //
+// Two kinds of great herm share this file.
+//
 // A route's great herm runs EventScript_IchorGreatHerm as its bg event, or a
 // sign script calls EventScript_IchorAnointHerm after its own line (the fork's
-// directions). The engine finds which herm it is from the map
-// (src/data/ichor_herms.h).
+// directions). Anointing it with olive oil is a Favor rite for Hermes, and with
+// Daedalus's Wings its route is a fly target. The engine finds which herm it is
+// from the map (src/data/ichor_herms.h).
+//
+// A town's travel herm stands at its main entrance (tools/ichor/maps/town_herms.py):
+// the herm object runs EventScript_IchorTownHerm and its plaque
+// EventScript_IchorTownHermSign. Touching it, or using the town's Asclepeion or
+// healer, registers it (src/data/ichor_town_herms.h). Every travel herm then
+// offers to carry the player to any other registered town. Route herms keep to
+// anointing; the Wings fly from them, and from anywhere.
 
 script EventScript_IchorGreatHerm {
     lockall
@@ -42,4 +52,85 @@ script EventScript_IchorAnointHerm {
         msgbox(format("Every great herm in Aethos shines with your oil now.\pHermes is delighted!"), MSGBOX_DEFAULT)
     }
     return
+}
+
+// ---------------------------------------------------------------------------
+// Travel herms
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorTownHerm {
+    lockall
+    specialvar(VAR_RESULT, Ichor_TouchTownHerm)
+    if (var(VAR_RESULT) == TOWN_HERM_TOUCH_NEW) {
+        playse(SE_M_HEAL_BELL)
+        msgbox(Ichor_Text_TownHermFirst, MSGBOX_DEFAULT)
+    } else {
+        msgbox(Ichor_Text_TownHerm, MSGBOX_DEFAULT)
+    }
+    specialvar(VAR_RESULT, Ichor_CountTravelHerms)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(Ichor_Text_TownHermAlone, MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    call(EventScript_IchorHermTravelMenu)
+    releaseall
+}
+
+script EventScript_IchorTownHermSign {
+    special(Ichor_BufferTownHermName)
+    msgbox(Ichor_Text_TownHermSign, MSGBOX_SIGN)
+}
+
+script EventScript_IchorHermTravelMenu {
+    msgbox(Ichor_Text_TownHermAskTravel, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        return
+    }
+    message(Ichor_Text_TownHermWhere)
+    waitmessage
+    special(Ichor_BuildTravelMenu)
+    dynmultistack(20, 1, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    if (var(VAR_RESULT) == TOWN_HERM_STAY || var(VAR_RESULT) == MULTI_B_PRESSED) {
+        closemessage
+        return
+    }
+    closemessage
+    copyvar(VAR_0x8004, VAR_RESULT)
+    playse(SE_WARP_IN)
+    specialvar(VAR_RESULT, Ichor_TravelToTownHerm)
+    if (var(VAR_RESULT) == TRUE) {
+        waitstate
+    }
+    return
+}
+
+text Ichor_Text_TownHermFirst {
+    "The great herm of {STR_VAR_1}. Its winged\n"
+    "cap shines, and its garland is fresh.\p"
+    "Hermes will remember you passed.\n"
+    "Touch any herm to come back here."
+}
+
+text Ichor_Text_TownHerm {
+    "The great herm of {STR_VAR_1}."
+}
+
+text Ichor_Text_TownHermAlone {
+    "No other herm knows you yet.\p"
+    "Rest at a town's Asclepeion or touch\n"
+    "its herm, and Hermes can carry you there."
+}
+
+text Ichor_Text_TownHermAskTravel {
+    "Travel to another herm?"
+}
+
+text Ichor_Text_TownHermWhere {
+    "Where shall Hermes carry you?"
+}
+
+text Ichor_Text_TownHermSign {
+    "The herm of {STR_VAR_1}.\n"
+    "Touch it to travel between herms."
 }

@@ -1,0 +1,71 @@
+// The treasury of Astyra, Delphoi (design/phase4/SCRIPT.md Part 2): Aristion
+// polishes the spoils of the old war and gives you the ostrakon his neighbours
+// wrote against him. Alethea copies the hymns from III-6C until III-8. The room
+// is delphoi_rooms.py's. The ostrakon is the Delphoi one of SYSTEMS §5's thirty;
+// TODO(director): number it in FLAG_ICHOR_OSTRAKA_START's range.
+
+mapscripts Delphoi_AstyranTreasury_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_DELPHOI_ARRIVED) && var(VAR_ICHOR_ACT3) < 14) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_TREASURY)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_TREASURY)
+        }
+    }
+}
+
+text Astyra_Text_NameAristion { "ARISTION" }
+text Astyra_Text_NameAletheaT { "ALETHEA" }
+
+script Delphoi_AstyranTreasury_EventScript_Aristion {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NameAristion)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Someone sang the hymn on the wall. The one with the notes. Out loud!\p"
+                      "A girl with a satchel. Badly. In tune, but badly. I wept."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_DELPHOI_OSTRAKON)) {
+        msgbox(format("I polish every shield every day. Some days twice."))
+        release
+        end
+    }
+    msgbox(format("The treasury of Astyra! Built from the spoils of the old war.\pLook at it.\p"
+                  "I polish every shield every day. Some days twice.\p"
+                  "The neighbors complained, once. Noise. The polishing.\p"
+                  "They tried to have me exiled for it. Look."))
+    msgbox(format("“ARISTION. Polishes too loud.” Somebody cared enough to write it.\p"
+                  "I keep it. It's the proudest thing I own.\pTake it. You look like a collector."))
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} received an ostrakon!"))
+    waitfanfare
+    setflag(FLAG_ICHOR_GOT_DELPHOI_OSTRAKON)
+    release
+}
+
+script Delphoi_AstyranTreasury_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(Astyra_Text_NameAletheaT)
+    if (flag(FLAG_TEMP_1)) {
+        msgbox(format("I keep wanting to send him the tablet. Phaedon. Elpis's real words.\p"
+                      "He won't read it. You saw him. Some people won't open a letter.\p"
+                      "…Bring it with you. Tonight. Just in case he changes."))
+    } else {
+        setflag(FLAG_TEMP_1)
+        msgbox(format("Every city's treasury says the same thing. “We won. The god agreed.”\p"
+                      "Truthfully, it's lovely. Everyone's so sure.\p"
+                      "Look. This one's a hymn, with the notes carved over the words.\p"
+                      "Somebody wrote down exactly how it goes. So nobody could get it wrong."))
+    }
+    release
+}
+
+// the hymn
+script Delphoi_AstyranTreasury_EventScript_Thing1 {
+    msgbox(format("A hymn to Apollo, cut in the marble, with little letters over the words.\p"
+                  "The letters are the notes. Somebody wanted it sung exactly right."), MSGBOX_SIGN)
+}

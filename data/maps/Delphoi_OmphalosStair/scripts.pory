@@ -1,0 +1,43 @@
+// The Omphalos stair (design/phase4/SCRIPT.md III-8, "The Omphalos stair"): a
+// long stair down from the cracked stone, lit by nothing, the music box's tick
+// growing louder (every 60 frames at the top, 40 halfway, 30 near the bottom).
+// The layout is tools/ichor/maps/delphoi_temple.py's (build_stair). The bottom
+// is the Loom's east entrance, the climax chapter's map (III-9); until it lands
+// the way down leads back to the top. No encounters.
+
+mapscripts Delphoi_OmphalosStair_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_0, 0)
+    }
+}
+
+// The music box, ticking somewhere under the ground: the stair's coord events
+// sit every third step at the top, every second near the bottom, so the ticks
+// come faster as you go down.
+script Delphoi_OmphalosStair_EventScript_Tick {
+    playse(SE_CLICK)
+    end
+}
+
+script Delphoi_OmphalosStair_EventScript_Torch {
+    msgbox(format("Hyperion's torch. He must have dropped it. He went on down in the dark."), MSGBOX_SIGN)
+}
+
+script Delphoi_OmphalosStair_EventScript_Knot {
+    msgbox(format("A knot of the Omphalos's net. Charred. Every knot is tied the same way."), MSGBOX_SIGN)
+}
+
+script Delphoi_OmphalosStair_EventScript_Niche {
+    msgbox(format("A lamp niche cut in the rock. The oil in it dried up long ago.\p"
+                  "Somebody climbed down here once, and lit the way. Then stopped."), MSGBOX_SIGN)
+}
+
+script Delphoi_OmphalosStair_EventScript_Pots {
+    msgbox(format("Little clay pots against the wall. Barley, honey, a lock of hair.\p"
+                  "Offerings. For whoever's at the bottom."), MSGBOX_SIGN)
+}
+
+script Delphoi_OmphalosStair_EventScript_Carving {
+    msgbox(format("Something is cut into the rock here. Three women, and a loom.\p"
+                  "It's older than any writing. You can read it anyway."), MSGBOX_SIGN)
+}

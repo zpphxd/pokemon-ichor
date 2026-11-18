@@ -1,0 +1,53 @@
+// The Agora, Delphoi (design/phase4/SCRIPT.md Part 2): a long portico, stalls of
+// votive figurines, laurel sprigs, honey cakes and lead question-strips; a row of
+// tiny bronze tripods, each a little crooked. The room is delphoi_rooms.py's.
+
+mapscripts Delphoi_Agora_MapScripts {}
+
+text DelphoiAgora_Text_NameLampsakos { "LAMPSAKOS" }
+
+script Delphoi_Agora_EventScript_Lampsakos {
+    lock
+    faceplayer
+    setspeaker(DelphoiAgora_Text_NameLampsakos)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Nobody's buying lead strips. Nobody's got questions.\p"
+                      "Well. They've got questions. They're asking each other.\pI've started selling dice."))
+    } else {
+        message(format("Laurel? Figurine? A lead strip to write your question on?\p"
+                       "Questions are free. Lead's two obols. Answers are the god's business."))
+        waitmessage
+    }
+    if (flag(FLAG_BADGE08_GET)) {
+        pokemart(Delphoi_Agora_Mart_AfterLaurel)
+    } else {
+        pokemart(Delphoi_Agora_Mart_BeforeLaurel)
+    }
+    release
+}
+
+mart Delphoi_Agora_Mart_BeforeLaurel {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+    ITEM_LAUREL_SPRIG
+}
+
+mart Delphoi_Agora_Mart_AfterLaurel {
+    ITEM_ULTRA_BALL
+    ITEM_HYPER_POTION
+    ITEM_FULL_RESTORE
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+    ITEM_LAUREL_SPRIG
+}
+
+script Delphoi_Agora_EventScript_Thing1 {
+    msgbox(format("Little bronze tripods, a hand high. Every one leans slightly to the left.\p"
+                  "A card: AS USED BY THE PYTHIA. Probably not."), MSGBOX_SIGN)
+}

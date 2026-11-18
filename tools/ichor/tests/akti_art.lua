@@ -25,8 +25,8 @@ local supported = {
 local selected = os.getenv("AKTI_ART_POKEMON")
 if selected then
   pokemon = {}
-  for name in (selected .. ","):gmatch("(.-),") do
-    name = name:match("^%s*(.-)%s*$"):upper()
+  for raw in (selected .. ","):gmatch("(.-),") do
+    local name = raw:match("^%s*(.-)%s*$"):upper()
     assert(name ~= "", "Akti gallery species selection contains an empty name")
     assert(supported[name], "unsupported Akti gallery species " .. name)
     table.insert(pokemon, name)

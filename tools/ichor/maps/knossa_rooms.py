@@ -371,15 +371,22 @@ def grand_staircase(stem):
         m.run("staircase", [row + "_L", row, row + "_R"], 1, y)
         m.piece("staircase", "balustrade_col" if y in (4, 6) else "balustrade", 4, y)
     m.piece("staircase", "dark", 2, 2)
+    # the breach: beside the stair, the north wall's plaster and gypsum have fallen and
+    # the hill's raw rock shows through, a hollow going on into the cave (LABYRINTH_MAZE §1)
+    m.put("breach", 5, 1)
     m.part("furniture", "well_TL", 6, 4, 2, 1)
     m.f("brazier", 9, 3)
     m.obj("ICHOR_ARIADNE", 6, 6, P + "Ariadne", "MOVEMENT_TYPE_FACE_DOWN",
           flag="FLAG_ICHOR_HIDE_ARIADNE_STAIR", local_id="LOCALID_STAIR_ARIADNE")
     m.sign(6, 4, P + "LightWell")
+    m.sign(6, 2, P + "Breach")
     m.sign(7, 4, P + "LightWell")
     m.coords.append({"type": "trigger", "x": 2, "y": 3, "elevation": 3, "var": "VAR_TEMP_0",
                      "var_value": "0", "script": P + "StairDown"})
     _out(m, 5, 9, "MAP_KNOSSA_PALACE", PALACE_WARPS["GrandStaircase"])
+    # warp 1, the dark at the stair's foot: Ring I's way back up lands here. The
+    # trigger on the step below (2,3) checks for the Thread before you reach it.
+    m.warp(2, 2, "MAP_LABYRINTH_RING1", 0)
     return m.build(stem, starts=[(5, 9)], must_reach=[(2, 3, "the stair down")], views=[(5, 5)])
 
 

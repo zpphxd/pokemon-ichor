@@ -45,6 +45,11 @@ Every Ichor map follows these rules. They come from how Game Freak builds Gen 3 
 ## 2. Towns
 
 - **First things first.** The Asclepeion and the Agora should be visible from the main entrance, or very close to it. A tired player shouldn't have to search for healing.
+- **A travel herm at the gate** (user, 2026-11-17). Every town, hamlet and major rest stop has a great herm a step or two from where the player arrives (its main edge, quay or ferry landing), with its plaque beside it: "The herm of Akti. Touch it to travel between herms." Touching it, or using the town's Asclepeion or healer, registers the town for herm travel (SYSTEMS §4).
+  - Stand the herm beside the main path, never on it, and leave a landing tile next to it on the path.
+  - Place it with `tools/ichor/maps/town_herms.py` (a row there, two objects, no new tiles) and add the town's row to `src/data/ichor_town_herms.h` (a `TOWN_HERM_*` id and its spare flag in `include/constants/flags.h`).
+  - A town healed by an inn instead of an Asclepeion registers from the inn's script: `setvar(VAR_0x8004, TOWN_HERM_<TOWN>)` then `special(Ichor_RegisterTownHerm)`.
+  - `tools/ichor/herm_audit.py` (run by `smoke_test.sh`) fails when a heal location with a healer has no herm row, a row's map has no herm and plaque, or the herm is more than 16 steps from an entrance.
 - **The temple is the crown.** It is the town's landmark: elevated, at the far end, or framed by the main street. If the story needs it closed, it stays shut until the right beat.
 - **Every house is a home** (user, 2026-11-14). Every house in a town has a door, an interior and someone living there, and something happens inside. That means a gift, a trade (an in-game Pokémon trade or an item swap), a small quest, a minigame, a rematch, or lore that leads to a reward. Flavour text alone isn't enough. There are no scenery-only houses with barred or shuttered doors.
   - Give each household a story in a line or two: who lives there, and what they want or offer.

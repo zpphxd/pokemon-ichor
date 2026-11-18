@@ -49,7 +49,7 @@ script KytheraPaphia_Asclepeion_EventScript_Pithos {
     lockall
     setvar(VAR_0x8004, PC_LOCATION_OTHER)
     msgbox(Ichor_Text_PithosLook)
-    msgbox(Ichor_Text_PithosLift)
+    call(Ichor_EventScript_PithosLiftLid)
     goto(KytheraPaphia_Asclepeion_EventScript_PithosMenu)
 }
 
