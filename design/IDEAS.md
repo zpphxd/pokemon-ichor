@@ -60,6 +60,16 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Then:** a natural-level balance playthrough of the whole game (party level at each Laurel), raising trainers and bosses where the player is too far ahead.
 - **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
 
+## After the main game: the Oracle edition (user, 2026-11-18)
+
+An optional AI layer through the emulator; the standard ROM plays exactly as now.
+- **How:** mGBA's Lua scripting (sockets) bridges a reserved RAM block to a small companion program on the laptop that holds the player's own API key (BYOK). OpenEmu can't do it (no Lua), so it needs mGBA or a launcher built on its core. The key never goes in the ROM or save.
+- **No typing (user's rule):** input comes only from menu choices, how the player plays, and the save's state.
+- **Two tiers:** TypeSafe's Jev, a cheap decision model that returns typed choices, yes/no and scores with confidence, picks among authored options. A large LLM (Claude, Gemini, OpenAI) writes new text inside the box limits and the GBA character set, checked by the companion.
+- **Always offline-safe:** no connection, or a slow one, plays the authored line. Generated text is saved once shown, so reloads match. The model only picks from allowed actions and flags; it never runs code.
+- **Features:** run-specific prophecies (Klotheia, Pythia, augurs); characters who remember the player; the Scroll of Deeds as Homeric verse; Mom's letters; gods answering in character from Favor; adaptive difficulty and a rival who counters the real party (Jev); generated side quests from real items, maps and Pokémon; playstyle-driven omens; location-aware Pythia hints toward unfound hidden spots; battle commentary; Pokédex entries in Alethea's voice; epithets; a rumor mill toward legend quests; a self-updating walkthrough; playtest feedback for balance.
+- **First prototype:** Jev's playstyle reader feeding omens and Kleon's team, then the Klotheia prophecy.
+
 ## Done
 
 ### Herm fast travel, made clear and early (user, 2026-11-17)
