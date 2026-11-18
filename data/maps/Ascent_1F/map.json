@@ -80,7 +80,7 @@
       "local_id": "LOCALID_ASCENT_1F_LAMPON",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
       "x": 20,
-      "y": 18,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -121,7 +121,7 @@
     {
       "local_id": "LOCALID_ASCENT_1F_MULETEER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
-      "x": 44,
+      "x": 43,
       "y": 27,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -135,8 +135,8 @@
     {
       "local_id": "LOCALID_ASCENT_1F_GOAT",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
-      "x": 45,
-      "y": 26,
+      "x": 44,
+      "y": 25,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,

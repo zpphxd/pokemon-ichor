@@ -28,6 +28,23 @@
     .align 2
     .endm
 
+    @ Kleon's recruitment: arriving with four Laurels, before Kallisto.
+    test_header ArkadiaTown_RecruitHeader, ArkadiaTown_RecruitScript
+ArkadiaTown_RecruitScript:
+    lockall
+    setvar VAR_TEMP_F, 1
+    givemon SPECIES_KYNDER, 100, move1=MOVE_FLAMETHROWER, move2=MOVE_LEER
+    setflag FLAG_SYS_POKEMON_GET
+    setflag FLAG_BADGE01_GET
+    setflag FLAG_BADGE02_GET
+    setflag FLAG_BADGE03_GET
+    setflag FLAG_BADGE04_GET
+    setvar VAR_REPEL_STEP_COUNT, 999
+    warp MAP_ARKADIA, 12, 36
+    waitstate
+    releaseall
+    end
+
     test_header ArkadiaTown_SetupHeader, ArkadiaTown_SetupScript
 ArkadiaTown_SetupScript:
     lockall

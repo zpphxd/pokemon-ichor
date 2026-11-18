@@ -87,7 +87,7 @@ def rooms():
     m = hall("Kaldera_Agora", 16, 12)
     m.rect(3, 3, 11, 3, 0x20C, True)
     m.rect(12, 5, 13, 8, 0x20C, True)
-    m.person("Merchant", 7, 4, gfx="MERCHANT")
+    m.person("Merchant", 7, 5, gfx="MERCHANT")  # clear of the shelf row's top layer
     m.person("Customer", 4, 8, gfx="PILGRIM")
     m.json["warp_events"] = [warp(8, 11, "Kaldera", 1)]
     m.save()

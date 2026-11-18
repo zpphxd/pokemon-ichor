@@ -90,15 +90,34 @@ script Arkadia_EventScript_Recruitment {
         end
     }
     setvar(VAR_TEMP_1, 1)
-    setvar(VAR_0x8004, TIME_NIGHT)
+    // The player comes in on any row of the clearing's mouth (x 9, y 35-38);
+    // every row ends at (7,37), three steps from Kleon, with Alethea at the
+    // player's shoulder (6,36) and the map's west border just off screen.
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8005) == 35) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Arkadia_Movement_ClearingFrom35)
+    } elif (var(VAR_0x8005) == 36) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Arkadia_Movement_ClearingFrom36)
+    } elif (var(VAR_0x8005) == 38) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Arkadia_Movement_ClearingFrom38)
+    } else {
+        applymovement(OBJ_EVENT_ID_PLAYER, Arkadia_Movement_ClearingFrom37)
+    }
+    waitmovement(0)
+    applymovement(LOCALID_ARKADIA_ALETHEA, Arkadia_Movement_AletheaToClearing)
+    waitmovement(0)
+    // Dusk in the cypresses: the evening tint, warm and readable, never full
+    // night. Released at the end; the map's transition releases it too.
+    setvar(VAR_0x8004, TIME_EVENING)
     special(Ichor_HoldTimeOfDay)
     delay(30)
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
-    applymovement(LOCALID_ARKADIA_ALETHEA, Common_Movement_FaceLeft)
+    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceRight)
     waitmovement(0)
     setspeaker(Arkadia_Text_NameKleon)
     msgbox(format("Don't. Whatever you're going to say. Don't.\p"
                   "...She didn't even look at me. Kallisto. The whole match."))
+    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceDown)
+    waitmovement(0)
     msgbox(format("She looked at the sky. And she won anyway. Six to nothing.\p"
                   "Six to nothing."))
     msgbox(format("You know what her acolytes said? “Poor thing. He's fated.”\p"
@@ -108,16 +127,25 @@ script Arkadia_EventScript_Recruitment {
     setspeaker(Arkadia_Text_NameAlethea)
     msgbox(format("Kleon, she's beaten everyone this month. She's--"))
     setspeaker(Arkadia_Text_NameKleon)
+    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceRight)
+    waitmovement(0)
     msgbox(format("She beat everyone. She crushed me. There's a difference."))
+    closemessage
+    // A twig snaps: everyone turns to the cypresses, and the mask steps out.
+    playse(SE_BREAKABLE_DOOR)
+    applymovement(LOCALID_ARKADIA_KLEON, Arkadia_Movement_StartleLeft)
+    applymovement(LOCALID_ARKADIA_ALETHEA, Arkadia_Movement_StartleLeft)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
     playbgm(MUS_ICHOR_TITAN, TRUE)
-    setspeaker(SP_NAME_NONE)
-    msgbox(format("A twig snaps. A white tragic mask moves between the cypresses.\p"
-                  "The fingers of his right hand are stained with ink."))
     clearflag(FLAG_ICHOR_HIDE_IAPETOS_ARKADIA)
     addobject(LOCALID_ARKADIA_IAPETOS)
-    applymovement(LOCALID_ARKADIA_IAPETOS, Common_Movement_FaceRight)
-    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceLeft)
+    applymovement(LOCALID_ARKADIA_IAPETOS, Arkadia_Movement_OutOfCypresses)
     waitmovement(0)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A white tragic mask comes out of the cypresses.\p"
+                  "The fingers of his right hand are stained with ink."))
+    setspeaker(Arkadia_Text_NameIapetos)
     msgbox(format("Six to nothing. I watched. It was very hard to watch."))
     setspeaker(Arkadia_Text_NameKleon)
     msgbox(format("Who are you?"))
@@ -125,7 +153,11 @@ script Arkadia_EventScript_Recruitment {
     msgbox(format("A writer, of a sort. I write down what people are.\p"
                   "The Titans call me Iapetos. You can call me whatever helps."))
     setspeaker(Arkadia_Text_NameAlethea)
+    applymovement(LOCALID_ARKADIA_ALETHEA, Common_Movement_FaceDown)
+    waitmovement(0)
     msgbox(format("{PLAYER}. That's a Titan."))
+    applymovement(LOCALID_ARKADIA_ALETHEA, Common_Movement_FaceLeft)
+    waitmovement(0)
     setspeaker(Arkadia_Text_NameIapetos)
     msgbox(format("And you're Daphne's girl. The one who digs. Hello.\p"
                   "Kleon. May I tell you something true?"))
@@ -155,10 +187,12 @@ script Arkadia_EventScript_Recruitment {
     setspeaker(Arkadia_Text_NameKleon)
     msgbox(format("Everybody's telling me the truth! I'd like a better one!"))
     delay(45)
-    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceDown)
+    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceRight)
     waitmovement(0)
     msgbox(format("Everyone's got a story about you. Even the Titans. They wrote you a play.\p"
                   "I just want one that's mine."))
+    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceLeft)
+    waitmovement(0)
     setspeaker(SP_NAME_NONE)
     msgbox(format("Kleon takes the tablet."))
     setspeaker(Arkadia_Text_NameIapetos)
@@ -167,17 +201,23 @@ script Arkadia_EventScript_Recruitment {
     msgbox(format("...Nor yours?"))
     setspeaker(Arkadia_Text_NameIapetos)
     msgbox(format("Good. You'll pick it up."))
+    closemessage
     applymovement(LOCALID_ARKADIA_IAPETOS, Arkadia_Movement_IntoCypresses)
     waitmovement(0)
     setflag(FLAG_ICHOR_HIDE_IAPETOS_ARKADIA)
     removeobject(LOCALID_ARKADIA_IAPETOS)
     setspeaker(Arkadia_Text_NameKleon)
+    applymovement(LOCALID_ARKADIA_KLEON, Common_Movement_FaceRight)
+    waitmovement(0)
     msgbox(format("Don't follow me. I mean it this time.\p"
                   "Next time we fight, it's written that I win."))
+    closemessage
     applymovement(LOCALID_ARKADIA_KLEON, Arkadia_Movement_KleonLeaves)
     waitmovement(0)
     setflag(FLAG_ICHOR_KLEON_JOINED_TITANS)
     removeobject(LOCALID_ARKADIA_KLEON)
+    applymovement(LOCALID_ARKADIA_ALETHEA, Common_Movement_FaceDown)
+    waitmovement(0)
     setspeaker(Arkadia_Text_NameAlethea)
     msgbox(format("...He didn't believe me.\p"
                   "People don't. I'm used to it.\pTruthfully, I'm not."))
@@ -187,8 +227,17 @@ script Arkadia_EventScript_Recruitment {
     releaseall
 }
 
-movement Arkadia_Movement_IntoCypresses { walk_up walk_up walk_up }
-movement Arkadia_Movement_KleonLeaves { walk_up walk_left walk_left walk_up walk_up }
+// Iapetos waits hidden in the cypress at (2,35) and steps down to (2,37), face
+// to face with Kleon at (4,37); both leave the same way, up into the trees.
+movement Arkadia_Movement_OutOfCypresses { walk_slow_down walk_slow_down face_right }
+movement Arkadia_Movement_IntoCypresses { walk_slow_up walk_slow_up walk_slow_up }
+movement Arkadia_Movement_KleonLeaves { walk_left walk_left walk_up walk_up walk_up }
+movement Arkadia_Movement_StartleLeft { emote_exclamation_mark face_left }
+movement Arkadia_Movement_ClearingFrom35 { walk_down walk_down walk_left walk_left }
+movement Arkadia_Movement_ClearingFrom36 { walk_down walk_left walk_left }
+movement Arkadia_Movement_ClearingFrom37 { walk_left walk_left }
+movement Arkadia_Movement_ClearingFrom38 { walk_up walk_left walk_left }
+movement Arkadia_Movement_AletheaToClearing { walk_up walk_up walk_left walk_left walk_left walk_left walk_left face_left }
 
 // ---------------------------------------------------------------------------
 // The town's people, signs, grotto and falls, ported from claude/world-act2-0a92e7

@@ -34,6 +34,10 @@ fi
 /usr/bin/python3 tools/ichor/herm_audit.py \
   || { echo "SMOKE FAIL: a town without its travel herm (tools/ichor/herm_audit.py)"; exit 1; }
 
+# Nobody stands inside a wall or a tree, or under a crown or a capital's top layer.
+/usr/bin/python3 tools/ichor/object_audit.py \
+  || { echo "SMOKE FAIL: an object inside solid ground or under top-layer art (tools/ichor/object_audit.py)"; exit 1; }
+
 # No starter in the wild, every regular line catchable before the League, the tables as
 # planned (design/DISTRIBUTION.md).
 /usr/bin/python3 tools/ichor/distribution.py \

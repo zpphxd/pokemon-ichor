@@ -19,7 +19,7 @@
       "local_id": "LOCALID_KALDERA_AGORA_MERCHANT",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
       "x": 7,
-      "y": 4,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,

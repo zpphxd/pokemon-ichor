@@ -1,6 +1,6 @@
 -- The Arkadia cluster ported from world-act2: doors both ways, the seams, the rooms' gifts.
 local L = dofile("tools/ichor/tests/engine_lib.lua")
-local S = L.S
+local S, K = L.S, L.K
 for k, v in pairs(dofile(L.OUT .. "arkadia_town_symbols.lua")) do S.SCRIPTS[k] = v end
 local expect = L.expect
 
@@ -25,11 +25,65 @@ local function cross(dir, map, name)
     L.shot(name)
 end
 
+local function gfxOf(localId)
+    for i = 0, S.OBJECT_EVENTS_COUNT - 1 do
+        local o = S.gObjectEvents + i * S.OBJECT_EVENT_SIZE
+        if L.emu:read8(o) & 1 == 1 and L.emu:read8(o + S.OFF_OBJ_LOCAL_ID) == localId then
+            return L.emu:read16(o + S.OFF_OBJ_GRAPHICS_ID)
+        end
+    end
+end
+local function heldTime() return L.emu:read8(L.ichor() + S.OFF_HELD_TIME) end
+
+-- Kleon's recruitment (STORY.md §7.2), a shot on every box: the cast in place,
+-- Iapetos in his mask stepping out of the cypresses, a warm dusk at most, and
+-- the clock's own light back afterwards.
+local function recruitment()
+    L.runHeader("ArkadiaTown_RecruitHeader")
+    expect(L.mapId() == S.MAP_ARKADIA and not L.getFlag(S.FLAG_RECRUITED), "arrived before Kleon's choice")
+    expect(heldTime() == 0, "Arkadia starts on the clock's own light")
+    L.setBeat("kleons_choice", false)
+    L.shot("before")
+    local seen = {held = {}}
+    L.goTrigger(L.triggers("Arkadia_EventScript_Recruitment"))
+    L.settle({every = true, stop = function()
+        local h = heldTime()
+        seen.held[h] = true
+        local ix, iy = L.objectAt(S.LOCALID_IAPETOS)
+        if ix and not seen.iapetos then seen.iapetos = gfxOf(S.LOCALID_IAPETOS) end
+        if ix and L.boxUp() then seen.iapetosAt = ix .. "," .. iy end
+        if L.boxUp() and not seen.cast then
+            local px, py = L.pos()
+            local kx, ky = L.objectAt(S.LOCALID_KLEON)
+            local ax, ay = L.objectAt(S.LOCALID_ALETHEA)
+            seen.cast = string.format("%d,%d %d,%d %d,%d", px, py, kx or -1, ky or -1, ax or -1, ay or -1)
+        end
+        return false
+    end})
+    L.log("NOTE cast at the first box (player, Kleon, Alethea): " .. tostring(seen.cast))
+    expect(seen.cast == "7,37 4,37 6,36", "the player stands three steps from Kleon with Alethea at the shoulder")
+    expect(seen.iapetos == S.GFX_IAPETOS, "Iapetos wears his own mask, not a grunt's")
+    expect(seen.iapetosAt == "2,37", "Iapetos steps out of the cypresses to face Kleon")
+    expect(seen.held[S.TIME_EVENING + 1] and not seen.held[S.TIME_NIGHT + 1],
+           "the scene holds a warm dusk, never full night")
+    expect(heldTime() == 0, "the clock's own light returns after the scene")
+    expect(L.getFlag(S.FLAG_RECRUITED) and L.getFlag(S.FLAG_HIDE_IAPETOS)
+           and not L.objectAt(S.LOCALID_KLEON) and not L.objectAt(S.LOCALID_IAPETOS),
+           "Kleon and Iapetos leave into the cypresses")
+    L.shot("after")
+    L.setBeat("boot", false)
+end
+
 L.start(function()
     L.quickstart()
+    recruitment()
     L.runHeader("ArkadiaTown_SetupHeader")
     expect(L.mapId() == S.MAP_ARKADIA, "arrived before the Temple of Artemis")
     L.shot("temple_stair")
+    -- the two huntresses gossip beside the cypress, not inside it (object_audit.py)
+    L.go(22, 21)
+    L.face(K.UP)
+    L.shot("huntresses")
     local A = S.MAP_ARKADIA
     door(A, "Arkadia", S.MAP_TEMPLE, "temple")
     door(A, "Arkadia", S.MAP_CLINIC, "asclepeion")
