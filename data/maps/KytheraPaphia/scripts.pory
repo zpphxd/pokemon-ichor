@@ -9,8 +9,8 @@
 // workshop, 4 the dovecote, 5 the mirror-house, 6 the orchard house, 7 the
 // potter's house (tools/ichor/maps/kythera_homes.py's DOORS).
 //
-// Hidden items: an Ultra Ball behind the dovecote (28,9), and a Pearl under the
-// mirror by the jetty (11,19). A Love Ball waits on the green by the Asclepeion.
+// Hidden items: a Herakles Ball behind the dovecote (28,9), and a Pearl under the
+// mirror by the jetty (11,19). An Eros Ball waits on the green by the Asclepeion.
 // Music: MUS_ICHOR_AKTI stands in for MUS_ICHOR_KYTHERA; Hermes's reveal has no
 // MUS_ICHOR_THEOXENIA sting yet.
 
@@ -211,7 +211,7 @@ script KytheraPaphia_EventScript_Hermes {
     msgbox(format("And this. A tortoise. My first lyre was a tortoise shell. Don't tell him."))
     setspeaker(SP_NAME_NONE)
     // TODO(theoxenia): SYSTEMS §10's gift in full: Modest, Rain Dish, god-taught Shell
-    // Smash, 3 perfect IVs, a Cherish Ball, the Xenia Ribbon, fateful, met as "a
+    // Smash, 3 perfect IVs, a Charis Ball, the Xenia Ribbon, fateful, met as "a
     // guest-gift of Hermes"; then set FLAG_ICHOR_THEOXENIA_HERMES and open the
     // Stranger omen kind (SYSTEMS §6).
     givemon(SPECIES_SQUIRTLE, 45, ITEM_WHITE_HERB)

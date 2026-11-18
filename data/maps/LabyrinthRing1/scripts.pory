@@ -1,0 +1,386 @@
+// Ring I, the Threshold (design/LABYRINTH.md §6 Ring I; design/maps/LabyrinthRing1.md).
+// Hestia's verb, carry the flame: the threshold hearth's fire lasts 30 steps on the
+// torch (36 Mortal, 26 Spartan), the five braziers take only that fire, and a lit
+// brazier hands it back. The layout and the generated block below come from
+// tools/ichor/maps/labyrinth_ring1.py.
+
+mapscripts LabyrinthRing1_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        call(LabyrinthRing1_EventScript_Register)
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(Ichor_DrawThread)
+    }
+}
+
+text LabyrinthRing1_Name_Akakallis { "AKAKALLIS" }
+text LabyrinthRing1_Name_Xenodike { "XENODIKE" }
+
+// --- The threshold fire ---------------------------------------------------------------------
+
+// VAR_0x8005: the threshold fire's steps for this difficulty (Mortal 36, Hero 30, Spartan 26).
+script LabyrinthRing1_EventScript_FlameBudget {
+    specialvar(VAR_RESULT, Ichor_GetStepGlassLimit)
+    if (var(VAR_RESULT) == 150) {
+        setvar(VAR_0x8005, 36)
+    } elif (var(VAR_RESULT) == 100) {
+        setvar(VAR_0x8005, 26)
+    } else {
+        setvar(VAR_0x8005, 30)
+    }
+}
+
+script LabyrinthRing1_EventScript_Hearth {
+    lockall
+    call(LabyrinthRing1_EventScript_FlameBudget)
+    setvar(VAR_0x8004, FLAME_THRESHOLD)
+    special(Ichor_TakeFlame)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The threshold hearth. The house's oldest fire, low and steady.\p"
+                      "It has never gone out. A lit torch could carry it."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("You hold the torch to the hearth. The threshold fire takes.\p"
+                      "It won't last long away from home."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+// A lit brazier hands its fire back to a lit torch.
+script LabyrinthRing1_EventScript_Relight {
+    call(LabyrinthRing1_EventScript_FlameBudget)
+    setvar(VAR_0x8004, FLAME_THRESHOLD)
+    special(Ichor_TakeFlame)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("The brazier's fire leaps to your torch."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("The brazier burns steadily."), MSGBOX_DEFAULT)
+    }
+}
+
+script LabyrinthRing1_EventScript_Draught {
+    call(EventScript_IchorDraught)
+}
+
+// --- The thread lesson -------------------------------------------------------------------------
+
+script LabyrinthRing1_EventScript_TieLesson {
+    setvar(VAR_TEMP_1, 1)
+    if (!flag(FLAG_ICHOR_R1_TIE_TAUGHT)) {
+        lockall
+        setflag(FLAG_ICHOR_R1_TIE_TAUGHT)
+        msgbox(format("A bronze ring is set in the floor.\p"
+                      "You remember Ariadne's voice on the stair: TIE IT HERE.\p"
+                      "(Stand on a ring, open the Relic Ring with SELECT, choose THREAD, then TIE OFF.)"),
+               MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+// --- The hole down -----------------------------------------------------------------------------
+
+script LabyrinthRing1_EventScript_Hole {
+    lockall
+    msgbox(format("The rock crumbles under your feet!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_RING2, 3)
+    waitstate
+}
+
+// --- Priestesses of the Mistress ---------------------------------------------------------------
+
+script LabyrinthRing1_EventScript_Akakallis {
+    trainerbattle_single(TRAINER_ICHOR_AKAKALLIS, LabyrinthRing1_Text_AkakallisIntro, LabyrinthRing1_Text_AkakallisDefeat)
+    setspeaker(LabyrinthRing1_Name_Akakallis)
+    msgbox(format("Every brazier down here takes only the hearth's fire. Mind the draughts."), MSGBOX_AUTOCLOSE)
+}
+
+text LabyrinthRing1_Text_AkakallisIntro {
+    format("Ariadne sent you with her thread. So I test you. That's the rule.")
+}
+
+text LabyrinthRing1_Text_AkakallisDefeat {
+    format("You'll do. Carry the fire carefully. It's older than the walls.")
+}
+
+script LabyrinthRing1_EventScript_Xenodike {
+    trainerbattle_single(TRAINER_ICHOR_XENODIKE, LabyrinthRing1_Text_XenodikeIntro, LabyrinthRing1_Text_XenodikeDefeat)
+    setspeaker(LabyrinthRing1_Name_Xenodike)
+    msgbox(format("My sister tests the brave. I test the nosy. You're both."), MSGBOX_AUTOCLOSE)
+}
+
+text LabyrinthRing1_Text_XenodikeIntro {
+    format("You found my corner. Nobody finds my corner. Battle, then.")
+}
+
+text LabyrinthRing1_Text_XenodikeDefeat {
+    format("Take the scroll. I was only guarding it from boredom.")
+}
+
+// --- Things on the walls -----------------------------------------------------------------------
+
+script LabyrinthRing1_EventScript_Shrine {
+    msgbox(format("A little clay goddess in a niche, arms raised, snakes in her hands.\p"
+                  "Someone left a smear of honey on her ledge."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing1_EventScript_FrescoBulls {
+    msgbox(format("A fresco: bulls running nose to tail in a ring.\p"
+                  "Under them, a red line runs all the way round, like a thread."), MSGBOX_SIGN)
+}
+
+// ---- BEGIN GENERATED by tools/ichor/maps/labyrinth_lib.py: do not edit ----
+script LabyrinthRing1_EventScript_Register {
+    // the floors that take Ariadne's thread, each with its first twin
+    setvar(VAR_0x8004, 0x320)
+    setvar(VAR_0x8005, 0x321)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x32B)
+    setvar(VAR_0x8005, 0x32C)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x2E8)
+    setvar(VAR_0x8005, 0x2E9)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x2F3)
+    setvar(VAR_0x8005, 0x2F4)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 21)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R1_THRESHOLD)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 30)
+    setvar(VAR_0x8005, 26)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R1_GATE)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 8)
+    setvar(VAR_0x8005, 16)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R1_FRESCO)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 38)
+    setvar(VAR_0x8005, 6)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R1_CLEFT)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 19)
+    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
+    special(Ichor_AddThreadAnchor)
+}
+
+// The ring's state, drawn on load and after every change: lit braziers, opened
+// doors and gates. Ichor_DrawThread goes after it.
+script LabyrinthRing1_EventScript_DrawState {
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x30)) {
+        setmetatile(10, 2, 0x33D, TRUE)
+        setmetatile(10, 3, 0x345, TRUE)
+        setmetatile(11, 2, 0x33E, TRUE)
+        setmetatile(11, 3, 0x346, TRUE)
+        setmetatile(9, 8, 0x255, TRUE)
+        setmetatile(10, 8, 0x320, FALSE)
+        setmetatile(11, 8, 0x32B, FALSE)
+        setmetatile(12, 8, 0x257, TRUE)
+        setmetatile(9, 9, 0x25D, TRUE)
+        setmetatile(10, 9, 0x32B, FALSE)
+        setmetatile(11, 9, 0x320, FALSE)
+        setmetatile(12, 9, 0x24C, TRUE)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x31)) {
+        setmetatile(34, 10, 0x33D, TRUE)
+        setmetatile(34, 11, 0x345, TRUE)
+        setmetatile(35, 10, 0x33E, TRUE)
+        setmetatile(35, 11, 0x346, TRUE)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x33)) {
+        setmetatile(2, 30, 0x33D, TRUE)
+        setmetatile(2, 31, 0x345, TRUE)
+        setmetatile(3, 30, 0x33E, TRUE)
+        setmetatile(3, 31, 0x346, TRUE)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x34)) {
+        setmetatile(14, 30, 0x33D, TRUE)
+        setmetatile(14, 31, 0x345, TRUE)
+        setmetatile(15, 30, 0x33E, TRUE)
+        setmetatile(15, 31, 0x346, TRUE)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x32)) {
+        setmetatile(6, 14, 0x33D, TRUE)
+        setmetatile(6, 15, 0x345, TRUE)
+        setmetatile(7, 14, 0x33E, TRUE)
+        setmetatile(7, 15, 0x346, TRUE)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x35)) {
+        setmetatile(30, 27, 0x362, TRUE)
+        setmetatile(30, 28, 0x36A, TRUE)
+        setmetatile(31, 27, 0x363, TRUE)
+        setmetatile(31, 28, 0x36B, TRUE)
+    }
+    if (!flag(FLAG_ICHOR_RING1_GATE)) {
+        setmetatile(30, 25, 0x3CB, TRUE)
+        setmetatile(31, 25, 0x3CB, TRUE)
+    } else {
+        setmetatile(30, 25, 0x234, FALSE)
+        setmetatile(31, 25, 0x235, FALSE)
+    }
+}
+
+script LabyrinthRing1_EventScript_BrazierB1 {
+    lockall
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x30)) {
+        call(LabyrinthRing1_EventScript_Relight)
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_THRESHOLD) {
+        msgbox(format("A cold bronze brazier. The torch's own flame just slides off the ash.\pIt wants the threshold fire."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x30)
+    setvar(VAR_0x8005, FALSE)
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(DrawWholeMapView)
+        msgbox(format("In the new light, a seam shows in the wall to the south.\pA painted door. It swings in at a touch."), MSGBOX_DEFAULT)
+        call(LabyrinthRing1_EventScript_Relight)
+    }
+    releaseall
+    end
+}
+
+script LabyrinthRing1_EventScript_BrazierB2 {
+    lockall
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x31)) {
+        call(LabyrinthRing1_EventScript_Relight)
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_THRESHOLD) {
+        msgbox(format("A cold bronze brazier. The torch's own flame just slides off the ash.\pIt wants the threshold fire."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x31)
+    setvar(VAR_0x8005, FALSE)
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(DrawWholeMapView)
+        call(LabyrinthRing1_EventScript_Relight)
+    }
+    releaseall
+    end
+}
+
+script LabyrinthRing1_EventScript_BrazierB3 {
+    lockall
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x32)) {
+        call(LabyrinthRing1_EventScript_Relight)
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_THRESHOLD) {
+        msgbox(format("A cold bronze brazier. The torch's own flame just slides off the ash.\pIt wants the threshold fire."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x32)
+    setvar(VAR_0x8005, FALSE)
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(DrawWholeMapView)
+        call(LabyrinthRing1_EventScript_Relight)
+    }
+    releaseall
+    end
+}
+
+script LabyrinthRing1_EventScript_BrazierB4 {
+    lockall
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x33)) {
+        call(LabyrinthRing1_EventScript_Relight)
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_THRESHOLD) {
+        msgbox(format("A cold bronze brazier. The torch's own flame just slides off the ash.\pIt wants the threshold fire."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x33)
+    setvar(VAR_0x8005, FALSE)
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(DrawWholeMapView)
+        call(LabyrinthRing1_EventScript_Relight)
+    }
+    releaseall
+    end
+}
+
+script LabyrinthRing1_EventScript_BrazierB5 {
+    lockall
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x34)) {
+        call(LabyrinthRing1_EventScript_Relight)
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_THRESHOLD) {
+        msgbox(format("A cold bronze brazier. The torch's own flame just slides off the ash.\pIt wants the threshold fire."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x34)
+    setvar(VAR_0x8005, FALSE)
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(DrawWholeMapView)
+        call(LabyrinthRing1_EventScript_Relight)
+    }
+    releaseall
+    end
+}
+
+script LabyrinthRing1_EventScript_BrazierG {
+    lockall
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x35)) {
+        call(LabyrinthRing1_EventScript_Relight)
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_THRESHOLD) {
+        msgbox(format("A cold bronze brazier. The torch's own flame just slides off the ash.\pIt wants the threshold fire."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (!flag(FLAG_ICHOR_BRAZIERS_START + 0x30) || !flag(FLAG_ICHOR_BRAZIERS_START + 0x31) || !flag(FLAG_ICHOR_BRAZIERS_START + 0x32) || !flag(FLAG_ICHOR_BRAZIERS_START + 0x33) || !flag(FLAG_ICHOR_BRAZIERS_START + 0x34)) {
+        msgbox(format("The gate brazier won't take the fire.\pIts five sisters are still dark."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x35)
+    setvar(VAR_0x8005, FALSE)
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_RING1_GATE)
+        call(LabyrinthRing1_EventScript_DrawState)
+        special(DrawWholeMapView)
+        setflag(FLAG_ICHOR_RING1_GATE)
+        if (var(VAR_ICHOR_KNOSSA) < 6) {
+            setvar(VAR_ICHOR_KNOSSA, 6)
+        }
+        playse(SE_DOOR)
+        msgbox(format("Under the gate brazier, the grate grinds up into the stone.\pThe stair down is open."), MSGBOX_DEFAULT)
+        call(LabyrinthRing1_EventScript_Relight)
+    }
+    releaseall
+    end
+}
+// ---- END GENERATED ----

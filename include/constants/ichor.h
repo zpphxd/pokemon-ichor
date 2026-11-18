@@ -139,6 +139,43 @@
 
 #define THREAD_ANCHOR_UNNAMED          0
 #define THREAD_ANCHOR_GRAND_STAIRCASE  1
+// Labyrinth I's anchors (10-29); Labyrinth II uses 30 and up (design/maps/Labyrinth_System.md)
+#define THREAD_ANCHOR_R1_THRESHOLD           10
+#define THREAD_ANCHOR_R1_FRESCO              11
+#define THREAD_ANCHOR_R1_GATE                12
+#define THREAD_ANCHOR_R1_CLEFT               13
+#define THREAD_ANCHOR_R2_ENTRANCE            14
+#define THREAD_ANCHOR_R2_LONG_HALL           15
+#define THREAD_ANCHOR_R2_HERALDS             16
+#define THREAD_ANCHOR_R2_GROTTO              17
+#define THREAD_ANCHOR_R3_ENTRANCE            18
+#define THREAD_ANCHOR_R3_STREAM              19
+#define THREAD_ANCHOR_R3_WEBS                20
+#define THREAD_ANCHOR_R3_WORKSHOP_DOOR       21
+#define THREAD_ANCHOR_WORKSHOP               22
+#define THREAD_ANCHOR_R4_ENTRANCE            23
+#define THREAD_ANCHOR_R4_BARRACKS            24
+#define THREAD_ANCHOR_R4_DIG                 25
+#define THREAD_ANCHOR_R4_CHECKPOINT          26
+// The Labyrinth's heart (the Labyrinth II build), from 40 up
+#define THREAD_ANCHOR_RING5_GALLERY    40
+#define THREAD_ANCHOR_RING5_WEST       41
+#define THREAD_ANCHOR_RING5_EAST       42
+#define THREAD_ANCHOR_RING5_TOMB       43
+#define THREAD_ANCHOR_RING5_SOUTH      44
+#define THREAD_ANCHOR_RING5_TREASURE   45
+#define THREAD_ANCHOR_RING5_DEEP       46
+#define THREAD_ANCHOR_RING6_LANDING    47
+#define THREAD_ANCHOR_RING6_DIALS      48
+#define THREAD_ANCHOR_RING6_FORGE      49
+#define THREAD_ANCHOR_RING6_SHRINE     50
+#define THREAD_ANCHOR_RING6_WEST       51
+#define THREAD_ANCHOR_RING6_EAST       52
+#define THREAD_ANCHOR_RING6_DEEP       53
+#define THREAD_ANCHOR_RING7_STAIR      54
+#define THREAD_ANCHOR_RING7_DOME       55
+#define THREAD_ANCHOR_RING7_MIRRORS    56
+#define THREAD_ANCHOR_RING7_DEEP       57
 
 // Carried flames (SYSTEMS §2): VAR_TEMP_3 holds the kind, VAR_TEMP_2 the steps
 // left. Names for the start menu are in src/ichor_relics.c; add new kinds at the end.

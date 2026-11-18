@@ -100,8 +100,9 @@ def paint():
     c.meander(x0, 154, x1 - x0, K_W0)
     c.hline(x0, 159, x1 - x0, K_INK)
 
-    # --- item icon plate, as in the bag (icon at 24,88) --------------------
-    bx, by, bw, bh = 9, 73, 30, 29
+    # --- item icon plate, as in the bag (the pic at ICON_PIC) ---------------
+    check_icon_plate()
+    bx, by, bw, bh = ICON_PLATE
     c.rect(bx, by, bw, bh, K_P)
     c.frame(bx, by, bw, bh, K_INK)
     c.frame(bx + 2, by + 2, bw - 4, bh - 4, K_PS)

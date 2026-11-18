@@ -143,11 +143,15 @@ local TMS = { S.ITEM_TM_FACADE, S.ITEM_TM_FOCUS_PUNCH, S.ITEM_TM_WATER_PULSE, S.
   S.ITEM_TM_DRAGON_CLAW, S.ITEM_TM_SLUDGE_BOMB, S.ITEM_TM_EARTHQUAKE, S.ITEM_TM_ROCK_TOMB,
   S.ITEM_TM_AERIAL_ACE, S.ITEM_TM_STEEL_WING, S.ITEM_TM_THIEF, S.ITEM_HM_CUT }
 
-local function fill_bag(items)
+-- Every Poke Ball, over the two passes: the pocket holds 16.
+local BALLS_A = { S.ITEM_POKE_BALL, S.ITEM_GREAT_BALL, S.ITEM_ULTRA_BALL, S.ITEM_MASTER_BALL, S.ITEM_PREMIER_BALL, S.ITEM_HEAL_BALL, S.ITEM_NET_BALL, S.ITEM_NEST_BALL, S.ITEM_DIVE_BALL, S.ITEM_DUSK_BALL, S.ITEM_TIMER_BALL, S.ITEM_QUICK_BALL, S.ITEM_REPEAT_BALL, S.ITEM_LUXURY_BALL, S.ITEM_LEVEL_BALL, S.ITEM_LURE_BALL }
+local BALLS_B = { S.ITEM_MOON_BALL, S.ITEM_FRIEND_BALL, S.ITEM_LOVE_BALL, S.ITEM_FAST_BALL, S.ITEM_HEAVY_BALL, S.ITEM_DREAM_BALL, S.ITEM_SAFARI_BALL, S.ITEM_SPORT_BALL, S.ITEM_PARK_BALL, S.ITEM_BEAST_BALL, S.ITEM_CHERISH_BALL, S.ITEM_STRANGE_BALL }
+
+local function fill_bag(items, balls)
   return { check = function()
     fill(S.OFF_BAG_ITEMS, S.BAG_ITEMS_COUNT, items)
     fill(S.OFF_BAG_KEY, S.BAG_KEYITEMS_COUNT, { S.ITEM_ESCAPE_ROPE, S.ITEM_OLD_ROD })
-    fill(S.OFF_BAG_BALLS, S.BAG_POKEBALLS_COUNT, { S.ITEM_POKE_BALL })
+    fill(S.OFF_BAG_BALLS, S.BAG_POKEBALLS_COUNT, balls)
     fill(S.OFF_BAG_TMHM, S.BAG_TMHM_COUNT, TMS)
     fill(S.OFF_BAG_BERRIES, S.BAG_BERRIES_COUNT, { S.ITEM_ORAN_BERRY, S.ITEM_SITRUS_BERRY })
     return true, string.format("bag filled (%d in Items)", #items)
@@ -166,17 +170,18 @@ local function page(prefix, n)
 end
 
 local bag = L.seq(
-  { warp(AKTI, 12, 20), fill_bag(ITEMS_A),
+  { warp(AKTI, 12, 20), fill_bag(ITEMS_A, BALLS_A),
     { press = K.START, wait = 40 }, { press = K.A, wait = 160 } },
   page("bag_items_a", #ITEMS_A),
-  { { press = K.RIGHT, wait = 40 } }, page("bag_balls", 1),
+  { { press = K.RIGHT, wait = 40 } }, page("bag_balls", #BALLS_A),
   { { press = K.RIGHT, wait = 40 } }, page("bag_tms", #TMS),
   { { press = K.RIGHT, wait = 40 } }, page("bag_berries", 2),
   { { press = K.RIGHT, wait = 40 } }, page("bag_key", 2),
   { { press = K.B, wait = 150 }, { press = K.B, wait = 40 },
-    fill_bag(ITEMS_B), { press = K.START, wait = 40 }, { press = K.A, wait = 160 },
+    fill_bag(ITEMS_B, BALLS_B), { press = K.START, wait = 40 }, { press = K.A, wait = 160 },
     { press = K.RIGHT, wait = 40 } },          -- Key Items wraps round to Items
   page("bag_items_b", #ITEMS_B),
+  { { press = K.RIGHT, wait = 40 } }, page("bag_balls_b", #BALLS_B),
   { { press = K.B, wait = 150 }, { press = K.B, wait = 40 } }
 )
 

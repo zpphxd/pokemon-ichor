@@ -1,0 +1,28 @@
+// The vineyard terraces (design/maps/KnossaBullRoad_Vineyard.md; SCRIPT.md Part 2-4):
+// the optional grass west of the Bull Road's meadow, three terraces of vines with
+// their own rarer table, two optional trainers, the sealed jar on the top terrace.
+// Map: tools/ichor/maps/knossa_bull_road.py.
+
+mapscripts KnossaBullRoad_Vineyard_MapScripts {}
+
+text KnossaBullRoad_Vineyard_Name_Iphitos { "IPHITOS" }
+text KnossaBullRoad_Vineyard_Name_Propolis { "PROPOLIS" }
+
+script KnossaBullRoad_Vineyard_EventScript_Iphitos {
+    trainerbattle_single(TRAINER_ICHOR_IPHITOS, format("I'm practicing on the vines. They don't charge. Will you?"),
+                         format("You charged. I didn't leap. That's the wrong way round."))
+    setspeaker(KnossaBullRoad_Vineyard_Name_Iphitos)
+    msgbox(format("Hoplomex jump better than me. I've stopped pretending they don't."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_Vineyard_EventScript_Propolis {
+    trainerbattle_single(TRAINER_ICHOR_PROPOLIS, format("That jar's on my terrace. My terrace, my jar. Battle for it."),
+                         format("Fine. It's your jar. It was never really mine either."))
+    setspeaker(KnossaBullRoad_Vineyard_Name_Propolis)
+    msgbox(format("Bees glue the cracks in the hive shut. With me. That's my name."), MSGBOX_AUTOCLOSE)
+}
+
+script KnossaBullRoad_Vineyard_EventScript_Sign {
+    msgbox(format("Vines of the house of Minos. Dionysus courted a princess of this house.\p"
+                  "He brought his own wine. Very forward of him."), MSGBOX_SIGN)
+}

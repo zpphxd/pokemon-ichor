@@ -849,7 +849,7 @@ Built in `src/ichor_labyrinth.c` and `data/scripts/ichor_labyrinth.pory`. Tested
 
 ```
 // ON_LOAD
-setvar(VAR_0x8004, <floor metatile>)          // a floor that takes thread (up to 4)
+setvar(VAR_0x8004, <floor metatile>)          // a floor that takes thread (up to 8)
 setvar(VAR_0x8005, <its first twin>)          // ten twins in a row, in the order below
 special(Ichor_AddThreadFloor)
 
@@ -1706,3 +1706,28 @@ three difficulties, old-save and post-starter refusal, once-only persistence
 of either answer, and the complete native water-clock-to-Oath handoff through
 save/reset/CONTINUE. These demonstrate the core rules, not human balance
 approval or completed later-chapter memorial scenes.
+
+## 12. The catch mash
+
+Tap A as you throw a ball and it is a little likelier to hold. **It is a secret**
+(the user's call, 2026-11-17): no prompt, sound or NPC hints at it. `src/ichor_catch.c`;
+the numbers are in `include/config/ichor.h` (`ICHOR_CATCH_MASH_*`).
+
+- **When.** The expansion rolls a throw's shakes in `Cmd_handleballthrow` before the
+  animation plays. The window opens first: after "{PLAYER} used Poké Ball!" prints,
+  the message silently holds while A presses are counted. It closes after 1.3 s, or a
+  beat after the tenth press, and only then are the odds rolled.
+  The shakes the player then watches are that one roll, so they always match.
+- **The bonus.** The modified catch rate is multiplied by 1 + 0.03 per press, to
+  x1.3 at ten presses (`Ichor_ApplyCatchMash`). Catch chance follows that rate almost
+  linearly, so an 18% throw becomes about 23%. The boosted rate stops at 254, one
+  short of the auto-catch line, so mashing never makes a catch certain.
+- **No window** for throws that can't miss (Master Ball, rates of 255 and over, the
+  victory catch), trainer battles, the catch tutorial, ghost dodges, Oath-refused
+  battles, link and recorded battles, and the expansion's test runner.
+- **State.** `gIchorCatchMash` holds the open flag, the presses and the last throw's
+  rate before and after the bonus. `Ichor_TakeCatchMash` spends the presses on the
+  throw that follows, so no later throw inherits them.
+- **No hint.** Keep it out of dialogue, signs and descriptions.
+- **Tests.** `test/battle/ichor_catch_mash.c` (the math, and a vanilla throw);
+  `tools/ichor/tests/catch_mash.sh` (a mashed, an untouched and a Master Ball throw).

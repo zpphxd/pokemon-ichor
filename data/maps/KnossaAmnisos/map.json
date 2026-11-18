@@ -1,0 +1,307 @@
+{
+  "id": "MAP_KNOSSA_AMNISOS",
+  "name": "KnossaAmnisos",
+  "layout": "LAYOUT_KNOSSA_AMNISOS",
+  "music": "MUS_ICHOR_AKTI",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_AMNISOS",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_KNOSSA_BULL_ROAD",
+      "offset": 5,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_AMNISOS_NAUSIKLES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 17,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Nausikles",
+      "flag": "FLAG_ICHOR_HIDE_NAUSIKLES_AMNISOS"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 18,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_VETERAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 27,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Veteran",
+      "flag": "FLAG_ICHOR_HIDE_AMNISOS_VETERAN"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_FISHER",
+      "x": 19,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Sailor",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_F",
+      "x": 18,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Girl",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_BOMBOS",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MELIBEE)",
+      "x": 19,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Bombos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "x": 6,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_OldWoman",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_GENNAIA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
+      "x": 3,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Gennaia",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_KID",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
+      "x": 33,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_Kid",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_NETMENDER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_FISHER",
+      "x": 32,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_NetMender",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AMNISOS_SAFFRON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 27,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 3,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaAmnisos_EventScript_SaffronGirl",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 6,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REPEL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_AMNISOS_MAX_REPEL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 15,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_AMNISOS_HYPER_POTION"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_ASCLEPEION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_AGORA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_TAVERN",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 34,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_FISHERS_HUT",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 8,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_XENIA_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_LEAPERS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_AMNISOS_KYDONS_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_PEARL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 8,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_OBOL"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaAmnisos_EventScript_Shrine"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaAmnisos_EventScript_SouthSign"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaAmnisos_EventScript_CaveSign"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaAmnisos_EventScript_QuaySign"
+    }
+  ]
+}

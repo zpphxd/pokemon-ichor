@@ -1,0 +1,407 @@
+{
+  "id": "MAP_KNOSSA_BULL_ROAD",
+  "name": "KnossaBullRoad",
+  "layout": "LAYOUT_KNOSSA_BULL_ROAD",
+  "music": "MUS_ICHOR_ROAD",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_BULL_ROAD",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_KNOSSA_AMNISOS",
+      "offset": -5,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_KNOSSA_PALACE",
+      "offset": -14,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_KNOSSA_BRONZE_HEEL",
+      "offset": 11,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_KNOSSA_BULL_ROAD_VINEYARD",
+      "offset": 21,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_BULL_ROAD_KERINTHE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 19,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KnossaBullRoad_EventScript_Kerinthe",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_TELEMOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
+      "x": 10,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KnossaBullRoad_EventScript_Telemos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_EUPHEMOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 11,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KnossaBullRoad_EventScript_Euphemos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_BOUKOLION",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 10,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "KnossaBullRoad_EventScript_Boukolion",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_KYBISTE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
+      "x": 19,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KnossaBullRoad_EventScript_Kybiste",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_KROKALE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 5,
+      "y": 30,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "KnossaBullRoad_EventScript_Krokale",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_THEORIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 23,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KnossaBullRoad_EventScript_Theoris",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_ELAIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 22,
+      "y": 38,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "KnossaBullRoad_EventScript_Elais",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_PHAISTIA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "x": 13,
+      "y": 42,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KnossaBullRoad_EventScript_Phaistia",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_MILON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 8,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaBullRoad_EventScript_Milon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_HERD_1",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(TAURIVET)",
+      "x": 11,
+      "y": 30,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaBullRoad_EventScript_Herd",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_HERD_2",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(TAURIVET)",
+      "x": 18,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaBullRoad_EventScript_Herd",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_HERD_3",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(TAURIVET)",
+      "x": 24,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaBullRoad_EventScript_Herd",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_GRUNT_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 13,
+      "y": 46,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaBullRoad_EventScript_SouthGrunt",
+      "flag": "FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS"
+    },
+    {
+      "local_id": "LOCALID_BULL_ROAD_GRUNT_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 17,
+      "y": 46,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaBullRoad_EventScript_SouthGrunt",
+      "flag": "FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 25,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_BULL_ROAD_ULTRA_BALL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 1,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_HEAL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_BULL_ROAD_FULL_HEAL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 24,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_BULL_ROAD_MAX_POTION"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 2,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HP_UP",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_BULL_ROAD_HP_UP"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 25,
+      "y": 40,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_REVIVE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_BULL_ROAD_REVIVE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 21,
+      "y": 35,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_BULL_ROAD_HUT",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 11,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_OLIVE_OIL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_OLIVE_OIL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 10,
+      "y": 22,
+      "elevation": 3,
+      "item": "ITEM_RELIC_SILVER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_SILVER_OWL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 23,
+      "y": 35,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_STAR_PIECE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 10,
+      "y": 38,
+      "elevation": 3,
+      "item": "ITEM_MAX_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_MAX_ETHER"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaBullRoad_EventScript_NorthSign"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaBullRoad_EventScript_Herm"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KnossaBullRoad_EventScript_MilonsLine"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaBullRoad_EventScript_LabrysDoor"
+    },
+    {
+      "type": "sign",
+      "x": 25,
+      "y": 33,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaBullRoad_EventScript_Shrine"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 41,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaBullRoad_EventScript_SouthSign"
+    }
+  ]
+}

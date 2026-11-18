@@ -96,7 +96,8 @@ local steps = L.seq(
   -- 4. the Pithos, from (12,3) facing the jar
   { { warp = { INDOOR, MAP_ASCLEPEION, -1, 12, 3 }, wait = 100 },
     { hold = K.UP, frames = 4, wait = 30 } },
-  L.talk("14_pithos", 3, 30),                 -- (facing it), the jar, lifting the lid
+  L.talk("14_pithos", 7, 30),                 -- (facing it), the jar, lifting the lid,
+                                              -- and the four first-use pages
   { { wait = 10 }, { shot = "15_pithos_menu.png" },
     { press = K.A, wait = 30 } },              -- "Pokémon"
   L.talk("16_pithos_storage", 2, 30),          -- "opened", "rest safely"

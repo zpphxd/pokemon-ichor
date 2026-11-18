@@ -441,6 +441,10 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SCULPTOR] = { _("SCULPTOR"), 6 },
     [TRAINER_CLASS_BEEKEEPER] = { _("BEEKEEPER"), 4 },
     [TRAINER_CLASS_DIVER] = { _("DIVER"), 6 },
+    // Ichor: Knossa's. Leapers pay like battle girls; MINOAN PRIEST is too long for
+    // the class name, so the priestesses show as PRIESTESS.
+    [TRAINER_CLASS_BULL_LEAPER] = { _("BULL-LEAPER"), 6 },
+    [TRAINER_CLASS_MINOAN_PRIEST] = { _("PRIESTESS"), 8 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

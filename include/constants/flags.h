@@ -1978,10 +1978,16 @@
 #define FLAG_ICHOR_ITEM_KALDERA_FORGE_ETHER     (FLAG_ICHOR_GENERAL_START + 0x159) // Ichor: Telchines forge supply
 #define FLAG_ICHOR_ITEM_KALDERA_FORGE_REVIVE    (FLAG_ICHOR_GENERAL_START + 0x15A) // Ichor: Telchines forge side grotto gift
 #define FLAG_ICHOR_HIDE_DAPHNE_LIBRARY          (FLAG_ICHOR_GENERAL_START + 0x15B) // Ichor: Daphne followed the player to Kaldera
+#define FLAG_ICHOR_R6_VINES_CUT                 (FLAG_ICHOR_GENERAL_START + 0x15C) // Ichor: Route 6: Demeter's Sickle cut the vines on the terrace stair
+#define FLAG_ICHOR_R6_PRESS_VINES_CUT           (FLAG_ICHOR_GENERAL_START + 0x15D) // Ichor: Route 6: the Sickle cut the vines over the old wine press
+#define FLAG_ICHOR_R6_POSTERN_VINES_CUT         (FLAG_ICHOR_GENERAL_START + 0x15E) // Ichor: Route 6: the Sickle cut the vines in the fort's postern
+#define FLAG_ICHOR_R6_VINEDRESSER_GIFT          (FLAG_ICHOR_GENERAL_START + 0x15F) // Ichor: Route 6: the vine-dresser gave the player a Miracle Seed
+#define FLAG_ICHOR_KITHAIRON_WINE_GIFT          (FLAG_ICHOR_GENERAL_START + 0x160) // Ichor: Kithairon: the maenads gave the player Wine for the god
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
 #define FLAG_ICHOR_MOM_CONFESSED                (FLAG_ICHOR_GENERAL_START + 0x483) // Ichor: Mom confessed the bee at the Kastalian spring: her knucklebones play fair (engine, ENGINE_API §7; set by world-act3 at III-7)
+#define FLAG_ICHOR_PITHOS_EXPLAINED             (FLAG_ICHOR_GENERAL_START + 0x484) // Ichor: first lid lifted on a Pithos: what it is for was explained
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_HONEY         (FLAG_ICHOR_GENERAL2_START + 0x000) // Ichor: Eleutherai shrine honey
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x001) // Ichor: Eleutherai terrace Revive
 #define FLAG_ICHOR_HIDDEN_ITEM_R6_REPEL         (FLAG_ICHOR_GENERAL2_START + 0x002) // Ichor: Eleutherai verge Repel
@@ -2164,6 +2170,87 @@
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Neraida falls item ball: Max Potion on the plunge pool's west bank
 #define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Neraida falls item ball: Elixir on the upper shelf
 #define FLAG_ICHOR_NERAIDA_BERRIES_PLANTED (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: initialized the falls' first-fruits trees once
+#define FLAG_ICHOR_ITEM_R7_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x100) // Ichor: Route 7: the jar at Kronos's stone, behind the Hammer rubble
+#define FLAG_ICHOR_ITEM_R7_TERRACE              (FLAG_ICHOR_GENERAL2_START + 0x101) // Ichor: Route 7: the vine terrace behind the column drum (Girdle)
+#define FLAG_ICHOR_R7_VINES_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x102) // Ichor: Route 7: the old vineyard's vines cut (Sickle)
+#define FLAG_ICHOR_R8_REEDS_CUT                 (FLAG_ICHOR_GENERAL2_START + 0x103) // Ichor: Route 8: the reed thicket on the south boardwalk cut (Sickle)
+#define FLAG_ICHOR_ITEM_R8_GLA                  (FLAG_ICHOR_GENERAL2_START + 0x104) // Ichor: Route 8: the jar on Gla's island (Conch)
+#define FLAG_ICHOR_ITEM_R8_ISLET                (FLAG_ICHOR_GENERAL2_START + 0x105) // Ichor: Route 8: the reed islet at the boardwalk's end
+#define FLAG_ICHOR_R8_FISHER_GIFT               (FLAG_ICHOR_GENERAL2_START + 0x106) // Ichor: Route 8: the eel-fisher's gift
+#define FLAG_ICHOR_ITEM_KATAVOTHRA_GALLERY      (FLAG_ICHOR_GENERAL2_START + 0x107) // Ichor: Kopais katavothres: the side gallery behind the rubble
+#define FLAG_ICHOR_ITEM_KATAVOTHRA_ISLET        (FLAG_ICHOR_GENERAL2_START + 0x108) // Ichor: Kopais katavothres: the rock in the channel (Conch)
+#define FLAG_ICHOR_ITEM_KATAVOTHRA_PASSAGE      (FLAG_ICHOR_GENERAL2_START + 0x109) // Ichor: Kopais katavothres: the main passage
+#define FLAG_ICHOR_ITEM_LEBADEIA                (FLAG_ICHOR_GENERAL2_START + 0x10A) // Ichor: Lebadeia: the jar by the springs
+#define FLAG_ICHOR_LEBADEIA_HONEY_TRADE         (FLAG_ICHOR_GENERAL2_START + 0x10B) // Ichor: Lebadeia: Euanthe's honey cakes, for Honey
+#define FLAG_ICHOR_LEBADEIA_KEEPER_TALK         (FLAG_ICHOR_GENERAL2_START + 0x10C) // Ichor: Lebadeia: the Trophoneion's keeper told of the descent
+#define FLAG_ICHOR_HIDDEN_ITEM_R7_SHRINE        (FLAG_ICHOR_GENERAL2_START + 0x10D) // Ichor: Route 7: under Kronos's stone
+#define FLAG_ICHOR_HIDDEN_ITEM_KATAVOTHRA_SEEP  (FLAG_ICHOR_GENERAL2_START + 0x10E) // Ichor: Kopais katavothres: at the seep
+#define FLAG_ICHOR_HIDDEN_ITEM_KATAVOTHRA_BONES (FLAG_ICHOR_GENERAL2_START + 0x10F) // Ichor: Kopais katavothres: among the old bones
+#define FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_SPRING  (FLAG_ICHOR_GENERAL2_START + 0x110) // Ichor: Lebadeia: by the spring of Lethe
+#define FLAG_ICHOR_HIDDEN_ITEM_LEBADEIA_TEMENOS (FLAG_ICHOR_GENERAL2_START + 0x111) // Ichor: Lebadeia: in the temenos wall's corner
+// Gulf (gulf.py): moved from +0x100-0x122 to +0x0D0-0x0F2 on merge, clear of Kopais and Nemea
+#define FLAG_ICHOR_AIGION_FISHER_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x0D0) // Ichor: Gulf (gulf.py): AIGION_FISHER_GIFT
+#define FLAG_ICHOR_AIGION_OATH_GIFT             (FLAG_ICHOR_GENERAL2_START + 0x0D1) // Ichor: Gulf (gulf.py): AIGION_OATH_GIFT
+#define FLAG_ICHOR_AIGION_PRIEST_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x0D2) // Ichor: Gulf (gulf.py): AIGION_PRIEST_GIFT
+#define FLAG_ICHOR_ITEM_AIGION                  (FLAG_ICHOR_GENERAL2_START + 0x0D3) // Ichor: Gulf (gulf.py): ITEM_AIGION
+#define FLAG_ICHOR_ITEM_AIGION_HELIKE           (FLAG_ICHOR_GENERAL2_START + 0x0D4) // Ichor: Gulf (gulf.py): ITEM_AIGION_HELIKE
+#define FLAG_ICHOR_ITEM_KIRRHA                  (FLAG_ICHOR_GENERAL2_START + 0x0D5) // Ichor: Gulf (gulf.py): ITEM_KIRRHA
+#define FLAG_ICHOR_ITEM_KIRRHA_ISLET            (FLAG_ICHOR_GENERAL2_START + 0x0D6) // Ichor: Gulf (gulf.py): ITEM_KIRRHA_ISLET
+#define FLAG_ICHOR_ITEM_KORYKIAN_CHAMBER        (FLAG_ICHOR_GENERAL2_START + 0x0D7) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_CHAMBER
+#define FLAG_ICHOR_ITEM_KORYKIAN_GROTTO         (FLAG_ICHOR_GENERAL2_START + 0x0D8) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_GROTTO
+#define FLAG_ICHOR_ITEM_KORYKIAN_HALL           (FLAG_ICHOR_GENERAL2_START + 0x0D9) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_HALL
+#define FLAG_ICHOR_ITEM_KORYKIAN_ISLET          (FLAG_ICHOR_GENERAL2_START + 0x0DA) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_ISLET
+#define FLAG_ICHOR_ITEM_KORYKIAN_SANCTUM        (FLAG_ICHOR_GENERAL2_START + 0x0DB) // Ichor: Gulf (gulf.py): ITEM_KORYKIAN_SANCTUM
+#define FLAG_ICHOR_ITEM_R11_FALLS               (FLAG_ICHOR_GENERAL2_START + 0x0DC) // Ichor: Gulf (gulf.py): ITEM_R11_FALLS
+#define FLAG_ICHOR_ITEM_R11_ISLET               (FLAG_ICHOR_GENERAL2_START + 0x0DD) // Ichor: Gulf (gulf.py): ITEM_R11_ISLET
+#define FLAG_ICHOR_ITEM_R9_DAULIS               (FLAG_ICHOR_GENERAL2_START + 0x0DE) // Ichor: Gulf (gulf.py): ITEM_R9_DAULIS
+#define FLAG_ICHOR_ITEM_R9_RAVINE               (FLAG_ICHOR_GENERAL2_START + 0x0DF) // Ichor: Gulf (gulf.py): ITEM_R9_RAVINE
+#define FLAG_ICHOR_KIRRHA_BEE_ASKED             (FLAG_ICHOR_GENERAL2_START + 0x0E0) // Ichor: Gulf (gulf.py): KIRRHA_BEE_ASKED
+#define FLAG_ICHOR_KIRRHA_BEE_FOUND             (FLAG_ICHOR_GENERAL2_START + 0x0E1) // Ichor: Gulf (gulf.py): KIRRHA_BEE_FOUND
+#define FLAG_ICHOR_KIRRHA_BELL_GIFT             (FLAG_ICHOR_GENERAL2_START + 0x0E2) // Ichor: Gulf (gulf.py): KIRRHA_BELL_GIFT
+#define FLAG_ICHOR_KIRRHA_WATER_GIFT            (FLAG_ICHOR_GENERAL2_START + 0x0E3) // Ichor: Gulf (gulf.py): KIRRHA_WATER_GIFT
+#define FLAG_ICHOR_KORYKIAN_THORNWEB_BURNT      (FLAG_ICHOR_GENERAL2_START + 0x0E4) // Ichor: Gulf (gulf.py): KORYKIAN_THORNWEB_BURNT
+#define FLAG_ICHOR_KORYKIAN_WEB_BURNT           (FLAG_ICHOR_GENERAL2_START + 0x0E5) // Ichor: Gulf (gulf.py): KORYKIAN_WEB_BURNT
+#define FLAG_ICHOR_R11_RUBBLE_BROKEN            (FLAG_ICHOR_GENERAL2_START + 0x0E6) // Ichor: Gulf (gulf.py): R11_RUBBLE_BROKEN
+#define FLAG_ICHOR_R9_GREAT_BOULDER             (FLAG_ICHOR_GENERAL2_START + 0x0E7) // Ichor: Gulf (gulf.py): R9_GREAT_BOULDER
+#define FLAG_ICHOR_R9_SCREE_BROKEN              (FLAG_ICHOR_GENERAL2_START + 0x0E8) // Ichor: Gulf (gulf.py): R9_SCREE_BROKEN
+#define FLAG_ICHOR_R9_THICKET_CUT               (FLAG_ICHOR_GENERAL2_START + 0x0E9) // Ichor: Gulf (gulf.py): R9_THICKET_CUT
+#define FLAG_ICHOR_HIDDEN_ITEM_AIGION_CAMP      (FLAG_ICHOR_GENERAL2_START + 0x0EA) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_AIGION_CAMP
+#define FLAG_ICHOR_HIDDEN_ITEM_AIGION_TERRACE   (FLAG_ICHOR_GENERAL2_START + 0x0EB) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_AIGION_TERRACE
+#define FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_HEADLAND  (FLAG_ICHOR_GENERAL2_START + 0x0EC) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KIRRHA_HEADLAND
+#define FLAG_ICHOR_HIDDEN_ITEM_KIRRHA_SHRINE    (FLAG_ICHOR_GENERAL2_START + 0x0ED) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KIRRHA_SHRINE
+#define FLAG_ICHOR_HIDDEN_ITEM_KORYKIAN_ALTAR   (FLAG_ICHOR_GENERAL2_START + 0x0EE) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KORYKIAN_ALTAR
+#define FLAG_ICHOR_HIDDEN_ITEM_KORYKIAN_BAY     (FLAG_ICHOR_GENERAL2_START + 0x0EF) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_KORYKIAN_BAY
+#define FLAG_ICHOR_HIDDEN_ITEM_R9_TOMB          (FLAG_ICHOR_GENERAL2_START + 0x0F0) // Ichor: Gulf (gulf.py): HIDDEN_ITEM_R9_TOMB
+#define FLAG_ICHOR_R9_SPRING_GIFT               (FLAG_ICHOR_GENERAL2_START + 0x0F1) // Ichor: Gulf (gulf.py): R9 spring keeper's gift
+#define FLAG_ICHOR_R11_SPRING_GIFT              (FLAG_ICHOR_GENERAL2_START + 0x0F2) // Ichor: Gulf (gulf.py): R11 nymph spring's gift
+#define FLAG_ICHOR_ITEM_R13_GLADE               (FLAG_ICHOR_GENERAL2_START + 0x120) // Ichor: Route 13 glade jar behind the thicket
+#define FLAG_ICHOR_ITEM_R13_CELL                (FLAG_ICHOR_GENERAL2_START + 0x121) // Ichor: Route 13 hermit's cell jar behind the rubble
+#define FLAG_ICHOR_ITEM_R13_CRAG                (FLAG_ICHOR_GENERAL2_START + 0x122) // Ichor: Route 13 crag jar up the handholds (climbing relic)
+#define FLAG_ICHOR_R13_BEEKEEPER_GIFT           (FLAG_ICHOR_GENERAL2_START + 0x123) // Ichor: Route 13 beekeeper's gift
+#define FLAG_ICHOR_ITEM_NEMEA_TRACK             (FLAG_ICHOR_GENERAL2_START + 0x124) // Ichor: Nemea stadium jar
+#define FLAG_ICHOR_ITEM_NEMEA_ISLET             (FLAG_ICHOR_GENERAL2_START + 0x125) // Ichor: Nemea river islet jar (Conch)
+#define FLAG_ICHOR_NEMEA_HONEY_GIVEN            (FLAG_ICHOR_GENERAL2_START + 0x126) // Ichor: Molorchos got his honey
+#define FLAG_ICHOR_NEMEA_PALAESTRA_GIFT         (FLAG_ICHOR_GENERAL2_START + 0x127) // Ichor: palaestra trainer's gift
+#define FLAG_ICHOR_NEMEA_LION_BOULDER           (FLAG_ICHOR_GENERAL2_START + 0x128) // Ichor: lion's den boulder split (Hephaestus's Hammer)
+#define FLAG_ICHOR_ITEM_R14_GULLY               (FLAG_ICHOR_GENERAL2_START + 0x129) // Ichor: Route 14 gully jar behind the rubble
+#define FLAG_ICHOR_ITEM_R14_ISLET               (FLAG_ICHOR_GENERAL2_START + 0x12A) // Ichor: Route 14 gorge islet jar (Conch)
+#define FLAG_ICHOR_R14_GREAT_BOULDER            (FLAG_ICHOR_GENERAL2_START + 0x12B) // Ichor: Route 14 great boulder split
+#define FLAG_ICHOR_ITEM_TRETOS_HEAL             (FLAG_ICHOR_GENERAL2_START + 0x12C) // Ichor: Tretos jar
+#define FLAG_ICHOR_ITEM_TRETOS_BALL             (FLAG_ICHOR_GENERAL2_START + 0x12D) // Ichor: Tretos jar behind the cobweb
+#define FLAG_ICHOR_ITEM_TRETOS_POOL             (FLAG_ICHOR_GENERAL2_START + 0x12E) // Ichor: Tretos pool islet jar (Conch)
+#define FLAG_ICHOR_ITEM_TRETOS_DEEP             (FLAG_ICHOR_GENERAL2_START + 0x12F) // Ichor: Tretos deep jar behind the thornweb
+#define FLAG_ICHOR_HIDE_TRETOS_WEB              (FLAG_ICHOR_GENERAL2_START + 0x130) // Ichor: Tretos cobweb burnt
+#define FLAG_ICHOR_HIDE_TRETOS_THORNWEB         (FLAG_ICHOR_GENERAL2_START + 0x131) // Ichor: Tretos thornweb burnt
+#define FLAG_ICHOR_TRETOS_GREAT_BOULDER         (FLAG_ICHOR_GENERAL2_START + 0x132) // Ichor: Tretos great boulder split
+#define FLAG_ICHOR_HIDDEN_ITEM_NEMEA_MOUND      (FLAG_ICHOR_GENERAL2_START + 0x133) // Ichor: Nemea, at Opheltes's mound
+#define FLAG_ICHOR_HIDDEN_ITEM_NEMEA_SPRING     (FLAG_ICHOR_GENERAL2_START + 0x134) // Ichor: Nemea, by the Langia spring
+#define FLAG_ICHOR_HIDDEN_ITEM_TRETOS_BONES     (FLAG_ICHOR_GENERAL2_START + 0x135) // Ichor: Tretos, in the bones
+#define FLAG_ICHOR_HIDDEN_ITEM_TRETOS_SEEP      (FLAG_ICHOR_GENERAL2_START + 0x136) // Ichor: Tretos, at the seep
+#define FLAG_ICHOR_R14_HERDSMAN_GIFT            (FLAG_ICHOR_GENERAL2_START + 0x137) // Ichor: Route 14 herdsman's gift
+#define FLAG_ICHOR_TRETOS_RUBBLE                (FLAG_ICHOR_GENERAL2_START + 0x138) // Ichor: Tretos rubble broken (Hammer)
+#define FLAG_ICHOR_R13_RUBBLE                   (FLAG_ICHOR_GENERAL2_START + 0x139) // Ichor: Route 13 hermit's cell rubble broken
+#define FLAG_ICHOR_R14_RUBBLE                   (FLAG_ICHOR_GENERAL2_START + 0x13A) // Ichor: Route 14 gully rubble broken
 #define FLAG_ICHOR_ACT3_COMPLETE                (FLAG_ICHOR_GENERAL2_START + 0x1C0) // Ichor: League: Act III done (Elpis's line, III-12); the Act III builder sets it. Gates L-1 to L-5
 #define FLAG_ICHOR_LEAGUE_DECREE                (FLAG_ICHOR_GENERAL2_START + 0x1C1) // Ichor: League L-1: heard Kerykos read the Archon's decree in Astyra
 #define FLAG_ICHOR_IAPETOS_TRIED                (FLAG_ICHOR_GENERAL2_START + 0x1C2) // Ichor: League L-2: the trial of Iapetos in the Stoa; Alethea's exile lifted
@@ -2242,6 +2329,148 @@
 #define FLAG_ICHOR_GOT_SCOPE_LENS               (FLAG_ICHOR_GENERAL2_START + 0x528) // Ichor: Lakonia: Kleta's Scope Lens, for the cheese game at Orthia
 #define FLAG_ICHOR_GOT_WISE_GLASSES             (FLAG_ICHOR_GENERAL2_START + 0x529) // Ichor: Lakonia: Chilon's Wise Glasses, for answering in the fewest words
 #define FLAG_ICHOR_XENIA_LAKONIA                (FLAG_ICHOR_GENERAL2_START + 0x52A) // Ichor: Lakonia: Lichas has fed you (xenia)
+#define FLAG_ICHOR_RING1_GATE                   (FLAG_ICHOR_GENERAL2_START + 0x450) // Ichor: Labyrinth Ring I: the gate brazier caught, the stair down is open
+#define FLAG_ICHOR_R1_TIE_TAUGHT                (FLAG_ICHOR_GENERAL2_START + 0x451) // Ichor: Labyrinth Ring I: Ariadne's TIE IT HERE shown
+#define FLAG_ICHOR_ITEM_R1_HYPER_POTION         (FLAG_ICHOR_GENERAL2_START + 0x452) // Ichor: Labyrinth Ring I: the thread lesson's Hyper Potion
+#define FLAG_ICHOR_ITEM_R1_TM_ROCK_SLIDE        (FLAG_ICHOR_GENERAL2_START + 0x453) // Ichor: Labyrinth Ring I: Xenodike's TM Rock Slide
+#define FLAG_ICHOR_ITEM_R1_HYPER_POTION_2       (FLAG_ICHOR_GENERAL2_START + 0x454) // Ichor: Labyrinth Ring I: the hidden anchor's Hyper Potion
+#define FLAG_ICHOR_ITEM_R1_ETHER                (FLAG_ICHOR_GENERAL2_START + 0x455) // Ichor: Labyrinth Ring I: an Ether in the cave pocket
+#define FLAG_ICHOR_HIDDEN_ITEM_R1_BRONZE_OBOL   (FLAG_ICHOR_GENERAL2_START + 0x456) // Ichor: Labyrinth Ring I: a Bronze Obol in a dead end
+#define FLAG_ICHOR_HIDDEN_ITEM_R1_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x457) // Ichor: Labyrinth Ring I: a Revive in the cleft
+#define FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_PEARL    (FLAG_ICHOR_GENERAL2_START + 0x400) // Ichor: Knossa hidden: Amnisos, Pearl at the jetty's end
+#define FLAG_ICHOR_HIDDEN_ITEM_AMNISOS_OBOL     (FLAG_ICHOR_GENERAL2_START + 0x401) // Ichor: Knossa hidden: Amnisos, Bronze Obol behind the harbor shrine
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_OLIVE_OIL (FLAG_ICHOR_GENERAL2_START + 0x402) // Ichor: Knossa hidden: the Bull Road, Olive Oil behind the great herm
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_SILVER_OWL (FLAG_ICHOR_GENERAL2_START + 0x403) // Ichor: Knossa hidden: the Bull Road, Silver Owl in the cutting
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x404) // Ichor: Knossa hidden: the Bull Road, Star Piece in the spring trough
+#define FLAG_ICHOR_HIDDEN_ITEM_BULL_ROAD_MAX_ETHER (FLAG_ICHOR_GENERAL2_START + 0x405) // Ichor: Knossa hidden: the Bull Road, Max Ether under the oldest olive
+#define FLAG_ICHOR_HIDDEN_ITEM_VINEYARD_WINE    (FLAG_ICHOR_GENERAL2_START + 0x406) // Ichor: Knossa hidden: the vineyard, Wine in the walled corner
+#define FLAG_ICHOR_HIDDEN_ITEM_VINEYARD_ELIXIR  (FLAG_ICHOR_GENERAL2_START + 0x407) // Ichor: Knossa hidden: the vineyard, Elixir under the vintner's sign
+#define FLAG_ICHOR_HIDDEN_ITEM_BRONZE_HEEL_METAL_COAT (FLAG_ICHOR_GENERAL2_START + 0x408) // Ichor: Knossa hidden: the Bronze Heel, Metal Coat at the point
+#define FLAG_ICHOR_HIDDEN_ITEM_BRONZE_HEEL_STARDUST (FLAG_ICHOR_GENERAL2_START + 0x409) // Ichor: Knossa hidden: the Bronze Heel, Stardust in the ankle's hollow
+#define FLAG_ICHOR_HIDDEN_ITEM_PALACE_SILVER_OWL (FLAG_ICHOR_GENERAL2_START + 0x40A) // Ichor: Knossa hidden: the palace, Silver Owl under the gypsum bench
+#define FLAG_ICHOR_HIDDEN_ITEM_PALACE_STAR_PIECE (FLAG_ICHOR_GENERAL2_START + 0x40B) // Ichor: Knossa hidden: the palace, Star Piece in the light well
+#define FLAG_ICHOR_HIDDEN_ITEM_PALACE_GOLD_STATER (FLAG_ICHOR_GENERAL2_START + 0x40C) // Ichor: Knossa hidden: the palace, Gold Stater by the horns
+#define FLAG_ICHOR_ARRIVED_KNOSSA               (FLAG_ICHOR_GENERAL2_START + 0x40D) // Ichor: Knossa: III-3A, landed at Amnisos and met Alethea on the quay
+#define FLAG_ICHOR_VISITED_AMNISOS              (FLAG_ICHOR_GENERAL2_START + 0x40E) // Ichor: Knossa: Amnisos visited (fly; heal location its Asclepeion)
+#define FLAG_ICHOR_MET_ARIADNE                  (FLAG_ICHOR_GENERAL2_START + 0x40F) // Ichor: Knossa: III-3D, Scene A in the Throne Room
+#define FLAG_ICHOR_FIRST_LEAP                   (FLAG_ICHOR_GENERAL2_START + 0x410) // Ichor: Knossa: III-3E, the first clean leap over the Gentle Bull
+#define FLAG_ICHOR_MILON_PRACTICE               (FLAG_ICHOR_GENERAL2_START + 0x411) // Ichor: Knossa: the Bull Road, Milon's practice leap landed clean (his Lum Berry)
+#define FLAG_ICHOR_SHOWED_KLEON_TABLET          (FLAG_ICHOR_GENERAL2_START + 0x412) // Ichor: Knossa: III-3O, Scene K, Kleon read Iapetos's hand and left
+#define FLAG_ICHOR_ALETHEA_TOLD                 (FLAG_ICHOR_GENERAL2_START + 0x413) // Ichor: Knossa: III-3O, Alethea heard about Phaedon in the court
+#define FLAG_ICHOR_DAPHNE_LETTER_KNOSSA         (FLAG_ICHOR_GENERAL2_START + 0x414) // Ichor: Knossa: III-4, Daphne's letter read on Amnisos's quay
+#define FLAG_ICHOR_CAUGHT_ASTERION              (FLAG_ICHOR_GENERAL2_START + 0x415) // Ichor: Knossa: Asterion stepped into your ball in the court (LABYRINTH §10)
+#define FLAG_ICHOR_LEAP_PRIZE_3                 (FLAG_ICHOR_GENERAL2_START + 0x416) // Ichor: Knossa: Sarpedon's prize for 3 leaps (Olive Oil x5)
+#define FLAG_ICHOR_LEAP_PRIZE_5                 (FLAG_ICHOR_GENERAL2_START + 0x417) // Ichor: Knossa: Sarpedon's prize for 5 leaps (TM Body Slam)
+#define FLAG_ICHOR_LEAP_PRIZE_10                (FLAG_ICHOR_GENERAL2_START + 0x418) // Ichor: Knossa: Sarpedon's prize for 10 leaps
+#define FLAG_ICHOR_LEAP_PRIZE_20                (FLAG_ICHOR_GENERAL2_START + 0x419) // Ichor: Knossa: Sarpedon's prize for 20 leaps (a palace-herd Taurivet)
+#define FLAG_ICHOR_GOT_KYDON_HONEY              (FLAG_ICHOR_GENERAL2_START + 0x41A) // Ichor: Knossa: Amnisos, Kydon's three jars of thyme honey
+#define FLAG_ICHOR_GOT_KYDON_LEFTOVERS          (FLAG_ICHOR_GENERAL2_START + 0x41B) // Ichor: Knossa: Amnisos, Kydon's good jar (Leftovers) after the raid
+#define FLAG_ICHOR_KNUCKLEBONES_AMNISOS         (FLAG_ICHOR_GENERAL2_START + 0x41C) // Ichor: Knossa: Amnisos, beat Lykastos, the Double Axe's champion (TM Taunt)
+#define FLAG_ICHOR_BONES_KRESSA                 (FLAG_ICHOR_GENERAL2_START + 0x41D) // Ichor: Knossa: Amnisos, beat Kressa at knucklebones (Olive Oil)
+#define FLAG_ICHOR_BONES_DORION                 (FLAG_ICHOR_GENERAL2_START + 0x41E) // Ichor: Knossa: Amnisos, beat Dorion at knucklebones (Wine)
+#define FLAG_ICHOR_BROKEN_RING_2                (FLAG_ICHOR_GENERAL2_START + 0x41F) // Ichor: Knossa: Amnisos, Aithon's guest-gift (xenia chain link 2)
+#define FLAG_ICHOR_GOT_FOCUS_BAND_KNOSSA        (FLAG_ICHOR_GENERAL2_START + 0x420) // Ichor: Knossa: Amnisos, Euanthe's Focus Band after the first leap
+#define FLAG_ICHOR_TRADED_TELCHIS               (FLAG_ICHOR_GENERAL2_START + 0x421) // Ichor: Knossa: Amnisos, traded Polypos an Aphrell for Telchis
+#define FLAG_ICHOR_GOT_BOMBYLIA_HONEY           (FLAG_ICHOR_GENERAL2_START + 0x422) // Ichor: Knossa: the Bull Road, Bombylia's two jars of honey
+#define FLAG_ICHOR_FOSSIL_DUG                   (FLAG_ICHOR_GENERAL2_START + 0x423) // Ichor: Knossa: the Bronze Heel, dug one fossil from the tide ledge
+#define FLAG_ICHOR_GOT_AKESTOR_SALVE            (FLAG_ICHOR_GENERAL2_START + 0x424) // Ichor: Knossa: Amnisos Asclepeion, Akestor's gift
+#define FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY    (FLAG_ICHOR_GENERAL2_START + 0x425) // Ichor: Knossa: hide Alethea on Amnisos's quay
+#define FLAG_ICHOR_HIDE_ALETHEA_HEEL            (FLAG_ICHOR_GENERAL2_START + 0x426) // Ichor: Knossa: hide Alethea at the Bronze Heel
+#define FLAG_ICHOR_HIDE_ALETHEA_MEGARON         (FLAG_ICHOR_GENERAL2_START + 0x427) // Ichor: Knossa: hide Alethea in the Queen's Megaron
+#define FLAG_ICHOR_HIDE_ALETHEA_COURT           (FLAG_ICHOR_GENERAL2_START + 0x428) // Ichor: Knossa: hide Alethea in the Central Court
+#define FLAG_ICHOR_HIDE_KLEON_KNOSSA            (FLAG_ICHOR_GENERAL2_START + 0x429) // Ichor: Knossa: hide Kleon in the palace court (Scene K)
+#define FLAG_ICHOR_HIDE_PALACE_GRUNTS           (FLAG_ICHOR_GENERAL2_START + 0x42A) // Ichor: Knossa: hide the palace's Titanborn after the Turning
+#define FLAG_ICHOR_HIDE_AMNISOS_VETERAN         (FLAG_ICHOR_GENERAL2_START + 0x42B) // Ichor: Knossa: hide the Titanborn veteran on Amnisos's mole after the Turning
+#define FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS        (FLAG_ICHOR_GENERAL2_START + 0x42C) // Ichor: Knossa: hide the two Titanborn at the Bull Road's south end
+#define FLAG_ICHOR_HIDE_ARIADNE_THRONE          (FLAG_ICHOR_GENERAL2_START + 0x42D) // Ichor: Knossa: hide Ariadne in the Throne Room
+#define FLAG_ICHOR_HIDE_ARIADNE_STAIR           (FLAG_ICHOR_GENERAL2_START + 0x42E) // Ichor: Knossa: hide Ariadne at the Grand Staircase
+#define FLAG_ICHOR_HIDE_ARIADNE_COURT           (FLAG_ICHOR_GENERAL2_START + 0x42F) // Ichor: Knossa: hide Ariadne in the Central Court
+#define FLAG_ICHOR_HIDE_ASTERION_COURT          (FLAG_ICHOR_GENERAL2_START + 0x430) // Ichor: Knossa: hide Asterion in the Central Court
+#define FLAG_ICHOR_HIDE_NAUSIKLES_AMNISOS       (FLAG_ICHOR_GENERAL2_START + 0x431) // Ichor: Knossa: hide Nausikles on Amnisos's quay
+#define FLAG_ICHOR_ITEM_AMNISOS_MAX_REPEL       (FLAG_ICHOR_GENERAL2_START + 0x432) // Ichor: Knossa item ball: Amnisos, Max Repel up the cave path
+#define FLAG_ICHOR_ITEM_AMNISOS_HYPER_POTION    (FLAG_ICHOR_GENERAL2_START + 0x433) // Ichor: Knossa item ball: Amnisos, Hyper Potion on the hive roof
+#define FLAG_ICHOR_ITEM_BULL_ROAD_FULL_HEAL     (FLAG_ICHOR_GENERAL2_START + 0x434) // Ichor: Knossa item ball: the Bull Road, Full Heal
+#define FLAG_ICHOR_ITEM_BULL_ROAD_ULTRA_BALL    (FLAG_ICHOR_GENERAL2_START + 0x435) // Ichor: Knossa item ball: the Bull Road, Ultra Ball
+#define FLAG_ICHOR_ITEM_BULL_ROAD_MAX_POTION    (FLAG_ICHOR_GENERAL2_START + 0x436) // Ichor: Knossa item ball: the Bull Road, Max Potion
+#define FLAG_ICHOR_ITEM_BULL_ROAD_HP_UP         (FLAG_ICHOR_GENERAL2_START + 0x437) // Ichor: Knossa item ball: the Bull Road, HP Up
+#define FLAG_ICHOR_ITEM_BULL_ROAD_REVIVE        (FLAG_ICHOR_GENERAL2_START + 0x438) // Ichor: Knossa item ball: the Bull Road, Revive
+#define FLAG_ICHOR_ITEM_VINEYARD_PP_UP          (FLAG_ICHOR_GENERAL2_START + 0x439) // Ichor: Knossa item ball: the vineyard's sealed jar, PP Up
+#define FLAG_ICHOR_ITEM_VINEYARD_ULTRA_BALL     (FLAG_ICHOR_GENERAL2_START + 0x43A) // Ichor: Knossa item ball: the vineyard, Ultra Ball
+#define FLAG_ICHOR_ITEM_BRONZE_HEEL_BIG_PEARL   (FLAG_ICHOR_GENERAL2_START + 0x43B) // Ichor: Knossa item ball: the Bronze Heel, Big Pearl on the giant's ankle
+#define FLAG_ICHOR_ITEM_BRONZE_HEEL_RARE_CANDY  (FLAG_ICHOR_GENERAL2_START + 0x43C) // Ichor: Knossa item ball: the Bronze Heel, Rare Candy
+#define FLAG_ICHOR_ITEM_PALACE_HYPER_POTION     (FLAG_ICHOR_GENERAL2_START + 0x43D) // Ichor: Knossa item ball: the West Magazines' open pithos, Hyper Potion
+#define FLAG_ICHOR_ITEM_PALACE_ELIXIR           (FLAG_ICHOR_GENERAL2_START + 0x43E) // Ichor: Knossa item ball: the palace, Elixir in the Theatral Area
+#define FLAG_ICHOR_ARIADNE_WOKE_YOU             (FLAG_ICHOR_GENERAL2_START + 0x43F) // Ichor: Knossa: III-3P, Ariadne at the Megaron's door before dawn (He wants you)
+#define FLAG_ICHOR_ALETHEA_DAWN_DONE            (FLAG_ICHOR_GENERAL2_START + 0x440) // Ichor: Knossa: III-3P, Alethea sent the gull at dawn and went down to the quay
+#define FLAG_ICHOR_R2_LONG_HALL                 (FLAG_ICHOR_GENERAL2_START + 0x458) // Ichor: Labyrinth Ring II: scene C played, Asterion broke the Long Hall's cracked wall
+#define FLAG_ICHOR_ITEM_R2_TM                   (FLAG_ICHOR_GENERAL2_START + 0x459) // Ichor: Labyrinth Ring II: the sun room's TM
+#define FLAG_ICHOR_ITEM_R2_MOON_STONE           (FLAG_ICHOR_GENERAL2_START + 0x45A) // Ichor: Labyrinth Ring II: the Moon Room's Moon Stone
+#define FLAG_ICHOR_ITEM_R2_FULL_HEAL            (FLAG_ICHOR_GENERAL2_START + 0x45B) // Ichor: Labyrinth Ring II: the Full Heal behind the broken wall
+#define FLAG_ICHOR_ITEM_R2_SILVER_OWL           (FLAG_ICHOR_GENERAL2_START + 0x45C) // Ichor: Labyrinth Ring II: Sinopos's gallery Silver Owl
+#define FLAG_ICHOR_ITEM_R2_MAX_REPEL            (FLAG_ICHOR_GENERAL2_START + 0x45D) // Ichor: Labyrinth Ring II: a Max Repel in a dead end
+#define FLAG_ICHOR_ITEM_R2_ULTRA_BALL           (FLAG_ICHOR_GENERAL2_START + 0x45E) // Ichor: Labyrinth Ring II: an Ultra Ball in the grotto
+#define FLAG_ICHOR_HIDDEN_ITEM_R2_STARDUST      (FLAG_ICHOR_GENERAL2_START + 0x45F) // Ichor: Labyrinth Ring II: Stardust in the Moon Room
+#define FLAG_ICHOR_HIDDEN_ITEM_R2_OBOL          (FLAG_ICHOR_GENERAL2_START + 0x460) // Ichor: Labyrinth Ring II: a Bronze Obol in a dead end
+#define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
+#define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
+#define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken
+#define FLAG_ICHOR_KLEON_HUMBLED                (FLAG_ICHOR_GENERAL2_START + 0x4A3) // Ichor: Ring V: Scene E, Kleon bowled over at pool 1
+#define FLAG_ICHOR_HIDE_KLEON_RING5             (FLAG_ICHOR_GENERAL2_START + 0x4A4) // Ichor: Ring V: Kleon gone after Scene E (set at new game until the scene)
+#define FLAG_ICHOR_RING5_DOOR_BACK              (FLAG_ICHOR_GENERAL2_START + 0x4A5) // Ichor: Ring V: the bronze grate back to the gallery, opened from the south
+#define FLAG_ICHOR_RING5_BELL_RUNG              (FLAG_ICHOR_GENERAL2_START + 0x4A6) // Ichor: Ring V: the bell rung once (its first-time line)
+#define FLAG_ICHOR_RING5_ITEM_1                 (FLAG_ICHOR_GENERAL2_START + 0x4A7) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_2                 (FLAG_ICHOR_GENERAL2_START + 0x4A8) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_3                 (FLAG_ICHOR_GENERAL2_START + 0x4A9) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_4                 (FLAG_ICHOR_GENERAL2_START + 0x4AA) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_5                 (FLAG_ICHOR_GENERAL2_START + 0x4AB) // Ichor: Ring V: item
+#define FLAG_ICHOR_RING5_ITEM_6                 (FLAG_ICHOR_GENERAL2_START + 0x4AC) // Ichor: Ring V: item
+#define FLAG_ICHOR_TOMB_ITEM                    (FLAG_ICHOR_GENERAL2_START + 0x4AD) // Ichor: Minos's tomb: the gold stater (Big Nugget)
+#define FLAG_ICHOR_HIDE_HELM_BIER               (FLAG_ICHOR_GENERAL2_START + 0x4AE) // Ichor: Minos's tomb: the Helm taken from the bier
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_ISLAND     (FLAG_ICHOR_GENERAL2_START + 0x4AF) // Ichor: Ring V: the lake island
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_A          (FLAG_ICHOR_GENERAL2_START + 0x4B0) // Ichor: Ring V: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_B          (FLAG_ICHOR_GENERAL2_START + 0x4B1) // Ichor: Ring V: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING5_C          (FLAG_ICHOR_GENERAL2_START + 0x4B2) // Ichor: Ring V: hidden
+#define FLAG_ICHOR_ASTERION_FREED               (FLAG_ICHOR_GENERAL2_START + 0x4B3) // Ichor: Starry Chamber: Scene J, the collar cut; Asterion is free (hides every chained or patrolling Asterion)
+#define FLAG_ICHOR_PHAEDON_UNMASKED             (FLAG_ICHOR_GENERAL2_START + 0x4B4) // Ichor: Starry Chamber: Scene J, Kronos took off the gold mask
+#define FLAG_ICHOR_RHEA_MERCY                   (FLAG_ICHOR_GENERAL2_START + 0x4B5) // Ichor: Starry Chamber: Scene J, Rhea left the threshold open; the Turning begins
+#define FLAG_ICHOR_SHOWED_PHAEDON_TABLET        (FLAG_ICHOR_GENERAL2_START + 0x4B6) // Ichor: Starry Chamber: showed Phaedon the sealed tablet
+#define FLAG_ICHOR_TURNING_DONE                 (FLAG_ICHOR_GENERAL2_START + 0x4B7) // Ichor: The Turning: out through the threshold
+#define FLAG_ICHOR_ICARUS_FLIGHT                (FLAG_ICHOR_GENERAL2_START + 0x4B8) // Ichor: Scene L: flew up the Icarus Shaft
+#define FLAG_ICHOR_HIDE_STARRY_CAST             (FLAG_ICHOR_GENERAL2_START + 0x4B9) // Ichor: Starry Chamber: Kronos, Rhea, Kleon and the chained Asterion gone after Scene J
+#define FLAG_ICHOR_ARCHIVE_TABLET               (FLAG_ICHOR_GENERAL2_START + 0x4BA) // Ichor: Ring VI archive: took Kleon's draft (Scene H)
+#define FLAG_ICHOR_GOT_ELPIS_TABLET             (FLAG_ICHOR_GENERAL2_START + 0x4BB) // Ichor: Ring VI archive: took Elpis's sealed tablet (Scene H)
+#define FLAG_ICHOR_HIDE_HYPERION_KNOSSA         (FLAG_ICHOR_GENERAL2_START + 0x4BC) // Ichor: Ring VI: Hyperion gone after Scene G
+#define FLAG_ICHOR_MISTRESS_HONEY               (FLAG_ICHOR_GENERAL2_START + 0x4BD) // Ichor: Ring VI shrine: offered Honey to the Mistress
+#define FLAG_ICHOR_ARIADNE_JOINED               (FLAG_ICHOR_GENERAL2_START + 0x4BE) // Ichor: Ring VII: Scene I, Ariadne joined; the Gigas beaten
+#define FLAG_ICHOR_DANCE_DONE                   (FLAG_ICHOR_GENERAL2_START + 0x4BF) // Ichor: Ring VII: the crane dance danced; the stair to the heart opens
+#define FLAG_ICHOR_RING7_BEAM_DONE              (FLAG_ICHOR_GENERAL2_START + 0x4C0) // Ichor: Ring VII: the mirrors carry the beam to the crystal; the floor is lit
+#define FLAG_ICHOR_HIDE_ARIADNE_RING7           (FLAG_ICHOR_GENERAL2_START + 0x4C1) // Ichor: Ring VII: Ariadne out of sight (before Scene I, and after the dance)
+#define FLAG_ICHOR_HIDE_GIGAS_RING7             (FLAG_ICHOR_GENERAL2_START + 0x4C2) // Ichor: Ring VII: the Gigas gone after the double battle
+#define FLAG_ICHOR_RING6_DIALS_SET              (FLAG_ICHOR_GENERAL2_START + 0x4C3) // Ichor: Ring VI: the dials stood at the clerks' setting (ABA) on first entry
+#define FLAG_ICHOR_RING6_TEACH_OPEN             (FLAG_ICHOR_GENERAL2_START + 0x4C4) // Ichor: Ring VI: the teaching dial turned; the Hall of Dials is open
+#define FLAG_ICHOR_HIDE_SENTRY_1                (FLAG_ICHOR_GENERAL2_START + 0x4C5) // Ichor: Ring VI: Bronzong sentry 1 rang its alarm and wound down
+#define FLAG_ICHOR_HIDE_SENTRY_2                (FLAG_ICHOR_GENERAL2_START + 0x4C6) // Ichor: Ring VI: Bronzong sentry 2 rang its alarm and wound down
+#define FLAG_ICHOR_HIDE_SENTRY_3                (FLAG_ICHOR_GENERAL2_START + 0x4C7) // Ichor: Ring VI: Bronzong sentry 3 rang its alarm and wound down
+#define FLAG_ICHOR_RING6_LANDING_OPEN           (FLAG_ICHOR_GENERAL2_START + 0x4C8) // Ichor: Ring VI: the sealed landing door opened (Hyperion beaten)
+#define FLAG_ICHOR_RING6_ARCHIVE_BACK           (FLAG_ICHOR_GENERAL2_START + 0x4C9) // Ichor: Ring VI: the archive's back grate opened from inside
+#define FLAG_ICHOR_RING6_ITEM_1                 (FLAG_ICHOR_GENERAL2_START + 0x4CA) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_ITEM_2                 (FLAG_ICHOR_GENERAL2_START + 0x4CB) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_ITEM_3                 (FLAG_ICHOR_GENERAL2_START + 0x4CC) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_ITEM_4                 (FLAG_ICHOR_GENERAL2_START + 0x4CD) // Ichor: Ring VI: item
+#define FLAG_ICHOR_RING6_VAULT_1                (FLAG_ICHOR_GENERAL2_START + 0x4CE) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_RING6_VAULT_2                (FLAG_ICHOR_GENERAL2_START + 0x4CF) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_RING6_VAULT_3                (FLAG_ICHOR_GENERAL2_START + 0x4D0) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_RING6_VAULT_4                (FLAG_ICHOR_GENERAL2_START + 0x4D1) // Ichor: Ring VI vault: chest
+#define FLAG_ICHOR_GOT_TM_FLARE                 (FLAG_ICHOR_GENERAL2_START + 0x4D2) // Ichor: Ring VI: Hyperion's TM after Scene G
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_A          (FLAG_ICHOR_GENERAL2_START + 0x4D3) // Ichor: Ring VI: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_B          (FLAG_ICHOR_GENERAL2_START + 0x4D4) // Ichor: Ring VI: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_C          (FLAG_ICHOR_GENERAL2_START + 0x4D5) // Ichor: Ring VI: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING6_FALLS      (FLAG_ICHOR_GENERAL2_START + 0x4D6) // Ichor: Ring VI: above the falls
+#define FLAG_ICHOR_RING7_ITEM_1                 (FLAG_ICHOR_GENERAL2_START + 0x4D7) // Ichor: Ring VII: item
+#define FLAG_ICHOR_RING7_ITEM_2                 (FLAG_ICHOR_GENERAL2_START + 0x4D8) // Ichor: Ring VII: item
+#define FLAG_ICHOR_RING7_DISC                   (FLAG_ICHOR_GENERAL2_START + 0x4D9) // Ichor: Ring VII: the teaching mirror lit the disc
+#define FLAG_ICHOR_HIDDEN_ITEM_RING7_A          (FLAG_ICHOR_GENERAL2_START + 0x4DA) // Ichor: Ring VII: hidden
+#define FLAG_ICHOR_HIDDEN_ITEM_RING7_B          (FLAG_ICHOR_GENERAL2_START + 0x4DB) // Ichor: Ring VII: hidden
 // Ichor bank flags: end
 
 // Ichor: the Pantheon's four seats reuse Emerald's Elite Four defeat flags, so the

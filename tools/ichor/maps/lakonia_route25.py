@@ -123,7 +123,7 @@ def build():
         pass
     m.plane(8, 5)            # the plane trees framing the cutting and band 3
     m.plane(18, 1)
-    # ---- the cutting: rock either side of the road, Amompharetos's post --------------
+    # ---- the cutting: rock either side of the road, Arimnestos's post --------------
     for x in range(12, 15):
         m.piece("taygetos", "lip_b" if x % 2 else "lip", x, 8)
         m.piece("taygetos", "face_b" if x % 2 else "face", x, 9)
@@ -211,7 +211,7 @@ def build():
     t("ICHOR_CADET", 14, 21, "Phoibidas", "RIGHT", 2)
     t("ICHOR_FISHER", 17, 32, "Alpheios", "RIGHT", 1)
     t("ICHOR_PILGRIM", 8, 12, "Theodora", "UP", 2)
-    t("ICHOR_HOPLITE", 14, 8, "Amompharetos", "RIGHT", 2)
+    t("ICHOR_HOPLITE", 14, 8, "Arimnestos", "RIGHT", 2)
     t("ICHOR_HARVESTER", 7, 41, "Euthymia", "UP", 3)
     o("ICHOR_CADET", 19, 28, S + "ReedCadet", "MOVEMENT_TYPE_FACE_UP")
     o("ICHOR_CADET", 20, 30, S + "ReedCadet2", "MOVEMENT_TYPE_FACE_LEFT")

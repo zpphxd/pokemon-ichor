@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the Eleusa--Daphni--Astyra road and the capital's first story rooms."""
-from thyrsa import ROOT, Map, bg, hall, obj, read, warp, write
+from thyrsa import ROOT, Map, asclepeion, bg, hall, obj, read, warp, write
 from nemea import roads, encounters_and_teams
 
 ROADS = [
@@ -83,13 +83,11 @@ def city():
 def rooms():
     m = hall("Astyra_Asclepeion", 18, 12)
     m.json["music"] = "MUS_ICHOR_ASCLEPEION"
-    m.rect(4, 4, 11, 4, 0x213, True)
-    m.person("Phaedon", 8, 3, gfx="MAN")
+    asclepeion(m, 8, 14)
+    m.person("Phaedon", 8, 2, gfx="MAN")
     m.person("Panacoil", 12, 7)
     m.json["object_events"][-1]["graphics_id"] = "OBJ_EVENT_GFX_SPECIES(PANACOIL)"
     m.person("Alethea", 9, 5, gfx="ALETHEA", flag="FLAG_ICHOR_HIDE_ALETHEA_ASTYRA_CLINIC")
-    m.stamp(14, 2, [[0x21F, 0x220], [0x221, 0x222], [0x223, 0x224]])
-    m.json["bg_events"].append(bg(14, 4, m.prefix + "Pithos"))
     m.sign("Hearth", 3, 7, tile=0x21B)
     m.json["warp_events"] = [warp(9, 11, "Astyra", 0)]
     m.save()

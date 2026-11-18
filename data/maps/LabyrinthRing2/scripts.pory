@@ -1,0 +1,342 @@
+// Ring II, the Runner's Ring (design/LABYRINTH.md §6 Ring II; design/maps/LabyrinthRing2.md).
+// Hermes's verb, race and route: the sun gate and the moon gate (one open at any hour),
+// the Long Hall and Asterion's first sighting (scene C), then the heralds' way: each
+// bronze plate raises its grate for a few steps (VAR_TEMP_2 counts them, VAR_TEMP_3 is
+// the run under way; every cell of a run has a coord event that burns one step).
+// FLAG_TEMP_1-3: a grate already passed, so it stays up for the walk back.
+// The layout and the generated block come from tools/ichor/maps/labyrinth_ring2.py.
+
+mapscripts LabyrinthRing2_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        call(LabyrinthRing2_EventScript_Register)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(Ichor_DrawThread)
+    }
+}
+
+text LabyrinthRing2_Name_Tephra { "TEPHRA" }
+text LabyrinthRing2_Name_Sinopos { "SINOPOS" }
+
+// --- The heralds' way ----------------------------------------------------------------------------
+
+// VAR_TEMP_2: the grate's steps for this difficulty (Mortal 14, Hero 12, Spartan 10).
+script LabyrinthRing2_EventScript_HeraldSteps {
+    specialvar(VAR_RESULT, Ichor_GetStepGlassLimit)
+    if (var(VAR_RESULT) == 150) {
+        setvar(VAR_TEMP_2, 14)
+    } elif (var(VAR_RESULT) == 100) {
+        setvar(VAR_TEMP_2, 10)
+    } else {
+        setvar(VAR_TEMP_2, 12)
+    }
+}
+
+script LabyrinthRing2_EventScript_StartRun {
+    call(LabyrinthRing2_EventScript_HeraldSteps)
+    call(LabyrinthRing2_EventScript_DrawState)
+    special(DrawWholeMapView)
+    playse(SE_CLICK)
+}
+
+script LabyrinthRing2_EventScript_Plate1 {
+    if (var(VAR_TEMP_3) != 1) {
+        setvar(VAR_TEMP_3, 1)
+        call(LabyrinthRing2_EventScript_StartRun)
+    }
+}
+
+script LabyrinthRing2_EventScript_Plate2 {
+    if (var(VAR_TEMP_3) != 2) {
+        setvar(VAR_TEMP_3, 2)
+        call(LabyrinthRing2_EventScript_StartRun)
+    }
+}
+
+script LabyrinthRing2_EventScript_Plate3 {
+    if (var(VAR_TEMP_3) != 3) {
+        setvar(VAR_TEMP_3, 3)
+        call(LabyrinthRing2_EventScript_StartRun)
+    }
+}
+
+// One step off the herald's count; at nothing the grate drops.
+script LabyrinthRing2_EventScript_RunStep {
+    subvar(VAR_TEMP_2, 1)
+    if (var(VAR_TEMP_2) == 0) {
+        lockall
+        setvar(VAR_TEMP_3, 0)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+        playse(SE_DOOR)
+        msgbox(format("Clang! The grate drops. Back to the plate, and run."), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing2_EventScript_Past1 {
+    if (!flag(FLAG_TEMP_1)) {
+        setflag(FLAG_TEMP_1)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+    }
+}
+
+script LabyrinthRing2_EventScript_Past2 {
+    if (!flag(FLAG_TEMP_2)) {
+        setflag(FLAG_TEMP_2)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+    }
+}
+
+script LabyrinthRing2_EventScript_Past3 {
+    if (!flag(FLAG_TEMP_3)) {
+        setflag(FLAG_TEMP_3)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+    }
+}
+
+// --- Scene C: the Long Hall ------------------------------------------------------------------------
+
+script LabyrinthRing2_EventScript_SceneC {
+    setvar(VAR_TEMP_4, 1)
+    if (!flag(FLAG_ICHOR_R2_LONG_HALL)) {
+        lockall
+        msgbox(format("Far down the hall, in the dark, something huge lifts its head."), MSGBOX_DEFAULT)
+        closemessage
+        playse(SE_M_STRENGTH)
+        delay(30)
+        setvar(VAR_0x8004, 2)
+        setvar(VAR_0x8005, 2)
+        setvar(VAR_0x8006, 16)
+        setvar(VAR_0x8007, 3)
+        special(ShakeCamera)
+        waitstate
+        playse(SE_M_ROCK_THROW)
+        setflag(FLAG_ICHOR_R2_LONG_HALL)
+        call(LabyrinthRing2_EventScript_DrawState)
+        special(DrawWholeMapView)
+        msgbox(format("The wall beside you is rubble now. The dust tastes of very old stone.\p"
+                      "…It wasn't aiming at you. Was it?"), MSGBOX_DEFAULT)
+        releaseall
+    }
+}
+
+script LabyrinthRing2_EventScript_CrackedWall {
+    msgbox(format("Cracks run all through this wall. Something very heavy could break it."), MSGBOX_SIGN)
+}
+
+// --- The cave: the sunken floor, the climb ---------------------------------------------------------
+
+script LabyrinthRing2_EventScript_SunkenFloor {
+    lockall
+    msgbox(format("The floor here has sunk into a hollow. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_RING3, 3)
+    waitstate
+}
+
+script LabyrinthRing2_EventScript_ClimbSign {
+    msgbox(format("Flowstone runs down the rock here in wet ridges, like a stair somebody poured."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing2_EventScript_Climb {
+    lockall
+    msgbox(format("Climb the flowstone?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        warp(MAP_LABYRINTH_RING1, 6)
+        waitstate
+    }
+    releaseall
+}
+
+script LabyrinthRing2_EventScript_StairDown {
+    if (var(VAR_ICHOR_KNOSSA) < 7) {
+        setvar(VAR_ICHOR_KNOSSA, 7)
+    }
+}
+
+// --- Titanborn scouts ------------------------------------------------------------------------------
+
+script LabyrinthRing2_EventScript_Tephra {
+    trainerbattle_single(TRAINER_ICHOR_TEPHRA, LabyrinthRing2_Text_TephraIntro, LabyrinthRing2_Text_TephraDefeat)
+    setspeaker(LabyrinthRing2_Name_Tephra)
+    msgbox(format("It nearly had me in the Long Hall. It looked at me. Then it didn't."), MSGBOX_AUTOCLOSE)
+}
+
+text LabyrinthRing2_Text_TephraIntro {
+    format("Turn back! The bull's loose down here! …Fine. Battle first.")
+}
+
+text LabyrinthRing2_Text_TephraDefeat {
+    format("Ow. Hyperion says I fight like a landslide. Downhill only.")
+}
+
+script LabyrinthRing2_EventScript_Sinopos {
+    trainerbattle_single(TRAINER_ICHOR_SINOPOS, LabyrinthRing2_Text_SinoposIntro, LabyrinthRing2_Text_SinoposDefeat)
+    setspeaker(LabyrinthRing2_Name_Sinopos)
+    msgbox(format("…I don't think it's a very good reason, now I say it out loud."), MSGBOX_AUTOCLOSE)
+}
+
+text LabyrinthRing2_Text_SinoposIntro {
+    format("I'm a scout! I scout. This gallery. It's very scouted.")
+}
+
+text LabyrinthRing2_Text_SinoposDefeat {
+    format("My friends joined. The helmets are good. Is that not a reason?")
+}
+
+// --- Things on the walls ---------------------------------------------------------------------------
+
+script LabyrinthRing2_EventScript_Shrine {
+    msgbox(format("A clay goddess in a niche. Someone has tied a red thread round her wrist."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing2_EventScript_FrescoHerald {
+    msgbox(format("A fresco: a herald running with his staff held high.\p"
+                  "Under his feet, the painter's joke: a bronze plate, and a door closing behind."), MSGBOX_SIGN)
+}
+
+script LabyrinthRing2_EventScript_Fresco {
+    msgbox(format("A faded fresco of dolphins, leaping in a ring."), MSGBOX_SIGN)
+}
+
+// ---- BEGIN GENERATED by tools/ichor/maps/labyrinth_lib.py: do not edit ----
+script LabyrinthRing2_EventScript_Register {
+    // the floors that take Ariadne's thread, each with its first twin
+    setvar(VAR_0x8004, 0x320)
+    setvar(VAR_0x8005, 0x321)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x32B)
+    setvar(VAR_0x8005, 0x32C)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x2E8)
+    setvar(VAR_0x8005, 0x2E9)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x2F3)
+    setvar(VAR_0x8005, 0x2F4)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 0x350)
+    setvar(VAR_0x8005, 0x351)
+    special(Ichor_AddThreadFloor)
+    setvar(VAR_0x8004, 4)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R2_ENTRANCE)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 50)
+    setvar(VAR_0x8005, 34)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R2_HERALDS)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 22)
+    setvar(VAR_0x8005, 24)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R2_LONG_HALL)
+    special(Ichor_AddThreadAnchor)
+    setvar(VAR_0x8004, 44)
+    setvar(VAR_0x8005, 6)
+    setvar(VAR_0x8006, THREAD_ANCHOR_R2_GROTTO)
+    special(Ichor_AddThreadAnchor)
+}
+
+// The ring's state, drawn on load and after every change: lit braziers, opened
+// doors and gates. Ichor_DrawThread goes after it.
+script LabyrinthRing2_EventScript_DrawState {
+    gettimeofday
+    if (var(VAR_0x8000) == TIME_NIGHT) {
+        setmetatile(17, 8, 0x255, TRUE)
+        setmetatile(18, 8, 0x320, FALSE)
+        setmetatile(19, 8, 0x32B, FALSE)
+        setmetatile(20, 8, 0x24C, TRUE)
+        setmetatile(17, 9, 0x25D, TRUE)
+        setmetatile(18, 9, 0x32B, FALSE)
+        setmetatile(19, 9, 0x320, FALSE)
+        setmetatile(20, 9, 0x25B, TRUE)
+    } else {
+        setmetatile(9, 8, 0x255, TRUE)
+        setmetatile(10, 8, 0x320, FALSE)
+        setmetatile(11, 8, 0x32B, FALSE)
+        setmetatile(12, 8, 0x259, TRUE)
+        setmetatile(9, 9, 0x25D, TRUE)
+        setmetatile(10, 9, 0x32B, FALSE)
+        setmetatile(11, 9, 0x320, FALSE)
+        setmetatile(12, 9, 0x25B, TRUE)
+    }
+    if (var(VAR_TEMP_3) == 1 || flag(FLAG_TEMP_1)) {
+        setmetatile(43, 17, 0x25E, TRUE)
+        setmetatile(44, 17, 0x25E, TRUE)
+        setmetatile(45, 17, 0x25E, TRUE)
+        setmetatile(46, 17, 0x25E, TRUE)
+        setmetatile(44, 18, 0x320, FALSE)
+        setmetatile(45, 18, 0x32B, FALSE)
+        setmetatile(44, 19, 0x32B, FALSE)
+        setmetatile(45, 19, 0x320, FALSE)
+        setmetatile(44, 20, 0x251, TRUE)
+        setmetatile(45, 20, 0x255, TRUE)
+    } else {
+        setmetatile(43, 17, 0x25F, TRUE)
+        setmetatile(44, 17, 0x23C, TRUE)
+        setmetatile(45, 17, 0x240, TRUE)
+        setmetatile(46, 17, 0x261, TRUE)
+        setmetatile(44, 18, 0x3CB, TRUE)
+        setmetatile(45, 18, 0x3CB, TRUE)
+        setmetatile(44, 19, 0x3CB, TRUE)
+        setmetatile(45, 19, 0x3CB, TRUE)
+        setmetatile(44, 20, 0x239, TRUE)
+        setmetatile(45, 20, 0x248, TRUE)
+    }
+    if (var(VAR_TEMP_3) == 2 || flag(FLAG_TEMP_2)) {
+        setmetatile(39, 25, 0x25E, TRUE)
+        setmetatile(40, 25, 0x25E, TRUE)
+        setmetatile(41, 25, 0x25E, TRUE)
+        setmetatile(42, 25, 0x25E, TRUE)
+        setmetatile(40, 26, 0x320, FALSE)
+        setmetatile(41, 26, 0x32B, FALSE)
+        setmetatile(40, 27, 0x32B, FALSE)
+        setmetatile(41, 27, 0x320, FALSE)
+        setmetatile(40, 28, 0x257, TRUE)
+        setmetatile(41, 28, 0x251, TRUE)
+    } else {
+        setmetatile(39, 25, 0x25F, TRUE)
+        setmetatile(40, 25, 0x23C, TRUE)
+        setmetatile(41, 25, 0x240, TRUE)
+        setmetatile(42, 25, 0x261, TRUE)
+        setmetatile(40, 26, 0x3CB, TRUE)
+        setmetatile(41, 26, 0x3CB, TRUE)
+        setmetatile(40, 27, 0x3CB, TRUE)
+        setmetatile(41, 27, 0x3CB, TRUE)
+        setmetatile(40, 28, 0x24C, TRUE)
+        setmetatile(41, 28, 0x23A, TRUE)
+    }
+    if (var(VAR_TEMP_3) == 3 || flag(FLAG_TEMP_3)) {
+        setmetatile(40, 33, 0x25B, TRUE)
+        setmetatile(41, 33, 0x25D, TRUE)
+        setmetatile(40, 34, 0x320, FALSE)
+        setmetatile(41, 34, 0x32B, FALSE)
+        setmetatile(40, 35, 0x32B, FALSE)
+        setmetatile(41, 35, 0x320, FALSE)
+        setmetatile(40, 36, 0x251, TRUE)
+        setmetatile(41, 36, 0x255, TRUE)
+    } else {
+        setmetatile(40, 33, 0x24C, TRUE)
+        setmetatile(41, 33, 0x248, TRUE)
+        setmetatile(40, 34, 0x3CB, TRUE)
+        setmetatile(41, 34, 0x3CB, TRUE)
+        setmetatile(40, 35, 0x3CB, TRUE)
+        setmetatile(41, 35, 0x3CB, TRUE)
+        setmetatile(40, 36, 0x239, TRUE)
+        setmetatile(41, 36, 0x248, TRUE)
+    }
+    if (flag(FLAG_ICHOR_R2_LONG_HALL)) {
+        setmetatile(21, 28, 0x255, TRUE)
+        setmetatile(22, 28, 0x320, FALSE)
+        setmetatile(23, 28, 0x32B, FALSE)
+        setmetatile(24, 28, 0x259, TRUE)
+        setmetatile(21, 29, 0x248, TRUE)
+        setmetatile(22, 29, 0x32B, FALSE)
+        setmetatile(23, 29, 0x320, FALSE)
+        setmetatile(24, 29, 0x24D, TRUE)
+    }
+}
+// ---- END GENERATED ----

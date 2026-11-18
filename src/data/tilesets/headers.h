@@ -536,11 +536,11 @@ const struct Tileset gTileset_CaveDark =
 };
 
 // Ichor: labyrinth, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
-// built by tools/ichor/art/labyrinth_build.py; so far it holds the house's masonry and
-// Daedalus's workshop. It uses only its own tiles and palettes 6-12, with opaque floors,
-// so it works on any interior primary (drawn for oikos). Its variant palette sets,
-// gTilesetPalettes_LabyrinthGlow (the doused torch) and gTilesetPalettes_LabyrinthDawn
-// (scene L), are in graphics.h. No layout uses it yet.
+// built by tools/ichor/art/labyrinth_build.py: the house's masonry, the karst cave it
+// was cut into, Rings I-IV and Minos's tomb (LABYRINTH_MAZE.md). It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_LabyrinthGlow)
+// are in graphics.h. No layout uses it yet.
 const struct Tileset gTileset_Labyrinth =
 {
     .isCompressed = TRUE,
@@ -549,7 +549,37 @@ const struct Tileset gTileset_Labyrinth =
     .palettes = gTilesetPalettes_PorytilesManaged_Labyrinth,
     .metatiles = gMetatiles_PorytilesManaged_Labyrinth,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
-    .callback = NULL,
+    .callback = InitTilesetAnim_PorytilesManaged_Labyrinth,
+};
+
+// Ichor: mychos, the Labyrinth's heart under Knossa (LABYRINTH.md §11, LABYRINTH_MAZE.md §4):
+// Ring V (the Hunt's lake cave) and Ring VI (the forge cavern, the Hall of Dials, the archive,
+// the vault, the shrine): the house's masonry and the cave kit. Porytiles-managed, built by
+// tools/ichor/art/mychos_build.py from world-act3's art (tools/ichor/art/mychos_base/). It uses
+// only its own tiles and palettes 6-12, so it works on any interior primary (drawn for oikos).
+const struct Tileset gTileset_Mychos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Mychos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Mychos,
+    .metatiles = gMetatiles_PorytilesManaged_Mychos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Mychos,
+    .callback = InitTilesetAnim_PorytilesManaged_Mychos,
+};
+
+// Ichor: astra, the Labyrinth's deepest caves (LABYRINTH_MAZE.md §1, §4): Ring VII's dome and
+// dancing floor, the Starry Chamber's crystal stars, the Icarus Shaft's chimney. Mychos's
+// sister, built by tools/ichor/art/mychos_build.py from the same house and cave kit.
+const struct Tileset gTileset_Astra =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Astra,
+    .palettes = gTilesetPalettes_PorytilesManaged_Astra,
+    .metatiles = gMetatiles_PorytilesManaged_Astra,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Astra,
+    .callback = InitTilesetAnim_PorytilesManaged_Astra,
 };
 
 // Ichor: the Mystery sanctum under Eleusa (tools/ichor/maps/sanctum.py). Two derived
@@ -1039,5 +1069,19 @@ const struct Tileset gTileset_CivicLakonia =
     .palettes = gTilesetPalettes_PorytilesManaged_CivicLakonia,
     .metatiles = gMetatiles_PorytilesManaged_CivicLakonia,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicLakonia,
+// Ichor: daidaleion, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
+// built by tools/ichor/art/labyrinth_build.py: the house's masonry, Daedalus's workshop
+// and the Icarus Shaft. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_DaidaleionDawn)
+// are in graphics.h. No layout uses it yet.
+const struct Tileset gTileset_Daidaleion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Daidaleion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Daidaleion,
+    .metatiles = gMetatiles_PorytilesManaged_Daidaleion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Daidaleion,
     .callback = NULL,
 };

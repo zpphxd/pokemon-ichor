@@ -2,7 +2,7 @@
   "id": "MAP_AIGION",
   "name": "Aigion",
   "layout": "LAYOUT_AIGION",
-  "music": "MUS_ICHOR_ROAD",
+  "music": "MUS_ICHOR_AKTI",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AIGION",
   "requires_flash": false,
@@ -24,8 +24,8 @@
     {
       "local_id": "LOCALID_AIGION_HEALER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
-      "x": 18,
-      "y": 10,
+      "x": 19,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -38,8 +38,8 @@
     {
       "local_id": "LOCALID_AIGION_MERCHANT",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
-      "x": 19,
-      "y": 18,
+      "x": 22,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -52,8 +52,8 @@
     {
       "local_id": "LOCALID_AIGION_GUIDE",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
-      "x": 6,
-      "y": 13,
+      "x": 11,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -66,8 +66,8 @@
     {
       "local_id": "LOCALID_AIGION_CAPTAIN",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
-      "x": 19,
-      "y": 26,
+      "x": 15,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -76,18 +76,152 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Aigion_EventScript_Captain",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AIGION_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_FISHER",
+      "x": 5,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Aigion_EventScript_Fisher",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AIGION_KID",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
+      "x": 9,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Aigion_EventScript_Kid",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AIGION_BOATL",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L",
+      "x": 21,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AIGION_BOATR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R",
+      "x": 22,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 1,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_HEAL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_AIGION"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_STAR_PIECE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_AIGION_HELIKE"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_AIGION_HOMARION",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
     {
+      "type": "hidden_item",
+      "x": 1,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_NET_BALL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_AIGION_CAMP",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 2,
+      "y": 21,
+      "elevation": 3,
+      "item": "ITEM_SMOKE_BALL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_AIGION_TERRACE",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
       "type": "sign",
-      "x": 14,
-      "y": 14,
+      "x": 12,
+      "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Aigion_EventScript_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 29,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Aigion_EventScript_SouthSign"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Aigion_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Aigion_EventScript_Oak"
     }
   ]
 }

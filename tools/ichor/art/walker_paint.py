@@ -965,6 +965,14 @@ CHARACTERS = {
     # leather work apron for the trade.
     "alfred": C_("folk", dict(H=1, h=2, G=11, B=3, C=12, c=11, W=6, w=2, A=3),
                  body="robe", hair="bun", over=["apron", "sash"], face="level"),
+    # Knossa (design/phase4/SCRIPT.md III-3D, LABYRINTH.md §8). Ariadne, priestess of the
+    # Mistress of the Labyrinth: black Minoan curls under a gold diadem, a Minoan-red
+    # flounced robe banded in saffron. Sarpedon, the old bull-master: grey fringe and
+    # beard, a leaper's red kilt-chiton and an ochre belt, thirty summers of scars.
+    "ariadne": C_("cast", dict(H=2, h=1, B=9, C=5, c=3, A=9, D=8, d=4, W=11, w=10, M=9, m=8),
+                  body="robe", hair="long", headwear=["band"], over=["stripes"]),
+    "sarpedon": C_("folk", dict(H=10, h=8, W=9, w=8, C=3, c=2, A=4, P=6, p=2),
+                   body="chiton", hair="bald_fringe", beard="full", over=["belt"], props=["staff"]),
     "pronomos": C_("folk", dict(H=2, h=1, G=6, C=9, c=8, A=3, P=6, p=2),
                    body="chiton", hair="curly", held=["aulos"]),
     # the Theoxenia

@@ -1,0 +1,595 @@
+{
+ "areas": [
+  {
+   "id": "route-6",
+   "maps": [
+    "Route6_EleutheraiRoad"
+   ],
+   "title": "Route 6: the Eleutherai Road",
+   "kind": "route",
+   "blurb": "The old road out of Eleusa, climbing terraced vineyards gone wild to the fort of Eleutherai under Kithairon.",
+   "walkthrough": [
+    "Leave Eleusa by the north road. Route 6 climbs in terraces: three bands of tall grass sit across the road, so you can't avoid the grass, and each terrace has a trainer standing where the path narrows.",
+    "On the lower terrace, Sostratos the shepherd watches the road. The stair up the terrace wall is choked with old vines: cut them with Demeter's Sickle. Someone's boot prints go straight up the wall beside it. East of the road an old wine press is also choked with vines; cut through for a Super Potion.",
+    "The middle terrace has Phano at the head of the stair and Melanippe further up. The vine-dresser stands in the corner by the stair you just cleared. Once you've cut her vines she gives you a Miracle Seed. A long meadow runs east past Lysis to a Theseus Ball, with ledges back down to the road.",
+    "The fort of Eleutherai straddles the road between two square towers, and Damon the hoplite holds the gate. East of the fort, a postern choked with vines leads to the augur's knoll, where Theognis guards an Ether.",
+    "Above the fort, the road runs through fir and pine and the third band of grass, then straight onto Mt. Kithairon. There is no healer on Route 6, so the first heal is the spring keeper halfway up the mountain."
+   ],
+   "key_npcs": [
+    {
+     "map": "Route6_EleutheraiRoad",
+     "script": "Route6_EleutheraiRoad_EventScript_VineDresser",
+     "label": "Vine-dresser",
+     "note": "Gives a Miracle Seed once you've cut the vines on the terrace stair."
+    },
+    {
+     "map": "Route6_EleutheraiRoad",
+     "script": "Route6_EleutheraiRoad_EventScript_KleonWall",
+     "label": "Boot prints",
+     "note": "Fresh prints go straight up the terrace wall. Someone didn't wait for the stair."
+    },
+    {
+     "map": "Route6_EleutheraiRoad",
+     "script": "Route6_EleutheraiRoad_EventScript_FortSign",
+     "label": "Fort of Eleutherai",
+     "note": "The free town's towers still watch the pass."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "All three vine thickets on this road fall to Demeter's Sickle. The stair vines are on the main road; the press vines (a Super Potion) and the postern vines (Theognis and an Ether) are side trips."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Ledges only drop south, so once you're above a terrace the way back down is quick. Clear each side trip before you climb past it."
+    },
+    {
+     "kind": "Hot Tip",
+     "text": "Look for three hidden items: Honey near the fort, a Revive by the press and a Super Repel near the south end of the road. The map marks all three."
+    }
+   ],
+   "puzzles": [],
+   "spoilers": []
+  },
+  {
+   "id": "mt-kithairon",
+   "maps": [
+    "MtKithairon"
+   ],
+   "title": "Mt. Kithairon",
+   "kind": "route",
+   "blurb": "A switchback climb up four cliff tiers to Dionysus's altar on the summit, then down off the peak toward the Kronia grounds.",
+   "walkthrough": [
+    "Kithairon climbs in tiers. Every tier is woods or crag except its road, so the trainers at the narrow points can't be walked round. Ledges only drop south: the way back down is quick, and the way up is earned.",
+    "At the foot, Aktaios the hoplite guards the first stair cut into the cliff. On the next tier, Bromios watches the ledge road, and a Theseus Ball sits just off it.",
+    "Halfway up is the maenads' camp. The spring keeper there heals your team every time you talk to her, and a maenad gives you a jar of Wine to pour at Dionysus's altar in Thyrsa. Nysa battles nearby.",
+    "A long stair is cut up the great cliff. On the high meadow above it, Kleito watches the road and an Ether waits off to the side. Then cross the last band of grass below the peak.",
+    "On the summit stands Dionysus's altar, a bronze tripod wound with ivy, with Charinos before it. The lookout on the east edge shows the whole road you've come up. Hop off the ledge on the peak's west side into the col, beat Euphron, and take the road down north to the Kronia grounds."
+   ],
+   "key_npcs": [
+    {
+     "map": "MtKithairon",
+     "script": "MtKithairon_EventScript_Spring",
+     "label": "Spring keeper",
+     "note": "Heals your party every time you talk to her."
+    },
+    {
+     "map": "MtKithairon",
+     "script": "MtKithairon_EventScript_Maenad",
+     "label": "Maenad",
+     "note": "Gives a jar of Wine, once, to pour at Dionysus's altar."
+    },
+    {
+     "map": "MtKithairon",
+     "script": "MtKithairon_EventScript_Altar",
+     "label": "Summit altar",
+     "note": "A bronze tripod wound with ivy, smelling of fresh wine."
+    },
+    {
+     "map": "MtKithairon",
+     "script": "MtKithairon_EventScript_Lookout",
+     "label": "Lookout",
+     "note": "The view back over Eleusa's fields, the fort and the sea."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "The maenads' camp is the place to train: fight in the grass on the tiers around it, then walk back to the spring keeper for a free heal."
+    },
+    {
+     "kind": "Hot Tip",
+     "text": "Keep the maenad's Wine for the great altar in the Temple of Dionysus. Offerings at a god's own temple altar earn extra Favor."
+    },
+    {
+     "kind": "Lore",
+     "text": "The summit pine with its top snapped off, and the baby's sandal on the herdsman's cairn at the foot, are both nods to Kithairon's old stories. Check them."
+    }
+   ],
+   "puzzles": [],
+   "spoilers": []
+  },
+  {
+   "id": "route-7",
+   "maps": [
+    "Route7_KroniaGrounds"
+   ],
+   "title": "Route 7: the Kronia Grounds",
+   "kind": "route",
+   "blurb": "The feast field below Thyrsa's south gate, where the Kronia festival is in full swing.",
+   "walkthrough": [
+    "The Kronia is the festival where masters serve their servants, and the grounds are full of tables and free bread. Six trainers mill around the feast, and one of them wears a Titan's helmet.",
+    "Near the north end a baker hands out bread. Talk to her and she heals your team, and the first time she also gives you two Barley Cakes. A man beside her preaches a new kind of fortune. Listen if you like; he wants nothing from you yet.",
+    "Thyrsa's Elektran Gate is straight north."
+   ],
+   "key_npcs": [
+    {
+     "map": "Route7_KroniaGrounds",
+     "script": "Route7_KroniaGrounds_EventScript_Baker",
+     "label": "Baker",
+     "note": "Heals your party every visit. Gives 2 Barley Cakes the first time."
+    },
+    {
+     "map": "Route7_KroniaGrounds",
+     "script": "Route7_KroniaGrounds_EventScript_Kronist",
+     "label": "Kronist",
+     "note": "A preacher of the Kronia. Talk only."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Barley Cakes are offerings. Keep them for the altars, where they earn Favor with the god."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "The baker's heal is right by Thyrsa's gate, so this is a safe place to grind before the Temple of Dionysus. Thespis leans on Grass/Poison types: bring Psychic, Fire or Flying moves."
+    },
+    {
+     "kind": "Lore",
+     "text": "At the Kronia, the old festival of Kronos, the masters wait on their slaves for a day. Listen to what the guests say about their readings."
+    }
+   ],
+   "puzzles": [],
+   "spoilers": [
+    {
+     "title": "Who is feeding the crowd?",
+     "text": "The free bread and the 'better readings' come from the Titans' followers, the Kronists. Several guests on the grounds have taken a new fortune from them, and one Titanborn grunt is among the trainers."
+    }
+   ]
+  },
+  {
+   "id": "thyrsa-city",
+   "maps": [
+    "ThyrsaCity",
+    "ThyrsaCity_Asclepeion",
+    "ThyrsaCity_Agora",
+    "ThyrsaCity_Tavern",
+    "ThyrsaCity_PindarosHouse",
+    "ThyrsaCity_VintnerHouse",
+    "ThyrsaCity_MantoHouse",
+    "ThyrsaCity_EudoraHouse",
+    "ThyrsaCity_SownHouse",
+    "ThyrsaCity_ActorHouse",
+    "ThyrsaCity_MaskWorkshop"
+   ],
+   "title": "Thyrsa City",
+   "kind": "town",
+   "blurb": "Dionysus's hill city of vineyards, masks and a great amphitheater, in the middle of the Dionysia.",
+   "walkthrough": [
+    "You come in through the Elektran Gate in the south. The Asclepeion is just inside on the left by the spring, and the Agora is under the awnings to the right. The gatekeeper gives you the lay of the land: the theater is on the east hill and the Temple of Dionysus is at the very top of the city.",
+    "Alethea and Kleon are waiting near the top of the main street, and they have seats for tonight's play. The amphitheater won't let you in until you win the Mask Laurel, so head up to the temple first.",
+    "Thyrsa is full of houses worth visiting. Pindaros the poet heals you and gives a Laurel Sprig for each new laurel. Chthonia of the Sown Men gives you a Dragon Fang just for listening. Eudora's fig tree hides her son's arm-ring. The tavern has three knucklebones players with prizes, and the vintner lets you tread grapes once a day.",
+    "Once you have the Mask Laurel, go to the amphitheater on the east hill for the Dionysia. After the play, Silenos by the tavern lets you try for the Girdle of Herakles.",
+    "The west gate leads to Route 8 and Lebadeia, which is the way on. The east gate to the Euripus is held by a guard and is closed for now."
+   ],
+   "key_npcs": [
+    {
+     "map": "ThyrsaCity_Asclepeion",
+     "script": "ThyrsaCity_Asclepeion_EventScript_Healer",
+     "label": "Asclepeion healer",
+     "note": "Heals your party. Thyrsa becomes your return point."
+    },
+    {
+     "map": "ThyrsaCity_Asclepeion",
+     "script": "ThyrsaCity_Asclepeion_EventScript_Pithos",
+     "label": "Pithos",
+     "note": "The great storage jar. 'Store & move Pokémon' opens your jars (the first time, it explains how they work); 'Your things' opens your stored items."
+    },
+    {
+     "map": "ThyrsaCity_Agora",
+     "script": "ThyrsaCity_Agora_EventScript_Merchant",
+     "label": "Agora stallkeeper",
+     "note": "Sells medicine, Theseus Balls and offerings."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Gatekeeper",
+     "label": "Gatekeeper",
+     "note": "Directions to the Asclepeion, Agora, theater and temple."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Herald",
+     "label": "Herald",
+     "note": "Points you west along Lake Kopais to Lebadeia, and to Kirrha's trireme."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Beggar",
+     "label": "Blind beggar",
+     "note": "Asks the way to the spring of Dirke. Answer BY THE ASCLEPEION for a Pecha Berry and +1 Favor with Zeus."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Manto",
+     "label": "Manto",
+     "note": "The blind seer on the wall walk. Meet her here to start her crow errand, and she reads the day's omen every visit."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Silenos",
+     "label": "Silenos",
+     "note": "After the Mask Laurel: win two of three contests (knucklebones, riddles, a battle) for the Girdle of Herakles."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Alethea",
+     "label": "Alethea",
+     "note": "Story. She bought a program for the play."
+    },
+    {
+     "map": "ThyrsaCity",
+     "script": "ThyrsaCity_EventScript_Kleon",
+     "label": "Kleon",
+     "note": "Story. He saved you a seat at the front."
+    },
+    {
+     "map": "ThyrsaCity_PindarosHouse",
+     "script": "ThyrsaCity_PindarosHouse_EventScript_Pindaros",
+     "label": "Pindaros",
+     "note": "Heals your party every visit and offers a bed until a time you choose. Gives a Laurel Sprig for each laurel he hasn't heard about yet."
+    },
+    {
+     "map": "ThyrsaCity_SownHouse",
+     "script": "ThyrsaCity_SownHouse_EventScript_Chthonia",
+     "label": "Chthonia",
+     "note": "Gives a Dragon Fang after her story. Her hearth is an altar of Hestia."
+    },
+    {
+     "map": "ThyrsaCity_EudoraHouse",
+     "script": "ThyrsaCity_EudoraHouse_EventScript_TurnedEarth",
+     "label": "Turned earth under the fig",
+     "note": "Dig here, then tell Eudora, and she gives you a Power Bracer."
+    },
+    {
+     "map": "ThyrsaCity_EudoraHouse",
+     "script": "ThyrsaCity_EudoraHouse_EventScript_Eudora",
+     "label": "Eudora",
+     "note": "Gives the Power Bracer once you've dug under her fig."
+    },
+    {
+     "map": "ThyrsaCity_MantoHouse",
+     "script": "ThyrsaCity_MantoHouse_EventScript_Manto",
+     "label": "Manto at home",
+     "note": "After you meet her on the wall, she asks which way the crows fly over the Kronia at dusk. Answer right for a Twisted Spoon."
+    },
+    {
+     "map": "ThyrsaCity_VintnerHouse",
+     "script": "ThyrsaCity_VintnerHouse_EventScript_Staphylos",
+     "label": "Staphylos the vintner",
+     "note": "Once a day: tread 30 steps on the floor for 2 Wine. After the Mask Laurel he gives you a Nugget, once."
+    },
+    {
+     "map": "ThyrsaCity_VintnerHouse",
+     "script": "ThyrsaCity_VintnerHouse_EventScript_Shrine",
+     "label": "Shrine of Dionysus",
+     "note": "A family altar: pray, or pour the god an offering."
+    },
+    {
+     "map": "ThyrsaCity_ActorHouse",
+     "script": "ThyrsaCity_ActorHouse_EventScript_Polos",
+     "label": "Polos the actor",
+     "note": "Show him a Prosomime in your party for a Mystic Water."
+    },
+    {
+     "map": "ThyrsaCity_MaskWorkshop",
+     "script": "ThyrsaCity_MaskWorkshop_EventScript_Euthykles",
+     "label": "Euthykles the mask-maker",
+     "note": "Trades his Prosomime, Pathos, for a Gelasable."
+    },
+    {
+     "map": "ThyrsaCity_Tavern",
+     "script": "ThyrsaCity_Tavern_EventScript_Phaidimos",
+     "label": "Phaidimos",
+     "note": "Knucklebones, a cautious player. First win: 2 Olive Oil."
+    },
+    {
+     "map": "ThyrsaCity_Tavern",
+     "script": "ThyrsaCity_Tavern_EventScript_Glauke",
+     "label": "Glauke",
+     "note": "Knucklebones, a bold player. First win: Wine."
+    },
+    {
+     "map": "ThyrsaCity_Tavern",
+     "script": "ThyrsaCity_Tavern_EventScript_Aristomache",
+     "label": "Aristomache",
+     "note": "Thyrsa's knucklebones champion. First win: Metronome."
+    }
+   ],
+   "shops": [
+    {
+     "where": "Thyrsa Agora",
+     "when": "always",
+     "items": [
+      "ITEM_GREAT_BALL",
+      "ITEM_SUPER_POTION",
+      "ITEM_HYPER_POTION",
+      "ITEM_ANTIDOTE",
+      "ITEM_AWAKENING",
+      "ITEM_FULL_HEAL",
+      "ITEM_REVIVE",
+      "ITEM_SUPER_REPEL",
+      "ITEM_OLIVE_OIL",
+      "ITEM_WINE"
+     ]
+    }
+   ],
+   "statics": [
+    {
+     "species": "SPECIES_PROSOMIME",
+     "level": null,
+     "where": "Euthykles's mask workshop",
+     "condition": "In-game trade: his Prosomime, Pathos, for your Gelasable."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Buy Antidotes and a Full Heal or two before the temple. Thespis's whole team carries poison moves, including Toxic."
+    },
+    {
+     "kind": "Hot Tip",
+     "text": "Pindaros is a free heal with a bed, and every new laurel earns you another Laurel Sprig. Visit him after each Hierophant."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Manto's crows only fly in the evening or at night. Stand in the Elektran Gate at the south end of the city after dusk to see them."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "A Nugget sells, but Erigone has an idea: let an Onotis hold it and see what happens."
+    },
+    {
+     "kind": "Lore",
+     "text": "Kadmos founded Thyrsa where a cow lay down, killed a dragon and sowed its teeth. The five men who survived started Thyrsa's oldest families. Chthonia is one of them."
+    }
+   ],
+   "puzzles": [
+    {
+     "title": "Silenos's riddles",
+     "hint": "Three riddles, one try each. You only need to get one right. Think about light, water and words.",
+     "solution": "'I follow you in sunlight, but leave you in the dark' is A SHADOW. 'I run without feet, and have a mouth but never speak' is A RIVER. 'What can you break without laying a hand on it?' is A PROMISE. One right answer wins the riddle contest."
+    },
+    {
+     "title": "Manto's crows",
+     "hint": "Watch the crows yourself at the Elektran Gate after dusk, then tell her exactly what they did last.",
+     "solution": "The crows circle the feast once and then fly SOUTH. Tell Manto SOUTH and she gives you Teiresias's Twisted Spoon."
+    },
+    {
+     "title": "The blind beggar",
+     "hint": "The spring of Dirke is near the healers.",
+     "solution": "Answer BY THE ASCLEPEION. He gives you a Pecha Berry and Zeus's Favor rises by 1."
+    }
+   ],
+   "spoilers": [
+    {
+     "title": "The Girdle of Herakles",
+     "text": "Silenos's prize is the Girdle of Herakles, a relic. It lets you push fallen column drums out of your way, which opens paths in older areas."
+    }
+   ]
+  },
+  {
+   "id": "temple-of-dionysus",
+   "maps": [
+    "ThyrsaCity_TempleOfDionysus"
+   ],
+   "title": "Temple of Dionysus",
+   "kind": "temple",
+   "blurb": "The Three-Act Play, \"The Vintner's Gift\": a backstage temple where you make three entrances in the right mask through the right painted door.",
+   "walkthrough": [
+    "You start in the green room at the bottom of the temple. The mask rack, the script on its stand, the rules chalked on a slate and the costume pegs are all here, and so is the prompter. Read everything: nothing tells you the answer outright, but the script, the paintings and the actors' lines add up to it.",
+    "Three painted scenery walls stand between you and the roof, one for each act. Each wall has three doors, left, middle and right, and each door has a painted panel beside it. Choose a mask from the rack, then walk through the door that fits the act.",
+    "Act I is practice: a wrong try costs nothing, because the prompter stops you and tells you what was wrong. From Act II on there's no safety net. The wrong door drops you through a trapdoor back into the green room. The right door in the wrong mask means a battle with the chorus, every time.",
+    "Three acolytes stand between the walls, one for each part: Comic, Tragic and Satyr. Battle them for experience; after the battle each one drops a hint about the next act. The koryphaios, who leads the chorus, also has a line worth hearing.",
+    "After the third act, take the crane (the mechane) up to the roof. Thespis waits beside the altar. Beat him for the Mask Laurel, TM06 Toxic and a jar of Wine, then he sends you to the amphitheater for tonight's play. The crane will take you back down to the stage whenever you like."
+   ],
+   "key_npcs": [
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Masks",
+     "label": "Mask rack",
+     "note": "Choose COMEDY, TRAGEDY or SATYR. You can't walk on barefaced."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Script",
+     "label": "The script",
+     "note": "The play's three acts. Act III's page has been torn away."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rules",
+     "label": "The slate",
+     "note": "The three rules of the stage."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Costumes",
+     "label": "Costume pegs",
+     "note": "Which part wears which face."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Prompter",
+     "label": "Prompter",
+     "note": "Gives a hint for whichever act you're on."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Koryphaios",
+     "label": "Koryphaios",
+     "note": "The chorus leader. Talk only."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_FrescoLast",
+     "label": "Festival fresco",
+     "note": "A clue for Act III."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_FrescoFollow",
+     "label": "Goat-men fresco",
+     "note": "A second clue for Act III."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_MechaneUp",
+     "label": "The crane (mechane)",
+     "note": "After the third act it lifts you to the roof."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar",
+     "label": "Altar of Dionysus",
+     "note": "The temple's great altar: pray and make offerings for Favor."
+    },
+    {
+     "map": "ThyrsaCity_TempleOfDionysus",
+     "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thespis",
+     "label": "Thespis",
+     "note": "The Hierophant. Battles you once you've played all three acts."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Pour your Wine on the roof altar. Thespis gives you one jar and the maenad on Kithairon gives you another, and a god's great temple altar is worth extra Favor."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "Lost? The prompter in the green room always has a hint for the act you're on, and talking costs nothing."
+    },
+    {
+     "kind": "Pro Tip",
+     "text": "A chorus battle for the wrong mask happens every time you try it, so it's a way to grind, but heal first: there's no Asclepeion inside."
+    }
+   ],
+   "puzzles": [
+    {
+     "title": "The Vintner's Gift",
+     "hint": "Rule one: come on through the door painted with where your character has just been. Rule two: wear the face your part would wear. Act I's stranger has just stepped off a ship, laughing. In Act II the shepherds blame the vintner, who went in to bed. Act III is torn out, but the frescoes tell you what always follows a tragedy, and whom the goat-men follow.",
+     "solution": "Act I: wear COMEDY and use the RIGHT door (the ship at the quay). Act II: wear TRAGEDY and use the MIDDLE door (the house with a lamp lit inside). Act III: wear SATYR and use the RIGHT door again, because the goat-men follow their god, the stranger, in from the harbor. Then ride the crane to the roof."
+    }
+   ],
+   "spoilers": [],
+   "hierophant": {
+    "trainer": "TRAINER_ICHOR_THESPIS",
+    "name": "Thespis",
+    "title": "the Masked Player",
+    "type": "Poison",
+    "laurel": "Mask Laurel",
+    "rewards": [
+     "ITEM_TM06",
+     "ITEM_WINE"
+    ],
+    "unlocks": "Entry to the amphitheater for the Dionysia, Silenos's contests for the Girdle of Herakles, and Staphylos's Nugget.",
+    "before": "Play all three acts of The Vintner's Gift (see the puzzle), then ride the crane up to the roof.",
+    "strategy": [
+     "Thespis opens with Prosomime, a Psychic/Poison type that uses Hypnosis and Encore. Lead with something that hits hard right away, and switch out if it locks you into a weak move with Encore.",
+     "Raknit uses Protect and String Shot to stall. Ampelix and his ace Thyrsivy are Grass/Poison: they drain you with Giga Drain and Leech Seed, then poison with Toxic and follow up with Venoshock, which hits harder on poisoned targets. Psychic, Fire, Flying and Ice moves hit both of them for super-effective damage.",
+     "Carry Antidotes or a Full Heal, and don't let a badly poisoned Pokémon sit in. A Steel-type ally is immune to his poison moves.",
+     "On Mortal his team is three levels lower (27 to 29). On Spartan every Pokémon holds a Sitrus Berry and has trained stats and a smart AI, so plan to knock out the Grass/Poison pair quickly before Toxic wears you down."
+    ]
+   }
+  },
+  {
+   "id": "amphitheater",
+   "maps": [
+    "ThyrsaCity_Amphitheater"
+   ],
+   "title": "The Amphitheater: the Dionysia",
+   "kind": "dungeon",
+   "blurb": "Thyrsa's great theater, where tonight's tragedy is called The Unwoven.",
+   "walkthrough": [
+    "With the Mask Laurel in your bag, climb the east hill to the amphitheater and walk down the aisle. Take your seat and the tragedy begins.",
+    "When the play is over something is very wrong: nobody moves. Talk to Thespis at the left of the seats. He tells you the play needs three entrances, in order, and gives you the goat mask if you aren't wearing one.",
+    "The stage works like his temple: a mask rack at the lower left, a program at the lower right, and three doors across the back, painted like the temple's. Make the three entrances Thespis describes, in order. One wrong cue and the trance closes again, and you start over from the first entrance.",
+    "Alethea has something to show you in the program, and Kleon says goodbye: he's heading for Arkadia. Then take the west gate out of the city for Route 8."
+   ],
+   "key_npcs": [
+    {
+     "map": "ThyrsaCity_Amphitheater",
+     "script": "ThyrsaCity_Amphitheater_EventScript_Thespis",
+     "label": "Thespis",
+     "note": "After the play, describes the three entrances and hands you the goat mask."
+    },
+    {
+     "map": "ThyrsaCity_Amphitheater",
+     "script": "ThyrsaCity_Amphitheater_EventScript_Masks",
+     "label": "Mask rack",
+     "note": "Choose a mask (after the play)."
+    },
+    {
+     "map": "ThyrsaCity_Amphitheater",
+     "script": "ThyrsaCity_Amphitheater_EventScript_Program",
+     "label": "Program",
+     "note": "The tragedy's program. Check who wrote it."
+    },
+    {
+     "map": "ThyrsaCity_Amphitheater",
+     "script": "ThyrsaCity_Amphitheater_EventScript_DoorLeft",
+     "label": "Left door",
+     "note": "Painted with vines on a hillside."
+    },
+    {
+     "map": "ThyrsaCity_Amphitheater",
+     "script": "ThyrsaCity_Amphitheater_EventScript_DoorMiddle",
+     "label": "Middle door",
+     "note": "Painted with a house, a lamp lit inside."
+    },
+    {
+     "map": "ThyrsaCity_Amphitheater",
+     "script": "ThyrsaCity_Amphitheater_EventScript_DoorRight",
+     "label": "Right door",
+     "note": "Painted with a ship at a quay."
+    }
+   ],
+   "tips": [
+    {
+     "kind": "Hot Tip",
+     "text": "Read the painted panels beside each door. Thespis never names a door; the paintings and his three descriptions tell you which is which."
+    }
+   ],
+   "puzzles": [
+    {
+     "title": "Breaking the tragedy",
+     "hint": "Thespis asks for a fool drunk in the vineyards since dawn, then someone from the golden king's own house to mourn him, then the goat-men. Match each to a painted door and a face.",
+     "solution": "First wear COMEDY and use the LEFT door (the vineyard). Then wear TRAGEDY and use the MIDDLE door (the house). Last, wear SATYR and use the RIGHT door (the ship), the way the goat-men always come in behind their god. The goat eats the prophecy and the audience wakes."
+    }
+   ],
+   "spoilers": [
+    {
+     "title": "The play is about you",
+     "text": "The tragedy tells the story of a bee-woman who stole a thread from the three sisters, and a child with no measure. The actor playing the child wears your hat. It is your own story, and it holds the whole theater in a trance."
+    },
+    {
+     "title": "The hook on the program",
+     "text": "The program has no author's name, only a little hook. Alethea has seen the same mark before, on the quay receipts and a clay seal. Someone is writing you a life."
+    }
+   ]
+  }
+ ]
+}

@@ -29,9 +29,18 @@ mapscripts EmporionHarbor_MapScripts {
             setvar(VAR_TEMP_1, 1)
         }
     }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_TEMP_1, 1: EmporionHarbor_EventScript_ArrivalFaceQuay
+    ]
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_1, 1: EmporionHarbor_EventScript_Arrival
     ]
+}
+
+// Before the fade-in: off the gangplank facing the quay, not the water (a warp
+// always arrives facing south).
+script EmporionHarbor_EventScript_ArrivalFaceQuay {
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
 }
 
 text EmporionHarbor_Text_NameKleon { "KLEON" }

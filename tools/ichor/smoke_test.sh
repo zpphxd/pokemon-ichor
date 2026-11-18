@@ -26,6 +26,10 @@ fi
 /usr/bin/python3 tools/ichor/maps/elaia.py --verify >/dev/null \
   || { echo "SMOKE FAIL: Elaia's seam rows (tools/ichor/maps/elaia.py --verify)"; exit 1; }
 
+# Open water beside reachable land must take a rod, and a map with it needs a fishing table.
+/usr/bin/python3 tools/ichor/fishing_audit.py \
+  || { echo "SMOKE FAIL: unfishable water (tools/ichor/fishing_audit.py)"; exit 1; }
+
 # Addresses and constants the Lua reads the game's state with.
 tools/ichor/tests/elaia_symbols.sh "${ROM%.gba}.elf" build/smoke/symbols.lua \
   || { echo "SMOKE FAIL: could not read symbols from ${ROM%.gba}.elf"; exit 1; }

@@ -601,7 +601,7 @@ void AnimTask_BlendColorCycleExclude(u8 taskId)
     }
 
     if (cmd->unk0 == 1)
-        selectedPalettes |= 0xE;
+        selectedPalettes |= BATTLE_BG_PALETTES_MASK; // Ichor: palettes 1-4, was 1-3
 
     gTasks[taskId].tPalSelectorHi = selectedPalettes >> 16;
     gTasks[taskId].tPalSelectorLo = selectedPalettes & 0xFF;

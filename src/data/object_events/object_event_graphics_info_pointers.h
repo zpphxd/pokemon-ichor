@@ -470,6 +470,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGigas;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCadet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCadetF;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorBrasidas;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAriadne;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSarpedon;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -933,6 +935,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_CADET] = &gObjectEventGraphicsInfo_IchorCadet,
     [OBJ_EVENT_GFX_ICHOR_CADET_F] = &gObjectEventGraphicsInfo_IchorCadetF,
     [OBJ_EVENT_GFX_ICHOR_BRASIDAS] = &gObjectEventGraphicsInfo_IchorBrasidas,
+    [OBJ_EVENT_GFX_ICHOR_SARPEDON] = &gObjectEventGraphicsInfo_IchorSarpedon,
+    [OBJ_EVENT_GFX_ICHOR_ARIADNE] = &gObjectEventGraphicsInfo_IchorAriadne,
     // End of Ichor object events
 };
 

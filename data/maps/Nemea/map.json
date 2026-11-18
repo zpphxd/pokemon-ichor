@@ -29,8 +29,8 @@
     {
       "local_id": "LOCALID_NEMEA_HEALER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
-      "x": 18,
-      "y": 10,
+      "x": 12,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -43,8 +43,8 @@
     {
       "local_id": "LOCALID_NEMEA_MERCHANT",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
-      "x": 19,
-      "y": 18,
+      "x": 24,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -57,8 +57,8 @@
     {
       "local_id": "LOCALID_NEMEA_GUIDE",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
-      "x": 6,
-      "y": 13,
+      "x": 9,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -67,34 +67,199 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Nemea_EventScript_Guide",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_NEMEA_RUNNER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 30,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Nemea_EventScript_Runner",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_NEMEA_DISCUS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
+      "x": 37,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Nemea_EventScript_Discus",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_NEMEA_KEEPER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "x": 17,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Nemea_EventScript_Keeper",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 25,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_NEMEA_TRACK"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 36,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_BIG_PEARL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_NEMEA_ISLET"
+    },
+    {
+      "local_id": "LOCALID_NEMEA_LIONBOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
+      "x": 36,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorGreatBoulder",
+      "flag": "FLAG_ICHOR_NEMEA_LION_BOULDER"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_NEMEA_PALAESTRA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 3,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_NEMEA_MOLORCHOS_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
-      "x": 14,
-      "y": 14,
+      "x": 16,
+      "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Nemea_EventScript_Sign"
     },
     {
       "type": "sign",
-      "x": 12,
-      "y": 6,
+      "x": 22,
+      "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Nemea_EventScript_Zeus"
     },
     {
       "type": "sign",
-      "x": 6,
-      "y": 26,
+      "x": 34,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Nemea_EventScript_LionCave"
+    },
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Nemea_EventScript_Mound"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Nemea_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Nemea_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 40,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Nemea_EventScript_HighMouth"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Nemea_EventScript_Track"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 29,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Nemea_EventScript_Tunnel"
+    },
+    {
+      "type": "hidden_item",
+      "x": 28,
+      "y": 4,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_NEMEA_MOUND",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 29,
+      "y": 8,
+      "elevation": 3,
+      "item": "ITEM_NUGGET",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_NEMEA_SPRING",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

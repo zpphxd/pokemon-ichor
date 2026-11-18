@@ -19,7 +19,7 @@
       "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_THESPIS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
       "x": 12,
-      "y": 3,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -30,26 +30,40 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_COMIC",
+      "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_SATYRACTOR",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
-      "x": 6,
-      "y": 18,
+      "x": 11,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_SatyrActor",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_KORYPHAIOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACTOR",
+      "x": 4,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Comic",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Koryphaios",
       "flag": "0"
     },
     {
       "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_TRAGIC",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
-      "x": 18,
-      "y": 18,
+      "x": 20,
+      "y": 20,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -58,24 +72,45 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_SATYRACTOR",
+      "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_COMIC",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
-      "x": 12,
-      "y": 12,
+      "x": 18,
+      "y": 27,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Comic",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_THYRSA_CITY_TEMPLE_OF_DIONYSUS_PROMPTER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "x": 20,
+      "y": 36,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_SatyrActor",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Prompter",
       "flag": "0"
     }
   ],
   "warp_events": [
     {
       "x": 12,
-      "y": 26,
+      "y": 40,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 13,
+      "y": 40,
       "elevation": 0,
       "dest_map": "MAP_THYRSA_CITY",
       "dest_warp_id": "2"
@@ -85,11 +120,19 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 6,
-      "y": 8,
+      "x": 15,
+      "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Comedy"
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_MechaneDown"
     },
     {
       "type": "sign",
@@ -97,39 +140,215 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Tragedy"
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_MechaneUp"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door1L"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door1M"
     },
     {
       "type": "sign",
       "x": 18,
-      "y": 8,
+      "y": 32,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Satyr"
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door1R"
     },
     {
       "type": "sign",
-      "x": 4,
-      "y": 21,
+      "x": 7,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelLeft"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelMiddle"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelRight"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door2L"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door2M"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door2R"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelLeft"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelMiddle"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelRight"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door3L"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door3M"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door3R"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelLeft"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelMiddle"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PanelRight"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_FrescoLast"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_FrescoFollow"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 32,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ThyrsaCity_TempleOfDionysus_EventScript_Masks"
     },
     {
       "type": "sign",
-      "x": 20,
-      "y": 21,
+      "x": 3,
+      "y": 32,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Program"
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Masks"
     },
     {
       "type": "sign",
-      "x": 18,
-      "y": 4,
+      "x": 4,
+      "y": 32,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Masks"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 32,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rules"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 33,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Costumes"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 35,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Script"
     }
   ]
 }

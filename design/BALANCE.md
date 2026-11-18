@@ -32,7 +32,8 @@ The single source for levels across the whole game. Every script, encounter tabl
 - **No early evolved forms in the wild** (director's ruling, 2026-11-14, from Phase 2's open question 22). A wild Pokémon never appears in an evolved form earlier than its evolution level allows. A few early evolved forms may appear only as one-off story rewards: augury statics such as Harpelle at 17 and Korantha or Persenyx at 22, and trainer teams such as Aiakides's Hoplomex on Aegina.
 - **Evolution timing:** the Aethos dex sets evolution levels so the main fully-evolved forms arrive around Laurels 4–6. The dex team owns this; keep this curve and their levels in step.
 - **Implemented return loop:** Route 13 uses wild 30–32 and trainers 33–35;
-  Route 14 uses wild 31–33 and trainers 34–36. These begin the Astyra stage
+  Route 14 uses wild 31–33 and trainers 34–36. The rebuild (design/maps/Nemea.md)
+  adds Nemea's wild 31–33, the Tretos's 32–34, and four trainers at 35–37. These begin the Astyra stage
   after the Moon Laurel. Their evolved encounters respect evolution timing;
   assisted native travel is not natural-level balance approval.
 - **Implemented capital approach:** Route 15 uses wild 32–34 and trainers 35–37;

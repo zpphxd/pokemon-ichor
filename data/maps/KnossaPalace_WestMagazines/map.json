@@ -1,0 +1,104 @@
+{
+  "id": "MAP_KNOSSA_PALACE_WEST_MAGAZINES",
+  "name": "KnossaPalace_WestMagazines",
+  "layout": "LAYOUT_KNOSSA_PALACE_WEST_MAGAZINES",
+  "music": "MUS_ICHOR_TITAN",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_PALACE_OF_MINOS",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_WestMagazines_EventScript_Grunt1",
+      "flag": "FLAG_ICHOR_HIDE_PALACE_GRUNTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 10,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_WestMagazines_EventScript_Grunt2",
+      "flag": "FLAG_ICHOR_HIDE_PALACE_GRUNTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 9,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_WestMagazines_EventScript_Grunt3",
+      "flag": "FLAG_ICHOR_HIDE_PALACE_GRUNTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 3,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KnossaPalace_WestMagazines_EventScript_Doubter",
+      "flag": "FLAG_ICHOR_HIDE_PALACE_GRUNTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 11,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_PALACE_HYPER_POTION"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_KNOSSA_PALACE",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KnossaPalace_WestMagazines_EventScript_OpenPithos"
+    }
+  ]
+}

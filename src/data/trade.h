@@ -1415,6 +1415,23 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_KARKITOX,
+    // Ichor: Amnisos (SCRIPT.md Part 2, Polypos's hut). The script casts a second
+    // Telkanvil, but Skandeia already trades one, so Polypos's sea-smith is a crab.
+    [INGAME_TRADE_ICHOR_TELCHIS] =
+    {
+        .nickname = _("TELCHIS"),
+        .species = SPECIES_KARKITOX,
+        .ivs = {20, 26, 24, 12, 18, 20},
+        .abilityNum = 0,
+        .otId = 61842,
+        .conditions = {5, 20, 5, 5, 30},
+        .personality = 0x91,
+        .heldItem = ITEM_HARD_STONE,
+        .mailNum = -1,
+        .otName = _("POLYPOS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_APHRELL,
     },
 };
 

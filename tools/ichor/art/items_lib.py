@@ -335,6 +335,31 @@ def read_jasc(path):
     return [tuple(int(v) for v in vals[i * 3:i * 3 + 3]) for i in range(16)]
 
 
+def centre_offset(arr):
+    """How far the opaque bounding box's centre sits from the frame's centre,
+    in pixels (dx, dy); positive is right and down."""
+    ys, xs = np.nonzero(arr)
+    h, w = arr.shape
+    return (xs.min() + xs.max() + 1) / 2 - w / 2, (ys.min() + ys.max() + 1) / 2 - h / 2
+
+
+def centred(arr):
+    """The icon moved whole pixels so its opaque bounding box is centred in
+    the frame to within half a pixel. The bag and shop show every icon in the
+    same square plate, so a pic drawn low or to one side looks off-centre
+    there, however it was meant to sit."""
+    dx, dy = centre_offset(arr)
+    sx, sy = -int(dx), -int(dy)          # toward zero: what is left is <= 0.5
+    if sx == 0 and sy == 0:
+        return arr
+    ys, xs = np.nonzero(arr)
+    h, w = arr.shape
+    assert 0 <= xs.min() + sx and xs.max() + sx < w and 0 <= ys.min() + sy and ys.max() + sy < h
+    out = np.zeros_like(arr)
+    out[ys + sy, xs + sx] = arr[ys, xs]
+    return out
+
+
 def save_indexed(arr, colors, path):
     im = Image.fromarray(arr.astype(np.uint8), "P")
     flat = [v for c in colors for v in c]

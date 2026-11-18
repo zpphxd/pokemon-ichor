@@ -8349,6 +8349,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAlfred = {
     .images = sPicTable_IchorAlfred,
 };
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRhea = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAriadne = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -8369,6 +8370,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRhea = {
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorRheaUnmasked = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .images = sPicTable_IchorAriadne,
+};
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSarpedon = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_FOLK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
@@ -8474,6 +8480,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorBrasidas = {
     .images = sPicTable_IchorBrasidas,
 };
 
+    .images = sPicTable_IchorSarpedon,
+};
 // End of Ichor object events
 
 // Ichor: items lying in the world are small clay jars sealed with beeswax,

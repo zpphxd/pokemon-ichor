@@ -1,0 +1,339 @@
+// Amnisos, the harbor of Knossa (design/maps/KnossaAmnisos.md; SCRIPT.md beats
+// III-3A and III-4, Part 2). Map: tools/ichor/maps/knossa_amnisos.py.
+//
+// VAR_TEMP_1 == 1  the arrival at dawn (beat III-3A): Alethea on the quay
+// VAR_TEMP_2 == 1  the evening after the raid (beat III-4): Daphne's letter
+//
+// The Kythera chapter's departure (KytheraSkandeia, beat III-1I) sets
+// FLAG_ICHOR_SAILED_FOR_KNOSSA and warps to (16,7), beside Nausikles's gangplank.
+// III-4 ends this chapter: FLAG_ICHOR_SAILED_FOR_GYTHEION, VAR_ICHOR_KNOSSA = 20 and
+// a warp to the Euploia's deck, where the Lakonia chapter's beat III-5A begins.
+
+mapscripts KnossaAmnisos_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_1, 0)
+        setvar(VAR_TEMP_2, 0)
+        if (flag(FLAG_ICHOR_SAILED_FOR_KNOSSA) && !flag(FLAG_ICHOR_ARRIVED_KNOSSA)) {
+            setvar(VAR_TEMP_1, 1)
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY)
+        } elif (var(VAR_ICHOR_ACT3) >= 6 && !flag(FLAG_ICHOR_DAPHNE_LETTER_KNOSSA)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY)
+            gettimeofday
+            if (var(VAR_0x8000) == TIME_EVENING || var(VAR_0x8000) == TIME_NIGHT) {
+                setvar(VAR_TEMP_2, 1)
+            }
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY)
+        }
+        if (flag(FLAG_ICHOR_ARRIVED_KNOSSA)) {
+            setflag(FLAG_ICHOR_VISITED_AMNISOS)
+        }
+        if (var(VAR_ICHOR_KNOSSA) >= 18) {
+            setflag(FLAG_ICHOR_HIDE_AMNISOS_VETERAN)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_AMNISOS_VETERAN)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: KnossaAmnisos_EventScript_Arrival
+        VAR_TEMP_2, 1: KnossaAmnisos_EventScript_DaphnesLetter
+    ]
+}
+
+text KnossaAmnisos_Name_Alethea { "ALETHEA" }
+text KnossaAmnisos_Name_Nausikles { "NAUSIKLES" }
+text KnossaAmnisos_Name_Titanborn { "TITANBORN" }
+text KnossaAmnisos_Name_Sailor { "SAILOR" }
+text KnossaAmnisos_Name_Girl { "GIRL" }
+text KnossaAmnisos_Name_OldWoman { "OLD WOMAN" }
+text KnossaAmnisos_Name_Gennaia { "GENNAIA" }
+text KnossaAmnisos_Name_Kid { "KID" }
+text KnossaAmnisos_Name_Mender { "NET-MENDER" }
+text KnossaAmnisos_Name_Saffron { "SAFFRON GIRL" }
+
+// ---------------------------------------------------------------------------
+// Beat III-3A: Amnisos at dawn, and the repairs
+// ---------------------------------------------------------------------------
+
+script KnossaAmnisos_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    // Every Knossa scene object starts hidden until its beat shows it
+    // (the court, the stair and the Megaron set their own on entry).
+    setflag(FLAG_ICHOR_HIDE_KLEON_KNOSSA)
+    setflag(FLAG_ICHOR_HIDE_ASTERION_COURT)
+    setflag(FLAG_ICHOR_HIDE_ARIADNE_COURT)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_COURT)
+    playse(SE_M_FLY)
+    applymovement(LOCALID_AMNISOS_ALETHEA, KnossaAmnisos_Movement_AletheaWaves)
+    waitmovement(0)
+    applymovement(LOCALID_AMNISOS_ALETHEA, KnossaAmnisos_Movement_AletheaToPlayer)
+    applymovement(OBJ_EVENT_ID_PLAYER, KnossaAmnisos_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(KnossaAmnisos_Name_Alethea)
+    msgbox(format("There you are! I've been on this quay since the bees woke up.\p"
+                  "I came over on a honey boat. Two days of bees. Never again.\p"
+                  "Daphne sent me ahead with these. Tracings. Every bull on every pot."))
+    closemessage
+    playse(SE_RG_BAG_POCKET)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("She pats her satchel. It clinks."))
+    setspeaker(KnossaAmnisos_Name_Alethea)
+    msgbox(format("Daphne thinks the Titans' last stop is here. So do I.\p"
+                  "Truthfully, so does everyone."))
+    closemessage
+    applymovement(LOCALID_AMNISOS_ALETHEA, KnossaAmnisos_Movement_FaceRight)
+    waitmovement(0)
+    msgbox(format("Four of their ships. They came in the night with no lights.\p"
+                  "Ask anyone about the palace and they say it's “closed for repairs.”\p"
+                  "The repairs wear bronze helmets."))
+    applymovement(LOCALID_AMNISOS_ALETHEA, KnossaAmnisos_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(format("I'm staying up top. Frescoes, the Bronze Heel, anything with writing on.\p"
+                  "You go and be brave somewhere dark. You're better at it than me.\p"
+                  "The palace is south, up the Bull Road. Mind the herd."))
+    closemessage
+    applymovement(LOCALID_AMNISOS_ALETHEA, KnossaAmnisos_Movement_AletheaToAgora)
+    waitmovement(0)
+    removeobject(LOCALID_AMNISOS_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY)
+    setvar(VAR_ICHOR_ACT3, 5)
+    setvar(VAR_ICHOR_KNOSSA, 1)
+    setflag(FLAG_ICHOR_ARRIVED_KNOSSA)
+    setflag(FLAG_ICHOR_VISITED_AMNISOS)
+    setrespawn(HEAL_LOCATION_KNOSSA_AMNISOS)
+    releaseall
+}
+
+movement KnossaAmnisos_Movement_AletheaWaves { jump_in_place_left jump_in_place_left }
+movement KnossaAmnisos_Movement_AletheaToPlayer { walk_left walk_left face_up }
+movement KnossaAmnisos_Movement_AletheaToAgora { walk_down walk_left walk_left walk_down * 4 }
+movement KnossaAmnisos_Movement_FaceDown { face_down }
+movement KnossaAmnisos_Movement_FaceUp { face_up }
+movement KnossaAmnisos_Movement_FaceRight { face_right }
+
+script KnossaAmnisos_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Alethea)
+    if (var(VAR_ICHOR_ACT3) >= 6) {
+        msgbox(format("The wind comes up in the evening, the captain says.\p"
+                      "I'm not going anywhere till it does. Truthfully, I can't sit still."))
+    } else {
+        msgbox(format("Four ships, no lights. Go on. I'll be up top with the frescoes."))
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-4: Amnisos's quay, evening: Daphne's letter
+// ---------------------------------------------------------------------------
+
+script KnossaAmnisos_EventScript_DaphnesLetter {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    playse(SE_M_WING_ATTACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A gull drops onto the bollard beside Alethea. A small tube is tied to its leg."))
+    setspeaker(KnossaAmnisos_Name_Alethea)
+    msgbox(format("That was fast. She must have written back the minute she read it.\p"
+                  "It's addressed to both of us. You read it. I can't."))
+    closemessage
+    msgbox(format("“Alethea. {PLAYER}. Your gull found me at Elpis's bedside.”"), MSGBOX_SIGN)
+    msgbox(format("“I know.”"), MSGBOX_SIGN)
+    msgbox(format("“I'm staying with Elpis. Someone should.”"), MSGBOX_SIGN)
+    msgbox(format("“She thinks her papa's gone to buy her a real bull.”"), MSGBOX_SIGN)
+    msgbox(format("“She's worse. She sleeps most of the day now. She still hums.”"), MSGBOX_SIGN)
+    msgbox(format("“I sent him that book. I'd send it again, for a sick child.”"), MSGBOX_SIGN)
+    msgbox(format("“That's the worst of it.”"), MSGBOX_SIGN)
+    msgbox(format("“I won't tell her. I'm a coward about one thing in my life, and it's this.”"), MSGBOX_SIGN)
+    msgbox(format("“Go and find your mother. Then come and tell me I was wrong about something.”"), MSGBOX_SIGN)
+    msgbox(format("“I would love to be wrong. -D.”"), MSGBOX_SIGN)
+    playse(SE_M_SURF)
+    delay(60)
+    setspeaker(KnossaAmnisos_Name_Alethea)
+    msgbox(format("She signed it with a D. She never does. She always writes her whole name.\p"
+                  "With a little laurel leaf on the end. She's very vain about the leaf.\p"
+                  "…Come on. Lakonia."))
+    closemessage
+    applymovement(LOCALID_AMNISOS_ALETHEA, KnossaAmnisos_Movement_AletheaToPlank)
+    waitmovement(0)
+    removeobject(LOCALID_AMNISOS_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY)
+    setflag(FLAG_ICHOR_DAPHNE_LETTER_KNOSSA)
+    releaseall
+    goto(KnossaAmnisos_EventScript_NausiklesGytheion)
+}
+
+movement KnossaAmnisos_Movement_AletheaToPlank { walk_up face_up }
+
+script KnossaAmnisos_EventScript_NausiklesGytheion {
+    lockall
+    setspeaker(KnossaAmnisos_Name_Nausikles)
+    msgbox(format("Gytheion, on the evening wind. Last call. Coming?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Not long, then. This wind won't wait, and neither will that girl."))
+        releaseall
+        end
+    }
+    msgbox(format("Good. The Lakonians won't say hello. Don't take it personally."))
+    closemessage
+    setflag(FLAG_ICHOR_SAILED_FOR_GYTHEION)
+    setvar(VAR_ICHOR_KNOSSA, 20)
+    fadescreen(FADE_TO_BLACK)
+    warpsilent(MAP_TRIREME_EUPLOIA_DECK, 13, 5)
+    waitstate
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Nausikles and the Euploia
+// ---------------------------------------------------------------------------
+
+script KnossaAmnisos_EventScript_Nausikles {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Nausikles)
+    if (flag(FLAG_ICHOR_DAPHNE_LETTER_KNOSSA) && !flag(FLAG_ICHOR_SAILED_FOR_GYTHEION)) {
+        release
+        goto(KnossaAmnisos_EventScript_NausiklesGytheion)
+    }
+    if (var(VAR_ICHOR_ACT3) >= 6 && !flag(FLAG_ICHOR_SAILED_FOR_GYTHEION)) {
+        msgbox(format("Gytheion's on the evening wind. Lakonia after that. Cheerful place.\p"
+                      "Wind's not up yet. This evening.\p"
+                      "Aithon up the hill will put you to bed till dusk, if you ask nicely."))
+        release
+        end
+    }
+    if (var(VAR_ICHOR_ACT3) < 6) {
+        msgbox(format("We'll be here till you're done. Whatever it is. Don't tell me.\p"
+                      "I never ask passengers what they're doing. It's bad for business."))
+    }
+    msgbox(format("Run you back to Skandeia? Half a day, if the wind's kind."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Suit yourself. I'll be here, mending things."))
+        release
+        end
+    }
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    warpsilent(MAP_KYTHERA_SKANDEIA, 26, 11)
+    waitstate
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The quay and the town (SCRIPT.md Part 2, Amnisos)
+// ---------------------------------------------------------------------------
+
+script KnossaAmnisos_EventScript_Veteran {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Titanborn)
+    msgbox(format("I've known how I die since I was sixteen. Forty years of knowing.\p"
+                  "I'm tired of knowing. The master says soon nobody will have to.\p"
+                  "I'm not fighting you, child. I'm watching the boats. That's my whole job."))
+    release
+}
+
+script KnossaAmnisos_EventScript_Sailor {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Sailor)
+    if (var(VAR_ICHOR_KNOSSA) >= 18) {
+        msgbox(format("They left as quiet as they came. Somebody lit a fire under them, I'd say."))
+    } else {
+        msgbox(format("Four Titan ships in the night, and every one of them sat low in the water.\p"
+                      "Heavy cargo. Shovels, they said. Nobody sails shovels at night."))
+    }
+    release
+}
+
+script KnossaAmnisos_EventScript_Girl {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Girl)
+    msgbox(format("This is Bombos. He's a drone. Drones don't do anything.\p"
+                  "Mama says that's not true. They do one thing. Then they're done.\p"
+                  "I don't know what the thing is. She won't tell me.\p"
+                  "You can climb the ladder. Mind the hives. Bombos minds them for me."))
+    release
+}
+
+script KnossaAmnisos_EventScript_Bombos {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Bombos the Melibee hovers, humming, doing nothing in particular."))
+    release
+}
+
+script KnossaAmnisos_EventScript_OldWoman {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_OldWoman)
+    msgbox(format("Up there's Eileithyia's cave. She brings the babies.\p"
+                  "I climbed it for all six of mine. Took me longer every time.\p"
+                  "Gennaia keeps it now. Bring her something sweet. She's earned it."))
+    release
+}
+
+script KnossaAmnisos_EventScript_Gennaia {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Gennaia)
+    msgbox(format("Not today, dear. There's a mother inside, and she's taking her time.\p"
+                  "Come back when the bull under the palace is quiet. It upsets them."))
+    release
+}
+
+script KnossaAmnisos_EventScript_Kid {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Kid)
+    if (var(VAR_ICHOR_KNOSSA) >= 17) {
+        msgbox(format("It stopped! The thing under the palace. Mama cried. I don't know why."))
+    } else {
+        msgbox(format("At the new moon you can hear it under the palace. Like a cow, but sad."))
+    }
+    release
+}
+
+script KnossaAmnisos_EventScript_NetMender {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Mender)
+    msgbox(format("Octopus pots, octopus nets, octopus everything. Polypos's mad for them.\p"
+                  "He's in the hut with the boat for a roof. Bring him something soft."))
+    release
+}
+
+script KnossaAmnisos_EventScript_SaffronGirl {
+    lock
+    faceplayer
+    setspeaker(KnossaAmnisos_Name_Saffron)
+    msgbox(format("Three threads from every crocus. By hand. Before the sun gets at them.\p"
+                  "Anthousa sells them in the hall by the quay. Don't haggle. She enjoys it."))
+    release
+}
+
+script KnossaAmnisos_EventScript_Shrine {
+    lockall
+    msgbox(format("A little shrine with a double axe painted on it.\p"
+                  "A jar of honey sits in front of it.\p"
+                  "The honey's fresh. Someone leaves it every morning."), MSGBOX_SIGN)
+    releaseall
+}
+
+script KnossaAmnisos_EventScript_QuaySign {
+    msgbox(format("AMNISOS. The harbor of Knossa. Honey, saffron, octopus. Ask for the good jar."),
+           MSGBOX_SIGN)
+}
+
+script KnossaAmnisos_EventScript_SouthSign {
+    msgbox(format("South: the Bull Road, to the palace of Minos."), MSGBOX_SIGN)
+}
+
+script KnossaAmnisos_EventScript_CaveSign {
+    msgbox(format("The Cave of Eileithyia. Bring an offering. Bring a shawl. It's cold."), MSGBOX_SIGN)
+}

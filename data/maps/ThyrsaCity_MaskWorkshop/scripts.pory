@@ -4,7 +4,14 @@
 // Prosomime, PATHOS, for a Gelasable (INGAME_TRADE_ICHOR_PATHOS in src/data/trade.h).
 // ICHOR_STUB_AETHOS_DEX: both species are stand-ins until the dex lands.
 
-mapscripts ThyrsaCity_MaskWorkshop_MapScripts {}
+mapscripts ThyrsaCity_MaskWorkshop_MapScripts {
+    // The Pokémon the player traded in shows only after the trade.
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_PROSOMIME)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
 
 text ThyrsaCity_MaskWorkshop_Name_Euthykles { "EUTHYKLES" }
 
@@ -51,6 +58,8 @@ script ThyrsaCity_MaskWorkshop_EventScript_Euthykles {
     special(DoInGameTradeScene)
     setflag(FLAG_ICHOR_TRADED_PROSOMIME)
     removeobject(LOCALID_MASK_WORKSHOP_MASK)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_MASK_WORKSHOP_GELASABLE)
     setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
     msgbox(format("A laugh for a tear. Fair trade. The theater always needs both.\p"
                   "“Pathos.” It means what you feel at the end of a tragedy.\p"
@@ -73,4 +82,14 @@ script ThyrsaCity_MaskWorkshop_EventScript_Heads {
 
 script ThyrsaCity_MaskWorkshop_EventScript_Paint {
     msgbox(format("Pots of paint: red, saffron, black and white. Everything a face needs."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MaskWorkshop_EventScript_Gelasable {
+    lock
+    faceplayer
+    playmoncry(SPECIES_GELASABLE, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The Gelasable is watching Euthykles pull faces. It laughs at every one."))
+    waitmoncry
+    release
 }

@@ -10,6 +10,7 @@
 #include "constants/pokemon.h"
 #include "constants/species.h"
 #include "constants/vars.h"
+#include "constants/opponents.h"
     .include "asm/macros.inc"
     .include "asm/macros/event.inc"
     .include "constants/constants.inc"
@@ -41,6 +42,11 @@ ArkadiaTown_SetupScript:
     setflag FLAG_ICHOR_KLEON_JOINED_TITANS
     setflag FLAG_ICHOR_KALLISTO_TRIAL
     setflag FLAG_ICHOR_ACT1_COMPLETE
+    @ This walks doors and seams. Damo stands on the walk to the Cave of Maia and
+    @ Euandros inside it; their battles are RNG (2-13 turns, sometimes lost or
+    @ drawn, which whites out to Arkadia), so any ROM change could fail the walk.
+    setflag TRAINER_FLAGS_START + TRAINER_ICHOR_R12_DAMO
+    setflag TRAINER_FLAGS_START + TRAINER_ICHOR_EUANDROS
     setvar VAR_REPEL_STEP_COUNT, 999
     warp MAP_ARKADIA, 20, 31
     waitstate
