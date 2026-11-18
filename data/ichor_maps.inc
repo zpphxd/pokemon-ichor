@@ -226,6 +226,8 @@
 	.include "data/maps/LakeStymphalia/scripts.inc"
 	.include "data/maps/Route27_ArkadianHills/scripts.inc"
 	.include "data/maps/Route27_SkiritaiCave/scripts.inc"
+	.include "data/maps/EmporionCity_GreatDeigma/scripts.inc"
+	.include "data/maps/Route7_NurseryOfNysa/scripts.inc"
 	.include "data/maps/ErymanthosPreserve_Lodge/scripts.inc"
 	.include "data/maps/ErymanthosPreserve_Oakwood/scripts.inc"
 	.include "data/maps/ErymanthosPreserve_Meadow/scripts.inc"

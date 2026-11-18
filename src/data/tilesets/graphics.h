@@ -690,6 +690,52 @@ const u16 gTilesetPalettes_PorytilesManaged_Domos[][16] =
     INCBIN_U16("data/tilesets/secondary/domos/porytiles_bin/palettes/15.gbapal")
 };
 
+// Ichor: kapeleia, the Great Deigma (tools/ichor/art/kapeleia_build.py)
+const u32 gTilesetTiles_PorytilesManaged_Kapeleia[] = INCBIN_U32("data/tilesets/secondary/kapeleia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Kapeleia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kapeleia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: nysa, the Nursery of Nysa on Route 7 (tools/ichor/art/kapeleia_build.py)
+const u32 gTilesetTiles_PorytilesManaged_Nysa[] = INCBIN_U32("data/tilesets/secondary/nysa/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Nysa[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/nysa/porytiles_bin/palettes/15.gbapal")
+};
+
 // Ichor: emporion
 const u32 gTilesetTiles_PorytilesManaged_Emporion[] = INCBIN_U32("data/tilesets/secondary/emporion/porytiles_bin/tiles.4bpp.lz");
 

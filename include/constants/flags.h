@@ -2819,6 +2819,7 @@
 #define FLAG_DAILY_ICHOR_FESTIVAL_JOINED        (FLAG_DAILY_ICHOR_GENERAL_START + 0x000) // Ichor: joined today's festival: its god's +5 Favor is given (engine, ENGINE_API §7)
 #define FLAG_DAILY_ICHOR_AUGURY_READ            (FLAG_DAILY_ICHOR_GENERAL_START + 0x040) // Ichor: heard today's shared omen; prevents repeated augur blessings
 #define FLAG_DAILY_ICHOR_TREADING               (FLAG_DAILY_ICHOR_GENERAL_START + 0x04C) // Ichor: trod Staphylos's grapes today (Thyrsa)
+#define FLAG_DAILY_ICHOR_DEIGMA_RARE            (FLAG_DAILY_ICHOR_GENERAL_START + 0x060) // Ichor: the Great Deigma's curio stall drew today's stock (VAR_ICHOR_DEIGMA_RARE)
 // Ichor daily bank flags: end
 
 // Temp flag aliases

@@ -10,6 +10,10 @@ Built by `tools/ichor/maps/kopais.py` on the Skiron tileset, like Mt. Kithairon 
 - **Reveal:** up the stair, the camp's tents and the bread carts across the field.
 - **Signature:** the Kronia camp: tents, carts, cookfires, the baker's free bread.
 
+## The Nursery of Nysa
+
+Since 2026-11-18 the map is 44 wide: east of the gate, the lane under the olives to the Nursery of Nysa (the day care), its glade below the wall and long grass below that. See `NurseryOfNysa.md`; renders `img/route7_nursery_before.png` and `_after.png`.
+
 ## The walk
 
 Euxenos at the stair's head, Doris on the scree road, Hages in the camp gate (all three can't be walked round). Manto, Myrton and Philiskos are optional. Forced grass: 2 + 3 + 3. The baker heals and gives two Barley Cakes once (unchanged).

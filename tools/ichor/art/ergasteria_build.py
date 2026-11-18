@@ -107,7 +107,8 @@ def room_modules():
     import eleusa_rooms        # Eleusa's six rooms (batch 4)
     import gulf_rooms          # Kirrha's hostel and Aigion's Homarion, on domos (tools/ichor/maps/gulf.py)
     import nemea_rooms         # Nemea's palaestra and cottage; last, so older ids don't move
-    return [aegina_homes, emporion_rooms, route5_rooms, eleusa_rooms, gulf_rooms, nemea_rooms]
+    import kapeleia_rooms      # the Great Deigma and the Nursery of Nysa, on their own set
+    return [aegina_homes, emporion_rooms, route5_rooms, eleusa_rooms, gulf_rooms, nemea_rooms, kapeleia_rooms]
 
 
 # --------------------------------------------------------------------------

@@ -153,6 +153,48 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_YARD_MON0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 34,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route7_KroniaGrounds_EventScript_YardMon0",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_YARD_MON1",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+      "x": 38,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route7_KroniaGrounds_EventScript_YardMon1",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_ARISTAIOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 39,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route7_KroniaGrounds_EventScript_Aristaios",
+      "flag": "0"
+    },
+    {
       "local_id": "LOCALID_ROUTE7_KRONIA_GROUNDS_SHRINE_RUBBLE",
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 7,
@@ -260,9 +302,25 @@
       "flag": "FLAG_ICHOR_ITEM_R7_TERRACE"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 35,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE7_NURSERY_OF_NYSA",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route7_KroniaGrounds_EventScript_NurserySign"
+    },
     {
       "type": "sign",
       "x": 15,

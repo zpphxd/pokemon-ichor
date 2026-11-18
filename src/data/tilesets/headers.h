@@ -432,6 +432,34 @@ const struct Tileset gTileset_Domos =
     .callback = NULL,
 };
 
+// Ichor: kapeleia ("the shops"): the Great Deigma, Emporion's covered market.
+// limen's art and palettes plus the market's stalls, in a set of its own
+// because limen and domos are full. Built by tools/ichor/art/kapeleia_build.py.
+const struct Tileset gTileset_Kapeleia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kapeleia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kapeleia,
+    .metatiles = gMetatiles_PorytilesManaged_Kapeleia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kapeleia,
+    .callback = NULL,
+};
+
+// Ichor: nysa, the Nursery of Nysa on Route 7: kapeleia's art (the cradle,
+// the Eggs, the ivy) on a set of its own, so the market keeps its tiles.
+// Built by tools/ichor/art/kapeleia_build.py.
+const struct Tileset gTileset_Nysa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Nysa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Nysa,
+    .metatiles = gMetatiles_PorytilesManaged_Nysa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Nysa,
+    .callback = NULL,
+};
+
 // Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion
 // City (streets, the house kit, the Agora, the Temple of Hermes and the monuments,
 // Acrocorinth, the workshops). It uses only its own tiles and palettes 6-12; cells

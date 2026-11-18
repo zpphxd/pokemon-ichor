@@ -447,6 +447,20 @@
       "flag": "FLAG_ICHOR_ITEM_DELPHOI_ULTRA_BALL"
     },
     {
+      "local_id": "LOCALID_DELPHOI_KLEON_FREE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_FREE",
+      "x": 23,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Climax_EventScript_DelphoiKleonTalk",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_GREAT_HERM",
       "x": 37,
       "y": 41,
@@ -471,20 +485,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_IchorTownHermSign",
       "flag": "0"
-    },
-    {
-      "local_id": "LOCALID_DELPHOI_KLEON_FREE",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_FREE",
-      "x": 23,
-      "y": 18,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Climax_EventScript_DelphoiKleonTalk",
-      "flag": "FLAG_ICHOR_HIDE_KLEON_FREE_DELPHOI"
     }
   ],
   "warp_events": [

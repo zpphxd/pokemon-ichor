@@ -23,6 +23,11 @@ where the Titanborn masters serve bread at the Kronia.*
   - The old vineyard east, behind vines (the Sickle); a column drum on its stair
     to the upper terrace (the Girdle, won just north in Thyrsa: a return).
   - Olives and the last band up to the gate.
+  - East along the lane under the olives, just outside the gate: the Nursery
+    of Nysa, a farmhouse where the nymphs who raised Dionysus raise travelers'
+    Pokemon (the day care, Route7_NurseryOfNysa, kapeleia_rooms.py), and its
+    glade below the wall where the two Pokemon left there roam; Aristaios the
+    beekeeper keeps the gate and hands over the Eggs.
 
 Route 8, the Kopais road (Stymphalia's marsh pieces on the aethos primary). *A
 Mycenaean dike carries the road across Lake Kopais's reeds from Thyrsa to the
@@ -482,9 +487,23 @@ def render(m, out_dir, stem, views, scale=2):
 # they keep to aethos (K.Grid's strip).
 # ---------------------------------------------------------------------------
 
+R7_W = 44                       # 30 columns of the Kronia grounds, 14 more east for the nursery
+NURSERY_DOOR = (35, 3)          # the farmhouse's door (its warp 0)
+NURSERY_HOUSE = (32, 0)         # the farmhouse's 7x4 front, top-left
+YARD = (31, 7, 41, 11)          # the glade the Pokemon left at the nursery roam
+YARD_GATE = (37, 6)
+YARD_MONS = [(34, 9), (38, 9)]  # the two roamers' home cells (wander range 2)
+ARISTAIOS = (39, 5)
+# aethos's farmhouse (Route 5's inn) widened to seven, the door in the middle
+NURSERY = [[0x008] + [0x009] * 5 + [0x00A],
+           [0x010] + [0x011] * 5 + [0x012],
+           [0x018, 0x01A, 0x019, 0x01A, 0x019, 0x01A, 0x01A],
+           [0x020, 0x019, 0x019, 0x021, 0x019, 0x019, 0x022]]
+
+
 def plan_route7():
-    W, H = 30, 36
-    g = K.Grid(R7, W, H, strip_top=True)
+    W, H = 30, 36                                   # the Kronia grounds' own columns
+    g = K.Grid(R7, R7_W, H, strip_top=True)
     # --- the col's foot (rows 30-35): pines, the road up from Kithairon ---------
     g.rect("#", 0, 30, W - 1, H - 1)
     g.rect("p", 10, 34, 13, H - 1)
@@ -551,6 +570,29 @@ def plan_route7():
     g.rect(",", 10, 2, 13, 4)                       # band 3, in the olives
     g.rect(".", 13, 4, 15, 5)
     g.put("k", (14, 4))
+    # --- the Nursery of Nysa, east of the gate (x 30-43) -----------------------
+    # the lane under the olives: a verge on row 4, the path on row 5
+    g.rect("o", 30, 0, R7_W - 1, 5)
+    g.rect(".", 16, 4, 38, 4)
+    g.rect("p", 16, 5, 38, 5)
+    hx, hy = NURSERY_HOUSE
+    g.rect("k", hx, hy, hx + 6, hy + 3)               # the farmhouse
+    g.put("k", (31, 4))                               # its sign
+    g.put(".", ARISTAIOS)                             # the lane's end, over the glade
+    g.rect("#", 39, 0, 39, 4)                         # a cypress or two by the farmhouse
+    # the glade below the wall, in the pines: in through the wall's steps
+    g.rect("w", 31, 6, 42, 6)
+    g.put("#", (30, 6))                               # a pine between the field wall and the glade's
+    g.put("s", YARD_GATE)
+    x0, y0, x1, y1 = YARD
+    g.rect(".", x0, y0, x1, y1)
+    g.put("#", (x0, y0), (x1, y0), (x0, y1))
+    # below the glade, the long grass where the nymphs' bees forage (wild, like the road)
+    g.rect(",", 32, 12, 42, 15)
+    g.rect(",", 34, 16, 40, 16)
+    g.put("#", (32, 15), (42, 12), (42, 15))
+    g.rect("k", 32, 7, 33, 7)                         # the hives
+    g.put("k", (40, 8), (31, 10))
     return g
 
 
@@ -580,6 +622,18 @@ def props_route7(g):
     # the scree meadow: boulders, the climb face's stele
     g.piece("boulders", 19, 23)
     g.piece("stele_low", 3, 21)
+    # the Nursery of Nysa: the farmhouse, a sign, the beekeeper's hives in the glade
+    hx, hy = NURSERY_HOUSE
+    for j, row in enumerate(NURSERY):
+        for i, mid in enumerate(row):
+            door = (hx + i, hy + j) == NURSERY_DOOR
+            g.set(hx + i, hy + j, mid, not door, "door" if door else "house")
+    g.set(31, 4, R5.SIGN, True, "sign")
+    g.piece("hives", 32, 7)
+    g.piece("baskets", 40, 8)
+    g.piece("myrtle", 31, 10)
+    for c in ((34, 7), (35, 8), (39, 7), (38, 10), (32, 9), (36, 11), (40, 10), (35, 10), (33, 11)):
+        g.set(*c, R5.FLOWERS, False, "flowers")            # the glade's flowers
 
 
 def spec_route7():
@@ -614,12 +668,21 @@ def spec_route7():
     s.hide("ITEM_REVIVE", 27, 14, "FLAG_ICHOR_HIDDEN_ITEM_R7_REVIVE")     # the press's sherds
     s.hide("ITEM_SUPER_REPEL", 6, 31, "FLAG_ICHOR_HIDDEN_ITEM_R7_REPEL")  # Manto's hollow
     s.hide("ITEM_STARDUST", 4, 12, "FLAG_ICHOR_HIDDEN_ITEM_R7_SHRINE")    # under the stone
+    s.warps = [warp(*NURSERY_DOOR, "Route7_NurseryOfNysa", 0)]
+    # the two Pokemon left at the nursery, roaming the glade (VAR_OBJ_GFX_ID_0/1, set on entry)
+    for i, (x, y) in enumerate(YARD_MONS):
+        s.person(f"YardMon{i}", f"OBJ_EVENT_GFX_VAR_{i}", x, y, "DOWN", f"FLAG_TEMP_{i + 1}",
+                 move="MOVEMENT_TYPE_WANDER_AROUND")
+    s.person("Aristaios", "SHEPHERD", *ARISTAIOS, "DOWN")
+    s.sign(31, 4, "NurserySign", text="THE NURSERY OF NYSA. The nymphs raise travelers' Pokémon.\\n"
+           "Leave two with Makris inside. Eggs from Aristaios at the glade.")
     s.sign(15, 34, "SouthSign", text="Route 7, the Kronia grounds.\\nSouth: Mt. Kithairon. North: Thyrsa.")
     s.sign(14, 4, "NorthSign", text="Thyrsa, the south gate.\\nSouth: the Kronia grounds and Mt. Kithairon.")
     s.sign(5, 11, "Stone", text="An old stele on a grassy mound. A sickle and a swaddled stone are cut into it.\\p"
            "Under them: HE SWALLOWED IT, AND WAS FOOLED.")
     s.sign(3, 21, "Handholds", text="Old handholds climb the scree face here, worn smooth.\\p"
            "Someone with the knack could climb up to the ledge.")
+    s.scripts += NURSERY_SCRIPTS
     s.scripts += [
         f'''script {s.px}Baker {{
     lock
@@ -653,9 +716,104 @@ def spec_route7():
     return s
 
 
+# Route 7's ON_TRANSITION: the two Pokemon left at the nursery roam its glade
+# (src/ichor_nursery.c puts their sprites in VAR_OBJ_GFX_ID_0/1); an empty
+# slot's roamer hides on FLAG_TEMP_1 or _2 (VAR_0x8004/5 say which hold one).
+R7_HEADER = f'''mapscripts {R7}_MapScripts {{
+    MAP_SCRIPT_ON_TRANSITION {{
+        special(Ichor_SetNurseryYardMons)
+        if (var(VAR_0x8004) == FALSE) {{
+            setflag(FLAG_TEMP_1)
+        }}
+        if (var(VAR_0x8005) == FALSE) {{
+            setflag(FLAG_TEMP_2)
+        }}
+    }}
+}}'''
+
+# Aristaios, who carried the infant Dionysus to the nymphs of Nysa, keeps the
+# glade and hands over the Eggs: the day-care man's script (data/scripts/
+# day_care.inc's Route117_EventScript_DaycareMan) in Ichor's words.
+_PX7 = R7 + "_EventScript_"
+NURSERY_SCRIPTS = [
+    f'''text {_PX7}Text_NameAristaios {{ "ARISTAIOS" }}''',
+    f'''script {_PX7}Aristaios {{
+    lock
+    faceplayer
+    special(GetDaycareMonNicknames)
+    specialvar(VAR_RESULT, GetDaycareState)
+    if (var(VAR_RESULT) == DAYCARE_EGG_WAITING) {{
+        setspeaker({_PX7}Text_NameAristaios)
+        msgbox(format("Ah, there you are. Your two left something in the hay this morning.\\p"
+                      "An Egg. The nymphs say it's yours by right. Will you take it?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {{
+            setspeaker({_PX7}Text_NameAristaios)
+            msgbox(format("You're sure? Makris will raise it if you don't.\\nWill you take it after all?"), MSGBOX_YESNO)
+            if (var(VAR_RESULT) == NO) {{
+                setspeaker({_PX7}Text_NameAristaios)
+                msgbox(format("Then it stays with the nymphs. They have raised stranger things."))
+                special(RejectEggFromDayCare)
+                release
+                end
+            }}
+        }}
+        specialvar(VAR_RESULT, CalculatePlayerPartyCount)
+        if (var(VAR_RESULT) == PARTY_SIZE) {{
+            setspeaker({_PX7}Text_NameAristaios)
+            msgbox(format("Your arms are full. Make room in your party, and I'll keep it warm."))
+            release
+            end
+        }}
+        message(format("{{PLAYER}} received the Egg from Aristaios."))
+        playfanfare(MUS_LEVEL_UP)
+        waitfanfare
+        waitbuttonpress
+        setspeaker({_PX7}Text_NameAristaios)
+        msgbox(format("Keep it close and keep walking. It hatches on the road."))
+        special(GiveEggFromDaycare)
+        release
+        end
+    }}
+    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {{
+        setspeaker({_PX7}Text_NameAristaios)
+        msgbox(format("Your {{STR_VAR_1}} is out in the glade with the bees and me. Doing fine."))
+        release
+        end
+    }}
+    if (var(VAR_RESULT) == DAYCARE_TWO_MONS) {{
+        setspeaker({_PX7}Text_NameAristaios)
+        msgbox(format("Your {{STR_VAR_1}} and {{STR_VAR_2}} are out in the glade. Doing fine."))
+        special(SetDaycareCompatibilityString)
+        special(ShowFieldMessageStringVar4)
+        waitmessage
+        waitbuttonpress
+        release
+        end
+    }}
+    setspeaker({_PX7}Text_NameAristaios)
+    msgbox(format("I carried a god up this hill once, wrapped in a fawn skin, to the nymphs inside.\\p"
+                  "They raised him. Leave two Pokémon with Makris and they'll raise yours.\\p"
+                  "Two that get along may leave you an Egg. I watch the glade for them."))
+    release
+}}''',
+    f'''script {_PX7}YardMon0 {{
+    lock
+    special(GetDaycareMonNicknames)
+    msgbox(format("{{STR_VAR_1}} is rolling in the thyme. It looks happy."))
+    release
+}}''',
+    f'''script {_PX7}YardMon1 {{
+    lock
+    special(GetDaycareMonNicknames)
+    msgbox(format("{{STR_VAR_2}} is nosing around the hives. It looks happy."))
+    release
+}}''',
+]
+
 VIEWS7 = [("1 the col's foot", 11, 32), ("2 the cut stair", 12, 26), ("3 the scree meadow", 12, 22),
           ("4 the camp gate", 11, 16), ("5 the Kronia field", 14, 11), ("6 Kronos's stone", 6, 13),
-          ("7 the old vineyard", 23, 12), ("8 the gate", 12, 3)]
+          ("7 the old vineyard", 23, 12), ("8 the gate", 12, 3), ("9 the Nursery of Nysa", 36, 5),
+          ("10 the nursery's glade", 36, 8)]
 
 
 def build_route7():
@@ -668,7 +826,7 @@ def build_route7():
     K.ground(g)
     blocks = K.write_layout(g, "pine_tall")
     spec = spec_route7()
-    write_events(spec, "MUS_ICHOR_ROAD", "MAP_TYPE_ROUTE")
+    write_events(spec, "MUS_ICHOR_ROAD", "MAP_TYPE_ROUTE", header=R7_HEADER)
     m = Walked(R7, blocks, "gTileset_Skiron", spec)
     segs = [("Kithairon to Thyrsa", [(x, 35) for x in range(10, 14)], [(x, 0) for x in range(10, 14)])]
     return m, segs, VIEWS7, "route7", g.missing

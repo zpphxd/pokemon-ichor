@@ -1160,3 +1160,5 @@ gSpecials::
 	def_special Ichor_BullLeap
 	// Ichor: the beam trace (E9), ported from world-act3 for the Pythian Light
 	def_special Ichor_TraceBeam
+	@ Ichor: the Nursery of Nysa's yard on Route 7 (src/ichor_nursery.c)
+	def_special Ichor_SetNurseryYardMons

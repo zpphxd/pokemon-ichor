@@ -124,7 +124,8 @@
     "EmporionCity_PottersWorkshop",
     "EmporionCity_ChariotStore",
     "EmporionCity_HiringHall",
-    "EmporionCity_TempleOfHermes"
+    "EmporionCity_TempleOfHermes",
+    "EmporionCity_GreatDeigma"
   ],
   "gMapGroup_IndoorEleusa": [
     "EleusaVillage_TempleOfDemeter",
@@ -172,7 +173,8 @@
     "Lebadeia_HoneyHouse",
     "Route14_Tretos",
     "Nemea_Palaestra",
-    "Nemea_MolorchosHouse"
+    "Nemea_MolorchosHouse",
+    "Route7_NurseryOfNysa"
   ],
   "gMapGroup_DungeonsAct2": [
     "SaltWell_B1F",

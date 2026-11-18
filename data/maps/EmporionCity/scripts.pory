@@ -280,6 +280,16 @@ script EmporionCity_EventScript_DeigmaDoor {
     releaseall
 }
 
+// The stoa's east door: the Great Deigma, the covered market behind the
+// exchange (tools/ichor/maps/kapeleia_rooms.py).
+script EmporionCity_EventScript_GreatDeigmaDoor {
+    lockall
+    playse(SE_DOOR)
+    warp(MAP_EMPORION_CITY_GREAT_DEIGMA, 0)
+    waitstate
+    releaseall
+}
+
 // ---------------------------------------------------------------------------
 // The Agora
 // ---------------------------------------------------------------------------
@@ -645,6 +655,11 @@ script EmporionCity_EventScript_WaltzChariotsSign {
 
 script EmporionCity_EventScript_DeigmaSign {
     msgbox(format("THE DEIGMA\nMerchants' samples shown within. Look, but don't lick."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_GreatDeigmaSign {
+    msgbox(format("THE GREAT DEIGMA\nThe covered market. Traders from Sidon, the Nile and the steppe.\p"
+                  "Stones, techniques, fruit, curios. Old coins bought at the trapeza."), MSGBOX_SIGN)
 }
 
 script EmporionCity_EventScript_TavernSign {

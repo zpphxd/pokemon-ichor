@@ -884,7 +884,7 @@
     {
       "id": "LAYOUT_ROUTE7_KRONIA_GROUNDS",
       "name": "Route7_KroniaGrounds_Layout",
-      "width": 30,
+      "width": 44,
       "height": 36,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Skiron",
@@ -2815,6 +2815,28 @@
       "secondary_tileset": "gTileset_CaveDark",
       "border_filepath": "data/layouts/ErymanthosPreserve_Cave/border.bin",
       "blockdata_filepath": "data/layouts/ErymanthosPreserve_Cave/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_GREAT_DEIGMA",
+      "name": "EmporionCity_GreatDeigma_Layout",
+      "width": 30,
+      "height": 16,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Kapeleia",
+      "border_filepath": "data/layouts/EmporionCity_GreatDeigma/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_GreatDeigma/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE7_NURSERY_OF_NYSA",
+      "name": "Route7_NurseryOfNysa_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Nysa",
+      "border_filepath": "data/layouts/Route7_NurseryOfNysa/border.bin",
+      "blockdata_filepath": "data/layouts/Route7_NurseryOfNysa/map.bin",
       "layout_version": "emerald"
     }
   ]

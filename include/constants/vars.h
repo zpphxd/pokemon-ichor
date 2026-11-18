@@ -298,6 +298,7 @@
 #define VAR_ICHOR_ACT3 (ICHOR_VARS_START + 0x00C) // Ichor: saved Act III story stage
 #define VAR_ICHOR_KNOSSA                        (ICHOR_VARS_START + 0x00D) // Ichor: Knossa story state 0-20 (design/LABYRINTH.md §13): arrival, palace, leap, thread, rings, heart, Turning, escape, dawn
 #define VAR_ICHOR_LABYRINTH                     (ICHOR_VARS_START + 0x00E) // Ichor: Labyrinth bits (LABYRINTH.md §13): dials W1-W3, Ring V walls, the Turning, Ring II's last gate
+#define VAR_ICHOR_DEIGMA_RARE                   (ICHOR_VARS_START + 0x018) // Ichor: the Great Deigma's curio stall: today's stock, 0-5, redrawn each day
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000

@@ -30,12 +30,6 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
 - **Built (2026-11-18, `tools/ichor/maps/stymphalia.py`):** Route 26, Lake Stymphalia, Route 27 and the Skiritai cave, opened by III-5J as the story's road to Arkadia (the Wings still work). 31 trainers, Akanthis's rest and the lake's travel herm, two route herms, the bronze flock's first-crossing scene, and nine relics in use. Finds and hooks: `design/maps/Route26_Skiritis.md`, `LakeStymphalia.md`, `Route27_ArkadianHills.md`; the walk is `tools/ichor/tests/stymphalia.sh`. Still open: the deep reeds' rainy Lernip roll, Ares's gully (theoxenia E4), the scytale reading, the Karyai berry trees.
 
-### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
-- The nymphs of Nysa raised Dionysus. A standard day care (levels, eggs); Hera's blessing already doubles egg finding (SYSTEMS).
-
-### Grand bazaar: the Great Deigma (Emporion)
-- A covered market of many stalls: foreign traders (Phoenician, Egyptian, Scythian), stones, TMs, berries, a daily rare stall and a coin exchange for Obols and Staters. A reason to sail back.
-
 ### The Ascent of Olympus: Ichor's Victory Road (user, 2026-11-17)
 - **Awesome:** a long climb from the foothills to the clouds, over many floors with mixed terrain: caves, cliff ledges and switchbacks, an ice band, and a stretch above the cloud line.
 - **Somewhat difficult:** strong trainer pairs on narrow paths you can't avoid, tougher wilds, puzzles that use every relic held, limited healing with one midpoint shrine, and a gatekeeper battle before the Pantheon.
@@ -48,6 +42,14 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 - **Built (2026-11-17/18, origin `ascent-wip`):** seven Ascent floors (1F, 2F, the Icefall with ice sliding, the Deep, the Crystal Vault, the Glacier, 3F above the cloud) and the summit rebuilt on gTileset_Chion; trainer pairs at every chokepoint and the gatekeeper Polydamas; the cook's camp as the one midpoint heal and herm; Girdle seals in the Icefall and at the Gate of the Winds (with reset levers); every relic used (Sickle, Hammer, Girdle, Torch, Conch, Labrys, and the Horn's meltwater fall, the Wings' updraft, the Thread's crevasse and the Helm's watch-post); the Ice Pokémon floor by floor; hymn fragments I–V at the floors' shrines; the Pantheon's pre-battle scenes and the League's teams at 59–75. Each map's finds and post-game hooks are in `design/maps/Ascent_*.md`, `Olympus_Summit.md` and `Olympus_Pantheon.md`; the walk is `tools/ichor/tests/ascent.sh`. Still open: the balance playthrough above, and LEAGUE.md's art list.
 
 ## Done
+
+### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
+- The nymphs of Nysa raised Dionysus. A standard day care (levels, eggs); Hera's blessing already doubles egg finding (SYSTEMS).
+- **Built (2026-11-18):** the farmhouse and its glade on Route 7, Makris and Aristaios, the deposited Pokémon roaming the glade (`src/ichor_nursery.c`), Hera's doubling kept; `design/maps/NurseryOfNysa.md`, `tools/ichor/tests/nysa_deigma.sh`. Proposed Day Care term: the Kourotrophion (TERMS).
+
+### Grand bazaar: the Great Deigma (Emporion)
+- A covered market of many stalls: foreign traders (Phoenician, Egyptian, Scythian), stones, TMs, berries, a daily rare stall and a coin exchange for Obols and Staters. A reason to sail back.
+- **Built (2026-11-18):** behind the stoa's east door: nine stalls (Hiram of Sidon, Amasis of Naukratis, Skyles the Scythian, stones, techniques, berries, the daily curio stall, spices, pots), Phormion's trapeza for coins, stock that grows after the 4th and 7th Laurels; `design/maps/GreatDeigma.md`. Still open: walkers drawn for the three foreign traders (they use the shared sailor, acolyte and harvester sprites).
 
 ### Wild Pokémon distribution pass
 - **Problem found:** Act II adds only 10 new species; Galenyon, Cairnolith, Pebblith, Kerazap, Gelasable and Galekit fill 40–57 maps each; about 18 regular lines can't be caught wild in the story (Chalkip, Elegull, Elektear, Erosie, Hymnet, Kalliglyph, Kerdovix, Skylaps, Sepidart, Sporadon, Ophidrop, Pagoshard, Lebetron, Bouldyphus, Enigmaw, Aetling and more); Nebrel, a starter, is wild on Routes 7–9.

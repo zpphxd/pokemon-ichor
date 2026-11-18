@@ -469,6 +469,13 @@
       "elevation": 0,
       "dest_map": "MAP_EMPORION_CITY_CHARIOT_STORE",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 36,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_EMPORION_CITY_GREAT_DEIGMA",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -555,6 +562,15 @@
     },
     {
       "type": "trigger",
+      "x": 36,
+      "y": 36,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EmporionCity_EventScript_GreatDeigmaDoor"
+    },
+    {
+      "type": "trigger",
       "x": 23,
       "y": 13,
       "elevation": 3,
@@ -603,6 +619,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "EmporionCity_EventScript_DeigmaSign"
+    },
+    {
+      "type": "sign",
+      "x": 35,
+      "y": 36,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_EventScript_GreatDeigmaSign"
     },
     {
       "type": "sign",

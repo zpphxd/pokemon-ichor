@@ -832,7 +832,9 @@ def compose_city():
     # ---- the harbor quarter ---------------------------------------------------
     g.put("asclepeion", 14, 32, bldg=True)            # door (16,36)
     g.put("steps", 15, 37)
-    stoa(g, 28, 32, ["stoa_bay", "stoa_bay_door", "stoa_bay", "stoa_bay"])   # the Deigma, door (32,36)
+    # the Deigma's stoa: the exchange's door (32,36), and the Great Deigma's,
+    # the covered market behind it, at the east end (36,36)
+    stoa(g, 28, 32, ["stoa_bay", "stoa_bay_door", "stoa_bay", "stoa_bay_door"])
     for x in range(28, 38):
         g.put("steps", x, 37, cx=0 if x == 28 else 2 if x == 37 else 1, cy=1, w=1, h=1)
     g.trees(cypresses=((9, 32), (11, 32)))
@@ -918,9 +920,10 @@ def check_city():
         scripted=SCRIPTED_PATHS)
     # the west-seam rule only binds the rows a player on Route 14 would see
     errors = [e for e in errors if "Route 14" not in e or int(re.search(r",(\d+)\)", e).group(1)) >= 32]
-    # The Deigma's door is the stoa's door bay, which the tileset doesn't mark
-    # MB_NON_ANIMATED_DOOR: a coord trigger on it does the warp (DeigmaDoor).
-    errors = [e for e in errors if "(32,36) is on MB_NORMAL" not in e]
+    # The Deigma's doors are the stoa's door bays, which the tileset doesn't mark
+    # MB_NON_ANIMATED_DOOR: coord triggers on them do the warps (DeigmaDoor,
+    # GreatDeigmaDoor).
+    errors = [e for e in errors if "(32,36) is on MB_NORMAL" not in e and "(36,36) is on MB_NORMAL" not in e]
     for x in range(W):
         top, bot = walkable(blocks, x, 0), walkable(blocks, x, H - 1)
         if top != (x in ISTHMUS_SEAM):
