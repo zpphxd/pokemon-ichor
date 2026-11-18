@@ -452,4 +452,13 @@ script LabyrinthRing2_EventScript_Lair2 {
     }
     releaseall
 }
+
+script LabyrinthRing2_EventScript_CellarHole3 {
+    lockall
+    msgbox(format("The floor here is only rubble over a hole. It gives!"), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_FALL)
+    warp(MAP_LABYRINTH_CELLARS, 9)
+    waitstate
+}
 // ---- END GENERATED ----

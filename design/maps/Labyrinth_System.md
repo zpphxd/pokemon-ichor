@@ -102,7 +102,7 @@ A trickle in Ring II's cleft, a surfable stream across Ring III, a channel throu
 **Hooks for later** (post-game relics; each guards a stronger Pokémon and an item):
 - Ring I: a labrys seal (open on the return from Ring III) on the stewards' treasury: a forgotten bronze Kolossette Lv 52, a Gold Stater.
 - Ring II: a labrys seal on the runners' shrine: a Taurivet of the palace herd Lv 52, a Silver Owl.
-- Ring III: a Three-Flamed Torch thornweb over the spiders' mother-nest was planned; this seed's maze left no free dead end for it, so it is still to place.
+- Ring III: a Three-Flamed Torch thornweb over the spiders' mother-nest: Hyphantis Lv 55, TM Toxic.
 - Ring IV: a Hephaestus's Hammer great boulder sealing the Titans' deepest dig: Geogrip Lv 56, a Nugget.
 - **Pan's Crook:** the relic isn't built yet (no item or climb behavior). The cave flowstone faces in Ring II's grotto and Ring IV's dig are where its handholds go; Ring II's grotto already climbs to Ring I by script.
 
@@ -146,6 +146,20 @@ No new art: the remains are read from walls and floor (the tileset has no bones 
 - **Workshop:** Daedalus's vaulted hall of bronze automata under the grey light of the Icarus Shaft.
 - **Ring IV:** the Titans' mess hall under sickle banners, and the dig where the stream roars over the lip into Ring V.
 
-## Vertical treasure
+## Vertical treasure: the cellars
 
-Built: Ring I's hole down to Ring II's grotto and its flowstone climb back; Ring II's sunken floor into Ring III's web pocket; Ring III's hole into Ring IV's dig; Ring IV's chute into Ring V's lake. Not yet: in-ring stairs and ladders to lofts and cellars (`labyrinth_extras.cellar` is written but not placed).
+`MAP_LABYRINTH_CELLARS` (`tools/ichor/maps/labyrinth_cellars.py`): nine sealed rooms under the upper rings, two per ring, each reached by a side stair down from a dead end (or a hole in a dead end's floor where no wall was free), each with treasure. Room r's warps: 3r the arrival, 3r+1 and 3r+2 its stair back up; the ring arrivals are in `tools/ichor/maps/labyrinth_cellars.json`, written by the ring builders (build the rings first).
+
+| Room | From | Treasure | Note |
+|---|---|---|---|
+| 0, 1 | Ring I (a stair; a hole) | PP Up; Gold Stater | |
+| 2, 3 | Ring II (a stair; a hole) | Rare Candy; TM Psychic | |
+| 4, 7 | Ring III (stairs) | Comet Shard; Star Piece | room 7's floor gives into room 8 |
+| 8 | room 7, two drops down | TM Earthquake | **its stair comes up in Ring IV's dig**, not in Ring III |
+| 5, 6 | Ring IV (stairs) | TM Flamethrower; PP Max | |
+
+The drops between rings are built too: Ring I's hole into Ring II's grotto and the flowstone climb back; Ring II's sunken floor into Ring III's web pocket; Ring III's hole into Ring IV's dig; Ring IV's chute into Ring V's lake.
+
+## New set piece
+
+**The dig cavern (Ring IV):** the Titans' tunnelling broke into a cave four nodes square, 16×16 cells, with the underground river running down it from its spring to the chute. It is the first open cave the player sees after three rings of corridors.

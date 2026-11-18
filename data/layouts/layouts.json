@@ -2255,6 +2255,17 @@
       "border_filepath": "data/layouts/Nemea_MolorchosHouse/border.bin",
       "blockdata_filepath": "data/layouts/Nemea_MolorchosHouse/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LABYRINTH_CELLARS",
+      "name": "LabyrinthCellars_Layout",
+      "width": 28,
+      "height": 25,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Labyrinth",
+      "border_filepath": "data/layouts/LabyrinthCellars/border.bin",
+      "blockdata_filepath": "data/layouts/LabyrinthCellars/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

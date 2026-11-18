@@ -17,7 +17,7 @@
 """
 from __future__ import annotations
 
-from labyrinth_lib import PITCH, cell, gap, mid, setmetatiles
+from labyrinth_lib import PITCH, ST, cell, gap, mid, setmetatiles
 
 KINDS = {
     "rubble": ("BREAKABLE_ROCK", "EventScript_RockSmash", "Bronze Hammer"),
@@ -176,6 +176,69 @@ def later_gate(m, slot, kind, hide_flag, prefix, tag, species, level, static_fla
          "    }", "    releaseall", "}"]
     m.extra_scripts = getattr(m, "extra_scripts", []) + s
     log(m, f"{relic} (later): {kind} across dead end {n}: {species} Lv {level} and {item} — {story}")
+
+
+REGISTRY = None
+
+
+def cellar_entries(m, mz, rooms, prefix):
+    """Stairs down into the Labyrinth's cellars (MAP_LABYRINTH_CELLARS) from
+    dead ends whose north wall is a plain face: each `rooms` entry is the cellar
+    room it leads to. Records each ring arrival for the cellars' stairs back up
+    in tools/ichor/maps/labyrinth_cellars.json."""
+    import json
+    from pathlib import Path
+    reg_p = Path(__file__).resolve().parent / "labyrinth_cellars.json"
+    reg = json.loads(reg_p.read_text()) if reg_p.exists() else {}
+    faces = {mid("walls", n) for n in ("face_cc", "face_ci", "face_ic", "face_ii", "face_oo", "face_oc", "face_co", "face_io", "face_oi")} | {mid("niche", n) for n in ("back", "shrine", "lamp_out")}
+    faces |= {ST["cave_rock"]["ids"][xy[1]][xy[0]] for k, xy in ST["cave_rock"]["names"].items() if k.startswith("fb")}
+    busy = {(b["x"], b["y"]) for b in m.bgs} | {(o["x"], o["y"]) for o in m.objects} | \
+        {(w["x"], w["y"]) for w in m.warps} | {(c["x"], c["y"]) for c in m.coords}
+    slots = []
+    for n in mz.metrics()["dead"]:
+        if len(n) != 2:
+            continue
+        x, y = cell(n)
+        f = [(x, y - 1), (x + 1, y - 1)]
+        if all(int(m.mid[fy, fx]) in faces and (fx, fy) not in busy for fx, fy in f) and m.walkable(x, y + 1) \
+                and (x, y + 1) not in busy and (x + 1, y) not in busy:
+            slots.append(n)
+    for room, n in zip(rooms, slots):
+        x, y = cell(n)
+        m.stairs(x, y - 1, "down")
+        m.warp(x, y - 1, "MAP_LABYRINTH_CELLARS", 3 * room)
+        m.warp(x + 1, y - 1, "MAP_LABYRINTH_CELLARS", 3 * room)
+        reg[str(room)] = [map_id(m), len(m.warps)]
+        m.arrival(x, y + 1)
+        log(m, f"stairs down at dead end {n} to cellar room {room}")
+    # any room left over gets a hole in the floor of a free dead end instead
+    left = rooms[len(slots):]
+    used = set(slots)
+    for room in left:
+        cands = []
+        for n in mz.metrics()["dead"]:
+            if len(n) != 2 or n in used:
+                continue
+            free = [c for c in [cell(n, i, j) for i in range(2) for j in range(2)] if c not in busy and m.walkable(*c)]
+            if len(free) >= 2:
+                cands.append((-len(free), n, free))
+        if not cands:
+            break
+        _, n, free = sorted(cands)[0]
+        used.add(n)
+        (hx, hy), (ax, ay) = free[-1], free[0]
+        m.put("hole", hx, hy)
+        m.stops.add((hx, hy))
+        m.trigger(hx, hy, prefix + f"CellarHole{room}")
+        reg[str(room)] = [map_id(m), len(m.warps)]
+        m.arrival(ax, ay)
+        m.extra_scripts = getattr(m, "extra_scripts", []) + [
+            "", f"script {prefix}CellarHole{room} {{", "    lockall",
+            '    msgbox(format("The floor here is only rubble over a hole. It gives!"), MSGBOX_DEFAULT)',
+            "    closemessage", "    playse(SE_FALL)", f"    warp(MAP_LABYRINTH_CELLARS, {3 * room})", "    waitstate", "}"]
+        log(m, f"a hole in dead end {n} down to cellar room {room}")
+    reg_p.write_text(json.dumps(reg, indent=1, sort_keys=True) + "\n")
+    return slots[:len(rooms)]
 
 
 def remains(m, x, y, prefix, tag, text, item=None, flag=None):

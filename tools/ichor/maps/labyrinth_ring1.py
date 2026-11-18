@@ -344,6 +344,7 @@ def build(render=True):
         X.later_gate(m, slots[0], "chain", "FLAG_ICHOR_HIDE_R1_SEAL", P, "1", "Kolossette", 52, "FLAG_ICHOR_R1_STATIC",
                      "ITEM_RELIC_GOLD", "FLAG_ICHOR_ITEM_R1_TREASURY",
                      "a labrys-sealed treasury of the house's first stewards, opened on the way back up with the Labrys; a bronze guardian Daedalus forgot")
+    X.cellar_entries(m, mz, [0, 1], P)
     m.break_runs(starts)
     errs, reach = m.build("labyrinth_ring1", starts, views=VIEWS, render=render,
                           extra=set(gap(*DOOR)))

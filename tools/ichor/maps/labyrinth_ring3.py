@@ -229,7 +229,7 @@ def finish(m, mz, front, back, render=True):
             m.put("hole", x, y)
             m.stops.add((x, y))
             m.trigger(x, y, P + "Hole")
-    for n in dead[len(rewards):]:
+    for n in dead[len(rewards):-1]:      # the last stays free for the thornweb (hooks for later)
         x, y = cell(n)
         if len(m.anchors) < 8:
             m.anchor(x + 1, y + 1, "THREAD_ANCHOR_UNNAMED")
@@ -264,6 +264,7 @@ def finish(m, mz, front, back, render=True):
         X.later_gate(m, slots[0], "thornweb", "FLAG_ICHOR_HIDE_R3_THORNWEB", P, "3", "Hyphantis", 55, "FLAG_ICHOR_R3_STATIC",
                      "ITEM_TM_TOXIC", "FLAG_ICHOR_ITEM_R3_NEST",
                      "the spiders' mother-nest behind a thornweb only the Three-Flamed Torch burns (post-game)")
+    X.cellar_entries(m, mz, [4, 7], P)
     m.break_runs(starts)
     water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
     errs, reach = m.build("labyrinth_ring3", starts, views=VIEWS, render=render, extra=water)

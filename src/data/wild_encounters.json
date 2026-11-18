@@ -13355,6 +13355,75 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_LABYRINTH_CELLARS",
+          "base_label": "gLabyrinthCellars_Morning",
+          "land_mons": {
+            "encounter_rate": 6,
+            "mons": [
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_PERSENYX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_MITOCLEW"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_LYKANAX"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_KOLOSSARD"
+              }
+            ]
+          }
         }
       ]
     },

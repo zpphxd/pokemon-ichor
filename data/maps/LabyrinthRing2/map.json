@@ -304,6 +304,34 @@
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING2",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_CELLARS",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 19,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_CELLARS",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 18,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING2",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -1629,6 +1657,15 @@
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "LabyrinthRing2_EventScript_PlatesMoon"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing2_EventScript_CellarHole3"
     }
   ],
   "bg_events": [

@@ -2398,6 +2398,15 @@
 #define FLAG_ICHOR_HIDDEN_ITEM_R3_ETHER         (FLAG_ICHOR_GENERAL2_START + 0x487) // Ichor: Labyrinth Ring III: an Ether by the stream
 #define FLAG_ICHOR_HIDDEN_ITEM_TOMB_PEARL       (FLAG_ICHOR_GENERAL2_START + 0x488) // Ichor: Minos's tomb: a Pearl in the dust by the bier
 #define FLAG_ICHOR_HIDDEN_ITEM_TOMB_OBOL        (FLAG_ICHOR_GENERAL2_START + 0x489) // Ichor: Minos's tomb: the ferryman's Obol in a jar
+#define FLAG_ICHOR_ITEM_CELLAR_1                (FLAG_ICHOR_GENERAL2_START + 0x48A) // Ichor: Labyrinth cellars: room 1's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_2                (FLAG_ICHOR_GENERAL2_START + 0x48B) // Ichor: Labyrinth cellars: room 2's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_3                (FLAG_ICHOR_GENERAL2_START + 0x48C) // Ichor: Labyrinth cellars: room 3's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_4                (FLAG_ICHOR_GENERAL2_START + 0x48D) // Ichor: Labyrinth cellars: room 4's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_5                (FLAG_ICHOR_GENERAL2_START + 0x48E) // Ichor: Labyrinth cellars: room 5's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_6                (FLAG_ICHOR_GENERAL2_START + 0x48F) // Ichor: Labyrinth cellars: room 6's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_7                (FLAG_ICHOR_GENERAL2_START + 0x490) // Ichor: Labyrinth cellars: room 7's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_8                (FLAG_ICHOR_GENERAL2_START + 0x491) // Ichor: Labyrinth cellars: room 8's treasure
+#define FLAG_ICHOR_ITEM_CELLAR_9                (FLAG_ICHOR_GENERAL2_START + 0x492) // Ichor: Labyrinth cellars: room 9's treasure, two drops down
 #define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
 #define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
 #define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken

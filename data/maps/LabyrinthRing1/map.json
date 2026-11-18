@@ -223,6 +223,34 @@
       "elevation": 0,
       "dest_map": "MAP_LABYRINTH_RING1",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_CELLARS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_CELLARS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 2,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_LABYRINTH_RING1",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -279,6 +307,15 @@
       "var": "VAR_TEMP_1",
       "var_value": "0",
       "script": "LabyrinthRing1_EventScript_TieLesson"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LabyrinthRing1_EventScript_CellarHole1"
     }
   ],
   "bg_events": [

@@ -62,6 +62,7 @@ TABLES = {
     ("MAP_LABYRINTH_RING5", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
     ("MAP_LABYRINTH_RING6", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
     ("MAP_LABYRINTH_MINOS_TOMB", "Morning"): {"land_mons": land(TOMB, 4)},
+    ("MAP_LABYRINTH_CELLARS", "Morning"): {"land_mons": land(TOMB, 6)},
 }
 
 

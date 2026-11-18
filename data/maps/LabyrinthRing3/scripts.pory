@@ -92,10 +92,6 @@ script LabyrinthRing3_EventScript_Register {
     setvar(VAR_0x8005, 15)
     setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
     special(Ichor_AddThreadAnchor)
-    setvar(VAR_0x8004, 51)
-    setvar(VAR_0x8005, 23)
-    setvar(VAR_0x8006, THREAD_ANCHOR_UNNAMED)
-    special(Ichor_AddThreadAnchor)
 }
 
 // The ring's state, drawn on load and after every change: lit braziers, opened
@@ -177,5 +173,20 @@ script LabyrinthRing3_EventScript_Remains2 {
 
 script LabyrinthRing3_EventScript_Remains3 {
     msgbox(format("An explorer's satchel, rotted through. A map inside, every line crossed out."), MSGBOX_SIGN)
+}
+
+// Hook for later (the Three-Flamed Torch (post-game)): the spiders' mother-nest behind a thornweb only the Three-Flamed Torch burns (post-game)
+script LabyrinthRing3_EventScript_Lair3 {
+    lockall
+    if (!flag(FLAG_ICHOR_R3_STATIC)) {
+        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)
+        closemessage
+        setwildbattle(SPECIES_HYPHANTIS, 55)
+        dowildbattle
+        setflag(FLAG_ICHOR_R3_STATIC)
+    } else {
+        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
+    }
+    releaseall
 }
 // ---- END GENERATED ----

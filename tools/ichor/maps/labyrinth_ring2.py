@@ -323,6 +323,7 @@ def finish(m, mz, dead, render=True):
         X.later_gate(m, slots[0], "chain", "FLAG_ICHOR_HIDE_R2_SEAL", P, "2", "Taurivet", 52, "FLAG_ICHOR_R2_STATIC",
                      "ITEM_RELIC_SILVER", "FLAG_ICHOR_ITEM_R2_SHRINE",
                      "the runners' shrine behind a labrys seal: a stray of the palace herd that found its way down")
+    X.cellar_entries(m, mz, [2, 3], P)
     m.break_runs(starts)
     errs, reach = m.build("labyrinth_ring2", starts, views=VIEWS, render=render)
     return errs

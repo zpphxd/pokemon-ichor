@@ -181,3 +181,4 @@
 	.include "data/maps/Route14_Tretos/scripts.inc"
 	.include "data/maps/Nemea_Palaestra/scripts.inc"
 	.include "data/maps/Nemea_MolorchosHouse/scripts.inc"
+	.include "data/maps/LabyrinthCellars/scripts.inc"

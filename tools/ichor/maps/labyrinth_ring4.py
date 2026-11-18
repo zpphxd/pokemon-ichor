@@ -32,6 +32,7 @@ SPRING_Y = 20
 
 def maze(seed=SEED):
     mz = Maze(12, 10, seed)
+    mz.room(0, 5, 3, 8)       # the dig cavern: the Titans broke into a great cave and its river
     for r in (ENTRY, BARRACKS, ARMORY, MESS, CHECK):
         mz.room(*r)
     keep = [((10, 7), (10, 8)), ((11, 7), (11, 8)), ((9, 7), (9, 8))]   # the checkpoint's north wall
@@ -206,6 +207,7 @@ def finish(m, mz, render=True):
         X.later_gate(m, slots[-1], "boulder", "FLAG_ICHOR_HIDE_R4_BOULDER", P, "4", "Geogrip", 56, "FLAG_ICHOR_R4_STATIC",
                      "ITEM_NUGGET", "FLAG_ICHOR_ITEM_R4_DEEP",
                      "the Titans' deepest dig, sealed by a great boulder only Hephaestus's Hammer breaks (post-game)")
+    X.cellar_entries(m, mz, [5, 6], P)
     m.break_runs(starts)
     water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
     errs, reach = m.build("labyrinth_ring4", starts, views=VIEWS, render=render, extra=water)
