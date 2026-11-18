@@ -281,7 +281,11 @@
     "Lakonia_Palaestra",
     "Lakonia_Orthia",
     "Lakonia_ChilonHouse",
-    "Lakonia_LichasHouse"
+    "Lakonia_LichasHouse",
+    "Route26_Skiritis",
+    "LakeStymphalia",
+    "Route27_ArkadianHills",
+    "Route27_SkiritaiCave"
   ],
   "gMapGroup_Delphoi": [
     "Route28_SacredOlives",

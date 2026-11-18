@@ -602,6 +602,7 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   | +0x10–0x13 | world-act1 | the Telesterion's season braziers in Eleusa: autumn, winter, spring, summer |
   | +0x14–0x1F | world-act1 | kept: the Mystery sanctum's four, Eleusa's procession torches |
   | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and oracle's chamber; Salt Well B2F uses +0x24; room for Arkadia and Kaldera |
+  | +0x60 | world-act3 | the Skiritai cave off Route 27 (`tools/ichor/maps/stymphalia.py`) |
   ```
   // the brazier's bg event
   script Map_Brazier1 {

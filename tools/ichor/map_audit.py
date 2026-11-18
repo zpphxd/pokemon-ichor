@@ -90,7 +90,7 @@ STAGES = [  # (stage, band, route numbers, place prefixes)
                                          "Samos", "Chios", "Lesbos")),
     ("Kythera", "late", (22,), ("Melos", "Kythera")),
     ("Knossa", "late", (23,), ("Knossa", "Amnisos", "Labyrinth")),
-    ("Lakonia", "late", (24, 25, 26, 27), ("Gytheion", "Lakonia", "Stymphalia")),
+    ("Lakonia", "late", (24, 25, 26, 27), ("Gytheion", "Lakonia", "Stymphalia", "LakeStymphalia")),
     ("Delphoi", "late", (28,), ("Delphoi",)),
     ("Ascent", "late", (29, 30), ("Thermopylai", "Tempe", "Ascent", "Olympus", "Pantheon")),
     ("post-game", "late", (31, 32, 33, 34), ("Tainaron", "Olympia", "Atlantis", "Rhodos", "Ithaka", "Kerkyra")),

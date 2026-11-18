@@ -68,6 +68,7 @@ TOWNS = [
     ("Route28_SacredOlives", (42, 2), (42, 3),  (43, 2),   "the gorge path, above Hieron's clearing"),
     ("Delphoi",           (37, 41),  (37, 40),  (38, 41),  "the falls road, from the Kastalian Gorge"),
     ("Ascent_2F",         (3, 41),   (3, 42),   (4, 41),   "the cloud ledges' landing, up from the slopes"),
+    ("LakeStymphalia",    (19, 32),  (18, 32),  (20, 32),  "the causeway's foot, from Route 26"),
 ]
 
 

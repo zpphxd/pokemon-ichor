@@ -35,6 +35,7 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 
 ### The road north from Lakonia: Route 26, Lake Stymphalia, Route 27
 - Lakonia's north road is roped off with a cadet for now; the player leaves by Wings. Build the walkable road to today's standard (a cave or climb, the Stymphalian marshes with their birds, a midpoint rest with a herm). It needs its own flag and trainer range (claim_ranges.md).
+- **Built (2026-11-18, `tools/ichor/maps/stymphalia.py`):** Route 26, Lake Stymphalia, Route 27 and the Skiritai cave, opened by III-5J as the story's road to Arkadia (the Wings still work). 31 trainers, Akanthis's rest and the lake's travel herm, two route herms, the bronze flock's first-crossing scene, and nine relics in use. Finds and hooks: `design/maps/Route26_Skiritis.md`, `LakeStymphalia.md`, `Route27_ArkadianHills.md`; the walk is `tools/ichor/tests/stymphalia.sh`. Still open: the deep reeds' rainy Lernip roll, Ares's gully (theoxenia E4), the scytale reading, the Karyai berry trees.
 
 ### Wild Pokémon distribution pass
 - **Problem found:** Act II adds only 10 new species; Galenyon, Cairnolith, Pebblith, Kerazap, Gelasable and Galekit fill 40–57 maps each; about 18 regular lines can't be caught wild in the story (Chalkip, Elegull, Elektear, Erosie, Hymnet, Kalliglyph, Kerdovix, Skylaps, Sepidart, Sporadon, Ophidrop, Pagoshard, Lebetron, Bouldyphus, Enigmaw, Aetling and more); Nebrel, a starter, is wild on Routes 7–9.

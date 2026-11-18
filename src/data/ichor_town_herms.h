@@ -35,4 +35,5 @@ const struct IchorTownHerm gIchorTownHerms[TOWN_HERM_MAX] =
     [TOWN_HERM_SACRED_OLIVES] = { MAP_ROUTE28_SACRED_OLIVES, 43, 2, HEAL_LOCATION_NONE,          COMPOUND_STRING("Sacred Olives") },
     [TOWN_HERM_DELPHOI]    = { MAP_DELPHOI,            38, 41, HEAL_LOCATION_DELPHOI,             COMPOUND_STRING("Delphoi") },
     [TOWN_HERM_ASCENT]     = { MAP_ASCENT_2F,           4, 41, HEAL_LOCATION_NONE,                COMPOUND_STRING("The Ascent") },
+    [TOWN_HERM_STYMPHALIA] = { MAP_LAKE_STYMPHALIA,    20, 32, HEAL_LOCATION_NONE,                COMPOUND_STRING("Stymphalia") },
 };

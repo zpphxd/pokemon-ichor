@@ -245,6 +245,18 @@
       "y": 14
     },
     {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_26",
+      "map": "MAP_ROUTE26_SKIRITIS",
+      "x": 12,
+      "y": 15
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_27",
+      "map": "MAP_ROUTE27_ARKADIAN_HILLS",
+      "x": 16,
+      "y": 12
+    },
+    {
       "id": "HEAL_LOCATION_GYTHEION",
       "map": "MAP_GYTHEION",
       "x": 7,

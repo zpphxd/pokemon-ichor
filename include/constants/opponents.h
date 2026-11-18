@@ -338,7 +338,41 @@
 #define TRAINER_ICHOR_GIGAS_EPHIALTES         442
 #define TRAINER_ICHOR_GIGAS_THOAS             443
 #define TRAINER_ICHOR_CHRYSOTHEMIS            444
-#define TRAINERS_END_ACT3 499
+// Ichor: the road north from Lakonia begin (tools/ichor/maps/stymphalia.py)
+// Route 26, Lake Stymphalia, Route 27 and the Skiritai cave: ids 1404-1434 of world-act3's 1404-1503.
+#define TRAINER_ICHOR_ANAXILAS                     1404
+#define TRAINER_ICHOR_R26_DROMAS                   1405
+#define TRAINER_ICHOR_ANAXANDROS                   1406
+#define TRAINER_ICHOR_R26_PALAISTES                1407
+#define TRAINER_ICHOR_R26_ARGEIOS                  1408
+#define TRAINER_ICHOR_R26_PHRYNON                  1409
+#define TRAINER_ICHOR_R26_KRYPTIS                  1410
+#define TRAINER_ICHOR_DIENEKES                     1411
+#define TRAINER_ICHOR_R26_AIPOLOS                  1412
+#define TRAINER_ICHOR_KYKNOS                       1413
+#define TRAINER_ICHOR_STYM_HALIA                   1414
+#define TRAINER_ICHOR_TITANBORN_BORBOROS           1415
+#define TRAINER_ICHOR_STYM_TENAGOS                 1416
+#define TRAINER_ICHOR_MELAMPOUS                    1417
+#define TRAINER_ICHOR_DONAX                        1418
+#define TRAINER_ICHOR_STYM_ORNITHE                 1419
+#define TRAINER_ICHOR_STYM_SKIRITES                1420
+#define TRAINER_ICHOR_STYM_LIMNAIA                 1421
+#define TRAINER_ICHOR_TITYOS                       1422
+#define TRAINER_ICHOR_R27_KORE                     1423
+#define TRAINER_ICHOR_R27_LOCHAGOS                 1424
+#define TRAINER_ICHOR_OTHRYADES                    1425
+#define TRAINER_ICHOR_R27_AGRIA                    1426
+#define TRAINER_ICHOR_R27_KARYATIS                 1427
+#define TRAINER_ICHOR_R27_PHOROS                   1428
+#define TRAINER_ICHOR_R27_SKOPOS                   1429
+#define TRAINER_ICHOR_R27_ANABATES                 1430
+#define TRAINER_ICHOR_STHENELAIDAS                 1431
+#define TRAINER_ICHOR_R27_KYNEGOS                  1432
+#define TRAINER_ICHOR_SKIRITAI_KRYPTE              1433
+#define TRAINER_ICHOR_SKIRITAI_ARKTOS              1434
+// Ichor: the road north from Lakonia end
+#define TRAINERS_END_ACT3 1435 // the road north from Lakonia's 1434 is Act III's highest
 
 // The League (world-act3's Olympus), ids 460-499, below Kythera's and Knossa's
 // claims from 320 up (tools/ichor/claim_ranges.md): the Ascent, the Pantheon, the Archon.

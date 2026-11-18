@@ -21,6 +21,15 @@ from lakonia_maps import A, LMap
 W, H = 52, 42
 ENTRY_ROW = 37               # Route 25 comes in on rows 36..38 at the east edge
 EAST_SEAM_ROWS = range(ENTRY_ROW - 3, H)   # rows Route 25 overlaps (aethos only, x >= 44)
+# Route 26 (gTileset_Stymphalia) joins the north road at offset 9 (tools/ichor/maps/
+# stymphalia.py). Its walkable seam rows sit over our x 23-27, so the camera there
+# sees our x 15-35 of the top six rows: those keep to aethos (MAP_DESIGN §5).
+NORTH_OFFSET = 9
+NORTH_STRIP = {(x, y) for x in range(15, 36) for y in range(6)}
+
+
+def north_strip(x, y):
+    return (x, y) in NORTH_STRIP
 
 
 def river_cols(y):
@@ -42,7 +51,8 @@ def land():
             if 0 <= x < W and 0 <= y < H:
                 g[y][x] = c
     fill(0, 0, 3, H - 1, "M")                      # Taygetos, the west wall
-    fill(4, 0, 23, 1, "M")                          # and its spur over the agoge
+    fill(4, 0, 14, 1, "M")                          # and its spur over the agoge
+    fill(15, 0, 23, 5, "T")                         # the north woods run west to the spur
     for y in range(H):
         a, b = river_cols(y)
         fill(a, y, b, y, "w")
@@ -75,12 +85,12 @@ def build():
     # ---- Taygetos -----------------------------------------------------------------------
     for y in range(2, H):
         m.piece("taygetos", "side_E", 3, y)
-    for x in range(4, 24):
+    for x in range(4, 15):
         m.piece("taygetos", "lip_b" if x % 2 else "lip", x, 1)
-        m.piece("taygetos", "pine_face" if x in (6, 13, 20) else ("face_b" if x % 2 else "face"), x, 2)
+        m.piece("taygetos", "pine_face" if x in (6, 13) else ("face_b" if x % 2 else "face"), x, 2)
         m.piece("taygetos", "foot_b" if x % 2 else "foot", x, 3)
     m.piece("taygetos", "side_E_foot", 3, 3)
-    for (x, y) in ((4, 12), (4, 29), (5, 19), (4, 38), (22, 4)):
+    for (x, y) in ((4, 12), (4, 29), (5, 19), (4, 38)):
         m.piece("taygetos", "scree", x, y)
     for (x, y) in ((4, 16), (4, 40), (4, 25), (4, 33), (4, 6)):
         m.piece("taygetos", "boulder", x, y)
@@ -90,10 +100,11 @@ def build():
     # the agoge stands a terrace above the village: its yard drops to the lanes
     m.ledge_run(5, 9, 17)
     m.ledge_run(13, 19, 17)
-    m.woods(m.cells("T"), salt=3, aethos_only=lambda x, y: x >= 44 and y in EAST_SEAM_ROWS)
+    m.woods(m.cells("T") - {(24, 0), (24, 1), (26, 0), (26, 1)}, salt=3,
+            aethos_only=lambda x, y: (x >= 44 and y in EAST_SEAM_ROWS) or north_strip(x, y))
     # ---- the agoge: barracks, the great yard, the ring ----------------------------------
     yard = {(x, y) for x in range(5, 23) for y in range(7, 17)}
-    yard |= {(x, y) for x in range(13, 24) for y in (4, 5, 6)}
+    yard |= {(x, y) for x in range(13, 15) for y in (4, 5, 6)} | {(x, 6) for x in range(15, 24)}
     yard -= {(5, 16), (22, 16), (22, 7), (5, 7), (6, 16)}
     m.soft("yard", yard, yard, edge_in=False)
     m.front("barracks", 6, 4)                        # door (9,6)
@@ -102,7 +113,7 @@ def build():
     m.part("house", "G_spears", 21, 9, 1, 1)         # a rack of practice spears in the yard
     m.part("house", "G_wood", 6, 9, 1, 1)
     # ---- the Sown Field, the wrestling sands, the palaestra -----------------------------
-    m.put("sown", 30, 5, cells={(i, j) for i in range(3) for j in range(3)})
+    m.put("sown", 30, 6, cells={(i, j) for i in range(3) for j in range(3)})
     sx, sy = 29, 12                                  # the wrestling sands (29..35, 12..14)
     for y in range(sy, sy + 3):
         for x in range(sx, sx + 7):
@@ -164,8 +175,8 @@ def build():
     for x in range(20, 23):                          # the Mani road's rope
         m.piece("rope", "post_L" if x == 20 else ("post_R" if x == 22 else "rope"), x, 40)
     m.set(19, 40, A.STELE, True)
-    for x in range(24, 27):                          # the north road, roped until Route 26 opens
-        m.piece("rope", "post_L" if x == 24 else ("post_R" if x == 26 else "rope"), x, 1)
+    for x in (24, 26):                               # the north road's gateposts: two cypresses
+        m.cypress(x, 0)                              # (a cadet holds the gap until III-5J)
     # ---- across the river: the Menelaion on its ridge, and olive groves ------------------
     for x in range(45, 51):
         m.piece("taygetos", "lip_b" if x % 2 else "lip", x, 12)
@@ -195,7 +206,6 @@ def build():
              if int(m.mid[y, x]) in (A.GRASS, A.SHADE) and not m.solid[y, x] and (x, y) != (7, 29)},
             salt=31, aethos_only=lambda x, y: False)
     m.border = [A.GRASS, A.GRASS, A.GRASS, A.GRASS]
-    # no up seam yet: Route 26 is not built (its builder agrees the north strip)
 
     # ---- events -------------------------------------------------------------------------
     S = "Lakonia_EventScript_"
@@ -245,7 +255,7 @@ def build():
     o("ICHOR_CADET", 26, 30, S + "Cadet", "MOVEMENT_TYPE_WALK_UP_AND_DOWN", ry=3)
     o("ICHOR_CADET_F", 10, 10, S + "CadetYard", "MOVEMENT_TYPE_WANDER_AROUND", rx=3, ry=2)
     o("ICHOR_CADET", 33, 8, S + "CadetField", "MOVEMENT_TYPE_WANDER_AROUND", rx=2, ry=1)
-    o("ICHOR_CADET", 27, 2, S + "NorthGuard", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_LAKONIA_NORTH_GUARD")
+    o("ICHOR_CADET", 25, 1, S + "NorthGuard", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_LAKONIA_NORTH_GUARD")
     o("ICHOR_HOPLITE", 31, 13, S + "Wrestler", "MOVEMENT_TYPE_FACE_LEFT")
     m.item_ball(49, 9, "ITEM_RARE_CANDY", "FLAG_ICHOR_ITEM_LAKONIA_MENELAION")
     o("BREAKABLE_ROCK", 3, 10, "EventScript_RockSmash", "MOVEMENT_TYPE_NONE", flag="FLAG_ICHOR_HIDE_LAKONIA_RUBBLE")
@@ -271,10 +281,15 @@ def build():
     for x in range(24, 27):
         m.trigger(x, 4, S + "GoatPaths", "VAR_TEMP_3", 0)
     m.connect("right", ENTRY_ROW - 3, "MAP_ROUTE25_EUROTAS")
+    m.connect("up", NORTH_OFFSET, "MAP_ROUTE26_SKIRITIS")
     starts = [(W - 1, ENTRY_ROW)]
     must = [(24, 22, "the agora"), (16, 13, "the ring"), (11, 29, "Lampito's step")]
     views = [(44, 37), (31, 35), (24, 23), (12, 30), (16, 11), (26, 5), (32, 11), (8, 37), (47, 9)]
     errs = m.build("lakonia", starts, must, views)
+    for (x, y) in sorted(NORTH_STRIP):
+        if int(m.mid[y, x]) >= 0x200:
+            print(f"Lakonia CHECK: ({x},{y}) holds lakonia 0x{int(m.mid[y, x]):03X} in Route 26's seam strip")
+            errs.append("seam")
     for y in EAST_SEAM_ROWS:
         for x in range(W - 8, W):
             if int(m.mid[y, x]) >= 0x200:
