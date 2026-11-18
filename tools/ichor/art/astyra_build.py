@@ -40,11 +40,15 @@ ROOT = K.ROOT
 TILES_PY = ROOT / "tools/ichor/maps/astyra_tiles.py"
 DOC = ROOT / "design/awe"
 NAMES = ["astyra", "akropolis"]
+# pieces whose every pixel was placed by hand: never redrawn as a near-duplicate
+EXACT = {"promachos", "skyline_promachos", "kodros", "kairos", "votive", "brazier"}
 
 KB.ANIM_ORDER.update({
     # the spear tip: a long rest, the sparkle running down it, the flare
     "glint": ["0", "0", "0", "0", "0", "0", "1", "2", "3", "0", "0", "0"],
     "spout": ["0", "1", "2"],
+    # a brazier's fire, never still
+    "flame": ["0", "1", "2"],
 })
 
 
@@ -55,12 +59,15 @@ def spec(name):
         return {
             "symbol": "gTileset_Akropolis", "dir": "akropolis", "label": "Akropolis",
             "title": "the Akropolis of Astyra", "maps": "Astyra_Akropolis", "groups": groups,
-            "merge_px": 5,
-            "sections": [("rock", [by["cliff"], by["edge"], by["ramp"]]),
-                         ("monuments", [by["parthenon"], by["promachos"], by["erechtheion"],
-                                        by["propylaia"], by["altar"], by["spring"]]),
-                         ("ruins", [by["foundations"], by["old_columns"], by["ruins"], by["col_moss3"],
-                                    ])],
+            # the architecture's flat fields merge at 8 px (statues are EXACT)
+            "merge_px": 8,
+            # one section, tallest first, so the packer leaves few holes in
+            # the 512 metatiles (the polish pass added the precinct kit)
+            "sections": [("akropolis", [by["parthenon"], by["promachos"], by["erechtheion"],
+                                        by["propylaia"], by["old_columns"], by["cliff"],
+                                        by["foundations"], by["pave"], by["col_moss3"], by["ramp"],
+                                        by["altar"], by["outcrop"], by["votive"], by["brazier"],
+                                        by["edge"], by["spring"], by["ruins"]])],
             "labels": [("spring", [("well_shut", "WellShut"), ("well_open", "WellOpen"),
                                    ("cleft", "Cleft"), ("rubble", "Rubble")])],
         }
@@ -71,7 +78,7 @@ def spec(name):
         return {
             "symbol": "gTileset_Astyra", "dir": "astyra", "label": "Astyra",
             "title": "Astyra, the capital", "maps": "Astyra, Astyra_Harbor", "groups": groups,
-            "merge_px": 5,
+            "merge_px": 6,             # statues are EXACT; the new Promachos crop needed the room
             "sections": CA.sections(by),
             "labels": CA.LABELS,
         }
@@ -148,8 +155,10 @@ def build_one(name, compile_=True):
     if not probs:
         before = len(K.tiles_of(structs))
         merges = []
+        # statues stay pixel-exact; the architecture's near-duplicates merge
+        loose = [s for s in structs if s.key not in EXACT]
         for _ in range(2):
-            merges += K.merge_near_duplicates(structs, sp.get("merge_px", KB.NEAR_DUPLICATE_PX), group_rgb)
+            merges += K.merge_near_duplicates(loose, sp.get("merge_px", KB.NEAR_DUPLICATE_PX), group_rgb)
         print(f"{name}: merged {len(merges)} near-duplicate tiles: {before} -> {len(K.tiles_of(structs))} tiles")
         probs = K.validate(structs, group_rgb)
     for p in probs[:60]:

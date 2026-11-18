@@ -56,13 +56,13 @@ const u16 *const gTilesetAnims_PorytilesManaged_Astyra_Spout[] = {
 static void QueueAnimTiles_PorytilesManaged_Astyra_Glint(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Astyra_Glint);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Astyra_Glint[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), 1 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Astyra_Glint[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), 3 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Astyra_Spout(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Astyra_Spout);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Astyra_Spout[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 2)), 7 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Astyra_Spout[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 4)), 7 * TILE_SIZE_4BPP);
 }
 
 // ============================================

@@ -37,6 +37,10 @@ NEW = {
     "hw1": (176, 152, 120), "hw2": (216, 192, 152), "hw3": (240, 224, 192),
     # the city's water
     "aw1": (40, 88, 152), "aw2": (72, 136, 200), "aw3": (144, 200, 232),
+    # Astyra's statue bronze: two steps between the kit's bz0-bz3 (a deep
+    # crease and a half-tone), a pale gold for the highlights, the crest's
+    # dark red (STYLE §4.8.4: drapery in 4-5 value steps)
+    "bzd": (104, 64, 40), "bzm": (168, 120, 56), "pgw": (248, 240, 176), "prd": (120, 32, 32),
 }
 for _n, _c in NEW.items():
     assert all(v % 8 == 0 for v in _c), _n
@@ -46,7 +50,11 @@ for _n, _c in NEW.items():
 
 GROUPS = {
     "marble": CK.GROUPS["marble"],
-    "bronze": CK.GROUPS["bronze"],
+    # the statue bronze: a 7-step ramp (bz0 bzd bz1 bzm bz2 bz3 pg2), gold,
+    # the crest's reds, and the three marble values a plinth top shares with
+    # the feet standing on it
+    "bronze": ["bz0", "bzd", "bz1", "bzm", "bz2", "bz3", "pg1", "pg2", "pgw", "pr1", "prd",
+               "vg1", "cm1", "cm3", "cm5"],
     "ruin": CK.GROUPS["ruin"],
     # the rock, its scrub, and the shadows it casts on path and grass
     "rock": ["ar0", "ar1", "ar2", "ar3", "ar4", "ar5", "gd", "t0", "ps", "mo1", "mo2", "iv1",
@@ -390,8 +398,7 @@ def poly_wall_px(X, Y, seed=0):
             xx = x0 + (x1 - x0) * (y - y0) / max(1, (y1 - y0))
             if abs(xx - x) < 0.6:
                 return "ar1"
-    k = hp(X, Y, 17 + seed)
-    return "ar3" if k % 9 == 0 else "ar2"
+    return "ar2"
 
 
 def ramp_kit(key="ramp"):
@@ -402,18 +409,22 @@ def ramp_kit(key="ramp"):
                           the wall face and its cast shadow on the lower path
       stair_L, stair, stair_R, stair_top_L/M/R
                           marble steps cut up through the wall (walkable)
-      post                a stone bollard by a stair head
+      cap_pier, wall_pier, foot_pier
+                          a buttress pier: over the coping, down the face, and
+                          its stepped foot on the lower terrace (all solid)
     """
     names = {"cap_L": (0, 0), "cap": (1, 0), "cap_R": (2, 0), "stair_top_L": (3, 0), "stair_top": (4, 0),
-             "stair_top_R": (5, 0), "post": (6, 0), "cap_b": (7, 0),
+             "stair_top_R": (5, 0), "foot_pier": (6, 0), "cap_b": (7, 0),
              "wall_L": (0, 1), "wall": (1, 1), "wall_R": (2, 1), "stair_L": (3, 1), "stair": (4, 1),
-             "stair_R": (5, 1), "wall_b": (7, 1), "wall_drain": (6, 1)}
-    s = struct(key, "the ramp's retaining walls and stairs", 8, 2, "akropolis",
-               walk=["XXX...XX", "XXX...XX"], names=names, on="path")
-    keep = ["cap_L", "cap", "cap_R", "stair_top_L", "stair_top", "stair_top_R", "post",
-            "wall_L", "wall", "wall_R", "stair_L", "stair", "stair_R"]
+             "stair_R": (5, 1), "wall_b": (7, 1), "wall_drain": (6, 1),
+             "cap_pier": (8, 0), "wall_pier": (8, 1)}
+    s = struct(key, "the ramp's retaining walls and stairs", 9, 2, "akropolis",
+               walk=["XXX...XXX", "XXX...XXX"], names=names, on="path")
+    keep = ["cap_L", "cap", "cap_R", "stair_top_L", "stair_top", "stair_top_R", "cap_pier",
+            "wall_L", "wall", "wall_R", "stair_L", "stair", "stair_R", "wall_pier", "foot_pier"]
     L = s.M
-    for name in ("cap_L", "cap", "cap_R", "cap_b", "wall_L", "wall", "wall_R", "wall_b", "wall_drain"):
+    for name in ("cap_L", "cap", "cap_R", "cap_b", "wall_L", "wall", "wall_R", "wall_b", "wall_drain",
+                 "cap_pier", "wall_pier"):
         cx, cy = names[name]
         seed = cx
         for y in range(16):
@@ -468,15 +479,46 @@ def ramp_kit(key="ramp"):
                     continue
                 t = (yy - 6) % 5
                 L.px(X, Y, "ar5" if t == 0 else "ar4" if t < 3 else "ar3" if t == 3 else "ar1")
-    # a bollard
-    cx, cy = names["post"]
-    for y in range(6, 15):
-        for x in range(5, 11):
-            e = x in (5, 10) or y == 14
-            L.px(cx * 16 + x, y, "ar0" if e else "ar5" if x < 7 else "ar3" if x < 9 else "ar2")
-    for x in range(8, 13):
-        L.px(cx * 16 + x, 15, "ps")
-    return K.pick(s, keep, w=7, key=key)
+    # a buttress pier against the wall: it rises over the coping, lit on its
+    # west face, its shadow on the wall face to its east and on the path below
+    # (cap_pier over wall_pier), stepping out onto the lower terrace in
+    # foot_pier: lit on its west face, its shadow east of it and below it
+    ox = names["cap_pier"][0] * 16
+    fx = names["foot_pier"][0] * 16
+
+    def pier_px(x, yy):
+        if x in (3, 12):
+            return "ar0"
+        c = "ar5" if x == 4 else "ar4" if x < 8 else "ar3" if x < 11 else "ar2"
+        return "ar1" if (yy - 5) % 6 == 5 else c
+    for yy in range(2, 32):
+        for x in range(3, 15):
+            X = ox + x
+            if x > 12:
+                if yy > 6 and x < 15 and yy < 26:
+                    L.px(X, yy, "ar1")                         # its shadow on the wall face
+                continue
+            if yy == 2:
+                c = "ar0"
+            elif yy < 5:
+                c = "ar5" if yy == 3 else "ar4"                # the pier's cap
+            elif yy == 5:
+                c = "ar1"
+            else:
+                c = pier_px(x, yy)
+            L.px(X, yy, c)
+    for y in range(16):
+        for x in range(2, 16):
+            X = fx + x
+            if y < 8 and 3 <= x <= 12:
+                L.px(X, y, pier_px(x, y + 32))
+            elif 8 <= y < 12 and x <= 13:
+                c = "ar5" if y == 8 else "ar3" if y < 11 else "ar1"     # its stepped base
+                L.px(X, y, "ar0" if x in (2, 13) else c)
+            elif (y < 12 and x >= 13) or (12 <= y < 15 and x >= 4):
+                if y == 12 or x == 13 or (x + y) % 2 == 0:
+                    L.px(X, y, "ps")
+    return K.pick(s, keep, w=8, key=key)
 
 
 # --------------------------------------------------------------------------
@@ -924,7 +966,7 @@ def erechtheion(key="erechtheion"):
         karyatid(L, P0 + 8 + 16 * k, 53, 82, 0)
     for y in range(83, 112):
         for x in range(P0, P1 + 1):
-            c = "cm4" if y < 86 else "cm3" if hp(x, y, 3) % 11 else "cm2"
+            c = "cm4" if y < 86 else "cm3"
             if y in (83, 111) or x in (P0, P1):
                 c = "cm0"
             if y == 84:
@@ -1099,8 +1141,6 @@ def foundations(key="foundations", on="path"):
             for x in range(x0, x0 + w):
                 e = x in (x0, x0 + w - 1) or y in (y0, y0 + hh - 1)
                 c = rmp[0] if (y == y0 + hh - 1 or x == x0 + w - 1) else rmp[4] if y == y0 or x == x0 else rmp[3]
-                if not e and hp(x, y, 9) % 13 == 0:
-                    c = rmp[2]
                 Lm.px(x, y, c)
     for n, (cx, cy) in names.items():
         ox, oy = cx * 16, cy * 16
@@ -1245,6 +1285,300 @@ def spring(key="spring", on="path"):
     return s
 
 
+# --------------------------------------------------------------------------
+# The precinct: paved ways, bedrock, votives, braziers
+# --------------------------------------------------------------------------
+
+def pave_px(X, Y):
+    """Limestone flags, 16 px periodic: courses 8 px tall, joints staggered
+    (slabs 10 + 6 wide, then 8 + 8), each slab lit on its top and left edges,
+    shaded on its bottom and right. Low contrast: this is ground you walk on."""
+    x, y = X % 16, Y % 16
+    course = y // 8
+    yy = y % 8
+    joints = (0, 10) if course == 0 else (5, 13)
+    if yy == 7 or x in joints:
+        return "ar2"
+    nxt = [j for j in joints if j > x]
+    right = (nxt[0] if nxt else joints[0] + 16) - 1
+    if yy == 0 or x - 1 in joints or (x == 0 and 15 in [j - 1 for j in joints]):
+        return "ar5"
+    if yy == 6 or x == right:
+        return "ar3"
+    return "ar4"
+
+
+def pave(key="pave"):
+    """A paved processional way as a 9-patch on borrowed path (TL T TR / L C
+    R / BL B BR), walkable: flags inside a kerb of long stones (lit on its
+    north and west, a shadow line south and east), the worn path showing at
+    the outer edge. Plus `C2`, a cracked, sunken flag."""
+    names = {"TL": (0, 0), "T": (1, 0), "TR": (2, 0), "L": (0, 1), "C": (1, 1), "R": (2, 1),
+             "BL": (0, 2), "B": (1, 2), "BR": (2, 2), "C2": (3, 1)}
+    s = struct(key, "the paved way", 4, 3, "akropolis", walk=["...."] * 3, names=names, on="path")
+    L = s.M
+    m0, m1 = 3, 45                      # the paved area inside the 48 x 48 9-patch
+    for Y in range(48):
+        for X in range(48):
+            if not (m0 <= X <= m1 and m0 <= Y <= m1):
+                continue
+            if (X, Y) in ((m0, m0), (m1, m0), (m0, m1), (m1, m1)):
+                continue                # the kerb's corners worn round
+            dx, dy = min(X - m0, m1 - X), min(Y - m0, m1 - Y)
+            d = min(dx, dy)
+            if d == 0:
+                c = "ar2" if (X == m1 or Y == m1) else "ar3"
+            elif d == 1:
+                c = "ar3" if (X > m1 - 2 or Y > m1 - 2) else "ar5"
+            elif d == 2:
+                c = "ar4" if (X > m1 - 3 or Y > m1 - 3) else "ar4"
+                if (X == m0 + 2 and Y % 12 == 0) or (Y == m0 + 2 and X % 12 == 0):
+                    c = "ar2"           # joints between the kerb stones
+            elif d == 3:
+                c = "ar2"
+            else:
+                c = pave_px(X, Y)
+            L.px(X, Y, c)
+    # the kerb's shadow on the path, south and east
+    for i in range(m0 + 2, m1 + 2):
+        if i % 2 == 0 or i < m1 - 3:
+            L.px(i, m1 + 1, "ps")
+            L.px(m1 + 1, i, "ps")
+    # C2: a cracked flag
+    for Y in range(16, 32):
+        for X in range(16, 32):
+            L.px(48 + X - 16, Y, L.get(X, Y))
+    for (x, y) in ((3, 2), (4, 3), (5, 3), (6, 4), (7, 5), (8, 5), (9, 6)):
+        L.px(48 + x, 16 + y, "ar2")
+        L.px(48 + x, 16 + y + 1, "ar5")
+    for y in range(1, 6):
+        for x in range(1, 9):
+            if L.get(48 + x, 16 + y) == "ar4":
+                L.px(48 + x, 16 + y, "ar3")
+    return K.pick(s, list(names), w=4, key=key)
+
+
+def outcrop(key="outcrop", on="path"):
+    """The bare rock breaking through the plateau (3 x 2, solid): two tiers of
+    weathered limestone, each with a lit top and a short riser, the south face
+    cracked, scrub in a crevice, the cast shadow down and right."""
+    W, H = 3, 2
+    L = canvas(W, H)
+    outer = mask_draw(48, 32, lambda d: d.polygon(
+        [(2, 13), (5, 6), (12, 3), (24, 2), (35, 4), (43, 8), (45, 15), (44, 24), (37, 28), (20, 29),
+         (7, 27), (2, 21)], fill=1))
+    upper = mask_draw(48, 32, lambda d: d.polygon(
+        [(14, 6), (25, 4), (36, 7), (41, 12), (39, 16), (23, 17), (13, 14)], fill=1))
+    sh = CK.SHADOW.get(on, "ps")
+    # the shadow first, offset down and right
+    for y in range(32):
+        for x in range(48):
+            if outer[max(0, y - 2), max(0, x - 2)] and not outer[y, x] and ((x + y) % 2 == 0 or
+                                                                              outer[max(0, y - 1), max(0, x - 1)]):
+                L.px(x, y, sh)
+    bottom = {}
+    for x in range(48):
+        ys = np.nonzero(outer[:, x])[0]
+        if len(ys):
+            bottom[x] = ys.max()
+    for y in range(32):
+        for x in range(48):
+            if not outer[y, x]:
+                continue
+            face = y > bottom[x] - 6
+            if face:
+                c = "ar2" if x < 30 else "ar1"
+                if y == bottom[x] - 5:
+                    c = "ar3"
+                if x % 7 == 3 and y > bottom[x] - 5:
+                    c = "ar1" if x < 30 else "ar0"      # vertical fractures in the face
+            elif upper[y, x]:
+                c = "ar5" if (y < 9 or x < 18) else "ar4"
+            else:
+                c = "ar4" if x < 20 or y < 10 else "ar3"
+                if upper[max(0, y - 1), x] and not upper[y, x]:
+                    c = "ar2"                            # the upper tier's riser
+                elif upper[max(0, y - 2), x] and not upper[y, x]:
+                    c = "ar1" if x > 28 else "ar2"
+            L.px(x, y, c)
+    outline_mask(L, outer, "ar0")
+    for (x, y, c) in ((9, 11, "iv2"), (10, 10, "iv2"), (11, 11, "iv1"), (10, 12, "iv1"), (8, 12, "mo2"),
+                      (33, 20, "mo2"), (34, 19, "mo2"), (35, 20, "mo1"), (28, 9, "ar2"), (29, 10, "ar2"),
+                      (30, 10, "ar2")):
+        L.px(x, y, c)
+    return cut(key, "the bare rock", W, H, {"middle": L}, ["XXX", "XXX"], on=on,
+               names={"TL": (0, 0), "T": (1, 0), "TR": (2, 0), "BL": (0, 1), "B": (1, 1), "BR": (2, 1)},
+               notes="The bedrock breaking through the plateau (3 x 2): two weathered tiers, each lit "
+                     "on top with a riser below, a cracked south face, scrub in a crevice, its shadow "
+                     "down and right. Solid.")
+
+
+VOTIVE_KOUROS = [
+    # a bronze kouros: the striding youth, fists at his sides, left foot forward
+    "......###.......",
+    ".....#d33#......",
+    ".....#332#......",
+    ".....#d21#......",
+    "......#2#.......",
+    "...###3221###...",
+    "..#3##32211#2#..",
+    "..#3#33221m#1#..",
+    "..#3#3322m1#1#..",
+    "..#3#332m21#1#..",
+    "..#2#3222m1#d#..",
+    "..#2#32221m#d#..",
+    "...##33221###...",
+    "....#33#211#....",
+    "....#32##21#....",
+    "...#32#..#21#...",
+    "...#32#..#21#...",
+    "..#332#..#211#..",
+    "..####....####..",
+]
+VOTIVE_KORE = [
+    # a painted marble kore: braided dark hair, a smile, the offering held out
+    "......###.......",
+    ".....#hhh#......",
+    ".....#h54h#.....",
+    ".....#h43h#.....",
+    "....#hh#3#hh#...",
+    "...#4h455443h#..",
+    "...#4#4bbbb3#...",
+    "..#gg#44543##...",
+    "..#rg#45543#....",
+    "...##445443#....",
+    "....#4r5r4r3#...",
+    "....#454432#....",
+    "....#4543432#...",
+    "....#4543432#...",
+    "...#45443432#...",
+    "...#45443432#...",
+    "...#rrrrrrrr#...",
+    "...#4#5##4#3#...",
+    "...##########...",
+]
+_VLEG = {"#": "bz0", "d": "bzd", "1": "bz1", "m": "bzm", "2": "bz2", "3": "bz3", "g": "pg2"}
+_KLEG = {"#": "cm0", "5": "cm5", "4": "cm4", "3": "cm3", "2": "cm2", "1": "cm1", "h": "cd1",
+         "r": "pr1", "b": "pb1", "g": "pg2"}
+
+
+def _square_plinth(P, ox, top=19, bot=29, shadow="ps"):
+    """A small square plinth in 3/4 under a votive (x ox+2..ox+13): the lit
+    top (cm5, cm3, cm1 only above y 24, where bronze feet share its tiles),
+    the front, the east side in shadow, the cast shadow down and right."""
+    for y in range(top, bot + 1):
+        for x in range(ox + 2, ox + 14):
+            if y < top + 3:
+                c = "cm5" if y < top + 2 and x < ox + 12 else "cm3"
+                if x in (ox + 2, ox + 13) or y == top:
+                    c = "cm1"
+            else:
+                c = "cm5" if x == ox + 3 else "cm1" if x >= ox + 12 else "cm3"
+                if y >= 24:
+                    c = {"cm5": "cm4", "cm3": "cm3", "cm1": "cm2"}[c] if x != ox + 12 else "cm1"
+                if y == bot - 1 and y >= 24:
+                    c = "cm1"
+                if x in (ox + 2, ox + 13) or y == bot:
+                    c = "cm1" if y < 24 else "cm0"
+            P.px(x, y, c)
+    for y in range(24, 32):
+        for x in range(ox + 14, ox + 16):
+            if (x + y) % 2 == 0 or x == ox + 14:
+                P.px(x, y, shadow)
+    for x in range(ox + 5, ox + 16):
+        if x < ox + 12 or (x + bot) % 2:
+            P.px(x, bot + 1, shadow)
+
+
+def votive(key="votive", on="path"):
+    """Votive statues (2 x 2) to line the processional way: `kouros` (a bronze
+    youth, left) and `kore` (a painted marble maiden holding out an offering,
+    right). Row 0 is the figure, over the player; row 1 its plinth, solid."""
+    W, H = 2, 2
+    T = canvas(W, H)
+    P = canvas(W, H)
+    sh = CK.SHADOW.get(on, "ps")
+    for i, (fig, leg) in enumerate(((VOTIVE_KOUROS, _VLEG), (VOTIVE_KORE, _KLEG))):
+        ox = i * 16
+        _square_plinth(P, ox, shadow=sh)
+        for j, row in enumerate(fig):
+            for k, ch in enumerate(row):
+                c = leg.get(ch)
+                if c:
+                    y = 1 + j
+                    (T if y < 16 else P).px(ox + k, y, c)
+    return cut(key, "votive statues", W, H, {"middle": P, "top": T}, ["TT", "XX"], on=on,
+               names={"kouros_top": (0, 0), "kore_top": (1, 0), "kouros": (0, 1), "kore": (1, 1)},
+               notes="Votives for the processional way (2 x 2): a bronze kouros and a painted marble "
+                     "kore holding out her offering, each on a 3/4 plinth with its shadow. The figure "
+                     "row is drawn over the player; the plinth row is solid.")
+
+
+def _flame(F, ox, f):
+    """A brazier's fire in frame f: a tongue of flame over the bowl, red at
+    its edge, gold inside, a pale core low in the middle."""
+    prof = [[0, 3, 6, 8, 10, 12, 11, 9, 7, 4, 2, 0],
+            [0, 2, 5, 9, 11, 10, 12, 10, 6, 5, 2, 0],
+            [0, 4, 7, 8, 9, 11, 10, 12, 9, 5, 3, 0]][f]
+    base = 14
+    for i, hgt in enumerate(prof):
+        x = ox + 2 + i
+        for y in range(base - hgt, base):
+            d = y - (base - hgt)               # depth below the flame's tip
+            side = min(i, 11 - i)
+            c = "prd" if d == 0 or side == 0 else "pr1" if d < 3 or side == 1 else \
+                "pg1" if d < 5 or side == 2 else "pg2" if d < 8 or side == 3 else "pgw"
+            F.px(x, y, c)
+    for (x, y) in ([(4, 1), (10, 3)], [(9, 0), (3, 2)], [(6, 1), (11, 2)])[f]:
+        F.px(ox + x, y, "pg2")                 # sparks
+
+
+def brazier(key="brazier", on="path"):
+    """A lit bronze brazier (1 x 2): the fire over the player (row 0, top
+    layer, animation `flame`), the bowl on its three lion-footed legs and a
+    bronze base plate (row 1, solid)."""
+    W, H = 1, 2
+    T = canvas(W, H)
+    P = canvas(W, H)
+    _flame(T, 0, 0)
+    # the bowl's rim (row 0) and body (row 1)
+    for x in range(1, 15):
+        T.px(x, 13, "bz0" if x in (1, 14) else "bz3" if x < 6 else "bz2")
+        T.px(x, 14, "bz0" if x in (1, 14) else "pg2" if x < 5 else "bzm" if x < 11 else "bz1")
+        T.px(x, 15, "bz0" if x in (1, 14) else "bz1")
+    for y in range(16, 21):
+        a, b = 2 + (y - 16) // 2, 13 - (y - 16) // 2
+        for x in range(a, b + 1):
+            P.px(x, y, "bz0" if x in (a, b) or y == 20 else "bz3" if x < a + 3 else "bz2" if x < b - 3 else "bz1")
+    for y in range(21, 28):
+        for x in (4, 8, 11):
+            P.px(x - (1 if x == 4 and y > 24 else 0) + (1 if x == 11 and y > 24 else 0), y,
+                 "bz2" if x == 4 else "bz1" if x == 8 else "bzd")
+    for x in range(3, 14):
+        P.px(x, 28, "bz0" if x in (3, 13) else "bz2" if x < 7 else "bz1")
+        P.px(x, 29, "bz0")
+    for x in range(5, 16):
+        if x < 13 or x % 2:
+            P.px(x, 30, "bzd" if on == "path" else "bz0")
+    frames = []
+    for f in (1, 2):
+        F = canvas(W, H)
+        F.a[:] = T.a
+        F.a[:13] = 0
+        _flame(F, 0, f)
+        F.a[13:16] = T.a[13:16]
+        frames.append(("top", F))
+    s = cut(key, "a lit brazier", W, H, {"middle": P, "top": T}, ["T", "X"], on=on,
+            names={"fire": (0, 0), "stand": (0, 1)},
+            notes="A lit bronze brazier (1 x 2): the fire over the player, flickering (animation "
+                  "`flame`), the bowl on three legs and a base plate below, solid.",
+            anims={"flame": frames})
+    # each frame is the whole fire, not drawn over the last one
+    for fr, (_, F) in zip(s.anims["flame"]["frames"], frames):
+        fr.a[:] = F.a
+    return s
+
+
 def akropolis_structures():
     """Every structure gTileset_Akropolis holds, by key."""
     out = {}
@@ -1264,8 +1598,9 @@ def akropolis_structures():
     for s in (cl, ed, ramp_kit(), parthenon(), ST.promachos(), erechtheion(),
               propylaia(), altar(), foundations(), old_columns(), spring(),
               K.pick(CK.ruins("moss", "path", key="ruins"),
-                     ["stub", "drum", "cap_doric", "plinth_feet", "poppies"], w=5, key="ruins"),
-              CK.free_column("doric", "moss", 3, "path", key="col_moss3")):
+                     ["stub", "drum", "poppies"], w=3, key="ruins"),
+              CK.free_column("doric", "moss", 3, "path", key="col_moss3"),
+              pave(), outcrop(), votive(), brazier()):
         out[s.key] = s
     return out
 

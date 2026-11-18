@@ -15,6 +15,10 @@
 // Frame Data (INCBIN statements)
 // ============================================
 
+const u16 gTilesetAnims_PorytilesManaged_Akropolis_Flame_Frame0[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/anim/flame/0.4bpp");
+const u16 gTilesetAnims_PorytilesManaged_Akropolis_Flame_Frame1[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/anim/flame/1.4bpp");
+const u16 gTilesetAnims_PorytilesManaged_Akropolis_Flame_Frame2[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/anim/flame/2.4bpp");
+
 const u16 gTilesetAnims_PorytilesManaged_Akropolis_Glint_Frame0[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/anim/glint/0.4bpp");
 const u16 gTilesetAnims_PorytilesManaged_Akropolis_Glint_Frame1[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/anim/glint/1.4bpp");
 const u16 gTilesetAnims_PorytilesManaged_Akropolis_Glint_Frame2[] = INCBIN_U16("data/tilesets/secondary/akropolis/porytiles_bin/anim/glint/2.4bpp");
@@ -23,6 +27,12 @@ const u16 gTilesetAnims_PorytilesManaged_Akropolis_Glint_Frame3[] = INCBIN_U16("
 // ============================================
 // Frame Pointer Arrays
 // ============================================
+
+const u16 *const gTilesetAnims_PorytilesManaged_Akropolis_Flame[] = {
+    gTilesetAnims_PorytilesManaged_Akropolis_Flame_Frame0,
+    gTilesetAnims_PorytilesManaged_Akropolis_Flame_Frame1,
+    gTilesetAnims_PorytilesManaged_Akropolis_Flame_Frame2
+};
 
 const u16 *const gTilesetAnims_PorytilesManaged_Akropolis_Glint[] = {
     gTilesetAnims_PorytilesManaged_Akropolis_Glint_Frame0,
@@ -43,10 +53,16 @@ const u16 *const gTilesetAnims_PorytilesManaged_Akropolis_Glint[] = {
 // Queue Functions
 // ============================================
 
+static void QueueAnimTiles_PorytilesManaged_Akropolis_Flame(u16 timer)
+{
+    u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Akropolis_Flame);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Akropolis_Flame[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), 4 * TILE_SIZE_4BPP);
+}
+
 static void QueueAnimTiles_PorytilesManaged_Akropolis_Glint(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Akropolis_Glint);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Akropolis_Glint[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), 3 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Akropolis_Glint[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 5)), 3 * TILE_SIZE_4BPP);
 }
 
 // ============================================
@@ -57,6 +73,7 @@ static void TilesetAnim_PorytilesManaged_Akropolis(u16 timer)
 {
     if (timer % 16 == 0)
     {
+        QueueAnimTiles_PorytilesManaged_Akropolis_Flame(timer / 16);
         QueueAnimTiles_PorytilesManaged_Akropolis_Glint(timer / 16);
     }
 }

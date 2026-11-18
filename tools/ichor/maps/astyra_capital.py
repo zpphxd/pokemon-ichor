@@ -438,6 +438,52 @@ PASSAGE = 19                    # the Propylaia's passage column
 ENTRY = (22, 53)
 
 
+def pave_cells(m, cells, salt=0):
+    """Lay the paved way over `cells` (a set of path cells): each takes the
+    9-patch piece its neighbors call for, so the kerb wraps every edge and
+    every prop standing in the way; a few flags are cracked (`C2`). Slivers
+    one cell thick and scraps under four cells stay worn path."""
+    cells = set(cells)
+    while True:
+        thin = {(x, y) for (x, y) in cells
+                if not ((x, y - 1) in cells or (x, y + 1) in cells)
+                or not ((x - 1, y) in cells or (x + 1, y) in cells)}
+        if not thin:
+            break
+        cells -= thin
+    seen = set()
+    for c in sorted(cells):
+        if c in seen:
+            continue
+        comp, todo = set(), [c]
+        while todo:
+            p = todo.pop()
+            if p in comp or p not in cells:
+                continue
+            comp.add(p)
+            todo += [(p[0] + dx, p[1] + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))]
+        seen |= comp
+        if len(comp) < 4:
+            cells -= comp
+    for (x, y) in cells:
+        n, s_, w, e = ((x, y - 1) in cells, (x, y + 1) in cells, (x - 1, y) in cells, (x + 1, y) in cells)
+        v = "T" if not n else "B" if not s_ else ""
+        h_ = "L" if not w else "R" if not e else ""
+        name = (v + h_) or ("C2" if KM._hash(x, y, salt) < 70 else "C")
+        m.piece("pave", name, x, y)
+
+
+def votive_at(m, kind, x, y):
+    """A votive statue (kouros or kore), 1 x 2: the figure at (x, y), its plinth below."""
+    m.piece("votive", kind + "_top", x, y)
+    m.piece("votive", kind, x, y + 1)
+
+
+def brazier_at(m, x, y):
+    m.piece("brazier", "fire", x, y)
+    m.piece("brazier", "stand", x, y + 1)
+
+
 def akropolis(render=True):
     src = events("Astyra_Akropolis")
     m = Map("Astyra_Akropolis", "akropolis", AK_W, AK_H, fill=A.PATH)
@@ -456,22 +502,26 @@ def akropolis(render=True):
         m.piece("edge", "edge_E", 42, y)
     # the Pandroseion: a patch of grass round Athena's olive
     grass = {(x, y) for x in range(14, 20) for y in range(5, 10)}
-    for (x, y) in grass:
+    # the sacred grove on its terrace, south-east, its lip a ledge down to the rim walk
+    grove = {(x, y) for x in range(33, 41) for y in range(18, 26)}
+    for (x, y) in grass | grove:
         m.set(x, y, A.GRASS, False)
-    edge_cells = {(x, y) for x in range(13, 21) for y in range(4, 11)} - grass
-    m.path(edge_cells, context={(x, y) for x in range(2, 42) for y in range(2, 27)} - grass)
+    plateau = {(x, y) for x in range(2, 42) for y in range(2, 27)}
+    m.path({(x, y) for x in range(13, 21) for y in range(4, 11)} - grass, context=plateau - grass)
+    m.path({(x, y) for x in range(31, 42) for y in range(16, 27)} - grove, context=plateau - grove)
+    for x in range(33, 38):
+        m.set(x, 25, A.LEDGE["SL"] if x == 33 else A.LEDGE["SR"] if x == 37 else A.LEDGE["S"], True)
     m.olive(*OLIVE)
     # Poseidon's marks and the salt spring
     m.piece("spring", "trident", *TRIDENT)
     m.piece("spring", "well_shut", *WELL)
     m.piece("spring", "cleft", *CLEFT)
     m.forced_open.add(WELL)
-    # the Erechtheion and its maidens, north-west
+    # the Erechtheion and its maidens, north-west; the Parthenon north-east; the altar before it
     m.put("erechtheion", 3, 2)
-    # the Parthenon, north-east, on its krepis; its altar before it
     m.put("parthenon", 26, 4)
     m.put("altar", 31, 14)
-    # the Old Temple's foundations between them, south of the Erechtheion
+    # the Old Temple's foundations, its two standing columns and its fallen drums in one heap
     fx0, fy0, fx1, fy1 = 3, 11, 11, 17
     for y in range(fy0, fy1 + 1):
         for x in range(fx0, fx1 + 1):
@@ -483,33 +533,63 @@ def akropolis(render=True):
         m.piece("foundations", "step", x, fy1 + 1)
     m.put("old_columns", 4, 11)
     m.put("col_moss3", 7, 11)
-    for (x, y, n) in ((9, 13, "drum"), (10, 13, "stub"), (6, 15, "cap_doric"), (8, 16, "drum"),
-                      (5, 17, "poppies"), (10, 15, "poppies"), (9, 16, "plinth_feet")):
+    for (x, y, n) in ((9, 13, "drum"), (10, 13, "stub"), (9, 14, "drum"), (10, 14, "poppies"),
+                      (5, 16, "poppies"), (6, 16, "drum")):
         m.piece("ruins", n, x, y)
     # Athena Promachos, facing the Propylaia
     m.put("promachos", 12, 15)
-    # votive bases and a few fallen pieces on the open plateau
-    for (x, y, n) in ((22, 22, "plinth_feet"), (23, 20, "stub"), (25, 18, "plinth_feet"), (27, 16, "stub"),
-                      (29, 22, "poppies"), (3, 21, "stub"), (6, 24, "plinth_feet"), (4, 23, "drum"),
-                      (9, 25, "poppies"), (17, 14, "drum")):
+
+    # --- the processional ways ----------------------------------------------------------------
+    props = set()
+
+    def prop(x, y, h=1):
+        props.update((x, y + j) for j in range(h))
+    # the Sacred Way: from the Propylaia's court north past Promachos to the
+    # Erechtheion's porch; east to the altar court below the Parthenon
+    way = {(x, y) for x in range(11, 24) for y in range(24, 27)}            # the gate court
+    way |= {(x, y) for x in range(18, 21) for y in range(10, 24)}           # north
+    way |= {(x, y) for x in range(3, 14) for y in range(9, 11)}             # to the Erechtheion
+    way |= {(x, y) for x in range(12, 18) for y in range(10, 12)}
+    way |= {(x, y) for x in range(21, 31) for y in range(17, 20)}           # east
+    way |= {(x, y) for x in range(28, 37) for y in range(12, 18)}           # the altar court
+    way -= {(x, y) for x in range(31, 34) for y in range(14, 16)}           # the altar itself
+    # braziers, lit, at the gate, by the altar, at the Erechtheion's porch and by the grove
+    for (x, y) in ((17, 22), (21, 22), (30, 13), (34, 13), (3, 9), (13, 7), (41, 23), (33, 2), (24, 15),
+                   (38, 12), (2, 21)):
+        brazier_at(m, x, y)
+        prop(x, y, 2)
+    # votives lining the Sacred Way (row 21 stays clear: Kleon leaves along it),
+    # a line of offerings before the north wall, more along the rims
+    vot = [(17, 12), (17, 15), (17, 18), (21, 12), (21, 14), (27, 20),
+           (14, 2), (17, 2), (20, 2), (27, 2), (30, 2), (36, 2), (39, 2), (41, 3),
+           (2, 5), (2, 12), (2, 15), (41, 7), (41, 12), (26, 24), (32, 24)]
+    for i, (x, y) in enumerate(vot):
+        votive_at(m, "kore" if i % 2 else "kouros", x, y)
+        prop(x, y, 2)
+    # the bare rock breaking through where the plateau is highest
+    for (x, y) in ((23, 2), (2, 18), (6, 22), (24, 22), (29, 21)):
+        m.put("outcrop", x, y)
+        props.update((x + i, y + j) for i in range(3) for j in range(2))
+    # fallen drums lying where they fell, in heaps, not strewn
+    for (x, y, n) in ((9, 20, "drum"), (10, 20, "stub"), (10, 21, "drum"), (4, 25, "drum"), (5, 25, "poppies"),
+                      (41, 17, "stub"), (11, 25, "stub"), (2, 25, "drum"),
+                      # votive bases left before the north wall and the Parthenon's steps
+                      (29, 2, "stub"), (35, 2, "drum"), (40, 2, "stub"), (27, 12, "stub"), (37, 12, "drum"), (12, 26, "stub"), (8, 9, "drum")):
         m.piece("ruins", n, x, y)
-    # votive columns along the procession to the altar, and a sacred grove of olives
-    m.put("col_moss3", 21, 15)
-    m.put("col_moss3", 30, 19)
-    grove = {(x, y) for x in range(33, 41) for y in range(18, 26)}
-    for (x, y) in grove:
-        m.set(x, y, A.GRASS, False)
-    m.path({(x, y) for x in range(31, 42) for y in range(16, 27)} - grove,
-           context={(x, y) for x in range(AK_W) for y in range(AK_H)} - grove)
+        prop(x, y)
+    # the grove's olives and its anemones
     for (x, y) in ((34, 19), (38, 20), (35, 23)):
         m.olive(x, y)
-    for (x, y) in ((33, 25), (37, 25), (40, 18), (39, 23)):
+    for (x, y) in ((33, 24), (37, 24), (40, 18), (39, 23), (37, 18)):
         m.set(x, y, ANEMONE, False)
+    pave_cells(m, {c for c in way - props if int(m.mid[c[1], c[0]]) not in (A.GRASS,)}, salt=11)
+    # a few votive bases along the south rim walk, breaking its line
+    for (x, y, n) in ((5, 26, "stub"), (27, 26, "drum"), (36, 26, "stub"), (37, 26, "poppies")):
+        m.piece("ruins", n, x, y)
 
     # --- the Propylaia and the south cliff (rows 27-36) ---------------------------------------
     PX = PASSAGE - 6
     m.put("propylaia", PX, 27)
-    # the plateau's south rim and the rock falling away either side of the Propylaia
     for x in range(1, 43):
         if PX <= x < PX + 13:
             continue
@@ -532,56 +612,84 @@ def akropolis(render=True):
     m.set(PASSAGE + 1, 34, int(m.mid[34, PASSAGE + 1]), True)
 
     # --- the switchback ramp (rows 37-53) -----------------------------------------------------
-    def leg(y0, x0, x1):
-        m.rect(x0, y0, x1, y0 + 2, A.PATH, False)
+    ramp_props = set()
 
-    def wall(y, x0, x1, stair):
+    def wall(y, x0, x1, stair, piers):
+        """A retaining wall: coping and face, a stair cut through it, buttress
+        piers (no run of plain wall over 6) with their feet on the terrace below."""
         for x in range(x0, x1 + 1):
             if stair[0] <= x <= stair[1]:
                 n = "L" if x == stair[0] else "R" if x == stair[1] else ""
                 m.piece("ramp", "stair_top" + ("_" + n if n else ""), x, y)
                 m.piece("ramp", "stair" + ("_" + n if n else ""), x, y + 1)
                 continue
+            if x in piers:
+                m.piece("ramp", "cap_pier", x, y)
+                m.piece("ramp", "wall_pier", x, y + 1)
+                m.piece("ramp", "foot_pier", x, y + 2)
+                ramp_props.add((x, y + 2))
+                continue
             n = "_L" if x == x0 else "_R" if x == x1 else ""
             m.piece("ramp", "cap" + n, x, y)
             m.piece("ramp", "wall" + n, x, y + 1)
-    leg(37, 4, 38)                       # leg C, under the cliff
-    wall(40, 3, 39, (33, 35))
-    leg(42, 4, 38)                       # leg B
-    wall(45, 3, 39, (6, 8))
-    leg(47, 4, 38)                       # leg A, from the gate
+    legs = {}
+    for (y0, x0, x1) in ((37, 4, 38), (42, 4, 38), (47, 4, 37)):          # legs C, B, A
+        m.rect(x0, y0, x1, y0 + 2, A.PATH, False)
+        legs[y0] = {(x, y) for x in range(x0, x1 + 1) for y in range(y0, y0 + 3)}
+    wall(40, 3, 39, (33, 35), (6, 12, 18, 24, 30))
+    wall(45, 3, 39, (6, 8), (13, 19, 26, 31))
     m.rect(21, 50, 23, 53, A.PATH, False)
     m.set(*ENTRY, EXIT_MAT, False)
-    # the slope beside the ramp: grass terraces with olives; on the east one a
-    # terrace lip drops south (one way), a little loop back to the gate
-    for (x0, y0, x1, y1) in ((24, 50, 33, 53), (14, 50, 19, 53)):
-        m.rect(x0, y0, x1, y1, A.GRASS, False)
-    for x in range(26, 30):
-        m.set(x, 51, LEDGE_S, True)
-    for (x, y) in ((31, 51), (15, 51)):
-        m.olive(x, y)
-    for (x, y) in ((33, 50), (18, 53), (17, 50)):
-        m.set(x, y, 0x0E0, True)
-    # bollards at the stair heads, and along the legs (a post every few cells)
-    for (x, y) in ((32, 39), (36, 39), (5, 44), (9, 44)):
-        m.piece("ramp", "post", x, y)
-    for x in (10, 18, 26, 31):
-        for y in (37, 39):
-            if (x, y) != (18, 37):
-                m.piece("ramp", "post", x, y)
-    for x in (12, 20, 27, 36):
-        for y in (42, 44):
-            m.piece("ramp", "post", x, y)
-    for x in (17, 25, 33):
-        for y in (47, 49):
-            m.piece("ramp", "post", x, y)
-    # votive bases along the plateau's rims
-    for (x, y, n) in ((18, 2, "stub"), (24, 2, "plinth_feet"), (30, 2, "stub"), (36, 2, "plinth_feet"),
-                      (2, 9, "stub"), (2, 19, "drum"), (41, 6, "stub"), (41, 15, "plinth_feet"),
-                      (41, 22, "stub"), (6, 26, "stub"), (28, 26, "drum"), (34, 26, "stub"),
-                      (40, 26, "plinth_feet"), (28, 12, "stub"), (36, 12, "plinth_feet"),
-                      (32, 3, "stub"), (12, 26, "drum")):
+    # gardens where the legs run past their turns: cypress and olive in beds
+    beds = {(x, y) for x in range(4, 15) for y in range(37, 40)}           # leg C, west of its stair
+    beds |= {(x, y) for x in range(36, 39) for y in range(37, 40)}         # leg C, east
+    beds |= {(x, y) for x in range(4, 6) for y in range(42, 44)}           # leg B, west
+    beds |= {(x, y) for x in range(33, 38) for y in range(47, 50)}         # leg A, east
+    for (x, y) in beds:
+        m.set(x, y, A.GRASS, False)
+    ramp = set().union(*legs.values())
+    m.path({c for c in ramp if c not in beds and any((c[0] + dx, c[1] + dy) in beds
+            for dx in (-1, 0, 1) for dy in (-1, 0, 1))}, context=ramp - beds)
+    for x in (4, 6, 8, 10, 37):
+        m.cypress(x, 38)
+    for (x, y) in ((8, 37), (37, 37)):
+        m.set(x, y, A.BOULDER_GRASS, True)
+    m.olive(11, 38)
+    m.cypress(4, 42)
+    for x in (33, 35, 37):
+        m.cypress(x, 48)
+    # herms at the turns, braziers at the Propylaia stair's foot, votives on the belvedere
+    m.set(14, 37, HERM, True)                     # in the garden bed
+    ramp_props.add((14, 37))
+    for i, (x, y) in enumerate(((32, 38), (9, 43), (5, 47))):
+        votive_at(m, "kore" if i % 2 else "kouros", x, y)
+        ramp_props.update({(x, y), (x, y + 1)})
+    for (x, y) in ((17, 37), (21, 37)):
+        brazier_at(m, x, y)
+        ramp_props.update({(x, y), (x, y + 1)})
+    votive_at(m, "kore", 28, 47)
+    votive_at(m, "kouros", 23, 47)
+    ramp_props.update({(28, 47), (28, 48), (23, 47), (23, 48)})
+    # votive bases along each leg's outer edge, so no run of wall foot passes 6 bare cells
+    for (x, y, n) in ((25, 39, "stub"), (16, 39, "drum"), (20, 39, "stub"), (26, 37, "stub"),
+                      (31, 37, "drum"), (7, 49, "drum"), (15, 44, "drum"), (21, 44, "stub"), (27, 44, "drum"), (35, 44, "stub"),
+                      (16, 49, "stub"), (25, 49, "drum"), (31, 49, "stub")):
         m.piece("ruins", n, x, y)
+        ramp_props.add((x, y))
+    ramp_pave = {c for c in ramp - beds - ramp_props if int(m.mid[c[1], c[0]]) == A.PATH}
+    ramp_pave -= {(4, 47), (4, 48), (4, 49), (5, 48), (5, 49)}              # the worn west end, where the revive hides
+    pave_cells(m, ramp_pave, salt=5)
+    # the view edge: a parapet along leg A's south side over the planted slope below
+    slope = {(x, y) for x in range(5, 21) for y in range(50, 54)} | {(x, y) for x in range(24, 37) for y in range(50, 54)}
+    for (x, y) in slope:
+        m.set(x, y, A.GRASS, False)
+    for x0, x1 in ((5, 20), (24, 36)):
+        for x in range(x0, x1 + 1):
+            m.set(x, 50, A.WALL["L"] if x == x0 else A.WALL["R"] if x == x1 else A.WALL["M"], True)
+    for (x, y) in ((6, 51), (10, 52), (15, 51), (26, 52), (30, 51), (34, 52)):
+        m.olive(x, y)
+    for x in (13, 19, 24, 29, 36):
+        m.cypress(x, 51 if x % 2 else 52)
 
     # --- events ---------------------------------------------------------------------------------
     m.warp(ENTRY[0], ENTRY[1], "MAP_ASTYRA", 4)
