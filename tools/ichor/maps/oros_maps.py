@@ -61,7 +61,7 @@ def meadow_key(g, key, x, y):
     h = g.P[key]["h"]
     w = g.P[key]["w"]
     cells = [(x + i, y + j) for j in range(h) for i in range(w)]
-    return twin if all(c in g.alpine_c or c in g.grass_c for c in cells) else key
+    return twin if all(c in g.alpine_c or c in g.grass_c or c in g.path_c for c in cells) else key
 
 
 def rows_of(a):
@@ -213,12 +213,16 @@ def build_snowfield():
     g.stairs({(x, y) for x in S_STAIR for y in range(29, 33)})
     lx0, lx1, ly = S_LEDGE
     g.ledge({(x, ly) for x in range(lx0, lx1 + 1)})
-    deep = {(x, y) for y in range(35, 39) for x in range(10, 31)}       # the snow line: a forced band
+    # the snow line's lower edge is ragged: the meadow's grass bites up into the deep
+    # snow by a row or two (the band stays at least two rows deep, so it's still forced)
+    bite = {(x, y) for x in range(10, 31) for y in (37, 38) if noise(x, y, 91) < (35 if y == 37 else 60)}
+    deep = {(x, y) for y in range(35, 39) for x in range(10, 31)} - bite
     deep |= {(x, y) for y in range(28, 29) for x in range(9, 16)}
     g.deep(deep)
     # the meadow's lower third is alpine: a forced band of tall grass below the snow
     # line, grass and wildflowers everywhere under patchy snow that thickens upward
-    tall = {(x, y) for y in range(40, 43) for x in range(5, 33)}
+    tall = {(x, y) for y in range(40, 43) for x in range(5, 33)} | {(x, y) for (x, y) in bite if (x, y + 1) in bite
+                                                                  or y == 38}
     tall |= {(x, 39) for x in range(5, 33) if noise(x, 39, 81) < 45}
     tall |= {(x, 43) for x in range(5, 33) if noise(x, 43, 82) < 40 and x not in (18, 19, 20)}
     g.grass(tall)
@@ -230,6 +234,7 @@ def build_snowfield():
     g.alpine({(x, y) for y in range(33, SH) for x in range(4, 34)
               if (x, y) not in deep and (x, y) not in road and (x, y) not in tall
               and noise(x, y, 77) < (40 if y < 39 else 101)})
+    g.soften({(x, y) for y in range(33, SH) for x in range(4, 34)})
     g.fixed[:] = False
     g.paint()
     # the Icefall's mouth at the cliff's foot; the road arrives from below
@@ -275,13 +280,13 @@ def build_snowfield():
                         ("rock_g", 7, 39), ("rock_g", 30, 44)):
         g.put(meadow_key(g, key, x, y), x, y)
     g.put("far_peak", 35, 38)
-    g.put("poppy", 11, 41)
+    g.put(meadow_key(g, "poppy", 11, 41), 11, 41)
     g.sign(11, 41, P + "Poppy")
     g.sign(31, 37, P + "Arrow", facing="NORTH")
     g.sign(32, 37, P + "Arrow", facing="NORTH")
     g.hidden("ITEM_SCOPE_LENS", 33, 37, "FLAG_ICHOR_HIDDEN_ITEM_SNOWFIELD_SCOPE_LENS")
     g.sign(16, 33, P + "Wine", facing="WEST")
-    g.put("sign", 21, 43)
+    g.put(meadow_key(g, "sign", 21, 43), 21, 43)
     g.sign(21, 43, P + "Sign")
     g.put("sign", 21, 27)
     g.sign(21, 27, P + "Tarn", facing="NORTH")

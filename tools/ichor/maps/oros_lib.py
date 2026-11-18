@@ -60,6 +60,7 @@ class Oros(A.Snow):
         self.marble_c = set()
         self.alpine_c = set()
         self.grass_c, self.pave_c, self.frost_c, self.tuft_c = set(), set(), set(), set()
+        self.soft_c = set()
         self.face = {}
         self.painted = False
 
@@ -100,6 +101,17 @@ class Oros(A.Snow):
     def tufts(self, cells):
         """Grass tufts and rock showing through the snow, scattered by noise."""
         self.tuft_c |= self._cells(cells)
+
+    def soften(self, region):
+        """Snow cells in `region` beside the meadow take the half-snow piece, so the
+        snow's edge over the grass is ragged rather than a ruled line."""
+        green = self.alpine_c | self.grass_c
+        for (x, y) in region:
+            if (x, y) in green or (x, y) in self.deep_c or (x, y) in self.path_c or (x, y) in self.ice_c:
+                continue
+            if any((x + dx, y + dy) in green for dx, dy in ((0, 1), (1, 0), (-1, 0), (0, -1))):
+                self.alpine_c.add((x, y))
+                self.soft_c.add((x, y))
 
     def creep(self, y):
         """Chance (0..100) that an alpine cell is half under snow, by row."""
@@ -172,11 +184,13 @@ class Oros(A.Snow):
                 return "ag2" if "ag2" in self.P else ("fg%d" % (r % 2))
             if r < 32:
                 return "rx%d" % (r % 2)
+        if (x, y) in self.soft_c:
+            return "ag2"
         if (x, y) in self.alpine_c:
             # the snow creeps in over the grass where the snow line is near
             return "ag2" if noise(x, y, 41) < self.creep(y) else "ag%d" % (noise(x, y, 42) % 2)
         if (x, y) in self.scour_c:
-            return "gw%d" % (noise(x, y, 33) % 2)
+            return "gw0"
         r = noise(x, y, 35)
         return "g0" if r < 34 else "g1" if r < 56 else "g2" if r < 62 else "g3" if r < 64 else "g0"
 
@@ -202,7 +216,7 @@ class Oros(A.Snow):
         for k, (dx, dy) in (("inw", (-1, -1)), ("ine", (1, -1)), ("isw", (-1, 1)), ("ise", (1, 1))):
             if not I(x + dx, y + dy):
                 return "ice_" + k
-        return "ice_c" if noise(x, y, 37) % 3 else "ice_c2"
+        return "ice_c"
 
     def lower(self, x, y, me):
         """Is the cell at (x, y) lower ground than level `me`, seen from beside it?"""

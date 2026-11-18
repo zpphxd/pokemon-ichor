@@ -813,7 +813,7 @@ def cloud_bridge_cv(variant):
 # Props
 # --------------------------------------------------------------------------
 
-def fir(w, hh, tiers, trunk_h, lean=0, arrow=False):
+def fir(w, hh, tiers, trunk_h, lean=0, arrow=False, foot=True):
     """A snow-laden fir on its own canvas: tiers of (top y, height, half width)."""
     cv = Cv(w, hh)
     cx = w / 2
@@ -854,8 +854,8 @@ def fir(w, hh, tiers, trunk_h, lean=0, arrow=False):
                 cv.px(x, yb, "sn3")
                 cv.px(x, yb - 1, "sn4")
     cv.outline("pn0")
-    # snow heaped at the foot
-    for x in range(int(cx) - 6, int(cx) + 6):
+    # snow heaped at the foot (a fir standing in the meadow has none)
+    for x in (range(int(cx) - 6, int(cx) + 6) if foot else ()):
         for y in range(hh - 4, hh):
             if abs(x + 0.5 - cx) < 6 - (hh - 1 - y) * 0.5 + (y - (hh - 4)) * 0.6:
                 cv.px(x, y, "sn4" if y == hh - 4 else "sn3" if y < hh - 1 else "sn2")
@@ -1694,12 +1694,11 @@ def terrain(which="oros"):
             one_cv(out, f"fg{v}", "frost-burnt grass", "terrain", frost_grass_cv(v), mb="MB_SAND")
             one_cv(out, f"pave{v}", "the processional way's marble flags", "terrain", marble_pave_cv(v))
     if full:
-        for k in ("gw0", "gw1"):
+        for k in ("gw0",):
             one_cv(out, k, "wind-scoured snow", "terrain", ground_cv(k), mb="MB_SAND")
         for v in (0, 1, 2):
             b, t = deep_cv(v)
             one_cv(out, f"deep{v}", "deep snow (wild Pokémon)", "terrain", b, walk="T", mb="MB_DEEP_SAND", top=t)
-        one_cv(out, "ice_c2", "frozen tarn", "terrain", ice_center(1), mb="MB_ICE")
         for k, sig in ICE_SIGS.items():
             one_cv(out, f"ice_{k}", "frozen tarn", "terrain", ice_cv(sig), mb="MB_ICE")
         for part in ("l", "m", "r"):
@@ -1733,6 +1732,9 @@ def props(which="oros"):
         # the same firs and rocks standing in the alpine meadow: their art's tiles are the
         # snow versions', their floor's are the meadow's, so they cost no new tiles
         mg = alpine_cv(0)
+        pine = fir(32, 48, [(2, 11, 5), (9, 12, 9), (17, 13, 12), (26, 13, 15)], 6, foot=False)
+        pine2 = fir(32, 48, [(4, 10, 4), (10, 11, 8), (18, 12, 11), (27, 12, 13)], 6, lean=1, foot=False)
+        small = fir(16, 32, [(1, 8, 3), (6, 9, 5), (12, 10, 7), (19, 8, 7)], 4, foot=False)
         grid_to(pine, out, "fir_g", "a fir in the meadow", "props", 2, 3, ["TT", "XX", "XX"], floor=mg, top_rows=1)
         grid_to(pine2, out, "fir_b_g", "a wind-bent fir in the meadow", "props", 2, 3, ["TT", "XX", "XX"], floor=mg,
                 top_rows=1)
@@ -1778,6 +1780,21 @@ def props(which="oros"):
         grid_to(crevasse_cv(), out, "crevasse", "a crevasse", "props", 2, 1, ["XX"])
         grid_to(shield_cv(), out, "shield", "a broken shield half-buried (Ares)", "props", 1, 1, ["X"])
         grid_to(poppy_cv(), out, "poppy", "a poppy in the snow (Demeter)", "props", 1, 1, ["."])
+        pg = alpine_cv(0)
+        for (x, y) in ((6, 6), (7, 6), (8, 5), (9, 6), (10, 6), (7, 7), (8, 7), (9, 7), (7, 5), (9, 5)):
+            pg.px(x, y, "pp")
+        for (x, y) in ((8, 6), (8, 8), (8, 9), (9, 10), (9, 11)):
+            pg.px(x, y, "rk1")
+        grid_to(pg, out, "poppy_g", "a poppy in the meadow (Demeter)", "props", 1, 1, ["."])
+        sg = Cv(16, 16)
+        sg.rect(7, 8, 2, 8, "bk1")
+        sg.rect(2, 3, 12, 7, "bk1")
+        sg.rect(2, 3, 12, 1, "sn4")
+        sg.rect(2, 9, 12, 1, "rk1")
+        for x in range(4, 12, 2):
+            sg.px(x, 6, "rk1")
+        sg.outline("rk1")
+        grid_to(sg, out, "sign_g", "a signpost in the meadow", "props", 1, 1, ["X"], floor=alpine_cv(0))
         grid_to(trident_rock_cv(), out, "trident_rock", "a rock split by three prongs (Poseidon)", "props", 1, 1,
                 ["X"], floor=g0)
         grid_to(lyre_rock_cv(), out, "lyre_rock", "a split rock that hums (Apollo)", "props", 1, 1, ["X"], floor=g0)

@@ -9,9 +9,9 @@ mapscripts Ascent_WindRidge_MapScripts {
 
 script Ascent_WindRidge_EventScript_DrawState {
     if (flag(FLAG_ICHOR_WINDRIDGE_BAR_UP)) {
-        setmetatile(22, 21, 0x29F, FALSE)
-        setmetatile(19, 23, 0x29D, FALSE)
-        setmetatile(25, 23, 0x29D, FALSE)
+        setmetatile(22, 21, 0x29D, FALSE)
+        setmetatile(19, 23, 0x29B, FALSE)
+        setmetatile(25, 23, 0x29B, FALSE)
         setobjectxyperm(LOCALID_ASCENT_WIND_RIDGE_DRUM0, 19, 23)
         setobjectxyperm(LOCALID_ASCENT_WIND_RIDGE_DRUM1, 25, 23)
     }
@@ -40,13 +40,13 @@ script Ascent_WindRidge_EventScript_Plates {
     if (var(VAR_TEMP_9) == 2) {
         lockall
         setflag(FLAG_ICHOR_WINDRIDGE_BAR_UP)
-        setmetatile(19, 23, 0x29D, FALSE)
-        setmetatile(25, 23, 0x29D, FALSE)
+        setmetatile(19, 23, 0x29B, FALSE)
+        setmetatile(25, 23, 0x29B, FALSE)
         playse(SE_DOOR)
         special(DrawWholeMapView)
         delay(30)
         playse(SE_M_GUST)
-        setmetatile(22, 21, 0x29F, FALSE)
+        setmetatile(22, 21, 0x29D, FALSE)
         special(DrawWholeMapView)
         msgbox(format("Both plates sink, and the wind drops all at once, like a breath held.\p"
                       "The bronze bar swings up off the last stair."), MSGBOX_DEFAULT)
