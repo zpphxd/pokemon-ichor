@@ -3,7 +3,7 @@
 the Hall of Heroes (design/LEAGUE.md). Each room is drawn on its own tileset, so
 each seat has its own floor, walls and signature motif:
 
-  Olympus_Propylaia       gTileset_TempleHestia  the hearth, the healer, the guard
+  Olympus_Propylaia       gTileset_Civic         the League's lobby: the healer and Pithos, the merchant, the guard
   Olympus_SeatOf*         gTileset_Seat*         the four seats (tools/ichor/maps/pantheon_halls.py)
   Olympus_Summit          gTileset_Aegina        Zeus's altar, the temple of the Twelve
   Olympus_HallOfHeroes    gTileset_Civic         the cella and its record stone
@@ -58,80 +58,87 @@ H_ROSETTE = 0x288
 
 
 def propylaia():
-    W, H = 17, 16
-    g = Grid("Olympus_Propylaia", W, H, primary="gTileset_Oikos", secondary="gTileset_TempleHestia",
-             cat=None, base=H_FLOOR, base_kind="floor")
+    """The Propylaia, rebuilt grand on 2026-11-18 (design/maps/Olympus_Pantheon.md): the
+    League's lobby, the calm before the Pantheon. A wide columned hall on
+    gTileset_Civic: the standard Asclepeion station with the Pithos beside it
+    (civic_rooms.station_cells, pithos_cells) on the west, the merchant's stall on
+    the east, two colonnades, statues down the walls, Hestia's hearth (the great
+    mosaic between braziers) in the middle and the inner door in the back wall."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
+    import civic_rooms as CR
+    import civic_tiles as ct
+    ct.define() if not ct.METATILES else None
+    W, H = 27, 17
+    r = CR.Room("olympus_propylaia", W, H, CR.checker("asc_floor_a", "asc_floor_b"))
+    r.row(0, 0, ["asc_wall_top_l"] + ["asc_wall_top"] * (W - 2) + ["asc_wall_top_r"])
+    r.row(1, 0, ["asc_wall_l"] + ["asc_wall"] * (W - 2) + ["asc_wall_r"])
+    r.row(2, 0, [("asc_floor_a_sh" if x % 2 == 0 else "asc_floor_b_sh") for x in range(W)])
+    for y in range(2, H - 1):
+        r.set(0, y, "asc_wall_l")
+        r.set(W - 1, y, "asc_wall_r")
+    for x in range(W):
+        r.set(x, H - 1, "void")
+    # the healer's station, the standard one, and the Pithos beside it (west)
+    hx, hy = 6, 2
+    CR.healer_station(r, hx, hy)
+    CR.pithos(r, 1)
+    # the merchant's stall (east): awning, the counter with the scale, shelves of goods
+    r.put("ago_awning", 18, 0, 3, 2)
+    r.row(2, 18, ["ago_counter_l", "ago_counter_staff", "ago_counter_r"])
+    r.row(3, 18, ["ago_counter_front_l", "ago_counter_front_m", "ago_counter_front_r"])
+    for x in (21, 22):
+        r.put("ago_shelf", x, 0, 1, 3)
+    r.put("ago_amphora", 24, 1, 1, 2)
+    r.set(17, 3, "ago_basket_pomegranates")
+    r.set(23, 3, "ago_basket_figs")
+    # the inner door to the Pantheon, between braziers and the Twelve's relief
+    r.set(13, 1, "void")
+    r.set(13, 0, "asc_wall_top")
+    r.put_checkered("asc_brazier", 11, 2, 1, 2)
+    r.put_checkered("asc_brazier", 15, 2, 1, 2)
+    # Hestia's hearth: the great mosaic, braziers round it
+    r.put("asc_mosaic", 12, 8, 3, 3)
+    r.put_checkered("asc_brazier", 10, 8, 1, 2)
+    r.put_checkered("asc_brazier", 16, 8, 1, 2)
+    # two colonnades down the hall
+    for x in (4, 22):
+        for y0 in (5, 9, 13):
+            if y0 + 2 < H - 1:
+                r.put_checkered("asc_column", x, y0, 1, 3)
+    # statues of the heroes along the side walls, couches and benches to rest on
+    for y0 in (5, 10):
+        r.put("asc_statue", 1, y0, 1, 3)
+        r.put("asc_statue", W - 2, y0, 1, 3)
+    r.put_checkered("asc_kline", 7, 12, 2, 2)
+    r.put_checkered("asc_kline", 18, 12, 2, 2)
+    r.put_checkered("asc_bench", 7, 5, 2, 1)
+    r.put_checkered("asc_bench", 18, 5, 2, 1)
+    r.put_checkered("asc_snake", 3, 13)
+    g = Grid("Olympus_Propylaia", W, H, primary="gTileset_Oikos", secondary="gTileset_Civic", cat=None)
+    blocks = r.blocks().reshape(H, W)
     for y in range(H):
         for x in range(W):
-            g.set(x, y, H_VEIN[noise(x, y, 3) % 2] if noise(x, y, 7) < 18 else H_FLOOR, False, "floor")
-    # walls: cornice, frieze, lower wall; the side walls down both edges
-    g.set(0, 0, H_CORNER_L, True)
-    g.set(W - 1, 0, H_CORNER_R, True)
-    for x in range(1, W - 1):
-        g.set(x, 0, H_TOP, True)
-        g.set(x, 1, H_FRIEZE[x % 4], True)
-        g.set(x, 2, H_LOWER_LAMPS if x in (3, 13) else H_LOWER_WREATH if x in (5, 11) else H_LOWER, True)
-    for y in range(1, H - 1):
-        g.set(0, y, H_SIDE_L, True)
-        g.set(W - 1, y, H_SIDE_R, True)
-    g.set(7, 1, H_HESTIA[0], True)
-    g.set(9, 1, H_HESTIA[1], True)
-    # the inner door to the Pantheon, between pilasters
-    g.set(8, 1, H_DOOR[0], True)
-    g.set(8, 2, H_DOOR[1], True)
-    for x in (6, 10):
-        g.set(x, 1, H_PILASTER[0], True)
-        g.set(x, 2, H_PILASTER[1], True)
-    # the bottom: void, and the mat
-    for x in range(W):
-        g.set(x, H - 1, H_VOID, True)
-    for i, x in enumerate((7, 8, 9)):
-        g.set(x, H - 1, H_MAT[i], False, "mat")
-    # the great hearth in its pool of light, and the runner through it
-    g.stamp(6, 6, H_HEARTH, solid=[[False] * 5] + [[False, True, True, True, False]] * 3 + [[False] * 5])
-    for y in range(3, 6):
-        g.set(8, y, H_RUNNER, False)
-    g.set(8, 3, H_RUNNER_N, False)
-    for y in range(11, H - 1):
-        g.set(8, y, H_RUNNER, False)
-    # colonnades down both sides
-    for y in (4, 8, 12):
-        for x in (3, 13):
-            g.set(x, y, H_COLUMN[0], True)
-            g.set(x, y + 1, H_COLUMN[1], True)
-    # the guard's lampstands at the door, the lustral basin at the way in
-    for x in (6, 10):
-        g.set(x, 3, H_LAMPSTAND[0], True)
-        g.set(x, 4, H_LAMPSTAND[1], True)
-    g.set(5, 12, H_BASIN[0], True)
-    g.set(5, 13, H_BASIN[1], True)
-    g.set(11, 12, H_STELE[0], True)
-    g.set(11, 13, H_STELE[1], True)
-    # the healer's corner (west) and the merchant's table (east)
-    g.set(1, 5, H_LAUREL[0], True)
-    g.set(1, 6, H_LAUREL[1], True)
-    g.set(15, 5, H_LAUREL[0], True)
-    g.set(15, 6, H_LAUREL[1], True)
-    g.set(2, 9, H_LAMPS, True)
-    g.stamp(14, 9, H_TABLE)
-    g.set(15, 12, H_AMPHORA, True)
-    g.set(1, 12, H_AMPHORA_RED, True)
-    g.set(2, 7, H_ROSETTE, False)
-    # events
-    g.person("HEALER", "HEALER", 2, 7, "Healer", facing="RIGHT")
-    g.person("MERCHANT", "MERCHANT", 14, 8, "Merchant", facing="DOWN")
-    g.person("GUARD", "HOPLITE", 8, 3, "Guard", facing="DOWN")
-    g.person("GUARD_B", "HOPLITE", 9, 4, "GuardB", facing="LEFT")
-    g.warp(8, H - 1, "Ascent_3F", 0)
-    g.sign(8, 2, "InnerDoor", facing="NORTH")
-    g.sign(11, 13, "Stele")
-    for x in range(7, 10):
-        for y in range(7, 10):
-            if (x, y) != (8, 8):
+            b = int(blocks[y, x])
+            g.set(x, y, b & 0x3FF, bool(b & 0x0400), "room")
+    r.set(13, H - 1, "asc_mat")
+    g.set(13, H - 1, ct.FIRST_ID + ct.BY_NAME["asc_mat"], False, "mat")
+    # people: the healer at her station, the merchant at the counter, the guards at the door
+    g.person("HEALER", "HEALER", hx, hy, "Healer", facing="DOWN")
+    g.person("MERCHANT", "MERCHANT", 19, 2, "Merchant", facing="DOWN")
+    g.person("GUARD", "HOPLITE", 13, 2, "Guard", facing="DOWN")
+    g.person("GUARD_B", "HOPLITE", 14, 3, "GuardB", facing="LEFT")
+    g.person("PILGRIM", "PILGRIM", 9, 13, "Pilgrim", facing="RIGHT")
+    g.warp(13, H - 1, "Ascent_3F", 0)
+    g.sign(13, 1, "InnerDoor", facing="NORTH")
+    for x in range(12, 15):
+        for y in range(8, 11):
+            if (x, y) != (13, 9):
                 g.sign(x, y, "Hearth")
-    g.save([H_VOID | 0x400] * 4, seat_fields("MUS_ICHOR_ASCLEPEION"))
-    g.check((8, H - 2), [("healer", (2, 7)), ("merchant", (14, 8)), ("guard", (8, 3))])
-    return g, [("hall", 8, 8)]
+    g.sign(1, 7, "StatueWest", facing="WEST") if False else None
+    g.save([ct.FIRST_ID | 0x400] * 4, seat_fields("MUS_ICHOR_ASCLEPEION"))
+    g.check((13, H - 2), [("healer", (hx, hy + 2)), ("merchant", (19, 4)), ("guard", (13, 2)),
+                          ("pithos", (1, 3))])
+    return g, [("hall", 13, 9), ("healer", 6, 6), ("merchant", 19, 6), ("door", 13, 4)]
 
 
 # ---------------------------------------------------------------------------

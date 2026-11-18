@@ -694,6 +694,22 @@ const u32 gObjectEventPic_IchorCami[] = INCGFX_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_IchorDemeter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/demeter.png", ".4bpp", "-mwidth 2 -mheight 4");
 // Thyrsa (ported from claude/world-act2-0a92e7)
 const u16 gObjectEventPal_IchorWine[] = INCGFX_U16("graphics/object_events/palettes/ichor_wine.pal", ".gbapal");
+const u16 gObjectEventPal_IchorStatue[] = INCGFX_U16("graphics/object_events/palettes/ichor_statue.pal", ".gbapal");
+// The statues of the Twelve (32x64, one frame): tools/ichor/art/statues.py
+const u32 gObjectEventPic_IchorStatueHestia[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_hestia.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueHermes[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_hermes.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueDemeter[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_demeter.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueDionysus[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_dionysus.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueArtemis[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_artemis.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueHephaestus[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_hephaestus.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueAphrodite[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_aphrodite.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueApollo[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_apollo.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueAres[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_ares.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatuePoseidon[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_poseidon.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueAthena[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_athena.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueHera[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_hera.png", ".4bpp", "-mwidth 4 -mheight 8");
+const u32 gObjectEventPic_IchorStatueZeus[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/statue_zeus.png", ".4bpp", "-mwidth 4 -mheight 8");
+
 const u32 gObjectEventPic_IchorManto[] = INCGFX_U32("graphics/object_events/pics/people/ichor/manto.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorVintner[] = INCGFX_U32("graphics/object_events/pics/people/ichor/vintner.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorAlfred[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alfred.png", ".4bpp", "-mwidth 2 -mheight 4");

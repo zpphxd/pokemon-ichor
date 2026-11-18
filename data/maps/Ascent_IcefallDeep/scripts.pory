@@ -18,3 +18,12 @@ script Ascent_IcefallDeep_EventScript_Styx {
 script Ascent_IcefallDeep_EventScript_Meltfall {
     msgbox(format("Meltwater pours down the ice here, loud in the dark: a spring from under the cone\pthat the cold never stopped. Something glints at the top.\pA river god's horn could climb water like this."), MSGBOX_SIGN)
 }
+
+// --- the gods' easter eggs (tools/ichor/maps/ascent_eggs.py) ---
+script Ascent_IcefallDeep_EventScript_EggOwl {
+    msgbox(format("Two round eyes shine back at you from a ledge above the tarn.\pAn owl, Athena's kind. It has watched everything you did in the dark, and it isn't telling."), MSGBOX_SIGN)
+}
+
+script Ascent_IcefallDeep_EventScript_EggFerry {
+    msgbox(format("A coin lies on the tarn's shore, set there on purpose: a fare for a ferryman.\pCharon never comes this far up. Somebody hoped anyway."), MSGBOX_SIGN)
+}

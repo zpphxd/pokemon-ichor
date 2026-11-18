@@ -6616,6 +6616,62 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Rock Slide
 - Iron Defense
 
+=== TRAINER_ICHOR_SNOWFIELD_LEUKIPPOS ===
+Name: LEUKIPPOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- X-Scissor
+- Brick Break
+- Swords Dance
+- Rock Slide
+
+Borapteryx
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Blizzard
+- Hurricane
+- Ice Shard
+- Roost
+
+Kourodin
+Level: 63
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Iron Head
+- Drain Punch
+- Bullet Punch
+- Ice Punch
+
+=== TRAINER_ICHOR_SNOWFIELD_THEONOE ===
+Name: THEONOE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Chionyad
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Ice Beam
+- Moonblast
+- Calm Mind
+- Aurora Veil
+
+Himerow
+Level: 63
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Moonblast
+- Air Slash
+- Roost
+- Calm Mind
+
 === TRAINER_ICHOR_ICEFALL_CHIONE ===
 Name: CHIONE
 Class: Acolyte
@@ -6825,6 +6881,62 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Calm Mind
 
 Krystolos @ Never-Melt Ice
+Level: 66
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Icicle Crash
+- Stone Edge
+- Earthquake
+- Stealth Rock
+
+=== TRAINER_ICHOR_WINDRIDGE_OREITHYIA ===
+Name: OREITHYIA
+Class: Augur
+Pic: Augur
+Gender: Female
+Music: Female
+AI: Smart Trainer
+
+Borapteryx @ Sharp Beak
+Level: 65
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Blizzard
+- Hurricane
+- Ice Shard
+- Tailwind
+
+Chionyad @ Leftovers
+Level: 65
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Freeze-Dry
+- Moonblast
+- Aurora Veil
+- Calm Mind
+
+Sophowl
+Level: 66
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Psychic
+- Hurricane
+- Calm Mind
+- Roost
+
+=== TRAINER_ICHOR_WINDRIDGE_KALAIS ===
+Name: KALAIS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Male
+AI: Smart Trainer
+
+Kerastorm @ Magnet
+Level: 65
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Thunderbolt
+- Moonblast
+- Thunder Wave
+- Charge Beam
+
+Krystolos @ Sitrus Berry
 Level: 66
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Icicle Crash

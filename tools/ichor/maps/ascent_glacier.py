@@ -222,7 +222,7 @@ script Ascent_CrystalVault_EventScript_ThreadUp {
         closemessage
         playse(SE_M_BIND)
         fadescreen(FADE_TO_BLACK)
-        warpsilent(MAP_ASCENT_GLACIER, 13, 11)
+        warpsilent(MAP_ASCENT_GLACIER, 14, 12)
         waitstate
     }
     releaseall

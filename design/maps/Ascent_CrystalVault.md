@@ -21,3 +21,9 @@ Builder: `tools/ichor/maps/ascent_glacier.py` (`build_vault`, gTileset_Chion, 24
 
 - Before: `img/ascent_crystalvault_before.png`. After: `img/ascent_crystalvault_after.png`.
 - Pass 1 walled the north-west corner and cut the shelf; pass 2 hung the Thread (the ladder-up piece, solid, read as a sign) and set the finds so the shelf reads as a separate place; pass 3 checked the hall's crystals still frame the giant.
+
+## Plan (2026-11-18 rework)
+
+- **Puzzle:** the Labrys's chain and Ariadne's Thread down from the Glacier, as before.
+- **Easter eggs:** **Eris's golden apple**, hidden in the crystal ("FOR THE FAIREST" is scratched on it; a Sweet Apple); **a crystal with a wheel in it**, the Arceus lead: "a gold wheel, turning very slowly, inside a crystal that hasn't moved in an age."
+- **Post-game gate:** the crack in the roof (Pan's Crook), as before.

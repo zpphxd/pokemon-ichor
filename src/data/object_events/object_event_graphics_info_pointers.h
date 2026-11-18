@@ -443,6 +443,19 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonT
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEggs;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestHatching;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEmpty;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueHestia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueHermes;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueDemeter;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueDionysus;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueArtemis;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueHephaestus;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueAphrodite;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueApollo;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueAres;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatuePoseidon;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueAthena;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueHera;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStatueZeus;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeBow;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeStern;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKerykos;
@@ -920,6 +933,19 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_NEST_EGGS] = &gObjectEventGraphicsInfo_IchorNestEggs,
     [OBJ_EVENT_GFX_ICHOR_NEST_HATCHING] = &gObjectEventGraphicsInfo_IchorNestHatching,
     [OBJ_EVENT_GFX_ICHOR_NEST_EMPTY] = &gObjectEventGraphicsInfo_IchorNestEmpty,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_HESTIA] = &gObjectEventGraphicsInfo_IchorStatueHestia,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_HERMES] = &gObjectEventGraphicsInfo_IchorStatueHermes,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_DEMETER] = &gObjectEventGraphicsInfo_IchorStatueDemeter,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_DIONYSUS] = &gObjectEventGraphicsInfo_IchorStatueDionysus,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_ARTEMIS] = &gObjectEventGraphicsInfo_IchorStatueArtemis,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_HEPHAESTUS] = &gObjectEventGraphicsInfo_IchorStatueHephaestus,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_APHRODITE] = &gObjectEventGraphicsInfo_IchorStatueAphrodite,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_APOLLO] = &gObjectEventGraphicsInfo_IchorStatueApollo,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_ARES] = &gObjectEventGraphicsInfo_IchorStatueAres,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_POSEIDON] = &gObjectEventGraphicsInfo_IchorStatuePoseidon,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_ATHENA] = &gObjectEventGraphicsInfo_IchorStatueAthena,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_HERA] = &gObjectEventGraphicsInfo_IchorStatueHera,
+    [OBJ_EVENT_GFX_ICHOR_STATUE_ZEUS] = &gObjectEventGraphicsInfo_IchorStatueZeus,
     [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW] = &gObjectEventGraphicsInfo_IchorDarkTriremeBow,
     [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN] = &gObjectEventGraphicsInfo_IchorDarkTriremeStern,
     [OBJ_EVENT_GFX_ICHOR_KERYKOS] =            &gObjectEventGraphicsInfo_IchorKerykos,

@@ -23,3 +23,7 @@ Builder: `tools/ichor/maps/ascent_peak.py` (gTileset_Chion, 28×26), run by `asc
 
 - Before (Aegina): `img/olympus_summit_before.png`. Passes: `img/olympus_summit_pass1.png`, `img/olympus_summit_pass2.png`. After: `img/olympus_summit_after.png`.
 - Pass 1: the temple and altar read at once, but the crag was a ragged patch, the meadow merged into the plateau, and the top edge ran straight to the map's rim. Pass 2 stepped the rim, cut a strait of cloud so the meadow floats, and made the crag a stepped mass with a face for the handholds. Pass 3 filled the empty west terrace with the Archons' stelai.
+
+## Plan (2026-11-18 rework)
+
+- **Easter eggs:** **Ganymede's cup** left on the altar step ("still half full. Of what, you'd rather not ask"); **the eagle's feather** on the crag's foot, the Pegaunos and Prime Mover hooks as before.

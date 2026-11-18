@@ -1,0 +1,2436 @@
+{
+ "tileset": "gTileset_Propylon",
+ "primary": "gTileset_Aethos",
+ "tiles_used": 437,
+ "metatiles": 218,
+ "pieces": [
+  {
+   "key": "g0",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     512
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "g1",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     513
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "g2",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     514
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "g3",
+   "title": "snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     515
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "gs",
+   "title": "snow in a cliff's shadow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     516
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_0",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     517
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_1",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     518
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_2",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     519
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_3",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     520
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_4",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     521
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_5",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     522
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_6",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     523
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_7",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     524
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_8",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     525
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_9",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     526
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_10",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     527
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_11",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     528
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_12",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     529
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_13",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     530
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_14",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     531
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "path_15",
+   "title": "a path of packed snow",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     532
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_b",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     533
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_a",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     534
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_ab",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     535
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {
+    "0,0": "MB_SAND"
+   }
+  },
+  {
+   "key": "rim_E",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     536
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_Ea",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     537
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_W",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     538
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_Wb",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     539
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_WE",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     540
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_N",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     541
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_NE",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     542
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_NW",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     543
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rim_NWE",
+   "title": "a plateau's edge",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     544
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     545
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     546
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     547
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_i_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     548
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_i_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     549
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_i_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     550
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     551
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     552
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     553
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_n_v",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     554
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     555
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_o_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     556
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     557
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_t_n_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     558
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     559
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     560
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     561
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_i_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     562
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_i_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     563
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_i_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     564
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     565
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     566
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     567
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_n_v",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     568
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     569
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_o_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     570
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     571
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_m_n_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     572
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     573
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     574
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     575
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_i_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     576
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_i_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     577
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_i_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     578
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_o",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     579
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_i",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     580
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_n",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     581
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_n_v",
+   "title": "cliff face",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     582
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     583
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_o_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     584
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_o_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     585
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "face_b_n_n_c",
+   "title": "cliff over the cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     586
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stair_t",
+   "title": "steps cut in the cliff",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     587
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stair_m",
+   "title": "steps cut in the cliff",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     588
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stair_b",
+   "title": "steps cut in the cliff",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     589
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_0",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     590
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_1",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     591
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_2",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     592
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "cloud_3",
+   "title": "the sea of cloud",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     593
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "mstair_t",
+   "title": "the processional way's marble steps",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     594
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "mstair_m",
+   "title": "the processional way's marble steps",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     595
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "mstair_b",
+   "title": "the processional way's marble steps",
+   "section": "terrain",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     596
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rock",
+   "title": "a rock through the snow",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     597
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "rock_b",
+   "title": "a rock through the snow",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     598
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "plate",
+   "title": "a bronze plate",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     599
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "plate_down",
+   "title": "a pressed plate",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     600
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "grate",
+   "title": "a bronze bar over a stair",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     601
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "grate_up",
+   "title": "the stair, the bar lifted",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     602
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "stele",
+   "title": "a stele with an inscription",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     603
+    ],
+    [
+     604
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "herm",
+   "title": "a herm (the travel herm)",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     605
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "sign",
+   "title": "a signpost",
+   "section": "props",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     606
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "tripod",
+   "title": "a bronze tripod, lit (an Archon's offering)",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     607
+    ],
+    [
+     608
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "kcol",
+   "title": "an Ionic column (the shared kit) by the processional way",
+   "section": "props",
+   "w": 1,
+   "h": 3,
+   "ids": [
+    [
+     609
+    ],
+    [
+     610
+    ],
+    [
+     611
+    ]
+   ],
+   "walk": [
+    "T",
+    "T",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "brazier",
+   "title": "a great brazier, lit",
+   "section": "props",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     612
+    ],
+    [
+     613
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "basin",
+   "title": "the lustral basin, frozen",
+   "section": "props",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     614,
+     615
+    ]
+   ],
+   "walk": [
+    "XX"
+   ],
+   "behaviors": {}
+  },
+  {
+   "key": "facade",
+   "title": "the Propylaia's facade: the grand entrance",
+   "section": "facade",
+   "w": 44,
+   "h": 16,
+   "ids": [
+    [
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     617,
+     618,
+     619,
+     620,
+     621,
+     622,
+     623,
+     624,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616
+    ],
+    [
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     617,
+     618,
+     619,
+     625,
+     626,
+     627,
+     627,
+     628,
+     629,
+     630,
+     627,
+     631,
+     632,
+     622,
+     623,
+     624,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616
+    ],
+    [
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     617,
+     618,
+     633,
+     634,
+     635,
+     636,
+     627,
+     637,
+     627,
+     627,
+     627,
+     638,
+     639,
+     640,
+     627,
+     627,
+     641,
+     627,
+     642,
+     643,
+     644,
+     645,
+     623,
+     624,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616
+    ],
+    [
+     616,
+     616,
+     616,
+     616,
+     616,
+     616,
+     617,
+     646,
+     647,
+     620,
+     648,
+     627,
+     649,
+     650,
+     651,
+     652,
+     627,
+     653,
+     654,
+     655,
+     656,
+     657,
+     658,
+     659,
+     627,
+     660,
+     661,
+     627,
+     662,
+     663,
+     664,
+     665,
+     627,
+     666,
+     621,
+     667,
+     668,
+     624,
+     616,
+     616,
+     616,
+     616,
+     616,
+     616
+    ],
+    [
+     616,
+     616,
+     617,
+     618,
+     619,
+     620,
+     626,
+     669,
+     670,
+     627,
+     671,
+     627,
+     672,
+     673,
+     674,
+     675,
+     627,
+     676,
+     677,
+     627,
+     627,
+     678,
+     679,
+     627,
+     627,
+     680,
+     681,
+     627,
+     682,
+     683,
+     684,
+     685,
+     627,
+     671,
+     627,
+     686,
+     687,
+     631,
+     621,
+     622,
+     623,
+     624,
+     616,
+     616
+    ],
+    [
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689,
+     688,
+     689
+    ],
+    [
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691,
+     690,
+     691
+    ],
+    [
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     692,
+     693,
+     694,
+     695,
+     696,
+     697,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699,
+     698,
+     699
+    ],
+    [
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     700,
+     701,
+     702,
+     703,
+     704,
+     705,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707,
+     706,
+     707
+    ],
+    [
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     708,
+     709,
+     710,
+     711,
+     712,
+     713,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715,
+     714,
+     715
+    ],
+    [
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     718,
+     718,
+     718,
+     718,
+     718,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716,
+     717,
+     716
+    ],
+    [
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     718,
+     718,
+     718,
+     718,
+     718,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719,
+     720,
+     719
+    ],
+    [
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     718,
+     718,
+     718,
+     718,
+     718,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721,
+     722,
+     721
+    ],
+    [
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     723,
+     723,
+     723,
+     723,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723,
+     724,
+     723
+    ],
+    [
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     723,
+     723,
+     723,
+     723,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723,
+     725,
+     723
+    ],
+    [
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     723,
+     723,
+     723,
+     723,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723,
+     726,
+     723
+    ]
+   ],
+   "walk": [
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXX..XXXXXXXXXXXXXXXXXXXXX",
+    "T.T.T.T.T.T.T.T.T.T......T.T.T.T.T.T.T.T.T.T",
+    "T.T.T.T.T.T.T.T.T.T......T.T.T.T.T.T.T.T.T.T",
+    "X.X.X.X.X.X.X.X.X.X......X.X.X.X.X.X.X.X.X.X",
+    "............................................",
+    "............................................",
+    "............................................"
+   ],
+   "behaviors": {
+    "21,9": "MB_NON_ANIMATED_DOOR",
+    "22,9": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "statue_champion",
+   "title": "the statue of Champion",
+   "section": "facade",
+   "w": 1,
+   "h": 3,
+   "ids": [
+    [
+     727
+    ],
+    [
+     728
+    ],
+    [
+     729
+    ]
+   ],
+   "walk": [
+    ".",
+    "X",
+    "X"
+   ],
+   "behaviors": {}
+  }
+ ]
+}

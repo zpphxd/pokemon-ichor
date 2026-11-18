@@ -599,6 +599,8 @@ def _sprite(gfx, facing):
             p = ROOT / f"graphics/object_events/pics/misc/ichor/{gfx[len(GFX):].lower()}.png"
         sheet = Image.open(p)
         fw = 16 if sheet.width >= 32 else sheet.width
+        if gfx[len(GFX):].startswith("STATUE_"):
+            fw = sheet.width                  # the statues of the Twelve: one 32x64 frame
     else:
         raise FileNotFoundError(gfx)
     frame = 0 if gfx == "OBJ_EVENT_GFX_ITEM_BALL" else {"DOWN": 0, "UP": 1, "LEFT": 2, "RIGHT": 2}.get(facing, 0)

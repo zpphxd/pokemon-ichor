@@ -515,6 +515,20 @@ enum
     OBJ_EVENT_GFX_ICHOR_REMAINS_SATCHEL,
     // Kronos: Phaedon in the gold mask and dark cloak (walker_paint.py "kronos")
     OBJ_EVENT_GFX_ICHOR_KRONOS,
+    // The statues of the Twelve (and Zeus) before the Propylaia: tools/ichor/art/statues.py
+    OBJ_EVENT_GFX_ICHOR_STATUE_HESTIA,
+    OBJ_EVENT_GFX_ICHOR_STATUE_HERMES,
+    OBJ_EVENT_GFX_ICHOR_STATUE_DEMETER,
+    OBJ_EVENT_GFX_ICHOR_STATUE_DIONYSUS,
+    OBJ_EVENT_GFX_ICHOR_STATUE_ARTEMIS,
+    OBJ_EVENT_GFX_ICHOR_STATUE_HEPHAESTUS,
+    OBJ_EVENT_GFX_ICHOR_STATUE_APHRODITE,
+    OBJ_EVENT_GFX_ICHOR_STATUE_APOLLO,
+    OBJ_EVENT_GFX_ICHOR_STATUE_ARES,
+    OBJ_EVENT_GFX_ICHOR_STATUE_POSEIDON,
+    OBJ_EVENT_GFX_ICHOR_STATUE_ATHENA,
+    OBJ_EVENT_GFX_ICHOR_STATUE_HERA,
+    OBJ_EVENT_GFX_ICHOR_STATUE_ZEUS,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -679,6 +693,7 @@ enum
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA         0x1136 // Sam, Apollo, Cami and Demeter: true gold, white, green
 #define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1137 // Thyrsa: the folk palette with grape purples and wine red (Act II)
+#define OBJ_EVENT_PAL_TAG_ICHOR_STATUE            0x1138 // the statues of the Twelve: painted marble, gold, the teal plinth
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

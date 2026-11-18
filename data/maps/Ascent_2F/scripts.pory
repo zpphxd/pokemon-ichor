@@ -90,3 +90,12 @@ script Ascent_2F_EventScript_Shrine {
                   "The war ended when the Hundred-Handed came out of the dark, and threw mountains.”\p"
                   "Someone has scratched underneath: AND US? WHAT HAPPENS TO US?"), MSGBOX_SIGN)
 }
+
+// --- the gods' easter eggs (tools/ichor/maps/ascent_eggs.py) ---
+script Ascent_2F_EventScript_EggFennel {
+    msgbox(format("A fennel stalk propped by the cookfire, and in its pith a coal, still glowing.\pIt's been burning longer than the camp has. Longer than the mountain's had a name."), MSGBOX_SIGN)
+}
+
+script Ascent_2F_EventScript_EggJar {
+    msgbox(format("A big jar, sealed with pitch. Scratched on the lid: DON'T.\pThe cook says it's Pandora's, and it's full of olives. He won't open it to prove it."), MSGBOX_SIGN)
+}

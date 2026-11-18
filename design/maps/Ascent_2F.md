@@ -21,3 +21,9 @@ Builder: `tools/ichor/maps/ascent.py` (aethos + Skiron, 40×44, `WEATHER_FOG_HOR
 ## Renders
 
 No changes in the 2026-11-18 pass; `img/ascent_2f_after.png`.
+
+## Plan (2026-11-18 rework)
+
+- **Puzzle:** the Bronze Hammer's rubble pocket, as before. The top of the ledges now leads out (through the short cut in the cliff) onto the Leuke snowfield, `Ascent_Snowfield`, and the Icefall is entered from there.
+- **Easter eggs:** **Prometheus's fennel stalk** by the camp's fire, a coal still glowing in its pith (a hidden Charcoal: "it's been burning longer than the camp has"); the cook's line about the **one jar he won't open** (Pandora's, he says; it's full of olives).
+- **Post-game gate:** none here; the camp is the climb's rest.

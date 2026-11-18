@@ -24,3 +24,9 @@ Builder: `tools/ichor/maps/ascent_snow.py` (gTileset_Chion, cave style, 42×46).
 ## Renders
 
 No changes in the 2026-11-18 pass; `img/ascent_icefall_after.png`.
+
+## Plan (2026-11-18 rework)
+
+- **Puzzle:** the slide hall and the one-drum seal, as before (the second step up in difficulty). The way in is now from the snowfield's cliff mouth.
+- **Easter eggs:** **Hephaestus's forgotten hammer** stuck in the ice of the drum room (a hidden Hard Stone: "the haft is warm. It shouldn't be"); **Boreas's breath** frozen in the upper hall's frost (an inspect: the frost on the wall has the shape of a face, cheeks puffed).
+- **Post-game gate:** the frozen fall at (23,36). After the credits its line changes: water can be heard running behind the ice.

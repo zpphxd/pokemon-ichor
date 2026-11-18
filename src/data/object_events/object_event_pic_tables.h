@@ -2847,3 +2847,57 @@ static const struct SpriteFrameImage sPicTable_IchorKronos[] = {
 static const struct SpriteFrameImage sPicTable_IchorItemJar[] = {
     overworld_frame(gObjectEventPic_IchorItemJar, 2, 2, 0),
 };
+
+// The statues of the Twelve before the Propylaia
+static const struct SpriteFrameImage sPicTable_IchorStatueHestia[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueHestia),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueHermes[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueHermes),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueDemeter[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueDemeter),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueDionysus[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueDionysus),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueArtemis[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueArtemis),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueHephaestus[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueHephaestus),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueAphrodite[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueAphrodite),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueApollo[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueApollo),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueAres[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueAres),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatuePoseidon[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatuePoseidon),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueAthena[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueAthena),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueHera[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueHera),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorStatueZeus[] = {
+    obj_frame_tiles(gObjectEventPic_IchorStatueZeus),
+};
+
