@@ -60,6 +60,9 @@ def build(render=True):
     head = mid("tomb_bier", "head_empty")
     m.gen = ["if (flag(FLAG_ICHOR_GOT_HELM_OF_DARKNESS)) {", f"    setmetatile(6, 3, 0x{head:03X}, TRUE)", "}"]
     m.anchor(7, 8, "THREAD_ANCHOR_UNNAMED")
+    m.hidden(5, 5, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_ITEM_TOMB_PEARL")
+    m.hidden(9, 5, "ITEM_RELIC_COPPER", "FLAG_ICHOR_HIDDEN_ITEM_TOMB_OBOL")
+    m.header["ichor_kind"] = "interior"     # one chamber off Ring V, not a dungeon of its own
     errs, reach = m.build("labyrinth_minos_tomb", [(7, 9)], views=[(7, 5)], render=render)
     return errs
 

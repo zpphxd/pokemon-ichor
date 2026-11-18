@@ -318,6 +318,11 @@ def finish(m, mz, dead, render=True):
                    "the Moon Room's way on: two drums, two plates")
     X.remains(m, 44, 9, P, "1", "A dropped sandal, the strap cut clean through, by the trickle.")
     X.remains(m, 22, 21, P, "2", "Carved shallow in the Long Hall's wall: IT RAN AT THE FIRE, NOT AT US.")
+    slots = X.free_dead_ends(m, mz)
+    if slots:
+        X.later_gate(m, slots[0], "chain", "FLAG_ICHOR_HIDE_R2_SEAL", P, "2", "Taurivet", 52, "FLAG_ICHOR_R2_STATIC",
+                     "ITEM_RELIC_SILVER", "FLAG_ICHOR_ITEM_R2_SHRINE",
+                     "the runners' shrine behind a labrys seal: a stray of the palace herd that found its way down")
     m.break_runs(starts)
     errs, reach = m.build("labyrinth_ring2", starts, views=VIEWS, render=render)
     return errs

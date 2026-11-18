@@ -201,6 +201,11 @@ def finish(m, mz, render=True):
     X.remains(m, 5, 30, P, "1", "A snapped spear, Titan-made, and claw marks on the rock beside it.")
     X.remains(m, 30, 13, P, "2", "Chalked on the barracks wall: DRIVE IT WITH THE TORCHES. IT HATES THE TORCHES.")
     X.remains(m, 20, 37, P, "3", "Bones, a broken shield with an owl on it, and a pack. The owl is Astyra's.")
+    slots = X.free_dead_ends(m, mz)
+    if slots:
+        X.later_gate(m, slots[-1], "boulder", "FLAG_ICHOR_HIDE_R4_BOULDER", P, "4", "Geogrip", 56, "FLAG_ICHOR_R4_STATIC",
+                     "ITEM_NUGGET", "FLAG_ICHOR_ITEM_R4_DEEP",
+                     "the Titans' deepest dig, sealed by a great boulder only Hephaestus's Hammer breaks (post-game)")
     m.break_runs(starts)
     water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
     errs, reach = m.build("labyrinth_ring4", starts, views=VIEWS, render=render, extra=water)

@@ -838,6 +838,14 @@
   ],
   "bg_events": [
     {
+      "type": "hidden_item",
+      "x": 42,
+      "y": 20,
+      "elevation": 3,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_R3_ETHER"
+    },
+    {
       "type": "sign",
       "x": 8,
       "y": 3,

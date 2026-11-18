@@ -41,19 +41,27 @@ FISH = [("Plouteras", 40, 44), ("Mitoclew", 40, 44), ("Plouteras", 42, 45), ("Ka
         ("Persenyx", 44, 46), ("Plouteras", 45, 47), ("Kalyptor", 45, 47), ("Mitoclew", 46, 47),
         ("Persenyx", 46, 47), ("Kolossette", 47, 47)]
 
+# rubble the Hammer breaks: what hides in fallen masonry
+ROCK = [("Cairnolith", 44, 47), ("Mitoclew", 44, 47), ("Cairnolith", 45, 47), ("Kolossette", 46, 47),
+        ("Geogrip", 47, 47)]
+TOMB = [("Kalyptor", 46, 48), ("Mitoclew", 46, 48), ("Persenyx", 46, 48), ("Kalyptor", 47, 48),
+        ("Mitoclew", 47, 48), ("Persenyx", 47, 48), ("Kalyptor", 48, 48), ("Lykanax", 47, 48),
+        ("Persenyx", 48, 48), ("Mitoclew", 48, 48), ("Lykanax", 48, 48), ("Kolossard", 48, 48)]
+
 TABLES = {
-    ("MAP_LABYRINTH_RING1", "Morning"): {"land_mons": land(R1)},
-    ("MAP_LABYRINTH_RING2", "Morning"): {"land_mons": land(R2), "water_mons": land(WATER, 4),
+    ("MAP_LABYRINTH_RING1", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R1)},
+    ("MAP_LABYRINTH_RING2", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R2), "water_mons": land(WATER, 4),
                                          "fishing_mons": land(FISH, 20)},
-    ("MAP_LABYRINTH_RING2", "Night"): {"land_mons": land(R2N), "water_mons": land(WATER, 4),
+    ("MAP_LABYRINTH_RING2", "Night"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R2N), "water_mons": land(WATER, 4),
                                        "fishing_mons": land(FISH, 20)},
-    ("MAP_LABYRINTH_RING3", "Morning"): {"land_mons": land(R3, 10), "water_mons": land(WATER, 4),
+    ("MAP_LABYRINTH_RING3", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R3, 10), "water_mons": land(WATER, 4),
                                          "fishing_mons": land(FISH, 20)},
-    ("MAP_LABYRINTH_RING4", "Morning"): {"land_mons": land(R4, 6), "water_mons": land(WATER, 4),
+    ("MAP_LABYRINTH_RING4", "Morning"): {"rock_smash_mons": land(ROCK, 20), "land_mons": land(R4, 6), "water_mons": land(WATER, 4),
                                          "fishing_mons": land(FISH, 20)},
     # Rings V and VI: the same stream fills the cisterns around the heart
     ("MAP_LABYRINTH_RING5", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
     ("MAP_LABYRINTH_RING6", "Morning"): {"water_mons": land(WATER, 4), "fishing_mons": land(FISH, 20)},
+    ("MAP_LABYRINTH_MINOS_TOMB", "Morning"): {"land_mons": land(TOMB, 4)},
 }
 
 

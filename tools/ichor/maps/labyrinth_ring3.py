@@ -208,6 +208,8 @@ def finish(m, mz, front, back, render=True):
         sight=2, local_id="LOCALID_R3_AUTOMATON_7")
     m.item(sx, sy, "ITEM_TM_SHADOW_BALL", "FLAG_ICHOR_ITEM_R3_TM")
     m.item(44, 18, "ITEM_BIG_PEARL", "FLAG_ICHOR_ITEM_R3_PEARL")
+    ex = min(((x, y) for y in range(20, 40) for x in range(40, 44) if m.walkable(x, y)), key=lambda c: c[1])
+    m.hidden(*ex, "ITEM_ETHER", "FLAG_ICHOR_HIDDEN_ITEM_R3_ETHER")
     for (x, y) in m.glows[:1]:
         m.sign(x, y, P + "GlowSign")
     # dead ends: the first web's Max Ether, the trail's Star Piece, a Revive, the hole down
@@ -257,6 +259,11 @@ def finish(m, mz, front, back, render=True):
     X.remains(m, 6, 5, P, "1", "Bones under a drift of old web. A bronze pin in the dust: a girl's.")
     X.remains(m, 20, 25, P, "2", "Scratched deep: THE BRONZE MEN DROVE IT AT US WITH FIRE.\\pIT DID NOT WANT TO.")
     X.remains(m, 40, 30, P, "3", "An explorer's satchel, rotted through. A map inside, every line crossed out.")
+    slots = X.free_dead_ends(m, mz)
+    if slots:
+        X.later_gate(m, slots[0], "thornweb", "FLAG_ICHOR_HIDE_R3_THORNWEB", P, "3", "Hyphantis", 55, "FLAG_ICHOR_R3_STATIC",
+                     "ITEM_TM_TOXIC", "FLAG_ICHOR_ITEM_R3_NEST",
+                     "the spiders' mother-nest behind a thornweb only the Three-Flamed Torch burns (post-game)")
     m.break_runs(starts)
     water = {(x, y) for y in range(H) for x in range(W) if m.at(x, y) == "~"}
     errs, reach = m.build("labyrinth_ring3", starts, views=VIEWS, render=render, extra=water)

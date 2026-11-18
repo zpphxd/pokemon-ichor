@@ -2394,6 +2394,10 @@
 #define FLAG_ICHOR_ITEM_R1_TREASURY             (FLAG_ICHOR_GENERAL2_START + 0x483) // Ichor: Labyrinth Ring I: the treasury's reward
 #define FLAG_ICHOR_ITEM_R3_NEST                 (FLAG_ICHOR_GENERAL2_START + 0x484) // Ichor: Labyrinth Ring III: the nest's reward
 #define FLAG_ICHOR_ITEM_R4_DEEP                 (FLAG_ICHOR_GENERAL2_START + 0x485) // Ichor: Labyrinth Ring IV: the deep dig's reward
+#define FLAG_ICHOR_ITEM_R2_SHRINE               (FLAG_ICHOR_GENERAL2_START + 0x486) // Ichor: Labyrinth Ring II: the runners' shrine's reward (behind the labrys seal)
+#define FLAG_ICHOR_HIDDEN_ITEM_R3_ETHER         (FLAG_ICHOR_GENERAL2_START + 0x487) // Ichor: Labyrinth Ring III: an Ether by the stream
+#define FLAG_ICHOR_HIDDEN_ITEM_TOMB_PEARL       (FLAG_ICHOR_GENERAL2_START + 0x488) // Ichor: Minos's tomb: a Pearl in the dust by the bier
+#define FLAG_ICHOR_HIDDEN_ITEM_TOMB_OBOL        (FLAG_ICHOR_GENERAL2_START + 0x489) // Ichor: Minos's tomb: the ferryman's Obol in a jar
 #define FLAG_ICHOR_RING5_WALL_TOMB              (FLAG_ICHOR_GENERAL2_START + 0x4A0) // Ichor: Ring V: %1, the tomb wall, broken by Asterion
 #define FLAG_ICHOR_RING5_WALL_SOUTH             (FLAG_ICHOR_GENERAL2_START + 0x4A1) // Ichor: Ring V: %2, the south shortcut wall, broken
 #define FLAG_ICHOR_RING5_WALL_TREASURE          (FLAG_ICHOR_GENERAL2_START + 0x4A2) // Ichor: Ring V: %3, the treasure wall, broken

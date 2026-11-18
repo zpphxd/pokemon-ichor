@@ -437,4 +437,19 @@ script LabyrinthRing2_EventScript_Remains1 {
 script LabyrinthRing2_EventScript_Remains2 {
     msgbox(format("Carved shallow in the Long Hall's wall: IT RAN AT THE FIRE, NOT AT US."), MSGBOX_SIGN)
 }
+
+// Hook for later (Labrys): the runners' shrine behind a labrys seal: a stray of the palace herd that found its way down
+script LabyrinthRing2_EventScript_Lair2 {
+    lockall
+    if (!flag(FLAG_ICHOR_R2_STATIC)) {
+        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)
+        closemessage
+        setwildbattle(SPECIES_TAURIVET, 52)
+        dowildbattle
+        setflag(FLAG_ICHOR_R2_STATIC)
+    } else {
+        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
 // ---- END GENERATED ----

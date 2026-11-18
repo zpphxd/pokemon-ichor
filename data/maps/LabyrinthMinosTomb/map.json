@@ -70,6 +70,23 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LabyrinthMinosTomb_EventScript_Bier"
+    },
+    {
+      "type": "hidden_item",
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_TOMB_PEARL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_ITEM_TOMB_OBOL"
     }
-  ]
+  ],
+  "ichor_kind": "interior"
 }

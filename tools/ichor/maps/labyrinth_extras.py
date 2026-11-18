@@ -129,6 +129,55 @@ def cellar(m, d1, d2, item, flag, prefix, tag, story):
     log(m, f"cellar {tag}: stairs at node {d1} down to the sealed cell {d2}: {item} — {story}")
 
 
+def free_dead_ends(m, mz):
+    """Dead-end nodes with nothing in them yet, and a passage cell leading in."""
+    busy = {(o["x"], o["y"]) for o in m.objects} | {(b["x"], b["y"]) for b in m.bgs} | \
+        {(c["x"], c["y"]) for c in m.coords} | {(w["x"], w["y"]) for w in m.warps} | {(a[0], a[1]) for a in m.anchors}
+    out = []
+    for n in mz.metrics()["dead"]:
+        if len(n) != 2:
+            continue
+        cells = [cell(n, i, j) for i in range(2) for j in range(2)]
+        if any(c in busy for c in cells) or not all(m.walkable(*c) for c in cells):
+            continue
+        nb = [b for b in mz.nbrs(n) if frozenset({n, b}) in mz.edges]
+        if len(nb) == 1:
+            out.append((n, nb[0]))
+    return out
+
+
+def later_gate(m, slot, kind, hide_flag, prefix, tag, species, level, static_flag, item, item_flag, story):
+    """A gate for a relic the player gets later: the obstacle across the dead
+    end's mouth (hidden for good by hide_flag), and behind it a stronger
+    Pokémon (a scripted encounter on the dead end's back wall) and an item."""
+    n, mouth = slot
+    lanes = []
+    cells = gap(n, mouth)
+    if n[1] == mouth[1]:
+        x = sorted({c[0] for c in cells})[0 if mouth[0] < n[0] else -1]
+        x = max(c[0] for c in cells) if mouth[0] < n[0] else min(c[0] for c in cells)
+        lanes = [(x, c[1]) for c in cells if c[0] == x]
+    else:
+        y = max(c[1] for c in cells) if mouth[1] < n[1] else min(c[1] for c in cells)
+        lanes = [(c[0], y) for c in cells if c[1] == y]
+    gfx, script, relic = KINDS[kind]
+    m.obj(gfx, lanes[0][0], lanes[0][1], script, flag=hide_flag)
+    for (x, y) in lanes[1:]:
+        m.obj(gfx, x, y, script, flag=hide_flag)
+    x0, y0 = cell(n)
+    m.item(x0, y0, item, item_flag)
+    m.sign(x0 + 1, y0 + 1, prefix + f"Lair{tag}")
+    s = ["", f"// Hook for later ({relic}): {story}",
+         f"script {prefix}Lair{tag} {{", "    lockall", f"    if (!flag({static_flag})) {{",
+         '        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)',
+         "        closemessage", f"        setwildbattle(SPECIES_{species.upper()}, {level})", "        dowildbattle",
+         f"        setflag({static_flag})", "    } else {",
+         '        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)',
+         "    }", "    releaseall", "}"]
+    m.extra_scripts = getattr(m, "extra_scripts", []) + s
+    log(m, f"{relic} (later): {kind} across dead end {n}: {species} Lv {level} and {item} — {story}")
+
+
 def remains(m, x, y, prefix, tag, text, item=None, flag=None):
     m.sign(x, y, prefix + f"Remains{tag}")
     if item:

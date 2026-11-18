@@ -395,4 +395,19 @@ script LabyrinthRing1_EventScript_Remains2 {
 script LabyrinthRing1_EventScript_Remains3 {
     msgbox(format("A torch, burned out and snapped in two, wedged in a crack in the rock."), MSGBOX_SIGN)
 }
+
+// Hook for later (Labrys): a labrys-sealed treasury of the house's first stewards, opened on the way back up with the Labrys; a bronze guardian Daedalus forgot
+script LabyrinthRing1_EventScript_Lair1 {
+    lockall
+    if (!flag(FLAG_ICHOR_R1_STATIC)) {
+        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)
+        closemessage
+        setwildbattle(SPECIES_KOLOSSETTE, 52)
+        dowildbattle
+        setflag(FLAG_ICHOR_R1_STATIC)
+    } else {
+        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
 // ---- END GENERATED ----

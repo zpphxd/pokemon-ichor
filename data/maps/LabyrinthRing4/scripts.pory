@@ -351,4 +351,19 @@ script LabyrinthRing4_EventScript_Remains2 {
 script LabyrinthRing4_EventScript_Remains3 {
     msgbox(format("Bones, a broken shield with an owl on it, and a pack. The owl is Astyra's."), MSGBOX_SIGN)
 }
+
+// Hook for later (Hephaestus's Hammer (post-game)): the Titans' deepest dig, sealed by a great boulder only Hephaestus's Hammer breaks (post-game)
+script LabyrinthRing4_EventScript_Lair4 {
+    lockall
+    if (!flag(FLAG_ICHOR_R4_STATIC)) {
+        msgbox(format("Something shifts in the dark at the end of the passage."), MSGBOX_DEFAULT)
+        closemessage
+        setwildbattle(SPECIES_GEOGRIP, 56)
+        dowildbattle
+        setflag(FLAG_ICHOR_R4_STATIC)
+    } else {
+        msgbox(format("Old scratches on the rock. Whatever lived here has gone."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
 // ---- END GENERATED ----
