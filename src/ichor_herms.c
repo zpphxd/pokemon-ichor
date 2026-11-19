@@ -183,6 +183,35 @@ static bool32 RegisterTownHerm(u32 townHerm)
     return TRUE;
 }
 
+// The Wings fly to every registered town, landing beside its herm, as herm
+// travel does (SYSTEMS §4). TOWN_HERM_NONE when the section has none registered.
+static u32 GetRegisteredTownHermForMapsec(u32 mapsec)
+{
+    u32 i;
+    for (i = 0; i < TOWN_HERM_MAX; i++)
+    {
+        if (Ichor_IsTownHermRegistered(i) && gIchorTownHerms[i].mapsec == mapsec)
+            return i;
+    }
+    return TOWN_HERM_NONE;
+}
+
+bool32 Ichor_IsTownFlyTarget(u32 mapsec)
+{
+    return GetRegisteredTownHermForMapsec(mapsec) != TOWN_HERM_NONE;
+}
+
+bool32 Ichor_SetTownFlyDestination(u32 mapsec)
+{
+    u32 townHerm = GetRegisteredTownHermForMapsec(mapsec);
+    const struct IchorTownHerm *dest;
+    if (townHerm == TOWN_HERM_NONE)
+        return FALSE;
+    dest = &gIchorTownHerms[townHerm];
+    SetWarpDestination(dest->map >> 8, dest->map & 0xFF, WARP_ID_NONE, dest->x, dest->y);
+    return TRUE;
+}
+
 static u32 GetTownHermOnThisMap(void)
 {
     u32 i;

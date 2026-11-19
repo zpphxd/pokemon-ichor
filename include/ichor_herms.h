@@ -40,6 +40,8 @@ u16 Ichor_GetHermFlag(u32 herm);
 
 u32 Ichor_CountAnointedHerms(void);
 bool32 Ichor_IsHermFlyTarget(u32 mapsec);                 // region_map.c, GetMapsecType
+bool32 Ichor_IsTownFlyTarget(u32 mapsec);                 // region_map.c: a registered town is a Wings target
+bool32 Ichor_SetTownFlyDestination(u32 mapsec);           // region_map.c, SetFlyDestination: beside its herm
 u32 Ichor_GetHermHealLocation(u32 mapsec);                // region_map.c, FilterFlyDestination
 u32 Ichor_GetAnointedHermMapsec(u32 herm);                // region_map.c, CreateFlyDestIcons
 

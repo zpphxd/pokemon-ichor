@@ -1475,6 +1475,8 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
 {
     if (Ichor_IsHermFlyTarget(mapSecId)) // Ichor: an anointed herm's route is a fly target (SYSTEMS §4)
         return MAPSECTYPE_CITY_CANFLY;
+    if (Ichor_IsTownFlyTarget(mapSecId)) // Ichor: so is every town whose herm is registered
+        return MAPSECTYPE_CITY_CANFLY;
     switch (mapSecId)
     {
     case MAPSEC_NONE:
@@ -2517,6 +2519,23 @@ static void CreateFlyDestIcons(void)
         }
     }
 
+    // Ichor: a lit dot on every registered town herm's own cell
+    for (i = 0; i < TOWN_HERM_MAX; i++)
+    {
+        const struct IchorTownHerm *herm = &gIchorTownHerms[i];
+        if (!Ichor_IsTownHermRegistered(i) || GetRegionMapType(herm->mapsec) != regionMapType)
+            continue;
+        spriteId = CreateSpriteUnchecked(&sFlyDestIconSpriteTemplate, (herm->mapX + MAPCURSOR_X_MIN) * 8 + 4,
+                                         (herm->mapY + MAPCURSOR_Y_MIN) * 8 + 4, 10);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.shape = SPRITE_SHAPE(8x8);
+            gSprites[spriteId].callback = SpriteCB_FlyDestIcon;
+            StartSpriteAnim(&gSprites[spriteId], SPRITE_SHAPE(8x8));
+            gSprites[spriteId].sIconMapSec = herm->mapsec;
+        }
+    }
+
     // Ichor: a lit dot on every anointed herm's route (SYSTEMS §4)
     for (i = 0; i < HERM_MAX; i++)
     {
@@ -2799,7 +2818,11 @@ u32 FilterFlyDestination(struct RegionMap* regionMap)
 
 void SetFlyDestination(struct RegionMap* regionMap)
 {
-    u32 flyDestination = FilterFlyDestination(regionMap);
+    u32 flyDestination;
+
+    if (Ichor_SetTownFlyDestination(regionMap->mapSecId)) // Ichor: land beside the town's herm
+        return;
+    flyDestination = FilterFlyDestination(regionMap);
 
     if (flyDestination != WARP_ID_NONE)
         SetWarpDestinationToHealLocation(flyDestination);
