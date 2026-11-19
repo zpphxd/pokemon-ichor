@@ -84,6 +84,7 @@ script SaltWell_B2F_EventScript_Dolphin {
     waitmovement(0)
     msgbox(format("It nudges the shell into your hands."))
     giveitem(ITEM_POSEIDONS_CONCH)
+    call(Ichor_EventScript_GiveRelicMoves)
     if (!flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
         msgbox(format("Your Bag is full. The dolphin waits with the shell."))
         releaseall

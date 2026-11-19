@@ -243,6 +243,7 @@ script KytheraNeraidaFalls_EventScript_Krenaia {
                   "It climbs water the way he did."))
     setspeaker(SP_NAME_NONE)
     giveitem(ITEM_HORN_OF_ACHELOUS)
+    call(Ichor_EventScript_GiveRelicMoves)
     if (var(VAR_RESULT) == FALSE) {
         msgbox(format("The Horn could not fit. Make room in your Key Items pocket and speak to Krenaia again."))
         release

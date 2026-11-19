@@ -213,6 +213,7 @@ script EleusaSanctum_B3F_EventScript_ReceiveSickle {
     // enters the bag. Demeter Favor +10 for her myth-quest (§3).
     setspeaker(SP_NAME_NONE)
     giveitem(ITEM_DEMETERS_SICKLE)
+    call(Ichor_EventScript_GiveRelicMoves)
     if (var(VAR_RESULT) == FALSE) {
         msgbox(format("Make room in your Bag, then return to the bronze sickle."))
         special(RemoveCameraObject)

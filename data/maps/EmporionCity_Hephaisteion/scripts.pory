@@ -83,6 +83,7 @@ script EmporionCity_Hephaisteion_EventScript_Kedalion {
     // when the item enters the bag.
     setspeaker(SP_NAME_NONE)
     giveitem(ITEM_BRONZE_HAMMER)
+    call(Ichor_EventScript_GiveRelicMoves)
     // Hephaestus Favor +5 (ENGINE_API §3).
     setvar(VAR_0x8004, ICHOR_GOD_HEPHAESTUS)
     setvar(VAR_0x8005, 5)

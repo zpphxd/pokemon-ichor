@@ -3,6 +3,7 @@
 --   SAVE_IN   the .sav to load (a copy; never OpenEmu's own file)
 --   HERMS     comma-separated TOWN_HERM ids to register, then save in game (empty: read only)
 --   FLAGS     comma-separated flag names from save_herms_consts.c to set (e.g. scenes already seen)
+--   RELIC_MOVES  1: add the HM for every relic already in the Bag, then save in game
 --   SHOW      comma-separated flag names from save_herms_consts.c to print (read only)
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
@@ -31,6 +32,17 @@ L.start(function()
   for name in (os.getenv("SHOW") or ""):gmatch("[%w_]+") do
     L.expect(S[name] ~= nil, "known flag " .. name)
     log("SHOWFLAG " .. name .. " " .. tostring(L.getFlag(S[name])))
+  end
+  if os.getenv("RELIC_MOVES") == "1" then
+    L.runHeader("SaveHerms_RelicMovesHeader")
+    L.wait(300)
+    for _, hm in ipairs({"CUT", "FLY", "SURF", "STRENGTH", "FLASH", "ROCK_SMASH", "WATERFALL", "DIVE"}) do
+      log("HM " .. hm .. " " .. L.itemCount(S["ITEM_HM_" .. hm]))
+    end
+    emu:reset()
+    L.continueSave()
+    report("AFTER")
+    L.log("HM SURF after reload " .. L.itemCount(S.ITEM_HM_SURF))
   end
   local want = os.getenv("HERMS") or ""
   local flags = os.getenv("FLAGS") or ""

@@ -50,6 +50,7 @@ script Kaldera_TelchinesForge_EventScript_Talos {
         msgbox(format("The Harpe cuts what's woven. Anyone woven who holds it comes apart.\pYou're not woven.\pThat's why they keep letting you follow them."))
         msgbox(format("An old man threw these into my fire. Wax and feathers. I pulled them out.\pHe said not too high, not too low. Then he threw them in my forge."))
         giveitem(ITEM_DAEDALUS_WINGS)
+        call(Ichor_EventScript_GiveRelicMoves)
         if (!flag(FLAG_ICHOR_GOT_DAEDALUS_WINGS)) {
             msgbox(format("Make room. These have waited long enough."))
             release

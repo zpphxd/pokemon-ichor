@@ -37,6 +37,7 @@ script ThyrsaCity_EventScript_Silenos {
     if (var(VAR_0x8009) >= 2) {
         msgbox(format("Two contests. Fairly won. That's one more than Herakles managed."))
         giveitem(ITEM_GIRDLE_OF_HERAKLES)
+        call(Ichor_EventScript_GiveRelicMoves)
         if (var(VAR_RESULT) == TRUE) {
             setflag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)
             msgbox(format("Put your shoulder to a fallen column drum. The girdle does the rest."))

@@ -99,6 +99,8 @@ Main-path relics are in bold.
 | 12 | Nereid Pearl | Dive | Post-game | Atlantis | Atlantis | — |
 | 13 | Aeolus's Bag | Defog; sail the fog banks | Post-game | The Odyssey | The Odyssey's islands | — |
 
+Each field relic also gives its move as a reusable HM (Rock Smash, Flash, Cut, Strength, Surf, Fly, Waterfall, Dive), so the power can be taught for battle. The relic still works the world; no Pokémon needs the move (`Ichor_EventScript_GiveRelicMoves`).
+
 Two **tools** sit beside the relics. They are key items, not relics.
 - **Alethea's Trowel** (dig) comes from Alethea on arrival at Emporion, at the start of Act I proper (§5).
 - **The Star Chart** comes from Daphne at the end of Act I (§8).

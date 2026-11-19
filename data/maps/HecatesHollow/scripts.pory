@@ -361,6 +361,7 @@ script HecatesHollow_EventScript_Hekataion {
     msgbox(format("The middle face's torch comes loose in your hand. It's warm."), MSGBOX_DEFAULT)
     call(HecatesHollow_EventScript_TakeTorch)
     giveitem(ITEM_HECATES_TORCH)
+    call(Ichor_EventScript_GiveRelicMoves)
     msgbox(format("Something brushes past your legs. Something warm, with a cold nose.\p"
                   "Then it's gone."), MSGBOX_DEFAULT)
     releaseall

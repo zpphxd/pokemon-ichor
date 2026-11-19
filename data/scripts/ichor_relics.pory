@@ -575,3 +575,76 @@ script EventScript_IchorDraught {
     releaseall
     return
 }
+
+// Each field relic comes with its move, as a reusable HM: the relic works the
+// world, the HM teaches the move for battle. Called right after a relic is
+// given; gives every missing HM for a relic in the Bag. VAR_RESULT is kept.
+script Ichor_EventScript_GiveRelicMoves {
+    copyvar(VAR_0x800A, VAR_RESULT)
+    checkitem(ITEM_BRONZE_HAMMER)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_ROCK_SMASH)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_ROCK_SMASH)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_HECATES_TORCH)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_FLASH)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_FLASH)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_DEMETERS_SICKLE)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_CUT)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_CUT)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_GIRDLE_OF_HERAKLES)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_STRENGTH)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_STRENGTH)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_POSEIDONS_CONCH)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_SURF)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_SURF)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_DAEDALUS_WINGS)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_FLY)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_FLY)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_HORN_OF_ACHELOUS)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_WATERFALL)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_WATERFALL)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    checkitem(ITEM_NEREID_PEARL)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_HM_DIVE)
+        if (var(VAR_RESULT) == FALSE) {
+            giveitem(ITEM_HM_DIVE)
+            msgbox(format("It teaches the relic's power to a Pokémon, as a move."))
+        }
+    }
+    copyvar(VAR_RESULT, VAR_0x800A)
+    return
+}
