@@ -464,12 +464,18 @@ script LabyrinthRing6_EventScript_Mimas {
         faceplayer
         msgbox(format("MIMAS: Forge business needs the archive's stamp.\p"
                       "No stamp, no forge. The clerks keep the passes. East."))
+        closemessage
+        // out of his sight line, or he spots the player again and again
+        applymovement(OBJ_EVENT_ID_PLAYER, LabyrinthRing6_Movement_MimasTurnsBack)
+        waitmovement(0)
         release
         end
     }
     trainerbattle_single(TRAINER_ICHOR_MIMAS, LabyrinthRing6_Text_MimasIntro, LabyrinthRing6_Text_MimasDefeat)
     msgbox(format("MIMAS: He'll roast you. Mostly not literally."), MSGBOX_AUTOCLOSE)
 }
+
+movement LabyrinthRing6_Movement_MimasTurnsBack { walk_up }
 
 text LabyrinthRing6_Text_MimasIntro { format("MIMAS: The forge is the Hand's. Nobody walks into the Hand's forge.") }
 text LabyrinthRing6_Text_MimasDefeat { format("MIMAS: …Nobody but you.") }

@@ -76,6 +76,15 @@ L.start(function()
   expect(collision(12, 18) == 0 and collision(11, 18) == 0 and collision(10, 18) == 0,
          "B A B: the three bars swing out of the forge corridor")
   shot("r6_dials_forge")
+  -- before the archive's stamp Mimas turns you back out of his sight, instead of
+  -- spotting you again and again (a soft lock the user hit); the stamp is cleared for this
+  L.setFlag(S.FLAG_ELPIS_TABLET, false)
+  L.go(7, 22); L.settle()
+  L.step(K.DOWN); L.step(K.DOWN); L.settle()
+  local _, my = L.pos()
+  expect(my <= 23 and L.idle() and not L.defeated(S.TRAINER_MIMAS), "no stamp: Mimas turns you back, and you can walk again")
+  shot("r6_mimas_turns_back")
+  L.setFlag(S.FLAG_ELPIS_TABLET, true)
   L.talk(7, 26, yes); L.talk(7, 27, yes)
   L.setVar(0x400F, 0); L.runHeader("Heart_HealHeader"); L.wait(10)
   L.go(7, 29); L.settle()
