@@ -3,6 +3,7 @@
 --   SAVE_IN   the .sav to load (a copy; never OpenEmu's own file)
 --   HERMS     comma-separated TOWN_HERM ids to register, then save in game (empty: read only)
 --   FLAGS     comma-separated flag names from save_herms_consts.c to set (e.g. scenes already seen)
+--   SHOW      comma-separated flag names from save_herms_consts.c to print (read only)
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
 local log = L.log
@@ -27,6 +28,10 @@ L.start(function()
   L.continueSave()
   L.shot("continued")
   report("BEFORE")
+  for name in (os.getenv("SHOW") or ""):gmatch("[%w_]+") do
+    L.expect(S[name] ~= nil, "known flag " .. name)
+    log("SHOWFLAG " .. name .. " " .. tostring(L.getFlag(S[name])))
+  end
   local want = os.getenv("HERMS") or ""
   local flags = os.getenv("FLAGS") or ""
   if want ~= "" or flags ~= "" then

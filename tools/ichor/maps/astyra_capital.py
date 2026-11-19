@@ -262,8 +262,9 @@ def city(render=True):
     house_block(m, 43, 15, 5, "low")
 
     # --- the Pnyx: terraces east of the agora, the speaker's platform on top -----------------
-    for y in (22, 25):
-        for x in range(38, 43):
+    # the lower lip stops short of the house at (36, 26): a ledge must never drop onto a roof
+    for y, x0 in ((22, 38), (25, 41)):
+        for x in range(x0, 43):
             m.set(x, y, LEDGE_S, True)
     m.put("bema", 39, 19)
     for y in (18, 20, 22, 24, 26, 28, 30):

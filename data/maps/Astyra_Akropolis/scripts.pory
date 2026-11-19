@@ -42,6 +42,14 @@ text Akropolis_Text_RheaLost { format("Hm. Good.") }
 script Astyra_Akropolis_EventScript_Gate {
     lockall
     setvar(VAR_TEMP_1, 0)
+    if (!flag(FLAG_ICHOR_ASTYRA_OSTRACISM_DONE)) {
+        msgbox(format("The Akropolis is closed by the Archon's order.\pThe Assembly meets in the Stoa, down in the agora.\pAsk the clerk by its door what's needed."))
+        closemessage
+        warp(MAP_ASTYRA, 4)
+        waitstate
+        releaseall
+        end
+    }
     if (!flag(FLAG_ICHOR_ALETHEA_CONFESSED)) {
         msgbox(format("The Akropolis is sealed tonight.\pAlethea was last seen on the road west of the city, just outside the walls."))
         closemessage
