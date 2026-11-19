@@ -181,8 +181,9 @@ def build(stem):
     m.obj("ICHOR_TITAN_GRUNT", 27, 4, P + "Veteran", "MOVEMENT_TYPE_FACE_UP",
           flag="FLAG_ICHOR_HIDE_AMNISOS_VETERAN", local_id="LOCALID_AMNISOS_VETERAN")
     m.obj("ICHOR_FISHER", 19, 9, P + "Sailor", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_AMNISOS_SAILOR")
-    m.obj("ICHOR_KID_F", 18, 21, P + "Girl", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_AMNISOS_GIRL")
-    m.obj("SPECIES(MELIBEE)", 19, 21, P + "Bombos", "MOVEMENT_TYPE_FACE_LEFT", local_id="LOCALID_AMNISOS_BOMBOS")
+    # by the ladder house, out of the gap that leads south to the Bull Road
+    m.obj("ICHOR_KID_F", 16, 21, P + "Girl", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_AMNISOS_GIRL")
+    m.obj("SPECIES(MELIBEE)", 15, 21, P + "Bombos", "MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_AMNISOS_BOMBOS")
     m.obj("ICHOR_ELDER_F", 6, 13, P + "OldWoman", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_AMNISOS_OLD_WOMAN")
     m.obj("ICHOR_HEALER", 3, 11, P + "Gennaia", "MOVEMENT_TYPE_FACE_DOWN", local_id="LOCALID_AMNISOS_GENNAIA")
     m.obj("ICHOR_KID_M", 33, 19, P + "Kid", "MOVEMENT_TYPE_WANDER_AROUND", local_id="LOCALID_AMNISOS_KID",

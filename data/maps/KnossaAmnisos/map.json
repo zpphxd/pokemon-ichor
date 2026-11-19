@@ -80,7 +80,7 @@
     {
       "local_id": "LOCALID_AMNISOS_GIRL",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_F",
-      "x": 18,
+      "x": 16,
       "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -94,10 +94,10 @@
     {
       "local_id": "LOCALID_AMNISOS_BOMBOS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MELIBEE)",
-      "x": 19,
+      "x": 15,
       "y": 21,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
