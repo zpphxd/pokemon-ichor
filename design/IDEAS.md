@@ -64,6 +64,15 @@ looks like a winged boy with a bow, not a Pokémon. Redesign it as a creature, k
 ornament rather than a person holding them. Check its pre-evolution against the same bar. New
 concept art goes through the concept-sprites skill (STYLE.md §3).
 
+### Redesign Kalliglyph: it reads as a plain statue (user, 2026-11-18)
+
+Seen in the same battle: Kalliglyph, the Living Stone (Galatea line, design/dex/species/galatea.yaml,
+Rock/Fairy), is a draped marble woman on a plinth, a statue rather than a Pokémon. Give it a
+Pokémon spin while keeping the Pygmalion idea of carved stone coming alive: a creature form,
+with eyes and a face that read at 1x, marble and chisel marks as its body's texture, and
+something alive breaking through (a blush, a heartbeat glow, cracks of colour). Check its
+pre-evolution against the same bar. Same pipeline as Himerow above.
+
 ## Done
 
 ### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
