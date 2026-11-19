@@ -56,6 +56,14 @@ Things the user wants built later. Nothing here is scheduled; each entry says wh
 ### The awe pass
 - Build from design/AWE_PASS.md's top 10 (colossi, grand temples, city improvements, the ruins kit) once the user picks.
 
+### Redesign Himerow (#95): it reads as a human (user, 2026-11-18)
+
+Seen in battle against Kynoketos: Himerow, the Love Archer (Eros line, design/dex/species/eros.yaml),
+looks like a winged boy with a bow, not a Pokémon. Redesign it as a creature, keeping the concept
+(desire's arrow, Fairy/Flying): an animal body, with the bow, wings and arrow as anatomy or
+ornament rather than a person holding them. Check its pre-evolution against the same bar. New
+concept art goes through the concept-sprites skill (STYLE.md §3).
+
 ## Done
 
 ### Day care: the Nursery of Nysa (Route 7, outside Thyrsa)
