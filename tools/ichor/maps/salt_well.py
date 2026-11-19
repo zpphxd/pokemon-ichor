@@ -77,6 +77,11 @@ def cave(name, lower=False):
     else:
         m.json["bg_events"] += [bg(15, 17, m.prefix + "Tide"),
                                 bg(14, 8, m.prefix + "Brazier")]
+        # the tide stele marks the shore, and stepping onto the shore offers the backwash too
+        m.put(15, 17, PIECES["stele"][0][0], True)
+        for x in (16, 17):
+            m.json["coord_events"].append(dict(type="trigger", x=x, y=17, elevation=0,
+                var="VAR_TEMP_2", var_value="0", script=m.prefix + "TideStep"))
         m.stamp(14, 8, PIECES["brazier_cold"])
         m.person("Halia", 5, 14, gfx="ACOLYTE_F", facing="RIGHT", sight=1)
         item(m, 5, 16, "ETHER", "ITEM_SALT_WELL_ETHER")

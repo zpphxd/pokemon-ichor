@@ -57,6 +57,13 @@ script SaltWell_B2F_EventScript_Tide {
     msgbox(format("The pale stones lead to a low shelf beside the pool."))
     releaseall
 }
+script SaltWell_B2F_EventScript_TideStep {
+    setvar(VAR_TEMP_2, 1)
+    if (!flag(FLAG_ICHOR_SALT_WELL_TIDE_2)) {
+        goto(SaltWell_B2F_EventScript_Tide)
+    }
+    end
+}
 script SaltWell_B2F_EventScript_LowWater {
     setmetatileinrange(16, 18, 17, 22, 0x157, FALSE, 3)
     return
